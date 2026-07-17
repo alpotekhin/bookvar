@@ -49,9 +49,9 @@ Reasoning в LLM традиционно строился на human-annotated Co
 - R1 → Qwen/Llama маленьких размеров (1.5B-70B)
 - Distilled модели превосходят оригинальные instruct-версии на reasoning
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/deepseek-r1/fig1.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/deepseek-r1-figure1-hq.png]]
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/deepseek-r1/fig2.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/deepseek-r1/figure2-pipeline.png]]
 
 ## Key Results
 

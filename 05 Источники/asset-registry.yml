@@ -459,30 +459,20 @@ assets:
     metadata_status: needs-confirmation
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/cot/images/cot-prompting-fig1.png
-  - id: curated-deepseek-r1-504afcfd2297
-    asset: 00 Учебник/Assets/Figures/curated/deepseek-r1/fig1.png
+  - id: curated-deepseek-r1-2b50f7aff174
+    asset: 00 Учебник/Assets/Figures/curated/deepseek-r1/figure2-pipeline.png
     author: DeepSeek-AI
     source_url: https://arxiv.org/abs/2501.12948
     license: null
     license_url: null
-    modifications: copied without modification from the local raw source for publication packaging
+    modifications: rendered at 300 DPI and cropped from page 6 of the local source PDF
     used_in:
       - Papers/DeepSeek-R1 Reasoning via RL.md
     metadata_status: needs-confirmation
     provenance_confirmation: user-confirmed-open-materials
-    source_asset: raw/papers/deepseek-r1/images/fig1.png
-  - id: curated-deepseek-r1-1be7ed4b3545
-    asset: 00 Учебник/Assets/Figures/curated/deepseek-r1/fig2.png
-    author: DeepSeek-AI
-    source_url: https://arxiv.org/abs/2501.12948
-    license: null
-    license_url: null
-    modifications: copied without modification from the local raw source for publication packaging
-    used_in:
-      - Papers/DeepSeek-R1 Reasoning via RL.md
-    metadata_status: needs-confirmation
-    provenance_confirmation: user-confirmed-open-materials
-    source_asset: raw/papers/deepseek-r1/images/fig2.png
+    source_asset: raw/papers/deepseek-r1/paper.pdf
+    source_page: 6
+    derivation: pdf-page-render-crop
   - id: curated-deepseek-v2-703a0c897390
     asset: 00 Учебник/Assets/Figures/curated/deepseek-v2/x1.png
     author: DeepSeek-AI
@@ -508,30 +498,6 @@ assets:
     metadata_status: needs-confirmation
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/deepseek-v2/images/x3.png
-  - id: curated-deepseek-v3-cc6231e92200
-    asset: 00 Учебник/Assets/Figures/curated/deepseek-v3/fig1.png
-    author: DeepSeek-AI
-    source_url: https://arxiv.org/abs/2412.19437
-    license: null
-    license_url: null
-    modifications: copied without modification from the local raw source for publication packaging
-    used_in:
-      - Papers/DeepSeek-V3 Technical Report.md
-    metadata_status: needs-confirmation
-    provenance_confirmation: user-confirmed-open-materials
-    source_asset: raw/papers/deepseek-v3/images/fig1.png
-  - id: curated-deepseek-v3-d0866f2d2b19
-    asset: 00 Учебник/Assets/Figures/curated/deepseek-v3/fig2.png
-    author: DeepSeek-AI
-    source_url: https://arxiv.org/abs/2412.19437
-    license: null
-    license_url: null
-    modifications: copied without modification from the local raw source for publication packaging
-    used_in:
-      - Papers/DeepSeek-V3 Technical Report.md
-    metadata_status: needs-confirmation
-    provenance_confirmation: user-confirmed-open-materials
-    source_asset: raw/papers/deepseek-v3/images/fig2.png
   - id: curated-dpo-81be2a401be5
     asset: 00 Учебник/Assets/Figures/curated/dpo/dpo-pipeline.png
     author: null
@@ -583,18 +549,6 @@ assets:
     metadata_status: needs-confirmation
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/dpo/images/fig4.png
-  - id: curated-emergent-abilities-d20967b88ae7
-    asset: 00 Учебник/Assets/Figures/curated/emergent-abilities/emergent-abilities-wei.png
-    author: null
-    source_url: null
-    license: null
-    license_url: null
-    modifications: copied without modification from the local raw source for publication packaging
-    used_in:
-      - Concepts/NLP/Emergent Abilities.md
-    metadata_status: needs-confirmation
-    provenance_confirmation: user-confirmed-open-materials
-    source_asset: raw/papers/emergent-abilities/images/emergent-abilities-wei.png
   - id: curated-fine-tuning-a18e2f42f1ce
     asset: 00 Учебник/Assets/Figures/curated/fine-tuning/finetuning-approaches.png
     author: null
@@ -631,18 +585,20 @@ assets:
     metadata_status: needs-confirmation
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/flash-attention/images/fig1-tiling.jpg
-  - id: curated-gemma-2-26ae628f5d3d
-    asset: 00 Учебник/Assets/Figures/curated/gemma-2/fig1.png
-    author: null
-    source_url: null
+  - id: curated-gemma-2-d395511e5e87
+    asset: 00 Учебник/Assets/Figures/curated/gemma-2/figure1-memorization.png
+    author: Gemma Team, Google DeepMind
+    source_url: https://arxiv.org/abs/2408.00118
     license: null
     license_url: null
-    modifications: copied without modification from the local raw source for publication packaging
+    modifications: rendered at 300 DPI and cropped from page 9 of the local source PDF
     used_in:
       - Papers/Gemma 2.md
     metadata_status: needs-confirmation
     provenance_confirmation: user-confirmed-open-materials
-    source_asset: raw/papers/gemma-2/images/fig1.png
+    source_asset: raw/papers/gemma-2/paper.pdf
+    source_page: 9
+    derivation: pdf-page-render-crop
   - id: curated-gemma-4e5ff2685d1a
     asset: 00 Учебник/Assets/Figures/curated/gemma/fig1.png
     author: null
@@ -930,18 +886,6 @@ assets:
     metadata_status: needs-confirmation
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/jamba/images/fig3.png
-  - id: curated-jamba-d294262df75f
-    asset: 00 Учебник/Assets/Figures/curated/jamba/jamba-architecture.png
-    author: null
-    source_url: https://arxiv.org/abs/2403.19887
-    license: null
-    license_url: null
-    modifications: copied without modification from the local raw source for publication packaging
-    used_in:
-      - Concepts/Architectures/Jamba.md
-    metadata_status: needs-confirmation
-    provenance_confirmation: user-confirmed-open-materials
-    source_asset: raw/papers/jamba/images/jamba-architecture.png
   - id: curated-kimi-k15-36604a6ea1c0
     asset: 00 Учебник/Assets/Figures/curated/kimi-k15/x1.png
     author: null
@@ -1377,18 +1321,6 @@ assets:
     metadata_status: needs-confirmation
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/pre-training/images/nlp-paradigms.png
-  - id: curated-qwen-25-9032effbf23e
-    asset: 00 Учебник/Assets/Figures/curated/qwen-25/fig1.png
-    author: null
-    source_url: null
-    license: null
-    license_url: null
-    modifications: copied without modification from the local raw source for publication packaging
-    used_in:
-      - Papers/Qwen 2.5 Technical Report.md
-    metadata_status: needs-confirmation
-    provenance_confirmation: user-confirmed-open-materials
-    source_asset: raw/papers/qwen-25/images/fig1.png
   - id: curated-react-5740af9e184a
     asset: 00 Учебник/Assets/Figures/curated/react/react-fig1.png
     author: null
@@ -1714,8 +1646,9 @@ assets:
     license_url: null
     modifications: figure crop or extraction; exact process requires confirmation
     used_in:
-      - 00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md
       - 00 Учебник/10 Атлас современных архитектур/01 Llama, Qwen и DeepSeek как эволюция блока.md
+      - 00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md
+      - Papers/DeepSeek-R1 Reasoning via RL.md
     metadata_status: needs-confirmation
   - asset: 00 Учебник/Assets/Figures/deepseek-r1-page4.png
     author: DeepSeek-AI
@@ -1748,7 +1681,8 @@ assets:
     license: null
     license_url: null
     modifications: figure crop or extraction; exact process requires confirmation
-    used_in: []
+    used_in:
+      - Papers/DeepSeek-V3 Technical Report.md
     metadata_status: needs-confirmation
   - asset: 00 Учебник/Assets/Figures/deepseek-v3-figure2-architecture-hq.png
     author: DeepSeek-AI
@@ -1758,6 +1692,7 @@ assets:
     modifications: figure crop or extraction; exact process requires confirmation
     used_in:
       - 00 Учебник/10 Атлас современных архитектур/01 Llama, Qwen и DeepSeek как эволюция блока.md
+      - Papers/DeepSeek-V3 Technical Report.md
     metadata_status: needs-confirmation
   - asset: 00 Учебник/Assets/Figures/deepseek-v3-page1.png
     author: DeepSeek-AI
@@ -1800,6 +1735,7 @@ assets:
     modifications: figure crop or extraction; exact process requires confirmation
     used_in:
       - 00 Учебник/10 Атлас современных архитектур/02 Альтернативы Transformer и multimodality.md
+      - Concepts/Architectures/Jamba.md
     metadata_status: needs-confirmation
   - asset: 00 Учебник/Assets/Figures/jamba-page3.png
     author: null
@@ -1883,6 +1819,7 @@ assets:
     modifications: figure crop or extraction; exact source and process require confirmation
     used_in:
       - 00 Учебник/10 Атлас современных архитектур/01 Llama, Qwen и DeepSeek как эволюция блока.md
+      - Papers/Qwen 2.5 Technical Report.md
     metadata_status: needs-confirmation
   - asset: 00 Учебник/Assets/Figures/qwen25-page1.png
     author: null
