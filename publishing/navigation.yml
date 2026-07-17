@@ -1,0 +1,37 @@
+site_title: ML & DL Handbook
+sections:
+  - id: textbook
+    title: Учебник
+    pages:
+      - source: 00 Учебник/_index.md
+        route: textbook/index
+      - source: 00 Учебник/01 Основы нейронных сетей/01 Нейрон, градиент и backpropagation.md
+        route: textbook/foundations/backpropagation
+      - source: 00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V.md
+        route: textbook/transformer/self-attention
+      - source: 00 Учебник/09 Dense FFN и Mixture of Experts/00 Карта модуля и источники.md
+        route: textbook/moe/module-map
+      - source: 00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md
+        route: textbook/post-training/rlvr-verifiers
+      - source: 00 Учебник/15 Embeddings, Retrieval и RAG/00 Карта модуля и источники.md
+        route: textbook/rag/module-map
+  - id: models
+    title: Атлас моделей
+    pages:
+      - source: 02 Атлас моделей/Семейства/DeepSeek.md
+        route: models/families/deepseek
+  - id: sources
+    title: Источники
+    pages:
+      - source: 05 Источники/Papers/DeepSeek-R1.md
+        route: sources/papers/deepseek-r1
+  - id: questions
+    title: Вопросы
+    pages:
+      - source: 04 Вопросы/Вопросы по LLM.md
+        route: questions/llm
+  - id: practice
+    title: Практика
+    pages:
+      - source: 06 Практика/02 Реализовать causal self-attention.md
+        route: practice/causal-self-attention
