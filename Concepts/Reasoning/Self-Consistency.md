@@ -2,6 +2,7 @@
 title: "Self-Consistency"
 aliases: [Self-Consistency, CoT-SC, Majority Voting, self-consistency decoding]
 type: concept
+status: legacy
 category: Reasoning
 papers: ["[[02 Areas/ML & DL/Papers/Self-Consistency|Self-Consistency]]"]
 courses: []

@@ -2,6 +2,7 @@
 title: "DeepSeek-R1"
 aliases: [DeepSeek-R1, DeepSeek R1, R1-Zero, DeepSeek-R1-Zero]
 type: concept
+status: legacy
 category: Architectures
 papers:
   - "[[02 Areas/ML & DL/Papers/DeepSeek-R1 Reasoning via RL|DeepSeek-R1]]"

@@ -6,6 +6,7 @@
     "test": "vitest run --exclude tests/site-output.test.ts",
     "test:unit": "vitest run --exclude tests/site-output.test.ts",
     "test:output": "vitest run tests/site-output.test.ts",
+    "check:links": "tsx adapter/check-built-links.ts",
     "build": "tsx adapter/build.ts"
   },
   "dependencies": { "gray-matter": "4.0.3", "yaml": "2.9.0" },

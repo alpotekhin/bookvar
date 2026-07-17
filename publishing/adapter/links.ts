@@ -17,7 +17,9 @@ function headingSlug(heading: string): string {
 function convertLink(
   expression: string,
   registry: RouteRegistry,
-  unresolved: string[]
+  unresolved: string[],
+  allowlist: ReadonlyMap<string, string>,
+  allowed: Array<{ target: string; reason: string }>
 ): string {
   const [targetWithHeading, alias] = expression.split('|', 2);
   const headingAt = targetWithHeading.indexOf('#');
@@ -31,7 +33,9 @@ function convertLink(
   const route = registry.routeForWikiTarget(target);
 
   if (route === undefined) {
-    unresolved.push(target);
+    const reason = allowlist.get(target);
+    if (reason === undefined) unresolved.push(target);
+    else allowed.push({ target, reason });
     return label;
   }
 
@@ -42,10 +46,12 @@ function convertLink(
 function convertEmbed(
   expression: string,
   registry: RouteRegistry,
-  unresolved: string[]
+  unresolved: string[],
+  allowlist: ReadonlyMap<string, string>,
+  allowed: Array<{ target: string; reason: string }>
 ): string {
   if (!IMAGE_EXTENSION.test(expression)) {
-    return convertLink(expression, registry, unresolved);
+    return convertLink(expression, registry, unresolved, allowlist, allowed);
   }
 
   const assetPath = expression.replace(/^Assets\//, '');
@@ -56,17 +62,23 @@ function convertEmbed(
 
 export function convertWikiSyntax(
   markdown: string,
-  registry: RouteRegistry
-): { markdown: string; unresolved: string[] } {
+  registry: RouteRegistry,
+  allowlist: ReadonlyMap<string, string> = new Map()
+): {
+  markdown: string;
+  unresolved: string[];
+  allowlisted: Array<{ target: string; reason: string }>;
+} {
   const unresolved: string[] = [];
+  const allowlisted: Array<{ target: string; reason: string }> = [];
   const withoutEmbeds = markdown.replace(
     /!\[\[([^\]\n]+)\]\]/g,
-    (_match, expression: string) => convertEmbed(expression, registry, unresolved)
+    (_match, expression: string) => convertEmbed(expression, registry, unresolved, allowlist, allowlisted)
   );
   const converted = withoutEmbeds.replace(
     /\[\[([^\]\n]+)\]\]/g,
-    (_match, expression: string) => convertLink(expression, registry, unresolved)
+    (_match, expression: string) => convertLink(expression, registry, unresolved, allowlist, allowlisted)
   );
 
-  return { markdown: converted, unresolved };
+  return { markdown: converted, unresolved, allowlisted };
 }

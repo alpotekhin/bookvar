@@ -2,6 +2,7 @@
 title: "RLVR"
 aliases: [RLVR, Reinforcement Learning with Verifiable Rewards, RL with Verifiable Rewards]
 type: concept
+status: legacy
 category: Training
 papers:
   - "[[02 Areas/ML & DL/Papers/DeepSeek-R1 Reasoning via RL|DeepSeek-R1]]"

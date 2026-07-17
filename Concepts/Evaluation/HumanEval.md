@@ -2,6 +2,7 @@
 title: "HumanEval"
 aliases: [HumanEval, pass@k, Codex, HumanEval+, Code Generation Benchmark]
 type: concept
+status: legacy
 category: Evaluation
 papers:
   - "[[02 Areas/ML & DL/Papers/HumanEval|HumanEval]]"

@@ -5,6 +5,7 @@ import matter from 'gray-matter';
 import { convertCallouts } from './callouts.js';
 import { readPage } from './frontmatter.js';
 import { convertWikiSyntax } from './links.js';
+import { loadLinkAllowlist } from './link-policy.js';
 import { loadManifest } from './manifest.js';
 import { createRouteRegistry } from './routes.js';
 
@@ -18,6 +19,12 @@ export interface BuildOptions {
 interface Asset {
   source: string;
   publicPath: string;
+}
+
+export function publicationHref(route: string): string {
+  return route.endsWith('/index')
+    ? `/${route.slice(0, -'/index'.length)}/`
+    : `/${route}/`;
 }
 
 const IMAGE_EXTENSION = /\.(?:png|jpe?g|webp|svg|gif)$/i;
@@ -76,6 +83,7 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
   if (outputOffset === '') throw new Error('Output directory must be below rootDir');
   const outputDir = contained(rootDir, outputOffset, 'Output');
   const manifest = loadManifest(options.manifestPath);
+  const allowlist = loadLinkAllowlist(join(dirname(options.manifestPath), 'link-allowlist.json'));
   const entries = manifest.sections.flatMap((section) => section.pages);
   const parsed = await Promise.all(entries.map(async (entry) => {
     const sourcePath = contained(rootDir, entry.source, 'Source');
@@ -84,7 +92,7 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
   }));
   const registry = createRouteRegistry(parsed.map(({ entry, page }) => ({
     sourcePath: entry.source,
-    route: `/${entry.route}/`,
+    route: publicationHref(entry.route),
     title: page.title
   })), { allowAmbiguousBasenames: true });
   const titles = new Map(parsed.map(({ entry, page }) => [entry.route, page.title]));
@@ -136,10 +144,11 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
     source: string;
     route: string;
     unresolved: string[];
+    allowlisted: Array<{ target: string; reason: string }>;
   }> };
 
   for (const { entry, page, prepared } of preparedPages) {
-    const converted = convertWikiSyntax(prepared.markdown, registry);
+    const converted = convertWikiSyntax(prepared.markdown, registry, allowlist);
     const markdown = removeLeadingSourceHeading(convertCallouts(converted.markdown));
     const target = contained(outputDir, `${entry.route}.md`, 'Output');
     await mkdir(dirname(target), { recursive: true });
@@ -151,13 +160,19 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
     if (page.lastUpdated) metadata.lastUpdated = new Date(page.lastUpdated);
     await writeFile(target, matter.stringify(markdown, metadata), 'utf8');
 
-    if (converted.unresolved.length > 0) {
+    if (converted.unresolved.length > 0 || converted.allowlisted.length > 0) {
       report.pages.push({
         source: entry.source,
         route: entry.route,
-        unresolved: [...new Set(converted.unresolved)]
+        unresolved: [...new Set(converted.unresolved)],
+        allowlisted: [...new Map(converted.allowlisted.map((item) => [item.target, item])).values()]
       });
     }
+  }
+
+  const unexplained = report.pages.flatMap((page) => page.unresolved.map((target) => `${page.source}: ${target}`));
+  if (unexplained.length > 0) {
+    throw new Error(['Unexplained unresolved wiki links:', ...unexplained.map((item) => `- ${item}`)].join('\n'));
   }
 
   for (const asset of assetsByPublicPath.values()) {

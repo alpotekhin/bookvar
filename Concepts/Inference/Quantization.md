@@ -2,6 +2,7 @@
 title: "Quantization"
 aliases: [Quantization, Квантизация, Model Quantization]
 type: concept
+status: legacy
 category: Inference
 papers:
   - "[[02 Areas/ML & DL/Papers/QLoRA|QLoRA]]"
