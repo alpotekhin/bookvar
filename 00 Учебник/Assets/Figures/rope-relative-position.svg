@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="760" viewBox="0 0 1400 760" role="img" aria-labelledby="title desc">
+  <title id="title">Как RoPE превращает абсолютные позиции в относительное смещение</title>
+  <desc id="desc">Query и key вращаются на углы, соответствующие позициям m и n. Их скалярное произведение зависит от разности n минус m.</desc>
+  <defs>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#3867d6"/></marker>
+    <marker id="arrowRed" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#d9485f"/></marker>
+    <style>
+      .title{font:600 30px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#172033}.label{font:500 23px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#172033}.small{font:400 19px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#526079}.formula{font:500 25px Georgia,serif;fill:#172033}.axis{stroke:#aeb8c8;stroke-width:2}.guide{stroke:#c9d1df;stroke-width:2;stroke-dasharray:8 8}.blue{stroke:#3867d6;stroke-width:7}.red{stroke:#d9485f;stroke-width:7}.arc{fill:none;stroke:#7c8aa5;stroke-width:3}.panel{fill:#f7f9fc;stroke:#dce2ec;stroke-width:2}
+    </style>
+  </defs>
+  <rect width="1400" height="760" fill="white"/>
+  <text x="60" y="65" class="title">RoPE: позиция задаёт поворот Q и K</text>
+  <rect x="55" y="100" width="820" height="585" rx="22" class="panel"/>
+  <rect x="920" y="100" width="425" height="585" rx="22" class="panel"/>
+
+  <text x="95" y="150" class="label">Одна пара координат в attention head</text>
+  <line x1="165" y1="570" x2="760" y2="570" class="axis"/>
+  <line x1="470" y1="625" x2="470" y2="205" class="axis"/>
+  <circle cx="470" cy="570" r="7" fill="#172033"/>
+
+  <line x1="470" y1="570" x2="706" y2="407" class="blue" marker-end="url(#arrowBlue)"/>
+  <text x="710" y="395" class="label">qₘ = R(mθ)q</text>
+  <line x1="470" y1="570" x2="571" y2="279" class="red" marker-end="url(#arrowRed)"/>
+  <text x="585" y="275" class="label">kₙ = R(nθ)k</text>
+
+  <line x1="470" y1="570" x2="760" y2="570" class="guide"/>
+  <path d="M590 570 A120 120 0 0 0 568 501" class="arc"/>
+  <text x="605" y="520" class="small">mθ</text>
+  <path d="M635 570 A165 165 0 0 0 527 415" class="arc"/>
+  <text x="535" y="438" class="small">nθ</text>
+  <path d="M657 441 A230 230 0 0 0 588 357" fill="none" stroke="#8d62c7" stroke-width="5" marker-end="url(#arrowRed)"/>
+  <text x="670" y="345" class="label" fill="#7041aa">Δ = (n−m)θ</text>
+
+  <text x="95" y="635" class="small">Абсолютные позиции m и n входят как углы поворота.</text>
+  <text x="95" y="665" class="small">Взаимное расположение векторов определяется разностью углов.</text>
+
+  <text x="960" y="155" class="label">Что видит attention</text>
+  <text x="960" y="225" class="formula">(R(mθ)q)ᵀ R(nθ)k</text>
+  <line x1="975" y1="260" x2="1288" y2="260" stroke="#3867d6" stroke-width="3"/>
+  <text x="1080" y="310" class="formula">=</text>
+  <text x="985" y="365" class="formula">qᵀ R((n−m)θ)k</text>
+
+  <text x="960" y="445" class="label">Следствие</text>
+  <text x="960" y="495" class="small">Скалярное произведение</text>
+  <text x="960" y="527" class="small">зависит от относительного</text>
+  <text x="960" y="559" class="small">смещения n−m.</text>
+  <rect x="960" y="600" width="330" height="52" rx="12" fill="#e9effd"/>
+  <text x="991" y="634" class="label" fill="#2b55b5">position → phase</text>
+</svg>
