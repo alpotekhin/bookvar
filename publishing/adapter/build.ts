@@ -52,7 +52,11 @@ export function parseMarkdownHeadings(markdown: string): MarkdownHeading[] {
   let offset = 0;
   for (const line of markdown.split(/(?<=\n)/)) {
     const content = line.replace(/\r?\n$/, '');
-    const delimiter = content.match(/^ {0,3}(`{3,}|~{3,})(.*)$/);
+    const delimiterMatch = content.match(/^ {0,3}(`{3,}|~{3,})(.*)$/);
+    const delimiter = delimiterMatch
+      && !(delimiterMatch[1][0] === '`' && delimiterMatch[2].includes('`'))
+      ? delimiterMatch
+      : null;
     if (fence) {
       const closing = content.match(/^ {0,3}(`{3,}|~{3,})[ \t]*$/);
       if (
