@@ -4,7 +4,8 @@ url: https://arxiv.org/abs/2106.09685
 authors: [Edward Hu, Yelong Shen, Phillip Wallis, Zeyuan Allen-Zhu, Yuanzhi Li, Shean Wang, Lu Wang, Weizhu Chen]
 year: 2021
 date_reviewed: 2026-04-07
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 tags:
   - PEFT

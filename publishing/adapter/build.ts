@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import matter from 'gray-matter';
 import { convertCallouts } from './callouts.js';
 import { readPage } from './frontmatter.js';
-import { convertWikiSyntax } from './links.js';
+import { convertWikiSyntax, wikiHeadingSlug } from './links.js';
 import { loadLinkAllowlist } from './link-policy.js';
 import { loadManifest } from './manifest.js';
 import { createRouteRegistry } from './routes.js';
@@ -146,10 +146,30 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
     unresolved: string[];
     allowlisted: Array<{ target: string; reason: string }>;
   }> };
+  const fragmentAnchors = new Map<string, Set<string>>();
+  for (const { entry, prepared } of preparedPages) {
+    for (const match of prepared.markdown.matchAll(/!?\[\[([^\]\n]+)\]\]/g)) {
+      const expression = match[1].split('|', 1)[0];
+      const headingAt = expression.indexOf('#');
+      if (headingAt === -1) continue;
+      const target = expression.slice(0, headingAt);
+      const heading = expression.slice(headingAt + 1);
+      if (!heading) continue;
+      const route = target === '' ? publicationHref(entry.route) : registry.routeForWikiTarget(target);
+      if (!route) continue;
+      const anchors = fragmentAnchors.get(route) ?? new Set<string>();
+      anchors.add(`wiki-${wikiHeadingSlug(heading)}`);
+      fragmentAnchors.set(route, anchors);
+    }
+  }
 
   for (const { entry, page, prepared } of preparedPages) {
     const converted = convertWikiSyntax(prepared.markdown, registry, allowlist);
-    const markdown = removeLeadingSourceHeading(convertCallouts(converted.markdown));
+    const anchors = [...(fragmentAnchors.get(publicationHref(entry.route)) ?? [])]
+      .map((anchor) => `<span id="${anchor}" aria-hidden="true"></span>`)
+      .join('\n');
+    const body = removeLeadingSourceHeading(convertCallouts(converted.markdown));
+    const markdown = anchors ? `${anchors}\n\n${body}` : body;
     const target = contained(outputDir, `${entry.route}.md`, 'Output');
     await mkdir(dirname(target), { recursive: true });
     const metadata: Record<string, string | Date> = {

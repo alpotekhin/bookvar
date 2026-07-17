@@ -2,6 +2,7 @@
 title: "KV-Cache"
 aliases: [KV-Cache, KV Cache, Key-Value Cache, KV кэш]
 type: concept
+status: legacy
 category: Inference
 papers:
   - "[[02 Areas/ML & DL/Papers/Mistral 7B|Mistral 7B]]"

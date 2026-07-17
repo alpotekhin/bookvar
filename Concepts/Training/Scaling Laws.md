@@ -2,6 +2,7 @@
 title: "Scaling Laws"
 aliases: [neural scaling laws, Chinchilla scaling, compute-optimal training]
 type: concept
+status: legacy
 category: Training
 papers:
   - "[[02 Areas/ML & DL/Papers/GPT 3.0]]"

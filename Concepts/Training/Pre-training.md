@@ -2,6 +2,7 @@
 title: "Pre-training"
 aliases: [pre-train, self-supervised pre-training]
 type: concept
+status: legacy
 category: Training
 papers:
   - "[[02 Areas/ML & DL/Papers/BERT]]"

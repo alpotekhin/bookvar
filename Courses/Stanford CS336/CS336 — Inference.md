@@ -1,6 +1,7 @@
 ---
 title: "CS336 — Inference"
-type: course-note
+type: source-note
+status: legacy
 course: "Stanford CS336"
 ---
 

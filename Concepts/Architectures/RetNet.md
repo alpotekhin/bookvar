@@ -2,6 +2,7 @@
 title: "RetNet"
 aliases: [RetNet, Retentive Network, Retention Mechanism, Multi-Scale Retention]
 type: concept
+status: legacy
 category: Architectures
 papers:
   - "[[02 Areas/ML & DL/Papers/RetNet|RetNet]]"

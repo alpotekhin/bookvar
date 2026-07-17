@@ -2,6 +2,7 @@
 title: "Self-RAG"
 aliases: [Self-RAG, Adaptive RAG, Self-Reflective RAG, Self-Reflective Retrieval-Augmented Generation]
 type: concept
+status: legacy
 category: Retrieval
 papers: ["[[02 Areas/ML & DL/Papers/Self-RAG|Self-RAG]]"]
 courses: []

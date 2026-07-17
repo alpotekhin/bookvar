@@ -2,6 +2,7 @@
 title: "Reward Model"
 aliases: [Reward Model, RM, Reward Modeling]
 type: concept
+status: legacy
 category: Training
 papers:
   - "[[02 Areas/ML & DL/Papers/InstructGPT|InstructGPT]]"

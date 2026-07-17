@@ -4,7 +4,8 @@ url: https://arxiv.org/abs/2501.12948
 authors: "DeepSeek-AI"
 year: 2025
 date_reviewed: 2026-04-08
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 raw: "[[02 Areas/ML & DL/raw/papers/deepseek-r1/source]]"
 concepts: [Reinforcement Learning, Chain of Thought, GRPO, Reasoning, Knowledge Distillation, Reward Hacking]

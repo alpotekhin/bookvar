@@ -4,7 +4,8 @@ url: https://arxiv.org/abs/2403.08295
 authors: "Gemma Team, Google DeepMind"
 year: 2024
 date_reviewed: 2026-04-07
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 raw: "[[02 Areas/ML & DL/raw/papers/gemma/source]]"
 concepts:
@@ -129,4 +130,3 @@ Gemma 7B: 63.8 average vs Mistral 7B: 61.0. Наибольшее преимущ�
 Gemma 7B IT превосходит Mistral 7B на CrowS-Pairs (49.67 vs 32.76), BBQ Ambig (86.06 vs 97.53 -- Mistral лучше), TruthfulQA (45.34 vs 48.54 -- Mistral лучше).
 
 ## My notes
-

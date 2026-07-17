@@ -2,6 +2,7 @@
 title: "Emergent Abilities"
 aliases: [emergent capabilities, emergent behavior, emergence in LLMs, phase transitions in LLMs]
 type: concept
+status: legacy
 category: NLP
 papers:
   - "[[02 Areas/ML & DL/Papers/GPT 4.0|GPT-4]]"

@@ -2,6 +2,7 @@
 title: "Fine-tuning"
 aliases: [task-specific fine-tuning, downstream fine-tuning, PEFT, parameter-efficient fine-tuning]
 type: concept
+status: legacy
 category: Training
 papers:
   - "[[02 Areas/ML & DL/Papers/BERT]]"

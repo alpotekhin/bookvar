@@ -65,7 +65,7 @@ describe('publication asset registry', () => {
     ]);
   });
 
-  it('keeps every asset-curated allowlist page independent of ignored raw files', () => {
+  it('publishes without retaining any raw-asset-blocked allowlist entry', () => {
     const allowlist = JSON.parse(readFileSync(resolve(root, 'publishing/link-allowlist.json'), 'utf8')) as {
       entries: Array<{ target: string; reason: string }>;
     };
@@ -84,7 +84,7 @@ describe('publication asset registry', () => {
         .map((entry) => `${entry.parentPath}/${entry.name}`);
     });
 
-    expect(blocked).toHaveLength(78);
+    expect(blocked).toHaveLength(0);
     for (const { target } of blocked) {
       const relativePage = target.replace(/^02 Areas\/ML & DL\//, '');
       const exactPage = resolve(root, `${relativePage}.md`);

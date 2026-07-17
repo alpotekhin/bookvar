@@ -2,7 +2,8 @@
 title: "CS224N — Lecture 14: Reasoning and Agents"
 course: "Stanford CS224N"
 lecture: 14
-type: course-note
+type: source-note
+status: legacy
 raw: "[[02 Areas/ML & DL/raw/courses/Stanford CS224N/slides/cs224n-spr2024-lecture14-agents-shikhar-updated]]"
 concepts: ["[[02 Areas/ML & DL/Concepts/Inference/Chain of Thought|Chain-of-Thought]]", "[[02 Areas/ML & DL/Concepts/NLP/LLM Agents|LLM Agents]]", "[[02 Areas/ML & DL/Concepts/NLP/Tool Use|Tool Use]]", "[[02 Areas/ML & DL/Concepts/Reasoning/ReAct|ReAct]]"]
 ---

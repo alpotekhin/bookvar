@@ -2,6 +2,7 @@
 title: "ReAct"
 aliases: [ReAct, Reasoning and Acting, ReAct Agent, Thought-Action-Observation]
 type: concept
+status: legacy
 category: Reasoning
 papers:
   - "[[02 Areas/ML & DL/Papers/ReAct|ReAct]]"

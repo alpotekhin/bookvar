@@ -2,6 +2,7 @@
 title: "Flash Attention"
 aliases: [FlashAttention, FlashAttention-2, FlashAttention-3, IO-aware Attention]
 type: concept
+status: legacy
 category: Inference
 papers:
   - "[[02 Areas/ML & DL/Papers/Flash Attention|Flash Attention (Dao et al., 2022)]]"

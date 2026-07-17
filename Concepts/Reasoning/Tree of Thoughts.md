@@ -2,6 +2,7 @@
 title: "Tree of Thoughts"
 aliases: [Tree of Thoughts, ToT, Deliberate Problem Solving]
 type: concept
+status: legacy
 category: Reasoning
 papers:
   - "[[02 Areas/ML & DL/Papers/Tree of Thoughts|Tree of Thoughts]]"

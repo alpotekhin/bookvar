@@ -2,6 +2,7 @@
 title: "RLHF"
 aliases: [Reinforcement Learning from Human Feedback, InstructGPT alignment]
 type: concept
+status: legacy
 category: Training
 papers:
   - "[[02 Areas/ML & DL/Papers/InstructGPT]]"

@@ -2,6 +2,7 @@
 title: "GPT-3"
 aliases: [GPT 3, GPT3, Language Models are Few-Shot Learners]
 type: concept
+status: legacy
 category: Architectures
 papers:
   - "[[02 Areas/ML & DL/Papers/GPT 1.0|GPT 1.0]]"

@@ -2,6 +2,7 @@
 title: "Chain of Thought"
 aliases: [CoT, chain-of-thought prompting, CoT prompting, Chain-of-Thought]
 type: concept
+status: legacy
 category: Inference
 papers:
   - "[[02 Areas/ML & DL/Papers/COT|Chain-of-Thought Prompting (Wei et al., 2022)]]"

@@ -4,7 +4,8 @@ url: https://arxiv.org/abs/2310.11511
 authors: [Akari Asai, Zeqiu Wu, Yizhong Wang, Avirup Sil, Hannaneh Hajishirzi]
 year: 2023
 date_reviewed: 2026-04-07
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 tags:
   - RAG

@@ -2,6 +2,7 @@
 title: "PPO"
 aliases: [PPO, Proximal Policy Optimization]
 type: concept
+status: legacy
 category: Training
 papers:
   - "[[02 Areas/ML & DL/Papers/InstructGPT|InstructGPT]]"

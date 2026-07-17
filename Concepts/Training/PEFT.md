@@ -2,6 +2,7 @@
 title: "PEFT"
 aliases: [PEFT, Parameter-Efficient Fine-Tuning, параметрически-эффективная настройка]
 type: concept
+status: legacy
 category: Training
 papers:
   - "[[02 Areas/ML & DL/Papers/LoRA|LoRA]]"

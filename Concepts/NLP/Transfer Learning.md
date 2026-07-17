@@ -2,6 +2,7 @@
 title: "Transfer Learning"
 aliases: [transfer learning in NLP, pre-training, fine-tuning paradigm, embeddings evolution, Word2Vec, GloVe, ELMo]
 type: concept
+status: legacy
 category: NLP
 papers:
   - "[[02 Areas/ML & DL/Papers/BERT|BERT]]"

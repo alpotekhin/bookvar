@@ -2,6 +2,7 @@
 title: "Tokenization"
 aliases: [BPE, Byte Pair Encoding, subword tokenization, WordPiece, SentencePiece, tokenizer, Unigram tokenizer, tiktoken]
 type: concept
+status: legacy
 category: NLP
 papers:
   - "[[02 Areas/ML & DL/Papers/Attention Is All You Need|Attention Is All You Need]]"

@@ -2,6 +2,7 @@
 title: "Layer Normalization"
 aliases: [LayerNorm, layer norm, RMSNorm, Pre-Norm, Post-Norm, batch normalization vs layer normalization]
 type: concept
+status: legacy
 category: NLP
 papers:
   - "[[02 Areas/ML & DL/Papers/Attention Is All You Need|Attention Is All You Need]]"

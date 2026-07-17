@@ -22,7 +22,7 @@ describe('convertWikiSyntax', () => {
       markdown: [
         '[Page](/resolved-route/)',
         '[читаемый текст](/resolved-route/)',
-        '[Page](/resolved-route/#раздел)',
+        '[Page](/resolved-route/#wiki-раздел)',
         '![attention](../../assets/Figures/attention.svg)'
       ].join('\n'),
       unresolved: [],
@@ -40,7 +40,7 @@ describe('convertWikiSyntax', () => {
 
     try {
       expect(convertWikiSyntax('[[Path/Page#ЁЖ]]', registry).markdown)
-        .toBe('[Page](/resolved-route/#ёж)');
+        .toBe('[Page](/resolved-route/#wiki-ёж)');
     } finally {
       localeLowercase.mockRestore();
     }
@@ -73,7 +73,7 @@ describe('convertWikiSyntax', () => {
 
   it('converts local heading targets without treating them as missing pages', () => {
     expect(convertWikiSyntax('[[#Local Heading|jump]]', registry)).toEqual({
-      markdown: '[jump](#local-heading)',
+      markdown: '[jump](#wiki-local-heading)',
       unresolved: [],
       allowlisted: []
     });

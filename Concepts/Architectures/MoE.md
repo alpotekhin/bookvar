@@ -2,6 +2,7 @@
 title: "MoE"
 aliases: [MoE, Mixture of Experts, Sparse Mixture of Experts]
 type: concept
+status: legacy
 category: Architectures
 papers:
   - "[[02 Areas/ML & DL/Papers/Mixtral of Experts|Mixtral]]"

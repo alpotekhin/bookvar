@@ -2,6 +2,7 @@
 title: "Mistral 7B"
 aliases: [Mistral, Mistral-7B, Mistral 7B]
 type: concept
+status: legacy
 category: Architectures
 papers:
   - "[[02 Areas/ML & DL/Papers/Mistral 7B|Mistral 7B]]"
