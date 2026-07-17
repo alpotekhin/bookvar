@@ -36,6 +36,54 @@ function removeLeadingSourceHeading(markdown: string): string {
   return markdown.slice(heading[0].length);
 }
 
+export function normalizeObsidianHeading(heading: string): string {
+  return heading.normalize('NFKC').trim().toLowerCase().replace(/\s+/g, ' ');
+}
+
+interface MarkdownHeading {
+  text: string;
+  normalized: string;
+  offset: number;
+}
+
+export function parseMarkdownHeadings(markdown: string): MarkdownHeading[] {
+  const headings: MarkdownHeading[] = [];
+  let fenced = false;
+  let offset = 0;
+  for (const line of markdown.split(/(?<=\n)/)) {
+    const content = line.replace(/\r?\n$/, '');
+    if (/^\s*(```|~~~)/.test(content)) fenced = !fenced;
+    if (!fenced) {
+      const match = content.match(/^#{1,6}[ \t]+(.+?)[ \t]*#?[ \t]*$/);
+      if (match) {
+        const text = match[1].replace(/[ \t]+#$/, '').trim();
+        headings.push({ text, normalized: normalizeObsidianHeading(text), offset });
+      }
+    }
+    offset += line.length;
+  }
+  return headings;
+}
+
+export function insertFragmentAliases(
+  markdown: string,
+  aliases: ReadonlyMap<string, string>
+): { markdown: string; missing: string[] } {
+  const headings = parseMarkdownHeadings(markdown);
+  const insertions: Array<{ offset: number; anchor: string }> = [];
+  const missing: string[] = [];
+  for (const [targetHeading, anchor] of aliases) {
+    const matches = headings.filter((heading) => heading.normalized === normalizeObsidianHeading(targetHeading));
+    if (matches.length !== 1) missing.push(targetHeading);
+    else insertions.push({ offset: matches[0].offset, anchor });
+  }
+  let converted = markdown;
+  for (const insertion of insertions.sort((a, b) => b.offset - a.offset)) {
+    converted = `${converted.slice(0, insertion.offset)}<span id="${insertion.anchor}" aria-hidden="true"></span>\n${converted.slice(insertion.offset)}`;
+  }
+  return { markdown: converted, missing };
+}
+
 function contained(root: string, candidate: string, label: string): string {
   if (isAbsolute(candidate)) throw new Error(`${label} path escapes rootDir: ${candidate}`);
   const absolute = resolve(root, candidate);
@@ -146,7 +194,11 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
     unresolved: string[];
     allowlisted: Array<{ target: string; reason: string }>;
   }> };
-  const fragmentAnchors = new Map<string, Set<string>>();
+  const headingsByRoute = new Map(preparedPages.map(({ entry, prepared }) => [
+    publicationHref(entry.route),
+    parseMarkdownHeadings(prepared.markdown)
+  ]));
+  const fragmentAnchors = new Map<string, Map<string, string>>();
   for (const { entry, prepared } of preparedPages) {
     for (const match of prepared.markdown.matchAll(/!?\[\[([^\]\n]+)\]\]/g)) {
       const expression = match[1].split('|', 1)[0];
@@ -157,19 +209,35 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
       if (!heading) continue;
       const route = target === '' ? publicationHref(entry.route) : registry.routeForWikiTarget(target);
       if (!route) continue;
-      const anchors = fragmentAnchors.get(route) ?? new Set<string>();
-      anchors.add(`wiki-${wikiHeadingSlug(heading)}`);
+      const exact = headingsByRoute.get(route)?.filter(
+        (candidate) => candidate.normalized === normalizeObsidianHeading(heading)
+      ) ?? [];
+      if (exact.length !== 1) continue;
+      const anchors = fragmentAnchors.get(route) ?? new Map<string, string>();
+      anchors.set(heading, `wiki-${wikiHeadingSlug(heading)}`);
       fragmentAnchors.set(route, anchors);
     }
   }
 
   for (const { entry, page, prepared } of preparedPages) {
-    const converted = convertWikiSyntax(prepared.markdown, registry, allowlist);
-    const anchors = [...(fragmentAnchors.get(publicationHref(entry.route)) ?? [])]
-      .map((anchor) => `<span id="${anchor}" aria-hidden="true"></span>`)
-      .join('\n');
-    const body = removeLeadingSourceHeading(convertCallouts(converted.markdown));
-    const markdown = anchors ? `${anchors}\n\n${body}` : body;
+    const currentRoute = publicationHref(entry.route);
+    const pageRegistry = {
+      routeForWikiTarget: registry.routeForWikiTarget,
+      fragmentForWikiTarget(target: string, heading: string): string | undefined {
+        const route = target === '' ? currentRoute : registry.routeForWikiTarget(target);
+        if (!route) return undefined;
+        return fragmentAnchors.get(route)?.get(heading);
+      }
+    };
+    const converted = convertWikiSyntax(prepared.markdown, pageRegistry, allowlist);
+    const withAnchors = insertFragmentAliases(
+      converted.markdown,
+      fragmentAnchors.get(currentRoute) ?? new Map()
+    );
+    if (withAnchors.missing.length > 0) {
+      throw new Error(`Fragment aliases lost their headings in ${entry.source}: ${withAnchors.missing.join(', ')}`);
+    }
+    const markdown = removeLeadingSourceHeading(convertCallouts(withAnchors.markdown));
     const target = contained(outputDir, `${entry.route}.md`, 'Output');
     await mkdir(dirname(target), { recursive: true });
     const metadata: Record<string, string | Date> = {

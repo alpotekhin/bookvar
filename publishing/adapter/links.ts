@@ -30,19 +30,27 @@ function convertLink(
     ? undefined
     : targetWithHeading.slice(headingAt + 1);
   const label = alias ?? (target === '' ? heading ?? '' : basename(target));
-  if (target === '' && heading !== undefined) {
-    return `[${label}](#wiki-${wikiHeadingSlug(heading)})`;
-  }
-  const route = registry.routeForWikiTarget(target);
+  const route = target === '' ? '' : registry.routeForWikiTarget(target);
 
-  if (route === undefined) {
+  if (target !== '' && route === undefined) {
     const reason = allowlist.get(target);
     if (reason === undefined) unresolved.push(target);
     else allowed.push({ target, reason });
     return label;
   }
 
-  const anchor = heading === undefined ? '' : `#wiki-${wikiHeadingSlug(heading)}`;
+  let anchor = '';
+  if (heading !== undefined) {
+    const fragment = registry.fragmentForWikiTarget?.(target, heading);
+    if (registry.fragmentForWikiTarget && fragment === undefined) {
+      const fullTarget = `${target}#${heading}`;
+      const reason = allowlist.get(fullTarget);
+      if (reason === undefined) unresolved.push(fullTarget);
+      else allowed.push({ target: fullTarget, reason });
+      return label;
+    }
+    anchor = `#${fragment ?? `wiki-${wikiHeadingSlug(heading)}`}`;
+  }
   return `[${label}](${route}${anchor})`;
 }
 

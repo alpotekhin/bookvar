@@ -6,4 +6,5 @@ export interface PageRecord {
 
 export interface RouteRegistry {
   routeForWikiTarget(target: string): string | undefined;
+  fragmentForWikiTarget?(target: string, heading: string): string | undefined;
 }
