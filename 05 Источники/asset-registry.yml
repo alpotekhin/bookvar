@@ -459,7 +459,7 @@ assets:
     metadata_status: needs-confirmation
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/cot/images/cot-prompting-fig1.png
-  - id: curated-deepseek-r1-2b50f7aff174
+  - id: curated-deepseek-r1-51d3877bb09b
     asset: 00 Учебник/Assets/Figures/curated/deepseek-r1/figure2-pipeline.png
     author: DeepSeek-AI
     source_url: https://arxiv.org/abs/2501.12948
