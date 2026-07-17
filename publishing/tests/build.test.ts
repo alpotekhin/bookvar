@@ -1,6 +1,7 @@
 import { mkdtempSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
+import matter from 'gray-matter';
 import { describe, expect, it } from 'vitest';
 import { buildPublication } from '../adapter/build.js';
 
@@ -23,6 +24,7 @@ function fixture(body = 'См. [[Page B]] и [[Missing]].\n\n![[Assets/Figures/c
     'title: Page A',
     'type: concept',
     'status: stable',
+    'last_updated: 2026-07-17',
     '---',
     body
   ].join('\n'));
@@ -69,10 +71,12 @@ describe('buildPublication', () => {
     const generated = readFileSync(join(options.outputDir, 'nested', 'page-a.md'), 'utf8');
     expect(generated).toContain('title: Page A');
     expect(generated).toContain('description: Page A');
-    expect(generated).toContain('editUrl: Notes/Page A.md');
+    const metadata = matter(generated).data;
+    expect(new URL(metadata.editUrl).protocol).toBe('file:');
+    expect(metadata.lastUpdated).toBeInstanceOf(Date);
     expect(generated).toContain('[Page B](/page-b/)');
     expect(generated).toContain('Missing');
-    expect(generated).toContain('![chart](../../assets/Figures/chart.svg)');
+    expect(generated).toContain('![chart](/assets/Figures/chart.svg)');
     expect(readFileSync(join(options.outputDir, 'page-b.md'), 'utf8'))
       .toContain(':::caution[Check]\nBody\n:::');
     expect(JSON.parse(readFileSync(options.reportPath, 'utf8'))).toMatchObject({

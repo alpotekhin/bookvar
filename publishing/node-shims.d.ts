@@ -31,6 +31,7 @@ declare module 'node:fs/promises' {
 
 declare module 'node:url' {
   export function fileURLToPath(url: string): string;
+  export function pathToFileURL(path: string): { href: string };
 }
 
 interface ImportMeta {

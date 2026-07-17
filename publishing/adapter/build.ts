@@ -1,6 +1,6 @@
 import { access, copyFile, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { dirname, isAbsolute, join, relative, resolve, sep } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import matter from 'gray-matter';
 import { convertCallouts } from './callouts.js';
 import { readPage } from './frontmatter.js';
@@ -57,13 +57,11 @@ function prepareAssets(rootDir: string, markdown: string): { markdown: string; a
     if (!IMAGE_EXTENSION.test(target)) return match;
     const asset = normalizeAsset(rootDir, expression);
     assets.push(asset);
-    return `![[Assets/${asset.publicPath}]]`;
+    const filename = asset.publicPath.slice(asset.publicPath.lastIndexOf('/') + 1);
+    const alt = filename.replace(IMAGE_EXTENSION, '');
+    return `![${alt}](/assets/${asset.publicPath})`;
   });
   return { markdown: converted, assets };
-}
-
-function editUrl(source: string): string {
-  return source.replaceAll('\\', '/');
 }
 
 export async function buildPublication(options: BuildOptions): Promise<void> {
@@ -82,7 +80,7 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
     sourcePath: entry.source,
     route: `/${entry.route}/`,
     title: page.title
-  })));
+  })), { allowAmbiguousBasenames: true });
 
   const assetsByPublicPath = new Map<string, Asset>();
   const preparedPages = parsed.map(({ entry, page }) => {
@@ -122,12 +120,12 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
     const markdown = convertCallouts(converted.markdown);
     const target = contained(outputDir, `${entry.route}.md`, 'Output');
     await mkdir(dirname(target), { recursive: true });
-    const metadata: Record<string, string> = {
+    const metadata: Record<string, string | Date> = {
       title: page.title,
       description: page.title,
-      editUrl: editUrl(entry.source)
+      editUrl: pathToFileURL(contained(rootDir, entry.source, 'Source')).href
     };
-    if (page.lastUpdated) metadata.lastUpdated = page.lastUpdated;
+    if (page.lastUpdated) metadata.lastUpdated = new Date(page.lastUpdated);
     await writeFile(target, matter.stringify(markdown, metadata), 'utf8');
 
     if (converted.unresolved.length > 0) {
