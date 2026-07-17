@@ -89,6 +89,9 @@ export function loadManifest(path: string): PublicationManifest {
       const source = text(page.source, `${label}.source`);
       const route = text(page.route, `${label}.route`);
 
+      if (source === 'raw' || source.startsWith('raw/')) {
+        throw new Error(`Manifest source must not reference ignored raw content: ${source}`);
+      }
       if (route.startsWith('/')) throw new Error(`Route must not begin with /: ${route}`);
       if (!ASCII_ROUTE.test(route)) throw new Error(`Route must be stable lowercase ASCII: ${route}`);
       if (routes.has(route)) throw new Error(`Duplicate route: ${route}`);

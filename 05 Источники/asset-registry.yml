@@ -1,0 +1,226 @@
+schema_version: 1
+reviewed_at: 2026-07-17
+notes:
+  - null means the exact value has not yet been verified; it must not be inferred from the filename.
+  - needs-confirmation entries are inventory records, not redistribution clearance.
+assets:
+  - asset: 00 Учебник/Assets/Figures/attention/transformer_self_attention_vectors.png
+    author: Jay Alammar
+    source_url: https://jalammar.github.io/illustrated-transformer/
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: [00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V.md]
+    metadata_status: verified
+  - asset: 00 Учебник/Assets/Figures/attention/self-attention-matrix-calculation-2.png
+    author: Jay Alammar
+    source_url: https://jalammar.github.io/illustrated-transformer/
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: [00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V.md]
+    metadata_status: verified
+  - asset: 00 Учебник/Assets/Figures/attention/transformer_multi-headed_self-attention-recap.png
+    author: Jay Alammar
+    source_url: https://jalammar.github.io/illustrated-transformer/
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: [00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V.md]
+    metadata_status: verified
+
+  - &colbert
+    asset: 00 Учебник/Assets/Figures/colbert-figure2-hq.png
+    author: null
+    source_url: https://arxiv.org/abs/2004.12832
+    license: null
+    license_url: null
+    modifications: figure crop or extraction; exact process requires confirmation
+    used_in: [00 Учебник/15 Embeddings, Retrieval и RAG/01 Embeddings и retrieval.md]
+    metadata_status: needs-confirmation
+  - <<: *colbert
+    asset: 00 Учебник/Assets/Figures/colbert-page1.png
+    modifications: paper page rasterization; exact process requires confirmation
+    used_in: []
+  - <<: *colbert
+    asset: 00 Учебник/Assets/Figures/colbert-page2.png
+    modifications: paper page rasterization; exact process requires confirmation
+    used_in: []
+
+  - &deepseek_r1
+    asset: 00 Учебник/Assets/Figures/deepseek-r1-figure1-hq.png
+    author: DeepSeek-AI
+    source_url: https://arxiv.org/abs/2501.12948
+    license: null
+    license_url: null
+    modifications: figure crop or extraction; exact process requires confirmation
+    used_in: [00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md, 00 Учебник/10 Атлас современных архитектур/01 Llama, Qwen и DeepSeek как эволюция блока.md]
+    metadata_status: needs-confirmation
+  - <<: *deepseek_r1
+    asset: 00 Учебник/Assets/Figures/deepseek-r1-page4.png
+    modifications: paper page rasterization; exact process requires confirmation
+    used_in: []
+  - <<: *deepseek_r1
+    asset: 00 Учебник/Assets/Figures/post-training/deepseek-r1-late-000.jpg
+    modifications: paper extraction or crop; exact source location and process require confirmation
+    used_in: []
+  - <<: *deepseek_r1
+    asset: 00 Учебник/Assets/Figures/post-training/deepseek-r1-late-001.jpg
+    modifications: paper extraction or crop; exact source location and process require confirmation
+    used_in: []
+  - <<: *deepseek_r1
+    asset: 00 Учебник/Assets/Figures/post-training/deepseek-r1-p16-000.jpg
+    modifications: paper page 16 extraction or crop; exact process requires confirmation
+    used_in: []
+
+  - &deepseek_v2
+    asset: 00 Учебник/Assets/Figures/deepseek-v2-figure2-hq.png
+    author: DeepSeek-AI
+    source_url: https://arxiv.org/abs/2405.04434
+    license: null
+    license_url: null
+    modifications: figure crop or extraction; exact process requires confirmation
+    used_in: [00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md]
+    metadata_status: needs-confirmation
+  - <<: *deepseek_v2
+    asset: 00 Учебник/Assets/Figures/deepseek-v2-page5.png
+    modifications: paper page rasterization; exact process requires confirmation
+    used_in: []
+
+  - &deepseek_v3
+    asset: 00 Учебник/Assets/Figures/deepseek-v3-figure1-hq.png
+    author: DeepSeek-AI
+    source_url: https://arxiv.org/abs/2412.19437
+    license: null
+    license_url: null
+    modifications: figure crop or extraction; exact process requires confirmation
+    used_in: []
+    metadata_status: needs-confirmation
+  - <<: *deepseek_v3
+    asset: 00 Учебник/Assets/Figures/deepseek-v3-figure2-architecture-hq.png
+    used_in: [00 Учебник/10 Атлас современных архитектур/01 Llama, Qwen и DeepSeek как эволюция блока.md]
+  - <<: *deepseek_v3
+    asset: 00 Учебник/Assets/Figures/deepseek-v3-page1.png
+    modifications: paper page rasterization; exact process requires confirmation
+  - <<: *deepseek_v3
+    asset: 00 Учебник/Assets/Figures/deepseek-v3-page7.png
+    modifications: paper page rasterization; exact process requires confirmation
+
+  - &glm4
+    asset: 00 Учебник/Assets/Figures/glm4-figure1-hq.png
+    author: null
+    source_url: https://arxiv.org/abs/2406.12793
+    license: null
+    license_url: null
+    modifications: figure crop or extraction; exact process requires confirmation
+    used_in: [00 Учебник/10 Атлас современных архитектур/01 Llama, Qwen и DeepSeek как эволюция блока.md]
+    metadata_status: needs-confirmation
+  - <<: *glm4
+    asset: 00 Учебник/Assets/Figures/glm4-page2.png
+    modifications: paper page rasterization; exact process requires confirmation
+    used_in: []
+
+  - &jamba
+    asset: 00 Учебник/Assets/Figures/jamba-figure1-hq.png
+    author: null
+    source_url: https://arxiv.org/abs/2403.19887
+    license: null
+    license_url: null
+    modifications: figure crop or extraction; exact process requires confirmation
+    used_in: [00 Учебник/10 Атлас современных архитектур/02 Альтернативы Transformer и multimodality.md]
+    metadata_status: needs-confirmation
+  - <<: *jamba
+    asset: 00 Учебник/Assets/Figures/jamba-page3.png
+    modifications: paper page rasterization; exact process requires confirmation
+    used_in: []
+
+  - asset: 00 Учебник/Assets/Figures/kv-cache-prefill-decode.svg
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: repository-authored SVG; authorship and repository license require confirmation
+    used_in: [00 Учебник/14 Inference и оптимизация/01 KV-cache, batching и FlashAttention.md]
+    metadata_status: needs-confirmation
+
+  - &instructgpt
+    asset: 00 Учебник/Assets/Figures/post-training/instructgpt-labeling-ui-000.png
+    author: null
+    source_url: https://arxiv.org/abs/2203.02155
+    license: null
+    license_url: null
+    modifications: paper UI extraction or crop; exact figure and process require confirmation
+    used_in: []
+    metadata_status: needs-confirmation
+  - <<: *instructgpt
+    asset: 00 Учебник/Assets/Figures/post-training/instructgpt-labeling-ui-001.png
+  - <<: *instructgpt
+    asset: 00 Учебник/Assets/Figures/post-training/instructgpt-labeling-ui-002.png
+    used_in: [00 Учебник/12 Post-training и Alignment/02 Preference data.md]
+  - <<: *instructgpt
+    asset: 00 Учебник/Assets/Figures/post-training/instructgpt-labeling-ui-003.png
+
+  - &qwen25
+    asset: 00 Учебник/Assets/Figures/qwen25-figure1-hq.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: figure crop or extraction; exact source and process require confirmation
+    used_in: [00 Учебник/10 Атлас современных архитектур/01 Llama, Qwen и DeepSeek как эволюция блока.md]
+    metadata_status: needs-confirmation
+  - <<: *qwen25
+    asset: 00 Учебник/Assets/Figures/qwen25-page1.png
+    modifications: paper page rasterization; exact source and process require confirmation
+    used_in: []
+
+  - &retnet
+    asset: 00 Учебник/Assets/Figures/retnet-figure3-hq.png
+    author: null
+    source_url: https://arxiv.org/abs/2307.08621
+    license: null
+    license_url: null
+    modifications: figure crop or extraction; exact process requires confirmation
+    used_in: [00 Учебник/10 Атлас современных архитектур/02 Альтернативы Transformer и multimodality.md]
+    metadata_status: needs-confirmation
+  - <<: *retnet
+    asset: 00 Учебник/Assets/Figures/retnet-page4.png
+    modifications: paper page rasterization; exact process requires confirmation
+    used_in: []
+
+  - asset: 00 Учебник/Assets/Figures/rope-relative-position.svg
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: repository-authored SVG; authorship and repository license require confirmation
+    used_in: [00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md]
+    metadata_status: needs-confirmation
+
+  - &rwkv
+    asset: 00 Учебник/Assets/Figures/rwkv-figure3-hq.png
+    author: null
+    source_url: https://arxiv.org/abs/2305.13048
+    license: null
+    license_url: null
+    modifications: figure crop or extraction; exact process requires confirmation
+    used_in: [00 Учебник/10 Атлас современных архитектур/02 Альтернативы Transformer и multimodality.md]
+    metadata_status: needs-confirmation
+  - <<: *rwkv
+    asset: 00 Учебник/Assets/Figures/rwkv-page4.png
+    modifications: paper page rasterization; exact process requires confirmation
+    used_in: []
+
+  - &tot
+    asset: 00 Учебник/Assets/Figures/tot-figure1-hq.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: figure crop or extraction; exact source and process require confirmation
+    used_in: [00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md]
+    metadata_status: needs-confirmation
+  - <<: *tot
+    asset: 00 Учебник/Assets/Figures/tot-page2.png
+    modifications: paper page rasterization; exact source and process require confirmation
+    used_in: []

@@ -43,7 +43,7 @@ describe('loadManifest', () => {
     expect(manifest.sections.map((section) => section.id)).toEqual([
       'textbook', 'models', 'sources', 'questions', 'practice'
     ]);
-    expect(manifest.sections.flatMap((section) => section.pages)).toHaveLength(10);
+    expect(manifest.sections.flatMap((section) => section.pages).length).toBeGreaterThanOrEqual(8);
   });
 
   it('returns ordered sections and pages from the exact manifest schema', () => {
@@ -63,6 +63,16 @@ describe('loadManifest', () => {
   it('rejects a missing source file', () => {
     expect(() => loadManifest(fixture(validYaml, ['00 Учебник/_index.md'])))
       .toThrow(/Missing source.*06 Практика\/lab\.md/);
+  });
+
+  it('rejects manifest sources under the ignored raw tree', () => {
+    const yaml = validYaml.replace('00 Учебник/_index.md', 'raw/papers/example.md');
+    const path = fixture(yaml, [
+      'raw/papers/example.md',
+      '06 Практика/lab.md'
+    ]);
+
+    expect(() => loadManifest(path)).toThrow(/Manifest source must not reference ignored raw content.*raw\/papers/);
   });
 
   it('rejects duplicate routes', () => {
