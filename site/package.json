@@ -9,6 +9,7 @@
   "scripts": {
     "content:build": "pnpm --dir ../publishing build",
     "predev": "pnpm content:build",
+    "precheck": "pnpm content:build",
     "prebuild": "pnpm content:build",
     "dev": "astro dev",
     "build": "astro build",

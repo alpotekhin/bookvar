@@ -3,6 +3,7 @@
 .superpowers/
 raw/
 node_modules/
+.astro/
 site/dist/
 site/.astro/
 site/src/content/docs/generated/
