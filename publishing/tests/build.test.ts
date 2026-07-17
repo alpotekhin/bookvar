@@ -105,8 +105,40 @@ describe('buildPublication', () => {
 
   it('fails when a referenced local asset is missing', async () => {
     const options = fixture('![[Assets/Figures/missing.svg]]');
+    const stale = join(options.outputDir, 'stale.md');
+    write(stale, 'must survive failed preflight');
 
     await expect(buildPublication(options)).rejects.toThrow(/Missing asset.*missing\.svg/);
+    expect(readFileSync(stale, 'utf8')).toBe('must survive failed preflight');
+  });
+
+  it('rejects distinct source assets that normalize to the same public path before cleanup', async () => {
+    const options = fixture([
+      '![[Assets/Figures/chart.svg]]',
+      '![[Figures/chart.svg]]'
+    ].join('\n'));
+    write(join(options.rootDir, 'Figures', 'chart.svg'), '<svg>different</svg>');
+    const stale = join(options.outputDir, 'stale.md');
+    write(stale, 'must survive failed preflight');
+
+    await expect(buildPublication(options)).rejects.toThrow(
+      /Asset destination collision.*Figures\/chart\.svg/
+    );
+    expect(readFileSync(stale, 'utf8')).toBe('must survive failed preflight');
+  });
+
+  it('deduplicates repeated references to the same source and public path', async () => {
+    const options = fixture([
+      '![[Assets/Figures/chart.svg]]',
+      '![[Assets/Figures/chart.svg]]'
+    ].join('\n'));
+
+    await buildPublication(options);
+
+    expect(readFileSync(
+      join(options.rootDir, 'site', 'public', 'assets', 'Figures', 'chart.svg'),
+      'utf8'
+    )).toBe('<svg>fixture</svg>');
   });
 
   it('refuses to clean rootDir itself as the generated output directory', async () => {
