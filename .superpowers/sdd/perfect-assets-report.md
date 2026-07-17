@@ -23,9 +23,13 @@ Date: 2026-07-17
 - `npm test` in `publishing/`: 8 files, 47 tests passed.
 - Byte comparison with `cmp`: all three tracked copies match their raw source.
 - `git diff --check`: passed.
-- Generator attempt reached the expanded concurrent manifest and stopped on
-  unrelated missing frontmatter: `Concepts/Architectures/DeepSeek-R1.md` lacks
-  required `status`.
+- Detached clean worktree: all 47 unit tests passed; publication generator
+  passed; `astro check` passed with 0 errors, warnings, or hints.
+- Detached clean-worktree `astro build` reached static entrypoint compilation,
+  then failed because reusing `site/node_modules` through a symlink made Astro
+  resolve the Starlight module from the original worktree while virtual-module
+  metadata belonged to the clean worktree (`No cached compile metadata`). This
+  is a dependency-reuse/path blocker, not a missing-content or asset error.
 
 ## Remaining metadata gaps
 
@@ -38,9 +42,9 @@ whole-repository redistribution clearance. The three Jay Alammar entries are
 
 ## Clean-worktree status
 
-A genuine clean-worktree build is required after this scoped commit. The live
-workspace contains concurrent navigation/site changes outside this work; those
-changes currently block the generator on unrelated frontmatter before the site
-build begins. The clean worktree should be created from this commit so it uses
-the original 10-page spike manifest and tests the packaged attention assets in
-isolation.
+A genuine detached clean worktree at this asset commit passed tests, generation,
+and Astro checking. A full Astro production build still needs either a local
+dependency install in that worktree or a dependency layout that does not cross
+worktree paths; the available cache could only be reused by symlink and Astro's
+virtual-module cache rejects that split path. The working tree's concurrent
+manifest expansion is intentionally outside this scoped commit.
