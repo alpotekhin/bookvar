@@ -2,6 +2,7 @@
 title: "MMLU"
 aliases: [MMLU, Massive Multitask Language Understanding, Massive Multitask Test]
 type: concept
+status: legacy
 category: Evaluation
 papers:
   - "[[02 Areas/ML & DL/Papers/MMLU|MMLU]]"

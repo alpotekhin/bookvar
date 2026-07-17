@@ -2,6 +2,7 @@
 title: "Mixed Precision Training"
 aliases: [Mixed Precision, AMP, FP16 training, BF16 training]
 type: concept
+status: legacy
 category: Training
 papers: []
 courses: []

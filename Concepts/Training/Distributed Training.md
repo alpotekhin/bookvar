@@ -2,6 +2,7 @@
 title: "Distributed Training"
 aliases: [Distributed Training, Распределённое обучение, DDP, FSDP, ZeRO]
 type: concept
+status: legacy
 category: Training
 papers: []
 courses: []

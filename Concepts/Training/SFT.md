@@ -2,6 +2,7 @@
 title: "SFT"
 aliases: [SFT, Supervised Fine-Tuning, Supervised Fine Tuning]
 type: concept
+status: legacy
 category: Training
 papers:
   - "[[02 Areas/ML & DL/Papers/InstructGPT|InstructGPT]]"

@@ -2,6 +2,7 @@
 title: "Alignment"
 aliases: [Alignment, Выравнивание, LLM Alignment, AI Alignment]
 type: concept
+status: legacy
 category: Training
 papers: []
 courses: []

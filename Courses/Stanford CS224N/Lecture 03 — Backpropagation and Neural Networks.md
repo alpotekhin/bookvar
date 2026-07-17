@@ -3,6 +3,7 @@ title: "CS224N — Lecture 3: Neural Net Learning: Gradients by Hand and Algorit
 course: "Stanford CS224N"
 lecture: 3
 type: course-note
+status: legacy
 raw: "[[02 Areas/ML & DL/raw/courses/Stanford CS224N/slides/cs224n-spr2024-lecture03-neuralnets]]"
 concepts: ["[[02 Areas/ML & DL/Concepts/Training/Backpropagation|Backpropagation]]", "[[02 Areas/ML & DL/Concepts/Training/Chain Rule|Chain Rule]]", "[[02 Areas/ML & DL/Concepts/Training/Jacobian|Jacobian]]", "[[02 Areas/ML & DL/Concepts/NLP/Neural Network|Neural Network]]", "[[02 Areas/ML & DL/Concepts/NLP/Activation Functions|Activation Functions]]"]
 ---

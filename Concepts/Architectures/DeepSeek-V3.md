@@ -2,6 +2,7 @@
 title: "DeepSeek-V3"
 aliases: [DeepSeek-V3, DeepSeek V3, DS-V3]
 type: concept
+status: legacy
 category: Architectures
 papers:
   - "[[02 Areas/ML & DL/Papers/DeepSeek-V3 Technical Report|DeepSeek-V3]]"

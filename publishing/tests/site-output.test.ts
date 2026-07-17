@@ -3,6 +3,7 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import YAML from 'yaml';
+import { findBrokenBuiltLinks } from '../adapter/check-built-links.js';
 
 const rootDir = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const distDir = join(rootDir, 'site', 'dist');
@@ -44,6 +45,9 @@ afterAll(async () => {
 });
 
 describe('static handbook output', () => {
+  it('has no broken emitted internal routes or fragments', async () => {
+    await expect(findBrokenBuiltLinks(distDir)).resolves.toEqual([]);
+  });
   it('does not publish local file edit links or workstation paths', async () => {
     const manifest = YAML.parse(await readFile(join(rootDir, 'publishing', 'navigation.yml'), 'utf8'));
     const routes: string[] = manifest.sections.flatMap(

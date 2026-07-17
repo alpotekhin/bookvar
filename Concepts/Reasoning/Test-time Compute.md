@@ -2,6 +2,7 @@
 title: "Test-time Compute"
 aliases: [Test-time Compute, Inference-time Scaling, Test-time Scaling, TTS, Thinking Tokens]
 type: concept
+status: legacy
 category: Reasoning
 papers:
   - "[[02 Areas/ML & DL/Papers/DeepSeek-R1 Reasoning via RL|DeepSeek-R1]]"

@@ -1,6 +1,7 @@
 ---
 title: Speculative Decoding
 type: concept
+status: legacy
 tags:
   - inference
   - optimization

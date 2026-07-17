@@ -2,6 +2,7 @@
 title: "Instruction Tuning"
 aliases: [instruction fine-tuning, SFT, Supervised Fine-Tuning, инструкционная настройка]
 type: concept
+status: legacy
 category: Training
 papers:
   - "[[02 Areas/ML & DL/Papers/Flan-T5-PaLM]]"

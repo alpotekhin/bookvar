@@ -2,6 +2,7 @@
 title: "Distillation"
 aliases: [Distillation, Knowledge Distillation, KD]
 type: concept
+status: legacy
 category: Training
 papers:
   - "[[02 Areas/ML & DL/Papers/Phi-2|Phi-2]]"

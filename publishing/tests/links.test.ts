@@ -25,7 +25,8 @@ describe('convertWikiSyntax', () => {
         '[Page](/resolved-route/#раздел)',
         '![attention](../../assets/Figures/attention.svg)'
       ].join('\n'),
-      unresolved: []
+      unresolved: [],
+      allowlisted: []
     });
     expect(source).toBe(originalSource);
   });
@@ -48,14 +49,25 @@ describe('convertWikiSyntax', () => {
   it('keeps an unresolved embed visible as plain text and reports its target', () => {
     expect(convertWikiSyntax('![[Missing Page]]', registry)).toEqual({
       markdown: 'Missing Page',
-      unresolved: ['Missing Page']
+      unresolved: ['Missing Page'],
+      allowlisted: []
     });
   });
 
   it('does not treat a non-allowlisted extension as an image', () => {
     expect(convertWikiSyntax('![[Assets/Figures/attention.svgx]]', registry)).toEqual({
       markdown: 'attention.svgx',
-      unresolved: ['Assets/Figures/attention.svgx']
+      unresolved: ['Assets/Figures/attention.svgx'],
+      allowlisted: []
+    });
+  });
+
+  it('keeps explicitly allowlisted targets visible and records their reason', () => {
+    const allowlist = new Map([['Missing Page', 'not available for publication']]);
+    expect(convertWikiSyntax('[[Missing Page|visible label]]', registry, allowlist)).toEqual({
+      markdown: 'visible label',
+      unresolved: [],
+      allowlisted: [{ target: 'Missing Page', reason: 'not available for publication' }]
     });
   });
 });

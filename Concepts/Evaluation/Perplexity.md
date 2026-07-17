@@ -2,6 +2,7 @@
 title: "Perplexity"
 aliases: [Perplexity, PPL]
 type: concept
+status: legacy
 category: Evaluation
 papers:
   - "[[02 Areas/ML & DL/Papers/GPT 2.0|GPT-2]]"

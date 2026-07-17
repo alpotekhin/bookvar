@@ -2,6 +2,7 @@
 title: "Causal Language Modeling"
 aliases: [CLM, autoregressive language modeling, autoregressive LM, авторегрессивное языковое моделирование]
 type: concept
+status: legacy
 category: Training
 papers:
   - "[[02 Areas/ML & DL/Papers/GPT 2.0]]"

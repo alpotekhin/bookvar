@@ -2,6 +2,7 @@
 title: "Sampling"
 aliases: [decoding strategies, temperature sampling, nucleus sampling, top-p sampling, top-k sampling, greedy decoding, beam search]
 type: concept
+status: legacy
 category: Inference
 papers:
   - "[[02 Areas/ML & DL/Papers/Speculative Decoding]]"

@@ -3,35 +3,75 @@ sections:
   - id: textbook
     title: Учебник
     pages:
-      - source: 00 Учебник/_index.md
-        route: textbook/index
-      - source: 00 Учебник/01 Основы нейронных сетей/01 Нейрон, градиент и backpropagation.md
-        route: textbook/foundations/backpropagation
-      - source: 00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V.md
-        route: textbook/transformer/self-attention
-      - source: 00 Учебник/09 Dense FFN и Mixture of Experts/00 Карта модуля и источники.md
-        route: textbook/moe/module-map
-      - source: 00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md
-        route: textbook/post-training/rlvr-verifiers
-      - source: 00 Учебник/15 Embeddings, Retrieval и RAG/00 Карта модуля и источники.md
-        route: textbook/rag/module-map
+      - { source: "00 Учебник/_index.md", route: "textbook/index" }
+      - { source: "00 Учебник/00 Как пользоваться учебником.md", route: "textbook/how-to-use" }
+      - { source: "00 Учебник/Assets/Учебная карта.md", route: "textbook/learning-map" }
+      - { source: "00 Учебник/Карта крупных учебных модулей.md", route: "textbook/module-roadmap" }
+      - { source: "00 Учебник/Покрытие программы.md", route: "textbook/curriculum-coverage" }
+      - { source: "00 Учебник/01 Основы нейронных сетей/01 Нейрон, градиент и backpropagation.md", route: "textbook/foundations/backpropagation" }
+      - { source: "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md", route: "textbook/foundations/optimization-stability" }
+      - { source: "00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction.md", route: "textbook/language-modeling/next-token-prediction" }
+      - { source: "00 Учебник/03 Языковое моделирование/02 Sampling и генерация.md", route: "textbook/language-modeling/sampling-generation" }
+      - { source: "00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V.md", route: "textbook/transformer/self-attention" }
+      - { source: "00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md", route: "textbook/modern-llm/llama-architecture" }
+      - { source: "00 Учебник/09 Dense FFN и Mixture of Experts/00 Карта модуля и источники.md", route: "textbook/moe/module-map" }
+      - { source: "00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md", route: "textbook/pretraining/data" }
+      - { source: "00 Учебник/11 Pre-training и Scaling/02 Distributed training и precision.md", route: "textbook/pretraining/distributed-training" }
+      - { source: "00 Учебник/12 Post-training и Alignment/00 Карта модуля и источники.md", route: "textbook/post-training/module-map" }
+      - { source: "00 Учебник/12 Post-training и Alignment/02 Preference data.md", route: "textbook/post-training/preference-data" }
+      - { source: "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md", route: "textbook/post-training/rlvr-verifiers" }
+      - { source: "00 Учебник/12 Post-training и Alignment/08 Reasoning distillation.md", route: "textbook/post-training/reasoning-distillation" }
+      - { source: "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md", route: "textbook/reasoning/test-time-compute" }
+      - { source: "00 Учебник/14 Inference и оптимизация/02 Quantization и deployment.md", route: "textbook/inference/quantization-deployment" }
+      - { source: "00 Учебник/15 Embeddings, Retrieval и RAG/00 Карта модуля и источники.md", route: "textbook/rag/module-map" }
+      - { source: "00 Учебник/15 Embeddings, Retrieval и RAG/01 Embeddings и retrieval.md", route: "textbook/rag/embeddings-retrieval" }
+      - { source: "00 Учебник/16 Multimodal Models/01 Vision-language и omni models.md", route: "textbook/multimodal/vision-language-omni" }
+      - { source: "00 Учебник/17 Tools и Agents/00 Agent Harness и Context Engineering — карта модуля.md", route: "textbook/agents/module-map" }
+      - { source: "00 Учебник/17 Tools и Agents/02 Evaluation и воспроизводимость.md", route: "textbook/agents/evaluation-reproducibility" }
   - id: models
     title: Атлас моделей
     pages:
-      - source: 02 Атлас моделей/Семейства/DeepSeek.md
-        route: models/families/deepseek
+      - { source: "02 Атлас моделей/_index.md", route: "models/index" }
+      - { source: "02 Атлас моделей/Семейства/DeepSeek.md", route: "models/families/deepseek" }
+      - { source: "Concepts/Architectures/DeepSeek-R1.md", route: "models/legacy/deepseek-r1" }
+      - { source: "Concepts/Architectures/DeepSeek-V3.md", route: "models/legacy/deepseek-v3" }
   - id: sources
-    title: Источники
+    title: Справочник, исследования и источники
     pages:
-      - source: 05 Источники/Papers/DeepSeek-R1.md
-        route: sources/papers/deepseek-r1
+      - { source: "01 Справочник/_index.md", route: "reference/index" }
+      - { source: "03 Исследовательские линии/_index.md", route: "research/index" }
+      - { source: "03 Исследовательские линии/RLHF → DPO → RLVR.md", route: "research/alignment-rlhf-dpo-rlvr" }
+      - { source: "03 Исследовательские линии/Reasoning и test-time compute.md", route: "research/reasoning-test-time-compute" }
+      - { source: "03 Исследовательские линии/Синтетические данные и дистилляция.md", route: "research/synthetic-data-distillation" }
+      - { source: "03 Исследовательские линии/Длинный контекст.md", route: "research/long-context" }
+      - { source: "05 Источники/_index.md", route: "sources/index" }
+      - { source: "05 Источники/Визуальные материалы и лицензии.md", route: "sources/visual-materials-licenses" }
+      - { source: "05 Источники/Papers/DeepSeek-R1.md", route: "sources/papers/deepseek-r1" }
+      - { source: "Courses/Stanford CS224N/Lecture 03 — Backpropagation and Neural Networks.md", route: "sources/courses/cs224n-lecture-03" }
+      - { source: "Courses/Stanford CS224N/Lecture 11 — Benchmarking and Evaluation.md", route: "sources/courses/cs224n-lecture-11" }
+      - { source: "Concepts/Training/SFT.md", route: "reference/training/sft" }
+      - { source: "Concepts/Training/Alignment.md", route: "reference/training/alignment" }
+      - { source: "Concepts/Training/Causal Language Modeling.md", route: "reference/training/causal-language-modeling" }
+      - { source: "Concepts/Training/Instruction Tuning.md", route: "reference/training/instruction-tuning" }
+      - { source: "Concepts/Training/Mixed Precision Training.md", route: "reference/training/mixed-precision" }
+      - { source: "Concepts/Training/Distributed Training.md", route: "reference/training/distributed-training" }
+      - { source: "Concepts/Training/RLVR.md", route: "reference/training/rlvr" }
+      - { source: "Concepts/Training/Distillation.md", route: "reference/training/distillation" }
+      - { source: "Concepts/Inference/Sampling.md", route: "reference/inference/sampling" }
+      - { source: "Concepts/Inference/Quantization.md", route: "reference/inference/quantization" }
+      - { source: "Concepts/Inference/Speculative Decoding.md", route: "reference/inference/speculative-decoding" }
+      - { source: "Concepts/Reasoning/Self-Consistency.md", route: "reference/reasoning/self-consistency" }
+      - { source: "Concepts/Reasoning/Test-time Compute.md", route: "reference/reasoning/test-time-compute" }
+      - { source: "Concepts/Evaluation/Perplexity.md", route: "reference/evaluation/perplexity" }
+      - { source: "Concepts/Evaluation/MMLU.md", route: "reference/evaluation/mmlu" }
+      - { source: "Concepts/Evaluation/HumanEval.md", route: "reference/evaluation/humaneval" }
   - id: questions
     title: Вопросы
     pages:
-      - source: 04 Вопросы/Вопросы по LLM.md
-        route: questions/llm
+      - { source: "04 Вопросы/_index.md", route: "questions/index" }
+      - { source: "04 Вопросы/Вопросы по LLM.md", route: "questions/llm" }
   - id: practice
     title: Практика
     pages:
-      - source: 06 Практика/02 Реализовать causal self-attention.md
-        route: practice/causal-self-attention
+      - { source: "06 Практика/_index.md", route: "practice/index" }
+      - { source: "06 Практика/02 Реализовать causal self-attention.md", route: "practice/causal-self-attention" }

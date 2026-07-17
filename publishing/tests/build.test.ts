@@ -3,7 +3,7 @@ import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import matter from 'gray-matter';
 import { describe, expect, it } from 'vitest';
-import { buildPublication } from '../adapter/build.js';
+import { buildPublication, publicationHref } from '../adapter/build.js';
 
 function write(path: string, contents: string): void {
   mkdirSync(dirname(path), { recursive: true });
@@ -51,6 +51,9 @@ function fixture(body = 'См. [[Page B]] и [[Missing]].\n\n![[Assets/Figures/c
     '      - source: Notes/Page B.md',
     '        route: page-b'
   ].join('\n'));
+  write(join(root, 'publishing', 'link-allowlist.json'), JSON.stringify({
+    entries: [{ target: 'Missing', reason: 'test fixture target' }]
+  }));
 
   return {
     rootDir: root,
@@ -62,6 +65,10 @@ function fixture(body = 'См. [[Page B]] и [[Missing]].\n\n![[Assets/Figures/c
 }
 
 describe('buildPublication', () => {
+  it('uses the emitted directory URL for section index routes', () => {
+    expect(publicationHref('textbook/index')).toBe('/textbook/');
+    expect(publicationHref('textbook/chapter')).toBe('/textbook/chapter/');
+  });
   it('generates nested pages, converted Markdown, copied assets, and a warning report without mutating sources', async () => {
     const options = fixture();
     const before = readFileSync(options.sourcePath);
@@ -82,7 +89,12 @@ describe('buildPublication', () => {
     expect(readFileSync(join(options.outputDir, 'page-b.md'), 'utf8'))
       .toContain(':::caution[Check]\nBody\n:::');
     expect(JSON.parse(readFileSync(options.reportPath, 'utf8'))).toMatchObject({
-      pages: [{ source: 'Notes/Page A.md', route: 'nested/page-a', unresolved: ['Missing'] }]
+      pages: [{
+        source: 'Notes/Page A.md',
+        route: 'nested/page-a',
+        unresolved: [],
+        allowlisted: [{ target: 'Missing', reason: 'test fixture target' }]
+      }]
     });
     expect(readFileSync(join(options.rootDir, 'site', 'public', 'assets', 'Figures', 'chart.svg'), 'utf8'))
       .toBe('<svg>fixture</svg>');
@@ -124,6 +136,13 @@ describe('buildPublication', () => {
 
     const generated = matter(readFileSync(join(options.outputDir, 'nested', 'page-a.md'), 'utf8'));
     expect(generated.content).toBe('\n## First subsection\n\nBody\n');
+  });
+
+  it('fails when a wiki target is neither published nor explicitly allowlisted', async () => {
+    const options = fixture('[[Unknown target]]');
+    await expect(buildPublication(options)).rejects.toThrow(
+      'Unexplained unresolved wiki links:\n- Notes/Page A.md: Unknown target'
+    );
   });
 
   it('preserves an H1 that appears after body content', async () => {
