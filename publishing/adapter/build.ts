@@ -48,12 +48,26 @@ interface MarkdownHeading {
 
 export function parseMarkdownHeadings(markdown: string): MarkdownHeading[] {
   const headings: MarkdownHeading[] = [];
-  let fenced = false;
+  let fence: { character: '`' | '~'; length: number } | undefined;
   let offset = 0;
   for (const line of markdown.split(/(?<=\n)/)) {
     const content = line.replace(/\r?\n$/, '');
-    if (/^\s*(```|~~~)/.test(content)) fenced = !fenced;
-    if (!fenced) {
+    const delimiter = content.match(/^ {0,3}(`{3,}|~{3,})(.*)$/);
+    if (fence) {
+      const closing = content.match(/^ {0,3}(`{3,}|~{3,})[ \t]*$/);
+      if (
+        closing
+        && closing[1][0] === fence.character
+        && closing[1].length >= fence.length
+      ) {
+        fence = undefined;
+      }
+    } else if (delimiter) {
+      fence = {
+        character: delimiter[1][0] as '`' | '~',
+        length: delimiter[1].length
+      };
+    } else {
       const match = content.match(/^#{1,6}[ \t]+(.+?)[ \t]*#?[ \t]*$/);
       if (match) {
         const text = match[1].replace(/[ \t]+#$/, '').trim();
