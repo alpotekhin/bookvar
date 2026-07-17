@@ -81,6 +81,14 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
     route: `/${entry.route}/`,
     title: page.title
   })), { allowAmbiguousBasenames: true });
+  const titles = new Map(parsed.map(({ entry, page }) => [entry.route, page.title]));
+  const sidebar = manifest.sections.map((section) => ({
+    label: section.title,
+    items: section.pages.map((entry) => ({
+      label: titles.get(entry.route)!,
+      slug: entry.route
+    }))
+  }));
 
   const assetsByPublicPath = new Map<string, Asset>();
   const preparedPages = parsed.map(({ entry, page }) => {
@@ -108,6 +116,13 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
 
   await rm(outputDir, { recursive: true, force: true });
   await mkdir(outputDir, { recursive: true });
+  const sidebarPath = contained(rootDir, 'site/generated-sidebar.mjs', 'Sidebar');
+  await mkdir(dirname(sidebarPath), { recursive: true });
+  await writeFile(sidebarPath, [
+    '// Generated from publishing/navigation.yml. Do not edit.',
+    `export default ${JSON.stringify(sidebar, null, 2)};`,
+    ''
+  ].join('\n'), 'utf8');
   const assetDir = join(rootDir, 'site', 'public', 'assets');
   const report = { pages: [] as Array<{
     source: string;
@@ -123,6 +138,7 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
     const metadata: Record<string, string | Date> = {
       title: page.title,
       description: page.title,
+      slug: entry.route,
       editUrl: pathToFileURL(contained(rootDir, entry.source, 'Source')).href
     };
     if (page.lastUpdated) metadata.lastUpdated = new Date(page.lastUpdated);

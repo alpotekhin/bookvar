@@ -1,0 +1,6 @@
+@import 'katex/dist/katex.min.css';
+
+.mermaid {
+  overflow-x: auto;
+  text-align: center;
+}

@@ -74,6 +74,7 @@ describe('buildPublication', () => {
     const metadata = matter(generated).data;
     expect(new URL(metadata.editUrl).protocol).toBe('file:');
     expect(metadata.lastUpdated).toBeInstanceOf(Date);
+    expect(metadata.slug).toBe('nested/page-a');
     expect(generated).toContain('[Page B](/page-b/)');
     expect(generated).toContain('Missing');
     expect(generated).toContain('![chart](/assets/Figures/chart.svg)');
@@ -85,6 +86,25 @@ describe('buildPublication', () => {
     expect(readFileSync(join(options.rootDir, 'site', 'public', 'assets', 'Figures', 'chart.svg'), 'utf8'))
       .toBe('<svg>fixture</svg>');
     expect(readFileSync(options.sourcePath)).toEqual(before);
+    expect(readFileSync(join(options.rootDir, 'site', 'generated-sidebar.mjs'), 'utf8')).toBe([
+      '// Generated from publishing/navigation.yml. Do not edit.',
+      'export default [',
+      '  {',
+      '    "label": "Textbook",',
+      '    "items": [',
+      '      {',
+      '        "label": "Page A",',
+      '        "slug": "nested/page-a"',
+      '      },',
+      '      {',
+      '        "label": "Page B",',
+      '        "slug": "page-b"',
+      '      }',
+      '    ]',
+      '  }',
+      '];',
+      ''
+    ].join('\n'));
   });
 
   it('removes stale generated files but preserves siblings outside the known output root', async () => {
