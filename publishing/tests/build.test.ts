@@ -3,7 +3,12 @@ import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import matter from 'gray-matter';
 import { describe, expect, it } from 'vitest';
-import { buildPublication, publicationHref } from '../adapter/build.js';
+import {
+  buildPublication,
+  insertFragmentAliases,
+  parseMarkdownHeadings,
+  publicationHref
+} from '../adapter/build.js';
 
 function write(path: string, contents: string): void {
   mkdirSync(dirname(path), { recursive: true });
@@ -165,6 +170,50 @@ describe('buildPublication', () => {
       '<span id="wiki-chat-template" aria-hidden="true"></span>\n## Chat template'
     );
     expect(target).not.toMatch(/^<span id="wiki-/);
+  });
+
+  it('ignores mixed fence delimiters and headings inside tilde fences', () => {
+    const markdown = [
+      '~~~text',
+      '```',
+      '# Fake heading',
+      '  ```',
+      '~~~~',
+      '# Real heading'
+    ].join('\n');
+
+    expect(parseMarkdownHeadings(markdown).map(({ text }) => text)).toEqual(['Real heading']);
+    const inserted = insertFragmentAliases(markdown, new Map([
+      ['Fake heading', 'wiki-fake-heading'],
+      ['Real heading', 'wiki-real-heading']
+    ]));
+    expect(inserted.missing).toEqual(['Fake heading']);
+    expect(inserted.markdown).not.toContain('wiki-fake-heading');
+    expect(inserted.markdown).toContain(
+      '<span id="wiki-real-heading" aria-hidden="true"></span>\n# Real heading'
+    );
+  });
+
+  it('requires a matching fence character and a closing delimiter at least as long as its opener', () => {
+    const markdown = [
+      '````js',
+      '```',
+      '# Still fenced',
+      '~~~~',
+      '    ````',
+      '# Also fenced',
+      '`````',
+      '# Real after longer close',
+      '```',
+      '# Hidden by short opener',
+      '````',
+      '# Real after valid longer close'
+    ].join('\n');
+
+    expect(parseMarkdownHeadings(markdown).map(({ text }) => text)).toEqual([
+      'Real after longer close',
+      'Real after valid longer close'
+    ]);
   });
 
   it('preserves an H1 that appears after body content', async () => {
