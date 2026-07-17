@@ -113,12 +113,12 @@ $$
 
 ## Всё вычисление на двух рисунках
 
-![[02 Areas/ML & DL/raw/papers/attention-is-all-you-need/images/transformer_self_attention_vectors.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/attention/transformer_self_attention_vectors.png]]
 
 *Jay Alammar, «The Illustrated Transformer»: из каждого token vector получаются
 Q, K и V. [Оригинальное объяснение](https://jalammar.github.io/illustrated-transformer/).*
 
-![[02 Areas/ML & DL/raw/papers/attention-is-all-you-need/images/self-attention-matrix-calculation-2.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/attention/self-attention-matrix-calculation-2.png]]
 
 *Jay Alammar: матричная запись всего вычисления. Эту картинку стоит читать справа
 налево: Values определяют передаваемое содержание, а `softmax(QKᵀ/√dₖ)` —
@@ -286,7 +286,7 @@ $$
 понятную лингвистическую функцию» слишком сильное: головы могут быть
 избыточными, распределёнными и трудными для интерпретации.
 
-![[02 Areas/ML & DL/raw/papers/attention-is-all-you-need/images/transformer_multi-headed_self-attention-recap.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/attention/transformer_multi-headed_self-attention-recap.png]]
 
 *Jay Alammar: split в несколько heads, независимый attention, concat и output
 projection. Изображение полезнее абстрактной формулы тем, что не теряет связь
