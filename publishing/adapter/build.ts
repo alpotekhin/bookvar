@@ -23,6 +23,12 @@ interface Asset {
 const IMAGE_EXTENSION = /\.(?:png|jpe?g|webp|svg|gif)$/i;
 const EMBED = /!\[\[([^\]\n]+)\]\]/g;
 
+function removeLeadingSourceHeading(markdown: string): string {
+  const heading = markdown.match(/^(?:[ \t]*\r?\n)*#\s+.+?(?:\r?\n|$)/);
+  if (!heading) return markdown;
+  return markdown.slice(heading[0].length);
+}
+
 function contained(root: string, candidate: string, label: string): string {
   if (isAbsolute(candidate)) throw new Error(`${label} path escapes rootDir: ${candidate}`);
   const absolute = resolve(root, candidate);
@@ -132,7 +138,7 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
 
   for (const { entry, page, prepared } of preparedPages) {
     const converted = convertWikiSyntax(prepared.markdown, registry);
-    const markdown = convertCallouts(converted.markdown);
+    const markdown = removeLeadingSourceHeading(convertCallouts(converted.markdown));
     const target = contained(outputDir, `${entry.route}.md`, 'Output');
     await mkdir(dirname(target), { recursive: true });
     const metadata: Record<string, string | Date> = {
