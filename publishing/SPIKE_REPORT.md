@@ -4,7 +4,7 @@ Audit date: 2026-07-17. Baseline: `7c72bec3cc92fb5bfa348c46c0e84409101a6ced`.
 
 ## Decision
 
-**No-go: remain in the spike and revise the adapter/repository packaging before public-repository setup or full-corpus generation.** Starlight remains a suitable stack, but the acceptance gate is not met. A real clean checkout cannot generate the site because a referenced image lives under ignored `raw/`; the prescribed test-before-build order also makes the output tests fail; the landing page still duplicates its title and contains prototype copy; the MoE diagram is not legible enough; and the user has not approved the visual result.
+**No-go: remain in the spike and revise the repository packaging before public-repository setup or full-corpus generation.** Starlight remains a suitable stack, but the acceptance gate is not met. A real clean checkout cannot generate the site because a referenced image lives under ignored `raw/`; the landing page still duplicates its title and contains prototype copy; the MoE diagram is not legible enough; and the user has not approved the visual result. The adapter now preflights before replacing its publication-owned asset tree, and CI now orders unit tests, build, and Pagefind-dependent output tests correctly, but neither change resolves the clean-checkout asset blocker.
 
 Vercel remains the preferred host *after* these blockers are resolved: the build is static and host-compatible, and no spike result justifies changing hosts. No Vercel project, remote, credentials, or deployment should be created at this gate.
 
@@ -82,7 +82,9 @@ Unsupported or degraded Obsidian constructs in this adapter:
 
 `publishing-report.json` is the complete machine-readable instance inventory: **90 unique unresolved targets across 7 pages**, all classified as known out-of-manifest targets (not parser-unknown syntax): textbook index 44; backpropagation 1; self-attention 2; MoE map 1; RAG map 3; DeepSeek-R1 paper 9; LLM questions 30. The other three generated pages have none. Full-corpus generation must either add routes or define an intentional external/plain-text policy for all 90.
 
-The three copied attention images are explicitly attributed in the source page to Jay Alammar and the reviewed license registry records *The Illustrated Transformer* as CC BY-NC-SA 4.0. No unclassified image was observed in this ten-page spike, but the ignored-asset packaging must be fixed without losing attribution/license records.
+The three copied attention images are explicitly attributed in the source page to Jay Alammar and the reviewed license registry records *The Illustrated Transformer* as CC BY-NC-SA 4.0. That is only a spike-corpus license pass and is insufficient for a public repository: Git tracks **32 files** under `00 Учебник/Assets/Figures/`, including apparent paper-page and UI extracts, without per-asset manifests. The count is reproducible with `git ls-files -z '00 Учебник/Assets/Figures/*' | tr -cd '\\0' | wc -c`. These files were neither deleted nor relicensed in this spike because redistribution rights require research. Before any remote is created, a whole-repository binary registry/audit must record author, source URL, license and license URL, modifications, and intended use for every asset; unverified assets must be removed or quarantined, and the repository license must distinguish third-party material.
+
+Dependency manifests now pin every direct dependency to the exact version represented by `pnpm-lock.yaml`. CI installs with `pnpm install --frozen-lockfile`; lockfile changes require explicit review alongside manifest changes. This is a reproducibility baseline, not a complete supply-chain gate: vulnerability and dependency-license auditing, reviewed update automation, and an exception/remediation policy remain required before public CI.
 
 ## Search evidence
 
@@ -99,17 +101,20 @@ This demonstrates the required Russian inflection example for the spike; broader
 |---|---|---|
 | Clean-checkout automated tests pass | **Fail** | Missing ignored image; tests also assume a pre-existing Pagefind build. |
 | Eight representative pages render | Pass | All ten manifest routes were rebuilt and browser-audited; each has exactly one DOM H1. |
-| Formulas, local images, internal links work | Pass with packaging blocker | Browser/build/tests pass locally; clean checkout lacks an image. |
+| Formulas and local images render in the spike | Pass with packaging blocker | Browser/build/tests pass locally; clean checkout lacks an image. |
+| Internal links and fragments are release-safe | **Fail** | 90 unresolved targets degrade to plain text; emitted fragment IDs have not yet been validated against built HTML. This is degraded navigation and a release failure, not a passing link gate. |
 | Russian inflected search works | Pass | `нейронов` test passes. |
 | Generation leaves authored content unchanged | Pass | Exact authored-directory diff is empty. |
-| No unknown-license asset silently included | Pass for spike corpus | Three copied images are attributed and covered by the reviewed registry. |
+| Whole-repository asset licensing is complete | **Fail** | The three emitted spike images pass the spike-only check, but 32 tracked figure assets lack required per-asset manifests. |
 | Manifest drives navigation | Pass | Ten generated pages equal ten manifest entries; sidebar is generated. |
 | Unsupported Obsidian constructs listed | Pass | Construct classes and all 90 instances are accounted for above/report JSON. |
 | User approves visual result | **Fail/pending** | No user approval; known landing and Mermaid defects remain. |
 
 ## Required next actions
 
-1. Put all publication-required assets in a tracked/licensed location (or deterministically acquire them with license verification), then repeat the exact clean-worktree sequence.
-2. Make `pnpm --dir publishing test` self-contained or split unit and built-output tests so the documented order succeeds from a clean checkout.
-3. Remove the landing-page duplicate H1 and placeholder copy; improve responsive Mermaid legibility.
-4. Rebuild and repeat desktop/mobile review after the remaining landing/Mermaid fixes, then obtain explicit user approval.
+1. Complete the whole-repository asset registry/audit for all 32 currently tracked figure assets; remove or quarantine any asset without verified redistribution permission. Do not create a public remote based on the three-image spike pass.
+2. Put all publication-required assets in a tracked/licensed location (or deterministically acquire them with license verification), then repeat the exact clean-worktree sequence.
+3. Add a post-build checker for emitted routes, assets, and fragment IDs; resolve or explicitly allowlist all 90 currently unresolved targets. Until then internal navigation fails the release gate.
+4. Add dependency vulnerability/license scanning, reviewed update automation, and a documented exception/remediation policy while retaining frozen-lockfile installs.
+5. Remove the landing-page duplicate H1 and placeholder copy; improve responsive Mermaid legibility.
+6. Rebuild and repeat desktop/mobile review after the remaining landing/Mermaid fixes, then obtain explicit user approval.

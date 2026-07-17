@@ -19,8 +19,8 @@
   },
   "dependencies": {
     "@astrojs/markdown-remark": "7.2.1",
-    "@astrojs/starlight": "latest",
-    "astro": "latest",
+    "@astrojs/starlight": "0.41.3",
+    "astro": "7.1.0",
     "astro-mermaid": "2.1.0",
     "katex": "0.16.47",
     "mermaid": "11.16.0",
@@ -28,8 +28,8 @@
     "remark-math": "6.0.0"
   },
   "devDependencies": {
-    "@astrojs/check": "latest",
-    "typescript": "^6.0.0",
-    "vitest": "latest"
+    "@astrojs/check": "0.9.9",
+    "typescript": "6.0.3",
+    "vitest": "4.1.10"
   }
 }
