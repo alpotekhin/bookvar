@@ -1,4 +1,4 @@
-import { copyFile, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { access, copyFile, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { dirname, isAbsolute, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import matter from 'gray-matter';
@@ -84,6 +84,30 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
     title: page.title
   })));
 
+  const assetsByPublicPath = new Map<string, Asset>();
+  const preparedPages = parsed.map(({ entry, page }) => {
+    const prepared = prepareAssets(rootDir, page.body);
+    for (const asset of prepared.assets) {
+      const existing = assetsByPublicPath.get(asset.publicPath);
+      if (existing && existing.source !== asset.source) {
+        throw new Error([
+          `Asset destination collision: ${asset.publicPath}`,
+          `- ${relative(rootDir, existing.source)}`,
+          `- ${relative(rootDir, asset.source)}`
+        ].join('\n'));
+      }
+      assetsByPublicPath.set(asset.publicPath, asset);
+    }
+    return { entry, page, prepared };
+  });
+  for (const asset of assetsByPublicPath.values()) {
+    try {
+      await access(asset.source);
+    } catch (error) {
+      throw new Error(`Missing asset: ${relative(rootDir, asset.source)}`, { cause: error });
+    }
+  }
+
   await rm(outputDir, { recursive: true, force: true });
   await mkdir(outputDir, { recursive: true });
   const assetDir = join(rootDir, 'site', 'public', 'assets');
@@ -93,8 +117,7 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
     unresolved: string[];
   }> };
 
-  for (const { entry, page } of parsed) {
-    const prepared = prepareAssets(rootDir, page.body);
+  for (const { entry, page, prepared } of preparedPages) {
     const converted = convertWikiSyntax(prepared.markdown, registry);
     const markdown = convertCallouts(converted.markdown);
     const target = contained(outputDir, `${entry.route}.md`, 'Output');
@@ -107,22 +130,22 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
     if (page.lastUpdated) metadata.lastUpdated = page.lastUpdated;
     await writeFile(target, matter.stringify(markdown, metadata), 'utf8');
 
-    for (const asset of prepared.assets) {
-      const destination = contained(assetDir, asset.publicPath, 'Asset');
-      await mkdir(dirname(destination), { recursive: true });
-      try {
-        await copyFile(asset.source, destination);
-      } catch (error) {
-        throw new Error(`Missing asset: ${relative(rootDir, asset.source)}`, { cause: error });
-      }
-    }
-
     if (converted.unresolved.length > 0) {
       report.pages.push({
         source: entry.source,
         route: entry.route,
         unresolved: [...new Set(converted.unresolved)]
       });
+    }
+  }
+
+  for (const asset of assetsByPublicPath.values()) {
+    const destination = contained(assetDir, asset.publicPath, 'Asset');
+    await mkdir(dirname(destination), { recursive: true });
+    try {
+      await copyFile(asset.source, destination);
+    } catch (error) {
+      throw new Error(`Missing asset: ${relative(rootDir, asset.source)}`, { cause: error });
     }
   }
 
