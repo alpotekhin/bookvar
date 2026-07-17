@@ -2,6 +2,7 @@
 title: "GPT-4"
 aliases: [GPT 4, GPT4]
 type: concept
+status: legacy
 category: Architectures
 papers:
   - "[[02 Areas/ML & DL/Papers/GPT 4.0]]"

@@ -4,7 +4,8 @@ url: https://arxiv.org/abs/2009.03300
 authors: [Dan Hendrycks, Collin Burns, Steven Basart, Andy Zou, Mantas Mazeika, Dawn Song, Jacob Steinhardt]
 year: 2021
 date_reviewed: 2026-04-07
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 tags:
   - Benchmark

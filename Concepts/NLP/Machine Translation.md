@@ -2,6 +2,7 @@
 title: "Machine Translation"
 aliases: [Machine Translation, MT, Машинный перевод, NMT]
 type: concept
+status: legacy
 category: NLP
 papers: []
 courses: []

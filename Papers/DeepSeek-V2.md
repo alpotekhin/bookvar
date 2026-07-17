@@ -4,7 +4,8 @@ url: "https://arxiv.org/abs/2405.04434"
 authors: [DeepSeek-AI]
 year: 2024
 date_reviewed: 2026-04-08
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 raw: "[[02 Areas/ML & DL/raw/papers/deepseek-v2/paper.pdf|PDF]]"
 concepts:

@@ -2,6 +2,7 @@
 title: "Encoder-Decoder"
 aliases: [seq2seq, sequence-to-sequence, encoder-decoder transformer]
 type: concept
+status: legacy
 category: Architectures
 papers:
   - "[[02 Areas/ML & DL/Papers/T5]]"

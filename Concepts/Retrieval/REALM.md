@@ -2,6 +2,7 @@
 title: "REALM"
 aliases: [REALM, Retrieval-Augmented Language Model Pre-Training, Retrieval-Augmented Language Model]
 type: concept
+status: legacy
 category: Retrieval
 papers: ["[[02 Areas/ML & DL/Papers/REALM|REALM]]"]
 courses: []

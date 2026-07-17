@@ -2,6 +2,7 @@
 title: "Dense Retrieval"
 aliases: [dense passage retrieval, DPR, bi-encoder retrieval, semantic search, neural retrieval]
 type: concept
+status: legacy
 category: Retrieval
 papers:
   - "[[02 Areas/ML & DL/Papers/Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks]]"

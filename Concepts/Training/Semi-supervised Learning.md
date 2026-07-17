@@ -2,6 +2,7 @@
 title: "Semi-supervised Learning"
 aliases: [semi-supervised, SSL, полу-контролируемое обучение]
 type: concept
+status: legacy
 category: Training
 papers:
   - "[[02 Areas/ML & DL/Papers/Adversarial Training Methods for Semi-Supervised Text Classification]]"

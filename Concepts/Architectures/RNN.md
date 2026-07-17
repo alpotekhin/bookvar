@@ -2,6 +2,7 @@
 title: "RNN"
 aliases: [RNN, Recurrent Neural Network, рекуррентная сеть]
 type: concept
+status: legacy
 category: Architectures
 papers: []
 courses:

@@ -2,6 +2,7 @@
 title: "Gradient Clipping"
 aliases: [Gradient Clipping, Клиппинг градиентов, Обрезка градиентов]
 type: concept
+status: legacy
 category: Training
 papers: []
 courses: []

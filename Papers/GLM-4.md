@@ -4,7 +4,8 @@ url: "https://arxiv.org/abs/2406.12793"
 authors: [Team GLM, Zhipu AI, Tsinghua University]
 year: 2024
 date_reviewed: 2026-04-08
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 raw: "[[02 Areas/ML & DL/raw/papers/glm-4/paper.pdf|PDF]]"
 concepts:

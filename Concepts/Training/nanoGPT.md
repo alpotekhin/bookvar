@@ -2,6 +2,7 @@
 title: "nanoGPT"
 aliases: [nanogpt, nano-GPT]
 type: concept
+status: legacy
 category: Training
 papers:
   - "[[02 Areas/ML & DL/Papers/GPT 2.0]]"

@@ -1,6 +1,7 @@
 ---
 title: "Reasoning"
-type: index
+type: concept
+status: legacy
 category: reasoning
 ---
 

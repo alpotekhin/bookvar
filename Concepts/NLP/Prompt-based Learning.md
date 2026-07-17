@@ -2,6 +2,7 @@
 title: "Prompt-based Learning"
 aliases: [prompt-based learning, pre-train prompt predict, промпт-парадигма]
 type: concept
+status: legacy
 category: NLP
 papers:
   - "[[02 Areas/ML & DL/Papers/Pre-train, Prompt, and Predict- A Systematic Survey of Prompting Methods in Natural Language Processing]]"

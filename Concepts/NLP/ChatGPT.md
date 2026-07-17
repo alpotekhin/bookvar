@@ -2,6 +2,7 @@
 title: "ChatGPT"
 aliases: [ChatGPT, GPT-3.5-turbo, GPT-4-turbo, чатгпт]
 type: concept
+status: legacy
 category: NLP
 papers:
   - "[[02 Areas/ML & DL/Papers/InstructGPT]]"

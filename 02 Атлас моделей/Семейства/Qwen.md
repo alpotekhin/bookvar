@@ -1,4 +1,5 @@
 ---
+title: "Qwen"
 type: model-family
 organization: Alibaba Qwen Team
 first_release: 2023

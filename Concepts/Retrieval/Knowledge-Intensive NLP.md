@@ -2,6 +2,7 @@
 title: "Knowledge-Intensive NLP"
 aliases: [knowledge-intensive tasks, KI-NLP, knowledge-intensive NLP tasks]
 type: concept
+status: legacy
 category: Retrieval
 papers:
   - "[[02 Areas/ML & DL/Papers/Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks]]"

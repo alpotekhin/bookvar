@@ -2,6 +2,7 @@
 title: "N-gram"
 aliases: [N-gram, N-grams, N-gram Language Model]
 type: concept
+status: legacy
 category: NLP
 papers: []
 courses:

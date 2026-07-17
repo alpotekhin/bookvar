@@ -1,6 +1,6 @@
 ---
 title: Исследовательские линии
-type: research-index
+type: concept
 status: active
 last_updated: 2026-07-16
 last_verified: 2026-07-16

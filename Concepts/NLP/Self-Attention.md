@@ -2,6 +2,7 @@
 title: "Self-Attention"
 aliases: [intra-attention, self-attention mechanism, само-внимание]
 type: concept
+status: legacy
 category: NLP
 papers:
   - "[[02 Areas/ML & DL/Papers/Attention Is All You Need|Attention Is All You Need]]"

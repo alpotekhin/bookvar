@@ -2,7 +2,8 @@
 title: "MIPT NLP — Topic 1: ANCE Dense Retrieval Training"
 course: "MIPT NLP"
 topic: 1
-type: course-note
+type: source-note
+status: legacy
 raw: "[[02 Areas/ML & DL/raw/courses/MIPT NLP/ANCE]]"
 concepts:
   - "[[02 Areas/ML & DL/Concepts/Retrieval/Dense Retrieval|Dense Retrieval]]"

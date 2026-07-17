@@ -2,7 +2,8 @@
 title: "SHAD LLM — Week 1: Intro to LLMs"
 course: "SHAD LLM"
 week: 1
-type: course-note
+type: source-note
+status: legacy
 raw: "[[02 Areas/ML & DL/raw/courses/SHAD LLM/Week 1/Week 1]]"
 concepts:
   - "[[02 Areas/ML & DL/Concepts/Architectures/Encoder-only|Encoder-only]]"

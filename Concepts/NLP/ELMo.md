@@ -2,6 +2,7 @@
 title: "ELMo"
 aliases: [ELMo, Embeddings from Language Models]
 type: concept
+status: legacy
 category: NLP
 papers: []
 courses:

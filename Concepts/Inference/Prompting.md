@@ -2,6 +2,7 @@
 title: "Prompting"
 aliases: [prompt, prompt design, LLM prompting, промптинг]
 type: concept
+status: legacy
 category: Inference
 papers:
   - "[[02 Areas/ML & DL/Papers/COT]]"

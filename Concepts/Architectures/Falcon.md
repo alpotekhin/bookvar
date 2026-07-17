@@ -2,6 +2,7 @@
 title: "Falcon"
 aliases: [Falcon, Falcon-40B, Falcon-180B, Falcon LLM, Falcon 3, TII Falcon]
 type: concept
+status: legacy
 category: Architectures
 papers:
   - "[[02 Areas/ML & DL/Papers/Falcon|RefinedWeb / Falcon]]"

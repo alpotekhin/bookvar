@@ -4,7 +4,8 @@ url: https://arxiv.org/abs/2305.14314
 authors: [Tim Dettmers, Artidoro Pagnoni, Ari Holtzman, Luke Zettlemoyer]
 year: 2023
 date_reviewed: 2026-04-07
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 tags:
   - PEFT

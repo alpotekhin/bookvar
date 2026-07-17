@@ -4,7 +4,8 @@ url: https://arxiv.org/abs/2311.10770
 authors: "Peter Belcak, Roger Wattenhofer"
 year: 2023
 date_reviewed: 2026-04-07
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 raw: "[[02 Areas/ML & DL/raw/papers/phi-2/source]]"
 concepts:
@@ -81,4 +82,3 @@ Feedforward-слои содержат большинство параметро�
 По мере углубления дерева (от 3072x0 до 1x11) performance падает плавно -- большая часть падения приходится на CoLA. Все остальные задачи стабильны.
 
 ## My notes
-

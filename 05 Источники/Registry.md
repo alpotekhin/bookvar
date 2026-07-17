@@ -1,6 +1,6 @@
 ---
 title: Registry внешних источников
-type: source-registry
+type: source-note
 status: active
 last_verified: 2026-07-16
 ---
@@ -26,4 +26,3 @@ last_verified: 2026-07-16
 > [!warning] Лицензии
 > Registry разрешает ссылаться на ресурс, но не автоматически копировать текст
 > или изображения. Политика конкретного asset проверяется отдельно.
-

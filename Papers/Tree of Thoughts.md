@@ -4,7 +4,8 @@ url: https://arxiv.org/abs/2305.10601
 authors: [Shunyu Yao, Dian Yu, Jeffrey Zhao, Izhak Shafran, Thomas L. Griffiths, Yuan Cao, Karthik Narasimhan]
 year: 2023
 date_reviewed: 2026-04-07
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 tags:
   - Reasoning

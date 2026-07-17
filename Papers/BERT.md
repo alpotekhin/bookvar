@@ -4,7 +4,8 @@ url: https://arxiv.org/abs/1810.04805
 authors: [Jacob Devlin, Ming-Wei Chang, Kenton Lee, Kristina Toutanova]
 year: 2018
 date_reviewed: 2026-04-06
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 tags:
   - BERT

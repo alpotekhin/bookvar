@@ -2,7 +2,8 @@
 title: "CS224N — Lecture 9: Pretraining"
 course: "Stanford CS224N"
 lecture: 9
-type: course-note
+type: source-note
+status: legacy
 raw: "[[02 Areas/ML & DL/raw/courses/Stanford CS224N/slides/cs224n-spr2024-lecture09-pretraining-updated]]"
 concepts: ["[[02 Areas/ML & DL/Concepts/Training/Pre-training|Pretraining]]", "[[02 Areas/ML & DL/Concepts/Architectures/BERT|BERT]]", "[[02 Areas/ML & DL/Concepts/NLP/GPT|GPT]]", "[[02 Areas/ML & DL/Concepts/NLP/Subword Tokenization|Subword Tokenization]]", "[[02 Areas/ML & DL/Concepts/NLP/ELMo|ELMo]]"]
 ---

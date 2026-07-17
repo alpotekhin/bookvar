@@ -2,6 +2,7 @@
 title: "Adversarial Training"
 aliases: [adversarial training for text, virtual adversarial training, VAT, FGM, состязательное обучение]
 type: concept
+status: legacy
 category: Training
 papers:
   - "[[02 Areas/ML & DL/Papers/Adversarial Training Methods for Semi-Supervised Text Classification]]"

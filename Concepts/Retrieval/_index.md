@@ -1,6 +1,7 @@
 ---
 title: "Retrieval"
-type: index
+type: concept
+status: legacy
 category: retrieval
 ---
 

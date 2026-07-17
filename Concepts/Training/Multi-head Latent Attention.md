@@ -2,6 +2,7 @@
 title: "Multi-head Latent Attention"
 aliases: [MLA, Multi-head Latent Attention, Latent Attention]
 type: concept
+status: legacy
 category: Training
 papers:
   - "[[02 Areas/ML & DL/Papers/DeepSeek-V2|DeepSeek-V2]]"

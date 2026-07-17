@@ -4,7 +4,8 @@ url: https://arxiv.org/abs/2006.05987
 authors: [Tianyi Zhang, Felix Wu, Arzoo Katiyar, Kilian Q. Weinberger, Yoav Artzi]
 year: 2021
 date_reviewed: 2026-04-06
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 tags:
   - BERT

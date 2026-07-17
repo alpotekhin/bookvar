@@ -2,6 +2,7 @@
 title: "Qwen2"
 aliases: [Qwen2, Qwen2-72B, Qwen2-7B, Qwen2-MoE]
 type: concept
+status: legacy
 category: Architectures
 papers:
   - "[[02 Areas/ML & DL/Papers/Qwen2|Qwen2]]"

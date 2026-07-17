@@ -1,4 +1,5 @@
 ---
+title: "Mistral и Mixtral"
 type: model-family
 organization: Mistral AI
 first_release: 2023

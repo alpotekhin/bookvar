@@ -1,6 +1,7 @@
 ---
 title: "Evaluation"
-type: index
+type: concept
+status: legacy
 category: evaluation
 ---
 

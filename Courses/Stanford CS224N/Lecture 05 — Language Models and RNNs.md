@@ -2,7 +2,8 @@
 title: "CS224N — Lecture 5: Language Models and Recurrent Neural Networks"
 course: "Stanford CS224N"
 lecture: 5
-type: course-note
+type: source-note
+status: legacy
 raw: "[[02 Areas/ML & DL/raw/courses/Stanford CS224N/slides/cs224n-spr2024-lecture05-rnnlm]]"
 concepts: ["[[02 Areas/ML & DL/Concepts/NLP/Language Model|Language Model]]", "[[02 Areas/ML & DL/Concepts/NLP/RNN/RNN|RNN]]", "[[02 Areas/ML & DL/Concepts/NLP/N-gram|N-gram]]", "[[02 Areas/ML & DL/Concepts/Evaluation/Perplexity|Perplexity]]"]
 ---

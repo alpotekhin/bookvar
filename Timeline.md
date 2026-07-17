@@ -1,6 +1,7 @@
 ---
 title: ML & DL Timeline
-type: timeline
+type: concept
+status: legacy
 last_updated: "2026-04-07"
 ---
 

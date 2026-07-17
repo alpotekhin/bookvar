@@ -2,6 +2,7 @@
 title: "Flan-T5"
 aliases: [Flan T5, flan-t5]
 type: concept
+status: legacy
 category: Architectures
 papers:
   - "[[02 Areas/ML & DL/Papers/Flan-T5-PaLM]]"

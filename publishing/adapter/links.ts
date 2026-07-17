@@ -29,7 +29,10 @@ function convertLink(
   const heading = headingAt === -1
     ? undefined
     : targetWithHeading.slice(headingAt + 1);
-  const label = alias ?? basename(target);
+  const label = alias ?? (target === '' ? heading ?? '' : basename(target));
+  if (target === '' && heading !== undefined) {
+    return `[${label}](#${headingSlug(heading)})`;
+  }
   const route = registry.routeForWikiTarget(target);
 
   if (route === undefined) {
@@ -73,11 +76,15 @@ export function convertWikiSyntax(
   const allowlisted: Array<{ target: string; reason: string }> = [];
   const withoutEmbeds = markdown.replace(
     /!\[\[([^\]\n]+)\]\]/g,
-    (_match, expression: string) => convertEmbed(expression, registry, unresolved, allowlist, allowlisted)
+    (match, expression: string) => expression.trim() === ''
+      ? match
+      : convertEmbed(expression, registry, unresolved, allowlist, allowlisted)
   );
   const converted = withoutEmbeds.replace(
     /\[\[([^\]\n]+)\]\]/g,
-    (_match, expression: string) => convertLink(expression, registry, unresolved, allowlist, allowlisted)
+    (match, expression: string) => expression.trim() === ''
+      ? match
+      : convertLink(expression, registry, unresolved, allowlist, allowlisted)
   );
 
   return { markdown: converted, unresolved, allowlisted };

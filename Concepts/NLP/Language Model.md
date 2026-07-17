@@ -2,6 +2,7 @@
 title: "Language Model"
 aliases: [Language Model, LM, Языковая модель]
 type: concept
+status: legacy
 category: NLP
 papers: []
 courses:

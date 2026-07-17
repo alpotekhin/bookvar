@@ -2,6 +2,7 @@
 title: "Qwen3"
 aliases: [Qwen3, Qwen3-235B, Qwen3-235B-A22B, Qwen 3]
 type: concept
+status: legacy
 category: Architectures
 papers:
   - "[[02 Areas/ML & DL/Papers/Qwen3|Qwen3]]"

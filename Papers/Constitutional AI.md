@@ -4,7 +4,8 @@ url: https://arxiv.org/abs/2212.08073
 authors: "Yuntao Bai, Saurav Kadavath, Sandipan Kundu, Amanda Askell, Jackson Kernion, Andy Jones, Anna Chen, Anna Goldie, et al."
 year: 2022
 date_reviewed: 2026-04-07
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 raw: "[[02 Areas/ML & DL/raw/papers/constitutional-ai/source]]"
 concepts:
@@ -118,4 +119,3 @@ RL-CAI практически никогда не уклоняется: даёт
 Red-teaming score (0-4, higher = more harmful): RL-CAI и RL-CAI w/ CoT снижают harmfulness монотонно в ходе RL training, в отличие от helpful RLHF которая становится более harmful.
 
 ## My notes
-

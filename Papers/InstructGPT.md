@@ -4,7 +4,8 @@ url: https://arxiv.org/abs/2203.02155
 authors: [Long Ouyang, Jeff Wu, Xu Jiang, Diogo Almeida, Carroll L. Wainwright, Pamela Mishkin, Chong Zhang, Sandhini Agarwal, Katarina Slama, Alex Ray, John Schulman, Jacob Hilton, Fraser Kelton, Luke Miller, Maddie Simens, Amanda Askell, Peter Welinder, Paul Christiano, Jan Leike, Ryan Lowe]
 year: 2022
 date_reviewed: 2026-04-06
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 tags:
   - LLM

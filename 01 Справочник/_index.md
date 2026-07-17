@@ -1,6 +1,6 @@
 ---
 title: Справочник ML, NLP и LLM
-type: reference-index
+type: concept
 status: canonical
 last_updated: 2026-07-16
 ---

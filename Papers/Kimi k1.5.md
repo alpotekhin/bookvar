@@ -4,7 +4,8 @@ url: "https://arxiv.org/abs/2501.12599"
 authors: [Kimi Team, Moonshot AI]
 year: 2025
 date_reviewed: 2026-04-08
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 raw: "[[02 Areas/ML & DL/raw/papers/kimi-k15/paper.pdf|PDF]]"
 concepts:

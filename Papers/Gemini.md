@@ -4,7 +4,8 @@ url: https://arxiv.org/abs/2312.11805
 authors: "Gemini Team, Google"
 year: 2023
 date_reviewed: 2026-04-08
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 raw: "[[02 Areas/ML & DL/raw/papers/gemini/source]]"
 concepts: [Multimodal, Transformer, TPU, Multi-Query Attention, Distillation, Safety, Chain of Thought]

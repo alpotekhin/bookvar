@@ -4,7 +4,8 @@ url: https://arxiv.org/abs/2305.10403
 authors: [Google]
 year: 2023
 date_reviewed: 2026-04-06
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 tags:
   - LLM

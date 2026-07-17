@@ -2,6 +2,7 @@
 title: "Zero-shot Learning"
 aliases: [zero-shot inference, zero-shot generalization, zero-shot prompting, zero-shot]
 type: concept
+status: legacy
 category: Inference
 papers:
   - "[[02 Areas/ML & DL/Papers/GPT 2.0]]"

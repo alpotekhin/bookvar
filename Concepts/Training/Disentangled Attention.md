@@ -2,6 +2,7 @@
 title: "Disentangled Attention"
 aliases: [disentangled attention mechanism, разделённый механизм внимания]
 type: concept
+status: legacy
 category: Training
 papers:
   - "[[02 Areas/ML & DL/Papers/DeBERTa]]"

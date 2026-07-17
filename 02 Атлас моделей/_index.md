@@ -1,6 +1,6 @@
 ---
 title: Атлас моделей
-type: model-atlas-index
+type: concept
 status: active
 last_updated: 2026-07-16
 ---

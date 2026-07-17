@@ -2,6 +2,7 @@
 title: "Next Sentence Prediction"
 aliases: [NSP, предсказание следующего предложения]
 type: concept
+status: legacy
 category: Training
 papers:
   - "[[02 Areas/ML & DL/Papers/BERT]]"

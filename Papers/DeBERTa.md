@@ -4,7 +4,8 @@ url: https://arxiv.org/abs/2006.03654
 authors: [Pengcheng He, Xiaodong Liu, Jianfeng Gao, Weizhu Chen]
 year: 2021
 date_reviewed: 2026-04-06
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 tags:
   - BERT

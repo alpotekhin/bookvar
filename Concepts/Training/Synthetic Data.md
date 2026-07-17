@@ -2,6 +2,7 @@
 title: "Synthetic Data"
 aliases: [Synthetic Data, Synthetic Training Data, Textbook Quality Data]
 type: concept
+status: legacy
 category: Training
 papers:
   - "[[02 Areas/ML & DL/Papers/Phi-2|Phi-2]]"

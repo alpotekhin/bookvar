@@ -1,4 +1,5 @@
 ---
+title: "Gemma"
 type: model-family
 organization: Google DeepMind
 first_release: 2024

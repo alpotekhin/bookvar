@@ -4,7 +4,8 @@ url: https://arxiv.org/abs/1605.07725
 authors: [Takeru Miyato, Andrew M. Dai, Ian Goodfellow]
 year: 2017
 date_reviewed: 2026-04-06
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 tags:
   - Feature

@@ -4,7 +4,8 @@ url: https://arxiv.org/abs/2407.10671
 authors: "An Yang, Baosong Yang, Binyuan Hui et al."
 year: 2024
 date_reviewed: 2026-04-07
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 raw: "[[02 Areas/ML & DL/raw/papers/qwen2/source]]"
 concepts:
@@ -150,4 +151,3 @@ Qwen2-7B показывает массивное преимущество в mat
 Qwen2-0.5B (300M non-emb params) конкурентоспособен с Gemma-2B и Qwen1.5-1.8B. Qwen2-1.5B превосходит Phi-2 в language understanding при меньшем размере.
 
 ## My notes
-

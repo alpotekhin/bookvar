@@ -1,6 +1,7 @@
 ---
 title: "Training"
-type: index
+type: concept
+status: legacy
 category: training
 ---
 

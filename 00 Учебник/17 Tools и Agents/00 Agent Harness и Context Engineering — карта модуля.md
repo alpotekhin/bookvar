@@ -1,6 +1,6 @@
 ---
 title: Agent Harness и Context Engineering — карта модуля
-type: textbook-module-index
+type: textbook-chapter
 status: active
 last_updated: 2026-07-17
 ---

@@ -1,6 +1,7 @@
 ---
 title: "NLP"
-type: index
+type: concept
+status: legacy
 category: nlp
 ---
 

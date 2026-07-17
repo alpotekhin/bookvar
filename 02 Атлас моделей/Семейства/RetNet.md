@@ -1,4 +1,5 @@
 ---
+title: "RetNet"
 type: model-family
 organization: Microsoft Research
 first_release: 2023

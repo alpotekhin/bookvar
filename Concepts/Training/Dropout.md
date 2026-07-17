@@ -2,6 +2,7 @@
 title: "Dropout"
 aliases: [Dropout]
 type: concept
+status: legacy
 category: Training
 papers:
   - "[[02 Areas/ML & DL/Papers/Attention Is All You Need|Attention Is All You Need]]"

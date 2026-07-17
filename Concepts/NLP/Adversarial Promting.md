@@ -2,6 +2,7 @@
 title: "Adversarial Prompting"
 aliases: [Adversarial Prompting, prompt injection, jailbreaking, adversarial attack on LLM, атаки на LLM]
 type: concept
+status: legacy
 category: NLP
 papers:
   - "[[02 Areas/ML & DL/Papers/Harnessing the Power of LLMs in Practice- A Survey on ChatGPT and Beyond]]"

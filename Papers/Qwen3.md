@@ -4,7 +4,8 @@ url: "https://arxiv.org/abs/2505.09388"
 authors: [Qwen Team, Alibaba]
 year: 2025
 date_reviewed: 2026-04-08
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 raw: "[[02 Areas/ML & DL/raw/papers/qwen3/paper.pdf|PDF]]"
 concepts:

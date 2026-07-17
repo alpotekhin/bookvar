@@ -2,6 +2,7 @@
 title: "Neural Network"
 aliases: [Neural Network, MLP, Multilayer Perceptron, нейросеть]
 type: concept
+status: legacy
 category: NLP
 papers: []
 courses:

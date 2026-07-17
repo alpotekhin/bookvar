@@ -2,7 +2,8 @@
 title: "CS224N — Lecture 8: Transformers"
 course: "Stanford CS224N"
 lecture: 8
-type: course-note
+type: source-note
+status: legacy
 raw: "[[02 Areas/ML & DL/raw/courses/Stanford CS224N/slides/cs224n-spr2024-lecture08-transformers]]"
 concepts: ["[[02 Areas/ML & DL/Concepts/Architectures/Transformer|Transformer]]", "[[02 Areas/ML & DL/Concepts/NLP/Attention Mechanism|Attention Mechanism]]", "[[02 Areas/ML & DL/Concepts/NLP/Self-Attention|Self-Attention]]", "[[02 Areas/ML & DL/Concepts/NLP/Multi-Head Attention|Multi-Head Attention]]", "[[02 Areas/ML & DL/Concepts/NLP/Positional Encoding|Positional Encoding]]", "[[02 Areas/ML & DL/Concepts/Training/Scaling Laws|Scaling Laws]]"]
 ---

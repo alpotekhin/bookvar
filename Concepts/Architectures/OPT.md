@@ -2,6 +2,7 @@
 title: "OPT"
 aliases: [Open Pre-trained Transformer, OPT-175B]
 type: concept
+status: legacy
 category: Architectures
 papers:
   - "[[02 Areas/ML & DL/Papers/OPT]]"

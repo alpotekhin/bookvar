@@ -2,6 +2,7 @@
 title: "Few-shot Fine-tuning"
 aliases: [few-sample fine-tuning, low-resource fine-tuning, малоданковая дообучение]
 type: concept
+status: legacy
 category: Training
 papers:
   - "[[02 Areas/ML & DL/Papers/Revisiting Few-sample BERT Fine-tuning]]"

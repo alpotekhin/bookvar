@@ -1,4 +1,5 @@
 ---
+title: "GLM"
 type: model-family
 organization: Zhipu AI and Tsinghua KEG
 first_release: 2021

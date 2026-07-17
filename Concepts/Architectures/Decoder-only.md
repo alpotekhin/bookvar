@@ -2,6 +2,7 @@
 title: "Decoder-only"
 aliases: [autoregressive architecture, causal LM architecture]
 type: concept
+status: legacy
 category: Architectures
 papers:
   - "[[02 Areas/ML & DL/Papers/GPT 2.0]]"

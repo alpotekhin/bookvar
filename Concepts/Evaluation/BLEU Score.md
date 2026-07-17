@@ -2,6 +2,7 @@
 title: "BLEU Score"
 aliases: [BLEU, BLEU Score, Bilingual Evaluation Understudy]
 type: concept
+status: legacy
 category: Evaluation
 papers:
   - "[[02 Areas/ML & DL/Papers/Attention Is All You Need|Attention Is All You Need]]"
