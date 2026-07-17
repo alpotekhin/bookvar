@@ -1,0 +1,8 @@
+{
+  "name": "ml-dl-handbook-publisher",
+  "private": true,
+  "type": "module",
+  "scripts": { "test": "vitest run", "build": "tsx adapter/build.ts" },
+  "dependencies": { "gray-matter": "latest", "yaml": "latest" },
+  "devDependencies": { "tsx": "latest", "typescript": "latest", "vitest": "latest" }
+}
