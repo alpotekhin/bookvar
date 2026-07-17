@@ -72,7 +72,8 @@ describe('buildPublication', () => {
     expect(generated).toContain('title: Page A');
     expect(generated).toContain('description: Page A');
     const metadata = matter(generated).data;
-    expect(new URL(metadata.editUrl).protocol).toBe('file:');
+    expect(metadata).not.toHaveProperty('editUrl');
+    expect(generated).not.toMatch(/file:|\/Users\//);
     expect(metadata.lastUpdated).toBeInstanceOf(Date);
     expect(metadata.slug).toBe('nested/page-a');
     expect(generated).toContain('[Page B](/page-b/)');
@@ -146,6 +147,16 @@ describe('buildPublication', () => {
     expect(readFileSync(sibling, 'utf8')).toBe('keep');
   });
 
+  it('removes stale publication assets after successful preflight', async () => {
+    const options = fixture('Body');
+    const stale = join(options.rootDir, 'site', 'public', 'assets', 'private', 'stale.png');
+    write(stale, 'must be removed');
+
+    await buildPublication(options);
+
+    expect(() => readFileSync(stale, 'utf8')).toThrow();
+  });
+
   it.each(['../outside.svg', '/tmp/outside.svg'])(
     'rejects an asset path outside rootDir: %s',
     async (asset) => {
@@ -157,10 +168,13 @@ describe('buildPublication', () => {
   it('fails when a referenced local asset is missing', async () => {
     const options = fixture('![[Assets/Figures/missing.svg]]');
     const stale = join(options.outputDir, 'stale.md');
+    const staleAsset = join(options.rootDir, 'site', 'public', 'assets', 'stale.png');
     write(stale, 'must survive failed preflight');
+    write(staleAsset, 'must survive failed preflight');
 
     await expect(buildPublication(options)).rejects.toThrow(/Missing asset.*missing\.svg/);
     expect(readFileSync(stale, 'utf8')).toBe('must survive failed preflight');
+    expect(readFileSync(staleAsset, 'utf8')).toBe('must survive failed preflight');
   });
 
   it('rejects distinct source assets that normalize to the same public path before cleanup', async () => {

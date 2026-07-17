@@ -44,6 +44,18 @@ afterAll(async () => {
 });
 
 describe('static handbook output', () => {
+  it('does not publish local file edit links or workstation paths', async () => {
+    const manifest = YAML.parse(await readFile(join(rootDir, 'publishing', 'navigation.yml'), 'utf8'));
+    const routes: string[] = manifest.sections.flatMap(
+      (section: { pages: Array<{ route: string }> }) => section.pages.map((page) => page.route)
+    );
+    for (const route of routes) {
+      const outputRoute = route.endsWith('/index') ? route.slice(0, -'/index'.length) : route;
+      const html = await readFile(join(distDir, outputRoute, 'index.html'), 'utf8');
+      expect(html, route).not.toMatch(/file:\/\/|\/Users\//);
+    }
+  });
+
   it('renders formulas and Mermaid without losing the source diagram', async () => {
     const formula = await readFile(
       join(distDir, 'textbook', 'foundations', 'backpropagation', 'index.html'),

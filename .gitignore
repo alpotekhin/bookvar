@@ -8,6 +8,7 @@ site/dist/
 site/.astro/
 site/src/content/docs/generated/
 site/public/assets/
+site/generated-sidebar.mjs
 publishing-report.json
 coverage/
 .env

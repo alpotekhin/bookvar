@@ -1,6 +1,6 @@
 import { access, copyFile, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { dirname, isAbsolute, join, relative, resolve, sep } from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
 import matter from 'gray-matter';
 import { convertCallouts } from './callouts.js';
 import { readPage } from './frontmatter.js';
@@ -130,6 +130,8 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
     ''
   ].join('\n'), 'utf8');
   const assetDir = join(rootDir, 'site', 'public', 'assets');
+  await rm(assetDir, { recursive: true, force: true });
+  await mkdir(assetDir, { recursive: true });
   const report = { pages: [] as Array<{
     source: string;
     route: string;
@@ -144,8 +146,7 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
     const metadata: Record<string, string | Date> = {
       title: page.title,
       description: page.title,
-      slug: entry.route,
-      editUrl: pathToFileURL(contained(rootDir, entry.source, 'Source')).href
+      slug: entry.route
     };
     if (page.lastUpdated) metadata.lastUpdated = new Date(page.lastUpdated);
     await writeFile(target, matter.stringify(markdown, metadata), 'utf8');

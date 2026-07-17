@@ -2,7 +2,12 @@
   "name": "ml-dl-handbook-publisher",
   "private": true,
   "type": "module",
-  "scripts": { "test": "vitest run", "build": "tsx adapter/build.ts" },
-  "dependencies": { "gray-matter": "latest", "yaml": "latest" },
-  "devDependencies": { "tsx": "latest", "typescript": "latest", "vitest": "latest" }
+  "scripts": {
+    "test": "vitest run --exclude tests/site-output.test.ts",
+    "test:unit": "vitest run --exclude tests/site-output.test.ts",
+    "test:output": "vitest run tests/site-output.test.ts",
+    "build": "tsx adapter/build.ts"
+  },
+  "dependencies": { "gray-matter": "4.0.3", "yaml": "2.9.0" },
+  "devDependencies": { "tsx": "4.23.1", "typescript": "7.0.2", "vitest": "4.1.10" }
 }
