@@ -107,6 +107,33 @@ describe('buildPublication', () => {
     ].join('\n'));
   });
 
+  it('omits exactly one leading source H1 even when it differs from the page title', async () => {
+    const options = fixture('\n# Short source heading\n\n# Second heading\n\nBody');
+
+    await buildPublication(options);
+
+    const generated = matter(readFileSync(join(options.outputDir, 'nested', 'page-a.md'), 'utf8'));
+    expect(generated.content).toBe('\n# Second heading\n\nBody\n');
+  });
+
+  it('preserves content that has no leading H1', async () => {
+    const options = fixture('\n## First subsection\n\nBody');
+
+    await buildPublication(options);
+
+    const generated = matter(readFileSync(join(options.outputDir, 'nested', 'page-a.md'), 'utf8'));
+    expect(generated.content).toBe('\n## First subsection\n\nBody\n');
+  });
+
+  it('preserves an H1 that appears after body content', async () => {
+    const options = fixture('\nIntroduction.\n\n# Later heading\n\nBody');
+
+    await buildPublication(options);
+
+    const generated = matter(readFileSync(join(options.outputDir, 'nested', 'page-a.md'), 'utf8'));
+    expect(generated.content).toBe('\nIntroduction.\n\n# Later heading\n\nBody\n');
+  });
+
   it('removes stale generated files but preserves siblings outside the known output root', async () => {
     const options = fixture('Body');
     write(join(options.outputDir, 'stale.md'), 'stale');
