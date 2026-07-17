@@ -94,4 +94,14 @@ describe('loadManifest', () => {
       '06 Практика/lab.md'
     ]))).toThrow(/Route must not begin with.*\//);
   });
+
+  it.each(['../outside.md', '/tmp/outside.md'])(
+    'rejects a source path outside the publication root: %s',
+    (source) => {
+      const path = fixture(validYaml.replace('00 Учебник/_index.md', source), [
+        '06 Практика/lab.md'
+      ]);
+      expect(() => loadManifest(path)).toThrow(/Source path escapes publication root/);
+    }
+  );
 });
