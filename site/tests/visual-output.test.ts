@@ -30,6 +30,7 @@ describe('diagram presentation', () => {
     const css = await read('src/styles/custom.css');
     expect(css).toMatch(/\.mermaid\s*\{[^}]*overflow-x:\s*auto/s);
     expect(css).toMatch(/\.mermaid\s+svg\s*\{[^}]*min-width:/s);
+    expect(css).toMatch(/\.mermaid\s+svg\s*\{[^}]*margin-inline:\s*0/s);
     expect(css).toMatch(/@media\s*\(max-width:\s*30rem\)/);
   });
 });

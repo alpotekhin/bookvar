@@ -142,7 +142,8 @@
   min-width: 44rem;
   max-width: none;
   height: auto;
-  margin-inline: auto;
+  /* Keep the first node reachable when the SVG is wider than its scroller. */
+  margin-inline: 0;
 }
 
 @media (max-width: 50rem) {
