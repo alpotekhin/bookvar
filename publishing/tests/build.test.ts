@@ -216,6 +216,23 @@ describe('buildPublication', () => {
     ]);
   });
 
+  it('rejects backtick fence openers whose info string contains a backtick', () => {
+    const markdown = ['```lang`variant', '# Parsed heading'].join('\n');
+
+    expect(parseMarkdownHeadings(markdown).map(({ text }) => text)).toEqual(['Parsed heading']);
+  });
+
+  it('allows backticks in a tilde fence info string', () => {
+    const markdown = [
+      '~~~lang`variant',
+      '# Fenced heading',
+      '~~~',
+      '# Parsed heading'
+    ].join('\n');
+
+    expect(parseMarkdownHeadings(markdown).map(({ text }) => text)).toEqual(['Parsed heading']);
+  });
+
   it('preserves an H1 that appears after body content', async () => {
     const options = fixture('\nIntroduction.\n\n# Later heading\n\nBody');
 
