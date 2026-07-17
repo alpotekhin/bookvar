@@ -2,6 +2,7 @@
 title: "ColBERT"
 aliases: [ColBERT, ColBERTv2, Late Interaction, Contextualized Late Interaction]
 type: concept
+status: legacy
 category: Retrieval
 papers:
   - "[[02 Areas/ML & DL/Papers/ColBERT|ColBERT (Khattab & Zaharia, 2020)]]"

@@ -2,6 +2,7 @@
 title: "Gemma"
 aliases: [Gemma, Gemma 2B, Gemma 7B]
 type: concept
+status: legacy
 category: Architectures
 papers: ["[[02 Areas/ML & DL/Papers/Gemma|Gemma]]"]
 courses: []

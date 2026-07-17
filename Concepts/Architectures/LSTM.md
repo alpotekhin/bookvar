@@ -2,6 +2,7 @@
 title: "LSTM"
 aliases: [LSTM, Long Short-Term Memory]
 type: concept
+status: legacy
 category: Architectures
 papers: []
 courses:

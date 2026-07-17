@@ -4,7 +4,8 @@ url: https://arxiv.org/abs/2601.21558
 authors: [Xiaoyu Tian, Haotian Wang, Shuaiting Chen, Hao Zhou, Kaichi Yu, Yudian Zhang, Jade Ouyang, Junxi Yin, Jiong Chen, Baoyan Guo, Lei Zhang, Junjie Tao, Yuansheng Song, Ming Cui, Chengwei Liu]
 year: 2026
 date_reviewed: 2026-04-12
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 tags:
   - RL

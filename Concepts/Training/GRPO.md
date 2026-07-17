@@ -2,6 +2,7 @@
 title: "GRPO"
 aliases: [GRPO, Group Relative Policy Optimization]
 type: concept
+status: legacy
 category: Training
 papers:
   - "[[02 Areas/ML & DL/Papers/DeepSeek-R1 Reasoning via RL|DeepSeek-R1]]"

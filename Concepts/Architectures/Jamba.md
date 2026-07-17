@@ -2,6 +2,7 @@
 title: "Jamba"
 aliases: [Jamba, Jamba 1.5, AI21 Jamba, Hybrid SSM-Transformer]
 type: concept
+status: legacy
 category: Architectures
 papers:
   - "[[02 Areas/ML & DL/Papers/Jamba SSM-Transformer Hybrid|Jamba]]"

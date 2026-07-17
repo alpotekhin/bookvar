@@ -2,6 +2,7 @@
 title: "BERT"
 aliases: [Bidirectional Encoder Representations from Transformers]
 type: concept
+status: legacy
 category: Architectures
 papers:
   - "[[02 Areas/ML & DL/Papers/BERT]]"

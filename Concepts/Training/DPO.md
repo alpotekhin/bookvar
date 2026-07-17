@@ -2,6 +2,7 @@
 title: "DPO"
 aliases: [DPO, Direct Preference Optimization]
 type: concept
+status: legacy
 category: Training
 papers:
   - "[[02 Areas/ML & DL/Papers/DPO|DPO]]"

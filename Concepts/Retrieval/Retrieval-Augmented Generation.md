@@ -2,6 +2,7 @@
 title: "Retrieval-Augmented Generation"
 aliases: [RAG, retrieval-augmented generation, Retrieval Augmented Generation]
 type: concept
+status: legacy
 category: Retrieval
 papers:
   - "[[02 Areas/ML & DL/Papers/Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks|RAG (Lewis et al., 2020)]]"

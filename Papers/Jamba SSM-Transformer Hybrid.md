@@ -4,7 +4,8 @@ url: https://arxiv.org/abs/2403.19887
 authors: "AI21 Labs"
 year: 2024
 date_reviewed: 2026-04-08
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 raw: "[[02 Areas/ML & DL/raw/papers/jamba/source]]"
 concepts: [Mamba, State Space Models, Mixture of Experts, Transformer, KV Cache, Long Context, Hybrid Architecture]

@@ -2,6 +2,7 @@
 title: "RWKV"
 aliases: [RWKV, Receptance Weighted Key Value, RWKV-4, RWKV-LM]
 type: concept
+status: legacy
 category: Architectures
 papers:
   - "[[02 Areas/ML & DL/Papers/RWKV|RWKV]]"

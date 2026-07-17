@@ -4,7 +4,8 @@ url: https://arxiv.org/abs/2412.15115
 authors: "Qwen Team"
 year: 2024
 date_reviewed: 2026-04-08
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 raw: "[[02 Areas/ML & DL/raw/papers/qwen-25/source]]"
 concepts: [Scaling Laws, Data Filtering, Synthetic Data, DPO, GRPO, Reinforcement Learning, Mixture of Experts, Long Context]

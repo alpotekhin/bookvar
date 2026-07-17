@@ -2,6 +2,7 @@
 title: "Mixtral of Experts"
 aliases: [Mixtral, Mixtral 8x7B, Sparse MoE, Mixture of Experts]
 type: concept
+status: legacy
 category: Architectures
 papers:
   - "[[02 Areas/ML & DL/Papers/Mixtral of Experts|Mixtral of Experts]]"

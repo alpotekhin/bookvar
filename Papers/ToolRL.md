@@ -4,7 +4,8 @@ url: https://arxiv.org/abs/2504.13958
 authors: [Cheng Qian, Emanuele La Malfa, Suyu Ge, Michael Backes, Yang Zhang, Huan Sun]
 year: 2025
 date_reviewed: 2026-04-12
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 tags:
   - RL

@@ -2,6 +2,7 @@
 title: "RoPE"
 aliases: [RoPE, Rotary Position Embedding, Rotary Positional Encoding]
 type: concept
+status: legacy
 category: Architectures
 papers:
   - "[[02 Areas/ML & DL/Papers/LLaMA|LLaMA]]"

@@ -2,6 +2,7 @@
 title: "Mamba"
 aliases: [Mamba, Selective SSM, S6, Selective State Space Model]
 type: concept
+status: legacy
 category: Architectures
 papers:
   - "[[02 Areas/ML & DL/Papers/Mamba|Mamba]]"

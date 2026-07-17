@@ -2,6 +2,7 @@
 title: "Positional Encoding"
 aliases: [positional embedding, position encoding, PE, RoPE, Rotary Positional Embedding, ALiBi, sinusoidal positional encoding]
 type: concept
+status: legacy
 category: NLP
 papers:
   - "[[02 Areas/ML & DL/Papers/Attention Is All You Need|Attention Is All You Need]]"

@@ -7,7 +7,7 @@ function basename(target: string): string {
   return name.replace(/\.md$/, '');
 }
 
-function headingSlug(heading: string): string {
+export function wikiHeadingSlug(heading: string): string {
   return heading
     .toLowerCase()
     .replace(/\s+/g, '-')
@@ -31,7 +31,7 @@ function convertLink(
     : targetWithHeading.slice(headingAt + 1);
   const label = alias ?? (target === '' ? heading ?? '' : basename(target));
   if (target === '' && heading !== undefined) {
-    return `[${label}](#${headingSlug(heading)})`;
+    return `[${label}](#wiki-${wikiHeadingSlug(heading)})`;
   }
   const route = registry.routeForWikiTarget(target);
 
@@ -42,7 +42,7 @@ function convertLink(
     return label;
   }
 
-  const anchor = heading === undefined ? '' : `#${headingSlug(heading)}`;
+  const anchor = heading === undefined ? '' : `#wiki-${wikiHeadingSlug(heading)}`;
   return `[${label}](${route}${anchor})`;
 }
 

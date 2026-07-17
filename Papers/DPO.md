@@ -4,7 +4,8 @@ url: https://arxiv.org/abs/2305.18290
 authors: "Rafael Rafailov, Archit Sharma, Eric Mitchell, Stefano Ermon, Christopher D. Manning, Chelsea Finn"
 year: 2023
 date_reviewed: 2026-04-07
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 raw: "[[02 Areas/ML & DL/raw/papers/dpo/source]]"
 concepts:
@@ -119,4 +120,3 @@ Pythia-2.8B, win rate vs chosen responses:
 DPO (temp=0.25) preferred 58% vs PPO (temp=0.0); GPT-4 agreement с humans ~65-85% -- на уровне inter-annotator agreement.
 
 ## My notes
-

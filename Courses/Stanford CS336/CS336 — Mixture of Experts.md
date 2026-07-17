@@ -1,6 +1,7 @@
 ---
 title: "CS336 — Mixture of Experts"
-type: course-note
+type: source-note
+status: legacy
 course: "Stanford CS336"
 ---
 

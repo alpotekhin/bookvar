@@ -4,7 +4,8 @@ url: https://cdn.openai.com/research-covers/language-unsupervised/language_under
 authors: [Alec Radford, Karthik Narasimhan, Tim Salimans, Ilya Sutskever]
 year: 2018
 date_reviewed: 2026-04-13
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 tags:
   - LLM

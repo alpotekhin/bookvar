@@ -2,6 +2,7 @@
 title: "GQA"
 aliases: [GQA, Grouped Query Attention, Grouped-Query Attention]
 type: concept
+status: legacy
 category: Architectures
 papers:
   - "[[02 Areas/ML & DL/Papers/LLaMA 2|LLaMA 2]]"

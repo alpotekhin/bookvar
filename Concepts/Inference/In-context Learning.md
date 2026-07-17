@@ -2,6 +2,7 @@
 title: "In-context Learning"
 aliases: [ICL, in-context learning, few-shot learning, few-shot prompting]
 type: concept
+status: legacy
 category: Inference
 papers:
   - "[[02 Areas/ML & DL/Papers/GPT 3.0|GPT-3 (Brown et al., 2020)]]"
