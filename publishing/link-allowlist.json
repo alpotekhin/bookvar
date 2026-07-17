@@ -265,6 +265,10 @@
       "reason": "legacy shorthand has no unambiguous authored target"
     },
     {
+      "target": "02 Areas/ML & DL/Concepts/NLP/Attention Mechanism#Multi-Head Attention",
+      "reason": "fragment does not exactly match the authored heading with its explanatory suffix"
+    },
+    {
       "target": "Reward Model",
       "reason": "ambiguous legacy shorthand has multiple authored targets"
     },

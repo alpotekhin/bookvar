@@ -10,7 +10,10 @@ function write(path: string, contents: string): void {
   writeFileSync(path, contents);
 }
 
-function fixture(body = 'См. [[Page B]] и [[Missing]].\n\n![[Assets/Figures/chart.svg]]'): {
+function fixture(
+  body = 'См. [[Page B]] и [[Missing]].\n\n![[Assets/Figures/chart.svg]]',
+  targetBody = '> [!warning] Check\n> Body'
+): {
   rootDir: string;
   manifestPath: string;
   outputDir: string;
@@ -34,8 +37,7 @@ function fixture(body = 'См. [[Page B]] и [[Missing]].\n\n![[Assets/Figures/c
     'type: concept',
     'status: stable',
     '---',
-    '> [!warning] Check',
-    '> Body'
+    targetBody
   ].join('\n'));
   write(join(root, 'Assets', 'Figures', 'chart.svg'), '<svg>fixture</svg>');
 
@@ -143,6 +145,26 @@ describe('buildPublication', () => {
     await expect(buildPublication(options)).rejects.toThrow(
       'Unexplained unresolved wiki links:\n- Notes/Page A.md: Unknown target'
     );
+  });
+
+  it('places fragment aliases directly before their matching headings', async () => {
+    const options = fixture(
+      '[[Page B#First Heading|first]] and [[Page B#Chat template|chat]]',
+      'Intro\n\n## First Heading\n\nOne\n\n## Chat template\n\nTwo'
+    );
+    await buildPublication(options);
+
+    const source = matter(readFileSync(join(options.outputDir, 'nested', 'page-a.md'), 'utf8')).content;
+    const target = matter(readFileSync(join(options.outputDir, 'page-b.md'), 'utf8')).content;
+    expect(source).toContain('[first](/page-b/#wiki-first-heading)');
+    expect(source).toContain('[chat](/page-b/#wiki-chat-template)');
+    expect(target).toContain(
+      '<span id="wiki-first-heading" aria-hidden="true"></span>\n## First Heading'
+    );
+    expect(target).toContain(
+      '<span id="wiki-chat-template" aria-hidden="true"></span>\n## Chat template'
+    );
+    expect(target).not.toMatch(/^<span id="wiki-/);
   });
 
   it('preserves an H1 that appears after body content', async () => {
