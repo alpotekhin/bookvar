@@ -1,0 +1,119 @@
+import { mkdtempSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { dirname, join } from 'node:path';
+import { describe, expect, it } from 'vitest';
+import { buildPublication } from '../adapter/build.js';
+
+function write(path: string, contents: string): void {
+  mkdirSync(dirname(path), { recursive: true });
+  writeFileSync(path, contents);
+}
+
+function fixture(body = 'См. [[Page B]] и [[Missing]].\n\n![[Assets/Figures/chart.svg]]'): {
+  rootDir: string;
+  manifestPath: string;
+  outputDir: string;
+  reportPath: string;
+  sourcePath: string;
+} {
+  const root = mkdtempSync(join(tmpdir(), 'publication-build-'));
+  const sourcePath = join(root, 'Notes', 'Page A.md');
+  write(sourcePath, [
+    '---',
+    'title: Page A',
+    'type: concept',
+    'status: stable',
+    '---',
+    body
+  ].join('\n'));
+  write(join(root, 'Notes', 'Page B.md'), [
+    '---',
+    'title: Page B',
+    'type: concept',
+    'status: stable',
+    '---',
+    '> [!warning] Check',
+    '> Body'
+  ].join('\n'));
+  write(join(root, 'Assets', 'Figures', 'chart.svg'), '<svg>fixture</svg>');
+
+  const manifestPath = join(root, 'publishing', 'navigation.yml');
+  write(manifestPath, [
+    'site_title: Fixture',
+    'sections:',
+    '  - id: textbook',
+    '    title: Textbook',
+    '    pages:',
+    '      - source: Notes/Page A.md',
+    '        route: nested/page-a',
+    '      - source: Notes/Page B.md',
+    '        route: page-b'
+  ].join('\n'));
+
+  return {
+    rootDir: root,
+    manifestPath,
+    outputDir: join(root, 'site', 'src', 'content', 'docs', 'generated'),
+    reportPath: join(root, 'publishing-report.json'),
+    sourcePath
+  };
+}
+
+describe('buildPublication', () => {
+  it('generates nested pages, converted Markdown, copied assets, and a warning report without mutating sources', async () => {
+    const options = fixture();
+    const before = readFileSync(options.sourcePath);
+
+    await buildPublication(options);
+
+    const generated = readFileSync(join(options.outputDir, 'nested', 'page-a.md'), 'utf8');
+    expect(generated).toContain('title: Page A');
+    expect(generated).toContain('description: Page A');
+    expect(generated).toContain('editUrl: Notes/Page A.md');
+    expect(generated).toContain('[Page B](/page-b/)');
+    expect(generated).toContain('Missing');
+    expect(generated).toContain('![chart](../../assets/Figures/chart.svg)');
+    expect(readFileSync(join(options.outputDir, 'page-b.md'), 'utf8'))
+      .toContain(':::caution[Check]\nBody\n:::');
+    expect(JSON.parse(readFileSync(options.reportPath, 'utf8'))).toMatchObject({
+      pages: [{ source: 'Notes/Page A.md', route: 'nested/page-a', unresolved: ['Missing'] }]
+    });
+    expect(readFileSync(join(options.rootDir, 'site', 'public', 'assets', 'Figures', 'chart.svg'), 'utf8'))
+      .toBe('<svg>fixture</svg>');
+    expect(readFileSync(options.sourcePath)).toEqual(before);
+  });
+
+  it('removes stale generated files but preserves siblings outside the known output root', async () => {
+    const options = fixture('Body');
+    write(join(options.outputDir, 'stale.md'), 'stale');
+    const sibling = join(dirname(options.outputDir), 'keep.md');
+    write(sibling, 'keep');
+
+    await buildPublication(options);
+
+    expect(() => readFileSync(join(options.outputDir, 'stale.md'), 'utf8')).toThrow();
+    expect(readFileSync(sibling, 'utf8')).toBe('keep');
+  });
+
+  it.each(['../outside.svg', '/tmp/outside.svg'])(
+    'rejects an asset path outside rootDir: %s',
+    async (asset) => {
+      const options = fixture(`![[${asset}]]`);
+      await expect(buildPublication(options)).rejects.toThrow(/Asset path escapes rootDir/);
+    }
+  );
+
+  it('fails when a referenced local asset is missing', async () => {
+    const options = fixture('![[Assets/Figures/missing.svg]]');
+
+    await expect(buildPublication(options)).rejects.toThrow(/Missing asset.*missing\.svg/);
+  });
+
+  it('refuses to clean rootDir itself as the generated output directory', async () => {
+    const options = fixture('Body');
+    options.outputDir = options.rootDir;
+
+    await expect(buildPublication(options)).rejects.toThrow(/Output directory must be below rootDir/);
+    expect(readFileSync(options.sourcePath, 'utf8')).toContain('title: Page A');
+  });
+});

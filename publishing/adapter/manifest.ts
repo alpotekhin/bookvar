@@ -1,5 +1,5 @@
 import { existsSync, readFileSync } from 'node:fs';
-import { dirname, resolve } from 'node:path';
+import { dirname, isAbsolute, relative, resolve, sep } from 'node:path';
 import { parse } from 'yaml';
 
 const SECTION_IDS = ['textbook', 'models', 'sources', 'questions', 'practice'] as const;
@@ -22,6 +22,16 @@ export interface PublicationSection {
 export interface PublicationManifest {
   siteTitle: string;
   sections: PublicationSection[];
+}
+
+function resolveContained(root: string, path: string): string {
+  if (isAbsolute(path)) throw new Error(`Source path escapes publication root: ${path}`);
+  const absolute = resolve(root, path);
+  const offset = relative(root, absolute);
+  if (offset === '..' || offset.startsWith(`..${sep}`) || isAbsolute(offset)) {
+    throw new Error(`Source path escapes publication root: ${path}`);
+  }
+  return absolute;
 }
 
 function record(value: unknown, label: string): Record<string, unknown> {
@@ -83,7 +93,8 @@ export function loadManifest(path: string): PublicationManifest {
       if (!ASCII_ROUTE.test(route)) throw new Error(`Route must be stable lowercase ASCII: ${route}`);
       if (routes.has(route)) throw new Error(`Duplicate route: ${route}`);
       if (sources.has(source)) throw new Error(`Duplicate source: ${source}`);
-      if (!existsSync(resolve(root, source))) throw new Error(`Missing source: ${source}`);
+      const sourcePath = resolveContained(root, source);
+      if (!existsSync(sourcePath)) throw new Error(`Missing source: ${source}`);
 
       routes.add(route);
       sources.add(source);
