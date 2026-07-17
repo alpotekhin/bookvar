@@ -1,6 +1,6 @@
 ---
 title: Community repositories
-type: resource-list
+type: source-note
 status: reviewed
 last_verified: 2026-07-16
 ---
@@ -37,4 +37,3 @@ last_verified: 2026-07-16
 - [LangGraph 101](https://github.com/langchain-ai/langgraph-101)
 
 Быстро меняющиеся API привязываются к tag/commit в конкретной лаборатории.
-

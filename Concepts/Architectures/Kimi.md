@@ -2,6 +2,7 @@
 title: "Kimi"
 aliases: [Kimi, Kimi k1.5, Moonshot AI, Kimi-K1.5]
 type: concept
+status: legacy
 category: Architectures
 papers:
   - "[[02 Areas/ML & DL/Papers/Kimi k1.5|Kimi k1.5]]"

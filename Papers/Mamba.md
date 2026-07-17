@@ -4,7 +4,8 @@ url: https://arxiv.org/abs/2312.00752
 authors: "Albert Gu, Tri Dao"
 year: 2023
 date_reviewed: 2026-04-07
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 raw: "[[02 Areas/ML & DL/raw/papers/mamba/source]]"
 concepts:
@@ -131,4 +132,3 @@ YouTubeMix piano: превосходит SaShiMi (prior SOTA на S4), perplexit
 - **Memory:** O(BLDN) -> O(BLD) через selective scan (state не материализуется)
 
 ## My notes
-

@@ -14,6 +14,19 @@ const FAST_CHANGING_TYPES = new Set([
   'research-line'
 ]);
 
+export const PUBLICATION_PAGE_TYPES = new Set([
+  'textbook-chapter',
+  'concept',
+  'model-family',
+  'model-release',
+  'research-line',
+  'source-note',
+  'external-resource',
+  'question-index',
+  'practice',
+  'visual'
+]);
+
 function dateString(value: unknown): string | undefined {
   if (typeof value === 'string' && value.trim()) return value;
   if (value instanceof Date && !Number.isNaN(value.valueOf())) {
@@ -36,6 +49,10 @@ export function readPage(sourcePath: string, raw: string): ParsedPage {
   const type = typeof metadata.type === 'string' ? metadata.type : '';
   const lastVerified = dateString(metadata.last_verified);
   const lastUpdated = dateString(metadata.last_updated);
+
+  if (type && !PUBLICATION_PAGE_TYPES.has(type)) {
+    errors.push(`unsupported type "${type}"`);
+  }
 
   if (FAST_CHANGING_TYPES.has(type) && !lastVerified) {
     errors.push(`missing required field "last_verified" for type "${type}"`);

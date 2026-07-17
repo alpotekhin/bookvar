@@ -4,7 +4,8 @@ url: https://arxiv.org/abs/2207.09238
 authors: [Mary Phuong, Marcus Hutter]
 year: 2022
 date_reviewed: 2026-04-06
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 tags:
   - Review

@@ -4,7 +4,8 @@ url: https://cdn.openai.com/better-language-models/language_models_are_unsupervi
 authors: [Alec Radford, Jeffrey Wu, Rewon Child, David Luan, Dario Amodei, Ilya Sutskever]
 year: 2019
 date_reviewed: 2026-04-12
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 tags:
   - GPT

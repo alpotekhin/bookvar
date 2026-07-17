@@ -1,4 +1,5 @@
 ---
+title: "InternLM"
 type: model-family
 organization: Shanghai AI Laboratory
 first_release: 2023

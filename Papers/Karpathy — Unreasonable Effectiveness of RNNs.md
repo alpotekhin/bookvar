@@ -4,7 +4,8 @@ url: https://karpathy.github.io/2015/05/21/rnn-effectiveness/
 authors: [Andrej Karpathy]
 year: 2015
 date_reviewed: 2026-04-07
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 tags:
   - RNN

@@ -4,7 +4,8 @@ url: https://arxiv.org/abs/2107.13586
 authors: [Pengfei Liu, Weizhe Yuan, Jinlan Fu, Zhengbao Jiang, Hiroaki Hayashi, Graham Neubig]
 year: 2021
 date_reviewed: 2026-04-06
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 tags:
   - LLM

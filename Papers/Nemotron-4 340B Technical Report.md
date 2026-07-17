@@ -4,7 +4,8 @@ url: https://arxiv.org/abs/2406.11704
 authors: "NVIDIA"
 year: 2024
 date_reviewed: 2026-04-08
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 raw: "[[02 Areas/ML & DL/raw/papers/nemotron-4/source]]"
 concepts: [Synthetic Data Generation, Reward Model, RLHF, DPO, Iterative Alignment, Supervised Fine-Tuning, Open Source LLM]

@@ -1,6 +1,7 @@
 ---
 title: "Inference"
-type: index
+type: concept
+status: legacy
 category: inference
 ---
 

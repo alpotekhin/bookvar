@@ -2,6 +2,7 @@
 title: "BPE"
 aliases: [BPE, Byte Pair Encoding, Byte-Pair Encoding]
 type: concept
+status: legacy
 category: NLP
 papers:
   - "[[02 Areas/ML & DL/Papers/GPT 2.0|GPT-2]]"

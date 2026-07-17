@@ -4,7 +4,8 @@ url: https://arxiv.org/abs/2310.06825
 authors: "Albert Q. Jiang, Alexandre Sablayrolles, Arthur Mensch, Chris Bamford, Devendra Singh Chaplot, Diego de las Casas, et al."
 year: 2023
 date_reviewed: 2026-04-07
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 raw: "[[02 Areas/ML & DL/raw/papers/mistral-7b/source]]"
 concepts:
@@ -104,4 +105,3 @@ Mistral 7B превосходит Llama 2 13B на всех метриках. П
 Mistral 7B Instruct превосходит все 7B модели на MT-Bench и сравним с 13B chat моделями. Human evaluation: Mistral 7B preferred 5020 раз vs Llama 2 13B 4143 раза.
 
 ## My notes
-

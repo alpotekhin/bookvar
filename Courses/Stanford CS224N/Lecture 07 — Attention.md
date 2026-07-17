@@ -2,7 +2,8 @@
 title: "CS224N — Lecture 7: Attention and Machine Translation Evaluation"
 course: "Stanford CS224N"
 lecture: 7
-type: course-note
+type: source-note
+status: legacy
 raw: "[[02 Areas/ML & DL/raw/courses/Stanford CS224N/slides/cs224n-spr2024-lecture07-final-project]]"
 concepts: ["[[02 Areas/ML & DL/Concepts/NLP/Attention Mechanism|Attention]]", "[[02 Areas/ML & DL/Concepts/NLP/BLEU Score|BLEU]]", "[[02 Areas/ML & DL/Concepts/NLP/Seq2Seq|Seq2Seq]]"]
 ---

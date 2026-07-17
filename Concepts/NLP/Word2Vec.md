@@ -2,6 +2,7 @@
 title: "Word2Vec"
 aliases: [Word2Vec, word2vec, Word Embeddings]
 type: concept
+status: legacy
 category: NLP
 papers: []
 courses:

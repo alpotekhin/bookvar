@@ -2,6 +2,7 @@
 title: "Natural Language Processing (NLP)"
 aliases: [NLP, Natural Language Processing, обработка естественного языка, NLU, NLG, Computational Linguistics]
 type: concept
+status: legacy
 category: NLP
 papers:
   - "[[02 Areas/ML & DL/Papers/Attention Is All You Need|Attention Is All You Need]]"

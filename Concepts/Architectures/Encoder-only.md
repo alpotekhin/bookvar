@@ -2,6 +2,7 @@
 title: "Encoder-only"
 aliases: [masked LM architecture, encoder-only transformer]
 type: concept
+status: legacy
 category: Architectures
 papers:
   - "[[02 Areas/ML & DL/Papers/BERT]]"

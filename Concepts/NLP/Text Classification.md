@@ -2,6 +2,7 @@
 title: "Text Classification"
 aliases: [sentiment analysis, document classification, text categorization, классификация текста]
 type: concept
+status: legacy
 category: NLP
 papers:
   - "[[02 Areas/ML & DL/Papers/BERT]]"

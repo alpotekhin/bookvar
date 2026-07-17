@@ -2,6 +2,16 @@ import { describe, expect, it } from 'vitest';
 import { readPage } from '../adapter/frontmatter.js';
 
 describe('readPage', () => {
+  it('rejects page types outside the AGENTS.md publication contract', () => {
+    expect(() => readPage('legacy.md', [
+      '---',
+      'title: Legacy',
+      'type: course-note',
+      'status: legacy',
+      '---',
+      'Body'
+    ].join('\n'))).toThrow('unsupported type "course-note"');
+  });
   it('reads textbook metadata and preserves the Markdown body', () => {
     const raw = [
       '---',

@@ -1,6 +1,6 @@
 ---
 title: Источники
-type: source-index
+type: source-note
 status: active
 last_updated: 2026-07-16
 ---

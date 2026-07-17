@@ -2,6 +2,7 @@
 title: "Backpropagation"
 aliases: [Backpropagation, Backprop, обратное распространение ошибки]
 type: concept
+status: legacy
 category: Training
 papers: []
 courses:

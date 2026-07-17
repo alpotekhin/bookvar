@@ -4,7 +4,8 @@ url: https://arxiv.org/abs/2205.14135
 authors: [Tri Dao, Daniel Y. Fu, Stefano Ermon, Atri Rudra, Christopher Re]
 year: 2022
 date_reviewed: 2026-04-07
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 tags:
   - attention

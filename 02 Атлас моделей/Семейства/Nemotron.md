@@ -1,4 +1,5 @@
 ---
+title: "Nemotron"
 type: model-family
 organization: NVIDIA
 first_release: 2023

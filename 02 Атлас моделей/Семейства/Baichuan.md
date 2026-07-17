@@ -1,4 +1,5 @@
 ---
+title: "Baichuan"
 type: model-family
 organization: Baichuan Intelligence
 first_release: 2023

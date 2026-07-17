@@ -2,6 +2,7 @@
 title: "LLaMA 3"
 aliases: [LLaMA 3, Llama 3, LLaMA-3, Llama 3.1, Llama 3.1 405B, Meta Llama 3]
 type: concept
+status: legacy
 category: Architectures
 papers:
   - "[[02 Areas/ML & DL/Papers/LLaMA 3 Herd of Models|LLaMA 3]]"

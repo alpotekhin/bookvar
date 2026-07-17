@@ -2,7 +2,8 @@
 title: "CS224N — Lecture 6: LSTM RNNs and Neural Machine Translation"
 course: "Stanford CS224N"
 lecture: 6
-type: course-note
+type: source-note
+status: legacy
 raw: "[[02 Areas/ML & DL/raw/courses/Stanford CS224N/slides/cs224n-spr2024-lecture06-fancy-rnn]]"
 concepts: ["[[02 Areas/ML & DL/Concepts/Architectures/LSTM|LSTM]]", "[[02 Areas/ML & DL/Concepts/Training/Vanishing Gradient|Vanishing Gradient]]", "[[02 Areas/ML & DL/Concepts/NLP/Machine Translation|Machine Translation]]", "[[02 Areas/ML & DL/Concepts/NLP/RNN/Bidirectional RNN|Bidirectional RNN]]", "[[02 Areas/ML & DL/Concepts/Training/Gradient Clipping|Gradient Clipping]]", "[[02 Areas/ML & DL/Concepts/NLP/Seq2Seq|Seq2Seq]]"]
 ---

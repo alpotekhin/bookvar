@@ -1,4 +1,5 @@
 ---
+title: "Command R"
 type: model-family
 organization: Cohere
 first_release: 2024

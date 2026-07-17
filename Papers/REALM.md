@@ -4,7 +4,8 @@ url: https://arxiv.org/abs/2002.08909
 authors: [Kelvin Guu, Kenton Lee, Zora Tung, Panupong Pasupat, Ming-Wei Chang]
 year: 2020
 date_reviewed: 2026-04-07
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 tags:
   - RAG

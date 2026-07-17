@@ -2,6 +2,7 @@
 title: "Feed-Forward Network"
 aliases: [FFN, MLP sublayer, position-wise FFN, SwiGLU, GELU, GLU variants, feed-forward sublayer]
 type: concept
+status: legacy
 category: NLP
 papers:
   - "[[02 Areas/ML & DL/Papers/Attention Is All You Need|Attention Is All You Need]]"

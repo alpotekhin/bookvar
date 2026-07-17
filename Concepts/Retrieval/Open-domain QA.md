@@ -2,6 +2,7 @@
 title: "Open-domain QA"
 aliases: [open-domain question answering, ODQA, OpenQA, open-domain QA]
 type: concept
+status: legacy
 category: Retrieval
 papers:
   - "[[02 Areas/ML & DL/Papers/Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks]]"

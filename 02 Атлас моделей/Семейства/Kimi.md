@@ -1,4 +1,5 @@
 ---
+title: "Kimi"
 type: model-family
 organization: Moonshot AI
 first_release: 2023

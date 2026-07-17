@@ -2,6 +2,7 @@
 title: "RoBERTa"
 aliases: [Robustly Optimized BERT Pretraining Approach]
 type: concept
+status: legacy
 category: Architectures
 papers:
   - "[[02 Areas/ML & DL/Papers/RoBERTa]]"

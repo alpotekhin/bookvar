@@ -1,6 +1,6 @@
 ---
 title: Timeline архитектур LLM
-type: model-atlas-timeline
+type: concept
 last_updated: 2026-07-16
 status: active
 ---

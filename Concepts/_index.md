@@ -1,6 +1,7 @@
 ---
 title: "Concepts"
-type: index
+type: concept
+status: legacy
 category: concepts
 ---
 

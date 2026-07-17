@@ -1,4 +1,5 @@
 ---
+title: "Mamba"
 type: model-family
 organization: researchers at CMU and Princeton; ecosystem contributors
 first_release: 2023

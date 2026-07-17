@@ -4,7 +4,8 @@ url: https://karpathy.github.io/2019/04/25/recipe/
 authors: [Andrej Karpathy]
 year: 2019
 date_reviewed: 2026-04-07
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 tags:
   - training

@@ -2,6 +2,7 @@
 title: "PaLM 2"
 aliases: [PaLM2, Pathways Language Model 2]
 type: concept
+status: legacy
 category: Architectures
 papers:
   - "[[02 Areas/ML & DL/Papers/PaLM 2]]"

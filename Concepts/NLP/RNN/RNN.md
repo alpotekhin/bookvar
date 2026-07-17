@@ -2,6 +2,7 @@
 title: "Recurrent Neural Networks (RNN)"
 aliases: [RNN, Recurrent Neural Network, рекуррентная нейронная сеть, LSTM, GRU, Vanilla RNN]
 type: concept
+status: legacy
 category: NLP
 papers:
   - "[[02 Areas/ML & DL/Papers/Attention Is All You Need|Attention Is All You Need]]"

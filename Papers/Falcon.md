@@ -4,7 +4,8 @@ url: https://arxiv.org/abs/2311.16867
 authors: "Falcon LLM Team, Technology Innovation Institute"
 year: 2023
 date_reviewed: 2026-04-08
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 raw: "[[02 Areas/ML & DL/raw/papers/falcon/source]]"
 concepts: [Transformer, RefinedWeb, Data Curation, Multiquery Attention, Grouped Query Attention, Scaling Laws, Open Source LLM]

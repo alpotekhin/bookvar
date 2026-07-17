@@ -2,6 +2,7 @@
 title: "DeBERTa"
 aliases: [Decoding-enhanced BERT with Disentangled Attention]
 type: concept
+status: legacy
 category: Architectures
 papers:
   - "[[02 Areas/ML & DL/Papers/DeBERTa]]"

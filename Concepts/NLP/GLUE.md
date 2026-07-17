@@ -2,6 +2,7 @@
 title: "GLUE / SuperGLUE"
 aliases: [GLUE, SuperGLUE, General Language Understanding Evaluation]
 type: concept
+status: legacy
 category: NLP
 papers:
   - "[[02 Areas/ML & DL/Papers/BERT]]"

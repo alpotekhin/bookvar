@@ -70,4 +70,12 @@ describe('convertWikiSyntax', () => {
       allowlisted: [{ target: 'Missing Page', reason: 'not available for publication' }]
     });
   });
+
+  it('converts local heading targets without treating them as missing pages', () => {
+    expect(convertWikiSyntax('[[#Local Heading|jump]]', registry)).toEqual({
+      markdown: '[jump](#local-heading)',
+      unresolved: [],
+      allowlisted: []
+    });
+  });
 });

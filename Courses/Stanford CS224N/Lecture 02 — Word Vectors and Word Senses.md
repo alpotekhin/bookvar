@@ -2,7 +2,8 @@
 title: "CS224N — Lecture 2: Word Vectors, Word Senses, and Neural Classifiers"
 course: "Stanford CS224N"
 lecture: 2
-type: course-note
+type: source-note
+status: legacy
 raw: "[[02 Areas/ML & DL/raw/courses/Stanford CS224N/slides/cs224n-spr2024-lecture02-wordvecs2]]"
 concepts: ["[[02 Areas/ML & DL/Concepts/NLP/Word2Vec|Word2Vec]]", "[[02 Areas/ML & DL/Concepts/NLP/GloVe|GloVe]]", "[[02 Areas/ML & DL/Concepts/NLP/Negative Sampling|Negative Sampling]]", "[[02 Areas/ML & DL/Concepts/NLP/Co-occurrence Matrix|Co-occurrence Matrix]]", "[[02 Areas/ML & DL/Concepts/NLP/SVD|SVD]]"]
 ---

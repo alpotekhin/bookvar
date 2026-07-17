@@ -2,6 +2,7 @@
 title: "LLaMA"
 aliases: [Llama, LLaMA-1]
 type: concept
+status: legacy
 category: Architectures
 papers:
   - "[[02 Areas/ML & DL/Papers/LLaMA]]"

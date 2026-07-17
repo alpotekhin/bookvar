@@ -4,7 +4,8 @@ url: https://arxiv.org/abs/2307.08621
 authors: "Yutao Sun, Li Dong, Shaohan Huang, Shuming Ma, Yuqing Xia, Jilong Xue, Jianyong Wang, Furu Wei"
 year: 2023
 date_reviewed: 2026-04-07
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 raw: "[[02 Areas/ML & DL/raw/papers/retnet/source]]"
 concepts:
@@ -101,4 +102,3 @@ RetNet perplexity = 26.05 (in-domain) vs RWKV 30.92, H3 29.97, Hyena 32.08, Line
 - Reduced head dim (256->64): +1.63
 
 ## My notes
-

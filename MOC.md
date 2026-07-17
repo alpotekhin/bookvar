@@ -1,6 +1,7 @@
 ---
 title: ML and DL Map of Content
-type: moc
+type: concept
+status: legacy
 last_updated: "2026-04-15"
 ---
 

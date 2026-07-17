@@ -2,6 +2,7 @@
 title: "GloVe"
 aliases: [GloVe, Global Vectors, Global Vectors for Word Representation]
 type: concept
+status: legacy
 category: NLP
 papers: []
 courses:

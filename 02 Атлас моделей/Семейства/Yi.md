@@ -1,4 +1,5 @@
 ---
+title: "Yi"
 type: model-family
 organization: 01.AI
 first_release: 2023

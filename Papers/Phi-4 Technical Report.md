@@ -4,7 +4,8 @@ url: https://arxiv.org/abs/2412.08905
 authors: "Marah Abdin et al., Microsoft Research"
 year: 2024
 date_reviewed: 2026-04-08
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 raw: "[[02 Areas/ML & DL/raw/papers/phi-4/source]]"
 concepts: [Synthetic Data, Small Language Models, Data Quality, Direct Preference Optimization, Reasoning, Pivotal Token Search]

@@ -1,4 +1,5 @@
 ---
+title: "DBRX"
 type: model-family
 organization: Databricks Mosaic Research
 first_release: 2024

@@ -4,7 +4,8 @@ url: https://arxiv.org/abs/2401.04088
 authors: "Albert Q. Jiang, Alexandre Sablayrolles, Antoine Roux, Arthur Mensch, Blanche Savary, Chris Bamford, et al."
 year: 2024
 date_reviewed: 2026-04-07
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 raw: "[[02 Areas/ML & DL/raw/papers/mixtral-of-experts/source]]"
 concepts:
@@ -120,4 +121,3 @@ Mixtral 8x7B Instruct v0.1: Elo 1121, превосходит Claude-2.1 (1117), 
 Эксперты НЕ специализируются по доменам (ArXiv, biology, philosophy имеют похожие распределения). Роутинг скорее синтаксический: одинаковые токены (self, Question, индентация) направляются к одним экспертам. Высокая temporal locality: в средних/последних слоях ~60-67% consecutive tokens идут к тому же эксперту (vs 46% при random). Это можно использовать для caching оптимизации.
 
 ## My notes
-

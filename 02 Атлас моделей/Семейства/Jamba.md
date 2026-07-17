@@ -1,4 +1,5 @@
 ---
+title: "Jamba"
 type: model-family
 organization: AI21 Labs
 first_release: 2024

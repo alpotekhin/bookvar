@@ -2,6 +2,7 @@
 title: "Constitutional AI"
 aliases: [Constitutional AI, CAI, RLAIF, RL from AI Feedback]
 type: concept
+status: legacy
 category: Training
 papers:
   - "[[02 Areas/ML & DL/Papers/Constitutional AI|Constitutional AI]]"

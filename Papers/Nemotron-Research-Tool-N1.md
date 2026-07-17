@@ -4,7 +4,8 @@ url: https://arxiv.org/abs/2505.00024
 authors: [NVIDIA Research]
 year: 2025
 date_reviewed: 2026-04-12
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 tags:
   - RL

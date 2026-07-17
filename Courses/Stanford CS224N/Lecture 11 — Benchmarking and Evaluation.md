@@ -2,7 +2,7 @@
 title: "CS224N — Lecture 11: Benchmarking and Evaluation"
 course: "Stanford CS224N"
 lecture: 11
-type: course-note
+type: source-note
 status: legacy
 raw: "[[02 Areas/ML & DL/raw/courses/Stanford CS224N/slides/cs224n-spr2024-lecture11-evaluation-yann]]"
 concepts: ["[[02 Areas/ML & DL/Concepts/NLP/Benchmarking|Benchmarking]]", "[[02 Areas/ML & DL/Concepts/Evaluation/MMLU|MMLU]]", "[[02 Areas/ML & DL/Concepts/NLP/SuperGLUE|SuperGLUE]]", "[[02 Areas/ML & DL/Concepts/NLP/BLEU Score|BLEU]]", "[[02 Areas/ML & DL/Concepts/NLP/LLM-as-Judge|LLM-as-Judge]]"]

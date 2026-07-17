@@ -1,4 +1,5 @@
 ---
+title: "RWKV"
 type: model-family
 organization: RWKV community
 first_release: 2021

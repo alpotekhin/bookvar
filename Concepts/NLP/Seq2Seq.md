@@ -2,6 +2,7 @@
 title: "Seq2Seq"
 aliases: [Seq2Seq, Sequence-to-Sequence, Encoder-Decoder]
 type: concept
+status: legacy
 category: NLP
 papers: []
 courses:

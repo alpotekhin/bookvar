@@ -2,6 +2,7 @@
 title: "Toolformer"
 aliases: [Toolformer, Tool Use, Self-Supervised Tool Use, API Augmented LM]
 type: concept
+status: legacy
 category: Reasoning
 papers:
   - "[[02 Areas/ML & DL/Papers/Toolformer|Toolformer]]"

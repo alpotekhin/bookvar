@@ -6,359 +6,143 @@
     },
     {
       "target": "02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN, LSTM и Seq2Seq",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/01 От Seq2Seq к Transformer",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/03 Полный Transformer",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/01 От SwiGLU к MoE",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/00 Учебник/10 Атлас современных архитектур/01 Llama, Qwen и DeepSeek как эволюция блока",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/00 Учебник/10 Атлас современных архитектур/02 Альтернативы Transformer и multimodality",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/01 SFT и instruction data",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/03 Reward modeling",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/05 DPO",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/01 KV-cache, batching и FlashAttention",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/00 Учебник/15 Embeddings, Retrieval и RAG/02 RAG как система",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/00 Учебник/17 Tools и Agents/01 Tool use и agents",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
-      "target": "02 Areas/ML & DL/01 Справочник/Attention/Cross-Attention",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
+      "target": "02 Areas/ML & DL/Concepts/Architectures/BERT",
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
-      "target": "02 Areas/ML & DL/01 Справочник/Attention/GQA",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/01 Справочник/Attention/MHA",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/01 Справочник/Attention/MLA",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/01 Справочник/Attention/MQA",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/01 Справочник/Attention/Self-Attention",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/01 Справочник/Evaluation/Evaluation",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/01 Справочник/FFN и MoE/Mixture of Experts",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/01 Справочник/FFN и MoE/SwiGLU",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/01 Справочник/Inference/FlashAttention",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/01 Справочник/Inference/KV-cache",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/01 Справочник/Post-training/DPO",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/01 Справочник/Post-training/GRPO",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/01 Справочник/Post-training/RLHF",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/01 Справочник/Post-training/RLVR",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/01 Справочник/Post-training/Reward Model",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/01 Справочник/Post-training/SFT",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/01 Справочник/Post-training/Verifiable Reward",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/01 Справочник/Retrieval/Embeddings",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/01 Справочник/Retrieval/RAG",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/01 Справочник/Retrieval/Retrieval",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/01 Справочник/Архитектурные паттерны/Decoder-only",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/01 Справочник/Архитектурные паттерны/Encoder-Decoder",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/01 Справочник/Архитектурные паттерны/Encoder-only",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/01 Справочник/Математика и DL/Нормализация",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/01 Справочник/Позиционные представления/RoPE",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/01 Справочник/Текст и токенизация/Токенизация",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/02 Атлас моделей/Timeline",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/02 Атлас моделей/Семейства/Baichuan",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/02 Атлас моделей/Семейства/Command R",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/02 Атлас моделей/Семейства/DBRX",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/02 Атлас моделей/Семейства/Falcon",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/02 Атлас моделей/Семейства/GLM",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/02 Атлас моделей/Семейства/Gemma",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/02 Атлас моделей/Семейства/InternLM",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/02 Атлас моделей/Семейства/Jamba",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/02 Атлас моделей/Семейства/Kimi",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/02 Атлас моделей/Семейства/Llama",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/02 Атлас моделей/Семейства/Mamba",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/02 Атлас моделей/Семейства/Mistral и Mixtral",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/02 Атлас моделей/Семейства/Nemotron",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/02 Атлас моделей/Семейства/Phi",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/02 Атлас моделей/Семейства/Qwen",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/02 Атлас моделей/Семейства/RWKV",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/02 Атлас моделей/Семейства/RetNet",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/02 Атлас моделей/Семейства/Yi",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/02 Атлас моделей/Сравнения/Карта архитектурных линий",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/02 Атлас моделей/Сравнения/Сравнение семейств",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/03 Исследовательские линии/Agentic learning",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/03 Исследовательские линии/Sparse и MoE-модели",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/03 Исследовательские линии/Эффективный attention",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/04 Вопросы/Вопросы по NLP",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/04 Вопросы/Вопросы по Retrieval и RAG",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/04 Вопросы/Вопросы по архитектурам",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/05 Источники/Community repositories",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/05 Источники/Registry",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/05 Источники/Авторы и сайты",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/05 Источники/Курсы",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/06 Практика/01 Собрать micrograd и bigram LM",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/06 Практика/03 Прочитать современный decoder в LitGPT",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/06 Практика/04 Проследить RLVR pipeline в Open-R1",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/06 Практика/05 Измерить KV-cache и quantization",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/Concepts/Architectures/Decoder-only",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/Concepts/Architectures/Flan-T5",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
+      "target": "02 Areas/ML & DL/Concepts/Architectures/GPT-3",
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/Concepts/Architectures/GQA",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
-      "target": "02 Areas/ML & DL/Concepts/Architectures/Kimi",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
+      "target": "02 Areas/ML & DL/Concepts/Architectures/Gemma",
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
+    },
+    {
+      "target": "02 Areas/ML & DL/Concepts/Architectures/Jamba",
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
+    },
+    {
+      "target": "02 Areas/ML & DL/Concepts/Architectures/LSTM",
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
+    },
+    {
+      "target": "02 Areas/ML & DL/Concepts/Architectures/Mamba",
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/Concepts/Architectures/Mistral 7B",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
+    },
+    {
+      "target": "02 Areas/ML & DL/Concepts/Architectures/Mixtral",
+      "reason": "target does not exist in the knowledge base"
     },
     {
       "target": "02 Areas/ML & DL/Concepts/Architectures/Mixtral of Experts",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
-      "target": "02 Areas/ML & DL/Concepts/Architectures/Qwen3",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
+      "target": "02 Areas/ML & DL/Concepts/Architectures/MoE",
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
+    },
+    {
+      "target": "02 Areas/ML & DL/Concepts/Architectures/RWKV",
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
+    },
+    {
+      "target": "02 Areas/ML & DL/Concepts/Architectures/RetNet",
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/Concepts/Architectures/RoPE",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
+    },
+    {
+      "target": "02 Areas/ML & DL/Concepts/Architectures/T5",
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
+    },
+    {
+      "target": "02 Areas/ML & DL/Concepts/Architectures/Transformer",
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/Concepts/Architectures/Transformer\\",
@@ -366,7 +150,7 @@
     },
     {
       "target": "02 Areas/ML & DL/Concepts/Inference/Chain of Thought",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/Concepts/Inference/Few-shot Learning",
@@ -374,23 +158,15 @@
     },
     {
       "target": "02 Areas/ML & DL/Concepts/Inference/Flash Attention",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/Concepts/Inference/In-context Learning",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/Concepts/Inference/KV-Cache",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
-    },
-    {
-      "target": "02 Areas/ML & DL/Concepts/Inference/Prompting",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/Concepts/Inference/Zero-shot Learning",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/Concepts/NLP/Activation Functions",
@@ -398,7 +174,7 @@
     },
     {
       "target": "02 Areas/ML & DL/Concepts/NLP/Attention Mechanism",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/Concepts/NLP/BLEU Score",
@@ -409,23 +185,63 @@
       "reason": "target does not exist in the knowledge base"
     },
     {
+      "target": "02 Areas/ML & DL/Concepts/NLP/Co-occurrence Matrix",
+      "reason": "target does not exist in the knowledge base"
+    },
+    {
+      "target": "02 Areas/ML & DL/Concepts/NLP/Distributional Semantics",
+      "reason": "target does not exist in the knowledge base"
+    },
+    {
+      "target": "02 Areas/ML & DL/Concepts/NLP/Embeddings",
+      "reason": "target does not exist in the knowledge base"
+    },
+    {
       "target": "02 Areas/ML & DL/Concepts/NLP/Emergent Abilities",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
+    },
+    {
+      "target": "02 Areas/ML & DL/Concepts/NLP/GPT",
+      "reason": "target does not exist in the knowledge base"
     },
     {
       "target": "02 Areas/ML & DL/Concepts/NLP/LLM-as-Judge",
       "reason": "target does not exist in the knowledge base"
     },
     {
-      "target": "02 Areas/ML & DL/Concepts/NLP/Language Model",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
+      "target": "02 Areas/ML & DL/Concepts/NLP/Layer Normalization",
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
-      "target": "02 Areas/ML & DL/Concepts/NLP/Neural Network",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
+      "target": "02 Areas/ML & DL/Concepts/NLP/Multi-Head Attention",
+      "reason": "target does not exist in the knowledge base"
+    },
+    {
+      "target": "02 Areas/ML & DL/Concepts/NLP/Negative Sampling",
+      "reason": "target does not exist in the knowledge base"
+    },
+    {
+      "target": "02 Areas/ML & DL/Concepts/NLP/Positional Encoding",
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/Concepts/NLP/Question Answering",
+      "reason": "target does not exist in the knowledge base"
+    },
+    {
+      "target": "02 Areas/ML & DL/Concepts/NLP/RNN",
+      "reason": "target does not exist in the knowledge base"
+    },
+    {
+      "target": "02 Areas/ML & DL/Concepts/NLP/RNN/Bidirectional RNN",
+      "reason": "target does not exist in the knowledge base"
+    },
+    {
+      "target": "02 Areas/ML & DL/Concepts/NLP/SVD",
+      "reason": "target does not exist in the knowledge base"
+    },
+    {
+      "target": "02 Areas/ML & DL/Concepts/NLP/Subword Tokenization",
       "reason": "target does not exist in the knowledge base"
     },
     {
@@ -434,35 +250,51 @@
     },
     {
       "target": "02 Areas/ML & DL/Concepts/NLP/Tokenization",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
+    },
+    {
+      "target": "02 Areas/ML & DL/Concepts/NLP/Transfer Learning",
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
+    },
+    {
+      "target": "02 Areas/ML & DL/Concepts/NLP/Transformers",
+      "reason": "target does not exist in the knowledge base"
+    },
+    {
+      "target": "02 Areas/ML & DL/Concepts/NLP/Word Embeddings",
+      "reason": "target does not exist in the knowledge base"
+    },
+    {
+      "target": "02 Areas/ML & DL/Concepts/NLP/Word Senses",
+      "reason": "target does not exist in the knowledge base"
+    },
+    {
+      "target": "02 Areas/ML & DL/Concepts/NLP/WordNet",
+      "reason": "target does not exist in the knowledge base"
     },
     {
       "target": "02 Areas/ML & DL/Concepts/Reasoning/ReAct",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
-      "target": "02 Areas/ML & DL/Concepts/Reasoning/Toolformer",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
+      "target": "02 Areas/ML & DL/Concepts/Reasoning/ReAct\\",
+      "reason": "target does not exist in the knowledge base"
     },
     {
       "target": "02 Areas/ML & DL/Concepts/Reasoning/Tree of Thoughts",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/Concepts/Retrieval/ColBERT",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
-    },
-    {
-      "target": "02 Areas/ML & DL/Concepts/Retrieval/Dense Retrieval",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/Concepts/Retrieval/Retrieval-Augmented Generation",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
-      "target": "02 Areas/ML & DL/Concepts/Training/Backpropagation",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
+      "target": "02 Areas/ML & DL/Concepts/Retrieval/Self-RAG",
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/Concepts/Training/Chain Rule",
@@ -470,19 +302,15 @@
     },
     {
       "target": "02 Areas/ML & DL/Concepts/Training/DPO",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/Concepts/Training/Fine-tuning",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/Concepts/Training/GRPO",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
-    },
-    {
-      "target": "02 Areas/ML & DL/Concepts/Training/Gradient Clipping",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/Concepts/Training/Jacobian",
@@ -490,67 +318,63 @@
     },
     {
       "target": "02 Areas/ML & DL/Concepts/Training/LoRA",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
-    },
-    {
-      "target": "02 Areas/ML & DL/Concepts/Training/Masked Language Modeling",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/Concepts/Training/Multi-head Latent Attention",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/Concepts/Training/PEFT",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/Concepts/Training/PPO",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/Concepts/Training/Pre-training",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/Concepts/Training/RLHF",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/Concepts/Training/Reward Model",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/Concepts/Training/Scaling Laws",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
-      "target": "02 Areas/ML & DL/Concepts/Training/Synthetic Data",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
+      "target": "02 Areas/ML & DL/Courses/Lena Voita NLP/_index\\",
+      "reason": "target does not exist in the knowledge base"
     },
     {
-      "target": "02 Areas/ML & DL/Concepts/Training/nanoGPT",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
+      "target": "02 Areas/ML & DL/Courses/MIPT NLP/_index\\",
+      "reason": "target does not exist in the knowledge base"
     },
     {
-      "target": "02 Areas/ML & DL/Concepts/_index",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
+      "target": "02 Areas/ML & DL/Courses/MIT 6.S191/_index\\",
+      "reason": "target does not exist in the knowledge base"
     },
     {
-      "target": "02 Areas/ML & DL/MOC",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
+      "target": "02 Areas/ML & DL/Courses/SHAD LLM/_index\\",
+      "reason": "target does not exist in the knowledge base"
+    },
+    {
+      "target": "02 Areas/ML & DL/Courses/Stanford CS224N/_index\\",
+      "reason": "target does not exist in the knowledge base"
+    },
+    {
+      "target": "02 Areas/ML & DL/Courses/Stanford CS336/_index\\",
+      "reason": "target does not exist in the knowledge base"
+    },
+    {
+      "target": "02 Areas/ML & DL/Courses/Ранжирование\\",
+      "reason": "target does not exist in the knowledge base"
     },
     {
       "target": "02 Areas/ML & DL/Papers/ASTRA",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
-    },
-    {
-      "target": "02 Areas/ML & DL/Papers/COT",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/Papers/ColBERT",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/Papers/DDTree",
@@ -558,135 +382,111 @@
     },
     {
       "target": "02 Areas/ML & DL/Papers/DPO",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/Papers/DeepSeek-R1 Reasoning via RL",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/Papers/DeepSeek-V3 Technical Report",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
-    },
-    {
-      "target": "02 Areas/ML & DL/Papers/Flan-T5-PaLM",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/Papers/Formal Algorithms for Transformers",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/Papers/GPT 2.0",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/Papers/GPT 3.0",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/Papers/Gemini",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/Papers/Gemma",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
-      "target": "02 Areas/ML & DL/Papers/InstructGPT",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/Papers/Karpathy — Recipe for Training Neural Networks",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/Papers/LLaMA",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/Papers/LLaMA 2",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/Papers/Nemotron-Research-Tool-N1",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/Papers/Phi-2",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/Papers/QLoRA",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/Papers/Self-Consistency",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/Papers/Speculative Decoding",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
+      "target": "02 Areas/ML & DL/Papers/Self-RAG",
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "02 Areas/ML & DL/Papers/ToolRL",
-      "reason": "page embeds ignored raw assets; publish after asset curation"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
-      "target": "02 Areas/ML & DL/Papers/Tree of Thoughts",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
-    },
-    {
-      "target": "02 Areas/ML & DL/Papers/XGrammar",
-      "reason": "secondary authored page outside the direct ten-page publication closure"
+      "target": "Attention Mechanism",
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "Constitutional AI",
-      "reason": "legacy shorthand target has no unambiguous full-path mapping"
+      "reason": "ambiguous legacy shorthand has multiple authored targets"
     },
     {
-      "target": "DPO",
-      "reason": "legacy shorthand target has no unambiguous full-path mapping"
+      "target": "Cross-Attention",
+      "reason": "ambiguous legacy shorthand has multiple authored targets"
     },
     {
-      "target": "GRPO",
-      "reason": "legacy shorthand target has no unambiguous full-path mapping"
+      "target": "GRU",
+      "reason": "legacy shorthand has no unambiguous authored target"
     },
     {
-      "target": "Gradient Clipping",
-      "reason": "legacy shorthand target has no unambiguous full-path mapping"
+      "target": "LSTM",
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
+    },
+    {
+      "target": "Layer Normalization",
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "LoRA",
-      "reason": "legacy shorthand target has no unambiguous full-path mapping"
+      "reason": "ambiguous legacy shorthand has multiple authored targets"
     },
     {
       "target": "MoE",
-      "reason": "legacy shorthand target has no unambiguous full-path mapping"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "PEFT",
-      "reason": "legacy shorthand target has no unambiguous full-path mapping"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "PPO",
-      "reason": "legacy shorthand target has no unambiguous full-path mapping"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
+    },
+    {
+      "target": "Papers/DPO",
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
+    },
+    {
+      "target": "Papers/Gemma",
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
+    },
+    {
+      "target": "Papers/LoRA",
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
+    },
+    {
+      "target": "Papers/Self-RAG",
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
       "target": "Pre-training",
-      "reason": "legacy shorthand target has no unambiguous full-path mapping"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
     },
     {
-      "target": "RLHF",
-      "reason": "legacy shorthand target has no unambiguous full-path mapping"
+      "target": "RLVR",
+      "reason": "ambiguous legacy shorthand has multiple authored targets"
     },
     {
-      "target": "Reward Model",
-      "reason": "legacy shorthand target has no unambiguous full-path mapping"
+      "target": "RNN",
+      "reason": "ambiguous legacy shorthand has multiple authored targets"
+    },
+    {
+      "target": "ResNet",
+      "reason": "legacy shorthand has no unambiguous authored target"
+    },
+    {
+      "target": "SFT",
+      "reason": "ambiguous legacy shorthand has multiple authored targets"
     },
     {
       "target": "Scaling Laws",
-      "reason": "legacy shorthand target has no unambiguous full-path mapping"
+      "reason": "authored page depends on ignored raw assets; publish after asset curation"
+    },
+    {
+      "target": "t_z ≤ t_x",
+      "reason": "legacy shorthand has no unambiguous authored target"
     }
   ]
 }

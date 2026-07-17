@@ -4,7 +4,8 @@ url: https://arxiv.org/abs/2307.08691
 authors: [Tri Dao]
 year: 2023
 date_reviewed: 2026-04-07
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 tags:
   - attention

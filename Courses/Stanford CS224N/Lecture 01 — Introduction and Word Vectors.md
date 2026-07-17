@@ -2,7 +2,8 @@
 title: "CS224N — Lecture 1: Introduction and Word Vectors"
 course: "Stanford CS224N"
 lecture: 1
-type: course-note
+type: source-note
+status: legacy
 raw: "[[02 Areas/ML & DL/raw/courses/Stanford CS224N/slides/cs224n-spr2024-lecture01-wordvecs1]]"
 concepts: ["[[02 Areas/ML & DL/Concepts/NLP/Word Embeddings|Word Embeddings]]", "[[02 Areas/ML & DL/Concepts/NLP/Word2Vec|Word2Vec]]", "[[02 Areas/ML & DL/Concepts/NLP/Distributional Semantics|Distributional Semantics]]"]
 ---

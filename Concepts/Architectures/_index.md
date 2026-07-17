@@ -1,6 +1,7 @@
 ---
 title: "Architectures"
-type: index
+type: concept
+status: legacy
 category: architectures
 ---
 

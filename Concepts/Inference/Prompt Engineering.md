@@ -2,6 +2,7 @@
 title: "Prompt Engineering"
 aliases: [prompt design, prompt optimization, промпт-инжиниринг]
 type: concept
+status: legacy
 category: Inference
 papers:
   - "[[02 Areas/ML & DL/Papers/Pre-train, Prompt, and Predict- A Systematic Survey of Prompting Methods in Natural Language Processing]]"

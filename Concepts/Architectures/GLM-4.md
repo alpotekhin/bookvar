@@ -2,6 +2,7 @@
 title: "GLM-4"
 aliases: [GLM-4, ChatGLM, ChatGLM-4, GLM, GLM-4-9B]
 type: concept
+status: legacy
 category: Architectures
 papers:
   - "[[02 Areas/ML & DL/Papers/GLM-4|GLM-4]]"

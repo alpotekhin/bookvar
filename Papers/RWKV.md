@@ -4,7 +4,8 @@ url: https://arxiv.org/abs/2305.13048
 authors: "Bo Peng, Eric Alcaide, Quentin Anthony et al."
 year: 2023
 date_reviewed: 2026-04-07
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 raw: "[[02 Areas/ML & DL/raw/papers/rwkv/source]]"
 concepts:
@@ -94,4 +95,3 @@ RWKV занимает второе место после S4 на LRA benchmark.
 - Повышенная чувствительность к prompt engineering: порядок информации в промпте критичен (F1 от 44.2% до 74.8% при переупорядочении).
 
 ## My notes
-

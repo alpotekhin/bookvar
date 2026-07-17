@@ -2,6 +2,7 @@
 title: "Vanishing Gradient"
 aliases: [Vanishing Gradient, Исчезающие градиенты, Исчезновение градиента]
 type: concept
+status: legacy
 category: Training
 papers: []
 courses: []

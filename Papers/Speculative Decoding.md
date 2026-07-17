@@ -4,7 +4,8 @@ url: https://arxiv.org/abs/2211.17192
 authors: [Yaniv Leviathan, Matan Kalman, Yossi Matias]
 year: 2022
 date_reviewed: 2026-04-07
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 tags:
   - inference

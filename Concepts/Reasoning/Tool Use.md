@@ -2,6 +2,7 @@
 title: "Tool Use"
 aliases: [Tool Use, Tool Calling, Function Calling, использование инструментов]
 type: concept
+status: legacy
 category: Reasoning
 papers:
   - "[[02 Areas/ML & DL/Papers/Toolformer|Toolformer]]"

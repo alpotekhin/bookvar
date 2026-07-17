@@ -4,7 +4,8 @@ url: https://arxiv.org/abs/2411.15100
 authors: [Anonymous (MLSys under review)]
 year: 2024
 date_reviewed: 2026-04-10
-type: paper-review
+type: source-note
+status: legacy
 category: paper
 tags:
   - structured-generation
