@@ -585,13 +585,13 @@ assets:
     metadata_status: needs-confirmation
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/flash-attention/images/fig1-tiling.jpg
-  - id: curated-gemma-2-d395511e5e87
-    asset: 00 Учебник/Assets/Figures/curated/gemma-2/figure1-memorization.png
+  - id: curated-gemma-2-8b113482aee1
+    asset: 00 Учебник/Assets/Figures/curated/gemma-2/figure1-memorization-tight.png
     author: Gemma Team, Google DeepMind
     source_url: https://arxiv.org/abs/2408.00118
     license: null
     license_url: null
-    modifications: rendered at 300 DPI and cropped from page 9 of the local source PDF
+    modifications: rendered at 300 DPI and tightly cropped to Figure 1 on page 9 of the local source PDF
     used_in:
       - Papers/Gemma 2.md
     metadata_status: needs-confirmation
