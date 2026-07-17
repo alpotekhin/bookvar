@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import type { RouteRegistry } from '../adapter/types.js';
 import { convertWikiSyntax } from '../adapter/links.js';
 
@@ -16,6 +16,7 @@ describe('convertWikiSyntax', () => {
       '[[Path/Page#Раздел]]',
       '![[Assets/Figures/attention.svg]]'
     ].join('\n');
+    const originalSource = source;
 
     expect(convertWikiSyntax(source, registry)).toEqual({
       markdown: [
@@ -26,13 +27,35 @@ describe('convertWikiSyntax', () => {
       ].join('\n'),
       unresolved: []
     });
-    expect(source).toContain('[[Path/Page]]');
+    expect(source).toBe(originalSource);
+  });
+
+  it('lowercases non-ASCII headings without locale-sensitive conversion', () => {
+    const localeLowercase = vi
+      .spyOn(String.prototype, 'toLocaleLowerCase')
+      .mockImplementation(() => {
+        throw new Error('locale-sensitive conversion used');
+      });
+
+    try {
+      expect(convertWikiSyntax('[[Path/Page#ЁЖ]]', registry).markdown)
+        .toBe('[Page](/resolved-route/#ёж)');
+    } finally {
+      localeLowercase.mockRestore();
+    }
   });
 
   it('keeps an unresolved embed visible as plain text and reports its target', () => {
     expect(convertWikiSyntax('![[Missing Page]]', registry)).toEqual({
       markdown: 'Missing Page',
       unresolved: ['Missing Page']
+    });
+  });
+
+  it('does not treat a non-allowlisted extension as an image', () => {
+    expect(convertWikiSyntax('![[Assets/Figures/attention.svgx]]', registry)).toEqual({
+      markdown: 'attention.svgx',
+      unresolved: ['Assets/Figures/attention.svgx']
     });
   });
 });
