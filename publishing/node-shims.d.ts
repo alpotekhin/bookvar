@@ -4,6 +4,8 @@ declare module 'node:fs' {
   export function mkdtempSync(prefix: string): string;
   export function readFileSync(path: string): Uint8Array;
   export function readFileSync(path: string, encoding: 'utf8'): string;
+  export function realpathSync(path: string): string;
+  export function symlinkSync(target: string, path: string): void;
   export function writeFileSync(path: string, data: string): void;
 }
 

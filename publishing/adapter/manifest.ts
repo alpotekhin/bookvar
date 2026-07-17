@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync, realpathSync } from 'node:fs';
 import { dirname, isAbsolute, relative, resolve, sep } from 'node:path';
 import { parse } from 'yaml';
 
@@ -32,6 +32,11 @@ function resolveContained(root: string, path: string): string {
     throw new Error(`Source path escapes publication root: ${path}`);
   }
   return absolute;
+}
+
+function isInside(root: string, candidate: string): boolean {
+  const offset = relative(root, candidate);
+  return offset === '' || (!isAbsolute(offset) && offset !== '..' && !offset.startsWith(`..${sep}`));
 }
 
 function record(value: unknown, label: string): Record<string, unknown> {
@@ -89,15 +94,20 @@ export function loadManifest(path: string): PublicationManifest {
       const source = text(page.source, `${label}.source`);
       const route = text(page.route, `${label}.route`);
 
-      if (source === 'raw' || source.startsWith('raw/')) {
+      const normalizedSource = source.replaceAll('\\', '/');
+      const sourcePath = resolveContained(root, normalizedSource);
+      const rawRoot = resolve(root, 'raw');
+      if (isInside(rawRoot, sourcePath)) {
         throw new Error(`Manifest source must not reference ignored raw content: ${source}`);
       }
       if (route.startsWith('/')) throw new Error(`Route must not begin with /: ${route}`);
       if (!ASCII_ROUTE.test(route)) throw new Error(`Route must be stable lowercase ASCII: ${route}`);
       if (routes.has(route)) throw new Error(`Duplicate route: ${route}`);
       if (sources.has(source)) throw new Error(`Duplicate source: ${source}`);
-      const sourcePath = resolveContained(root, source);
       if (!existsSync(sourcePath)) throw new Error(`Missing source: ${source}`);
+      if (existsSync(rawRoot) && isInside(realpathSync(rawRoot), realpathSync(sourcePath))) {
+        throw new Error(`Manifest source must not reference ignored raw content: ${source}`);
+      }
 
       routes.add(route);
       sources.add(source);

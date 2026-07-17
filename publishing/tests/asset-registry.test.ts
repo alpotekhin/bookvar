@@ -1,4 +1,4 @@
-import { readFileSync, readdirSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { parse } from 'yaml';
 import { describe, expect, it } from 'vitest';
@@ -21,13 +21,40 @@ describe('publication asset registry', () => {
     expect(paths.toSorted()).toEqual(files);
     expect(paths).toContain('00 Учебник/Assets/Figures/attention/transformer_self_attention_vectors.png');
     for (const asset of registry.assets) {
-      expect(asset).toHaveProperty('author');
-      expect(asset).toHaveProperty('source_url');
-      expect(asset).toHaveProperty('license');
-      expect(asset).toHaveProperty('license_url');
-      expect(asset).toHaveProperty('modifications');
-      expect(asset).toHaveProperty('used_in');
-      expect(asset).toHaveProperty('metadata_status');
+      expect(typeof asset.asset).toBe('string');
+      expect(asset.author === null || typeof asset.author === 'string').toBe(true);
+      expect(asset.source_url === null || typeof asset.source_url === 'string').toBe(true);
+      expect(asset.license === null || typeof asset.license === 'string').toBe(true);
+      expect(asset.license_url === null || typeof asset.license_url === 'string').toBe(true);
+      expect(typeof asset.modifications).toBe('string');
+      expect(['verified', 'needs-confirmation']).toContain(asset.metadata_status);
+      expect(Array.isArray(asset.used_in)).toBe(true);
+      for (const usage of asset.used_in as unknown[]) {
+        expect(typeof usage).toBe('string');
+        expect(existsSync(resolve(root, usage as string)), `Missing used_in note: ${String(usage)}`).toBe(true);
+      }
+
+      if (asset.metadata_status === 'verified') {
+        expect(typeof asset.author).toBe('string');
+        expect(typeof asset.source_url).toBe('string');
+        expect(typeof asset.license).toBe('string');
+        expect(typeof asset.license_url).toBe('string');
+      }
     }
+
+    const attention = registry.assets.find((asset) =>
+      asset.asset === '00 Учебник/Assets/Figures/attention/transformer_self_attention_vectors.png'
+    );
+    expect(attention?.used_in).toEqual([
+      '00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V.md'
+    ]);
+
+    const deepseekR1 = registry.assets.find((asset) =>
+      asset.asset === '00 Учебник/Assets/Figures/deepseek-r1-figure1-hq.png'
+    );
+    expect(deepseekR1?.used_in).toEqual([
+      '00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md',
+      '00 Учебник/10 Атлас современных архитектур/01 Llama, Qwen и DeepSeek как эволюция блока.md'
+    ]);
   });
 });

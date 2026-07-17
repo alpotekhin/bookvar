@@ -1,4 +1,4 @@
-import { mkdirSync, mkdtempSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, symlinkSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
@@ -73,6 +73,43 @@ describe('loadManifest', () => {
     ]);
 
     expect(() => loadManifest(path)).toThrow(/Manifest source must not reference ignored raw content.*raw\/papers/);
+  });
+
+  it.each([
+    './raw/papers/example.md',
+    'raw/../raw/papers/example.md',
+    'notes/../raw/papers/example.md',
+    '.\\raw\\papers\\example.md'
+  ])('rejects normalized raw source variant: %s', (source) => {
+    const yaml = validYaml.replace('00 Учебник/_index.md', source);
+    const path = fixture(yaml, [
+      'raw/papers/example.md',
+      '06 Практика/lab.md'
+    ]);
+
+    expect(() => loadManifest(path)).toThrow(/Manifest source must not reference ignored raw content/);
+  });
+
+  it('rejects a source symlink that resolves under the raw tree', () => {
+    const path = fixture(validYaml, [
+      'raw/papers/example.md',
+      '06 Практика/lab.md'
+    ]);
+    const root = join(path, '..', '..');
+    mkdirSync(join(root, '00 Учебник'), { recursive: true });
+    symlinkSync(join(root, 'raw/papers/example.md'), join(root, '00 Учебник/_index.md'));
+
+    expect(() => loadManifest(path)).toThrow(/Manifest source must not reference ignored raw content/);
+  });
+
+  it('does not confuse an ordinary draw directory with raw', () => {
+    const yaml = validYaml.replace('00 Учебник/_index.md', 'draw/example.md');
+    const manifest = loadManifest(fixture(yaml, [
+      'draw/example.md',
+      '06 Практика/lab.md'
+    ]));
+
+    expect(manifest.sections[0]?.pages[0]?.source).toBe('draw/example.md');
   });
 
   it('rejects duplicate routes', () => {

@@ -10,7 +10,8 @@ assets:
     license: CC BY-NC-SA 4.0
     license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
     modifications: copied without modification; path changed for tracked publication packaging
-    used_in: [00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V.md]
+    used_in:
+      - 00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V.md
     metadata_status: verified
   - asset: 00 Учебник/Assets/Figures/attention/self-attention-matrix-calculation-2.png
     author: Jay Alammar
@@ -18,7 +19,8 @@ assets:
     license: CC BY-NC-SA 4.0
     license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
     modifications: copied without modification; path changed for tracked publication packaging
-    used_in: [00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V.md]
+    used_in:
+      - 00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V.md
     metadata_status: verified
   - asset: 00 Учебник/Assets/Figures/attention/transformer_multi-headed_self-attention-recap.png
     author: Jay Alammar
@@ -26,7 +28,8 @@ assets:
     license: CC BY-NC-SA 4.0
     license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
     modifications: copied without modification; path changed for tracked publication packaging
-    used_in: [00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V.md]
+    used_in:
+      - 00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V.md
     metadata_status: verified
 
   - &colbert
@@ -36,7 +39,8 @@ assets:
     license: null
     license_url: null
     modifications: figure crop or extraction; exact process requires confirmation
-    used_in: [00 Учебник/15 Embeddings, Retrieval и RAG/01 Embeddings и retrieval.md]
+    used_in:
+      - 00 Учебник/15 Embeddings, Retrieval и RAG/01 Embeddings и retrieval.md
     metadata_status: needs-confirmation
   - <<: *colbert
     asset: 00 Учебник/Assets/Figures/colbert-page1.png
@@ -54,7 +58,9 @@ assets:
     license: null
     license_url: null
     modifications: figure crop or extraction; exact process requires confirmation
-    used_in: [00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md, 00 Учебник/10 Атлас современных архитектур/01 Llama, Qwen и DeepSeek как эволюция блока.md]
+    used_in:
+      - 00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md
+      - 00 Учебник/10 Атлас современных архитектур/01 Llama, Qwen и DeepSeek как эволюция блока.md
     metadata_status: needs-confirmation
   - <<: *deepseek_r1
     asset: 00 Учебник/Assets/Figures/deepseek-r1-page4.png
@@ -80,7 +86,8 @@ assets:
     license: null
     license_url: null
     modifications: figure crop or extraction; exact process requires confirmation
-    used_in: [00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md]
+    used_in:
+      - 00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md
     metadata_status: needs-confirmation
   - <<: *deepseek_v2
     asset: 00 Учебник/Assets/Figures/deepseek-v2-page5.png
@@ -98,7 +105,8 @@ assets:
     metadata_status: needs-confirmation
   - <<: *deepseek_v3
     asset: 00 Учебник/Assets/Figures/deepseek-v3-figure2-architecture-hq.png
-    used_in: [00 Учебник/10 Атлас современных архитектур/01 Llama, Qwen и DeepSeek как эволюция блока.md]
+    used_in:
+      - 00 Учебник/10 Атлас современных архитектур/01 Llama, Qwen и DeepSeek как эволюция блока.md
   - <<: *deepseek_v3
     asset: 00 Учебник/Assets/Figures/deepseek-v3-page1.png
     modifications: paper page rasterization; exact process requires confirmation
@@ -113,7 +121,8 @@ assets:
     license: null
     license_url: null
     modifications: figure crop or extraction; exact process requires confirmation
-    used_in: [00 Учебник/10 Атлас современных архитектур/01 Llama, Qwen и DeepSeek как эволюция блока.md]
+    used_in:
+      - 00 Учебник/10 Атлас современных архитектур/01 Llama, Qwen и DeepSeek как эволюция блока.md
     metadata_status: needs-confirmation
   - <<: *glm4
     asset: 00 Учебник/Assets/Figures/glm4-page2.png
@@ -127,7 +136,8 @@ assets:
     license: null
     license_url: null
     modifications: figure crop or extraction; exact process requires confirmation
-    used_in: [00 Учебник/10 Атлас современных архитектур/02 Альтернативы Transformer и multimodality.md]
+    used_in:
+      - 00 Учебник/10 Атлас современных архитектур/02 Альтернативы Transformer и multimodality.md
     metadata_status: needs-confirmation
   - <<: *jamba
     asset: 00 Учебник/Assets/Figures/jamba-page3.png
@@ -140,7 +150,8 @@ assets:
     license: null
     license_url: null
     modifications: repository-authored SVG; authorship and repository license require confirmation
-    used_in: [00 Учебник/14 Inference и оптимизация/01 KV-cache, batching и FlashAttention.md]
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/01 KV-cache, batching и FlashAttention.md
     metadata_status: needs-confirmation
 
   - &instructgpt
@@ -156,7 +167,8 @@ assets:
     asset: 00 Учебник/Assets/Figures/post-training/instructgpt-labeling-ui-001.png
   - <<: *instructgpt
     asset: 00 Учебник/Assets/Figures/post-training/instructgpt-labeling-ui-002.png
-    used_in: [00 Учебник/12 Post-training и Alignment/02 Preference data.md]
+    used_in:
+      - 00 Учебник/12 Post-training и Alignment/02 Preference data.md
   - <<: *instructgpt
     asset: 00 Учебник/Assets/Figures/post-training/instructgpt-labeling-ui-003.png
 
@@ -167,7 +179,8 @@ assets:
     license: null
     license_url: null
     modifications: figure crop or extraction; exact source and process require confirmation
-    used_in: [00 Учебник/10 Атлас современных архитектур/01 Llama, Qwen и DeepSeek как эволюция блока.md]
+    used_in:
+      - 00 Учебник/10 Атлас современных архитектур/01 Llama, Qwen и DeepSeek как эволюция блока.md
     metadata_status: needs-confirmation
   - <<: *qwen25
     asset: 00 Учебник/Assets/Figures/qwen25-page1.png
@@ -181,7 +194,8 @@ assets:
     license: null
     license_url: null
     modifications: figure crop or extraction; exact process requires confirmation
-    used_in: [00 Учебник/10 Атлас современных архитектур/02 Альтернативы Transformer и multimodality.md]
+    used_in:
+      - 00 Учебник/10 Атлас современных архитектур/02 Альтернативы Transformer и multimodality.md
     metadata_status: needs-confirmation
   - <<: *retnet
     asset: 00 Учебник/Assets/Figures/retnet-page4.png
@@ -194,7 +208,8 @@ assets:
     license: null
     license_url: null
     modifications: repository-authored SVG; authorship and repository license require confirmation
-    used_in: [00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md]
+    used_in:
+      - 00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md
     metadata_status: needs-confirmation
 
   - &rwkv
@@ -204,7 +219,8 @@ assets:
     license: null
     license_url: null
     modifications: figure crop or extraction; exact process requires confirmation
-    used_in: [00 Учебник/10 Атлас современных архитектур/02 Альтернативы Transformer и multimodality.md]
+    used_in:
+      - 00 Учебник/10 Атлас современных архитектур/02 Альтернативы Transformer и multimodality.md
     metadata_status: needs-confirmation
   - <<: *rwkv
     asset: 00 Учебник/Assets/Figures/rwkv-page4.png
@@ -218,7 +234,8 @@ assets:
     license: null
     license_url: null
     modifications: figure crop or extraction; exact source and process require confirmation
-    used_in: [00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md]
+    used_in:
+      - 00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md
     metadata_status: needs-confirmation
   - <<: *tot
     asset: 00 Учебник/Assets/Figures/tot-page2.png
