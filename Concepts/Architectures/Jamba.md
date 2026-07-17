@@ -39,7 +39,7 @@ sources:
 
 Jamba использует **блочную структуру**, где каждый блок содержит несколько слоёв:
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/jamba/jamba-architecture.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/jamba-figure1-hq.png]]
 *Jamba block architecture: (a) один блок с чередованием Mamba и Attention слоёв (ratio 1:7), MoE каждые 2 слоя; (b) типы слоёв — Transformer, Mamba, Attention+MoE (источник: AI21 Labs, 2024)*
 
 **Ratio 1:7:** на каждые 7 слоёв Mamba приходится 1 слой Transformer attention. Это не случайное число — AI21 экспериментально определили, что минимальное количество attention-слоёв достаточно для сохранения recall capability, при этом основная вычислительная нагрузка приходится на эффективные Mamba-слои.

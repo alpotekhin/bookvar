@@ -1,6 +1,6 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { createHash } from 'node:crypto';
-import { resolve } from 'node:path';
+import { extname, resolve } from 'node:path';
 import { parse } from 'yaml';
 import { describe, expect, it } from 'vitest';
 
@@ -10,7 +10,43 @@ function sha256(path: string): string {
   return createHash('sha256').update(readFileSync(path)).digest('hex');
 }
 
+function expectDecodableImage(path: string): void {
+  const bytes = readFileSync(path);
+  const extension = extname(path).toLowerCase();
+  const prefix = Buffer.from(bytes.subarray(0, 32)).toString('utf8').trimStart().toLowerCase();
+  expect(prefix, `${path} contains HTML instead of image data`).not.toMatch(/^<!doctype html|^<html/);
+
+  if (extension === '.png') {
+    expect([...bytes.subarray(0, 8)], `${path} has an invalid PNG signature`).toEqual([137, 80, 78, 71, 13, 10, 26, 10]);
+    expect(Buffer.from(bytes).includes(Buffer.from('IEND')), `${path} has no PNG IEND chunk`).toBe(true);
+  } else if (extension === '.jpg' || extension === '.jpeg') {
+    expect([...bytes.subarray(0, 3)], `${path} has an invalid JPEG signature`).toEqual([255, 216, 255]);
+    expect([...bytes.subarray(-2)], `${path} has no JPEG end marker`).toEqual([255, 217]);
+  } else if (extension === '.gif') {
+    expect(Buffer.from(bytes.subarray(0, 6)).toString('ascii'), `${path} has an invalid GIF signature`).toMatch(/^GIF8[79]a$/);
+    expect(bytes.at(-1), `${path} has no GIF trailer`).toBe(0x3b);
+  } else if (extension === '.webp') {
+    expect(Buffer.from(bytes.subarray(0, 4)).toString('ascii'), `${path} has an invalid RIFF signature`).toBe('RIFF');
+    expect(Buffer.from(bytes.subarray(8, 12)).toString('ascii'), `${path} has an invalid WebP signature`).toBe('WEBP');
+  } else if (extension === '.svg') {
+    const text = readFileSync(path, 'utf8').replace(/^\uFEFF/, '').trimStart();
+    expect(text, `${path} has no SVG root`).toMatch(/^(?:<\?xml[^>]*>\s*)?(?:<!--[^]*?-->\s*)*<svg[\s>]/i);
+    expect(text, `${path} contains HTML instead of SVG`).not.toMatch(/<!doctype html|<html[\s>]/i);
+  } else {
+    throw new Error(`Unsupported tracked figure extension: ${path}`);
+  }
+}
+
 describe('publication asset registry', () => {
+  it('stores decodable image data matching every tracked figure extension', () => {
+    const figuresRoot = resolve(root, '00 Учебник/Assets/Figures');
+    const files = readdirSync(figuresRoot, { recursive: true, withFileTypes: true })
+      .filter((entry) => entry.isFile())
+      .map((entry) => `${entry.parentPath}/${entry.name}`);
+
+    for (const file of files) expectDecodableImage(file);
+  });
+
   it('records every tracked textbook figure with reviewable rights metadata', () => {
     const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8'), { merge: true }) as {
       assets: Array<Record<string, unknown>>;
@@ -60,8 +96,9 @@ describe('publication asset registry', () => {
       asset.asset === '00 Учебник/Assets/Figures/deepseek-r1-figure1-hq.png'
     );
     expect(deepseekR1?.used_in).toEqual([
+      '00 Учебник/10 Атлас современных архитектур/01 Llama, Qwen и DeepSeek как эволюция блока.md',
       '00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md',
-      '00 Учебник/10 Атлас современных архитектур/01 Llama, Qwen и DeepSeek как эволюция блока.md'
+      'Papers/DeepSeek-R1 Reasoning via RL.md'
     ]);
   });
 
@@ -122,6 +159,7 @@ describe('publication asset registry', () => {
       assets: Array<{
         id?: string;
         asset: string;
+        derivation?: string;
         provenance_confirmation?: string;
         source_asset?: string;
       }>;
@@ -148,9 +186,14 @@ describe('publication asset registry', () => {
       expect(entry.id).toMatch(/^curated-[a-z0-9-]+-[a-f0-9]{12}$/);
       expect(entry.provenance_confirmation).toBe('user-confirmed-open-materials');
       expect(entry.source_asset).toMatch(/^raw\/papers\//);
-      expect(sha256(resolve(root, entry.asset))).toBe(
-        sha256(resolve(root, entry.source_asset as string))
-      );
+      if (entry.derivation === 'pdf-page-render-crop') {
+        expect(entry.source_asset).toMatch(/\.pdf$/);
+        expect(existsSync(resolve(root, entry.source_asset as string))).toBe(true);
+      } else {
+        expect(sha256(resolve(root, entry.asset))).toBe(
+          sha256(resolve(root, entry.source_asset as string))
+        );
+      }
     }
   });
 });

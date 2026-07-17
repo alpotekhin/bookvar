@@ -55,7 +55,7 @@ Qwen2 имел ограничения: короткая генерация (2K �
 - 4096→32K during pre-training, YARN + Dual Chunk Attention для 4x inference extension
 - Qwen2.5-Turbo: progressive extension 32K→256K, inference до 1M tokens
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/qwen-25/fig1.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/qwen25-figure1-hq.png]]
 
 ## Key Results
 
