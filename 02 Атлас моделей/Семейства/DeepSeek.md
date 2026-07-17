@@ -1,4 +1,5 @@
 ---
+title: DeepSeek
 type: model-family
 organization: DeepSeek AI
 first_release: 2023
