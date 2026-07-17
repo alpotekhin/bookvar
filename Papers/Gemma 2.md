@@ -46,7 +46,7 @@ Small-scale модели улучшаются в основном за счёт 
 | Qwen1.5 32B | 74.3 | 61.1 | 63.6 | 85.0 |
 | LLaMA-3 70B | 79.2 | 76.9 | 68.8 | 88.0 |
 
-![[02 Areas/ML & DL/raw/papers/gemma-2/images/fig1.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gemma-2/fig1.png]]
 
 ## Key Results
 

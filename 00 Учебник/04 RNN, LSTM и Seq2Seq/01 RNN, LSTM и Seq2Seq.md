@@ -33,7 +33,7 @@ $$
 $h_t$ зависит и от нового токена, и от состояния после предыдущих токенов.
 Поэтому его можно понимать как текущее краткое содержание прочитанного префикса.
 
-![[02 Areas/ML & DL/raw/papers/lstm/images/lstm-chain.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/lstm/lstm-chain.png]]
 
 *Chris Olah, «Understanding LSTM Networks»: одну recurrent-ячейку можно
 «развернуть» в цепочку одинаковых ячеек. Параметры на всех шагах общие; меняются

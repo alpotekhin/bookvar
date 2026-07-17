@@ -79,7 +79,7 @@ $$
 $A$ определяет, как прошлое затухает/распространяется; $B$ записывает input в
 state; $C$ читает state; $D$ даёт прямой skip от input.
 
-![[02 Areas/ML & DL/raw/papers/mamba/images/ssm-three-views.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mamba/ssm-three-views.png]]
 
 *Figure из Mamba materials: один linear time-invariant SSM можно вычислять как
 recurrence, convolution или structured scan. Формы математически связаны, но
@@ -129,7 +129,7 @@ $$
 - почти не менять state на filler token;
 - читать разные компоненты state в зависимости от input.
 
-![[02 Areas/ML & DL/raw/papers/mamba/images/selective-ssm.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mamba/selective-ssm.png]]
 
 *Ключевая иллюстрация Mamba paper: selection mechanism делает SSM
 input-dependent. Цветом показано, что разные tokens по-разному проходят через
@@ -167,7 +167,7 @@ Mamba использует hardware-aware selective scan:
 - fusion/recomputation становятся частью алгоритма, а не косметической
   оптимизацией.
 
-![[02 Areas/ML & DL/raw/papers/mamba/images/mamba-block.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mamba/mamba-block.png]]
 
 *Mamba block из paper: input projection разветвляется, short convolution
 обрабатывает локальный pattern, selective SSM — длинное состояние, gate смешивает

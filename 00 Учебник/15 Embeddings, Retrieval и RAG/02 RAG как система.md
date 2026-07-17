@@ -18,7 +18,7 @@ last_updated: 2026-07-16
 
 RAG добавляет внешнюю память, но качество определяется всей цепочкой.
 
-![[02 Areas/ML & DL/raw/papers/retrieval-augmented-generation-for-knowledge-intensive-nlp-t/images/rag-fig1.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/retrieval-augmented-generation-for-knowledge-intensive-nlp-t/rag-fig1.png]]
 
 *Оригинальный RAG соединяет parametric memory генератора и non-parametric
 memory индекса. Современные системы добавляют parsing, hybrid retrieval,

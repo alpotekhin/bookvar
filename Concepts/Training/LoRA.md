@@ -37,7 +37,7 @@ LoRA (Hu et al., 2021, Microsoft) решает обе проблемы: **10,000
 
 $$h = W_0 x + \Delta W \cdot x = W_0 x + BA \cdot x$$
 
-![[02 Areas/ML & DL/raw/papers/lora/images/fig1.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/lora/fig1.png]]
 *LoRA reparametrization: замороженные веса $W$ (синий) + обучаемые низкоранговые матрицы $B$ и $A$ (оранжевый). При инференсе $BA$ сливается с $W$ — нулевой overhead (источник: Hu et al., 2021)*
 
 Где:
@@ -53,7 +53,7 @@ $$h = W_0 x + \Delta W \cdot x = W_0 x + BA \cdot x$$
 
 В оригинальной статье LoRA применяется к **attention матрицам** $W_q$ и $W_v$. Авторы провели ablation:
 
-![[02 Areas/ML & DL/raw/papers/lora/images/fig2.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/lora/fig2.png]]
 *Ablation: адаптация разных подмножеств attention матриц в GPT-3. Лучше адаптировать больше матриц с меньшим r, чем одну с большим r (источник: Hu et al., 2021)*
 
 | Конфигурация | Параметры | Результат |
@@ -75,12 +75,12 @@ $$W = W_0 + BA$$
 
 **Переключение задач:** вычесть одну $BA$, прибавить другую $B'A'$ — мгновенно. Можно хранить десятки адаптеров по 35 MB каждый (vs 350 GB полный checkpoint).
 
-![[02 Areas/ML & DL/raw/papers/lora/images/fig5.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/lora/fig5.png]]
 *Сравнение inference latency: Adapter layers (AdapterL/AdapterH) добавляют 5-30% latency при batch\_size=1, LoRA — нулевой overhead (источник: Hu et al., 2021)*
 
 ## Результаты: LoRA vs Full Fine-Tuning
 
-![[02 Areas/ML & DL/raw/papers/lora/images/fig4.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/lora/fig4.png]]
 *Сравнение LoRA с другими методами PEFT на GPT-3 175B (источник: Hu et al., 2021)*
 
 | Метрика | Full FT (GPT-3 175B) | LoRA (0.003% params) |
@@ -94,7 +94,7 @@ $$W = W_0 + BA$$
 
 ## Выбор rank: сколько достаточно?
 
-![[02 Areas/ML & DL/raw/papers/lora/images/fig3.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/lora/fig3.png]]
 *Влияние rank r на quality: даже r=1 конкурентоспособен, r=4-8 — оптимальный диапазон (источник: Hu et al., 2021)*
 
 | Rank $r$ | Параметры (на слой) | Когда использовать |

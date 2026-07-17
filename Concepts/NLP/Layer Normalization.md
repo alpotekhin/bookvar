@@ -28,10 +28,10 @@ sources:
 
 ## Почему BatchNorm не работает для Transformer
 
-![[02 Areas/ML & DL/raw/papers/layer-normalization/images/batch-normalization.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/layer-normalization/batch-normalization.png]]
 *Batch Normalization: статистики вычисляются по batch dimension для каждого feature (источник: Pinecone)*
 
-![[02 Areas/ML & DL/raw/papers/layer-normalization/images/layer-normalization.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/layer-normalization/layer-normalization.png]]
 *Layer Normalization: статистики вычисляются по feature dimension для каждого примера — не зависит от batch size (источник: Pinecone)*
 
 **Batch Normalization** (Ioffe & Szegedy, 2015) нормализует по **batch dimension** — для каждого feature вычисляет среднее и дисперсию по всем примерам в mini-batch.
@@ -107,7 +107,7 @@ $$\text{output} = \text{LayerNorm}(x + \text{Sublayer}(x))$$
 
 Нормализация **после** residual connection. Использовался в оригинальном Transformer (2017) и BERT (2018).
 
-![[02 Areas/ML & DL/raw/papers/attention-is-all-you-need/images/transformer_resideual_layer_norm_2.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/transformer_resideual_layer_norm_2.png]]
 *Residual connection + LayerNorm (Post-Norm) внутри каждого блока (источник: Jay Alammar)*
 
 ### Pre-Norm (GPT-2, LLaMA, все современные LLM)

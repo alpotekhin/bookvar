@@ -24,7 +24,7 @@ Mistral AI показали **третье измерение**: **inference cos
 
 ## Sliding Window Attention (SWA): O(n) вместо O(n^2)
 
-![[02 Areas/ML & DL/raw/papers/mistral-7b/images/sliding-window-attention.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mistral-7b/sliding-window-attention.png]]
 *Sliding Window Attention: каждый токен attend только к W=3 предыдущим токенам в одном слое. Через стек слоёв информация распространяется на расстояние k*W (источник: оригинальная статья)*
 
 ### Проблема vanilla attention
@@ -50,7 +50,7 @@ $$\text{Теоретический attention span} = 32 \times 4096 = 131{,}072 
 
 ## Rolling Buffer Cache: фиксированная память
 
-![[02 Areas/ML & DL/raw/papers/mistral-7b/images/rolling-buffer-cache.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mistral-7b/rolling-buffer-cache.png]]
 *Rolling Buffer Cache: KV-cache фиксированного размера W. Позиция i хранится в ячейке i mod W. При переполнении старые значения перезаписываются (источник: оригинальная статья)*
 
 ### Проблема стандартного KV-cache
@@ -91,7 +91,7 @@ Mistral 7B: **8 KV-heads на 32 query-heads** (ratio 1:4). Каждая гру�
 
 ## Pre-fill и Chunking: эффективная работа с промптами
 
-![[02 Areas/ML & DL/raw/papers/mistral-7b/images/prefill-chunking.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mistral-7b/prefill-chunking.png]]
 *Pre-fill with chunking: длинный промпт разбивается на chunk'и размером W. Для каждого chunk'а attention считается по cache (sliding window) + внутри chunk'а (causal mask) (источник: оригинальная статья)*
 
 При генерации промпт известен заранее — можно **предзаполнить** KV-cache. Если промпт длиннее $W$, он разбивается на chunk'и размера $W$. Для каждого chunk'а:
@@ -128,7 +128,7 @@ GQA  →  4x меньше KV-heads  →  ещё меньше memory, больш�
 
 ## Бенчмарки: 7B бьёт 13B
 
-![[02 Areas/ML & DL/raw/papers/mistral-7b/images/benchmark-comparison.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mistral-7b/benchmark-comparison.png]]
 *Mistral 7B vs. LLaMA 2 (7B/13B) на различных бенчмарках. Mistral 7B превосходит LLaMA 2 13B на всех метриках (источник: оригинальная статья)*
 
 | Модель | MMLU | HumanEval | GSM8K | MATH | MBPP | HellaSwag |
@@ -149,7 +149,7 @@ GQA  →  4x меньше KV-heads  →  ещё меньше memory, больш�
 
 ### Equivalent Model Size
 
-![[02 Areas/ML & DL/raw/papers/mistral-7b/images/effective-model-sizes.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mistral-7b/effective-model-sizes.png]]
 *Effective model sizes: Mistral 7B показывает производительность, ожидаемую от LLaMA 2 модели >3x его размера на reasoning и STEM (источник: оригинальная статья)*
 
 На reasoning и STEM (MMLU) Mistral 7B эквивалентен LLaMA 2 модели **>3x его размера** (~21B+). На knowledge benchmarks — ~1.9x (ограничение по объёму хранимых фактов).

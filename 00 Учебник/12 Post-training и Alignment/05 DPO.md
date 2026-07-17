@@ -42,7 +42,7 @@ DPO спрашивает: если reward нужен только для пол�
 предпосылках — да. Получается supervised-looking binary classification loss,
 который обучает policy на fixed preference pairs.
 
-![[02 Areas/ML & DL/raw/papers/dpo/images/dpo-pipeline.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/dpo/dpo-pipeline.png]]
 
 *DPO paper, Figure 1. Слева explicit reward model и RL; справа preference loss
 непосредственно над policy. Упрощается training loop, но данные предпочтений и

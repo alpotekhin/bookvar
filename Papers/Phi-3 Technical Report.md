@@ -42,9 +42,9 @@ Scaling laws предполагают "fixed" data source. Но LLM сами м�
 - 4-bit quantization: ~1.8GB memory
 - iPhone 14 (A16 Bionic): 12+ tokens/sec, fully offline
 
-![[02 Areas/ML & DL/raw/papers/phi-3/images/fig1.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/phi-3/fig1.png]]
 
-![[02 Areas/ML & DL/raw/papers/phi-3/images/fig3.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/phi-3/fig3.png]]
 
 ## Key Results
 

@@ -29,10 +29,10 @@ Pre-trained LLM оптимизирована на **next token prediction** — 
 
 RLHF pipeline состоит из трёх последовательных этапов. Каждый следующий строится на результатах предыдущего.
 
-![[02 Areas/ML & DL/raw/papers/instructgpt/images/chatgpt-training-pipeline.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/instructgpt/chatgpt-training-pipeline.png]]
 *Полный pipeline обучения ChatGPT/InstructGPT: SFT на демонстрациях → обучение Reward Model на сравнениях → оптимизация через PPO (источник: Chip Huyen)*
 
-![[02 Areas/ML & DL/raw/papers/dpo/images/fig1.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/dpo/fig1.png]]
 *Figure 1 из DPO (Rafailov et al., 2023): сравнение RLHF pipeline (слева) и DPO (справа). RLHF требует отдельной Reward Model + RL (PPO); DPO оптимизирует предпочтения напрямую*
 
 ### Step 1: Supervised Fine-Tuning (SFT)
@@ -53,7 +53,7 @@ RLHF pipeline состоит из трёх последовательных эт
 
 **Цель:** обучить модель-оценщик, которая заменит людей. RM принимает (prompt, response) и выдаёт скалярную оценку качества.
 
-![[02 Areas/ML & DL/raw/papers/instructgpt/images/reward-model-hf.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/instructgpt/reward-model-hf.png]]
 *Обучение Reward Model: люди ранжируют ответы, модель учится предсказывать эти ранжирования (источник: Hugging Face)*
 
 **Сбор данных:**
@@ -78,7 +78,7 @@ $$\mathcal{L}(\theta) = -\frac{1}{\binom{K}{2}} \mathbb{E}_{(x, y_w, y_l) \sim D
 
 **Цель:** оптимизировать SFT модель, чтобы она генерировала ответы с высоким reward, не уходя далеко от исходной модели.
 
-![[02 Areas/ML & DL/raw/papers/instructgpt/images/rlhf-pipeline-hf.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/instructgpt/rlhf-pipeline-hf.png]]
 *RL этап: модель генерирует ответы, Reward Model оценивает, PPO обновляет веса политики (источник: Hugging Face)*
 
 **RL формулировка:**

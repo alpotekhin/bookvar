@@ -4,15 +4,6 @@ notes:
   - null means the exact value has not yet been verified; it must not be inferred from the filename.
   - needs-confirmation entries are inventory records, not redistribution clearance.
 assets:
-  - asset: 00 Учебник/Assets/Figures/attention/transformer_self_attention_vectors.png
-    author: Jay Alammar
-    source_url: https://jalammar.github.io/illustrated-transformer/
-    license: CC BY-NC-SA 4.0
-    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
-    modifications: copied without modification; path changed for tracked publication packaging
-    used_in:
-      - 00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V.md
-    metadata_status: verified
   - asset: 00 Учебник/Assets/Figures/attention/self-attention-matrix-calculation-2.png
     author: Jay Alammar
     source_url: https://jalammar.github.io/illustrated-transformer/
@@ -21,6 +12,8 @@ assets:
     modifications: copied without modification; path changed for tracked publication packaging
     used_in:
       - 00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V.md
+      - Concepts/Architectures/Transformer.md
+      - Concepts/NLP/Attention Mechanism.md
     metadata_status: verified
   - asset: 00 Учебник/Assets/Figures/attention/transformer_multi-headed_self-attention-recap.png
     author: Jay Alammar
@@ -30,10 +23,21 @@ assets:
     modifications: copied without modification; path changed for tracked publication packaging
     used_in:
       - 00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V.md
+      - Concepts/Architectures/Transformer.md
+      - Concepts/NLP/Attention Mechanism.md
     metadata_status: verified
-
-  - &colbert
-    asset: 00 Учебник/Assets/Figures/colbert-figure2-hq.png
+  - asset: 00 Учебник/Assets/Figures/attention/transformer_self_attention_vectors.png
+    author: Jay Alammar
+    source_url: https://jalammar.github.io/illustrated-transformer/
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in:
+      - 00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V.md
+      - Concepts/Architectures/Transformer.md
+      - Concepts/NLP/Attention Mechanism.md
+    metadata_status: verified
+  - asset: 00 Учебник/Assets/Figures/colbert-figure2-hq.png
     author: null
     source_url: https://arxiv.org/abs/2004.12832
     license: null
@@ -42,17 +46,1668 @@ assets:
     used_in:
       - 00 Учебник/15 Embeddings, Retrieval и RAG/01 Embeddings и retrieval.md
     metadata_status: needs-confirmation
-  - <<: *colbert
-    asset: 00 Учебник/Assets/Figures/colbert-page1.png
+  - asset: 00 Учебник/Assets/Figures/colbert-page1.png
+    author: null
+    source_url: https://arxiv.org/abs/2004.12832
+    license: null
+    license_url: null
     modifications: paper page rasterization; exact process requires confirmation
     used_in: []
-  - <<: *colbert
-    asset: 00 Учебник/Assets/Figures/colbert-page2.png
+    metadata_status: needs-confirmation
+  - asset: 00 Учебник/Assets/Figures/colbert-page2.png
+    author: null
+    source_url: https://arxiv.org/abs/2004.12832
+    license: null
+    license_url: null
     modifications: paper page rasterization; exact process requires confirmation
     used_in: []
-
-  - &deepseek_r1
-    asset: 00 Учебник/Assets/Figures/deepseek-r1-figure1-hq.png
+    metadata_status: needs-confirmation
+  - id: curated-astra-cd3c96b7ac6a
+    asset: 00 Учебник/Assets/Figures/curated/astra/env-synthesis.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Papers/ASTRA.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/astra/images/env-synthesis.png
+  - id: curated-astra-6dd44813a19c
+    asset: 00 Учебник/Assets/Figures/curated/astra/reward-ablation.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Papers/ASTRA.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/astra/images/reward-ablation.png
+  - id: curated-astra-4df3e4118758
+    asset: 00 Учебник/Assets/Figures/curated/astra/rl-pipeline.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Papers/ASTRA.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/astra/images/rl-pipeline.png
+  - id: curated-astra-3edea4669fcf
+    asset: 00 Учебник/Assets/Figures/curated/astra/sft-pipeline.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Papers/ASTRA.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/astra/images/sft-pipeline.png
+  - id: curated-astra-fa1e85bfdcb1
+    asset: 00 Учебник/Assets/Figures/curated/astra/tool-mixing-ablation.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Papers/ASTRA.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/astra/images/tool-mixing-ablation.png
+  - id: curated-astra-ece15cda113d
+    asset: 00 Учебник/Assets/Figures/curated/astra/turn-distribution.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Papers/ASTRA.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/astra/images/turn-distribution.png
+  - id: curated-attention-is-all-you-need-6c66971d0df0
+    asset: 00 Учебник/Assets/Figures/curated/attention-is-all-you-need/bahdanau_examples-min.png
+    author: null
+    source_url: https://arxiv.org/abs/1706.03762
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - 00 Учебник/05 Attention и Transformer/01 От Seq2Seq к Transformer.md
+      - Concepts/NLP/Attention Mechanism.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/attention-is-all-you-need/images/bahdanau_examples-min.png
+  - id: curated-attention-is-all-you-need-4e357db2d637
+    asset: 00 Учебник/Assets/Figures/curated/attention-is-all-you-need/bottleneck-min.png
+    author: null
+    source_url: https://arxiv.org/abs/1706.03762
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - 00 Учебник/05 Attention и Transformer/01 От Seq2Seq к Transformer.md
+      - Concepts/NLP/Attention Mechanism.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/attention-is-all-you-need/images/bottleneck-min.png
+  - id: curated-attention-is-all-you-need-c493c7de18b5
+    asset: 00 Учебник/Assets/Figures/curated/attention-is-all-you-need/encoder_with_tensors_2.png
+    author: null
+    source_url: https://arxiv.org/abs/1706.03762
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Architectures/Transformer.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/attention-is-all-you-need/images/encoder_with_tensors_2.png
+  - id: curated-attention-is-all-you-need-a68f06a7304a
+    asset: 00 Учебник/Assets/Figures/curated/attention-is-all-you-need/score_functions-min.png
+    author: null
+    source_url: https://arxiv.org/abs/1706.03762
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/NLP/Attention Mechanism.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/attention-is-all-you-need/images/score_functions-min.png
+  - id: curated-attention-is-all-you-need-7f6b43ec2eb7
+    asset: 00 Учебник/Assets/Figures/curated/attention-is-all-you-need/the_transformer_3.png
+    author: null
+    source_url: https://arxiv.org/abs/1706.03762
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Architectures/Transformer.md
+      - Concepts/NLP/Attention Mechanism.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/attention-is-all-you-need/images/the_transformer_3.png
+  - id: curated-attention-is-all-you-need-bdc0fd6444dd
+    asset: 00 Учебник/Assets/Figures/curated/attention-is-all-you-need/The_transformer_encoder_decoder_stack.png
+    author: null
+    source_url: https://arxiv.org/abs/1706.03762
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - 00 Учебник/05 Attention и Transformer/03 Полный Transformer.md
+      - Concepts/Architectures/Transformer.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/attention-is-all-you-need/images/The_transformer_encoder_decoder_stack.png
+  - id: curated-attention-is-all-you-need-ccfb7799c490
+    asset: 00 Учебник/Assets/Figures/curated/attention-is-all-you-need/transformer_decoder_output_softmax.png
+    author: null
+    source_url: https://arxiv.org/abs/1706.03762
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Architectures/Transformer.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/attention-is-all-you-need/images/transformer_decoder_output_softmax.png
+  - id: curated-attention-is-all-you-need-c89d9449ead2
+    asset: 00 Учебник/Assets/Figures/curated/attention-is-all-you-need/transformer_decoding_2.gif
+    author: null
+    source_url: https://arxiv.org/abs/1706.03762
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Architectures/Transformer.md
+      - Concepts/NLP/Attention Mechanism.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/attention-is-all-you-need/images/transformer_decoding_2.gif
+  - id: curated-attention-is-all-you-need-c6d3360f8c0a
+    asset: 00 Учебник/Assets/Figures/curated/attention-is-all-you-need/Transformer_encoder.png
+    author: null
+    source_url: https://arxiv.org/abs/1706.03762
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - 00 Учебник/05 Attention и Transformer/03 Полный Transformer.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/attention-is-all-you-need/images/Transformer_encoder.png
+  - id: curated-attention-is-all-you-need-1447f2a6561e
+    asset: 00 Учебник/Assets/Figures/curated/attention-is-all-you-need/transformer_positional_encoding_vectors.png
+    author: null
+    source_url: https://arxiv.org/abs/1706.03762
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Architectures/Transformer.md
+      - Concepts/NLP/Positional Encoding.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/attention-is-all-you-need/images/transformer_positional_encoding_vectors.png
+  - id: curated-attention-is-all-you-need-3ae6698b6155
+    asset: 00 Учебник/Assets/Figures/curated/attention-is-all-you-need/transformer_resideual_layer_norm_2.png
+    author: null
+    source_url: https://arxiv.org/abs/1706.03762
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Architectures/Transformer.md
+      - Concepts/NLP/Attention Mechanism.md
+      - Concepts/NLP/Layer Normalization.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/attention-is-all-you-need/images/transformer_resideual_layer_norm_2.png
+  - id: curated-attention-is-all-you-need-5f85f00a27e4
+    asset: 00 Учебник/Assets/Figures/curated/attention-is-all-you-need/transformer_self-attention_visualization.png
+    author: null
+    source_url: https://arxiv.org/abs/1706.03762
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Architectures/Transformer.md
+      - Concepts/NLP/Attention Mechanism.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/attention-is-all-you-need/images/transformer_self-attention_visualization.png
+  - id: curated-bert-d11ce7f28a15
+    asset: 00 Учебник/Assets/Figures/curated/bert/bert-base-bert-large-encoders.png
+    author: null
+    source_url: https://arxiv.org/abs/1810.04805
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Architectures/BERT.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/bert/images/bert-base-bert-large-encoders.png
+  - id: curated-bert-6940ba5c8c2c
+    asset: 00 Учебник/Assets/Figures/curated/bert/bert-classifier.png
+    author: null
+    source_url: https://arxiv.org/abs/1810.04805
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Architectures/BERT.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/bert/images/bert-classifier.png
+  - id: curated-transfer-learning-ab1792bd6e14
+    asset: 00 Учебник/Assets/Figures/curated/bert/bert-feature-extraction-contextualized-embeddings.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - 00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings.md
+      - Concepts/Architectures/BERT.md
+      - Concepts/NLP/Transfer Learning.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/transfer-learning/images/word2vec-to-bert.png
+  - id: curated-bert-d54ae8e6b6eb
+    asset: 00 Учебник/Assets/Figures/curated/bert/bert-input-output.png
+    author: null
+    source_url: https://arxiv.org/abs/1810.04805
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Architectures/BERT.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/bert/images/bert-input-output.png
+  - id: curated-bert-b81329241b13
+    asset: 00 Учебник/Assets/Figures/curated/bert/BERT-language-modeling-masked-lm.png
+    author: null
+    source_url: https://arxiv.org/abs/1810.04805
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md
+      - Concepts/Architectures/BERT.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/bert/images/BERT-language-modeling-masked-lm.png
+  - id: curated-bert-893524971850
+    asset: 00 Учебник/Assets/Figures/curated/bert/bert-next-sentence-prediction.png
+    author: null
+    source_url: https://arxiv.org/abs/1810.04805
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Architectures/BERT.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/bert/images/bert-next-sentence-prediction.png
+  - id: curated-bert-5f2b6bb2468e
+    asset: 00 Учебник/Assets/Figures/curated/bert/bert-tasks.png
+    author: null
+    source_url: https://arxiv.org/abs/1810.04805
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md
+      - Concepts/Architectures/BERT.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/bert/images/bert-tasks.png
+  - id: curated-transfer-learning-2e232d1b1260
+    asset: 00 Учебник/Assets/Figures/curated/bert/bert-transfer-learning.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/NLP/Transfer Learning.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/transfer-learning/images/elmo-bert-gpt.png
+  - id: curated-bert-1d4fb71d44c5
+    asset: 00 Учебник/Assets/Figures/curated/bert/openai-transformer-1.png
+    author: null
+    source_url: https://arxiv.org/abs/1810.04805
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Architectures/BERT.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/bert/images/openai-transformer-1.png
+  - id: curated-bpe-601c8c56e6bc
+    asset: 00 Учебник/Assets/Figures/curated/bpe/tokenizer-comparison.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - 00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/bpe/images/tokenizer-comparison.png
+  - id: curated-bpe-09791eef77fd
+    asset: 00 Учебник/Assets/Figures/curated/bpe/tokenizer-overview.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - 00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/bpe/images/tokenizer-overview.png
+  - id: curated-colbert-ed43eecc6c65
+    asset: 00 Учебник/Assets/Figures/curated/colbert/colbert-framework.png
+    author: null
+    source_url: https://arxiv.org/abs/2004.12832
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Retrieval/ColBERT.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/colbert/images/colbert-framework.png
+  - id: curated-cot-442433f12271
+    asset: 00 Учебник/Assets/Figures/curated/cot/cot-examples-fig3.png
+    author: null
+    source_url: https://arxiv.org/abs/2201.11903
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Inference/Chain of Thought.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/cot/images/cot-examples-fig3.png
+  - id: curated-cot-6237b1802e04
+    asset: 00 Учебник/Assets/Figures/curated/cot/cot-prompting-fig1.png
+    author: null
+    source_url: https://arxiv.org/abs/2201.11903
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Inference/Chain of Thought.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/cot/images/cot-prompting-fig1.png
+  - id: curated-deepseek-r1-504afcfd2297
+    asset: 00 Учебник/Assets/Figures/curated/deepseek-r1/fig1.png
+    author: DeepSeek-AI
+    source_url: https://arxiv.org/abs/2501.12948
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Papers/DeepSeek-R1 Reasoning via RL.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/deepseek-r1/images/fig1.png
+  - id: curated-deepseek-r1-1be7ed4b3545
+    asset: 00 Учебник/Assets/Figures/curated/deepseek-r1/fig2.png
+    author: DeepSeek-AI
+    source_url: https://arxiv.org/abs/2501.12948
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Papers/DeepSeek-R1 Reasoning via RL.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/deepseek-r1/images/fig2.png
+  - id: curated-deepseek-v2-703a0c897390
+    asset: 00 Учебник/Assets/Figures/curated/deepseek-v2/x1.png
+    author: DeepSeek-AI
+    source_url: https://arxiv.org/abs/2405.04434
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - 00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md
+      - 00 Учебник/10 Атлас современных архитектур/01 Llama, Qwen и DeepSeek как эволюция блока.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/deepseek-v2/images/x1.png
+  - id: curated-deepseek-v2-f98009659596
+    asset: 00 Учебник/Assets/Figures/curated/deepseek-v2/x3.png
+    author: DeepSeek-AI
+    source_url: https://arxiv.org/abs/2405.04434
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - 00 Учебник/09 Dense FFN и Mixture of Experts/01 От SwiGLU к MoE.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/deepseek-v2/images/x3.png
+  - id: curated-deepseek-v3-cc6231e92200
+    asset: 00 Учебник/Assets/Figures/curated/deepseek-v3/fig1.png
+    author: DeepSeek-AI
+    source_url: https://arxiv.org/abs/2412.19437
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Papers/DeepSeek-V3 Technical Report.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/deepseek-v3/images/fig1.png
+  - id: curated-deepseek-v3-d0866f2d2b19
+    asset: 00 Учебник/Assets/Figures/curated/deepseek-v3/fig2.png
+    author: DeepSeek-AI
+    source_url: https://arxiv.org/abs/2412.19437
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Papers/DeepSeek-V3 Technical Report.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/deepseek-v3/images/fig2.png
+  - id: curated-dpo-81be2a401be5
+    asset: 00 Учебник/Assets/Figures/curated/dpo/dpo-pipeline.png
+    author: null
+    source_url: https://arxiv.org/abs/2305.18290
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - 00 Учебник/12 Post-training и Alignment/05 DPO.md
+      - Concepts/Training/DPO.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/dpo/images/dpo-pipeline.png
+  - id: curated-dpo-af51c0802725
+    asset: 00 Учебник/Assets/Figures/curated/dpo/fig1.png
+    author: null
+    source_url: https://arxiv.org/abs/2305.18290
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Training/DPO.md
+      - Concepts/Training/RLHF.md
+      - Papers/DPO.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/dpo/images/fig1.png
+  - id: curated-dpo-6172e6344252
+    asset: 00 Учебник/Assets/Figures/curated/dpo/fig3.png
+    author: null
+    source_url: https://arxiv.org/abs/2305.18290
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Training/DPO.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/dpo/images/fig3.png
+  - id: curated-dpo-c664c0d557eb
+    asset: 00 Учебник/Assets/Figures/curated/dpo/fig4.png
+    author: null
+    source_url: https://arxiv.org/abs/2305.18290
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Training/DPO.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/dpo/images/fig4.png
+  - id: curated-emergent-abilities-d20967b88ae7
+    asset: 00 Учебник/Assets/Figures/curated/emergent-abilities/emergent-abilities-wei.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/NLP/Emergent Abilities.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/emergent-abilities/images/emergent-abilities-wei.png
+  - id: curated-fine-tuning-a18e2f42f1ce
+    asset: 00 Учебник/Assets/Figures/curated/fine-tuning/finetuning-approaches.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Training/Fine-tuning.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/fine-tuning/images/finetuning-approaches.png
+  - id: curated-fine-tuning-69ea8262a196
+    asset: 00 Учебник/Assets/Figures/curated/fine-tuning/regular-finetuning.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Training/Fine-tuning.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/fine-tuning/images/regular-finetuning.png
+  - id: curated-flash-attention-dbf9e1e91044
+    asset: 00 Учебник/Assets/Figures/curated/flash-attention/fig1-tiling.jpg
+    author: null
+    source_url: https://arxiv.org/abs/2205.14135
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Inference/Flash Attention.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/flash-attention/images/fig1-tiling.jpg
+  - id: curated-gemma-2-26ae628f5d3d
+    asset: 00 Учебник/Assets/Figures/curated/gemma-2/fig1.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Papers/Gemma 2.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/gemma-2/images/fig1.png
+  - id: curated-gemma-4e5ff2685d1a
+    asset: 00 Учебник/Assets/Figures/curated/gemma/fig1.png
+    author: null
+    source_url: https://arxiv.org/abs/2403.08295
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Architectures/Gemma.md
+      - Papers/Gemma.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/gemma/images/fig1.png
+  - id: curated-gemma-ae702e98a76c
+    asset: 00 Учебник/Assets/Figures/curated/gemma/fig2.png
+    author: null
+    source_url: https://arxiv.org/abs/2403.08295
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Architectures/Gemma.md
+      - Papers/Gemma.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/gemma/images/fig2.png
+  - id: curated-gemma-a74cb8306d47
+    asset: 00 Учебник/Assets/Figures/curated/gemma/fig3.png
+    author: null
+    source_url: https://arxiv.org/abs/2403.08295
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Papers/Gemma.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/gemma/images/fig3.png
+  - id: curated-gemma-610d0411d13f
+    asset: 00 Учебник/Assets/Figures/curated/gemma/fig4.png
+    author: null
+    source_url: https://arxiv.org/abs/2403.08295
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Papers/Gemma.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/gemma/images/fig4.png
+  - id: curated-gpt-30-7128f23d2a59
+    asset: 00 Учебник/Assets/Figures/curated/gpt-30/gpt-2-transformer-xl-bert-3.png
+    author: null
+    source_url: https://arxiv.org/abs/2005.14165
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - 00 Учебник/05 Attention и Transformer/03 Полный Transformer.md
+      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md
+      - Concepts/Architectures/GPT-3.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/gpt-30/images/gpt-2-transformer-xl-bert-3.png
+  - id: curated-gpt-30-58430f275e37
+    asset: 00 Учебник/Assets/Figures/curated/gpt-30/gpt2-autoregression-2.gif
+    author: null
+    source_url: https://arxiv.org/abs/2005.14165
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Architectures/GPT-3.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/gpt-30/images/gpt2-autoregression-2.gif
+  - id: curated-gpt-30-fd6d84995b9e
+    asset: 00 Учебник/Assets/Figures/curated/gpt-30/gpt2-sizes-hyperparameters-3.png
+    author: null
+    source_url: https://arxiv.org/abs/2005.14165
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Architectures/GPT-3.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/gpt-30/images/gpt2-sizes-hyperparameters-3.png
+  - id: curated-gpt-30-c356d842c1c0
+    asset: 00 Учебник/Assets/Figures/curated/gpt-30/gpt2-token-embeddings-wte-2.png
+    author: null
+    source_url: https://arxiv.org/abs/2005.14165
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Architectures/GPT-3.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/gpt-30/images/gpt2-token-embeddings-wte-2.png
+  - id: curated-gpt-30-94d7c51658e7
+    asset: 00 Учебник/Assets/Figures/curated/gpt-30/gpt2-transformer-block-vectors-2.png
+    author: null
+    source_url: https://arxiv.org/abs/2005.14165
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Architectures/GPT-3.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/gpt-30/images/gpt2-transformer-block-vectors-2.png
+  - id: curated-gpt-30-fb22d410edcc
+    asset: 00 Учебник/Assets/Figures/curated/gpt-30/self-attention-and-masked-self-attention.png
+    author: null
+    source_url: https://arxiv.org/abs/2005.14165
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Architectures/GPT-3.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/gpt-30/images/self-attention-and-masked-self-attention.png
+  - id: curated-gqa-02c3d00ec9f3
+    asset: 00 Учебник/Assets/Figures/curated/gqa/mha-gqa-mqa.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - 00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md
+      - Concepts/Architectures/GQA.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/gqa/images/mha-mqa-gqa.png
+  - id: curated-gqa-96869d5f7e01
+    asset: 00 Учебник/Assets/Figures/curated/gqa/uptrain-recycling.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - 00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/gqa/images/uptrain-recycling.png
+  - id: curated-grpo-4f71b08072d5
+    asset: 00 Учебник/Assets/Figures/curated/grpo/iterative-rl-curves.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Training/GRPO.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/grpo/images/iterative-rl-curves.png
+  - id: curated-grpo-d621599a487d
+    asset: 00 Учебник/Assets/Figures/curated/grpo/majk-passk.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Training/GRPO.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/grpo/images/majk-passk.png
+  - id: curated-grpo-84b71426c8c2
+    asset: 00 Учебник/Assets/Figures/curated/grpo/ppo-vs-grpo.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - 00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md
+      - Concepts/Training/GRPO.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/grpo/images/ppo-vs-grpo.png
+  - id: curated-grpo-73f869d4e921
+    asset: 00 Учебник/Assets/Figures/curated/grpo/training-methods-comparison.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Training/GRPO.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/grpo/images/training-methods-comparison.png
+  - id: curated-in-context-learning-42ef5c4132f3
+    asset: 00 Учебник/Assets/Figures/curated/in-context-learning/icl-scaling-model-size.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Inference/In-context Learning.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/in-context-learning/images/icl-scaling-model-size.png
+  - id: curated-instructgpt-ffb549dc81ca
+    asset: 00 Учебник/Assets/Figures/curated/instructgpt/chatgpt-training-pipeline.png
+    author: null
+    source_url: https://arxiv.org/abs/2203.02155
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - 00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md
+      - Concepts/Training/RLHF.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/instructgpt/images/chatgpt-training-pipeline.png
+  - id: curated-instructgpt-c9039445d6f7
+    asset: 00 Учебник/Assets/Figures/curated/instructgpt/pretraining-hf.png
+    author: null
+    source_url: https://arxiv.org/abs/2203.02155
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Training/Pre-training.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/instructgpt/images/pretraining-hf.png
+  - id: curated-instructgpt-30107284e8d7
+    asset: 00 Учебник/Assets/Figures/curated/instructgpt/reward-model-hf.png
+    author: null
+    source_url: https://arxiv.org/abs/2203.02155
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - 00 Учебник/12 Post-training и Alignment/03 Reward modeling.md
+      - Concepts/Training/RLHF.md
+      - Concepts/Training/Reward Model.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/instructgpt/images/reward-model-hf.png
+  - id: curated-instructgpt-892936ad206b
+    asset: 00 Учебник/Assets/Figures/curated/instructgpt/rlhf-pipeline-hf.png
+    author: null
+    source_url: https://arxiv.org/abs/2203.02155
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - 00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md
+      - Concepts/Training/PPO.md
+      - Concepts/Training/RLHF.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/instructgpt/images/rlhf-pipeline-hf.png
+  - id: curated-jamba-e66404c50c5d
+    asset: 00 Учебник/Assets/Figures/curated/jamba/fig1.png
+    author: null
+    source_url: https://arxiv.org/abs/2403.19887
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Papers/Jamba SSM-Transformer Hybrid.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/jamba/images/fig1.png
+  - id: curated-jamba-cb4250d4fe1c
+    asset: 00 Учебник/Assets/Figures/curated/jamba/fig3.png
+    author: null
+    source_url: https://arxiv.org/abs/2403.19887
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Papers/Jamba SSM-Transformer Hybrid.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/jamba/images/fig3.png
+  - id: curated-jamba-d294262df75f
+    asset: 00 Учебник/Assets/Figures/curated/jamba/jamba-architecture.png
+    author: null
+    source_url: https://arxiv.org/abs/2403.19887
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Architectures/Jamba.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/jamba/images/jamba-architecture.png
+  - id: curated-kimi-k15-36604a6ea1c0
+    asset: 00 Учебник/Assets/Figures/curated/kimi-k15/x1.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - 00 Учебник/10 Атлас современных архитектур/01 Llama, Qwen и DeepSeek как эволюция блока.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/kimi-k15/images/x1.png
+  - id: curated-kv-cache-37894e0e192f
+    asset: 00 Учебник/Assets/Figures/curated/kv-cache/gqa-comparison.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Inference/KV-Cache.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/kv-cache/images/gqa-comparison.png
+  - id: curated-kv-cache-49b9ae4aab97
+    asset: 00 Учебник/Assets/Figures/curated/kv-cache/kv-cache-mechanism.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Inference/KV-Cache.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/kv-cache/images/kv-cache-mechanism.png
+  - id: curated-kv-cache-8b4dd9088c16
+    asset: 00 Учебник/Assets/Figures/curated/kv-cache/paged-attention.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/01 KV-cache, batching и FlashAttention.md
+      - Concepts/Inference/KV-Cache.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/kv-cache/images/paged-attention.png
+  - id: curated-layer-normalization-153fb6ac851d
+    asset: 00 Учебник/Assets/Figures/curated/layer-normalization/batch-normalization.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/NLP/Layer Normalization.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/layer-normalization/images/batch-normalization.png
+  - id: curated-layer-normalization-5b854cb1dc79
+    asset: 00 Учебник/Assets/Figures/curated/layer-normalization/layer-normalization.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/NLP/Layer Normalization.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/layer-normalization/images/layer-normalization.png
+  - id: curated-lora-c8ae49bff175
+    asset: 00 Учебник/Assets/Figures/curated/lora/fig1.png
+    author: null
+    source_url: https://arxiv.org/abs/2106.09685
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Training/Fine-tuning.md
+      - Concepts/Training/LoRA.md
+      - Papers/LoRA.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/lora/images/fig1.png
+  - id: curated-lora-7b9d266fa7a6
+    asset: 00 Учебник/Assets/Figures/curated/lora/fig2.png
+    author: null
+    source_url: https://arxiv.org/abs/2106.09685
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Training/LoRA.md
+      - Papers/LoRA.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/lora/images/fig2.png
+  - id: curated-lora-3f40845831ce
+    asset: 00 Учебник/Assets/Figures/curated/lora/fig3.png
+    author: null
+    source_url: https://arxiv.org/abs/2106.09685
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Training/LoRA.md
+      - Papers/LoRA.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/lora/images/fig3.png
+  - id: curated-lora-3b3b64e26f6a
+    asset: 00 Учебник/Assets/Figures/curated/lora/fig4.png
+    author: null
+    source_url: https://arxiv.org/abs/2106.09685
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Training/LoRA.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/lora/images/fig4.png
+  - id: curated-lora-e71115400019
+    asset: 00 Учебник/Assets/Figures/curated/lora/fig5.png
+    author: null
+    source_url: https://arxiv.org/abs/2106.09685
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Training/Fine-tuning.md
+      - Concepts/Training/LoRA.md
+      - Papers/LoRA.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/lora/images/fig5.png
+  - id: curated-lstm-9ef0aeb8ba4e
+    asset: 00 Учебник/Assets/Figures/curated/lstm/lstm-chain.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - 00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN, LSTM и Seq2Seq.md
+      - Concepts/Architectures/LSTM.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/lstm/images/lstm-chain.png
+  - id: curated-mamba-20fb747e600a
+    asset: 00 Учебник/Assets/Figures/curated/mamba/mamba-block.png
+    author: null
+    source_url: https://arxiv.org/abs/2312.00752
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - 00 Учебник/10 Атлас современных архитектур/02 Альтернативы Transformer и multimodality.md
+      - Concepts/Architectures/Mamba.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/mamba/images/mamba-block.png
+  - id: curated-mamba-a7be647f0f21
+    asset: 00 Учебник/Assets/Figures/curated/mamba/mamba-vs-transformer.png
+    author: null
+    source_url: https://arxiv.org/abs/2312.00752
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Architectures/Mamba.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/mamba/images/mamba-vs-transformer.png
+  - id: curated-mamba-95120fa4fd87
+    asset: 00 Учебник/Assets/Figures/curated/mamba/selective-ssm.png
+    author: null
+    source_url: https://arxiv.org/abs/2312.00752
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - 00 Учебник/10 Атлас современных архитектур/02 Альтернативы Transformer и multimodality.md
+      - Concepts/Architectures/Mamba.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/mamba/images/selective-ssm.png
+  - id: curated-mamba-c02ede92a399
+    asset: 00 Учебник/Assets/Figures/curated/mamba/ssm-three-views.png
+    author: null
+    source_url: https://arxiv.org/abs/2312.00752
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - 00 Учебник/10 Атлас современных архитектур/02 Альтернативы Transformer и multimodality.md
+      - Concepts/Architectures/Mamba.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/mamba/images/ssm-three-views.png
+  - id: curated-mistral-7b-6725e4201510
+    asset: 00 Учебник/Assets/Figures/curated/mistral-7b/benchmark-comparison.png
+    author: null
+    source_url: https://arxiv.org/abs/2310.06825
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Architectures/Mistral 7B.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/mistral-7b/images/benchmark-comparison.png
+  - id: curated-mistral-7b-be3622a9114f
+    asset: 00 Учебник/Assets/Figures/curated/mistral-7b/effective-model-sizes.png
+    author: null
+    source_url: https://arxiv.org/abs/2310.06825
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Architectures/Mistral 7B.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/mistral-7b/images/effective-model-sizes.png
+  - id: curated-mistral-7b-48348eb04ca6
+    asset: 00 Учебник/Assets/Figures/curated/mistral-7b/prefill-chunking.png
+    author: null
+    source_url: https://arxiv.org/abs/2310.06825
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Architectures/Mistral 7B.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/mistral-7b/images/prefill-chunking.png
+  - id: curated-mistral-7b-c53f8a4addd5
+    asset: 00 Учебник/Assets/Figures/curated/mistral-7b/rolling-buffer-cache.png
+    author: null
+    source_url: https://arxiv.org/abs/2310.06825
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Architectures/Mistral 7B.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/mistral-7b/images/rolling-buffer-cache.png
+  - id: curated-mistral-7b-a45bd043eb95
+    asset: 00 Учебник/Assets/Figures/curated/mistral-7b/sliding-window-attention.png
+    author: null
+    source_url: https://arxiv.org/abs/2310.06825
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Architectures/Mistral 7B.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/mistral-7b/images/sliding-window-attention.png
+  - id: curated-mixtral-of-experts-199a03bd271e
+    asset: 00 Учебник/Assets/Figures/curated/mixtral-of-experts/benchmark-comparison.png
+    author: null
+    source_url: https://arxiv.org/abs/2401.04088
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Architectures/Mixtral of Experts.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/mixtral-of-experts/images/benchmark-comparison.png
+  - id: curated-mixtral-of-experts-ca3e3dda7349
+    asset: 00 Учебник/Assets/Figures/curated/mixtral-of-experts/expert-routing-analysis.png
+    author: null
+    source_url: https://arxiv.org/abs/2401.04088
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - 00 Учебник/09 Dense FFN и Mixture of Experts/01 От SwiGLU к MoE.md
+      - Concepts/Architectures/Mixtral of Experts.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/mixtral-of-experts/images/expert-routing-analysis.png
+  - id: curated-mixtral-of-experts-ae08e0d8ba8b
+    asset: 00 Учебник/Assets/Figures/curated/mixtral-of-experts/routing-sample.png
+    author: null
+    source_url: https://arxiv.org/abs/2401.04088
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Architectures/Mixtral of Experts.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/mixtral-of-experts/images/routing-sample.png
+  - id: curated-moe-1347eb75040f
+    asset: 00 Учебник/Assets/Figures/curated/mixtral-of-experts/smoe-layer.png
+    author: null
+    source_url: https://arxiv.org/abs/2401.04088
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - 00 Учебник/09 Dense FFN и Mixture of Experts/01 От SwiGLU к MoE.md
+      - Concepts/Architectures/Mixtral of Experts.md
+      - Concepts/Architectures/MoE.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/moe/images/mixtral-smoe.png
+  - id: curated-mixtral-of-experts-4769507545bc
+    asset: 00 Учебник/Assets/Figures/curated/mixtral-of-experts/sparse-moe-routing.png
+    author: null
+    source_url: https://arxiv.org/abs/2401.04088
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - 00 Учебник/09 Dense FFN и Mixture of Experts/01 От SwiGLU к MoE.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/mixtral-of-experts/images/sparse-moe-routing.png
+  - id: curated-peft-203bbb6d52ac
+    asset: 00 Учебник/Assets/Figures/curated/peft/adapter-bottleneck.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Training/PEFT.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/peft/images/adapter-bottleneck.png
+  - id: curated-peft-398088f0cf9b
+    asset: 00 Учебник/Assets/Figures/curated/peft/lora-architecture.gif
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Training/PEFT.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/peft/images/lora-architecture.gif
+  - id: curated-peft-b97d6293be7f
+    asset: 00 Учебник/Assets/Figures/curated/peft/peft-taxonomy.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Training/PEFT.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/peft/images/peft-taxonomy.png
+  - id: curated-phi-3-c705cf258b12
+    asset: 00 Учебник/Assets/Figures/curated/phi-3/fig1.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Papers/Phi-3 Technical Report.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/phi-3/images/fig1.png
+  - id: curated-phi-3-d7b594c7ae43
+    asset: 00 Учебник/Assets/Figures/curated/phi-3/fig3.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Papers/Phi-3 Technical Report.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/phi-3/images/fig3.png
+  - id: curated-positional-encoding-c2f523e3e62c
+    asset: 00 Учебник/Assets/Figures/curated/positional-encoding/rope-decay.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/NLP/Positional Encoding.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/positional-encoding/images/rope-decay.png
+  - id: curated-rope-b20cd23d2e2e
+    asset: 00 Учебник/Assets/Figures/curated/positional-encoding/rope-implementation.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Architectures/RoPE.md
+      - Concepts/NLP/Positional Encoding.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/rope/images/rope-visualization.png
+  - id: curated-pre-training-4cac6066bbb5
+    asset: 00 Учебник/Assets/Figures/curated/pre-training/clm-vs-mlm.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Training/Pre-training.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/pre-training/images/clm-vs-mlm.png
+  - id: curated-pre-training-41cc528cd6f4
+    asset: 00 Учебник/Assets/Figures/curated/pre-training/nlp-paradigms.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Training/Pre-training.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/pre-training/images/nlp-paradigms.png
+  - id: curated-qwen-25-9032effbf23e
+    asset: 00 Учебник/Assets/Figures/curated/qwen-25/fig1.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Papers/Qwen 2.5 Technical Report.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/qwen-25/images/fig1.png
+  - id: curated-react-5740af9e184a
+    asset: 00 Учебник/Assets/Figures/curated/react/react-fig1.png
+    author: null
+    source_url: https://arxiv.org/abs/2210.03629
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - 00 Учебник/17 Tools и Agents/01 Tool use и agents.md
+      - Concepts/Reasoning/ReAct.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/react/images/react-fig1.png
+  - id: curated-retnet-50f7168f77e3
+    asset: 00 Учебник/Assets/Figures/curated/retnet/dual-form.png
+    author: null
+    source_url: https://arxiv.org/abs/2307.08621
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Architectures/RetNet.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/retnet/images/dual-form.png
+  - id: curated-retnet-df19aedb0e60
+    asset: 00 Учебник/Assets/Figures/curated/retnet/impossible-triangle.png
+    author: null
+    source_url: https://arxiv.org/abs/2307.08621
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Architectures/RetNet.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/retnet/images/impossible-triangle.png
+  - id: curated-retnet-95ee9b617412
+    asset: 00 Учебник/Assets/Figures/curated/retnet/inference-cost-comparison.png
+    author: null
+    source_url: https://arxiv.org/abs/2307.08621
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Architectures/RetNet.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/retnet/images/inference-cost-comparison.png
+  - id: curated-retnet-76f5dfe0c30e
+    asset: 00 Учебник/Assets/Figures/curated/retnet/inference-memory-throughput.png
+    author: null
+    source_url: https://arxiv.org/abs/2307.08621
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Architectures/RetNet.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/retnet/images/inference-memory-throughput.png
+  - id: curated-retnet-c1ae13ecd506
+    asset: 00 Учебник/Assets/Figures/curated/retnet/scaling-curve.png
+    author: null
+    source_url: https://arxiv.org/abs/2307.08621
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Architectures/RetNet.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/retnet/images/scaling-curve.png
+  - id: curated-retrieval-augmented-generation-for-knowledge-intensive-nlp-t-5e1aee8b75f8
+    asset: 00 Учебник/Assets/Figures/curated/retrieval-augmented-generation-for-knowledge-intensive-nlp-t/rag-fig1.png
+    author: null
+    source_url: https://arxiv.org/abs/2005.11401
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - 00 Учебник/15 Embeddings, Retrieval и RAG/02 RAG как система.md
+      - Concepts/Retrieval/Retrieval-Augmented Generation.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/retrieval-augmented-generation-for-knowledge-intensive-nlp-t/images/rag-fig1.png
+  - id: curated-retrieval-augmented-generation-for-knowledge-intensive-nlp-t-71c7daa90e8a
+    asset: 00 Учебник/Assets/Figures/curated/retrieval-augmented-generation-for-knowledge-intensive-nlp-t/retrieval-with-embeddings.png
+    author: null
+    source_url: https://arxiv.org/abs/2005.11401
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Retrieval/Retrieval-Augmented Generation.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/retrieval-augmented-generation-for-knowledge-intensive-nlp-t/images/retrieval-with-embeddings.png
+  - id: curated-rwkv-76464eb03b16
+    asset: 00 Учебник/Assets/Figures/curated/rwkv/rwkv-architecture.png
+    author: null
+    source_url: https://arxiv.org/abs/2305.13048
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Architectures/RWKV.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/rwkv/images/rwkv-architecture.png
+  - id: curated-rwkv-45caecaf802a
+    asset: 00 Учебник/Assets/Figures/curated/rwkv/rwkv-eval.png
+    author: null
+    source_url: https://arxiv.org/abs/2305.13048
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Architectures/RWKV.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/rwkv/images/rwkv-eval.png
+  - id: curated-rwkv-1bc2033bd39b
+    asset: 00 Учебник/Assets/Figures/curated/rwkv/rwkv-formula.png
+    author: null
+    source_url: https://arxiv.org/abs/2305.13048
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Architectures/RWKV.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/rwkv/images/rwkv-formula.png
+  - id: curated-rwkv-e33f28a90ae7
+    asset: 00 Учебник/Assets/Figures/curated/rwkv/rwkv-inference-time.png
+    author: null
+    source_url: https://arxiv.org/abs/2305.13048
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Architectures/RWKV.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/rwkv/images/rwkv-inference-time.png
+  - id: curated-rwkv-e2c930ff6195
+    asset: 00 Учебник/Assets/Figures/curated/rwkv/rwkv-lm-architecture.png
+    author: null
+    source_url: https://arxiv.org/abs/2305.13048
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Architectures/RWKV.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/rwkv/images/rwkv-lm-architecture.png
+  - id: curated-rwkv-ab2959bda8cf
+    asset: 00 Учебник/Assets/Figures/curated/rwkv/rwkv-scaling-comparison.png
+    author: null
+    source_url: https://arxiv.org/abs/2305.13048
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Architectures/RWKV.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/rwkv/images/rwkv-scaling-comparison.png
+  - id: curated-scaling-laws-59a4390df7bd
+    asset: 00 Учебник/Assets/Figures/curated/scaling-laws/chinchilla-dataset-sizes.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Training/Scaling Laws.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/scaling-laws/images/chinchilla-dataset-sizes.png
+  - id: curated-scaling-laws-b3b50f7066d9
+    asset: 00 Учебник/Assets/Figures/curated/scaling-laws/chinchilla-scaling.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Training/Scaling Laws.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/scaling-laws/images/chinchilla-scaling.png
+  - id: curated-self-rag-432e3b2c5c47
+    asset: 00 Учебник/Assets/Figures/curated/self-rag/fig1.png
+    author: null
+    source_url: https://arxiv.org/abs/2310.11511
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Retrieval/Retrieval-Augmented Generation.md
+      - Concepts/Retrieval/Self-RAG.md
+      - Papers/Self-RAG.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/self-rag/images/fig1.png
+  - id: curated-self-rag-2423616e9d57
+    asset: 00 Учебник/Assets/Figures/curated/self-rag/fig2.png
+    author: null
+    source_url: https://arxiv.org/abs/2310.11511
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Retrieval/Self-RAG.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/self-rag/images/fig2.png
+  - id: curated-self-rag-2bbe30d0ae89
+    asset: 00 Учебник/Assets/Figures/curated/self-rag/fig3.png
+    author: null
+    source_url: https://arxiv.org/abs/2310.11511
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Retrieval/Self-RAG.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/self-rag/images/fig3.png
+  - id: curated-t5-60a4f5c68c9e
+    asset: 00 Учебник/Assets/Figures/curated/t5/encoder-decoder-architecture.png
+    author: null
+    source_url: https://arxiv.org/abs/1910.10683
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md
+      - Concepts/Architectures/T5.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/t5/images/encoder-decoder-architecture.png
+  - id: curated-t5-961e963bd519
+    asset: 00 Учебник/Assets/Figures/curated/t5/text-to-text-framework.png
+    author: null
+    source_url: https://arxiv.org/abs/1910.10683
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md
+      - Concepts/Architectures/T5.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/t5/images/text-to-text-framework.png
+  - id: curated-toolrl-99fcb5fe026f
+    asset: 00 Учебник/Assets/Figures/curated/toolrl/cold-start-comparison.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Papers/ToolRL.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/toolrl/images/cold-start-comparison.png
+  - id: curated-toolrl-7c80d3359f7d
+    asset: 00 Учебник/Assets/Figures/curated/toolrl/introduction.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Papers/ToolRL.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/toolrl/images/introduction.png
+  - id: curated-toolrl-3b079ec73e49
+    asset: 00 Учебник/Assets/Figures/curated/toolrl/reward-design.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Papers/ToolRL.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/toolrl/images/reward-design.png
+  - id: curated-tree-of-thoughts-3b1ced703276
+    asset: 00 Учебник/Assets/Figures/curated/tree-of-thoughts/tot-fig1.png
+    author: null
+    source_url: https://arxiv.org/abs/2305.10601
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Reasoning/Tree of Thoughts.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/tree-of-thoughts/images/tot-fig1.png
+  - id: curated-tree-of-thoughts-c2644a04889a
+    asset: 00 Учебник/Assets/Figures/curated/tree-of-thoughts/tot-game-of-24.png
+    author: null
+    source_url: https://arxiv.org/abs/2305.10601
+    license: null
+    license_url: null
+    modifications: copied without modification from the local raw source for publication packaging
+    used_in:
+      - Concepts/Reasoning/Tree of Thoughts.md
+    metadata_status: needs-confirmation
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/tree-of-thoughts/images/tot-game-of-24.png
+  - asset: 00 Учебник/Assets/Figures/deepseek-r1-figure1-hq.png
     author: DeepSeek-AI
     source_url: https://arxiv.org/abs/2501.12948
     license: null
@@ -62,25 +1717,15 @@ assets:
       - 00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md
       - 00 Учебник/10 Атлас современных архитектур/01 Llama, Qwen и DeepSeek как эволюция блока.md
     metadata_status: needs-confirmation
-  - <<: *deepseek_r1
-    asset: 00 Учебник/Assets/Figures/deepseek-r1-page4.png
+  - asset: 00 Учебник/Assets/Figures/deepseek-r1-page4.png
+    author: DeepSeek-AI
+    source_url: https://arxiv.org/abs/2501.12948
+    license: null
+    license_url: null
     modifications: paper page rasterization; exact process requires confirmation
     used_in: []
-  - <<: *deepseek_r1
-    asset: 00 Учебник/Assets/Figures/post-training/deepseek-r1-late-000.jpg
-    modifications: paper extraction or crop; exact source location and process require confirmation
-    used_in: []
-  - <<: *deepseek_r1
-    asset: 00 Учебник/Assets/Figures/post-training/deepseek-r1-late-001.jpg
-    modifications: paper extraction or crop; exact source location and process require confirmation
-    used_in: []
-  - <<: *deepseek_r1
-    asset: 00 Учебник/Assets/Figures/post-training/deepseek-r1-p16-000.jpg
-    modifications: paper page 16 extraction or crop; exact process requires confirmation
-    used_in: []
-
-  - &deepseek_v2
-    asset: 00 Учебник/Assets/Figures/deepseek-v2-figure2-hq.png
+    metadata_status: needs-confirmation
+  - asset: 00 Учебник/Assets/Figures/deepseek-v2-figure2-hq.png
     author: DeepSeek-AI
     source_url: https://arxiv.org/abs/2405.04434
     license: null
@@ -89,13 +1734,15 @@ assets:
     used_in:
       - 00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md
     metadata_status: needs-confirmation
-  - <<: *deepseek_v2
-    asset: 00 Учебник/Assets/Figures/deepseek-v2-page5.png
+  - asset: 00 Учебник/Assets/Figures/deepseek-v2-page5.png
+    author: DeepSeek-AI
+    source_url: https://arxiv.org/abs/2405.04434
+    license: null
+    license_url: null
     modifications: paper page rasterization; exact process requires confirmation
     used_in: []
-
-  - &deepseek_v3
-    asset: 00 Учебник/Assets/Figures/deepseek-v3-figure1-hq.png
+    metadata_status: needs-confirmation
+  - asset: 00 Учебник/Assets/Figures/deepseek-v3-figure1-hq.png
     author: DeepSeek-AI
     source_url: https://arxiv.org/abs/2412.19437
     license: null
@@ -103,19 +1750,32 @@ assets:
     modifications: figure crop or extraction; exact process requires confirmation
     used_in: []
     metadata_status: needs-confirmation
-  - <<: *deepseek_v3
-    asset: 00 Учебник/Assets/Figures/deepseek-v3-figure2-architecture-hq.png
+  - asset: 00 Учебник/Assets/Figures/deepseek-v3-figure2-architecture-hq.png
+    author: DeepSeek-AI
+    source_url: https://arxiv.org/abs/2412.19437
+    license: null
+    license_url: null
+    modifications: figure crop or extraction; exact process requires confirmation
     used_in:
       - 00 Учебник/10 Атлас современных архитектур/01 Llama, Qwen и DeepSeek как эволюция блока.md
-  - <<: *deepseek_v3
-    asset: 00 Учебник/Assets/Figures/deepseek-v3-page1.png
+    metadata_status: needs-confirmation
+  - asset: 00 Учебник/Assets/Figures/deepseek-v3-page1.png
+    author: DeepSeek-AI
+    source_url: https://arxiv.org/abs/2412.19437
+    license: null
+    license_url: null
     modifications: paper page rasterization; exact process requires confirmation
-  - <<: *deepseek_v3
-    asset: 00 Учебник/Assets/Figures/deepseek-v3-page7.png
+    used_in: []
+    metadata_status: needs-confirmation
+  - asset: 00 Учебник/Assets/Figures/deepseek-v3-page7.png
+    author: DeepSeek-AI
+    source_url: https://arxiv.org/abs/2412.19437
+    license: null
+    license_url: null
     modifications: paper page rasterization; exact process requires confirmation
-
-  - &glm4
-    asset: 00 Учебник/Assets/Figures/glm4-figure1-hq.png
+    used_in: []
+    metadata_status: needs-confirmation
+  - asset: 00 Учебник/Assets/Figures/glm4-figure1-hq.png
     author: null
     source_url: https://arxiv.org/abs/2406.12793
     license: null
@@ -124,13 +1784,15 @@ assets:
     used_in:
       - 00 Учебник/10 Атлас современных архитектур/01 Llama, Qwen и DeepSeek как эволюция блока.md
     metadata_status: needs-confirmation
-  - <<: *glm4
-    asset: 00 Учебник/Assets/Figures/glm4-page2.png
+  - asset: 00 Учебник/Assets/Figures/glm4-page2.png
+    author: null
+    source_url: https://arxiv.org/abs/2406.12793
+    license: null
+    license_url: null
     modifications: paper page rasterization; exact process requires confirmation
     used_in: []
-
-  - &jamba
-    asset: 00 Учебник/Assets/Figures/jamba-figure1-hq.png
+    metadata_status: needs-confirmation
+  - asset: 00 Учебник/Assets/Figures/jamba-figure1-hq.png
     author: null
     source_url: https://arxiv.org/abs/2403.19887
     license: null
@@ -139,11 +1801,14 @@ assets:
     used_in:
       - 00 Учебник/10 Атлас современных архитектур/02 Альтернативы Transformer и multimodality.md
     metadata_status: needs-confirmation
-  - <<: *jamba
-    asset: 00 Учебник/Assets/Figures/jamba-page3.png
+  - asset: 00 Учебник/Assets/Figures/jamba-page3.png
+    author: null
+    source_url: https://arxiv.org/abs/2403.19887
+    license: null
+    license_url: null
     modifications: paper page rasterization; exact process requires confirmation
     used_in: []
-
+    metadata_status: needs-confirmation
   - asset: 00 Учебник/Assets/Figures/kv-cache-prefill-decode.svg
     author: null
     source_url: null
@@ -153,9 +1818,31 @@ assets:
     used_in:
       - 00 Учебник/14 Inference и оптимизация/01 KV-cache, batching и FlashAttention.md
     metadata_status: needs-confirmation
-
-  - &instructgpt
-    asset: 00 Учебник/Assets/Figures/post-training/instructgpt-labeling-ui-000.png
+  - asset: 00 Учебник/Assets/Figures/post-training/deepseek-r1-late-000.jpg
+    author: DeepSeek-AI
+    source_url: https://arxiv.org/abs/2501.12948
+    license: null
+    license_url: null
+    modifications: paper extraction or crop; exact source location and process require confirmation
+    used_in: []
+    metadata_status: needs-confirmation
+  - asset: 00 Учебник/Assets/Figures/post-training/deepseek-r1-late-001.jpg
+    author: DeepSeek-AI
+    source_url: https://arxiv.org/abs/2501.12948
+    license: null
+    license_url: null
+    modifications: paper extraction or crop; exact source location and process require confirmation
+    used_in: []
+    metadata_status: needs-confirmation
+  - asset: 00 Учебник/Assets/Figures/post-training/deepseek-r1-p16-000.jpg
+    author: DeepSeek-AI
+    source_url: https://arxiv.org/abs/2501.12948
+    license: null
+    license_url: null
+    modifications: paper page 16 extraction or crop; exact process requires confirmation
+    used_in: []
+    metadata_status: needs-confirmation
+  - asset: 00 Учебник/Assets/Figures/post-training/instructgpt-labeling-ui-000.png
     author: null
     source_url: https://arxiv.org/abs/2203.02155
     license: null
@@ -163,17 +1850,32 @@ assets:
     modifications: paper UI extraction or crop; exact figure and process require confirmation
     used_in: []
     metadata_status: needs-confirmation
-  - <<: *instructgpt
-    asset: 00 Учебник/Assets/Figures/post-training/instructgpt-labeling-ui-001.png
-  - <<: *instructgpt
-    asset: 00 Учебник/Assets/Figures/post-training/instructgpt-labeling-ui-002.png
+  - asset: 00 Учебник/Assets/Figures/post-training/instructgpt-labeling-ui-001.png
+    author: null
+    source_url: https://arxiv.org/abs/2203.02155
+    license: null
+    license_url: null
+    modifications: paper UI extraction or crop; exact figure and process require confirmation
+    used_in: []
+    metadata_status: needs-confirmation
+  - asset: 00 Учебник/Assets/Figures/post-training/instructgpt-labeling-ui-002.png
+    author: null
+    source_url: https://arxiv.org/abs/2203.02155
+    license: null
+    license_url: null
+    modifications: paper UI extraction or crop; exact figure and process require confirmation
     used_in:
       - 00 Учебник/12 Post-training и Alignment/02 Preference data.md
-  - <<: *instructgpt
-    asset: 00 Учебник/Assets/Figures/post-training/instructgpt-labeling-ui-003.png
-
-  - &qwen25
-    asset: 00 Учебник/Assets/Figures/qwen25-figure1-hq.png
+    metadata_status: needs-confirmation
+  - asset: 00 Учебник/Assets/Figures/post-training/instructgpt-labeling-ui-003.png
+    author: null
+    source_url: https://arxiv.org/abs/2203.02155
+    license: null
+    license_url: null
+    modifications: paper UI extraction or crop; exact figure and process require confirmation
+    used_in: []
+    metadata_status: needs-confirmation
+  - asset: 00 Учебник/Assets/Figures/qwen25-figure1-hq.png
     author: null
     source_url: null
     license: null
@@ -182,13 +1884,15 @@ assets:
     used_in:
       - 00 Учебник/10 Атлас современных архитектур/01 Llama, Qwen и DeepSeek как эволюция блока.md
     metadata_status: needs-confirmation
-  - <<: *qwen25
-    asset: 00 Учебник/Assets/Figures/qwen25-page1.png
+  - asset: 00 Учебник/Assets/Figures/qwen25-page1.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
     modifications: paper page rasterization; exact source and process require confirmation
     used_in: []
-
-  - &retnet
-    asset: 00 Учебник/Assets/Figures/retnet-figure3-hq.png
+    metadata_status: needs-confirmation
+  - asset: 00 Учебник/Assets/Figures/retnet-figure3-hq.png
     author: null
     source_url: https://arxiv.org/abs/2307.08621
     license: null
@@ -197,11 +1901,14 @@ assets:
     used_in:
       - 00 Учебник/10 Атлас современных архитектур/02 Альтернативы Transformer и multimodality.md
     metadata_status: needs-confirmation
-  - <<: *retnet
-    asset: 00 Учебник/Assets/Figures/retnet-page4.png
+  - asset: 00 Учебник/Assets/Figures/retnet-page4.png
+    author: null
+    source_url: https://arxiv.org/abs/2307.08621
+    license: null
+    license_url: null
     modifications: paper page rasterization; exact process requires confirmation
     used_in: []
-
+    metadata_status: needs-confirmation
   - asset: 00 Учебник/Assets/Figures/rope-relative-position.svg
     author: null
     source_url: null
@@ -211,9 +1918,7 @@ assets:
     used_in:
       - 00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md
     metadata_status: needs-confirmation
-
-  - &rwkv
-    asset: 00 Учебник/Assets/Figures/rwkv-figure3-hq.png
+  - asset: 00 Учебник/Assets/Figures/rwkv-figure3-hq.png
     author: null
     source_url: https://arxiv.org/abs/2305.13048
     license: null
@@ -222,13 +1927,15 @@ assets:
     used_in:
       - 00 Учебник/10 Атлас современных архитектур/02 Альтернативы Transformer и multimodality.md
     metadata_status: needs-confirmation
-  - <<: *rwkv
-    asset: 00 Учебник/Assets/Figures/rwkv-page4.png
+  - asset: 00 Учебник/Assets/Figures/rwkv-page4.png
+    author: null
+    source_url: https://arxiv.org/abs/2305.13048
+    license: null
+    license_url: null
     modifications: paper page rasterization; exact process requires confirmation
     used_in: []
-
-  - &tot
-    asset: 00 Учебник/Assets/Figures/tot-figure1-hq.png
+    metadata_status: needs-confirmation
+  - asset: 00 Учебник/Assets/Figures/tot-figure1-hq.png
     author: null
     source_url: null
     license: null
@@ -237,7 +1944,11 @@ assets:
     used_in:
       - 00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md
     metadata_status: needs-confirmation
-  - <<: *tot
-    asset: 00 Учебник/Assets/Figures/tot-page2.png
+  - asset: 00 Учебник/Assets/Figures/tot-page2.png
+    author: null
+    source_url: null
+    license: null
+    license_url: null
     modifications: paper page rasterization; exact source and process require confirmation
     used_in: []
+    metadata_status: needs-confirmation

@@ -70,7 +70,7 @@ $$D_{\text{opt}} \approx 20 \cdot N$$
 
 **~20 токенов на параметр** — compute-optimal training. Для модели с N параметров оптимально обучать на ~20N токенов.
 
-![[02 Areas/ML & DL/raw/papers/scaling-laws/images/chinchilla-scaling.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/scaling-laws/chinchilla-scaling.png]]
 *Chinchilla scaling: compute-optimal allocation параметров и данных. Большинство моделей 2020-2021 были severely undertrained (источник: Alan D. Thompson / Life Architect)*
 
 ### Доказательство: Chinchilla 70B vs Gopher 280B
@@ -86,7 +86,7 @@ $$D_{\text{opt}} \approx 20 \cdot N$$
 
 Chinchilla показала, что **почти все крупные модели 2020-2021 были undertrained**:
 
-![[02 Areas/ML & DL/raw/papers/scaling-laws/images/chinchilla-dataset-sizes.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/scaling-laws/chinchilla-dataset-sizes.png]]
 *Размеры датасетов для различных моделей в контексте Chinchilla-optimal training (источник: Alan D. Thompson / Life Architect)*
 
 | Модель | N | D (actual) | D (Chinchilla optimal) | Undertrained? |

@@ -37,7 +37,7 @@ sources:
 
 ## Архитектура: общий взгляд
 
-![[02 Areas/ML & DL/raw/papers/attention-is-all-you-need/images/The_transformer_encoder_decoder_stack.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/The_transformer_encoder_decoder_stack.png]]
 *Стек из N энкодеров и N декодеров. Каждый энкодер содержит self-attention + FFN, каждый декодер — masked self-attention + cross-attention + FFN (источник: Jay Alammar)*
 
 Transformer следует классической encoder-decoder схеме, но вместо рекуррентных слоёв использует **стеки идентичных блоков**:
@@ -53,7 +53,7 @@ $$\text{output} = \text{LayerNorm}(x + \text{Sublayer}(x))$$
 
 ## Входные представления: эмбеддинги + позиционное кодирование
 
-![[02 Areas/ML & DL/raw/papers/attention-is-all-you-need/images/transformer_positional_encoding_vectors.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/transformer_positional_encoding_vectors.png]]
 *Позиционные кодировки добавляются к токенным эмбеддингам. Синусоидальный паттерн позволяет модели обучиться относительным позициям (источник: Jay Alammar)*
 
 Self-attention **инвариантен к порядку токенов**: если поменять местами слова в предложении, без дополнительной информации модель даст тот же результат. Поэтому необходимо **явно кодировать позицию**.
@@ -73,7 +73,7 @@ $$PE_{(pos, 2i+1)} = \cos\left(\frac{pos}{10000^{2i/d_{\text{model}}}}\right)$$
 
 ## Self-Attention: пошаговый разбор
 
-![[02 Areas/ML & DL/raw/papers/attention-is-all-you-need/images/encoder_with_tensors_2.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/encoder_with_tensors_2.png]]
 *Внутри блока энкодера: каждый токен проходит через self-attention (с доступом ко всем остальным токенам) и FFN (независимо) (источник: Jay Alammar)*
 
 Self-attention — ключевая инновация Transformer. Каждый токен «задаёт вопрос» (Query) всем остальным токенам, которые «отвечают» через Key (насколько релевантен) и Value (какую информацию отдать).
@@ -82,7 +82,7 @@ Self-attention — ключевая инновация Transformer. Каждый
 
 **Шаг 1.** Каждый входной эмбеддинг (512-мерный) умножается на три обученные матрицы $W^Q$, $W^K$, $W^V$, создавая три 64-мерных вектора Query, Key, Value.
 
-![[02 Areas/ML & DL/raw/papers/attention-is-all-you-need/images/transformer_self_attention_vectors.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/attention/transformer_self_attention_vectors.png]]
 *Создание Q, K, V векторов: умножение эмбеддинга на три матрицы весов (источник: Jay Alammar)*
 
 **Шаг 2.** Score = dot-product Query текущего токена с Key каждого другого токена — показывает «насколько сильно обращать внимание».
@@ -99,7 +99,7 @@ Self-attention — ключевая инновация Transformer. Каждый
 
 $$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right) V$$
 
-![[02 Areas/ML & DL/raw/papers/attention-is-all-you-need/images/self-attention-matrix-calculation-2.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/attention/self-attention-matrix-calculation-2.png]]
 *Матричная форма self-attention: одно выражение вместо шести шагов (источник: Jay Alammar)*
 
 ### Каноничный пример
@@ -108,7 +108,7 @@ $$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)
 
 К чему относится «it»? Для человека очевидно — к «animal». Self-attention назначает высокие веса позициям «The» и «animal» при обработке «it».
 
-![[02 Areas/ML & DL/raw/papers/attention-is-all-you-need/images/transformer_self-attention_visualization.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/transformer_self-attention_visualization.png]]
 *Self-attention связывает «it» с «The animal» — модель обучается кореференции без прямого supervision (источник: Jay Alammar)*
 
 ## Multi-Head Attention: несколько точек зрения
@@ -121,7 +121,7 @@ $$\text{MultiHead}(Q, K, V) = \text{Concat}(\text{head}_1, \ldots, \text{head}_h
 
 В оригинале: $h = 8$ голов, $d_k = d_v = d_{\text{model}} / h = 64$. Итоговая стоимость вычислений примерно та же, что у одной полноразмерной головы.
 
-![[02 Areas/ML & DL/raw/papers/attention-is-all-you-need/images/transformer_multi-headed_self-attention-recap.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/attention/transformer_multi-headed_self-attention-recap.png]]
 *Multi-Head Attention: 8 голов работают параллельно, выходы конкатенируются и проецируются через $W^O$ (источник: Jay Alammar)*
 
 **Что изучают разные головы?** Визуализации из Appendix оригинальной статьи (Figure 3-5) показывают специализацию:
@@ -133,7 +133,7 @@ $$\text{MultiHead}(Q, K, V) = \text{Concat}(\text{head}_1, \ldots, \text{head}_h
 
 Архитектура использует attention тремя принципиально разными способами:
 
-![[02 Areas/ML & DL/raw/papers/attention-is-all-you-need/images/the_transformer_3.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/the_transformer_3.png]]
 *Полная архитектура: энкодер (слева) с bidirectional attention, декодер (справа) с masked attention + cross-attention (источник: Jay Alammar)*
 
 | Вид | Q, K, V | Маска | Назначение |
@@ -156,7 +156,7 @@ $$\text{FFN}(x) = \max(0, xW_1 + b_1)W_2 + b_2$$
 
 ## Residual Connections + Layer Normalization
 
-![[02 Areas/ML & DL/raw/papers/attention-is-all-you-need/images/transformer_resideual_layer_norm_2.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/transformer_resideual_layer_norm_2.png]]
 *Каждый подслой обёрнут в residual connection и LayerNorm (источник: Jay Alammar)*
 
 **Residual connections** (He et al., 2016) решают проблему затухающих градиентов в глубоких сетях: градиент может «пролететь» напрямую через skip-connection, минуя подслой.
@@ -165,12 +165,12 @@ $$\text{FFN}(x) = \max(0, xW_1 + b_1)W_2 + b_2$$
 
 ## Декодирование: как генерируется выход
 
-![[02 Areas/ML & DL/raw/papers/attention-is-all-you-need/images/transformer_decoding_2.gif]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/transformer_decoding_2.gif]]
 *Авторегрессивное декодирование: каждый новый токен генерируется с attention ко всем предыдущим (источник: Jay Alammar)*
 
 Финальный linear layer проецирует выход декодера в вектор размерности словаря, softmax превращает его в вероятности:
 
-![[02 Areas/ML & DL/raw/papers/attention-is-all-you-need/images/transformer_decoder_output_softmax.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/transformer_decoder_output_softmax.png]]
 *Linear + Softmax: проекция в пространство словаря и вычисление вероятностей (источник: Jay Alammar)*
 
 Важная деталь: в оригинальном Transformer **weight tying** — одна и та же матрица весов используется для входных эмбеддингов, выходных эмбеддингов и pre-softmax линейного слоя (домноженная на $\sqrt{d_{\text{model}}}$ в эмбеддингах).

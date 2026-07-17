@@ -45,7 +45,7 @@ goal + state
 ReAct чередует reasoning и actions. Toolformer обучает self-supervised вызовы.
 Современный agentic RL использует environments с проверяемыми outcomes.
 
-![[02 Areas/ML & DL/raw/papers/react/images/react-fig1.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/react/react-fig1.png]]
 
 *ReAct: reasoning traces чередуются с actions и observations среды.*
 

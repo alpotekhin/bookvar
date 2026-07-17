@@ -30,7 +30,7 @@ $$\mathbf{K}_t = [\mathbf{K}_{t-1}; \mathbf{k}_t], \quad \mathbf{V}_t = [\mathbf
 
 Результат: генерация $N$ токенов — $O(N)$ вычислений attention вместо $O(N^2)$.
 
-![[02 Areas/ML & DL/raw/papers/kv-cache/images/kv-cache-mechanism.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/kv-cache/kv-cache-mechanism.png]]
 *KV-Cache: ключи и значения предыдущих токенов сохраняются и переиспользуются при генерации каждого нового токена (источник: Omri Mallis)*
 
 ## Как это работает: две фазы inference
@@ -101,7 +101,7 @@ $$\text{KV-cache size} = 2 \times L \times T \times d_{\text{model}} \times \tex
 
 ## Оптимизация 1: GQA и MQA — уменьшение числа KV-голов
 
-![[02 Areas/ML & DL/raw/papers/kv-cache/images/gqa-comparison.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/kv-cache/gqa-comparison.png]]
 *Multi-Head Attention (MHA) vs Multi-Query Attention (MQA) vs Grouped-Query Attention (GQA): GQA — компромисс между полной гибкостью MHA и эффективностью MQA (источник: Omri Mallis)*
 
 ### Multi-Query Attention (MQA)
@@ -149,7 +149,7 @@ Window W = 4:
 
 ## Оптимизация 3: PagedAttention (vLLM)
 
-![[02 Areas/ML & DL/raw/papers/kv-cache/images/paged-attention.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/kv-cache/paged-attention.png]]
 *PagedAttention: KV-cache разбивается на страницы фиксированного размера, хранящиеся неконтигуально в GPU memory — аналогия с виртуальной памятью ОС (источник: Omri Mallis)*
 
 PagedAttention (Kwon et al., 2023) — прорыв в management KV-cache, вдохновлённый **виртуальной памятью ОС**.

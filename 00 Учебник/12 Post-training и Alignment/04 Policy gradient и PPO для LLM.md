@@ -179,7 +179,7 @@ $$
 
 ## 5. Пять ролей, которые нельзя называть одной «моделью PPO»
 
-![[02 Areas/ML & DL/raw/papers/instructgpt/images/rlhf-pipeline-hf.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/instructgpt/rlhf-pipeline-hf.png]]
 
 *Схема показывает current policy, frozen reference/base model, reward model и
 RL update. В полном PPO pipeline дополнительно нужен value model, а rollout

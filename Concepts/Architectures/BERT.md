@@ -25,7 +25,7 @@ sources:
 
 2. **Fine-tuning (GPT)**: обучаем left-to-right Transformer decoder, потом fine-tune'им на задачу. Проблема: модель видит только **левый** контекст. Для token-level задач вроде QA и NER это катастрофически плохо — ответ на вопрос может зависеть от контекста **справа**.
 
-![[02 Areas/ML & DL/raw/papers/bert/images/openai-transformer-1.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/bert/openai-transformer-1.png]]
 *GPT (OpenAI Transformer): однонаправленный decoder — каждый токен видит только предшествующие (источник: Jay Alammar)*
 
 **Ключевой вопрос**: можно ли обучить **глубоко двунаправленную** модель? Проблема: если каждый токен видит все остальные, при стандартном language modeling токен «видит сам себя» через multi-layer attention — это тривиальная утечка информации.
@@ -34,7 +34,7 @@ sources:
 
 ## Архитектура
 
-![[02 Areas/ML & DL/raw/papers/bert/images/bert-base-bert-large-encoders.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/bert/bert-base-bert-large-encoders.png]]
 *BERT BASE (12 слоёв) vs BERT LARGE (24 слоя) — стеки encoder-блоков (источник: Jay Alammar)*
 
 BERT — стек [[02 Areas/ML & DL/Concepts/Architectures/Transformer|Transformer]] encoder блоков с **bidirectional (unmasked) self-attention**. Две конфигурации:
@@ -48,7 +48,7 @@ BERT_BASE специально выбран с таким же числом па
 
 ### Входные эмбеддинги: три компонента
 
-![[02 Areas/ML & DL/raw/papers/bert/images/bert-input-output.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/bert/bert-input-output.png]]
 *Вход BERT: [CLS] + токены предложения A + [SEP] + токены предложения B + [SEP] (источник: Jay Alammar)*
 
 Каждый токен получает **сумму** трёх эмбеддингов:
@@ -67,7 +67,7 @@ BERT_BASE специально выбран с таким же числом па
 
 ### Task 1: Masked Language Modeling (MLM)
 
-![[02 Areas/ML & DL/raw/papers/bert/images/BERT-language-modeling-masked-lm.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/bert/BERT-language-modeling-masked-lm.png]]
 *MLM: 15% токенов маскируются, модель предсказывает оригинальные токены по двунаправленному контексту (источник: Jay Alammar)*
 
 15% токенов случайно выбираются для предсказания. Но не все заменяются на `[MASK]` — иначе возникает mismatch между pre-training (где `[MASK]` есть) и fine-tuning (где его нет). Схема:
@@ -88,7 +88,7 @@ Loss считается **только по маскированным пози�
 
 ### Task 2: Next Sentence Prediction (NSP)
 
-![[02 Areas/ML & DL/raw/papers/bert/images/bert-next-sentence-prediction.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/bert/bert-next-sentence-prediction.png]]
 *NSP: бинарная классификация — предложение B реально следует за A (IsNext) или случайное (NotNext) (источник: Jay Alammar)*
 
 Бинарная задача для пар предложений:
@@ -111,7 +111,7 @@ Loss считается **только по маскированным пози�
 
 ## Fine-tuning: простота — сила BERT
 
-![[02 Areas/ML & DL/raw/papers/bert/images/bert-tasks.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/bert/bert-tasks.png]]
 *Fine-tuning BERT на разные задачи: одна и та же архитектура, разные output layers (источник: Jay Alammar)*
 
 Fine-tuning максимально прост — BERT не требует task-specific архитектур:
@@ -122,7 +122,7 @@ Fine-tuning максимально прост — BERT не требует task-
 | **Token-level** (NER) | Linear layer поверх каждого $T_i$ | `[CLS] tokens [SEP]` |
 | **QA (span extraction)** | Start vector $S$ + End vector $E$: $P(\text{start}=i) = \text{softmax}(S \cdot T_i)$ | `[CLS] question [SEP] paragraph [SEP]` |
 
-![[02 Areas/ML & DL/raw/papers/bert/images/bert-classifier.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/bert/bert-classifier.png]]
 *Classification: вектор [CLS] → linear layer → softmax → класс (источник: Jay Alammar)*
 
 **Гиперпараметры fine-tuning**: batch size = 32, эпохи = 3, lr $\in$ {5e-5, 4e-5, 3e-5, 2e-5}. Тюнится только learning rate на dev set.
@@ -186,7 +186,7 @@ BERT single model на SQuAD v2.0 побил предыдущий лучший �
 
 ## BERT как feature extractor
 
-![[02 Areas/ML & DL/raw/papers/bert/images/bert-feature-extraction-contextualized-embeddings.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/bert/bert-feature-extraction-contextualized-embeddings.png]]
 *BERT как feature extractor: выходы разных слоёв можно использовать как контекстуализированные эмбеддинги без fine-tuning (источник: Jay Alammar)*
 
 BERT можно использовать и без fine-tuning — как source of contextualized embeddings. Ablation из статьи показывает: конкатенация последних 4 слоёв даёт NER F1 = 96.1 (всего -0.3 от fine-tuning F1 = 96.4). Это полезно когда:

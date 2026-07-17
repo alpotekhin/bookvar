@@ -271,7 +271,7 @@ checkpoint.
 - MLA вместо MHA/GQA;
 - DeepSeekMoE вместо обычного dense FFN.
 
-![[02 Areas/ML & DL/raw/papers/deepseek-v2/images/x1.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/deepseek-v2/x1.png]]
 
 *Overview DeepSeek-V2: MLA и DeepSeekMoE находятся внутри model architecture.*
 
@@ -381,7 +381,7 @@ k1.5 paper важен как работа о multimodal long-context reinforceme
 long chain-of-thought. Это прежде всего post-training/reasoning contribution, а
 не новая базовая attention formula.
 
-![[02 Areas/ML & DL/raw/papers/kimi-k15/images/x1.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/kimi-k15/x1.png]]
 
 *Figure из Kimi k1.5: используйте её для training/reasoning pipeline, не как
 универсальную архитектуру всех Kimi.*

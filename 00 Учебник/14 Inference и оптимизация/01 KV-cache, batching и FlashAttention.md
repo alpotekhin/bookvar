@@ -25,7 +25,7 @@ Inference делится на:
 Continuous batching динамически объединяет запросы на разных decode шагах.
 PagedAttention управляет KV-cache блоками, уменьшая fragmentation.
 
-![[02 Areas/ML & DL/raw/papers/kv-cache/images/paged-attention.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/kv-cache/paged-attention.png]]
 
 FlashAttention не аппроксимирует attention. Он вычисляет exact result плитками,
 реже перемещая данные между HBM и on-chip SRAM. Это особенно важно на prefill и

@@ -23,7 +23,7 @@ Gemma (февраль 2024) — **первая открытая модель о�
 
 Gemma — **decoder-only Transformer** с архитектурными решениями, унаследованными от Gemini:
 
-![[02 Areas/ML & DL/raw/papers/gemma/images/fig1.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gemma/fig1.png]]
 *Сравнение Gemma 7B с LLaMA 2 7B, LLaMA 2 13B и Mistral 7B по четырём категориям (источник: Gemma paper)*
 
 ### Параметры моделей
@@ -107,7 +107,7 @@ Google применила многоуровневую фильтрацию pre-
 
 Gemma 7B превосходит **LLaMA 2 13B** (почти вдвое большую модель) по average score (56.9 vs 52.4).
 
-![[02 Areas/ML & DL/raw/papers/gemma/images/fig2.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gemma/fig2.png]]
 *Подробные результаты Gemma по категориям бенчмарков (источник: Gemma paper)*
 
 ### Gemma 2B: on-device champion

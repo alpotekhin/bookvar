@@ -37,9 +37,9 @@ DeepSeek-V3 -- MoE-модель на 671B параметров (37B активн
 - SFT: 1.5M примеров, включая reasoning data дистиллированный из DeepSeek-R1
 - RL: GRPO с rule-based rewards для math/code + reward model для общих задач
 
-![[02 Areas/ML & DL/raw/papers/deepseek-v3/images/fig1.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/deepseek-v3/fig1.png]]
 
-![[02 Areas/ML & DL/raw/papers/deepseek-v3/images/fig2.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/deepseek-v3/fig2.png]]
 
 ## Key Results
 

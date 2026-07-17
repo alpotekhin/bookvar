@@ -28,7 +28,7 @@ $$\mathbf{S} = \mathbf{Q}\mathbf{K}^\top \in \mathbb{R}^{N \times N}, \quad \mat
 
 ## Иерархия памяти GPU: ключевая интуиция
 
-![[02 Areas/ML & DL/raw/papers/flash-attention/images/fig1-tiling.jpg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/flash-attention/fig1-tiling.jpg]]
 *Figure 1 из FlashAttention (Dao et al., 2022): слева — иерархия памяти GPU; в центре — tiling-алгоритм; справа — 7.6x ускорение на GPT-2.*
 
 Иерархия памяти A100 GPU:

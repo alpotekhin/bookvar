@@ -110,7 +110,7 @@ y = 0.69 · E₂(x) + 0.31 · E₄(x)   # после renormalization
 На следующем layer тот же token может выбрать другую пару. Routing — решение
 для token × layer, а не постоянное назначение всего предложения одному expert.
 
-![[02 Areas/ML & DL/raw/papers/mixtral-of-experts/images/sparse-moe-routing.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mixtral-of-experts/sparse-moe-routing.png]]
 
 *Визуализация sparse routing в Mixtral: разные tokens направляются разным
 подмножествам FFN, после чего возвращаются в исходный sequence order.*
@@ -146,7 +146,7 @@ $$
 
 Mixtral 8×7B заменяет каждый FFN восемью experts и выбирает два на token.
 
-![[02 Areas/ML & DL/raw/papers/moe/images/mixtral-smoe.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mixtral-of-experts/smoe-layer.png]]
 
 *Схема sparse MoE layer Mixtral: attention общий, router выбирает два expert
 FFN. На каждом layer выбор выполняется заново.*
@@ -168,7 +168,7 @@ weights совместно обучаются по language-model loss.
 - overlap выбранных experts;
 - стабильность routing между layers.
 
-![[02 Areas/ML & DL/raw/papers/mixtral-of-experts/images/expert-routing-analysis.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mixtral-of-experts/expert-routing-analysis.png]]
 
 *Пример анализа routing из материалов Mixtral. Наблюдаемая специализация —
 эмпирический результат, а не гарантированная человечески понятная профессия.*
@@ -307,7 +307,7 @@ token ─┬→ shared expert(s) ─────────────┐
                                        ┘
 ```
 
-![[02 Areas/ML & DL/raw/papers/deepseek-v2/images/x3.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/deepseek-v2/x3.png]]
 
 *Схема DeepSeekMoE из DeepSeek-V2: shared experts идут по постоянному пути,
 routed experts выбираются router.*

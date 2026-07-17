@@ -39,14 +39,14 @@ RWKV — **крупнейшая dense RNN** когда-либо обученна
 
 ## Архитектура: два sub-блока
 
-![[02 Areas/ML & DL/raw/papers/rwkv/images/rwkv-architecture.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/rwkv/rwkv-architecture.png]]
 *Элементы RWKV блока (слева) и полная архитектура RWKV-LM (справа). Каждый residual block содержит Time-Mixing и Channel-Mixing sub-блоки (источник: оригинальная статья)*
 
 Модель — стек одинаковых residual-блоков. Каждый блок содержит два sub-блока:
 
 ### Time-Mixing (аналог self-attention)
 
-![[02 Areas/ML & DL/raw/papers/rwkv/images/rwkv-lm-architecture.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/rwkv/rwkv-lm-architecture.png]]
 *RWKV для language modeling: стек блоков с LayerNorm, Time-Mixing, Channel-Mixing и финальным LM Head (источник: оригинальная статья)*
 
 **Token Shift** — первая ключевая идея. Все линейные проекции получают **смесь текущего и предыдущего токена**:
@@ -81,7 +81,7 @@ Squared ReLU activation (So et al., 2021). Receptance gate $\sigma(r'_t)$ кон
 
 ### Time-Parallel Mode (обучение)
 
-![[02 Areas/ML & DL/raw/papers/rwkv/images/rwkv-formula.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/rwkv/rwkv-formula.png]]
 *RWKV attention формула: WKV оператор, комбинирующий exponential decay с key-value взвешиванием (источник: Hugging Face)*
 
 Сложность одного слоя: $O(BTd^2)$ — доминируют матричные умножения $W_{\lambda}$ (аналогично $W_Q, W_K, W_V, W_O$ в Transformer). WKV update — $O(BTd)$, что **пренебрежимо** по сравнению с линейными проекциями.
@@ -109,7 +109,7 @@ RWKV — **минимальная сложность** среди всех ср�
 
 ## Scaling Laws: RNN масштабируется как Transformer
 
-![[02 Areas/ML & DL/raw/papers/rwkv/images/rwkv-scaling-comparison.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/rwkv/rwkv-scaling-comparison.png]]
 *RWKV показывает сопоставимую производительность с Transformer-моделями (Pythia, OPT, BLOOM) при одинаковом compute (источник: оригинальная статья)*
 
 45 моделей RWKV обучены для проверки scaling laws. Результат: RWKV следует **тем же log-log linear scaling laws**, что и Transformers ($r^2 = 0.994$). Это опровергает утверждение Kaplan et al. (2020), что LSTM не следует scaling laws Transformer.
@@ -129,14 +129,14 @@ RWKV — **минимальная сложность** среди всех ср�
 
 ### Zero-Shot сравнение с Transformers
 
-![[02 Areas/ML & DL/raw/papers/rwkv/images/rwkv-eval.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/rwkv/rwkv-eval.png]]
 *Zero-shot performance RWKV vs. Transformer-моделей на NLP бенчмарках (источник: Hugging Face)*
 
 RWKV показывает сопоставимые результаты с Pythia, OPT и BLOOM на FLOP-matched основе. На ARC-Challenge и HellaSwag — на уровне или чуть ниже Transformer. На LAMBADA — иногда превосходит.
 
 ## Инференс: линейный скейлинг
 
-![[02 Areas/ML & DL/raw/papers/rwkv/images/rwkv-inference-time.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/rwkv/rwkv-inference-time.png]]
 *Cumulative time на text generation: RWKV линеен, Transformer — суперлинеен из-за растущего KV-cache (источник: оригинальная статья)*
 
 Практически: **int8 RWKV-14B** работает на последовательностях **любой длины** при **3GB VRAM**. Для Transformer той же размерности потребовалось бы 10x+ больше памяти при длинных контекстах.

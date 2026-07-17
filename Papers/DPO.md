@@ -67,7 +67,7 @@ L_DPO(pi_theta; pi_ref) = -E_{(x,yw,yl)~D} [
 
 Входные данные: тройки (prompt x, preferred response yw, dispreferred response yl). Один forward pass через pi_theta и pi_ref --> compute log ratios --> BCE loss. Без RL.
 
-![[02 Areas/ML & DL/raw/papers/dpo/images/fig1.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/dpo/fig1.png]]
 *Figure 1: Сравнение RLHF pipeline (SFT -> RM -> PPO) и DPO (SFT -> direct classification loss). DPO неявно подбирает reward model, оптимальная политика которой -- pi_theta.*
 
 ### Интерпретация градиента

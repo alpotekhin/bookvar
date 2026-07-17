@@ -14,7 +14,7 @@ sources:
 
 # Reward Model
 
-![[02 Areas/ML & DL/raw/papers/instructgpt/images/reward-model-hf.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/instructgpt/reward-model-hf.png]]
 *Обучение Reward Model: люди ранжируют ответы, модель учится предсказывать эти ранжирования через Bradley-Terry loss (источник: Hugging Face)*
 
 ## Зачем нужна Reward Model

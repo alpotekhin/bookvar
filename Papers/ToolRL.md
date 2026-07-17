@@ -34,7 +34,7 @@ concepts:
 
 Существующие подходы к tool-use RL (Search-R1, TORL) ограничены узкими доменами (search, code). Нет систематического анализа: какой reward design оптимален? Нужен ли SFT warm-start? Как масштабируется RL на general tool-use?
 
-![[02 Areas/ML & DL/raw/papers/toolrl/images/introduction.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/toolrl/introduction.png]]
 *ToolRL overview: GRPO с granular reward для tool-use. Cold-start RL consistently outperforms SFT+RL (источник: Qian et al., 2025)*
 
 ## Method
@@ -45,7 +45,7 @@ concepts:
 - **Бенчмарки:** BFCL-v3, API-Bank, Bamboogle
 - **Single-turn** tool calling (не multi-turn как в [[02 Areas/ML & DL/Papers/ASTRA|ASTRA]])
 
-![[02 Areas/ML & DL/raw/papers/toolrl/images/reward-design.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/toolrl/reward-design.png]]
 *Reward design: format reward (binary) + correctness reward (granular по tool name, param names, param values). Step-level decomposition даёт fine-grained gradient signal (источник: Qian et al., 2025)*
 
 ### Reward Design (ключевой вклад)
@@ -72,7 +72,7 @@ concepts:
 
 ## Key Results
 
-![[02 Areas/ML & DL/raw/papers/toolrl/images/cold-start-comparison.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/toolrl/cold-start-comparison.png]]
 *Cold-start GRPO vs SFT+GRPO: cold-start consistently wins. SFT causes memorization that undermines subsequent RL exploration (источник: Qian et al., 2025)*
 
 ### Cold-Start RL vs SFT+RL

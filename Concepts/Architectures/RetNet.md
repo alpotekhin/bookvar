@@ -16,7 +16,7 @@ sources:
 
 ## Зачем это нужно: «Impossible Triangle»
 
-![[02 Areas/ML & DL/raw/papers/retnet/images/impossible-triangle.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/retnet/impossible-triangle.png]]
 *«Impossible Triangle»: до RetNet ни одна архитектура не могла одновременно обеспечить training parallelism, low-cost inference и good performance (источник: оригинальная статья)*
 
 Transformer решает две из трёх задач:
@@ -56,7 +56,7 @@ $$o_n = \sum_{m=1}^{n} \gamma^{n-m} (Q_n e^{in\theta})(K_m e^{im\theta})^\dagger
 
 ## Три представления Retention
 
-![[02 Areas/ML & DL/raw/papers/retnet/images/dual-form.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/retnet/dual-form.png]]
 *Двойственная форма RetNet: (a) Parallel — матричное вычисление для обучения, (b) Recurrent — пошаговое вычисление для инференса (источник: оригинальная статья)*
 
 ### 1. Parallel (обучение)
@@ -145,7 +145,7 @@ FFN: $\text{FFN}(X) = \text{gelu}(XW_1)W_2$. Intermediate dimension = $2d$ (вм
 
 ### Language Modeling Scaling
 
-![[02 Areas/ML & DL/raw/papers/retnet/images/scaling-curve.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/retnet/scaling-curve.png]]
 *Perplexity scaling: RetNet начинает превосходить Transformer при размере >2B параметров (источник: оригинальная статья)*
 
 Три размера (1.3B, 2.7B, 6.7B), обучение на 100B токенов. RetNet **сопоставим** с Transformer, причём разрыв в пользу RetNet **растёт с размером модели**.
@@ -178,7 +178,7 @@ RetNet **превосходит** Transformer на 200M и все альтерн
 
 ## Inference Cost: главное преимущество
 
-![[02 Areas/ML & DL/raw/papers/retnet/images/inference-cost-comparison.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/retnet/inference-cost-comparison.png]]
 *Inference cost RetNet vs. Transformer (6.7B, 8K контекст): 8.4x быстрее decoding, 70% экономии памяти, 15.6x меньше latency (источник: оригинальная статья)*
 
 ### Memory
@@ -187,7 +187,7 @@ RetNet **превосходит** Transformer на 200M и все альтерн
 
 ### Throughput
 
-![[02 Areas/ML & DL/raw/papers/retnet/images/inference-memory-throughput.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/retnet/inference-memory-throughput.png]]
 *GPU memory и throughput при inference: RetNet имеет постоянную стоимость, Transformer деградирует с длиной (источник: оригинальная статья)*
 
 Throughput Transformer **падает** с длиной (KV-cache растёт → больше memory reads). RetNet — **константный** throughput. При 8K: RetNet 8.4x быстрее.

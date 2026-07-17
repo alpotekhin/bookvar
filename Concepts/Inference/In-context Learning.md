@@ -68,7 +68,7 @@ GPT-3 систематизировал три режима inference без fine
 
 ICL работает **только при достаточном масштабе**. Рисунок 1.2 из GPT-3:
 
-![[02 Areas/ML & DL/raw/papers/in-context-learning/images/icl-scaling-model-size.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/in-context-learning/icl-scaling-model-size.png]]
 *Larger models gain more from in-context examples: few-shot performance scales steeply with model size, while zero-shot improves more gradually (источник: Brown et al., 2020, Figure 1.2)*
 
 Маленькие модели (125M-1.3B) **не используют** демонстрации эффективно — adding examples не помогает. Большие модели (13B+) — каждый пример существенно улучшает результат. Это одна из причин, почему ICL считается **emergent ability** (Wei et al., 2022).

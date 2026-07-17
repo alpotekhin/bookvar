@@ -47,7 +47,7 @@ $$PE_{(pos, 2i+1)} = \cos\left(\frac{pos}{10000^{2i/d_{\text{model}}}}\right)$$
 
 где $pos$ — позиция токена в последовательности, $i$ — индекс измерения (dimension), $d_{\text{model}}$ — размерность модели.
 
-![[02 Areas/ML & DL/raw/papers/attention-is-all-you-need/images/transformer_positional_encoding_vectors.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/transformer_positional_encoding_vectors.png]]
 *Визуализация sinusoidal positional encoding: каждая строка — позиция, каждый столбец — dimension. Низкие dimensions (слева) меняются медленно, высокие (справа) — быстро (источник: Jay Alammar)*
 
 ### Интуиция
@@ -124,10 +124,10 @@ $$A_{ij} = \underbrace{H_i H_j^T}_{\text{content-to-content}} + \underbrace{H_i 
 
 ## 4. RoPE — Rotary Positional Embedding (LLaMA, Mistral, Qwen)
 
-![[02 Areas/ML & DL/raw/papers/positional-encoding/images/rope-implementation.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/positional-encoding/rope-implementation.png]]
 *Реализация RoPE: вращение пар измерений query и key векторов на угол, пропорциональный позиции (источник: Su et al., 2021)*
 
-![[02 Areas/ML & DL/raw/papers/positional-encoding/images/rope-decay.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/positional-encoding/rope-decay.png]]
 *Long-term decay RoPE: внутреннее произведение убывает с ростом относительного расстояния между токенами (источник: Su et al., 2021)*
 
 RoPE (Su et al., 2021) — самый широко используемый позиционный метод в современных LLM. Элегантно кодирует **относительную** позицию через **вращение** query и key векторов.

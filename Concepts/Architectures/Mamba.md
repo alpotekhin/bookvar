@@ -29,7 +29,7 @@ $$h'(t) = \mathbf{A}h(t) + \mathbf{B}x(t), \quad y(t) = \mathbf{C}h(t)$$
 
 где $h(t) \in \mathbb{R}^N$ — скрытое состояние, $\mathbf{A} \in \mathbb{R}^{N \times N}$ — матрица динамики, $\mathbf{B}, \mathbf{C}$ — проекции входа и выхода.
 
-![[02 Areas/ML & DL/raw/papers/mamba/images/ssm-three-views.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mamba/ssm-three-views.png]]
 *Три представления SSM: непрерывное, рекуррентное, свёрточное (источник: Maarten Grootendorst)*
 
 ### Три представления одной модели
@@ -56,7 +56,7 @@ $$\bar{\mathbf{A}} = \exp(\Delta \mathbf{A}), \quad \bar{\mathbf{B}} = (\Delta \
 
 ## Selection Mechanism (S6): ключевая инновация
 
-![[02 Areas/ML & DL/raw/papers/mamba/images/selective-ssm.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mamba/selective-ssm.png]]
 *Слева: S4 с фиксированными параметрами. Справа: S6 (Mamba) — параметры B, C, Delta зависят от входа (источник: Maarten Grootendorst)*
 
 Решение элегантно простое — **сделать параметры функциями входа**:
@@ -107,7 +107,7 @@ Time-varying параметры **ломают эквивалентность с
 
 ## Архитектура Mamba: один гомогенный блок
 
-![[02 Areas/ML & DL/raw/papers/mamba/images/mamba-block.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mamba/mamba-block.png]]
 *Mamba block: объединение H3 block и Gated MLP в единую структуру (источник: Maarten Grootendorst)*
 
 Вместо чередования Attention + MLP (как в Transformer) или SSM + MLP (как в H3), Mamba использует **один повторяющийся блок**:
@@ -128,7 +128,7 @@ Time-varying параметры **ломают эквивалентность с
 
 ## Бенчмарки: первая attention-free модель уровня Transformer
 
-![[02 Areas/ML & DL/raw/papers/mamba/images/mamba-vs-transformer.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mamba/mamba-vs-transformer.png]]
 *Scaling laws: Mamba — первая attention-free модель, сопоставимая с Transformer++ (LLaMA recipe) по perplexity (источник: Maarten Grootendorst)*
 
 ### Scaling Laws (125M — 1.3B)

@@ -13,7 +13,7 @@ sources:
 
 # Tree of Thoughts: Deliberate Problem Solving with Large Language Models
 
-![[02 Areas/ML & DL/raw/papers/tree-of-thoughts/images/tot-fig1.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tree-of-thoughts/tot-fig1.png]]
 *IO, CoT, CoT-SC и Tree of Thoughts как частные случаи дерева рассуждений: ToT добавляет branching, evaluation и backtracking (источник: Yao et al., 2023)*
 
 ## Зачем это нужно: LLM как «System 1» мышление
@@ -81,7 +81,7 @@ sources:
 
 ### Game of 24: главный showcase
 
-![[02 Areas/ML & DL/raw/papers/tree-of-thoughts/images/tot-game-of-24.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tree-of-thoughts/tot-game-of-24.png]]
 *ToT в Game of 24: (a) thought generation — генерация кандидатов на каждом шаге, (b) valuation — оценка перспективности каждого состояния (источник: Yao et al., 2023)*
 
 Задача: используя 4 числа и арифметические операции (+-*/), получить 24. Пример: (10 - 4) * (13 - 9) = 24.

@@ -161,7 +161,7 @@ bank account
 subword information и лучше работает с редкими формами, но контекст конкретного
 предложения всё равно не меняет итоговый vector.
 
-![[02 Areas/ML & DL/raw/papers/transfer-learning/images/word2vec-to-bert.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/bert/bert-feature-extraction-contextualized-embeddings.png]]
 
 *Переход от статического Word2Vec к контекстным представлениям: раньше слову
 соответствовал один вектор, теперь он вычисляется заново в каждом предложении.*
@@ -172,7 +172,7 @@ ELMo получает представление слова из двунапр�
 другие Transformer encoders позволяют каждому токену учитывать окружающие
 токены через self-attention.
 
-![[02 Areas/ML & DL/raw/papers/bert/images/bert-feature-extraction-contextualized-embeddings.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/bert/bert-feature-extraction-contextualized-embeddings.png]]
 
 *Jay Alammar, «The Illustrated BERT»: каждый слой BERT создаёт новое контекстное
 представление каждого токена. Для downstream-задачи можно использовать последний

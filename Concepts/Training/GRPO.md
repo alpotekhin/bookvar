@@ -34,7 +34,7 @@ sources:
 
 ## PPO vs GRPO: обзор архитектуры
 
-![[02 Areas/ML & DL/raw/papers/grpo/images/ppo-vs-grpo.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/grpo/ppo-vs-grpo.png]]
 *PPO требует 4 модели (policy, reference, reward, value/critic). GRPO убирает value model — advantage считается через нормализацию rewards внутри группы из G ответов (источник: DeepSeekMath, 2024)*
 
 ## Как работает PPO (baseline)
@@ -96,7 +96,7 @@ GRPO отвечает на тот же вопрос **эмпирически**: 
 
 GRPO использует rewards **сравнительно** (через нормализацию по группе), что идеально совпадает с тем, как rewards обучены. PPO с critic пытается использовать rewards **абсолютно** — менее надёжно.
 
-![[02 Areas/ML & DL/raw/papers/grpo/images/training-methods-comparison.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/grpo/training-methods-comparison.png]]
 *Сравнение методов обучения (SFT, RFT, GRPO, PPO) на DeepSeekMath-Instruct 1.3B: GRPO конкурентоспособен с PPO при меньших ресурсах (источник: DeepSeekMath, 2024)*
 
 ## Сравнение PPO и GRPO
@@ -132,10 +132,10 @@ $$r_{format} = \begin{cases} 1 & \text{если формат } \texttt{<think>..
 
 Для open-ended задач (writing, QA) используется обученная reward model, как в стандартном RLHF.
 
-![[02 Areas/ML & DL/raw/papers/grpo/images/iterative-rl-curves.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/grpo/iterative-rl-curves.png]]
 *Iterative RL: кривые обучения DeepSeekMath-Instruct 7B на GSM8K и MATH через GRPO. Каждая итерация улучшает результат (источник: DeepSeekMath, 2024)*
 
-![[02 Areas/ML & DL/raw/papers/grpo/images/majk-passk.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/grpo/majk-passk.png]]
 *Maj@K и Pass@K: SFT vs RL (GRPO). RL-модели генерируют более разнообразные решения — Pass@K растёт быстрее (источник: DeepSeekMath, 2024)*
 
 ## GRPO в DeepSeek-R1: что произошло
