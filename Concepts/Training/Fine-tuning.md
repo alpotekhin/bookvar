@@ -29,15 +29,15 @@ Fine-tuning — адаптация pre-trained модели к downstream зад
 
 ## Эволюция парадигм fine-tuning
 
-![[02 Areas/ML & DL/raw/papers/fine-tuning/images/finetuning-approaches.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fine-tuning/finetuning-approaches.png]]
 *Три подхода к fine-tuning: feature-based (замороженная модель + классификатор), output-layer tuning (только верхний слой), full fine-tuning (все параметры). С 2021+ добавились PEFT-методы (LoRA, adapters), а с 2022+ — prompting без fine-tuning вообще (источник: Sebastian Raschka)*
 
 ## Full Fine-Tuning: классический подход
 
-![[02 Areas/ML & DL/raw/papers/fine-tuning/images/regular-finetuning.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fine-tuning/regular-finetuning.png]]
 *Full Fine-Tuning: все веса модели обновляются через backpropagation. Для больших моделей (>10B) требует значительных ресурсов (источник: Sebastian Raschka)*
 
-![[02 Areas/ML & DL/raw/papers/fine-tuning/images/lora-weights.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/lora/fig1.png]]
 *LoRA: вместо обновления полной матрицы $W$ обучаются только низкоранговые матрицы $A$ и $B$, которые при инференсе сливаются с оригинальными весами (источник: Sebastian Raschka)*
 
 ### Как это работает
@@ -106,7 +106,7 @@ Fine-tuning — адаптация pre-trained модели к downstream зад
 
 $$h = W_0 x + BA \cdot x$$
 
-![[02 Areas/ML & DL/raw/papers/lora/images/fig1.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/lora/fig1.png]]
 *LoRA: замороженные веса $W$ + обучаемые $B$ и $A$. При inference сливаются — нулевой overhead (источник: Hu et al., 2021)*
 
 - $r = 4-8$ — стандартный rank
@@ -133,7 +133,7 @@ x → LayerNorm → Down-project (d → r) → GELU → Up-project (r → d) →
 
 Обучаются только adapter параметры (~1-3% от модели). Минус: добавляют **sequential computation** → 5-30% latency overhead при inference (особенно заметно при batch\_size=1).
 
-![[02 Areas/ML & DL/raw/papers/lora/images/fig5.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/lora/fig5.png]]
 *Adapter layers (AdapterL/AdapterH) добавляют 5-30% latency при batch\_size=1. LoRA = нулевой overhead (источник: Hu et al., 2021)*
 
 ### Prefix Tuning

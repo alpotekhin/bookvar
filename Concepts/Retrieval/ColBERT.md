@@ -44,7 +44,7 @@ Document →  BERT  →  [CLS]  →  d⃗  (один вектор)
 
 ### 3. Late Interaction (ColBERT) — лучшее из двух миров
 
-![[02 Areas/ML & DL/raw/papers/colbert/images/colbert-framework.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/colbert/colbert-framework.png]]
 *Архитектура ColBERT: query и document независимо кодируются, relevance вычисляется через MaxSim (источник: Stanford).*
 
 ```

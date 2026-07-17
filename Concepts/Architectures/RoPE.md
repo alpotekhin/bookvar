@@ -15,7 +15,7 @@ sources:
 
 # RoPE — Rotary Position Embedding
 
-![[02 Areas/ML & DL/raw/papers/rope/images/rope-visualization.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/positional-encoding/rope-implementation.png]]
 *Визуализация Rotary Position Embedding: вращение пар элементов в пространстве embedding'ов (RoFormer paper, 2104.09864)*
 
 ## Проблема: зачем нужны позиционные кодировки

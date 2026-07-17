@@ -14,7 +14,7 @@ sources:
 
 # LSTM — Long Short-Term Memory
 
-![[02 Areas/ML & DL/raw/papers/lstm/images/lstm-chain.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/lstm/lstm-chain.png]]
 *Цепочка LSTM-ячеек: cell state (верхняя линия) проходит через всю последовательность с минимальными трансформациями, три гейта управляют потоком информации (источник: Colah, 2015)*
 
 ## Зачем это нужно: проблема затухающих градиентов

@@ -20,7 +20,7 @@ primary_sources:
 > а количество состояний, которые нужно записывать и снова читать на каждом
 > decode step.
 
-![[02 Areas/ML & DL/raw/papers/gqa/images/mha-mqa-gqa.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gqa/mha-gqa-mqa.png]]
 
 *Иллюстрация из материалов GQA: query heads сохраняются, а число независимых
 K/V heads уменьшается от MHA к MQA. GQA — промежуточная точка.*
@@ -175,7 +175,7 @@ $$
 Если $n_q=32$ и $n_{kv}=8$, $r=4$: каждые четыре query heads читают один KV
 head. Cache в четыре раза меньше MHA.
 
-![[02 Areas/ML & DL/raw/papers/gqa/images/mha-gqa-mqa.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gqa/mha-gqa-mqa.png]]
 
 *Ещё один вид той же структуры: GQA сохраняет несколько независимых K/V
 подпространств, не оплачивая полный MHA cache.*
@@ -268,7 +268,7 @@ $$
 
 и аналогично для $W_V$. После такого surgery модель дополнительно обучают.
 
-![[02 Areas/ML & DL/raw/papers/gqa/images/uptrain-recycling.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gqa/uptrain-recycling.png]]
 
 *Схема из GQA paper: checkpoint не выбрасывают; K/V heads агрегируют и проводят
 короткое uptraining. Авторы исследовали бюджет около 5% исходного pre-training

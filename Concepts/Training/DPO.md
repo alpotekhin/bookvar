@@ -25,7 +25,7 @@ sources:
 
 DPO (Rafailov et al., 2023, Stanford, NeurIPS 2023) устраняет шаги 2 и 3 целиком. Ключевой инсайт: **языковая модель *неявно* является reward model** — оптимальная политика для KL-constrained reward maximization выражается аналитически, и можно оптимизировать её напрямую через binary cross-entropy loss.
 
-![[02 Areas/ML & DL/raw/papers/dpo/images/fig1.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/dpo/fig1.png]]
 *RLHF (слева) vs DPO (справа): RLHF требует отдельного обучения reward model и RL loop. DPO оптимизирует policy напрямую из preference data через classification loss (источник: Rafailov et al., 2023)*
 
 ## Математическая деривация: от RLHF к DPO
@@ -91,7 +91,7 @@ $$\nabla_\theta \mathcal{L} = -\beta \cdot \sigma(\hat{r}_\theta(y_l) - \hat{r}_
 
 ## Pipeline DPO на практике
 
-![[02 Areas/ML & DL/raw/papers/dpo/images/dpo-pipeline.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/dpo/dpo-pipeline.png]]
 *DPO training pipeline: SFT model → reference policy (frozen) → preference dataset → DPO optimization через binary cross-entropy loss. Вместо 4 моделей RLHF нужны только 2: policy + reference (источник: Cameron Wolfe)*
 
 **Гиперпараметры:**
@@ -101,7 +101,7 @@ $$\nabla_\theta \mathcal{L} = -\beta \cdot \sigma(\hat{r}_\theta(y_l) - \hat{r}_
 
 ## Результаты: DPO vs PPO
 
-![[02 Areas/ML & DL/raw/papers/dpo/images/fig3.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/dpo/fig3.png]]
 *Frontier analysis: DPO vs PPO на TL;DR summarization. DPO доминирует PPO по win rate при comparable KL divergence (источник: Rafailov et al., 2023)*
 
 | Задача | Метрика | DPO | PPO | Best-of-N |
@@ -115,7 +115,7 @@ $$\nabla_\theta \mathcal{L} = -\beta \cdot \sigma(\hat{r}_\theta(y_l) - \hat{r}_
 
 **OOD generalization:** На CNN/DailyMail (модель не видела эти данные) DPO win rate 36% vs PPO 26%. DPO лучше обобщается за пределы training distribution.
 
-![[02 Areas/ML & DL/raw/papers/dpo/images/fig4.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/dpo/fig4.png]]
 *Controlled sentiment generation: DPO vs PPO. DPO точнее контролирует sentiment при меньшем KL divergence (источник: Rafailov et al., 2023)*
 
 ## Теоретические гарантии

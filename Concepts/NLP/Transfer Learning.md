@@ -29,10 +29,10 @@ sources:
 
 ## Эволюция: от Word2Vec до GPT-4
 
-![[02 Areas/ML & DL/raw/papers/transfer-learning/images/word2vec-to-bert.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/bert/bert-feature-extraction-contextualized-embeddings.png]]
 *Эволюция представлений: от static word embeddings (Word2Vec) к контекстуализированным представлениям (ELMo, BERT) (источник: Jay Alammar)*
 
-![[02 Areas/ML & DL/raw/papers/transfer-learning/images/elmo-bert-gpt.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/bert/bert-transfer-learning.png]]
 *Сравнение подходов: ELMo (feature-based), GPT (fine-tuning, left-to-right), BERT (fine-tuning, bidirectional) (источник: Jay Alammar)*
 
 История transfer learning в NLP — это пять эпох, каждая из которых решала ключевое ограничение предыдущей.
@@ -79,7 +79,7 @@ $$J = \sum_{i,j=1}^{V} f(X_{ij}) \left( w_i^T \tilde{w}_j + b_i + \tilde{b}_j - 
 
 **Embeddings from Language Models** — прорыв: двунаправленный LSTM обучается как языковая модель (forward + backward), и **все скрытые слои** используются для создания эмбеддинга.
 
-![[02 Areas/ML & DL/raw/papers/bert/images/bert-feature-extraction-contextualized-embeddings.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/bert/bert-feature-extraction-contextualized-embeddings.png]]
 *Контекстуализированные эмбеддинги: одно слово получает разные векторы в зависимости от контекста (источник: Jay Alammar)*
 
 **Ключевая инновация**: разные downstream tasks нуждаются в **разной** информации, поэтому ELMo использует **task-specific взвешенное усреднение** трёх слоёв:
@@ -111,7 +111,7 @@ Fine-tuning: добавляем task-specific linear head, обновляем **
 
 #### BERT (Devlin et al., 2018)
 
-![[02 Areas/ML & DL/raw/papers/bert/images/bert-transfer-learning.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/bert/bert-transfer-learning.png]]
 *Transfer learning в BERT: pre-training на unlabeled data → fine-tuning на task-specific data (источник: Jay Alammar)*
 
 Два нововведения:

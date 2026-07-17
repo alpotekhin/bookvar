@@ -31,7 +31,7 @@ raw: "[[02 Areas/ML & DL/raw/papers/self-rag/paper.txt]]"
 
 Self-RAG обучает одну LLM (7B/13B) адаптивно извлекать документы **по требованию**, генерировать ответ и **критиковать собственные выходы** с помощью специальных reflection tokens. В отличие от классического RAG, который всегда извлекает фиксированное количество документов, Self-RAG сама решает, нужен ли retrieval, оценивает релевантность документов и степень поддержки ответа цитатами. Результат: Self-RAG 7B/13B превосходит ChatGPT и retrieval-augmented Llama2-chat на задачах QA, fact verification и long-form generation.
 
-![[02 Areas/ML & DL/raw/papers/self-rag/images/fig1.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/self-rag/fig1.png]]
 *Рисунок 1: Сравнение стандартного RAG (слева) и Self-RAG (справа). Self-RAG адаптивно решает, когда извлекать, обрабатывает несколько документов параллельно и критикует качество генерации.*
 
 ## Problem

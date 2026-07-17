@@ -52,9 +52,9 @@ Transformer -- dominant architecture, но две проблемы при дли
 - In-house dataset: web, books, code (last update March 2024)
 - Successfully trained on context lengths up to 1M tokens
 
-![[02 Areas/ML & DL/raw/papers/jamba/images/fig1.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/jamba/fig1.png]]
 
-![[02 Areas/ML & DL/raw/papers/jamba/images/fig3.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/jamba/fig3.png]]
 
 ## Key Results
 

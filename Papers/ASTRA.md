@@ -42,7 +42,7 @@ End-to-end фреймворк для тренировки tool-use агенто�
 
 ## Method
 
-![[02 Areas/ML & DL/raw/papers/astra/images/sft-pipeline.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/astra/sft-pipeline.png]]
 *ASTRA SFT pipeline: 5 стадий от сбора тулов до верифицированных траекторий. Stage 5 включает 7-мерную reward system (Global + Step-wise) (источник: Tian et al., 2026)*
 
 ### Компонент A: Trajectory Synthesis (для SFT)
@@ -88,12 +88,12 @@ End-to-end фреймворк для тренировки tool-use агенто�
 
 **Шаг 4. Мерж подсред.** Функционально эквивалентные подзадачи объединяются, данные расширяются.
 
-![[02 Areas/ML & DL/raw/papers/astra/images/env-synthesis.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/astra/env-synthesis.png]]
 *Environment Synthesis: Q-A декомпозиция → Python-функции → executable arenas. Каждая подзадача становится реальным тулом с ground-truth ответом (источник: Tian et al., 2026)*
 
 ### Training Pipeline
 
-![[02 Areas/ML & DL/raw/papers/astra/images/rl-pipeline.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/astra/rl-pipeline.png]]
 *RL pipeline: multi-turn interaction в Code Sandbox. Batch rollouts → tool execution → deterministic reward. Одна траектория показана для одного промпта (источник: Tian et al., 2026)*
 
 **Stage 1: SFT** на синтезированных траекториях. 2 эпохи, batch 32, max 20K tokens, LR 5e-6 (14B) / 2e-6 (32B).
@@ -158,13 +158,13 @@ ASTRA-14B бьёт base Qwen3-32B на всех трёх бенчмарках.
 
 ## Ablation Studies
 
-![[02 Areas/ML & DL/raw/papers/astra/images/reward-ablation.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/astra/reward-ablation.png]]
 *Reward ablation: F1 vs recall-only vs precision-only. Recall → turns explode, precision → turns collapse, F1 → stable (источник: Tian et al., 2026)*
 
-![[02 Areas/ML & DL/raw/papers/astra/images/tool-mixing-ablation.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/astra/tool-mixing-ablation.png]]
 *Tool mixing ablation: similarity-band > random > none. Structured distractors дают balanced discrimination pressure (источник: Tian et al., 2026)*
 
-![[02 Areas/ML & DL/raw/papers/astra/images/turn-distribution.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/astra/turn-distribution.png]]
 *Turn distribution по стадиям обучения. SFT сжимает output, RL возвращает к средней длине (источник: Tian et al., 2026)*
 
 **Reward design:** F1 > recall-only (turns explode) > precision-only (turns collapse). Только графики, без точных чисел.

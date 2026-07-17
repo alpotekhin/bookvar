@@ -1,9 +1,14 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 import { parse } from 'yaml';
 import { describe, expect, it } from 'vitest';
 
 const root = resolve(import.meta.dirname, '../..');
+
+function sha256(path: string): string {
+  return createHash('sha256').update(readFileSync(path)).digest('hex');
+}
 
 describe('publication asset registry', () => {
   it('records every tracked textbook figure with reviewable rights metadata', () => {
@@ -46,7 +51,9 @@ describe('publication asset registry', () => {
       asset.asset === '00 Учебник/Assets/Figures/attention/transformer_self_attention_vectors.png'
     );
     expect(attention?.used_in).toEqual([
-      '00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V.md'
+      '00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V.md',
+      'Concepts/Architectures/Transformer.md',
+      'Concepts/NLP/Attention Mechanism.md'
     ]);
 
     const deepseekR1 = registry.assets.find((asset) =>
@@ -56,5 +63,94 @@ describe('publication asset registry', () => {
       '00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md',
       '00 Учебник/10 Атлас современных архитектур/01 Llama, Qwen и DeepSeek как эволюция блока.md'
     ]);
+  });
+
+  it('keeps every asset-curated allowlist page independent of ignored raw files', () => {
+    const allowlist = JSON.parse(readFileSync(resolve(root, 'publishing/link-allowlist.json'), 'utf8')) as {
+      entries: Array<{ target: string; reason: string }>;
+    };
+    const blocked = allowlist.entries.filter(({ reason }) =>
+      reason === 'authored page depends on ignored raw assets; publish after asset curation'
+    );
+    const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8'), { merge: true }) as {
+      assets: Array<{ asset: string }>;
+    };
+    const registeredAssets = new Set(registry.assets.map(({ asset }) => asset));
+    const noteRoots = ['00 Учебник', 'Concepts', 'Papers'];
+    const authoredNotes = noteRoots.flatMap((directory) => {
+      const directoryRoot = resolve(root, directory);
+      return readdirSync(directoryRoot, { recursive: true, withFileTypes: true })
+        .filter((entry) => entry.isFile() && entry.name.endsWith('.md'))
+        .map((entry) => `${entry.parentPath}/${entry.name}`);
+    });
+
+    expect(blocked).toHaveLength(78);
+    for (const { target } of blocked) {
+      const relativePage = target.replace(/^02 Areas\/ML & DL\//, '');
+      const exactPage = resolve(root, `${relativePage}.md`);
+      const basenameMatches = relativePage.includes('/')
+        ? []
+        : authoredNotes.filter((page) => page.endsWith(`/${relativePage}.md`));
+      const page = existsSync(exactPage) ? exactPage : basenameMatches[0] ?? exactPage;
+      expect(existsSync(exactPage) || basenameMatches.length === 1, `Ambiguous curated target: ${relativePage}`).toBe(true);
+      expect(existsSync(page), `Missing curated target page: ${relativePage}`).toBe(true);
+      const source = readFileSync(page, 'utf8');
+      expect(source, `Raw asset remains in ${relativePage}`).not.toMatch(
+        /!\[\[[^\]]*(?:^|\/)raw\/|!\[[^\]]*\]\([^)]*(?:^|\/)raw\//m
+      );
+      const localImages = [
+        ...source.matchAll(/!\[\[((?:02 Areas\/ML & DL\/)?[^\]|]+\.(?:png|jpe?g|gif|webp|svg))(?:\|[^\]]*)?\]\]/giu),
+        ...source.matchAll(/!\[[^\]]*\]\(((?:02 Areas\/ML & DL\/)?[^)]+\.(?:png|jpe?g|gif|webp|svg))\)/giu)
+      ].map((match) => match[1]?.replace(/^02 Areas\/ML & DL\//, ''));
+      for (const image of localImages) {
+        expect(image, `Invalid local image in ${relativePage}`).toBeTypeOf('string');
+        expect(registeredAssets.has(image as string), `Unregistered local image in ${relativePage}: ${image}`).toBe(true);
+        expect(existsSync(resolve(root, image as string)), `Missing tracked image in ${relativePage}: ${image}`).toBe(true);
+      }
+    }
+
+    for (const page of authoredNotes) {
+      const source = readFileSync(page, 'utf8');
+      expect(source, `Raw asset remains in publication candidate: ${page}`).not.toMatch(
+        /!\[\[[^\]]*(?:^|\/)raw\/|!\[[^\]]*\]\([^)]*(?:^|\/)raw\//m
+      );
+    }
+  });
+
+  it('registers every tracked curated binary exactly once', () => {
+    const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8'), { merge: true }) as {
+      assets: Array<{
+        id?: string;
+        asset: string;
+        provenance_confirmation?: string;
+        source_asset?: string;
+      }>;
+    };
+    const curatedRoot = resolve(root, '00 Учебник/Assets/Figures/curated');
+    const files = existsSync(curatedRoot)
+      ? readdirSync(curatedRoot, { recursive: true, withFileTypes: true })
+        .filter((entry) => entry.isFile())
+        .map((entry) => `00 Учебник/Assets/Figures/curated/${entry.parentPath.slice(curatedRoot.length + 1)}${entry.parentPath === curatedRoot ? '' : '/'}${entry.name}`)
+        .sort()
+      : [];
+    const registered = registry.assets
+      .map(({ asset }) => asset)
+      .filter((asset) => asset.startsWith('00 Учебник/Assets/Figures/curated/'))
+      .sort();
+
+    expect(files.length).toBeGreaterThan(0);
+    expect(registered).toEqual(files);
+    const curatedEntries = registry.assets.filter(({ asset }) =>
+      asset.startsWith('00 Учебник/Assets/Figures/curated/')
+    );
+    expect(new Set(curatedEntries.map(({ id }) => id)).size).toBe(curatedEntries.length);
+    for (const entry of curatedEntries) {
+      expect(entry.id).toMatch(/^curated-[a-z0-9-]+-[a-f0-9]{12}$/);
+      expect(entry.provenance_confirmation).toBe('user-confirmed-open-materials');
+      expect(entry.source_asset).toMatch(/^raw\/papers\//);
+      expect(sha256(resolve(root, entry.asset))).toBe(
+        sha256(resolve(root, entry.source_asset as string))
+      );
+    }
   });
 });

@@ -28,7 +28,7 @@ primary_sources:
 RLVR задаёт reward. **GRPO задаёт estimator advantage и семейство policy
 updates**. Он может работать с verifiable function, reward model или их смесью.
 
-![[02 Areas/ML & DL/raw/papers/grpo/images/ppo-vs-grpo.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/grpo/ppo-vs-grpo.png]]
 
 *В PPO baseline предсказывает critic; в GRPO baseline строится по нескольким
 ответам на один prompt. Источник: Shao et al., 2024,

@@ -33,7 +33,7 @@ sources:
 
 ## Эволюция GPT: от 117M к 175B
 
-![[02 Areas/ML & DL/raw/papers/gpt-30/images/gpt-2-transformer-xl-bert-3.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-30/gpt-2-transformer-xl-bert-3.png]]
 *Линейка моделей 2018-2019: GPT использует Transformer decoder, BERT — encoder. Масштаб растёт (источник: Jay Alammar)*
 
 ### GPT-1 (Radford et al., 2018) — proof of concept
@@ -46,7 +46,7 @@ sources:
 
 ### GPT-2 (Radford et al., 2019) — zero-shot generalization
 
-![[02 Areas/ML & DL/raw/papers/gpt-30/images/gpt2-sizes-hyperparameters-3.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-30/gpt2-sizes-hyperparameters-3.png]]
 *Четыре размера GPT-2: от 117M до 1.5B параметров (источник: Jay Alammar)*
 
 - **1.5B параметров**, 48 слоёв, $d_{\text{model}}$ = 1600
@@ -70,7 +70,7 @@ sources:
 
 ## Архитектура GPT-3
 
-![[02 Areas/ML & DL/raw/papers/gpt-30/images/gpt2-transformer-block-vectors-2.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-30/gpt2-transformer-block-vectors-2.png]]
 *Decoder block GPT-2/3: Layer Norm → Masked Self-Attention → Residual → Layer Norm → FFN → Residual (источник: Jay Alammar)*
 
 GPT-3 наследует архитектуру GPT-2 с минимальными изменениями:
@@ -83,7 +83,7 @@ GPT-3 наследует архитектуру GPT-2 с минимальным�
 5. **Feed-Forward Network** ($d_{\text{model}}$ → $4 \times d_{\text{model}}$ → $d_{\text{model}}$)
 6. **Residual connection**
 
-![[02 Areas/ML & DL/raw/papers/gpt-30/images/self-attention-and-masked-self-attention.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-30/self-attention-and-masked-self-attention.png]]
 *Masked self-attention (справа) vs обычный self-attention (слева): будущие позиции заблокированы (источник: Jay Alammar)*
 
 ### Семейство моделей (Table 2.1 из статьи)
@@ -104,7 +104,7 @@ GPT-3 наследует архитектуру GPT-2 с минимальным�
 
 ### Входные представления
 
-![[02 Areas/ML & DL/raw/papers/gpt-30/images/gpt2-token-embeddings-wte-2.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-30/gpt2-token-embeddings-wte-2.png]]
 *Token embeddings + learned positional embeddings (источник: Jay Alammar)*
 
 - **Token embedding**: BPE с словарём ~50K (наследие GPT-2)
@@ -113,7 +113,7 @@ GPT-3 наследует архитектуру GPT-2 с минимальным�
 
 ### Авторегрессивная генерация
 
-![[02 Areas/ML & DL/raw/papers/gpt-30/images/gpt2-autoregression-2.gif]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-30/gpt2-autoregression-2.gif]]
 *Авторегрессия: каждый новый токен генерируется с учётом всех предыдущих (источник: Jay Alammar)*
 
 На каждом шаге модель предсказывает распределение вероятностей следующего токена по всему словарю. Выбранный токен добавляется ко входу, процесс повторяется. Loss: стандартный cross-entropy языковой модели.

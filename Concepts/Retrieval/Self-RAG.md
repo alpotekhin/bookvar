@@ -35,7 +35,7 @@ Self-RAG расширяет словарь модели **четырьмя ти�
 
 Критический момент: модель **сама генерирует** эти токены как часть output — это не отдельная reward model или внешний классификатор. Reflection tokens — часть расширенного словаря, предсказываемые standard next-token prediction.
 
-![[02 Areas/ML & DL/raw/papers/self-rag/images/fig1.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/self-rag/fig1.png]]
 *Сравнение классического RAG (слева) и Self-RAG (справа). Self-RAG адаптивно решает, когда извлекать, оценивает релевантность и поддержку каждого документа (источник: Asai et al., 2023)*
 
 ## Как это работает: inference pipeline
@@ -56,7 +56,7 @@ Self-RAG расширяет словарь модели **четырьмя ти�
 
 Если `Retrieve = No` — модель генерирует ответ без retrieval (как обычная LM) и оценивает его через `IsUse`.
 
-![[02 Areas/ML & DL/raw/papers/self-rag/images/fig2.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/self-rag/fig2.png]]
 *Примеры training data для Self-RAG. Слева: задача без retrieval (эссе). Справа: задача с retrieval — документы, reflection tokens и оценки вставлены в training corpus (источник: Asai et al., 2023)*
 
 ## Обучение: critic model + generator model
@@ -117,7 +117,7 @@ Self-RAG 7B/13B (на базе Llama 2) **превосходит ChatGPT** и re
 
 Self-RAG 7B также превосходит **CoVE 65B** (модель в 9x больше) и **Llama2-chat 13B** на всех задачах.
 
-![[02 Areas/ML & DL/raw/papers/self-rag/images/fig3.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/self-rag/fig3.png]]
 *Ablation study: вклад каждого компонента Self-RAG. Удаление любого типа reflection token ухудшает результат (источник: Asai et al., 2023)*
 
 ## Почему это важно

@@ -292,7 +292,7 @@ values можно не разворачивать до weighted sum.
 
 ## MLA, MHA, GQA: сравнение на одной оси
 
-![[02 Areas/ML & DL/raw/papers/deepseek-v2/images/x1.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/deepseek-v2/x1.png]]
 
 *Если эта figure доступна в выгрузке DeepSeek-V2, она показывает архитектурный
 контекст MLA и DeepSeekMoE. Для деталей attention используйте предыдущую схему

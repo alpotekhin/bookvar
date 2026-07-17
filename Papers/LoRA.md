@@ -47,7 +47,7 @@ Full fine-tuning LLM (GPT-3 175B) нецелесообразен в продак
 
 ### LoRA reparametrization (§4.1)
 
-![[02 Areas/ML & DL/raw/papers/lora/images/fig1.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/lora/fig1.png]]
 *Figure 1: LoRA reparametrization. Замороженная матрица W₀ + обучаемые матрицы B (d×r) и A (r×k). B инициализируется нулями, A — случайно. ∆W = BA = 0 в начале обучения.*
 
 ```
@@ -118,7 +118,7 @@ LoRA с 4.7M (0.003% от 175B) превышает или сопоставим �
 
 ### Inference Latency (Table 1, lora/fig5.png)
 
-![[02 Areas/ML & DL/raw/papers/lora/images/fig5.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/lora/fig5.png]]
 *Figure 5: Задержка инференса GPT-2 medium (мс). LoRA = нулевой overhead (merged weights). AdapterL/H добавляют +20% при batch=1/seq=128.*
 
 | Batch / Seq | FT / LoRA | AdapterL (+%) | AdapterH (+%) |
@@ -144,7 +144,7 @@ LoRA с 4.7M (0.003% от 175B) превышает или сопоставим �
 
 ### Оптимальный rank r? (Table 6, §7.2)
 
-![[02 Areas/ML & DL/raw/papers/lora/images/fig2.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/lora/fig2.png]]
 *Figure 2: GPT-3 175B validation accuracy vs trainable parameters. LoRA доминирует над Adapter/Prefix методами.*
 
 | r | WikiSQL (Wq+Wv) | MNLI (Wq+Wv) |
@@ -159,7 +159,7 @@ LoRA с 4.7M (0.003% от 175B) превышает или сопоставим �
 
 ### Subspace analysis (§7.3, lora/fig3.png, fig4.png)
 
-![[02 Areas/ML & DL/raw/papers/lora/images/fig3.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/lora/fig3.png]]
 *Figure 3: Subspace similarity между Ar=8 и Ar=64 для Wq и Wv. Высокая схожесть верхних сингулярных векторов подтверждает: low-rank adaptation учит intrinsically low-dimensional subspace.*
 
 Φ_Fr (нормализованная схожесть подпространств) между Ar=8 и Ar=64 ≈ 0.5–0.7 для верхних d=1 сингулярных векторов. Нижние → ≈ 0. Вывод: лишь несколько значимых направлений в ∆W.

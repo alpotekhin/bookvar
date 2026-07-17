@@ -21,7 +21,7 @@ concepts:
 **Published:** 2024 (arXiv:2403.08295v4, Apr 2024)
 **URL:** https://arxiv.org/abs/2403.08295
 
-![[02 Areas/ML & DL/raw/papers/gemma/images/fig1.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gemma/fig1.png]]
 *Performance Gemma 7B по категориям задач в сравнении с LLaMA 2 и Mistral.*
 
 ## TL;DR
@@ -59,7 +59,7 @@ Transformer decoder, context length 8192 токенов.
 - Shared input/output embeddings для уменьшения размера модели
 - Большой vocabulary (256k) от Gemini -- рассчитан на многоязычность
 
-![[02 Areas/ML & DL/raw/papers/gemma/images/fig2.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gemma/fig2.png]]
 *Сравнение rates memorization между Gemma и PaLM моделями.*
 
 ### Обучение
@@ -112,7 +112,7 @@ Gemma 7B: 63.8 average vs Mistral 7B: 61.0. Наибольшее преимущ�
 - **Safety**: 63.5% win rate (7B), 60.1% (2B)
 - **Instruction Following**: 61.2% win rate (7B), 45% (2B)
 
-![[02 Areas/ML & DL/raw/papers/gemma/images/fig3.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gemma/fig3.png]]
 *Rates memorization personal data по data source.*
 
 ### Memorization
@@ -121,7 +121,7 @@ Gemma 7B: 63.8 average vs Mistral 7B: 61.0. Наибольшее преимущ�
 - **Нет** случаев memorization sensitive data.
 - ~50% больше данных approximate-memorized vs exact.
 
-![[02 Areas/ML & DL/raw/papers/gemma/images/fig4.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gemma/fig4.png]]
 *Exact vs approximate memorization по data source.*
 
 ### Safety benchmarks (Table 8)

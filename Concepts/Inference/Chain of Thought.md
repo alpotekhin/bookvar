@@ -18,7 +18,7 @@ courses:
 
 # Chain of Thought (CoT)
 
-![[02 Areas/ML & DL/raw/papers/cot/images/cot-prompting-fig1.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/cot/cot-prompting-fig1.png]]
 *Standard prompting vs Chain-of-Thought prompting: CoT позволяет модели разбить сложную задачу на шаги, значительно повышая точность (источник: Wei et al., 2022)*
 
 ## Зачем это нужно: LLM не умеют считать
@@ -83,7 +83,7 @@ A: [модель генерирует цепочку рассуждений + о
 
 ## Emergent ability: CoT работает только при масштабе
 
-![[02 Areas/ML & DL/raw/papers/cot/images/cot-examples-fig3.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/cot/cot-examples-fig3.png]]
 *Примеры chain-of-thought рассуждений по трём типам задач: arithmetic, commonsense и symbolic reasoning (источник: Wei et al., 2022)*
 
 **Критический результат**: CoT — **emergent ability**, появляющаяся только при размере модели $\geq \sim 100B$ параметров.

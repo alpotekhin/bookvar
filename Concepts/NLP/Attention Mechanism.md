@@ -25,7 +25,7 @@ sources:
 
 До 2014 года seq2seq модели (Sutskever et al.) работали так: энкодер-RNN читает входную последовательность и сжимает её в **один вектор фиксированной длины** (обычно 512 или 1024 размерности). Этот вектор передаётся декодеру, который из него генерирует выход.
 
-![[02 Areas/ML & DL/raw/papers/attention-is-all-you-need/images/bottleneck-min.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/bottleneck-min.png]]
 *Проблема бутылочного горлышка: вся информация о входе сжимается в один вектор (источник: Lena Voita)*
 
 Представь, что тебе нужно перевести абзац из 50 слов, но запомнить его можно только в виде одного предложения. На коротких фразах это работает, на длинных — катастрофически ломается. Как пишет Voita: *"the whole universe is compressed into a single vector of size 512"*.
@@ -38,7 +38,7 @@ sources:
 
 **Bahdanau et al. (2014)** предложили решение: вместо одного вектора дать декодеру доступ ко **всем** скрытым состояниям энкодера. На каждом шаге генерации механизм внимания решает, какие части входа сейчас важнее.
 
-![[02 Areas/ML & DL/raw/papers/attention-is-all-you-need/images/bahdanau_examples-min.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/bahdanau_examples-min.png]]
 *Матрица выравнивания Bahdanau attention: яркие клетки показывают, на какие входные слова «смотрит» декодер при генерации каждого выходного слова. Модель автоматически учится выравнивать слова между языками без прямого supervision (источник: Lena Voita)*
 
 Формально, контекстный вектор на шаге $t$:
@@ -55,7 +55,7 @@ $$\alpha_{t,i} = \text{softmax}(\text{score}(s_t, h_i))$$
 
 Разные авторы предложили разные способы вычислять score — насколько текущее состояние декодера $s_t$ «совместимо» с состоянием энкодера $h_i$:
 
-![[02 Areas/ML & DL/raw/papers/attention-is-all-you-need/images/score_functions-min.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/score_functions-min.png]]
 *Сравнение функций скоринга (источник: Lena Voita)*
 
 | Название | Формула | Откуда |
@@ -82,7 +82,7 @@ $$\alpha_{t,i} = \text{softmax}(\text{score}(s_t, h_i))$$
 
 **Шаг 1.** Каждый входной эмбеддинг (512-мерный) умножается на три обученные матрицы $W^Q$, $W^K$, $W^V$, создавая три 64-мерных вектора: Query, Key, Value.
 
-![[02 Areas/ML & DL/raw/papers/attention-is-all-you-need/images/transformer_self_attention_vectors.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/attention/transformer_self_attention_vectors.png]]
 *Создание Q, K, V векторов для каждого токена (источник: Jay Alammar)*
 
 **Шаг 2.** Score = dot-product Query текущего токена с Key каждого другого токена. Это показывает, насколько текущий токен должен «обращать внимание» на каждую другую позицию.
@@ -99,7 +99,7 @@ $$\alpha_{t,i} = \text{softmax}(\text{score}(s_t, h_i))$$
 
 $$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right) V$$
 
-![[02 Areas/ML & DL/raw/papers/attention-is-all-you-need/images/self-attention-matrix-calculation-2.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/attention/self-attention-matrix-calculation-2.png]]
 *Матричное вычисление self-attention (источник: Jay Alammar)*
 
 ### Каноничный пример
@@ -108,7 +108,7 @@ $$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)
 
 К чему относится «it»? Для человека очевидно — к «animal». Self-attention позволяет модели установить эту связь: при обработке «it» механизм внимания назначает высокие веса позициям «The» и «animal».
 
-![[02 Areas/ML & DL/raw/papers/attention-is-all-you-need/images/transformer_self-attention_visualization.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/transformer_self-attention_visualization.png]]
 *Визуализация self-attention: модель связывает «it» с «The animal» (источник: Jay Alammar)*
 
 ## Multi-Head Attention: несколько точек зрения одновременно
@@ -121,7 +121,7 @@ $$\text{MultiHead}(Q, K, V) = \text{Concat}(\text{head}_1, \ldots, \text{head}_h
 
 В оригинальном Transformer: $h = 8$ голов, каждая работает в 64-мерном подпространстве (512 / 8 = 64). Итоговая стоимость примерно та же, что у одной полноразмерной головы.
 
-![[02 Areas/ML & DL/raw/papers/attention-is-all-you-need/images/transformer_multi-headed_self-attention-recap.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/attention/transformer_multi-headed_self-attention-recap.png]]
 *Multi-Head Attention: 8 голов, конкатенация, проекция через $W^O$ (источник: Jay Alammar)*
 
 **Зачем это нужно на практике?** Визуализации из оригинальной статьи (Appendix, Figure 3-5) показывают, что разные головы специализируются на разных задачах:
@@ -133,7 +133,7 @@ $$\text{MultiHead}(Q, K, V) = \text{Concat}(\text{head}_1, \ldots, \text{head}_h
 
 В полной архитектуре Transformer attention используется тремя способами:
 
-![[02 Areas/ML & DL/raw/papers/attention-is-all-you-need/images/the_transformer_3.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/the_transformer_3.png]]
 *Общая архитектура Transformer: N энкодерных + N декодерных блоков (источник: Jay Alammar)*
 
 1. **Encoder self-attention** — каждый токен видит все остальные (bidirectional). Q, K, V — все из предыдущего слоя энкодера. Mask = 1.
@@ -142,7 +142,7 @@ $$\text{MultiHead}(Q, K, V) = \text{Concat}(\text{head}_1, \ldots, \text{head}_h
 
 3. **Cross-attention (encoder-decoder)** — Query из декодера, Key и Value из выхода энкодера. Позволяет декодеру «смотреть» на входную последовательность (как классический Bahdanau attention, но с scaled dot-product).
 
-![[02 Areas/ML & DL/raw/papers/attention-is-all-you-need/images/transformer_decoding_2.gif]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/transformer_decoding_2.gif]]
 *Авторегрессивное декодирование: каждый новый токен генерируется с attention ко всем предыдущим (источник: Jay Alammar)*
 
 ## Residual + Layer Norm
@@ -151,7 +151,7 @@ $$\text{MultiHead}(Q, K, V) = \text{Concat}(\text{head}_1, \ldots, \text{head}_h
 
 $$\text{output} = \text{LayerNorm}(x + \text{Sublayer}(x))$$
 
-![[02 Areas/ML & DL/raw/papers/attention-is-all-you-need/images/transformer_resideual_layer_norm_2.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/transformer_resideual_layer_norm_2.png]]
 *Residual connection + LayerNorm внутри каждого блока (источник: Jay Alammar)*
 
 Residual connections решают проблему затухающих градиентов при глубоких стеках (6+ слоёв). LayerNorm стабилизирует обучение.

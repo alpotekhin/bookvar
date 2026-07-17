@@ -27,12 +27,12 @@ Pre-training — **первая фаза обучения**: крупная мо
 
 Аналогия: pre-training — это как общее образование (школа + университет), fine-tuning — специализация (аспирантура или работа). Чем лучше base education, тем быстрее и эффективнее специализация.
 
-![[02 Areas/ML & DL/raw/papers/instructgpt/images/pretraining-hf.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/instructgpt/pretraining-hf.png]]
 *Pre-training: модель обучается на огромном корпусе текстов через self-supervised objectives без человеческой разметки (источник: Hugging Face)*
 
 ## Три парадигмы pre-training objectives
 
-![[02 Areas/ML & DL/raw/papers/pre-training/images/clm-vs-mlm.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/pre-training/clm-vs-mlm.png]]
 *Schematic comparison of pre-training objectives: Causal Language Modeling (CLM), Masked Language Modeling (MLM), и их варианты (источник: arXiv 2412.03275)*
 
 Выбор pre-training objective определяет **архитектуру модели** и **для чего она лучше подходит**. Три основных подхода:
@@ -248,7 +248,7 @@ BERT использует Next Sentence Prediction (NSP) как второй obj
 
 ## Парадигмы использования pre-trained моделей
 
-![[02 Areas/ML & DL/raw/papers/pre-training/images/nlp-paradigms.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/pre-training/nlp-paradigms.png]]
 *Парадигмы использования pre-trained моделей: от feature extraction (ELMo) через fine-tuning (BERT, LoRA) к prompting (GPT-3+) и instruction tuning (ChatGPT). Каждая парадигма снижает объём task-specific адаптации (источник: Cameron Wolfe)*
 
 | Парадигма | Эпоха | Подход | Пример |

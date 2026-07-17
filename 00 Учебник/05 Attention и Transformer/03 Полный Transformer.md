@@ -119,7 +119,7 @@ Encoder получает input embeddings + positions. Каждый из $N$ б�
 Full attention означает: каждая непустая input position может читать каждую
 другую. Encoder выдаёт contextual representations всего входа.
 
-![[02 Areas/ML & DL/raw/papers/attention-is-all-you-need/images/Transformer_encoder.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/Transformer_encoder.png]]
 
 *Jay Alammar, «The Illustrated Transformer»: encoder как self-attention и FFN с
 residual path. Используем эту схему как промежуточную, а не начинаем сразу с
@@ -142,7 +142,7 @@ $$
 Это наследник идеи Bahdanau: decoder читает source memory. Отличаются scoring,
 multi-head organization и отсутствие recurrent decoder state.
 
-![[02 Areas/ML & DL/raw/papers/attention-is-all-you-need/images/The_transformer_encoder_decoder_stack.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/The_transformer_encoder_decoder_stack.png]]
 
 *Jay Alammar: развёрнутый encoder-decoder stack. На схеме особенно важно увидеть
 единственную связь между башнями: encoder outputs становятся K и V для
@@ -173,7 +173,7 @@ KV-cache сохраняет K/V прошлых positions и не вычисля�
 
 ## 8. Три архитектурные ветви
 
-![[02 Areas/ML & DL/raw/papers/gpt-30/images/gpt-2-transformer-xl-bert-3.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-30/gpt-2-transformer-xl-bert-3.png]]
 
 *Jay Alammar, «The Illustrated GPT-2»: наглядное сравнение decoder-only GPT-2,
 encoder-only BERT и recurrent extension Transformer-XL.

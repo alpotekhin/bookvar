@@ -27,7 +27,7 @@ sources:
 
 Это утверждение вызвало жаркую дискуссию: если способности LLM появляются **непредсказуемо** при масштабировании, как обеспечить безопасность? Что ещё «проснётся» в GPT-5?
 
-![[02 Areas/ML & DL/raw/papers/emergent-abilities/images/emergent-abilities-wei.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/emergent-abilities/emergent-abilities-wei.png]]
 *Примеры emergent abilities: near-zero performance у малых моделей → sudden jump у больших (источник: Wei et al., 2022)*
 
 ## Оригинальное определение (Wei et al., 2022)

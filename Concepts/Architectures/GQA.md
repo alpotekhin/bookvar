@@ -14,7 +14,7 @@ sources:
 
 # GQA — Grouped Query Attention
 
-![[02 Areas/ML & DL/raw/papers/gqa/images/mha-mqa-gqa.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gqa/mha-gqa-mqa.png]]
 *Сравнение Multi-Head, Grouped-Query и Multi-Query Attention: GQA группирует query heads, разделяющие общие KV проекции (GQA paper, 2305.13245)*
 
 ## Проблема: KV-cache как узкое место inference

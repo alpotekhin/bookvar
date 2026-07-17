@@ -46,7 +46,7 @@ Mixture of Experts (MoE) разрывает эту связь: модель мо
 
 ## Архитектура: как работает Sparse MoE
 
-![[02 Areas/ML & DL/raw/papers/mixtral-of-experts/images/smoe-layer.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mixtral-of-experts/smoe-layer.png]]
 *Mixture of Experts Layer: каждый токен направляется к 2 из 8 экспертов. Выход — взвешенная сумма outputs выбранных экспертов (источник: оригинальная статья)*
 
 ### Базовая формула
@@ -89,7 +89,7 @@ Softmax нормализует **только по двум выбранным �
 
 ## 47B total vs. 13B active: экономика MoE
 
-![[02 Areas/ML & DL/raw/papers/mixtral-of-experts/images/benchmark-comparison.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mixtral-of-experts/benchmark-comparison.png]]
 *Mixtral 8x7B vs. LLaMA 2 (7B/13B/70B): при 13B active params Mixtral превосходит LLaMA 2 70B на большинстве бенчмарков (источник: оригинальная статья)*
 
 Ключевой insight: **compute пропорционален active params, не total params**.
@@ -125,7 +125,7 @@ Mixtral 8x7B Instruct (SFT + [[02 Areas/ML & DL/Concepts/Training/DPO|DPO]]) н�
 
 ## Routing Analysis: что выучивают эксперты?
 
-![[02 Areas/ML & DL/raw/papers/mixtral-of-experts/images/routing-sample.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mixtral-of-experts/routing-sample.png]]
 *Визуализация routing: каждый токен подсвечен цветом выбранного эксперта. Одинаковые синтаксические конструкции (self в Python, Question в English) маршрутизируются к одним экспертам (источник: оригинальная статья)*
 
 Удивительный результат: **эксперты НЕ специализируются по доменам**. Распределение экспертов практически идентично для ArXiv, PubMed, Philosophy и Wikipedia.
@@ -136,7 +136,7 @@ Mixtral 8x7B Instruct (SFT + [[02 Areas/ML & DL/Concepts/Training/DPO|DPO]]) н�
 2. **Temporal locality** — ~60-67% consecutive tokens идут к тому же эксперту в средних/последних слоях (при рандомном ожидании ~46%)
 3. **DM Mathematics** — единственный домен с заметно другим распределением (синтетические данные)
 
-![[02 Areas/ML & DL/raw/papers/mixtral-of-experts/images/expert-routing-analysis.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mixtral-of-experts/expert-routing-analysis.png]]
 *Распределение экспертов по доменам из The Pile. Пунктирная линия — равномерное распределение (1/8). Эксперты не специализируются по доменам (источник: оригинальная статья)*
 
 ### Implications для оптимизации

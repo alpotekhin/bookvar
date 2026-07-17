@@ -31,7 +31,7 @@ sources:
 
 ## Таксономия PEFT-методов
 
-![[02 Areas/ML & DL/raw/papers/peft/images/peft-taxonomy.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/peft/peft-taxonomy.png]]
 *Таксономия PEFT-методов: additive (adapters, soft prompts), reparametrization-based (LoRA, KronA), selective (BitFit, Fish-Mask). Многие методы комбинируют подходы (источник: HuggingFace PEFT Blog)*
 
 ## LoRA: стандарт де-факто
@@ -44,7 +44,7 @@ $$W = W_0 + \Delta W = W_0 + BA$$
 
 где $B \in \mathbb{R}^{d \times r}$, $A \in \mathbb{R}^{r \times k}$, и $r \ll \min(d, k)$.
 
-![[02 Areas/ML & DL/raw/papers/peft/images/lora-architecture.gif]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/peft/lora-architecture.gif]]
 *LoRA: замороженные pretrained веса $W \in \mathbb{R}^{d \times d}$ + обучаемые low-rank матрицы $B$ (инициализация нулями) и $A$ (Gaussian). При inference $BA$ сливается с $W_0$ — нулевой overhead (источник: HuggingFace PEFT Blog)*
 
 ### Почему это работает
@@ -78,7 +78,7 @@ Dettmers et al. (2023) сделали fine-tuning LLaMA 65B возможным �
 
 Houlsby et al. (2019) вставляют маленькие модули внутрь каждого Transformer блока:
 
-![[02 Areas/ML & DL/raw/papers/peft/images/adapter-bottleneck.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/peft/adapter-bottleneck.png]]
 *Adapter layers внутри Transformer блока: bottleneck-модули (down-projection → nonlinearity → up-projection + residual) добавляются после Multi-Head Attention и FFN подслоёв (источник: AdapterHub)*
 
 Down-projection: $\mathbb{R}^d \to \mathbb{R}^m$ (где $m \ll d$, обычно $m = 64$).

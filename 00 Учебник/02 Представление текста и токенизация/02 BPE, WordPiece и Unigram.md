@@ -38,7 +38,7 @@ Word-level tokenizer сохраняет много смысла в одном to
 Subword tokenization ищет компромисс: частые фрагменты получает целиком, редкие
 слова собирает из меньших частей.
 
-![[02 Areas/ML & DL/raw/papers/bpe/images/tokenizer-comparison.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/bpe/tokenizer-comparison.png]]
 
 *Сравнение способов разбиения текста. Важно смотреть одновременно на две цены:
 размер vocabulary и число tokens в последовательности.*
@@ -222,7 +222,7 @@ BPE внутри.
 - больше редких специализированных tokens;
 - больше памяти и параметров на словарь.
 
-![[02 Areas/ML & DL/raw/papers/bpe/images/tokenizer-overview.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/bpe/tokenizer-overview.png]]
 
 *Fertility — среднее число tokens на слово. На графике больший vocabulary
 сокращает разбиение, а multilingual tokenizer заметно эффективнее для

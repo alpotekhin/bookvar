@@ -33,7 +33,7 @@ Andrej Karpathy в *State of GPT* предлагает полезное разл
 inference, и продолжаем обычное обучение следующему токену, но уже на тщательно
 отобранном распределении.
 
-![[02 Areas/ML & DL/raw/papers/instructgpt/images/chatgpt-training-pipeline.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/instructgpt/chatgpt-training-pipeline.png]]
 
 *SFT — левая часть pipeline InstructGPT: люди пишут demonstrations, а модель
 учится их воспроизводить. Источник схемы: Ouyang et al., 2022, Figure 2.*

@@ -14,7 +14,7 @@ sources:
 
 # PPO — Proximal Policy Optimization
 
-![[02 Areas/ML & DL/raw/papers/instructgpt/images/rlhf-pipeline-hf.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/instructgpt/rlhf-pipeline-hf.png]]
 *PPO в RLHF pipeline: модель генерирует ответы → Reward Model оценивает → PPO обновляет веса политики с KL-штрафом относительно reference model (источник: Hugging Face)*
 
 ## Зачем PPO: проблемы vanilla policy gradient

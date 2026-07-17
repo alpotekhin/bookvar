@@ -42,7 +42,7 @@ shortcut «длиннее — лучше», а не сетевую семант�
 
 ## 1. Архитектура sequence reward model
 
-![[02 Areas/ML & DL/raw/papers/instructgpt/images/reward-model-hf.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/instructgpt/reward-model-hf.png]]
 
 *Как читать схему: language model создаёт candidates для одних и тех же
 prompts; люди упорядочивают candidates; reward model учится воспроизводить

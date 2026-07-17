@@ -51,7 +51,7 @@ $$
 s_t=f_{\text{dec}}(s_{t-1},y_{t-1},h_n).
 $$
 
-![[02 Areas/ML & DL/raw/papers/attention-is-all-you-need/images/bottleneck-min.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/bottleneck-min.png]]
 
 *Lena Voita, «Seq2seq and Attention»: bottleneck старого encoder-decoder.
 [Оригинальная глава курса](https://lena-voita.github.io/nlp_course/seq2seq_and_attention.html).*
@@ -145,7 +145,7 @@ target не размечалось вручную, но возникло как 
 Это коэффициенты конкретного вычисления; одинаковый output иногда можно получить
 при существенно отличающихся распределениях.
 
-![[02 Areas/ML & DL/raw/papers/attention-is-all-you-need/images/bahdanau_examples-min.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/bahdanau_examples-min.png]]
 
 *Примеры soft alignment из Bahdanau et al.; визуальный материал сохранён в базе
 из курса Lena Voita. Светлая клетка означает больший вес соответствия между

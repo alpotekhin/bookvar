@@ -33,10 +33,10 @@ courses: []
 
 ### Оригинальная архитектура RAG (Lewis et al., 2020)
 
-![[02 Areas/ML & DL/raw/papers/retrieval-augmented-generation-for-knowledge-intensive-nlp-t/images/rag-fig1.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/retrieval-augmented-generation-for-knowledge-intensive-nlp-t/rag-fig1.png]]
 *RAG pipeline: Query Encoder кодирует запрос, MIPS находит top-k документов из индекса, Generator (BART) генерирует ответ с маргинализацией по retrieved документам (источник: Lewis et al., 2020)*
 
-![[02 Areas/ML & DL/raw/papers/retrieval-augmented-generation-for-knowledge-intensive-nlp-t/images/retrieval-with-embeddings.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/retrieval-augmented-generation-for-knowledge-intensive-nlp-t/retrieval-with-embeddings.png]]
 *Retrieval с BERT-эмбеддингами: запрос и документы кодируются в плотные векторы, nearest neighbor search находит семантически близкие чанки (источник: Jay Alammar)*
 
 Два компонента работают вместе:
@@ -89,7 +89,7 @@ $$\mathcal{L} = \sum_j -\log p(y_j | x_j)$$
 
 ## Self-RAG: адаптивный retrieval
 
-![[02 Areas/ML & DL/raw/papers/self-rag/images/fig1.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/self-rag/fig1.png]]
 *Figure 1 из Self-RAG (Asai et al., 2023): слева — стандартный RAG всегда делает retrieval; справа — Self-RAG адаптивно решает, когда retrievить, используя специальные reflection tokens.*
 
 Стандартный RAG **всегда** делает retrieval — даже когда модель уже знает ответ (например, «Сколько будет 2+2?»). Это добавляет latency и может привести к ухудшению из-за нерелевантных документов.

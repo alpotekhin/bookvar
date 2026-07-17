@@ -16,7 +16,7 @@ sources:
 
 # MoE — Mixture of Experts
 
-![[02 Areas/ML & DL/raw/papers/moe/images/mixtral-architecture.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mixtral-of-experts/smoe-layer.png]]
 *Mixture of Experts Layer: router распределяет токены по экспертам, выходы взвешиваются gating weights (Mixtral paper, 2401.04088)*
 
 ## Зачем это нужно: scaling dilemma
