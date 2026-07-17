@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="700" viewBox="0 0 1500 700" role="img" aria-labelledby="title desc">
+  <title id="title">KV-cache во время prefill и autoregressive decode</title>
+  <desc id="desc">Во время prefill ключи и значения всех токенов prompt записываются в cache. На каждом шаге decode новый query читает весь cache, а новый key и value добавляются в конец.</desc>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0 0L0 6L9 3z" fill="#40516f"/></marker>
+    <style>.t{font:600 30px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#172033}.h{font:600 24px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#172033}.l{font:500 21px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#172033}.s{font:400 18px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#526079}.box{fill:#f7f9fc;stroke:#d9e0eb;stroke-width:2}.tok{fill:#e9effd;stroke:#7894d7;stroke-width:2}.kv{fill:#e8f5ed;stroke:#68a77c;stroke-width:2}.new{fill:#fff0df;stroke:#d99a52;stroke-width:3}.line{stroke:#40516f;stroke-width:3;fill:none;marker-end:url(#a)}.read{stroke:#7a57b5;stroke-width:4;fill:none;marker-end:url(#a)}</style>
+  </defs>
+  <rect width="1500" height="700" fill="white"/>
+  <text x="55" y="62" class="t">KV-cache: один раз записать прошлое, затем читать его на каждом шаге</text>
+  <rect x="50" y="100" width="650" height="530" rx="22" class="box"/>
+  <rect x="750" y="100" width="700" height="530" rx="22" class="box"/>
+  <text x="85" y="150" class="h">1. Prefill prompt</text>
+  <text x="785" y="150" class="h">2. Decode нового токена</text>
+
+  <g transform="translate(90 205)">
+    <rect x="0" y="0" width="105" height="54" rx="10" class="tok"/><text x="25" y="35" class="l">token₁</text>
+    <rect x="125" y="0" width="105" height="54" rx="10" class="tok"/><text x="150" y="35" class="l">token₂</text>
+    <rect x="250" y="0" width="105" height="54" rx="10" class="tok"/><text x="275" y="35" class="l">token₃</text>
+    <text x="380" y="36" class="l">…</text><rect x="430" y="0" width="105" height="54" rx="10" class="tok"/><text x="458" y="35" class="l">tokenₛ</text>
+    <path d="M267 70V135" class="line"/><text x="300" y="110" class="s">QKV projections</text>
+    <rect x="25" y="155" width="500" height="165" rx="18" class="kv"/>
+    <text x="48" y="192" class="h">KV-cache после prefill</text>
+    <text x="48" y="240" class="l">K₁ V₁ │ K₂ V₂ │ K₃ V₃ │ … │ Kₛ Vₛ</text>
+    <text x="48" y="285" class="s">Q прошлого сохранять не нужно.</text>
+    <text x="48" y="350" class="s">Prompt обрабатывается параллельно.</text>
+  </g>
+
+  <g transform="translate(790 200)">
+    <rect x="0" y="0" width="180" height="58" rx="11" class="new"/><text x="24" y="37" class="l">new token s+1</text>
+    <path d="M90 72V132" class="line"/>
+    <rect x="20" y="150" width="95" height="58" rx="10" class="new"/><text x="48" y="187" class="l">qₛ₊₁</text>
+    <rect x="135" y="150" width="95" height="58" rx="10" class="new"/><text x="162" y="187" class="l">kₛ₊₁</text>
+    <rect x="250" y="150" width="95" height="58" rx="10" class="new"/><text x="277" y="187" class="l">vₛ₊₁</text>
+    <rect x="0" y="290" width="590" height="150" rx="18" class="kv"/>
+    <text x="25" y="329" class="h">K₁V₁ … KₛVₛ</text><text x="225" y="329" class="l">＋</text><text x="270" y="329" class="h">Kₛ₊₁Vₛ₊₁</text>
+    <text x="25" y="375" class="s">прочитать весь накопленный cache</text>
+    <text x="345" y="375" class="s">добавить новую пару</text>
+    <path d="M65 218C65 255 65 255 80 280" class="read"/>
+    <path d="M185 218C185 250 330 250 355 282" class="line"/>
+    <path d="M298 218C298 250 390 250 415 282" class="line"/>
+    <text x="0" y="485" class="s">Следующий шаг повторяет чтение уже более длинного cache.</text>
+  </g>
+</svg>
