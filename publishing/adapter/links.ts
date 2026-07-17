@@ -9,7 +9,7 @@ function basename(target: string): string {
 
 function headingSlug(heading: string): string {
   return heading
-    .toLocaleLowerCase()
+    .toLowerCase()
     .replace(/\s+/g, '-')
     .replace(/[^\p{L}\p{N}_-]/gu, '');
 }
