@@ -99,7 +99,7 @@ This demonstrates the required Russian inflection example for the spike; broader
 
 | Gate | Status | Evidence |
 |---|---|---|
-| Clean-checkout automated tests pass | **Fail** | Missing ignored image; tests also assume a pre-existing Pagefind build. |
+| Clean-checkout automated tests pass | **Fail** | CI ordering is corrected (unit tests → build → output tests), but generation still fails because a required image is ignored under `raw/`. |
 | Eight representative pages render | Pass | All ten manifest routes were rebuilt and browser-audited; each has exactly one DOM H1. |
 | Formulas and local images render in the spike | Pass with packaging blocker | Browser/build/tests pass locally; clean checkout lacks an image. |
 | Internal links and fragments are release-safe | **Fail** | 90 unresolved targets degrade to plain text; emitted fragment IDs have not yet been validated against built HTML. This is degraded navigation and a release failure, not a passing link gate. |
