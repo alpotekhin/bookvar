@@ -7,6 +7,8 @@ import remarkMath from 'remark-math';
 import sidebar from './generated-sidebar.mjs';
 
 export default defineConfig({
+  site: 'https://alpotekhin.github.io',
+  base: process.env.PUBLICATION_BASE_PATH || '/',
   output: 'static',
   markdown: {
     processor: unified({
@@ -17,7 +19,7 @@ export default defineConfig({
   integrations: [
     mermaid({ enableLog: false }),
     starlight({
-      title: 'ML & DL Handbook',
+      title: 'Bookvar',
       defaultLocale: 'root',
       locales: { root: { label: 'Русский', lang: 'ru' } },
       customCss: ['./src/styles/custom.css'],

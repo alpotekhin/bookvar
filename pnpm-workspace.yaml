@@ -1,3 +1,5 @@
 packages:
   - site
   - publishing
+allowBuilds:
+  esbuild: true

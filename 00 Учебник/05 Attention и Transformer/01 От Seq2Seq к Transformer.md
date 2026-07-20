@@ -2,8 +2,8 @@
 title: От Seq2Seq к Attention
 type: textbook-chapter
 status: canonical
-last_updated: 2026-07-16
-previous: "[[02 Areas/ML & DL/00 Учебник/00 Как пользоваться учебником]]"
+last_updated: 2026-07-18
+previous: "[[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN, LSTM и Seq2Seq]]"
 next: "[[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V]]"
 primary_sources:
   - https://arxiv.org/abs/1409.3215
@@ -283,5 +283,5 @@ self-attention следующей главы все $T$ позиций созд�
 - [[02 Areas/ML & DL/Courses/Stanford CS224N/Lecture 07 — Attention|CS224N: Attention]]
 - [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/00 Источники и визуальный стандарт|Паспорт источников модуля]]
 
-**Назад:** [[02 Areas/ML & DL/00 Учебник/00 Как пользоваться учебником]] ·
+**Назад:** [[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN, LSTM и Seq2Seq]] ·
 **Дальше:** [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V]]

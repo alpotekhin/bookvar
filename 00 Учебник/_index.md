@@ -2,13 +2,13 @@
 title: Учебник по NLP и LLM
 type: textbook-chapter
 status: active
-last_updated: 2026-07-17
+last_updated: 2026-07-20
 ---
 
 # Учебник по NLP и LLM
 
-Подробный визуальный маршрут от представления текста до современных LLM,
-reasoning, retrieval и agents.
+Последовательный визуальный курс: от производной и представления текста до
+современных языковых моделей, обучения рассуждению, поиска и агентных систем.
 
 > [!info] Как устроена база
 > Учебник задаёт порядок чтения. [[02 Areas/ML & DL/01 Справочник/_index|Справочник]]
@@ -40,7 +40,7 @@ reasoning, retrieval и agents.
 13. [[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура]]
 14. [[02 Areas/ML & DL/00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA]]
 15. [[02 Areas/ML & DL/00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache]]
-16. [[02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/00 Карта модуля и источники|Mixture of Experts — карта модуля]]
+16. [[02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/00 Карта модуля и источники|Mixture of Experts: карта модуля]]
 17. [[02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/01 От SwiGLU к MoE]]
 
 ### III. Архитектуры и жизненный цикл
@@ -64,12 +64,12 @@ reasoning, retrieval и agents.
 
 ### IV. Системы вокруг модели
 
-34. [[02 Areas/ML & DL/00 Учебник/15 Embeddings, Retrieval и RAG/00 Карта модуля и источники|Retrieval и RAG — карта модуля]]
-35. [[02 Areas/ML & DL/00 Учебник/15 Embeddings, Retrieval и RAG/01 Embeddings и retrieval]]
+34. [[02 Areas/ML & DL/00 Учебник/15 Embeddings, Retrieval и RAG/00 Карта модуля и источники|Поиск и RAG: карта модуля]]
+35. [[02 Areas/ML & DL/00 Учебник/15 Embeddings, Retrieval и RAG/01 Embeddings и retrieval|BM25, эмбеддинги и переранжирование]]
 36. [[02 Areas/ML & DL/00 Учебник/15 Embeddings, Retrieval и RAG/02 RAG как система]]
-37. [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/01 Vision-language и omni models]]
-38. [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/00 Agent Harness и Context Engineering — карта модуля]]
-39. [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/01 Tool use и agents]]
+37. [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/01 Vision-language и omni models|Изображение, видео и звук]]
+38. [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/00 Agent Harness и Context Engineering — карта модуля|Harness и управление контекстом]]
+39. [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/01 Tool use и agents|Инструменты и агентный цикл]]
 40. [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/02 Evaluation и воспроизводимость]]
 
 ## Другие режимы
