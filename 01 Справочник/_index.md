@@ -7,7 +7,10 @@ last_updated: 2026-07-16
 
 # Справочник ML, NLP и LLM
 
-Канонические определения механизмов. Здесь удобно быстро уточнить термин; связное изложение находится в [[02 Areas/ML & DL/00 Учебник/_index|учебнике]]. Старые подробные заметки пока сохранены в [[02 Areas/ML & DL/Concepts/_index|legacy Concepts]].
+Канонические определения механизмов. Здесь удобно быстро уточнить термин;
+связное изложение находится в [[02 Areas/ML & DL/00 Учебник/_index|учебнике]].
+Старые заметки из `Concepts` сохраняются для обратных ссылок, но не входят в
+навигацию справочника.
 
 ## Архитектура
 
@@ -16,10 +19,10 @@ last_updated: 2026-07-16
 - [[02 Areas/ML & DL/01 Справочник/Архитектурные паттерны/Encoder-Decoder|Encoder–Decoder]]
 - [[02 Areas/ML & DL/01 Справочник/Attention/Self-Attention|Self-Attention]]
 - [[02 Areas/ML & DL/01 Справочник/Attention/Cross-Attention|Cross-Attention]]
-- [[02 Areas/ML & DL/01 Справочник/Attention/MHA|MHA]] · [[02 Areas/ML & DL/01 Справочник/Attention/MQA|MQA]] · [[02 Areas/ML & DL/01 Справочник/Attention/GQA|GQA]] · [[02 Areas/ML & DL/01 Справочник/Attention/MLA|MLA]]
+- [[02 Areas/ML & DL/01 Справочник/Attention/MHA, MQA и GQA|MHA, MQA и GQA]] · [[02 Areas/ML & DL/01 Справочник/Attention/MLA|MLA]]
 - [[02 Areas/ML & DL/01 Справочник/Позиционные представления/RoPE|RoPE]]
 - [[02 Areas/ML & DL/01 Справочник/Математика и DL/Нормализация|LayerNorm и RMSNorm]]
-- [[02 Areas/ML & DL/01 Справочник/FFN и MoE/SwiGLU|SwiGLU]]
+- [[02 Areas/ML & DL/01 Справочник/FFN и MoE/Dense FFN и gated activations|Dense FFN, GLU и SwiGLU]]
 - [[02 Areas/ML & DL/01 Справочник/FFN и MoE/Mixture of Experts|Mixture of Experts]]
 
 ## Данные, обучение и post-training

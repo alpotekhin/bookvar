@@ -3,8 +3,8 @@ title: Bookvar
 description: Открытый русскоязычный учебник по машинному и глубокому обучению — от математических основ до современных LLM.
 template: splash
 hero:
-  title: Машинное обучение — связно и доказательно
-  tagline: "Русскоязычный handbook о том, как устроены современные модели: от градиента и attention до RAG, post-training и исследовательских статей."
+  title: Машинное обучение и языковые модели
+  tagline: "Последовательный учебник: от линейной алгебры и нейронных сетей до Transformer, обучения по предпочтениям, RAG и агентных систем. Объяснения опираются на университетские курсы и первичные статьи."
   actions:
     - text: Начать с учебника
       link: ./textbook/
@@ -31,17 +31,17 @@ hero:
   <a class="entry-card" href="./textbook/transformer/self-attention/">
     <span class="entry-index" aria-hidden="true">02</span>
     <strong>Технологии</strong>
-    <span>Механизмы, из которых собраны модели: attention, MoE, RAG и post-training.</span>
+    <span>Механизмы, из которых собраны модели: внимание, MoE, RAG и обучение после предобучения.</span>
   </a>
   <a class="entry-card" href="./models/families/deepseek/">
     <span class="entry-index" aria-hidden="true">03</span>
     <strong>Семейства</strong>
-    <span>Атлас моделей: что наследуется, что меняется и какой trade-off появляется.</span>
+    <span>Атлас моделей: что наследуется, что меняется и чем приходится за это платить.</span>
   </a>
   <a class="entry-card" href="./sources/papers/deepseek-r1/">
     <span class="entry-index" aria-hidden="true">04</span>
-    <strong>Papers</strong>
-    <span>Разборы первичных источников с границами утверждений и уровнем уверенности.</span>
+    <strong>Статьи</strong>
+    <span>Разборы первичных источников: постановка задачи, метод, эксперимент и границы выводов.</span>
   </a>
   <a class="entry-card" href="./practice/causal-self-attention/">
     <span class="entry-index" aria-hidden="true">05</span>
@@ -63,8 +63,8 @@ hero:
   </div>
   <ol class="curriculum-steps">
     <li><span>Основания</span><strong>Градиент, оптимизация, представления</strong></li>
-    <li><span>Архитектура</span><strong>Attention, Transformer, MoE</strong></li>
-    <li><span>Системы</span><strong>Post-training, inference, RAG</strong></li>
+    <li><span>Архитектура</span><strong>Механизм внимания, Transformer, MoE</strong></li>
+    <li><span>Системы</span><strong>Дообучение, инференс, RAG</strong></li>
   </ol>
 </section>
 

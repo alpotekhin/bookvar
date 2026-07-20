@@ -20,15 +20,13 @@ primary_sources:
 Sparse-модель хранит много параметров, но активирует лишь часть вычислительного
 графа для каждого токена. В MoE sparsity обычно находится в FFN:
 
-```mermaid
-flowchart LR
-    X["token x"] --> R["router"]
-    R -->|top-k| E1["expert 1"]
-    R -. не выбран .-> E2["expert 2"]
-    R -->|top-k| E3["expert 3"]
-    E1 --> S["weighted sum"]
-    E3 --> S
-```
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/modern-37-40-moe/mixtral-smoe-layer.png]]
+
+*В sparse MoE-слое router вычисляет веса экспертов отдельно для каждого токена,
+выбирает top-k FFN и смешивает их выходы. Иллюстрация из Omar Sanseviero et al.,
+[Mixture of Experts Explained](https://huggingface.co/blog/moe); исходный файл
+опубликован в наборе
+[Hugging Face documentation-images](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/moe/01_moe_layer.png).*
 
 ## Что даёт MoE
 
@@ -67,7 +65,7 @@ flowchart LR
 
 ## Связанные страницы
 
-[[02 Areas/ML & DL/Concepts/Architectures/MoE|MoE]] ·
-[[02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/01 От SwiGLU к MoE|От SwiGLU к MoE]] ·
-[[02 Areas/ML & DL/Concepts/Architectures/Mixtral of Experts|Mixtral]] ·
-[[02 Areas/ML & DL/Concepts/Architectures/DeepSeek-V3|DeepSeek-V3]]
+[[02 Areas/ML & DL/01 Справочник/FFN и MoE/Mixture of Experts|MoE]] ·
+[[02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving|Mixture of Experts]] ·
+[[02 Areas/ML & DL/02 Атлас моделей/Семейства/Mistral и Mixtral|Mixtral]] ·
+[[02 Areas/ML & DL/02 Атлас моделей/Семейства/DeepSeek|DeepSeek-V3]]

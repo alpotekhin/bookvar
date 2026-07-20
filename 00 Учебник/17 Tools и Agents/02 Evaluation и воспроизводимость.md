@@ -55,8 +55,8 @@ primary_sources:
 
 $$
 X_i=\begin{cases}
-1,&\text{задача }i\text{ выполнена};\\
-0,&\text{иначе}.
+1,&\text{task }i\text{ is solved};\\
+0,&\text{otherwise}.
 \end{cases}
 $$
 

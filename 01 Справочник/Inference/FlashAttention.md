@@ -12,13 +12,16 @@ primary_sources:
 
 **FlashAttention** вычисляет exact scaled dot-product attention, не материализуя целиком матрицу attention в медленной HBM-памяти. Он разбивает Q/K/V на tiles, использует SRAM и online softmax.
 
-```mermaid
-flowchart LR
-  QKV["Q,K,V в HBM"] --> TILE["tiles в SRAM"]
-  TILE --> SOFT["online softmax statistics"]
-  SOFT --> OUT["output tile"]
-  OUT --> HBM["O в HBM"]
-```
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/flashattention-tiling.png]]
+
+*Forward pass FlashAttention: внешние циклы перебирают блоки $K,V$ и $Q$,
+локальная матрица $S_{ij}$ живёт в SRAM, а статистики softmax и блок выхода
+обновляются без записи полной $N\times N$ матрицы в HBM. Оригинальная схема Tri
+Dao et al., [FlashAttention, Algorithm 1](https://arxiv.org/abs/2205.14135).*
+
+Главное на схеме — граница памяти. Алгоритм не меняет формулу attention: он
+переставляет вычисления так, чтобы дорогие чтения и записи HBM происходили для
+блоков входа и выхода, а промежуточные scores оставались в быстрой SRAM.
 
 Обычная реализация часто записывает и снова читает $n\times n$ score/probability matrices. FlashAttention уменьшает memory I/O — критический bottleneck GPU — и поэтому работает быстрее при меньшем memory footprint.
 
@@ -31,9 +34,13 @@ flowchart LR
 
 FlashAttention-2 улучшил partitioning работы и utilisation GPU. Более новые версии и vendor kernels развивают ту же IO-aware идею; свойства нужно проверять по конкретной реализации.
 
+## Подробнее
+
+IO-aware разбиение, online softmax и отличие от разреженного attention подробно
+разобраны в главе [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/56 FlashAttention|FlashAttention]].
+
 ## Источники
 
 - [FlashAttention](https://arxiv.org/abs/2205.14135)
 - [FlashAttention-2](https://arxiv.org/abs/2307.08691)
 - [Official repository](https://github.com/Dao-AILab/flash-attention)
-- [[02 Areas/ML & DL/Concepts/Inference/Flash Attention|Legacy: Flash Attention]]

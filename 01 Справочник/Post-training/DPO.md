@@ -12,19 +12,24 @@ primary_sources:
 
 **DPO** оптимизирует policy непосредственно на парах предпочтений без отдельного reward-model training и online RL.
 
-$$\mathcal L_{DPO}=
+$$
+\mathcal L_{DPO}=
 -\log\sigma\left(
 \beta\log\frac{\pi_\theta(y^+|x)}{\pi_{ref}(y^+|x)}
 -\beta\log\frac{\pi_\theta(y^-|x)}{\pi_{ref}(y^-|x)}
-\right).$$
+\right).
+$$
 
-```mermaid
-flowchart LR
-  D["prompt, chosen, rejected"] --> P["policy πθ"]
-  D --> R["frozen reference πref"]
-  P --> L["DPO loss"]
-  R --> L
-```
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/dpo/dpo-pipeline.png]]
+
+*Слева показан классический RLHF с отдельной reward model и RL; справа DPO
+преобразует preference pairs непосредственно в функцию потерь языковой модели.
+Источник: Rafael Rafailov et al., [Direct Preference Optimization, Figure
+1](https://arxiv.org/abs/2305.18290).*
+
+Схема объясняет слово *direct*: reward не исчезает из математической модели
+предпочтений, но не реализуется отдельной обученной сетью и не используется в
+online rollout loop.
 
 Интуитивно policy должна повысить относительное предпочтение chosen против rejected по сравнению с reference. Параметр $\beta$ регулирует силу отклонения.
 
@@ -34,8 +39,12 @@ flowchart LR
 
 DPO не является drop-in эквивалентом любого RLHF setup: online exploration, verifiable environments и sequence-level credit assignment могут требовать RL-подхода.
 
+## Подробнее
+
+Вывод objective из модели предпочтений, роль reference policy и практические
+режимы обучения рассмотрены в главе [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/05 DPO|DPO]].
+
 ## Источники
 
 - [Direct Preference Optimization](https://arxiv.org/abs/2305.18290)
 - [[02 Areas/ML & DL/Papers/DPO|Paper note: DPO]]
-- [[02 Areas/ML & DL/Concepts/Training/DPO|Legacy: DPO]]

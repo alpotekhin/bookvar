@@ -3,7 +3,7 @@ title: От Seq2Seq к Attention
 type: textbook-chapter
 status: canonical
 last_updated: 2026-07-18
-previous: "[[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN, LSTM и Seq2Seq]]"
+previous: "[[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора]]"
 next: "[[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V]]"
 primary_sources:
   - https://arxiv.org/abs/1409.3215
@@ -13,13 +13,12 @@ primary_sources:
 
 # От Seq2Seq к Attention
 
-> [!abstract] Идея главы
-> Attention возник не как украшение Transformer. Сначала он решил конкретную
-> проблему машинного перевода: decoder перестал получать всё исходное предложение
-> через один фиксированный вектор и научился заново читать нужные части входа на
-> каждом шаге генерации.
+Attention возник не как украшение Transformer. Сначала он решил конкретную
+проблему машинного перевода: decoder перестал получать всё исходное предложение
+через один фиксированный вектор и научился заново читать нужные части входа на
+каждом шаге генерации.
 
-## Одна задача на всю главу
+## Перевод как условная языковая модель
 
 Пусть модель переводит:
 
@@ -62,7 +61,7 @@ $$
 Проблема практичнее:
 
 - ранняя информация должна пройти через длинную recurrent-цепочку;
-- градиент от поздних decoder steps идёт к ранним input tokens длинным путём;
+- градиент от поздних шагов decoder идёт к ранним входным токенам длинным путём;
 - decoder не может запросить у encoder разные детали в разные моменты;
 - качество ранних seq2seq-систем заметно ухудшалось на длинных предложениях.
 
@@ -105,7 +104,7 @@ $$
 e_{tj}=v_a^\top\tanh(W_as_{t-1}+U_ah_j).
 $$
 
-Затем softmax нормализует scores по всем input positions:
+Затем softmax нормализует оценки по всем позициям входа:
 
 $$
 \alpha_{tj}=
@@ -118,16 +117,23 @@ $$
 s_t=f_{\text{dec}}(s_{t-1},y_{t-1},c_t).
 $$
 
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/d2l-recurrent/seq2seq-attention.svg]]
+
+*RNN encoder–decoder с Bahdanau attention. На каждом шаге decoder обращается
+ко всей последовательности состояний encoder, а не только к последнему.
+Источник: [Dive into Deep Learning, Bahdanau Attention](https://classic.d2l.ai/chapter_attention-mechanisms/bahdanau-attention.html),
+CC BY-SA 4.0.*
+
 Смысл этих трёх стадий лучше формулы:
 
-1. **score** — насколько элемент памяти подходит текущему запросу;
+1. **оценка совместимости** — насколько элемент памяти подходит текущему запросу;
 2. **softmax** — какую долю чтения дать каждому элементу;
-3. **weighted sum** — прочитать несколько элементов мягко, сохранив
+3. **взвешенная сумма** — прочитать несколько элементов мягко, сохранив
    дифференцируемость.
 
 ## 3. Проследим один перевод
 
-Представим упрощённые attention weights:
+Представим упрощённые веса attention:
 
 | target step | The | black | cat | sleeps | on | the | sofa |
 |---|---:|---:|---:|---:|---:|---:|---:|
@@ -142,26 +148,28 @@ $$
 target не размечалось вручную, но возникло как полезная внутренняя структура.
 
 Однако attention matrix не надо называть доказательством рассуждения модели.
-Это коэффициенты конкретного вычисления; одинаковый output иногда можно получить
+Это коэффициенты конкретного вычисления; одинаковый выход иногда можно получить
 при существенно отличающихся распределениях.
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/bahdanau_examples-min.png]]
 
 *Примеры soft alignment из Bahdanau et al.; визуальный материал сохранён в базе
-из курса Lena Voita. Светлая клетка означает больший вес соответствия между
-source token и target token. Здесь важна не идеальная диагональ, а то, что
-модель сама восстанавливает перестановки и составные соответствия.*
+из курса Lena Voita,
+[Seq2Seq and Attention](https://lena-voita.github.io/nlp_course/seq2seq_and_attention.html).
+Светлая клетка означает больший вес соответствия между source token и target
+token. Здесь важна не идеальная диагональ, а то, что модель сама восстанавливает
+перестановки и составные соответствия.*
 
 ## 4. Bahdanau и Luong — похожий принцип, разные сборки
 
 | Свойство | Bahdanau | Luong |
 |---|---|---|
-| score | additive MLP | dot, general или concat |
+| функция оценки | аддитивный MLP | скалярное произведение, general или concat |
 | encoder в исходной работе | bidirectional | обычно stacked unidirectional |
 | момент вычисления | использует предыдущее decoder state | часто после текущего decoder state |
 | область памяти | global | global или local window |
 
-Популярные score functions:
+Популярные функции оценки:
 
 $$
 \text{dot}(s,h)=s^\top h,
@@ -175,8 +183,9 @@ $$
 \text{additive}(s,h)=v^\top\tanh(W_ss+W_hh).
 $$
 
-Нет универсально «настоящей» функции attention. Общий механизм — score,
-нормализация и weighted aggregation; score можно параметризовать по-разному.
+Нет универсально «настоящей» функции attention. Общий механизм — оценка,
+нормализация и взвешенное суммирование; функцию оценки можно параметризовать
+по-разному.
 
 ## 5. Что именно улучшил attention
 
@@ -187,7 +196,7 @@ $$
 
 ### Короткий путь для информации и градиента
 
-Decoder output соединён с нужным $h_j$ через weighted sum. Сигналу больше не
+Выход decoder соединён с нужным $h_j$ через взвешенную сумму. Сигналу больше не
 обязательно полностью проходить через финальный encoder state.
 
 ### Переменная длина памяти
@@ -197,7 +206,7 @@ Decoder output соединён с нужным $h_j$ через weighted sum. �
 
 ### Наблюдаемый alignment
 
-Weights можно рисовать как heatmap и исследовать. Это полезный диагностический
+Веса можно рисовать как тепловую карту и исследовать. Это полезный диагностический
 инструмент, хотя не полное объяснение поведения.
 
 ## 6. Почему этого всё ещё недостаточно
@@ -205,9 +214,9 @@ Weights можно рисовать как heatmap и исследовать. Э
 RNN + attention решил bottleneck, но сохранил recurrent backbone:
 
 - $h_j$ зависит от $h_{j-1}$ — encoder нельзя полностью вычислить параллельно;
-- $s_t$ зависит от $s_{t-1}$ — decoder training можно ускорить teacher forcing,
+- $s_t$ зависит от $s_{t-1}$ — обучение decoder можно ускорить teacher forcing,
   но сама recurrence остаётся;
-- путь между далёкими input positions всё ещё проходит через RNN states;
+- путь между далёкими позициями входа всё ещё проходит через состояния RNN;
 - attention используется главным образом как decoder-to-encoder read.
 
 Следующий вопрос оказался важнее машинного перевода:
@@ -227,14 +236,14 @@ RNN + attention решил bottleneck, но сохранил recurrent backbone:
 - [Lena Voita — Seq2seq and Attention](https://lena-voita.github.io/nlp_course/seq2seq_and_attention.html)
 
 Первый источник особенно хорош как визуальная история механизмов памяти; второй
-— как строгий учебный маршрут с формулами, вариантами score и анализом heads.
+— как строгий учебный маршрут с формулами, вариантами функции оценки и анализом голов.
 
 ## 7. Три термина, которые нельзя смешивать
 
 | Механизм | Кто задаёт запрос | Где находятся читаемые элементы |
 |---|---|---|
 | Bahdanau cross-attention | recurrent decoder | encoder annotations |
-| Transformer cross-attention | Transformer decoder | encoder outputs |
+| Transformer cross-attention | decoder Transformer | выходы encoder |
 | self-attention | позиция последовательности | другие позиции той же последовательности |
 
 Термины Query, Key и Value удобно ретроспективно применить к старому attention,
@@ -262,10 +271,10 @@ self-attention следующей главы все $T$ позиций созд�
 - Attention появился до Transformer.
 - Первая ключевая роль — decoder-to-encoder soft alignment.
 - Context vector стал зависеть от decoder step.
-- Score, softmax и weighted sum — общий вычислительный шаблон.
+- Оценка совместимости, softmax и взвешенная сумма — общий вычислительный шаблон.
 - Bahdanau attention — cross-attention, не self-attention.
-- Transformer родился из следующего шага: убрать recurrence и сделать
-  communication между позициями основным примитивом.
+- Transformer возник из следующего шага: убрать рекуррентные переходы и сделать
+  обмен информацией между позициями основной операцией.
 
 ## Источники и хорошие продолжения
 
@@ -281,7 +290,7 @@ self-attention следующей главы все $T$ позиций созд�
 - [Distill — Attention and Augmented Recurrent Neural Networks](https://distill.pub/2016/augmented-rnns/)
 - [Jay Alammar — Visualizing Neural Machine Translation](https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/)
 - [[02 Areas/ML & DL/Courses/Stanford CS224N/Lecture 07 — Attention|CS224N: Attention]]
-- [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/00 Источники и визуальный стандарт|Паспорт источников модуля]]
+- [[02 Areas/ML & DL/05 Источники/Визуальные материалы и лицензии|Как в Bookvar отбираются и атрибутируются иллюстрации]]
 
-**Назад:** [[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN, LSTM и Seq2Seq]] ·
+**Назад:** [[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора]] ·
 **Дальше:** [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V]]

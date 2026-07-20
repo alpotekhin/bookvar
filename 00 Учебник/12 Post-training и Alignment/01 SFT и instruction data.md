@@ -36,8 +36,12 @@ next: "[[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/02 Pre
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/instructgpt/chatgpt-training-pipeline.png]]
 
-*SFT — левая часть процесса InstructGPT: люди пишут образцовые ответы, а модель
-учится их воспроизводить. Источник: Ouyang et al., 2022, рисунок 2.*
+*SFT занимает участок между demonstration data и SFT model: люди пишут
+образцовые ответы, а модель учится их воспроизводить. Иллюстрация из Hugging
+Face, [Illustrating Reinforcement Learning from Human
+Feedback](https://huggingface.co/blog/rlhf); описанный трёхэтапный процесс
+восходит к Ouyang et al.,
+[InstructGPT, Figure 2](https://arxiv.org/pdf/2203.02155#page=3).*
 
 ## Сквозной пример
 
@@ -98,6 +102,13 @@ JSON не попадает в Transformer. Токенизатор превращ
 это безобидным форматированием. Служебные токены входят в контекст и меняют
 условное распределение следующего токена.
 
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/post-training-courses/sft-chat-template.png]]
+
+*Одна и та же запись диалога до и после применения шаблона чата. Слева —
+переносимый список сообщений, справа — фактический текст со служебными токенами,
+который увидит модель. Источник: Nathan Lambert,
+[RLHF & Post-Training, лекция 2, слайд 11](https://rlhfbook.com/teach/course/lec2-chap4-5-9/#/10).*
+
 Пусть упрощённый токенизатор дал такую последовательность:
 
 | позиция | токен | id | метка | входит в функцию потерь? |
@@ -116,6 +127,14 @@ JSON не попадает в Transformer. Токенизатор превращ
 `−100` — соглашение PyTorch: позиция остаётся частью контекста, но не входит в
 кросс-энтропию. Через внимание модель видит системное сообщение и запрос
 пользователя, однако градиент не учит её воспроизводить их текст.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/post-training-courses/sft-prompt-masking.png]]
+
+*Маскирование запроса в SFT: токены system и user участвуют в прямом проходе,
+но функция потерь вычисляется только на продолжении assistant. Сопоставьте
+цветные позиции на слайде со столбцом «входит в функцию потерь?» в таблице выше.
+Источник: Nathan Lambert,
+[RLHF & Post-Training, лекция 2, слайд 20](https://rlhfbook.com/teach/course/lec2-chap4-5-9/#/19).*
 
 > [!warning] Сдвиг меток
 > Логиты в позиции $i$ предсказывают токен $i+1$. Большинство готовых классов

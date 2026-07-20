@@ -4,7 +4,7 @@ type: textbook-chapter
 status: canonical
 last_updated: 2026-07-20
 prerequisites:
-  - "[[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/00 Agent Harness и Context Engineering — карта модуля]]"
+  - "[[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/01 Vision-language и omni models]]"
 next:
   - "[[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/02 Evaluation и воспроизводимость]]"
 primary_sources:
@@ -30,18 +30,12 @@ primary_sources:
 контекст, проверяет предложенный вызов, запускает инструмент, записывает
 результат и решает, следует ли продолжить цикл.
 
-```mermaid
-flowchart LR
-    G["цель и состояние"] --> C["сборка контекста"]
-    C --> M["языковая модель"]
-    M -->|"обычный ответ"| V["проверка завершения"]
-    M -->|"вызов инструмента"| P["проверка прав и аргументов"]
-    P --> X["исполнение"]
-    X --> O["наблюдение и изменение состояния"]
-    O --> C
-    V -->|"не завершено"| C
-    V -->|"завершено"| F["результат"]
-```
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-65-68/agent-loop-anthropic.png]]
+
+*Автономный цикл: модель выбирает действие, среда возвращает обратную связь,
+затем модель либо продолжает, либо останавливается. Источник: Anthropic,
+[Building Effective Agents](https://www.anthropic.com/engineering/building-effective-agents),
+схема «Agents».*
 
 Полезно различать:
 
@@ -360,7 +354,6 @@ verifier должен вернуть конкретное отсутствующ
 - Hugging Face, [Context Engineering Course](https://huggingface.co/learn/context-course/unit0/introduction) — активный контекст, skills, hooks и подагенты.
 - Simon Willison, [How coding agents work](https://simonwillison.net/guides/agentic-engineering-patterns/how-coding-agents-work/) — ясное описание практического coding-agent loop.
 - [mini-SWE-agent](https://github.com/SWE-agent/mini-swe-agent) — компактная реализация, которую можно прочитать целиком.
-- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/00 Agent Harness и Context Engineering — карта модуля|Расширенная карта harness и context engineering]].
 
 ### Первоисточники
 

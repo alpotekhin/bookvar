@@ -58,7 +58,7 @@ $$P(x_t = w | x_{<t}) = \text{softmax}(z_w / T)$$
 Оставляем только $k$ наиболее вероятных токенов, перераспределяем вероятности:
 
 $$\mathcal{Z} = \{w : \text{rank}(P(w|x_{<t})) \leq k\}$$
-$$P'(x_t = w) = \frac{P(w|x_{<t})}{\sum_{w' \in \mathcal{Z}} P(w'|x_{<t})} \quad \text{если } w \in \mathcal{Z}, \text{ иначе } 0$$
+$$P'(x_t = w) = \frac{P(w|x_{<t})}{\sum_{w' \in \mathcal{Z}} P(w'|x_{<t})} \quad \text{if } w \in \mathcal{Z}, \text{ otherwise } 0$$
 
 GPT-2 использовал $k = 40$ по умолчанию. Top-k отсекает «мусорный хвост» распределения — токены с ничтожной вероятностью, которые temperature sampling может выбрать.
 

@@ -14,19 +14,27 @@ primary_sources:
 
 Для пары координат:
 
-$$R_m(\theta)=
+$$
+R_m(\theta)=
 \begin{bmatrix}
 \cos m\theta & -\sin m\theta\\
 \sin m\theta & \cos m\theta
-\end{bmatrix}.$$
+\end{bmatrix}.
+$$
 
-```mermaid
-flowchart LR
-  QK["Q, K"] --> P["Разбить каналы на пары"]
-  POS["позиция m"] --> R["углы разных частот"]
-  P --> ROT["2D rotations"]
-  R --> ROT --> DOT["Qₘ · Kₙ зависит от m−n"]
-```
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-32-34/roformer-rope-figure1.png]]
+
+*Верхняя часть рисунка показывает поворот одной пары координат. Внизу query или
+key разбит на пары; каждая пара вращается со своей частотой, но угол каждой из
+них определяется позицией токена. Jianlin Su et al., “RoFormer: Enhanced
+Transformer with Rotary Position Embedding”, Figure 1,
+[с. 5](https://arxiv.org/pdf/2104.09864#page=5). Фигура извлечена из статьи без
+изменения содержания.*
+
+Рисунок полезно читать слева направо: вектор не получает отдельную позиционную
+добавку. Вместо этого его координаты попарно превращаются в точки на плоскости и
+поворачиваются. Низкие частоты меняются медленно и различают далёкие позиции,
+высокие — быстро и лучше различают близкие.
 
 Ключевое свойство: внутреннее произведение повёрнутых Q и K зависит от относительного смещения позиций. Values обычно не вращаются.
 
@@ -38,7 +46,11 @@ RoPE не гарантирует хорошую экстраполяцию да�
 
 RoPE прост, не требует learned position table и хорошо интегрируется с attention. Однако выбор base/frequencies и extrapolation recipe влияет на качество длинного контекста; неправильное scaling может ухудшить короткие и длинные зависимости.
 
+## Подробнее
+
+Геометрический вывод вращения, применение RoPE к парам координат и методы
+расширения контекста разобраны в главе [[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/04 RoPE|RoPE]].
+
 ## Источники
 
 - [RoFormer: Enhanced Transformer with Rotary Position Embedding](https://arxiv.org/abs/2104.09864)
-- [[02 Areas/ML & DL/Concepts/Architectures/RoPE|Legacy: RoPE]]

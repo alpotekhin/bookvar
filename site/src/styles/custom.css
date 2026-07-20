@@ -22,10 +22,10 @@
 }
 
 .hero h1 {
-  max-width: 16ch;
-  font-size: clamp(2.7rem, 7vw, 5.4rem);
-  letter-spacing: -0.055em;
-  line-height: 0.98;
+  max-width: 21ch;
+  font-size: clamp(2.65rem, 5.5vw, 4.65rem);
+  letter-spacing: -0.045em;
+  line-height: 1.02;
 }
 
 .hero .tagline {
@@ -36,6 +36,24 @@
 
 .sl-markdown-content {
   --sl-content-width: 76rem;
+  min-width: 0;
+}
+
+.sl-markdown-content .katex-display,
+.sl-markdown-content pre,
+.sl-markdown-content table {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.sl-markdown-content .katex-display {
+  padding-bottom: 0.25rem;
+}
+
+.sl-markdown-content table {
+  display: block;
 }
 
 .landing-intro {
@@ -126,26 +144,6 @@
 }
 .contribution h2, .contribution p { margin: 0; }
 
-/* Keep Mermaid text at a readable size. Wide diagrams scroll instead of shrinking
-   to the viewport; trackpads and touch screens retain native pan/zoom gestures. */
-.mermaid {
-  overflow-x: auto;
-  overscroll-behavior-inline: contain;
-  padding: 1rem 0.25rem 1.25rem;
-  text-align: center;
-  scrollbar-gutter: stable;
-  -webkit-overflow-scrolling: touch;
-}
-
-.mermaid svg {
-  display: block;
-  min-width: 44rem;
-  max-width: none;
-  height: auto;
-  /* Keep the first node reachable when the SVG is wider than its scroller. */
-  margin-inline: 0;
-}
-
 @media (max-width: 50rem) {
   .entry-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .landing-intro, .curriculum, .contribution { grid-template-columns: 1fr; }
@@ -158,8 +156,6 @@
   .entry-grid { grid-template-columns: 1fr; }
   .entry-card { min-height: 0; }
   .curriculum-steps li { grid-template-columns: 1fr; gap: 0.35rem; }
-  .mermaid { margin-inline: calc(var(--sl-content-pad-x) * -1); padding-inline: var(--sl-content-pad-x); text-align: left; }
-  .mermaid svg { min-width: 42rem; margin-inline: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {

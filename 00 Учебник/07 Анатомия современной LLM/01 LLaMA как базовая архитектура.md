@@ -207,11 +207,11 @@ $$
 LLaMA не добавляет $p_m$ в residual stream. Rotary Position Embedding вращает
 пары координат query и key на угол, зависящий от позиции.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/rope-relative-position.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-32-34/roformer-rope-figure1.png]]
 
-*Векторная схема для этой главы: позиции $m$ и $n$ задают повороты $Q$ и $K$,
-а их скалярное произведение зависит от относительного смещения $n-m$. $V$ при
-этом не вращается.*
+*Поворот query и key в RoPE: их скалярное произведение после вращения зависит
+от относительного смещения позиций. Источник: Jianlin Su et al.,
+[RoFormer](https://arxiv.org/pdf/2104.09864#page=5), Figure 1, p. 5.*
 
 Для одной пары координат:
 
@@ -473,7 +473,7 @@ $$
 - написать две формулы pre-norm block;
 - объяснить RMSNorm без фразы «упрощённый LayerNorm»;
 - вывести зависимость RoPE score от относительного смещения;
-- нарисовать три projections SwiGLU;
+- по схеме и формулам из первоисточника объяснить роль трёх проекций SwiGLU;
 - отличить базовый LLaMA recipe от изменений Llama 2/3;
 - отделить architecture block от tokenizer, data и post-training.
 

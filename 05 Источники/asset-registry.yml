@@ -206,6 +206,7 @@ assets:
     modifications: copied without modification from the local raw source for publication packaging
     used_in:
       - 00 Учебник/05 Attention и Transformer/03 Полный Transformer.md
+      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/02 Encoder-Decoder Transformer.md
       - Concepts/Architectures/Transformer.md
     metadata_status: needs-confirmation
     provenance_confirmation: user-confirmed-open-materials
@@ -218,6 +219,7 @@ assets:
     license_url: null
     modifications: copied without modification from the local raw source for publication packaging
     used_in:
+      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/02 Encoder-Decoder Transformer.md
       - Concepts/Architectures/Transformer.md
     metadata_status: needs-confirmation
     provenance_confirmation: user-confirmed-open-materials
@@ -230,6 +232,7 @@ assets:
     license_url: null
     modifications: copied without modification from the local raw source for publication packaging
     used_in:
+      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/02 Encoder-Decoder Transformer.md
       - Concepts/Architectures/Transformer.md
       - Concepts/NLP/Attention Mechanism.md
     metadata_status: needs-confirmation
@@ -255,6 +258,7 @@ assets:
     license_url: null
     modifications: copied without modification from the local raw source for publication packaging
     used_in:
+      - 00 Учебник/05 Attention и Transformer/04 Позиционная информация.md
       - Concepts/Architectures/Transformer.md
       - Concepts/NLP/Positional Encoding.md
     metadata_status: needs-confirmation
@@ -320,6 +324,7 @@ assets:
     modifications: copied without modification from the local raw source for publication packaging
     used_in:
       - 00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings.md
+      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md
       - Concepts/Architectures/BERT.md
       - Concepts/NLP/Transfer Learning.md
     metadata_status: needs-confirmation
@@ -333,6 +338,7 @@ assets:
     license_url: null
     modifications: copied without modification from the local raw source for publication packaging
     used_in:
+      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md
       - Concepts/Architectures/BERT.md
     metadata_status: needs-confirmation
     provenance_confirmation: user-confirmed-open-materials
@@ -346,6 +352,7 @@ assets:
     modifications: copied without modification from the local raw source for publication packaging
     used_in:
       - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md
+      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md
       - Concepts/Architectures/BERT.md
     metadata_status: needs-confirmation
     provenance_confirmation: user-confirmed-open-materials
@@ -371,6 +378,7 @@ assets:
     modifications: copied without modification from the local raw source for publication packaging
     used_in:
       - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md
+      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md
       - Concepts/Architectures/BERT.md
     metadata_status: needs-confirmation
     provenance_confirmation: user-confirmed-open-materials
@@ -395,6 +403,7 @@ assets:
     license_url: null
     modifications: copied without modification from the local raw source for publication packaging
     used_in:
+      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md
       - Concepts/Architectures/BERT.md
     metadata_status: needs-confirmation
     provenance_confirmation: user-confirmed-open-materials
@@ -493,8 +502,7 @@ assets:
     license: null
     license_url: null
     modifications: copied without modification from the local raw source for publication packaging
-    used_in:
-      - 00 Учебник/09 Dense FFN и Mixture of Experts/01 От SwiGLU к MoE.md
+    used_in: []
     metadata_status: needs-confirmation
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/deepseek-v2/images/x3.png
@@ -659,6 +667,7 @@ assets:
     used_in:
       - 00 Учебник/05 Attention и Transformer/03 Полный Transformer.md
       - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md
+      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning.md
       - Concepts/Architectures/GPT-3.md
     metadata_status: needs-confirmation
     provenance_confirmation: user-confirmed-open-materials
@@ -671,6 +680,7 @@ assets:
     license_url: null
     modifications: copied without modification from the local raw source for publication packaging
     used_in:
+      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык.md
       - Concepts/Architectures/GPT-3.md
     metadata_status: needs-confirmation
     provenance_confirmation: user-confirmed-open-materials
@@ -683,6 +693,7 @@ assets:
     license_url: null
     modifications: copied without modification from the local raw source for publication packaging
     used_in:
+      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык.md
       - Concepts/Architectures/GPT-3.md
     metadata_status: needs-confirmation
     provenance_confirmation: user-confirmed-open-materials
@@ -695,6 +706,7 @@ assets:
     license_url: null
     modifications: copied without modification from the local raw source for publication packaging
     used_in:
+      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык.md
       - Concepts/Architectures/GPT-3.md
     metadata_status: needs-confirmation
     provenance_confirmation: user-confirmed-open-materials
@@ -1169,7 +1181,6 @@ assets:
     license_url: null
     modifications: copied without modification from the local raw source for publication packaging
     used_in:
-      - 00 Учебник/09 Dense FFN и Mixture of Experts/01 От SwiGLU к MoE.md
       - Concepts/Architectures/Mixtral of Experts.md
     metadata_status: needs-confirmation
     provenance_confirmation: user-confirmed-open-materials
@@ -1194,7 +1205,6 @@ assets:
     license_url: null
     modifications: copied without modification from the local raw source for publication packaging
     used_in:
-      - 00 Учебник/09 Dense FFN и Mixture of Experts/01 От SwiGLU к MoE.md
       - Concepts/Architectures/Mixtral of Experts.md
       - Concepts/Architectures/MoE.md
     metadata_status: needs-confirmation
@@ -1207,8 +1217,7 @@ assets:
     license: null
     license_url: null
     modifications: copied without modification from the local raw source for publication packaging
-    used_in:
-      - 00 Учебник/09 Dense FFN и Mixture of Experts/01 От SwiGLU к MoE.md
+    used_in: []
     metadata_status: needs-confirmation
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/mixtral-of-experts/images/sparse-moe-routing.png
@@ -1562,6 +1571,7 @@ assets:
     modifications: copied without modification from the local raw source for publication packaging
     used_in:
       - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md
+      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md
       - Concepts/Architectures/T5.md
     metadata_status: needs-confirmation
     provenance_confirmation: user-confirmed-open-materials
@@ -1575,6 +1585,7 @@ assets:
     modifications: copied without modification from the local raw source for publication packaging
     used_in:
       - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md
+      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md
       - Concepts/Architectures/T5.md
     metadata_status: needs-confirmation
     provenance_confirmation: user-confirmed-open-materials
@@ -1889,3 +1900,2666 @@ assets:
     modifications: paper page rasterization; exact source and process require confirmation
     used_in: []
     metadata_status: needs-confirmation
+  - id: curated-d2l-dropout-000000000001
+    asset: 00 Учебник/Assets/Figures/curated/d2l/dropout.svg
+    author: Dive into Deep Learning contributors
+    source_url: https://d2l.ai/chapter_multilayer-perceptrons/dropout.html
+    license: CC BY-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-sa/4.0/
+    modifications: copied without modification from the open course
+    used_in:
+      - 00 Учебник/01 Основы нейронных сетей/06 Dropout и регуляризация.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/d2l/dropout.svg
+  - id: curated-d2l-lenet-000000000002
+    asset: 00 Учебник/Assets/Figures/curated/d2l/lenet.svg
+    author: Dive into Deep Learning contributors
+    source_url: https://d2l.ai/chapter_convolutional-neural-networks/lenet.html
+    license: CC BY-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-sa/4.0/
+    modifications: copied without modification from the open course
+    used_in:
+      - 00 Учебник/01 Основы нейронных сетей/07 CNN — от свёртки до ResNet.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/d2l/lenet.svg
+  - id: curated-d2l-residual-block-000000000003
+    asset: 00 Учебник/Assets/Figures/curated/d2l/residual-block.svg
+    author: Dive into Deep Learning contributors
+    source_url: https://d2l.ai/chapter_convolutional-modern/resnet.html
+    license: CC BY-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-sa/4.0/
+    modifications: copied without modification from the open course
+    used_in:
+      - 00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/d2l/residual-block.svg
+  - id: curated-d2l-resnet18-000000000004
+    asset: 00 Учебник/Assets/Figures/curated/d2l/resnet18.svg
+    author: Dive into Deep Learning contributors
+    source_url: https://d2l.ai/chapter_convolutional-modern/resnet.html
+    license: CC BY-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-sa/4.0/
+    modifications: copied without modification from the open course
+    used_in:
+      - 00 Учебник/01 Основы нейронных сетей/07 CNN — от свёртки до ResNet.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/d2l/resnet18.svg
+  - id: curated-google-mlcc-split-000000000005
+    asset: 00 Учебник/Assets/Figures/curated/google-mlcc/train-validation-test.png
+    author: Google Machine Learning Crash Course
+    source_url: https://developers.google.com/machine-learning/crash-course/overfitting/dividing-datasets
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    modifications: copied without modification from the open course
+    used_in:
+      - 00 Учебник/00 Математические и ML-основания/05 Train, validation и test.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/google-mlcc/train-validation-test.png
+  - id: curated-google-mlcc-loop-000000000006
+    asset: 00 Учебник/Assets/Figures/curated/google-mlcc/model-selection-loop.svg
+    author: Google Machine Learning Crash Course
+    source_url: https://developers.google.com/machine-learning/crash-course/overfitting/dividing-datasets
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    modifications: copied without modification from the open course
+    used_in:
+      - 00 Учебник/00 Математические и ML-основания/05 Train, validation и test.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/google-mlcc/model-selection-loop.svg
+  - id: curated-google-mlcc-curves-000000000007
+    asset: 00 Учебник/Assets/Figures/curated/google-mlcc/generalization-curves.png
+    author: Google Machine Learning Crash Course
+    source_url: https://developers.google.com/machine-learning/crash-course/overfitting/overfitting
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    modifications: copied without modification from the open course
+    used_in:
+      - 00 Учебник/00 Математические и ML-основания/06 Переобучение, регуляризация и оценивание.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/google-mlcc/generalization-curves.png
+  - id: curated-micrograd-graph-000000000008
+    asset: 00 Учебник/Assets/Figures/curated/micrograd/computational-graph.svg
+    author: Andrej Karpathy
+    source_url: https://github.com/karpathy/micrograd
+    license: MIT
+    license_url: https://github.com/karpathy/micrograd/blob/master/LICENSE
+    modifications: copied without modification from the open repository
+    used_in:
+      - 00 Учебник/01 Основы нейронных сетей/01 Нейрон, градиент и backpropagation.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/micrograd/computational-graph.svg
+  - id: curated-micrograd-moon-000000000009
+    asset: 00 Учебник/Assets/Figures/curated/micrograd/moon-mlp.png
+    author: Andrej Karpathy
+    source_url: https://github.com/karpathy/micrograd
+    license: MIT
+    license_url: https://github.com/karpathy/micrograd/blob/master/LICENSE
+    modifications: copied without modification from the open repository
+    used_in:
+      - 00 Учебник/01 Основы нейронных сетей/01 Нейрон и MLP.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/micrograd/moon-mlp.png
+  - id: curated-vae-blocks-00000000000a
+    asset: 00 Учебник/Assets/Figures/curated/vae/vae-blocks.png
+    author: Sebastian Nguyen and Wikimedia contributors
+    source_url: https://commons.wikimedia.org/wiki/File:VAE_blocks.png
+    license: CC BY-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-sa/4.0/
+    modifications: copied without modification from Wikimedia Commons
+    used_in:
+      - 00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/wikimedia/vae-blocks.png
+  - id: curated-d2l-rnn-unfold-00000000000b
+    asset: 00 Учебник/Assets/Figures/curated/d2l-recurrent/unfolded-rnn.svg
+    author: Dive into Deep Learning contributors
+    source_url: https://d2l.ai/chapter_recurrent-neural-networks/index.html
+    license: CC BY-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-sa/4.0/
+    modifications: copied without modification from the open course
+    used_in:
+      - 00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/d2l/unfolded-rnn.svg
+  - id: curated-d2l-lstm-gates-00000000000c
+    asset: 00 Учебник/Assets/Figures/curated/d2l-recurrent/lstm-gates.svg
+    author: Dive into Deep Learning contributors
+    source_url: https://d2l.ai/chapter_recurrent-modern/lstm.html
+    license: CC BY-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-sa/4.0/
+    modifications: copied without modification from the open course
+    used_in:
+      - 00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/d2l/lstm-0.svg
+  - id: curated-d2l-lstm-state-00000000000d
+    asset: 00 Учебник/Assets/Figures/curated/d2l-recurrent/lstm-hidden-state.svg
+    author: Dive into Deep Learning contributors
+    source_url: https://d2l.ai/chapter_recurrent-modern/lstm.html
+    license: CC BY-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-sa/4.0/
+    modifications: copied without modification from the open course
+    used_in:
+      - 00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/d2l/lstm-3.svg
+  - id: curated-d2l-gru-00000000000e
+    asset: 00 Учебник/Assets/Figures/curated/d2l-recurrent/gru.svg
+    author: Dive into Deep Learning contributors
+    source_url: https://d2l.ai/chapter_recurrent-modern/gru.html
+    license: CC BY-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-sa/4.0/
+    modifications: copied without modification from the open course
+    used_in:
+      - 00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/d2l/gru-1.svg
+  - id: curated-d2l-seq2seq-00000000000f
+    asset: 00 Учебник/Assets/Figures/curated/d2l-recurrent/seq2seq.svg
+    author: Dive into Deep Learning contributors
+    source_url: https://d2l.ai/chapter_recurrent-modern/encoder-decoder.html
+    license: CC BY-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-sa/4.0/
+    modifications: copied without modification from the open course
+    used_in:
+      - 00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/d2l/seq2seq.svg
+  - id: curated-d2l-seq2seq-attn-000000000010
+    asset: 00 Учебник/Assets/Figures/curated/d2l-recurrent/seq2seq-attention.svg
+    author: Dive into Deep Learning contributors
+    source_url: https://classic.d2l.ai/chapter_attention-mechanisms/bahdanau-attention.html
+    license: CC BY-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-sa/4.0/
+    modifications: copied without modification from the open course
+    used_in:
+      - 00 Учебник/05 Attention и Transformer/01 От Seq2Seq к Transformer.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/d2l/seq2seq-attention-details.svg
+  - id: curated-voita-ngram-window-000000000011
+    asset: 00 Учебник/Assets/Figures/curated/voita-language-modeling/ngram-window.png
+    author: Lena Voita
+    source_url: https://lena-voita.github.io/nlp_course/language_modeling.html
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://lena-voita.github.io/nlp_course.html
+    modifications: copied without modification from the open course
+    used_in:
+      - 00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/voita/ngram/example_cut_3gram-min.png
+  - id: curated-voita-ngram-prob-000000000012
+    asset: 00 Учебник/Assets/Figures/curated/voita-language-modeling/ngram-probability.png
+    author: Lena Voita
+    source_url: https://lena-voita.github.io/nlp_course/language_modeling.html
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://lena-voita.github.io/nlp_course.html
+    modifications: copied without modification from the open course
+    used_in:
+      - 00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/voita/ngram/prob_cat_on_a_mat-min.png
+  - id: curated-voita-ngram-backoff-000000000013
+    asset: 00 Учебник/Assets/Figures/curated/voita-language-modeling/backoff.png
+    author: Lena Voita
+    source_url: https://lena-voita.github.io/nlp_course/language_modeling.html
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://lena-voita.github.io/nlp_course.html
+    modifications: copied without modification from the open course
+    used_in:
+      - 00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/voita/ngram/backoff-min.png
+  - id: curated-voita-ngram-interp-000000000014
+    asset: 00 Учебник/Assets/Figures/curated/voita-language-modeling/interpolation.png
+    author: Lena Voita
+    source_url: https://lena-voita.github.io/nlp_course/language_modeling.html
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://lena-voita.github.io/nlp_course.html
+    modifications: copied without modification from the open course
+    used_in:
+      - 00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/voita/ngram/interpolation-min.png
+  - id: curated-voita-lookup-000000000015
+    asset: 00 Учебник/Assets/Figures/curated/voita-word-embeddings/lookup-table.gif
+    author: Lena Voita
+    source_url: https://lena-voita.github.io/nlp_course/word_embeddings.html
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://lena-voita.github.io/nlp_course.html
+    modifications: copied without modification from the open course
+    used_in:
+      - 00 Учебник/02 Представление текста и токенизация/01 Представление текста числами.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/voita/word_emb/lookup_table.gif
+  - id: curated-voita-one-hot-000000000016
+    asset: 00 Учебник/Assets/Figures/curated/voita-word-embeddings/one-hot.png
+    author: Lena Voita
+    source_url: https://lena-voita.github.io/nlp_course/word_embeddings.html
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://lena-voita.github.io/nlp_course.html
+    modifications: copied without modification from the open course
+    used_in:
+      - 00 Учебник/02 Представление текста и токенизация/01 Представление текста числами.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/voita/word_emb/one_hot-min.png
+  - id: curated-voita-counts-000000000017
+    asset: 00 Учебник/Assets/Figures/curated/voita-word-embeddings/count-based-idea.png
+    author: Lena Voita
+    source_url: https://lena-voita.github.io/nlp_course/word_embeddings.html
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://lena-voita.github.io/nlp_course.html
+    modifications: copied without modification from the open course
+    used_in:
+      - 00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/voita/word_emb/preneural/idea-min.png
+  - id: curated-voita-w2v-intro-000000000018
+    asset: 00 Учебник/Assets/Figures/curated/voita-word-embeddings/word2vec-intro.png
+    author: Lena Voita
+    source_url: https://lena-voita.github.io/nlp_course/word_embeddings.html
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://lena-voita.github.io/nlp_course.html
+    modifications: copied without modification from the open course
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/voita/word_emb/w2v/intro-min.png
+  - id: curated-voita-cbow-skip-000000000019
+    asset: 00 Учебник/Assets/Figures/curated/voita-word-embeddings/cbow-skipgram.png
+    author: Lena Voita
+    source_url: https://lena-voita.github.io/nlp_course/word_embeddings.html
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://lena-voita.github.io/nlp_course.html
+    modifications: copied without modification from the open course
+    used_in:
+      - 00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/voita/word_emb/w2v/cbow_skip-min.png
+  - id: curated-voita-negative-00000000001a
+    asset: 00 Учебник/Assets/Figures/curated/voita-word-embeddings/negative-sampling.png
+    author: Lena Voita
+    source_url: https://lena-voita.github.io/nlp_course/word_embeddings.html
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://lena-voita.github.io/nlp_course.html
+    modifications: copied without modification from the open course
+    used_in:
+      - 00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/voita/word_emb/w2v/negative_sampling-min.png
+  - id: curated-voita-glove-idea-00000000001b
+    asset: 00 Учебник/Assets/Figures/curated/voita-word-embeddings/glove-idea.png
+    author: Lena Voita
+    source_url: https://lena-voita.github.io/nlp_course/word_embeddings.html
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://lena-voita.github.io/nlp_course.html
+    modifications: copied without modification from the open course
+    used_in:
+      - 00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/voita/word_emb/glove/idea-min.png
+  - id: curated-voita-glove-loss-00000000001c
+    asset: 00 Учебник/Assets/Figures/curated/voita-word-embeddings/glove-loss.png
+    author: Lena Voita
+    source_url: https://lena-voita.github.io/nlp_course/word_embeddings.html
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://lena-voita.github.io/nlp_course.html
+    modifications: copied without modification from the open course
+    used_in:
+      - 00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/voita/word_emb/glove/glove_loss-min.png
+  - id: curated-cs336-data-composition-00000000001d
+    asset: 00 Учебник/Assets/Figures/curated/training-systems-courses/41-cs336-data-composition.png
+    author: Tatsu Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/main/lecture_09.pdf
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://cs336.stanford.edu/
+    modifications: slide 21 rendered to PNG without content changes
+    used_in:
+      - 00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/cs336/lecture-09-slide-21.png
+  - id: curated-cs336-mixture-00000000001e
+    asset: 00 Учебник/Assets/Figures/curated/training-systems-courses/41-cs336-mixture-selection.png
+    author: Tatsu Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/main/lecture_09.pdf
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://cs336.stanford.edu/
+    modifications: slide 23 rendered to PNG without content changes
+    used_in:
+      - 00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/cs336/lecture-09-slide-23.png
+  - id: curated-slp-chain-rule-00000000001f
+    asset: 00 Учебник/Assets/Figures/curated/training-systems-courses/42-slp-chain-rule.png
+    author: Dan Jurafsky and James H. Martin
+    source_url: https://web.stanford.edu/~jurafsky/slp3/slides/lm_jan25.pdf
+    license: open educational slides; reuse confirmed by repository owner
+    license_url: https://web.stanford.edu/~jurafsky/slp3/
+    modifications: slide 10 rendered to PNG without content changes
+    used_in:
+      - 00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/slp3/lm-jan25-slide-10.png
+  - id: curated-slp-perplexity-000000000020
+    asset: 00 Учебник/Assets/Figures/curated/training-systems-courses/42-slp-perplexity.png
+    author: Dan Jurafsky and James H. Martin
+    source_url: https://web.stanford.edu/~jurafsky/slp3/slides/lm_jan25.pdf
+    license: open educational slides; reuse confirmed by repository owner
+    license_url: https://web.stanford.edu/~jurafsky/slp3/
+    modifications: slide 45 rendered to PNG without content changes
+    used_in:
+      - 00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/slp3/lm-jan25-slide-45.png
+  - id: curated-cs336-isoflops-000000000021
+    asset: 00 Учебник/Assets/Figures/curated/training-systems-courses/43-cs336-isoflops.png
+    author: Tatsu Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/main/lecture_09.pdf
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://cs336.stanford.edu/
+    modifications: slide 48 rendered to PNG without content changes
+    used_in:
+      - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/cs336/lecture-09-slide-48.png
+  - id: curated-cs336-deploy-optimum-000000000022
+    asset: 00 Учебник/Assets/Figures/curated/training-systems-courses/43-cs336-train-vs-inference-optimum.png
+    author: Tatsu Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/main/lecture_09.pdf
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://cs336.stanford.edu/
+    modifications: slide 54 rendered to PNG without content changes
+    used_in:
+      - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/cs336/lecture-09-slide-54.png
+  - id: curated-cs336-dp-memory-000000000023
+    asset: 00 Учебник/Assets/Figures/curated/training-systems-courses/44-cs336-dp-memory.png
+    author: Percy Liang, Tatsu Hashimoto, and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/main/lecture_08.pdf
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://cs336.stanford.edu/
+    modifications: slide 17 rendered to PNG without content changes
+    used_in:
+      - 00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/cs336/lecture-08-slide-17.png
+  - id: curated-cs336-parallelism-000000000024
+    asset: 00 Учебник/Assets/Figures/curated/training-systems-courses/44-cs336-parallelism-table.png
+    author: Percy Liang, Tatsu Hashimoto, and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/main/lecture_08.pdf
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://cs336.stanford.edu/
+    modifications: slide 55 rendered to PNG without content changes
+    used_in:
+      - 00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/cs336/lecture-08-slide-55.png
+  - id: curated-rope-decay-000000000025
+    asset: 00 Учебник/Assets/Figures/curated/modern-37-40-long-context/rope-decay.png
+    author: Jianlin Su et al.
+    source_url: https://arxiv.org/pdf/2104.09864
+    license: open-paper-material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2104.09864
+    modifications: Figure 2 rendered from the official PDF at high resolution and cropped without content changes
+    used_in:
+      - 00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/rope/paper.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-jalammar-ffn-000000000026
+    asset: 00 Учебник/Assets/Figures/curated/modern-37-40-dense-ffn/transformer-block-ffn.png
+    author: Jay Alammar
+    source_url: https://jalammar.github.io/illustrated-gpt2/
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without content changes
+    used_in:
+      - 00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/gpt-30/images/gpt2-transformer-block-vectors-2.png
+  - id: curated-hf-moe-layer-000000000027
+    asset: 00 Учебник/Assets/Figures/curated/modern-37-40-moe/mixtral-smoe-layer.png
+    author: Omar Sanseviero et al.
+    source_url: https://huggingface.co/blog/moe
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://huggingface.co/blog/moe
+    modifications: copied without content changes
+    used_in:
+      - 00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/huggingface/moe/01_moe_layer.png
+  - id: curated-hf-moe-routing-000000000028
+    asset: 00 Учебник/Assets/Figures/curated/modern-37-40-moe/sparse-routing.png
+    author: Maarten Grootendorst; Aritra Roy Gosthipaty et al.
+    source_url: https://huggingface.co/blog/moe-transformers
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://huggingface.co/blog/moe-transformers
+    modifications: copied without content changes
+    used_in:
+      - 00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/huggingface/moe-transformers/moe_routing.png
+  - id: curated-mamba-figure1-000000000029
+    asset: 00 Учебник/Assets/Figures/curated/modern-37-40-alternatives/mamba-selective-ssm.png
+    author: Albert Gu and Tri Dao
+    source_url: https://arxiv.org/pdf/2312.00752
+    license: open-paper-material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2312.00752
+    modifications: Figure 1 extracted from the official paper
+    used_in:
+      - 00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/mamba/paper.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-rwkv-architecture-00000000002a
+    asset: 00 Учебник/Assets/Figures/curated/modern-37-40-alternatives/rwkv-architecture.png
+    author: Bo Peng et al.
+    source_url: https://arxiv.org/pdf/2305.13048
+    license: open-paper-material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2305.13048
+    modifications: Figure 3 rendered from the official PDF at high resolution and cropped without content changes
+    used_in:
+      - 00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/rwkv/paper.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-retnet-dual-00000000002b
+    asset: 00 Учебник/Assets/Figures/curated/modern-37-40-alternatives/retnet-dual-form.png
+    author: Yutao Sun et al.
+    source_url: https://arxiv.org/pdf/2307.08621
+    license: open-paper-material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2307.08621
+    modifications: Figure 3 rendered from the official PDF at high resolution and cropped without content changes
+    used_in:
+      - 00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/retnet/paper.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-jamba-figure1-00000000002c
+    asset: 00 Учебник/Assets/Figures/curated/modern-37-40-alternatives/jamba-hybrid.png
+    author: Opher Lieber et al.
+    source_url: https://arxiv.org/pdf/2403.19887
+    license: open-paper-material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2403.19887
+    modifications: Figure 1 extracted from the official paper
+    used_in:
+      - 00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/jamba/paper.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-atlas-llama3-00000000002d
+    asset: 00 Учебник/Assets/Figures/curated/atlas-courses-official/llama3-architecture.png
+    author: Meta Llama Team
+    source_url: https://arxiv.org/pdf/2407.21783
+    license: open-paper-material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2407.21783
+    modifications: Figure 1 cropped from the official PDF without content changes
+    used_in:
+      - 02 Атлас моделей/Семейства/Llama.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/llama-3/paper.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-atlas-qwen3-00000000002e
+    asset: 00 Учебник/Assets/Figures/curated/atlas-courses-official/qwen3-post-training-pipeline.png
+    author: Qwen Team
+    source_url: https://arxiv.org/pdf/2505.09388
+    license: open-paper-material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2505.09388
+    modifications: Figure 1 cropped from page 9 of the official PDF
+    used_in:
+      - 02 Атлас моделей/Семейства/Qwen.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/qwen3/paper.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-atlas-deepseek-00000000002f
+    asset: 00 Учебник/Assets/Figures/curated/atlas-courses-official/deepseek-v2-mla-moe.png
+    author: DeepSeek-AI
+    source_url: https://arxiv.org/pdf/2405.04434
+    license: open-paper-material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2405.04434
+    modifications: architecture figure extracted from the official PDF
+    used_in:
+      - 02 Атлас моделей/Семейства/DeepSeek.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/deepseek-v2/paper.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-atlas-glm-000000000030
+    asset: 00 Учебник/Assets/Figures/curated/atlas-courses-official/glm-family-timeline.png
+    author: GLM-4 Team, Zhipu AI, and Tsinghua KEG
+    source_url: https://arxiv.org/pdf/2406.12793
+    license: open-paper-material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2406.12793
+    modifications: Figure 1 cropped from page 2 of the official PDF
+    used_in:
+      - 02 Атлас моделей/Семейства/GLM.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/glm-4/paper.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-atlas-kimi-000000000031
+    asset: 00 Учебник/Assets/Figures/curated/atlas-courses-official/kimi-k15-rl-system.png
+    author: Kimi Team and Moonshot AI
+    source_url: https://arxiv.org/pdf/2501.12599
+    license: open-paper-material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2501.12599
+    modifications: Figure 3 extracted from the official PDF
+    used_in:
+      - 02 Атлас моделей/Семейства/Kimi.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/kimi-k15/paper.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-atlas-mistral-000000000032
+    asset: 00 Учебник/Assets/Figures/curated/atlas-courses-official/mistral-sliding-window-attention.png
+    author: Albert Q. Jiang et al.
+    source_url: https://arxiv.org/pdf/2310.06825
+    license: open-paper-material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2310.06825
+    modifications: Figure 1 extracted from the official PDF
+    used_in:
+      - 02 Атлас моделей/Семейства/Mistral и Mixtral.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/mistral-7b/paper.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-atlas-gemma-000000000033
+    asset: 00 Учебник/Assets/Figures/curated/atlas-courses-official/gemma-capability-comparison.png
+    author: Gemma Team, Google DeepMind
+    source_url: https://arxiv.org/pdf/2403.08295
+    license: open-paper-material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2403.08295
+    modifications: Figure 1 extracted from the official PDF
+    used_in:
+      - 02 Атлас моделей/Семейства/Gemma.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/gemma/paper.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-atlas-phi-000000000034
+    asset: 00 Учебник/Assets/Figures/curated/atlas-courses-official/phi-data-optimal-scaling.png
+    author: Microsoft Phi-3 Team
+    source_url: https://arxiv.org/pdf/2404.14219
+    license: open-paper-material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2404.14219
+    modifications: Figure 3 extracted from the official PDF
+    used_in:
+      - 02 Атлас моделей/Семейства/Phi.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/phi-3/paper.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-gpt-3-paper-416b4bb6d87b
+    asset: 00 Учебник/Assets/Figures/curated/gpt-3-paper/zero-one-few-shot-vs-finetuning.png
+    author: Tom B. Brown et al.
+    source_url: https://arxiv.org/abs/2005.14165
+    license: open-paper-material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2005.14165
+    modifications: extracted without visual modification from Figure 2.1 of the official paper PDF
+    used_in:
+      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/gpt-30/paper.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-gpt-3-paper-table-12ca47fd68d1
+    asset: 00 Учебник/Assets/Figures/curated/gpt-3-paper/model-sizes-table-2-1.png
+    author: Tom B. Brown et al.
+    source_url: https://arxiv.org/abs/2005.14165
+    license: open-paper-material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2005.14165
+    modifications: Table 2.1 extracted from page 8 of the official paper PDF; whitespace cropped
+    used_in:
+      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/gpt-30/paper.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-nvidia-gcf-000000000035
+    asset: 00 Учебник/Assets/Figures/curated/topics-53-59-source-first/nvidia-generate-critique-filter.png
+    author: NVIDIA
+    source_url: https://developer.nvidia.com/blog/mastering-llm-techniques-data-preprocessing/
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://developer.nvidia.com/blog/mastering-llm-techniques-data-preprocessing/
+    modifications: copied or extracted without visual modification for publication
+    used_in:
+      - 00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/topics-53-59/nvidia-generate-critique-filter.png
+  - id: curated-nemotron-grf-000000000036
+    asset: 00 Учебник/Assets/Figures/curated/topics-53-59-source-first/nemotron-generate-rank-filter.png
+    author: NVIDIA
+    source_url: https://developer.nvidia.com/blog/leverage-our-latest-open-models-for-synthetic-data-generation-with-nvidia-nemotron-4-340b/
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://developer.nvidia.com/blog/leverage-our-latest-open-models-for-synthetic-data-generation-with-nvidia-nemotron-4-340b/
+    modifications: copied or extracted without visual modification for publication
+    used_in:
+      - 00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/topics-53-59/nemotron-generate-rank-filter.png
+  - id: curated-olmo2-dolmino-000000000037
+    asset: 00 Учебник/Assets/Figures/curated/topics-53-59-source-first/olmo2-dolmino.png
+    author: Allen Institute for AI and Stanford CS336
+    source_url: https://arxiv.org/abs/2501.00656
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2501.00656
+    modifications: copied or extracted without visual modification for publication
+    used_in:
+      - 00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/topics-53-59/olmo2-dolmino.png
+  - id: curated-hf-greedy-000000000038
+    asset: 00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hf-greedy_search.png
+    author: Patrick von Platen and Hugging Face
+    source_url: https://huggingface.co/blog/how-to-generate
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://huggingface.co/blog/how-to-generate
+    modifications: copied or extracted without visual modification for publication
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/topics-53-59/hf-greedy_search.png
+  - id: curated-hf-beam-000000000039
+    asset: 00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hf-beam_search.png
+    author: Patrick von Platen and Hugging Face
+    source_url: https://huggingface.co/blog/how-to-generate
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://huggingface.co/blog/how-to-generate
+    modifications: copied or extracted without visual modification for publication
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/topics-53-59/hf-beam_search.png
+  - id: curated-hf-sampling-00000000003a
+    asset: 00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hf-sampling_search.png
+    author: Patrick von Platen and Hugging Face
+    source_url: https://huggingface.co/blog/how-to-generate
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://huggingface.co/blog/how-to-generate
+    modifications: copied or extracted without visual modification for publication
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/topics-53-59/hf-sampling_search.png
+  - id: curated-hf-temperature-00000000003b
+    asset: 00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hf-sampling_search_with_temp.png
+    author: Patrick von Platen and Hugging Face
+    source_url: https://huggingface.co/blog/how-to-generate
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://huggingface.co/blog/how-to-generate
+    modifications: copied or extracted without visual modification for publication
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/topics-53-59/hf-sampling_search_with_temp.png
+  - id: curated-hf-top-k-00000000003c
+    asset: 00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hf-top_k_sampling.png
+    author: Patrick von Platen and Hugging Face
+    source_url: https://huggingface.co/blog/how-to-generate
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://huggingface.co/blog/how-to-generate
+    modifications: copied or extracted without visual modification for publication
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/topics-53-59/hf-top_k_sampling.png
+  - id: curated-hf-top-p-00000000003d
+    asset: 00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hf-top_p_sampling.png
+    author: Patrick von Platen and Hugging Face
+    source_url: https://huggingface.co/blog/how-to-generate
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://huggingface.co/blog/how-to-generate
+    modifications: copied or extracted without visual modification for publication
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/topics-53-59/hf-top_p_sampling.png
+  - id: curated-cs336-prefill-00000000003e
+    asset: 00 Учебник/Assets/Figures/curated/topics-53-59-source-first/prefill-decode.png
+    author: Stanford CS336 course staff
+    source_url: https://cs336.stanford.edu/
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://cs336.stanford.edu/
+    modifications: copied or extracted without visual modification for publication
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/topics-53-59/prefill-decode.png
+  - id: curated-anyscale-batching-00000000003f
+    asset: 00 Учебник/Assets/Figures/curated/topics-53-59-source-first/anyscale-static-batching.png
+    author: Anyscale
+    source_url: https://www.anyscale.com/blog/continuous-batching-llm-inference
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://www.anyscale.com/blog/continuous-batching-llm-inference
+    modifications: copied or extracted without visual modification for publication
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/topics-53-59/anyscale-static-batching.png
+  - id: curated-paged-fragment-000000000040
+    asset: 00 Учебник/Assets/Figures/curated/topics-53-59-source-first/paged-attention-fragmentation.png
+    author: Woosuk Kwon et al.
+    source_url: https://arxiv.org/abs/2309.06180
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2309.06180
+    modifications: copied or extracted without visual modification for publication
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/topics-53-59/paged-attention-fragmentation.png
+  - id: curated-paged-blocks-000000000041
+    asset: 00 Учебник/Assets/Figures/curated/topics-53-59-source-first/paged-attention-blocks.png
+    author: Woosuk Kwon et al.
+    source_url: https://arxiv.org/abs/2309.06180
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2309.06180
+    modifications: copied or extracted without visual modification for publication
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/topics-53-59/paged-attention-blocks.png
+  - id: curated-paged-logical-000000000042
+    asset: 00 Учебник/Assets/Figures/curated/topics-53-59-source-first/paged-attention-logical.png
+    author: Woosuk Kwon et al.
+    source_url: https://arxiv.org/abs/2309.06180
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2309.06180
+    modifications: copied or extracted without visual modification for publication
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/topics-53-59/paged-attention-logical.png
+  - id: curated-flash-tiling-000000000043
+    asset: 00 Учебник/Assets/Figures/curated/topics-53-59-source-first/flashattention-tiling.png
+    author: Tri Dao and Stanford CRFM
+    source_url: https://crfm.stanford.edu/2023/07/17/flash2.html
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://crfm.stanford.edu/2023/07/17/flash2.html
+    modifications: copied or extracted without visual modification for publication
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/56 FlashAttention.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/topics-53-59/flashattention-tiling.png
+  - id: curated-flash2-part-000000000044
+    asset: 00 Учебник/Assets/Figures/curated/topics-53-59-source-first/flashattention2-partitioning.png
+    author: Tri Dao and Stanford CRFM
+    source_url: https://crfm.stanford.edu/2023/07/17/flash2.html
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://crfm.stanford.edu/2023/07/17/flash2.html
+    modifications: copied or extracted without visual modification for publication
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/56 FlashAttention.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/topics-53-59/flashattention2-partitioning.png
+  - id: curated-hf-quant-000000000045
+    asset: 00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hf-quantization-rounding.png
+    author: Hugging Face and Tim Dettmers
+    source_url: https://huggingface.co/blog/hf-bitsandbytes-integration
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://huggingface.co/blog/hf-bitsandbytes-integration
+    modifications: copied or extracted without visual modification for publication
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/topics-53-59/hf-quantization-rounding.png
+  - id: curated-awq-schema-000000000046
+    asset: 00 Учебник/Assets/Figures/curated/topics-53-59-source-first/awq-schema.png
+    author: Ji Lin et al.
+    source_url: https://arxiv.org/abs/2306.00978
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2306.00978
+    modifications: copied or extracted without visual modification for publication
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/topics-53-59/awq-schema.png
+  - id: curated-spec-alg-000000000047
+    asset: 00 Учебник/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-algorithm.png
+    author: Yaniv Leviathan et al.
+    source_url: https://arxiv.org/abs/2211.17192
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2211.17192
+    modifications: copied or extracted without visual modification for publication
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/topics-53-59/speculative-sampling-algorithm.png
+  - id: curated-spec-results-000000000048
+    asset: 00 Учебник/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-results.png
+    author: Yaniv Leviathan et al.
+    source_url: https://arxiv.org/abs/2211.17192
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2211.17192
+    modifications: copied or extracted without visual modification for publication
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/topics-53-59/speculative-sampling-results.png
+  - id: curated-spec-stats-000000000049
+    asset: 00 Учебник/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-stats.png
+    author: Yaniv Leviathan et al.
+    source_url: https://arxiv.org/abs/2211.17192
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2211.17192
+    modifications: copied or extracted without visual modification for publication
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/topics-53-59/speculative-sampling-stats.png
+  - id: curated-gpqa-00000000004a
+    asset: 00 Учебник/Assets/Figures/curated/topics-53-59-source-first/gpqa.png
+    author: David Rein et al.
+    source_url: https://arxiv.org/abs/2311.12022
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2311.12022
+    modifications: copied or extracted without visual modification for publication
+    used_in:
+      - 00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/topics-53-59/gpqa.png
+  - id: curated-hle-00000000004b
+    asset: 00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hle-pipeline.png
+    author: Long Phan et al.
+    source_url: https://arxiv.org/abs/2501.14249
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2501.14249
+    modifications: copied or extracted without visual modification for publication
+    used_in:
+      - 00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/topics-53-59/hle-pipeline.png
+  - id: curated-ifeval-00000000004c
+    asset: 00 Учебник/Assets/Figures/curated/topics-53-59-source-first/ifeval-categories.png
+    author: Jeffrey Zhou et al.
+    source_url: https://arxiv.org/abs/2311.07911
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2311.07911
+    modifications: copied or extracted without visual modification for publication
+    used_in:
+      - 00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/topics-53-59/ifeval-categories.png
+  - id: curated-contamination-00000000004d
+    asset: 00 Учебник/Assets/Figures/curated/topics-53-59-source-first/contamination-exchangeability.png
+    author: Yonatan Oren et al.
+    source_url: https://arxiv.org/abs/2310.17623
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2310.17623
+    modifications: copied or extracted without visual modification for publication
+    used_in:
+      - 00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/topics-53-59/contamination-exchangeability.png
+  - id: curated-cs336-prenorm-00000000004e
+    asset: 00 Учебник/Assets/Figures/curated/source-first-32-34/cs336-transformer-lm-prenorm-block.png
+    author: Stanford CS336 course staff, Percy Liang, Tatsunori Hashimoto et al.
+    source_url: https://github.com/stanford-cs336/assignment1-basics/blob/main/cs336_assignment1_basics.pdf#page=13
+    license: MIT
+    license_url: https://github.com/stanford-cs336/assignment1-basics/blob/main/LICENSE
+    modifications: cropped page 13 to preserve Figures 1–2 without altering the diagrams
+    used_in:
+      - 00 Учебник/07 Анатомия современной LLM/02 Современный decoder block.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/cs336/cs336_assignment1_basics.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-cs336-silu-relu-00000000004f
+    asset: 00 Учебник/Assets/Figures/curated/source-first-32-34/cs336-silu-vs-relu.png
+    author: Stanford CS336 course staff, Percy Liang, Tatsunori Hashimoto et al.
+    source_url: https://github.com/stanford-cs336/assignment1-basics/blob/main/cs336_assignment1_basics.pdf#page=21
+    license: MIT
+    license_url: https://github.com/stanford-cs336/assignment1-basics/blob/main/LICENSE
+    modifications: cropped Figure 3 from page 21 without altering the plot
+    used_in:
+      - 00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/cs336/cs336_assignment1_basics.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-rmsnorm-results-000000000050
+    asset: 00 Учебник/Assets/Figures/curated/source-first-32-34/rmsnorm-paper-results.png
+    author: Biao Zhang and Rico Sennrich
+    source_url: https://arxiv.org/pdf/1910.07467#page=7
+    license: open-paper-material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/1910.07467
+    modifications: cropped Figure 3 and Tables 3–5 from page 7
+    used_in:
+      - 00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/rmsnorm/paper.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-roformer-figure1-000000000051
+    asset: 00 Учебник/Assets/Figures/curated/source-first-32-34/roformer-rope-figure1.png
+    author: Jianlin Su et al.
+    source_url: https://arxiv.org/pdf/2104.09864#page=5
+    license: open-paper-material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2104.09864
+    modifications: cropped Figure 1 from page 5 without altering content
+    used_in:
+      - 00 Учебник/07 Анатомия современной LLM/04 RoPE.md
+      - 00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/roformer/paper.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-posttraining-sft-chat-000000000052
+    asset: 00 Учебник/Assets/Figures/curated/post-training-courses/sft-chat-template.png
+    author: Nathan Lambert
+    source_url: https://rlhfbook.com/teach/course/lec2-chap4-5-9/slides.pdf#page=11
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://rlhfbook.com/teach/course/
+    modifications: full PDF slide rendered at 150 dpi without content changes
+    used_in:
+      - 00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/rlhfbook/sft-chat-template.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-posttraining-sft-mask-000000000053
+    asset: 00 Учебник/Assets/Figures/curated/post-training-courses/sft-prompt-masking.png
+    author: Nathan Lambert
+    source_url: https://rlhfbook.com/teach/course/lec2-chap4-5-9/slides.pdf#page=20
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://rlhfbook.com/teach/course/
+    modifications: full PDF slide rendered at 150 dpi without content changes
+    used_in:
+      - 00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/rlhfbook/sft-prompt-masking.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-posttraining-pref-ui-000000000054
+    asset: 00 Учебник/Assets/Figures/curated/post-training-courses/preference-collection-interface.png
+    author: Nathan Lambert
+    source_url: https://rlhfbook.com/teach/course/lec8-chap10-11-preferences/slides.pdf#page=25
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://rlhfbook.com/teach/course/
+    modifications: full PDF slide rendered at 150 dpi without content changes
+    used_in:
+      - 00 Учебник/12 Post-training и Alignment/02 Preference data.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/rlhfbook/preference-collection-interface.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-posttraining-pref-bias-000000000055
+    asset: 00 Учебник/Assets/Figures/curated/post-training-courses/preference-data-biases.png
+    author: Nathan Lambert
+    source_url: https://rlhfbook.com/teach/course/lec8-chap10-11-preferences/slides.pdf#page=39
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://rlhfbook.com/teach/course/
+    modifications: full PDF slide rendered at 150 dpi without content changes
+    used_in:
+      - 00 Учебник/12 Post-training и Alignment/02 Preference data.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/rlhfbook/preference-data-biases.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-posttraining-rm-train-000000000056
+    asset: 00 Учебник/Assets/Figures/curated/post-training-courses/reward-model-training.png
+    author: Nathan Lambert
+    source_url: https://rlhfbook.com/teach/course/lec2-chap4-5-9/slides.pdf#page=42
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://rlhfbook.com/teach/course/
+    modifications: full PDF slide rendered at 150 dpi without content changes
+    used_in:
+      - 00 Учебник/12 Post-training и Alignment/03 Reward modeling.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/rlhfbook/reward-model-training.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-posttraining-rm-types-000000000057
+    asset: 00 Учебник/Assets/Figures/curated/post-training-courses/reward-model-types.png
+    author: Nathan Lambert
+    source_url: https://rlhfbook.com/teach/course/lec2-chap4-5-9/slides.pdf#page=56
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://rlhfbook.com/teach/course/
+    modifications: full PDF slide rendered at 150 dpi without content changes
+    used_in:
+      - 00 Учебник/12 Post-training и Alignment/03 Reward modeling.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/rlhfbook/reward-model-types.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-posttraining-ppo-inputs-000000000058
+    asset: 00 Учебник/Assets/Figures/curated/post-training-courses/ppo-step-inputs.png
+    author: Nathan Lambert
+    source_url: https://rlhfbook.com/teach/course/lec4-chap6-p2/slides.pdf#page=19
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://rlhfbook.com/teach/course/
+    modifications: full PDF slide rendered at 150 dpi without content changes
+    used_in:
+      - 00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/rlhfbook/ppo-step-inputs.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-posttraining-ppo-models-000000000059
+    asset: 00 Учебник/Assets/Figures/curated/post-training-courses/ppo-four-models.png
+    author: Nathan Lambert
+    source_url: https://rlhfbook.com/teach/course/lec4-chap6-p2/slides.pdf#page=35
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://rlhfbook.com/teach/course/
+    modifications: full PDF slide rendered at 150 dpi without content changes
+    used_in:
+      - 00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/rlhfbook/ppo-four-models.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-posttraining-dpo-grad-00000000005a
+    asset: 00 Учебник/Assets/Figures/curated/post-training-courses/dpo-gradient.png
+    author: Nathan Lambert
+    source_url: https://rlhfbook.com/teach/course/lec6-chap8-dpo/slides.pdf#page=39
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://rlhfbook.com/teach/course/
+    modifications: full PDF slide rendered at 150 dpi without content changes
+    used_in:
+      - 00 Учебник/12 Post-training и Alignment/05 DPO.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/rlhfbook/dpo-gradient.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-posttraining-dpo-mode-00000000005b
+    asset: 00 Учебник/Assets/Figures/curated/post-training-courses/dpo-offline-vs-online.png
+    author: Nathan Lambert
+    source_url: https://rlhfbook.com/teach/course/lec6-chap8-dpo/slides.pdf#page=48
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://rlhfbook.com/teach/course/
+    modifications: full PDF slide rendered at 150 dpi without content changes
+    used_in:
+      - 00 Учебник/12 Post-training и Alignment/05 DPO.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/rlhfbook/dpo-offline-vs-online.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-posttraining-rlhf-rlvr-00000000005c
+    asset: 00 Учебник/Assets/Figures/curated/post-training-courses/rlhf-vs-rlvr.png
+    author: Nathan Lambert
+    source_url: https://rlhfbook.com/teach/course/lec5-chap7/slides.pdf#page=5
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://rlhfbook.com/teach/course/
+    modifications: full PDF slide rendered at 150 dpi without content changes
+    used_in:
+      - 00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/rlhfbook/rlhf-vs-rlvr.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-posttraining-rlvr-loop-00000000005d
+    asset: 00 Учебник/Assets/Figures/curated/post-training-courses/rlvr-feedback-loop.png
+    author: Nathan Lambert
+    source_url: https://rlhfbook.com/teach/course/lec5-chap7/slides.pdf#page=6
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://rlhfbook.com/teach/course/
+    modifications: full PDF slide rendered at 150 dpi without content changes
+    used_in:
+      - 00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/rlhfbook/rlvr-feedback-loop.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-posttraining-grpo-rel-00000000005e
+    asset: 00 Учебник/Assets/Figures/curated/post-training-courses/grpo-group-relative.png
+    author: Nathan Lambert
+    source_url: https://rlhfbook.com/teach/course/lec4-chap6-p2/slides.pdf#page=37
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://rlhfbook.com/teach/course/
+    modifications: full PDF slide rendered at 150 dpi without content changes
+    used_in:
+      - 00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/rlhfbook/grpo-group-relative.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-posttraining-grpo-ppo-00000000005f
+    asset: 00 Учебник/Assets/Figures/curated/post-training-courses/grpo-vs-ppo-implementation.png
+    author: Nathan Lambert
+    source_url: https://rlhfbook.com/teach/course/lec4-chap6-p2/slides.pdf#page=40
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://rlhfbook.com/teach/course/
+    modifications: full PDF slide rendered at 150 dpi without content changes
+    used_in:
+      - 00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/rlhfbook/grpo-vs-ppo-implementation.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-posttraining-distill-mean-000000000060
+    asset: 00 Учебник/Assets/Figures/curated/post-training-courses/distillation-two-meanings.png
+    author: Nathan Lambert
+    source_url: https://rlhfbook.com/teach/course/lec7-chap12-synthetic-data/slides.pdf#page=12
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://rlhfbook.com/teach/course/
+    modifications: full PDF slide rendered at 150 dpi without content changes
+    used_in:
+      - 00 Учебник/12 Post-training и Alignment/08 Reasoning distillation.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/rlhfbook/distillation-two-meanings.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-posttraining-distill-pipe-000000000061
+    asset: 00 Учебник/Assets/Figures/curated/post-training-courses/distillation-data-pipeline.png
+    author: Nathan Lambert
+    source_url: https://rlhfbook.com/teach/course/lec7-chap12-synthetic-data/slides.pdf#page=15
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://rlhfbook.com/teach/course/
+    modifications: full PDF slide rendered at 150 dpi without content changes
+    used_in:
+      - 00 Учебник/12 Post-training и Alignment/08 Reasoning distillation.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/rlhfbook/distillation-data-pipeline.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-dpr-dual-000000000062
+    asset: 00 Учебник/Assets/Figures/curated/source-first-60-64/dpr-dual-encoder-and-loss.png
+    author: Danqi Chen
+    source_url: https://github.com/danqi/acl2020-openqa-tutorial/blob/master/slides/part5-dense-retriever-e2e-training.pdf
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://github.com/danqi/acl2020-openqa-tutorial/blob/master/slides/part5-dense-retriever-e2e-training.pdf
+    modifications: official PDF figure or slide cropped without content changes
+    used_in:
+      - 00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-60-64/dpr-dual-encoder-and-loss.png
+    derivation: pdf-page-render-crop
+  - id: curated-dpr-positive-000000000063
+    asset: 00 Учебник/Assets/Figures/curated/source-first-60-64/dpr-positive-and-negative-examples.png
+    author: Danqi Chen
+    source_url: https://github.com/danqi/acl2020-openqa-tutorial/blob/master/slides/part5-dense-retriever-e2e-training.pdf
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://github.com/danqi/acl2020-openqa-tutorial/blob/master/slides/part5-dense-retriever-e2e-training.pdf
+    modifications: official PDF figure or slide cropped without content changes
+    used_in:
+      - 00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-60-64/dpr-positive-and-negative-examples.png
+    derivation: pdf-page-render-crop
+  - id: curated-dpr-inbatch-000000000064
+    asset: 00 Учебник/Assets/Figures/curated/source-first-60-64/dpr-in-batch-negatives.png
+    author: Danqi Chen
+    source_url: https://github.com/danqi/acl2020-openqa-tutorial/blob/master/slides/part5-dense-retriever-e2e-training.pdf
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://github.com/danqi/acl2020-openqa-tutorial/blob/master/slides/part5-dense-retriever-e2e-training.pdf
+    modifications: official PDF figure or slide cropped without content changes
+    used_in:
+      - 00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-60-64/dpr-in-batch-negatives.png
+    derivation: pdf-page-render-crop
+  - id: curated-openqa-tfidf-000000000065
+    asset: 00 Учебник/Assets/Figures/curated/source-first-60-64/openqa-tfidf-retriever.png
+    author: Danqi Chen
+    source_url: https://github.com/danqi/acl2020-openqa-tutorial/blob/master/slides/part4-retriever-reader.pdf
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://github.com/danqi/acl2020-openqa-tutorial/blob/master/slides/part4-retriever-reader.pdf
+    modifications: official PDF figure or slide cropped without content changes
+    used_in:
+      - 00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-60-64/openqa-tfidf-retriever.png
+    derivation: pdf-page-render-crop
+  - id: curated-openqa-reader-000000000066
+    asset: 00 Учебник/Assets/Figures/curated/source-first-60-64/openqa-retriever-reader.png
+    author: Danqi Chen
+    source_url: https://github.com/danqi/acl2020-openqa-tutorial/blob/master/slides/part4-retriever-reader.pdf
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://github.com/danqi/acl2020-openqa-tutorial/blob/master/slides/part4-retriever-reader.pdf
+    modifications: official PDF figure or slide cropped without content changes
+    used_in:
+      - 00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-60-64/openqa-retriever-reader.png
+    derivation: pdf-page-render-crop
+  - id: curated-sbert-bicross-000000000067
+    asset: 00 Учебник/Assets/Figures/curated/source-first-60-64/sbert-bi-vs-cross-encoder.png
+    author: UKP Lab and Sentence Transformers
+    source_url: https://www.sbert.net/examples/cross_encoder/applications/README.html
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://www.sbert.net/examples/cross_encoder/applications/README.html
+    modifications: copied without content changes
+    used_in:
+      - 00 Учебник/15 Embeddings, Retrieval и RAG/62 Reranking — cross-encoder и late interaction.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-60-64/sbert-bi-vs-cross-encoder.png
+  - id: curated-colbert-late-000000000068
+    asset: 00 Учебник/Assets/Figures/curated/source-first-60-64/colbert-late-interaction.png
+    author: Omar Khattab and Matei Zaharia
+    source_url: https://arxiv.org/abs/2004.12832
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2004.12832
+    modifications: Figure 2 rendered from the official PDF at high resolution and cropped without content changes
+    used_in:
+      - 00 Учебник/15 Embeddings, Retrieval и RAG/62 Reranking — cross-encoder и late interaction.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/colbert/paper.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-rag-arch-000000000069
+    asset: 00 Учебник/Assets/Figures/curated/source-first-60-64/rag-original-architecture.png
+    author: Patrick Lewis et al.
+    source_url: https://arxiv.org/abs/2005.11401
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2005.11401
+    modifications: copied without content changes
+    used_in:
+      - 00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-60-64/rag-original-architecture.png
+  - id: curated-hf-rag-flow-00000000006a
+    asset: 00 Учебник/Assets/Figures/curated/source-first-60-64/hf-rag-evaluation-workflow.png
+    author: Aymeric Roucher and Hugging Face
+    source_url: https://huggingface.co/learn/cookbook/en/rag_evaluation
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://huggingface.co/learn/cookbook/en/rag_evaluation
+    modifications: copied without content changes
+    used_in:
+      - 00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-60-64/hf-rag-evaluation-workflow.png
+  - id: curated-hf-rag-accuracy-00000000006b
+    asset: 00 Учебник/Assets/Figures/curated/source-first-60-64/hf-rag-settings-accuracy.png
+    author: Aymeric Roucher and Hugging Face
+    source_url: https://huggingface.co/learn/cookbook/en/rag_evaluation
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://huggingface.co/learn/cookbook/en/rag_evaluation
+    modifications: copied without content changes
+    used_in:
+      - 00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-60-64/hf-rag-settings-accuracy.png
+  - id: curated-clip-figure1-00000000006c
+    asset: 00 Учебник/Assets/Figures/curated/source-first-60-64/clip-contrastive-pretraining.png
+    author: Alec Radford et al.
+    source_url: https://arxiv.org/abs/2103.00020
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2103.00020
+    modifications: official PDF figure or slide cropped without content changes
+    used_in:
+      - 00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-60-64/clip-contrastive-pretraining.png
+    derivation: pdf-page-render-crop
+  - id: curated-flamingo-figure3-00000000006d
+    asset: 00 Учебник/Assets/Figures/curated/source-first-60-64/flamingo-architecture.png
+    author: Jean-Baptiste Alayrac et al.
+    source_url: https://arxiv.org/abs/2204.14198
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2204.14198
+    modifications: official PDF figure or slide cropped without content changes
+    used_in:
+      - 00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-60-64/flamingo-architecture.png
+    derivation: pdf-page-render-crop
+  - id: curated-llava-figure1-00000000006e
+    asset: 00 Учебник/Assets/Figures/curated/source-first-60-64/llava-architecture.png
+    author: Haotian Liu et al.
+    source_url: https://arxiv.org/abs/2304.08485
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2304.08485
+    modifications: official PDF figure or slide cropped without content changes
+    used_in:
+      - 00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-60-64/llava-architecture.png
+    derivation: pdf-page-render-crop
+  - id: curated-react-patterns-00000000006f
+    asset: 00 Учебник/Assets/Figures/curated/source-first-65-68/react-patterns.png
+    author: Shunyu Yao et al.
+    source_url: https://react-lm.github.io/
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://react-lm.github.io/
+    modifications: copied without content changes
+    used_in:
+      - 00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-65-68/react-patterns.png
+  - id: curated-react-hotpotqa-000000000070
+    asset: 00 Учебник/Assets/Figures/curated/source-first-65-68/react-hotpotqa.png
+    author: Shunyu Yao et al.
+    source_url: https://react-lm.github.io/
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://react-lm.github.io/
+    modifications: copied without content changes
+    used_in:
+      - 00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-65-68/react-hotpotqa.png
+  - id: curated-anthropic-agent-loop-000000000071
+    asset: 00 Учебник/Assets/Figures/curated/source-first-65-68/agent-loop-anthropic.png
+    author: Anthropic
+    source_url: https://www.anthropic.com/engineering/building-effective-agents
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://www.anthropic.com/engineering/building-effective-agents
+    modifications: copied without content changes
+    used_in:
+      - 00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-65-68/agent-loop-anthropic.png
+  - id: curated-context-iteration-000000000072
+    asset: 00 Учебник/Assets/Figures/curated/source-first-65-68/context-engineering-iteration.png
+    author: Anthropic
+    source_url: https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents
+    modifications: copied without content changes
+    used_in:
+      - 00 Учебник/17 Tools и Agents/66 Agent harness и context engineering.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-65-68/context-engineering-iteration.png
+  - id: curated-prompt-calibration-000000000073
+    asset: 00 Учебник/Assets/Figures/curated/source-first-65-68/system-prompt-calibration.png
+    author: Anthropic
+    source_url: https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents
+    modifications: copied without content changes
+    used_in:
+      - 00 Учебник/17 Tools и Agents/66 Agent harness и context engineering.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-65-68/system-prompt-calibration.png
+  - id: curated-memgpt-hierarchy-000000000074
+    asset: 00 Учебник/Assets/Figures/curated/source-first-65-68/memgpt-memory-hierarchy.png
+    author: Charles Packer et al.
+    source_url: https://arxiv.org/abs/2310.08560
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2310.08560
+    modifications: official PDF figure cropped without content changes
+    used_in:
+      - 00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-65-68/memgpt-memory-hierarchy.png
+    derivation: pdf-page-render-crop
+  - id: curated-orchestrator-workers-000000000075
+    asset: 00 Учебник/Assets/Figures/curated/source-first-65-68/orchestrator-workers.png
+    author: Anthropic
+    source_url: https://www.anthropic.com/engineering/building-effective-agents
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://www.anthropic.com/engineering/building-effective-agents
+    modifications: copied without content changes
+    used_in:
+      - 00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-65-68/orchestrator-workers.png
+  - id: curated-evaluator-optimizer-000000000076
+    asset: 00 Учебник/Assets/Figures/curated/source-first-65-68/evaluator-optimizer.png
+    author: Anthropic
+    source_url: https://www.anthropic.com/engineering/building-effective-agents
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://www.anthropic.com/engineering/building-effective-agents
+    modifications: copied without content changes
+    used_in:
+      - 00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-65-68/evaluator-optimizer.png
+  - id: curated-agent-eval-simple-000000000077
+    asset: 00 Учебник/Assets/Figures/curated/source-first-65-68/agent-eval-simple-vs-multiturn.png
+    author: Anthropic
+    source_url: https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents
+    modifications: copied without content changes
+    used_in:
+      - 00 Учебник/17 Tools и Agents/68 Оценивание агентных систем.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-65-68/agent-eval-simple-vs-multiturn.png
+  - id: curated-agent-eval-components-000000000078
+    asset: 00 Учебник/Assets/Figures/curated/source-first-65-68/agent-eval-components.png
+    author: Anthropic
+    source_url: https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents
+    modifications: copied without content changes
+    used_in:
+      - 00 Учебник/17 Tools и Agents/68 Оценивание агентных систем.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-65-68/agent-eval-components.png
+  - id: curated-agent-eval-passk-000000000079
+    asset: 00 Учебник/Assets/Figures/curated/source-first-65-68/pass-at-k-vs-pass-power-k.png
+    author: Anthropic
+    source_url: https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents
+    modifications: copied without content changes
+    used_in:
+      - 00 Учебник/17 Tools и Agents/68 Оценивание агентных систем.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-65-68/pass-at-k-vs-pass-power-k.png
+  - id: curated-agentbench-figure1-00000000007a
+    asset: 00 Учебник/Assets/Figures/curated/source-first-65-68/agentbench-environments-results.png
+    author: Xiao Liu et al.
+    source_url: https://arxiv.org/abs/2308.03688
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2308.03688
+    modifications: official PDF figure cropped without content changes
+    used_in:
+      - 00 Учебник/17 Tools и Agents/68 Оценивание агентных систем.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-65-68/agentbench-environments-results.png
+    derivation: pdf-page-render-crop
+  - id: curated-atlas-baichuan-00000000007b
+    asset: 00 Учебник/Assets/Figures/curated/atlas-remainder-official/baichuan2-data-and-config.png
+    author: Yang et al. and Baichuan Intelligence
+    source_url: https://arxiv.org/abs/2309.10305
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2309.10305
+    modifications: official PDF figure cropped without content changes
+    used_in:
+      - 02 Атлас моделей/Семейства/Baichuan.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/atlas-remainder/baichuan2-data-and-config.png
+    derivation: pdf-page-render-crop
+  - id: curated-atlas-internlm-00000000007c
+    asset: 00 Учебник/Assets/Figures/curated/atlas-remainder-official/internlm-data-pipeline.png
+    author: InternLM Team
+    source_url: https://arxiv.org/abs/2403.17297
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2403.17297
+    modifications: official PDF figure cropped without content changes
+    used_in:
+      - 02 Атлас моделей/Семейства/InternLM.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/atlas-remainder/internlm-data-pipeline.png
+    derivation: pdf-page-render-crop
+  - id: curated-atlas-rwkv-00000000007d
+    asset: 00 Учебник/Assets/Figures/curated/atlas-remainder-official/rwkv-architecture.png
+    author: RWKV Community
+    source_url: https://wiki.rwkv.com/basic/architecture.html
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://wiki.rwkv.com/basic/architecture.html
+    modifications: official full-resolution JPEG converted to PNG without resizing or content changes
+    used_in:
+      - 02 Атлас моделей/Семейства/RWKV.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/visual-quality/rwkv7-architecture-original.jpg
+    derivation: lossless-format-conversion
+  - id: curated-atlas-yi-00000000007e
+    asset: 00 Учебник/Assets/Figures/curated/atlas-remainder-official/yi-data-pipeline.png
+    author: 01.AI
+    source_url: https://arxiv.org/abs/2403.04652
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2403.04652
+    modifications: official PDF figure cropped without content changes
+    used_in:
+      - 02 Атлас моделей/Семейства/Yi.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/atlas-remainder/yi-data-pipeline.png
+    derivation: pdf-page-render-crop
+  - id: curated-atlas-dbrx-00000000007f
+    asset: 00 Учебник/Assets/Figures/curated/atlas-remainder-official/dbrx-comparison.png
+    author: Databricks Mosaic Research
+    source_url: https://www.databricks.com/blog/introducing-dbrx-new-state-art-open-llm
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://www.databricks.com/blog/introducing-dbrx-new-state-art-open-llm
+    modifications: copied without content changes
+    used_in:
+      - 02 Атлас моделей/Семейства/DBRX.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/atlas-remainder/dbrx-comparison.png
+  - id: curated-atlas-falcon-000000000080
+    asset: 00 Учебник/Assets/Figures/curated/atlas-remainder-official/falcon-h1-architecture.png
+    author: Zuo et al. and Technology Innovation Institute
+    source_url: https://arxiv.org/abs/2507.22448
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2507.22448
+    modifications: official PDF figure cropped without content changes
+    used_in:
+      - 02 Атлас моделей/Семейства/Falcon.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/atlas-remainder/falcon-h1-architecture.png
+    derivation: pdf-page-render-crop
+  - id: curated-atlas-nemotron-000000000081
+    asset: 00 Учебник/Assets/Figures/curated/atlas-remainder-official/nemotron3-layer-pattern.png
+    author: NVIDIA
+    source_url: https://research.nvidia.com/labs/nemotron/files/NVIDIA-Nemotron-3-Super-Technical-Report.pdf
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://research.nvidia.com/labs/nemotron/files/NVIDIA-Nemotron-3-Super-Technical-Report.pdf
+    modifications: official PDF figure cropped without content changes
+    used_in:
+      - 02 Атлас моделей/Семейства/Nemotron.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/atlas-remainder/nemotron3-layer-pattern.png
+    derivation: pdf-page-render-crop
+  - id: curated-atlas-retnet-000000000082
+    asset: 00 Учебник/Assets/Figures/curated/atlas-remainder-official/retnet-dual-form.png
+    author: Yutao Sun et al.
+    source_url: https://arxiv.org/abs/2307.08621
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2307.08621
+    modifications: Figure 3 rendered from the official PDF at high resolution and cropped without content changes
+    used_in:
+      - 02 Атлас моделей/Семейства/RetNet.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/retnet/paper.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-atlas-jamba-000000000083
+    asset: 00 Учебник/Assets/Figures/curated/atlas-remainder-official/jamba-architecture.png
+    author: AI21 Labs
+    source_url: https://arxiv.org/abs/2403.19887
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2403.19887
+    modifications: official PDF figure cropped without content changes
+    used_in:
+      - 02 Атлас моделей/Семейства/Jamba.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/atlas-remainder/jamba-architecture.png
+    derivation: pdf-page-render-crop
+  - id: curated-atlas-command-000000000084
+    asset: 00 Учебник/Assets/Figures/curated/atlas-remainder-official/command-a-architecture.png
+    author: Cohere
+    source_url: https://cohere.com/research/papers/command-a-technical-report.pdf
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://cohere.com/research/papers/command-a-technical-report.pdf
+    modifications: official PDF figure cropped without content changes
+    used_in:
+      - 02 Атлас моделей/Семейства/Command R.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/atlas-remainder/command-a-architecture.png
+    derivation: pdf-page-render-crop
+  - id: curated-atlas-mamba-000000000085
+    asset: 00 Учебник/Assets/Figures/curated/atlas-remainder-official/mamba-block.png
+    author: Albert Gu and Tri Dao
+    source_url: https://arxiv.org/abs/2312.00752
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2312.00752
+    modifications: copied without content changes
+    used_in:
+      - 02 Атлас моделей/Семейства/Mamba.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/atlas-remainder/mamba-block.png
+  - id: curated-atlas-gpt-000000000086
+    asset: 00 Учебник/Assets/Figures/curated/atlas-remainder-official/gpt-decoder-block.png
+    author: Jay Alammar
+    source_url: https://jalammar.github.io/illustrated-gpt2/
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without content changes
+    used_in:
+      - 02 Атлас моделей/Семейства/GPT.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/atlas-remainder/gpt-decoder-block.png
+  - id: curated-atlas-bert-000000000087
+    asset: 00 Учебник/Assets/Figures/curated/atlas-remainder-official/bert-input-output.png
+    author: Jay Alammar
+    source_url: https://jalammar.github.io/illustrated-bert/
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without content changes
+    used_in:
+      - 02 Атлас моделей/Семейства/BERT.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/atlas-remainder/bert-input-output.png
+  - id: curated-atlas-t5-000000000088
+    asset: 00 Учебник/Assets/Figures/curated/atlas-remainder-official/t5-text-to-text.png
+    author: Colin Raffel et al.
+    source_url: https://arxiv.org/abs/1910.10683
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/1910.10683
+    modifications: copied without content changes
+    used_in:
+      - 02 Атлас моделей/Семейства/T5.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/atlas-remainder/t5-text-to-text.png
+  - id: curated-atlas-multimodal-000000000089
+    asset: 00 Учебник/Assets/Figures/curated/atlas-remainder-official/flamingo-architecture.png
+    author: Jean-Baptiste Alayrac et al.
+    source_url: https://arxiv.org/abs/2204.14198
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2204.14198
+    modifications: official PDF figure cropped without content changes
+    used_in:
+      - 02 Атлас моделей/Семейства/Мультимодальные семейства.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/atlas-remainder/flamingo-architecture.png
+    derivation: pdf-page-render-crop
+  - id: curated-cs231n-mlp-00000000008a
+    asset: 00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-mlp-layered.jpeg
+    author: Stanford CS231n course staff
+    source_url: https://cs231n.github.io/neural-networks-1/
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://cs231n.github.io/neural-networks-1/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in:
+      - 00 Учебник/01 Основы нейронных сетей/01 Нейрон и MLP.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-7-14/cs231n-mlp-layered.jpeg
+  - id: curated-cs231n-depth-00000000008b
+    asset: 00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-depth-width.jpeg
+    author: Stanford CS231n course staff
+    source_url: https://cs231n.github.io/neural-networks-1/
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://cs231n.github.io/neural-networks-1/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in:
+      - 00 Учебник/01 Основы нейронных сетей/01 Нейрон и MLP.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-7-14/cs231n-depth-width.jpeg
+  - id: curated-cs231n-regions-00000000008c
+    asset: 00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-decision-regions.jpeg
+    author: Stanford CS231n course staff
+    source_url: https://cs231n.github.io/neural-networks-1/
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://cs231n.github.io/neural-networks-1/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in:
+      - 00 Учебник/01 Основы нейронных сетей/01 Нейрон и MLP.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-7-14/cs231n-decision-regions.jpeg
+  - id: curated-d2l-sigmoid-00000000008d
+    asset: 00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-sigmoid.svg
+    author: Aston Zhang et al.
+    source_url: https://d2l.ai/chapter_multilayer-perceptrons/mlp.html#activation-functions
+    license: CC BY-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in:
+      - 00 Учебник/01 Основы нейронных сетей/02 Функции активации.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-7-14/d2l-sigmoid.svg
+  - id: curated-d2l-sigmoid-grad-00000000008e
+    asset: 00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-sigmoid-gradient.svg
+    author: Aston Zhang et al.
+    source_url: https://d2l.ai/chapter_multilayer-perceptrons/mlp.html#activation-functions
+    license: CC BY-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in:
+      - 00 Учебник/01 Основы нейронных сетей/02 Функции активации.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-7-14/d2l-sigmoid-gradient.svg
+  - id: curated-d2l-tanh-00000000008f
+    asset: 00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-tanh.svg
+    author: Aston Zhang et al.
+    source_url: https://d2l.ai/chapter_multilayer-perceptrons/mlp.html#activation-functions
+    license: CC BY-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in:
+      - 00 Учебник/01 Основы нейронных сетей/02 Функции активации.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-7-14/d2l-tanh.svg
+  - id: curated-d2l-tanh-grad-000000000090
+    asset: 00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-tanh-gradient.svg
+    author: Aston Zhang et al.
+    source_url: https://d2l.ai/chapter_multilayer-perceptrons/mlp.html#activation-functions
+    license: CC BY-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in:
+      - 00 Учебник/01 Основы нейронных сетей/02 Функции активации.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-7-14/d2l-tanh-gradient.svg
+  - id: curated-d2l-relu-000000000091
+    asset: 00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-relu.svg
+    author: Aston Zhang et al.
+    source_url: https://d2l.ai/chapter_multilayer-perceptrons/mlp.html#activation-functions
+    license: CC BY-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in:
+      - 00 Учебник/01 Основы нейронных сетей/02 Функции активации.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-7-14/d2l-relu.svg
+  - id: curated-d2l-relu-grad-000000000092
+    asset: 00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-relu-gradient.svg
+    author: Aston Zhang et al.
+    source_url: https://d2l.ai/chapter_multilayer-perceptrons/mlp.html#activation-functions
+    license: CC BY-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in:
+      - 00 Учебник/01 Основы нейронных сетей/02 Функции активации.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-7-14/d2l-relu-gradient.svg
+  - id: curated-d2l-sgd-000000000093
+    asset: 00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-sgd-anisotropic.svg
+    author: Aston Zhang et al.
+    source_url: https://d2l.ai/chapter_optimization/momentum.html
+    license: CC BY-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in:
+      - 00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-7-14/d2l-sgd-anisotropic.svg
+  - id: curated-d2l-momentum-000000000094
+    asset: 00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-momentum-anisotropic.svg
+    author: Aston Zhang et al.
+    source_url: https://d2l.ai/chapter_optimization/momentum.html
+    license: CC BY-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in:
+      - 00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-7-14/d2l-momentum-anisotropic.svg
+  - id: curated-cs231n-opt-000000000095
+    asset: 00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-optimizer-trajectories.gif
+    author: Stanford CS231n course staff
+    source_url: https://cs231n.github.io/neural-networks-3/
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://cs231n.github.io/neural-networks-3/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in:
+      - 00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-7-14/cs231n-optimizer-trajectories.gif
+  - id: curated-cs231n-lr-000000000096
+    asset: 00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-learning-rates.jpeg
+    author: Stanford CS231n course staff
+    source_url: https://cs231n.github.io/neural-networks-3/
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://cs231n.github.io/neural-networks-3/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in:
+      - 00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-7-14/cs231n-learning-rates.jpeg
+  - id: curated-cs231n-dropout-000000000097
+    asset: 00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-dropout-train.jpeg
+    author: Stanford CS231n course staff
+    source_url: https://cs231n.github.io/neural-networks-2/#reg
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://cs231n.github.io/neural-networks-2/#reg
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in:
+      - 00 Учебник/01 Основы нейронных сетей/06 Dropout и регуляризация.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-7-14/cs231n-dropout-train.jpeg
+  - id: curated-d2l-crosscorr-000000000098
+    asset: 00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-cross-correlation.svg
+    author: Aston Zhang et al.
+    source_url: https://d2l.ai/chapter_convolutional-neural-networks/conv-layer.html
+    license: CC BY-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in:
+      - 00 Учебник/01 Основы нейронных сетей/07 CNN — от свёртки до ResNet.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-7-14/d2l-cross-correlation.svg
+  - id: curated-cs231n-local-000000000099
+    asset: 00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-local-connectivity.jpeg
+    author: Stanford CS231n course staff
+    source_url: https://cs231n.github.io/convolutional-networks/
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://cs231n.github.io/convolutional-networks/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in:
+      - 00 Учебник/01 Основы нейронных сетей/07 CNN — от свёртки до ResNet.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-7-14/cs231n-local-connectivity.jpeg
+  - id: curated-cs231n-stride-00000000009a
+    asset: 00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-stride-padding.jpeg
+    author: Stanford CS231n course staff
+    source_url: https://cs231n.github.io/convolutional-networks/
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://cs231n.github.io/convolutional-networks/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in:
+      - 00 Учебник/01 Основы нейронных сетей/07 CNN — от свёртки до ResNet.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-7-14/cs231n-stride-padding.jpeg
+  - id: curated-weng-ae-00000000009b
+    asset: 00 Учебник/Assets/Figures/curated/source-first-7-14/weng-autoencoder.png
+    author: Lilian Weng
+    source_url: https://lilianweng.github.io/posts/2018-08-12-vae/
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://lilianweng.github.io/posts/2018-08-12-vae/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in:
+      - 00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-7-14/weng-autoencoder.png
+  - id: curated-weng-vae-00000000009c
+    asset: 00 Учебник/Assets/Figures/curated/source-first-7-14/weng-vae-graphical-model.png
+    author: Lilian Weng
+    source_url: https://lilianweng.github.io/posts/2018-08-12-vae/
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://lilianweng.github.io/posts/2018-08-12-vae/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in:
+      - 00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-7-14/weng-vae-graphical-model.png
+  - id: curated-weng-reparam-00000000009d
+    asset: 00 Учебник/Assets/Figures/curated/source-first-7-14/weng-reparameterization.png
+    author: Lilian Weng
+    source_url: https://lilianweng.github.io/posts/2018-08-12-vae/
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://lilianweng.github.io/posts/2018-08-12-vae/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in:
+      - 00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-7-14/weng-reparameterization.png
+  - id: curated-snell-prm-search-7e44420a8340
+    asset: 00 Учебник/Assets/Figures/curated/test-time-compute/snell-prm-search-methods.png
+    author: Charlie Snell, Jaehoon Lee, Kelvin Xu, Aviral Kumar
+    source_url: https://arxiv.org/abs/2408.03314
+    license: open-paper-material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2408.03314
+    modifications: Figure 2 rendered from page 8 of the paper and cropped to the figure area
+    used_in:
+      - 00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/2408.03314.pdf
+    source_page: 8
+    derivation: pdf-page-render-crop
+  - id: curated-mml-vector-geometry-00000000009e
+    asset: 00 Учебник/Assets/Figures/curated/foundations-source-first/mml-vector-geometry.png
+    author: Marc Peter Deisenroth; A. Aldo Faisal; Cheng Soon Ong
+    source_url: https://mml-book.github.io/book/mml-book.pdf
+    license: free-to-view educational book; reuse confirmed by repository owner
+    license_url: https://mml-book.github.io/
+    modifications: Figure 2.1 rendered from page 17 and cropped to the figure area
+    used_in:
+      - 00 Учебник/00 Математические и ML-основания/01 Векторы, матрицы и тензоры.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/mml-book.pdf
+    source_page: 17
+    derivation: pdf-page-render-crop
+  - id: curated-d2l-broadcasting-00000000009f
+    asset: 00 Учебник/Assets/Figures/curated/foundations-source-first/d2l-broadcasting-example.png
+    author: Aston Zhang et al.
+    source_url: https://d2l.ai/chapter_preliminaries/ndarray.html#broadcasting
+    license: CC BY-SA 4.0
+    license_url: https://github.com/d2l-ai/d2l-en/blob/master/LICENSE
+    modifications: copied and cropped from the course example
+    used_in:
+      - 00 Учебник/00 Математические и ML-основания/01 Векторы, матрицы и тензоры.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/foundations-source-first/d2l-broadcasting-example.png
+  - id: curated-mml-secant-tangent-0000000000a0
+    asset: 00 Учебник/Assets/Figures/curated/foundations-source-first/mml-secant-to-tangent.png
+    author: Marc Peter Deisenroth; A. Aldo Faisal; Cheng Soon Ong
+    source_url: https://mml-book.github.io/book/mml-book.pdf
+    license: free-to-view educational book; reuse confirmed by repository owner
+    license_url: https://mml-book.github.io/
+    modifications: Figure 5.3 rendered from page 141 and cropped to the figure area
+    used_in:
+      - 00 Учебник/00 Математические и ML-основания/02 Производная и градиент.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/mml-book.pdf
+    source_page: 141
+    derivation: pdf-page-render-crop
+  - id: curated-google-gradient-descent-0000000000a1
+    asset: 00 Учебник/Assets/Figures/curated/foundations-source-first/google-gradient-descent.png
+    author: Google
+    source_url: https://developers.google.com/machine-learning/crash-course/linear-regression/gradient-descent
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    modifications: copied from the course page
+    used_in:
+      - 00 Учебник/00 Математические и ML-основания/02 Производная и градиент.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/foundations-source-first/google-gradient-descent.png
+  - id: curated-mml-matrix-gradient-0000000000a2
+    asset: 00 Учебник/Assets/Figures/curated/foundations-source-first/mml-matrix-gradient-shape.png
+    author: Marc Peter Deisenroth; A. Aldo Faisal; Cheng Soon Ong
+    source_url: https://mml-book.github.io/book/mml-book.pdf
+    license: free-to-view educational book; reuse confirmed by repository owner
+    license_url: https://mml-book.github.io/
+    modifications: Figure 5.7 rendered from page 155 and cropped to the figure area
+    used_in:
+      - 00 Учебник/00 Математические и ML-основания/02 Производная и градиент.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/mml-book.pdf
+    source_page: 155
+    derivation: pdf-page-render-crop
+  - id: curated-mml-computation-graph-0000000000a3
+    asset: 00 Учебник/Assets/Figures/curated/foundations-source-first/mml-computation-graph-forward.png
+    author: Marc Peter Deisenroth; A. Aldo Faisal; Cheng Soon Ong
+    source_url: https://mml-book.github.io/book/mml-book.pdf
+    license: free-to-view educational book; reuse confirmed by repository owner
+    license_url: https://mml-book.github.io/
+    modifications: Figure 5.8 rendered from page 160 and cropped to the figure area
+    used_in:
+      - 00 Учебник/00 Математические и ML-основания/02 Производная и градиент.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/mml-book.pdf
+    source_page: 160
+    derivation: pdf-page-render-crop
+  - id: curated-mml-density-0000000000a4
+    asset: 00 Учебник/Assets/Figures/curated/foundations-source-first/mml-discrete-continuous-density.png
+    author: Marc Peter Deisenroth; A. Aldo Faisal; Cheng Soon Ong
+    source_url: https://mml-book.github.io/book/mml-book.pdf
+    license: free-to-view educational book; reuse confirmed by repository owner
+    license_url: https://mml-book.github.io/
+    modifications: Figure 6.3 rendered from page 182 and cropped to the figure area
+    used_in:
+      - 00 Учебник/00 Математические и ML-основания/03 Вероятность, правдоподобие и логарифм.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/mml-book.pdf
+    source_page: 182
+    derivation: pdf-page-render-crop
+  - id: curated-d2l-likelihood-coin-0000000000a5
+    asset: 00 Учебник/Assets/Figures/curated/foundations-source-first/d2l-likelihood-coin.svg
+    author: Aston Zhang et al.
+    source_url: https://d2l.ai/chapter_appendix-mathematics-for-deep-learning/maximum-likelihood.html#a-concrete-example
+    license: CC BY-SA 4.0
+    license_url: https://github.com/d2l-ai/d2l-en/blob/master/LICENSE
+    modifications: copied from the course page
+    used_in:
+      - 00 Учебник/00 Математические и ML-основания/03 Вероятность, правдоподобие и логарифм.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/foundations-source-first/d2l-likelihood-coin.svg
+  - id: curated-cs231n-softmax-ce-0000000000a6
+    asset: 00 Учебник/Assets/Figures/curated/foundations-source-first/cs231n-softmax-cross-entropy.png
+    author: Fei-Fei Li; Ranjay Krishna; Danfei Xu
+    source_url: https://cs231n.stanford.edu/slides/2025/lecture_2.pdf
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://cs231n.stanford.edu/
+    modifications: slide 77 rendered and cropped to the explanatory figure
+    used_in:
+      - 00 Учебник/00 Математические и ML-основания/04 Функции потерь.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/cs231n-lecture-2.pdf
+    source_page: 77
+    derivation: pdf-page-render-crop
+  - id: curated-cs231n-boundaries-0000000000a7
+    asset: 00 Учебник/Assets/Figures/curated/foundations-source-first/cs231n-linear-decision-boundaries.png
+    author: Fei-Fei Li; Ranjay Krishna; Danfei Xu
+    source_url: https://cs231n.stanford.edu/slides/2025/lecture_2.pdf
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://cs231n.stanford.edu/
+    modifications: slide 63 rendered and cropped to the explanatory figure
+    used_in:
+      - 00 Учебник/00 Математические и ML-основания/04 Функции потерь.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/cs231n-lecture-2.pdf
+    source_page: 63
+    derivation: pdf-page-render-crop
+  - id: curated-google-mse-outliers-0000000000a8
+    asset: 00 Учебник/Assets/Figures/curated/foundations-source-first/google-mse-outliers.png
+    author: Google
+    source_url: https://developers.google.com/machine-learning/crash-course/linear-regression/loss
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    modifications: copied from the course page
+    used_in:
+      - 00 Учебник/00 Математические и ML-основания/04 Функции потерь.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/foundations-source-first/google-mse-outliers.png
+  - id: curated-google-mae-outliers-0000000000a9
+    asset: 00 Учебник/Assets/Figures/curated/foundations-source-first/google-mae-outliers.png
+    author: Google
+    source_url: https://developers.google.com/machine-learning/crash-course/linear-regression/loss
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    modifications: copied from the course page
+    used_in:
+      - 00 Учебник/00 Математические и ML-основания/04 Функции потерь.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/foundations-source-first/google-mae-outliers.png
+  - id: curated-google-hashing-split-0000000000aa
+    asset: 00 Учебник/Assets/Figures/curated/foundations-source-first/google-hashing-split.gif
+    author: Google
+    source_url: https://developers.google.com/machine-learning/crash-course/production-ml-systems/monitoring
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    modifications: copied from the course page
+    used_in:
+      - 00 Учебник/00 Математические и ML-основания/05 Train, validation и test.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/foundations-source-first/google-hashing-split.gif
+  - id: curated-google-underfit-overfit-0000000000ab
+    asset: 00 Учебник/Assets/Figures/curated/foundations-source-first/google-underfit-fit-overfit.svg
+    author: Google
+    source_url: https://developers.google.com/machine-learning/crash-course/overfitting/overfitting
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    modifications: copied from the course page
+    used_in:
+      - 00 Учебник/00 Математические и ML-основания/06 Переобучение, регуляризация и оценивание.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/foundations-source-first/google-underfit-fit-overfit.svg
+  - id: curated-cs229-bias-variance-0000000000ac
+    asset: 00 Учебник/Assets/Figures/curated/foundations-source-first/cs229-bias-variance-decomposition.png
+    author: Stanford CS229 course staff
+    source_url: https://cs229.stanford.edu/summer2023/BiasVarianceAnalysis.pdf
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://cs229.stanford.edu/
+    modifications: page 7 rendered and cropped to the decomposition
+    used_in:
+      - 00 Учебник/00 Математические и ML-основания/06 Переобучение, регуляризация и оценивание.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/cs229-bias-variance.pdf
+    source_page: 7
+    derivation: pdf-page-render-crop
+  - id: curated-google-complex-model-0000000000ad
+    asset: 00 Учебник/Assets/Figures/curated/foundations-source-first/google-complex-model.svg
+    author: Google
+    source_url: https://developers.google.com/machine-learning/crash-course/overfitting/model-complexity
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    modifications: copied from the course page
+    used_in:
+      - 00 Учебник/00 Математические и ML-основания/06 Переобучение, регуляризация и оценивание.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/foundations-source-first/google-complex-model.svg
+  - id: curated-google-simple-model-0000000000ae
+    asset: 00 Учебник/Assets/Figures/curated/foundations-source-first/google-simple-model.svg
+    author: Google
+    source_url: https://developers.google.com/machine-learning/crash-course/overfitting/model-complexity
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    modifications: copied from the course page
+    used_in:
+      - 00 Учебник/00 Математические и ML-основания/06 Переобучение, регуляризация и оценивание.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/foundations-source-first/google-simple-model.svg
+  - id: curated-google-high-lambda-0000000000af
+    asset: 00 Учебник/Assets/Figures/curated/foundations-source-first/google-high-lambda.svg
+    author: Google
+    source_url: https://developers.google.com/machine-learning/crash-course/overfitting/regularization
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    modifications: copied from the course page
+    used_in:
+      - 00 Учебник/00 Математические и ML-основания/06 Переобучение, регуляризация и оценивание.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/foundations-source-first/google-high-lambda.svg
+  - id: curated-google-low-lambda-0000000000b0
+    asset: 00 Учебник/Assets/Figures/curated/foundations-source-first/google-low-lambda.svg
+    author: Google
+    source_url: https://developers.google.com/machine-learning/crash-course/overfitting/regularization
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    modifications: copied from the course page
+    used_in:
+      - 00 Учебник/00 Математические и ML-основания/06 Переобучение, регуляризация и оценивание.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/foundations-source-first/google-low-lambda.svg
+  - id: curated-cs336-prefill-decode-0000000000b1
+    asset: 00 Учебник/Assets/Figures/curated/source-first-35-36/cs336-prefill-decode.png
+    author: Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/spring2025-lectures/blob/main/lecture_01.py
+    license: MIT
+    license_url: https://github.com/stanford-cs336/spring2025-lectures/blob/main/LICENSE
+    modifications: copied without modification from the course repository
+    used_in:
+      - 00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-35-36/cs336-prefill-decode.png
+  - id: curated-gqa-quality-latency-0000000000b2
+    asset: 00 Учебник/Assets/Figures/curated/source-first-35-36/gqa-quality-latency-table.png
+    author: Joshua Ainslie et al.
+    source_url: https://aclanthology.org/2023.emnlp-main.298/
+    license: open-paper-material; reuse confirmed by repository owner
+    license_url: https://aclanthology.org/2023.emnlp-main.298/
+    modifications: Table 1 crop distributed with Stanford CS336 Lecture 10
+    used_in:
+      - 00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-35-36/gqa-quality-latency-table.png
+  - id: curated-gqa-groups-speed-0000000000b3
+    asset: 00 Учебник/Assets/Figures/curated/source-first-35-36/gqa-groups-speed.png
+    author: Joshua Ainslie et al.
+    source_url: https://aclanthology.org/2023.emnlp-main.298/
+    license: open-paper-material; reuse confirmed by repository owner
+    license_url: https://aclanthology.org/2023.emnlp-main.298/
+    modifications: Figure 6 crop distributed with Stanford CS336 Lecture 10
+    used_in:
+      - 00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-35-36/gqa-groups-speed.png
+  - id: curated-cs336-attention-comparison-0000000000b4
+    asset: 00 Учебник/Assets/Figures/curated/source-first-35-36/cs336-mha-gqa-mqa-mla.png
+    author: Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/spring2025-lectures/blob/main/lecture_10.py
+    license: MIT
+    license_url: https://github.com/stanford-cs336/spring2025-lectures/blob/main/LICENSE
+    modifications: copied without modification; course adaptation of DeepSeek-V2 Figure 3
+    used_in:
+      - 00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-35-36/cs336-mha-gqa-mqa-mla.png
+  - id: curated-mla-absorption-orders-0000000000b5
+    asset: 00 Учебник/Assets/Figures/curated/source-first-35-36/mla-weight-absorption-orders.png
+    author: Robin Geens; Marian Verhelst
+    source_url: https://arxiv.org/abs/2506.02523
+    license: open-paper-material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2506.02523
+    modifications: Figure 2 cropped from the official paper PDF without content changes
+    used_in:
+      - 00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/2506.02523.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-deepseek-attention-ablation-0000000000b6
+    asset: 00 Учебник/Assets/Figures/curated/source-first-35-36/deepseek-v2-mha-gqa-mqa-ablation.png
+    author: DeepSeek-AI
+    source_url: https://arxiv.org/abs/2405.04434
+    license: open-paper-material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2405.04434
+    modifications: Table 8 crop distributed with Stanford CS336 Lecture 10
+    used_in:
+      - 00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-35-36/deepseek-v2-mha-gqa-mqa-ablation.png
+  - id: curated-deepseek-mla-ablation-0000000000b7
+    asset: 00 Учебник/Assets/Figures/curated/source-first-35-36/deepseek-v2-mla-ablation.png
+    author: DeepSeek-AI
+    source_url: https://arxiv.org/abs/2405.04434
+    license: open-paper-material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2405.04434
+    modifications: Table 9 crop distributed with Stanford CS336 Lecture 10
+    used_in:
+      - 00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-35-36/deepseek-v2-mla-ablation.png
+  - id: curated-colah-lstm-chain-0000000000b8
+    asset: 00 Учебник/Assets/Figures/curated/source-audit-15-24/LSTM3-chain.png
+    author: Chris Olah
+    source_url: https://colah.github.io/posts/2015-08-Understanding-LSTMs/
+    license: open-educational-web-material; reuse confirmed by repository owner
+    license_url: https://colah.github.io/posts/2015-08-Understanding-LSTMs/
+    modifications: copied without content changes from the original article asset
+    used_in:
+      - 00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-audit-15-24/LSTM3-chain.png
+  - id: curated-colah-lstm-forget-0000000000b9
+    asset: 00 Учебник/Assets/Figures/curated/source-audit-15-24/LSTM3-focus-f.png
+    author: Chris Olah
+    source_url: https://colah.github.io/posts/2015-08-Understanding-LSTMs/
+    license: open-educational-web-material; reuse confirmed by repository owner
+    license_url: https://colah.github.io/posts/2015-08-Understanding-LSTMs/
+    modifications: copied without content changes from the original article asset
+    used_in:
+      - 00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-audit-15-24/LSTM3-focus-f.png
+  - id: curated-colah-lstm-input-0000000000ba
+    asset: 00 Учебник/Assets/Figures/curated/source-audit-15-24/LSTM3-focus-i.png
+    author: Chris Olah
+    source_url: https://colah.github.io/posts/2015-08-Understanding-LSTMs/
+    license: open-educational-web-material; reuse confirmed by repository owner
+    license_url: https://colah.github.io/posts/2015-08-Understanding-LSTMs/
+    modifications: copied without content changes from the original article asset
+    used_in:
+      - 00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-audit-15-24/LSTM3-focus-i.png
+  - id: curated-colah-lstm-cell-update-0000000000bb
+    asset: 00 Учебник/Assets/Figures/curated/source-audit-15-24/LSTM3-focus-C.png
+    author: Chris Olah
+    source_url: https://colah.github.io/posts/2015-08-Understanding-LSTMs/
+    license: open-educational-web-material; reuse confirmed by repository owner
+    license_url: https://colah.github.io/posts/2015-08-Understanding-LSTMs/
+    modifications: copied without content changes from the original article asset
+    used_in:
+      - 00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-audit-15-24/LSTM3-focus-C.png
+  - id: curated-colah-lstm-output-0000000000bc
+    asset: 00 Учебник/Assets/Figures/curated/source-audit-15-24/LSTM3-focus-o.png
+    author: Chris Olah
+    source_url: https://colah.github.io/posts/2015-08-Understanding-LSTMs/
+    license: open-educational-web-material; reuse confirmed by repository owner
+    license_url: https://colah.github.io/posts/2015-08-Understanding-LSTMs/
+    modifications: copied without content changes from the original article asset
+    used_in:
+      - 00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-audit-15-24/LSTM3-focus-o.png
+  - id: curated-colah-lstm-cell-line-0000000000bd
+    asset: 00 Учебник/Assets/Figures/curated/source-audit-15-24/LSTM3-C-line.png
+    author: Chris Olah
+    source_url: https://colah.github.io/posts/2015-08-Understanding-LSTMs/
+    license: open-educational-web-material; reuse confirmed by repository owner
+    license_url: https://colah.github.io/posts/2015-08-Understanding-LSTMs/
+    modifications: copied without content changes from the original article asset
+    used_in:
+      - 00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-audit-15-24/LSTM3-C-line.png
+  - id: curated-colah-gru-0000000000be
+    asset: 00 Учебник/Assets/Figures/curated/source-audit-15-24/LSTM3-var-GRU.png
+    author: Chris Olah
+    source_url: https://colah.github.io/posts/2015-08-Understanding-LSTMs/
+    license: open-educational-web-material; reuse confirmed by repository owner
+    license_url: https://colah.github.io/posts/2015-08-Understanding-LSTMs/
+    modifications: copied without content changes from the original article asset
+    used_in:
+      - 00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-audit-15-24/LSTM3-var-GRU.png
+  - id: curated-hf-tokenizer-pipeline-0000000000bf
+    asset: 00 Учебник/Assets/Figures/curated/source-audit-15-24/hf-tokenization-pipeline.svg
+    author: Hugging Face Course
+    source_url: https://huggingface.co/docs/course/main/chapter6/4
+    license: Apache-2.0
+    license_url: https://github.com/huggingface/course/blob/main/LICENSE
+    modifications: copied without content changes from the course asset
+    used_in:
+      - 00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md
+      - Concepts/NLP/Tokenization.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-audit-15-24/hf-tokenization-pipeline.svg
+  - id: curated-tokenizer-choice-0000000000c0
+    asset: 00 Учебник/Assets/Figures/curated/source-audit-15-24/tokenizer-choice-figure1.png
+    author: Mehdi Ali et al.
+    source_url: https://aclanthology.org/2024.findings-naacl.247/
+    license: open-paper-material; reuse confirmed by repository owner
+    license_url: https://aclanthology.org/2024.findings-naacl.247/
+    modifications: Figure 1 rendered from the official paper and cropped without data changes
+    used_in:
+      - 00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/2024.findings-naacl.247.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-causal-mask-godoy-0000000000c1
+    asset: 00 Учебник/Assets/Figures/curated/source-audit-15-24/causal-mask-detailed.png
+    author: Daniel Voigt Godoy
+    source_url: https://commons.wikimedia.org/wiki/File:Decoder_self-attention_with_causal_masking,_detailed_diagram.png
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    modifications: copied without content changes
+    used_in:
+      - 00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-audit-15-24/causal-mask-detailed.png
+  - id: curated-voita-qkv-heads-0000000000c2
+    asset: 00 Учебник/Assets/Figures/curated/source-audit-15-24/qkv-for-heads.png
+    author: Elena Voita
+    source_url: https://lena-voita.github.io/nlp_course/seq2seq_and_attention.html#multi_head_attention
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://lena-voita.github.io/nlp_course/seq2seq_and_attention.html
+    modifications: copied without content changes from the course asset
+    used_in:
+      - 00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-audit-15-24/qkv-for-heads.png
+  - id: curated-alammar-heads-qkv-0000000000c3
+    asset: 00 Учебник/Assets/Figures/curated/source-audit-15-24/transformer_attention_heads_qkv.png
+    author: Jay Alammar
+    source_url: https://jalammar.github.io/illustrated-transformer/
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without content changes from the article asset
+    used_in:
+      - 00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-audit-15-24/transformer_attention_heads_qkv.png
+  - id: curated-alammar-heads-z-0000000000c4
+    asset: 00 Учебник/Assets/Figures/curated/source-audit-15-24/transformer_attention_heads_z.png
+    author: Jay Alammar
+    source_url: https://jalammar.github.io/illustrated-transformer/
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without content changes from the article asset
+    used_in:
+      - 00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-audit-15-24/transformer_attention_heads_z.png
+  - id: curated-alammar-heads-wo-0000000000c5
+    asset: 00 Учебник/Assets/Figures/curated/source-audit-15-24/transformer_attention_heads_weight_matrix_o.png
+    author: Jay Alammar
+    source_url: https://jalammar.github.io/illustrated-transformer/
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without content changes from the article asset
+    used_in:
+      - 00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-audit-15-24/transformer_attention_heads_weight_matrix_o.png
+  - id: curated-helm-taxonomy-0000000000c6
+    asset: 00 Учебник/Assets/Figures/curated/reference-source-first/helm-taxonomy-figure2.png
+    author: Percy Liang et al.
+    source_url: https://arxiv.org/abs/2211.09110
+    license: open-paper-material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2211.09110
+    modifications: Figure 2 rendered from page 3 and cropped without content changes
+    used_in:
+      - 01 Справочник/Evaluation/Evaluation.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/2211.09110.pdf
+    source_page: 3
+    derivation: pdf-page-render-crop
+  - id: curated-d2l-sinusoidal-curves-0000000000c7
+    asset: 00 Учебник/Assets/Figures/curated/source-audit-25-31/d2l-sinusoidal-curves.svg
+    author: Aston Zhang et al.
+    source_url: https://d2l.ai/chapter_attention-mechanisms-and-transformers/self-attention-and-positional-encoding.html
+    license: CC BY-SA 4.0
+    license_url: https://github.com/d2l-ai/d2l-en/blob/master/LICENSE
+    modifications: copied without content changes from the course asset
+    used_in:
+      - 00 Учебник/05 Attention и Transformer/04 Позиционная информация.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-audit-25-31/d2l-sinusoidal-curves.svg
+  - id: curated-d2l-positional-heatmap-0000000000c8
+    asset: 00 Учебник/Assets/Figures/curated/source-audit-25-31/d2l-positional-heatmap.svg
+    author: Aston Zhang et al.
+    source_url: https://d2l.ai/chapter_attention-mechanisms-and-transformers/self-attention-and-positional-encoding.html
+    license: CC BY-SA 4.0
+    license_url: https://github.com/d2l-ai/d2l-en/blob/master/LICENSE
+    modifications: copied without content changes from the course asset
+    used_in:
+      - 00 Учебник/05 Attention и Transformer/04 Позиционная информация.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-audit-25-31/d2l-positional-heatmap.svg
+  - id: curated-gpt1-figure1-0000000000c9
+    asset: 00 Учебник/Assets/Figures/curated/source-audit-25-31/gpt1-figure1.png
+    author: Alec Radford et al.
+    source_url: https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf
+    license: open-paper-material; reuse confirmed by repository owner
+    license_url: https://openai.com/index/language-unsupervised/
+    modifications: Figure 1 rendered from page 4 and cropped without content changes
+    used_in:
+      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/gpt1-paper.pdf
+    source_page: 4
+    derivation: pdf-page-render-crop
+  - id: curated-roberta-dynamic-masking-0000000000ca
+    asset: 00 Учебник/Assets/Figures/curated/source-audit-25-31/roberta-dynamic-masking-table1.png
+    author: Yinhan Liu et al.
+    source_url: https://arxiv.org/abs/1907.11692
+    license: open-paper-material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/1907.11692
+    modifications: Table 1 rendered from page 4 and cropped without content changes
+    used_in:
+      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/1907.11692.pdf
+    source_page: 4
+    derivation: pdf-page-render-crop
+  - id: curated-deberta-equation4-0000000000cb
+    asset: 00 Учебник/Assets/Figures/curated/source-audit-25-31/deberta-disentangled-attention-equation4.png
+    author: Pengcheng He et al.
+    source_url: https://arxiv.org/abs/2006.03654
+    license: open-paper-material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2006.03654
+    modifications: Equation 4 rendered from page 4 and cropped without content changes
+    used_in:
+      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/2006.03654.pdf
+    source_page: 4
+    derivation: pdf-page-render-crop
+  - id: curated-t5-span-corruption-0000000000cc
+    asset: 00 Учебник/Assets/Figures/curated/source-audit-25-31/t5-span-corruption-figure2.png
+    author: Colin Raffel et al.
+    source_url: https://arxiv.org/abs/1910.10683
+    license: open-paper-material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/1910.10683
+    modifications: Figure 2 rendered from page 13 and cropped without content changes
+    used_in:
+      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/1910.10683.pdf
+    source_page: 13
+    derivation: pdf-page-render-crop
+  - id: curated-longformer-patterns-0000000000cd
+    asset: 00 Учебник/Assets/Figures/curated/source-first-37-40-audit/longformer-attention-patterns.png
+    author: Iz Beltagy; Matthew E. Peters; Arman Cohan
+    source_url: https://arxiv.org/abs/2004.05150
+    license: open-paper-material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2004.05150
+    modifications: Figure 2 rendered from the official paper and cropped without content changes
+    used_in:
+      - 00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/2004.05150.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-lost-middle-figure1-0000000000ce
+    asset: 00 Учебник/Assets/Figures/curated/source-first-37-40-audit/lost-in-the-middle-figure-1.png
+    author: Nelson F. Liu et al.
+    source_url: https://arxiv.org/abs/2307.03172
+    license: open-paper-material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2307.03172
+    modifications: Figure 1 rendered from the official paper and cropped without content changes
+    used_in:
+      - 00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/2307.03172.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-switch-parallelism-0000000000cf
+    asset: 00 Учебник/Assets/Figures/curated/source-first-37-40-audit/switch-parallelism.png
+    author: William Fedus; Barret Zoph; Noam Shazeer
+    source_url: https://huggingface.co/blog/moe
+    license: open-educational-web-material; reuse confirmed by repository owner
+    license_url: https://huggingface.co/blog/moe
+    modifications: copied without content changes from the Hugging Face MoE course article
+    used_in:
+      - 00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-37-40-audit/switch-parallelism.png
+  - id: curated-megablocks-expert-matmuls-0000000000d0
+    asset: 00 Учебник/Assets/Figures/curated/source-first-37-40-audit/megablocks-expert-matmuls.png
+    author: Trevor Gale et al.
+    source_url: https://huggingface.co/blog/moe
+    license: open-educational-web-material; reuse confirmed by repository owner
+    license_url: https://huggingface.co/blog/moe
+    modifications: copied without content changes from the Hugging Face MoE course article
+    used_in:
+      - 00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-37-40-audit/megablocks-expert-matmuls.png
+  - id: curated-swe-agent-instance-reminders-0000000000d1
+    asset: 00 Учебник/Assets/Figures/curated/source-first-65-68/swe-agent-instance-template-reminders.png
+    author: John Yang; Carlos E. Jimenez; Alexander Wettig; Kilian Lieret; Shunyu Yao; Karthik Narasimhan; Ofir Press
+    source_url: https://arxiv.org/abs/2405.15793
+    license: open-paper-material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2405.15793
+    modifications: Figure 29 rendered from page 42 and cropped without content changes
+    used_in:
+      - 00 Учебник/17 Tools и Agents/66 Agent harness и context engineering.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-first-65-68/swe-agent-2405.15793.pdf
+    source_page: 42
+    derivation: pdf-page-render-crop
+  - id: curated-gelu-figure1-0000000000d2
+    asset: 00 Учебник/Assets/Figures/curated/source-audit-1-18/gelu-figure-1.png
+    author: Dan Hendrycks; Kevin Gimpel
+    source_url: https://arxiv.org/abs/1606.08415
+    license: open-paper-material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/1606.08415
+    modifications: Figure 1 rendered from page 2 and cropped without content changes
+    used_in:
+      - 00 Учебник/01 Основы нейронных сетей/02 Функции активации.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-audit-1-18/gelu.pdf
+    source_page: 2
+    derivation: pdf-page-render-crop
+  - id: curated-resnet-figure2-0000000000d3
+    asset: 00 Учебник/Assets/Figures/curated/source-audit-1-18/resnet-figure-2.png
+    author: Kaiming He; Xiangyu Zhang; Shaoqing Ren; Jian Sun
+    source_url: https://arxiv.org/abs/1512.03385
+    license: open-paper-material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/1512.03385
+    modifications: Figure 2 rendered from page 2 and cropped without content changes
+    used_in:
+      - 00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/source-audit-1-18/resnet.pdf
+    source_page: 2
+    derivation: pdf-page-render-crop

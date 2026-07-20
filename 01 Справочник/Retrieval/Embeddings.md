@@ -13,13 +13,16 @@ primary_sources:
 
 **Embedding** — обученное отображение дискретного или сложного объекта в dense vector. Близость векторов должна отражать полезное для задачи сходство.
 
-```mermaid
-flowchart LR
-  Q["query"] --> EQ["encoder"]
-  D["document"] --> ED["encoder"]
-  EQ --> S["cosine / dot product"]
-  ED --> S --> R["similarity"]
-```
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-60-64/sbert-bi-vs-cross-encoder.png]]
+
+*Слева предложения кодируются независимо и сравниваются после pooling; справа
+cross-encoder обрабатывает пару совместно. Источник: UKP Lab / Hugging Face,
+[Sentence Transformers — Cross-Encoder
+applications](https://www.sbert.net/examples/cross_encoder/applications/README.html).*
+
+Для sequence embeddings важна именно левая ветвь: независимость кодирования
+позволяет заранее вычислить document vectors. Правая ветвь обычно точнее для
+конкретной пары, но уже не создаёт универсальный индексируемый embedding.
 
 ## Три разных значения
 
@@ -29,7 +32,7 @@ flowchart LR
 
 Для semantic retrieval часто используют bi-encoder: query и document кодируются независимо, поэтому документы можно индексировать заранее. Contrastive loss сближает positive pairs и отдаляет negatives.
 
-$$s(q,d)=\frac{e_q^\top e_d}{\|e_q\|\|e_d\|}\quad\text{или}\quad e_q^\top e_d.$$
+$$s(q,d)=\frac{e_q^\top e_d}{\|e_q\|\|e_d\|}\quad\text{or}\quad e_q^\top e_d.$$
 
 Cosine и dot product эквивалентны для L2-normalized vectors. Выбор similarity должен совпадать с training/model card.
 
@@ -37,8 +40,12 @@ Cosine и dot product эквивалентны для L2-normalized vectors. В�
 
 Один vector сжимает документ и теряет детали; качество зависит от домена, языка, pooling, instruction prefix и negatives. Dense embeddings плохо гарантируют exact keyword match, поэтому [[02 Areas/ML & DL/01 Справочник/Retrieval/Retrieval|hybrid retrieval]] сочетает dense и sparse сигналы.
 
+## Подробнее
+
+Metric learning, negative sampling, pooling и оценивание retrieval-эмбеддингов
+разобраны в главе [[02 Areas/ML & DL/00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning|Embeddings и metric learning]].
+
 ## Источники
 
 - [word2vec](https://arxiv.org/abs/1301.3781)
 - [Sentence-BERT](https://arxiv.org/abs/1908.10084)
-- [[02 Areas/ML & DL/Concepts/NLP/Word2Vec|Legacy: Word2Vec]]

@@ -19,15 +19,13 @@ primary_sources:
 Агент отличается от одиночной генерации наличием цикла «действие →
 наблюдение → обновление состояния»:
 
-```mermaid
-flowchart LR
-    G["цель"] --> P["план / policy"]
-    P --> A["действие или tool call"]
-    A --> O["наблюдение"]
-    O --> M["память / состояние"]
-    M --> P
-    P -->|готово| R["результат"]
-```
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-65-68/react-patterns.png]]
+
+*В ReAct рассуждение и действие образуют одну траекторию: результат действия
+возвращается модели как наблюдение и меняет следующий шаг. На исходной figure
+этот режим сопоставлен с reason-only и act-only. Источник: Shunyu Yao et al.,
+[ReAct, Figure 1](https://arxiv.org/abs/2210.03629), также опубликован на
+[странице проекта](https://react-lm.github.io/).*
 
 Agentic learning учит не только формат tool call, но и политику: когда вызвать
 инструмент, какой выбрать, как восстановиться после ошибки и когда остановиться.
@@ -74,7 +72,7 @@ Agentic learning учит не только формат tool call, но и по
 
 ## Связанные страницы
 
-[[02 Areas/ML & DL/Concepts/Reasoning/ReAct|ReAct]] ·
-[[02 Areas/ML & DL/Concepts/Reasoning/Tool Use|Tool Use]] ·
-[[02 Areas/ML & DL/Concepts/Reasoning/Toolformer|Toolformer]] ·
-[[02 Areas/ML & DL/Concepts/Training/RLVR|RLVR]]
+[[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию|ReAct]] ·
+[[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию|Tool Use]] ·
+[[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию|Toolformer]] ·
+[[02 Areas/ML & DL/01 Справочник/Post-training/RLVR|RLVR]]

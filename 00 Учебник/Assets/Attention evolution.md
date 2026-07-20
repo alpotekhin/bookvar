@@ -1,44 +1,15 @@
 ---
 title: Эволюция MHA, MQA, GQA и MLA
 type: visual
-status: canonical
-last_updated: 2026-07-16
+status: redirect
+last_updated: 2026-07-20
+redirect_to: "[[02 Areas/ML & DL/00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA]]"
 ---
 
 # Эволюция attention и KV-cache
 
-```mermaid
-flowchart LR
-    subgraph MHA["MHA"]
-      MQ["h Q-heads"]
-      MK["h K-heads"]
-      MV["h V-heads"]
-    end
-    subgraph MQA["MQA"]
-      QQ["h Q-heads"]
-      QK["1 K-head"]
-      QV["1 V-head"]
-    end
-    subgraph GQA["GQA"]
-      GQ["h Q-heads"]
-      GK["g K-heads<br/>1 < g < h"]
-      GV["g V-heads"]
-    end
-    subgraph MLA["MLA"]
-      LQ["Q-heads"]
-      C["малый latent KV<br/>кэшируется"]
-      UP["восстановление K/V<br/>для вычисления"]
-      C --> UP
-    end
-    MHA -->|"меньше cache"| MQA
-    MQA -->|"лучше quality"| GQA
-    GQA -->|"low-rank compression"| MLA
-```
+Эта служебная visual-заметка заменена каноническими главами с исходными
+иллюстрациями:
 
-| Вариант | Что хранится на токен | Главный компромисс |
-|---|---:|---|
-| MHA | K и V каждой головы | максимум гибкости, большой cache |
-| MQA | один K/V набор | минимум cache, возможная потеря качества |
-| GQA | несколько K/V групп | практический баланс |
-| MLA | сжатое latent-представление | сложнее реализация и kernels |
-
+- [[02 Areas/ML & DL/00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA|MHA, MQA и GQA]];
+- [[02 Areas/ML & DL/00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache|MLA и сжатие KV-cache]].

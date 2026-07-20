@@ -1,4 +1,4 @@
-import { mkdirSync, mkdtempSync, symlinkSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, readFileSync, symlinkSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
@@ -36,6 +36,39 @@ sections:
 `;
 
 describe('loadManifest', () => {
+  it('keeps all 68 curriculum routes in the matrix and publication manifest in the same order', () => {
+    const root = join(import.meta.dirname, '..', '..');
+    const matrix = readFileSync(join(root, '00 Учебник', 'Редакционная матрица Bookvar.md'), 'utf8');
+    const matrixRows = [...matrix.matchAll(/^\|\s*(\d+)\s*\|\s*`([^`]+)`\s*\|$/gm)]
+      .map((match) => ({ number: Number(match[1]), route: match[2] }));
+    expect(matrixRows.map(({ number }) => number)).toEqual(
+      Array.from({ length: 68 }, (_, index) => index + 1)
+    );
+
+    const manifest = loadManifest(join(root, 'publishing', 'navigation.yml'));
+    const publishedRoutes = new Set(
+      manifest.sections.flatMap((section) => section.pages.map((page) => page.route))
+    );
+    for (const { route } of matrixRows) expect(publishedRoutes.has(route), route).toBe(true);
+
+    const textbookOrder = manifest.sections
+      .find((section) => section.id === 'textbook')
+      ?.pages.map((page) => page.route) ?? [];
+    const curriculumOrder = textbookOrder.filter((route) =>
+      matrixRows.some((row) => row.route === route)
+    );
+    expect(curriculumOrder).toEqual(matrixRows.map(({ route }) => route));
+  });
+
+  it('maps every curriculum topic from 1 through 68 to compared source material', () => {
+    const root = join(import.meta.dirname, '..', '..');
+    const maps = ['Темы 01–18.md', 'Темы 19–40.md', 'Темы 41–68.md']
+      .map((name) => readFileSync(join(root, '05 Источники', 'Source maps', name), 'utf8'))
+      .join('\n');
+    const topicNumbers = [...maps.matchAll(/^##\s+(\d+)\./gm)].map((match) => Number(match[1]));
+    expect(topicNumbers).toEqual(Array.from({ length: 68 }, (_, index) => index + 1));
+  });
+
   it('loads the representative handbook manifest with at least eight real pages', () => {
     const path = join(import.meta.dirname, '..', 'navigation.yml');
     const manifest = loadManifest(path);

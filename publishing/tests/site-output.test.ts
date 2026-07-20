@@ -60,19 +60,20 @@ describe('static handbook output', () => {
     }
   });
 
-  it('renders formulas and Mermaid without losing the source diagram', async () => {
+  it('renders formulas and source figures instead of exposing Markdown image syntax', async () => {
     const formula = await readFile(
-      join(distDir, 'textbook', 'foundations', 'backpropagation', 'index.html'),
+      join(distDir, 'textbook', 'neural-networks', 'backpropagation', 'index.html'),
       'utf8'
     );
-    const diagram = await readFile(
-      join(distDir, 'textbook', 'rag', 'module-map', 'index.html'),
+    const figure = await readFile(
+      join(distDir, 'textbook', 'rag', 'full-pipeline', 'index.html'),
       'utf8'
     );
 
     expect(formula).toContain('class="katex');
-    expect(diagram).toContain('class="mermaid"');
-    expect(diagram).toContain('flowchart LR');
+    expect(figure).toContain('<img');
+    expect(figure).toContain('rag-original-architecture.png');
+    expect(figure).not.toContain('<p>![');
   });
 
   it('emits every manifest route as Russian HTML', async () => {
@@ -113,7 +114,7 @@ describe('static handbook output', () => {
   it('stems Russian inflections in the generated index', async () => {
     const search = await pagefind.search('нейронов');
     const results = await Promise.all(search.results.map((result) => result.data()));
-    expect(results.some((result) => result.url.includes('/textbook/foundations/backpropagation/')))
+    expect(results.some((result) => result.url.includes('/textbook/neural-networks/backpropagation/')))
       .toBe(true);
   });
 });

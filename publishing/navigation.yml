@@ -7,99 +7,159 @@ sections:
         route: textbook/index
       - source: 00 Учебник/00 Как пользоваться учебником.md
         route: textbook/how-to-use
-      - source: 00 Учебник/Assets/Учебная карта.md
-        route: textbook/learning-map
-      - source: 00 Учебник/Карта крупных учебных модулей.md
-        route: textbook/module-roadmap
-      - source: 00 Учебник/Покрытие программы.md
-        route: textbook/curriculum-coverage
+      - source: 00 Учебник/00 Математические и ML-основания/01 Векторы, матрицы и тензоры.md
+        route: textbook/ml-foundations/tensors
+      - source: 00 Учебник/00 Математические и ML-основания/02 Производная и градиент.md
+        route: textbook/ml-foundations/derivatives-gradients
+      - source: 00 Учебник/00 Математические и ML-основания/03 Вероятность, правдоподобие и логарифм.md
+        route: textbook/ml-foundations/probability-likelihood-logarithms
+      - source: 00 Учебник/00 Математические и ML-основания/04 Функции потерь.md
+        route: textbook/ml-foundations/loss-functions
+      - source: 00 Учебник/00 Математические и ML-основания/05 Train, validation и test.md
+        route: textbook/ml-foundations/train-validation-test
+      - source: 00 Учебник/00 Математические и ML-основания/06 Переобучение, регуляризация и оценивание.md
+        route: textbook/ml-foundations/generalization-regularization
+      - source: 00 Учебник/01 Основы нейронных сетей/01 Нейрон и MLP.md
+        route: textbook/neural-networks/mlp
+      - source: 00 Учебник/01 Основы нейронных сетей/02 Функции активации.md
+        route: textbook/neural-networks/activation-functions
       - source: 00 Учебник/01 Основы нейронных сетей/01 Нейрон, градиент и backpropagation.md
-        route: textbook/foundations/backpropagation
+        route: textbook/neural-networks/backpropagation
       - source: 00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md
-        route: textbook/foundations/optimization-stability
-      - source: 00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction.md
-        route: textbook/language-modeling/next-token-prediction
-      - source: 00 Учебник/03 Языковое моделирование/02 Sampling и генерация.md
-        route: textbook/language-modeling/sampling-generation
+        route: textbook/neural-networks/optimizers-schedules
+      - source: 00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections.md
+        route: textbook/neural-networks/initialization-normalization-residuals
+      - source: 00 Учебник/01 Основы нейронных сетей/06 Dropout и регуляризация.md
+        route: textbook/neural-networks/dropout-regularization
+      - source: 00 Учебник/01 Основы нейронных сетей/07 CNN — от свёртки до ResNet.md
+        route: textbook/neural-networks/cnn-lenet-resnet
+      - source: 00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE.md
+        route: textbook/neural-networks/autoencoder-vae
+      - source: 00 Учебник/02 Представление текста и токенизация/01 Представление текста числами.md
+        route: textbook/text-representation/numerical-representation
+      - source: 00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель.md
+        route: textbook/language-modeling/ngram
+      - source: 00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings.md
+        route: textbook/text-representation/word2vec-glove
+      - source: 00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md
+        route: textbook/text-representation/tokenization
+      - source: 00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT.md
+        route: textbook/recurrent-networks/rnn-bptt
+      - source: 00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU.md
+        route: textbook/recurrent-networks/lstm-gru
+      - source: 00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора.md
+        route: textbook/recurrent-networks/seq2seq-bottleneck
+      - source: 00 Учебник/05 Attention и Transformer/01 От Seq2Seq к Transformer.md
+        route: textbook/transformer/from-seq2seq-to-transformer
       - source: 00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V.md
         route: textbook/transformer/self-attention
+      - source: 00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров.md
+        route: textbook/transformer/masking-heads-shapes
+      - source: 00 Учебник/05 Attention и Transformer/04 Позиционная информация.md
+        route: textbook/transformer/positional-information
+      - source: 00 Учебник/05 Attention и Transformer/03 Полный Transformer.md
+        route: textbook/transformer/full-transformer
+      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md
+        route: textbook/transformer/encoder-decoder-patterns
+      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md
+        route: textbook/models/bert-roberta-deberta
+      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md
+        route: textbook/models/gpt-1
+      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык.md
+        route: textbook/models/gpt-2
+      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning.md
+        route: textbook/models/gpt-3
+      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md
+        route: textbook/models/t5
       - source: 00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md
         route: textbook/modern-llm/llama-architecture
-      - source: 00 Учебник/09 Dense FFN и Mixture of Experts/00 Карта модуля и источники.md
-        route: textbook/moe/module-map
-      - source: 00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md
-        route: textbook/pretraining/data
-      - source: 00 Учебник/11 Pre-training и Scaling/02 Distributed training и precision.md
-        route: textbook/pretraining/distributed-training
-      - source: 00 Учебник/12 Post-training и Alignment/00 Карта модуля и источники.md
-        route: textbook/post-training/module-map
+      - source: 00 Учебник/07 Анатомия современной LLM/02 Современный decoder block.md
+        route: textbook/modern-llm/decoder-block
+      - source: 00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual.md
+        route: textbook/modern-llm/norm-gating-residual
+      - source: 00 Учебник/07 Анатомия современной LLM/04 RoPE.md
+        route: textbook/modern-llm/rope
+      - source: 00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md
+        route: textbook/modern-llm/mha-mqa-gqa
+      - source: 00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md
+        route: textbook/modern-llm/mla-kv-compression
+      - source: 00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md
+        route: textbook/modern-llm/long-context
+      - source: 00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating.md
+        route: textbook/modern-llm/dense-ffn
+      - source: 00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md
+        route: textbook/moe/mixture-of-experts
+      - source: 00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md
+        route: textbook/modern-llm/sequence-model-alternatives
+      - source: 00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md
+        route: textbook/pretraining/data-pipeline
+      - source: 00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md
+        route: textbook/pretraining/next-token-objective
+      - source: 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
+        route: textbook/pretraining/scaling-laws
+      - source: 00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md
+        route: textbook/pretraining/distributed-systems
+      - source: 00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md
+        route: textbook/post-training/sft-instruction-data
       - source: 00 Учебник/12 Post-training и Alignment/02 Preference data.md
         route: textbook/post-training/preference-data
+      - source: 00 Учебник/12 Post-training и Alignment/03 Reward modeling.md
+        route: textbook/post-training/reward-modeling
+      - source: 00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md
+        route: textbook/post-training/ppo
+      - source: 00 Учебник/12 Post-training и Alignment/05 DPO.md
+        route: textbook/post-training/dpo
       - source: 00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md
         route: textbook/post-training/rlvr-verifiers
+      - source: 00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md
+        route: textbook/post-training/grpo-deepseek-r1
       - source: 00 Учебник/12 Post-training и Alignment/08 Reasoning distillation.md
         route: textbook/post-training/reasoning-distillation
       - source: 00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md
         route: textbook/reasoning/test-time-compute
-      - source: 00 Учебник/14 Inference и оптимизация/02 Quantization и deployment.md
-        route: textbook/inference/quantization-deployment
-      - source: 00 Учебник/15 Embeddings, Retrieval и RAG/00 Карта модуля и источники.md
-        route: textbook/rag/module-map
-      - source: 00 Учебник/15 Embeddings, Retrieval и RAG/01 Embeddings и retrieval.md
-        route: textbook/rag/embeddings-retrieval
-      - source: 00 Учебник/16 Multimodal Models/01 Vision-language и omni models.md
-        route: textbook/multimodal/vision-language-omni
-      - source: 00 Учебник/17 Tools и Agents/00 Agent Harness и Context Engineering — карта модуля.md
-        route: textbook/agents/module-map
-      - source: 00 Учебник/17 Tools и Agents/02 Evaluation и воспроизводимость.md
-        route: textbook/agents/evaluation-reproducibility
-      - source: 00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings.md
-        route: textbook/legacy/02-predstavlenie-teksta-i-tokenizatsiya/01-ot-slov-k-embeddings
-      - source: 00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md
-        route: textbook/legacy/02-predstavlenie-teksta-i-tokenizatsiya/02-bpe-wordpiece-i-unigram
-      - source: 00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN, LSTM и Seq2Seq.md
-        route: textbook/legacy/04-rnn-lstm-i-seq2seq/01-rnn-lstm-i-seq2seq
-      - source: 00 Учебник/05 Attention и Transformer/01 От Seq2Seq к Transformer.md
-        route: textbook/legacy/05-attention-i-transformer/01-ot-seq2seq-k-transformer
-      - source: 00 Учебник/05 Attention и Transformer/03 Полный Transformer.md
-        route: textbook/legacy/05-attention-i-transformer/03-polnyy-transformer
-      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md
-        route: textbook/legacy/06-encoder-decoder-i-encoder-decoder/01-tri-arhitekturnyh-patterna
-      - source: 00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md
-        route: textbook/legacy/08-effektivnyy-attention-i-dlinnyy-kontekst/01-mha-mqa-i-gqa
-      - source: 00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md
-        route: textbook/legacy/08-effektivnyy-attention-i-dlinnyy-kontekst/02-mla-i-szhatie-kv-cache
-      - source: 00 Учебник/09 Dense FFN и Mixture of Experts/01 От SwiGLU к MoE.md
-        route: textbook/legacy/09-dense-ffn-i-mixture-of-experts/01-ot-swiglu-k-moe
-      - source: 00 Учебник/10 Атлас современных архитектур/01 Llama, Qwen и DeepSeek как эволюция блока.md
-        route: textbook/legacy/10-atlas-sovremennyh-arhitektur/01-llama-qwen-i-deepseek-kak-evolyutsiya-bloka
-      - source: 00 Учебник/10 Атлас современных архитектур/02 Альтернативы Transformer и multimodality.md
-        route: textbook/legacy/10-atlas-sovremennyh-arhitektur/02-alternativy-transformer-i-multimodality
-      - source: 00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md
-        route: textbook/legacy/12-post-training-i-alignment/01-sft-i-instruction-data
-      - source: 00 Учебник/12 Post-training и Alignment/03 Reward modeling.md
-        route: textbook/legacy/12-post-training-i-alignment/03-reward-modeling
-      - source: 00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md
-        route: textbook/legacy/12-post-training-i-alignment/04-policy-gradient-i-ppo-dlya-llm
-      - source: 00 Учебник/12 Post-training и Alignment/05 DPO.md
-        route: textbook/legacy/12-post-training-i-alignment/05-dpo
-      - source: 00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md
-        route: textbook/legacy/12-post-training-i-alignment/07-grpo-i-deepseek-r1
-      - source: 00 Учебник/14 Inference и оптимизация/01 KV-cache, batching и FlashAttention.md
-        route: textbook/legacy/14-inference-i-optimizatsiya/01-kv-cache-batching-i-flashattention
-      - source: 00 Учебник/15 Embeddings, Retrieval и RAG/02 RAG как система.md
-        route: textbook/legacy/15-embeddings-retrieval-i-rag/02-rag-kak-sistema
-      - source: 00 Учебник/17 Tools и Agents/01 Tool use и agents.md
-        route: textbook/legacy/17-tools-i-agents/01-tool-use-i-agents
-      - source: 00 Учебник/05 Attention и Transformer/00 Источники и визуальный стандарт.md
-        route: textbook/legacy/05-attention-i-transformer/00-istochniki-i-vizualnyy-standart
-      - source: 00 Учебник/Assets/Model innovation matrix.md
-        route: textbook/legacy/assets/model-innovation-matrix
+      - source: 00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md
+        route: textbook/pretraining/synthetic-data-curricula
+      - source: 00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена.md
+        route: textbook/inference/decoding
+      - source: 00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md
+        route: textbook/inference/kv-cache-batching-pagedattention
+      - source: 00 Учебник/14 Inference и оптимизация/56 FlashAttention.md
+        route: textbook/inference/flashattention
+      - source: 00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md
+        route: textbook/inference/quantization
+      - source: 00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md
+        route: textbook/inference/speculative-decoding
+      - source: 00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md
+        route: textbook/evaluation/models-contamination
+      - source: 00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning.md
+        route: textbook/retrieval/embeddings-metric-learning
+      - source: 00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid.md
+        route: textbook/retrieval/sparse-dense-hybrid
+      - source: 00 Учебник/15 Embeddings, Retrieval и RAG/62 Reranking — cross-encoder и late interaction.md
+        route: textbook/retrieval/reranking
+      - source: 00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер.md
+        route: textbook/rag/full-pipeline
+      - source: 00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md
+        route: textbook/multimodal/models
+      - source: 00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md
+        route: textbook/agents/tool-use
+      - source: 00 Учебник/17 Tools и Agents/66 Agent harness и context engineering.md
+        route: textbook/agents/harness-context-engineering
+      - source: 00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md
+        route: textbook/agents/memory-planning-orchestration
+      - source: 00 Учебник/17 Tools и Agents/68 Оценивание агентных систем.md
+        route: textbook/agents/evaluation
   - id: models
     title: Атлас моделей
     pages:
       - source: 02 Атлас моделей/_index.md
         route: models/index
+      - source: 02 Атлас моделей/Семейства/GPT.md
+        route: models/families/gpt
+      - source: 02 Атлас моделей/Семейства/BERT.md
+        route: models/families/bert
+      - source: 02 Атлас моделей/Семейства/T5.md
+        route: models/families/t5
       - source: 02 Атлас моделей/Семейства/DeepSeek.md
         route: models/families/deepseek
       - source: 02 Атлас моделей/Семейства/Llama.md
@@ -138,6 +198,8 @@ sections:
         route: models/semeystva/rwkv
       - source: 02 Атлас моделей/Семейства/RetNet.md
         route: models/semeystva/retnet
+      - source: 02 Атлас моделей/Семейства/Мультимодальные семейства.md
+        route: models/families/multimodal
       - source: 02 Атлас моделей/Сравнения/Карта архитектурных линий.md
         route: models/sravneniya/karta-arhitekturnyh-liniy
       - source: 02 Атлас моделей/Сравнения/Сравнение семейств.md
@@ -147,10 +209,6 @@ sections:
   - id: sources
     title: Справочник, исследования и источники
     pages:
-      - source: Concepts/Architectures/DeepSeek-R1.md
-        route: models/legacy/deepseek-r1
-      - source: Concepts/Architectures/DeepSeek-V3.md
-        route: models/legacy/deepseek-v3
       - source: 01 Справочник/_index.md
         route: reference/index
       - source: 03 Исследовательские линии/_index.md
@@ -173,8 +231,6 @@ sections:
         route: sources/courses/cs224n-lecture-03
       - source: Courses/Stanford CS224N/Lecture 11 — Benchmarking and Evaluation.md
         route: sources/courses/cs224n-lecture-11
-      - source: Concepts/Training/SFT.md
-        route: reference/training/sft
       - source: Concepts/Training/Alignment.md
         route: reference/training/alignment
       - source: Concepts/Training/Causal Language Modeling.md
@@ -185,8 +241,6 @@ sections:
         route: reference/training/mixed-precision
       - source: Concepts/Training/Distributed Training.md
         route: reference/training/distributed-training
-      - source: Concepts/Training/RLVR.md
-        route: reference/training/rlvr
       - source: Concepts/Training/Distillation.md
         route: reference/training/distillation
       - source: Concepts/Inference/Sampling.md
@@ -205,38 +259,26 @@ sections:
         route: reference/evaluation/mmlu
       - source: Concepts/Evaluation/HumanEval.md
         route: reference/evaluation/humaneval
-      - source: MOC.md
-        route: sources/legacy/moc
       - source: Papers/Karpathy — Recipe for Training Neural Networks.md
         route: sources/papers/karpathy-recipe-for-training-neural-networks
-      - source: Concepts/Training/Gradient Clipping.md
-        route: reference/legacy/training/gradient-clipping
-      - source: Concepts/NLP/Language Model.md
-        route: reference/legacy/nlp/language-model
       - source: Papers/LLaMA.md
         route: sources/papers/llama
       - source: 01 Справочник/Позиционные представления/RoPE.md
         route: reference/pozitsionnye-predstavleniya/rope
       - source: 01 Справочник/FFN и MoE/SwiGLU.md
         route: reference/ffn-i-moe/swiglu
-      - source: Concepts/Training/Synthetic Data.md
-        route: reference/legacy/training/synthetic-data
+      - source: 01 Справочник/FFN и MoE/Dense FFN и gated activations.md
+        route: reference/ffn-i-moe/dense-ffn-gated-activations
       - source: Papers/Self-Consistency.md
         route: sources/papers/self-consistency
       - source: Papers/Tree of Thoughts.md
         route: sources/papers/tree-of-thoughts
       - source: Papers/QLoRA.md
         route: sources/papers/qlora
-      - source: Concepts/Retrieval/Dense Retrieval.md
-        route: reference/legacy/retrieval/dense-retrieval
       - source: Papers/ColBERT.md
         route: sources/papers/colbert
       - source: Papers/Gemini.md
         route: sources/papers/gemini
-      - source: Concepts/Training/Multi-head Latent Attention.md
-        route: reference/legacy/training/multi-head-latent-attention
-      - source: Concepts/_index.md
-        route: reference/legacy/index
       - source: 01 Справочник/Архитектурные паттерны/Encoder-only.md
         route: reference/arhitekturnye-patterny/encoder-only
       - source: 01 Справочник/Архитектурные паттерны/Decoder-only.md
@@ -253,6 +295,8 @@ sections:
         route: reference/attention/mqa
       - source: 01 Справочник/Attention/GQA.md
         route: reference/attention/gqa
+      - source: 01 Справочник/Attention/MHA, MQA и GQA.md
+        route: reference/attention/mha-mqa-gqa
       - source: 01 Справочник/Attention/MLA.md
         route: reference/attention/mla
       - source: 01 Справочник/Математика и DL/Нормализация.md
@@ -297,8 +341,6 @@ sections:
         route: sources/papers/instructgpt
       - source: Papers/COT.md
         route: sources/papers/cot
-      - source: Concepts/Architectures/Kimi.md
-        route: reference/legacy/architectures/kimi
       - source: 05 Источники/Registry.md
         route: sources/registry
       - source: 05 Источники/Авторы и сайты.md
@@ -307,10 +349,6 @@ sections:
         route: sources/community-repositories
       - source: 05 Источники/Курсы.md
         route: sources/kursy
-      - source: Concepts/Training/Backpropagation.md
-        route: reference/legacy/training/backpropagation
-      - source: Concepts/NLP/Neural Network.md
-        route: reference/legacy/nlp/neural-network
       - source: Papers/LLaMA 2.md
         route: sources/papers/llama-2
       - source: Papers/GPT 2.0.md
@@ -321,22 +359,10 @@ sections:
         route: sources/papers/opt
       - source: Papers/Formal Algorithms for Transformers.md
         route: sources/papers/formal-algorithms-for-transformers
-      - source: Concepts/Training/Masked Language Modeling.md
-        route: reference/legacy/training/masked-language-modeling
-      - source: Concepts/Architectures/Decoder-only.md
-        route: reference/legacy/architectures/decoder-only
-      - source: Concepts/Training/nanoGPT.md
-        route: reference/legacy/training/nanogpt
       - source: Papers/Flan-T5-PaLM.md
         route: sources/papers/flan-t5-palm
-      - source: Concepts/Inference/Prompting.md
-        route: reference/legacy/inference/prompting
-      - source: Concepts/Architectures/Flan-T5.md
-        route: reference/legacy/architectures/flan-t5
       - source: Papers/Nemotron-Research-Tool-N1.md
         route: sources/papers/nemotron-research-tool-n1
-      - source: Concepts/Reasoning/Toolformer.md
-        route: reference/legacy/reasoning/toolformer
       - source: Papers/Phi-2.md
         route: sources/papers/phi-2
       - source: Papers/Speculative Decoding.md
@@ -345,98 +371,34 @@ sections:
         route: sources/courses/shad-llm/week-1-intro-to-llms
       - source: Papers/XGrammar.md
         route: sources/papers/xgrammar
-      - source: Concepts/Architectures/Qwen3.md
-        route: reference/legacy/architectures/qwen3
       - source: Papers/MMLU.md
         route: sources/papers/mmlu
-      - source: Concepts/Inference/Zero-shot Learning.md
-        route: reference/legacy/inference/zero-shot-learning
       - source: Papers/HumanEval.md
         route: sources/papers/humaneval
-      - source: Concepts/Architectures/_index.md
-        route: reference/legacy/architectures/index
-      - source: Concepts/Training/_index.md
-        route: reference/legacy/training/index
-      - source: Concepts/Inference/_index.md
-        route: reference/legacy/inference/index
-      - source: Concepts/Retrieval/_index.md
-        route: reference/legacy/retrieval/index
-      - source: Concepts/NLP/_index.md
-        route: reference/legacy/nlp/index
-      - source: Concepts/Reasoning/_index.md
-        route: reference/legacy/reasoning/index
-      - source: Concepts/Evaluation/_index.md
-        route: reference/legacy/evaluation/index
-      - source: Timeline.md
-        route: sources/legacy/timeline
       - source: Papers/Karpathy — Unreasonable Effectiveness of RNNs.md
         route: sources/papers/karpathy-unreasonable-effectiveness-of-rnns
       - source: Papers/Attention Is All You Need.md
         route: sources/papers/attention-is-all-you-need
-      - source: Concepts/Training/Vanishing Gradient.md
-        route: reference/legacy/training/vanishing-gradient
       - source: Courses/Stanford CS224N/Lecture 05 — Language Models and RNNs.md
         route: sources/courses/stanford-cs224n/lecture-05-language-models-and-rnns
       - source: Courses/Stanford CS224N/Lecture 09 — Pretraining.md
         route: sources/courses/stanford-cs224n/lecture-09-pretraining
-      - source: Concepts/NLP/N-gram.md
-        route: reference/legacy/nlp/n-gram
-      - source: Concepts/Architectures/GPT-2.md
-        route: reference/legacy/architectures/gpt-2
-      - source: Concepts/Architectures/GPT-4.md
-        route: reference/legacy/architectures/gpt-4
-      - source: Concepts/Architectures/RoBERTa.md
-        route: reference/legacy/architectures/roberta
-      - source: Concepts/Architectures/DeBERTa.md
-        route: reference/legacy/architectures/deberta
-      - source: Concepts/Architectures/Encoder-only.md
-        route: reference/legacy/architectures/encoder-only
-      - source: Concepts/Architectures/LLaMA.md
-        route: reference/legacy/architectures/llama
       - source: Papers/Phi-4 Technical Report.md
         route: sources/papers/phi-4-technical-report
       - source: Papers/Nemotron-4 340B Technical Report.md
         route: sources/papers/nemotron-4-340b-technical-report
-      - source: Concepts/Architectures/Falcon.md
-        route: reference/legacy/architectures/falcon
       - source: Papers/Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks.md
         route: sources/papers/retrieval-augmented-generation-for-knowledge-intensive-nlp-tasks
       - source: Papers/REALM.md
         route: sources/papers/realm
       - source: Courses/MIPT NLP/ANCE — Dense Retrieval Training.md
         route: sources/courses/mipt-nlp/ance-dense-retrieval-training
-      - source: Concepts/Retrieval/Open-domain QA.md
-        route: reference/legacy/retrieval/open-domain-qa
-      - source: Concepts/Retrieval/Knowledge-Intensive NLP.md
-        route: reference/legacy/retrieval/knowledge-intensive-nlp
-      - source: Concepts/Retrieval/REALM.md
-        route: reference/legacy/retrieval/realm
       - source: Papers/DeepSeek-V2.md
         route: sources/papers/deepseek-v2
-      - source: Concepts/Architectures/Encoder-Decoder.md
-        route: reference/legacy/architectures/encoder-decoder
-      - source: Concepts/NLP/Self-Attention.md
-        route: reference/legacy/nlp/self-attention
-      - source: Concepts/NLP/Cross-Attention.md
-        route: reference/legacy/nlp/cross-attention
-      - source: Concepts/NLP/Word2Vec.md
-        route: reference/legacy/nlp/word2vec
       - source: Papers/Flash Attention.md
         route: sources/papers/flash-attention
-      - source: Concepts/Reasoning/Tool Use.md
-        route: reference/legacy/reasoning/tool-use
-      - source: Concepts/NLP/ChatGPT.md
-        route: reference/legacy/nlp/chatgpt
       - source: Papers/Kimi k1.5.md
         route: sources/papers/kimi-k1-5
-      - source: Concepts/Training/Dropout.md
-        route: reference/legacy/training/dropout
-      - source: Concepts/NLP/Feed-Forward Network.md
-        route: reference/legacy/nlp/feed-forward-network
-      - source: Concepts/Architectures/LLaMA 2.md
-        route: reference/legacy/architectures/llama-2
-      - source: Concepts/Architectures/OPT.md
-        route: reference/legacy/architectures/opt
       - source: Papers/BERT.md
         route: sources/papers/bert
       - source: Papers/RoBERTa.md
@@ -445,60 +407,16 @@ sections:
         route: sources/papers/deberta
       - source: Papers/T5.md
         route: sources/papers/t5
-      - source: Concepts/Training/Next Sentence Prediction.md
-        route: reference/legacy/training/next-sentence-prediction
-      - source: Concepts/Training/Disentangled Attention.md
-        route: reference/legacy/training/disentangled-attention
       - source: Papers/GPT 4.0.md
         route: sources/papers/gpt-4-0
       - source: Papers/Harnessing the Power of LLMs in Practice- A Survey on ChatGPT and Beyond.md
         route: sources/papers/harnessing-the-power-of-llms-in-practice-a-survey-on-chatgpt-and-beyond
-      - source: Concepts/NLP/GLUE.md
-        route: reference/legacy/nlp/glue
       - source: Papers/Pre-train, Prompt, and Predict- A Systematic Survey of Prompting Methods in Natural Language Processing.md
         route: sources/papers/pre-train-prompt-and-predict-a-systematic-survey-of-prompting-methods-in-natural-language-processing
-      - source: Concepts/Inference/Prompt Engineering.md
-        route: reference/legacy/inference/prompt-engineering
-      - source: Concepts/NLP/Prompt-based Learning.md
-        route: reference/legacy/nlp/prompt-based-learning
-      - source: Concepts/Architectures/PaLM 2.md
-        route: reference/legacy/architectures/palm-2
       - source: Papers/Toolformer.md
         route: sources/papers/toolformer
       - source: Papers/Qwen3.md
         route: sources/papers/qwen3
-      - source: Concepts/Architectures/Qwen2.md
-        route: reference/legacy/architectures/qwen2
-      - source: Concepts/NLP/NLP.md
-        route: reference/legacy/nlp/nlp
-      - source: Concepts/NLP/BPE.md
-        route: reference/legacy/nlp/bpe
-      - source: Concepts/NLP/GloVe.md
-        route: reference/legacy/nlp/glove
-      - source: Concepts/NLP/ELMo.md
-        route: reference/legacy/nlp/elmo
-      - source: Concepts/Architectures/RNN.md
-        route: reference/legacy/architectures/rnn
-      - source: Concepts/NLP/Seq2Seq.md
-        route: reference/legacy/nlp/seq2seq
-      - source: Concepts/NLP/Text Classification.md
-        route: reference/legacy/nlp/text-classification
-      - source: Concepts/Evaluation/BLEU Score.md
-        route: reference/legacy/evaluation/bleu-score
-      - source: Concepts/Architectures/LLaMA 3.md
-        route: reference/legacy/architectures/llama-3
-      - source: Concepts/Architectures/GLM-4.md
-        route: reference/legacy/architectures/glm-4
-      - source: Concepts/NLP/Adversarial Promting.md
-        route: reference/legacy/nlp/adversarial-promting
-      - source: Concepts/Training/Few-shot Fine-tuning.md
-        route: reference/legacy/training/few-shot-fine-tuning
-      - source: Concepts/Training/Constitutional AI.md
-        route: reference/legacy/training/constitutional-ai
-      - source: Concepts/Training/Adversarial Training.md
-        route: reference/legacy/training/adversarial-training
-      - source: Concepts/Training/Semi-supervised Learning.md
-        route: reference/legacy/training/semi-supervised-learning
       - source: Papers/Adversarial Training Methods for Semi-Supervised Text Classification.md
         route: sources/papers/adversarial-training-methods-for-semi-supervised-text-classification
       - source: Papers/Revisiting Few-sample BERT Fine-tuning.md
@@ -523,8 +441,6 @@ sections:
         route: sources/papers/mixtral-of-experts
       - source: Papers/Qwen2.md
         route: sources/papers/qwen2
-      - source: Concepts/NLP/RNN/RNN.md
-        route: reference/legacy/nlp/rnn/rnn
       - source: Papers/Falcon.md
         route: sources/papers/falcon
       - source: Courses/Stanford CS224N/Lecture 08 — Transformers.md
@@ -541,100 +457,18 @@ sections:
         route: sources/papers/llama-3-herd-of-models
       - source: Papers/GLM-4.md
         route: sources/papers/glm-4
-      - source: Concepts/NLP/Machine Translation.md
-        route: reference/legacy/nlp/machine-translation
-      - source: Concepts/Training/Pre-training.md
-        route: reference/legacy/training/pre-training
-      - source: Concepts/Training/Scaling Laws.md
-        route: reference/legacy/training/scaling-laws
       - source: Papers/DeepSeek-V3 Technical Report.md
         route: sources/papers/deepseek-v3-technical-report
-      - source: Concepts/Inference/Chain of Thought.md
-        route: reference/legacy/inference/chain-of-thought
-      - source: Concepts/Retrieval/ColBERT.md
-        route: reference/legacy/retrieval/colbert
-      - source: Concepts/Training/GRPO.md
-        route: reference/legacy/training/grpo
-      - source: Concepts/Training/RLHF.md
-        route: reference/legacy/training/rlhf
       - source: Papers/DeepSeek-R1 Reasoning via RL.md
         route: sources/papers/deepseek-r1-reasoning-via-rl
-      - source: Concepts/Architectures/Mixtral of Experts.md
-        route: reference/legacy/architectures/mixtral-of-experts
-      - source: Concepts/Inference/KV-Cache.md
-        route: reference/legacy/inference/kv-cache
-      - source: Concepts/NLP/Attention Mechanism.md
-        route: reference/legacy/nlp/attention-mechanism
-      - source: Concepts/Training/PPO.md
-        route: reference/legacy/training/ppo
-      - source: Concepts/Training/DPO.md
-        route: reference/legacy/training/dpo
-      - source: Concepts/Training/Reward Model.md
-        route: reference/legacy/training/reward-model
       - source: Papers/DPO.md
         route: sources/papers/dpo
-      - source: Concepts/Reasoning/Tree of Thoughts.md
-        route: reference/legacy/reasoning/tree-of-thoughts
-      - source: Concepts/Architectures/GQA.md
-        route: reference/legacy/architectures/gqa
-      - source: Concepts/Retrieval/Retrieval-Augmented Generation.md
-        route: reference/legacy/retrieval/retrieval-augmented-generation
-      - source: Concepts/Architectures/RoPE.md
-        route: reference/legacy/architectures/rope
-      - source: Concepts/Architectures/Mistral 7B.md
-        route: reference/legacy/architectures/mistral-7b
-      - source: Concepts/Training/LoRA.md
-        route: reference/legacy/training/lora
       - source: Papers/ToolRL.md
         route: sources/papers/toolrl
       - source: Papers/ASTRA.md
         route: sources/papers/astra
-      - source: Concepts/Training/Fine-tuning.md
-        route: reference/legacy/training/fine-tuning
-      - source: Concepts/Inference/In-context Learning.md
-        route: reference/legacy/inference/in-context-learning
-      - source: Concepts/Training/PEFT.md
-        route: reference/legacy/training/peft
-      - source: Concepts/Architectures/MoE.md
-        route: reference/legacy/architectures/moe
-      - source: Concepts/Reasoning/ReAct.md
-        route: reference/legacy/reasoning/react
       - source: Papers/Gemma.md
         route: sources/papers/gemma
-      - source: Concepts/Inference/Flash Attention.md
-        route: reference/legacy/inference/flash-attention
-      - source: Concepts/NLP/Tokenization.md
-        route: reference/legacy/nlp/tokenization
-      - source: Concepts/NLP/Emergent Abilities.md
-        route: reference/legacy/nlp/emergent-abilities
-      - source: Concepts/Architectures/LSTM.md
-        route: reference/legacy/architectures/lstm
-      - source: Concepts/NLP/Layer Normalization.md
-        route: reference/legacy/nlp/layer-normalization
-      - source: Concepts/Architectures/GPT-3.md
-        route: reference/legacy/architectures/gpt-3
-      - source: Concepts/Architectures/BERT.md
-        route: reference/legacy/architectures/bert
-      - source: Concepts/Architectures/Transformer.md
-        route: reference/legacy/architectures/transformer
-      - source: Concepts/NLP/Positional Encoding.md
-        route: reference/legacy/nlp/positional-encoding
-      - source: Concepts/Architectures/T5.md
-        route: reference/legacy/architectures/t5
-      - source: Concepts/NLP/Transfer Learning.md
-        route: reference/legacy/nlp/transfer-learning
-      - source: Concepts/Architectures/Gemma.md
-        route: reference/legacy/architectures/gemma
-      - source: Concepts/Architectures/Jamba.md
-        route: reference/legacy/architectures/jamba
-      - source: Concepts/Architectures/Mamba.md
-        route: reference/legacy/architectures/mamba
-      - source: Concepts/Architectures/RWKV.md
-        route: reference/legacy/architectures/rwkv
-      - source: Concepts/Architectures/RetNet.md
-        route: reference/legacy/architectures/retnet
-      - source: Concepts/Retrieval/Self-RAG.md
-        route: reference/legacy/retrieval/self-rag
       - source: Papers/LoRA.md
         route: sources/papers/lora
       - source: Papers/Self-RAG.md
@@ -668,6 +502,8 @@ sections:
         route: questions/voprosy-po-arhitekturam
       - source: 04 Вопросы/Вопросы по Retrieval и RAG.md
         route: questions/voprosy-po-retrieval-i-rag
+      - source: 04 Вопросы/Вопросы по агентам.md
+        route: questions/agents
   - id: practice
     title: Практика
     pages:

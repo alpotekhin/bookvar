@@ -49,7 +49,7 @@ function convertLink(
       else allowed.push({ target: fullTarget, reason });
       return label;
     }
-    anchor = `#${fragment ?? `wiki-${wikiHeadingSlug(heading)}`}`;
+    anchor = `#${fragment ?? wikiHeadingSlug(heading)}`;
   }
   return `[${label}](${route}${anchor})`;
 }
