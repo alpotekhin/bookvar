@@ -36,6 +36,16 @@ function normalizedRoute(pathname: string): string {
   return `${pathname}/`;
 }
 
+function withoutPublicationBase(pathname: string): string {
+  const configured = process.env.PUBLICATION_BASE_PATH?.trim() ?? '';
+  const base = configured === '' || configured === '/'
+    ? ''
+    : `/${configured.replace(/^\/+|\/+$/g, '')}`;
+  if (base === '') return pathname;
+  if (pathname === base) return '/';
+  return pathname.startsWith(`${base}/`) ? pathname.slice(base.length) : pathname;
+}
+
 export async function findBrokenBuiltLinks(distDir: string): Promise<string[]> {
   const files = await builtFiles(distDir);
   const filePaths = new Set(files.map((file) => `/${relative(distDir, file).split(sep).join('/')}`));
@@ -50,12 +60,13 @@ export async function findBrokenBuiltLinks(distDir: string): Promise<string[]> {
     for (const href of [...attributeValues(page.html, 'href'), ...attributeValues(page.html, 'src')]) {
       if (/^(?:https?:|mailto:|tel:|javascript:)/i.test(href)) continue;
       const url = new URL(href, `https://handbook.invalid${page.route}`);
-      if (/^\/(?:_astro|assets|pagefind)(?:\/|$)/.test(url.pathname) || /\.[a-z0-9]+$/i.test(url.pathname)) {
-        const filePath = decodeURIComponent(url.pathname);
+      const pathname = withoutPublicationBase(url.pathname);
+      if (/^\/(?:_astro|assets|pagefind)(?:\/|$)/.test(pathname) || /\.[a-z0-9]+$/i.test(pathname)) {
+        const filePath = decodeURIComponent(pathname);
         if (!filePaths.has(filePath)) errors.push(`${page.route} -> missing file ${filePath}`);
         continue;
       }
-      const route = normalizedRoute(decodeURIComponent(url.pathname));
+      const route = normalizedRoute(decodeURIComponent(pathname));
       const target = byRoute.get(route);
       if (!target) {
         errors.push(`${page.route} -> missing route ${route}`);

@@ -1,151 +1,152 @@
 ---
-title: Agent Harness и Context Engineering — карта модуля
+title: Исполняющая среда агента и управление контекстом — карта модуля
 type: textbook-chapter
 status: active
-last_updated: 2026-07-17
+last_updated: 2026-07-20
 ---
 
-# Agent Harness и Context Engineering
+# Исполняющая среда агента и управление контекстом
 
-Модель генерирует следующий ответ. Harness превращает её в систему, которая
-может действовать несколько шагов, пользоваться инструментами, сохранять
-состояние, восстанавливаться после ошибок и доказывать, что задача выполнена.
+Языковая модель предлагает следующее сообщение. Исполняющая среда, или
+*harness*, превращает её в систему, которая может действовать в несколько
+шагов, пользоваться инструментами, сохранять состояние, восстанавливаться после
+ошибок и проверять, действительно ли задача выполнена.
 
-> [!important] Про reminder tokens
-> `Reminder tokens` — разговорное, но неточное название. Обычно это не special
-> tokens tokenizer и не отдельная технология модели. Harness динамически
-> вставляет короткое сообщение с целью, ограничением, состоянием или памятью;
-> оно расходует обычные input tokens. Корректные термины: **reminder injection**,
-> **dynamic system reminder**, **context reinforcement**.
+> [!important] О «токенах-напоминаниях»
+> Выражение `reminder tokens` удобно в разговоре, но технически неточно. Обычно
+> речь идёт не о специальных токенах словаря и не об отдельном механизме модели.
+> Harness динамически добавляет обычное сообщение с целью, ограничением или
+> изменившимся состоянием. В англоязычных источниках встречаются термины
+> *reminder injection*, *dynamic system reminder* и *context reinforcement*.
 
-## Модель, агент, workflow и harness
+## Модель, агент, процесс и исполняющая среда
 
 | Слой | Ответственность | Чего он не гарантирует |
 |---|---|---|
-| Model | предлагает текст, решение или tool call | что действие разрешено и выполнено |
-| Agent policy | выбирает следующий шаг из текущего контекста | сохранность состояния вне окна |
-| Workflow | задаёт заранее определённый граф шагов | адаптацию за пределами графа |
-| Harness | собирает context, ведёт loop, tools, state, limits, permissions, trace | правильность каждого решения модели |
-| Environment | хранит реальное состояние мира | что модель его верно интерпретировала |
-| Eval harness | запускает trials и graders | тождество production harness без parity-check |
+| Модель | предлагает текст, решение или вызов инструмента | что действие разрешено и выполнено |
+| Стратегия агента | выбирает следующий шаг из текущего контекста | сохранность состояния вне окна |
+| Процесс | задаёт заранее определённый граф шагов | адаптацию за пределами графа |
+| Harness | собирает контекст, ведёт цикл, инструменты, состояние, пределы и журнал | правильность каждого решения модели |
+| Среда | хранит фактическое состояние файлов, сервисов и мира | что модель верно его интерпретирует |
+| Оценочная среда | запускает попытки и проверки | совпадение с производственной средой без отдельной проверки |
 
 ## Центральная схема
 
 ```mermaid
 flowchart TB
-    S["Stable prefix<br/>system, tool schemas, repo rules"] --> C["Context constructor"]
-    D["Dynamic state<br/>task, cwd, permissions, plan, budget"] --> C
-    T["Trajectory projection<br/>messages, calls, results, summaries"] --> C
-    R["Event injections<br/>reminders, errors, callbacks"] --> C
-    C --> M["Model"]
-    M -->|final| V["Verifier / terminal condition"]
-    M -->|tool call| P["Policy and permission gate"]
-    P --> X["Executor / sandbox"]
-    X --> O["Observation + state update"]
-    O --> H["History processor / compactor"]
+    S["Стабильный префикс<br/>система, схемы инструментов, правила проекта"] --> C["Сборщик контекста"]
+    D["Динамическое состояние<br/>задача, каталог, права, план, бюджет"] --> C
+    T["Проекция траектории<br/>сообщения, вызовы, результаты, резюме"] --> C
+    R["Событийные вставки<br/>напоминания, ошибки, обратные вызовы"] --> C
+    C --> M["Модель"]
+    M -->|"итог"| V["Проверка условия завершения"]
+    M -->|"вызов"| P["Проверка политики и прав"]
+    P --> X["Исполнитель и sandbox"]
+    X --> O["Наблюдение и обновление состояния"]
+    O --> H["Обработка и сжатие истории"]
     H --> T
     V -->|not done| R
 ```
 
-Критическая граница проходит вне модели: sandbox, permissions, idempotency,
-budgets и deterministic verification должны обеспечиваться controller-ом, а
+Критическая граница проходит вне модели: изоляция, права, идемпотентность,
+бюджеты и детерминированная проверка обеспечиваются управляющей программой, а
 не просьбой в prompt.
 
 ## Двадцать четыре урока
 
 ### I. Исполняющая среда
 
-1. Model ≠ agent ≠ workflow ≠ harness.
-2. Минимальный model→tool→observation loop.
-3. Message assembly: roles, stable prefix и dynamic suffix.
-4. Tool/ACI design: schemas, validation, errors, pagination и output size.
-5. Environment state: files, cwd, processes, containers и checkpoints.
-6. Terminal conditions: done, blocked, handoff и human judgment.
+1. Модель, агент, заранее заданный процесс и harness — разные уровни.
+2. Минимальный цикл «модель → инструмент → наблюдение».
+3. Сборка сообщений: роли, стабильный префикс и динамический суффикс.
+4. Проектирование интерфейса инструментов: схемы, проверка, ошибки, страницы и объём вывода.
+5. Состояние среды: файлы, рабочий каталог, процессы, контейнеры и контрольные точки.
+6. Условия завершения: успех, блокировка, передача задачи и человеческое решение.
 
 ### II. Управление выполнением
 
-7. Step/call/token/cost/time budgets и graceful stopping.
-8. Model retry, tool retry, backoff и retry classification.
-9. Partial side effects, idempotency keys и compensation.
-10. Permissions, sandbox, approval, approve/edit/reject и HITL.
-11. Plans, todo state, hooks, middleware и callbacks.
-12. Subagents: delegation, context isolation, concurrency и merge conflicts.
+7. Ограничения шагов, вызовов, токенов, стоимости и времени; корректная остановка.
+8. Повторы модели и инструментов, задержка между попытками и классификация ошибок.
+9. Частичные побочные эффекты, ключи идемпотентности и компенсация.
+10. Права, sandbox, подтверждение действий и участие человека.
+11. Планы, состояние задач, hooks, промежуточные обработчики и обратные вызовы.
+12. Подагенты: делегирование, изоляция контекста, параллельность и конфликты изменений.
 
 ### III. Контекст и память
 
-13. Context constructor и signal-per-token.
-14. Context rot: position, distractors, stale state и behavioral decay.
-15. Trimming, deterministic elision и clearing старых tool results.
-16. Semantic compaction и проверка fidelity.
-17. Session state, artifacts и source-of-truth checkpoints.
-18. Semantic, episodic и procedural memory; reactive/proactive recall.
-19. Reminder injections: trigger, payload, TTL, dedup и priority.
-20. Long-running sessions, fresh-context handoff и recovery.
+13. Сборщик контекста и полезный сигнал на один токен.
+14. Деградация контекста: позиция, отвлекающие фрагменты и устаревшее состояние.
+15. Обрезка, детерминированное исключение и очистка старых результатов инструментов.
+16. Семантическое сжатие и проверка сохранности смысла.
+17. Состояние сессии, артефакты и авторитетные контрольные точки.
+18. Семантическая, эпизодическая и процедурная память; реактивное и упреждающее извлечение.
+19. Событийные напоминания: триггер, содержание, срок, удаление повторов и приоритет.
+20. Длительные сессии, передача в свежий контекст и восстановление.
 
 ### IV. Доказательность
 
-21. Trace, active context и durable transcript — три разных объекта.
-22. Outcome graders и trajectory graders.
-23. Harness ablations, variance, environment snapshots и benchmark parity.
-24. Security: prompt/tool injection, fake reminder tags и memory poisoning.
+21. Полный журнал, активный контекст и долговременная стенограмма — разные объекты.
+22. Проверка конечного результата и проверка траектории.
+23. Исключение компонентов harness, разброс, снимки среды и совпадение с benchmark.
+24. Безопасность: внедрение инструкций через prompt и инструменты, поддельные теги и отравление памяти.
 
 ## Reminder injections подробно
 
-Reminder — это политика повторной подачи decision-relevant state.
+Напоминание — это правило повторной подачи состояния, необходимого для решения.
 
 ```text
-event → trigger policy → select payload → deduplicate → assign authority/role
-      → insert near relevant turn → observe behavior → expire or refresh
+событие → правило срабатывания → выбор содержания → удаление повторов
+        → назначение роли → вставка в нужный момент → истечение или обновление
 ```
 
 ### Что может вызвать reminder
 
-- смена plan/execute mode;
-- tool завершился или вернул ошибку;
-- изменился permission state;
-- задача потеряла progress update;
-- context приблизился к compaction threshold;
-- завершился subagent;
-- модель пытается остановиться без verification evidence;
-- во внешнем мире изменился файл, процесс или review status.
+- переход между планированием и исполнением;
+- завершение инструмента или ошибка;
+- изменение прав;
+- отсутствие ожидаемого отчёта о ходе работы;
+- приближение контекста к порогу сжатия;
+- завершение подагента;
+- попытка остановиться без доказательства выполнения;
+- изменение файла, процесса или состояния проверки во внешней среде.
 
 ### Что измерять
 
 | Свойство | Почему важно |
 |---|---|
-| Trigger precision/recall | слишком редкие reminders не помогают, частые загрязняют context |
-| Added input tokens | напоминание имеет реальную стоимость каждый раз |
-| Prompt-cache effect | изменение stable prefix может разрушать cache reuse |
-| Behavioral compliance | модель может проигнорировать текст |
-| Task outcome | локальная compliance не равна успешной задаче |
-| False intervention | reminder способен увести правильную trajectory в сторону |
+| Точность и полнота срабатываний | редкие напоминания не помогают, частые загрязняют контекст |
+| Добавленные входные токены | каждое напоминание имеет стоимость |
+| Влияние на кеш prompt | изменение стабильного префикса может нарушить переиспользование кеша |
+| Следование сообщению | модель может проигнорировать текст |
+| Итог задачи | локальное послушание не равно успешному результату |
+| Лишнее вмешательство | напоминание способно увести верную траекторию в сторону |
 
-### Reminder не является enforcement
+### Напоминание не является механизмом принуждения
 
-Строка `<system-reminder>` сама по себе не создаёт trust boundary. Недоверенный
-web/tool output может напечатать такой же тег. Authority должна задаваться
-структурой сообщения и provenance вне текста. Запрет опасного действия
-обеспечивается permission gate или sandbox, а не повторением запрета модели.
+Строка `<system-reminder>` сама по себе не создаёт границу доверия. Недоверенная
+веб-страница или результат инструмента способны напечатать такой же тег.
+Авторитет задаётся ролью сообщения и происхождением вне текста. Опасное действие
+запрещает проверка прав или sandbox, а не повторение запрета модели.
 
 Свежая работа [Remember When It Matters](https://arxiv.org/abs/2607.08716)
 изучает selective memory-grounded reminders и сообщает улучшения на
 Terminal-Bench 2.0 и tau2-Bench. Это июльский preprint 2026 года: используем как
 перспективный результат, а не универсально доказанную норму.
 
-## Context rot и управление историей
+## Деградация контекста и управление историей
 
-`Context window` не равен `memory`, а большой лимит не гарантирует надёжного
-использования всех tokens.
+Контекстное окно не равно памяти, а большой предел не гарантирует надёжного
+использования всех помещённых в него токенов.
 
 | Механизм | Что делает | Основной риск |
 |---|---|---|
-| Truncation | удаляет старые события | теряет причинную цепочку |
-| Tool-result clearing | заменяет старые большие observations | теряет детали, если source исчез |
-| Deterministic elision | оставляет последние N результатов/tags | не понимает семантическую важность |
-| Compaction | превращает trajectory в summary/state | summary loss и fabricated continuity |
-| Retrieval | возвращает выбранные фрагменты | miss и ошибочный ranking |
-| Structured notes | сохраняет прогресс вне окна | stale или неполная запись |
-| Fresh-session handoff | начинает чистый context с artifacts | плохой handoff скрывает незавершённое |
+| Обрезка | удаляет старые события | теряет причинную цепочку |
+| Очистка результатов | заменяет старые объёмные наблюдения | теряет детали, если источник исчез |
+| Детерминированное исключение | оставляет последние N результатов или тегов | не понимает смысловую важность |
+| Сжатие | превращает траекторию в резюме и состояние | потеря сведений и вымышленная связность |
+| Поиск | возвращает выбранные фрагменты | пропуск и ошибочный порядок |
+| Структурированные заметки | сохраняют ход работы вне окна | устаревшая или неполная запись |
+| Передача в новую сессию | начинает чистый контекст с артефактами | плохая передача скрывает незавершённое |
 
 Основы:
 
@@ -154,22 +155,22 @@ Terminal-Bench 2.0 и tau2-Bench. Это июльский preprint 2026 года
 - [Chroma: Context Rot](https://www.trychroma.com/research/context-rot) —
   контролируемые эксперименты на разных моделях; пороги не универсальны.
 - [Anthropic: Effective context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) —
-  compaction, structured notes и context isolation через subagents.
+  сжатие, структурированные заметки и изоляция контекста через подагентов.
 - [Self-Compacting Language Model Agents](https://arxiv.org/abs/2606.23525) —
   свежая работа об adaptive compaction; помечать emerging.
 
 ## Основные курсы и объяснения
 
 - [Hugging Face Context Engineering Course](https://huggingface.co/learn/context-course/unit0/introduction) —
-  Skills, MCP, plugins, subagents, hooks и Nano Harness; практический companion.
+  skills, MCP, плагины, подагенты, hooks и Nano Harness; практический курс.
 - [Stanford CS329A: Self-Improving AI Agents](https://cs329a.stanford.edu/) —
-  tools, memory, orchestration, search/RL и robust evaluation.
+  инструменты, память, оркестрация, поиск, RL и устойчивое оценивание.
 - [Hugging Face Agents Course](https://huggingface.co/learn/agents-course/unit0/introduction) —
-  базовый loop и frameworks после реализации from scratch.
+  базовый цикл и фреймворки после самостоятельной реализации.
 - [Simon Willison: How coding agents work](https://simonwillison.net/guides/agentic-engineering-patterns/how-coding-agents-work/) —
-  ясное practitioner-введение; не использовать как единственное доказательство.
+  ясное практическое введение; не использовать как единственное доказательство.
 - [Lilian Weng: LLM Powered Autonomous Agents](https://lilianweng.github.io/posts/2023-06-23-agent/) —
-  историческая taxonomy planning/memory/tools; современные harness internals
+  историческая систематизация планирования, памяти и инструментов; современные детали harness
   обновлять источниками 2025–2026 годов.
 
 ## Канонические case studies
@@ -205,11 +206,11 @@ Terminal-Bench 2.0 и tau2-Bench. Это июльский preprint 2026 года
 - [smolagents](https://huggingface.co/docs/smolagents/en/reference/agents) —
   max steps, planning intervals, callbacks, subagents и final checks.
 
-## Evaluation harness
+## Среда оценивания
 
-Нельзя сообщать benchmark score модели без фиксации harness. Нужно закрепить:
-model/version, prompts, tool schemas, context policy, retry policy, budgets,
-environment image, dataset commit и grader version.
+Нельзя сообщать результат модели на benchmark без фиксации harness. Необходимо
+указать версию модели, prompts, схемы инструментов, правила контекста и повторов,
+бюджеты, образ среды, версию набора данных и проверяющей программы.
 
 - [Anthropic: Demystifying evals for AI agents](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents) —
   outcomes, trajectories и несколько trials.
@@ -222,24 +223,25 @@ environment image, dataset commit и grader version.
 
 ## Лабораторная траектория
 
-1. Написать nano harness loop без framework.
-2. Добавить typed tool, validation и observation.
-3. Хранить полный trace отдельно от active context.
-4. Воспроизвести деградацию на растущей noisy trajectory.
-5. Сравнить last-N, tool clearing и semantic compaction.
-6. Проверить compaction на recall критических facts и unresolved state.
-7. Добавить progress artifact и fresh-session handoff.
-8. Реализовать event-driven reminder с TTL и dedup.
-9. Показать, что fake `<system-reminder>` в tool output не имеет authority.
-10. Провести ablation: no reminder / always-on / selective / hard gate.
-11. Добавить budgets, retries и idempotency test.
-12. Запустить outcome + trajectory evaluation с несколькими seeds/trials.
+1. Написать минимальный цикл harness без фреймворка.
+2. Добавить типизированный инструмент, проверку и наблюдение.
+3. Хранить полный журнал отдельно от активного контекста.
+4. Воспроизвести деградацию на растущей зашумлённой траектории.
+5. Сравнить последние N сообщений, очистку результатов и семантическое сжатие.
+6. Проверить, сохраняет ли сжатие критические факты и незавершённое состояние.
+7. Добавить артефакт прогресса и передачу в свежую сессию.
+8. Реализовать событийное напоминание со сроком действия и удалением повторов.
+9. Показать, что поддельный `<system-reminder>` в результате инструмента не имеет авторитета.
+10. Сравнить отсутствие напоминаний, постоянное, выборочное и жёсткое программное ограничение.
+11. Добавить бюджеты, повторные попытки и тест идемпотентности.
+12. Оценить исход и траекторию в нескольких запусках с разными случайными зернами.
 
 ## Формулы, которые нужно запомнить
 
 > [!summary]
-> Context window ≠ memory. Transcript ≠ task state. Summary ≠ source of truth.
-> Reminder ≠ enforcement. Long context ≠ reliable context. Model eval ≠ harness eval.
+> Контекстное окно ≠ память. Стенограмма ≠ состояние задачи. Резюме ≠ источник
+> истины. Напоминание ≠ принуждение. Длинный контекст ≠ надёжный контекст.
+> Оценка модели ≠ оценка harness.
 
 Связанные главы:
 [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/01 Tool use и agents]] и

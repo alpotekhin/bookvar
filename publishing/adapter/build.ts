@@ -16,15 +16,22 @@ export interface BuildOptions {
   reportPath: string;
 }
 
+function publicationBasePath(): string {
+  const configured = process.env.PUBLICATION_BASE_PATH?.trim() ?? '';
+  if (configured === '' || configured === '/') return '';
+  return `/${configured.replace(/^\/+|\/+$/g, '')}`;
+}
+
 interface Asset {
   source: string;
   publicPath: string;
 }
 
 export function publicationHref(route: string): string {
-  return route.endsWith('/index')
+  const path = route.endsWith('/index')
     ? `/${route.slice(0, -'/index'.length)}/`
     : `/${route}/`;
+  return `${publicationBasePath()}${path}`;
 }
 
 const IMAGE_EXTENSION = /\.(?:png|jpe?g|webp|svg|gif)$/i;
@@ -138,7 +145,7 @@ function prepareAssets(rootDir: string, markdown: string): { markdown: string; a
     assets.push(asset);
     const filename = asset.publicPath.slice(asset.publicPath.lastIndexOf('/') + 1);
     const alt = filename.replace(IMAGE_EXTENSION, '');
-    return `![${alt}](/assets/${asset.publicPath})`;
+    return `![${alt}](${publicationBasePath()}/assets/${asset.publicPath})`;
   });
   return { markdown: converted, assets };
 }

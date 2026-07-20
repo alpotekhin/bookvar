@@ -38,4 +38,18 @@ describe('findBrokenBuiltLinks', () => {
     expect(errors).toContain('/ -> missing file /missing.pdf');
     expect(errors).not.toContain('/ -> missing file /assets/present.svg');
   });
+
+  it('checks links below the configured GitHub Pages base path', async () => {
+    const previous = process.env.PUBLICATION_BASE_PATH;
+    process.env.PUBLICATION_BASE_PATH = '/bookvar';
+    try {
+      await expect(findBrokenBuiltLinks(fixture([
+        '<a href="/bookvar/target/#existing">target</a>',
+        '<img src="/bookvar/assets/present.svg">'
+      ].join('\n')))).resolves.toEqual([]);
+    } finally {
+      if (previous === undefined) delete process.env.PUBLICATION_BASE_PATH;
+      else process.env.PUBLICATION_BASE_PATH = previous;
+    }
+  });
 });

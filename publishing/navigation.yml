@@ -1,4 +1,4 @@
-site_title: ML & DL Handbook
+site_title: Bookvar
 sections:
   - id: textbook
     title: Учебник
@@ -674,7 +674,7 @@ sections:
       - source: 06 Практика/_index.md
         route: practice/index
       - source: 06 Практика/02 Реализовать causal self-attention.md
-        route: practice/causal-self-attention
+        route: practice/causal-self-attention-notes
       - source: 06 Практика/01 Собрать micrograd и bigram LM.md
         route: practice/01-sobrat-micrograd-i-bigram-lm
       - source: 06 Практика/03 Прочитать современный decoder в LitGPT.md

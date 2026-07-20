@@ -10,6 +10,9 @@ import {
   publicationHref
 } from '../adapter/build.js';
 
+const configuredBase = process.env.PUBLICATION_BASE_PATH?.replace(/^\/+|\/+$/g, '') ?? '';
+const publicationBase = configuredBase === '' ? '' : `/${configuredBase}`;
+
 function write(path: string, contents: string): void {
   mkdirSync(dirname(path), { recursive: true });
   writeFileSync(path, contents);
@@ -73,8 +76,8 @@ function fixture(
 
 describe('buildPublication', () => {
   it('uses the emitted directory URL for section index routes', () => {
-    expect(publicationHref('textbook/index')).toBe('/textbook/');
-    expect(publicationHref('textbook/chapter')).toBe('/textbook/chapter/');
+    expect(publicationHref('textbook/index')).toBe(`${publicationBase}/textbook/`);
+    expect(publicationHref('textbook/chapter')).toBe(`${publicationBase}/textbook/chapter/`);
   });
   it('generates nested pages, converted Markdown, copied assets, and a warning report without mutating sources', async () => {
     const options = fixture();
@@ -90,9 +93,9 @@ describe('buildPublication', () => {
     expect(generated).not.toMatch(/file:|\/Users\//);
     expect(metadata.lastUpdated).toBeInstanceOf(Date);
     expect(metadata.slug).toBe('nested/page-a');
-    expect(generated).toContain('[Page B](/page-b/)');
+    expect(generated).toContain(`[Page B](${publicationBase}/page-b/)`);
     expect(generated).toContain('Missing');
-    expect(generated).toContain('![chart](/assets/Figures/chart.svg)');
+    expect(generated).toContain(`![chart](${publicationBase}/assets/Figures/chart.svg)`);
     expect(readFileSync(join(options.outputDir, 'page-b.md'), 'utf8'))
       .toContain(':::caution[Check]\nBody\n:::');
     expect(JSON.parse(readFileSync(options.reportPath, 'utf8'))).toMatchObject({
@@ -161,8 +164,8 @@ describe('buildPublication', () => {
 
     const source = matter(readFileSync(join(options.outputDir, 'nested', 'page-a.md'), 'utf8')).content;
     const target = matter(readFileSync(join(options.outputDir, 'page-b.md'), 'utf8')).content;
-    expect(source).toContain('[first](/page-b/#wiki-first-heading)');
-    expect(source).toContain('[chat](/page-b/#wiki-chat-template)');
+    expect(source).toContain(`[first](${publicationBase}/page-b/#wiki-first-heading)`);
+    expect(source).toContain(`[chat](${publicationBase}/page-b/#wiki-chat-template)`);
     expect(target).toContain(
       '<span id="wiki-first-heading" aria-hidden="true"></span>\n## First Heading'
     );
