@@ -31,7 +31,7 @@ Paper стал опорной точкой сразу для трёх линий
 
 - база: DeepSeek-V3-Base;
 - post-training: large-scale RL без предварительного reasoning SFT;
-- алгоритм: [[02 Areas/ML & DL/Concepts/Training/GRPO|GRPO]];
+- алгоритм: [[02 Areas/ML & DL/01 Справочник/Post-training/GRPO|GRPO]];
 - rewards: проверка правильности ответа и соблюдения формата;
 - наблюдение: рост длины решения, self-verification и смена стратегий.
 
@@ -39,13 +39,12 @@ Paper стал опорной точкой сразу для трёх линий
 
 Практичная версия использует многостадийный pipeline:
 
-```mermaid
-flowchart LR
-    B["V3-Base"] --> C["cold-start SFT"]
-    C --> R1["reasoning RL"]
-    R1 --> RS["rejection sampling<br/>+ новый SFT mix"]
-    RS --> R2["финальный RL<br/>helpfulness + safety"]
-```
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/deepseek-r1/figure2-pipeline.png]]
+
+*Оригинальная Figure 2 из технического отчёта показывает многостадийное
+обучение DeepSeek-R1: cold-start data и reasoning-oriented RL, затем rejection
+sampling с SFT и отдельный RL-этап для всех сценариев. Источник: DeepSeek-AI,
+[DeepSeek-R1, Figure 2](https://arxiv.org/abs/2501.12948).*
 
 Это принципиально: R1-Zero исследует pure RL, тогда как итоговый R1 сочетает
 SFT, verifiable rewards, синтетические данные и preference alignment.
@@ -71,8 +70,8 @@ SFT, verifiable rewards, синтетические данные и preference a
 
 ## Термины
 
-[[02 Areas/ML & DL/Concepts/Training/RLVR|RLVR]] ·
-[[02 Areas/ML & DL/Concepts/Training/GRPO|GRPO]] ·
-[[02 Areas/ML & DL/Concepts/Training/Distillation|Distillation]] ·
-[[02 Areas/ML & DL/Concepts/Architectures/DeepSeek-R1|DeepSeek-R1]] ·
-[[02 Areas/ML & DL/Concepts/Architectures/DeepSeek-V3|DeepSeek-V3]]
+[[02 Areas/ML & DL/01 Справочник/Post-training/RLVR|RLVR]] ·
+[[02 Areas/ML & DL/01 Справочник/Post-training/GRPO|GRPO]] ·
+[[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/08 Reasoning distillation|Distillation]] ·
+[[02 Areas/ML & DL/02 Атлас моделей/Семейства/DeepSeek|DeepSeek-R1]] ·
+[[02 Areas/ML & DL/02 Атлас моделей/Семейства/DeepSeek|DeepSeek-V3]]

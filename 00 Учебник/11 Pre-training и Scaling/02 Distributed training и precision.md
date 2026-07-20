@@ -301,4 +301,4 @@ DeepSeek-V3 показала крупномасштабное обучение �
 - [[02 Areas/ML & DL/Concepts/Training/Mixed Precision Training]]
 - [[02 Areas/ML & DL/Papers/DeepSeek-V3 Technical Report]]
 
-**Дальше:** [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/00 Карта модуля и источники|как базовую языковую модель превращают в помощника и почему SFT, предпочтения и RL решают разные задачи.]]
+**Дальше:** [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/01 SFT и instruction data|как базовую языковую модель превращают в помощника с помощью instruction data и SFT.]]

@@ -4,7 +4,7 @@ type: textbook-chapter
 status: canonical
 last_updated: 2026-07-20
 previous: "[[02 Areas/ML & DL/00 Учебник/10 Атлас современных архитектур/01 Llama, Qwen и DeepSeek как эволюция блока]]"
-next: "[[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training]]"
+next: "[[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных]]"
 primary_sources:
   - https://arxiv.org/abs/2312.00752
   - https://arxiv.org/abs/2305.13048
@@ -371,7 +371,7 @@ SSM, внимание и рекуррентность определяют, ка
 
 Можно построить мультимодальный Transformer, Mamba или гибрид. Поэтому подробный
 разбор вынесен в
-[[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/01 Vision-language и omni models]],
+[[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64 Мультимодальные модели]],
 а здесь мультимодальность не рассматривается как синоним «альтернативы
 Transformer».
 
@@ -465,4 +465,4 @@ $$
 - [[02 Areas/ML & DL/Papers/RetNet]]
 - [[02 Areas/ML & DL/Papers/Jamba SSM-Transformer Hybrid]]
 
-**Дальше:** [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training|из чего на практике складывается предобучение: данные, функция потерь, число токенов и законы масштабирования.]]
+**Дальше:** [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных|как сырой корпус превращается в обучающую смесь.]]

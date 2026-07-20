@@ -34,6 +34,18 @@ export function publicationHref(route: string): string {
   return `${publicationBasePath()}${path}`;
 }
 
+const SOURCE_SIDEBAR_GROUPS = [
+  { routePrefix: 'reference/', label: 'Справочник' },
+  { routePrefix: 'research/', label: 'Исследовательские линии' },
+  { routePrefix: 'sources/', label: 'Источники' }
+] as const;
+
+function visibleInSidebar(route: string): boolean {
+  return !route.includes('/legacy/')
+    && !route.startsWith('sources/papers/')
+    && !route.startsWith('sources/courses/');
+}
+
 const IMAGE_EXTENSION = /\.(?:png|jpe?g|webp|svg|gif)$/i;
 const EMBED = /!\[\[([^\]\n]+)\]\]/g;
 
@@ -145,7 +157,8 @@ function prepareAssets(rootDir: string, markdown: string): { markdown: string; a
     assets.push(asset);
     const filename = asset.publicPath.slice(asset.publicPath.lastIndexOf('/') + 1);
     const alt = filename.replace(IMAGE_EXTENSION, '');
-    return `![${alt}](${publicationBasePath()}/assets/${asset.publicPath})`;
+    const href = asset.publicPath.split('/').map(encodeURIComponent).join('/');
+    return `![${alt}](${publicationBasePath()}/assets/${href})`;
   });
   return { markdown: converted, assets };
 }
@@ -169,13 +182,33 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
     title: page.title
   })), { allowAmbiguousBasenames: true });
   const titles = new Map(parsed.map(({ entry, page }) => [entry.route, page.title]));
-  const sidebar = manifest.sections.map((section) => ({
-    label: section.title,
-    items: section.pages.map((entry) => ({
-      label: titles.get(entry.route)!,
-      slug: entry.route
-    }))
-  }));
+  const statuses = new Map(parsed.map(({ entry, page }) => [entry.route, page.status]));
+  const sidebar = manifest.sections.map((section) => {
+    if (section.id !== 'sources') {
+      return {
+        label: section.title,
+        items: section.pages.filter((entry) => visibleInSidebar(entry.route) && statuses.get(entry.route) !== 'redirect').map((entry) => ({
+          label: titles.get(entry.route)!,
+          slug: entry.route
+        }))
+      };
+    }
+
+    return {
+      label: section.title,
+      items: SOURCE_SIDEBAR_GROUPS.map((group) => ({
+        label: group.label,
+        items: section.pages
+          .filter((entry) => entry.route.startsWith(group.routePrefix)
+            && visibleInSidebar(entry.route)
+            && !['redirect', 'legacy'].includes(statuses.get(entry.route) ?? ''))
+          .map((entry) => ({
+            label: titles.get(entry.route)!,
+            slug: entry.route
+          }))
+      }))
+    };
+  });
 
   const assetsByPublicPath = new Map<string, Asset>();
   const preparedPages = parsed.map(({ entry, page }) => {
@@ -239,7 +272,10 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
       ) ?? [];
       if (exact.length !== 1) continue;
       const anchors = fragmentAnchors.get(route) ?? new Map<string, string>();
-      anchors.set(heading, `wiki-${wikiHeadingSlug(heading)}`);
+      // Astro/Starlight already assigns this slug to the Markdown heading.
+      // Linking to that native anchor avoids injecting raw HTML before a
+      // heading, which can make the page body disappear during rendering.
+      anchors.set(heading, wikiHeadingSlug(heading));
       fragmentAnchors.set(route, anchors);
     }
   }
@@ -255,14 +291,15 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
       }
     };
     const converted = convertWikiSyntax(prepared.markdown, pageRegistry, allowlist);
-    const withAnchors = insertFragmentAliases(
-      converted.markdown,
-      fragmentAnchors.get(currentRoute) ?? new Map()
-    );
-    if (withAnchors.missing.length > 0) {
-      throw new Error(`Fragment aliases lost their headings in ${entry.source}: ${withAnchors.missing.join(', ')}`);
-    }
-    const markdown = removeLeadingSourceHeading(convertCallouts(withAnchors.markdown));
+    const legacyUnresolved = page.status === 'legacy'
+      ? [...new Set(converted.unresolved)].map((target) => ({
+          target,
+          reason: 'legacy page preserved for old links; not part of the canonical publication'
+        }))
+      : [];
+    const unresolved = page.status === 'legacy' ? [] : converted.unresolved;
+    const allowlisted = [...converted.allowlisted, ...legacyUnresolved];
+    const markdown = removeLeadingSourceHeading(convertCallouts(converted.markdown));
     const target = contained(outputDir, `${entry.route}.md`, 'Output');
     await mkdir(dirname(target), { recursive: true });
     const metadata: Record<string, string | Date> = {
@@ -273,12 +310,12 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
     if (page.lastUpdated) metadata.lastUpdated = new Date(page.lastUpdated);
     await writeFile(target, matter.stringify(markdown, metadata), 'utf8');
 
-    if (converted.unresolved.length > 0 || converted.allowlisted.length > 0) {
+    if (unresolved.length > 0 || allowlisted.length > 0) {
       report.pages.push({
         source: entry.source,
         route: entry.route,
-        unresolved: [...new Set(converted.unresolved)],
-        allowlisted: [...new Map(converted.allowlisted.map((item) => [item.target, item])).values()]
+        unresolved: [...new Set(unresolved)],
+        allowlisted: [...new Map(allowlisted.map((item) => [item.target, item])).values()]
       });
     }
   }

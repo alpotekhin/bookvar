@@ -32,6 +32,12 @@ pnpm --dir site build
 pnpm --dir publishing test:output
 ```
 
+## Совместное редактирование
+
+Правки принимаются pull request-ами в ветку `dev`; из неё же GitHub Actions
+собирает Pages-preview. Подробный порядок работы в Obsidian, требования к
+главам, источникам и иллюстрациям описаны в [CONTRIBUTING.md](CONTRIBUTING.md).
+
 ## Устройство материалов
 
 - `00 Учебник` — последовательный маршрут;

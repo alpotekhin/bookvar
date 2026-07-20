@@ -6,7 +6,7 @@ last_updated: 2026-07-20
 prerequisites:
   - "[[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/01 KV-cache, batching и FlashAttention]]"
 next:
-  - "[[02 Areas/ML & DL/00 Учебник/15 Embeddings, Retrieval и RAG/00 Карта модуля и источники]]"
+  - "[[02 Areas/ML & DL/00 Учебник/15 Embeddings, Retrieval и RAG/01 Embeddings и retrieval]]"
 primary_sources:
   - https://arxiv.org/abs/2210.17323
   - https://arxiv.org/abs/2306.00978
@@ -106,7 +106,7 @@ $$
 масштаб. Без нулевой точки средняя стоимость
 
 $$
-4+\frac{16}{128}=4.125\text{ бита на параметр}.
+4+\frac{16}{128}=4.125\ \text{bits/parameter}.
 $$
 
 Если добавить ещё одну 16-битную нулевую точку, получится 4.25 бита. Формат

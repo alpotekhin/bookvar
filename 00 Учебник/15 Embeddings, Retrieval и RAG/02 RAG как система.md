@@ -42,19 +42,13 @@ primary_sources:
 RAG не гарантирует фактической правильности. Он создаёт возможность опереться на
 источник, но доказательство может потеряться на любом этапе.
 
-```mermaid
-flowchart LR
-    A["документы"] --> B["разбор и структура"]
-    B --> C["фрагменты и метаданные"]
-    C --> D["индексы"]
-    Q["вопрос"] --> E["переформулировка и фильтры"]
-    D --> F["кандидаты"]
-    E --> F
-    F --> G["переранжирование"]
-    G --> H["сборка контекста"]
-    H --> I["генерация"]
-    I --> J["утверждения и цитаты"]
-```
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-60-64/hf-rag-evaluation-workflow.png]]
+
+*Схема из [Hugging Face RAG Evaluation cookbook](https://huggingface.co/learn/cookbook/en/rag_evaluation),
+Aymeric Roucher. Верхняя половина показывает chunking, embedding и построение
+vector store до production; нижняя — query embedding, retrieval top-k, сборку
+контекста и generation. Подписанные вопросы задают параметры, которые затем
+проверяются отдельными экспериментами.*
 
 ## 2. Сначала определить доказательство
 
@@ -407,7 +401,6 @@ RAG также не исправляет отсутствие знания в и
 - DeepLearning.AI, [Retrieval Augmented Generation](https://www.deeplearning.ai/alpha/courses/retrieval-augmented-generation-rag) — последовательная практическая сборка.
 - Hugging Face, [RAG Evaluation cookbook](https://huggingface.co/learn/cookbook/en/rag_evaluation) — разработка через оценивание и промежуточные метрики.
 - Full Stack Deep Learning, [LLM Bootcamp](https://fullstackdeeplearning.com/llm-bootcamp/spring-2023/) — grounded QA и развёртывание систем с LLM.
-- [[02 Areas/ML & DL/00 Учебник/15 Embeddings, Retrieval и RAG/00 Карта модуля и источники|Карта расширенного модуля RAG]] — дальнейшие уроки, исследования и визуальные задания.
 
 ### Первоисточники
 

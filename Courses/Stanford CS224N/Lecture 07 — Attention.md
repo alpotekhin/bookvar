@@ -68,7 +68,7 @@ Encoder hidden states: $h_1, h_2, \ldots, h_N$. На шаге $t$ decoder име
 
 **Шаг 1: Attention scores** -- вычислить совместимость decoder state с каждым encoder state:
 
-$$e_t^i = s_t^T h_i \quad \text{для всех } i = 1, \ldots, N$$
+$$e_t^i = s_t^T h_i \quad \forall i = 1, \ldots, N$$
 
 **Шаг 2: Attention distribution** -- softmax для получения вероятностей:
 

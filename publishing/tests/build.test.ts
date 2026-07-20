@@ -130,6 +130,74 @@ describe('buildPublication', () => {
     ].join('\n'));
   });
 
+  it('percent-encodes copied asset paths so Markdown renders them as images', async () => {
+    const options = fixture('![[Assets/Figures With Spaces/chart one.svg]]');
+    write(join(options.rootDir, 'Assets', 'Figures With Spaces', 'chart one.svg'), '<svg/>');
+
+    await buildPublication(options);
+
+    const generated = readFileSync(join(options.outputDir, 'nested', 'page-a.md'), 'utf8');
+    expect(generated).toContain(
+      `${publicationBase}/assets/Figures%20With%20Spaces/chart%20one.svg`
+    );
+  });
+
+  it('groups canonical source routes in the sidebar while building hidden pages', async () => {
+    const options = fixture('Body');
+    const pages = [
+      ['Reference', 'reference/index'],
+      ['Research', 'research/index'],
+      ['Sources', 'sources/index'],
+      ['Legacy', 'reference/legacy/old-page'],
+      ['Legacy status', 'reference/old-concept'],
+      ['Redirect', 'reference/redirect-old'],
+      ['Paper', 'sources/papers/paper'],
+      ['Course', 'sources/courses/course']
+    ] as const;
+    for (const [title, route] of pages) {
+      write(join(options.rootDir, 'Notes', `${title}.md`), [
+        '---',
+        `title: ${title}`,
+        'type: concept',
+        `status: ${title === 'Redirect' ? 'redirect' : title === 'Legacy status' ? 'legacy' : 'stable'}`,
+        '---',
+        'Body'
+      ].join('\n'));
+    }
+    write(options.manifestPath, [
+      'site_title: Fixture',
+      'sections:',
+      '  - id: sources',
+      '    title: Source fixture',
+      '    pages:',
+      ...pages.flatMap(([title, route]) => [
+        `      - source: Notes/${title}.md`,
+        `        route: ${route}`
+      ])
+    ].join('\n'));
+
+    await buildPublication(options);
+
+    const sidebarSource = readFileSync(
+      join(options.rootDir, 'site', 'generated-sidebar.mjs'),
+      'utf8'
+    );
+    const sidebar = JSON.parse(sidebarSource
+      .replace('// Generated from publishing/navigation.yml. Do not edit.\nexport default ', '')
+      .replace(/;\n$/, ''));
+    expect(sidebar).toEqual([{
+      label: 'Source fixture',
+      items: [
+        { label: 'Справочник', items: [{ label: 'Reference', slug: 'reference/index' }] },
+        { label: 'Исследовательские линии', items: [{ label: 'Research', slug: 'research/index' }] },
+        { label: 'Источники', items: [{ label: 'Sources', slug: 'sources/index' }] }
+      ]
+    }]);
+    for (const [, route] of pages) {
+      expect(readFileSync(join(options.outputDir, `${route}.md`), 'utf8')).toContain('Body');
+    }
+  });
+
   it('omits exactly one leading source H1 even when it differs from the page title', async () => {
     const options = fixture('\n# Short source heading\n\n# Second heading\n\nBody');
 
@@ -155,6 +223,39 @@ describe('buildPublication', () => {
     );
   });
 
+  it('reports unresolved links from hidden legacy pages without failing canonical publication', async () => {
+    const options = fixture('Body');
+    write(join(options.rootDir, 'Notes', 'Legacy.md'), [
+      '---',
+      'title: Legacy',
+      'type: concept',
+      'status: legacy',
+      '---',
+      'See [[Removed old note]].'
+    ].join('\n'));
+    write(options.manifestPath, [
+      'site_title: Fixture',
+      'sections:',
+      '  - id: sources',
+      '    title: Sources',
+      '    pages:',
+      '      - source: Notes/Legacy.md',
+      '        route: reference/old-concept'
+    ].join('\n'));
+
+    await expect(buildPublication(options)).resolves.toBeUndefined();
+    const report = JSON.parse(readFileSync(options.reportPath, 'utf8'));
+    expect(report.pages).toEqual([{
+      source: 'Notes/Legacy.md',
+      route: 'reference/old-concept',
+      unresolved: [],
+      allowlisted: [{
+        target: 'Removed old note',
+        reason: 'legacy page preserved for old links; not part of the canonical publication'
+      }]
+    }]);
+  });
+
   it('places fragment aliases directly before their matching headings', async () => {
     const options = fixture(
       '[[Page B#First Heading|first]] and [[Page B#Chat template|chat]]',
@@ -164,15 +265,11 @@ describe('buildPublication', () => {
 
     const source = matter(readFileSync(join(options.outputDir, 'nested', 'page-a.md'), 'utf8')).content;
     const target = matter(readFileSync(join(options.outputDir, 'page-b.md'), 'utf8')).content;
-    expect(source).toContain(`[first](${publicationBase}/page-b/#wiki-first-heading)`);
-    expect(source).toContain(`[chat](${publicationBase}/page-b/#wiki-chat-template)`);
-    expect(target).toContain(
-      '<span id="wiki-first-heading" aria-hidden="true"></span>\n## First Heading'
-    );
-    expect(target).toContain(
-      '<span id="wiki-chat-template" aria-hidden="true"></span>\n## Chat template'
-    );
-    expect(target).not.toMatch(/^<span id="wiki-/);
+    expect(source).toContain(`[first](${publicationBase}/page-b/#first-heading)`);
+    expect(source).toContain(`[chat](${publicationBase}/page-b/#chat-template)`);
+    expect(target).toContain('## First Heading');
+    expect(target).toContain('## Chat template');
+    expect(target).not.toContain('aria-hidden="true"');
   });
 
   it('ignores mixed fence delimiters and headings inside tilde fences', () => {

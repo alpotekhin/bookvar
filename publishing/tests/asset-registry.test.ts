@@ -30,7 +30,9 @@ function expectDecodableImage(path: string): void {
     expect(Buffer.from(bytes.subarray(8, 12)).toString('ascii'), `${path} has an invalid WebP signature`).toBe('WEBP');
   } else if (extension === '.svg') {
     const text = readFileSync(path, 'utf8').replace(/^\uFEFF/, '').trimStart();
-    expect(text, `${path} has no SVG root`).toMatch(/^(?:<\?xml[^>]*>\s*)?(?:<!--[^]*?-->\s*)*<svg[\s>]/i);
+    expect(text, `${path} has no SVG root`).toMatch(
+      /^(?:<\?xml[^>]*>\s*)?(?:<!DOCTYPE\s+svg[^>]*(?:\[[^]*?\]\s*)?>\s*)?(?:<!--[^]*?-->\s*)*<svg[\s>]/i
+    );
     expect(text, `${path} contains HTML instead of SVG`).not.toMatch(/<!doctype html|<html[\s>]/i);
   } else {
     throw new Error(`Unsupported tracked figure extension: ${path}`);
@@ -195,6 +197,10 @@ describe('publication asset registry', () => {
       }
       if (entry.derivation === 'pdf-page-render-crop') {
         expect(entry.source_asset).toMatch(/\.pdf$/);
+      } else if (entry.derivation === 'lossless-format-conversion') {
+        expect(entry.source_asset).toMatch(/\.jpe?g$/i);
+        expect(entry.asset).toMatch(/\.png$/i);
+        expect(entry.modifications).toMatch(/converted to PNG without resizing or content changes/i);
       } else {
         expect(sha256(resolve(root, entry.asset))).toBe(
           sha256(sourceAsset)

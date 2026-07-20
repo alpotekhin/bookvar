@@ -11,12 +11,16 @@ primary_sources:
 
 **Encoder-only Transformer** превращает всю входную последовательность в контекстуализированные представления. Каждый токен может смотреть на токены слева и справа, поэтому паттерн особенно удобен для понимания уже данного текста.
 
-```mermaid
-flowchart LR
-  T["Токены"] --> E["Двунаправленный self-attention"]
-  E --> H["Вектор каждого токена"]
-  H --> C["Классификация / NER / retrieval"]
-```
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/bert/bert-input-output.png]]
+
+*BERT складывает token, segment и position embeddings и возвращает
+контекстуализированное состояние для каждой входной позиции. Источник: Jay
+Alammar, [The Illustrated BERT](https://jalammar.github.io/illustrated-bert/),
+[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).*
+
+Выход encoder — не один «вектор текста», а последовательность состояний. Уже
+голова задачи решает, использовать `[CLS]`, pooling, отдельные token states или
+их комбинацию.
 
 ## Механика
 
@@ -40,7 +44,11 @@ flowchart LR
 
 `Encoder-only` — архитектурный паттерн, а `masked language modeling` — objective обучения. Они часто встречаются вместе, но логически не тождественны.
 
+## Подробнее
+
+Сопоставление encoder-only, decoder-only и encoder-decoder на одном примере
+находится в главе [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Три архитектурных паттерна]].
+
 ## Источники
 
 - [BERT](https://arxiv.org/abs/1810.04805)
-- [[02 Areas/ML & DL/Concepts/Architectures/Encoder-only|Legacy: Encoder-only]]

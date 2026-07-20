@@ -12,14 +12,16 @@ primary_sources:
 
 **RLVR** оптимизирует language-model policy с помощью [[02 Areas/ML & DL/01 Справочник/Post-training/Verifiable Reward|проверяемой награды]]: тестов, answer checker, theorem prover или среды.
 
-```mermaid
-flowchart LR
-  TASK["задача"] --> PI["policy rollout"]
-  PI --> VERIFY["verifier"]
-  VERIFY --> REWARD["reward"]
-  REWARD --> ALG["GRPO / PPO / другое RL"]
-  ALG --> PI
-```
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/post-training-courses/rlvr-feedback-loop.png]]
+
+*Полный цикл RLVR: policy порождает ответы, verifier возвращает scalar reward,
+после чего алгоритм RL обновляет policy и цикл повторяется. Источник: Nathan
+Lambert, [RLHF & Post-Training, lecture 5, slide
+8](https://rlhfbook.com/teach/course/lec5-chap7/#/7).*
+
+Verifier и алгоритм обновления на рисунке разделены намеренно. Проверяемая
+награда задаёт обратную связь, но не предписывает GRPO, PPO или иной конкретный
+метод оптимизации.
 
 ## Чем отличается от RLHF
 
@@ -40,9 +42,13 @@ RLVR — парадигма reward design, а не конкретный algorith
 
 Нужно явно фиксировать: task distribution, sampling, verifier, reward shaping, curriculum, policy algorithm, KL/regularization, contamination и evaluation. Новый paper про RLVR обычно обновляет эти компоненты и исследовательскую линию, а не создаёт «новую архитектуру Transformer».
 
+## Подробнее
+
+Устройство rollout loop, требования к verifier и типичные способы эксплуатации
+награды рассматриваются в главе [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers|RLVR и verifiers]].
+
 ## Источники
 
 - [DeepSeek-R1](https://arxiv.org/abs/2501.12948)
 - [OpenAI: Learning to reason with LLMs](https://openai.com/index/learning-to-reason-with-llms/)
 - [[02 Areas/ML & DL/Papers/DeepSeek-R1 Reasoning via RL|Paper note: DeepSeek-R1]]
-- [[02 Areas/ML & DL/Concepts/Training/RLVR|Legacy: RLVR]]

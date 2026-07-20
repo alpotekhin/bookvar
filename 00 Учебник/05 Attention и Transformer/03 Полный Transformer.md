@@ -128,9 +128,9 @@ Full attention означает: каждая непустая input position м
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/Transformer_encoder.png]]
 
-*Jay Alammar, «The Illustrated Transformer»: encoder как self-attention и FFN с
-residual path. Используем эту схему как промежуточную, а не начинаем сразу с
-перегруженной Figure 1 оригинальной статьи.*
+*Jay Alammar, [The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/):
+encoder как self-attention и FFN с residual path. Эта схема позволяет сначала
+проследить один блок, прежде чем переходить к полному стеку.*
 
 ## 6. Оригинальный decoder block
 
@@ -151,8 +151,8 @@ multi-head organization и отсутствие recurrent decoder state.
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/The_transformer_encoder_decoder_stack.png]]
 
-*Jay Alammar: развёрнутый encoder-decoder stack. На схеме особенно важно увидеть
-единственную связь между башнями: encoder outputs становятся K и V для
+*Jay Alammar, [The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/):
+развёрнутый encoder-decoder stack. Encoder outputs становятся K и V для
 cross-attention каждого decoder block.*
 
 ## 7. Training и inference
@@ -345,7 +345,7 @@ vocabulary logits         [B, T, |Vocab|]
 - [Karpathy — Let’s reproduce GPT-2](https://www.youtube.com/watch?v=l8pRSuU81PU)
 - [Transformer Explainer](https://poloclub.github.io/transformer-explainer/)
 - [Jay Alammar — The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/)
-- [[02 Areas/ML & DL/Concepts/Architectures/Transformer|Legacy deep dive: Transformer]]
+- [[02 Areas/ML & DL/01 Справочник/Архитектурные паттерны/Encoder-Decoder|Encoder–Decoder]]
 
 **Назад:** [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V]] ·
 **Дальше:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна]]

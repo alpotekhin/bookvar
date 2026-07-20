@@ -1,10 +1,10 @@
 ---
 title: "Mamba"
 type: model-family
-organization: researchers at CMU and Princeton; ecosystem contributors
+organization: state-spaces research team
 first_release: 2023
-latest_verified_release: Mamba-2
-last_verified: 2026-07-16
+latest_verified_release: Mamba-3
+last_verified: 2026-07-20
 architecture_base: selective state-space model
 modalities: [sequence]
 status: active-research
@@ -12,24 +12,39 @@ status: active-research
 
 # Mamba
 
-Mamba — не Transformer: вместо pairwise attention она обновляет компактное
-состояние. **Selective SSM** делает параметры перехода зависимыми от входа,
-позволяя выбирать, что запомнить или забыть. Mamba-2 связывает SSM и attention
-через Structured State Space Duality.
+State-space model переносит информацию не через матрицу попарного attention, а через состояние, которое последовательно обновляется входом. До Mamba такой подход часто проигрывал Transformer на языке: фиксированное правило плохо решало, что запомнить, а что отбросить. Mamba делает параметры обновления зависимыми от текущего токена. Эта *selectivity* — содержательное ядро архитектуры.
 
-| Свойство | Attention | Mamba |
-|---|---|---|
-| Training | попарное смешивание токенов | parallel scan |
-| Decoding state | KV-cache растёт с длиной | фиксированное recurrent state |
-| Retrieval | прямой доступ к прошлому токену | информация сжата в состоянии |
+## От Mamba-1 к Mamba-3
 
-- **Architecture:** selective SSM (**A**).
-- **Training/post-training:** архитектура не задаёт автоматически данные или
-  alignment recipe.
-- **Риск:** линейная сложность не гарантирует лучшее качество retrieval.
+| Релиз | Архитектурный diff |
+|---|---|
+| Mamba (2023) | Selective SSM, hardware-aware parallel scan, без attention и отдельного MLP в базовом блоке. |
+| Mamba-2 (2024) | Structured State Space Duality: общий язык для SSM и линейного attention; эффективная SSD-реализация. |
+| Mamba-3 (2026) | State-tracking, complex-valued dynamics и MIMO-режим с низкоранговым смешиванием нескольких каналов. |
 
-## Primary sources
+Официальный репозиторий уже включает код Mamba-3 и ссылается на arXiv:2603.15569; это на 20 июля 2026 года последняя опубликованная версия.
 
-- [Mamba paper](https://arxiv.org/abs/2312.00752) — **A**
-- [Mamba-2 paper](https://arxiv.org/abs/2405.21060) — **A**
-- [Official state-spaces/mamba code](https://github.com/state-spaces/mamba) — **A**
+## Что происходит внутри блока
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/atlas-remainder-official/mamba-block.png]]
+
+*Рисунок: Gu & Dao, [Mamba](https://arxiv.org/abs/2312.00752), Figure 3; локальная копия. Вход разветвляется: одна ветвь формирует gate, другая проходит локальную свёртку и selective SSM; затем ветви объединяются.*
+
+Линейная проекция расширяет признаки, короткая causal convolution собирает локальный контекст. Затем selective SSM вычисляет параметры шага, записи и чтения состояния из входа: значимый токен может сильно изменить память, незначимый — почти не затронуть её. Parallel scan позволяет обучать последовательность без обычного пошагового цикла. Kernel спроектирован с учётом иерархии памяти GPU, чтобы не материализовать всё состояние в медленной памяти.
+
+Mamba-2 показала, что определённый класс attention-матриц и SSM — две формы одной структуры. Это не превращает Mamba в softmax-attention: произвольный прямой доступ к прошлому по-прежнему отсутствует. Mamba-3 расширяет динамику и число каналов состояния, улучшая качество при той же идее линейного прохода.
+
+## Обучение, токенизация и post-training
+
+Статьи сравнивают архитектуры на одинаковых данных, а официальный репозиторий публикует исследовательские контрольные точки. «Mamba» не задаёт единого токенизатора, instruction tuning или safety recipe. Крупные Jamba, Falcon-H1 и Nemotron используют Mamba-компонент, но являются отдельными гибридными семействами со своими данными и post-training.
+
+## Инференс и ограничения
+
+При декодировании каждый слой переносит состояние фиксированного размера; память не растёт пропорционально контексту. Для prefill применяется параллельный или блочный scan. Практическая скорость зависит от специализированных CUDA/Triton kernels. Рекуррентное состояние сложнее переиспользовать для prefix caching и ветвления продолжений, чем явный KV-cache. Линейная сложность оператора также не гарантирует идеального сохранения фактов на любой дистанции.
+
+## Источники
+
+- [Mamba](https://arxiv.org/abs/2312.00752) — selective SSM.
+- [Mamba-2](https://arxiv.org/abs/2405.21060) — Structured State Space Duality.
+- [Mamba-3](https://arxiv.org/abs/2603.15569) — последняя архитектура.
+- [state-spaces/mamba](https://github.com/state-spaces/mamba) — официальный код.

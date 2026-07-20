@@ -37,15 +37,13 @@ primary_sources:
 
 Поэтому практическая система часто устроена каскадом:
 
-```mermaid
-flowchart LR
-    Q["запрос"] --> S["лексический поиск"]
-    Q --> D["плотный поиск"]
-    S --> F["объединение кандидатов"]
-    D --> F
-    F --> R["дорогое переранжирование"]
-    R --> K["верхние k фрагментов"]
-```
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-60-64/openqa-retriever-reader.png]]
+
+*Слайд 4 из [ACL 2020 Open-Domain QA Tutorial, part IV](https://github.com/danqi/acl2020-openqa-tutorial/blob/master/slides/part4-retriever-reader.pdf),
+Danqi Chen, основанный на [DrQA](https://arxiv.org/abs/1704.00051). Слева
+показана коллекция, к которой применяется дешёвый Document Retriever; справа
+Document Reader получает уже выбранный материал. Поэтому полнота списка
+кандидатов задаёт потолок качества следующего этапа.*
 
 ## 2. Инвертированный индекс
 

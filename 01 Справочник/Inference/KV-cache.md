@@ -11,16 +11,17 @@ primary_sources:
 
 При autoregressive generation новые queries должны взаимодействовать со всеми прошлыми keys и values. **KV-cache** сохраняет K/V предыдущих токенов, чтобы не пересчитывать весь префикс на каждом decode step.
 
-```mermaid
-sequenceDiagram
-  participant C as Cache K,V
-  participant M as Model
-  M->>C: prefill: K,V всего prompt
-  loop каждый новый токен
-    M->>C: прочитать прошлые K,V
-    M->>C: дописать Kₜ,Vₜ
-  end
-```
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/kv-cache/kv-cache-mechanism.png]]
+
+*При каждом шаге декодирования новые Q сравниваются с сохранёнными K/V
+префикса; в cache дописывается только пара текущего токена. Источник: Sebastian
+Raschka, [Understanding and Coding the KV Cache in LLMs from
+Scratch](https://magazine.sebastianraschka.com/p/coding-the-kv-cache-in-llms).*
+
+Рисунок отделяет две операции, которые часто смешивают: прошлые hidden states не
+прогоняются через модель заново, но их K/V читаются на каждом шаге attention.
+Поэтому cache экономит вычисления и одновременно создаёт растущую нагрузку на
+память и её пропускную способность.
 
 Для обычного attention объём cache масштабируется приблизительно как:
 
@@ -37,8 +38,12 @@ $$2\cdot L\cdot T\cdot h_{kv}\cdot d_{head}\cdot bytes,$$
 
 Paged KV-cache управляет cache блоками и уменьшает fragmentation; prefix caching повторно использует общий prompt; quantized KV снижает память ценой возможной ошибки. Это inference techniques, не изменение уже обученных attention weights.
 
+## Подробнее
+
+Расчёт памяти, различие prefill/decode, batching и PagedAttention собраны в
+главе [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention|KV-cache, пакетирование и PagedAttention]].
+
 ## Источники
 
 - [Fast Transformer Decoding / MQA](https://arxiv.org/abs/1911.02150)
 - [vLLM / PagedAttention](https://arxiv.org/abs/2309.06180)
-- [[02 Areas/ML & DL/Concepts/Inference/KV-Cache|Legacy: KV-cache]]

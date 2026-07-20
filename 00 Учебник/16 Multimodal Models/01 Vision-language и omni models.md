@@ -6,7 +6,7 @@ last_updated: 2026-07-20
 prerequisites:
   - "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна]]"
 next:
-  - "[[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/00 Agent Harness и Context Engineering — карта модуля]]"
+  - "[[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/01 Tool use и agents]]"
 primary_sources:
   - https://arxiv.org/abs/2103.00020
   - https://arxiv.org/abs/2204.14198
@@ -59,14 +59,11 @@ $$
 9216 токенов — квадратичная стоимость полного внимания быстро становится
 неприемлемой.
 
-```mermaid
-flowchart LR
-    I["изображение H×W"] --> P["сетка patches P×P"]
-    P --> V["Vision Transformer"]
-    V --> Z["визуальные признаки"]
-    Z --> C["соединитель с языковой моделью"]
-    C --> L["языковая модель"]
-```
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-60-64/llava-architecture.png]]
+
+*Рисунок 1 из [Visual Instruction Tuning](https://arxiv.org/abs/2304.08485),
+Liu et al., NeurIPS 2023. На нём видна граница компонентов: замороженный
+визуальный encoder CLIP, обучаемая проекция и языковая модель.*
 
 ## 3. Предобученный vision encoder
 
