@@ -31,8 +31,6 @@ jobs:
           node-version-file: .nvmrc
           cache: pnpm
       - uses: actions/configure-pages@v5
-        with:
-          enablement: true
       - run: pnpm install --frozen-lockfile
       - run: pnpm --dir publishing test:unit
       - run: pnpm --dir site check
