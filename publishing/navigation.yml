@@ -150,7 +150,7 @@ sections:
       - source: 00 Учебник/17 Tools и Agents/68 Оценивание агентных систем.md
         route: textbook/agents/evaluation
   - id: models
-    title: Атлас моделей
+    title: Справочник
     pages:
       - source: 02 Атлас моделей/_index.md
         route: models/index
@@ -207,7 +207,7 @@ sections:
       - source: 02 Атлас моделей/Timeline.md
         route: models/timeline
   - id: sources
-    title: Справочник, исследования и источники
+    title: Источники
     pages:
       - source: 01 Справочник/_index.md
         route: reference/index
@@ -323,6 +323,14 @@ sections:
         route: reference/inference/kv-cache
       - source: 01 Справочник/Inference/FlashAttention.md
         route: reference/inference/flashattention
+      - source: 01 Справочник/Inference/vLLM — анатомия inference engine.md
+        route: reference/inference/vllm
+      - source: 01 Справочник/Inference/PagedAttention.md
+        route: reference/inference/pagedattention
+      - source: 01 Справочник/Inference/SGLang и RadixAttention.md
+        route: reference/inference/sglang-radixattention
+      - source: 01 Справочник/Inference/Triton и GPU kernels.md
+        route: reference/inference/triton
       - source: 01 Справочник/Retrieval/Embeddings.md
         route: reference/retrieval/embeddings
       - source: 01 Справочник/Retrieval/Retrieval.md

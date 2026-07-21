@@ -2679,6 +2679,7 @@ assets:
     modifications: copied or extracted without visual modification for publication
     used_in:
       - 00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md
+      - 01 Справочник/Inference/PagedAttention.md
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/topics-53-59/prefill-decode.png
@@ -2691,6 +2692,7 @@ assets:
     modifications: copied or extracted without visual modification for publication
     used_in:
       - 00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md
+      - 01 Справочник/Inference/PagedAttention.md
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/topics-53-59/anyscale-static-batching.png
@@ -2703,6 +2705,7 @@ assets:
     modifications: copied or extracted without visual modification for publication
     used_in:
       - 00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md
+      - 01 Справочник/Inference/PagedAttention.md
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/topics-53-59/paged-attention-fragmentation.png
@@ -4563,3 +4566,199 @@ assets:
     source_asset: raw/papers/external/source-audit-1-18/resnet.pdf
     source_page: 2
     derivation: pdf-page-render-crop
+  - id: curated-vllm-engine-constructor-a1b2c3d4e501
+    asset: 00 Учебник/Assets/Figures/curated/inference-serving/vllm-engine_constructor.png
+    author: Aleksa Gordić
+    source_url: https://www.aleksagordic.com/blog/vllm
+    license: open educational web material; reuse confirmed by repository owner
+    license_url: https://www.aleksagordic.com/blog/vllm
+    modifications: copied without visual modification from the official vLLM blog repository
+    used_in:
+      - 01 Справочник/Inference/vLLM — анатомия inference engine.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/inference-serving/vllm/engine_constructor.png
+  - id: curated-vllm-engine-loop-a1b2c3d4e502
+    asset: 00 Учебник/Assets/Figures/curated/inference-serving/vllm-engine_loop.png
+    author: Aleksa Gordić
+    source_url: https://www.aleksagordic.com/blog/vllm
+    license: open educational web material; reuse confirmed by repository owner
+    license_url: https://www.aleksagordic.com/blog/vllm
+    modifications: copied without visual modification from the official vLLM blog repository
+    used_in:
+      - 01 Справочник/Inference/vLLM — анатомия inference engine.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/inference-serving/vllm/engine_loop.png
+  - id: curated-vllm-forward-pass-a1b2c3d4e503
+    asset: 00 Учебник/Assets/Figures/curated/inference-serving/vllm-fwd_pass.png
+    author: Aleksa Gordić
+    source_url: https://www.aleksagordic.com/blog/vllm
+    license: open educational web material; reuse confirmed by repository owner
+    license_url: https://www.aleksagordic.com/blog/vllm
+    modifications: copied without visual modification from the official vLLM blog repository
+    used_in:
+      - 01 Справочник/Inference/vLLM — анатомия inference engine.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/inference-serving/vllm/fwd_pass.png
+  - id: curated-vllm-prefix-one-a1b2c3d4e504
+    asset: 00 Учебник/Assets/Figures/curated/inference-serving/vllm-prefix_pt1.png
+    author: Aleksa Gordić
+    source_url: https://www.aleksagordic.com/blog/vllm
+    license: open educational web material; reuse confirmed by repository owner
+    license_url: https://www.aleksagordic.com/blog/vllm
+    modifications: copied without visual modification from the official vLLM blog repository
+    used_in:
+      - 01 Справочник/Inference/vLLM — анатомия inference engine.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/inference-serving/vllm/prefix_pt1.png
+  - id: curated-vllm-prefix-two-a1b2c3d4e505
+    asset: 00 Учебник/Assets/Figures/curated/inference-serving/vllm-prefix_pt2.png
+    author: Aleksa Gordić
+    source_url: https://www.aleksagordic.com/blog/vllm
+    license: open educational web material; reuse confirmed by repository owner
+    license_url: https://www.aleksagordic.com/blog/vllm
+    modifications: copied without visual modification from the official vLLM blog repository
+    used_in:
+      - 01 Справочник/Inference/vLLM — анатомия inference engine.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/inference-serving/vllm/prefix_pt2.png
+  - id: curated-vllm-prefix-three-a1b2c3d4e506
+    asset: 00 Учебник/Assets/Figures/curated/inference-serving/vllm-prefix_pt3.png
+    author: Aleksa Gordić
+    source_url: https://www.aleksagordic.com/blog/vllm
+    license: open educational web material; reuse confirmed by repository owner
+    license_url: https://www.aleksagordic.com/blog/vllm
+    modifications: copied without visual modification from the official vLLM blog repository
+    used_in:
+      - 01 Справочник/Inference/vLLM — анатомия inference engine.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/inference-serving/vllm/prefix_pt3.png
+  - id: curated-vllm-multiprocess-a1b2c3d4e507
+    asset: 00 Учебник/Assets/Figures/curated/inference-serving/vllm-multiprocexecutor.png
+    author: Aleksa Gordić
+    source_url: https://www.aleksagordic.com/blog/vllm
+    license: open educational web material; reuse confirmed by repository owner
+    license_url: https://www.aleksagordic.com/blog/vllm
+    modifications: copied without visual modification from the official vLLM blog repository
+    used_in:
+      - 01 Справочник/Inference/vLLM — анатомия inference engine.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/inference-serving/vllm/multiprocexecutor.png
+  - id: curated-vllm-server-setup-a1b2c3d4e508
+    asset: 00 Учебник/Assets/Figures/curated/inference-serving/vllm-server_setup.png
+    author: Aleksa Gordić
+    source_url: https://www.aleksagordic.com/blog/vllm
+    license: open educational web material; reuse confirmed by repository owner
+    license_url: https://www.aleksagordic.com/blog/vllm
+    modifications: copied without visual modification from the official vLLM blog repository
+    used_in:
+      - 01 Справочник/Inference/vLLM — анатомия inference engine.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/inference-serving/vllm/server_setup.png
+  - id: curated-vllm-latency-a1b2c3d4e509
+    asset: 00 Учебник/Assets/Figures/curated/inference-serving/vllm-latency_diagram.png
+    author: Aleksa Gordić
+    source_url: https://www.aleksagordic.com/blog/vllm
+    license: open educational web material; reuse confirmed by repository owner
+    license_url: https://www.aleksagordic.com/blog/vllm
+    modifications: copied without visual modification from the official vLLM blog repository
+    used_in:
+      - 01 Справочник/Inference/vLLM — анатомия inference engine.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/inference-serving/vllm/latency_diagram.png
+  - id: curated-vllm-roofline-a1b2c3d4e50a
+    asset: 00 Учебник/Assets/Figures/curated/inference-serving/vllm-roofline.png
+    author: Aleksa Gordić
+    source_url: https://www.aleksagordic.com/blog/vllm
+    license: open educational web material; reuse confirmed by repository owner
+    license_url: https://www.aleksagordic.com/blog/vllm
+    modifications: copied without visual modification from the official vLLM blog repository
+    used_in:
+      - 01 Справочник/Inference/vLLM — анатомия inference engine.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/inference-serving/vllm/roofline.png
+  - id: curated-sglang-program-a1b2c3d4e50b
+    asset: 00 Учебник/Assets/Figures/curated/inference-serving/sglang-program-figure2.png
+    author: Lianmin Zheng et al.
+    source_url: https://arxiv.org/abs/2312.07104
+    license: open paper material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2312.07104
+    modifications: Figure 2 rendered from the official paper and cropped without content changes
+    used_in:
+      - 01 Справочник/Inference/SGLang и RadixAttention.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/2312.07104.pdf
+    source_page: 3
+    derivation: pdf-page-render-crop
+  - id: curated-sglang-radix-a1b2c3d4e50c
+    asset: 00 Учебник/Assets/Figures/curated/inference-serving/sglang-radixattention-figure3.png
+    author: Lianmin Zheng et al.
+    source_url: https://arxiv.org/abs/2312.07104
+    license: open paper material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2312.07104
+    modifications: Figure 3 rendered from the official paper and cropped without content changes
+    used_in:
+      - 01 Справочник/Inference/SGLang и RadixAttention.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/2312.07104.pdf
+    source_page: 4
+    derivation: pdf-page-render-crop
+  - id: curated-triton-softmax-a1b2c3d4e50d
+    asset: 00 Учебник/Assets/Figures/curated/inference-serving/triton-fused-softmax-benchmark.png
+    author: OpenAI Triton project
+    source_url: https://triton-lang.org/main/getting-started/tutorials/02-fused-softmax.html
+    license: MIT
+    license_url: https://github.com/triton-lang/triton/blob/main/LICENSE
+    modifications: copied without visual modification from the official tutorial
+    used_in:
+      - 01 Справочник/Inference/Triton и GPU kernels.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/inference-serving/triton/fused-softmax-performance.png
+  - id: curated-triton-grouping-a1b2c3d4e50e
+    asset: 00 Учебник/Assets/Figures/curated/inference-serving/triton-grouped-vs-row-major.png
+    author: OpenAI Triton project
+    source_url: https://triton-lang.org/main/getting-started/tutorials/03-matrix-multiplication.html
+    license: MIT
+    license_url: https://github.com/triton-lang/triton/blob/main/LICENSE
+    modifications: copied without visual modification from the official tutorial
+    used_in:
+      - 01 Справочник/Inference/Triton и GPU kernels.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/inference-serving/triton/grouped-vs-row-major-ordering.png
+  - id: curated-triton-matmul-fp16-a1b2c3d4e50f
+    asset: 00 Учебник/Assets/Figures/curated/inference-serving/triton-matmul-benchmark-fp16.png
+    author: OpenAI Triton project
+    source_url: https://triton-lang.org/main/getting-started/tutorials/03-matrix-multiplication.html
+    license: MIT
+    license_url: https://github.com/triton-lang/triton/blob/main/LICENSE
+    modifications: copied without visual modification from the official tutorial
+    used_in:
+      - 01 Справочник/Inference/Triton и GPU kernels.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/inference-serving/triton/matmul-performance-fp16.png
+  - id: curated-triton-matmul-fp8-a1b2c3d4e510
+    asset: 00 Учебник/Assets/Figures/curated/inference-serving/triton-matmul-benchmark-fp8.png
+    author: OpenAI Triton project
+    source_url: https://triton-lang.org/main/getting-started/tutorials/03-matrix-multiplication.html
+    license: MIT
+    license_url: https://github.com/triton-lang/triton/blob/main/LICENSE
+    modifications: copied without visual modification from the official tutorial
+    used_in:
+      - 01 Справочник/Inference/Triton и GPU kernels.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/inference-serving/triton/matmul-performance-fp8.png

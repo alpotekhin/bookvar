@@ -38,7 +38,10 @@ $$\mathcal{L} = -\sum_{t=1}^{T} \log P(x_t \mid x_1, x_2, \ldots, x_{t-1}; \thet
 
 Реализуется через **causal mask** -- нижнетреугольная матрица:
 
-$$M_{ij} = \begin{cases} 0 & \text{если } i \geq j \\ -\infty & \text{если } i < j \end{cases}$$
+$$M_{ij} = \begin{cases} 0 & i \geq j \\ -\infty & i < j \end{cases}$$
+
+Нулевое значение сохраняет связь с текущей или предыдущей позицией, а
+$-\infty$ обнуляет вероятность связи с будущей позицией после softmax.
 
 ```
 Attention matrix (до softmax) + causal mask:
