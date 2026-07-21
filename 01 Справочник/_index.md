@@ -7,10 +7,19 @@ last_updated: 2026-07-16
 
 # Справочник ML, NLP и LLM
 
-Канонические определения механизмов. Здесь удобно быстро уточнить термин;
-связное изложение находится в [[02 Areas/ML & DL/00 Учебник/_index|учебнике]].
+Справочник объединяет канонические определения механизмов, семейства моделей,
+обзоры развивающихся направлений и хронологию. Здесь удобно быстро уточнить
+термин или сопоставить подходы; связное изложение находится в
+[[02 Areas/ML & DL/00 Учебник/_index|учебнике]].
 Старые заметки из `Concepts` сохраняются для обратных ссылок, но не входят в
 навигацию справочника.
+
+## Карта справочника
+
+- **Механизмы** — канонические определения ниже на этой странице.
+- **Модели и семейства** — [[02 Areas/ML & DL/02 Атлас моделей/_index|атлас моделей]].
+- **Обзоры направлений** — [[02 Areas/ML & DL/03 Исследовательские линии/_index|карта развивающихся направлений]].
+- **Хронология** — [[02 Areas/ML & DL/02 Атлас моделей/Timeline|временная шкала моделей и технологий]].
 
 ## Архитектура
 
@@ -39,7 +48,11 @@ last_updated: 2026-07-16
 ## Inference, retrieval и evaluation
 
 - [[02 Areas/ML & DL/01 Справочник/Inference/KV-cache|KV-cache]]
+- [[02 Areas/ML & DL/01 Справочник/Inference/PagedAttention|PagedAttention]]
 - [[02 Areas/ML & DL/01 Справочник/Inference/FlashAttention|FlashAttention]]
+- [[02 Areas/ML & DL/01 Справочник/Inference/vLLM — анатомия inference engine|vLLM — анатомия inference engine]]
+- [[02 Areas/ML & DL/01 Справочник/Inference/SGLang и RadixAttention|SGLang и RadixAttention]]
+- [[02 Areas/ML & DL/01 Справочник/Inference/Triton и GPU kernels|Triton и GPU kernels]]
 - [[02 Areas/ML & DL/01 Справочник/Retrieval/Embeddings|Embeddings]]
 - [[02 Areas/ML & DL/01 Справочник/Retrieval/Retrieval|Retrieval]]
 - [[02 Areas/ML & DL/01 Справочник/Retrieval/RAG|RAG]]

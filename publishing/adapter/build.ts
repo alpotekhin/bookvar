@@ -34,11 +34,17 @@ export function publicationHref(route: string): string {
   return `${publicationBasePath()}${path}`;
 }
 
-const SOURCE_SIDEBAR_GROUPS = [
-  { routePrefix: 'reference/', label: 'Справочник' },
-  { routePrefix: 'research/', label: 'Исследовательские линии' },
-  { routePrefix: 'sources/', label: 'Источники' }
+const REFERENCE_SIDEBAR_GROUPS = [
+  { label: 'Механизмы', includes: (route: string) => route.startsWith('reference/') },
+  {
+    label: 'Модели и семейства',
+    includes: (route: string) => route.startsWith('models/') && route !== 'models/timeline'
+  },
+  { label: 'Обзоры направлений', includes: (route: string) => route.startsWith('research/') },
+  { label: 'Хронология', includes: (route: string) => route === 'models/timeline' }
 ] as const;
+
+const SIDEBAR_SECTION_ORDER = ['textbook', 'models', 'sources', 'practice', 'questions'] as const;
 
 function visibleInSidebar(route: string): boolean {
   return !route.includes('/legacy/')
@@ -183,7 +189,31 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
   })), { allowAmbiguousBasenames: true });
   const titles = new Map(parsed.map(({ entry, page }) => [entry.route, page.title]));
   const statuses = new Map(parsed.map(({ entry, page }) => [entry.route, page.status]));
-  const sidebar = manifest.sections.map((section) => {
+  const sidebar = [...manifest.sections]
+    .sort((left, right) =>
+      SIDEBAR_SECTION_ORDER.indexOf(left.id) - SIDEBAR_SECTION_ORDER.indexOf(right.id)
+    )
+    .map((section) => {
+    if (section.id === 'models') {
+      const referencePages = manifest.sections
+        .filter((candidate) => candidate.id === 'models' || candidate.id === 'sources')
+        .flatMap((candidate) => candidate.pages);
+      return {
+        label: section.title,
+        items: REFERENCE_SIDEBAR_GROUPS.map((group) => ({
+          label: group.label,
+          items: referencePages
+            .filter((entry) => group.includes(entry.route)
+              && visibleInSidebar(entry.route)
+              && !['redirect', 'legacy'].includes(statuses.get(entry.route) ?? ''))
+            .map((entry) => ({
+              label: titles.get(entry.route)!,
+              slug: entry.route
+            }))
+        }))
+      };
+    }
+
     if (section.id !== 'sources') {
       return {
         label: section.title,
@@ -196,17 +226,14 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
 
     return {
       label: section.title,
-      items: SOURCE_SIDEBAR_GROUPS.map((group) => ({
-        label: group.label,
-        items: section.pages
-          .filter((entry) => entry.route.startsWith(group.routePrefix)
-            && visibleInSidebar(entry.route)
-            && !['redirect', 'legacy'].includes(statuses.get(entry.route) ?? ''))
-          .map((entry) => ({
-            label: titles.get(entry.route)!,
-            slug: entry.route
-          }))
-      }))
+      items: section.pages
+        .filter((entry) => entry.route.startsWith('sources/')
+          && visibleInSidebar(entry.route)
+          && !['redirect', 'legacy'].includes(statuses.get(entry.route) ?? ''))
+        .map((entry) => ({
+          label: titles.get(entry.route)!,
+          slug: entry.route
+        }))
     };
   });
 

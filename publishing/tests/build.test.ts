@@ -142,7 +142,7 @@ describe('buildPublication', () => {
     );
   });
 
-  it('groups canonical source routes in the sidebar while building hidden pages', async () => {
+  it('shows only source index pages in the source sidebar while building hidden pages', async () => {
     const options = fixture('Body');
     const pages = [
       ['Reference', 'reference/index'],
@@ -187,15 +187,72 @@ describe('buildPublication', () => {
       .replace(/;\n$/, ''));
     expect(sidebar).toEqual([{
       label: 'Source fixture',
-      items: [
-        { label: 'Справочник', items: [{ label: 'Reference', slug: 'reference/index' }] },
-        { label: 'Исследовательские линии', items: [{ label: 'Research', slug: 'research/index' }] },
-        { label: 'Источники', items: [{ label: 'Sources', slug: 'sources/index' }] }
-      ]
+      items: [{ label: 'Sources', slug: 'sources/index' }]
     }]);
     for (const [, route] of pages) {
       expect(readFileSync(join(options.outputDir, `${route}.md`), 'utf8')).toContain('Body');
     }
+  });
+
+  it('combines mechanisms, models, research overviews and timeline in the reference sidebar', async () => {
+    const options = fixture('Body');
+    const pages = [
+      ['Models', 'models/index'],
+      ['Timeline', 'models/timeline'],
+      ['Reference', 'reference/index'],
+      ['Overview', 'research/index'],
+      ['Sources', 'sources/index']
+    ] as const;
+    for (const [title] of pages) {
+      write(join(options.rootDir, 'Notes', `${title}.md`), [
+        '---',
+        `title: ${title}`,
+        'type: concept',
+        'status: stable',
+        '---',
+        'Body'
+      ].join('\n'));
+    }
+    write(options.manifestPath, [
+      'site_title: Fixture',
+      'sections:',
+      '  - id: models',
+      '    title: Справочник',
+      '    pages:',
+      ...pages.slice(0, 2).flatMap(([title, route]) => [
+        `      - source: Notes/${title}.md`,
+        `        route: ${route}`
+      ]),
+      '  - id: sources',
+      '    title: Источники',
+      '    pages:',
+      ...pages.slice(2).flatMap(([title, route]) => [
+        `      - source: Notes/${title}.md`,
+        `        route: ${route}`
+      ])
+    ].join('\n'));
+
+    await buildPublication(options);
+
+    const sidebarSource = readFileSync(
+      join(options.rootDir, 'site', 'generated-sidebar.mjs'),
+      'utf8'
+    );
+    const sidebar = JSON.parse(sidebarSource
+      .replace('// Generated from publishing/navigation.yml. Do not edit.\nexport default ', '')
+      .replace(/;\n$/, ''));
+    expect(sidebar).toEqual([
+      {
+        label: 'Справочник',
+        items: [
+          { label: 'Механизмы', items: [{ label: 'Reference', slug: 'reference/index' }] },
+          { label: 'Модели и семейства', items: [{ label: 'Models', slug: 'models/index' }] },
+          { label: 'Обзоры направлений', items: [{ label: 'Overview', slug: 'research/index' }] },
+          { label: 'Хронология', items: [{ label: 'Timeline', slug: 'models/timeline' }] }
+        ]
+      },
+      { label: 'Источники', items: [{ label: 'Sources', slug: 'sources/index' }] }
+    ]);
   });
 
   it('omits exactly one leading source H1 even when it differs from the page title', async () => {

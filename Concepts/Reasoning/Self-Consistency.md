@@ -42,9 +42,9 @@ A:
 
 Вместо greedy decoding — **семплируем** $m$ independent reasoning paths из decoder (temperature/top-k/nucleus sampling):
 
-**Path 1**: «She uses 3 + 4 = 7 eggs. She has 16 - 7 = 9 left. 9 * $2 = **$18**.»
-**Path 2**: «She sells the remainder for $2 * (16 - 4 - 3) = $2 * 9 = **$18**.»
-**Path 3**: «She uses 3 + 4 = 7 eggs. She sells 7 * $2 = **$14**.» (ошибка!)
+**Path 1**: «She uses 3 + 4 = 7 eggs. She has 16 - 7 = 9 left. 9 × 2 dollars = **18 dollars**.»
+**Path 2**: «She sells the remainder for 2 × (16 - 4 - 3) = 2 × 9 = **18 dollars**.»
+**Path 3**: «She uses 3 + 4 = 7 eggs. She sells 7 × 2 = **14 dollars**.» (ошибка!)
 
 Каждый path может использовать **разную стратегию** решения и прийти к **разному ответу**.
 
@@ -52,7 +52,9 @@ A:
 
 $$\hat{a} = \arg\max_a \sum_{i=1}^{m} \mathbb{1}(a_i = a)$$
 
-Просто считаем, какой ответ встречается **чаще всего** среди $m$ paths. В примере выше: $18 появляется 2 раза, $14 — 1 раз. Ответ: **$18**.
+Просто считаем, какой ответ встречается **чаще всего** среди $m$ paths. В
+примере выше ответ «18 долларов» появляется дважды, а «14 долларов» — один раз.
+Итоговый ответ: **18 долларов**.
 
 По сути — **Monte Carlo approximation** правильного ответа через маргинализацию по reasoning paths.
 

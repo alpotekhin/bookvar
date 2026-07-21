@@ -1,16 +1,17 @@
 ---
-title: Timeline архитектур языковых моделей
+title: Хронология моделей и технологий LLM
 type: concept
-last_updated: 2026-07-20
+last_updated: 2026-07-21
 status: active
 ---
 
-# Хронология архитектурных линий
+# Хронология моделей и технологий LLM
 
-Хронология отмечает момент публикации идеи или первого официального релиза,
-который сделал линию заметной. Она не устанавливает абсолютный приоритет: многие
-решения развивались параллельно, а продуктовый релиз может менять постобучение,
-не меняя базовый вычислительный блок.
+Хронология отмечает момент публикации архитектурной идеи, системной технологии
+или первого официального релиза, который сделал линию заметной. Она не
+устанавливает абсолютный приоритет: многие решения развивались параллельно, а
+новый inference engine или продуктовый релиз может менять исполнение и
+постобучение, не меняя базовый вычислительный блок модели.
 
 ## 2017–2020: три интерфейса Transformer
 
@@ -96,6 +97,22 @@ Flamingo важен не просто как «модель с картинка�
 | 2026 | Nemotron 3 | семейство открытых моделей NVIDIA, в котором особенно важны post-training и agentic deployment recipe | [Nemotron 3 overview](https://arxiv.org/abs/2512.20856), [официальный портал](https://developer.nvidia.com/topics/ai/nemotron) |
 | 2026 | Baichuan-M3 | медицинская ветка; специализированный домен не означает новую универсальную архитектуру | [Baichuan-M3 report](https://arxiv.org/abs/2602.06570) |
 
+## Inference и serving: от GPU-ядер к разделению prefill и decode
+
+Эта линия описывает не новые backbone-модели, а способы исполнять уже обученную
+модель. Поэтому её события вынесены отдельно от календаря релизов: оптимизация
+ядра, планировщик запросов и управление KV-кэшем отвечают за разные уровни
+системы и могут сочетаться в одном inference engine.
+
+| Дата | Технология | Системный сдвиг | Первичный источник |
+|---|---|---|---|
+| 2019-06 | Triton | язык и компилятор для плиточных GPU-вычислений позволили описывать специализированные ядра выше уровня CUDA | [Tillet, Kung, Cox, MAPL 2019](https://www.eecs.harvard.edu/~htk/publication/2019-mapl-tillet-kung-cox.pdf) |
+| 2022-05 | FlashAttention | точный attention стал IO-aware: tiling уменьшает обмен между HBM и SRAM без аппроксимации результата | [Dao et al., NeurIPS 2022](https://papers.nips.cc/paper_files/paper/2022/hash/67d57c32e20fd0a7a302cb81d36e40d5-Abstract-Conference.html) |
+| 2022-07 | Orca | iteration-level scheduling разрешил менять состав batch между шагами авторегрессионной генерации; это опорная работа для continuous batching | [Yu et al., OSDI 2022](https://www.usenix.org/conference/osdi22/presentation/yu) |
+| 2023-06/10 | PagedAttention и vLLM | блочное управление KV-кэшем по аналогии с виртуальной памятью уменьшило фрагментацию и позволило держать больше запросов в batch | [первый релиз vLLM](https://vllm-project.github.io/2023/06/20/vllm.html), [Kwon et al., SOSP 2023](https://doi.org/10.1145/3600006.3613165) |
+| 2023-12 / 2024-01 | SGLang и RadixAttention | radix tree сделал общие prompt-префиксы переиспользуемым KV-кэшем для ветвящихся и многошаговых программ | [Zheng et al.](https://arxiv.org/abs/2312.07104), [официальный анонс SGLang](https://www.lmsys.org/blog/2024-01-17-sglang/) |
+| 2024-01 | Disaggregated prefill/decode | DistServe разместил compute-bound prefill и memory-bound decode на разных GPU и раздельно оптимизировал TTFT и TPOT | [Zhong et al., OSDI 2024](https://www.usenix.org/conference/osdi24/presentation/zhong-yinmin) |
+
 ## Линии, которые пересекают календарь
 
 Календарный порядок скрывает причинные связи. Для архитектурного сравнения
@@ -109,6 +126,7 @@ Flamingo важен не просто как «модель с картинка�
 | Стоимость длинной последовательности | full attention → local attention → RetNet/RWKV/Mamba → гибриды Jamba/Kimi | асимптотика, состояние, качество дальних зависимостей и параллельность обучения |
 | Постобучение | fine-tuning → RLHF → preference optimization → RLVR/reasoning | источник сигнала, online/offline режим и отделимость от backbone |
 | Мультимодальность | CLIP → Flamingo/BLIP-2/LLaVA → native multimodal families | кодировщик, connector, место fusion и число токенов модальности |
+| Inference и serving | Triton/FlashAttention → Orca continuous batching → PagedAttention/vLLM → SGLang/RadixAttention → disaggregated prefill/decode | пропускная способность, TTFT, TPOT, занятость GPU, фрагментация и переиспользование KV-кэша |
 
 ## Границы датированных утверждений
 
