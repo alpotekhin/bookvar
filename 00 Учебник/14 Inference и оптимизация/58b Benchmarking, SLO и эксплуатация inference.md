@@ -286,3 +286,5 @@ throughput и goodput, ошибки/отмены, стоимость в GPU-hour
 - Zhong et al., [DistServe](https://www.usenix.org/conference/osdi24/presentation/zhong-yinmin), OSDI 2024 — TTFT/TPOT SLO, attainment и per-GPU goodput.
 - vLLM, [`vllm bench serve`](https://docs.vllm.ai/en/latest/cli/bench/serve.html) — официальный интерфейс измерения serving workload и определения доступных метрик.
 - vLLM, [Benchmarking Dashboard](https://docs.vllm.ai/en/latest/benchmarking/dashboard.html) — публикуемый подход к сравнению throughput и latency; конкретные результаты зависят от версии.
+
+**Предыдущая глава:** [[58a2 Раздельное обслуживание prefill и decode|Раздельное обслуживание prefill и decode]]
