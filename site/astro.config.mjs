@@ -21,6 +21,9 @@ export default defineConfig({
   site: 'https://alpotekhin.github.io',
   base: process.env.PUBLICATION_BASE_PATH || '/',
   output: 'static',
+  redirects: {
+    '/en/practice/causal-self-attention': '/practice/causal-self-attention'
+  },
   markdown: {
     processor: unified({
       remarkPlugins: [remarkMath, rejectNonAsciiMath],
@@ -31,7 +34,10 @@ export default defineConfig({
     starlight({
       title: 'Bookvar',
       defaultLocale: 'root',
-      locales: { root: { label: 'Русский', lang: 'ru' } },
+      locales: {
+        root: { label: 'Русский', lang: 'ru' },
+        en: { label: 'English', lang: 'en' }
+      },
       customCss: ['./src/styles/custom.css'],
       sidebar
     })

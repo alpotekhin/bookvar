@@ -30,26 +30,29 @@ interface Asset {
 
 interface SidebarEntry {
   label: string;
+  translations?: { en: string };
   slug?: string;
   items?: SidebarEntry[];
   collapsed?: boolean;
 }
 
-export function publicationHref(route: string): string {
-  const path = route.endsWith('/index')
-    ? `/${route.slice(0, -'/index'.length)}/`
-    : `/${route}/`;
+export function publicationHref(route: string, locale?: 'en'): string {
+  const localizedRoute = locale ? `${locale}/${route}` : route;
+  const path = localizedRoute.endsWith('/index')
+    ? `/${localizedRoute.slice(0, -'/index'.length)}/`
+    : `/${localizedRoute}/`;
   return `${publicationBasePath()}${path}`;
 }
 
 const REFERENCE_SIDEBAR_GROUPS = [
-  { label: 'Механизмы', includes: (route: string) => route.startsWith('reference/') },
+  { label: 'Механизмы', labelEn: 'Mechanisms', includes: (route: string) => route.startsWith('reference/') },
   {
     label: 'Модели и семейства',
+    labelEn: 'Models and families',
     includes: (route: string) => route.startsWith('models/') && route !== 'models/timeline'
   },
-  { label: 'Обзоры направлений', includes: (route: string) => route.startsWith('research/') },
-  { label: 'Хронология', includes: (route: string) => route === 'models/timeline' }
+  { label: 'Обзоры направлений', labelEn: 'Research overviews', includes: (route: string) => route.startsWith('research/') },
+  { label: 'Хронология', labelEn: 'Timeline', includes: (route: string) => route === 'models/timeline' }
 ] as const;
 
 const SIDEBAR_SECTION_ORDER = ['textbook', 'models', 'sources', 'practice', 'questions'] as const;
@@ -188,25 +191,42 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
   const parsed = await Promise.all(entries.map(async (entry) => {
     const sourcePath = contained(rootDir, entry.source, 'Source');
     const raw = await readFile(sourcePath, 'utf8');
-    return { entry, page: readPage(entry.source, raw) };
+    const page = readPage(entry.source, raw);
+    if (!entry.sourceEn) return { entry, page };
+    const sourceEnPath = contained(rootDir, entry.sourceEn, 'Source');
+    const rawEn = await readFile(sourceEnPath, 'utf8');
+    return { entry, page, pageEn: readPage(entry.sourceEn, rawEn) };
   }));
-  const registry = createRouteRegistry(parsed.map(({ entry, page }) => ({
-    sourcePath: entry.source,
-    route: publicationHref(entry.route),
-    title: page.title
-  })), { allowAmbiguousBasenames: true });
   const titles = new Map(parsed.map(({ entry, page }) => [entry.route, page.title]));
+  const titlesEn = new Map(parsed
+    .filter(({ pageEn }) => pageEn)
+    .map(({ entry, pageEn }) => [entry.route, pageEn!.title]));
   const statuses = new Map(parsed.map(({ entry, page }) => [entry.route, page.status]));
+  const translatedLabel = (labelEn?: string): Pick<SidebarEntry, 'translations'> =>
+    labelEn ? { translations: { en: labelEn } } : {};
   const sidebarItems = (items: PublicationSidebarItem[]): SidebarEntry[] => items.map((item) => 'route' in item
-    ? { label: item.label, slug: item.route }
-    : { label: item.label, collapsed: true, items: sidebarItems(item.items) });
+    ? {
+        label: item.label,
+        ...translatedLabel(item.labelEn ?? titlesEn.get(item.route)),
+        slug: item.route
+      }
+    : {
+        label: item.label,
+        ...translatedLabel(item.labelEn),
+        collapsed: true,
+        items: sidebarItems(item.items)
+      });
   const sidebar = [...manifest.sections]
     .sort((left, right) =>
       SIDEBAR_SECTION_ORDER.indexOf(left.id) - SIDEBAR_SECTION_ORDER.indexOf(right.id)
     )
     .map((section) => {
     if (section.sidebar) {
-      return { label: section.title, items: sidebarItems(section.sidebar) };
+      return {
+        label: section.title,
+        ...translatedLabel(section.titleEn),
+        items: sidebarItems(section.sidebar)
+      };
     }
     if (section.id === 'models') {
       const referencePages = manifest.sections
@@ -214,14 +234,17 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
         .flatMap((candidate) => candidate.pages);
       return {
         label: section.title,
+        ...translatedLabel(section.titleEn),
         items: REFERENCE_SIDEBAR_GROUPS.map((group) => ({
           label: group.label,
+          ...translatedLabel(group.labelEn),
           items: referencePages
             .filter((entry) => group.includes(entry.route)
               && visibleInSidebar(entry.route)
               && !['redirect', 'legacy'].includes(statuses.get(entry.route) ?? ''))
             .map((entry) => ({
               label: titles.get(entry.route)!,
+              ...translatedLabel(titlesEn.get(entry.route)),
               slug: entry.route
             }))
         }))
@@ -231,8 +254,10 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
     if (section.id !== 'sources') {
       return {
         label: section.title,
+        ...translatedLabel(section.titleEn),
         items: section.pages.filter((entry) => visibleInSidebar(entry.route) && statuses.get(entry.route) !== 'redirect').map((entry) => ({
           label: titles.get(entry.route)!,
+          ...translatedLabel(titlesEn.get(entry.route)),
           slug: entry.route
         }))
       };
@@ -240,19 +265,27 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
 
     return {
       label: section.title,
+      ...translatedLabel(section.titleEn),
       items: section.pages
         .filter((entry) => entry.route.startsWith('sources/')
           && visibleInSidebar(entry.route)
           && !['redirect', 'legacy'].includes(statuses.get(entry.route) ?? ''))
         .map((entry) => ({
           label: titles.get(entry.route)!,
+          ...translatedLabel(titlesEn.get(entry.route)),
           slug: entry.route
         }))
     };
   });
 
   const assetsByPublicPath = new Map<string, Asset>();
-  const preparedPages = parsed.map(({ entry, page }) => {
+  const localizedPages = parsed.flatMap(({ entry, page, pageEn }) => [
+    { entry, page, source: entry.source, locale: undefined },
+    ...(pageEn && entry.sourceEn
+      ? [{ entry, page: pageEn, source: entry.sourceEn, locale: 'en' as const }]
+      : [])
+  ]);
+  const preparedPages = localizedPages.map(({ entry, page, source, locale }) => {
     const prepared = prepareAssets(rootDir, page.body);
     for (const asset of prepared.assets) {
       const existing = assetsByPublicPath.get(asset.publicPath);
@@ -265,7 +298,7 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
       }
       assetsByPublicPath.set(asset.publicPath, asset);
     }
-    return { entry, page, prepared };
+    return { entry, page, source, locale, prepared };
   });
   for (const asset of assetsByPublicPath.values()) {
     try {
@@ -293,12 +326,37 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
     unresolved: string[];
     allowlisted: Array<{ target: string; reason: string }>;
   }> };
-  const headingsByRoute = new Map(preparedPages.map(({ entry, prepared }) => [
-    publicationHref(entry.route),
+  const registries = new Map<'root' | 'en', ReturnType<typeof createRouteRegistry>>([
+    ['root', createRouteRegistry(parsed.map(({ entry, page }) => ({
+      sourcePath: entry.source,
+      route: publicationHref(entry.route),
+      title: page.title
+    })), { allowAmbiguousBasenames: true })],
+    ['en', createRouteRegistry(parsed.flatMap(({ entry, page, pageEn }) => {
+      const localized = {
+        route: publicationHref(entry.route, 'en'),
+        title: pageEn?.title ?? page.title
+      };
+      return [
+        { sourcePath: entry.source, ...localized },
+        ...(entry.sourceEn ? [{ sourcePath: entry.sourceEn, ...localized }] : [])
+      ];
+    }), { allowAmbiguousBasenames: true })]
+  ]);
+  const headingsByRoute = new Map(preparedPages.map(({ entry, locale, prepared }) => [
+    publicationHref(entry.route, locale),
     parseMarkdownHeadings(prepared.markdown)
   ]));
+  for (const { entry, pageEn } of parsed) {
+    if (pageEn) continue;
+    headingsByRoute.set(
+      publicationHref(entry.route, 'en'),
+      headingsByRoute.get(publicationHref(entry.route)) ?? []
+    );
+  }
   const fragmentAnchors = new Map<string, Map<string, string>>();
-  for (const { entry, prepared } of preparedPages) {
+  for (const { entry, locale, prepared } of preparedPages) {
+    const registry = registries.get(locale ?? 'root')!;
     for (const match of prepared.markdown.matchAll(/!?\[\[([^\]\n]+)\]\]/g)) {
       const expression = match[1].split('|', 1)[0];
       const headingAt = expression.indexOf('#');
@@ -306,7 +364,9 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
       const target = expression.slice(0, headingAt);
       const heading = expression.slice(headingAt + 1);
       if (!heading) continue;
-      const route = target === '' ? publicationHref(entry.route) : registry.routeForWikiTarget(target);
+      const route = target === ''
+        ? publicationHref(entry.route, locale)
+        : registry.routeForWikiTarget(target);
       if (!route) continue;
       const exact = headingsByRoute.get(route)?.filter(
         (candidate) => candidate.normalized === normalizeObsidianHeading(heading)
@@ -321,8 +381,9 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
     }
   }
 
-  for (const { entry, page, prepared } of preparedPages) {
-    const currentRoute = publicationHref(entry.route);
+  for (const { entry, page, source, locale, prepared } of preparedPages) {
+    const registry = registries.get(locale ?? 'root')!;
+    const currentRoute = publicationHref(entry.route, locale);
     const pageRegistry = {
       routeForWikiTarget: registry.routeForWikiTarget,
       fragmentForWikiTarget(target: string, heading: string): string | undefined {
@@ -341,20 +402,21 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
     const unresolved = page.status === 'legacy' ? [] : converted.unresolved;
     const allowlisted = [...converted.allowlisted, ...legacyUnresolved];
     const markdown = removeLeadingSourceHeading(convertCallouts(converted.markdown));
-    const target = contained(outputDir, `${entry.route}.md`, 'Output');
+    const outputRoute = locale ? `${locale}/${entry.route}` : entry.route;
+    const target = contained(outputDir, `${outputRoute}.md`, 'Output');
     await mkdir(dirname(target), { recursive: true });
     const metadata: Record<string, string | Date> = {
       title: page.title,
       description: page.title,
-      slug: entry.route
+      slug: outputRoute
     };
     if (page.lastUpdated) metadata.lastUpdated = new Date(page.lastUpdated);
     await writeFile(target, matter.stringify(markdown, metadata), 'utf8');
 
     if (unresolved.length > 0 || allowlisted.length > 0) {
       report.pages.push({
-        source: entry.source,
-        route: entry.route,
+        source,
+        route: outputRoute,
         unresolved: [...new Set(unresolved)],
         allowlisted: [...new Map(allowlisted.map((item) => [item.target, item])).values()]
       });

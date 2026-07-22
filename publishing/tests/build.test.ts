@@ -130,6 +130,82 @@ describe('buildPublication', () => {
     ].join('\n'));
   });
 
+  it('emits English translations under en and lets Starlight fall back for untranslated pages', async () => {
+    const options = fixture('Русская страница A', '## Section\n\nРусская страница B');
+    write(join(options.rootDir, 'English', 'Page A.md'), [
+      '---',
+      'title: Page A in English',
+      'type: concept',
+      'status: stable',
+      '---',
+      'English page linking to [[Page B]] and [[Page B#Section]].'
+    ].join('\n'));
+    write(options.manifestPath, [
+      'site_title: Fixture',
+      'sections:',
+      '  - id: textbook',
+      '    title: Учебник',
+      '    title_en: Textbook',
+      '    pages:',
+      '      - source: Notes/Page A.md',
+      '        source_en: English/Page A.md',
+      '        route: nested/page-a',
+      '      - source: Notes/Page B.md',
+      '        route: page-b',
+      '    sidebar:',
+      '      - label: Первая страница',
+      '        route: nested/page-a',
+      '      - label: Вторая страница',
+      '        route: page-b'
+    ].join('\n'));
+
+    await buildPublication(options);
+
+    const translated = readFileSync(join(options.outputDir, 'en', 'nested', 'page-a.md'), 'utf8');
+    expect(translated).toContain('title: Page A in English');
+    expect(matter(translated).data.slug).toBe('en/nested/page-a');
+    expect(translated).toContain(`[Page B](${publicationBase}/en/page-b/)`);
+    expect(translated).toContain(`[Page B](${publicationBase}/en/page-b/#section)`);
+    expect(() => readFileSync(join(options.outputDir, 'en', 'page-b.md'), 'utf8')).toThrow();
+
+    const sidebarSource = readFileSync(
+      join(options.rootDir, 'site', 'generated-sidebar.mjs'),
+      'utf8'
+    );
+    const sidebar = JSON.parse(sidebarSource
+      .replace('// Generated from publishing/navigation.yml. Do not edit.\nexport default ', '')
+      .replace(/;\n$/, ''));
+    expect(sidebar).toEqual([{
+      label: 'Учебник',
+      translations: { en: 'Textbook' },
+      items: [
+        { label: 'Первая страница', translations: { en: 'Page A in English' }, slug: 'nested/page-a' },
+        { label: 'Вторая страница', slug: 'page-b' }
+      ]
+    }]);
+  });
+
+  it('resolves Russian canonical paths from English pages when the target is translated', async () => {
+    const options = fixture('Русская страница A', 'Русская страница B');
+    write(join(options.rootDir, 'English', 'Page A.md'), [
+      '---', 'title: Page A', 'type: concept', 'status: stable', '---',
+      'See [[Notes/Page B|translated B]].'
+    ].join('\n'));
+    write(join(options.rootDir, 'English', 'Page B.md'), [
+      '---', 'title: Page B', 'type: concept', 'status: stable', '---', 'English B.'
+    ].join('\n'));
+    write(options.manifestPath, [
+      'site_title: Fixture', 'sections:', '  - id: textbook', '    title: Textbook', '    pages:',
+      '      - source: Notes/Page A.md', '        source_en: English/Page A.md', '        route: page-a',
+      '      - source: Notes/Page B.md', '        source_en: English/Page B.md', '        route: page-b'
+    ].join('\n'));
+
+    await buildPublication(options);
+
+    expect(readFileSync(join(options.outputDir, 'en', 'page-a.md'), 'utf8'))
+      .toContain(`[translated B](${publicationBase}/en/page-b/)`);
+  });
+
   it('percent-encodes copied asset paths so Markdown renders them as images', async () => {
     const options = fixture('![[Assets/Figures With Spaces/chart one.svg]]');
     write(join(options.rootDir, 'Assets', 'Figures With Spaces', 'chart one.svg'), '<svg/>');
@@ -330,10 +406,10 @@ describe('buildPublication', () => {
       {
         label: 'Справочник',
         items: [
-          { label: 'Механизмы', items: [{ label: 'Reference', slug: 'reference/index' }] },
-          { label: 'Модели и семейства', items: [{ label: 'Models', slug: 'models/index' }] },
-          { label: 'Обзоры направлений', items: [{ label: 'Overview', slug: 'research/index' }] },
-          { label: 'Хронология', items: [{ label: 'Timeline', slug: 'models/timeline' }] }
+          { label: 'Механизмы', translations: { en: 'Mechanisms' }, items: [{ label: 'Reference', slug: 'reference/index' }] },
+          { label: 'Модели и семейства', translations: { en: 'Models and families' }, items: [{ label: 'Models', slug: 'models/index' }] },
+          { label: 'Обзоры направлений', translations: { en: 'Research overviews' }, items: [{ label: 'Overview', slug: 'research/index' }] },
+          { label: 'Хронология', translations: { en: 'Timeline' }, items: [{ label: 'Timeline', slug: 'models/timeline' }] }
         ]
       },
       { label: 'Источники', items: [{ label: 'Sources', slug: 'sources/index' }] }

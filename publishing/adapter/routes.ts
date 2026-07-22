@@ -12,14 +12,15 @@ export function createRouteRegistry(
   options: { allowAmbiguousBasenames?: boolean } = {}
 ): RouteRegistry {
   const routes = new Map<string, string>();
-  const basenames = new Set<string>();
+  const basenameRoutes = new Map<string, string>();
   const ambiguousBasenames = new Set<string>();
 
   for (const record of records) {
     const sourcePath = normalizeWikiTarget(record.sourcePath);
     const basename = sourcePath.slice(sourcePath.lastIndexOf('/') + 1);
 
-    if (basenames.has(basename)) {
+    const previousRoute = basenameRoutes.get(basename);
+    if (previousRoute !== undefined && previousRoute !== record.route) {
       if (!options.allowAmbiguousBasenames) {
         throw new Error(`Ambiguous basename: ${basename}`);
       }
@@ -27,7 +28,7 @@ export function createRouteRegistry(
       ambiguousBasenames.add(basename);
     }
 
-    basenames.add(basename);
+    basenameRoutes.set(basename, record.route);
     routes.set(sourcePath, record.route);
     if (!ambiguousBasenames.has(basename)) routes.set(basename, record.route);
   }

@@ -32,4 +32,15 @@ describe('route registry', () => {
     expect(registry.routeForWikiTarget('b/Index')).toBe('/b/');
     expect(registry.routeForWikiTarget('Index')).toBeUndefined();
   });
+
+  it('keeps aliases when localized source paths point to the same route', () => {
+    const registry = createRouteRegistry([
+      { sourcePath: '00 Учебник/14 Inference/55 Cache.md', route: '/en/textbook/cache/', title: 'Cache' },
+      { sourcePath: 'en/00 Textbook/14 Inference/55 Cache.md', route: '/en/textbook/cache/', title: 'Cache' }
+    ]);
+
+    expect(registry.routeForWikiTarget('00 Учебник/14 Inference/55 Cache')).toBe('/en/textbook/cache/');
+    expect(registry.routeForWikiTarget('en/00 Textbook/14 Inference/55 Cache')).toBe('/en/textbook/cache/');
+    expect(registry.routeForWikiTarget('55 Cache')).toBe('/en/textbook/cache/');
+  });
 });
