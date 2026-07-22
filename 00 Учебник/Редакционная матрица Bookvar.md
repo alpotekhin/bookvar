@@ -161,12 +161,21 @@ RMSNorm, SwiGLU и RoPE перед раздельным разбором мех�
 | 56 | FlashAttention | `14…/56 FlashAttention` | принято | HBM/SRAM traffic; tiling; exactness |
 | 57 | Quantization | `14…/57 Квантизация…` | принято | ranges; per-channel/group; weight/activation/KV |
 | 58 | Speculative decoding | `14…/58 Спекулятивное декодирование` | принято | draft/verify/accept loop; expected speedup |
+| 58.1 | Parallelism и collectives | `14…/58a Распределённый inference…` | в работе | DP/TP/PP/EP/SP/CP; collectives; topology |
+| 58.2 | Prefill/decode disaggregation | `14…/58a2 Раздельное обслуживание…` | в работе | interference; KV transfer; routing; backpressure |
+| 58.3 | Benchmarking и SLO | `14…/58b Benchmarking…` | принято | TTFT/TPOT/goodput; нагрузочные профили; эксплуатация |
 | 59 | Evaluation и contamination | `18…/59 Оценивание моделей…` | принято | evaluation stack; contamination; confidence intervals |
 | 60 | Embeddings и metric learning | `15…/60 Embeddings…` | принято | bi-encoder; contrastive geometry; hard negatives |
 | 61 | Retrieval | `15…/61 Retrieval…` | принято | indexing/query path; sparse/dense; ANN |
 | 62 | Reranking | `15…/62 Reranking…` | принято | retrieve-then-rerank; cross encoder; late interaction |
 | 63 | RAG | `15…/63 RAG — полный конвейер` | принято | ingestion; retrieval; generation; evaluation; operations |
-| 64 | Multimodal models | `16…/64 Мультимодальные модели` | принято | projector/cross-attention; resolution; audio/video |
+| 64 | ViT, CLIP и visual tokens | `16…/64 Мультимодальные модели` | в работе | patches; contrastive alignment; retrieval vs generation |
+| 64.1 | Connectors и fusion | `16…/64a Connectors и fusion` | в работе | projector; Q-Former; resampler; cross-attention |
+| 64.2 | Resolution и spatial positions | `16…/64b Разрешение…` | в работе | native resolution; tiling; compression; 2D/MRoPE |
+| 64.3 | Обучение VLM | `16…/64c Обучение VLM…` | в работе | alignment; instruction data; interleaved data; grounding |
+| 64.4 | Documents, OCR и grounding | `16…/64d Документы…` | в работе | reading order; coordinates; charts; document parsing |
+| 64.5 | Video, audio и omni | `16…/64e Видео…` | в работе | time sampling; temporal positions; streaming; speech output |
+| 64.6 | Evaluation и serving VLM | `16…/64f Оценивание…` | в работе | perception vs reasoning; hallucination; visual-token cost |
 | 65 | Tool use | `17…/65 Tool use…` | принято | schema → call → result; training data; errors |
 | 66 | Agent harness и context engineering | `17…/66 Agent harness…` | принято | harness layers; context assembly; execution loop |
 | 67 | Memory, planning и orchestration | `17…/67 Память…` | принято | memory types; planner/executor; multi-agent boundaries |
@@ -237,12 +246,21 @@ RMSNorm, SwiGLU и RoPE перед раздельным разбором мех�
 | 56 | `textbook/inference/flashattention` |
 | 57 | `textbook/inference/quantization` |
 | 58 | `textbook/inference/speculative-decoding` |
+| 58.1 | `textbook/inference/distributed-inference` |
+| 58.2 | `textbook/inference/disaggregated-serving` |
+| 58.3 | `textbook/inference/benchmarking-slo` |
 | 59 | `textbook/evaluation/models-contamination` |
 | 60 | `textbook/retrieval/embeddings-metric-learning` |
 | 61 | `textbook/retrieval/sparse-dense-hybrid` |
 | 62 | `textbook/retrieval/reranking` |
 | 63 | `textbook/rag/full-pipeline` |
 | 64 | `textbook/multimodal/models` |
+| 64.1 | `textbook/multimodal/connectors-fusion` |
+| 64.2 | `textbook/multimodal/visual-tokenization-resolution` |
+| 64.3 | `textbook/multimodal/training-data` |
+| 64.4 | `textbook/multimodal/documents-ocr-grounding` |
+| 64.5 | `textbook/multimodal/video-audio-omni` |
+| 64.6 | `textbook/multimodal/evaluation-serving` |
 | 65 | `textbook/agents/tool-use` |
 | 66 | `textbook/agents/harness-context-engineering` |
 | 67 | `textbook/agents/memory-planning-orchestration` |

@@ -56,6 +56,28 @@
   display: block;
 }
 
+.sl-markdown-content img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  margin-inline: auto;
+}
+
+/* Legacy reference pages can still contain Mermaid diagrams. Keep them
+   readable without letting wide SVG canvases stretch the article column. */
+.mermaid {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.mermaid svg {
+  min-width: 42rem;
+  max-width: none;
+  margin-inline: 0;
+}
+
 .landing-intro {
   display: grid;
   grid-template-columns: minmax(12rem, 0.8fr) minmax(18rem, 1.2fr);

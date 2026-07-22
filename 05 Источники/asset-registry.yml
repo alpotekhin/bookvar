@@ -4827,3 +4827,304 @@ assets:
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/inference-serving/triton/matmul-performance-fp8.png
+  - id: curated-vlm2026-vit-figure1-4cce6f5005a5
+    asset: 00 Учебник/Assets/Figures/curated/vlm-2026/vit-figure1-patch-sequence.png
+    author: Alexey Dosovitskiy et al.
+    source_url: https://arxiv.org/pdf/2010.11929
+    license: open paper material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/pdf/2010.11929
+    modifications: Figure 1 rendered from official paper and cropped without content changes
+    used_in: ["00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md"]
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/vlm-2026/2010.11929.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-vlm2026-clip-figure1-e415b6061173
+    asset: 00 Учебник/Assets/Figures/curated/vlm-2026/clip-figure1-training-and-zero-shot.png
+    author: Alec Radford et al.
+    source_url: https://arxiv.org/pdf/2103.00020
+    license: open paper material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/pdf/2103.00020
+    modifications: Figure 1 rendered from official paper and cropped without content changes
+    used_in: ["00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md"]
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/vlm-2026/2103.00020.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-vlm2026-llava-figure1-e01755d29e01
+    asset: 00 Учебник/Assets/Figures/curated/vlm-2026/llava-figure1-projector.png
+    author: Haotian Liu et al.
+    source_url: https://arxiv.org/pdf/2304.08485
+    license: open paper material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/pdf/2304.08485
+    modifications: Figure 1 rendered from official paper and cropped without content changes
+    used_in: ["00 Учебник/16 Multimodal Models/64a Connectors и fusion.md"]
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/vlm-2026/2304.08485.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-vlm2026-blip2-figure2-45912bff8b05
+    asset: 00 Учебник/Assets/Figures/curated/vlm-2026/blip2-figure2-qformer-objectives.png
+    author: Junnan Li et al.
+    source_url: https://arxiv.org/pdf/2301.12597
+    license: open paper material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/pdf/2301.12597
+    modifications: Figure 2 rendered from official paper and cropped without content changes
+    used_in: ["00 Учебник/16 Multimodal Models/64a Connectors и fusion.md"]
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/vlm-2026/2301.12597.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-vlm2026-flamingo-figure3-764e83c6d558
+    asset: 00 Учебник/Assets/Figures/curated/vlm-2026/flamingo-figure3-architecture.png
+    author: Jean-Baptiste Alayrac et al.
+    source_url: https://arxiv.org/pdf/2204.14198
+    license: open paper material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/pdf/2204.14198
+    modifications: Figure 3 rendered from official paper and cropped without content changes
+    used_in: ["00 Учебник/16 Multimodal Models/64a Connectors и fusion.md"]
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/vlm-2026/2204.14198.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-vlm2026-molmo-figure5-35fde220b09c
+    asset: 00 Учебник/Assets/Figures/curated/vlm-2026/molmo-figure5-image-tokenization.png
+    author: Matt Deitke et al.
+    source_url: https://arxiv.org/pdf/2409.17146
+    license: open paper material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/pdf/2409.17146
+    modifications: Figure 5 rendered from official paper and cropped without content changes
+    used_in: ["00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md"]
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/vlm-2026/2409.17146.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-vlm2026-internvl-figure2-e6f8f5eefb4c
+    asset: 00 Учебник/Assets/Figures/curated/vlm-2026/internvl25-figure2-dynamic-tiles.png
+    author: Weiyun Wang et al.
+    source_url: https://arxiv.org/pdf/2412.05271
+    license: open paper material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/pdf/2412.05271
+    modifications: Figure 2 rendered from official paper and cropped without content changes
+    used_in: ["00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md"]
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/vlm-2026/2412.05271.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-vlm2026-qwen2vl-figure3-0d8de4d9d399
+    asset: 00 Учебник/Assets/Figures/curated/vlm-2026/qwen2vl-figure3-mrope.png
+    author: Peng Wang et al.
+    source_url: https://arxiv.org/pdf/2409.12191
+    license: open paper material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/pdf/2409.12191
+    modifications: Figure 3 rendered from official paper and cropped without content changes
+    used_in: ["00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md"]
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/vlm-2026/2409.12191.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-vlm2026-internvl-figure4-55849a69a962
+    asset: 00 Учебник/Assets/Figures/curated/vlm-2026/internvl25-figure4-training-pipeline.png
+    author: Weiyun Wang et al.
+    source_url: https://arxiv.org/pdf/2412.05271
+    license: open paper material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/pdf/2412.05271
+    modifications: Figure 4 rendered from official paper and cropped without content changes
+    used_in: ["00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные.md"]
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/vlm-2026/2412.05271.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-vlm2026-molmo-figure1-0ad6faf38dfa
+    asset: 00 Учебник/Assets/Figures/curated/vlm-2026/molmo-figure1-data-and-capabilities.png
+    author: Matt Deitke et al.
+    source_url: https://arxiv.org/pdf/2409.17146
+    license: open paper material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/pdf/2409.17146
+    modifications: Figure 1 rendered from official paper and cropped without content changes
+    used_in: ["00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные.md"]
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/vlm-2026/2409.17146.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-vlm2026-qwen2vl-figure11-9e9e972693ee
+    asset: 00 Учебник/Assets/Figures/curated/vlm-2026/qwen2vl-figure11-dense-ocr.png
+    author: Peng Wang et al.
+    source_url: https://arxiv.org/pdf/2409.12191
+    license: open paper material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/pdf/2409.12191
+    modifications: Figure 11 rendered from official paper and cropped without content changes
+    used_in: ["00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding.md"]
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/vlm-2026/2409.12191.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-vlm2026-qwen25omni-figure2-6a1a5c7d1f45
+    asset: 00 Учебник/Assets/Figures/curated/vlm-2026/qwen25omni-figure2-thinker-talker.png
+    author: Jin Xu et al.
+    source_url: https://arxiv.org/pdf/2503.20215
+    license: open paper material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/pdf/2503.20215
+    modifications: Figure 2 rendered from official paper and cropped without content changes
+    used_in: ["00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md"]
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/vlm-2026/2503.20215.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-vlm2026-qwen25omni-figure3-a2a2295cd274
+    asset: 00 Учебник/Assets/Figures/curated/vlm-2026/qwen25omni-figure3-tmrope.png
+    author: Jin Xu et al.
+    source_url: https://arxiv.org/pdf/2503.20215
+    license: open paper material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/pdf/2503.20215
+    modifications: Figure 3 rendered from official paper and cropped without content changes
+    used_in: ["00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md"]
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/vlm-2026/2503.20215.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-vlm2026-cs231n-winoground-d72312341628
+    asset: 00 Учебник/Assets/Figures/curated/vlm-2026/cs231n-lecture16-winoground.png
+    author: Zane Durante and Stanford CS231n staff
+    source_url: https://cs231n.stanford.edu/slides/2025/lecture_16.pdf
+    license: open course material; reuse confirmed by repository owner
+    license_url: https://cs231n.stanford.edu/slides/2025/lecture_16.pdf
+    modifications: PDF page 48 rendered without content changes
+    used_in: ["00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM.md"]
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/vlm-2026/cs231n-lecture16.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-vlm2026-molmo-figure11-8af348635d94
+    asset: 00 Учебник/Assets/Figures/curated/vlm-2026/molmo-figure11-openness.png
+    author: Matt Deitke et al.
+    source_url: https://arxiv.org/pdf/2409.17146
+    license: open paper material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/pdf/2409.17146
+    modifications: Figure 11 rendered from official paper and cropped without content changes
+    used_in: ["00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM.md"]
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/vlm-2026/2409.17146.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-distributed-serving-nccl-allreduce-56ba8399a2d0
+    asset: 00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-allreduce.png
+    author: NVIDIA NCCL project
+    source_url: https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html
+    license: BSD-3-Clause
+    license_url: https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/index.html
+    modifications: copied without visual modification from the official NCCL documentation
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md
+      - en/00 Textbook/14 Inference and optimization/58a Distributed inference and disaggregated serving.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/distributed-serving-2026/nccl-allreduce.png
+  - id: curated-distributed-serving-nccl-allgather-93b7bf717381
+    asset: 00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-allgather.png
+    author: NVIDIA NCCL project
+    source_url: https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html
+    license: BSD-3-Clause
+    license_url: https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/index.html
+    modifications: copied without visual modification from the official NCCL documentation
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md
+      - en/00 Textbook/14 Inference and optimization/58a Distributed inference and disaggregated serving.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/distributed-serving-2026/nccl-allgather.png
+  - id: curated-distributed-serving-nccl-reducescatter-1a8a69eec211
+    asset: 00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-reducescatter.png
+    author: NVIDIA NCCL project
+    source_url: https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html
+    license: BSD-3-Clause
+    license_url: https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/index.html
+    modifications: copied without visual modification from the official NCCL documentation
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md
+      - en/00 Textbook/14 Inference and optimization/58a Distributed inference and disaggregated serving.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/distributed-serving-2026/nccl-reducescatter.png
+  - id: curated-distributed-serving-nccl-alltoall-664155da9f45
+    asset: 00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-alltoall.png
+    author: NVIDIA NCCL project
+    source_url: https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html
+    license: BSD-3-Clause
+    license_url: https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/index.html
+    modifications: copied without visual modification from the official NCCL documentation
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md
+      - en/00 Textbook/14 Inference and optimization/58a Distributed inference and disaggregated serving.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/distributed-serving-2026/nccl-alltoall.png
+  - id: curated-distributed-serving-megatron-cp-7df8af2f3f89
+    asset: 00 Учебник/Assets/Figures/curated/distributed-serving-2026/megatron-context-parallel-overview.png
+    author: NVIDIA Megatron Core project
+    source_url: https://docs.nvidia.com/megatron-core/developer-guide/latest/user-guide/features/context_parallel.html
+    license: Apache-2.0
+    license_url: https://github.com/NVIDIA/Megatron-LM/blob/main/LICENSE
+    modifications: copied without visual modification from the official Megatron Core documentation
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md
+      - en/00 Textbook/14 Inference and optimization/58a Distributed inference and disaggregated serving.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/distributed-serving-2026/megatron-context-parallel-overview.png
+  - id: curated-distributed-serving-distserve-fig2-a1cd348c25b8
+    asset: 00 Учебник/Assets/Figures/curated/distributed-serving-2026/distserve-fig2-prefill-decode-interference.png
+    author: Yinmin Zhong et al.
+    source_url: https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf
+    license: open paper material; reuse confirmed by repository owner
+    license_url: https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf
+    modifications: Figure 2 rendered from the official paper and cropped without content changes
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/58a2 Раздельное обслуживание prefill и decode.md
+      - en/00 Textbook/14 Inference and optimization/58a2 Disaggregated prefill and decode serving.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/osdi24-zhong-yinmin.pdf
+    derivation: copied from existing verified crop in curated assets
+  - id: curated-distributed-serving-distserve-fig6-4cc3ff623197
+    asset: 00 Учебник/Assets/Figures/curated/distributed-serving-2026/distserve-fig6-runtime-architecture.png
+    author: Yinmin Zhong et al.
+    source_url: https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf
+    license: open paper material; reuse confirmed by repository owner
+    license_url: https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf
+    modifications: Figure 6 rendered from the official paper and cropped without content changes
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/58a2 Раздельное обслуживание prefill и decode.md
+      - en/00 Textbook/14 Inference and optimization/58a2 Disaggregated prefill and decode serving.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/osdi24-zhong-yinmin.pdf
+    derivation: copied from existing verified crop in curated assets
+  - id: curated-distributed-serving-mooncake-figure1-aab8b1ed5d94
+    asset: 00 Учебник/Assets/Figures/curated/distributed-serving-2026/mooncake-figure1-architecture.png
+    author: Ruoyu Qin et al.
+    source_url: https://arxiv.org/abs/2407.00079
+    license: open paper material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2407.00079
+    modifications: Figure 1 rendered from page 2 of the official paper and cropped without content changes
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/58a2 Раздельное обслуживание prefill и decode.md
+      - en/00 Textbook/14 Inference and optimization/58a2 Disaggregated prefill and decode serving.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/distributed-serving-2026/mooncake.pdf
+    source_page: 2
+    derivation: pdf-page-render-crop
+  - id: curated-distributed-serving-dynamo-architecture-0dd67b67387c
+    asset: 00 Учебник/Assets/Figures/curated/distributed-serving-2026/dynamo-architecture.png
+    author: NVIDIA Dynamo project
+    source_url: https://github.com/ai-dynamo/dynamo/blob/main/docs/assets/img/architecture.png
+    license: Apache-2.0
+    license_url: https://github.com/ai-dynamo/dynamo/blob/main/LICENSE
+    modifications: copied without visual modification from the official repository
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/58a2 Раздельное обслуживание prefill и decode.md
+      - en/00 Textbook/14 Inference and optimization/58a2 Disaggregated prefill and decode serving.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/distributed-serving-2026/dynamo-architecture.png

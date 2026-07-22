@@ -148,6 +148,9 @@ sections:
       - source: 00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md
         source_en: en/00 Textbook/14 Inference and optimization/58a Distributed inference and disaggregated serving.md
         route: textbook/inference/distributed-inference
+      - source: 00 Учебник/14 Inference и оптимизация/58a2 Раздельное обслуживание prefill и decode.md
+        source_en: en/00 Textbook/14 Inference and optimization/58a2 Disaggregated prefill and decode serving.md
+        route: textbook/inference/disaggregated-serving
       - source: 00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md
         source_en: en/00 Textbook/14 Inference and optimization/58b Benchmarking SLOs and inference operations.md
         route: textbook/inference/benchmarking-slo
@@ -162,7 +165,26 @@ sections:
       - source: 00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер.md
         route: textbook/rag/full-pipeline
       - source: 00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md
+        source_en: en/00 Textbook/16 Multimodal Models/64 Multimodal models.md
         route: textbook/multimodal/models
+      - source: 00 Учебник/16 Multimodal Models/64a Connectors и fusion.md
+        source_en: en/00 Textbook/16 Multimodal Models/64a Connectors and fusion.md
+        route: textbook/multimodal/connectors-fusion
+      - source: 00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md
+        source_en: en/00 Textbook/16 Multimodal Models/64b Resolution, tiling, and spatial positions.md
+        route: textbook/multimodal/visual-tokenization-resolution
+      - source: 00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные.md
+        source_en: en/00 Textbook/16 Multimodal Models/64c Training VLMs — alignment, instruction tuning, and data.md
+        route: textbook/multimodal/training-data
+      - source: 00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding.md
+        source_en: en/00 Textbook/16 Multimodal Models/64d Documents, OCR, and visual grounding.md
+        route: textbook/multimodal/documents-ocr-grounding
+      - source: 00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md
+        source_en: en/00 Textbook/16 Multimodal Models/64e Video, audio, and omni models.md
+        route: textbook/multimodal/video-audio-omni
+      - source: 00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM.md
+        source_en: en/00 Textbook/16 Multimodal Models/64f Evaluation, failure modes, and VLM serving.md
+        route: textbook/multimodal/evaluation-serving
       - source: 00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md
         route: textbook/agents/tool-use
       - source: 00 Учебник/17 Tools и Agents/66 Agent harness и context engineering.md
@@ -335,11 +357,14 @@ sections:
           - label: 58. Спекулятивное декодирование
             label_en: 58. Speculative decoding
             route: textbook/inference/speculative-decoding
-          - label: 58.1 Распределённый inference и disaggregated serving
-            label_en: 58.1 Distributed inference and disaggregated serving
+          - label: 58.1 Параллелизм и коллективные операции
+            label_en: 58.1 Parallelism and collective operations
             route: textbook/inference/distributed-inference
-          - label: 58.2 Benchmarking, SLO и эксплуатация inference
-            label_en: 58.2 Benchmarking, SLOs, and inference operations
+          - label: 58.2 Раздельное обслуживание prefill и decode
+            label_en: 58.2 Disaggregated prefill and decode serving
+            route: textbook/inference/disaggregated-serving
+          - label: 58.3 Benchmarking, SLO и эксплуатация inference
+            label_en: 58.3 Benchmarking, SLOs, and inference operations
             route: textbook/inference/benchmarking-slo
           - label: 59. Оценивание моделей и контаминация
             route: textbook/evaluation/models-contamination
@@ -352,7 +377,26 @@ sections:
           - label: 63. RAG — полный конвейер
             route: textbook/rag/full-pipeline
           - label: 64. Мультимодальные модели
+            label_en: 64. Multimodal models
             route: textbook/multimodal/models
+          - label: 64.1 Connectors и fusion
+            label_en: 64.1 Connectors and fusion
+            route: textbook/multimodal/connectors-fusion
+          - label: 64.2 Разрешение, tiling и пространственные позиции
+            label_en: 64.2 Resolution, tiling, and spatial positions
+            route: textbook/multimodal/visual-tokenization-resolution
+          - label: 64.3 Обучение VLM — alignment, instruction tuning и данные
+            label_en: 64.3 Training VLMs — alignment, instruction tuning, and data
+            route: textbook/multimodal/training-data
+          - label: 64.4 Документы, OCR и visual grounding
+            label_en: 64.4 Documents, OCR, and visual grounding
+            route: textbook/multimodal/documents-ocr-grounding
+          - label: 64.5 Видео, аудио и omni-модели
+            label_en: 64.5 Video, audio, and omni models
+            route: textbook/multimodal/video-audio-omni
+          - label: 64.6 Оценивание, отказы и serving VLM
+            label_en: 64.6 Evaluation, failure modes, and VLM serving
+            route: textbook/multimodal/evaluation-serving
           - label: 65. Tool use — от вызова функции к действию
             route: textbook/agents/tool-use
           - label: 66. Agent harness и context engineering

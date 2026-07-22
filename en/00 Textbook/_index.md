@@ -54,8 +54,23 @@ edition. Read it in order:
 6. [[00 Учебник/14 Inference и оптимизация/56 FlashAttention|FlashAttention]]
 7. [[00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей|Quantizing language models]]
 8. [[00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование|Speculative decoding]]
-9. [[00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving|Distributed inference and disaggregated prefill/decode serving]]
-10. [[00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference|Benchmarking, SLOs, and LLM inference operations]]
+9. [[00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving|Parallelism and collective operations]]
+10. [[00 Учебник/14 Inference и оптимизация/58a2 Раздельное обслуживание prefill и decode|Disaggregated prefill and decode serving]]
+11. [[00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference|Benchmarking, SLOs, and LLM inference operations]]
+
+## Complete English multimodal sequence
+
+The multimodal route follows the data path from pixels to language-model
+states, then separates visual tokenization, training, grounded perception,
+temporal modalities, evaluation, and serving:
+
+1. [[00 Учебник/16 Multimodal Models/64 Мультимодальные модели|From ViT and CLIP to multimodal language models]]
+2. [[00 Учебник/16 Multimodal Models/64a Connectors и fusion|Connectors and fusion]]
+3. [[00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции|Resolution, tiling, and spatial positions]]
+4. [[00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные|Training VLMs: alignment, instruction tuning, and data]]
+5. [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding|Documents, OCR, and visual grounding]]
+6. [[00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели|Video, audio, and omni models]]
+7. [[00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM|Evaluation, failure modes, and VLM serving]]
 
 The English prose returns to the terminology used by the original papers and
 courses rather than translating Russian sentence structure literally. Claims

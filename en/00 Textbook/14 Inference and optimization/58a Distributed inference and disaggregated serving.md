@@ -1,271 +1,338 @@
 ---
-title: "Distributed inference and disaggregated prefill/decode serving"
+title: "Parallelism and collective communication in LLM inference"
 type: textbook-chapter
 status: canonical
 locale: en
 translation_of: "00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md"
-last_updated: 2026-07-22
-last_verified: 2026-07-22
+last_updated: 2026-07-23
+last_verified: 2026-07-23
 primary_sources:
-  - https://cs336.stanford.edu/spring2025/
-  - https://www.usenix.org/conference/osdi24/presentation/zhong-yinmin
+  - https://jax-ml.github.io/scaling-book/sharding/
+  - https://jax-ml.github.io/scaling-book/inference/
+  - https://arxiv.org/abs/1909.08053
+  - https://arxiv.org/abs/2104.04473
   - https://docs.nvidia.com/megatron-core/developer-guide/latest/user-guide/parallelism-guide.html
+  - https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html
 ---
 
-# Distributed inference and disaggregated prefill/decode serving
+# Parallelism and collective communication in LLM inference
 
-A single accelerator is a natural boundary for a small model, but not for one
-whose weights and KV cache exceed device memory, nor for a service handling
-thousands of independent requests. Distributing inference across GPUs solves two
-different problems. One is to **place and execute a single model instance** by
-partitioning its computation across devices. The other is to **increase service
-capacity** by running multiple instances and distributing requests among them.
-These goals must not be conflated: a scheme that reduces the latency of one
-forward pass may increase per-request cost through communication, while
-replication can scale request throughput without helping a model that does not
-fit on one GPU.
+Distributed inference is needed for two different reasons. A single model
+instance may not fit in one accelerator's memory, or its latency may be too high;
+one request must then be computed by several GPUs. Alternatively, the model may
+fit comfortably on one device while one instance cannot sustain the incoming
+request rate. In that case, the service runs independent replicas and assigns
+whole requests to them. Both designs use multiple GPUs, but they move different
+data, depend on different links, and affect single-user latency differently.
 
-[Stanford CS336 Lecture 10](https://cs336.stanford.edu/spring2025/) begins with
-the distinction between the two phases of generation. During **prefill**, all
-prompt tokens are processed in parallel, and the large matrix multiplications
-usually make good use of GPU compute units. During **decode**, each request
-produces only one new token per step: the model parameters must be read again,
-while arithmetic intensity is much lower. The phases therefore differ not only
-in duration but also in how resources should be allocated.
+This chapter therefore asks one question throughout: **which tensor is sharded,
+where does each shard live before an operation, and where must the result live
+after it?** The acronyms DP, TP, PP, SP, CP, and EP become useful only after that
+question has an answer. Tracking tensor placement explains why a system needs
+all-reduce, all-gather, reduce-scatter, all-to-all, or point-to-point transfers;
+why tensor-parallel ranks usually stay inside an NVLink domain; and why a layout
+that works well for prefill may perform poorly during decode.
 
-## Four principal forms of parallelism
+## From one Transformer block to a GPU group
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-multiprocexecutor.png]]
-
-*The transition from a local worker to a multiprocess executor: each process
-owns a device and participates in the model executor's collective operations.
-Source: Aleksa Gordić, [Inside vLLM](https://www.aleksagordic.com/blog/vllm),
-[original image](https://github.com/vllm-project/vllm-project.github.io/blob/main/assets/figures/2025-vllm-anatomy/multiprocexecutor.png).*
-
-### Model replication: data parallelism
-
-With **data parallelism (DP)**, every GPU group holds a complete model instance,
-and a router assigns requests to replicas. Unlike training, inference requires
-no gradient exchange: replicas can serve requests independently. DP can
-therefore increase the maximum request rate almost linearly until an external
-component—tokenization, networking, weight storage, or load balancing—becomes
-the next bottleneck.
-
-The cost is a full copy of the weights and runtime memory at every replica. DP
-does not reduce the memory required by one instance and does little for the
-latency of one request. On the other hand, one replica can usually fail without
-stopping the others, and each can build continuous batches independently. For a
-model that fits on one GPU, this is the simplest way to raise throughput.
-
-### Partitioning operations within a layer: tensor parallelism
-
-**Tensor parallelism (TP)** partitions the large matrices of a layer across
-GPUs. Different devices may, for example, store different columns of a
-projection; each computes its part before a collective operation combines the
-partial results. DistServe calls this intra-operator parallelism.
-
-TP reduces per-GPU weight memory and can shorten a large matrix multiplication,
-but almost every Transformer block invokes a collective such as `all-reduce`,
-`reduce-scatter`, or `all-gather`. It is consequently sensitive to interconnect
-bandwidth and latency. TP is often effective within an NVLink/NVSwitch node,
-whereas its benefit may disappear across a slower network. A wider TP degree
-also leaves less work on each device, eventually producing kernels too small to
-use the GPU efficiently. Maximum TP is thus not an objective: the degree is a
-constraint chosen from memory, latency, and topology.
-
-### Partitioning the model by depth: pipeline parallelism
-
-**Pipeline parallelism (PP)** places consecutive groups of layers on different
-devices. Stages exchange activations rather than partial results from every
-matrix operation; DistServe calls this inter-operator parallelism. PP can place
-a very deep model with fewer frequent collectives than TP, but an individual
-request still traverses the stages sequentially.
-
-Throughput emerges when stages process different microbatches concurrently. If
-stage times differ, faster stages wait for the slowest, creating a **pipeline
-bubble**. Prefill microbatches differ in input-token count, while the effective
-decode batch changes as requests finish, so equal layer counts do not guarantee
-balanced load. PP generally adds activation-transfer latency to one pass, but
-can raise rate capacity once the pipeline is full.
-
-### Partitioning experts: expert parallelism
-
-In a mixture-of-experts model, **expert parallelism (EP)** assigns different
-experts to different GPUs. The router selects experts per token, after which an
-all-to-all sends tokens to their owners and returns the results. Unlike TP, the
-communication volume depends on routing and load balance. If a few popular
-experts receive disproportionate traffic, other GPUs idle while the overloaded
-experts determine layer latency.
-
-The [Megatron Core Parallelism Strategies Guide](https://docs.nvidia.com/megatron-core/developer-guide/latest/user-guide/parallelism-guide.html)
-shows that TP, PP, DP, and EP are composable. A 64-GPU allocation might contain
-several replicas, each using TP within a node, PP across layer groups, and EP for
-MoE blocks. The product of the parallel degrees determines the distributed
-instance size, though communication groups can overlap. Inference configurations
-must be evaluated along the actual data path, not merely by whether the weights
-fit.
-
-### Long sequences as a separate partitioning axis
-
-For very long contexts, attention memory and computation can be partitioned
-along the sequence dimension. Libraries use *sequence parallelism* and *context
-parallelism* for related but non-identical schemes: some shard activations among
-tensor-parallel ranks; others divide the context tokens themselves and exchange
-K/V blocks. During prefill this can make an otherwise unplaceable input fit.
-The decode benefit is less direct: the query has one position while the stored
-KV cache is distributed, so partial attention results still have to be combined
-at every token.
-
-This axis is justified when context length, rather than weights, dominates
-memory. It should not be layered automatically on TP and PP: another
-communication dimension may add more latency than it saves in computation. A
-report should state exactly what is partitioned—parameters, layers, experts,
-prefill tokens, or the decode KV cache—because “parallelism” alone says nothing
-about the data path.
-
-## Communication determines the useful configuration
-
-A distributed pass has a hard lower bound: it cannot finish before its required
-communication. TP exchanges partial activations in nearly every layer; PP sends
-full activations at stage boundaries; EP moves router-selected tokens twice; DP
-normally exchanges only control data among otherwise independent replicas.
-These patterns map differently onto cluster topology.
-
-A practical rule is to keep the most frequent synchronous collectives within
-the fastest communication domain. TP is commonly confined to one
-NVLink/NVSwitch node; PP or DP may cross nodes; EP should avoid sending
-all-to-all traffic through congested network tiers. This is not universal: long
-prefill supplies enough computation to hide some communication, whereas the
-small decode step is more exposed to every collective's latency.
-
-## Why colocated prefill and decode interfere
-
-A conventional serving engine mixes new prefill work with ongoing decode work.
-This can improve average GPU utilization, but the phases then perturb each
-other's user-facing latency. A long prefill delays the next token of an existing
-response; a large decode batch delays a new request's prefill and first token.
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-advanced/distributed-benchmarking/distserve-fig2-prefill-decode-interference.png]]
-
-*Figure 2 from Yinmin Zhong et al., [DistServe: Disaggregating Prefill and
-Decoding for Goodput-optimized Large Language Model Serving](https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf),
-OSDI 2024. For a 13B model, the authors measure batch execution time: adding one
-prefill to a decode batch slows decode, while decode work lengthens prefill; the
-effect is stronger for a 1,024-token input. This image is cropped from the
-original vector figure in the public USENIX PDF.*
-
-Chunked prefill limits the longest blocking unit but does not remove competition
-for memory and compute units. Decode priority smooths responses already in
-progress at the cost of queueing new requests; prefill priority reverses the
-trade-off. A shared TP/PP configuration also has to compromise between phases
-whose best batch sizes and parallel degrees differ.
-
-## Separate prefill and decode pools
-
-**Prefill/decode disaggregation** assigns the phases to different model
-instances. The prefill pool receives the prompt, constructs its KV cache, and
-produces the first token. Attention state is then transferred to a decode pool,
-which continues generation. Each pool can scale independently: prefill against
-the TTFT objective, decode against TPOT and the number of live sequences.
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-advanced/distributed-benchmarking/distserve-fig6-runtime-architecture.png]]
-
-*Figure 6 from [DistServe](https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf).
-The controller sends a request to a prefill instance, after which its KV cache
-is transferred to a decode instance. This crop comes from the vector figure in
-the USENIX PDF; the architecture and labels belong to the paper's authors.*
-
-Disaggregation removes direct phase interference but adds a mandatory segment
-to the critical path: **KV transfer**. Every layer's K and V tensors for every
-input token must move. For $L$ layers, $n_{kv}$ KV heads, head dimension $d_h$,
-prompt length $S$, and $b$ bytes per element, the volume is approximately
+Let activations be $X\in\mathbb{R}^{B\times D}$, where $B$ is the number of
+tokens processed together and $D$ is model width. A linear layer computes
+$Y=XW$. On one GPU, $X$, $W$, and $Y$ are local. If $W$ does not fit, or the
+matrix multiplication must be accelerated, it can be partitioned by columns:
 
 $$
-M_{KV}=2L S n_{kv}d_h b.
+W=[W_1\;W_2\;\ldots\;W_p],\qquad
+Y=[XW_1\;XW_2\;\ldots\;XW_p].
 $$
 
-The factor of two accounts for K and V. GQA and MQA reduce $n_{kv}$, lowering
-both decode memory and transfer cost. With long contexts, KV transfer can
-consume a material fraction of TTFT; a fast network does not make it free.
+Each of $p$ ranks receives the complete $X$, stores only $W_i$, and produces a
+fragment of $Y$. No communication is required while the next operation accepts
+that layout. If it requires a complete $Y$, the fragments must be gathered.
+Partitioning the contracting dimension instead makes every rank produce a
+partial sum, so a reduction is required. Most communication in a distributed
+Transformer can be derived from these two matrix-multiplication cases.
 
-DistServe exploits a useful property of pipeline parallelism: a layer's KV is
-needed by its corresponding decode stage, not by every GPU. It colocates
-matching prefill and decode segments within a node so the transfer traverses
-NVLink rather than the inter-node network. Under bursts, a decode instance
-pulls a ready cache from the prefill instance; prefill memory acts as a buffer
-and prevents a push storm from exhausting decode memory.
+[How to Scale Your Model](https://jax-ml.github.io/scaling-book/sharding/)
+uses a particularly clear discipline: write both the logical tensor dimensions
+and the axes of the device mesh along which they are partitioned. A tensor may be
+replicated or sharded over batch, hidden width, sequence, heads, or experts. Two
+tensors with the same global shape can therefore have entirely different
+physical layouts and communication requirements.
 
-## Choosing resources for each phase
+## Collective operations as layout transformations
 
-Prefill often benefits from TP: a long matrix uses the compute units well, and
-shorter execution directly improves TTFT. Once the GPU is saturated, however,
-larger batches merely lengthen the queue. PP can increase rate capacity when its
-stages remain occupied, though it raises the latency of an individual prompt.
+A collective is called coherently by every rank in a process group. It is not an
+incidental network request after the computation; it is part of the distributed
+algorithm. Until the collective completes, the next layer often does not have a
+mathematically valid input.
 
-Decode must retain many KV caches while producing tokens at a steady cadence.
-Replication raises aggregate capacity; TP is needed when the model or cache does
-not fit, or when one step exceeds the TPOT budget. Yet overly wide TP adds
-synchronization at every token. MoE decode may also require EP, which saves
-expert memory but makes all-to-all traffic and router imbalance operational
-concerns.
+### AllGather: shards become complete copies
 
-There is consequently no universal rule such as “TP=8 for a large model.” The
-design jointly selects prefill and decode replica counts, TP/PP/EP within each
-pool, placement on the network topology, and routing policy. DistServe derives
-this plan from prompt and output-duration profiles, arrival rate, and the two
-SLO constraints. A workload change requires replanning: a configuration tuned
-for short chat may be inefficient for long-document summarization.
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-allgather.png]]
 
-## Routing, queues, and backpressure
+*Official NCCL diagram. Every rank contributes one fragment and receives the
+concatenation in rank order. Source: NVIDIA,
+[Collective Operations](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html),
+from the BSD-licensed NCCL documentation.*
 
-Once the physical layout is fixed, online scheduling remains. A naive router
-sends a request to the prefill replica with the shortest queue and its finished
-cache to the least busy decode replica. Request counts are a poor proxy for work,
-however: one 32K-token prompt can cost more than dozens of short ones, and a
-long-context decode request consumes more KV memory. At minimum, a scheduler
-should consider queued token counts, free cache blocks, and request age. PP also
-depends on microbatch composition: prompts with similar execution times reduce
-pipeline bubbles.
+If rank $i$ holds $x_i$, every rank holds
+$[x_0,x_1,\ldots,x_{p-1}]$ after AllGather. The local output is $p$ times the
+size of one shard. AllGather is needed when the next operator cannot consume the
+partitioned representation. Sequence parallelism, for example, can keep
+LayerNorm activations split by sequence and restore the layout expected by a
+tensor-parallel linear layer only when necessary.
 
-Disaggregation turns two local queues into a coupled producer–consumer system.
-If prefill creates KV caches faster than decode consumes them, intermediate
-memory fills even while prefill compute is idle. Continuing admission merely
-moves the queue from the scheduler into HBM. **Backpressure** is required:
-prefill must slow admission when decode lacks memory or network capacity.
-Otherwise a brief burst can trigger eviction, repeated prefill, and still more
-load.
+### ReduceScatter: sum and keep the result sharded
 
-Scaling the decode pool also raises the question of whether an existing cache
-can be reassigned. Transfer is valid only when model revision, KV format,
-parallel layout, and positional configuration match; sharing a model name is
-not enough. Under TP/PP, the cache is sharded by ranks and layers, so the router
-must know both the replica address and its shard mapping. Changing TP degree at
-runtime usually requires repartitioning the state or running prefill again.
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-reducescatter.png]]
 
-These constraints explain why disaggregated serving is not simply two
-Deployments and a network call. It is one control plane for queues, memory, and
-state compatibility. Its stability must be tested under long prompts, bursty
-traffic, network slowdown, and decode-worker loss—not only a uniform synthetic
-stream.
+*ReduceScatter reduces corresponding input elements and leaves one result shard
+on each rank. Source: official NCCL documentation.*
 
-## When disaggregation is worthwhile
+Suppose each rank computed a partial output $y_i$ with the same logical shape and
+the complete answer is $y=\sum_i y_i$. If the following operator accepts a
+partitioned $y$, replicating the whole sum is wasteful. ReduceScatter performs
+the reduction while retaining only $1/p$ of the result locally. It reduces
+activation memory and often forms a more efficient pair with a later AllGather
+than an unconditional AllReduce.
 
-Disaggregation is most useful for sustained traffic with distinct phase compute
-profiles and independent, strict TTFT and TPOT objectives. It permits separate
-scaling and latency isolation. A small one- or two-GPU deployment, short prompts,
-or sparse requests may lose more to duplicated weights and KV transfer than it
-gains from isolation. A decode-instance failure also affects the prefill results
-assigned to it, requiring rerouting, bounded queues, and memory controls.
+### AllReduce: the complete reduction on every rank
 
-The right comparison is not raw kernel tokens/s. Measure the share of requests
-meeting TTFT and TPOT simultaneously; include every GPU in both pools, KV network
-traffic, replica memory, and behavior under bursts. DistServe calls the resulting
-measure *per-GPU goodput*: SLO-compliant requests served per second per allocated
-GPU.
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-allreduce.png]]
+
+*AllReduce returns the reduced value to every rank. Conceptually, it can be
+decomposed into ReduceScatter followed by AllGather. Source: official NCCL
+documentation.*
+
+Classic Megatron tensor parallelism uses AllReduce after a row-parallel
+projection: ranks calculate partial sums over a partitioned contracting
+dimension, while the following residual path expects the same complete
+activation on every rank. A rough ring model for an $M$-byte message on $p$
+ranks is
+
+$$
+T_{AR}\approx 2(p-1)\alpha+2\frac{p-1}{p}\frac{M}{\beta},
+$$
+
+where $\alpha$ is per-step latency and $\beta$ is effective bandwidth. NCCL uses
+topology- and size-dependent algorithms, so this is not a performance predictor.
+It does expose the two limiting regimes: small decode activations are sensitive
+to latency, whereas larger prefill messages are more bandwidth-sensitive.
+
+### AllToAll: a personalized permutation among ranks
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-alltoall.png]]
+
+*In AllToAll, each rank sends a different fragment to every destination and
+receives a different fragment from every source. Source: official NCCL
+documentation.*
+
+AllToAll is not a reduction. It changes ownership. In a mixture-of-experts
+layer, the router assigns each token to one or more experts; tokens initially
+held by different ranks must move to the ranks that own those experts. A second
+AllToAll returns the outputs. Expert parallelism therefore stresses bisection
+bandwidth and is more sensitive to token imbalance than dense tensor
+parallelism.
+
+Pipeline parallelism, by contrast, mostly uses point-to-point send/receive
+between adjacent stages. A message follows a specific pipeline edge rather than
+being exchanged by all ranks, and its cost appears as transfer latency and idle
+time when stages are imbalanced.
+
+## Data parallelism: independent serving replicas
+
+During training, data parallelism means identical weights, different
+mini-batches, and gradient synchronization. Ordinary inference has no gradients.
+It is clearer to think in terms of **request-level replication**: each replica
+contains a complete executable model instance, and a router assigns entire
+requests to replicas.
+
+DP increases aggregate request capacity almost linearly until a shared frontend,
+tokenizer, storage layer, or network becomes the next bottleneck. It neither
+reduces memory required by one instance nor accelerates one forward pass. Its
+advantages are operational: replicas do not synchronize at every layer, build
+continuous batches independently, and provide natural failure boundaries.
+
+Replicas are not completely stateless. Each owns a KV cache and a local prefix
+cache. Routing solely to the shortest queue balances compute but may destroy
+prefix locality; routing solely to the largest cache match creates hot replicas.
+In MoE deployments, DP can also denote specialized groups where attention is
+replicated while experts are partitioned. A statement such as `DP=8` is therefore
+incomplete without the model placement and request-routing policy.
+
+## Tensor parallelism: partitioning a layer's matrices
+
+Megatron-LM uses a conjugate pair of column- and row-parallel linear layers. The
+first MLP matrix is split along its output dimension. GeLU or SwiGLU is applied
+locally because each fragment is independent. The second matrix is split along
+its input dimension; ranks produce partial sums that are then reduced. Q, K, and
+V can similarly be split by heads, followed by a row-parallel output projection.
+
+The arrangement is attractive because no communication is needed between the
+two large MLP matrix multiplications, and synchronization occurs at a few known
+points in each block. Those points nevertheless repeat for every Transformer
+layer. If TP crosses a slow inter-node fabric, tens of collectives accumulate in
+every generated token.
+
+Prefill presents many tokens to each matrix multiplication. Kernels are large,
+and some communication can be overlapped with useful work. Decode contributes
+one token per active sequence. Its local GEMMs are shorter, while collective
+latency remains. On the other hand, TP distributes weights across several HBM
+channels and can reduce the lower bound imposed by reading parameters. Decode
+can therefore benefit from wider TP even while memory-bound, but only until
+communication costs more than the saved HBM traffic.
+
+A practical TP choice begins with three measurements:
+
+1. whether weights, runtime buffers, and the target KV budget fit;
+2. whether measured step latency improves from TP1 to TP2, TP4, and TP8;
+3. whether all TP ranks remain in a fast NVLink/NVSwitch domain.
+
+Cost must also be considered. TP8 may minimize latency but deliver fewer tokens
+per second per GPU than two TP4 replicas. There is no universally optimal TP
+degree independent of workload and SLO.
+
+## Pipeline parallelism: partitioning depth
+
+PP places consecutive layer groups on different stages. Activations travel from
+stage 0 to stage 1 and onward. Unlike TP, most layers need no all-rank collective;
+communication occurs at stage boundaries. This can place a model that exceeds
+one node and can use slower inter-node links for relatively compact activations.
+
+A single request is not parallel across depth: its next stage waits for the
+previous stage. Throughput appears when several microbatches occupy different
+stages simultaneously. During pipeline fill and drain, some devices are idle—the
+pipeline bubble. In online inference, bubble size depends on variable prompt
+lengths, sequences leaving the decode batch, and unequal layer costs, not merely
+on the number of stages.
+
+An equal number of layers per stage does not guarantee balance. Embeddings and
+the output head have different cost, MoE layers depend on routing, and attention
+cost changes with context. Megatron Core therefore supports custom layouts and
+virtual stages. Serving layouts must be tested on the target input/output length
+distribution rather than only uniform synthetic sequences.
+
+PP is commonly added when a model still does not fit under a sensible
+intra-node TP degree. A TP8×PP4 instance has four stage groups, each implemented
+by eight GPUs. A request crosses four stages, and the layers within each stage
+still execute TP collectives.
+
+## Sequence parallelism and context parallelism are not synonyms
+
+Library terminology varies, but Megatron uses these methods for distinct
+purposes. **Sequence parallelism (SP)** complements TP: operators such as
+LayerNorm and dropout, which do not couple tokens, operate on a partitioned
+sequence dimension. Paired ReduceScatter and AllGather operations avoid keeping
+all relevant activations replicated.
+
+**Context parallelism (CP)** partitions the network input and all activations by
+sequence, including attention. Linear layers remain local, but each query must
+see keys and values from its permitted causal prefix. Ranks must exchange KV
+blocks or combine partial attention results.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/megatron-context-parallel-overview.png]]
+
+*A Transformer layer under TP2×CP2. Communication around attention belongs to
+CP; communication around linear blocks belongs to TP. AG and RS denote AllGather
+and ReduceScatter. Source: NVIDIA,
+[Megatron Core Context Parallelism](https://docs.nvidia.com/megatron-core/developer-guide/latest/user-guide/features/context_parallel.html),
+Figure 1.*
+
+For long prefill, CP reduces per-rank activation memory and distributes very long
+contexts. During decode, the new query has sequence length one while the historic
+KV cache is long. Query distribution must be distinguished from KV sharding: KV
+can be partitioned by heads, batch, or context, but partial attention outputs
+still need to be combined at every token. CP is not a free decode acceleration
+and is especially sensitive to inter-rank latency.
+
+## Expert parallelism: parameters stay, tokens move
+
+A dense MLP applies one parameter set to every token. An MoE has $E$ experts and
+a router typically chooses $k\ll E$ of them per token. EP partitions experts to
+avoid replicating every parameter. Each MoE layer then performs:
+
+1. routing to expert indices and weights;
+2. grouping tokens by destination;
+3. AllToAll dispatch to expert owners;
+4. local grouped GEMMs;
+5. a reverse AllToAll;
+6. restoration of token order and weighted top-k combination.
+
+Compute is determined by activated parameters, capacity by all resident experts,
+and communication by routed tokens. These are different quantities. Average
+balance does not guarantee low tail latency: one overloaded expert delays the
+collective group. Capacity factor, padding or token dropping, expert replication,
+and Expert Parallel Load Balancing alter quality, memory, and latency and must be
+reported in a benchmark.
+
+EP also composes with TP. If each expert is itself tensor-parallel, the system
+first dispatches tokens to an expert group and then runs collectives inside that
+group. DeepSeek-style deployments may combine EP, expert TP, attention DP, and
+PP. The product of degrees is not a sufficient network description; readers need
+a rank map and the sequence of collectives in dense and MoE layers.
+
+## Topology turns an algorithm into performance
+
+Data moves through several domains: HBM inside a GPU, PCIe, NVLink/NVSwitch
+inside a server, and InfiniBand or RoCE between servers. Their bandwidth and
+latency differ dramatically. NUMA placement, NIC count, leaf-spine
+oversubscription, and NCCL's actual route matter as much as the advertised link.
+
+Frequent synchronous collectives should occupy the fastest domain. This leads to
+a useful, non-universal rule of thumb:
+
+- keep TP inside an NVLink/NVSwitch node;
+- place EP within a high-bisection-bandwidth domain;
+- allow PP to cross nodes when activation transfers are modest;
+- place independent DP replicas in separate network or failure domains.
+
+The workload can reverse a simple rule. Long prefill has large GEMMs and may hide
+communication; short decode steps expose every synchronization. Large messages
+are bandwidth-bound, while small messages are governed by latency and launch
+overhead. Naming the interconnect is not a substitute for benchmarking the
+collective message sizes and process groups used by the model.
+
+A useful diagnostic order is: establish the single-GPU kernel and HBM roofline;
+microbenchmark the required collectives; inspect layer timelines; only then run
+end-to-end serving. Low GPU compute utilization does not prove insufficient
+traffic. A rank may be waiting for a collective, a remote expert, or the next
+pipeline stage.
+
+## Choosing a DP×TP×PP×CP×EP composition
+
+Start with the smallest group that fits weights and a realistic KV budget. For a
+dense model, use intra-node TP first and add PP if required. Turn remaining GPUs
+into independent service replicas. Add CP only when long-context memory or
+latency demands it. MoE architecture requires experts, but EP degree and expert
+placement remain engineering choices.
+
+For every candidate, record which weights are replicated or sharded, where
+activations and KV live, the collective sequence of dense and MoE layers, node
+and NIC boundaries, maximum resident KV tokens, and measured TTFT, ITL,
+throughput, and tokens per second per GPU.
+
+“32 GPUs” is almost meaningless. “Four replicas, each TP8, with every TP group
+inside one NVSwitch node and a cache-aware request router” makes the data path
+understandable. An MoE deployment may require a still richer statement:
+attention DP4, EP32, expert TP1, redundant shared experts, and a distinct
+communication group for token dispatch.
+
+Parallelism describes how model instances use accelerators and interconnects. It
+does not decide whether prefill and decode belong in the same instance. They can
+share one distributed replica or run in independently scaled pools with
+different layouts. The latter introduces KV transfer between instances and turns
+routing, backpressure, and autoscaling into coupled problems. That is the subject
+of the next chapter.
 
 ## Sources and further reading
 
-- Stanford CS336, [Lecture 10: Inference](https://cs336.stanford.edu/spring2025/) — the prefill/decode distinction, arithmetic intensity, and serving workloads.
-- Zhong et al., [DistServe](https://www.usenix.org/conference/osdi24/presentation/zhong-yinmin), OSDI 2024 — interference, independent resource allocation, placement, and KV transfer.
-- NVIDIA, [Megatron Core Parallelism Strategies Guide](https://docs.nvidia.com/megatron-core/developer-guide/latest/user-guide/parallelism-guide.html) — definitions and composition of DP, TP, PP, EP, and context parallelism.
-- Shoeybi et al., [Megatron-LM](https://arxiv.org/abs/1909.08053) — the original tensor-parallel partitioning of Transformer layers.
+- Austin et al., [Sharded Matrices](https://jax-ml.github.io/scaling-book/sharding/) — deriving collectives from distributed tensor layouts.
+- Austin et al., [All About Transformer Inference](https://jax-ml.github.io/scaling-book/inference/) — roofline analysis for prefill, decode, and KV-cache sharding.
+- Shoeybi et al., [Megatron-LM](https://arxiv.org/abs/1909.08053) — the original tensor-parallel Transformer layout.
+- Narayanan et al., [Efficient Large-Scale Language Model Training Using Megatron-LM](https://arxiv.org/abs/2104.04473) — composing tensor, pipeline, and data parallelism.
+- NVIDIA, [Megatron Core Parallelism Strategies](https://docs.nvidia.com/megatron-core/developer-guide/latest/user-guide/parallelism-guide.html) — current DP, TP, PP, CP, and EP terminology.
+- NVIDIA, [NCCL Collective Operations](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html) — exact definitions of the communication primitives.
+
+**Previous:** [[58 Speculative decoding|Speculative decoding]]
+
+**Next:** [[58a2 Disaggregated prefill and decode serving|Disaggregated prefill and decode serving]]

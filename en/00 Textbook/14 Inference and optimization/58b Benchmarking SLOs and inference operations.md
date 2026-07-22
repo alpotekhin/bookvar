@@ -283,3 +283,5 @@ how much headroom remains before the user-facing SLO fails.
 - Zhong et al., [DistServe](https://www.usenix.org/conference/osdi24/presentation/zhong-yinmin), OSDI 2024 — TTFT/TPOT SLOs, attainment, and per-GPU goodput.
 - vLLM, [`vllm bench serve`](https://docs.vllm.ai/en/latest/cli/bench/serve.html) — the official interface for measuring serving workloads and definitions of available metrics.
 - vLLM, [Benchmarking Dashboard](https://docs.vllm.ai/en/latest/benchmarking/dashboard.html) — a published approach to throughput/latency comparison; specific results are version-dependent.
+
+**Previous:** [[58a2 Disaggregated prefill and decode serving|Disaggregated prefill and decode serving]]

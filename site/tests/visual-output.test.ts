@@ -18,7 +18,7 @@ describe('handbook landing output', () => {
 
   test('renders every expected navigation card', async () => {
     const html = await read('dist/index.html');
-    for (const label of ['Учебник', 'Технологии', 'Семейства', 'Papers', 'Практика', 'Вопросы']) {
+    for (const label of ['Учебник', 'Технологии', 'Семейства', 'Статьи', 'Практика', 'Вопросы']) {
       expect(html).toContain(`>${label}</`);
     }
     expect(html.match(/class="entry-card/g)).toHaveLength(6);
