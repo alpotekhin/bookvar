@@ -10,16 +10,19 @@ export type PublicationSectionId = typeof SECTION_IDS[number];
 
 export interface PublicationPage {
   source: string;
+  sourceEn?: string;
   route: string;
 }
 
 export interface PublicationSidebarPage {
   label: string;
+  labelEn?: string;
   route: string;
 }
 
 export interface PublicationSidebarGroup {
   label: string;
+  labelEn?: string;
   items: PublicationSidebarItem[];
 }
 
@@ -28,6 +31,7 @@ export type PublicationSidebarItem = PublicationSidebarPage | PublicationSidebar
 export interface PublicationSection {
   id: PublicationSectionId;
   title: string;
+  titleEn?: string;
   pages: PublicationPage[];
   sidebar?: PublicationSidebarItem[];
 }
@@ -91,6 +95,7 @@ export function loadManifest(path: string): PublicationManifest {
   const sections = raw.sections.map((sectionValue, sectionIndex): PublicationSection => {
     const section = record(sectionValue, `sections[${sectionIndex}]`);
     const sectionKeys = ['id', 'title', 'pages'];
+    if ('title_en' in section) sectionKeys.push('title_en');
     if ('sidebar' in section) sectionKeys.push('sidebar');
     exactKeys(section, sectionKeys, `sections[${sectionIndex}]`);
     const id = text(section.id, `sections[${sectionIndex}].id`);
@@ -98,6 +103,9 @@ export function loadManifest(path: string): PublicationManifest {
     if (sectionIds.has(id)) throw new Error(`Duplicate section ID: ${id}`);
     sectionIds.add(id);
     const title = text(section.title, `sections[${sectionIndex}].title`);
+    const titleEn = 'title_en' in section
+      ? text(section.title_en, `sections[${sectionIndex}].title_en`)
+      : undefined;
     if (!Array.isArray(section.pages) || section.pages.length === 0) {
       throw new Error(`sections[${sectionIndex}].pages must be a non-empty array`);
     }
@@ -105,8 +113,11 @@ export function loadManifest(path: string): PublicationManifest {
     const pages = section.pages.map((pageValue, pageIndex): PublicationPage => {
       const label = `sections[${sectionIndex}].pages[${pageIndex}]`;
       const page = record(pageValue, label);
-      exactKeys(page, ['source', 'route'], label);
+      const pageKeys = ['source', 'route'];
+      if ('source_en' in page) pageKeys.push('source_en');
+      exactKeys(page, pageKeys, label);
       const source = text(page.source, `${label}.source`);
+      const sourceEn = 'source_en' in page ? text(page.source_en, `${label}.source_en`) : undefined;
       const route = text(page.route, `${label}.route`);
 
       const normalizedSource = source.replaceAll('\\', '/');
@@ -126,7 +137,20 @@ export function loadManifest(path: string): PublicationManifest {
 
       routes.add(route);
       sources.add(source);
-      return { source, route };
+      if (sourceEn) {
+        const normalizedSourceEn = sourceEn.replaceAll('\\', '/');
+        const sourceEnPath = resolveContained(root, normalizedSourceEn);
+        if (isInside(rawRoot, sourceEnPath)) {
+          throw new Error(`Manifest source must not reference ignored raw content: ${sourceEn}`);
+        }
+        if (sources.has(sourceEn)) throw new Error(`Duplicate source: ${sourceEn}`);
+        if (!existsSync(sourceEnPath)) throw new Error(`Missing source: ${sourceEn}`);
+        if (existsSync(rawRoot) && isInside(realpathSync(rawRoot), realpathSync(sourceEnPath))) {
+          throw new Error(`Manifest source must not reference ignored raw content: ${sourceEn}`);
+        }
+        sources.add(sourceEn);
+      }
+      return { source, ...(sourceEn ? { sourceEn } : {}), route };
     });
 
     let sidebar: PublicationSidebarItem[] | undefined;
@@ -141,22 +165,35 @@ export function loadManifest(path: string): PublicationManifest {
           const itemLabel = `${label}[${itemIndex}]`;
           const item = record(itemValue, itemLabel);
           const labelText = text(item.label, `${itemLabel}.label`);
+          const labelEn = 'label_en' in item
+            ? text(item.label_en, `${itemLabel}.label_en`)
+            : undefined;
           if ('route' in item) {
-            exactKeys(item, ['label', 'route'], itemLabel);
+            exactKeys(item, ['label', 'route', ...(labelEn ? ['label_en'] : [])], itemLabel);
             const route = text(item.route, `${itemLabel}.route`);
             if (!pageRoutes.has(route)) throw new Error(`Unknown sidebar route: ${route}`);
             if (sidebarRoutes.has(route)) throw new Error(`Duplicate sidebar route: ${route}`);
             sidebarRoutes.add(route);
-            return { label: labelText, route };
+            return { label: labelText, ...(labelEn ? { labelEn } : {}), route };
           }
-          exactKeys(item, ['label', 'items'], itemLabel);
-          return { label: labelText, items: parseSidebarItems(item.items, `${itemLabel}.items`) };
+          exactKeys(item, ['label', 'items', ...(labelEn ? ['label_en'] : [])], itemLabel);
+          return {
+            label: labelText,
+            ...(labelEn ? { labelEn } : {}),
+            items: parseSidebarItems(item.items, `${itemLabel}.items`)
+          };
         });
       };
       sidebar = parseSidebarItems(section.sidebar, `sections[${sectionIndex}].sidebar`);
     }
 
-    return { id: id as PublicationSectionId, title, pages, ...(sidebar ? { sidebar } : {}) };
+    return {
+      id: id as PublicationSectionId,
+      title,
+      ...(titleEn ? { titleEn } : {}),
+      pages,
+      ...(sidebar ? { sidebar } : {})
+    };
   });
 
   return { siteTitle, sections };

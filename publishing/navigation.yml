@@ -2,8 +2,10 @@ site_title: Bookvar
 sections:
   - id: textbook
     title: Учебник
+    title_en: Textbook
     pages:
       - source: 00 Учебник/_index.md
+        source_en: en/00 Textbook/_index.md
         route: textbook/index
       - source: 00 Учебник/00 Как пользоваться учебником.md
         route: textbook/how-to-use
@@ -120,24 +122,34 @@ sections:
       - source: 00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md
         route: textbook/pretraining/synthetic-data-curricula
       - source: 00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена.md
+        source_en: en/00 Textbook/14 Inference and optimization/54 Decoding and next-token selection.md
         route: textbook/inference/decoding
       - source: 00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md
+        source_en: en/00 Textbook/14 Inference and optimization/55a The physics of LLM inference — prefill, decode, and roofline.md
         route: textbook/inference/llm-inference-physics
       - source: 00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md
+        source_en: en/00 Textbook/14 Inference and optimization/55 KV cache batching and PagedAttention.md
         route: textbook/inference/kv-cache-batching-pagedattention
       - source: 00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md
+        source_en: en/00 Textbook/14 Inference and optimization/55b Scheduling — continuous batching, chunked prefill, and prefix caching.md
         route: textbook/inference/scheduling
       - source: 00 Учебник/14 Inference и оптимизация/55c Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer.md
+        source_en: en/00 Textbook/14 Inference and optimization/55c Serving engines — vLLM, SGLang, TensorRT-LLM, and FlashInfer.md
         route: textbook/inference/serving-engines
       - source: 00 Учебник/14 Inference и оптимизация/56 FlashAttention.md
+        source_en: en/00 Textbook/14 Inference and optimization/56 FlashAttention.md
         route: textbook/inference/flashattention
       - source: 00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md
+        source_en: en/00 Textbook/14 Inference and optimization/57 Quantizing language models.md
         route: textbook/inference/quantization
       - source: 00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md
+        source_en: en/00 Textbook/14 Inference and optimization/58 Speculative decoding.md
         route: textbook/inference/speculative-decoding
       - source: 00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md
+        source_en: en/00 Textbook/14 Inference and optimization/58a Distributed inference and disaggregated serving.md
         route: textbook/inference/distributed-inference
       - source: 00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md
+        source_en: en/00 Textbook/14 Inference and optimization/58b Benchmarking SLOs and inference operations.md
         route: textbook/inference/benchmarking-slo
       - source: 00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md
         route: textbook/evaluation/models-contamination
@@ -161,10 +173,13 @@ sections:
         route: textbook/agents/evaluation
     sidebar:
       - label: Оглавление
+        label_en: Contents
         route: textbook/index
       - label: Как пользоваться учебником
+        label_en: How to use this textbook
         route: textbook/how-to-use
       - label: I. Математические и ML-основания
+        label_en: I. Mathematical and machine-learning foundations
         items:
           - label: 1. Векторы, матрицы и тензоры
             route: textbook/ml-foundations/tensors
@@ -179,6 +194,7 @@ sections:
           - label: 6. Переобучение, регуляризация и оценивание
             route: textbook/ml-foundations/generalization-regularization
       - label: II. Нейронные сети
+        label_en: II. Neural networks
         items:
           - label: 7. Нейрон и MLP
             route: textbook/neural-networks/mlp
@@ -197,6 +213,7 @@ sections:
           - label: 14. Autoencoder и VAE
             route: textbook/neural-networks/autoencoder-vae
       - label: III. Текст до Transformer
+        label_en: III. Text before the Transformer
         items:
           - label: 15. Представление текста числами
             route: textbook/text-representation/numerical-representation
@@ -215,6 +232,7 @@ sections:
           - label: 22. Attention для перевода
             route: textbook/transformer/from-seq2seq-to-transformer
       - label: IV. Transformer, BERT и GPT
+        label_en: IV. Transformer, BERT, and GPT
         items:
           - label: 23. Self-Attention — Q, K, V
             route: textbook/transformer/self-attention
@@ -237,6 +255,7 @@ sections:
           - label: 31. T5 — text-to-text Transformer
             route: textbook/models/t5
       - label: V. Анатомия современной LLM
+        label_en: V. Anatomy of a modern LLM
         items:
           - label: LLaMA как базовая архитектура
             route: textbook/modern-llm/llama-architecture
@@ -259,6 +278,7 @@ sections:
           - label: 40. Mamba, RWKV, RetNet и гибридные архитектуры
             route: textbook/modern-llm/sequence-model-alternatives
       - label: VI. Обучение LLM
+        label_en: VI. Training language models
         items:
           - label: 41. Сбор, очистка и смеси данных
             route: textbook/pretraining/data-pipeline
@@ -289,26 +309,37 @@ sections:
           - label: 53. Синтетические данные и учебные программы
             route: textbook/pretraining/synthetic-data-curricula
       - label: VII. Эксплуатация и системы вокруг модели
+        label_en: VII. Inference and systems around the model
         items:
           - label: 54. Декодирование и выбор следующего токена
+            label_en: 54. Decoding and selecting the next token
             route: textbook/inference/decoding
           - label: 55. Физика LLM inference — prefill, decode и roofline
+            label_en: 55. The physics of LLM inference — prefill, decode, and roofline
             route: textbook/inference/llm-inference-physics
           - label: 55.1 KV-cache, пакетирование и PagedAttention
+            label_en: 55.1 KV cache, batching, and PagedAttention
             route: textbook/inference/kv-cache-batching-pagedattention
           - label: 55.2 Scheduling — continuous batching, chunked prefill и prefix caching
+            label_en: 55.2 Scheduling — continuous batching, chunked prefill, and prefix caching
             route: textbook/inference/scheduling
           - label: 55.3 Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer
+            label_en: 55.3 Serving engines — vLLM, SGLang, TensorRT-LLM, and FlashInfer
             route: textbook/inference/serving-engines
           - label: 56. FlashAttention
+            label_en: 56. FlashAttention
             route: textbook/inference/flashattention
           - label: 57. Квантизация языковых моделей
+            label_en: 57. Quantizing language models
             route: textbook/inference/quantization
           - label: 58. Спекулятивное декодирование
+            label_en: 58. Speculative decoding
             route: textbook/inference/speculative-decoding
           - label: 58.1 Распределённый inference и disaggregated serving
+            label_en: 58.1 Distributed inference and disaggregated serving
             route: textbook/inference/distributed-inference
           - label: 58.2 Benchmarking, SLO и эксплуатация inference
+            label_en: 58.2 Benchmarking, SLOs, and inference operations
             route: textbook/inference/benchmarking-slo
           - label: 59. Оценивание моделей и контаминация
             route: textbook/evaluation/models-contamination
@@ -332,6 +363,7 @@ sections:
             route: textbook/agents/evaluation
   - id: models
     title: Справочник
+    title_en: Reference
     pages:
       - source: 02 Атлас моделей/_index.md
         route: models/index
@@ -389,6 +421,7 @@ sections:
         route: models/timeline
   - id: sources
     title: Источники
+    title_en: Sources
     pages:
       - source: 01 Справочник/_index.md
         route: reference/index
@@ -680,6 +713,7 @@ sections:
         route: sources/courses/stanford-cs336/cs336-mixture-of-experts
   - id: questions
     title: Вопросы
+    title_en: Questions
     pages:
       - source: 04 Вопросы/_index.md
         route: questions/index
@@ -695,6 +729,7 @@ sections:
         route: questions/agents
   - id: practice
     title: Практика
+    title_en: Practice
     pages:
       - source: 06 Практика/_index.md
         route: practice/index

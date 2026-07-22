@@ -93,6 +93,30 @@ describe('loadManifest', () => {
     }]);
   });
 
+  it('loads optional English sources and navigation labels without duplicating routes', () => {
+    const yaml = validYaml
+      .replace('title: Учебник', 'title: Учебник\n    title_en: Textbook')
+      .replace(
+        '        route: textbook/index',
+        '        route: textbook/index\n        source_en: en/textbook/index.md'
+      );
+    const manifest = loadManifest(fixture(yaml, [
+      '00 Учебник/_index.md',
+      'en/textbook/index.md',
+      '06 Практика/lab.md'
+    ]));
+
+    expect(manifest.sections[0]).toMatchObject({
+      title: 'Учебник',
+      titleEn: 'Textbook',
+      pages: [{
+        source: '00 Учебник/_index.md',
+        sourceEn: 'en/textbook/index.md',
+        route: 'textbook/index'
+      }]
+    });
+  });
+
   it('loads nested sidebar groups while keeping section pages flat', () => {
     const yaml = validYaml.replace(
       '        route: textbook/index',
@@ -118,6 +142,37 @@ describe('loadManifest', () => {
     expect(manifest.sections[0]?.pages).toEqual([{
       source: '00 Учебник/_index.md',
       route: 'textbook/index'
+    }]);
+  });
+
+  it('loads optional English labels on nested sidebar items', () => {
+    const yaml = validYaml.replace(
+      '        route: textbook/index',
+      [
+        '        route: textbook/index',
+        '    sidebar:',
+        '      - label: I. Основы',
+        '        label_en: I. Foundations',
+        '        items:',
+        '          - label: 1. Первая тема',
+        '            label_en: 1. First topic',
+        '            route: textbook/index'
+      ].join('\n')
+    );
+
+    const manifest = loadManifest(fixture(yaml, [
+      '00 Учебник/_index.md',
+      '06 Практика/lab.md'
+    ]));
+
+    expect(manifest.sections[0]?.sidebar).toEqual([{
+      label: 'I. Основы',
+      labelEn: 'I. Foundations',
+      items: [{
+        label: '1. Первая тема',
+        labelEn: '1. First topic',
+        route: 'textbook/index'
+      }]
     }]);
   });
 
