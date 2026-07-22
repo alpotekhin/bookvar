@@ -121,14 +121,24 @@ sections:
         route: textbook/pretraining/synthetic-data-curricula
       - source: 00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена.md
         route: textbook/inference/decoding
+      - source: 00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md
+        route: textbook/inference/llm-inference-physics
       - source: 00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md
         route: textbook/inference/kv-cache-batching-pagedattention
+      - source: 00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md
+        route: textbook/inference/scheduling
+      - source: 00 Учебник/14 Inference и оптимизация/55c Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer.md
+        route: textbook/inference/serving-engines
       - source: 00 Учебник/14 Inference и оптимизация/56 FlashAttention.md
         route: textbook/inference/flashattention
       - source: 00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md
         route: textbook/inference/quantization
       - source: 00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md
         route: textbook/inference/speculative-decoding
+      - source: 00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md
+        route: textbook/inference/distributed-inference
+      - source: 00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md
+        route: textbook/inference/benchmarking-slo
       - source: 00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md
         route: textbook/evaluation/models-contamination
       - source: 00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning.md
@@ -149,6 +159,177 @@ sections:
         route: textbook/agents/memory-planning-orchestration
       - source: 00 Учебник/17 Tools и Agents/68 Оценивание агентных систем.md
         route: textbook/agents/evaluation
+    sidebar:
+      - label: Оглавление
+        route: textbook/index
+      - label: Как пользоваться учебником
+        route: textbook/how-to-use
+      - label: I. Математические и ML-основания
+        items:
+          - label: 1. Векторы, матрицы и тензоры
+            route: textbook/ml-foundations/tensors
+          - label: 2. Производная и градиент
+            route: textbook/ml-foundations/derivatives-gradients
+          - label: 3. Вероятность, правдоподобие и логарифм
+            route: textbook/ml-foundations/probability-likelihood-logarithms
+          - label: 4. Функции потерь
+            route: textbook/ml-foundations/loss-functions
+          - label: 5. Train, validation и test
+            route: textbook/ml-foundations/train-validation-test
+          - label: 6. Переобучение, регуляризация и оценивание
+            route: textbook/ml-foundations/generalization-regularization
+      - label: II. Нейронные сети
+        items:
+          - label: 7. Нейрон и MLP
+            route: textbook/neural-networks/mlp
+          - label: 8. Функции активации
+            route: textbook/neural-networks/activation-functions
+          - label: 9. Вычислительный граф и backpropagation
+            route: textbook/neural-networks/backpropagation
+          - label: 10. SGD, Momentum, Adam и расписания шага
+            route: textbook/neural-networks/optimizers-schedules
+          - label: 11. Инициализация, нормализация и residual connections
+            route: textbook/neural-networks/initialization-normalization-residuals
+          - label: 12. Dropout и регуляризация
+            route: textbook/neural-networks/dropout-regularization
+          - label: 13. CNN — от свёртки до ResNet
+            route: textbook/neural-networks/cnn-lenet-resnet
+          - label: 14. Autoencoder и VAE
+            route: textbook/neural-networks/autoencoder-vae
+      - label: III. Текст до Transformer
+        items:
+          - label: 15. Представление текста числами
+            route: textbook/text-representation/numerical-representation
+          - label: 16. N-граммная языковая модель
+            route: textbook/language-modeling/ngram
+          - label: 17. Word2Vec, GloVe и распределительные представления
+            route: textbook/text-representation/word2vec-glove
+          - label: 18. BPE, WordPiece и Unigram
+            route: textbook/text-representation/tokenization
+          - label: 19. RNN и BPTT
+            route: textbook/recurrent-networks/rnn-bptt
+          - label: 20. LSTM и GRU
+            route: textbook/recurrent-networks/lstm-gru
+          - label: 21. Seq2Seq и bottleneck фиксированного вектора
+            route: textbook/recurrent-networks/seq2seq-bottleneck
+          - label: 22. Attention для перевода
+            route: textbook/transformer/from-seq2seq-to-transformer
+      - label: IV. Transformer, BERT и GPT
+        items:
+          - label: 23. Self-Attention — Q, K, V
+            route: textbook/transformer/self-attention
+          - label: 24. Маскирование, головы и формы тензоров
+            route: textbook/transformer/masking-heads-shapes
+          - label: 25. Позиционная информация
+            route: textbook/transformer/positional-information
+          - label: 26. Полный encoder-decoder Transformer
+            route: textbook/transformer/full-transformer
+          - label: Три архитектурных паттерна
+            route: textbook/transformer/encoder-decoder-patterns
+          - label: 27. BERT, RoBERTa и DeBERTa
+            route: textbook/models/bert-roberta-deberta
+          - label: 28. GPT-1 — генеративное предобучение
+            route: textbook/models/gpt-1
+          - label: 29. GPT-2 — zero-shot через язык
+            route: textbook/models/gpt-2
+          - label: 30. GPT-3 — in-context learning
+            route: textbook/models/gpt-3
+          - label: 31. T5 — text-to-text Transformer
+            route: textbook/models/t5
+      - label: V. Анатомия современной LLM
+        items:
+          - label: LLaMA как базовая архитектура
+            route: textbook/modern-llm/llama-architecture
+          - label: 32. Современный decoder block
+            route: textbook/modern-llm/decoder-block
+          - label: 33. Pre-norm, RMSNorm, SwiGLU и residual
+            route: textbook/modern-llm/norm-gating-residual
+          - label: 34. RoPE
+            route: textbook/modern-llm/rope
+          - label: 35. MHA, MQA и GQA
+            route: textbook/modern-llm/mha-mqa-gqa
+          - label: 36. MLA и сжатие KV-cache
+            route: textbook/modern-llm/mla-kv-compression
+          - label: 37. Длинный контекст — расширение, разреженность и оценивание
+            route: textbook/modern-llm/long-context
+          - label: 38. Dense FFN — token-wise вычисление, expansion и gating
+            route: textbook/modern-llm/dense-ffn
+          - label: 39. Mixture of Experts — routing, capacity и serving
+            route: textbook/moe/mixture-of-experts
+          - label: 40. Mamba, RWKV, RetNet и гибридные архитектуры
+            route: textbook/modern-llm/sequence-model-alternatives
+      - label: VI. Обучение LLM
+        items:
+          - label: 41. Сбор, очистка и смеси данных
+            route: textbook/pretraining/data-pipeline
+          - label: 42. Next-token prediction
+            route: textbook/pretraining/next-token-objective
+          - label: 43. Scaling laws
+            route: textbook/pretraining/scaling-laws
+          - label: 44. Distributed training и mixed precision
+            route: textbook/pretraining/distributed-systems
+          - label: 45. SFT и instruction data
+            route: textbook/post-training/sft-instruction-data
+          - label: 46. Preference data
+            route: textbook/post-training/preference-data
+          - label: 47. Reward modeling
+            route: textbook/post-training/reward-modeling
+          - label: 48. Policy gradient и PPO для LLM
+            route: textbook/post-training/ppo
+          - label: 49. DPO
+            route: textbook/post-training/dpo
+          - label: 50. RLVR и verifiers
+            route: textbook/post-training/rlvr-verifiers
+          - label: 51. GRPO и DeepSeek-R1
+            route: textbook/post-training/grpo-deepseek-r1
+          - label: 52. Reasoning distillation
+            route: textbook/post-training/reasoning-distillation
+          - label: Test-time compute
+            route: textbook/reasoning/test-time-compute
+          - label: 53. Синтетические данные и учебные программы
+            route: textbook/pretraining/synthetic-data-curricula
+      - label: VII. Эксплуатация и системы вокруг модели
+        items:
+          - label: 54. Декодирование и выбор следующего токена
+            route: textbook/inference/decoding
+          - label: 55. Физика LLM inference — prefill, decode и roofline
+            route: textbook/inference/llm-inference-physics
+          - label: 55.1 KV-cache, пакетирование и PagedAttention
+            route: textbook/inference/kv-cache-batching-pagedattention
+          - label: 55.2 Scheduling — continuous batching, chunked prefill и prefix caching
+            route: textbook/inference/scheduling
+          - label: 55.3 Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer
+            route: textbook/inference/serving-engines
+          - label: 56. FlashAttention
+            route: textbook/inference/flashattention
+          - label: 57. Квантизация языковых моделей
+            route: textbook/inference/quantization
+          - label: 58. Спекулятивное декодирование
+            route: textbook/inference/speculative-decoding
+          - label: 58.1 Распределённый inference и disaggregated serving
+            route: textbook/inference/distributed-inference
+          - label: 58.2 Benchmarking, SLO и эксплуатация inference
+            route: textbook/inference/benchmarking-slo
+          - label: 59. Оценивание моделей и контаминация
+            route: textbook/evaluation/models-contamination
+          - label: 60. Embeddings и metric learning
+            route: textbook/retrieval/embeddings-metric-learning
+          - label: 61. Retrieval — от BM25 до dense и hybrid
+            route: textbook/retrieval/sparse-dense-hybrid
+          - label: 62. Reranking — cross-encoder и late interaction
+            route: textbook/retrieval/reranking
+          - label: 63. RAG — полный конвейер
+            route: textbook/rag/full-pipeline
+          - label: 64. Мультимодальные модели
+            route: textbook/multimodal/models
+          - label: 65. Tool use — от вызова функции к действию
+            route: textbook/agents/tool-use
+          - label: 66. Agent harness и context engineering
+            route: textbook/agents/harness-context-engineering
+          - label: 67. Память, планирование и оркестрация агентов
+            route: textbook/agents/memory-planning-orchestration
+          - label: 68. Оценивание агентных систем
+            route: textbook/agents/evaluation
   - id: models
     title: Справочник
     pages:
