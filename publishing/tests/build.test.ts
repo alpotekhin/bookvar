@@ -142,6 +142,91 @@ describe('buildPublication', () => {
     );
   });
 
+  it('preserves manifest-defined nested textbook groups, labels, and slugs', async () => {
+    const options = fixture('Body');
+    const pages = [
+      ['Index', '00 Учебник/_index.md', 'textbook/index'],
+      ['How to use', '00 Учебник/00 Как пользоваться учебником.md', 'textbook/how-to-use'],
+      ['Tensors', '00 Учебник/00 Математические и ML-основания/01 Tensors.md', 'textbook/foundations/tensors'],
+      ['Gradients', '00 Учебник/00 Математические и ML-основания/02 Gradients.md', 'textbook/foundations/gradients'],
+      ['Decoding', '00 Учебник/14 Inference и оптимизация/54 Decoding.md', 'textbook/inference/decoding']
+    ] as const;
+    for (const [title, source] of pages) {
+      write(join(options.rootDir, source), [
+        '---',
+        `title: ${title}`,
+        'type: textbook-chapter',
+        'status: stable',
+        '---',
+        'Body'
+      ].join('\n'));
+    }
+    write(options.manifestPath, [
+      'site_title: Fixture',
+      'sections:',
+      '  - id: textbook',
+      '    title: Учебник',
+      '    pages:',
+      ...pages.flatMap(([, source, route]) => [
+        `      - source: ${source}`,
+        `        route: ${route}`
+      ]),
+      '    sidebar:',
+      '      - label: Index',
+      '        route: textbook/index',
+      '      - label: How to use',
+      '        route: textbook/how-to-use',
+      '      - label: I. Foundations',
+      '        items:',
+      '          - label: Core mathematics',
+      '            items:',
+      '              - label: 1. Tensors',
+      '                route: textbook/foundations/tensors',
+      '              - label: 2. Gradients',
+      '                route: textbook/foundations/gradients',
+      '      - label: VII. Serving',
+      '        items:',
+      '          - label: 68. Decoding',
+      '            route: textbook/inference/decoding'
+    ].join('\n'));
+
+    await buildPublication(options);
+
+    const sidebarSource = readFileSync(
+      join(options.rootDir, 'site', 'generated-sidebar.mjs'),
+      'utf8'
+    );
+    const sidebar = JSON.parse(sidebarSource
+      .replace('// Generated from publishing/navigation.yml. Do not edit.\nexport default ', '')
+      .replace(/;\n$/, ''));
+    expect(sidebar).toEqual([{
+      label: 'Учебник',
+      items: [
+        { label: 'Index', slug: 'textbook/index' },
+        { label: 'How to use', slug: 'textbook/how-to-use' },
+        {
+          label: 'I. Foundations',
+          collapsed: true,
+          items: [
+            {
+              label: 'Core mathematics',
+              collapsed: true,
+              items: [
+                { label: '1. Tensors', slug: 'textbook/foundations/tensors' },
+                { label: '2. Gradients', slug: 'textbook/foundations/gradients' }
+              ]
+            }
+          ]
+        },
+        {
+          label: 'VII. Serving',
+          collapsed: true,
+          items: [{ label: '68. Decoding', slug: 'textbook/inference/decoding' }]
+        }
+      ]
+    }]);
+  });
+
   it('shows only source index pages in the source sidebar while building hidden pages', async () => {
     const options = fixture('Body');
     const pages = [

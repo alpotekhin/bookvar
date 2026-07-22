@@ -7,6 +7,7 @@ import { readPage } from './frontmatter.js';
 import { convertWikiSyntax, wikiHeadingSlug } from './links.js';
 import { loadLinkAllowlist } from './link-policy.js';
 import { loadManifest } from './manifest.js';
+import type { PublicationSidebarItem } from './manifest.js';
 import { createRouteRegistry } from './routes.js';
 
 export interface BuildOptions {
@@ -25,6 +26,13 @@ function publicationBasePath(): string {
 interface Asset {
   source: string;
   publicPath: string;
+}
+
+interface SidebarEntry {
+  label: string;
+  slug?: string;
+  items?: SidebarEntry[];
+  collapsed?: boolean;
 }
 
 export function publicationHref(route: string): string {
@@ -189,11 +197,17 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
   })), { allowAmbiguousBasenames: true });
   const titles = new Map(parsed.map(({ entry, page }) => [entry.route, page.title]));
   const statuses = new Map(parsed.map(({ entry, page }) => [entry.route, page.status]));
+  const sidebarItems = (items: PublicationSidebarItem[]): SidebarEntry[] => items.map((item) => 'route' in item
+    ? { label: item.label, slug: item.route }
+    : { label: item.label, collapsed: true, items: sidebarItems(item.items) });
   const sidebar = [...manifest.sections]
     .sort((left, right) =>
       SIDEBAR_SECTION_ORDER.indexOf(left.id) - SIDEBAR_SECTION_ORDER.indexOf(right.id)
     )
     .map((section) => {
+    if (section.sidebar) {
+      return { label: section.title, items: sidebarItems(section.sidebar) };
+    }
     if (section.id === 'models') {
       const referencePages = manifest.sections
         .filter((candidate) => candidate.id === 'models' || candidate.id === 'sources')

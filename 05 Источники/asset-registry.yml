@@ -2679,6 +2679,7 @@ assets:
     modifications: copied or extracted without visual modification for publication
     used_in:
       - 00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md
+      - 00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md
       - 01 Справочник/Inference/PagedAttention.md
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
@@ -4575,6 +4576,7 @@ assets:
     modifications: copied without visual modification from the official vLLM blog repository
     used_in:
       - 01 Справочник/Inference/vLLM — анатомия inference engine.md
+      - 00 Учебник/14 Inference и оптимизация/55c Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer.md
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/inference-serving/vllm/engine_constructor.png
@@ -4587,6 +4589,7 @@ assets:
     modifications: copied without visual modification from the official vLLM blog repository
     used_in:
       - 01 Справочник/Inference/vLLM — анатомия inference engine.md
+      - 00 Учебник/14 Inference и оптимизация/55c Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer.md
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/inference-serving/vllm/engine_loop.png
@@ -4599,6 +4602,8 @@ assets:
     modifications: copied without visual modification from the official vLLM blog repository
     used_in:
       - 01 Справочник/Inference/vLLM — анатомия inference engine.md
+      - 00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md
+      - 00 Учебник/14 Inference и оптимизация/55c Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer.md
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/inference-serving/vllm/fwd_pass.png
@@ -4611,6 +4616,7 @@ assets:
     modifications: copied without visual modification from the official vLLM blog repository
     used_in:
       - 01 Справочник/Inference/vLLM — анатомия inference engine.md
+      - 00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/inference-serving/vllm/prefix_pt1.png
@@ -4623,6 +4629,7 @@ assets:
     modifications: copied without visual modification from the official vLLM blog repository
     used_in:
       - 01 Справочник/Inference/vLLM — анатомия inference engine.md
+      - 00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/inference-serving/vllm/prefix_pt2.png
@@ -4635,6 +4642,7 @@ assets:
     modifications: copied without visual modification from the official vLLM blog repository
     used_in:
       - 01 Справочник/Inference/vLLM — анатомия inference engine.md
+      - 00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/inference-serving/vllm/prefix_pt3.png
@@ -4647,6 +4655,7 @@ assets:
     modifications: copied without visual modification from the official vLLM blog repository
     used_in:
       - 01 Справочник/Inference/vLLM — анатомия inference engine.md
+      - 00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/inference-serving/vllm/multiprocexecutor.png
@@ -4659,6 +4668,8 @@ assets:
     modifications: copied without visual modification from the official vLLM blog repository
     used_in:
       - 01 Справочник/Inference/vLLM — анатомия inference engine.md
+      - 00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md
+      - 00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/inference-serving/vllm/server_setup.png
@@ -4671,6 +4682,7 @@ assets:
     modifications: copied without visual modification from the official vLLM blog repository
     used_in:
       - 01 Справочник/Inference/vLLM — анатомия inference engine.md
+      - 00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/inference-serving/vllm/latency_diagram.png
@@ -4695,6 +4707,7 @@ assets:
     modifications: Figure 2 rendered from the official paper and cropped without content changes
     used_in:
       - 01 Справочник/Inference/SGLang и RadixAttention.md
+      - 00 Учебник/14 Inference и оптимизация/55c Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer.md
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/2312.07104.pdf
@@ -4709,10 +4722,62 @@ assets:
     modifications: Figure 3 rendered from the official paper and cropped without content changes
     used_in:
       - 01 Справочник/Inference/SGLang и RadixAttention.md
+      - 00 Учебник/14 Inference и оптимизация/55c Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer.md
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/2312.07104.pdf
     source_page: 4
+    derivation: pdf-page-render-crop
+  - id: curated-gordic-chunked-prefill-7e3a09d84c21
+    asset: 00 Учебник/Assets/Figures/curated/inference-advanced/physics-scheduling/gordic-chunked-prefill.png
+    author: Aleksa Gordić
+    source_url: https://www.aleksagordic.com/blog/vllm
+    license: open educational web material; reuse confirmed by repository owner
+    license_url: https://www.aleksagordic.com/blog/vllm
+    modifications: copied without visual modification from the official vLLM blog repository
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/inference-serving/vllm/chunked_pt1.png
+  - id: curated-distserve-slo-curves-20a47b90f116
+    asset: 00 Учебник/Assets/Figures/curated/inference-advanced/distributed-benchmarking/distserve-fig1-slo-curves.png
+    author: Yinmin Zhong et al.
+    source_url: https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf
+    license: open paper material; reuse confirmed by repository owner
+    license_url: https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf
+    modifications: Figure 1 rendered from the official paper and cropped without content changes
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/osdi24-zhong-yinmin.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-distserve-interference-a6f8c140de32
+    asset: 00 Учебник/Assets/Figures/curated/inference-advanced/distributed-benchmarking/distserve-fig2-prefill-decode-interference.png
+    author: Yinmin Zhong et al.
+    source_url: https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf
+    license: open paper material; reuse confirmed by repository owner
+    license_url: https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf
+    modifications: Figure 2 rendered from the official paper and cropped without content changes
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/osdi24-zhong-yinmin.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-distserve-runtime-34b6dd120ce5
+    asset: 00 Учебник/Assets/Figures/curated/inference-advanced/distributed-benchmarking/distserve-fig6-runtime-architecture.png
+    author: Yinmin Zhong et al.
+    source_url: https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf
+    license: open paper material; reuse confirmed by repository owner
+    license_url: https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf
+    modifications: Figure 6 rendered from the official paper and cropped without content changes
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/osdi24-zhong-yinmin.pdf
     derivation: pdf-page-render-crop
   - id: curated-triton-softmax-a1b2c3d4e50d
     asset: 00 Учебник/Assets/Figures/curated/inference-serving/triton-fused-softmax-benchmark.png

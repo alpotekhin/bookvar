@@ -93,6 +93,74 @@ describe('loadManifest', () => {
     }]);
   });
 
+  it('loads nested sidebar groups while keeping section pages flat', () => {
+    const yaml = validYaml.replace(
+      '        route: textbook/index',
+      [
+        '        route: textbook/index',
+        '    sidebar:',
+        '      - label: I. Основы',
+        '        items:',
+        '          - label: 1. Первая тема',
+        '            route: textbook/index'
+      ].join('\n')
+    );
+
+    const manifest = loadManifest(fixture(yaml, [
+      '00 Учебник/_index.md',
+      '06 Практика/lab.md'
+    ]));
+
+    expect(manifest.sections[0]?.sidebar).toEqual([{
+      label: 'I. Основы',
+      items: [{ label: '1. Первая тема', route: 'textbook/index' }]
+    }]);
+    expect(manifest.sections[0]?.pages).toEqual([{
+      source: '00 Учебник/_index.md',
+      route: 'textbook/index'
+    }]);
+  });
+
+  it('defines seven real textbook modules numbered 1 through 68 without changing flat routes', () => {
+    const root = join(import.meta.dirname, '..', '..');
+    const textbook = loadManifest(join(root, 'publishing', 'navigation.yml')).sections
+      .find((section) => section.id === 'textbook')!;
+    const modules = textbook.sidebar?.filter((item) => 'items' in item) ?? [];
+    expect(modules).toHaveLength(7);
+
+    const flattenSidebar = (items: NonNullable<typeof textbook.sidebar>): typeof items =>
+      items.flatMap((item) => 'route' in item ? [item] : flattenSidebar(item.items));
+    const moduleItems = flattenSidebar(modules);
+    const primaryNumbers = moduleItems
+      .map((item) => item.label.match(/^(\d+)\. /))
+      .filter((match): match is RegExpMatchArray => match !== null)
+      .map((match) => Number(match[1]));
+    expect(primaryNumbers).toEqual(
+      Array.from({ length: 68 }, (_, index) => index + 1)
+    );
+    expect(moduleItems.filter((item) => /^\d+\.\d+ /.test(item.label)).map((item) => item.label))
+      .toEqual(expect.arrayContaining([
+        expect.stringMatching(/^55\.1 /),
+        expect.stringMatching(/^55\.2 /),
+        expect.stringMatching(/^55\.3 /),
+        expect.stringMatching(/^58\.1 /),
+        expect.stringMatching(/^58\.2 /)
+      ]));
+    const sidebarRoutes = flattenSidebar(textbook.sidebar ?? []).map((item) => item.route);
+    expect(sidebarRoutes).toEqual(textbook.pages.map((page) => page.route));
+  });
+
+  it('rejects sidebar routes absent from the flat page manifest', () => {
+    const yaml = validYaml.replace(
+      '        route: textbook/index',
+      '        route: textbook/index\n    sidebar:\n      - label: Missing\n        route: textbook/missing'
+    );
+    expect(() => loadManifest(fixture(yaml, [
+      '00 Учебник/_index.md',
+      '06 Практика/lab.md'
+    ]))).toThrow(/Unknown sidebar route.*textbook\/missing/);
+  });
+
   it('rejects a missing source file', () => {
     expect(() => loadManifest(fixture(validYaml, ['00 Учебник/_index.md'])))
       .toThrow(/Missing source.*06 Практика\/lab\.md/);
