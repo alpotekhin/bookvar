@@ -1,19 +1,28 @@
 ---
-title: "LMCache: карта материалов"
+title: "LMCache: architecture, storage, transfer, and operations"
 type: source-note
 status: active
 last_verified: 2026-07-23
 ---
 
-# LMCache: карта материалов
+# LMCache: architecture, storage, transfer, and operations
 
-Подробные заметки сохранены на английском, чтобы названия структур, путей
-передачи и интерфейсов совпадали с документацией и кодом LMCache.
+Полная глава опубликована на английском: так названия структур, протоколов,
+режимов передачи и конфигурационных параметров совпадают с документацией и
+кодом LMCache. Переключите язык страницы на English.
 
-1. [[LMCache — an external KV cache layer|LMCache as an external KV cache layer]]
-2. [[LMCache MP mode — transfer paths|MP mode: CUDA IPC, shared memory and pickle]]
-3. [[KV cache as persistent inference state|KV cache as persistent inference state]]
-4. [[CacheBlend — non-prefix KV reuse|CacheBlend and non-prefix KV reuse]]
+Это единая последовательная глава, а не четыре короткие справочные статьи. В
+ней разобраны:
+
+- MP-архитектура и полный путь L0 → L1 → L2;
+- идентичность KV-объекта, chunking, lookup, eviction и prefetch;
+- локальная передача через CUDA IPC, shared memory и engine-driven path;
+- P2P, NIXL и prefill/decode disaggregation;
+- Controller, Coordinator, cache-aware routing и quotas;
+- CacheBlend, CacheGen, FP8, TurboQuant, serde и KV Cache SDK;
+- storage backends, multimodal и hybrid-attention support;
+- observability, Kubernetes Operator, multi-tenancy и границы безопасности;
+- таблицы зрелости технологий и выбора production-конфигурации.
 
 Связанные главы учебника: [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention|KV-cache и PagedAttention]],
 [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching|prefix caching]] и
