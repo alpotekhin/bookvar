@@ -5136,7 +5136,7 @@ assets:
     license_url: https://blog.lmcache.ai/en/2026/06/15/understanding-lmcache-mp-mode-transfer-paths-a-beginners-guide/
     modifications: copied from the official article without visual modification
     used_in:
-      - en/05 Sources/LMCache/LMCache MP mode — transfer paths.md
+      - en/05 Sources/LMCache/LMCache — map of materials.md
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/lmcache-blog-2026/LMCacheMP3paths.excalidraw-1.png
@@ -5148,7 +5148,7 @@ assets:
     license_url: https://blog.lmcache.ai/en/2026/06/15/understanding-lmcache-mp-mode-transfer-paths-a-beginners-guide/
     modifications: copied from the official article without visual modification
     used_in:
-      - en/05 Sources/LMCache/LMCache MP mode — transfer paths.md
+      - en/05 Sources/LMCache/LMCache — map of materials.md
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/lmcache-blog-2026/3pathsUpdate-1-edited.png
@@ -5160,7 +5160,7 @@ assets:
     license_url: https://blog.lmcache.ai/en/2026/04/28/stop-calling-it-kv-cache-its-something-much-bigger/
     modifications: copied from the official article without visual modification
     used_in:
-      - en/05 Sources/LMCache/KV cache as persistent inference state.md
+      - en/05 Sources/LMCache/LMCache — map of materials.md
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/lmcache-blog-2026/classic-cache-vs-kv-state.png
@@ -5172,7 +5172,7 @@ assets:
     license_url: https://blog.lmcache.ai/en/2026/04/01/accelerating-openclaw-agents-with-cacheblend/
     modifications: copied from the official article without visual modification
     used_in:
-      - en/05 Sources/LMCache/CacheBlend — non-prefix KV reuse.md
+      - en/05 Sources/LMCache/LMCache — map of materials.md
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/lmcache-blog-2026/OpenClaw-Inputs-scaled.jpg
@@ -5184,7 +5184,7 @@ assets:
     license_url: https://blog.lmcache.ai/en/2026/04/01/accelerating-openclaw-agents-with-cacheblend/
     modifications: copied from the official article without visual modification
     used_in:
-      - en/05 Sources/LMCache/CacheBlend — non-prefix KV reuse.md
+      - en/05 Sources/LMCache/LMCache — map of materials.md
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/lmcache-blog-2026/cacheblend-results.png
