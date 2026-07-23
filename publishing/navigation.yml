@@ -775,7 +775,14 @@ sections:
     title_en: Questions
     pages:
       - source: 04 Вопросы/_index.md
+        source_en: en/04 Questions/_index.md
         route: questions/index
+      - source: 04 Вопросы/100 вопросов по NLP.md
+        source_en: en/04 Questions/100 questions about NLP.md
+        route: questions/100-nlp
+      - source: 04 Вопросы/100 вопросов по NLP — исходные ответы.md
+        source_en: en/04 Questions/100 questions about NLP — original answers.md
+        route: questions/100-nlp/source-answers
       - source: 04 Вопросы/Вопросы по LLM.md
         route: questions/llm
       - source: 04 Вопросы/Вопросы по NLP.md
