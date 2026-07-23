@@ -481,6 +481,21 @@ sections:
         route: research/long-context
       - source: 05 Источники/_index.md
         route: sources/index
+      - source: 05 Источники/LMCache/LMCache — карта материалов.md
+        source_en: en/05 Sources/LMCache/LMCache — map of materials.md
+        route: sources/lmcache/index
+      - source: 05 Источники/LMCache/LMCache — an external KV cache layer.md
+        source_en: en/05 Sources/LMCache/LMCache — an external KV cache layer.md
+        route: sources/lmcache/external-kv-layer
+      - source: 05 Источники/LMCache/LMCache MP mode — transfer paths.md
+        source_en: en/05 Sources/LMCache/LMCache MP mode — transfer paths.md
+        route: sources/lmcache/mp-transfer-paths
+      - source: 05 Источники/LMCache/KV cache as persistent inference state.md
+        source_en: en/05 Sources/LMCache/KV cache as persistent inference state.md
+        route: sources/lmcache/persistent-inference-state
+      - source: 05 Источники/LMCache/CacheBlend — non-prefix KV reuse.md
+        source_en: en/05 Sources/LMCache/CacheBlend — non-prefix KV reuse.md
+        route: sources/lmcache/cacheblend
       - source: 05 Источники/Визуальные материалы и лицензии.md
         route: sources/visual-materials-licenses
       - source: 05 Источники/Papers/DeepSeek-R1.md
