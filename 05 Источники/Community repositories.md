@@ -30,6 +30,11 @@ last_verified: 2026-07-16
 - [vLLM](https://github.com/vllm-project/vllm)
 - [SGLang](https://github.com/sgl-project/sglang)
 
+## ML systems courses
+
+- [Harvard ML Systems Book](https://github.com/harvard-edge/cs249r_book) — pinned transfer audit: `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
+- [Efficient Deep Learning Systems](https://github.com/mryab/efficient-dl-systems) — pinned transfer audit: `e632aa89ca9e6638d52e1b686095e7442faffbb0`.
+
 ## RAG и agents
 
 - [rag-cookbooks](https://github.com/athina-ai/rag-cookbooks)

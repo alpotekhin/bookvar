@@ -630,6 +630,12 @@ sections:
         route: sources/community-repositories
       - source: 05 Источники/Курсы.md
         route: sources/kursy
+      - source: 05 Источники/Source maps/Harvard ML Systems — complete transfer matrix.md
+        route: sources/source-maps/harvard-ml-systems-transfer
+      - source: 05 Источники/Source maps/Efficient DL Systems — complete transfer matrix.md
+        route: sources/source-maps/efficient-dl-systems-transfer
+      - source: 05 Источники/Source maps/ML systems — Bookvar gap matrix.md
+        route: sources/source-maps/ml-systems-bookvar-gaps
       - source: Papers/LLaMA 2.md
         route: sources/papers/llama-2
       - source: Papers/GPT 2.0.md
