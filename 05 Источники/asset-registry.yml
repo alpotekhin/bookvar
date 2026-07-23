@@ -5128,3 +5128,63 @@ assets:
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/distributed-serving-2026/dynamo-architecture.png
+  - id: curated-lmcache-blog-mp-mode-architecture-9a4922890960
+    asset: 00 Учебник/Assets/Figures/curated/lmcache-blog-2026/mp-mode-architecture.png
+    author: Jiayue Chen, Tony Lin, and LMCache Team
+    source_url: https://blog.lmcache.ai/en/2026/06/15/understanding-lmcache-mp-mode-transfer-paths-a-beginners-guide/
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://blog.lmcache.ai/en/2026/06/15/understanding-lmcache-mp-mode-transfer-paths-a-beginners-guide/
+    modifications: copied from the official article without visual modification
+    used_in:
+      - en/05 Sources/LMCache/LMCache MP mode — transfer paths.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/lmcache-blog-2026/LMCacheMP3paths.excalidraw-1.png
+  - id: curated-lmcache-blog-mp-transfer-paths-7e921ffbdc92
+    asset: 00 Учебник/Assets/Figures/curated/lmcache-blog-2026/mp-transfer-paths.png
+    author: Jiayue Chen, Tony Lin, and LMCache Team
+    source_url: https://blog.lmcache.ai/en/2026/06/15/understanding-lmcache-mp-mode-transfer-paths-a-beginners-guide/
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://blog.lmcache.ai/en/2026/06/15/understanding-lmcache-mp-mode-transfer-paths-a-beginners-guide/
+    modifications: copied from the official article without visual modification
+    used_in:
+      - en/05 Sources/LMCache/LMCache MP mode — transfer paths.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/lmcache-blog-2026/3pathsUpdate-1-edited.png
+  - id: curated-lmcache-blog-persistent-state-e8603475837b
+    asset: 00 Учебник/Assets/Figures/curated/lmcache-blog-2026/classic-cache-vs-kv-state.png
+    author: Junchen Jiang and LMCache Team
+    source_url: https://blog.lmcache.ai/en/2026/04/28/stop-calling-it-kv-cache-its-something-much-bigger/
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://blog.lmcache.ai/en/2026/04/28/stop-calling-it-kv-cache-its-something-much-bigger/
+    modifications: copied from the official article without visual modification
+    used_in:
+      - en/05 Sources/LMCache/KV cache as persistent inference state.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/lmcache-blog-2026/classic-cache-vs-kv-state.png
+  - id: curated-lmcache-blog-cacheblend-context-c26fc59a5e98
+    asset: 00 Учебник/Assets/Figures/curated/lmcache-blog-2026/cacheblend-agent-context.jpg
+    author: Jiayue Chen and LMCache Team
+    source_url: https://blog.lmcache.ai/en/2026/04/01/accelerating-openclaw-agents-with-cacheblend/
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://blog.lmcache.ai/en/2026/04/01/accelerating-openclaw-agents-with-cacheblend/
+    modifications: copied from the official article without visual modification
+    used_in:
+      - en/05 Sources/LMCache/CacheBlend — non-prefix KV reuse.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/lmcache-blog-2026/OpenClaw-Inputs-scaled.jpg
+  - id: curated-lmcache-blog-cacheblend-results-d0d44e3b4177
+    asset: 00 Учебник/Assets/Figures/curated/lmcache-blog-2026/cacheblend-results.png
+    author: Jiayue Chen and LMCache Team
+    source_url: https://blog.lmcache.ai/en/2026/04/01/accelerating-openclaw-agents-with-cacheblend/
+    license: open educational material; reuse confirmed by repository owner
+    license_url: https://blog.lmcache.ai/en/2026/04/01/accelerating-openclaw-agents-with-cacheblend/
+    modifications: copied from the official article without visual modification
+    used_in:
+      - en/05 Sources/LMCache/CacheBlend — non-prefix KV reuse.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/lmcache-blog-2026/cacheblend-results.png
