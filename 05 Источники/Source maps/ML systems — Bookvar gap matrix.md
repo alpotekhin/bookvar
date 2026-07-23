@@ -2,25 +2,32 @@
 title: ML systems — Bookvar gap matrix
 type: source-note
 status: editorial
-last_updated: 2026-07-23
+last_updated: 2026-07-24
 ---
 
 # ML systems — Bookvar gap matrix
 
 | Bookvar concept | Current page | Missing material | Best source IDs | Action |
 |---|---|---|---|---|
-| System framing | — | DAM, Iron Law, constraints | H-V1-01, H-V1-02 | new chapter 01 |
-| CUDA timing | — | async launch, warmup, synchronization | E-01-L/S, H-V1-11 | new chapters 02–03 + lab |
-| Transformer/MoE arithmetic | — | FLOPs, memory, all-to-all | E-06-L, H-V1-05 | new chapter 04 |
-| Numerical formats | `44 Distributed training и mixed precision.md` | FP8/MXFP8, accumulation, loss scaling | E-02-L, H-V1-08 | new chapter 05; split 44 |
-| Input pipeline/profiling | `41 Сбор, очистка и смеси данных.md` | I/O, decode, padding, snapshots | E-02-L/S/H1…3 | new chapters 06–07 |
-| DP and collectives | `44 Distributed training и mixed precision.md` | ring/tree, overlap, cost | E-03-L/S/H, H-V2-06 | 44a + lab |
-| TP/PP/checkpointing | `44 Distributed training и mixed precision.md` | placement, bubble, offload | E-04-L/S1…2, H-V2-05 | 44b–d |
-| ZeRO/FSDP | `44 Distributed training и mixed precision.md` | DeviceMesh, DTensor, DCP | E-05-L/S/H | 44e + lab |
-| EP/hybrid, fabric, recovery | `02 Mixture of Experts — routing, capacity и serving.md` | GroupedGEMM, RDMA, Young-Daly | E-06-L, H-V2-03…08 | 44f–h |
-| KV-cache/scheduling | `55 KV-cache, пакетирование и PagedAttention.md` | Qwen measurements, mini-engine | E-08-L/S/H/P | worked example + lab |
-| Kernels | `56 FlashAttention.md` | compile, fusion, Liger profiles | E-06-S, H-V2-09 | expand 56 |
-| Quantization/speculation | `57 Квантизация языковых моделей.md`; `58 Спекулятивное декодирование.md` | W8A8, KV rollback/compression | E-09-L/S/H | 57a; practices 15–16 |
-| Queueing and capacity | `58b Benchmarking, SLO и эксплуатация inference.md` | utilization, replica/cost model | H-V1-13, H-V2-10, E-08-S | new 58c |
-| Deployment/MLOps | — | health, observability, rollout | E-07-L/P1…7, H-V1-14 | lifecycle chapter + lab |
-| Security/robustness/sustainability | — | threats, SDC, energy | H-V2-13…16 | Task 8 focused pages |
+| System framing | none | DAM, Iron Law, energy hierarchy, deployment constraints | H-V1-01, H-V1-02, H-SL1-01 | Create `00 Учебник/10 ML Systems/01 Модель как часть системы.md`. |
+| GPU and CUDA | none | SIMT, divergence, async launch, synchronization, memory hierarchy | H-V1-11, H-V2-02, E-01-L, E-01-S | Create `00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md` and `06 Практика/06 Измерить CUDA правильно.md`. |
+| Measurement and roofline | `00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md` | warmup, distributions, general roofline, memory wall | H-V1-12, H-SIM-01, H-SIM-02, E-01-S | Create `00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md`; link existing 55a to it. |
+| Transformer and MoE arithmetic | none | operation FLOPs, activation memory, dispatch, all-to-all | H-V1-05, E-06-L | Create `00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md`. |
+| Numerical formats | `00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md` | FP8, MXFP8, accumulation, master weights, loss scaling | H-V1-08, E-02-L, E-02-A1 | Create `00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md`; retain only distributed context in chapter 44. |
+| Input pipeline | `00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md` | storage, decoding, dynamic padding, packing, bucketing | H-V1-04, E-02-S, E-02-H1, E-02-H2 | Create `00 Учебник/10 ML Systems/06 Data pipeline, padding и packing.md` and `06 Практика/08 Padding, packing и profiler.md`. |
+| Profiling | none | PyTorch Profiler, memory snapshots, Nsight Systems, bottleneck diagnosis | H-V1-07, E-02-H3, E-06-S | Create `00 Учебник/10 ML Systems/07 Profiling ML-нагрузки.md`. |
+| Data parallelism and collectives | `00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md` | collective primitives, ring and tree algorithms, overlap and cost | H-V2-06, E-03-L, E-03-S, E-03-H | Create `00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md` and `06 Практика/09 Реализовать Ring AllReduce.md`. |
+| Checkpointing and offload | `00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md` | activation lifetimes, recomputation, CPU and disk offload | E-04-L, E-04-S1 | Create `00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload.md` and `06 Практика/10 Checkpointing и offload.md`. |
+| Tensor and sequence parallelism | `00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md` | MLP and attention partitioning, Ulysses and Ring Attention | H-V2-05, E-04-L, E-04-S2 | Create `00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism.md` and `06 Практика/11 Tensor и sequence parallelism.md`. |
+| Pipeline parallelism | `00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md` | GPipe, 1F1B, bubbles, schedule verification | H-SL2-05, E-04-L, E-04-S2 | Create `00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism.md`. |
+| ZeRO and FSDP | `00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md` | DeviceMesh, DTensor, FSDP2 hooks, distributed checkpoints | E-05-L, E-05-S, E-05-H | Create `00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor.md` and `06 Практика/12 Собрать FSDP из collectives.md`. |
+| Expert and hybrid parallelism | `00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md` | GroupedGEMM, EP all-to-all, token imbalance, 3D parallelism | H-V2-05, H-SIM-14, E-06-L | Create `00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism.md`; link architecture theory instead of duplicating it. |
+| Networks, storage, and checkpoints | none | RDMA, GPUDirect, fabric topology, GDS, checkpoint storms | H-V2-03, H-V2-04, H-F2-03, H-F2-04 | Create `00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints.md`. |
+| Fault tolerance and orchestration | none | failure domains, Young-Daly, elastic recovery, gang scheduling | H-V2-07, H-V2-08, H-SL2-07, H-SL2-08 | Create `00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration.md`. |
+| KV cache and scheduling | `00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md` | measured Qwen example and mini-engine scheduler | H-V2-10, E-08-L, E-08-S, E-08-H | Add the measured example to the existing page and create `06 Практика/14 Собрать mini inference engine.md`. |
+| Kernels and compilation | `00 Учебник/14 Inference и оптимизация/56 FlashAttention.md` | fusion, torch.compile, Liger kernels, profile interpretation | H-V2-09, E-06-S, E-06-A | Expand `00 Учебник/14 Inference и оптимизация/56 FlashAttention.md` and create `06 Практика/13 Оптимизировать Transformer step.md`. |
+| Quantization and KV compression | `00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md` | W8A8, SmoothQuant, KV compression and offload | H-V1-10, H-SIM-06, E-09-L, E-09-S | Expand chapter 57; create `00 Учебник/14 Inference и оптимизация/57a KV-cache compression и offload.md` and `06 Практика/15 W8A8 и SmoothQuant в Triton.md`. |
+| Speculative decoding | `00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md` | accept and reject correctness, KV rollback, practical verification | E-09-L, E-09-H | Expand `00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md` and create `06 Практика/16 Speculative decoding и KV rollback.md`. |
+| Queueing, SLO, and capacity | `00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md` | utilization knee, replicas, cost, tail-latency capacity model | H-V1-13, H-V2-10, H-SIM-10, E-08-S | Create `00 Учебник/14 Inference и оптимизация/58c Queueing и capacity planning.md`; link it from chapter 58b. |
+| Deployment and MLOps | none | service boundaries, health, metrics, gRPC, supervision, staged rollout | H-V1-14, E-07-L, E-07-P3, E-07-P4, E-07-P5, E-07-P6, E-07-P7 | Create `00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps.md` and `06 Практика/17 Упаковать модель в наблюдаемый сервис.md`. |
+| Security, robustness, and sustainability | none | threat models, silent corruption, energy, carbon, and water | H-V2-13, H-V2-14, H-V2-15, H-V2-16 | Create `01 Справочник/Security и Robustness/01 Security и privacy.md`, `01 Справочник/Security и Robustness/02 Robustness.md`, and `00 Учебник/18 Evaluation и методология/60 Responsible systems.md`. |
