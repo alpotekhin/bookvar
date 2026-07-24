@@ -120,3 +120,69 @@ Build/link/output evidence:
 - No deploy, remote operation, PR, push, or merge was performed.
 
 Content commit: `27c16bb68ba9442599ba046aa3a175bc4b3bb232`.
+
+## Review remediation — standalone depth and schedule proof
+
+The compact first pass was expanded after review without reverting the inherited
+44c/44d corrections. Current source counts are:
+
+| Page | Lines | Words |
+|---|---:|---:|
+| 44 | 95 | 947 |
+| 44a | 89 | 674 |
+| 44b | 88 | 821 |
+| 44c | 138 | 942 |
+| 44d | 166 | 1177 |
+| 44e | 86 | 664 |
+| 44f | 71 | 585 |
+| 44g | 74 | 597 |
+| 44h | 92 | 782 |
+
+Review finding → remediation map:
+
+- ambiguous Adam ledger → named BF16/FP32 dtype table and explicit
+  `2+4+4+4+4=18 B/param`;
+- lost legacy operational material → restored constraint→tool→cost→check table
+  and the five launch gates;
+- activation formula hid naive attention → separated
+  `O(LBHS^2)` saved score/probability state from FlashAttention's
+  `O(LBHSD)` saved-state contract;
+- mixed GiB/GB arithmetic → `16 GiB = 17.18 GB`,
+  `17.18/24 = 0.716 s`, with `0.316 s` uncovered after 0.4 s compute;
+- compact chapter summaries → added goals/prerequisites, state transitions,
+  pseudocode, worked ledgers/configurations, trade-offs and verification;
+- vague source references → added mechanism locators for selective activation
+  checkpointing, FlashAttention, FSDP2/fully_shard/DCP, EP compatibility,
+  RDMA/RoCE/PFC/storage, gang/topology/Slurm/Kubernetes;
+- multiline display math triggered the non-ASCII math guard → made the two
+  affected formulas single-line without changing their semantics.
+
+Schedule proof used literal 4-stage, 4-microbatch GPipe and 1F1B tables. The
+validator asserted: 32 unique operations per table; exactly one `Fμ` and `Bμ`
+per `(stage,microbatch)`; `Fμ@Si > Fμ@S(i-1)`; `Bμ@Si >
+Bμ@S(i+1)`; and `Bμ@Si > Fμ@Si`. Output:
+
+```text
+GPipe PASS: 32 ops; uniqueness, F chain, B chain, and B-after-F dependencies hold
+1F1B PASS: 32 ops; uniqueness, F chain, B chain, and B-after-F dependencies hold
+```
+
+Fresh verification after remediation:
+
+```text
+cd publishing && npm test
+Test Files 10 passed (10); Tests 98 passed (98)
+
+cd site && pnpm check && pnpm build
+astro check: 0 errors, 0 warnings, 0 hints
+astro build: 590 pages built; Pagefind completed; exit 0
+
+cd publishing && pnpm build && npm run check:links && npm run test:output
+0 broken internal routes, fragments, or files
+Test Files 1 passed (1); Tests 8 passed (8)
+
+git diff --check
+exit 0
+```
+
+The pre-existing modified plan file remained excluded from Task 5 staging.

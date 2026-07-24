@@ -9,6 +9,10 @@ last_updated: 2026-07-24
 
 При синхронном обучении отказ одного rank останавливает world. Если независимый MTBF устройства равен $M$, то грубый MTBF job на $N$ устройствах — $M/N$. Для $M=5$ лет и $N=1024$ это около 42.8 часа: многонедельный запуск обязан проектировать recovery как штатный путь.
 
+## Что нужно знать и чему научимся
+
+Нужны durable checkpoints из 44g и process groups из 44a. После главы можно вывести checkpoint interval, разделить fail-stop и SDC, описать elastic state transition и принять решение между немедленным фрагментированным и отложенным компактным размещением.
+
 ## Домены отказа и silent corruption
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/failure-domains.svg]]
@@ -43,6 +47,15 @@ Recovery time включает detection $D$, scheduler/rendezvous $Q$, restore 
 
 Elastic restart может заменить rank или изменить world size. Но изменение DP degree меняет global batch, scheduler semantics, shard placement и порядок data sampler. Состояние должно быть topology-independent; rendezvous формирует новый world, distributed checkpoint reshard’ится, а data position не повторяет и не пропускает примеры. Для TP/PP изменение степени часто невозможно без смены layout, поэтому elasticity обычно ограничивают DP-осью.
 
+```text
+detect_failed_world()
+stop_surviving_ranks_at_safe_boundary()
+new_world = rendezvous(replacement_nodes, allowed_dp_degree)
+state = load_latest_known_good_checkpoint(reshard_to=new_world)
+restore_rng_scheduler_scaler_and_data_cursor(state)
+run_one_step_and_compare_recovery_invariants()
+```
+
 ## Fleet orchestration
 
 Gang scheduling запускает job только если одновременно доступны все требуемые ranks. Частичный старт 60 из 64 GPU расходует ресурсы, но collective не начнётся. Backfilling заполняет окна короткими jobs, не задерживая зарезервированный крупный запуск; preemption полезна только при checkpoint-aware grace period.
@@ -73,7 +86,7 @@ Job на 256 GPU ждёт compact block 2 h или может стартоват
 ## Источники
 
 - Harvard Edge ML Systems Book, [Fault Tolerance](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/fault_tolerance/fault_tolerance.qmd), sections `sec-fault-tolerance-failure-models`, `sec-fault-tolerance-checkpoint-optimization`, `sec-fault-tolerance-silent-data-corruption`.
-- Harvard Edge ML Systems Book, [Fleet Orchestration](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/fleet_orchestration/fleet_orchestration.qmd), sections on gang scheduling, topology placement, Slurm and Kubernetes.
+- Harvard Edge ML Systems Book, commit `45ecc8d…`, [Fleet Orchestration, `sec-fleet-orchestration-gang-scheduling`, `sec-fleet-orchestration-topology-aware-placement`, `sec-fleet-orchestration-slurm` and `sec-fleet-orchestration-kubernetes`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/fleet_orchestration/fleet_orchestration.qmd).
 - Daly, [A Higher Order Estimate of the Optimum Checkpoint Interval](https://doi.org/10.1016/j.future.2004.11.016), 2006.
 
 ← [[44g Network, storage и distributed checkpoints]] · Далее: [[01 SFT и instruction data]]

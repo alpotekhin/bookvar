@@ -9,6 +9,10 @@ last_updated: 2026-07-24
 
 Один процесс обслуживает одно устройство. Его `rank` — номер в группе, `world_size=N` — число участников; группы позволяют выполнять разные collectives на разных осях параллелизма. Point-to-point `send/recv` задают обмен явно, collective выражает общий шаблон и позволяет библиотеке выбрать алгоритм.
 
+## Что нужно знать и чему научимся
+
+Нужны только tensors и synchronous data parallelism. После главы можно восстановить shape/state переход любого collective, оценить latency/bandwidth lower bound, написать DDP-step и отличить полезное overlap от нарисованного profiler-ом суммарного времени.
+
 ## От сообщений к коллективным операциям
 
 Broadcast копирует тензор одного rank всем; reduce собирает результат у root; all-reduce возвращает редукцию каждому; all-gather собирает все shards каждому; reduce-scatter одновременно редуцирует и оставляет rank только его shard; all-to-all пересылает каждому rank отдельную часть. Последняя операция особенно важна для MoE.
@@ -43,6 +47,20 @@ DDP копирует параметры и optimizer state, раздаёт ра�
 
 Если каждый rank вычисляет средний градиент по $b$ примерам, то после sum all-reduce нужно делить на $N$ (или доверить это реализации), чтобы получить градиент global batch $Nb$. Нельзя одновременно суммировать loss и ещё раз делить gradient: это меняет learning rate.
 
+```text
+initialize_process_group(rank, world_size)
+model = replicate_same_parameters()
+for local_batch in distributed_sampler():
+    loss = model(local_batch) / gradient_accumulation_steps
+    backward(loss)                 # готовые buckets запускают async all-reduce
+    if accumulation_boundary:
+        wait_all_buckets()
+        optimizer.step()
+        optimizer.zero_grad()
+```
+
+Gradient переходит из состояния `local partial` в `globally averaged replica`, не меняя shape. При accumulation collective либо подавляют до последнего microbatch, либо его стоимость умножается на число microbatches.
+
 ### Полезность масштабирования
 
 Пусть backward занимает 180 ms, а 1-GiB ring — 70 ms. Если 55 ms скрыты вычислением, шаг платит 15 ms. Добавление GPU, уменьшившее compute до 100 ms, может открыть уже 40 ms communication: speedup становится сублинейным. Измерять нужно exposed collective time, а не сумму длительностей NCCL kernels.
@@ -65,6 +83,7 @@ $$u_t=g_t+e_t,\quad q_t=C(u_t),\quad e_{t+1}=u_t-q_t.$$
 
 - EDLS, [week 3: distributed training](https://github.com/mryab/efficient-dl-systems).
 - Harvard Edge ML Systems Book, [Collective Communication](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/collective_communication/collective_communication.qmd), sections `sec-collective-communication-primitives`, `sec-collective-communication-allreduce`.
+- Harvard Edge ML Systems Book, commit `45ecc8d…`, [Distributed Training, `sec-distributed-training-systems-systems-data-parallelism-0c8f`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/distributed_training.qmd).
 - Vogels et al., [PowerSGD](https://arxiv.org/abs/1905.13727), 2019.
 
 ← [[44 Distributed training и mixed precision]] · Далее: [[44b Gradient checkpointing и offload]]
