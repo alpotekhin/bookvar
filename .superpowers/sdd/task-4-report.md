@@ -150,3 +150,7 @@ MoE example S=8192,k=8,H=7168,I=2048:
   full SwiGLU = 5,772,436,045,824 FLOP = 7.216 ms at 800 TFLOP/s
   one projection = 1,924,145,348,608 FLOP = 2.405 ms
 ```
+
+Review-fix implementation commit:
+`c3a85bebe0c50767d479fc2bc92260b8bde838c5`
+(`Deepen ML systems computational foundations`).
