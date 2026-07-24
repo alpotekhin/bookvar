@@ -5,6 +5,11 @@ import { parse } from 'yaml';
 import { describe, expect, it } from 'vitest';
 
 const root = resolve(import.meta.dirname, '../..');
+const systemsAssetRoot = resolve(
+  root,
+  '00 Учебник/Assets/Figures/curated/ml-systems'
+);
+const trackedFigurePattern = /\.(svg|png|jpe?g|gif|webp)$/i;
 
 function sha256(path: string): string {
   return createHash('sha256').update(readFileSync(path)).digest('hex');
@@ -40,10 +45,36 @@ function expectDecodableImage(path: string): void {
 }
 
 describe('publication asset registry', () => {
+  it('registers every curated ML systems asset with pinned provenance', () => {
+    const manifestPath = resolve(systemsAssetRoot, 'assets.yml');
+    const manifest = parse(readFileSync(manifestPath, 'utf8')) as {
+      assets: Array<{
+        file: string;
+        author: string;
+        source_url: string;
+        commit: string;
+        license: string;
+        modified: boolean;
+        used_in: string[];
+      }>;
+    };
+    const registered = new Set(manifest.assets.map((asset) => asset.file));
+    const actual = readdirSync(systemsAssetRoot, { recursive: true })
+      .map(String)
+      .filter((file) => /\.(svg|png|jpe?g|gif|webp)$/i.test(file));
+
+    expect([...registered].sort()).toEqual(actual.sort());
+    for (const asset of manifest.assets) {
+      expect(asset.source_url).toMatch(/^https:\/\/github\.com\/.+\/blob\/[0-9a-f]{40}\//);
+      expect(asset.commit).toMatch(/^[0-9a-f]{40}$/);
+      expect(asset.used_in.length).toBeGreaterThan(0);
+    }
+  });
+
   it('stores decodable image data matching every tracked figure extension', () => {
     const figuresRoot = resolve(root, '00 Учебник/Assets/Figures');
     const files = readdirSync(figuresRoot, { recursive: true, withFileTypes: true })
-      .filter((entry) => entry.isFile())
+      .filter((entry) => entry.isFile() && trackedFigurePattern.test(entry.name))
       .map((entry) => `${entry.parentPath}/${entry.name}`);
 
     for (const file of files) expectDecodableImage(file);
@@ -56,7 +87,7 @@ describe('publication asset registry', () => {
     const paths = registry.assets.map((asset) => asset.asset);
     const figuresRoot = resolve(root, '00 Учебник/Assets/Figures');
     const files = readdirSync(figuresRoot, { recursive: true, withFileTypes: true })
-      .filter((entry) => entry.isFile())
+      .filter((entry) => entry.isFile() && trackedFigurePattern.test(entry.name))
       .map((entry) => `00 Учебник/Assets/Figures/${entry.parentPath.slice(figuresRoot.length + 1)}${entry.parentPath === figuresRoot ? '' : '/'}${entry.name}`)
       .sort();
 
@@ -169,7 +200,7 @@ describe('publication asset registry', () => {
     const curatedRoot = resolve(root, '00 Учебник/Assets/Figures/curated');
     const files = existsSync(curatedRoot)
       ? readdirSync(curatedRoot, { recursive: true, withFileTypes: true })
-        .filter((entry) => entry.isFile())
+        .filter((entry) => entry.isFile() && trackedFigurePattern.test(entry.name))
         .map((entry) => `00 Учебник/Assets/Figures/curated/${entry.parentPath.slice(curatedRoot.length + 1)}${entry.parentPath === curatedRoot ? '' : '/'}${entry.name}`)
         .sort()
       : [];
