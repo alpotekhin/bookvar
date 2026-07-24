@@ -12,6 +12,10 @@ primary_sources:
 
 # LSTM и GRU
 
+Полная исходная памятка Stanford с уравнениями всех gates, схемами ячейки и
+сравнением LSTM/GRU сохранена в
+[[05 Источники/Courses/Stanford CS230 Cheatsheets/en/cheatsheet-recurrent-neural-networks.pdf|Recurrent Neural Networks Cheatsheet]].
+
 Простая RNN переносит память через повторяющееся нелинейное преобразование.
 Чтобы факт с первого шага повлиял на сотый, сигнал должен пережить длинное
 произведение Якоби. LSTM меняет геометрию этого пути: наряду с обычным скрытым

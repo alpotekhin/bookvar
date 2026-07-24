@@ -1,6 +1,7 @@
 import type { RouteRegistry } from './types.js';
 
 const IMAGE_EXTENSION = /\.(?:png|jpe?g|webp|svg|gif)$/i;
+const PROTECTED_TOKEN_PREFIX = 'BOOKVARPROTECTEDCODE';
 
 function basename(target: string): string {
   const name = target.slice(target.lastIndexOf('/') + 1);
@@ -82,7 +83,25 @@ export function convertWikiSyntax(
 } {
   const unresolved: string[] = [];
   const allowlisted: Array<{ target: string; reason: string }> = [];
-  const withoutEmbeds = markdown.replace(
+  const protectedSegments: string[] = [];
+  const protect = (segment: string): string => {
+    const token = `${PROTECTED_TOKEN_PREFIX}${protectedSegments.length}TOKEN`;
+    protectedSegments.push(segment);
+    return token;
+  };
+  // Obsidian syntax is meaningful in prose, not inside literal source code.
+  // Protect fenced blocks first, then inline code spans. The fence expression
+  // deliberately accepts both backticks and tildes and preserves the source
+  // byte-for-byte when the tokens are restored below.
+  const withoutFencedCode = markdown.replace(
+    /^( {0,3})(`{3,}|~{3,})[^\n]*\n[\s\S]*?^\1\2[ \t]*$/gm,
+    protect
+  );
+  const withoutCode = withoutFencedCode.replace(
+    /(`+)([\s\S]*?)\1/g,
+    protect
+  );
+  const withoutEmbeds = withoutCode.replace(
     /!\[\[([^\]\n]+)\]\]/g,
     (match, expression: string) => expression.trim() === ''
       ? match
@@ -94,6 +113,10 @@ export function convertWikiSyntax(
       ? match
       : convertLink(expression, registry, unresolved, allowlist, allowlisted)
   );
+  const restored = converted.replace(
+    new RegExp(`${PROTECTED_TOKEN_PREFIX}(\\d+)TOKEN`, 'g'),
+    (_match, index: string) => protectedSegments[Number(index)]
+  );
 
-  return { markdown: converted, unresolved, allowlisted };
+  return { markdown: restored, unresolved, allowlisted };
 }

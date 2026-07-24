@@ -78,4 +78,40 @@ describe('convertWikiSyntax', () => {
       allowlisted: []
     });
   });
+
+  it('does not resolve wiki-like Python indexing inside code', () => {
+    const source = [
+      'Outside: [[Path/Page]].',
+      '',
+      '```python',
+      'matrix[[1, 2], [3, 4]]',
+      'literal = "[[Missing Page]]"',
+      '```',
+      '',
+      'Inline `array[[0, 1]]` stays literal.',
+      '',
+      '~~~text',
+      '[[Also Missing]]',
+      '~~~'
+    ].join('\n');
+
+    expect(convertWikiSyntax(source, registry)).toEqual({
+      markdown: [
+        'Outside: [Page](/resolved-route/).',
+        '',
+        '```python',
+        'matrix[[1, 2], [3, 4]]',
+        'literal = "[[Missing Page]]"',
+        '```',
+        '',
+        'Inline `array[[0, 1]]` stays literal.',
+        '',
+        '~~~text',
+        '[[Also Missing]]',
+        '~~~'
+      ].join('\n'),
+      unresolved: [],
+      allowlisted: []
+    });
+  });
 });

@@ -7,6 +7,8 @@ last_updated: 2026-07-24
 
 # Оптимизировать один Transformer step
 
+**Полный исполняемый модуль:** [[05 Источники/Courses/Harvard ML Systems/tinytorch/20_capstone|TinyTorch 20 — Capstone]]. Он объединяет profiling, quantization, compression, acceleration, memoization и benchmarking в воспроизводимое сравнение baseline и optimized model со schema-validated JSON-отчётом.
+
 Это итоговая работа по training performance. Выполняйте [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week06_dl_arithmetic/seminar/practice.ipynb|EDLS Week 6 seminar notebook]] и сверяйтесь с [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week06_dl_arithmetic/lecture.pdf|полной 146-слайдовой лекцией]].
 
 Зафиксируйте baseline Transformer step. До оптимизации составьте три ведомости:

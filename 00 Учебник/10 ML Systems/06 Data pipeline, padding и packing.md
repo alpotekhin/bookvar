@@ -8,6 +8,8 @@ source_language: mixed
 
 # Data pipeline, padding и packing
 
+**Полный исполняемый модуль:** [[05 Источники/Courses/Harvard ML Systems/tinytorch/05_dataloader|TinyTorch 05 — DataLoader]]. Исходный код реализует абстракции `Dataset` и `TensorDataset`, формирование batch, перемешивание и итерацию по данным и позволяет измерить свойства этого минимального pipeline.
+
 GPU простаивает, если batch не готов. Data pipeline должен доставлять следующий
 batch быстрее, чем модель обрабатывает текущий, и не тратить compute на
 бессмысленный padding.

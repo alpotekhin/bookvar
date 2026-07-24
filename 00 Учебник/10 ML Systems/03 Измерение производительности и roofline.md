@@ -8,6 +8,8 @@ source_language: mixed
 
 # Измерение производительности и roofline
 
+**Полный исполняемый модуль:** [[05 Источники/Courses/Harvard ML Systems/tinytorch/19_benchmarking|TinyTorch 19 — Benchmarking]]. Модуль строит единый benchmarking harness для latency и сравнений вариантов модели, включая повторные измерения, абляции и стандартный формат результата.
+
 Benchmark — воспроизводимый эксперимент, а не одно число.
 
 ## Полные источники и практикум

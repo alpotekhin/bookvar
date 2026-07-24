@@ -188,8 +188,16 @@ sections:
         route: textbook/inference/benchmarking-slo
       - source: 00 Учебник/14 Inference и оптимизация/58c Queueing и capacity planning.md
         route: textbook/inference/queueing-capacity-planning
+      - source: 00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow.md
+        route: textbook/deployment/ml-workflow
+      - source: 00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps.md
+        route: textbook/deployment/mlops
+      - source: 00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment.md
+        route: textbook/deployment/edge-federated
       - source: 00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md
         route: textbook/evaluation/models-contamination
+      - source: 00 Учебник/18 Evaluation и методология/59a Responsible systems.md
+        route: textbook/evaluation/responsible-systems
       - source: 00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning.md
         route: textbook/retrieval/embeddings-metric-learning
       - source: 00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid.md
@@ -437,8 +445,16 @@ sections:
             route: textbook/inference/benchmarking-slo
           - label: 58.4 Queueing и capacity planning
             route: textbook/inference/queueing-capacity-planning
+          - label: 58.5 ML workflow
+            route: textbook/deployment/ml-workflow
+          - label: 58.6 MLOps — от артефакта до наблюдаемого сервиса
+            route: textbook/deployment/mlops
+          - label: 58.7 Edge и federated deployment
+            route: textbook/deployment/edge-federated
           - label: 59. Оценивание моделей и контаминация
             route: textbook/evaluation/models-contamination
+          - label: 59.1 Ответственные ML-системы
+            route: textbook/evaluation/responsible-systems
           - label: 60. Embeddings и metric learning
             route: textbook/retrieval/embeddings-metric-learning
           - label: 61. Retrieval — от BM25 до dense и hybrid
@@ -683,6 +699,10 @@ sections:
         route: reference/retrieval/rag
       - source: 01 Справочник/Evaluation/Evaluation.md
         route: reference/evaluation/evaluation
+      - source: 01 Справочник/Security и Robustness/01 Security и privacy.md
+        route: reference/security-robustness/security-privacy
+      - source: 01 Справочник/Security и Robustness/02 Robustness.md
+        route: reference/security-robustness/robustness
       - source: 03 Исследовательские линии/Эффективный attention.md
         route: research/effektivnyy-attention
       - source: 03 Исследовательские линии/Sparse и MoE-модели.md
@@ -977,6 +997,48 @@ sections:
         route: sources/courses/harvard-ml-systems/vol2/sustainable-ai
       - source: 05 Источники/Courses/Harvard ML Systems/vol2/responsible_ai.md
         route: sources/courses/harvard-ml-systems/vol2/responsible-ai
+      - source: 05 Источники/Courses/Harvard ML Systems/tinytorch/README.md
+        route: sources/courses/harvard-ml-systems/tinytorch
+      - source: 05 Источники/Courses/Harvard ML Systems/tinytorch/01_tensor.md
+        route: sources/courses/harvard-ml-systems/tinytorch/01-tensor
+      - source: 05 Источники/Courses/Harvard ML Systems/tinytorch/02_activations.md
+        route: sources/courses/harvard-ml-systems/tinytorch/02-activations
+      - source: 05 Источники/Courses/Harvard ML Systems/tinytorch/03_layers.md
+        route: sources/courses/harvard-ml-systems/tinytorch/03-layers
+      - source: 05 Источники/Courses/Harvard ML Systems/tinytorch/04_losses.md
+        route: sources/courses/harvard-ml-systems/tinytorch/04-losses
+      - source: 05 Источники/Courses/Harvard ML Systems/tinytorch/05_dataloader.md
+        route: sources/courses/harvard-ml-systems/tinytorch/05-dataloader
+      - source: 05 Источники/Courses/Harvard ML Systems/tinytorch/06_autograd.md
+        route: sources/courses/harvard-ml-systems/tinytorch/06-autograd
+      - source: 05 Источники/Courses/Harvard ML Systems/tinytorch/07_optimizers.md
+        route: sources/courses/harvard-ml-systems/tinytorch/07-optimizers
+      - source: 05 Источники/Courses/Harvard ML Systems/tinytorch/08_training.md
+        route: sources/courses/harvard-ml-systems/tinytorch/08-training
+      - source: 05 Источники/Courses/Harvard ML Systems/tinytorch/09_convolutions.md
+        route: sources/courses/harvard-ml-systems/tinytorch/09-convolutions
+      - source: 05 Источники/Courses/Harvard ML Systems/tinytorch/10_tokenization.md
+        route: sources/courses/harvard-ml-systems/tinytorch/10-tokenization
+      - source: 05 Источники/Courses/Harvard ML Systems/tinytorch/11_embeddings.md
+        route: sources/courses/harvard-ml-systems/tinytorch/11-embeddings
+      - source: 05 Источники/Courses/Harvard ML Systems/tinytorch/12_attention.md
+        route: sources/courses/harvard-ml-systems/tinytorch/12-attention
+      - source: 05 Источники/Courses/Harvard ML Systems/tinytorch/13_transformers.md
+        route: sources/courses/harvard-ml-systems/tinytorch/13-transformers
+      - source: 05 Источники/Courses/Harvard ML Systems/tinytorch/14_profiling.md
+        route: sources/courses/harvard-ml-systems/tinytorch/14-profiling
+      - source: 05 Источники/Courses/Harvard ML Systems/tinytorch/15_quantization.md
+        route: sources/courses/harvard-ml-systems/tinytorch/15-quantization
+      - source: 05 Источники/Courses/Harvard ML Systems/tinytorch/16_compression.md
+        route: sources/courses/harvard-ml-systems/tinytorch/16-compression
+      - source: 05 Источники/Courses/Harvard ML Systems/tinytorch/17_acceleration.md
+        route: sources/courses/harvard-ml-systems/tinytorch/17-acceleration
+      - source: 05 Источники/Courses/Harvard ML Systems/tinytorch/18_memoization.md
+        route: sources/courses/harvard-ml-systems/tinytorch/18-memoization
+      - source: 05 Источники/Courses/Harvard ML Systems/tinytorch/19_benchmarking.md
+        route: sources/courses/harvard-ml-systems/tinytorch/19-benchmarking
+      - source: 05 Источники/Courses/Harvard ML Systems/tinytorch/20_capstone.md
+        route: sources/courses/harvard-ml-systems/tinytorch/20-capstone
       - source: 05 Источники/Source maps/Harvard ML Systems — complete transfer matrix.md
         route: sources/source-maps/harvard-ml-systems-transfer
       - source: 05 Источники/Source maps/Efficient DL Systems — complete transfer matrix.md

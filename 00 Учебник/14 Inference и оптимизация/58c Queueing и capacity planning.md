@@ -163,3 +163,5 @@ preemption, errors и стоимость. Затем повторяют с burst
 - Zhong et al., [DistServe](https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf) — goodput под TTFT/TPOT SLO.
 
 **Предыдущая глава:** [[58b Benchmarking, SLO и эксплуатация inference|Benchmarking, SLO и эксплуатация inference]]
+
+**Следующая глава:** [[02 Areas/ML & DL/00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow|Жизненный цикл ML-системы]]

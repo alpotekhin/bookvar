@@ -9,9 +9,10 @@ last_verified: 2026-07-24
 
 Здесь находится не конспект и не перевод, а полный перенос 29 содержательных
 глав открытого учебника *Machine Learning Systems* Vijay Janapa Reddi и
-соавторов. Английский текст, порядок разделов, таблицы, формулы, контрольные
-вопросы и подписи сохранены. Изменены только формат публикации, внутренние
-ссылки и пути к локальным изображениям.
+соавторов, а также двадцати исполняемых модулей TinyTorch. Английский текст,
+порядок разделов, таблицы, формулы, контрольные вопросы и подписи сохранены.
+Изменены только формат публикации, внутренние ссылки и пути к локальным
+изображениям.
 
 Зафиксирована опубликованная версия сайта: commit
 [`2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd`](https://github.com/harvard-edge/cs249r_book/commit/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd).
@@ -58,6 +59,14 @@ Bookvar.
 13. [[05 Источники/Courses/Harvard ML Systems/vol2/robust_ai|Robust AI]]
 14. [[05 Источники/Courses/Harvard ML Systems/vol2/sustainable_ai|Sustainable AI]]
 15. [[05 Источники/Courses/Harvard ML Systems/vol2/responsible_ai|Responsible AI]]
+
+## TinyTorch — framework from first principles
+
+[[05 Источники/Courses/Harvard ML Systems/tinytorch/README|Полный маршрут TinyTorch]]
+содержит все двадцать оригинальных progressive modules вместе с `module.yaml`
+и полным Python source: от собственного tensor/autograd stack до attention,
+Transformer, profiling, quantization, compression и benchmarking. Код
+распространяется по MIT; учебная проза внутри модулей — по CC BY-NC-SA 4.0.
 
 ## Что будет дальше
 

@@ -8,6 +8,8 @@ source_language: mixed
 
 # GPU, CUDA и иерархия памяти
 
+**Полный исполняемый модуль:** [[05 Источники/Courses/Harvard ML Systems/tinytorch/17_acceleration|TinyTorch 17 — Acceleration]]. Исходный код сопоставляет базовые, векторизованные и fused operations и проверяет, как уменьшение обращений к памяти меняет throughput.
+
 GPU быстр, когда много одинаковой работы можно запланировать одновременно, а
 данные переиспользуются рядом с ALU.
 
