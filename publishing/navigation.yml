@@ -701,6 +701,66 @@ sections:
         route: sources/community-repositories
       - source: 05 Источники/Курсы.md
         route: sources/kursy
+      - source: 05 Источники/Courses/Harvard ML Systems.md
+        route: sources/harvard-ml-systems
+      - source: 05 Источники/Courses/Harvard ML Systems/vol1/ml_systems.md
+        route: sources/courses/harvard-ml-systems/vol1/ml-systems
+      - source: 05 Источники/Courses/Harvard ML Systems/vol1/ml_workflow.md
+        route: sources/courses/harvard-ml-systems/vol1/ml-workflow
+      - source: 05 Источники/Courses/Harvard ML Systems/vol1/data_engineering.md
+        route: sources/courses/harvard-ml-systems/vol1/data-engineering
+      - source: 05 Источники/Courses/Harvard ML Systems/vol1/nn_computation.md
+        route: sources/courses/harvard-ml-systems/vol1/neural-computation
+      - source: 05 Источники/Courses/Harvard ML Systems/vol1/nn_architectures.md
+        route: sources/courses/harvard-ml-systems/vol1/network-architectures
+      - source: 05 Источники/Courses/Harvard ML Systems/vol1/frameworks.md
+        route: sources/courses/harvard-ml-systems/vol1/frameworks
+      - source: 05 Источники/Courses/Harvard ML Systems/vol1/training.md
+        route: sources/courses/harvard-ml-systems/vol1/training
+      - source: 05 Источники/Courses/Harvard ML Systems/vol1/data_selection.md
+        route: sources/courses/harvard-ml-systems/vol1/data-selection
+      - source: 05 Источники/Courses/Harvard ML Systems/vol1/model_compression.md
+        route: sources/courses/harvard-ml-systems/vol1/model-compression
+      - source: 05 Источники/Courses/Harvard ML Systems/vol1/hw_acceleration.md
+        route: sources/courses/harvard-ml-systems/vol1/hardware-acceleration
+      - source: 05 Источники/Courses/Harvard ML Systems/vol1/benchmarking.md
+        route: sources/courses/harvard-ml-systems/vol1/benchmarking
+      - source: 05 Источники/Courses/Harvard ML Systems/vol1/model_serving.md
+        route: sources/courses/harvard-ml-systems/vol1/model-serving
+      - source: 05 Источники/Courses/Harvard ML Systems/vol1/ml_ops.md
+        route: sources/courses/harvard-ml-systems/vol1/ml-operations
+      - source: 05 Источники/Courses/Harvard ML Systems/vol1/responsible_engr.md
+        route: sources/courses/harvard-ml-systems/vol1/responsible-engineering
+      - source: 05 Источники/Courses/Harvard ML Systems/vol2/compute_infrastructure.md
+        route: sources/courses/harvard-ml-systems/vol2/compute-infrastructure
+      - source: 05 Источники/Courses/Harvard ML Systems/vol2/network_fabrics.md
+        route: sources/courses/harvard-ml-systems/vol2/network-fabrics
+      - source: 05 Источники/Courses/Harvard ML Systems/vol2/data_storage.md
+        route: sources/courses/harvard-ml-systems/vol2/data-storage
+      - source: 05 Источники/Courses/Harvard ML Systems/vol2/distributed_training.md
+        route: sources/courses/harvard-ml-systems/vol2/distributed-training
+      - source: 05 Источники/Courses/Harvard ML Systems/vol2/collective_communication.md
+        route: sources/courses/harvard-ml-systems/vol2/collective-communication
+      - source: 05 Источники/Courses/Harvard ML Systems/vol2/fault_tolerance.md
+        route: sources/courses/harvard-ml-systems/vol2/fault-tolerance
+      - source: 05 Источники/Courses/Harvard ML Systems/vol2/fleet_orchestration.md
+        route: sources/courses/harvard-ml-systems/vol2/fleet-orchestration
+      - source: 05 Источники/Courses/Harvard ML Systems/vol2/performance_engineering.md
+        route: sources/courses/harvard-ml-systems/vol2/performance-engineering
+      - source: 05 Источники/Courses/Harvard ML Systems/vol2/inference.md
+        route: sources/courses/harvard-ml-systems/vol2/inference
+      - source: 05 Источники/Courses/Harvard ML Systems/vol2/edge_intelligence.md
+        route: sources/courses/harvard-ml-systems/vol2/edge-intelligence
+      - source: 05 Источники/Courses/Harvard ML Systems/vol2/ops_scale.md
+        route: sources/courses/harvard-ml-systems/vol2/ml-operations-at-scale
+      - source: 05 Источники/Courses/Harvard ML Systems/vol2/security_privacy.md
+        route: sources/courses/harvard-ml-systems/vol2/security-privacy
+      - source: 05 Источники/Courses/Harvard ML Systems/vol2/robust_ai.md
+        route: sources/courses/harvard-ml-systems/vol2/robust-ai
+      - source: 05 Источники/Courses/Harvard ML Systems/vol2/sustainable_ai.md
+        route: sources/courses/harvard-ml-systems/vol2/sustainable-ai
+      - source: 05 Источники/Courses/Harvard ML Systems/vol2/responsible_ai.md
+        route: sources/courses/harvard-ml-systems/vol2/responsible-ai
       - source: 05 Источники/Source maps/Harvard ML Systems — complete transfer matrix.md
         route: sources/source-maps/harvard-ml-systems-transfer
       - source: 05 Источники/Source maps/Efficient DL Systems — complete transfer matrix.md
