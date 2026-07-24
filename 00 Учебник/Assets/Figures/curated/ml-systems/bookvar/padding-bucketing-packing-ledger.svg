@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" role="img" aria-labelledby="title desc">
   <title id="title">Сравнение padding, bucketing и packing на одном наборе длин</title>
-  <desc id="desc">Три панели показывают, как одинаковые документы длиной 8, 7, 3 и 2 токена занимают 32 слота при общем padding, 22 слота после bucketing и 24 слота в двух packed-последовательностях. Полезных токенов во всех случаях 20.</desc>
+  <desc id="desc">Три панели показывают, как одинаковые документы длиной 8, 7, 3 и 2 токена занимают 32 слота при общем padding, 22 слота после bucketing и 20 слотов в двух packed-последовательностях. Полезных токенов во всех случаях 20; EOS не включён ни в один вариант.</desc>
   <style>
-    text{font-family:Inter,Arial,sans-serif;fill:#172033}.h{font-size:25px;font-weight:700}.s{font-size:17px}.n{font-size:15px}.box{fill:#f7f9fc;stroke:#8894a7;stroke-width:2}.tok{fill:#3478c9}.pad{fill:#fff;stroke:#a7b0bf;stroke-width:1.5;stroke-dasharray:5 4}.eos{fill:#ec9a29}.sep{stroke:#172033;stroke-width:2}
+    text{font-family:Inter,Arial,sans-serif;fill:#172033}.h{font-size:25px;font-weight:700}.s{font-size:17px}.n{font-size:15px}.box{fill:#f7f9fc;stroke:#8894a7;stroke-width:2}.tok{fill:#3478c9}.tok2{fill:#69a7df}.pad{fill:#fff;stroke:#a7b0bf;stroke-width:1.5;stroke-dasharray:5 4}.sep{stroke:#172033;stroke-width:2}
   </style>
   <text x="30" y="36" class="h">Один набор длин → три стратегии размещения</text>
   <g transform="translate(30 70)">
@@ -29,13 +29,13 @@
   </g>
   <g transform="translate(650 70)">
     <rect class="box" width="280" height="390" rx="12"/>
-    <text x="18" y="36" class="h">Packing</text><text x="18" y="64" class="s">2 × 12: 20 / 24 = 83,3%</text>
+    <text x="18" y="36" class="h">Packing</text><text x="18" y="64" class="s">2 × 10: 20 / 20 = 100%</text>
     <g transform="translate(18 104)">
-      <rect class="tok" width="160" height="42" rx="4"/><rect class="eos" x="160" width="20" height="42"/><rect class="tok" x="180" width="40" height="42"/><rect class="eos" x="220" width="20" height="42"/>
-      <rect class="tok" y="76" width="140" height="42" rx="4"/><rect class="eos" x="140" y="76" width="20" height="42"/><rect class="tok" x="160" y="76" width="60" height="42"/><rect class="eos" x="220" y="76" width="20" height="42"/>
-      <text x="0" y="160" class="n">синий = токены · оранжевый = EOS</text>
+      <rect class="tok" width="192" height="42" rx="4"/><rect class="tok2" x="192" width="48" height="42" rx="4"/><path class="sep" d="M192 0v42"/>
+      <rect class="tok" y="76" width="168" height="42" rx="4"/><rect class="tok2" x="168" y="76" width="72" height="42" rx="4"/><path class="sep" d="M168 76v42"/>
+      <text x="0" y="160" class="n">линия = граница документа, не отдельный слот</text>
     </g>
-    <text x="18" y="320" class="s">4 boundary-слота</text><text x="18" y="350" class="n">Экономия требует масок и правил границ.</text>
+    <text x="18" y="320" class="s">0 пустых слотов</text><text x="18" y="350" class="n">Границы хранятся в metadata/mask.</text>
   </g>
-  <text x="30" y="500" class="s">Ledger считает занятые слоты, а не обещает одинаковую стоимость kernels.</text>
+  <text x="30" y="500" class="s">EOS в этом сравнении не моделируется ни в одной панели; ledger считает только исходные 20 токенов.</text>
 </svg>

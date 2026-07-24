@@ -27,13 +27,6 @@ SIMT исполняет одну инструкцию для активных la
 проходит пути с масками последовательно. Tail tiles и число blocks, не кратное
 числу SM, создают tile/wave quantization.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/foundation/hw_acceleration_roofline_elbow.svg]]
-
-*Оригинальная иллюстрация Harvard CS249r, Vol. I, Hardware Acceleration,
-§ “Roofline Model”, locator `sec-hardware-acceleration-roofline-model-42ff`,
-commit `45ecc8d…`, CC BY-NC-SA 4.0; файл не изменён. Точка слева от ridge
-показывает режим, где дополнительная арифметика не заменяет доставку байтов.*
-
 ## Оригинальная схема: где живут work и bytes
 
 ```text
@@ -90,6 +83,18 @@ Warp читает 32 FP32 = 128 B. При выровненном contiguous acce
 и риск tail waste. Tensor Cores выполняют matrix multiply-accumulate над
 фиксированными фрагментами и форматами; выигрыш требует подходящих dtype,
 alignment/layout и размеров, а accumulation precision надо выбирать осознанно.
+
+Именно reuse повышает арифметическую интенсивность
+$I=F/Q_{\mathrm{HBM}}$: те же FLOP выполняются при меньшем traffic. Слева от
+ridge производительность ограничена $BW_{\mathrm{HBM}}I$; после ridge —
+compute ceiling.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/foundation/hw_acceleration_roofline_elbow.svg]]
+
+*Оригинальная иллюстрация Harvard CS249r, Vol. I, Hardware Acceleration,
+§ “Roofline Model”, locator `sec-hardware-acceleration-roofline-model-42ff`,
+commit `45ecc8d…`, CC BY-NC-SA 4.0; файл не изменён. Точка слева от ridge
+показывает режим, где дополнительная арифметика не заменяет доставку байтов.*
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/operator-fusion.svg]]
 

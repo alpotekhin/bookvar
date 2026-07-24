@@ -5218,7 +5218,9 @@ assets:
     license: CC BY-NC-SA 4.0
     license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
     modifications: copied without modification; path changed for tracked publication packaging
-    used_in: []
+    sha256: 8efdc56567a3017c10b042ec9ae143862ef640f8f193bdc8aa4445a201dc4560
+    used_in:
+      - 00 Учебник/10 ML Systems/01 Модель как часть системы.md
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
   - id: curated-harvard-harvard-foundation-frameworks-dispatch-tax-divergence-svg-db660dab5df0
@@ -5240,7 +5242,10 @@ assets:
     license: CC BY-NC-SA 4.0
     license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
     modifications: copied without modification; path changed for tracked publication packaging
-    used_in: []
+    sha256: 585cbabc2fedafe80abc87ea7da39ef32bc985d01003fedf07eee7f458a2fb4d
+    used_in:
+      - 00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md
+      - 00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
   - id: curated-harvard-harvard-foundation-hw-acceleration-roofline-elbow-svg-837ecd35b4f8
@@ -5251,7 +5256,10 @@ assets:
     license: CC BY-NC-SA 4.0
     license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
     modifications: copied without modification; path changed for tracked publication packaging
-    used_in: []
+    sha256: 4d20898ae8244de893577b70fc843b4c24f444842056f32d0cfcdc3169e42b5e
+    used_in:
+      - 00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md
+      - 00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
   - id: curated-harvard-harvard-foundation-hw-acceleration-energy-ladder-svg-f7d298e7765a
@@ -5361,7 +5369,10 @@ assets:
     license: CC BY-NC-SA 4.0
     license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
     modifications: copied without modification; path changed for tracked publication packaging
-    used_in: []
+    sha256: 6464aeac450f95fdc299e87d05c519e49e439e4b1a7dcfe2339850124f97f5eb
+    used_in:
+      - 00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md
+      - 00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism.md
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
   - id: curated-harvard-harvard-distributed-moe-all-to-all-routing-svg-914d887b52e8
@@ -5372,7 +5383,10 @@ assets:
     license: CC BY-NC-SA 4.0
     license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
     modifications: copied without modification; path changed for tracked publication packaging
-    used_in: []
+    sha256: 4571f4c2f935765e2deeb623ffa8c8143fc27821d07dcdc6b8325d88b620702d
+    used_in:
+      - 00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md
+      - 00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism.md
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
   - id: curated-harvard-harvard-distributed-zero-memory-partitioning-svg-a8e4a48164b4
@@ -5482,7 +5496,10 @@ assets:
     license: CC BY-NC-SA 4.0
     license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
     modifications: copied without modification; path changed for tracked publication packaging
-    used_in: []
+    sha256: 6b23d97b249a7d6841aaea70af6827148003f5f6806978a91aedcf3b553cfcf8
+    used_in:
+      - 00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md
+      - 00 Учебник/14 Inference и оптимизация/56 FlashAttention.md
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
   - id: curated-harvard-harvard-performance-flashattention-tiling-svg-7c84d90bdbb9
@@ -5515,7 +5532,10 @@ assets:
     license: CC BY-NC-SA 4.0
     license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
     modifications: copied without modification; path changed for tracked publication packaging
-    used_in: []
+    sha256: 8240e8b8971d7a69e115bd7643dd96b7bd9bbc9de2bf94815b51bdecef2b3a4d
+    used_in:
+      - 00 Учебник/10 ML Systems/07 Profiling ML-нагрузки.md
+      - 00 Учебник/14 Inference и оптимизация/56 FlashAttention.md
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
   - id: curated-harvard-harvard-inference-batching-strategies-svg-eb33debb5730
@@ -5627,7 +5647,7 @@ assets:
     license_url: https://creativecommons.org/licenses/by/4.0/
     modifications: original Bookvar SVG derived from the chapter formulas and the EDLS topic; not copied from the slide
     derivation: one fixed document-length set is re-laid into padded, bucketed, and packed slot ledgers
-    sha256: 9efe3221e7c3c9b060c93c76a50dacc34613ce88e08c1d1c2b50b829970fbe47
+    sha256: c01bab8fa293e06e0afd89ba8b83d5433cd219e2ffdf1b07d5e0ef8c68069eb9
     used_in:
       - 00 Учебник/10 ML Systems/06 Data pipeline, padding и packing.md
     metadata_status: verified
