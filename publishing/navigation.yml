@@ -93,6 +93,20 @@ sections:
         route: textbook/moe/mixture-of-experts
       - source: 00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md
         route: textbook/modern-llm/sequence-model-alternatives
+      - source: 00 Учебник/10 ML Systems/01 Модель как часть системы.md
+        route: textbook/ml-systems/model-as-part-of-system
+      - source: 00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md
+        route: textbook/ml-systems/gpu-cuda-memory-hierarchy
+      - source: 00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md
+        route: textbook/ml-systems/performance-measurement-roofline
+      - source: 00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md
+        route: textbook/ml-systems/transformer-moe-arithmetic
+      - source: 00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md
+        route: textbook/ml-systems/numerical-formats-mixed-precision
+      - source: 00 Учебник/10 ML Systems/06 Data pipeline, padding и packing.md
+        route: textbook/ml-systems/data-pipeline-padding-packing
+      - source: 00 Учебник/10 ML Systems/07 Profiling ML-нагрузки.md
+        route: textbook/ml-systems/profiling
       - source: 00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md
         route: textbook/pretraining/data-pipeline
       - source: 00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md
@@ -299,6 +313,20 @@ sections:
             route: textbook/moe/mixture-of-experts
           - label: 40. Mamba, RWKV, RetNet и гибридные архитектуры
             route: textbook/modern-llm/sequence-model-alternatives
+          - label: S1. Модель как часть системы
+            route: textbook/ml-systems/model-as-part-of-system
+          - label: S2. GPU, CUDA и иерархия памяти
+            route: textbook/ml-systems/gpu-cuda-memory-hierarchy
+          - label: S3. Измерение производительности и roofline
+            route: textbook/ml-systems/performance-measurement-roofline
+          - label: S4. Арифметика Transformer и MoE
+            route: textbook/ml-systems/transformer-moe-arithmetic
+          - label: S5. Численные форматы и mixed precision
+            route: textbook/ml-systems/numerical-formats-mixed-precision
+          - label: S6. Data pipeline, padding и packing
+            route: textbook/ml-systems/data-pipeline-padding-packing
+          - label: S7. Profiling ML-нагрузки
+            route: textbook/ml-systems/profiling
       - label: VI. Обучение LLM
         label_en: VI. Training language models
         items:

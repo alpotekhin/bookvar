@@ -81,7 +81,22 @@ last_updated: 2026-07-20
 чтобы увидеть, как они комбинируются в Llama, Qwen, DeepSeek, GLM, Kimi и
 других моделях.
 
-### VI. Обучение LLM
+### VI. Вычислительные основы ML-систем
+
+Этот блок переводит архитектуру модели в измеримые системные требования. Главы
+нужно читать по порядку: системная постановка задаёт ограничения, GPU и roofline
+объясняют пределы исполнения, арифметика и численные форматы дают бюджет шага,
+а input pipeline и profiling учат находить фактическое узкое место.
+
+1. [[02 Areas/ML & DL/00 Учебник/10 ML Systems/01 Модель как часть системы]]
+2. [[02 Areas/ML & DL/00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти]]
+3. [[02 Areas/ML & DL/00 Учебник/10 ML Systems/03 Измерение производительности и roofline]]
+4. [[02 Areas/ML & DL/00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE]]
+5. [[02 Areas/ML & DL/00 Учебник/10 ML Systems/05 Численные форматы и mixed precision]]
+6. [[02 Areas/ML & DL/00 Учебник/10 ML Systems/06 Data pipeline, padding и packing]]
+7. [[02 Areas/ML & DL/00 Учебник/10 ML Systems/07 Profiling ML-нагрузки]]
+
+### VII. Обучение LLM
 
 41. [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных]]
 42. [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/42 Next-token prediction]]
@@ -103,7 +118,7 @@ last_updated: 2026-07-20
 
 53. [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы]]
 
-### VII. Эксплуатация и системы вокруг модели
+### VIII. Эксплуатация и системы вокруг модели
 
 54. [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена]]
 55. [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline|Физика LLM inference: prefill, decode и roofline]]
