@@ -128,7 +128,7 @@ Below is a comprehensive overview of our GenAI agent implementations, organized 
   <tr style="background-color:#FBF3DB">
     <td width="4%" align="center">⭐</td>
     <td width="14%"><img src="https://img.shields.io/badge/⭐_FEATURED-D9B44A" height="20" alt="Featured tutorial"></td>
-    <td width="27%"><b><a href="all_agents_tutorials/document_intake_agent_langgraph.ipynb">Document Intake Agent</a></b></td>
+    <td width="27%"><b><a href="https://github.com/NirDiamant/GenAI_Agents/blob/bd681451b254ac1a790e947b581d3997ab35013d/all_agents_tutorials/document_intake_agent_langgraph.ipynb">Document Intake Agent</a></b></td>
     <td width="15%">LangGraph</td>
     <td width="40%">Office docs to LLM-ready markdown, conversion as a tool call, grounded answers</td>
   </tr>

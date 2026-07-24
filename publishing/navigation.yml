@@ -1166,3 +1166,27 @@ sections:
         route: practice/04-prosledit-rlvr-pipeline-v-open-r1
       - source: 06 Практика/05 Измерить KV-cache и quantization.md
         route: practice/05-izmerit-kv-cache-i-quantization
+      - source: 06 Практика/06 Измерить CUDA без самообмана.md
+        route: practice/06-izmerit-cuda-bez-samoobmana
+      - source: 06 Практика/07 Построить roofline и найти bottleneck.md
+        route: practice/07-postroit-roofline-i-nayti-bottleneck
+      - source: 06 Практика/08 Ускорить data pipeline.md
+        route: practice/08-uskorit-data-pipeline
+      - source: 06 Практика/09 Реализовать ring all-reduce.md
+        route: practice/09-realizovat-ring-all-reduce
+      - source: 06 Практика/10 Измерить checkpointing и offload.md
+        route: practice/10-izmerit-checkpointing-i-offload
+      - source: 06 Практика/11 Разрезать Transformer по TP и SP.md
+        route: practice/11-razrezat-transformer-po-tp-i-sp
+      - source: 06 Практика/12 Собрать и проверить FSDP.md
+        route: practice/12-sobrat-i-proverit-fsdp
+      - source: 06 Практика/13 Оптимизировать один Transformer step.md
+        route: practice/13-optimizirovat-odin-transformer-step
+      - source: 06 Практика/14 Собрать минимальный inference engine.md
+        route: practice/14-sobrat-minimalnyy-inference-engine
+      - source: 06 Практика/15 Реализовать W8A8 и SmoothQuant.md
+        route: practice/15-realizovat-w8a8-i-smoothquant
+      - source: 06 Практика/16 Проверить speculative decoding и rollback KV.md
+        route: practice/16-proverit-speculative-decoding-i-rollback-kv
+      - source: 06 Практика/17 Развернуть наблюдаемый ML сервис.md
+        route: practice/17-razvernut-nablyudaemyy-ml-servis

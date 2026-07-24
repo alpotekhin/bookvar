@@ -45,4 +45,12 @@ describe('findBrokenBuiltLinks', () => {
       '<img src="/bookvar/assets/present.svg">'
     ].join('\n')), '/bookvar')).resolves.toEqual([]);
   });
+
+  it('ignores href and src examples inside code blocks', async () => {
+    await expect(findBrokenBuiltLinks(fixture([
+      '<pre><code>&lt;a href="/not-a-route/"&gt;example&lt;/a&gt;</code></pre>',
+      '<pre><code><span style="color:red">href="</span><span>/still-code/</span></code></pre>',
+      '<a href="/target/#existing">real link</a>'
+    ].join('\n')))).resolves.toEqual([]);
+  });
 });

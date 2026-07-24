@@ -44,7 +44,7 @@ The GIF generation process follows these high-level steps:
 Throughout this process, LangGraph manages the flow of information between steps, ensuring that the output of each stage is appropriately fed into the next. The use of asynchronous programming allows for efficient parallel processing, particularly during the image generation and retrieval phases.
 
 ## Conclusion
-This GIF Animation Generator demonstrates the potential of combining different AI technologies to create a powerful, user-friendly tool for content creation. By automating the process from text prompt to visual animation, it opens up new possibilities for storytelling, education, and entertainment. 
+This GIF Animation Generator demonstrates the potential of combining different AI technologies to create a powerful, user-friendly tool for content creation. By automating the process from text prompt to visual animation, it opens up new possibilities for storytelling, education, and entertainment.
 
 The modular nature of the system, facilitated by LangGraph, allows for easy updates or replacements of individual components. This makes the project adaptable to future advancements in language models or image generation technologies.
 
@@ -130,7 +130,7 @@ def generate_image_prompts(state: GraphState) -> GraphState:
     """Generate specific image prompts for each frame of the GIF."""
     plot = state["plot"]
     character_description = state["character_description"]
-    response = llm.invoke([HumanMessage(content=f"""Based on this plot: '{plot}' and featuring this description: {character_description}, generate 5 specific, family-friendly image prompts, one for each step. Each prompt should be detailed enough for image generation, maintaining consistency, and suitable for DALL-E. 
+    response = llm.invoke([HumanMessage(content=f"""Based on this plot: '{plot}' and featuring this description: {character_description}, generate 5 specific, family-friendly image prompts, one for each step. Each prompt should be detailed enough for image generation, maintaining consistency, and suitable for DALL-E.
 
 Always include the following in EVERY prompt to maintain consistency:
 1. A brief reminder of the main character or object's key features
@@ -141,16 +141,16 @@ Format each prompt as a numbered list item, like this:
 1. [Your prompt here]
 2. [Your prompt here]
 ... and so on.""")])
-    
+
     prompts = []
     for line in response.content.split('\n'):
         if line.strip().startswith(('1.', '2.', '3.', '4.', '5.')):
             prompt = line.split('.', 1)[1].strip()
             prompts.append(f"Create a detailed, photorealistic image of the following scene: {prompt}")
-    
+
     if len(prompts) != 5:
         raise ValueError(f"Expected 5 prompts, but got {len(prompts)}. Please try again.")
-    
+
     state["image_prompts"] = prompts
     return state
 
@@ -189,11 +189,11 @@ async def create_gif(state: GraphState) -> GraphState:
     async with aiohttp.ClientSession() as session:
         tasks = [get_image_data(session, url) for url in image_urls if url]
         image_data_list = await asyncio.gather(*tasks)
-    
+
     for img_data in image_data_list:
         if img_data:
             images.append(Image.open(io.BytesIO(img_data)))
-    
+
     if images:
         gif_buffer = io.BytesIO()
         images[0].save(gif_buffer, format='GIF', save_all=True, append_images=images[1:], duration=1000, loop=0)
@@ -283,7 +283,7 @@ async def run_workflow(query: str):
             print("\nGIF generated successfully. Use the next cell to display or save it.")
         else:
             print("\nFailed to generate GIF.")
-        
+
         return result
     except Exception as e:
         print(f"An error occurred: {str(e)}")
@@ -307,7 +307,7 @@ Display the generated GIF and provide an option to save it.
 if result and result["gif_data"]:
     # Display the GIF
     display(IPImage(data=result["gif_data"], format='gif'))
-    
+
     # Ask if the user wants to save the GIF
     save_gif = input("Do you want to save the GIF? (yes/no): ").lower().strip()
     if save_gif == 'yes':
@@ -323,6 +323,6 @@ else:
     print("No GIF data available to display or save.")
 ```
 
-![Cat_GIF_agent](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/all_agents_tutorials/../images/langgraph_agent_cat_animation.gif)
+![Cat_GIF_agent](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/images/langgraph_agent_cat_animation.gif)
 
 ![](https://europe-west1-genai-agents-views-tracker.cloudfunctions.net/genai-agents-tracker?notebook=all-agents-tutorials--gif-animation-generator-langgraph)

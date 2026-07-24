@@ -134,7 +134,7 @@ def parse_search_results(results_string: str) -> List[dict]:
 
 def fetch_article_content(url: str, fallback_snippet: str = '', max_chars: int = 3000) -> str:
     """Fetch the actual article content from a URL.
-    
+
     Falls back to the search result snippet if the URL cannot be fetched
     (e.g. paywalled content, network errors, or non-HTML responses).
     """
@@ -174,27 +174,27 @@ def perform_web_search(query: str, specific_site: Optional[str] = None) -> Tuple
             specific_results = search.invoke(specific_query)
             print(f"Specific search results: {specific_results}")
             specific_parsed = parse_search_results(specific_results)
-            
+
             general_query = f"-site:{specific_site} {query}"
             print(f"Searching for: {general_query}")
             general_results = search.invoke(general_query)
             print(f"General search results: {general_results}")
             general_parsed = parse_search_results(general_results)
-            
+
             combined_results = (specific_parsed + general_parsed)[:3]
         else:
             print(f"Searching for: {query}")
             web_results = search.invoke(query)
             print(f"Web results: {web_results}")
             combined_results = parse_search_results(web_results)[:3]
-        
+
         # Fetch actual article content from each URL; fall back to snippet if unavailable
         web_knowledge = [
             fetch_article_content(result.get('link', ''), fallback_snippet=result.get('snippet', ''))
             for result in combined_results
         ]
         sources = [(result.get('title', 'Untitled'), result.get('link', '')) for result in combined_results]
-        
+
         print(f"Processed sources: {sources}")
         return web_knowledge, sources
     except Exception as e:
@@ -221,9 +221,9 @@ def summarize_text(text: str, source: Tuple[str, str]) -> str:
         summary_chain = prompt | llm
         input_data = {"text": text}
         summary = summary_chain.invoke(input_data)
-        
+
         summary_content = summary.content if hasattr(summary, 'content') else str(summary)
-        
+
         formatted_summary = f"Source: {source[0]} ({source[1]})\n{summary_content.strip()}\n"
         return formatted_summary
     except Exception as e:
@@ -239,13 +239,13 @@ This cell defines the main function that combines web search and text summarizat
 def search_summarize(query: str, specific_site: Optional[str] = None) -> str:
     """Perform a web search and summarize the results."""
     web_knowledge, sources = perform_web_search(query, specific_site)
-    
+
     if not web_knowledge or not sources:
         print("No web knowledge or sources found.")
         return ""
-    
+
     summaries = [summarize_text(knowledge, source) for knowledge, source in zip(web_knowledge, sources) if summarize_text(knowledge, source)]
-    
+
     combined_summary = "\n".join(summaries)
     return combined_summary
 ```
@@ -271,7 +271,7 @@ Processed web_knowledge: ['Powered by a large language model (LLM) and trained o
 Processed sources: [('Chatbots in science: What can ChatGPT do for you? - Nature', 'https://www.nature.com/articles/d41586-024-02630-z'), ('Science and the new age of AI - Nature', 'https://www.nature.com/immersive/d41586-023-03017-2/index.html'), ('AI now beats humans at basic tasks — new benchmarks are ... - Nature', 'https://www.nature.com/articles/d41586-024-01087-4')]
 Summary of latest advancements in AI (including information from https://www.nature.com):
 Source: Chatbots in science: What can ChatGPT do for you? - Nature (https://www.nature.com/articles/d41586-024-02630-z)
-- OpenAI's AI chatbot, developed in San Francisco, utilizes a large language model trained on extensive internet text. 
+- OpenAI's AI chatbot, developed in San Francisco, utilizes a large language model trained on extensive internet text.
 - The chatbot is designed to generate human-like responses and assist users in various tasks.
 
 Source: Science and the new age of AI - Nature (https://www.nature.com/immersive/d41586-023-03017-2/index.html)

@@ -116,14 +116,14 @@ This system serves as a model for how AI can transform complex business processe
 
 ```python
 # ! pip install langgraph
-# ! pip install langchain-core 
-# ! pip install langchain-openai 
-# ! pip install langchain-groq 
-# ! pip install langchain-community 
-# ! pip install python-dotenv 
-# ! pip install pydantic 
-# ! pip install typing-extensions 
-# ! pip install chromadb 
+# ! pip install langchain-core
+# ! pip install langchain-openai
+# ! pip install langchain-groq
+# ! pip install langchain-community
+# ! pip install python-dotenv
+# ! pip install pydantic
+# ! pip install typing-extensions
+# ! pip install chromadb
 # ! pip install langchain-text-splitters
 ```
 
@@ -168,7 +168,7 @@ llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
 
 # Create and Populate Database
 
-In this section, we create and populate a database to store category rates for our contextual quoting agent. 
+In this section, we create and populate a database to store category rates for our contextual quoting agent.
 
 We use **SQLite**, a lightweight and efficient database, which works well for projects where simplicity and speed are key considerations.
 
@@ -226,9 +226,9 @@ Database and table created successfully, and data inserted.
 
 # Define Required Pydantic Schemas
 
-In this section, we define several schemas using Pydantic, a Python library for data validation. 
+In this section, we define several schemas using Pydantic, a Python library for data validation.
 
-These schemas serve as structured models for initial data collection, workflow routing, classification, rationale, and accuracy assessment in our contextual quoting agent. 
+These schemas serve as structured models for initial data collection, workflow routing, classification, rationale, and accuracy assessment in our contextual quoting agent.
 
 They ensure data consistency and accuracy throughout the quoting process.
 
@@ -242,7 +242,7 @@ class BusinessInformation(BaseModel):
     primary_products_or_services: Optional[str] = Field(default="Info not yet provided", description="The primary products or services offered")
     secondary_or_ancillary_operations: Optional[str] = Field(default="Info not yet provided", description="Any secondary or ancillary operations")
     industries: Optional[str] = Field(default="Info not yet provided", description="In which industries does the business operate?")
-    manufacturing_retail_wholesale_or_distribution: Optional[str] = Field(default="Info not yet provided", 
+    manufacturing_retail_wholesale_or_distribution: Optional[str] = Field(default="Info not yet provided",
         description="Does the business engage in manufacturing, retail, wholesale, or distribution?")
     projected_revenue: Optional[str] = Field(default="Info not yet provided", description="The projected revenue for the upcoming year")
 
@@ -264,7 +264,7 @@ class ToUnderwritingAssistant(BaseModel):
 # Models for classification and code assignment
 class FinalClassificationsInfo(BaseModel):
     """Information about the final classifications and code that best describe the business."""
-    
+
     category: str = Field(
         description="A string representing the category."
     )
@@ -281,11 +281,11 @@ class ToQuoteAssistant(BaseModel):
     request: str = Field(
         description="Any information that the underwriting assistant should know before proceeding."
      )
-    
+
     final_classifications: list[FinalClassificationsInfo] = Field(
         description="A list of FinalClassificationsInfo objects, each containing a category, category description, and code."
     )
-    
+
     class Config:
         json_schema_extra = {
             "example": {
@@ -337,7 +337,7 @@ class CategoriesOutput(BaseModel):
 # Models for classification accuracy assessment
 class DescriptionGrade(BaseModel):
     """Schema to define a business description and its corresponding grade.
-    
+
     Attributes:
         description (str): A string representing the business description.
         grade (float): A float representing the grade assigned to the business description.
@@ -357,7 +357,7 @@ class DescriptionGrade(BaseModel):
 
 class DescriptionGradeSchema(BaseModel):
     """Schema to hold a list of business descriptions with their corresponding grades.
-    
+
     Attributes:
         description_grades (list[DescriptionGrade]): A list of DescriptionGrade objects, each containing a business description and its corresponding grade.
     """
@@ -368,7 +368,7 @@ class DescriptionGradeSchema(BaseModel):
 
 ## Define State
 
-In this section, we define the **State** classes which represent the core data structures for managing and storing various types of information during the workflow. 
+In this section, we define the **State** classes which represent the core data structures for managing and storing various types of information during the workflow.
 
 These state definitions ensure that different parts of the quoting process stay synchronized and properly updated:
 
@@ -391,9 +391,9 @@ def update_workflow_state(left: list[str], right: Optional[str]) -> list[str]:
         return left
 
     # Handle 'pop' case to remove the last element
-    if right == "pop":  
+    if right == "pop":
         return left[:-1] if left else left  # Safeguard against empty lists
-    
+
     # Handle cases where 'right' is a list (from the tutorial)
     if isinstance(right, list):
         # Avoid adding elements already in the list
@@ -403,7 +403,7 @@ def update_workflow_state(left: list[str], right: Optional[str]) -> list[str]:
     if right not in left:
         return left + [right]
 
-    return left 
+    return left
 
 # Main State
 class MainState(TypedDict):
@@ -554,7 +554,7 @@ In this section, we define the **Quote Tool**, which calculates the premium for 
   - `categories`: A list of categories for which the rates are fetched.
   - `projected_revenue`: The projected revenue to be used in calculating the premiums.
 
-- **Premium Calculation**: 
+- **Premium Calculation**:
   - The function connects to the SQLite database (`categories.db`) to retrieve rates for each provided category.
   - It calculates each category's share of the projected revenue and then determines the computed premium based on the rate per $1,000 of revenue.
   - The total premium is accumulated across all categories.
@@ -647,14 +647,14 @@ from langchain_core.runnables import Runnable, RunnableConfig
 class Assistant:
     def __init__(self, runnable: Runnable):
         self.runnable = runnable.with_config()
-        
+
     def __call__(self, state: MainState, config: RunnableConfig):
         # Create input with both messages and business_information
         input_state = {
             "messages": state["messages"],
             "business_information": state.get("business_information", None),
         }
-        
+
         while True:
             result = self.runnable.invoke(input_state)
             # If the LLM happens to return an empty response, we will re-prompt it
@@ -675,7 +675,7 @@ class Assistant:
 
 In this section, we define the **Main Assistant** of our contextual quoting system. This assistant guides the user through the quoting process, ensuring the gathered data is complete and consistent:
 
-- **Main Assistant Prompt**: 
+- **Main Assistant Prompt**:
   - The `main_assistant_prompt` uses `ChatPromptTemplate.from_messages()` to define the conversation flow.
   - It defines the assistant's role as a **commercial underwriter assistant**, responsible for guiding the user through the quoting process.
   - The assistant's main tasks include:
@@ -699,7 +699,7 @@ main_assistant_prompt = ChatPromptTemplate.from_messages(
         ("system",
         """
 You are the main commercial underwriter assistant.\n
-You are responsible for guiding the user through the quoting process and ensuring that the information they provide is accurate and consistent, to later provide a quote. 
+You are responsible for guiding the user through the quoting process and ensuring that the information they provide is accurate and consistent, to later provide a quote.
 When details and/or information about the business are provided, use "info_tool" to process the information and gather or update the required data.\n\n
 Once you have gathered the information, you must first evaluate the prospects information with the underwriters by calling "ToUnderwritingAssistant".\n
 Before proceeding to quote, you must provide the user with a summary of the information they have provided.\n
@@ -740,7 +740,7 @@ underwriting_assistant_prompt = ChatPromptTemplate.from_messages(
 You are the main commercial underwriter assistant.\n
 You are responsible for evaluating the prospects information as he principal underwriter.\n
 **Only call one tool at a time.**\n
-When all the required information and categories have been confirmed, call "ToQuoteAssistant" to proceed to quote. 
+When all the required information and categories have been confirmed, call "ToQuoteAssistant" to proceed to quote.
 Current business information:\n
 {business_information}
 """,
@@ -762,11 +762,11 @@ In this section, we define the **Quote Assistant**, which is responsible for cal
   - Key responsibilities and guidelines for the Quote Assistant include:
     1. **Calling `fetch_rates` only once**: It fetches rates for all required categories using the projected revenue.
     2. **Finalizing with `CompleteOrEscalate`**: After receiving the rates and calculating the premium, the assistant must call `CompleteOrEscalate` to end the process.
-    3. **No Recalculation unless instructed**: The assistant should not call `fetch_rates` again unless explicitly asked by the user to do so. 
+    3. **No Recalculation unless instructed**: The assistant should not call `fetch_rates` again unless explicitly asked by the user to do so.
     ***(This is to avoid calling the tool multiple times)***
   - The assistant also ensures that a clear and understandable **summary** of the quote is provided to the user before concluding.
 
-- **Quote Assistant Tools**: 
+- **Quote Assistant Tools**:
   - The tools available to the quote assistant are defined in `quote_assistant_tools`, which includes `[fetch_rates]`. This enables the assistant to fetch rates for given categories and calculate the required premium.
 
 The **Quote Assistant** plays a vital role in completing the underwriting and quoting process. By fetching rates, calculating premiums, and providing a summary to the user, it ensures that the entire workflow is concluded seamlessly with all necessary information clearly communicated to the user.
@@ -780,7 +780,7 @@ You are an expert commercial underwriting assistant tasked with providing a quot
 
 You will use the provided classifications and their corresponding rates to calculate the annual premium.
 
-IMPORTANT: 
+IMPORTANT:
 1. Call fetch_rates ONLY ONCE with all required categories and the projected revenue.
 2. After receiving the rates and calculating the premium, call CompleteOrEscalate to end the process.
 3. Do not call fetch_rates again unless explicitly asked to recalculate.
@@ -1020,7 +1020,7 @@ We define the **Reasoning Node**, which is responsible for analyzing the busines
   - **Reasoning Process**:
     - The function calls the **Reasoning Agent** (`reasoning_runnable`) using the `invoke()` method, passing in the `description` and `documents` to generate the **rationale**.
     - This rationale explains why certain categories are relevant to the business, providing a more thorough understanding of the classification logic.
-  - **Return Value**: 
+  - **Return Value**:
     - The function returns an updated `RAGState`, including the reasoned **rationale** for the selected categories (`"rationale": rationale`).
 
 The **Reasoning Node** is crucial for adding transparency and justification to the underwriting process. By providing a detailed explanation of why certain categories are assigned, it ensures that the classification is not only accurate but also understandable, making it easier for users or underwriters to validate and trust the results.
@@ -1075,14 +1075,14 @@ def classification_grading(rag_state: RAGState) -> ExtraState:
     Grade each category based on how well it matches the business description.
     """
     print("\n=== CLASSIFICATION GRADING START ===")
-    
+
     # Extract core data
     description = rag_state["description"]
     rationale = rag_state["rationale"]
     categories = rationale.categories
-    
+
     print(f"Processing {len(categories)} categories for grading...")
-    
+
     try:
         # Format categories into a single string
         cat_and_rat = "\n\n".join([
@@ -1092,18 +1092,18 @@ def classification_grading(rag_state: RAGState) -> ExtraState:
             f"Rationale: {cat.rationalization}\n"
             for cat in categories
         ])
-        
+
         graded_categories = classification_grading_runnable.invoke({
             "description": description,
             "cat_and_rat": cat_and_rat
         })
-        
+
         print(f"\nCompleted grading {len(graded_categories.description_grades)} categories")
-        
+
     except Exception as e:
         print(f"Error during classification grading: {str(e)}")
         raise
-    
+
     print("=== CLASSIFICATION GRADING END ===\n")
     return {"graded_categories": graded_categories.description_grades}
 ```
@@ -1185,17 +1185,17 @@ def route_quote_assistant(
         return END
 
     tool_calls = state["messages"][-1].tool_calls
-    
+
     did_cancel = any(tc["name"] == CompleteOrEscalate.__name__ for tc in tool_calls)
     if did_cancel:
         return "reroute"
-    
+
     # Get tool names using the name property for StructuredTools
     tool_names = [t.name for t in quote_assistant_tools]
-    
+
     if all(tc["name"] in tool_names for tc in tool_calls):
         return "quote_assistant_tools"
-        
+
     raise ValueError(f"Invalid route. Tool call {[tc['name'] for tc in tool_calls]} not found in available tools {tool_names}")
 ```
 
@@ -1210,7 +1210,7 @@ def create_entry_node_quote(assistant_name: str, new_workflow_state: str) -> Cal
         tool_call_id = state["messages"][-1].tool_calls[0]["id"]
         final_classifications = state["messages"][-1].tool_calls[0]["args"]["final_classifications"]
         business_information = state.get("business_information", {})  # Changed from [] to {}
-        
+
         # Create a new dictionary combining both pieces of information
         updated_business_info = {
             **business_information,
@@ -1340,7 +1340,7 @@ def update_state(state: MainState) -> MainState:
     The function updates the state with the new business information from tool calls.
     """
     messages = state.get("messages", [])
-    
+
     # Find the most recent tool message
     tool_messages = [msg for msg in messages if msg.type == "tool"]
     if tool_messages:
@@ -1465,7 +1465,7 @@ graph.add_edge("retrieve", "reasoning")
 graph.add_edge("reasoning", "classification_grading")
 # Edges from classification grading to pass final classifications
 graph.add_edge("classification_grading", "pass_final_classifications")
-# Edges from pass final classifications to create tool message  
+# Edges from pass final classifications to create tool message
 graph.add_edge("pass_final_classifications", "create_tool_message")
 # Edges from create tool message to underwriting assistant
 graph.add_edge("create_tool_message", "underwriting_assistant")
@@ -1491,14 +1491,14 @@ final_graph = graph.compile(
 
 # Graph Visualization
 
-![Final Graph](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/all_agents_tutorials/../images/contextual_quoting_graph.svg)
+![Final Graph](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/images/contextual_quoting_graph.svg)
 
 ## Test Quote Engine
 
 ```python
 import uuid
 from langchain.schema import AIMessage
-from langchain_core.messages import ToolMessage 
+from langchain_core.messages import ToolMessage
 
 # Function to print the event
 def _print_event(event: dict, _printed: set, max_length=1500):
@@ -1574,14 +1574,14 @@ def process_questions():
                     },
                     config,
                 )
-                
+
             # Filter and print the last AIMessage
             aimessages = [message for message in result["messages"] if isinstance(message, AIMessage)]
             last_aimessage = aimessages[-1] if aimessages else None
             if last_aimessage is not None:
                 # print(last_aimessage.content)
                 _print_event(result, _printed)
-                
+
             snapshot = final_graph.get_state(config)
 
         input_count += 1
@@ -1662,14 +1662,14 @@ The business information provided is:
 * Business Type: Software Provider
 * Revenue: $4 million
 
-Please wait while I evaluate this information with the underwriters... 
+Please wait while I evaluate this information with the underwriters...
 
 **ToUnderwritingAssistant**
 
 Please provide a response to the business information provided.
 ================================[1m Human Message [0m=================================
 
-Looks good. 
+Looks good.
 ==================================[1m Ai Message [0m==================================
 Tool Calls:
   info_tool (8a8ff5b5-0a70-41e6-91e0-d5bce6f4cb96)

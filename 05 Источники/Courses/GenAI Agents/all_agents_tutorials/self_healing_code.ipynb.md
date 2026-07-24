@@ -42,12 +42,12 @@ Several key factors motivate this implementation:
    - Validation of applied patches
 
 ## Key Components
-1. **State Management System**: 
+1. **State Management System**:
    - Maintains workflow state using Pydantic models
    - Tracks function references, errors, and fixes
    - Ensures type safety and execution validation
 
-2. **LLM Integration**: 
+2. **LLM Integration**:
    - Leverages LLM for code analysis and generation
    - Produces fixes based on error types:
      - Runtime Errors
@@ -61,7 +61,7 @@ Several key factors motivate this implementation:
    - Maintains contextual relationships between errors
    - Supports pattern-based learning
 
-4. **Graph-based Workflow**: 
+4. **Graph-based Workflow**:
    - Uses LangGraph's StateGraph for orchestration
    - Implements error detection nodes
    - Controls fix generation through edges
@@ -132,9 +132,9 @@ The system implements a sophisticated memory architecture:
 A flowchart representing the design and flow of the workflow.
 
 <div style="max-width:600px;">
-    
-![image.png](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/all_agents_tutorials/../images/self_healing_code.png)
-    
+
+![image.png](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/images/self_healing_code.png)
+
 </div>
 
 ## Conclusion
@@ -240,7 +240,7 @@ def code_update_node(state: State):
     prompt = ChatPromptTemplate.from_template(
         'You are tasked with fixing a Python function that raised an error.'
         'Function: {function_string}'
-        'Error: {error_description}' 
+        'Error: {error_description}'
         'You must provide a fix for the present error only.'
         'The bug fix should handle the thrown error case gracefully by returning an error message.'
         'Do not raise an error in your bug fix.'
@@ -257,7 +257,7 @@ def code_update_node(state: State):
     print('\n🩹 Proposed Bug Fix')
     print('-------------------\n')
     print(new_function_string)
-    
+
     state.new_function_string = new_function_string
     return state
 
@@ -269,19 +269,19 @@ def code_patching_node(state: State):
         print('\n❤️‍🩹 Patching code...')
         # Store the new function as a string
         new_code = state.new_function_string
-        
+
         # Create namespace for new function
         namespace = {}
-        
+
         # Execute new code in namespace
         exec(new_code, namespace)
-        
+
         # Get function name dynamically
         func_name = state.function.__name__
-        
+
         # Get the new function using dynamic name
         new_function = namespace[func_name]
-        
+
         # Update state
         state.function = new_function
         state.error = False
@@ -290,7 +290,7 @@ def code_patching_node(state: State):
         result = state.function(*state.arguments)
 
         print('...patch complete 😬\n')
-                
+
     except Exception as e:
         print(f'...patch failed: {e}')
         print(f'Error details: {str(e)}')
@@ -331,11 +331,11 @@ def memory_search_node(state: State):
         'Your response must be a concise string including only crucial information on the bug report for future reference.'
         'Format: # function_name ## error_description ### error_analysis'
     )
-    
+
     message = HumanMessage(content=prompt.format(
         bug_report=state.bug_report,
     ))
-    
+
     response = llm.invoke([message]).content.strip()
 
     results = collection.query(query_texts=[response])
@@ -347,7 +347,7 @@ def memory_search_node(state: State):
         state.memory_search_results = [{'id':results['ids'][0][index], 'memory':results['documents'][0][index], 'distance':results['distances'][0][index]} for index, id in enumerate(results['ids'][0])]
     else:
         print('...none found.\n')
-            
+
     return state
 
 
@@ -357,12 +357,12 @@ def memory_filter_node(state: State):
     for memory in state.memory_search_results:
         if memory['distance'] < 0.3:
             state.memory_ids_to_update.append(memory['id'])
-        
+
     if state.memory_ids_to_update:
         print(f'...{len(state.memory_ids_to_update)} selected.\n')
     else:
         print('...none selected.\n')
-            
+
     return state
 
 
@@ -375,11 +375,11 @@ def memory_generation_node(state: State):
         'Your response must be a concise string including only crucial information on the bug report for future reference.'
         'Format: # function_name ## error_description ### error_analysis'
     )
-    
+
     message = HumanMessage(content=prompt.format(
         bug_report=state.bug_report,
     ))
-    
+
     response = llm.invoke([message]).content.strip()
 
     print('\n💾 Saving Bug Report to Memory')
@@ -390,7 +390,7 @@ def memory_generation_node(state: State):
     collection.add(
         ids=[id],
         documents=[response],
-    )        
+    )
     return state
 
 
@@ -412,21 +412,21 @@ def memory_modification_node(state: State):
         bug_report=state.bug_report,
         memory_to_update=memory_to_update,
     ))
-    
+
     response = llm.invoke([message]).content.strip()
-    
+
     print('\nCurrent Bug Report')
     print('------------------\n')
     print(memory_to_update)
     print('\nWill be Replaced With')
     print('---------------------\n')
     print(response)
-    
+
     collection.update(
         ids=[memory_to_update_id],
         documents=[response],
     )
-        
+
     return state
 ```
 
@@ -506,7 +506,7 @@ def execute_self_healing_code_system(function, arguments):
         function_string=inspect.getsource(function),
         arguments=arguments,
     )
-    
+
     return graph.invoke(state)
 ```
 
@@ -585,13 +585,13 @@ Running Arbitrary Function
 2. Pass `0` as the value for `b`.
 
 **Example:**
-```python
+``​`python
 divide_two_numbers(10, 0)  # Raises ZeroDivisionError
-```
+``​`
 
 **Expected Behavior:** The function should handle the case where `b` is zero and return a user-friendly error message or a default value instead of raising an exception.
 
-**Proposed Solution:** Implement error handling to check if `b` is zero before performing the division. Return an appropriate message or value in such cases. 
+**Proposed Solution:** Implement error handling to check if `b` is zero before performing the division. Return an appropriate message or value in such cases.
 
 **Priority:** High
 
@@ -653,7 +653,7 @@ Running Arbitrary Function
 **Description:** The function `divide_two_numbers` fails to handle cases where the first argument `a` is of type `str` while the second argument `b` is of type `int`. This leads to a TypeError when attempting to perform division.
 
 **Steps to Reproduce:**
-1. Call the function with a string as the first argument and an integer as the second argument. 
+1. Call the function with a string as the first argument and an integer as the second argument.
    Example: `divide_two_numbers("10", 2)`
 
 **Expected Behavior:** The function should either handle the type mismatch gracefully (e.g., by raising a custom error or converting input types) or document the expected input types clearly.
@@ -730,17 +730,17 @@ Running Arbitrary Function
 📝 Generating Bug Report
 ------------------------
 
-Bug Report: 
+Bug Report:
 
-**Function Name:** process_list  
-**Parameters:** lst (list), index (int)  
-**Error Raised:** IndexError: list index out of range  
-**Description:** The function attempts to access an element at a specified index in the list `lst`, but if the index is greater than or equal to the length of the list or if the list is empty, it raises an "IndexError".  
-**Reproduction Steps:**  
-1. Call `process_list([], 0)`  
-2. Call `process_list([1, 2, 3], 5)`  
-**Expected Behavior:** The function should handle invalid indices gracefully, possibly by returning a default value or raising a custom error message.  
-**Priority:** High - this bug can lead to runtime errors when the function is used with invalid inputs.  
+**Function Name:** process_list
+**Parameters:** lst (list), index (int)
+**Error Raised:** IndexError: list index out of range
+**Description:** The function attempts to access an element at a specified index in the list `lst`, but if the index is greater than or equal to the length of the list or if the list is empty, it raises an "IndexError".
+**Reproduction Steps:**
+1. Call `process_list([], 0)`
+2. Call `process_list([1, 2, 3], 5)`
+**Expected Behavior:** The function should handle invalid indices gracefully, possibly by returning a default value or raising a custom error message.
+**Priority:** High - this bug can lead to runtime errors when the function is used with invalid inputs.
 **Proposed Solution:** Implement index validation before accessing the list element.
 ```
 
@@ -820,12 +820,12 @@ Running Arbitrary Function
 
 **Proposed Fix:** Add a check at the beginning of the function to ensure `lst` is not `None`. For example:
 
-```python
+``​`python
 def process_list(lst, index):
     if lst is None:
         raise ValueError("Input list cannot be None")
     return lst[index] * 2
-```
+``​`
 ```
 
 ```text
@@ -895,13 +895,13 @@ Running Arbitrary Function
 
 **Bug Report: parse_date Function**
 
-**Function Name:** parse_date  
-**Error Raised:** ValueError: not enough values to unpack (expected 3, got 1)  
-**Description:** The function attempts to split the input string `date_string` by the '-' character and unpack the result into three variables: year, month, and day. However, if the input string does not contain two '-' characters, it raises a ValueError due to insufficient values for unpacking.  
-**Reproduction Steps:**  
+**Function Name:** parse_date
+**Error Raised:** ValueError: not enough values to unpack (expected 3, got 1)
+**Description:** The function attempts to split the input string `date_string` by the '-' character and unpack the result into three variables: year, month, and day. However, if the input string does not contain two '-' characters, it raises a ValueError due to insufficient values for unpacking.
+**Reproduction Steps:**
 1. Call `parse_date("2023")` or any string that does not contain exactly two '-' characters.
-2. Observe the error message indicating that not enough values were provided for unpacking.  
-**Expected Behavior:** The function should handle cases where the input does not conform to the expected format, either by returning an error message or raising a custom exception.  
+2. Observe the error message indicating that not enough values were provided for unpacking.
+**Expected Behavior:** The function should handle cases where the input does not conform to the expected format, either by returning an error message or raising a custom exception.
 **Suggested Fix:** Implement input validation to ensure the `date_string` contains the correct format (YYYY-MM-DD) before attempting to unpack the values.
 ```
 

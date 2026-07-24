@@ -55,7 +55,7 @@ Let's begin by understanding the MCP architecture and setting up our environment
 
 ## MCP Architecture Overview
 
-![MCP Architecture](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/all_agents_tutorials/../images/mcp_architecture.png)
+![MCP Architecture](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/images/mcp_architecture.png)
 
 MCP follows a client-server architecture with three main components:
 
@@ -123,7 +123,7 @@ now we can start the server by runnning following commands in the ternimal:
 # Copy the server file from the scripts folder
 cp ../scripts/mcp_server.py .
 
-# Start the MCP server 
+# Start the MCP server
 uv run mcp_server.py
 ```
 
@@ -170,33 +170,33 @@ Replace `/ABSOLUTE/PATH/TO/uv` with the path you got from the `which uv` command
 
 You should see this hammer in your chat box.
 
-![Claude Desktop connected with MCP](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/all_agents_tutorials/../images/Claude_Desktop_with_MCP.png)
+![Claude Desktop connected with MCP](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/images/Claude_Desktop_with_MCP.png)
 
 #### Step 5: Try ask the price of Bitcoin
 
 Type in "What is the current price of Bitcoin ?", and you will get response like:
 
-![Track Bitcoin price with MCP](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/all_agents_tutorials/../images/track_bitcoin_price_with_mcp.png)
+![Track Bitcoin price with MCP](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/images/track_bitcoin_price_with_mcp.png)
 
 
-Congrats! You've successfully apply your MCP server and tool. Now, you can try add your own tools to [mcp_server.py](/mcp-crypto-server/mcp_server.py). Here is an example:
+Congrats! You've successfully apply your MCP server and tool. Now, you can try add your own tools to [mcp_server.py](https://github.com/NirDiamant/GenAI_Agents/blob/bd681451b254ac1a790e947b581d3997ab35013d/mcp-crypto-server/mcp_server.py). Here is an example:
 
 ```python
 @mcp.tool()
 async def get_crypto_market_info(crypto_ids: str, currency: str = "usd") -> str:
     """
     Get market information for one or more cryptocurrencies.
-    
+
     Parameters:
     - crypto_ids: Comma-separated list of cryptocurrency IDs (e.g., 'bitcoin,ethereum')
     - currency: The currency to display values in (default: 'usd')
-    
+
     Returns:
     - Market information including price, market cap, volume, and price changes
     """
     # Construct the API URL
     url = f"{COINGECKO_BASE_URL}/coins/markets"
-    
+
     # Set up the query parameters
     params = {
         "vs_currency": currency,  # Currency to display values in
@@ -205,20 +205,20 @@ async def get_crypto_market_info(crypto_ids: str, currency: str = "usd") -> str:
         "page": 1,                # Page number
         "sparkline": "false"      # Exclude sparkline data
     }
-    
+
     try:
         # Make the API call
         async with httpx.AsyncClient() as client:
             response = await client.get(url, params=params)
             response.raise_for_status()
-            
+
             # Parse the response
             data = response.json()
-            
+
             # Check if we got any data
             if not data:
                 return f"No data found for cryptocurrencies: '{crypto_ids}'. Please check the IDs and try again."
-            
+
             # Format the results
             result = ""
             for crypto in data:
@@ -228,22 +228,22 @@ async def get_crypto_market_info(crypto_ids: str, currency: str = "usd") -> str:
                 market_cap = crypto.get('market_cap', 'Unknown')
                 volume = crypto.get('total_volume', 'Unknown')
                 price_change = crypto.get('price_change_percentage_24h', 'Unknown')
-                
+
                 result += f"{name} ({symbol}):\n"
                 result += f"Current price: {price} {currency.upper()}\n"
                 result += f"Market cap: {market_cap} {currency.upper()}\n"
                 result += f"24h trading volume: {volume} {currency.upper()}\n"
                 result += f"24h price change: {price_change}%\n\n"
-            
+
             return result
-            
+
     except Exception as e:
         return f"Error fetching market data: {str(e)}"
 ```
 
 Rerun your mcp server with `uv run mcp_server.py`, restart Claude Desktop, and type "What's the market data for Dogecoin and Solana?". You will get the response like this:
 
-![Track Crypto Market Data with MCP](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/all_agents_tutorials/../images/track_crypto_market_data_with_mcp.png)
+![Track Crypto Market Data with MCP](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/images/track_crypto_market_data_with_mcp.png)
 
 ## Customized Agent executing tool via MCP
 
@@ -266,7 +266,7 @@ This architecture follows a pattern common in modern AI systems:
 
 Here is a simple worflow diagram:
 
-![Track Crypto Market Data with MCP](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/all_agents_tutorials/../images/customized_mcp_host.png)
+![Track Crypto Market Data with MCP](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/images/customized_mcp_host.png)
 
 Important Reminder Before Running the Code:
 ⚠️ Don't forget to start your MCP server first! ⚠️
@@ -331,15 +331,15 @@ async def discover_tools():
     GREEN = "\033[92m"
     RESET = "\033[0m"
     SEP = "=" * 40
-    
+
     # Create server parameters for connecting to your MCP server through stdio
     server_params = StdioServerParameters(
         command="python",  # Command to run the server
         args=[mcp_server_path],  # Path to your MCP server script
     )
-    
+
     print(f"{BLUE}{SEP}\n🔍 DISCOVERY PHASE: Connecting to MCP server...{RESET}")
-    
+
     # Connect to the server via stdio
     async with stdio_client(server_params) as (read, write):
         # Create a client session
@@ -347,11 +347,11 @@ async def discover_tools():
             # Initialize the connection
             print(f"{BLUE}📡 Initializing MCP connection...{RESET}")
             await session.initialize()
-            
+
             # List the available tools
             print(f"{BLUE}🔎 Discovering available tools...{RESET}")
             tools = await session.list_tools()
-            
+
             # Format the tools information for easier viewing
             tool_info = []
             for tool_type, tool_list in tools:
@@ -362,7 +362,7 @@ async def discover_tools():
                             "description": tool.description,
                             "schema": tool.inputSchema
                         })
-            
+
             print(f"{GREEN}✅ Successfully discovered {len(tool_info)} tools{RESET}")
             print(f"{SEP}")
             return tool_info
@@ -402,23 +402,23 @@ for i, tool in enumerate(tools, 1):
 [92m✅ Successfully discovered 2 tools[0m
 ========================================
 Discovered 2 tools:
-1. get_crypto_price: 
+1. get_crypto_price:
     Get the current price of a cryptocurrency in a specified currency.
-    
+
     Parameters:
     - crypto_id: The ID of the cryptocurrency (e.g., 'bitcoin', 'ethereum')
     - currency: The currency to display the price in (default: 'usd')
-    
+
     Returns:
     - Current price information as a formatted string
-    
-2. get_crypto_market_info: 
+
+2. get_crypto_market_info:
     Get market information for one or more cryptocurrencies.
-    
+
     Parameters:
     - crypto_ids: Comma-separated list of cryptocurrency IDs (e.g., 'bitcoin,ethereum')
     - currency: The currency to display values in (default: 'usd')
-    
+
     Returns:
     - Market information including price, market cap, volume, and price changes
 ```
@@ -433,11 +433,11 @@ Now that our host can discover available tools, we need to implement the client 
 async def execute_tool(tool_name: str, arguments: Dict[str, Any]):
     """
     Execute a specific tool provided by the MCP server.
-    
+
     Args:
         tool_name: The name of the tool to execute
         arguments: A dictionary of arguments to pass to the tool
-        
+
     Returns:
         The result from executing the tool
     """
@@ -447,35 +447,35 @@ async def execute_tool(tool_name: str, arguments: Dict[str, Any]):
     YELLOW = "\033[93m"
     RESET = "\033[0m"
     SEP = "-" * 40
-    
+
     server_params = StdioServerParameters(
         command="python",
         args=[mcp_server_path],
     )
-    
+
     print(f"{YELLOW}{SEP}")
     print(f"⚙️ EXECUTION PHASE: Running tool '{tool_name}'")
     print(f"📋 Arguments: {json.dumps(arguments, indent=2)}")
     print(f"{SEP}{RESET}")
-    
+
     async with stdio_client(server_params) as (read, write):
         async with ClientSession(read, write) as session:
             await session.initialize()
-            
+
             # Call the specific tool with the provided arguments
             print(f"{BLUE}📡 Sending request to MCP server...{RESET}")
             result = await session.call_tool(tool_name, arguments)
-            
+
             print(f"{GREEN}✅ Tool execution complete{RESET}")
-            
+
             # Format result preview for cleaner output
             result_preview = str(result)
             if len(result_preview) > 150:
                 result_preview = result_preview[:147] + "..."
-                
+
             print(f"{BLUE}📊 Result: {result_preview}{RESET}")
             print(f"{SEP}")
-            
+
             return result
 
 print("Tool execution function defined")
@@ -509,12 +509,12 @@ Let's implement a function that orchestrates this entire process:
 async def query_claude(prompt: str, tool_info: List[Dict], previous_messages=None):
     """
     Send a query to Claude and process the response.
-    
+
     Args:
         prompt: User's query
         tool_info: Information about available tools
         previous_messages: Previous messages for maintaining context
-        
+
     Returns:
         Claude's response, potentially after executing tools
     """
@@ -525,24 +525,24 @@ async def query_claude(prompt: str, tool_info: List[Dict], previous_messages=Non
     PURPLE = "\033[95m"
     RESET = "\033[0m"
     SEP = "=" * 40
-    
+
     if previous_messages is None:
         previous_messages = []
-    
+
     print(f"{PURPLE}{SEP}")
     print("🧠 REASONING PHASE: Processing query with Claude")
     print(f"🔤 Query: \"{prompt}\"")
     print(f"{SEP}{RESET}")
-    
+
     # Format tool information for Claude
     tool_descriptions = "\n\n".join([
         f"Tool: {tool['name']}\nDescription: {tool['description']}\nSchema: {json.dumps(tool['schema'], indent=2)}"
         for tool in tool_info
     ])
-    
+
     # Build the system prompt
     system_prompt = f"""You are an AI assistant with access to specialized tools through MCP (Model Context Protocol).
-    
+
 Available tools:
 {tool_descriptions}
 
@@ -558,18 +558,18 @@ When you need to use a tool, respond with a JSON object in the following format:
 Do not include any other text when using a tool, just the JSON object.
 For regular responses, simply respond normally.
 """
-    
+
     # Filter out system messages from previous messages
     filtered_messages = [msg for msg in previous_messages if msg["role"] != "system"]
-    
+
     # Build the messages for the conversation (WITHOUT system message)
     messages = filtered_messages.copy()
-    
+
     # Add the current user query
     messages.append({"role": "user", "content": prompt})
-    
+
     print(f"{BLUE}📡 Sending request to Claude API...{RESET}")
-    
+
     # Send the request to Claude with system as a top-level parameter
     response = client.messages.create(
         model="claude-3-5-sonnet-20240620",
@@ -577,43 +577,43 @@ For regular responses, simply respond normally.
         system=system_prompt,  # System prompt as a separate parameter
         messages=messages      # Only user and assistant messages
     )
-    
+
     # Get Claude's response
     claude_response = response.content[0].text
     print(f"{GREEN}✅ Received response from Claude{RESET}")
-    
+
     # Try to extract and parse JSON from the response
     try:
         # Look for JSON pattern in the response
         import re
         json_match = re.search(r'(\{[\s\S]*\})', claude_response)
-        
+
         if json_match:
             json_str = json_match.group(1)
             print(f"{YELLOW}🔍 Tool usage detected in response{RESET}")
             print(f"{BLUE}📦 Extracted JSON: {json_str}{RESET}")
-            
+
             tool_request = json.loads(json_str)
-            
+
             if "tool" in tool_request and "arguments" in tool_request:
                 tool_name = tool_request["tool"]
                 arguments = tool_request["arguments"]
-                
+
                 print(f"{YELLOW}🔧 Claude wants to use tool: {tool_name}{RESET}")
-                
+
                 # Execute the tool using our MCP client
                 tool_result = await execute_tool(tool_name, arguments)
-                
+
                 # Convert tool result to string if needed
                 if not isinstance(tool_result, str):
                     tool_result = str(tool_result)
-                
+
                 # Update messages with the tool request and result
                 messages.append({"role": "assistant", "content": claude_response})
                 messages.append({"role": "user", "content": f"Tool result: {tool_result}"})
-                
+
                 print(f"{PURPLE}🔄 Getting Claude's interpretation of the tool result...{RESET}")
-                
+
                 # Get Claude's interpretation of the tool result
                 final_response = client.messages.create(
                     model="claude-3-5-sonnet-20240620",
@@ -621,18 +621,18 @@ For regular responses, simply respond normally.
                     system=system_prompt,
                     messages=messages
                 )
-                
+
                 print(f"{GREEN}✅ Final response ready{RESET}")
                 print(f"{SEP}")
-                
+
                 return final_response.content[0].text, messages
-        
+
     except (json.JSONDecodeError, KeyError, AttributeError) as e:
         print(f"{YELLOW}⚠️ No tool usage detected in response: {str(e)}{RESET}")
-    
+
     print(f"{GREEN}✅ Response ready{RESET}")
     print(f"{SEP}")
-    
+
     return claude_response, messages
 
 print("Claude query function defined")
@@ -721,10 +721,10 @@ try:
     if tools:
         first_tool = tools[0]
         tool_name = first_tool["name"]
-        
+
         # Use the correct parameter name for get_crypto_price
         arguments = {"crypto_id": "bitcoin"}
-        
+
         print(f"Executing tool '{tool_name}' with arguments: {arguments}")
         result = await execute_tool(tool_name, arguments)
         print(f"Tool result: {result}")
@@ -774,11 +774,11 @@ async def chat_session():
     BOLD = "\033[1m"
     RESET = "\033[0m"
     SEP = "=" * 50
-    
+
     print(f"{CYAN}{BOLD}{SEP}")
     print("🤖 INITIALIZING MCP AGENT")
     print(f"{SEP}{RESET}")
-    
+
     # Make sure 'tools' is defined from a previous cell, or discover them again
     try:
         # Check if tools is defined and not empty
@@ -787,38 +787,38 @@ async def chat_session():
             tools_local = await discover_tools()
         else:
             tools_local = tools
-            
+
         print(f"{GREEN}✅ Agent ready with {len(tools_local)} tools:{RESET}")
-        
+
         # Print the available tools for reference
         for i, tool in enumerate(tools_local, 1):
             print(f"{YELLOW}  {i}. {tool['name']}{RESET}")
             print(f"     {tool['description'].strip()}")
-        
+
         # Start the chat session
         print(f"\n{CYAN}{BOLD}{SEP}")
         print(f"💬 INTERACTIVE CHAT SESSION")
         print(f"{SEP}")
         print(f"Type 'exit' or 'quit' to end the session{RESET}")
-        
+
         messages = []
-        
+
         while True:
             # Get user input
             user_input = input(f"\n{BOLD}You:{RESET} ")
-            
+
             # Check if user wants to exit
             if user_input.lower() in ['exit', 'quit']:
                 print(f"\n{GREEN}Ending chat session. Goodbye!{RESET}")
                 break
-            
+
             # Process the query with Claude
             print(f"\n{BLUE}Processing...{RESET}")
             response, messages = await query_claude(user_input, tools_local, messages)
-            
+
             # Display Claude's response
             print(f"\n{BOLD}Assistant:{RESET} {response}")
-            
+
     except Exception as e:
         print(f"\n{YELLOW}⚠️ An error occurred: {str(e)}{RESET}")
 
@@ -854,20 +854,20 @@ await chat_session()
 [92m✅ Agent ready with 2 tools:[0m
 [93m  1. get_crypto_price[0m
      Get the current price of a cryptocurrency in a specified currency.
-    
+
     Parameters:
     - crypto_id: The ID of the cryptocurrency (e.g., 'bitcoin', 'ethereum')
     - currency: The currency to display the price in (default: 'usd')
-    
+
     Returns:
     - Current price information as a formatted string
 [93m  2. get_crypto_market_info[0m
      Get market information for one or more cryptocurrencies.
-    
+
     Parameters:
     - crypto_ids: Comma-separated list of cryptocurrency IDs (e.g., 'bitcoin,ethereum')
     - currency: The currency to display values in (default: 'usd')
-    
+
     Returns:
     - Market information including price, market cap, volume, and price changes
 
@@ -919,7 +919,7 @@ Dogecoin (DOGE):
 3. 24h trading volume: $1,635,314,095
 4. 24h price change: +4.39%
 
-Both cryptocurrencies have shown positive price movements in the last 24 hours, with Solana experiencing a slightly higher increase compared to Dogecoin. Solana has a significantly higher market capitalization and trading volume than Dogecoin. 
+Both cryptocurrencies have shown positive price movements in the last 24 hours, with Solana experiencing a slightly higher increase compared to Dogecoin. Solana has a significantly higher market capitalization and trading volume than Dogecoin.
 
 Is there any specific aspect of this market data you'd like me to elaborate on or any other information you need about these cryptocurrencies?
 

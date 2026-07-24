@@ -58,7 +58,7 @@ AInsight processes news through three specialized agents:
 
 <div style="text-align: center;">
 
-<img src="https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/all_agents_tutorials/../images/ainsight_langgraph.svg" alt="ainsight by langgraph" style="width:20%; height:50%;">
+<img src="https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/images/ainsight_langgraph.svg" alt="ainsight by langgraph" style="width:20%; height:50%;">
 </div>
 
 ### 🎯 Learning Objectives
@@ -126,7 +126,7 @@ We use Pydantic and TypedDict to define our data structures:
 class Article(BaseModel):
     """
     Represents a single news article
-    
+
     Attributes:
         title (str): Article headline
         url (str): Source URL
@@ -139,7 +139,7 @@ class Article(BaseModel):
 class Summary(TypedDict):
     """
     Represents a processed article summary
-    
+
     Attributes:
         title (str): Original article title
         summary (str): Generated summary
@@ -153,14 +153,14 @@ class Summary(TypedDict):
 class GraphState(TypedDict):
     """
     Maintains workflow state between agents
-    
+
     Attributes:
         articles (Optional[List[Article]​]): Found articles
         summaries (Optional[List[Summary]​]): Generated summaries
         report (Optional[str]): Final compiled report
     """
-    articles: Optional[List[Article]​] 
-    summaries: Optional[List[Summary]​] 
+    articles: Optional[List[Article]​]
+    summaries: Optional[List[Summary]​]
     report: Optional[str]
 ```
 
@@ -174,22 +174,22 @@ class NewsSearcher:
     Agent responsible for finding relevant AI/ML news articles
     using the Tavily search API
     """
-    
+
     def search(self) -> List[Article]:
         """
         Performs news search with configured parameters
-        
+
         Returns:
             List[Article]: Collection of found articles
         """
         response = tavily.search(
-            query="artificial intelligence and machine learning news", 
+            query="artificial intelligence and machine learning news",
             topic="news",
             time_period="1w",
             search_depth="advanced",
             max_results=5
         )
-        
+
         articles = []
         for result in response['results']:
             articles.append(Article(
@@ -197,7 +197,7 @@ class NewsSearcher:
                 url=result['url'],
                 content=result['content']
             ))
-        
+
         return articles
 ```
 
@@ -209,21 +209,21 @@ class Summarizer:
     Agent that processes articles and generates accessible summaries
     using gpt-4o-mini
     """
-    
+
     def __init__(self):
         self.system_prompt = """
-        You are an AI expert who makes complex topics accessible 
-        to general audiences. Summarize this article in 2-3 sentences, focusing on the key points 
+        You are an AI expert who makes complex topics accessible
+        to general audiences. Summarize this article in 2-3 sentences, focusing on the key points
         and explaining any technical terms simply.
         """
-    
+
     def summarize(self, article: Article) -> str:
         """
         Generates an accessible summary of a single article
-        
+
         Args:
             article (Article): Article to summarize
-            
+
         Returns:
             str: Generated summary
         """
@@ -239,42 +239,42 @@ class Summarizer:
 ```python
 class Publisher:
     """
-    Agent that compiles summaries into a formatted report 
+    Agent that compiles summaries into a formatted report
     and saves it to disk
     """
-    
+
     def create_report(self, summaries: List[Dict]) -> str:
         """
         Creates and saves a formatted markdown report
-        
+
         Args:
             summaries (List[Dict]): Collection of article summaries
-            
+
         Returns:
             str: Generated report content
         """
         prompt = """
-        Create a weekly AI/ML news report for the general public. 
+        Create a weekly AI/ML news report for the general public.
         Format it with:
         1. A brief introduction
         2. The main news items with their summaries
         3. Links for further reading
-        
+
         Make it engaging and accessible to non-technical readers.
         """
-        
+
         # Format summaries for the LLM
         summaries_text = "\n\n".join([
             f"Title: {item['title']}\nSummary: {item['summary']}\nSource: {item['url']}"
             for item in summaries
         ])
-        
+
         # Generate report
         response = llm.invoke([
             SystemMessage(content=prompt),
             HumanMessage(content=summaries_text)
         ])
-        
+
         # Add metadata and save
         current_date = datetime.now().strftime("%Y-%m-%d")
         markdown_content = f"""
@@ -282,11 +282,11 @@ class Publisher:
 
         {response.content}
         """
-        
+
         filename = f"ai_news_report_{current_date}.md"
         with open(filename, 'w') as f:
             f.write(markdown_content)
-        
+
         return response.content
 ```
 
@@ -300,7 +300,7 @@ You can think of nodes as the "workers" (aka agents) in your workflow. Each node
 2. Processes it
 3. Returns updated state
 
-For example the node of NewsSearcher agent:  
+For example the node of NewsSearcher agent:
 
 1. Takes current state (empty at first)
 2. Searches for articles
@@ -310,30 +310,30 @@ For example the node of NewsSearcher agent:
 def search_node(state: Dict[str, Any]) -> Dict[str, Any]:
     """
     Node for article search
-    
+
     Args:
         state (Dict[str, Any]): Current workflow state
-        
+
     Returns:
         Dict[str, Any]: Updated state with found articles
     """
     searcher = NewsSearcher()
-    state['articles'] = searcher.search() 
+    state['articles'] = searcher.search()
     return state
 
 def summarize_node(state: Dict[str, Any]) -> Dict[str, Any]:
     """
     Node for article summarization
-    
+
     Args:
         state (Dict[str, Any]): Current workflow state
-        
+
     Returns:
         Dict[str, Any]: Updated state with summaries
     """
     summarizer = Summarizer()
     state['summaries'] = []
-    
+
     for article in state['articles']: # Uses articles from previous node
         summary = summarizer.summarize(article)
         state['summaries'].append({
@@ -346,10 +346,10 @@ def summarize_node(state: Dict[str, Any]) -> Dict[str, Any]:
 def publish_node(state: Dict[str, Any]) -> Dict[str, Any]:
     """
     Node for report generation
-    
+
     Args:
         state (Dict[str, Any]): Current workflow state
-        
+
     Returns:
         Dict[str, Any]: Updated state with final report
     """
@@ -366,26 +366,26 @@ def create_workflow() -> StateGraph:
     """
     Constructs and configures the workflow graph
     search -> summarize -> publish
-    
+
     Returns:
         StateGraph: Compiled workflow ready for execution
     """
-    
+
     # Create a workflow (graph) initialized with our state schema
     workflow = StateGraph(state_schema=GraphState)
-    
+
     # Add processing nodes that we will flow between
     workflow.add_node("search", search_node)
     workflow.add_node("summarize", summarize_node)
     workflow.add_node("publish", publish_node)
-    
+
     # Define the flow with edges
     workflow.add_edge("search", "summarize") # search results flow to summarizer
     workflow.add_edge("summarize", "publish") # summaries flow to publisher
-    
+
     # Set where to start
     workflow.set_entry_point("search")
-    
+
     return workflow.compile()
 ```
 
@@ -400,7 +400,7 @@ if __name__ == "__main__":
         "summaries": None,
         "report": None
     })
-    
+
     # Display results
     print("\n=== AI/ML Weekly News Report ===\n")
     print(final_state['report'])
@@ -417,23 +417,23 @@ Welcome to this week's roundup of exciting developments in the world of artifici
 ## Key News Items
 
 ### 1. Microsoft and OneLake Collaboration
-**Source:** [Solutions Review](https://solutionsreview.com/artificial-intelligence-news-for-the-week-of-november-15-updates-from-amd-ibm-openai-more/)  
+**Source:** [Solutions Review](https://solutionsreview.com/artificial-intelligence-news-for-the-week-of-november-15-updates-from-amd-ibm-openai-more/)
 Microsoft has announced a new collaboration that enhances data management through its OneLake platform, part of Microsoft Fabric. This partnership aims to bolster the infrastructure needed to support AI and machine learning tasks, addressing the growing demand for robust data solutions in enterprise tech. Stay tuned for more updates and resources related to AI discussions in the tech community!
 
 ### 2. Mississippi State University’s AI Training Program
-**Source:** [Government Technology](https://www.govtech.com/education/higher-ed/mississippi-state-to-teach-students-to-build-train-ai-systems)  
+**Source:** [Government Technology](https://www.govtech.com/education/higher-ed/mississippi-state-to-teach-students-to-build-train-ai-systems)
 Mississippi State University has secured a $1.2 million grant from the National Science Foundation to train 60 students in building and training AI systems focused on analyzing digital images. This program, in collaboration with 15 high school teachers, will provide students with hands-on experience in preparing image data and developing smart devices, enhancing their skills in intelligent vision tasks.
 
 ### 3. Machine Learning and Gut Health
-**Source:** [Genetic Engineering & Biotechnology News](https://www.genengnews.com/topics/artificial-intelligence/machine-learning-reveals-impact-of-microbial-load-on-gut-health-and-disease/)  
+**Source:** [Genetic Engineering & Biotechnology News](https://www.genengnews.com/topics/artificial-intelligence/machine-learning-reveals-impact-of-microbial-load-on-gut-health-and-disease/)
 Researchers at EMBL Heidelberg have developed a machine learning model that estimates the density of microbes in the gut, known as microbial load, using only microbial composition data. This innovative approach could revolutionize how scientists study the gut microbiome, which is vital for understanding gut health and disease, allowing for more efficient analyses without additional experimental tests.
 
 ### 4. OpenAI and Estée Lauder Partnership
-**Source:** [The Business of Fashion](https://www.businessoffashion.com/news/beauty/openai-partners-with-estee-lauder-on-rd/)  
+**Source:** [The Business of Fashion](https://www.businessoffashion.com/news/beauty/openai-partners-with-estee-lauder-on-rd/)
 OpenAI has teamed up with Estée Lauder to provide employees access to over 240 advanced AI tools, known as generative pre-trained transformers (GPTs). This collaboration aims to assist in the development and marketing of new beauty products, showcasing the increasing integration of AI in the fashion and beauty sectors, especially as brands look to innovate during a slowdown in luxury sales.
 
 ### 5. New Company for Healthcare Innovation
-**Source:** [Washington Technology](https://www.washingtontechnology.com/companies/2024/11/private-equity-firm-creates-company-harness-tech-societal-good/401016/?oref=wt-homepage-river)  
+**Source:** [Washington Technology](https://www.washingtontechnology.com/companies/2024/11/private-equity-firm-creates-company-harness-tech-societal-good/401016/?oref=wt-homepage-river)
 Gavin Long's Pleasant Land group
 ```
 

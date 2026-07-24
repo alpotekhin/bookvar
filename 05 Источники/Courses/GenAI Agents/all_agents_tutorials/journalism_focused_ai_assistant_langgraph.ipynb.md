@@ -15,7 +15,7 @@ source_commit: bd681451b254ac1a790e947b581d3997ab35013d
 
 
 
-![Journalism Focused AI Assistant](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/all_agents_tutorials/../images/journalism_focused_ai_assistant_langgraph.png)
+![Journalism Focused AI Assistant](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/images/journalism_focused_ai_assistant_langgraph.png)
 
 ## Overview
 
@@ -144,7 +144,7 @@ llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
 
 For this, I used the `gpt-4o` model to generate a sample article using the prompt below. Note that the information mentioned in the article is not to be taken seriously. The article will serve as input for summarization, fact-checking, tone analysis, quote extraction, and grammar and bias analysis modules, providing a basis for refining prompt responses.
 
-We will take advantage of the `document_loaders` `langchain` module, specifically the `PyMuPDFLoader` for loading the text from a PDF file. 
+We will take advantage of the `document_loaders` `langchain` module, specifically the `PyMuPDFLoader` for loading the text from a PDF file.
 
 `Prompt`:
 Write an article designed for classification purposes, containing a variety of claims that fit into distinct but subtly presented categories: well-known and confirmed facts, refuted claims, unverifiable statements requiring further research, and vague or speculative assertions. The article should flow naturally without explicitly labeling these categories but ensure that each type of claim is clearly identifiable through its content and context. Use varied tones, including positive, critical, biased, or opinionated language, to differentiate the claims. Incorporate quotes to enhance realism and include occasional minor grammar errors or awkward phrasing for added authenticity.
@@ -176,7 +176,7 @@ def clean_page_content(page_content: str) -> str:
 print("Page content before cleaning")
 for page in pages:
     pprint.pprint(page.page_content[:100])
-    
+
 
 print("\nPage content after cleaning")
 formatted_pages = []
@@ -297,12 +297,12 @@ def combine_summaries(summaries: List[str]):
     # If the article is short, return the single summary
     if len(summaries) == 1:
         return summaries[0]
-    
+
     # Combine the summaries into a single text
     summaries_text = ""
     for i, summary in enumerate(summaries):
         summaries_text += f"Summary {i + 1}:\n{summary}\n\n"
-    
+
     # Generate a combined summary
     full_summary = combine_summarization_pipeline.invoke({"summaries": summaries_text})
 
@@ -326,7 +326,7 @@ def summarize_article(article_text: str, article_chunks=None):
 
     # Combine the individual summaries into a single coherent summary
     full_summary = combine_summaries(summaries)
-    
+
     return full_summary
 ```
 
@@ -442,7 +442,7 @@ def search_ddg(keywords: str, max_results: int = 1):
         except Exception as e:
             print("Error: ", str(e))
             return [{}]
-    
+
     return text_results
 
 
@@ -461,7 +461,7 @@ def search_and_summarize(keywords: str, max_results: int = 1):
         html_transform = (
             bs_transformer.remove_unwanted_tags(html_content, ["script", "style", "noscript"])
         )
-        
+
         # Based on various attempt I oberserved that the content is mostly in <p> tags,
         # so I am extracting only <p> tags, but is not the best approach for all the websites
         html_transform = bs_transformer.extract_tags(html_transform, ["p"], remove_comments=True)
@@ -522,7 +522,7 @@ def fact_check_article(article_text: str, chunks=None):
     # Split the full article text into manageable chunks if not provided
     if not chunks:
         chunks = chunk_large_text(article_text)
-    
+
     # Fact-check each chunk of the article
     fact_check_results = []
     for chunk in chunks:
@@ -534,7 +534,7 @@ def fact_check_article(article_text: str, chunks=None):
                 statement['search_results'] = [
                     search_and_summarize(keyword) for keyword in suggested_keywords
                 ]
-        
+
         fact_check_results.extend(fact_check_result["result"])
 
     return fact_check_results
@@ -563,7 +563,7 @@ print("\n\n Unverifiable facts")
 for statement in fact_check_results:
     if statement["status"] == "unverifiable":
         pprint.pprint(statement)
-        
+
 # print("\n\n Vague facts")
 # for statement in fact_check_results:
 #     if statement["status"] == "vague":
@@ -605,13 +605,13 @@ def tone_analysis_article(article_text: str, chunks=None):
     # Split the full article text into manageable chunks if not provided
     if not chunks:
         chunks = chunk_large_text(article_text)
-    
+
     # Analyze the tones of each chunk of the article
     tone_results = []
     for chunk in chunks:
         tone_result = tone_pipeline.invoke({"text": chunk})
         tone_results.append(tone_result.content)
-    
+
     return tone_results
 ```
 
@@ -701,13 +701,13 @@ def quote_extraction_article(article_text: str, chunks=None):
     # Split the full article text into manageable chunks if not provided
     if not chunks:
         chunks = chunk_large_text(article_text)
-    
+
     # Extract quotes from each chunk of the article
     quote_results = []
     for chunk in chunks:
         quote_result = quote_extraction_pipeline.invoke({"text": chunk})
         quote_results.append(quote_result.content)
-    
+
     return quote_results
 ```
 
@@ -815,13 +815,13 @@ def grammary_and_bias_analysis_article(article_text: str, chunks=None):
     # Split the full article text into manageable chunks if not provided
     if not chunks:
         chunks = chunk_large_text(article_text)
-    
+
     # Review each chunk of the article
     review_results = []
     for chunk in chunks:
         review_result = grammar_and_bias_review.invoke({"text": chunk})
         review_results.append(review_result.content)
-    
+
     return review_results
 ```
 
@@ -996,7 +996,7 @@ def get_user_actions(input_text: str) -> List[str]:
     Identify the user's intended actions based on their input.
     """
     system_actions = action_pipeline.invoke({"input_text": input_text})
-    
+
     return system_actions["actions"]
 ```
 
@@ -1547,7 +1547,7 @@ def format_analysis_results(report_data):
     # Grammar and Bias Review
     grammar_review = report_data.get('grammar_and_bias_review_result', ['No grammar or bias review available.'])
     grammar_review = "\n".join(grammar_review)
-    
+
     # Tone Analysis
     tone_analysis = report_data.get('tone_analysis_result', ['No tone analysis available.'])
     tone_analysis = "\n".join(tone_analysis)

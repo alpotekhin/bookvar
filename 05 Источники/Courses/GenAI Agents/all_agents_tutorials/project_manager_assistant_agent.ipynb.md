@@ -24,10 +24,10 @@ Effective management is key to project success. It already starts, with the setu
 The ```Project Manager Assistant Agent``` was created to transfrom how projects are initiated by introducing automation, intelligence, and precision into the process. It enables project managers to seamless translate project description into structure, actionable plans, mapping dependencies for better workflow alignment and assign tasks based on team members' expertise and experience. In addition, it creates risks scores for the individual tasks allowing overall project risk assessment. This overall project risk score is used as part of a self-reflection (along insights generations on the actual plan) to further improve the schedule and task assignment to reduce the project risks. (see details on the implementation).
 
 ### Benefits
-This AI-driven approach reduces the burden of manual planning and eliminates redundancies, allowing project managers to shift their focus to higher-level strategy and decision. making. 
+This AI-driven approach reduces the burden of manual planning and eliminates redundancies, allowing project managers to shift their focus to higher-level strategy and decision. making.
 
 Example visaulized output for an agent derived project plan:
-![Project Manager Assistant Agent Gantt-chart](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/all_agents_tutorials/../images/project_manager_assistant_agent_ganttchart.png)
+![Project Manager Assistant Agent Gantt-chart](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/images/project_manager_assistant_agent_ganttchart.png)
 
 ### Key Components
 <ol>
@@ -96,7 +96,7 @@ Example visaulized output for an agent derived project plan:
         <b>TaskAllocation</b>
         <ul>
             <li><b>task</b>: A task </li>
-            <li><b>team_member</b>: To whom the task is allocated</li> 
+            <li><b>team_member</b>: To whom the task is allocated</li>
         </ul>
     </li>
     <li>
@@ -173,7 +173,7 @@ Example visaulized output for an agent derived project plan:
 
 ## Visual Representation of the Agent
 
-<img src="https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/all_agents_tutorials/../images/project_manager_assistant_agent.svg" alt="Project Manager Assistant" width="500" height="500">
+<img src="https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/images/project_manager_assistant_agent.svg" alt="Project Manager Assistant" width="500" height="500">
 
 ## Implementation
 In the following section, we provide a detailed overview how to implement the Project Manager Assistant Agent.
@@ -212,7 +212,7 @@ model_provider = 'Azure' # 'Azure' or 'OpenAI'
 if model_provider == 'Azure':
     """
     Define your environmental variables under .venv:
-        - AZURE_OPENAI_API_KEY    
+        - AZURE_OPENAI_API_KEY
         - OPENAI_API_VERSION
         - AZURE_OPENAI_ENDPOINT
     """
@@ -349,7 +349,7 @@ In this tutorial we have implemented the nodes based on th following pattern:
 def task_generation_node(state: AgentState):
  """LangGraph node that will extract tasks from given project description"""
     description = state["project_description"]
-    prompt = f"""You are an experienced project description analyzer. Analyze the 
+    prompt = f"""You are an experienced project description analyzer. Analyze the
     project description '{description}' and create a list of actionable and
     realistic tasks with estimated time (in days) to complete each task.
     If the task takes longer than 5 days, break it down into independent smaller tasks.
@@ -360,7 +360,7 @@ def task_generation_node(state: AgentState):
     return state
 ```
 In almost all nodes, we used:
-- `llm.with_structured_output(<structure>)` - generating structured output. 
+- `llm.with_structured_output(<structure>)` - generating structured output.
 
 The .with_structured_output() method enables models with native APIs for structured outputs, such as function calling or JSON mode, to reliably produce outputs as objects based on a defined schema. The schema can be specified using a TypedDict, JSON Schema, or a Pydantic class, determining whether the output is a dictionary or a Pydantic object.
 
@@ -373,7 +373,7 @@ def task_generation_node(state: AgentState):
     description = state["project_description"]
     prompt = f"""
         You are an expert project manager tasked with analyzing the following project description: {description}
-        Your objectives are to: 
+        Your objectives are to:
         1. **Extract Actionable Tasks:**
             - Identify and list all actionable and realistic tasks necessary to complete the project.
             - Provide an estimated number of days required to complete each task.
@@ -395,7 +395,7 @@ def task_dependency_node(state: AgentState):
         Your objectives are to:
             1. **Identify Dependencies:**
                 - For each task, determine which other tasks must be completed before it can begin (blocking tasks).
-            2. **Map Dependent Tasks:** 
+            2. **Map Dependent Tasks:**
                 - For every task, list all tasks that depend on its completion.
         """
     structure_llm = llm.with_structured_output(DependencyList)
@@ -420,7 +420,7 @@ def task_scheduler_node(state: AgentState):
                 - Optimize the schedule to minimize the overall project duration.
                 - If possible parallelize the tasks to reduce the overall project duration.
                 - Try not to increase the project duration compared to previous iterations.
-            2. **Incorporate Insights:** 
+            2. **Incorporate Insights:**
                 - Utilize insights from previous iterations to enhance scheduling efficiency and address any identified issues.
         """
     schedule_llm = llm.with_structured_output(Schedule)
@@ -437,21 +437,21 @@ def task_allocation_node(state: AgentState):
     insights = state["insights"] #"" if state["insights"] is None else state["insights"].insights[-1]
     prompt = f"""
         You are a proficient project manager responsible for allocating tasks to team members efficiently.
-        **Given:** 
-            - **Tasks:** {tasks} 
-            - **Schedule:** {schedule} 
-            - **Team Members:** {team} 
-            - **Previous Insights:** {insights} 
-            - **Previous Task Allocations (if any):** {state["task_allocations_iteration"]} 
-        **Your objectives are to:** 
-            1. **Allocate Tasks:** 
-                - Assign each task to a team member based on their expertise and current availability. 
-                - Ensure that no team member is assigned overlapping tasks during the same time period. 
-            2. **Optimize Assignments:** 
-                - Utilize insights from previous iterations to improve task allocations. 
+        **Given:**
+            - **Tasks:** {tasks}
+            - **Schedule:** {schedule}
+            - **Team Members:** {team}
+            - **Previous Insights:** {insights}
+            - **Previous Task Allocations (if any):** {state["task_allocations_iteration"]}
+        **Your objectives are to:**
+            1. **Allocate Tasks:**
+                - Assign each task to a team member based on their expertise and current availability.
+                - Ensure that no team member is assigned overlapping tasks during the same time period.
+            2. **Optimize Assignments:**
+                - Utilize insights from previous iterations to improve task allocations.
                 - Balance the workload evenly among team members to enhance productivity and prevent burnout.
-                **Constraints:** 
-                    - Each team member can handle only one task at a time. 
+                **Constraints:**
+                    - Each team member can handle only one task at a time.
                     - Assignments should respect the skills and experience of each team member.
         """
     structure_llm = llm.with_structured_output(TaskAllocationList)
@@ -542,7 +542,7 @@ def router(state: AgentState):
 As a last remainign step, let's create an agentic workflow using LangGraph.
 
 ```python
-# Instantiate the workflow    
+# Instantiate the workflow
 workflow = StateGraph(AgentState)
 
 # Add nodes to the workflow
@@ -570,7 +570,7 @@ graph_plan = workflow.compile(checkpointer=memory)
 ```
 
 ```python
-# To visualize the created workflow, we can use 
+# To visualize the created workflow, we can use
 display(Image(graph_plan.get_graph(xray=1).draw_mermaid_png()))
 ```
 
@@ -618,7 +618,7 @@ team_members=[TeamMember(name='Alice', profile=' Alice is a Frontend Developer s
 ```
 
 ```python
-# Definition of the AgentState 
+# Definition of the AgentState
 state_input = {
     "project_description": project_description,
     "team": team,
@@ -776,7 +776,7 @@ def project_plan_generation_node(state: SimpleAgentState):
     return {"tasks": project_plan.tasks, "dependencies": project_plan.dependencies, "schedule": project_plan.schedule, "task_allocations": project_plan.task_allocations}
 
 
-# Instantiate the workflow    
+# Instantiate the workflow
 simple_workflow = StateGraph(SimpleAgentState)
 
 # Add nodes to the workflow
@@ -792,7 +792,7 @@ simple_memory = MemorySaver()
 # Compile the workflow
 simple_graph_plan = simple_workflow.compile(checkpointer=memory)
 
-# To visualize the created workflow, we can use 
+# To visualize the created workflow, we can use
 display(Image(simple_graph_plan.get_graph(xray=1).draw_mermaid_png()))
 ```
 
@@ -808,7 +808,7 @@ config = {"configurable": {"thread_id": "2"}}
 for event in simple_graph_plan.stream(state_input, config, stream_mode=["updates"]):
     "Print the different nodes as the agent progresses"
     print(f"Current node: {next(iter(event[1]))}")
-    
+
 simple_final_state = simple_graph_plan.get_state(config).values
 ```
 
@@ -879,7 +879,7 @@ fig.show()
 Improvement Possibilities:
 - Incorporating a 'human-in-the-loop' mechanism as part of the self-reflection process can significantly enhance the system's effectiveness. This approach allows for the introduction of additional, real-time information about the schedule and the availability or status of team members. For instance, if a team member is currently sick, the agent would typically still assign tasks to them due to a lack of awareness. By integrating human oversight, such critical updates can be communicated to the system, ensuring that tasks are reassigned appropriately and the workload is distributed more efficiently.
 Limitations of the Approach:
-- Incorporating an optimizer based on extracted features generated by the LLM can provide better and more reproducible scheduling and task allocation. So only leveraging the agent to produce structured content from the project description, task dependencies and team member profiles, then use the optimizer to create the project plan (task assignment). 
+- Incorporating an optimizer based on extracted features generated by the LLM can provide better and more reproducible scheduling and task allocation. So only leveraging the agent to produce structured content from the project description, task dependencies and team member profiles, then use the optimizer to create the project plan (task assignment).
 
 Limitations:
 - The current approach relies on a Large Language Model (LLM) to assign risk scores to tasks. However, this method has inherent limitations. Even if the same person is assigned to the same task on the same schedule, the LLM may generate different risk scores each time. This inconsistency arises because the model's output can vary independently of the explicit details provided in the prompt. Consequently, this variability can lead to unpredictable risk assessments, potentially affecting the reliability and accuracy of task management.

@@ -36,7 +36,7 @@ Multi-agent systems offer several advantages in complex tasks like content creat
 The system follows a structured approach:
 
 1. Agent Configuration: Each agent is set up with a specific role and behavior.
-   
+
    In this step, we define the characteristics and capabilities of each agent. This includes:
    - Setting the agent's name and role
    - Defining the agent's instructions (what it should do)
@@ -48,25 +48,25 @@ The system follows a structured approach:
    - Planner: Organizes the research into an outline.
    - Writer: Drafts the blog post based on the outline.
    - Editor: Reviews and edits the draft for quality assurance.
-   
+
    Each role is crucial for the successful creation of a high-quality blog post. This division of labor allows for specialization and ensures that each aspect of the content creation process receives focused attention.
 
 3. Interaction Management: Defines permissible interactions between agents to maintain orderly communication.
-   
+
    This step involves:
    - Determining which agents can communicate with each other
    - Defining the order of operations (e.g., research before writing)
    - Ensuring that context and information are properly passed between agents
 
 4. Task Execution: The admin initiates a task, and agents collaboratively work through researching, planning, writing, and editing.
-   
+
    The task execution follows a logical flow:
    1. Admin sets the topic and initiates the process
    2. Planner creates an outline based on the topic
    3. Researcher gathers information on each section of the outline
    4. Writer uses the research to draft the blog post
    5. Editor reviews and refines the final product
-   
+
    This structured approach ensures a comprehensive and well-researched blog post as the final output.
 
 ```python
@@ -152,7 +152,7 @@ Once your research is complete, transfer to the writer agent"""
 
 
 def writer_instructions(context_variables):
-    return """You are the Writer Agent. using the prior information write a clear blog post following the outline from the planner agent. 
+    return """You are the Writer Agent. using the prior information write a clear blog post following the outline from the planner agent.
     Summarise and include as much information relevant from the research into the blog post.
     The blog post should be quite large as the context the context provided should be quite dense.
 Write clear, engaging content for each section.

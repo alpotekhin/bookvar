@@ -36,21 +36,21 @@ Key challenges include:
 
 ## Key components
 
- 1. State-Driven Workflow Engine 
-    - StateGraph Architecture: Five-node system for orchestrated research 
-    - Decision Making Node: Query intent analysis and routing 
+ 1. State-Driven Workflow Engine
+    - StateGraph Architecture: Five-node system for orchestrated research
+    - Decision Making Node: Query intent analysis and routing
     - Planning Node: Research strategy formulation
-    - Tool Execution Node: Paper retrieval and processing 
-    - Judge Node: Quality validation and improvement cycles 
+    - Tool Execution Node: Paper retrieval and processing
+    - Judge Node: Quality validation and improvement cycles
 
-2. Paper Processing Integration 
-    - Source Integration, CORE API for comprehensive paper access 
-    - Document Processing, PDF content extraction, Text structure preservation 
+2. Paper Processing Integration
+    - Source Integration, CORE API for comprehensive paper access
+    - Document Processing, PDF content extraction, Text structure preservation
 
-3. Analysis Workflow 
-    - State-aware processing pipeline 
-    - Multi-step validation gates 
-    - Quality-focused improvement cycles 
+3. Analysis Workflow
+    - State-aware processing pipeline
+    - Multi-step validation gates
+    - Quality-focused improvement cycles
     - Human-in-the-loop validation options
 
 An overview of the workflow is shown below:
@@ -59,11 +59,11 @@ An overview of the workflow is shown below:
 
 ## Method details
 
-1. The system requires 
+1. The system requires
     - OpenAI API key to access GPT 4o. This model was chosen after comparing its performance with other, open-source alternatives (in particular Llama 3). However, any other LLM with tool calling capabilities can be used.
     - CORE API key for paper retrieval. CORE is one of the larges online repositories for scientific papers, counting over 136 million papers, and offers a free API for personal use. A key can be requested [here](https://core.ac.uk/services/api#form).
 
-2. Technical Architecture: 
+2. Technical Architecture:
     - LangGraph for state orchestration.
     - PDFplumber for document processing.
     - Pydantic for structured data handling.
@@ -140,7 +140,7 @@ If any feedback is provided about a previous answer, incorportate it in your new
 
 # TOOLS
 
-For each subtask, indicate the external tool required to complete the subtask. 
+For each subtask, indicate the external tool required to complete the subtask.
 Tools can be one of the following:
 {tools}
 """
@@ -149,7 +149,7 @@ Tools can be one of the following:
 agent_prompt = """
 # IDENTITY AND PURPOSE
 
-You are an experienced scientific researcher. 
+You are an experienced scientific researcher.
 Your goal is to help the user with their scientific research. You have access to a set of external tools to complete your tasks.
 Follow the plan you wrote to successfully complete the task.
 
@@ -224,12 +224,12 @@ class CoreAPIWrapper(BaseModel):
         http = urllib3.PoolManager()
 
         # Retry mechanism to handle transient errors
-        max_retries = 5    
+        max_retries = 5
         for attempt in range(max_retries):
             response = http.request(
                 'GET',
-                f"{self.base_url}/search/outputs", 
-                headers={"Authorization": f"Bearer {self.api_key}"}, 
+                f"{self.base_url}/search/outputs",
+                headers={"Authorization": f"Bearer {self.api_key}"},
                 fields={"q": query, "limit": self.top_k_results}
             )
             if 200 <= response.status < 300:
@@ -283,7 +283,7 @@ async def print_stream(app: CompiledStateGraph, input: str) -> Optional[BaseMess
     display(Markdown(f"### Input:\n\n{input}\n\n"))
     display(Markdown("### Stream:\n\n"))
 
-    # Stream the results 
+    # Stream the results
     all_messages = []
     async for chunk in app.astream({"messages": [input]}, stream_mode="updates"):
         for updates in chunk.values():
@@ -292,7 +292,7 @@ async def print_stream(app: CompiledStateGraph, input: str) -> Optional[BaseMess
                 for message in messages:
                     message.pretty_print()
                     print("\n\n")
- 
+
     # Return the last message if any
     if not all_messages:
         return None
@@ -348,11 +348,11 @@ def download_paper(url: str) -> str:
     Returns:
         The paper content.
     """
-    try:        
+    try:
         http = urllib3.PoolManager(
             cert_reqs='CERT_NONE',
         )
-        
+
         # Mock browser headers to avoid 403 error
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
@@ -548,10 +548,10 @@ test_inputs = [
 
     "Can you find 8 papers on quantum machine learning?",
 
-    """Find recent papers (2023-2024) about CRISPR applications in treating genetic disorders, 
+    """Find recent papers (2023-2024) about CRISPR applications in treating genetic disorders,
     focusing on clinical trials and safety protocols""",
 
-    """Find and analyze papers from 2023-2024 about the application of transformer architectures in protein folding prediction, 
+    """Find and analyze papers from 2023-2024 about the application of transformer architectures in protein folding prediction,
     specifically looking for novel architectural modifications with experimental validation."""
 ]
 
@@ -584,7 +584,7 @@ The paper titled "Advances, limitations and perspectives in the use of celecoxib
 
 ### Key Findings:
 
-1. **Nanocarrier Types and Materials**: 
+1. **Nanocarrier Types and Materials**:
    - CXB-loaded nanocarriers are primarily based on polymers and lipids, using materials like poly(lactic-co-glycolic acid) (PLGA), cholesterol, phospholipids, and poly(ethylene glycol) (PEG).
    - These carriers enhance drug solubility, stability, and bioavailability, and can be engineered for targeted delivery to tumor sites.
 
@@ -672,7 +672,7 @@ These papers cover a range of topics within quantum machine learning, from theor
 
 ## Input:
 
-Find recent papers (2023-2024) about CRISPR applications in treating genetic disorders, 
+Find recent papers (2023-2024) about CRISPR applications in treating genetic disorders,
     focusing on clinical trials and safety protocols
 
 
@@ -711,7 +711,7 @@ These papers provide insights into the current state of CRISPR technology in cli
 
 ## Input:
 
-Find and analyze papers from 2023-2024 about the application of transformer architectures in protein folding prediction, 
+Find and analyze papers from 2023-2024 about the application of transformer architectures in protein folding prediction,
     specifically looking for novel architectural modifications with experimental validation.
 
 
@@ -772,7 +772,7 @@ The comparative analysis reveals a clear differentiation in approaches:
 - Microsoft Copilot: Focused on rapid information retrieval and general overview
 - Perplexity AI: Balanced approach with emphasis on source verification
 
-### Microsoft  copilot results 
+### Microsoft  copilot results
 
 ![image](https://i.ibb.co/y4Zf4Pc/Screenshot-2024-11-17-at-21-40-21.png)]
 
@@ -792,7 +792,7 @@ Here we present a comprehensive comparison between our research assistant agent 
     - API rate limits for paper access
     - Handle time for large PDFs
     - Limited to publicly accessible papers
-  
+
 2. Functional Limitations
     - No support for image analysis in papers
     - Limited context window for very long papers
@@ -813,14 +813,14 @@ Here we present a comprehensive comparison between our research assistant agent 
     - Implement cross-referencing between papers
     - Add citation network analysis
     - Include domain-specific validation rules
-        
+
 3. User Experience
     - Add interactive feedback mechanisms
     - Implement progress tracking
     - Add customizable validation criteria
     - Include export options for research summaries
-        
-   
+
+
 ## Specific Use Cases:
 
 1. Academic Research, Literature review and paper analysis.

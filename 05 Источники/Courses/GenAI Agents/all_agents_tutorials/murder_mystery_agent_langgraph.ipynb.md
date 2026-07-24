@@ -118,7 +118,7 @@ This notebook demonstrates the great potential LLM agents can have in a game, ei
 
 <div style="text-align: center;">
 
-<img src="https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/all_agents_tutorials/../images/murder_mystery_game.png" style="width:50%; height:auto;">
+<img src="https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/images/murder_mystery_game.png" style="width:50%; height:auto;">
 </div>
 
 ## Beginner's Guide to Using This Notebook
@@ -629,8 +629,8 @@ def print_incorrect_guess():
 We define 3 schema classes:
 1. `Character`: an ingame character
 2. `NPC`: The interactable character list for the game
-3. `StoryDetails`: Blueprint for story details to LLM generate  
-The schema classes allow us to request structured output from the LLM  
+3. `StoryDetails`: Blueprint for story details to LLM generate
+The schema classes allow us to request structured output from the LLM
 
 We define 2 state classes:
 1. `ConversationState`: holds the ongoing conversation state throughout the game
@@ -708,10 +708,10 @@ class GenerateGameState(TypedDict):
 
 ## LLM Initialization
 
-Initialize the Large Language Model (LLM) backbone for all the different agents in our system.  
-We have used OPEN AI GPT-4o for our development and testing.  
-The code should also work with any other LLM supported by LangChain.  
-  
+Initialize the Large Language Model (LLM) backbone for all the different agents in our system.
+We have used OPEN AI GPT-4o for our development and testing.
+The code should also work with any other LLM supported by LangChain.
+
 We set the `temperature` to 0, this makes the run deterministic, i.e. no randomness.
 
 ```python
@@ -1543,7 +1543,7 @@ output = graph.invoke({"environment":environment,"max_characters":max_characters
 ```
 
 ```text
-                                                                                                                   
+
                                                     [1;34mCHARACTERS[0m
 ```
 
@@ -1699,7 +1699,7 @@ You have selected Marc Renault
 ```
 
 ```text
-                                                                                                                   
+
                                                     [1;34mCHARACTERS[0m
 ```
 

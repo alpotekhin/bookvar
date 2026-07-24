@@ -104,7 +104,7 @@ The system follows a multi-step approach to generate podcast content:
 
 1. [Sub Graph/Agent] Planning: stage is implemented as a subgraph within the larger content generation workflow. This modular approach allows for easy extension and modification of the generation process.
 2. [Sub Graph/Agent] Keyword Generation: Identifies at least 5 relevant keywords related to the podcast topic
-3. [Sub Graph/Agent] Structure Generation: Creates 5 subtopics based on the podcast topic and 
+3. [Sub Graph/Agent] Structure Generation: Creates 5 subtopics based on the podcast topic and
 
 4. [Main Graph/Agent] Content Generation: Likely generates detailed content for each subtopic
 5. [Main Graph/Agent]
@@ -124,7 +124,7 @@ The planning subgraph is visualized using a Mermaid diagram, providing a clear r
 ### Conclusion
 This notebook demonstrates a sophisticated approach to automated podcast content generation by leveraging state-of-the-art AI models and graph-based workflows. The system's modular design allows for easy expansion and customization, making it adaptable to various podcast topics and formats. While the provided code focuses on the planning stage, it lays the groundwork for a comprehensive content generation system that could potentially streamline the podcast creation process.
 
-![Podcast_Gen_LangGraph](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/all_agents_tutorials/../images/podcast_generating_system_langgraph.jpg)
+![Podcast_Gen_LangGraph](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/images/podcast_generating_system_langgraph.jpg)
 
 ### Import necessary libraries
 
@@ -317,7 +317,7 @@ graph_plan.invoke({"topic": "What is Attention in human cognition"})
 
 Here we depict what the output looks like in the LangGraph studio:
 
-![agent_1.png](attachment:agent_1.png)
+![agent_1.png](/_assets/Sources/GenAI Agents/all_agents_tutorials/generate_podcast_agent_langgraph/cell-035-attachment.png)
 
 #### Conduct podcast
 
@@ -609,10 +609,10 @@ A classic example is the "cocktail party effect." Imagine you're at a lively par
 
 **Interviewer:**  So, it's like a combination of these theories that helps us navigate the world?
 
-**Expert:**  Exactly! These mechanisms highlight how our brains prioritize information based on factors such as relevance, familiarity, and context. This prioritization is influenced by our past experiences and cultural background, which can shape what we find noteworthy or important in any given situation. Overall, attention is a dynamic process that not only filters information but also actively shapes our perception of reality. 
+**Expert:**  Exactly! These mechanisms highlight how our brains prioritize information based on factors such as relevance, familiarity, and context. This prioritization is influenced by our past experiences and cultural background, which can shape what we find noteworthy or important in any given situation. Overall, attention is a dynamic process that not only filters information but also actively shapes our perception of reality.
 
 
-![agent_2.png](attachment:agent_2.png)
+![agent_2.png](/_assets/Sources/GenAI Agents/all_agents_tutorials/generate_podcast_agent_langgraph/cell-048-attachment.png)
 
 ### Main graph
 
@@ -842,9 +842,9 @@ display(Markdown(report))
 
 Have you ever wondered why you can focus on a conversation in a crowded room, or why you can tune out distractions while working on a challenging task?  The answer lies in the fascinating world of attention, a cognitive superpower that shapes our perception, guides our decisions, and ultimately defines how we experience the world.
 
-In this episode, we'll delve into the intricate workings of attention, exploring its surprising complexities and uncovering the secrets of how our brains manage this vital process. We'll uncover the hidden "bottleneck" that limits our ability to process information, and discover the three distinct networks in our brains that work together to control our focus. 
+In this episode, we'll delve into the intricate workings of attention, exploring its surprising complexities and uncovering the secrets of how our brains manage this vital process. We'll uncover the hidden "bottleneck" that limits our ability to process information, and discover the three distinct networks in our brains that work together to control our focus.
 
-Join us as we unravel the mystery of attention, from the spotlight that illuminates our environment to the intricate neural mechanisms that make it possible. Get ready to learn how attention shapes our reality, and how we can harness its power to improve our focus, productivity, and overall well-being. 
+Join us as we unravel the mystery of attention, from the spotlight that illuminates our environment to the intricate neural mechanisms that make it possible. Get ready to learn how attention shapes our reality, and how we can harness its power to improve our focus, productivity, and overall well-being.
 
 
 ---
@@ -853,17 +853,17 @@ Join us as we unravel the mystery of attention, from the spotlight that illumina
 
 **Intro**
 
-Hey everyone, and welcome back to the show! Today, we're diving deep into the fascinating world of attention. It's something we do all the time, but how much do we really understand about this crucial cognitive process? 
+Hey everyone, and welcome back to the show! Today, we're diving deep into the fascinating world of attention. It's something we do all the time, but how much do we really understand about this crucial cognitive process?
 
 **What is Attention?**
 
-Our expert guest today, Dr. Emily Carter, a cognitive psychologist specializing in attention and perception, is here to help us unravel the mysteries of attention. 
+Our expert guest today, Dr. Emily Carter, a cognitive psychologist specializing in attention and perception, is here to help us unravel the mysteries of attention.
 
 **Dr. Carter:** Attention is essentially the concentration of awareness on specific stimuli while filtering out irrelevant information. It's about "taking possession by the mind" of one out of several possible objects or thoughts. This selective focus allows us to engage effectively with our environment.
 
 **Interviewer:** So, it's like a spotlight that we can shine on different things in our environment?
 
-**Dr. Carter:** Exactly! But here's the surprising part: our attention has a limited capacity. We can only process a small fraction of the information available to us at any given moment. This means that our attentional resources are precious and must be managed wisely. 
+**Dr. Carter:** Exactly! But here's the surprising part: our attention has a limited capacity. We can only process a small fraction of the information available to us at any given moment. This means that our attentional resources are precious and must be managed wisely.
 
 **The Brain's Attention Network**
 
@@ -877,7 +877,7 @@ Our expert guest today, Dr. Emily Carter, a cognitive psychologist specializing 
 
 **Cognitive Load and Attention**
 
-**Interviewer:**  That's really intriguing! So, if I understand correctly, cognitive load can either help us focus or distract us, depending on how well the information we’re processing aligns with our tasks. Can you provide a specific example from your research or experience where cognitive load significantly impacted attention in a real-world scenario? 
+**Interviewer:**  That's really intriguing! So, if I understand correctly, cognitive load can either help us focus or distract us, depending on how well the information we’re processing aligns with our tasks. Can you provide a specific example from your research or experience where cognitive load significantly impacted attention in a real-world scenario?
 
 **Dr. Carter:** Certainly! A great example can be found in classroom settings. If the cognitive load is too high—perhaps due to the introduction of too many new variables or concepts at once—students may struggle to focus on the key principles being taught. This overload can lead to distractions, as their working memory becomes overwhelmed, making it difficult to retain any information.
 
@@ -891,9 +891,9 @@ Our expert guest today, Dr. Emily Carter, a cognitive psychologist specializing 
 
 **Dr. Carter:**  Exactly! And that brings us to selective attention, which is the cognitive process that enables us to focus on specific stimuli in our environment while filtering out distractions. It's like having a spotlight in our minds that highlights what’s important at any given moment.
 
-**Interviewer:**  That's a great example! It really highlights how selective attention plays a role in our daily interactions. 
+**Interviewer:**  That's a great example! It really highlights how selective attention plays a role in our daily interactions.
 
-**Dr. Carter:**  Exactly! Think about being at a crowded café. You might be engaged in a conversation with a friend, tuning into their voice while ignoring the clatter of dishes and background chatter. This ability to hone in on one sound amidst a cacophony is a classic demonstration of selective attention. 
+**Dr. Carter:**  Exactly! Think about being at a crowded café. You might be engaged in a conversation with a friend, tuning into their voice while ignoring the clatter of dishes and background chatter. This ability to hone in on one sound amidst a cacophony is a classic demonstration of selective attention.
 
 **Managing Attention in Daily Life**
 
@@ -903,11 +903,11 @@ Our expert guest today, Dr. Emily Carter, a cognitive psychologist specializing 
 
 **Interviewer:**  That's really interesting! So, it's not just about being constantly focused, but also about finding the right balance?
 
-**Dr. Carter:**  Exactly! By incorporating these strategies, individuals can better manage their attentional resources and improve their overall focus in daily life. 
+**Dr. Carter:**  Exactly! By incorporating these strategies, individuals can better manage their attentional resources and improve their overall focus in daily life.
 
 **Outro**
 
-So there you have it, folks! Attention is a complex and fascinating process that plays a crucial role in our daily lives. By understanding how attention works, we can better manage our focus, enhance our productivity, and improve our overall well-being. 
+So there you have it, folks! Attention is a complex and fascinating process that plays a crucial role in our daily lives. By understanding how attention works, we can better manage our focus, enhance our productivity, and improve our overall well-being.
 
 Thanks for joining us today, and be sure to tune in next time for another exciting episode!
 
@@ -916,11 +916,11 @@ Thanks for joining us today, and be sure to tune in next time for another exciti
 
 ## Conclusion
 
-Today, we've explored the fascinating world of attention, a cognitive process that shapes our perception of reality. We've learned that attention is not just about focusing on one thing, but a complex interplay of filtering, prioritizing, and allocating cognitive resources. 
+Today, we've explored the fascinating world of attention, a cognitive process that shapes our perception of reality. We've learned that attention is not just about focusing on one thing, but a complex interplay of filtering, prioritizing, and allocating cognitive resources.
 
 We've discovered that our brains have dedicated networks for different types of attention, from the frontoparietal network that helps us control our focus to the salience network that alerts us to important stimuli. We've also learned about the concept of cognitive load and how it can either enhance or hinder our ability to focus, depending on the information we're processing.
 
-Ultimately, understanding attention is crucial for navigating our complex world effectively. By learning to manage our attentional resources, we can improve our productivity, enhance our learning, and even improve our overall well-being. So, the next time you find yourself struggling to focus, remember the power of attention and the strategies you can use to manage it. 
+Ultimately, understanding attention is crucial for navigating our complex world effectively. By learning to manage our attentional resources, we can improve our productivity, enhance our learning, and even improve our overall well-being. So, the next time you find yourself struggling to focus, remember the power of attention and the strategies you can use to manage it.
 
 
 ```python
@@ -935,6 +935,6 @@ final_state.values.get('subtopics')
  'Neural Mechanisms Behind Attention and Focus']
 ```
 
-![agent_3.png](attachment:agent_3.png)
+![agent_3.png](/_assets/Sources/GenAI Agents/all_agents_tutorials/generate_podcast_agent_langgraph/cell-066-attachment.png)
 
 ![](https://europe-west1-genai-agents-views-tracker.cloudfunctions.net/genai-agents-tracker?notebook=all-agents-tutorials--generate-podcast-agent-langgraph)
