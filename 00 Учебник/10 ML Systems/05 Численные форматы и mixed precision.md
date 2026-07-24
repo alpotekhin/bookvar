@@ -45,8 +45,10 @@ instructions. Догадываться об использовании Tensor Co
 
 ## Mixed precision
 
-> Training in pure FP16 hardly works. Some operations (matrix multiplication)
-> can work, others (softmax, batch normalization) need higher precision.
+> **Адаптация, не дословная цитата:** EDLS week 2, PDF p. 18,
+> slide “Mixed precision training”. Pure FP16 обычно нестабилен: GEMM можно
+> выполнять в узком формате, тогда как softmax, normalization и accumulation
+> часто требуют более широкой точности.
 
 Autocast выбирает low precision для подходящих GEMM/convolution и оставляет
 чувствительные reductions/normalization в более широком формате. Accumulation

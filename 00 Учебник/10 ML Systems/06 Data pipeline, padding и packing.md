@@ -14,7 +14,9 @@ batch быстрее, чем модель обрабатывает текущи�
 
 ## Что хранить
 
-> Two components: what to read and how to read.
+> **Адаптация, не дословная цитата:** EDLS week 2, PDF p. 26,
+> slide “Bottlenecks in data loading”. Pipeline разделяется на два связанных
+> вопроса: что читать и как доставлять прочитанное к модели.
 
 Raw files удобны для просмотра, но множество мелких файлов создаёт metadata и
 network overhead. Для structured data подходят Arrow/Protobuf/msgpack или
@@ -107,7 +109,7 @@ Synthetic-тест: изменение tokens A не должно менять l
 objective, напротив, сознательно разрешает переход через EOS — режимы нельзя
 смешивать.
 
-## Runnable pipeline
+## Каркас pipeline
 
 ```python
 from torch.nn.utils.rnn import pad_sequence

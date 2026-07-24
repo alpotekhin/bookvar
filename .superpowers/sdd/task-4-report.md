@@ -154,3 +154,31 @@ MoE example S=8192,k=8,H=7168,I=2048:
 Review-fix implementation commit:
 `c3a85bebe0c50767d479fc2bc92260b8bde838c5`
 (`Deepen ML systems computational foundations`).
+
+## Final narrow re-review cleanup
+
+- Chapter 05's mixed-precision block is explicitly labeled an adaptation of
+  EDLS week 2, PDF p. 18, slide “Mixed precision training”.
+- Chapter 06's data-loading block is explicitly labeled an adaptation of EDLS
+  week 2, PDF p. 26, slide “Bottlenecks in data loading”.
+- The chapter 06 code is labeled “Каркас pipeline”; it is intentionally not
+  claimed to be a self-contained runnable program.
+- Chapter 02 now cites exact pinned Harvard headings and anchors: “Compute
+  Units and Execution Models”, “Evolution from SIMD to SIMT architectures”,
+  “Memory hierarchy”, and “Hardware Mapping”.
+
+Commands and exact results:
+
+```text
+git diff --check
+  passed
+focused rg provenance/heading checks
+  required labels, PDF pages, exact Harvard anchors and renamed heading found
+  old pseudo-heading combination and “Runnable pipeline” absent
+npm test
+  10 test files passed; 98/98 tests passed
+npm run build
+  passed
+npm run check:links
+  Built link check passed: 0 broken internal routes, fragments, or files
+```
