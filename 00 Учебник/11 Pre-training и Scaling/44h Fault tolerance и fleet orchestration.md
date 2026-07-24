@@ -7,6 +7,17 @@ last_updated: 2026-07-24
 
 # 44h. Fault tolerance и fleet orchestration
 
+## Полные главы Harvard CS249r
+
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/fault_tolerance|Fault Tolerance]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/fleet_orchestration|Fleet Orchestration]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/ops_scale|ML Operations at Scale]].
+
+Читайте их как одну последовательность: сначала модель отказа и checkpoint,
+затем размещение и перезапуск workloads, после этого — наблюдаемость и
+операционные процедуры всего fleet. Глава Bookvar ниже связывает эту
+последовательность с LLM pre-training job.
+
 При синхронном обучении отказ одного rank останавливает world. Если независимый MTBF устройства равен $M$, то грубый MTBF job на $N$ устройствах — $M/N$. Для $M=5$ лет и $N=1024$ это около 42.8 часа: многонедельный запуск обязан проектировать recovery как штатный путь.
 
 ## Что нужно знать и чему научимся

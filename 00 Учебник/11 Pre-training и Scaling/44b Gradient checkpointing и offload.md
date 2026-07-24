@@ -7,6 +7,17 @@ last_updated: 2026-07-24
 
 # 44b. Gradient checkpointing и offload
 
+## Полные исходные материалы
+
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week04_large_models/lecture.pdf|EDLS Week 4 — полная лекция]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week04_large_models/practice_part1.ipynb|EDLS Week 4 — practice part 1]];
+- [[02 Areas/ML & DL/06 Практика/10 Измерить checkpointing и offload|практическая работа Bookvar с единым протоколом измерения]].
+
+Исходный notebook оставлен целиком: в нём можно увидеть, какие activations
+перестают жить до backward, какие operators вычисляются повторно и когда offload
+добавляет копирование на критический путь. Текст главы ниже нужен для расчёта
+компромисса memory–compute до запуска эксперимента.
+
 Backward требует промежуточные значения forward. Если сохранять активации всех $L$ блоков, память грубо растёт как $O(LBSD)$ для batch $B$, sequence $S$ и hidden size $D$. Gradient checkpointing оставляет только границы сегментов и повторяет внутренний forward во время backward.
 
 ## Что нужно знать и чему научимся

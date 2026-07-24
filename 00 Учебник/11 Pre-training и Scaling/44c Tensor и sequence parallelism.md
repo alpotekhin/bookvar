@@ -7,6 +7,17 @@ last_updated: 2026-07-24
 
 # 44c. Tensor, sequence и context parallelism
 
+## Полные исходные материалы
+
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week04_large_models/lecture.pdf|EDLS Week 4 — полная лекция]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week04_large_models/practice_part2.ipynb|EDLS Week 4 — practice part 2]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/distributed_training|Harvard CS249r — Distributed Training]];
+- [[02 Areas/ML & DL/06 Практика/11 Разрезать Transformer по TP и SP|практика TP/SP]].
+
+Практику начинайте с двух linear layers: пока для каждого rank не подписаны
+локальные shapes и collectives, переносить тот же разрез на attention и MLP
+рано. Harvard-глава помещает этот разрез в общую систему осей параллелизма.
+
 Три похожих названия скрывают разные layouts. Tensor parallelism (TP) делит hidden dimensions и веса внутри слоя. Megatron sequence parallelism (SP) делит **только sequence-local activation** вокруг LayerNorm/dropout и работает вместе с TP. Context/attention parallelism делит сам длинный контекст и меняет способ вычисления attention — например, Ulysses all-to-all или Ring Attention.
 
 ## Предпосылки и цели

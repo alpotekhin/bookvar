@@ -7,6 +7,16 @@ last_updated: 2026-07-24
 
 # 44d. Pipeline parallelism
 
+## Полные исходные материалы
+
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week04_large_models/lecture.pdf|EDLS Week 4 — полная лекция]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/distributed_training|Harvard CS249r — Distributed Training]].
+
+В EDLS pipeline parallelism разбирается рядом с memory pressure больших
+моделей; в Harvard — рядом с data и tensor parallelism. Читайте обе версии:
+первая помогает посчитать bubble для конкретного schedule, вторая — понять,
+когда pipeline является правильной осью разбиения всей системы.
+
 Pipeline parallelism делит не матрицу, а последовательность слоёв. Если модель из 48 Transformer-блоков не помещается на одном GPU, четыре стадии могут хранить по 12 блоков. Цена такого размещения — зависимости между стадиями: стадия $i+1$ не начнёт forward микропакета, пока не получит activation от $i$, а стадия $i$ не начнёт backward, пока не получит gradient activation от $i+1$.
 
 ## Что нужно знать и чему научимся

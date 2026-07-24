@@ -7,6 +7,18 @@ last_updated: 2026-07-24
 
 # 44f. Expert и hybrid parallelism
 
+## Полные исходные материалы
+
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week06_dl_arithmetic/lecture.pdf|EDLS Week 6 — model-state, activation и MoE logistics]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week06_dl_arithmetic/seminar/practice.ipynb|EDLS Week 6 — notebook]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/distributed_training|Harvard CS249r — Distributed Training]];
+- [[02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving|полная глава Bookvar о механике MoE]].
+
+Expert parallelism нельзя выбирать отдельно от router load и topology:
+all-to-all возникает из token dispatch, а объём работы каждого rank зависит от
+фактического распределения токенов. EDLS даёт ресурсный ledger, Harvard —
+системный контекст гибридных осей.
+
 Архитектуру router, auxiliary loss и capacity разбирает [[02 Mixture of Experts — routing, capacity и serving]]. Здесь вопрос системный: как доставить выбранные токены владельцам экспертов и вернуть outputs в исходный порядок.
 
 ## Что нужно знать и чему научимся

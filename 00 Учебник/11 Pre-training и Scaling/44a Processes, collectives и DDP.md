@@ -9,6 +9,19 @@ last_updated: 2026-07-24
 
 Один процесс обслуживает одно устройство. Его `rank` — номер в группе, `world_size=N` — число участников; группы позволяют выполнять разные collectives на разных осях параллелизма. Point-to-point `send/recv` задают обмен явно, collective выражает общий шаблон и позволяет библиотеке выбрать алгоритм.
 
+## Полный маршрут по исходным материалам
+
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week03_data_parallel/lecture.pdf|EDLS Week 3 — полная лекция]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week03_data_parallel/practice.ipynb|EDLS Week 3 — исходный practice notebook]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week03_data_parallel/homework/README|EDLS Week 3 — homework]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/collective_communication|Harvard CS249r — Collective Communication]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/distributed_training|Harvard CS249r — Distributed Training]].
+
+Лекцию EDLS следует проходить вместе с notebook: схемы ring, gossip и gradient
+compression становятся проверяемыми только после измерения message size,
+latency и effective bandwidth. Harvard дополняет эксперимент систематическим
+разбором топологий и collective algorithms.
+
 ## Что нужно знать и чему научимся
 
 Нужны только tensors и synchronous data parallelism. После главы можно восстановить shape/state переход любого collective, оценить latency/bandwidth lower bound, написать DDP-step и отличить полезное overlap от нарисованного profiler-ом суммарного времени.
