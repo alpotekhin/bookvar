@@ -5617,54 +5617,54 @@ assets:
     used_in: []
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
-  - id: curated-edls-week09-eagle-method-slide-64-c88f42fc89fc
-    asset: 00 Учебник/Assets/Figures/curated/ml-systems/edls/inference-algorithms/eagle-method-slide-64.png
-    author: Efficient DL Systems course contributors
+  - id: curated-editorial-eagle-feature-drafting-bf8d8cf8b1c3
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/editorial/eagle-feature-drafting.svg
+    author: Bookvar contributors
     source_url: https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week09_inference_algorithms/lecture.pdf#page=64
     commit: e632aa89ca9e6638d52e1b686095e7442faffbb0
-    sha256: c88f42fc89fc3e689ed751916854c70c40e9b128127a1a665bed31d31a8157f7
-    license: MIT repository; embedded paper figures retain original attribution
-    license_url: https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/LICENSE
-    modifications: rendered full PDF slide 64 to PNG without crop or visual editing
+    sha256: bf8d8cf8b1c36c7a63efb19ace8f1765cb84bc7b77b47786e3fe5730a9ebabc3
+    license: project-authored editorial diagram; no upstream artwork reused
+    license_url: https://arxiv.org/licenses/nonexclusive-distrib/1.0/
+    modifications: original composition derived from factual description in EAGLE section 3 and Figure 4; upstream title EAGLE Speculative Sampling Requires Rethinking Feature Uncertainty; upstream authors Yuhui Li, Fangyun Wei, Chao Zhang, Hongyang Zhang; arXiv grants non-exclusive distribution only, so its artwork was not reused
     used_in:
       - 00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
-  - id: curated-edls-week09-kv-token-slide-71-0e6d59e08098
-    asset: 00 Учебник/Assets/Figures/curated/ml-systems/edls/inference-algorithms/kv-token-level-slide-71.png
-    author: Efficient DL Systems course contributors
+  - id: curated-editorial-kv-token-level-a701d50162a1
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/editorial/kv-token-level.svg
+    author: Bookvar contributors
     source_url: https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week09_inference_algorithms/lecture.pdf#page=71
     commit: e632aa89ca9e6638d52e1b686095e7442faffbb0
-    sha256: 0e6d59e080984086b425ad3ac2d073ef3aed70d9546455fe2c61865c62b8f7fd
-    license: MIT repository
-    license_url: https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/LICENSE
-    modifications: rendered full PDF slide 71 to PNG without crop or visual editing
+    sha256: a701d50162a11d29b00241ac52968632e7c5aa985884326bef556e0ed6bbd4fd
+    license: project-authored editorial diagram; no upstream artwork reused
+    license_url: https://arxiv.org/licenses/nonexclusive-distrib/1.0/
+    modifications: original composition derived from factual taxonomy in section 4 and Figure 4; upstream title A Survey on Large Language Model Acceleration based on KV Cache Management; upstream authors Haoyang Li, Yiming Li, Anxin Tian, Tianhao Tang, Zhanchao Xu, Xuejia Chen, Nicole Hu, Wei Dong, Qing Li, Lei Chen; arXiv grants non-exclusive distribution only, so its artwork was not reused
     used_in:
       - 00 Учебник/14 Inference и оптимизация/57a KV-cache compression и offload.md
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
-  - id: curated-edls-week09-kv-model-slide-72-2f929ef94a51
-    asset: 00 Учебник/Assets/Figures/curated/ml-systems/edls/inference-algorithms/kv-model-level-slide-72.png
-    author: Efficient DL Systems course contributors
+  - id: curated-editorial-kv-model-level-c49cc666cdf4
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/editorial/kv-model-level.svg
+    author: Bookvar contributors
     source_url: https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week09_inference_algorithms/lecture.pdf#page=72
     commit: e632aa89ca9e6638d52e1b686095e7442faffbb0
-    sha256: 2f929ef94a51ff5bcbc6f83dae1aee643de4d6115ddc6ed98df073de7d849878
-    license: MIT repository
-    license_url: https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/LICENSE
-    modifications: rendered full PDF slide 72 to PNG without crop or visual editing
+    sha256: c49cc666cdf43b1f56ba920d315a3eeed3cd7c362b744225285ac9ad6367f507
+    license: project-authored editorial diagram; no upstream artwork reused
+    license_url: https://arxiv.org/licenses/nonexclusive-distrib/1.0/
+    modifications: original composition derived from factual taxonomy in section 5 and Figure 5; upstream title A Survey on Large Language Model Acceleration based on KV Cache Management; upstream authors Haoyang Li, Yiming Li, Anxin Tian, Tianhao Tang, Zhanchao Xu, Xuejia Chen, Nicole Hu, Wei Dong, Qing Li, Lei Chen; arXiv grants non-exclusive distribution only, so its artwork was not reused
     used_in:
       - 00 Учебник/14 Inference и оптимизация/57a KV-cache compression и offload.md
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
-  - id: curated-edls-week09-kv-system-slide-73-b48e2be8523e
-    asset: 00 Учебник/Assets/Figures/curated/ml-systems/edls/inference-algorithms/kv-system-level-slide-73.png
-    author: Efficient DL Systems course contributors
+  - id: curated-editorial-kv-system-level-96e3143fd365
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/editorial/kv-system-level.svg
+    author: Bookvar contributors
     source_url: https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week09_inference_algorithms/lecture.pdf#page=73
     commit: e632aa89ca9e6638d52e1b686095e7442faffbb0
-    sha256: b48e2be8523e45859a1f81312b2fdb1a25448ded6f6e23d2357bc1c820f282dc
-    license: MIT repository
-    license_url: https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/LICENSE
-    modifications: rendered full PDF slide 73 to PNG without crop or visual editing
+    sha256: 96e3143fd365214901cb341899376d224bcb5cadc5317e112afb8d7fd91da39b
+    license: project-authored editorial diagram; no upstream artwork reused
+    license_url: https://arxiv.org/licenses/nonexclusive-distrib/1.0/
+    modifications: original composition derived from factual taxonomy in section 6 and Figure 6; upstream title A Survey on Large Language Model Acceleration based on KV Cache Management; upstream authors Haoyang Li, Yiming Li, Anxin Tian, Tianhao Tang, Zhanchao Xu, Xuejia Chen, Nicole Hu, Wei Dong, Qing Li, Lei Chen; arXiv grants non-exclusive distribution only, so its artwork was not reused
     used_in:
       - 00 Учебник/14 Inference и оптимизация/57a KV-cache compression и offload.md
     metadata_status: verified

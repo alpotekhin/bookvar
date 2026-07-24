@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="650" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc">
+  <title id="title">Token-level KV-cache optimization</title><desc id="desc">Original editorial taxonomy of token selection, budget allocation, merging, quantization, and low-rank compression.</desc>
+  <defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#24756a"/></marker><style>.t{font:700 34px Arial;fill:#142522}.h{font:700 21px Arial;fill:#142522}.b{font:17px Arial;fill:#314743}.s{font:15px Arial;fill:#526763}.c{fill:#f5fbf9;stroke:#24756a;stroke-width:3}.e{fill:#fff8e8;stroke:#bb7a12;stroke-width:2}.l{stroke:#24756a;stroke-width:3;fill:none;marker-end:url(#a)}</style></defs>
+  <rect width="1200" height="650" fill="#fff"/><text x="55" y="60" class="t">Token-level: какие KV хранить и с какой точностью</text><text x="55" y="92" class="s">Редакционная схема Bookvar, создана с нуля по taxonomy survey</text>
+  <rect x="55" y="245" width="210" height="105" rx="16" class="c"/><text x="91" y="290" class="h">KV positions</text><text x="91" y="322" class="b">L токенов</text>
+  <path d="M265 297H345" class="l"/>
+  <g transform="translate(345 125)"><rect width="260" height="92" rx="14" class="e"/><text x="24" y="37" class="h">Selection</text><text x="24" y="68" class="b">static / dynamic eviction</text></g>
+  <g transform="translate(345 235)"><rect width="260" height="92" rx="14" class="e"/><text x="24" y="37" class="h">Budget allocation</text><text x="24" y="68" class="b">per layer / per head</text></g>
+  <g transform="translate(345 345)"><rect width="260" height="92" rx="14" class="e"/><text x="24" y="37" class="h">Merging</text><text x="24" y="68" class="b">combine redundant states</text></g>
+  <g transform="translate(700 125)"><rect width="300" height="92" rx="14" class="e"/><text x="24" y="37" class="h">Quantization</text><text x="24" y="68" class="b">fixed / mixed / outlier-aware</text></g>
+  <g transform="translate(700 255)"><rect width="300" height="92" rx="14" class="e"/><text x="24" y="37" class="h">Low-rank compression</text><text x="24" y="68" class="b">SVD / tensor / learned</text></g>
+  <g transform="translate(700 385)"><rect width="300" height="92" rx="14" class="c"/><text x="24" y="37" class="h">Kernel reads less</text><text x="24" y="68" class="b">bytes and/or positions</text></g>
+  <path d="M605 171H700M605 281H650V301H700M605 391H650V431H700M1000 171H1065V431H1000" class="l"/>
+  <text x="55" y="605" class="s">Источник фактов: Li et al., “A Survey on Large Language Model Acceleration based on KV Cache Management”, arXiv:2412.19442, §4 и Fig. 4.</text>
+</svg>

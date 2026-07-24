@@ -221,3 +221,54 @@ model download/run occurred in Task 6.
 - 412-pixel render of KV-cache offload reproduces the pre-existing,
   site-wide horizontal overflow in the shared layout; the new figures are not
   the source of that overflow.
+
+## P1 provenance remediation
+
+This section supersedes the earlier statements that the four EDLS full-slide
+PNG renders were safe reusable assets. Inspection showed that slide 64 embeds
+paper artwork from EAGLE and slides 71–73 embed taxonomy figures from a KV-cache
+survey. The MIT license of the course repository does not relicense those
+embedded figures.
+
+The upstream records were audited as follows:
+
+- **EAGLE: Speculative Sampling Requires Rethinking Feature Uncertainty**,
+  Yuhui Li, Fangyun Wei, Chao Zhang and Hongyang Zhang,
+  <https://arxiv.org/abs/2401.15077>, §3 and Figure 4.
+- **A Survey on Large Language Model Acceleration based on KV Cache
+  Management**, Haoyang Li, Yiming Li, Anxin Tian, Tianhao Tang, Zhanchao Xu,
+  Xuejia Chen, Nicole Hu, Wei Dong, Qing Li and Lei Chen,
+  <https://arxiv.org/abs/2412.19442>, §§4–6 and Figures 4–6.
+
+Both arXiv records expose the arXiv non-exclusive distribution license, not a
+license granting downstream reuse of paper artwork. Therefore all four
+full-slide PNGs were deleted rather than attributed as reusable.
+
+They were replaced with four project-authored SVGs:
+
+- `editorial/eagle-feature-drafting.svg`;
+- `editorial/kv-token-level.svg`;
+- `editorial/kv-model-level.svg`;
+- `editorial/kv-system-level.svg`.
+
+Each SVG uses an original Bookvar composition drawn from factual method or
+taxonomy descriptions; none copies external artwork. Visible captions now give
+the upstream title, authors or author group, canonical URL, section and figure
+number, and explain the licensing decision. Both manifests record the pinned
+EDLS slide as the discovery/factual source required by the curated-asset
+contract, the canonical paper and license evidence in derivation metadata,
+`modified: true`, and the final SVG hash.
+
+Fresh verification after replacement:
+
+- `publishing/npm test`: 10 files, 98 tests passed;
+- `publishing/pnpm build`: passed;
+- `publishing/npm run check:links`: 0 broken links;
+- `publishing/npm run test:output`: 1 file, 8 tests passed;
+- `site/pnpm check`: 0 errors, 0 warnings, 0 hints;
+- `site/pnpm build`: 594 pages and 595 indexed HTML files;
+- direct Chrome render of the EAGLE SVG and in-page render of the KV taxonomy
+  are clean.
+
+The Qwen3-4B external measurement remains unresolved. No model download or GPU
+run was performed during this remediation.
