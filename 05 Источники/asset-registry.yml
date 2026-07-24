@@ -5188,3 +5188,432 @@ assets:
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/lmcache-blog-2026/cacheblend-results.png
+  - id: curated-harvard-harvard-foundation-introduction-iron-law-bars-svg-a29db2c7f958
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/foundation/introduction_iron_law_bars.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/introduction/images/svg/introduction_iron_law_bars.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-harvard-harvard-foundation-introduction-energy-hierarchy-svg-baab8f6f1d53
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/foundation/introduction_energy_hierarchy.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/introduction/images/svg/introduction_energy_hierarchy.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-harvard-harvard-foundation-ml-systems-memory-wall-divergence-svg-9d2b337867e9
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/foundation/ml_systems_memory_wall_divergence.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/ml_systems/images/svg/ml_systems_memory_wall_divergence.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-harvard-harvard-foundation-frameworks-dispatch-tax-divergence-svg-db660dab5df0
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/foundation/frameworks_dispatch_tax_divergence.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/frameworks/images/svg/frameworks_dispatch_tax_divergence.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-harvard-harvard-foundation-training-optimizer-memory-svg-8cefbb1789ad
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/foundation/training_optimizer_memory.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/training/images/svg/training_optimizer_memory.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-harvard-harvard-foundation-hw-acceleration-roofline-elbow-svg-837ecd35b4f8
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/foundation/hw_acceleration_roofline_elbow.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/hw_acceleration/images/svg/hw_acceleration_roofline_elbow.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-harvard-harvard-foundation-hw-acceleration-energy-ladder-svg-f7d298e7765a
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/foundation/hw_acceleration_energy_ladder.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/hw_acceleration/images/svg/hw_acceleration_energy_ladder.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-harvard-harvard-foundation-benchmarking-tail-latency-gap-svg-e2b28f7abf7d
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/foundation/benchmarking_tail_latency_gap.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/benchmarking/images/svg/benchmarking_tail_latency_gap.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-harvard-harvard-distributed-five-level-model-svg-c25d1ccb33a0
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/five-level-model.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/network_fabrics/images/svg/five-level-model.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-harvard-harvard-distributed-gpudirect-data-path-svg-a2d387191273
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/gpudirect-data-path.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/network_fabrics/images/svg/gpudirect-data-path.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-harvard-harvard-distributed-complete-data-path-svg-6c2ca9f97650
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/complete-data-path.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/data_storage/images/svg/complete-data-path.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-harvard-harvard-distributed-collective-primitives-overview-svg-a1b9e8b9c975
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/collective-primitives-overview.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/collective_communication/images/svg/collective-primitives-overview.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-harvard-harvard-distributed-ring-allreduce-svg-855fbe7c0601
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/ring-allreduce.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/collective_communication/images/svg/ring-allreduce.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-harvard-harvard-distributed-data-parallel-flow-svg-1440e33c8caa
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/data-parallel-flow.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/images/svg/data-parallel-flow.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-harvard-harvard-distributed-tensor-parallel-split-svg-b363952a7606
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/tensor-parallel-split.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/images/svg/tensor-parallel-split.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-harvard-harvard-distributed-pipeline-parallelism-svg-95d0f500fd4a
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/pipeline-parallelism.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/images/svg/pipeline-parallelism.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-harvard-harvard-distributed-moe-all-to-all-routing-svg-914d887b52e8
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/moe-all-to-all-routing.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/images/svg/moe-all-to-all-routing.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-harvard-harvard-distributed-zero-memory-partitioning-svg-a8e4a48164b4
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/zero-memory-partitioning.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/images/svg/zero-memory-partitioning.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-harvard-harvard-distributed-3d-parallelism-cube-svg-04be622cd68b
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/3d-parallelism-cube.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/images/svg/3d-parallelism-cube.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-harvard-harvard-distributed-parallelism-decision-tree-svg-0db9c522c843
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/parallelism-decision-tree.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/images/svg/parallelism-decision-tree.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-harvard-harvard-distributed-failure-domains-svg-cf98c6d69e66
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/failure-domains.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/fault_tolerance/images/svg/failure-domains.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-harvard-harvard-distributed-young-daly-optimization-svg-57dcf38c7eaf
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/young-daly-optimization.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/fault_tolerance/images/svg/young-daly-optimization.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-harvard-harvard-distributed-topology-placement-svg-232ef6e758c2
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/topology-placement.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/fleet_orchestration/images/svg/topology-placement.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-harvard-harvard-performance-profiling-hierarchy-svg-2a8af0ef5cbc
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/profiling-hierarchy.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/profiling-hierarchy.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-harvard-harvard-performance-roofline-model-svg-96b348d8ab11
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/roofline-model.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/roofline-model.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-harvard-harvard-performance-gpu-memory-hierarchy-svg-0f49a30b32c8
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/gpu-memory-hierarchy.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/gpu-memory-hierarchy.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-harvard-harvard-performance-operator-fusion-svg-efe422f26289
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/operator-fusion.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/operator-fusion.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-harvard-harvard-performance-flashattention-tiling-svg-7c84d90bdbb9
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/flashattention-tiling.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/flashattention-tiling.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-harvard-harvard-performance-prefill-vs-decode-roofline-svg-85802162e84d
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/prefill-vs-decode-roofline.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/prefill-vs-decode-roofline.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-harvard-harvard-performance-optimization-decision-tree-svg-cd7e4555257c
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/optimization-decision-tree.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/optimization-decision-tree.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-harvard-harvard-inference-batching-strategies-svg-eb33debb5730
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/inference/batching-strategies.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/inference/images/svg/batching-strategies.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-harvard-harvard-inference-continuous-batching-svg-6f53babd6257
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/inference/continuous-batching.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/inference/images/svg/continuous-batching.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-harvard-harvard-inference-kv-cache-fragmentation-svg-c8904cdd6093
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/inference/kv-cache-fragmentation.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/inference/images/svg/kv-cache-fragmentation.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-harvard-harvard-inference-disaggregated-serving-svg-00fb28c31ef1
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/inference/disaggregated-serving.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/inference/images/svg/disaggregated-serving.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-harvard-harvard-inference-queuing-hockey-stick-svg-be9c3dbc69b6
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/inference/queuing-hockey-stick.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/inference/images/svg/queuing-hockey-stick.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-harvard-harvard-inference-tensor-parallel-routing-svg-ee69bbdf02f9
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/inference/tensor-parallel-routing.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/inference/images/svg/tensor-parallel-routing.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-harvard-harvard-inference-pipeline-parallel-routing-svg-490527e93d08
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/inference/pipeline-parallel-routing.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/inference/images/svg/pipeline-parallel-routing.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-harvard-harvard-inference-expert-parallel-routing-svg-6630ca4d1a39
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/inference/expert-parallel-routing.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/inference/images/svg/expert-parallel-routing.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-harvard-harvard-inference-ttft-tpot-timeline-svg-d15d0aa56ec2
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/inference/ttft-tpot-timeline.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/images/ttft-tpot-timeline.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: copied without modification; path changed for tracked publication packaging
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
