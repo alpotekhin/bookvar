@@ -9,6 +9,10 @@ last_updated: 2026-07-24
 
 Collective не живёт в абстрактном «канале». Байты проходят HBM, accelerator interconnect, NIC, кабель, switches и обратный путь. Пять уровней Harvard — link, transport, topology, fabric behavior, cluster design — помогают найти место, где nominal bandwidth перестал быть effective.
 
+## Что нужно знать и чему научимся
+
+Нужны collectives из 44a и distributed state из 44e. После главы можно провести tensor по HBM→NIC→fabric→storage, рассчитать lower bound, выбрать метрики для RoCE/PFC и спроектировать атомарный checkpoint без rank-0 bottleneck.
+
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/five-level-model.svg]]
 
 *Источник: Harvard Edge ML Systems Book, [Network Fabrics, figure `fig-network-five-level-model`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/network_fabrics/network_fabrics.qmd), CC BY-NC-SA 4.0.*
@@ -47,6 +51,15 @@ Distributed checkpoint должен:
 4. ограничивать concurrency и разносить metadata operations;
 5. проверяться restore на другой допустимой topology.
 
+```text
+freeze logical step metadata
+for each rank in parallel:
+    write_large_shard(temp_generation, checksum, global_tensor_metadata)
+barrier_and_validate_all_shards()
+single_committer.write_atomic_manifest(generation, durable=true)
+garbage_collect_only_generations_older_than_last_known_good()
+```
+
 Неполный каталог нельзя считать последним checkpoint. Temp generation + atomic commit marker отделяет завершённую версию от оборванной.
 
 ## Наблюдаемость
@@ -55,7 +68,7 @@ Distributed checkpoint должен:
 
 ## Источники
 
-- Harvard Edge ML Systems Book, [Network Fabrics](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/network_fabrics/network_fabrics.qmd), `sec-network-fabrics-transport`, `sec-network-fabrics-topology`.
-- Harvard Edge ML Systems Book, [Data Storage](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/data_storage/data_storage.qmd), sections on training paths and checkpoint storms.
+- Harvard Edge ML Systems Book, commit `45ecc8d…`, [Network Fabrics, `sec-network-fabrics-rdma`, `sec-network-fabrics-roce`, `sec-network-fabrics-pfc` and `sec-network-fabrics-topology`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/network_fabrics/network_fabrics.qmd).
+- Harvard Edge ML Systems Book, commit `45ecc8d…`, [Data Storage, `sec-data-storage-training-data-path` and `sec-data-storage-checkpoint-storms`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/data_storage/data_storage.qmd).
 
 ← [[44f Expert и hybrid parallelism]] · Далее: [[44h Fault tolerance и fleet orchestration]]

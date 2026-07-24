@@ -9,6 +9,10 @@ last_updated: 2026-07-24
 
 Архитектуру router, auxiliary loss и capacity разбирает [[02 Mixture of Experts — routing, capacity и serving]]. Здесь вопрос системный: как доставить выбранные токены владельцам экспертов и вернуть outputs в исходный порядок.
 
+## Что нужно знать и чему научимся
+
+Нужны all-to-all из 44a, TP/SP из 44c и process meshes из 44e. После главы можно проследить token state через dispatch/GroupedGEMM/combine, рассчитать payload и imbalance, а затем разместить EP вместе с TP, PP и DP без нарушения divisibility constraints.
+
 ## Dispatch, compute, combine
 
 После top-$k$ routing каждый source rank группирует токены по destination expert. Первый all-to-all делает dispatch, локальные experts выполняют MLP, второй возвращает outputs. Metadata обязана сохранить `(source rank, token index, expert slot, gate weight)`.
@@ -18,6 +22,17 @@ last_updated: 2026-07-24
 *Источник: Harvard Edge ML Systems Book, [Distributed Training, figure `fig-moe-all-to-all-routing`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/distributed_training.qmd), CC BY-NC-SA 4.0.*
 
 При $T$ токенах, hidden $D$, BF16 и top-$k$, logical activation payload одного направления порядка $2kTD$ байт до padding/metadata. $T=8192,D=4096,k=2$ даёт 128 MiB для dispatch и ещё 128 MiB для combine в глобальном tensor view.
+
+```text
+routes = topk(router(hidden), k)
+packed, inverse_map = pack_by_destination(hidden, routes)
+received = all_to_all(packed, ep_group)
+expert_outputs = grouped_gemm(received, local_expert_weights)
+returned = all_to_all(expert_outputs, ep_group)
+output = unpack_and_weight(returned, inverse_map, routes.gates)
+```
+
+State transition имеет вид `[token,D] → [destination,slot,D] → [expert,row,D] → [token,k,D] → [token,D]`. Ошибка inverse map может оставить правильные counts и конечный shape, но перемешать outputs, поэтому проверяют token IDs.
 
 ## Дисбаланс — это время, а не только loss
 
@@ -50,7 +65,7 @@ TP делит **каждый** expert и требует collectives внутри
 ## Источники
 
 - EDLS, [week 6](https://github.com/mryab/efficient-dl-systems), expert and hybrid parallelism.
-- Harvard Edge ML Systems Book, [Distributed Training](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/distributed_training.qmd), sections `sec-distributed-training-model-parallelism` and `sec-distributed-training-hybrid`.
-- NVIDIA Megatron Core, [parallelism strategies](https://docs.nvidia.com/megatron-core/developer-guide/latest/user-guide/parallelism-guide.html).
+- Harvard Edge ML Systems Book, commit `45ecc8d…`, [Distributed Training, `sec-distributed-training-systems-systems-expert-parallelism-b896` and `sec-distributed-training-systems-systems-hybrid-parallelism-5674`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/distributed_training.qmd).
+- NVIDIA Megatron Core, [Parallelism strategies, “Expert Parallelism (EP)” compatibility note](https://docs.nvidia.com/megatron-core/developer-guide/latest/user-guide/parallelism-guide.html).
 
 ← [[44e ZeRO, FSDP2, DeviceMesh и DTensor]] · Далее: [[44g Network, storage и distributed checkpoints]]

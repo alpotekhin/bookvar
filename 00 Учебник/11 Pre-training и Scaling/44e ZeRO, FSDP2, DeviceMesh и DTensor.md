@@ -9,6 +9,10 @@ last_updated: 2026-07-24
 
 DDP реплицирует параметры $P$, gradients $G$ и optimizer state $O$. ZeRO последовательно делит их по data-parallel rank:
 
+## Что нужно знать и чему научимся
+
+Нужны AllGather/ReduceScatter из 44a и layouts из 44c. Цель — проследить parameter shard от покоя до materialization, gradient reduction, optimizer update и checkpoint, а затем выбрать unit boundary и prefetch без скрытого peak.
+
 | Режим | Реплицировано | Разделено | постоянная память на rank |
 |---|---|---|---:|
 | DDP | $P,G,O$ | — | $P+G+O$ |
@@ -50,6 +54,22 @@ FSDP2 выражает sharding per-parameter через DTensor и регист
 
 Hybrid sharding делит параметры внутри группы из $S$ rank и реплицирует shard-группы $R$ раз, $N=SR$. Это уменьшает дорогой межузловой AllGather, сохраняя часть экономии: постоянное state порядка $(P+G+O)/S$, а не `/N`.
 
+```text
+for unit in forward_order:
+    all_gather(unit.parameter_shards)
+    prefetch(next_unit, max_in_flight=1)
+    output = unit.forward(input)
+    reshard(unit.parameters)
+for unit in reverse_order:
+    all_gather(unit.parameter_shards)
+    input_grad, full_grad = unit.backward(output_grad)
+    grad_shard = reduce_scatter(full_grad)
+    reshard(unit.parameters)
+optimizer.step(local_parameter_shard, grad_shard, local_state)
+```
+
+Реальный FSDP2 выполняет переходы hooks. Если control flow различается между ranks, один может войти в AllGather следующего unit, пока другой ожидает ReduceScatter текущего: порядок hooks — часть протокола.
+
 ## Distributed Checkpoint
 
 Checkpoint сохраняет global logical DTensor независимо от текущего placement. Каждый rank пишет shards, planner фиксирует global shapes, dtype, keys и mapping. При restore на другой mesh shards перераспределяются. Обязательны optimizer/scheduler/scaler, RNG и data position; проверка — следующий шаг, а не успешный `load`.
@@ -60,7 +80,7 @@ Checkpoint сохраняет global logical DTensor независимо от �
 
 - EDLS, [week 5](https://github.com/mryab/efficient-dl-systems), ZeRO/FSDP/DeviceMesh/DTensor.
 - Rajbhandari et al., [ZeRO](https://arxiv.org/abs/1910.02054), 2019.
-- PyTorch, [FSDP2 tutorial](https://pytorch.org/tutorials/intermediate/FSDP_tutorial.html) и [Distributed Checkpoint](https://pytorch.org/docs/stable/distributed.checkpoint.html).
-- Harvard Edge ML Systems Book, [Distributed Training](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/distributed_training.qmd), section `sec-distributed-training-data-parallelism`.
+- PyTorch, [FSDP2 tutorial, “How FSDP2 works” and “2D parallelism”](https://pytorch.org/tutorials/intermediate/FSDP_tutorial.html), [fully_shard API](https://pytorch.org/docs/stable/distributed.fsdp.fully_shard.html), и [Distributed Checkpoint, `get_state_dict`/`set_state_dict`](https://pytorch.org/docs/stable/distributed.checkpoint.html).
+- Harvard Edge ML Systems Book, commit `45ecc8d…`, [Distributed Training, `sec-distributed-training-systems-systems-zero-redundancy-optimizer-zero-20bd` and `sec-distributed-training-systems-systems-fully-sharded-data-parallel-fsdp-79a3`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/distributed_training.qmd).
 
 ← [[44d Pipeline parallelism]] · Далее: [[44f Expert и hybrid parallelism]]
