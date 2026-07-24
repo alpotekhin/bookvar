@@ -81,3 +81,88 @@ alternative, if a book-only policy is later imposed, is
 - The repository-wide asset-registry test remains red until the separate
   global-registry owner registers the 39 imported files in
   `05 Источники/asset-registry.yml`.
+
+## Review fix — repository-wide registry
+
+Review status: **HIGH fixed**.
+
+Fix commit: `55cda0e` (`Register pinned Harvard course assets`).
+
+### Root cause and covering test
+
+`publishing/tests/asset-registry.test.ts` treated every curated asset as a
+derivative of an ignored `raw/papers/**` file. That assumption was correct for
+the existing paper-derived collection, but not for unchanged course assets
+whose primary evidence is an exact upstream file at a pinned repository
+revision.
+
+The existing failure supplied the RED case:
+
+```text
+npm test -- asset-registry.test.ts
+Test Files  1 failed (1)
+Tests       2 failed | 13 passed (15)
+```
+
+The test now has two explicit provenance modes:
+
+1. Existing `source_asset` entries retain the original
+   `raw/papers/**` and byte-equivalence checks.
+2. Entries without `source_asset` must declare
+   `provenance_confirmation: pinned-upstream-repository`, a GitHub
+   `/blob/<40-character SHA>/...` URL, the same SHA in `commit`, and
+   `metadata_status: verified`.
+
+No raw or paper source was invented for the Harvard files.
+
+### Global registry entries
+
+`05 Источники/asset-registry.yml` now contains 39 unique Harvard entries.
+Each records:
+
+- the exact curated asset path;
+- `Harvard Edge ML Systems Book contributors`;
+- the exact direct GitHub blob URL already audited in the Task 3 manifest;
+- commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`;
+- `CC BY-NC-SA 4.0` and its canonical license URL;
+- unchanged-copy packaging metadata;
+- `metadata_status: verified`;
+- `provenance_confirmation: pinned-upstream-repository`.
+
+`used_in` is empty in the repository-wide inventory because the consuming
+Task 4–6 pages are not yet present in this worktree. The dedicated Task 3
+manifest retains the concrete planned destinations.
+
+### GREEN verification
+
+```text
+npm test -- asset-registry.test.ts
+Test Files  1 passed (1)
+Tests       15 passed (15)
+
+npm test
+Test Files  10 passed (10)
+Tests       98 passed (98)
+
+git diff --check
+exit 0
+
+registry audit
+HARVARD_GLOBAL_REGISTRY_OK=39
+```
+
+The registry audit checked count, unique IDs, unique asset paths, exact
+source-URL SHA equality with `commit`, verified status, direct-upstream
+provenance marker, and absence of invented `source_asset` values.
+
+### Self-review
+
+- Scope is limited to the global registry and the curated provenance branch in
+  its existing test.
+- Existing raw-paper validation remains byte-for-byte unchanged and is still
+  exercised by the full test file.
+- The direct-upstream branch cannot accept an unpinned branch URL, short SHA,
+  commit mismatch, unverified metadata, or a different provenance marker.
+- All Harvard URLs point directly to the pinned course repository files,
+  including the exact slide-tree source for `ttft-tpot-timeline.svg`.
+- No network, push, merge, PR, or deploy action was performed.
