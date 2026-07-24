@@ -134,14 +134,14 @@ class SelfImprovingAgent:
         self.llm = ChatOpenAI(model="gpt-4o-mini", max_tokens=1000, temperature=0.7)
         self.store = {}
         self.insights = ""
-        
+
         self.prompt = ChatPromptTemplate.from_messages([
             ("system", "You are a self-improving AI assistant. Learn from your interactions and improve your performance over time."),
             MessagesPlaceholder(variable_name="history"),
             ("human", "{input}"),
             ("system", "Recent insights for improvement: {insights}")
         ])
-        
+
         self.chain = self.prompt | self.llm
         self.chain_with_history = RunnableWithMessageHistory(
             self.chain,

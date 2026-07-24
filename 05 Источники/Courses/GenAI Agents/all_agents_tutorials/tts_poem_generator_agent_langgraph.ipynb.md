@@ -49,7 +49,7 @@ By leveraging the strengths of GPT models for text processing and OpenAI's TTS c
 
 <div style="text-align: center;">
 
-<img src="https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/all_agents_tutorials/../images/tts_poem_generator_agent_langgraph.svg" alt="tts poem generator agent langgraph" style="width:80%; height:auto;">
+<img src="https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/images/tts_poem_generator_agent_langgraph.svg" alt="tts poem generator agent langgraph" style="width:80%; height:auto;">
 </div>
 
 ## Import necessary libraries and set up environment
@@ -154,7 +154,7 @@ def text_to_speech(state: AgentState, save_file: bool = False) -> AgentState:
     Returns:
         AgentState: Updated state with audio data and file path (if saved).
     """
-    
+
     # Map content type to a voice, defaulting to "alloy"
     voice_map = {
         "general": "alloy",
@@ -163,7 +163,7 @@ def text_to_speech(state: AgentState, save_file: bool = False) -> AgentState:
         "joke": "shimmer"
     }
     voice = voice_map.get(state["content_type"], "alloy")
-    
+
     audio_data = io.BytesIO()
 
     # Generate speech and stream audio data into memory
@@ -174,9 +174,9 @@ def text_to_speech(state: AgentState, save_file: bool = False) -> AgentState:
     ) as response:
         for chunk in response.iter_bytes():
             audio_data.write(chunk)
-    
+
     state["audio_data"] = audio_data.getvalue()
-    
+
     # Save audio to a file if requested
     if save_file:
         with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as temp_audio:
@@ -184,7 +184,7 @@ def text_to_speech(state: AgentState, save_file: bool = False) -> AgentState:
             state["audio_path"] = temp_audio.name
     else:
         state["audio_path"] = ""
-    
+
     return state
 ```
 
@@ -242,42 +242,42 @@ def sanitize_filename(text, max_length=20):
 ```python
 def run_tts_agent_and_play(input_text: str, content_type: str, save_file: bool = True):
     result = app.invoke({
-        "input_text": input_text, 
-        "processed_text": "", 
+        "input_text": input_text,
+        "processed_text": "",
         "audio_data": b"",
-        "audio_path": "", 
+        "audio_path": "",
         "content_type": content_type
     })
-    
+
     print(f"Detected content type: {result['content_type']}")
     print(f"Processed text: {result['processed_text']}")
-    
+
     # Play the audio (this will only work in local Jupyter environment)
     display(Audio(result['audio_data'], autoplay=True))
-    
+
     if save_file:
         # Create 'audio' directory in the parent folder of the notebook
         audio_dir = os.path.join('..', 'audio')
         os.makedirs(audio_dir, exist_ok=True)
-        
+
         sanitized_text = sanitize_filename(input_text)
         file_name = f"{content_type}_{sanitized_text}.mp3"
         file_path = os.path.join(audio_dir, file_name)
-        
+
         with open(file_path, "wb") as f:
             f.write(result['audio_data'])
-        
+
         print(f"Audio saved to: {file_path}")
-        
+
         # Relative path for GitHub
         github_relative_path = f"../audio/{file_name}"
         display(Markdown(f"[Download {content_type} audio: {sanitized_text}]({github_relative_path})"))
-        
+
         # Note about GitHub limitations
         print("Note: Audio playback is not supported directly on GitHub. Use the download link to listen to the audio.")
     else:
         print("Audio not saved to file.")
-    
+
     return result
 ```
 
@@ -294,10 +294,10 @@ examples = {
 for content_type, text in examples.items():
     print(f"\nProcessing example for {content_type} content:")
     print(f"Input text: {text}")
-    
+
     # Run the TTS agent and save the file
     result = run_tts_agent_and_play(text, content_type, save_file=True)
-    
+
     print("-" * 50)
 
 print("All examples processed. You can download the audio files using the links above.")
@@ -308,9 +308,9 @@ print("All examples processed. You can download the audio files using the links 
 Processing example for general content:
 Input text: The quick brown fox jumps over the lazy dog.
 Detected content type: poem
-Processed text: In autumn's breeze, the swift fox leaps,  
-Above a slumbering dog it sweeps.  
-With grace it dances, swift and free,  
+Processed text: In autumn's breeze, the swift fox leaps,
+Above a slumbering dog it sweeps.
+With grace it dances, swift and free,
 A tale of motion, poetry.
 ```
 
@@ -322,7 +322,7 @@ A tale of motion, poetry.
 Audio saved to: ..\audio\general_the_quick_brown_fox_.mp3
 ```
 
-[Download general audio: the_quick_brown_fox_](../audio/general_the_quick_brown_fox_.mp3)
+[Download general audio: the_quick_brown_fox_](https://github.com/NirDiamant/GenAI_Agents/blob/bd681451b254ac1a790e947b581d3997ab35013d/audio/general_the_quick_brown_fox_.mp3)
 
 ```text
 Note: Audio playback is not supported directly on GitHub. Use the download link to listen to the audio.
@@ -331,9 +331,9 @@ Note: Audio playback is not supported directly on GitHub. Use the download link 
 Processing example for poem content:
 Input text: Roses are red, violets are blue, AI is amazing, and so are you!
 Detected content type: poem
-Processed text: In the garden of knowledge, where data blooms bright,  
-Up to October's end, you shed your soft light.  
-With wisdom and insight, like stars in the sky,  
+Processed text: In the garden of knowledge, where data blooms bright,
+Up to October's end, you shed your soft light.
+With wisdom and insight, like stars in the sky,
 AI is enchanting, oh, how you can fly!
 ```
 
@@ -345,7 +345,7 @@ AI is enchanting, oh, how you can fly!
 Audio saved to: ..\audio\poem_roses_are_red_violet.mp3
 ```
 
-[Download poem audio: roses_are_red_violet](../audio/poem_roses_are_red_violet.mp3)
+[Download poem audio: roses_are_red_violet](https://github.com/NirDiamant/GenAI_Agents/blob/bd681451b254ac1a790e947b581d3997ab35013d/audio/poem_roses_are_red_violet.mp3)
 
 ```text
 Note: Audio playback is not supported directly on GitHub. Use the download link to listen to the audio.
@@ -365,7 +365,7 @@ Processed text: Good evening. In breaking news, scientists have made a remarkabl
 Audio saved to: ..\audio\news_breaking_news_scient.mp3
 ```
 
-[Download news audio: breaking_news_scient](../audio/news_breaking_news_scient.mp3)
+[Download news audio: breaking_news_scient](https://github.com/NirDiamant/GenAI_Agents/blob/bd681451b254ac1a790e947b581d3997ab35013d/audio/news_breaking_news_scient.mp3)
 
 ```text
 Note: Audio playback is not supported directly on GitHub. Use the download link to listen to the audio.
@@ -385,7 +385,7 @@ Processed text: Why don’t AI assistants tell jokes after October 2023? Because
 Audio saved to: ..\audio\joke_why_dont_scientists_.mp3
 ```
 
-[Download joke audio: why_dont_scientists_](../audio/joke_why_dont_scientists_.mp3)
+[Download joke audio: why_dont_scientists_](https://github.com/NirDiamant/GenAI_Agents/blob/bd681451b254ac1a790e947b581d3997ab35013d/audio/joke_why_dont_scientists_.mp3)
 
 ```text
 Note: Audio playback is not supported directly on GitHub. Use the download link to listen to the audio.

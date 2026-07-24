@@ -15,7 +15,7 @@ source_commit: bd681451b254ac1a790e947b581d3997ab35013d
 
 
 
-![ClauseAI](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/all_agents_tutorials/../images/ClauseAI_logo.jpeg)
+![ClauseAI](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/images/ClauseAI_logo.jpeg)
 
 ## Overview
 
@@ -886,13 +886,13 @@ print(result['final_report'])
 
 ```text
 ===============================================
-                  Contract Review Report       
+                  Contract Review Report
 ===============================================
 
 Contract Overview
 -----------------
 Primary Objective: Negotiate better terms and ensure compliance
-Specific Focus: 
+Specific Focus:
 
 Contract Type: Employment Agreement
 Industry: Technology
@@ -1003,7 +1003,7 @@ Final Notes:
 Please ensure all suggested modifications are incorporated and reviewed by a legal expert before finalizing the contract.
 
 ===============================================
-                  End of Report               
+                  End of Report
 ===============================================
 ```
 

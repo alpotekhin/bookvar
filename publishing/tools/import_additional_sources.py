@@ -65,6 +65,10 @@ def protect_wiki_delimiters(text: str) -> str:
     return text.replace("[[", "[\u200b[").replace("]]", "]\u200b]")
 
 
+def protect_fence_delimiters(text: str) -> str:
+    return text.replace("```", "``\u200b`")
+
+
 def normalize_math_unicode(markdown: str) -> str:
     replacements = {
         "⫫": r"\perp",
@@ -87,21 +91,45 @@ def normalize_math_unicode(markdown: str) -> str:
     return re.sub(r"(\${1,2})(.+?)\1", normalize, markdown, flags=re.S)
 
 
+def sanitize_workstation_paths(text: str) -> str:
+    """Keep source output useful without publishing an author's home path."""
+
+    text = re.sub(r"file:///Users/[^/\s<>'\"]+", "file://$HOME", text)
+    return re.sub(r"/Users/[^/\s<>'\"]+", "$HOME", text)
+
+
 def pinned_url(source: Source, source_path: str, target: str, *, raw: bool) -> str:
     if (
         re.match(r"^[a-z][a-z0-9+.-]*:", target, flags=re.I)
-        or target.startswith("#")
-        or target.startswith("/")
     ):
         return target
-    resolved = (PurePosixPath(source_path).parent / target).as_posix()
-    while resolved.startswith("../"):
-        resolved = resolved[3:]
+    if target.startswith("#"):
+        return (
+            f"{source.repository}/blob/{source.commit}/{source_path}{target}"
+        )
+    if target.startswith("/"):
+        resolved = target.lstrip("/")
+    else:
+        resolved = (PurePosixPath(source_path).parent / target).as_posix()
+        parts: list[str] = []
+        for part in PurePosixPath(resolved).parts:
+            if part == "..":
+                if parts:
+                    parts.pop()
+            elif part != ".":
+                parts.append(part)
+        resolved = "/".join(parts)
     endpoint = "raw" if raw else "blob"
     return f"{source.repository}/{endpoint}/{source.commit}/{resolved}"
 
 
 def rewrite_links(markdown: str, source: Source, source_path: str) -> str:
+    markdown = re.sub(
+        r"\[([^\]]+)\]\((?:GitHub|LinkedIn|Link)\)",
+        lambda match: match.group(1),
+        markdown,
+    )
+
     def image(match: re.Match[str]) -> str:
         target = pinned_url(source, source_path, match.group(2), raw=True)
         return f"![{match.group(1)}]({target})"
@@ -123,9 +151,20 @@ def rewrite_links(markdown: str, source: Source, source_path: str) -> str:
         markdown,
         flags=re.I,
     )
-    return re.sub(
+    markdown = re.sub(
+        r'(<a\b[^>]*\bhref=["\'])([^"\']+)(["\'])',
+        lambda match: (
+            match.group(1)
+            + pinned_url(source, source_path, match.group(2), raw=False)
+            + match.group(3)
+        ),
+        markdown,
+        flags=re.I,
+    )
+    markdown = re.sub(
         r"(?<!!)\[([^\]]+)\]\(([^)\s]+)(?:\s+\"[^\"]*\")?\)", link, markdown
     )
+    return markdown
 
 
 def frontmatter(source: Source, title: str, source_path: str, kind: str) -> str:
@@ -176,10 +215,14 @@ def render_output(
 ) -> str:
     output_type = saved.get("output_type")
     if output_type == "stream":
-        text = protect_wiki_delimiters(str(saved.get("text", "")).rstrip())
+        text = protect_fence_delimiters(
+            protect_wiki_delimiters(str(saved.get("text", "")).rstrip())
+        )
         return f"```text\n{text}\n```" if text else ""
     if output_type == "error":
-        text = protect_wiki_delimiters("\n".join(saved.get("traceback", [])))
+        text = protect_fence_delimiters(
+            protect_wiki_delimiters("\n".join(saved.get("traceback", [])))
+        )
         return f"```text\n{text}\n```" if text else ""
     data = saved.get("data", {})
     blocks: list[str] = []
@@ -191,7 +234,10 @@ def render_output(
         if mime == "text/markdown":
             blocks.append(normalize_math_unicode(text))
         else:
-            blocks.append(f"```text\n{protect_wiki_delimiters(text.rstrip())}\n```")
+            protected = protect_fence_delimiters(
+                protect_wiki_delimiters(text.rstrip())
+            )
+            blocks.append(f"```text\n{protected}\n```")
         break
     for mime, suffix in (
         ("image/png", ".png"),
@@ -212,6 +258,72 @@ def render_output(
     return "\n\n".join(blocks)
 
 
+def localize_markdown_data_images(
+    text: str,
+    assets: Path,
+    root: Path,
+    cell_index: int,
+) -> str:
+    """Replace embedded base64 Markdown images with ordinary local assets."""
+
+    counter = 0
+    pattern = re.compile(
+        r"!\[([^\]]*)\]\(data:image/(png|jpeg|jpg);base64,([A-Za-z0-9+/=\s]+)\)"
+    )
+
+    def replace(match: re.Match[str]) -> str:
+        nonlocal counter
+        counter += 1
+        suffix = ".jpg" if match.group(2) in {"jpeg", "jpg"} else ".png"
+        destination = assets / f"cell-{cell_index:03d}-markdown-{counter:02d}{suffix}"
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        encoded = re.sub(r"\s+", "", match.group(3))
+        destination.write_bytes(base64.b64decode(encoded))
+        alt = match.group(1).strip() or destination.stem
+        return f"![{alt}](/_assets/{destination.relative_to(root / 'Assets').as_posix()})"
+
+    return pattern.sub(replace, text)
+
+
+def localize_notebook_attachments(
+    text: str,
+    cell: nbformat.NotebookNode,
+    assets: Path,
+    root: Path,
+    cell_index: int,
+) -> str:
+    attachments = cell.get("attachments", {})
+
+    def replace(match: re.Match[str]) -> str:
+        name = match.group(2)
+        payload = attachments.get(name)
+        if not payload:
+            return match.group(0)
+        for mime, suffix in (
+            ("image/png", ".png"),
+            ("image/jpeg", ".jpg"),
+            ("image/svg+xml", ".svg"),
+        ):
+            if mime not in payload:
+                continue
+            destination = assets / f"cell-{cell_index:03d}-attachment{suffix}"
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            value = payload[mime]
+            encoded = "".join(value) if isinstance(value, list) else str(value)
+            if mime == "image/svg+xml":
+                destination.write_text(encoded, encoding="utf-8")
+            else:
+                destination.write_bytes(base64.b64decode(encoded))
+            alt = match.group(1).strip() or name
+            return (
+                f"![{alt}](/_assets/"
+                f"{destination.relative_to(root / 'Assets').as_posix()})"
+            )
+        return match.group(0)
+
+    return re.sub(r"!\[([^\]]*)\]\(attachment:([^)]+)\)", replace, text)
+
+
 def import_notebook(
     root: Path, source_root: Path, source: Source, path: Path
 ) -> dict[str, object]:
@@ -226,6 +338,10 @@ def import_notebook(
             text = normalize_math_unicode(
                 rewrite_links(str(cell.source), source, relative)
             ).strip()
+            text = localize_markdown_data_images(text, assets, root, cell_index)
+            text = localize_notebook_attachments(
+                text, cell, assets, root, cell_index
+            )
             if not removed_title:
                 heading = re.match(r"^#\s+(.+?)(?:\r?\n|$)", text)
                 if heading and re.sub(r"<[^>]+>", "", heading.group(1)).strip() == title:
@@ -246,10 +362,13 @@ def import_notebook(
                     saved, assets, root, cell_index, output_index
                 )
                 if rendered:
-                    chunks.append(rendered)
+                    chunks.append(rewrite_links(rendered, source, relative))
     destination = output_path(root, source, f"{relative}.md")
     destination.parent.mkdir(parents=True, exist_ok=True)
-    destination.write_text("\n\n".join(chunks).rstrip() + "\n", encoding="utf-8")
+    rendered_document = sanitize_workstation_paths(re.sub(
+        r"[ \t]+$", "", "\n\n".join(chunks), flags=re.M
+    ).rstrip())
+    destination.write_text(rendered_document + "\n", encoding="utf-8")
     return {
         "source_path": relative,
         "kind": "notebook",

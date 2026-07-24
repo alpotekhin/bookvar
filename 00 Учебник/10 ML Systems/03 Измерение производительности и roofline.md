@@ -10,6 +10,17 @@ source_language: mixed
 
 Benchmark — воспроизводимый эксперимент, а не одно число.
 
+## Полные источники и практикум
+
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/benchmarking|Harvard CS249r — Benchmarking]]: спецификация benchmark, harness, статистика и правила отчётности.
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/performance_engineering|Harvard CS249r — Performance Engineering]]: Iron Law, roofline и диагностический процесс.
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week01_intro/seminar.ipynb|EDLS Week 1 — seminar notebook]]: измерения, которые можно повторить локально.
+
+Встроенные копии сохраняют полный английский текст, исходные рисунки и
+notebook. Глава ниже нужна как последовательность действий: сначала определить
+границу эксперимента, затем получить распределение измерений и только после
+этого объяснять результат через roofline.
+
 ## Benchmark specification и harness
 
 До запуска фиксируют:

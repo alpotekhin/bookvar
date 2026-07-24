@@ -39,7 +39,7 @@ As GenAI rapidly evolves, more people are eager to learn it for career advanceme
    - Hosts Q&A sessions on common and technical interview questions.
    - Simulates real interview scenarios and conducts mock interviews.
 5. **Job Search Assistance:**
-   - Guides users through the job search process, offering tailored insights and support. 
+   - Guides users through the job search process, offering tailored insights and support.
 With the GenAI Career Assistant, your journey to a career in Generative AI becomes organized, personalized, and efficient!
 
 <img src="https://i.imghippo.com/files/xrJV7042k.png" alt="agent" border="0" style="height:20%;width:90%">
@@ -121,7 +121,7 @@ class State(TypedDict):
 <a href="https://python.langchain.com/docs/how_to/trim_messages/"> 👉 trim_messages <a>
 
 1. **`trim_conversation` Function**: This function limits the conversation history to the latest messages (up to 10), ensuring only recent and relevant messages are retained in the promp
-  
+
 2. **`save_file` Function**: Saves data into a uniquely timestamped Markdown file in the `Agent_output` folder, creating the folder if it doesn't exst.
 
 3. **`show_md_file` Function**: Reads and displays the content of a Markdown file within the notebook, rendering it in Markdown form readabilityblity.
@@ -153,19 +153,19 @@ def save_file(data, filename):
     """Saves data to a markdown file with a timestamped filename."""
     folder_name = "Agent_output"  # Folder to store output files
     os.makedirs(folder_name, exist_ok=True)  # Creates the folder if it doesn't exist
-    
+
     # Generate a timestamped filename for uniqueness
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")  # Format: YYYYMMDDHHMMSS
     filename = f"{filename}_{timestamp}.md"
-    
+
     # Define the full file path
     file_path = os.path.join(folder_name, filename)
-    
+
     # Save the data to the file in the specified path
     with open(file_path, "w", encoding="utf-8") as file:
         file.write(data)
         print(f"File '{file_path}' created successfully.")
-    
+
     # Return the full path of the saved file
     return file_path
 
@@ -173,7 +173,7 @@ def show_md_file(file_path):
     """Displays the content of a markdown file as Markdown in the notebook."""
     with open(file_path, 'r', encoding='utf-8') as file:
         content = file.read()
-    
+
     # Render the content in Markdown format within the notebook
     display(Markdown(content))
 ```
@@ -184,7 +184,7 @@ def show_md_file(file_path):
 <a href="https://python.langchain.com/docs/how_to/agent_executor/">👉 AgentExecutor <a>
 <a href="https://python.langchain.com/docs/integrations/tools/ddg/">👉 DuckDuckGoSearchResults <a>
 
-1. **Imports**: 
+1. **Imports**:
    - `ChatPromptTemplate` and `MessagesPlaceholder` from `langchain_core.prompts` help structure prompts.
    - `DuckDuckGoSearchResults` from `langchain_community.tools` provides web search capability.
    - `create_tool_calling_agent` and `AgentExecutor` manage agent creation and execution.
@@ -212,7 +212,7 @@ class LearningResourceAgent:
         agent = create_tool_calling_agent(self.model, self.tools, self.prompt)
         agent_executor = AgentExecutor(agent=agent, tools=self.tools, verbose=True)
         response = agent_executor.invoke({"input": user_input})
-        
+
         # Save and display the response as a markdown file
         path = save_file(str(response.get('output')).replace("```markdown", "").strip(), 'Tutorial')
         print(f"Tutorial saved to {path}")
@@ -227,22 +227,22 @@ class LearningResourceAgent:
         while True:
             # Trim conversation history to maintain prompt size
             self.prompt = trim_conversation(self.prompt)
-            
+
             # Generate a response from the AI model and update conversation history
             response = self.model.invoke(self.prompt)
             record_QA_session.append('\nExpert Response: %s \n' % response.content)
-            
+
             self.prompt.append(AIMessage(content=response.content))
-            
+
             # Display the AI's response and prompt for user input
             print('*' * 50 + 'AGENT' + '*' * 50)
             print("\nEXPERT AGENT RESPONSE:", response.content)
-            
+
             print('*' * 50 + 'USER' + '*' * 50)
             user_input = input("\nYOUR QUERY: ")
             record_QA_session.append('\nUser Query: %s \n' % response.content)
             self.prompt.append(HumanMessage(content=user_input))
-            
+
             # Exit the Q&A loop if the user types 'exit'
             if user_input.lower() == "exit":
                 print("Ending the chat session.")
@@ -257,7 +257,7 @@ class LearningResourceAgent:
    - **`__init__` Method**: Initializes the model (`gemini-1.5-flash`), prompt, tools (such as DuckDuckGo search), and creates an agent executor with error handling enabled.
 
 2. **`Interview_questions` Method**:
-   - Runs a loop for handling interview questions from the user, generating responses using the agent executor. 
+   - Runs a loop for handling interview questions from the user, generating responses using the agent executor.
    - Responses are stored in `questions_bank` for later reference. The conversation ends when the user types "exit," and the chat history is saved as a Markdown file.
 
 3. **`Mock_Interview` Method**:
@@ -284,19 +284,19 @@ class InterviewAgent:
             if user_input.lower() == "exit":
                 print("Ending the conversation. Goodbye!")
                 break
-            
+
             # Generate a response to the user input and add it to questions_bank
             response = self.agent_executor.invoke({"input": user_input, "chat_history": chat_history})
             questions_bank += str(response.get('output')).replace("```markdown", "").strip() + "\n"
-            
+
             # Update chat history with user input and AI response, limiting history to the last 10 messages
             chat_history.extend([HumanMessage(content=user_input), response["output"]​])
             if len(chat_history) > 10:
                 chat_history = chat_history[-10:]  # Keep only the last 10 messages
-            
+
             # Get the next input from the user to continue the conversation
             user_input = input("You: ")
-        
+
         # Save the entire question-response history to a markdown file and display it
         path = save_file(questions_bank, 'Interview_questions')
         print(f"Interviews question saved to {path}")
@@ -305,34 +305,34 @@ class InterviewAgent:
     def Mock_Interview(self):
         # Start a simulated mock interview session
         print("\nStarting the mock interview. Type 'exit' to end the session.\n")
-        
+
         # Initialize with a starting message and store interview records
         initial_message = 'I am ready for the interview.\n'
         interview_record = []
         interview_record.append('Candidate: %s \n' % initial_message)
         self.prompt.append(HumanMessage(content=initial_message))
-        
+
         while True:
             # Trim conversation history if necessary to maintain prompt size
             self.prompt = trim_conversation(self.prompt)
-            
+
             # Generate a response using the chat model
             response = self.model.invoke(self.prompt)
-            
+
             # Add AI response to the conversation history
             self.prompt.append(AIMessage(content=response.content))
-            
+
             # Output the AI's response as the "Interviewer"
             print("\nInterviewer:", response.content)
             interview_record.append('\nInterviewer: %s \n' % response.content)
-            
+
             # Get the user's response as "Candidate" input
             user_input = input("\nCandidate: ")
             interview_record.append('\nCandidate: %s \n' % user_input)
-            
+
             # Add user input to the conversation history
             self.prompt.append(HumanMessage(content=user_input))
-            
+
             # End the interview if the user types "exit"
             if user_input.lower() == "exit":
                 print("Ending the interview session.")
@@ -370,18 +370,18 @@ class ResumeMaker:
             if user_input.lower() == "exit":
                 print("Ending the conversation. Goodbye!")
                 break
-            
+
             # Generate a response to user input using the agent and add it to the chat history
             response = self.agent_executor.invoke({"input": user_input, "chat_history": chat_history})
             chat_history.extend([HumanMessage(content=user_input), response["output"]​])
-            
+
             # Limit the chat history to the last 10 messages
             if len(chat_history) > 10:
                 chat_history = chat_history[-10:]
-            
+
             # Prompt for the next user input to continue the resume creation conversation
             user_input = input("You: ")
-        
+
         # Save the final output as a markdown file and return the file path
         path = save_file(str(response.get('output')).replace("```markdown", "").strip(), 'Resume')
         print(f"Resume saved to {path}")
@@ -411,9 +411,9 @@ class JobSearch:
 
     def find_jobs(self, user_input):
         results = self.tools.invoke(user_input)
-        chain = self.prompt | self.model  
+        chain = self.prompt | self.model
         jobs = chain.invoke({"result": results}).content
-        
+
         path = save_file(str(jobs).replace("```markdown", "").strip(), 'Job_search')
         print(f"Jobs saved to {path}")
         return path
@@ -453,7 +453,7 @@ def categorize(state: State) -> State:
     )
 
     # Creates a categorization chain and invokes it with the user's query to get the category
-    chain = prompt | llm 
+    chain = prompt | llm
     print('Categorizing the customer query...')
     category = chain.invoke({"query": state["query"]}).content
     return {"category": category}
@@ -477,7 +477,7 @@ def handle_learning_resource(state: State) -> State:
     )
 
     # Creates a further categorization chain to decide between Tutorial or Question
-    chain = prompt | llm 
+    chain = prompt | llm
     print('Categorizing the customer query further...')
     response = chain.invoke({"query": state["query"]}).content
     return {"category": response}
@@ -500,7 +500,7 @@ def handle_interview_preparation(state: State) -> State:
     )
 
     # Creates a further categorization chain to decide between Mock or Question
-    chain = prompt | llm 
+    chain = prompt | llm
     print('Categorizing the customer query further...')
     response = chain.invoke({"query": state["query"]}).content
     return {"category": response}
@@ -530,9 +530,9 @@ def job_search(state: State) -> State:
 def handle_resume_making(state: State) -> State:
     """Generate a customized resume based on user details for a tech role in AI and Generative AI."""
     prompt = ChatPromptTemplate.from_messages([
-        ("system", '''You are a skilled resume expert with extensive experience in crafting resumes tailored for tech roles, especially in AI and Generative AI. 
-        Your task is to create a resume template for an AI Engineer specializing in Generative AI, incorporating trending keywords and technologies in the current job market. 
-        Feel free to ask users for any necessary details such as skills, experience, or projects to complete the resume. 
+        ("system", '''You are a skilled resume expert with extensive experience in crafting resumes tailored for tech roles, especially in AI and Generative AI.
+        Your task is to create a resume template for an AI Engineer specializing in Generative AI, incorporating trending keywords and technologies in the current job market.
+        Feel free to ask users for any necessary details such as skills, experience, or projects to complete the resume.
         Try to ask details step by step and try to ask all details within 4 to 5 steps.
         Ensure the final resume is in .md format.'''),
        MessagesPlaceholder("chat_history"),
@@ -558,8 +558,8 @@ def handle_resume_making(state: State) -> State:
 ```python
 def ask_query_bot(state: State) -> State:
     """Provide detailed answers to user queries related to Generative AI."""
-    system_message = '''You are an expert Generative AI Engineer with extensive experience in training and guiding others in AI engineering. 
-    You have a strong track record of solving complex problems and addressing various challenges in AI. 
+    system_message = '''You are an expert Generative AI Engineer with extensive experience in training and guiding others in AI engineering.
+    You have a strong track record of solving complex problems and addressing various challenges in AI.
     Your role is to assist users by providing insightful solutions and expert advice on their queries.
     Engage in a back-and-forth chat session to address user queries.'''
     prompt = [SystemMessage(content=system_message)]
@@ -572,16 +572,16 @@ def ask_query_bot(state: State) -> State:
 
 def tutorial_agent(state: State) -> State:
     """Generate a tutorial blog for Generative AI based on user requirements."""
-    system_message = '''You are a knowledgeable assistant specializing as a Senior Generative AI Developer with extensive experience in both development and tutoring. 
+    system_message = '''You are a knowledgeable assistant specializing as a Senior Generative AI Developer with extensive experience in both development and tutoring.
          Additionally, you are an experienced blogger who creates tutorials focused on Generative AI.
-         Your task is to develop high-quality tutorials blogs in .md file with Coding example based on the user's requirements. 
+         Your task is to develop high-quality tutorials blogs in .md file with Coding example based on the user's requirements.
          Ensure tutorial includes clear explanations, well-structured python code, comments, and fully functional code examples.
          Provide resource reference links at the end of each tutorial for further learning.'''
     prompt = ChatPromptTemplate.from_messages([("system", system_message),
             ("placeholder", "{chat_history}"),
             ("human", "{input}"),
             ("placeholder", "{agent_scratchpad}"),])
-    #agent_scratchpad is a function that formats the intermediate steps of the agent's actions and observations into a string. 
+    #agent_scratchpad is a function that formats the intermediate steps of the agent's actions and observations into a string.
     #This function is used to keep track of the agent's thoughts or actions during the execution of the program. But its not necessary, we can do without this so we will not include it only define it.
     learning_agent = LearningResourceAgent(prompt)
     path = learning_agent.TutorialAgent(state["query"])
@@ -796,10 +796,10 @@ display(
 ```python
 def run_user_query(query: str) -> Dict[str, str]:
     """Process a user query through the LangGraph workflow.
-    
+
     Args:
         query (str): The user's query
-        
+
     Returns:
         Dict[str, str]: A dictionary containing the query's category and response
     """
@@ -832,7 +832,7 @@ Category: tutorial_agent
 
 
 [1m> Entering new AgentExecutor chain...[0m
-[32;1m[1;3m```markdown
+[32;1m[1;3m``​`markdown
 # LangChain and LangGraph: A Powerful Combination for Generative AI Applications
 
 This tutorial introduces LangChain and LangGraph, two powerful libraries that enhance the development of Generative AI applications. We'll explore their core concepts and demonstrate their usage with practical Python code examples.
@@ -853,7 +853,7 @@ LangChain simplifies the creation of sophisticated applications using Large Lang
 
 ### Code Example:
 
-```python
+``​`python
 from langchain_openai import OpenAI
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
@@ -872,7 +872,7 @@ chain = LLMChain(prompt=prompt, llm=llm)
 response = chain.invoke({"adjective": "funny", "topic": "programming"})
 print(response)
 
-```
+``​`
 
 ## LangGraph: Visualizing and Analyzing LLM Workflows
 
@@ -886,14 +886,14 @@ LangGraph complements LangChain by providing tools to visualize, analyze, and de
 
 ### Code Example (Conceptual - LangGraph integration is evolving):
 
-```python
+``​`python
 # Hypothetical LangGraph integration - API is subject to change
 from langgraph import visualize
 
 # Visualize the LLM chain
 visualize(chain)
 
-```
+``​`
 
 ## Resources for Further Learning:
 
@@ -902,7 +902,7 @@ visualize(chain)
 
 
 This tutorial provided a foundational understanding of LangChain and LangGraph.  Experiment with the code examples and explore the provided resources to delve deeper into these powerful libraries and unlock their full potential for your Generative AI projects.
-```[0m
+``​`[0m
 
 [1m> Finished chain.[0m
 File 'Agent_output\Tutorial_20241117172824.md' created successfully.
@@ -1167,7 +1167,7 @@ Starting the Interview question preparation. Type 'exit' to end the session.
 [32;1m[1;3mOkay, focusing on a **Mid-level** role with expertise in **LLMs** and other **Generative AI technologies**, here's a markdown file containing interview questions.  This covers a range of topics, from foundational knowledge to practical application and problem-solving.  Remember that the specific questions asked should be adapted based on the candidate's resume and the specific needs of the role.
 
 
-```markdown
+``​`markdown
 # Generative AI Interview Questions - Mid-Level
 
 This document outlines interview questions for a mid-level Generative AI role, encompassing expertise in LLMs and other generative AI technologies.
@@ -1227,7 +1227,7 @@ This document outlines interview questions for a mid-level Generative AI role, e
 
 
 This list is not exhaustive, and the specific questions asked should be tailored to the candidate's experience and the requirements of the role.  Remember to also assess soft skills such as communication, teamwork, and problem-solving abilities throughout the interview process.
-```
+``​`
 [0m
 
 [1m> Finished chain.[0m
@@ -1247,7 +1247,7 @@ Starting the Interview question preparation. Type 'exit' to end the session.
 [32;1m[1;3mOkay, let's add some questions specifically targeting Langchain and LangGraph to the existing interview questions.  We'll integrate them into the existing markdown structure.  Since LangChain and LangGraph are relatively new, the questions will focus on understanding their core concepts and how they relate to broader Generative AI principles.
 
 
-```markdown
+``​`markdown
 # Generative AI Interview Questions - Mid-Level
 
 This document outlines interview questions for a mid-level Generative AI role, encompassing expertise in LLMs and other generative AI technologies, including LangChain and LangGraph.
@@ -1298,7 +1298,7 @@ This document outlines interview questions for a mid-level Generative AI role, e
 
 
 This list is not exhaustive, and the specific questions asked should be tailored to the candidate's experience and the requirements of the role.  Remember to also assess soft skills such as communication, teamwork, and problem-solving abilities throughout the interview process.
-```
+``​`
 [0m
 
 [1m> Finished chain.[0m
@@ -1528,30 +1528,30 @@ Mock Interview saved to Agent_output\Mock_Interview_20241117174111.md
 ```
 
 Candidate: I am ready for the interview.
- 
+
 
 Interviewer: Great! Welcome.  My name is Alex, and I'll be conducting your interview today for the Generative AI Engineer position.  Let's start with a brief introduction from you. Tell me about yourself and your experience relevant to this role.  We have your resume, but I'd like to hear it in your own words.  Keep it to about 2-3 minutes.
- 
 
-Candidate: I’m Karan, and I’m currently focused on advancing my skills and contributions in Generative AI. My journey started with a solid foundation in Computer Science, where I developed a strong interest in AI and machine learning. Over the years, I’ve built a range of projects that have helped me gain expertise in several core areas of this role.  One of my most impactful experiences was working on an end-to-end Legal Case Identification system for Verinext and Pondlehocky. This project involved integrating Gen-AI to automate case assignments. I led a team to develop a pipeline that included NLP, GPT, prompt engineering, and Litify DB integration, ultimately enabling efficient case handling through an AI-driven model.  I’ve also worked on an Automatic Number Plate Recognition project for NPCI. This required designing and deploying a real-time ANPR solution using transfer learning, Deepstream, and OCR. I collaborated closely with my team on model improvement and pipeline optimization to ensure the project could effectively replace existing toll services.  Beyond my technical skills, I bring a strategic approach to problem-solving and a knack for diving into the nuances of machine learning models, optimizing them to fit specific business needs. I’m passionate about harnessing AI to address real-world challenges, and I’m excited about the possibility of contributing my skills and learning further with your team. 
+
+Candidate: I’m Karan, and I’m currently focused on advancing my skills and contributions in Generative AI. My journey started with a solid foundation in Computer Science, where I developed a strong interest in AI and machine learning. Over the years, I’ve built a range of projects that have helped me gain expertise in several core areas of this role.  One of my most impactful experiences was working on an end-to-end Legal Case Identification system for Verinext and Pondlehocky. This project involved integrating Gen-AI to automate case assignments. I led a team to develop a pipeline that included NLP, GPT, prompt engineering, and Litify DB integration, ultimately enabling efficient case handling through an AI-driven model.  I’ve also worked on an Automatic Number Plate Recognition project for NPCI. This required designing and deploying a real-time ANPR solution using transfer learning, Deepstream, and OCR. I collaborated closely with my team on model improvement and pipeline optimization to ensure the project could effectively replace existing toll services.  Beyond my technical skills, I bring a strategic approach to problem-solving and a knack for diving into the nuances of machine learning models, optimizing them to fit specific business needs. I’m passionate about harnessing AI to address real-world challenges, and I’m excited about the possibility of contributing my skills and learning further with your team.
 
 Interviewer: That's a strong introduction, Karan.  Your projects demonstrate a good understanding of the practical applications of Generative AI. Let's delve a bit deeper.  You mentioned prompt engineering in your Legal Case Identification project. Can you describe a challenging prompt engineering problem you faced and how you solved it?  What metrics did you use to evaluate the success of your prompt engineering efforts?
- 
 
-Candidate: Certainly, Alex.  In the Legal Case Identification project, a significant challenge in prompt engineering arose when trying to accurately classify complex case types from unstructured legal data. The prompts needed to be crafted carefully to balance specificity with flexibility, as the language in legal documents can vary widely. One particular issue was handling nuanced legal terms and context-specific language that often influenced the interpretation of a case’s category.  To address this, I experimented with structured prompt templates that included both contextual keywords and specific qualifiers. For example, rather than just asking the model to classify a "personal injury" case, I structured prompts to include additional context like, "Identify if this case involves physical harm due to an accident or negligence," which guided the model to focus on relevant legal scenarios.  For evaluation, I used precision, recall, and F1 scores to measure how accurately the prompts identified cases correctly across categories. Additionally, we monitored the model’s consistency by testing it on a set of challenging cases with subtle differences to see if the prompts led to consistent responses. I also tracked user feedback from legal experts who verified if the classifications aligned with practical expectations.  This iterative approach, along with close collaboration with subject matter experts, allowed me to refine prompts effectively. It was a great learning experience in balancing prompt detail and adaptability while ensuring reliable, high-quality results for the client. 
+
+Candidate: Certainly, Alex.  In the Legal Case Identification project, a significant challenge in prompt engineering arose when trying to accurately classify complex case types from unstructured legal data. The prompts needed to be crafted carefully to balance specificity with flexibility, as the language in legal documents can vary widely. One particular issue was handling nuanced legal terms and context-specific language that often influenced the interpretation of a case’s category.  To address this, I experimented with structured prompt templates that included both contextual keywords and specific qualifiers. For example, rather than just asking the model to classify a "personal injury" case, I structured prompts to include additional context like, "Identify if this case involves physical harm due to an accident or negligence," which guided the model to focus on relevant legal scenarios.  For evaluation, I used precision, recall, and F1 scores to measure how accurately the prompts identified cases correctly across categories. Additionally, we monitored the model’s consistency by testing it on a set of challenging cases with subtle differences to see if the prompts led to consistent responses. I also tracked user feedback from legal experts who verified if the classifications aligned with practical expectations.  This iterative approach, along with close collaboration with subject matter experts, allowed me to refine prompts effectively. It was a great learning experience in balancing prompt detail and adaptability while ensuring reliable, high-quality results for the client.
 
 Interviewer: Excellent.  That demonstrates a good understanding of prompt engineering and evaluation metrics.  Now, let's shift gears slightly.  Generative AI models can sometimes produce biased or inaccurate outputs.  How would you address such issues in a production environment?
 
 
- 
 
-Candidate: Thank you, Alex; that’s an important consideration.  In a production environment, handling bias and inaccuracies in Generative AI outputs requires a proactive, multi-layered approach. Here’s how I’d approach it:  Data and Model Auditing: I’d start by auditing the training data to identify and mitigate any inherent biases. This might involve using a diverse dataset or adding counterexamples to balance the perspectives presented in the model’s outputs. Model fine-tuning can help adjust any biases found in pre-trained models by focusing on more representative or neutral datasets.  Prompt Design and Constraints: In prompt engineering, I’d craft prompts that guide the model toward neutral and accurate responses. For instance, setting constraints in the prompt to avoid speculative or potentially biased language can help. Additionally, I’d use prompt templates that explicitly frame questions to elicit factual and context-appropriate information.  Post-Processing and Filtering: After generating outputs, I’d implement a filtering or post-processing layer that flags any content that seems potentially biased or incorrect. For example, sentiment analysis or bias detection algorithms can help flag outputs, allowing for an additional layer of human review or correction before the final output is published. 
+
+Candidate: Thank you, Alex; that’s an important consideration.  In a production environment, handling bias and inaccuracies in Generative AI outputs requires a proactive, multi-layered approach. Here’s how I’d approach it:  Data and Model Auditing: I’d start by auditing the training data to identify and mitigate any inherent biases. This might involve using a diverse dataset or adding counterexamples to balance the perspectives presented in the model’s outputs. Model fine-tuning can help adjust any biases found in pre-trained models by focusing on more representative or neutral datasets.  Prompt Design and Constraints: In prompt engineering, I’d craft prompts that guide the model toward neutral and accurate responses. For instance, setting constraints in the prompt to avoid speculative or potentially biased language can help. Additionally, I’d use prompt templates that explicitly frame questions to elicit factual and context-appropriate information.  Post-Processing and Filtering: After generating outputs, I’d implement a filtering or post-processing layer that flags any content that seems potentially biased or incorrect. For example, sentiment analysis or bias detection algorithms can help flag outputs, allowing for an additional layer of human review or correction before the final output is published.
 
 Interviewer: Good.  You've covered some key aspects.  One last question:  Describe your preferred approach to staying up-to-date with the rapidly evolving field of Generative AI.
 
- 
 
-Candidate: To stay current in Generative AI, I rely on a structured approach that combines both learning from established resources and exploring emerging trends:  Research Papers and Journals: I regularly read papers from sources like arXiv and conferences such as NeurIPS, ICML, and CVPR. Following key researchers and institutions helps me stay updated on cutting-edge techniques, and I make it a habit to read and analyze at least one new paper each week, focusing on both theoretical advances and practical applications.  Community and Open-Source Contributions: I participate in open-source projects on platforms like GitHub, which keeps me connected with the latest tools and libraries. Additionally, contributing to or following repositories in frameworks like Hugging Face or PyTorch gives me hands-on exposure to practical advancements in model development and deployment.  Online Courses and Workshops: I engage in online courses or certifications, especially when new architectures or methodologies gain traction, such as diffusion models or prompt engineering techniques. Platforms like Coursera and specialized workshops provide structured, in-depth content that complements hands-on experience.  Podcasts and Newsletters: I subscribe to AI-focused newsletters like "The Batch" by Andrew Ng and listen to podcasts such as "Lex Fridman" and "Data Skeptic," which often feature industry experts discussing the latest trends and breakthroughs. This is a great way to get a broader perspective on AI developments and practical applications. 
+
+Candidate: To stay current in Generative AI, I rely on a structured approach that combines both learning from established resources and exploring emerging trends:  Research Papers and Journals: I regularly read papers from sources like arXiv and conferences such as NeurIPS, ICML, and CVPR. Following key researchers and institutions helps me stay updated on cutting-edge techniques, and I make it a habit to read and analyze at least one new paper each week, focusing on both theoretical advances and practical applications.  Community and Open-Source Contributions: I participate in open-source projects on platforms like GitHub, which keeps me connected with the latest tools and libraries. Additionally, contributing to or following repositories in frameworks like Hugging Face or PyTorch gives me hands-on exposure to practical advancements in model development and deployment.  Online Courses and Workshops: I engage in online courses or certifications, especially when new architectures or methodologies gain traction, such as diffusion models or prompt engineering techniques. Platforms like Coursera and specialized workshops provide structured, in-depth content that complements hands-on experience.  Podcasts and Newsletters: I subscribe to AI-focused newsletters like "The Batch" by Andrew Ng and listen to podcasts such as "Lex Fridman" and "Data Skeptic," which often feature industry experts discussing the latest trends and breakthroughs. This is a great way to get a broader perspective on AI developments and practical applications.
 
 Interviewer: Excellent. Thank you, Karan. That concludes our interview.  I appreciate you taking the time to speak with me today.
 
@@ -1559,9 +1559,9 @@ Interviewer: Excellent. Thank you, Karan. That concludes our interview.  I appre
 **Evaluation:**
 
 Karan demonstrated a strong understanding of Generative AI concepts and their practical application. His project descriptions were detailed and showcased his ability to tackle complex problems and evaluate results effectively.  He articulated a well-rounded approach to addressing bias and maintaining accuracy in production environments. His commitment to continuous learning is also commendable. While he could have provided more specific examples in some areas, overall, he presented himself as a strong candidate for the Generative AI Engineer position.  I would recommend him for the next stage of the interview process.
- 
 
-Candidate: exit 
+
+Candidate: exit
 
 
 ```text
@@ -1769,10 +1769,10 @@ Starting the Resume create session. Type 'exit' to end the session.
 
 
 
-[1m> Entering new AgentExecutor chain...[0m
-[32;1m[1;3m```markdown
+1m> Entering new AgentExecutor chain...[0m
+[32;1m[1;3m``​`markdown
 # Karan Shrestha
-[LinkedIn](LinkedIn) | 747-295-9996 | ks.karanshrestha@gmail.com | [GitHub](GitHub)
+[LinkedIn | 747-295-9996 | ks.karanshrestha@gmail.com | GitHub
 
 ## Summary
 
@@ -1831,12 +1831,12 @@ Highly motivated and results-oriented Data Scientist with 4.5 years of experienc
 
 ## Certifications
 
-* **Oracle Cloud Infrastructure 2024 Generative AI Certified Professional:** [Link](Link)
+* **Oracle Cloud Infrastructure 2024 Generative AI Certified Professional:** Link
 * **Gold Badge (5 Star) for Python on HackerRank:** [Link]
 * **Data Scientist 1-year Master Professional Program:** [Link]
 * **Certificate of Training in Machine Learning Advanced Course:** [Link]
 
-```[0m
+``​`[0m
 
 [1m> Finished chain.[0m
 ```
@@ -1855,7 +1855,7 @@ Resume saved to Agent_output\Resume_20241117173459.md
 ```
 
 # Karan Shrestha
-[LinkedIn](LinkedIn) | 747-295-9996 | ks.karanshrestha@gmail.com | [GitHub](GitHub)
+LinkedIn | 747-295-9996 | ks.karanshrestha@gmail.com | GitHub
 
 ## Summary
 
@@ -1914,7 +1914,7 @@ Highly motivated and results-oriented Data Scientist with 4.5 years of experienc
 
 ## Certifications
 
-* **Oracle Cloud Infrastructure 2024 Generative AI Certified Professional:** [Link](Link)
+* **Oracle Cloud Infrastructure 2024 Generative AI Certified Professional:** Link
 * **Gold Badge (5 Star) for Python on HackerRank:** [Link]
 * **Data Scientist 1-year Master Professional Program:** [Link]
 * **Certificate of Training in Machine Learning Advanced Course:** [Link]
@@ -1994,7 +1994,7 @@ Starting the Resume create session. Type 'exit' to end the session.
 
 
 [1m> Entering new AgentExecutor chain...[0m
-[32;1m[1;3m```markdown
+[32;1m[1;3m``​`markdown
 # [Your Name]
 [Phone Number] | [Email Address] | [LinkedIn Profile URL]
 
@@ -2042,7 +2042,7 @@ Highly motivated and results-oriented AI Engineer with a proven track record in 
 * **Bachelor of Science in Computer Science & Engineering,** ITS Engineering College (Greater Noida, India) 05/2015 - 06/2019 (GPA: 3.62)
 
 
-```
+``​`
 [0m
 
 [1m> Finished chain.[0m

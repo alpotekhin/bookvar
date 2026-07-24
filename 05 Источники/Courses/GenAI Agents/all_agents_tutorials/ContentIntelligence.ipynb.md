@@ -72,7 +72,7 @@ The system is composed of several specialized nodes:
 ### 1. Workflow Design
 The agent uses LangGraph's StateGraph to create a structured workflow:
 
-![ContentIntelligence](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/all_agents_tutorials/../images/contentIntelli.svg)
+![ContentIntelligence](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/images/contentIntelli.svg)
 
 ### 2. Data Flow
 1. Input text enters the summary node for initial processing
@@ -86,11 +86,11 @@ Each platform has dedicated prompts tailored to its unique requirements:
 
 ```python
 instagram_prompt = ChatPromptTemplate.from_template("""
-You are a creative social media strategist specializing in Instagram content.  
+You are a creative social media strategist specializing in Instagram content.
 
-**Input Details:**  
-1. Text: {text}  
-2. Research: {research}  
+**Input Details:**
+1. Text: {text}
+2. Research: {research}
 
 Your task is to create an **Instagram post caption** with:
 - Engaging Caption
@@ -347,7 +347,7 @@ def research_node(state: SumamryOutputState) -> ResearchOutputState:
     for i,ques in enumerate(res["questions"]):
         research += "question: " + ques + "\n"
         research += "Answers" + "\n\n".join([res["content"] for res in response[i]​]) + "\n\n"
-    
+
     return {"text": state["text"], "platforms": state["platforms"], "research": research}
 
 def IntentMatching(state: ResearchOutputState):
@@ -363,119 +363,119 @@ def IntentMatching(state: ResearchOutputState):
 
 ```python
 instagram_prompt = ChatPromptTemplate.from_template("""
-You are a creative social media strategist specializing in Instagram content.  
+You are a creative social media strategist specializing in Instagram content.
 
-**Input Details:**  
-1. Text: {text}  
-2. Research: {research}  
+**Input Details:**
+1. Text: {text}
+2. Research: {research}
 
-Your task is to create an **Instagram post caption** and provide the following:  
-- **Engaging Caption**: Write a compelling caption that aligns with the given text, highlights the key points, and uses an **inspirational or engaging tone** (as per the audience).  
-- **Hashtag Suggestions**: Suggest at least 10 hashtags that are **trending and relevant** to the content and target audience.  
-- **Call-to-Action (CTA)**: Include a specific action to encourage user engagement (e.g., comment, tag friends, visit website).  
-- **Emoji Usage**: Add appropriate emojis to make the caption lively and engaging, without overdoing it.  
+Your task is to create an **Instagram post caption** and provide the following:
+- **Engaging Caption**: Write a compelling caption that aligns with the given text, highlights the key points, and uses an **inspirational or engaging tone** (as per the audience).
+- **Hashtag Suggestions**: Suggest at least 10 hashtags that are **trending and relevant** to the content and target audience.
+- **Call-to-Action (CTA)**: Include a specific action to encourage user engagement (e.g., comment, tag friends, visit website).
+- **Emoji Usage**: Add appropriate emojis to make the caption lively and engaging, without overdoing it.
 
-**Special Guidelines:**  
-1. Keep the caption within 2200 characters but aim for 150–300 characters for better engagement.  
-2. Ensure hashtags balance **broad reach (#FitnessGoals)** and **niche relevance (#EcoFitFashion)**.  
-3. Optimize for Instagram’s algorithm by starting with a **hook** (e.g., a question or statement).  
+**Special Guidelines:**
+1. Keep the caption within 2200 characters but aim for 150–300 characters for better engagement.
+2. Ensure hashtags balance **broad reach (#FitnessGoals)** and **niche relevance (#EcoFitFashion)**.
+3. Optimize for Instagram’s algorithm by starting with a **hook** (e.g., a question or statement).
 
-**Response Format:**  
-Caption: [Your Instagram caption here]  
-Hashtags: [#hashtag1, #hashtag2, ...]  
-CTA: [Call-to-Action here]  
+**Response Format:**
+Caption: [Your Instagram caption here]
+Hashtags: [#hashtag1, #hashtag2, ...]
+CTA: [Call-to-Action here]
 
 """)
 
 twitter_prompt = ChatPromptTemplate.from_template("""
-You are a social media expert tasked with crafting tweets that drive engagement on Twitter.  
+You are a social media expert tasked with crafting tweets that drive engagement on Twitter.
 
-**Input Details:**  
-1. Text: {text}  
-2. Research: {research}  
+**Input Details:**
+1. Text: {text}
+2. Research: {research}
 
-Your task is to create **Twitter content** with the following specifications:  
-- **Tweet**: Craft a tweet that conveys the essence of the text in **280 characters or less**, ensuring clarity, conciseness, and a conversational tone.  
-- **Hashtag Suggestions**: Include up to 3 hashtags that enhance visibility and are platform-specific.  
-- **Thread**: If the content cannot fit in a single tweet, create a **thread** with concise, numbered tweets that maintain flow and engagement.  
+Your task is to create **Twitter content** with the following specifications:
+- **Tweet**: Craft a tweet that conveys the essence of the text in **280 characters or less**, ensuring clarity, conciseness, and a conversational tone.
+- **Hashtag Suggestions**: Include up to 3 hashtags that enhance visibility and are platform-specific.
+- **Thread**: If the content cannot fit in a single tweet, create a **thread** with concise, numbered tweets that maintain flow and engagement.
 
-**Special Guidelines:**  
-1. Start with a **strong hook** in the first tweet to grab attention.  
-2. Use one or two relevant keywords or phrases identified in the research.  
-3. Maintain a balance between **professional** and **relatable** language.  
+**Special Guidelines:**
+1. Start with a **strong hook** in the first tweet to grab attention.
+2. Use one or two relevant keywords or phrases identified in the research.
+3. Maintain a balance between **professional** and **relatable** language.
 
-**Response Format:**  
-Tweet: [Your tweet here]  
-Hashtags: [#hashtag1, #hashtag2, ...]  
-Thread:  
-1. [First tweet in the thread]  
-2. [Second tweet in the thread]  
-...  
+**Response Format:**
+Tweet: [Your tweet here]
+Hashtags: [#hashtag1, #hashtag2, ...]
+Thread:
+1. [First tweet in the thread]
+2. [Second tweet in the thread]
+...
 
 """)
 
 linkedin_prompt = ChatPromptTemplate.from_template("""
-You are a professional LinkedIn content creator, focused on crafting posts that establish thought leadership and build connections.  
+You are a professional LinkedIn content creator, focused on crafting posts that establish thought leadership and build connections.
 
-**Input Details:**  
-1. Text: {text}  
-2. Research: {research}  
+**Input Details:**
+1. Text: {text}
+2. Research: {research}
 
-Your task is to create a **LinkedIn post** with the following details:  
-- **Post Content**: Write a professional, thoughtful post elaborating on the text, tailored to LinkedIn’s audience. Highlight the key takeaways or updates and use a **formal yet engaging tone**.  
-- **Hashtags**: Suggest up to 5 hashtags relevant to LinkedIn’s professional audience.  
-- **CTA**: Include a CTA encouraging engagement (e.g., “Share your thoughts,” “Let us know how you tackle this,” or “Visit our page for more”).  
+Your task is to create a **LinkedIn post** with the following details:
+- **Post Content**: Write a professional, thoughtful post elaborating on the text, tailored to LinkedIn’s audience. Highlight the key takeaways or updates and use a **formal yet engaging tone**.
+- **Hashtags**: Suggest up to 5 hashtags relevant to LinkedIn’s professional audience.
+- **CTA**: Include a CTA encouraging engagement (e.g., “Share your thoughts,” “Let us know how you tackle this,” or “Visit our page for more”).
 
-**Special Guidelines:**  
-1. Aim for **150–300 words**, focusing on storytelling and professional insights.  
-2. Structure the post with:  
-   - A **hook** to grab attention.  
-   - The main body with value-driven insights.  
-   - A concluding CTA.  
-3. Avoid using jargon unless contextually relevant.  
-4. Ensure hashtags are business-focused and professional.  
+**Special Guidelines:**
+1. Aim for **150–300 words**, focusing on storytelling and professional insights.
+2. Structure the post with:
+   - A **hook** to grab attention.
+   - The main body with value-driven insights.
+   - A concluding CTA.
+3. Avoid using jargon unless contextually relevant.
+4. Ensure hashtags are business-focused and professional.
 
-**Response Format:**  
-Post: [Your LinkedIn post here]  
-Hashtags: [#hashtag1, #hashtag2, ...]  
-CTA: [Call-to-Action here]  
+**Response Format:**
+Post: [Your LinkedIn post here]
+Hashtags: [#hashtag1, #hashtag2, ...]
+CTA: [Call-to-Action here]
 
 """)
 
 blog_prompt = ChatPromptTemplate.from_template("""
-You are a content writer specializing in blogs that captivate readers and provide actionable insights.  
+You are a content writer specializing in blogs that captivate readers and provide actionable insights.
 
-**Input Details:**  
-1. Text: {text}  
-2. Research: {research}  
+**Input Details:**
+1. Text: {text}
+2. Research: {research}
 
-Your task is to create a **markdown-formatted blog post** with the following structure:  
-- **Title**: Create an eye-catching and SEO-friendly blog title.  
-- **Introduction**: Write an engaging opening paragraph that sets the context and hooks the reader.  
-- **Main Body**: Elaborate on the text using the research to provide insights, examples, and supporting details. Structure it into sections with headings (H2/H3).  
-- **Conclusion**: Summarize key takeaways and include a CTA encouraging readers to take the next step.  
+Your task is to create a **markdown-formatted blog post** with the following structure:
+- **Title**: Create an eye-catching and SEO-friendly blog title.
+- **Introduction**: Write an engaging opening paragraph that sets the context and hooks the reader.
+- **Main Body**: Elaborate on the text using the research to provide insights, examples, and supporting details. Structure it into sections with headings (H2/H3).
+- **Conclusion**: Summarize key takeaways and include a CTA encouraging readers to take the next step.
 
-**Special Guidelines:**  
-1. Use a tone aligned with the target audience (e.g., casual for general readers, formal for professionals).  
-2. Optimize for SEO by incorporating keywords from the research naturally into the content.  
-3. Ensure readability by using bullet points, numbered lists, and short paragraphs.  
-4. Keep the blog **800–1500 words**.  
+**Special Guidelines:**
+1. Use a tone aligned with the target audience (e.g., casual for general readers, formal for professionals).
+2. Optimize for SEO by incorporating keywords from the research naturally into the content.
+3. Ensure readability by using bullet points, numbered lists, and short paragraphs.
+4. Keep the blog **800–1500 words**.
 
-**Response Format:**  
+**Response Format:**
 ```markdown
-# [Title of the Blog]  
+# [Title of the Blog]
 
-## Introduction  
-[Your introduction here]  
+## Introduction
+[Your introduction here]
 
-## Section 1: [Heading]  
-[Content]  
+## Section 1: [Heading]
+[Content]
 
-## Section 2: [Heading]  
-[Content]  
+## Section 2: [Heading]
+[Content]
 
-## Conclusion  
-[Conclusion with CTA]  
+## Conclusion
+[Conclusion with CTA]
 
 """)
 ```
@@ -619,63 +619,63 @@ print(res["generated_content"])
 ```
 
 ```text
-```markdown
+``​`markdown
 # Unleashing the Power of Memory Management in LangGraph for AI Excellence
 
-## Introduction  
+## Introduction
 In the ever-evolving landscape of artificial intelligence, memory management plays a pivotal role in enhancing the capabilities of conversational applications. Enter LangGraph, a revolutionary framework designed to optimize memory usage for AI agents, enabling them to deliver more coherent, context-aware, and personalized interactions. Whether you're an AI developer or a tech enthusiast, understanding the intricacies of LangGraph's memory management system is crucial to harnessing its full potential. This blog delves into the dual approach of short-term and long-term memory in LangGraph, offering insights and actionable strategies to elevate your AI projects.
 
-## Section 1: Mastering Short-Term Memory in LangGraph  
+## Section 1: Mastering Short-Term Memory in LangGraph
 Short-term memory is the cornerstone of maintaining context within a single session, ensuring seamless interactions.
 
-### Definition and Implementation  
+### Definition and Implementation
 LangGraph's short-term memory is engineered to manage data within a single conversational thread. By utilizing thread-scoped checkpoints, this system allows applications to remember previous interactions during a session, preserving continuity. This memory encompasses conversation history, user inputs, and other contextual data essential for maintaining the flow of dialogue.
 
-### Use Cases  
+### Use Cases
 - **Conversation History Management**: Retain dialogue context to enhance ongoing interactions.
 - **Session-Specific Data Storage**: Store temporary information like user preferences or recent queries relevant only for the session duration.
 
-### Challenges and Solutions  
+### Challenges and Solutions
 Long conversations often lead to increased memory usage, potentially exceeding the context window of language models. To address this, techniques such as summarization or message trimming are employed, ensuring efficient memory management without sacrificing context.
 
-## Section 2: Harnessing Long-Term Memory for Personalized Interactions  
+## Section 2: Harnessing Long-Term Memory for Personalized Interactions
 Long-term memory in LangGraph transcends single sessions, enabling applications to retain and utilize information across multiple interactions.
 
-### Definition and Implementation  
+### Definition and Implementation
 LangGraph's long-term memory is structured using custom namespaces for hierarchical storage, with each memory stored as a JSON document. This setup facilitates easy retrieval and management, supporting various storage backends like in-memory storage and databases.
 
-### Use Cases  
+### Use Cases
 - **User Profile Retention**: Store user profiles, preferences, and historical interactions for future reference.
 - **Structured Knowledge Storage**: Retain facts or knowledge triples extracted from conversations to enrich responses.
 
-### Advantages  
+### Advantages
 By recalling past interactions and user-specific information, long-term memory allows applications to deliver a more personalized and context-aware experience.
 
-## Section 3: Effective Strategies for Memory Management in LangGraph  
+## Section 3: Effective Strategies for Memory Management in LangGraph
 To maximize the impact of LangGraph's memory management system, consider the following strategies:
 
 - **Leverage Custom Namespaces**: Organize long-term memory using custom namespaces for efficient hierarchical storage.
 - **Implement Summarization Techniques**: Use summarization to manage large conversation histories effectively.
 - **Utilize Persistent Storage Solutions**: Opt for databases or other persistent storage solutions for robust long-term memory management.
 
-## Conclusion  
+## Conclusion
 LangGraph's innovative memory management system bridges the gap between short-term and long-term memory, empowering AI applications to deliver richer, more personalized interactions. By understanding and implementing these memory strategies, developers can unlock new levels of AI excellence, transforming user experiences. Ready to elevate your AI projects? Explore LangGraph's memory management capabilities today and unleash the full potential of your conversational applications.
-```
+``​`
 
 
 
 
 
-**Tweet:**  
+**Tweet:**
 Unlock the power of memory in AI with LangGraph! 🧠 Discover how short-term & long-term memory systems enhance personalized, context-aware interactions in your applications. Dive in and transform your AI experience today! #AIcommunity #AItools #LangGraph
 
-**Hashtags:**  
-[#AIcommunity, #AItools, #LangGraph]  
+**Hashtags:**
+[#AIcommunity, #AItools, #LangGraph]
 
-**Thread:**  
-1. 🚀 Introducing LangGraph's dual memory system: Short-term memory manages session data, while long-term memory retains user info across threads, creating personalized experiences.  
-2. Short-term memory keeps conversation history & user inputs in check, ensuring seamless session continuity. Perfect for maintaining context!  
-3. Long-term memory, organized in namespaces, stores user profiles & past interactions, allowing for a richer, more personalized user experience.  
+**Thread:**
+1. 🚀 Introducing LangGraph's dual memory system: Short-term memory manages session data, while long-term memory retains user info across threads, creating personalized experiences.
+2. Short-term memory keeps conversation history & user inputs in check, ensuring seamless session continuity. Perfect for maintaining context!
+3. Long-term memory, organized in namespaces, stores user profiles & past interactions, allowing for a richer, more personalized user experience.
 4. Embrace the future of AI interactions with LangGraph's memory management system. Enhance your app's capabilities with structured storage and dynamic memory solutions! #AIchat
 ```
 

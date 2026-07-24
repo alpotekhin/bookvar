@@ -11,6 +11,16 @@ source_language: mixed
 Меньше бит означает меньше memory/communication traffic и доступ к быстрым
 Tensor Cores, но одновременно меньше precision или dynamic range.
 
+## От определения формата до работающего training loop
+
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week02_fast_pipelines/lecture.pdf|EDLS Week 2 — полная лекция]]: численные форматы, Tensor Cores и mixed precision.
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week02_fast_pipelines/seminar/practice.ipynb|EDLS Week 2 — seminar notebook]]: исходный код и измерения.
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/training|Harvard CS249r — Training]]: связь численной точности с полным training pipeline.
+
+Практический критерий здесь двойной: ускорение должно быть измерено на
+целевом железе, а численная эквивалентность — проверена по loss curve и
+downstream quality, не только по отсутствию `NaN`.
+
 ## Encoding, rounding и пределы
 
 Нормальное двоичное число хранит

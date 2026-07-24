@@ -61,7 +61,7 @@ The system follows a structured learning cycle:
 ## Conclusion
 This notebook demonstrates a structured approach to guided learning. By combining sequential checkpoints, clear verification thresholds, and Feynman-style teaching, it offers a methodical learning experience with immediate support when needed. The system is particularly effective for complex topics that benefit from step-by-step guidance and simplified explanations.
 
-![Chiron](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/all_agents_tutorials/../images/chiron.svg)
+![Chiron](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/images/chiron.svg)
 
 ## Requirements
 
@@ -131,7 +131,7 @@ class LearningCheckpoint(BaseModel):
 class Checkpoints(BaseModel):
     """Main checkpoints container with index tracking"""
     checkpoints: List[LearningCheckpoint] = Field(
-        ..., 
+        ...,
         description="List of checkpoints covering foundation, application, and mastery levels"
     )
 
@@ -197,28 +197,28 @@ The system uses three utility functions:
 ```python
 def extract_content_from_chunks(chunks):
     """Extract and combine content from chunks with splits attribute.
-    
+
     Args:
         chunks: List of chunk objects that may contain splits attribute
-        
+
     Returns:
         str: Combined content from all chunks joined with newlines
     """
     content = []
-    
+
     for chunk in chunks:
         if hasattr(chunk, 'splits') and chunk.splits:
             chunk_content = ' '.join(chunk.splits)
             content.append(chunk_content)
-    
+
     return '\n'.join(content)
 
 def format_checkpoints_as_message(checkpoints: Checkpoints) -> str:
     """Convert Checkpoints object to a formatted string for the message.
-    
+
     Args:
         checkpoints (Checkpoints): Checkpoints object containing learning checkpoints
-        
+
     Returns:
         str: Formatted string containing numbered checkpoints with descriptions and criteria
     """
@@ -233,16 +233,16 @@ def format_checkpoints_as_message(checkpoints: Checkpoints) -> str:
 
 def generate_checkpoint_message(checks: List[LearningCheckpoint]) -> HumanMessage:
     """Generate a formatted message for learning checkpoints that need context.
-    
+
     Args:
         checks (List[LearningCheckpoint]): List of learning checkpoint objects
-        
+
     Returns:
-        HumanMessage: Formatted message containing checkpoint descriptions, criteria and 
+        HumanMessage: Formatted message containing checkpoint descriptions, criteria and
                      verification methods, ready for context search
     """
     formatted_checks = []
-    
+
     for check in checks:
         checkpoint_text = f"""
         Description: {check.description}
@@ -251,14 +251,14 @@ def generate_checkpoint_message(checks: List[LearningCheckpoint]) -> HumanMessag
         Verification Method: {check.verification}
         """
         formatted_checks.append(checkpoint_text)
-    
+
     all_checks = "\n---\n".join(formatted_checks)
-    
+
     checkpoints_message = HumanMessage(content=f"""The following learning checkpoints need additional context:
         {all_checks}
-        
+
         Please generate search queries to find relevant information.""")
-    
+
     return checkpoints_message
 ```
 
@@ -275,7 +275,7 @@ Here we define the core instruction prompts for our LLM. Each message serves a s
 learning_checkpoints_generator = SystemMessage(content="""You will be given a learning topic title and learning objectives.
 Your goal is to generate clear learning checkpoints that will help verify understanding and progress through the topic.
 The output should be in the following dictionary structure:
-checkpoint 
+checkpoint
 -> description (level checkpoint description)
 -> criteria
 -> verification (How to verify this checkpoint (Feynman Methods))
@@ -341,46 +341,46 @@ The `ContextStore` class manages context chunks and embeddings in memory, optimi
 ```python
 class ContextStore:
     """Store for managing context chunks and their embeddings in memory.
-    
+
     A class that provides storage and retrieval of context data using an in-memory store.
     Each context entry consists of context chunks and their corresponding embeddings.
     """
-    
+
     def __init__(self):
         """Initialize ContextStore with an empty in-memory store."""
         self.store = InMemoryStore()
-        
+
     def save_context(self, context_chunks: list, embeddings: list, key: str = None):
         """Save context chunks and their embeddings to the store.
-        
+
         Args:
             context_chunks (list): List of context chunk objects
             embeddings (list): List of corresponding embeddings for the chunks
             key (str, optional): Custom key for storing the context. Defaults to None,
                                in which case a UUID is generated.
-            
+
         Returns:
             str: The key used to store the context
         """
         namespace = ("context",)
-        
+
         if key is None:
             key = str(uuid.uuid4())
-            
+
         value = {
             "chunks": context_chunks,
             "embeddings": embeddings
         }
-        
+
         self.store.put(namespace, key, value)
         return key
-        
+
     def get_context(self, context_key: str):
         """Retrieve context data from the store using a key.
-        
+
         Args:
             context_key (str): The key used to store the context
-            
+
         Returns:
             dict: The stored context value containing chunks and embeddings
         """
@@ -407,8 +407,8 @@ The learning system is powered by eight main functions that process and update t
 ```python
 def generate_query(state: LearningtState):
     """Generates search queries based on learning checkpoints from current state."""
-    structured_llm = llm.with_structured_output(SearchQuery) 
-    checkpoints_message = HumanMessage(content=format_checkpoints_as_message(state['checkpoints']))  
+    structured_llm = llm.with_structured_output(SearchQuery)
+    checkpoints_message = HumanMessage(content=format_checkpoints_as_message(state['checkpoints']))
     messages = [checkpoint_based_query_generator, checkpoints_message]
     search_queries = structured_llm.invoke(messages)
     return {"search_queries": search_queries}
@@ -416,12 +416,12 @@ def generate_query(state: LearningtState):
 def search_web(state: LearningtState):
     """Retrieves and processes web search results based on search queries."""
     search_queries = state["search_queries"].search_queries
-    
+
     all_search_docs = []
     for query in search_queries:
         search_docs = tavily_search.invoke(query)
         all_search_docs.extend(search_docs)
-    
+
     formatted_search_docs = [
         f'Context: {doc["content"]}\n Source: {doc["url"]}\n'
         for doc in all_search_docs
@@ -433,7 +433,7 @@ def search_web(state: LearningtState):
         chunk_embeddings,
         key=state.get('context_key')
     )
-    
+
     return {"context_chunks": formatted_search_docs}
 
 def generate_checkpoints(state: LearningtState):
@@ -455,7 +455,7 @@ def chunk_context(state: LearningtState):
         min_split_tokens=128,
         max_split_tokens=512
     )
-    
+
     chunks = chunker([state['context']​])
     content = []
     for chunk in chunks:
@@ -474,42 +474,42 @@ def context_validation(state: LearningtState):
     context = context_store.get_context(state['context_key'])
     chunks = context['chunks']
     chunk_embeddings = context['embeddings']
-    
+
     checks = []
     structured_llm = llm.with_structured_output(InContext)
-    
+
     for checkpoint in state['checkpoints'].checkpoints:
         query = embeddings.embed_query(checkpoint.verification)
-        
+
         similarities = cosine_similarity([query], chunk_embeddings)[0]
-        top_3_indices = sorted(range(len(similarities)), 
-                             key=lambda i: similarities[i], 
+        top_3_indices = sorted(range(len(similarities)),
+                             key=lambda i: similarities[i],
                              reverse=True)[:3]
         relevant_chunks = [chunks[i] for i in top_3_indices]
-        
+
         messages = [
             validate_context,
             HumanMessage(content=f"""
             Criteria:
             {chr(10).join(f"- {c}" for c in checkpoint.criteria)}
-            
+
             Context:
             {chr(10).join(relevant_chunks)}
             """)
         ]
-        
+
         response = structured_llm.invoke(messages)
         if response.is_in_context.lower() == "no":
             checks.append(checkpoint)
-    
+
     if checks:
         structured_llm = llm.with_structured_output(SearchQuery)
         checkpoints_message = generate_checkpoint_message(checks)
-        
+
         messages = [checkpoint_based_query_generator, checkpoints_message]
         search_queries = structured_llm.invoke(messages)
         return {"search_queries": search_queries}
-    
+
     return {"search_queries": None}
 
 def generate_question(state: LearningtState):
@@ -517,7 +517,7 @@ def generate_question(state: LearningtState):
     structured_llm = llm.with_structured_output(QuestionOutput)
     current_checkpoint = state['current_checkpoint']
     checkpoint_info = state['checkpoints'].checkpoints[current_checkpoint]
-    
+
     messages = [
         question_generator,
         HumanMessage(content=f"""
@@ -525,10 +525,10 @@ def generate_question(state: LearningtState):
         Success Criteria:
         {chr(10).join(f"- {c}" for c in checkpoint_info.criteria)}
         Verification Method: {checkpoint_info.verification}
-        
+
         Generate an appropriate verification question.""")
     ]
-    
+
     question_output = structured_llm.invoke(messages)
     return {"current_question": question_output.question}
 
@@ -537,57 +537,57 @@ def verify_answer(state: LearningtState):
     structured_llm = llm.with_structured_output(LearningVerification)
     current_checkpoint = state['current_checkpoint']
     checkpoint_info = state['checkpoints'].checkpoints[current_checkpoint]
-    
+
     context = context_store.get_context(state['context_key'])
     chunks = context['chunks']
     chunk_embeddings = context['embeddings']
-    
+
     query = embeddings.embed_query(checkpoint_info.verification)
-    
+
     similarities = cosine_similarity([query], chunk_embeddings)[0]
-    top_3_indices = sorted(range(len(similarities)), 
-                         key=lambda i: similarities[i], 
+    top_3_indices = sorted(range(len(similarities)),
+                         key=lambda i: similarities[i],
                          reverse=True)[:3]
     relevant_chunks = [chunks[i] for i in top_3_indices]
-    
+
     messages = [
         answer_verifier,
         HumanMessage(content=f"""
         Question: {state['current_question']}
         Answer: {state['current_answer']}
-        
+
         Checkpoint Description: {checkpoint_info.description}
         Success Criteria:
         {chr(10).join(f"- {c}" for c in checkpoint_info.criteria)}
         Verification Method: {checkpoint_info.verification}
-        
+
         Context:
         {chr(10).join(relevant_chunks)}
-        
+
         Assess the answer.""")
     ]
-    
+
     verification = structured_llm.invoke(messages)
     return {"verifications": verification}
-    
+
 def teach_concept(state: LearningtState):
     """Creates simplified Feynman-style explanations for concepts that need reinforcement."""
     structured_llm = llm.with_structured_output(FeynmanTeaching)
     current_checkpoint = state['current_checkpoint']
     checkpoint_info = state['checkpoints'].checkpoints[current_checkpoint]
-    
+
     messages = [
         feynman_teacher,
         HumanMessage(content=f"""
         Criteria: {checkpoint_info.criteria}
         Verification: {state['verifications']}
-        
+
         Context:
         {state['context_chunks']}
-        
+
         Create a Feynman teaching explanation.""")
     ]
-    
+
     teaching = structured_llm.invoke(messages)
     return {"teachings": teaching}
 ```
@@ -627,13 +627,13 @@ def route_context(state: LearningtState):
 def route_verification(state: LearningtState):
     """Determines next step based on verification results and checkpoint progress."""
     current_checkpoint = state['current_checkpoint']
-    
+
     if state['verifications'].understanding_level < 0.7:
         return 'teach_concept'
-        
+
     if current_checkpoint + 1 < len(state['checkpoints'].checkpoints):
         return 'next_checkpoint'
-    
+
     return END
 
 def route_teaching(state: LearningtState):
@@ -742,19 +742,19 @@ def print_checkpoints(event):
         print("\n" + "=" * 80)
         print("🎯 LEARNING CHECKPOINTS OVERVIEW".center(80))
         print("=" * 80 + "\n")
-        
+
         for i, checkpoint in enumerate(checkpoints.checkpoints, 1):
             # Checkpoint header with number
             print(f"📍 CHECKPOINT #{i}".center(80))
             print("─" * 80 + "\n")
-            
+
             # Description section with text wrapping
             print("📝 Description:")
             print("─" * 40)
             words = checkpoint.description.split()
             current_line = []
             current_length = 0
-            
+
             for word in words:
                 if current_length + len(word) + 1 <= 70:
                     current_line.append(word)
@@ -763,11 +763,11 @@ def print_checkpoints(event):
                     print(f"  {' '.join(current_line)}")
                     current_line = [word]
                     current_length = len(word)
-            
+
             if current_line:
                 print(f"  {' '.join(current_line)}")
             print()
-            
+
             # Success Criteria section
             print("✅ Success Criteria:")
             print("─" * 40)
@@ -777,7 +777,7 @@ def print_checkpoints(event):
                 current_line = []
                 current_length = 0
                 first_line = True
-                
+
                 for word in words:
                     if current_length + len(word) + 1 <= 66:  # Shorter width to account for numbering
                         current_line.append(word)
@@ -790,21 +790,21 @@ def print_checkpoints(event):
                             print(f"     {' '.join(current_line)}")
                         current_line = [word]
                         current_length = len(word)
-                
+
                 if current_line:
                     if first_line:
                         print(f"  {j}. {' '.join(current_line)}")
                     else:
                         print(f"     {' '.join(current_line)}")
             print()
-            
+
             # Verification Method section
             print("🔍 Verification Method:")
             print("─" * 40)
             words = checkpoint.verification.split()
             current_line = []
             current_length = 0
-            
+
             for word in words:
                 if current_length + len(word) + 1 <= 70:
                     current_line.append(word)
@@ -813,15 +813,15 @@ def print_checkpoints(event):
                     print(f"  {' '.join(current_line)}")
                     current_line = [word]
                     current_length = len(word)
-            
+
             if current_line:
                 print(f"  {' '.join(current_line)}")
             print()
-            
+
             # Separator between checkpoints
             if i < len(checkpoints.checkpoints):
                 print("~" * 80 + "\n")
-        
+
         print("=" * 80 + "\n")
 
 def print_verification_results(event):
@@ -837,23 +837,23 @@ def print_verification_results(event):
         bar_length = 20
         filled_length = int(understanding * bar_length)
         bar = "█" * filled_length + "░" * (bar_length - filled_length)
-        
+
         print(f"📈 Understanding Level: [{bar}] {understanding * 100:.1f}%\n")
-        
+
         # Feedback section
         print("💡 Feedback:")
         print(f"{verifications.feedback}\n")
-        
+
         # Suggestions section
         print("🎯 Suggestions:")
         for i, suggestion in enumerate(verifications.suggestions, 1):
             print(f"  {i}. {suggestion}")
         print()
-        
+
         # Context Alignment
         print("🔍 Context Alignment:")
         print(f"{verifications.context_alignment}\n")
-        
+
         print("-" * 50 + "\n")
 def print_teaching_results(event):
     """Pretty print Feynman teaching results with improved formatting"""
@@ -874,7 +874,7 @@ def print_teaching_results(event):
             lines = []
             current_line = []
             current_length = 0
-            
+
             for word in words:
                 if current_length + len(word) + 1 <= 60:
                     current_line.append(word)
@@ -883,28 +883,28 @@ def print_teaching_results(event):
                     lines.append(' '.join(current_line))
                     current_line = [word]
                     current_length = len(word)
-            
+
             if current_line:
                 lines.append(' '.join(current_line))
-            
+
             for line in lines:
                 print(f"{line}")
             print()
-        
+
         # Key Concepts section
         print("💡 KEY CONCEPTS:")
         print("─" * 30)
         for i, concept in enumerate(teachings.key_concepts, 1):
             print(f"  {i}. {concept}")
         print()
-        
+
         # Analogies section
         print("🔄 ANALOGIES & EXAMPLES:")
         print("─" * 30)
         for i, analogy in enumerate(teachings.analogies, 1):
             print(f"  {i}. {analogy}")
         print()
-        
+
         print("=" * 70 + "\n")
 ```
 
@@ -960,10 +960,10 @@ for event in graph.stream(initial_input, thread, stream_mode="values"):
 ```text
 
 ================================================================================
-                        🎯 LEARNING CHECKPOINTS OVERVIEW                         
+                        🎯 LEARNING CHECKPOINTS OVERVIEW
 ================================================================================
 
-                                📍 CHECKPOINT #1                                 
+                                📍 CHECKPOINT #1
 ────────────────────────────────────────────────────────────────────────────────
 
 📝 Description:
@@ -985,7 +985,7 @@ for event in graph.stream(initial_input, thread, stream_mode="values"):
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-                                📍 CHECKPOINT #2                                 
+                                📍 CHECKPOINT #2
 ────────────────────────────────────────────────────────────────────────────────
 
 📝 Description:
@@ -1009,7 +1009,7 @@ for event in graph.stream(initial_input, thread, stream_mode="values"):
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-                                📍 CHECKPOINT #3                                 
+                                📍 CHECKPOINT #3
 ────────────────────────────────────────────────────────────────────────────────
 
 📝 Description:
@@ -1046,7 +1046,7 @@ from pydantic import BaseModel
 def create_checkpoint_editor(checkpoints_model: Checkpoints):
     """
     Creates an interactive checkpoint editor using a Pydantic model.
-    
+
     Args:
         checkpoints_model: Pydantic model of Checkpoints class
     """
@@ -1054,7 +1054,7 @@ def create_checkpoint_editor(checkpoints_model: Checkpoints):
     checkpoints = [cp.model_dump() for cp in checkpoints_model.checkpoints]
     checkpoints_widgets = []
     accepted_checkpoints = []
-    
+
     def create_criterion_widget(checkpoint_index: int, criterion_value: str = "", criterion_index: int = None):
         """Creates a widget for a single criterion with a delete button"""
         criterion_container = widgets.HBox([
@@ -1069,46 +1069,46 @@ def create_checkpoint_editor(checkpoints_model: Checkpoints):
                 layout=widgets.Layout(width='15%')
             )
         ])
-        
+
         def on_criterion_change(change):
             nonlocal criterion_index
             if criterion_index is not None:
                 checkpoints[checkpoint_index]['criteria'][criterion_index] = change['new']
-        
+
         def remove_criterion(b):
             if criterion_index is not None:
                 checkpoints[checkpoint_index]['criteria'].pop(criterion_index)
                 update_checkpoint_widget(checkpoint_index)
-        
+
         criterion_container.children[0].observe(on_criterion_change, names='value')
         criterion_container.children[1].on_click(remove_criterion)
-        
+
         return criterion_container
-    
+
     def create_checkpoint_widget(checkpoint: dict, index: int):
         """Creates a widget for a single checkpoint"""
-        
+
         def on_accept_change(change):
             if change['new']:
                 accepted_checkpoints.append(index)
             else:
                 if index in accepted_checkpoints:
                     accepted_checkpoints.remove(index)
-        
+
         def on_description_change(change):
             checkpoints[index]['description'] = change['new']
-        
+
         def on_verification_change(change):
             checkpoints[index]['verification'] = change['new']
-        
+
         def add_criterion(b):
             checkpoints[index]['criteria'].append("")
             update_checkpoint_widget(index)
-        
+
         def remove_checkpoint(b):
             checkpoints.pop(index)
             update_all_checkpoints()
-        
+
         # Header with checkbox and delete button
         header = widgets.HBox([
             widgets.HTML(f'<h3 style="margin: 0;">Checkpoint {index + 1}</h3>'),
@@ -1124,37 +1124,37 @@ def create_checkpoint_editor(checkpoints_model: Checkpoints):
                 layout=widgets.Layout(margin='0 0 0 20px')
             )
         ])
-        
+
         # Description
         description = widgets.Textarea(
             value=checkpoint['description'],
             description='Description:',
             layout=widgets.Layout(width='95%', height='60px')
         )
-        
+
         # Criteria
         criteria_label = widgets.HTML('<b>Criteria:</b>')
         criteria_container = widgets.VBox([
             create_criterion_widget(index, criterion, i)
             for i, criterion in enumerate(checkpoint['criteria'])
         ])
-        
+
         # Add criterion button
         add_criterion_btn = widgets.Button(
             description='Add criterion',
             button_style='success',
             layout=widgets.Layout(margin='10px 0')
         )
-        
+
         # Verification
         verification = widgets.Textarea(
             value=checkpoint['verification'],
             description='Verification:',
             layout=widgets.Layout(width='95%', height='60px', margin='10px 0')
         )
-        
+
         separator = widgets.HTML('<hr style="margin: 20px 0;">')
-        
+
         # Combine all elements
         checkpoint_widget = widgets.VBox([
             header,
@@ -1165,22 +1165,22 @@ def create_checkpoint_editor(checkpoints_model: Checkpoints):
             verification,
             separator
         ])
-        
+
         # Add observers and handlers
         header.children[1].observe(on_accept_change, names='value')
         header.children[2].on_click(remove_checkpoint)
         description.observe(on_description_change, names='value')
         verification.observe(on_verification_change, names='value')
         add_criterion_btn.on_click(add_criterion)
-        
+
         return checkpoint_widget
-    
+
     def update_checkpoint_widget(index: int):
         """Updates a single checkpoint widget"""
         if 0 <= index < len(checkpoints):
             checkpoints_widgets[index] = create_checkpoint_widget(checkpoints[index], index)
             update_main_container()
-    
+
     def update_all_checkpoints():
         """Updates all checkpoint widgets"""
         nonlocal checkpoints_widgets
@@ -1189,7 +1189,7 @@ def create_checkpoint_editor(checkpoints_model: Checkpoints):
             for i, checkpoint in enumerate(checkpoints)
         ]
         update_main_container()
-    
+
     def add_new_checkpoint(b):
         """Adds a new checkpoint"""
         checkpoints.append({
@@ -1198,20 +1198,20 @@ def create_checkpoint_editor(checkpoints_model: Checkpoints):
             'verification': ''
         })
         update_all_checkpoints()
-    
+
     def get_pydantic_model() -> Checkpoints:
         """Converts the current editor state back to a Pydantic model"""
         return Checkpoints(checkpoints=[
             LearningCheckpoint(**checkpoint)
             for checkpoint in checkpoints
         ])
-    
+
     # Create initial checkpoint widgets
     checkpoints_widgets = [
         create_checkpoint_widget(checkpoint, i)
         for i, checkpoint in enumerate(checkpoints)
     ]
-    
+
     # Add new checkpoint button
     add_checkpoint_btn = widgets.Button(
         description='Add checkpoint',
@@ -1219,7 +1219,7 @@ def create_checkpoint_editor(checkpoints_model: Checkpoints):
         layout=widgets.Layout(margin='20px 0')
     )
     add_checkpoint_btn.on_click(add_new_checkpoint)
-    
+
     # Main container
     main_container = widgets.VBox(
         checkpoints_widgets + [add_checkpoint_btn],
@@ -1229,14 +1229,14 @@ def create_checkpoint_editor(checkpoints_model: Checkpoints):
             border_radius='5px'
         )
     )
-    
+
     def update_main_container():
         """Updates the main container"""
         main_container.children = tuple(checkpoints_widgets + [add_checkpoint_btn])
-    
+
     # Add method to container to retrieve data later
     main_container.get_model = get_pydantic_model
-    
+
     return main_container
 ```
 
@@ -1255,7 +1255,7 @@ VBox(children=(VBox(children=(HBox(children=(HTML(value='<h3 style="margin: 0;">
 
 ## Widget preview - Human in the loop checkpoints modifications
 
-![Chiron Widget](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/all_agents_tutorials/../images/chiron_widget.png)
+![Chiron Widget](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/images/chiron_widget.png)
 
 ## Upade state with adjusted checkpoints
 
@@ -1316,7 +1316,7 @@ graph.update_state(thread, {"current_answer": answer_question}, as_node="user_an
 ```python
 for event in graph.stream(None, thread, stream_mode="values"):
     print(graph.get_state(thread).next)
-    
+
 print_verification_results(event)
 print_teaching_results(event)
 ```
@@ -1328,7 +1328,7 @@ print_teaching_results(event)
 ('user_answer',)
 
 ==================================================
-              📊 VERIFICATION RESULTS              
+              📊 VERIFICATION RESULTS
 ==================================================
 
 📈 Understanding Level: [██████████████████░░] 90.0%
@@ -1347,7 +1347,7 @@ False
 --------------------------------------------------
 ```
 
-## Answer second question 
+## Answer second question
 
 As we can see, we have additional context from the Tavily search, which we did not add at the initial context
 
@@ -1394,7 +1394,7 @@ graph.update_state(thread, {"current_answer": answer_question}, as_node="user_an
 ```python
 for event in graph.stream(None, thread, stream_mode="values"):
     print(graph.get_state(thread).next)
-    
+
 print_verification_results(event)
 print_teaching_results(event)
 ```
@@ -1405,7 +1405,7 @@ print_teaching_results(event)
 ()
 
 ==================================================
-              📊 VERIFICATION RESULTS              
+              📊 VERIFICATION RESULTS
 ==================================================
 
 📈 Understanding Level: [░░░░░░░░░░░░░░░░░░░░] 0.0%
@@ -1426,7 +1426,7 @@ False
 
 
 ======================================================================
-                    🎓 FEYNMAN TEACHING EXPLANATION                    
+                    🎓 FEYNMAN TEACHING EXPLANATION
 ======================================================================
 
 📚 SIMPLIFIED EXPLANATION:

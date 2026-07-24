@@ -34,7 +34,7 @@ In the realm of AI applications, managing state and flow in multi-step processes
 
 Our Travel Planner follows a straightforward, three-step process:
 
-1. **City Input**: 
+1. **City Input**:
    - The application prompts the user to enter the city they want to visit.
    - This information is stored in the state.
 
@@ -181,7 +181,7 @@ def run_travel_planner(user_request: str):
         "interests": [],
         "itinerary": "",
     }
-    
+
     for output in app.stream(state):
         pass  # The nodes themselves now handle all printing
 ```

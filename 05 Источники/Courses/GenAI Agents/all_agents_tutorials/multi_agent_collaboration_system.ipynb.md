@@ -77,14 +77,14 @@ class Agent:
         messages = [
             SystemMessage(content=f"You are {self.name}, a {self.role}. Your skills include: {', '.join(self.skills)}. Respond to the task based on your role and skills.")
         ]
-        
+
         if context:
             for msg in context:
                 if msg['role'] == 'human':
                     messages.append(HumanMessage(content=msg['content']))
                 elif msg['role'] == 'ai':
                     messages.append(AIMessage(content=msg['content']))
-        
+
         messages.append(HumanMessage(content=task))
         response = self.llm.invoke(messages)
         return response.content
@@ -175,10 +175,10 @@ class HistoryDataCollaborationSystem:
 
     def solve(self, task: str, timeout: int = 300) -> str:
         print(f"\n👥 Starting collaboration to solve: {task}\n")
-        
+
         start_time = time.time()
         context = []
-        
+
         steps = [
             (research_historical_context, self.history_agent),
             (identify_data_needs, self.data_agent),
@@ -186,7 +186,7 @@ class HistoryDataCollaborationSystem:
             (analyze_data, self.data_agent),
             (synthesize_final_answer, self.history_agent)
         ]
-        
+
         for step_func, agent in steps:
             if time.time() - start_time > timeout:
                 return "Operation timed out. The process took too long to complete."
@@ -197,7 +197,7 @@ class HistoryDataCollaborationSystem:
                 context = result
             except Exception as e:
                 return f"Error during collaboration: {str(e)}"
-        
+
         print("\n✅ Collaboration complete. Final answer synthesized.\n")
         return context[-1]["content"]
 ```

@@ -19,6 +19,17 @@ microbatch, $H$ — hidden width, $I$ — FFN width, $L$ — слои, $V$ — v
 $n_h,n_{kv}$ — query- и KV-heads, $d$ — head width, $E$ — experts, $k$ —
 top-$k$. Один BF16-элемент занимает $b=2$ bytes.
 
+## Полная лекция, notebook и главы справочника
+
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week06_dl_arithmetic/lecture.pdf|EDLS Week 6 — полная лекция, 146 слайдов]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week06_dl_arithmetic/seminar/practice.ipynb|EDLS Week 6 — seminar notebook]]: profiling, fusion и память на исполняемых примерах.
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week06_dl_arithmetic/homework/README|EDLS Week 6 — homework]]: исходное задание курса.
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/nn_computation|Harvard CS249r — Neural Computation]] и [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/model_compression|Model Compression]].
+
+EDLS задаёт порядок расчёта ресурсов; Harvard даёт более широкий системный
+контекст. Формулы ниже — рабочая ведомость, по которой можно проверить
+конкретную конфигурацию Transformer или MoE, а не замена полной лекции.
+
 ## Нулевая стадия: данные тоже входят в step time
 
 EDLS начинает не с GEMM, а с простоя: CPU читает и готовит batch, пока дорогой

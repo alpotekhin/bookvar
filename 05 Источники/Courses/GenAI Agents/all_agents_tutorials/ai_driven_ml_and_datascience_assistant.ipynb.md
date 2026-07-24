@@ -93,33 +93,33 @@ df.sample(3)
 
 ```text
                                           BROKERTITLE            TYPE   PRICE  \
-89    Brokered by Engel & Volkers Brownstone Brooklyn  Condo for sale  215000   
-674                         Brokered by Corcoran SoHo  Co-op for sale  299000   
-4641                  Brokered by Schmidt Realty Inc.      Contingent  669000   
+89    Brokered by Engel & Volkers Brownstone Brooklyn  Condo for sale  215000
+674                         Brokered by Corcoran SoHo  Co-op for sale  299000
+4641                  Brokered by Schmidt Realty Inc.      Contingent  669000
 
       BEDS  BATH  PROPERTYSQFT                 ADDRESS  \
-89       1   1.0         625.0  195 Prince St Unit 1LL   
-674      3   1.0         640.0    410 E 57th St Apt 8B   
-4641     3   2.0        2115.0            323 Getz Ave   
+89       1   1.0         625.0  195 Prince St Unit 1LL
+674      3   1.0         640.0    410 E 57th St Apt 8B
+4641     3   2.0        2115.0            323 Getz Ave
 
                         STATE                              MAIN_ADDRESS  \
-89         New York, NY 10012  195 Prince St Unit 1LLNew York, NY 10012   
-674        New York, NY 10022    410 E 57th St Apt 8BNew York, NY 10022   
-4641  Staten Island, NY 10312       323 Getz AveStaten Island, NY 10312   
+89         New York, NY 10012  195 Prince St Unit 1LLNew York, NY 10012
+674        New York, NY 10022    410 E 57th St Apt 8BNew York, NY 10022
+4641  Staten Island, NY 10312       323 Getz AveStaten Island, NY 10312
 
      ADMINISTRATIVE_AREA_LEVEL_2         LOCALITY      SUBLOCALITY  \
-89                      New York  New York County         New York   
-674                     New York  New York County         New York   
-4641               United States         New York  Richmond County   
+89                      New York  New York County         New York
+674                     New York  New York County         New York
+4641               United States         New York  Richmond County
 
         STREET_NAME    LONG_NAME                           FORMATTED_ADDRESS  \
-89        Manhattan          195  195 Prince St #1r, New York, NY 10012, USA   
-674       Manhattan          410  410 E 57th St #8b, New York, NY 10022, USA   
-4641  Staten Island  Getz Avenue  323 Getz Ave, Staten Island, NY 10312, USA   
+89        Manhattan          195  195 Prince St #1r, New York, NY 10012, USA
+674       Manhattan          410  410 E 57th St #8b, New York, NY 10022, USA
+4641  Staten Island  Getz Avenue  323 Getz Ave, Staten Island, NY 10312, USA
 
-       LATITUDE  LONGITUDE  
-89    40.726773 -74.002538  
-674   40.757832 -73.962456  
+       LATITUDE  LONGITUDE
+89    40.726773 -74.002538
+674   40.757832 -73.962456
 4641  40.551553 -74.164629
 ```
 
@@ -976,7 +976,7 @@ DataFrame saved successfully as properties_with_price_per_sqft.csv
 
 - The visualization for the price of houses has been generated.
 - Key statistics indicate a **highly skewed distribution** with a skewness of **66.8** and a kurtosis of **4566.85**.
-- A normality test (Shapiro-Wilk) resulted in a **p-value < 0.05**, confirming that the price distribution is not normal. 
+- A normality test (Shapiro-Wilk) resulted in a **p-value < 0.05**, confirming that the price distribution is not normal.
 
 If you need further analysis or specific insights, please let me know!
 
@@ -1035,7 +1035,7 @@ Example questions:
 
 User: What's the overall structure of the dataset?
 
-Assistant: 
+Assistant:
 The dataset has the following structure:
 
 - **Total Records**: 4,801

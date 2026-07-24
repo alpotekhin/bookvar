@@ -11,6 +11,16 @@ source_language: mixed
 GPU быстр, когда много одинаковой работы можно запланировать одновременно, а
 данные переиспользуются рядом с ALU.
 
+## Полный материал и лабораторная работа
+
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/hw_acceleration|Harvard CS249r — Hardware Acceleration]]: SIMD/SIMT, устройство GPU, memory hierarchy и специализированные ускорители.
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week01_intro/lecture.pdf|EDLS Week 1 — lecture]]: оригинальные слайды курса.
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week01_intro/seminar.ipynb|EDLS Week 1 — seminar notebook]]: исполняемые измерения CPU/GPU, матричного умножения и памяти.
+
+Сначала прочитайте Harvard до раздела *Memory hierarchy*, затем пройдите
+notebook EDLS. Следующие параграфы дают словарь, с которым проще разбирать
+timeline и результаты измерений.
+
 ## От grid до SM: исполнение и планирование
 
 Host ставит kernel launch в очередь device. Grid делится на thread blocks; block
@@ -27,32 +37,19 @@ SIMT исполняет одну инструкцию для активных la
 проходит пути с масками последовательно. Tail tiles и число blocks, не кратное
 числу SM, создают tile/wave quantization.
 
-## Оригинальная схема: где живут work и bytes
-
-```text
-HOST RAM ── PCIe/NVLink ──► DEVICE HBM ─► L2 (общий)
-                                   │
-                    ┌──────────────┴──────────────┐
-                    ▼                             ▼
-                  SM 0                          SM N
-          warp schedulers                warp schedulers
-          registers/thread               registers/thread
-          shared memory/block            shared memory/block
-          L1/cache                       L1/cache
-                    └── Tensor/Core pipelines ──┘
-```
-
-*Оригинальная учебная схема Bookvar; синтез EDLS Week 1, PDF pp. 6–10, и
-Harvard CS249r Hardware Acceleration § “Evolution from SIMD to SIMT
-architectures”, locator
-`sec-hardware-acceleration-evolution-simd-simt-architectures-e1fd`, и
-§ “Memory hierarchy”, locator `sec-hardware-acceleration-memory-hierarchy-1839`.
-Не является копией исходной фигуры.*
+## Где исполняется работа и где находятся данные
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/gpu-memory-hierarchy.svg]]
 
 *Оригинальная иллюстрация Harvard CS249r Vol. II, Performance Engineering,
 § “Memory Hierarchy”, `gpu-memory-hierarchy.svg`, CC BY-NC-SA 4.0.*
+
+Схему следует читать снизу вверх. Registers принадлежат отдельному thread,
+shared memory — thread block, L2 и HBM разделяются большим числом SM. Чем дальше
+от ALU находится уровень, тем больше обычно его ёмкость и тем дороже повторное
+получение данных. Поэтому tile — не декоративная оптимизация: он превращает
+несколько обращений к HBM в одну загрузку и серию обращений к более близкой
+памяти.
 
 ## Memory access: coalescing, banks, spills
 

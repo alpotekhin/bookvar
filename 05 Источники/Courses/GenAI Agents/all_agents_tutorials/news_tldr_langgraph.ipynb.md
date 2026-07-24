@@ -50,7 +50,7 @@ This news TL;DR agent highlights the utility of coordinating successive LLM gene
 achieve a higher level goal.
 
 Although the current implementation only retrieves bulleted summaries, it could be elaborated to start
-a dialogue with the user that could allow them to ask questions about the article and get 
+a dialogue with the user that could allow them to ask questions about the article and get
 more information or to collectively generate a coherent opinion.
 
 ## Setup and Imports
@@ -229,7 +229,7 @@ def generate_newsapi_params(state: GraphState) -> GraphState:
 
     These searches have already been made. Loosen the search terms to get more results.
     {past_searches}
-    
+
     Following these formatting instructions:
     {format_instructions}
 
@@ -268,7 +268,7 @@ def retrieve_articles_metadata(state: GraphState) -> GraphState:
     try:
         # create a NewsApiClient object
         newsapi = NewsApiClient(api_key=os.getenv('NEWSAPI_KEY'))
-        
+
         # retreive the metadata of the new articles
         articles = newsapi.get_everything(**newsapi_params)
 
@@ -314,7 +314,7 @@ def retrieve_articles_text(state: GraphState) -> GraphState:
 
         # use beautiful soup to extract the article content
         response = requests.get(url, headers=headers)
-        
+
         # check if the request was successful
         if response.status_code == 200:
             # parse the HTML content
@@ -340,7 +340,7 @@ def select_top_urls(state: GraphState) -> GraphState:
     """Based on the article synoses, choose the top-n articles to summarize."""
     news_query = state["news_query"]
     num_articles_tldr = state["num_articles_tldr"]
-    
+
     # load all processed articles with full text but no summaries
     potential_articles = state["potential_articles"]
 
@@ -385,7 +385,7 @@ async def summarize_articles_parallel(state: GraphState) -> GraphState:
     prompt = """
     Create a * bulleted summarizing tldr for the article:
     {text}
-      
+
     Be sure to follow the following format exaxtly with nothing else:
     {title}
     {url}
@@ -532,7 +532,7 @@ async def run_workflow(query: str, num_searches_remaining: int = 10, num_article
     }
     try:
         result = await app.ainvoke(initial_state)
-        
+
         return result["formatted_results"]
     except Exception as e:
         print(f"An error occurred: {str(e)}")
@@ -552,30 +552,30 @@ print(await run_workflow(query, num_articles_tldr=3))
 Here are the top 2 articles based on search terms:
 genai news
 
-NIQ Releases 2025 CMO Outlook Report  
-https://financialpost.com/pmn/business-wire-news-releases-pmn/niq-releases-2025-cmo-outlook-report  
-* NIQ's annual CMO Outlook report highlights evolving priorities for senior marketing leaders.  
-* The report emphasizes the role of AI, marketing measurement tools, and collaboration in driving growth for 2025.  
-* Economic challenges, such as rising costs and potential downturns, are affecting consumer spending patterns.  
-* Despite economic headwinds, 78% of marketers remain optimistic about their future position.  
-* Over half (56%) of marketers still view marketing as key for immediate sales, shifting focus towards long-term brand building.  
-* AI is increasingly being integrated into marketing strategies, with 72% utilizing it for content generation.  
-* Data-driven insights are crucial, with 81% of marketers relying on them for performance monitoring.  
-* The CMO Outlook Index shows slight improvement in marketing health, particularly in Europe.  
-* Marketers plan to enhance collaboration across departments to maximize AI potential.  
+NIQ Releases 2025 CMO Outlook Report
+https://financialpost.com/pmn/business-wire-news-releases-pmn/niq-releases-2025-cmo-outlook-report
+* NIQ's annual CMO Outlook report highlights evolving priorities for senior marketing leaders.
+* The report emphasizes the role of AI, marketing measurement tools, and collaboration in driving growth for 2025.
+* Economic challenges, such as rising costs and potential downturns, are affecting consumer spending patterns.
+* Despite economic headwinds, 78% of marketers remain optimistic about their future position.
+* Over half (56%) of marketers still view marketing as key for immediate sales, shifting focus towards long-term brand building.
+* AI is increasingly being integrated into marketing strategies, with 72% utilizing it for content generation.
+* Data-driven insights are crucial, with 81% of marketers relying on them for performance monitoring.
+* The CMO Outlook Index shows slight improvement in marketing health, particularly in Europe.
+* Marketers plan to enhance collaboration across departments to maximize AI potential.
 * The report is based on a survey of nearly 600 senior marketing leaders from 18 countries.
 
-FPT Leverages AI to Optimize Legacy Systems for Enterprises  
-https://financialpost.com/pmn/business-wire-news-releases-pmn/fpt-leverages-ai-to-optimize-legacy-systems-for-enterprises  
-* FPT Corporation emphasizes the need for legacy system modernization at the FPT Techday 2024 event.  
-* Many of FPT's over 1,000 global clients still rely on outdated legacy systems that require significant maintenance.  
-* These legacy systems are costly, prone to errors, and hinder business agility in a rapidly changing tech landscape.  
-* FPT offers end-to-end services for legacy system management, including maintenance and cloud services.  
-* AI is central to FPT's strategy for modernizing legacy systems, enhancing efficiency and accuracy.  
-* The company utilizes tools like EMT, xMainframe, and CodeVista to facilitate modernization and onboarding.  
-* xMainframe reduces project onboarding time by 30% while maintaining 90% accuracy.  
-* CodeVista has generated 1.5 million lines of code, saving approximately 6,000 man-months in development time.  
-* FPT aims to help businesses navigate legacy system challenges and align with market demands for future success.  
+FPT Leverages AI to Optimize Legacy Systems for Enterprises
+https://financialpost.com/pmn/business-wire-news-releases-pmn/fpt-leverages-ai-to-optimize-legacy-systems-for-enterprises
+* FPT Corporation emphasizes the need for legacy system modernization at the FPT Techday 2024 event.
+* Many of FPT's over 1,000 global clients still rely on outdated legacy systems that require significant maintenance.
+* These legacy systems are costly, prone to errors, and hinder business agility in a rapidly changing tech landscape.
+* FPT offers end-to-end services for legacy system management, including maintenance and cloud services.
+* AI is central to FPT's strategy for modernizing legacy systems, enhancing efficiency and accuracy.
+* The company utilizes tools like EMT, xMainframe, and CodeVista to facilitate modernization and onboarding.
+* xMainframe reduces project onboarding time by 30% while maintaining 90% accuracy.
+* CodeVista has generated 1.5 million lines of code, saving approximately 6,000 man-months in development time.
+* FPT aims to help businesses navigate legacy system challenges and align with market demands for future success.
 * FPT Corporation is a leading technology provider based in Vietnam, with a focus on sustainable growth and innovative solutions.
 ```
 

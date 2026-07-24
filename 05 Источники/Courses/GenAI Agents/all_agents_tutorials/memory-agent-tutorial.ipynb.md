@@ -36,7 +36,7 @@ The agent will leverage all three memory types to create a system that becomes m
 
 <div style="text-align: center;">
 
-<img src="https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/all_agents_tutorials/../images/memory-enhanced-email-agent.svg" alt="essay grading system langgraph" style="width:80%; height:auto;">
+<img src="https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/images/memory-enhanced-email-agent.svg" alt="essay grading system langgraph" style="width:80%; height:auto;">
 </div>
 
 ### 1. Setting the Stage: Imports and Setup
@@ -167,10 +167,10 @@ from langgraph.prebuilt import create_react_agent
 def create_agent_prompt(state, config, store):
     messages = state['messages']
     user_id = config["configurable"]["langgraph_user_id"]
-    
+
     # Get the current response prompt from procedural memory
     system_prompt = store.get(("email_assistant", user_id, "prompts"), "response_prompt").value
-    
+
     return [{"role": "system", "content": system_prompt}] + messages
 
 # Try using the current API signature
@@ -213,7 +213,7 @@ agent = workflow.compile(store=store)
 ```python
 from langchain_core.runnables.graph import MermaidDrawMethod
 from IPython.display import display, Image
- 
+
 display(
     Image(
         agent.get_graph().draw_mermaid_png(
@@ -264,15 +264,15 @@ store.put(("email_assistant", "test_user", "prompts"), "response_prompt", initia
 def triage_email_with_procedural_memory(state: State, config: dict, store: InMemoryStore) -> dict:
     email = state["email_input"]
     user_id = config["configurable"]["langgraph_user_id"]
-    
+
     # Retrieve the current triage prompt (procedural memory)
     current_prompt_template = store.get(("email_assistant", user_id, "prompts"), "triage_prompt").value
-    
+
     # Retrieve relevant examples from memory (episodic memory)
     namespace = ("email_assistant", user_id, "examples")
     examples = store.search(namespace, query=str(email))
     formatted_examples = format_few_shot_examples(examples)
-    
+
     # Format the prompt
     prompt = PromptTemplate.from_template(current_prompt_template).format(examples=formatted_examples, **email)
     messages = [HumanMessage(content=prompt)]
@@ -286,11 +286,11 @@ from langmem import create_multi_prompt_optimizer
 def optimize_prompts(feedback: str, config: dict, store: InMemoryStore):
     """Improve our prompts based on feedback."""
     user_id = config["configurable"]["langgraph_user_id"]
-    
+
     # Get current prompts
     triage_prompt = store.get(("email_assistant", user_id, "prompts"), "triage_prompt").value
     response_prompt = store.get(("email_assistant", user_id, "prompts"), "response_prompt").value
-    
+
     # Create a more relevant test example based on our actual email
     sample_email = {
         "author": "Alice Smith <alice.smith@company.com>",
@@ -298,47 +298,47 @@ def optimize_prompts(feedback: str, config: dict, store: InMemoryStore):
         "subject": "Quick question about API documentation",
         "email_thread": "Hi John, I was reviewing the API documentation and noticed a few endpoints are missing. Could you help? Thanks, Alice",
     }
-    
+
     # Create the optimizer
     optimizer = create_multi_prompt_optimizer(llm)
-    
+
     # Create a more relevant conversation trajectory with feedback
     conversation = [
         {"role": "system", "content": response_prompt},
         {"role": "user", "content": f"I received this email: {sample_email}"},
         {"role": "assistant", "content": "How can I assist you today?"}
     ]
-    
+
     # Format prompts
     prompts = [
         {"name": "triage", "prompt": triage_prompt},
         {"name": "response", "prompt": response_prompt}
     ]
-    
+
     try:
-        # More relevant trajectories 
+        # More relevant trajectories
         trajectories = [(conversation, {"feedback": feedback})]
         result = optimizer.invoke({"trajectories": trajectories, "prompts": prompts})
-        
+
         # Extract the improved prompts
         improved_triage_prompt = next(p["prompt"] for p in result if p["name"] == "triage")
         improved_response_prompt = next(p["prompt"] for p in result if p["name"] == "response")
-        
+
     except Exception as e:
         print(f"API error: {e}")
         print("Using manual prompt improvement as fallback")
-        
+
         # More specific manual improvements
         improved_triage_prompt = triage_prompt + "\n\nNote: Emails about API documentation or missing endpoints are high priority and should ALWAYS be classified as 'respond'."
         improved_response_prompt = response_prompt + "\n\nWhen responding to emails about documentation or API issues, acknowledge the specific issue mentioned and offer specific assistance rather than generic responses."
-    
+
     # Store the improved prompts
     store.put(("email_assistant", user_id, "prompts"), "triage_prompt", improved_triage_prompt)
     store.put(("email_assistant", user_id, "prompts"), "response_prompt", improved_response_prompt)
-    
+
     print(f"Triage prompt improved: {improved_triage_prompt[:100]}...")
     print(f"Response prompt improved: {improved_response_prompt[:100]}...")
-    
+
     return "Prompts improved based on feedback!"
 ```
 
@@ -399,7 +399,7 @@ def create_email_agent(store):
     # Define the workflow
     workflow = StateGraph(State)
     workflow.add_node("triage", lambda state, config: triage_email_with_procedural_memory(state, config, store))
-    
+
     # Create a fresh response agent that will use the latest prompts
     response_agent = create_react_agent(
         tools=tools,
@@ -407,9 +407,9 @@ def create_email_agent(store):
         store=store,
         model=llm
     )
-    
+
     workflow.add_node("response_agent", response_agent)
-    
+
     # The routing logic remains the same
     workflow.add_edge(START, "triage")
     workflow.add_conditional_edges("triage", route_based_on_triage,
@@ -417,7 +417,7 @@ def create_email_agent(store):
                                     "response_agent": "response_agent",
                                     END: END
                                 })
-    
+
     # Compile and return the graph
     return workflow.compile(store=store)
 ```
@@ -437,7 +437,7 @@ api_doc_example = {
     "email": {
         "author": "Developer <dev@company.com>",
         "to": "John Doe <john.doe@company.com>",
-        "subject": "API Documentation Issue", 
+        "subject": "API Documentation Issue",
         "email_thread": "Found missing endpoints in the API docs. Need urgent update.",
     },
     "label": "respond",
@@ -446,10 +446,10 @@ store.put(("email_assistant", "test_user", "examples"), "api_doc_example", api_d
 print("Added API documentation example to episodic memory")
 
 # Provide feedback
-feedback = """The agent didn't properly recognize that emails about API documentation issues 
-are high priority and require immediate attention. When an email mentions 
+feedback = """The agent didn't properly recognize that emails about API documentation issues
+are high priority and require immediate attention. When an email mentions
 'API documentation', it should always be classified as 'respond' with a helpful tone.
-Also, instead of just responding with 'How can I assist you today?', the agent should 
+Also, instead of just responding with 'How can I assist you today?', the agent should
 acknowledge the specific documentation issue mentioned and offer assistance."""
 
 # Optimize prompts

@@ -12,6 +12,16 @@ Benchmarking говорит, что программа медленная; profi
 исчезает время и память. Начинают с самого дешёвого уровня и углубляются только
 после локализации bottleneck.
 
+## Полный диагностический маршрут
+
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/performance_engineering|Harvard CS249r — Performance Engineering]]: диагностическое дерево, roofline и анализ bottleneck.
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week02_fast_pipelines/seminar/practice.ipynb|EDLS Week 2 — profiler practice]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week06_dl_arithmetic/seminar/practice.ipynb|EDLS Week 6 — arithmetic and profiling practice]].
+
+Notebook следует читать вместе с trace: название operator само по себе не
+объясняет задержку. Сначала находят пустоты и зависимости на timeline, затем
+переходят к operator- и kernel-level counters.
+
 ## Иерархия инструментов
 
 | Вопрос | Инструмент |

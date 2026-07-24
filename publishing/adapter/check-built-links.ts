@@ -31,6 +31,15 @@ function attributeValues(html: string, name: string): string[] {
   return values;
 }
 
+function withoutNonNavigableMarkup(html: string): string {
+  // Syntax highlighters preserve example HTML attributes inside <pre>/<code>.
+  // Those strings are source code, not links in the generated document.
+  return html.replace(
+    /<(?:pre|code|script|style)\b[^>]*>[\s\S]*?<\/(?:pre|code|script|style)>/gi,
+    ''
+  );
+}
+
 function normalizedRoute(pathname: string): string {
   if (pathname.endsWith('/')) return pathname;
   return `${pathname}/`;
@@ -60,7 +69,8 @@ export async function findBrokenBuiltLinks(
   const errors: string[] = [];
 
   for (const page of pages) {
-    for (const href of [...attributeValues(page.html, 'href'), ...attributeValues(page.html, 'src')]) {
+    const navigableHtml = withoutNonNavigableMarkup(page.html);
+    for (const href of [...attributeValues(navigableHtml, 'href'), ...attributeValues(navigableHtml, 'src')]) {
       if (/^(?:https?:|mailto:|tel:|javascript:)/i.test(href)) continue;
       const url = new URL(href, `https://handbook.invalid${page.route}`);
       const pathname = withoutPublicationBase(url.pathname, publicationBasePath);

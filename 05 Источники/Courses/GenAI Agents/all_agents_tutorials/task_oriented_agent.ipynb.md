@@ -199,7 +199,7 @@ def run_agent_with_query(agent_executor, query):
     """
     # Invoke the agent_executor with the query as input
     result = agent_executor.invoke({"input": query})
-    
+
     # Extract and return the 'output' field from the result
     return result['output']
 ```
@@ -208,8 +208,8 @@ def run_agent_with_query(agent_executor, query):
 
 ```python
 # Define the input query
-query = """The quick brown fox jumps over the lazy dog. This sentence is often used as a pangram in typography 
-to display font examples, as it contains every letter of the English alphabet. However, it's not the only pangram 
+query = """The quick brown fox jumps over the lazy dog. This sentence is often used as a pangram in typography
+to display font examples, as it contains every letter of the English alphabet. However, it's not the only pangram
 in existence. Another example is 'Pack my box with five dozen liquor jugs', which is shorter but less commonly used."""
 
 # Run the agent with the query
@@ -251,8 +251,8 @@ Translation (Spanish): La rápida zorra marrón salta sobre el perro perezoso. E
 [1m> Finished chain.[0m
 
 Query:
-The quick brown fox jumps over the lazy dog. This sentence is often used as a pangram in typography 
-to display font examples, as it contains every letter of the English alphabet. However, it's not the only pangram 
+The quick brown fox jumps over the lazy dog. This sentence is often used as a pangram in typography
+to display font examples, as it contains every letter of the English alphabet. However, it's not the only pangram
 in existence. Another example is 'Pack my box with five dozen liquor jugs', which is shorter but less commonly used.
 
 Result:

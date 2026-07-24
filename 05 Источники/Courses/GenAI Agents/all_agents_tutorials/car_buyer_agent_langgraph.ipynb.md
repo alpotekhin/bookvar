@@ -49,7 +49,7 @@ The agent follows a structured workflow:
 
 Below is the diagram of the agent's architecture:
 
-![Smart Product Buyer Agent Architecture](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/all_agents_tutorials/../images/car_buyer_agent_langgraph.png)
+![Smart Product Buyer Agent Architecture](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/images/car_buyer_agent_langgraph.png)
 
 ---
 
@@ -195,14 +195,14 @@ The modular design allows for easy addition of new platforms by extending the `W
 async def scroll_to_bottom(page, scroll_delay=0.1):
     """
     Scroll to the bottom of the page iteratively, with delays to ensure dynamic content is fully loaded.
-    
+
     Args:
         page: The Playwright page instance.
         scroll_delay: Delay in seconds between scrolls to allow content loading.
     """
-    
+
     print("Scrolling through the page...")
-    
+
     scroll_size = 2160
 
     next_scroll = scroll_size
@@ -214,7 +214,7 @@ async def scroll_to_bottom(page, scroll_delay=0.1):
 
         # Wait for content to load
         await asyncio.sleep(scroll_delay)
-        
+
     print("Finished scrolling through the page.")
 
 async def block_unnecessary_resources(route):
@@ -222,11 +222,11 @@ async def block_unnecessary_resources(route):
         await route.abort()
     else:
         await route.continue_()
-        
+
 class WebsiteInterface(ABC):
     def __init__(self):
         self.base_url = ""
-        
+
     @abstractmethod
     async def crawl(self) -> List[Dict[str, str]​]:
         """
@@ -255,10 +255,10 @@ class AutotraderInterface(WebsiteInterface):
     def __init__(self):
         self.base_url = "https://www.autotrader.com/cars-for-sale/all-cars"
         # https://www.autotrader.com/cars-for-sale/all-cars/floral-park-ny?endYear=2022&makeCode=BMW&makeCode=FORD&newSearch=true&startYear=2012&zip=11001
-        
+
     async def crawl(self) -> List[Dict[str, str]​]:
         listings = []
-        
+
         url = self.url
 
         playwright = await async_playwright().start()
@@ -273,7 +273,7 @@ class AutotraderInterface(WebsiteInterface):
                                                             "--disable-gpu"
                                                     ]
                                                     )
-        
+
         context = await browser.new_context(
             user_agent='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36',
             viewport={"width": 1920, "height": 1080},
@@ -287,20 +287,20 @@ class AutotraderInterface(WebsiteInterface):
         print("Opening browser page")
 
         page = await context.new_page()
-        
+
         await page.route("**/*", block_unnecessary_resources)
 
         print("Loading page")
-        
+
         await page.goto(url, wait_until="domcontentloaded")
 
         print("Page partially loaded. Starting to scroll.")
-        
+
         # Scroll to the bottom of the page
         await scroll_to_bottom(page)
-        
+
         page_content = await page.content()
-        
+
         # Parse HTML using lxml
         tree = html.fromstring(page_content)
 
@@ -319,20 +319,20 @@ class AutotraderInterface(WebsiteInterface):
             car_data['phone'] = listing.xpath('.//span[@data-cmp="phoneNumber"]/text()')
             car_data['url'] = listing.xpath('.//a[@data-cmp="link"]/@href')
             car_data['image'] = listing.xpath('.//img[@data-cmp="inventoryImage"]/@src')
-            
+
             # Clean up extracted data
             car_data = {key: (val[0].strip() if val else None) for key, val in car_data.items()}
-            
+
             car_data['url'] = car_data['url'].split('?')[0]
-            
+
             # Add domain to the URL. Extract domain from the base URL without the path
             car_data['url'] = re.sub(r'^(https?://[^/]+).*$', r'\1', self.base_url) + car_data['url']
-            
+
             # Set the ID of the listing as the ID of the WebsiteInterface and the car number from URL
             car_data = { "id": f"{self.__class__.__name__}_{car_data['url'].split('/')[-1]}" } | car_data
-            
+
             listings.append(car_data)
-            
+
         if __name__ == "__main__":
             print("Found the following car listings:")
             # Display the extracted data
@@ -342,12 +342,12 @@ class AutotraderInterface(WebsiteInterface):
         print("Found", len(listings), "listings")
 
         await browser.close()
-        
+
         return listings
-    
+
     async def crawl_listing(self, listing_url) -> List[Dict[str, str]​]:
         listing_info = ""
-        
+
         url = listing_url
 
         playwright = await async_playwright().start()
@@ -362,7 +362,7 @@ class AutotraderInterface(WebsiteInterface):
                                                             "--disable-gpu"
                                                     ]
                                                     )
-        
+
         context = await browser.new_context(
             user_agent='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36',
             viewport={"width": 1920, "height": 1080},
@@ -376,11 +376,11 @@ class AutotraderInterface(WebsiteInterface):
         print("Opening browser page")
 
         page = await context.new_page()
-        
+
         await page.route("**/*", block_unnecessary_resources)
 
         print("Loading page")
-        
+
         await page.goto(url, wait_until="domcontentloaded")
 
         print("Page partially loaded. Starting to scroll.")
@@ -399,16 +399,16 @@ class AutotraderInterface(WebsiteInterface):
         # Seller information should already be included in the listing information
         # seller_info = tree.xpath("//div[@id='sellerComments']//text()")
         # listing_info = listing_info + seller_info
-            
+
         if __name__ == "__main__":
             print("Found the following information:")
             # Print the extracted text
             print(listing_info)
 
         await browser.close()
-        
+
         return listing_info
-    
+
     def get_filters_info(self) -> str:
         """
         Return a prompt for the LLM describing the filters and expected output format.
@@ -440,7 +440,7 @@ class AutotraderInterface(WebsiteInterface):
         - transmissionCode: Transmission type (e.g., "AUT" for automatic, "MAN" for manual).
         - vehicleHistoryType: Vehicle history (e.g., "NO_ACCIDENTS", "ONE_OWNER", "CLEAN_TITLE").
         - newSearch: Boolean to indicate a new search (e.g., "true").
-        - sortBy: Sorting option for the results (optional). 
+        - sortBy: Sorting option for the results (optional).
             Options:
             - "relevance" (default): Sort by relevance.
             - "derivedpriceASC": Sort by price, lowest to highest.
@@ -452,7 +452,7 @@ class AutotraderInterface(WebsiteInterface):
             - "mileageDESC": Sort by mileage, highest to lowest.
             - "yearASC": Sort by year, oldest to newest.
             - "yearDESC": Sort by year, newest to oldest.
-        
+
         Special filters:
         - price: Price is embedded in the path of the URL, e.g., "/cars-over-45000" or "/cars-between-10000-and-20000".
 
@@ -462,7 +462,7 @@ class AutotraderInterface(WebsiteInterface):
 
         Based on the user's needs, format the response as only the complete URL (no extra explanations). The URL is an example, don't include filters if they are not needed by the user.
         """
-        
+
     def set_filters_from_llm_response(self, llm_response: str):
         """
         Process the LLM's response and set the URL with the provided parameters.
@@ -519,7 +519,7 @@ try:
   os.environ["OPENAI_API_KEY"] = os.getenv('OPENAI_API_KEY', userdata.get('OPENAI_API_KEY'))
 except:
   os.environ["OPENAI_API_KEY"] = os.getenv('OPENAI_API_KEY')
-  
+
 os.environ["LANGCHAIN_TRACING_V2"] = "false"
 os.environ["LANGCHAIN_ENDPOINT"] = "https://api.smith.langchain.com"
 os.environ["LANGCHAIN_PROJECT"] = "car_buyer_agent"
@@ -619,12 +619,12 @@ USER_NEEDS_GPT = ChatOpenAI(model="gpt-4o-mini", response_format=UserNeeds)
 
 def ask_user_needs(state: State) -> State:
     """Ask user initial questions to define their needs for the car."""
-    messages = state.get("messages", [])    
+    messages = state.get("messages", [])
     if len(messages) == 0:
         system_message = "You are a car buying assistant. Your goal is to help the user find a car that meets their needs. Start by introducing yourself and asking about their requirements, such as intended usage (e.g., commuting, family trips), budget, size preferences, and any specific constraints or features they value. Use their responses to guide them toward the best options."
     else:
         system_message = "Ask the user for any additional information that can help narrow down the search. If he asked any questions before, answer them before asking for more information. When answering, make sure to provide clear and concise information, with relevant examples."
-        
+
     existing_needs = state.get("user_needs", "")
     if existing_needs:
         system_message += f" Here's what we know about the needs of the user so far:\n\n{existing_needs}"
@@ -635,12 +635,12 @@ def ask_user_needs(state: State) -> State:
     response = GPT.invoke(messages).content
     messages += [AIMessage(response)]
     show_assistant_output(f"\033[92m{messages[-1].content}\033[0m", flush=True)
-    
+
     messages += [HumanMessage(get_user_input(response))]
     print(f"\033[94m{messages[-1].content}\033[0m", flush=True)
-    
+
     summarization_messages = messages.copy()
-    
+
     summarization_messages += [
         SystemMessage(
             "Summarize the user's car-buying needs in clear and concise bullet points based on their input and any prior knowledge.\n"
@@ -650,17 +650,17 @@ def ask_user_needs(state: State) -> State:
             "If the user's query is irrelevant to the matter at hand (buying a car), respond 'irrelevant'."
         )
     ]
-    
+
     response = json.loads(USER_NEEDS_GPT.invoke(summarization_messages).content)
 
     state["user_needs"] = response["user_needs"]
-    
+
     messages += [AIMessage("I have summarized your car-buying needs as follows:\n" + state["user_needs"])]
-    
+
     show_assistant_output(f"\033[92m{messages[-1].content}\033[0m")
-    
+
     state["next_node"] = response["next_step"]
-        
+
     print(f"\nNext node: {state['next_node']}", flush=True)
 
     return state
@@ -694,15 +694,15 @@ def build_filters(state: State) -> State:
     """Build and refine search filters based on user needs."""
 
     show_assistant_output("Building filters based on user needs...")
-    
+
     for interface in state["web_interfaces"]:
         filters_info = interface.get_filters_info()
-        
+
         # TODO: Check if this website is useful to the user based on the filters
         # If not continue to the next interface
-        
+
         # If the website is useful, use LLM to setup the filters based on user needs
-        
+
         # Define system instructions with filters information
         system_message = SystemMessage(filters_info + "\n\n" + "User needs:\n" + state["user_needs"])
 
@@ -719,7 +719,7 @@ def build_filters(state: State) -> State:
             show_assistant_output(f"Failed to set filters for {interface.base_url}: {e}")
         except Exception as e:
             show_assistant_output(f"An error occurred while processing filters for {interface.base_url}: {e}")
-    
+
     return
 ```
 
@@ -742,17 +742,17 @@ This asynchronous function retrieves car listings from various web interfaces ba
 ```python
 async def fetch_listings_from_sources(web_interfaces: List[WebsiteInterface]) -> List[Dict[str, str]​]:
     """Simulate retrieval of car listings from Autotrader.com based on filters.
-    
+
     Args:
         filters (dict): Dictionary containing search filters (e.g., budget, fuel type).
-        
+
     Returns:
         list: A list of dictionaries, each representing a car listing.
     """
     listings = []
     for interface in web_interfaces:
         listings += await interface.crawl()
-        
+
     return listings
 ```
 
@@ -797,14 +797,14 @@ def search_listings(state: State) -> State:
 
     async def _search_listings():
         return await fetch_listings_from_sources(state["web_interfaces"])
-    
+
     listings = asyncio.run(_search_listings())
     state["listings"] = listings
-    
+
     show_assistant_output(f"Successfully fetched {len(listings)} listings from the sources.")
-    
+
     AI_message = ""
-    
+
     # Display the first few listings for the user to view
     AI_message += "Here are recent listings that match your requirements:\n"
     for i, listing in enumerate(state["listings"][:5], 1):
@@ -816,15 +816,15 @@ def search_listings(state: State) -> State:
             else:
                 AI_message += f"   {formatted_key}: {value}\n"
         AI_message += "\n"  # Add an extra line for readability
-    
+
     user_prompt = "Would you like to view more details about a specific listing, or refine your search (Write END to finish this conversation) ?"
     AI_message += user_prompt
-        
+
     state["messages"].append(AIMessage(AI_message))
     show_assistant_output(f"\033[92m{state['messages'][-1].content}\033[0m")
     state["messages"].append(HumanMessage(get_user_input(user_prompt)))
     print(f"\033[94m{state['messages'][-1].content}\033[0m")
-       
+
     response = json.loads(CLASSIFIER_GPT.invoke(state["messages"]).content)
 
     if response["action"] == "select_listing":
@@ -838,7 +838,7 @@ def search_listings(state: State) -> State:
         state["next_node"] = "ask_user_needs"
     else:
         state["next_node"] = END
-        
+
     return state
 ```
 
@@ -882,7 +882,7 @@ def fetch_additional_info(state: State) -> State:
         for interface in state["web_interfaces"]:
             if listing["id"].split("_")[0].lower() in interface.__class__.__name__.lower():
                 return await interface.crawl_listing(listing["url"])
-    
+
     info_car_for_sale = asyncio.run(_crawl_car_listing())
 
     # Call the LLM to summarize the information about the car for sale into a concise paragraph
@@ -916,18 +916,18 @@ def fetch_additional_info(state: State) -> State:
         f"Here is additioanl context to help you provide the information:\n\n{context}"
         f"Here are the user needs, give some insights about the car based on the user needs:\n\n{state['user_needs']}"
     )
-    
+
     result = GPT.invoke([prompt])
-    
+
     listing["additional_info"] = result.content
-    
+
     show_assistant_output(f"\033[92mHere is additional information about the model in general, coming from Internet:\n{listing['additional_info']}\n\033[0m")
-    
+
     user_prompt = "Would you like to view more details about another listing, or refine your search (Write END to finish this conversation) ?"
     state["messages"] += [SystemMessage(user_prompt)]
     state["messages"] += [HumanMessage(get_user_input(user_prompt))]
     print(f"\033[94m{state['messages'][-1].content}\033[0m", flush=True)
-    
+
     response = json.loads(CLASSIFIER_GPT.invoke(state["messages"]).content)
 
     if response["action"] == "select_listing":
@@ -941,7 +941,7 @@ def fetch_additional_info(state: State) -> State:
         state["next_node"] = "ask_user_needs"
     else:
         state["next_node"] = END
-    
+
     return state
 ```
 
@@ -1045,14 +1045,14 @@ This function initializes and executes the car-buying assistant workflow using t
 # Verify initial setup and function invocation
 def run_car_buyer_agent():
     """Run the car-buying assistant with LangGraph."""
-        
+
     messages = []
-    
+
     initial_state = State(
-        user_needs={}, 
-        web_interfaces=[AutotraderInterface()], 
+        user_needs={},
+        web_interfaces=[AutotraderInterface()],
         listings=[],
-        selected_listing={}, 
+        selected_listing={},
         additional_info={},
         next_node="",
         messages=messages
@@ -1201,24 +1201,24 @@ def get_user_input(*args, **kwargs):
 
 def show_assistant_output(*args, **kwargs):
     """Show the output of the LLM."""
-    
+
     result = " ".join(args) + kwargs.get("end", "\n")
-    
+
     # Replace any Color Codes with Regex
     result = re.sub(r'\033\[\d+m', '', result)
     # result = result.replace("\033[92m", "").replace("\033[0m", "").replace("\033[94m", "")
-    
+
     output_queue.put(result)
 
 # Gradio UI Functionality
 def interact_with_agent(user_message, history, discard_user_input=False):
     """Send user message to the bot and handle the response."""
-    
+
     global waiting_for_input
-    
+
     if not discard_user_input:
         input_queue.put(user_message + "\n")  # Send user input to LangGraph
-        
+
     partial_message = ""
 
     # Fetch and yield bot responses incrementally
@@ -1226,7 +1226,7 @@ def interact_with_agent(user_message, history, discard_user_input=False):
         try:
             message = output_queue.get(timeout=0.1)  # Wait for bot output
             if message:
-                    
+
                 partial_message += message
                 yield partial_message
         except queue.Empty:
@@ -1234,12 +1234,12 @@ def interact_with_agent(user_message, history, discard_user_input=False):
             if is_end:
                 break
             time.sleep(0.1)
-            
+
 def get_initial_message():
     """Run the agent and capture the initial message."""
     # Simulate an initial empty input to get the initial message
     initial_message = ""
-    
+
     for message in interact_with_agent("", [], True):  # Consume the generator to get the full initial message
         initial_message = message  # Keep updating until the generator finishes
 

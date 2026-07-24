@@ -135,10 +135,10 @@ def create_session_if_not_exists(session_id: str) -> None:
     """Makes sure that `session_id` exists in the chat storage."""
     if session_id not in store:
         store[session_id]: list[ModelMessage] = []
-    
+
 def get_chat_history(session_id: str) -> list[ModelMessage]:
     """Returns the existing chat history."""
-    
+
     create_session_if_not_exists(session_id)
 
     # Convert from `bytes` to a list of `Message`s and return the history.
@@ -150,7 +150,7 @@ def get_chat_history(session_id: str) -> list[ModelMessage]:
 def store_messages_in_history(session_id: str, run_result: AgentRunResult[ModelMessage]) -> None:
     """Stores all new messages from the recent `run` with the model, into the local store.
 
-    Receives a session ID and the results that the model returned, fetches all the new 
+    Receives a session ID and the results that the model returned, fetches all the new
     messages in `bytes` format and stores them in our local storage.
     """
     create_session_if_not_exists(session_id)

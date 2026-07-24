@@ -19,7 +19,7 @@ source_commit: bd681451b254ac1a790e947b581d3997ab35013d
 The LangGraph-Based Systems Inspector is a tool designed to help developers create more secure and robust agent-based applications using LangGraph. It offers valuable insights into system architectures and helps identify potential vulnerabilities, addressing the unique challenges associated with developing LangGraph systems. By using this tool, developers can enhance the quality of their projects and ensure a more secure foundation for multi-agent applications.
 
 ## Motivation
-The adoption of multi-agent systems with LangGraph brings opportunities and challenges, such as security concerns like prompt injection and understanding complex workflows. This project helps developers secure their systems and improve reliability by analyzing system architecture and highlighting weaknesses. 
+The adoption of multi-agent systems with LangGraph brings opportunities and challenges, such as security concerns like prompt injection and understanding complex workflows. This project helps developers secure their systems and improve reliability by analyzing system architecture and highlighting weaknesses.
 
 This project also takes inspiration from the LangChain project [SCIPE - Systematic Chain Improvement and Problem Evaluation](https://blog.langchain.dev/scipe-systematic-chain-improvement-and-problem-evaluation/), which analyzes independent and dependent failure probabilities to identify the most impactful problematic node in the system.
 
@@ -67,7 +67,7 @@ Moving forward, this tool could be expanded to include more advanced performance
 
 <div style="text-align: center;">
 
-<img src="https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/all_agents_tutorials/../images/graph_inspector_system_langgraph.svg" alt="graph inspector system langgraph" style="width:30%; height:auto;">
+<img src="https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/images/graph_inspector_system_langgraph.svg" alt="graph inspector system langgraph" style="width:30%; height:auto;">
 </div>
 
 ## Setup and Imports
@@ -108,7 +108,7 @@ from dotenv import load_dotenv
 ### Set up LLM model
 - Set up API keys in a .env file
 
-- Define the LLM model for the whole system. 
+- Define the LLM model for the whole system.
 
 - It must be a LangChain compatible model.
 
@@ -134,7 +134,7 @@ def create_structured_llm(config: dict, structured_output: BaseModel):
     """
     Creates a structured language model (LLM) based on the provided configuration and structured output model.
     Args:
-        config (dict): A dictionary containing the configuration for the LLM. It should have a key "configurable" 
+        config (dict): A dictionary containing the configuration for the LLM. It should have a key "configurable"
                        which contains another dictionary with the key "llm" representing the language model.
         structured_output (BaseModel): An instance of a BaseModel that defines the structure of the output.
     Returns:
@@ -172,20 +172,20 @@ class Config(TypedDict):
 Wrapper function that provides error handling and configuration management around graph execution.
 
 ```python
-def invoke_graph(graph: CompiledGraph, 
+def invoke_graph(graph: CompiledGraph,
                  input: Any,
                  thread_id:Optional[str] = None,
                  user_id:Optional[str]= None,
                  description:str="") -> tuple[Config, bool, str]:
-    
+
 
     thread_id = thread_id if thread_id else str(uuid.uuid4())
     user_id = user_id if user_id else str(uuid.uuid4())
-    
+
     config = Config(thread_id=thread_id,
                     user_id=user_id,
                     description=description)
-    
+
     configurable = {"configurable": config}
 
     error = False
@@ -238,7 +238,7 @@ Retrieve the annotation of any Python object. This function is used to determine
 ```python
 class TypeAnnotator:
     _iterables = [list, tuple, set, dict]
-    _message_types = [HumanMessage, AIMessage, ToolMessage, SystemMessage, 
+    _message_types = [HumanMessage, AIMessage, ToolMessage, SystemMessage,
                      FunctionMessage, ChatMessage]
     _no_iterables = [int, float, str, bool] + _message_types
 
@@ -254,7 +254,7 @@ class TypeAnnotator:
         # Handle message types first
         if any(isinstance(obj, t) for t in self._message_types):
             return type(obj)
-        
+
         # Handle basic types
         if type(obj) in self._no_iterables:
             return type(obj)
@@ -272,7 +272,7 @@ class TypeAnnotator:
         """Handle list type annotation."""
         if not obj:
             return List[Any]
-        
+
         types = {self._infer_type(el) for el in obj}
         if len(types) == 1:
             return List[next(iter(types))]
@@ -282,15 +282,15 @@ class TypeAnnotator:
         """Handle dict type annotation."""
         if not obj:
             return Dict[Any, Any]
-        
+
         key_types = {self._infer_type(k) for k in obj.keys()}
         value_types = {self._infer_type(v) for v in obj.values()}
-        
-        key_type = (Union[tuple(sorted(key_types, key=str))] 
+
+        key_type = (Union[tuple(sorted(key_types, key=str))]
                    if len(key_types) > 1 else next(iter(key_types)))
-        value_type = (Union[tuple(sorted(value_types, key=str))] 
+        value_type = (Union[tuple(sorted(value_types, key=str))]
                      if len(value_types) > 1 else next(iter(value_types)))
-        
+
         return Dict[key_type, value_type]
 
     def _handle_tuple(self, obj: Tuple) -> Type[Tuple]:
@@ -303,7 +303,7 @@ class TypeAnnotator:
         """Handle set type annotation."""
         if not obj:
             return Set[Any]
-        
+
         types = {self._infer_type(el) for el in obj}
         if len(types) == 1:
             return Set[next(iter(types))]
@@ -317,19 +317,19 @@ obj_to_str function  is used to pass the inputs samples to the LLM model as stri
 def obj_to_str(obj, max_depth=float('inf'), current_depth=0):
     """
     Converts any Python object into a string representation that looks like the original code.
-    
+
     Args:
         obj: Any Python object
         max_depth: Maximum depth for recursion (default: infinite)
         current_depth: Current recursion depth (used internally)
-        
+
     Returns:
         String representation of the object that looks like code
     """
     # Check if we've reached maximum depth
     if current_depth >= max_depth:
         return repr(obj)
-    
+
     if isinstance(obj, dict):
         items = [f'"{k}": {obj_to_str(v, max_depth, current_depth + 1)}' for k, v in obj.items()]
         return '{' + ', '.join(items) + '}'
@@ -345,11 +345,11 @@ def obj_to_str(obj, max_depth=float('inf'), current_depth=0):
     else:
         # Handle custom objects by reconstructing their initialization
         class_name = obj.__class__.__name__
-        
+
         # If at max_depth, just return the repr
         if current_depth >= max_depth:
             return f"{class_name}(...)"
-        
+
         # Try to get the object's attributes
         try:
             # First try to get __dict__
@@ -359,7 +359,7 @@ def obj_to_str(obj, max_depth=float('inf'), current_depth=0):
             attrs.pop('additional_kwargs', None)
             attrs.pop('usage_metadata', None)
             attrs.pop('response_metadata', None)
-            
+
         except AttributeError:
             try:
                 # If no __dict__, try getting slots
@@ -367,14 +367,14 @@ def obj_to_str(obj, max_depth=float('inf'), current_depth=0):
             except AttributeError:
                 # If neither works, just use repr
                 return repr(obj)
-        
+
         # Convert attributes to key=value pairs
         attr_strs = []
         for key, value in attrs.items():
             # Skip private attributes (starting with _)
             if not key.startswith('_'):
                 attr_strs.append(f"{key}={obj_to_str(value, max_depth, current_depth + 1)}")
-        
+
         return f"{class_name}({', '.join(attr_strs)})"
 ```
 
@@ -402,7 +402,7 @@ class SuggestedTester(BaseModel):
     @property
     def id(self):
         return self._id
-    
+
 class Testers(BaseModel):
     testers: List[SuggestedTester] = Field(
         description="Comprehensive list of testers with their roles and descriptions",
@@ -411,11 +411,11 @@ class Testers(BaseModel):
 # ========================================
 class TestCase(BaseModel):
     name: str = Field(description="name of the test case.")
-    
+
     description: str = Field(description="Test case description")
-    
+
     acceptance_criteria: str = Field(description="criteal to pass the test")
-    
+
     tester_id: str = Field(description="leave this field blank", default='')
 
     _id: str = PrivateAttr(default_factory=lambda: str(uuid.uuid4()))
@@ -423,7 +423,7 @@ class TestCase(BaseModel):
     @property
     def id(self):
         return self._id
-    
+
 class TaseCasesList(BaseModel):
     test_cases: List[TestCase] = Field(description="Comprehensive list of test cases with their properties")
 
@@ -443,7 +443,7 @@ class FinalOutput(BaseModel):
     test_case_id: str = Field(description="leave this field blank", default='')
 
 # ========================================
-    
+
 class OverallState(TypedDict):
     # user input
     user_description: str
@@ -495,7 +495,7 @@ def static_test(state: OverallState):
             for name_tool, tool in node.data.tools_by_name.items():
                 tools[name_tool] = tool.description
 
-        graph_sumary.add_node(name, type=type_node, runnable=node.data, tools=tools, name=name) 
+        graph_sumary.add_node(name, type=type_node, runnable=node.data, tools=tools, name=name)
 
     for edge in edges:
         graph_sumary.add_edge(edge.source, edge.target, conditional=edge.conditional)
@@ -509,9 +509,9 @@ def static_test(state: OverallState):
 It will generate a description for each node base on the node's input, output, tools, and edges.
 
 ```python
-# Prompts 
+# Prompts
 node_description_promt = PromtTemplate(template="""
-You are a workflow developer tasked with characterizating a graph. 
+You are a workflow developer tasked with characterizating a graph.
 You have focused on LangChain and LangGraph frameworks in python.
 Using the data below, describe what a node is for:
 
@@ -532,13 +532,13 @@ sample_output: {{output}}
 Take your time and be clrear.
 
 First, identify the node name and its type.
-Then look at the input_node, sample_input, and output_node, sample_output. 
+Then look at the input_node, sample_input, and output_node, sample_output.
 Explain how it could interact with neighboring nodes.
 Explain the input and output requirements.
 {% if node_description %}Combine previous description and current description.{% endif %}
-{% if functions %}figure out what the fuction are for in the graph context.{% endif %} 
-Find out how the node can contribute to achieve the description. 
-Finally, write the description of the node.""", 
+{% if functions %}figure out what the fuction are for in the graph context.{% endif %}
+Find out how the node can contribute to achieve the description.
+Finally, write the description of the node.""",
 input_variables=["graph_description", "input", "output", "node_name", "type", "functions", "income_nodes", "outcome_nodes", "node_description"])
 
 
@@ -548,10 +548,10 @@ def generate_node_descriptions(state: OverallState, config: RunnableConfig):
 
     config, error, error_message  = invoke_graph(graph=state["compiled_graph"],
                           input=state["valid_input"])
-    
+
     if error:
         raise ValueError(f"Invalid graph input: {error}")
-    
+
     configurable = {"configurable": config}
 
     history = list(state["compiled_graph"].get_state_history(configurable))
@@ -559,7 +559,7 @@ def generate_node_descriptions(state: OverallState, config: RunnableConfig):
 
     node_name_in_tasks = [item.tasks[0].name for item in history if item.tasks]
     node_name_in_tasks.remove('__start__')
-    
+
     node_tasks_in_tasks = [item.tasks[0].result for item in history if item.tasks]
 
     summary_graph = state["summary_graph"]
@@ -580,34 +580,34 @@ def generate_node_descriptions(state: OverallState, config: RunnableConfig):
         "income_nodes":str(summary_graph.in_edges(node_name)),
         "outcome_nodes":str(summary_graph.out_edges(node_name)),
         "node_description":current_description}
-                                                       
+
         system_message = node_description_promt.render(**parameters)
         llm_description = structured_llm.invoke([SystemMessage(system_message)])
 
         summary_graph.nodes[node_name]["description"] = llm_description.node_description
 
-    
+
     return {"execution_configs": [config],
             "summary_graph": summary_graph}
 ```
 
-## Generate testers 
+## Generate testers
 It will generate several testers to test the system.s
 In the future, there could be human in the loop interaction to verify the testers to be created.
 
 ```python
 # promts
 testers_instructions = PromtTemplate("""
-You are tasked with creating a set of AI tester personas. 
-Those are going to test an agentic system in python. 
+You are tasked with creating a set of AI tester personas.
+Those are going to test an agentic system in python.
 Those must have a grasp of the LLM and LangGraph frameworks.
 Follow these instructions carefully:
 1. First, review the general graph description:
 {{graph_description}}
-        
-2. Examine any security team feedback that has been optionally provided to guide creation of the testers: 
+
+2. Examine any security team feedback that has been optionally provided to guide creation of the testers:
 {{human_analyst_feedback}}
-    
+
 3. Determine the most critical kind of testing needed based upon the feedback above. Add more if needed.
 Max number of analysts: {{max_analysts}}
 
@@ -617,9 +617,9 @@ input_variables=["graph_description", "human_analyst_feedback", "max_analysts"])
 # Nodes
 def generate_testers(state: OverallState, config: RunnableConfig):
     structured_llm = create_structured_llm(config, Testers)
-    
+
     parameters = {"graph_description":state["user_description"],
-                    "human_analyst_feedback":"Include: functional tester, anti injection and jailbreak LLM engeener, vulnerabilities bounty hunter", 
+                    "human_analyst_feedback":"Include: functional tester, anti injection and jailbreak LLM engeener, vulnerabilities bounty hunter",
                     "max_analysts":3}
 
     system_message = testers_instructions.render(**parameters)
@@ -627,7 +627,7 @@ def generate_testers(state: OverallState, config: RunnableConfig):
 
     nodes = [node_data for node_name, node_data in state["summary_graph"].nodes(data=True) if node_data.get("description", None)]
     testers = created_testers.testers
-    
+
     return {"testers": {tester.id: tester for tester in created_testers.testers},
             "node_and_tester": generate_pairs(nodes, testers),
             "test_cases": []}
@@ -644,19 +644,19 @@ test_case_prompt = PromtTemplate("""
 {{role_description}}
 
 You must test this node deeply. The below is the node information:
-                            
+
 name: {{node_name}}
 type: {{node_type}}
 description: {{node_description}}
 functions: {{node_functions}}
 sample_input: {{sample_input}}
 sample_output: {{sample_output}}
-                               
+
 existing test cases: {{existing_test_cases}}
-                            
-How would you test the node? 
+
+How would you test the node?
 Give at least 3 test case.
-AVOID [repeating the same test case, puting values in the acceptance_criteria]                      
+AVOID [repeating the same test case, puting values in the acceptance_criteria]
 Take your time and think out of the box.
 If there is no test case neded, return and empty object.""",
 input_variables=["role_description", "node_name", "node_type", "node_description", "node_functions", "sample_input", "sample_output", "existing_test_cases"])
@@ -686,7 +686,7 @@ def generate_test_cases(state: OverallState, config: RunnableConfig):
             actual_outputs.append(task[1])
 
     name_test_cases = [test_case.name for test_case in state["test_cases"]​]
-    
+
     parameters = {"role_description":current_tester.description,
                   "node_name":current_node["name"],
                   "node_type":current_node["type"],
@@ -695,7 +695,7 @@ def generate_test_cases(state: OverallState, config: RunnableConfig):
                   "sample_input":obj_to_str(actual_inputs),
                   "sample_output":obj_to_str(actual_outputs),
                   "existing_test_cases":name_test_cases}
-    
+
     system_message = test_case_prompt.render(**parameters)
     test_cases = structured_llm.invoke([SystemMessage(content=system_message)]+[HumanMessage(content="Generate the set of test cases.")])
 
@@ -715,10 +715,10 @@ def more_test_cases(state: OverallState):
         execution_configs = state["execution_configs"]
 
         for test_case in state["test_cases"]:
-            new_state = {"current_test_case":test_case, 
+            new_state = {"current_test_case":test_case,
                          "valid_input":valid_inpout,
                          "compiled_graph":compiled_graph}
-                    
+
             routing.append(Send("run_test_cases",new_state))
 
         return routing
@@ -735,11 +735,11 @@ new_input_prompt = PromtTemplate("""
 You are a LangChain and LangGraph python developer. Your are focused on testing a graph of LangGraph.
 Some senior testers have provided you with a test case for the graph.
 The test case is as follows:
-                                 
+
 - name: {{test_case_name}}
 - description: {{test_case_description}}
 - graph valid input: {{graph_valid_input}}
-                                 
+
 you must follow this instructions:
 1. Review the test case description.
 2. Validate if the test case can be tested with an input using the valid input structure.
@@ -775,13 +775,13 @@ def generate_new_inputs(state: SubGraphState, config: RunnableConfig):
             new_input.actual_input = agent_valid_input
 
             config, error, error_message  = invoke_graph(graph=state["compiled_graph"],
-                                                         input=agent_valid_input, 
+                                                         input=agent_valid_input,
                                                          description= state["current_test_case"].name,
                                                          thread_id=new_input.test_case_id,
                                                          user_id=new_input.tester_id)
             new_input.is_successful = not error
-            
-            return {"all_new_inputs": [new_input], 
+
+            return {"all_new_inputs": [new_input],
                     "execution_configs": [config]}
         else:
             raise ValueError(f"invalid input type for {new_input.new_input}")
@@ -805,14 +805,14 @@ It will analyze the results of the test cases and generate insights according to
 # promts
 assertion_prompt = PromtTemplate("""
 {{role_description}}
-A test cases has been run on the graph and here you have the results. 
-You must validate the results using the test case description, acceptance criteria, and the output of the test case: 
-                                 
+A test cases has been run on the graph and here you have the results.
+You must validate the results using the test case description, acceptance criteria, and the output of the test case:
+
 - test case name: {{test_case_name}}
 - test case description: {{test_case_description}}
 - acceptance criteria: {{acceptance_criteria}}
 - output: {{output}}
-                                 
+
 You must validate the output. If the output is as described in the acceptance criteria, return 'True'. Otherwise, return 'False'.
 Finally, write additional comments of how to solve the issue if the output is not as expected.
 If the output is as expected, the comments should be a description of the behavior of the graph.
@@ -826,13 +826,13 @@ def analize_results(state: OverallState, config: RunnableConfig):
 
     if not current_result_config["description"]:
         return {"listResults": []}
-    
+
     for test_case in state["test_cases"]:
         if test_case.id == current_result_config["thread_id"]:
             current_test_case = test_case
-            break  
+            break
 
-    tester = state["testers"][current_result_config["user_id"]​] 
+    tester = state["testers"][current_result_config["user_id"]​]
 
     configurable = {"configurable": current_result_config}
 
@@ -975,7 +975,7 @@ In most cases, the recursion limit error is raised when the default value (25) i
 configurations = {"configurable": {"llm": llm}, "recursion_limit": 50}
 
 result = graph.invoke({"user_description":user_description
-                       ,"valid_input": user_valid_input, 
+                       ,"valid_input": user_valid_input,
                        "graph_before_compile": graph_before_compile},
                        config=configurations)
 ```
@@ -998,9 +998,9 @@ with gr.Blocks() as demo:
                 current_test_case = test_case
                 break
 
-        tester = result["testers"][result_graph.tester_id] 
+        tester = result["testers"][result_graph.tester_id]
 
-        configurations = {"configurable": {"user_id":tester.id, 
+        configurations = {"configurable": {"user_id":tester.id,
                                            "thread_id":current_test_case.id}}
 
         with gr.Accordion(f"{current_test_case.name}: {symbol}", open=False):
@@ -1016,7 +1016,7 @@ demo.launch(debug=False, inbrowser=False)
 ```
 
 ### Sample results
-![Sample results](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/all_agents_tutorials/../images/graph_inspector_system_langgraph_result.png)
+![Sample results](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/images/graph_inspector_system_langgraph_result.png)
 
 # Final Thoughts
 The LangGraph-Based Systems Inspector is a tool capable of autonomously analyzing system architecture and identifying potential vulnerabilities. However, it is important to note that the tool is still in its early stages of development, and there remains significant room for improvement. For example:

@@ -22,7 +22,7 @@ source_commit: bd681451b254ac1a790e947b581d3997ab35013d
 
 ## Overview
 
-Taskifier presents an agent that helps manage task management for productivity optimization. This tutorial utilizes Langchain and LangGraph to build a regulated pipeline for such purpose. It encompasses: 
+Taskifier presents an agent that helps manage task management for productivity optimization. This tutorial utilizes Langchain and LangGraph to build a regulated pipeline for such purpose. It encompasses:
  - context breakdown & analysis
  - external resource retrieval (web search)
  - discretization of information
@@ -161,7 +161,7 @@ def task_manifest(approach: ApproachState) -> ApproachState:
 
     search_foundation = "What are the steps for the following task? {task}"
     search_query = search_foundation.format(task=approach["task"])
-    
+
     searches = tavily_client.search(search_query, max_results=10)
 
     details = ""
@@ -261,7 +261,7 @@ Task:
 
 
     I want to build a smoke detector device! I am visioning it with futuristic design and hope to maximize the ability to install it anywhere. Perhaps keep it small and energy efficient for that purpose!
-    
+
 
 Style:
 
@@ -276,7 +276,7 @@ Here’s a structured plan to build a futuristic, energy-efficient smoke detecto
 ### Step 1: Define the Requirements
 **Why It’s Needed:** Establishing clear requirements helps in laying a strong foundation for the project. It ensures all stakeholders have a unified vision and expectations are aligned.
 
-**What to Do:** 
+**What to Do:**
 - Gather information on necessary features (e.g., smoke detection technology, IoT integration, energy efficiency).
 - Outline specifications such as size, power source, and design aesthetics.
 

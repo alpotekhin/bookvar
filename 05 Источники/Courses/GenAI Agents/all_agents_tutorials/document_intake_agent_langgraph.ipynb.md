@@ -31,7 +31,7 @@ The naive way to feed a docx or pdf to a model is to rip the raw text out and pa
 
 Converting to markdown first preserves that structure in a form models are heavily trained on: pipe tables stay tables, headings stay headings, and the agent can quote figures instead of hallucinating around them.
 
-![What each path preserves](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/all_agents_tutorials/../images/document-intake-table-loss.svg)
+![What each path preserves](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/images/document-intake-table-loss.svg)
 
 ### Key Components
 
@@ -42,7 +42,7 @@ Converting to markdown first preserves that structure in a form models are heavi
 
 ### Agent Architecture
 
-![Document Intake Agent](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/all_agents_tutorials/../images/document-intake-agent.svg)
+![Document Intake Agent](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/images/document-intake-agent.svg)
 
 The routing decision is deterministic on purpose. A ReAct-style agent could decide "should I convert this?" with an LLM call on every run, but format routing is a lookup, not a judgment call: putting it in a conditional edge makes the behavior testable and saves a model round trip on every document.
 
@@ -120,7 +120,7 @@ The API is a three-step flow, the standard shape for services that move real fil
 
 The optional `Idempotency-Key` header makes retries safe: a resubmission with the same key returns the same job and is never charged twice. Pass a stable key if you wrap this call in retry logic.
 
-![The conversion flow](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/all_agents_tutorials/../images/document-intake-conversion-flow.svg)
+![The conversion flow](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/images/document-intake-conversion-flow.svg)
 
 ```python
 def convert_file(path: str, to: str, idempotency_key: str | None = None) -> bytes:
@@ -362,7 +362,7 @@ Every number survives, but the table does not: `North 128.4 +6.1% South 95.2 +2.
 
 The failure gets worse on PDFs. Glyph-level text extraction has no notion of layout, so a two-column page comes out interleaved, with sentence fragments from the left column spliced into the right. Conversion chains that reconstruct the document, rather than scrape its glyphs, preserve column reading order; that difference, not raw text recall, is usually what separates a usable ingestion pipeline from a broken one.
 
-![Two-column reading order](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/all_agents_tutorials/../images/document-intake-reading-order.svg)
+![Two-column reading order](https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/images/document-intake-reading-order.svg)
 
 ## Using the Same Capability from Claude Code, Cursor, and Other MCP Hosts
 

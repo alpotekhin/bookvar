@@ -48,7 +48,7 @@ This AI Music Compositor demonstrates the potential of combining language models
 
 <div style="text-align: center;">
 
-<img src="https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/all_agents_tutorials/../images/music_composer_agent_langgraph.svg" alt="tts poem generator agent langgraph" style="width:50%; height:auto;">
+<img src="https://github.com/NirDiamant/GenAI_Agents/raw/bd681451b254ac1a790e947b581d3997ab35013d/images/music_composer_agent_langgraph.svg" alt="tts poem generator agent langgraph" style="width:50%; height:auto;">
 </div>
 
 ## Imports
@@ -223,7 +223,7 @@ def midi_converter(state: MusicState) -> Dict:
     final_note = music21.note.Note(scales[scale_name][0] + '4')
     final_note.quarterLength = 1
     melody.append(final_note)
-    
+
     final_chord = music21.chord.Chord(chords[scale_name.split()[0] + ' ' + scale_name.split()[1]​])
     final_chord.quarterLength = 1
     harmony.append(final_chord)
@@ -238,7 +238,7 @@ def midi_converter(state: MusicState) -> Dict:
     # Create a temporary MIDI file
     with tempfile.NamedTemporaryFile(delete=False, suffix='.mid') as temp_midi:
         piece.write('midi', temp_midi.name)
-    
+
     return {"midi_file": temp_midi.name}
 ```
 
@@ -308,7 +308,7 @@ def play_midi(midi_file_path):
     # Wait for playback to finish
     while pygame.mixer.music.get_busy():
         pygame.time.Clock().tick(10)
-    
+
     # Clean up
     pygame.mixer.quit()
 

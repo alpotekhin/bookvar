@@ -215,10 +215,10 @@ This function processes a customer query through our LangGraph workflow.
 ```python
 def run_customer_support(query: str) -> Dict[str, str]:
     """Process a customer query through the LangGraph workflow.
-    
+
     Args:
         query (str): The customer's query
-        
+
     Returns:
         Dict[str, str]: A dictionary containing the query's category, sentiment, and response
     """

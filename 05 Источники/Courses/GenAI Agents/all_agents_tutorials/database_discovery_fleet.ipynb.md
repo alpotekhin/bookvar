@@ -71,11 +71,11 @@ To create a robust and versatile **AI agent system** that:
 
 Here is the State Graph for how the agent fleet processes input from a user.
 
-![Screenshot 2024-11-24 at 9.00.09 am.png](attachment:4a02c7ba-ad35-4759-bab5-5d46ef3ef5ed.png)
+![Screenshot 2024-11-24 at 9.00.09 am.png](/_assets/Sources/GenAI Agents/all_agents_tutorials/database_discovery_fleet/cell-002-attachment.png)
 
 Here is the architecture of the application.
 
-![Screenshot 2024-11-24 at 9.05.40 am.png](attachment:eaeb7f62-a929-4f56-93c8-58b7fdca383d.png)
+![Screenshot 2024-11-24 at 9.05.40 am.png](/_assets/Sources/GenAI Agents/all_agents_tutorials/database_discovery_fleet/cell-003-attachment.png)
 
 # Packages needed to run the tutorial
 
@@ -84,69 +84,69 @@ Here is the architecture of the application.
 ```
 
 ```text
-Requirement already satisfied: langgraph in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (0.2.53)
-Requirement already satisfied: langchain in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (0.3.4)
-Requirement already satisfied: langchain-openai in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (0.2.3)
-Requirement already satisfied: langchain_community in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (0.3.3)
-Requirement already satisfied: python-dotenv in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (1.0.1)
-Requirement already satisfied: networkx in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (3.3)
-Requirement already satisfied: matplotlib in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (3.9.2)
-Requirement already satisfied: pydot in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (3.0.2)
-Requirement already satisfied: langchain-core!=0.3.0,!=0.3.1,!=0.3.10,!=0.3.11,!=0.3.12,!=0.3.13,!=0.3.14,!=0.3.2,!=0.3.3,!=0.3.4,!=0.3.5,!=0.3.6,!=0.3.7,!=0.3.8,!=0.3.9,<0.4.0,>=0.2.43 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langgraph) (0.3.19)
-Requirement already satisfied: langgraph-checkpoint<3.0.0,>=2.0.4 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langgraph) (2.0.5)
-Requirement already satisfied: langgraph-sdk<0.2.0,>=0.1.32 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langgraph) (0.1.36)
-Requirement already satisfied: PyYAML>=5.3 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langchain) (6.0.1)
-Requirement already satisfied: SQLAlchemy<3,>=1.4 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langchain) (2.0.36)
-Requirement already satisfied: aiohttp<4.0.0,>=3.8.3 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langchain) (3.9.5)
-Requirement already satisfied: langchain-text-splitters<0.4.0,>=0.3.0 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langchain) (0.3.0)
-Requirement already satisfied: langsmith<0.2.0,>=0.1.17 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langchain) (0.1.137)
-Requirement already satisfied: numpy<2.0.0,>=1.26.0 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langchain) (1.26.4)
-Requirement already satisfied: pydantic<3.0.0,>=2.7.4 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langchain) (2.9.2)
-Requirement already satisfied: requests<3,>=2 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langchain) (2.32.3)
-Requirement already satisfied: tenacity!=8.4.0,<10,>=8.1.0 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langchain) (9.0.0)
-Requirement already satisfied: openai<2.0.0,>=1.52.0 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langchain-openai) (1.52.2)
-Requirement already satisfied: tiktoken<1,>=0.7 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langchain-openai) (0.7.0)
-Requirement already satisfied: dataclasses-json<0.7,>=0.5.7 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langchain_community) (0.6.6)
-Requirement already satisfied: pydantic-settings<3.0.0,>=2.4.0 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langchain_community) (2.6.0)
-Requirement already satisfied: contourpy>=1.0.1 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from matplotlib) (1.3.1)
-Requirement already satisfied: cycler>=0.10 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from matplotlib) (0.12.1)
-Requirement already satisfied: fonttools>=4.22.0 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from matplotlib) (4.55.0)
-Requirement already satisfied: kiwisolver>=1.3.1 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from matplotlib) (1.4.7)
-Requirement already satisfied: packaging>=20.0 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from matplotlib) (23.2)
-Requirement already satisfied: pillow>=8 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from matplotlib) (11.0.0)
-Requirement already satisfied: pyparsing>=2.3.1 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from matplotlib) (3.1.2)
-Requirement already satisfied: python-dateutil>=2.7 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from matplotlib) (2.9.0.post0)
-Requirement already satisfied: aiosignal>=1.1.2 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from aiohttp<4.0.0,>=3.8.3->langchain) (1.3.1)
-Requirement already satisfied: attrs>=17.3.0 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from aiohttp<4.0.0,>=3.8.3->langchain) (23.2.0)
-Requirement already satisfied: frozenlist>=1.1.1 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from aiohttp<4.0.0,>=3.8.3->langchain) (1.4.1)
-Requirement already satisfied: multidict<7.0,>=4.5 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from aiohttp<4.0.0,>=3.8.3->langchain) (6.0.5)
-Requirement already satisfied: yarl<2.0,>=1.0 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from aiohttp<4.0.0,>=3.8.3->langchain) (1.9.4)
-Requirement already satisfied: marshmallow<4.0.0,>=3.18.0 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from dataclasses-json<0.7,>=0.5.7->langchain_community) (3.21.3)
-Requirement already satisfied: typing-inspect<1,>=0.4.0 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from dataclasses-json<0.7,>=0.5.7->langchain_community) (0.9.0)
-Requirement already satisfied: jsonpatch<2.0,>=1.33 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langchain-core!=0.3.0,!=0.3.1,!=0.3.10,!=0.3.11,!=0.3.12,!=0.3.13,!=0.3.14,!=0.3.2,!=0.3.3,!=0.3.4,!=0.3.5,!=0.3.6,!=0.3.7,!=0.3.8,!=0.3.9,<0.4.0,>=0.2.43->langgraph) (1.33)
-Requirement already satisfied: typing-extensions>=4.7 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langchain-core!=0.3.0,!=0.3.1,!=0.3.10,!=0.3.11,!=0.3.12,!=0.3.13,!=0.3.14,!=0.3.2,!=0.3.3,!=0.3.4,!=0.3.5,!=0.3.6,!=0.3.7,!=0.3.8,!=0.3.9,<0.4.0,>=0.2.43->langgraph) (4.12.1)
-Requirement already satisfied: msgpack<2.0.0,>=1.1.0 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langgraph-checkpoint<3.0.0,>=2.0.4->langgraph) (1.1.0)
-Requirement already satisfied: httpx>=0.25.2 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langgraph-sdk<0.2.0,>=0.1.32->langgraph) (0.27.0)
-Requirement already satisfied: httpx-sse>=0.4.0 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langgraph-sdk<0.2.0,>=0.1.32->langgraph) (0.4.0)
-Requirement already satisfied: orjson>=3.10.1 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langgraph-sdk<0.2.0,>=0.1.32->langgraph) (3.10.3)
-Requirement already satisfied: requests-toolbelt<2.0.0,>=1.0.0 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langsmith<0.2.0,>=0.1.17->langchain) (1.0.0)
-Requirement already satisfied: anyio<5,>=3.5.0 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from openai<2.0.0,>=1.52.0->langchain-openai) (4.4.0)
-Requirement already satisfied: distro<2,>=1.7.0 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from openai<2.0.0,>=1.52.0->langchain-openai) (1.9.0)
-Requirement already satisfied: jiter<1,>=0.4.0 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from openai<2.0.0,>=1.52.0->langchain-openai) (0.5.0)
-Requirement already satisfied: sniffio in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from openai<2.0.0,>=1.52.0->langchain-openai) (1.3.1)
-Requirement already satisfied: tqdm>4 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from openai<2.0.0,>=1.52.0->langchain-openai) (4.66.4)
-Requirement already satisfied: annotated-types>=0.6.0 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from pydantic<3.0.0,>=2.7.4->langchain) (0.7.0)
-Requirement already satisfied: pydantic-core==2.23.4 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from pydantic<3.0.0,>=2.7.4->langchain) (2.23.4)
-Requirement already satisfied: six>=1.5 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from python-dateutil>=2.7->matplotlib) (1.16.0)
-Requirement already satisfied: charset-normalizer<4,>=2 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from requests<3,>=2->langchain) (3.3.2)
-Requirement already satisfied: idna<4,>=2.5 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from requests<3,>=2->langchain) (3.7)
-Requirement already satisfied: urllib3<3,>=1.21.1 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from requests<3,>=2->langchain) (2.2.1)
-Requirement already satisfied: certifi>=2017.4.17 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from requests<3,>=2->langchain) (2024.6.2)
-Requirement already satisfied: regex>=2022.1.18 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from tiktoken<1,>=0.7->langchain-openai) (2024.5.15)
-Requirement already satisfied: httpcore==1.* in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from httpx>=0.25.2->langgraph-sdk<0.2.0,>=0.1.32->langgraph) (1.0.5)
-Requirement already satisfied: h11<0.15,>=0.13 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from httpcore==1.*->httpx>=0.25.2->langgraph-sdk<0.2.0,>=0.1.32->langgraph) (0.14.0)
-Requirement already satisfied: jsonpointer>=1.9 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from jsonpatch<2.0,>=1.33->langchain-core!=0.3.0,!=0.3.1,!=0.3.10,!=0.3.11,!=0.3.12,!=0.3.13,!=0.3.14,!=0.3.2,!=0.3.3,!=0.3.4,!=0.3.5,!=0.3.6,!=0.3.7,!=0.3.8,!=0.3.9,<0.4.0,>=0.2.43->langgraph) (2.4)
-Requirement already satisfied: mypy-extensions>=0.3.0 in /Users/justinhennessy/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from typing-inspect<1,>=0.4.0->dataclasses-json<0.7,>=0.5.7->langchain_community) (1.0.0)
+Requirement already satisfied: langgraph in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (0.2.53)
+Requirement already satisfied: langchain in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (0.3.4)
+Requirement already satisfied: langchain-openai in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (0.2.3)
+Requirement already satisfied: langchain_community in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (0.3.3)
+Requirement already satisfied: python-dotenv in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (1.0.1)
+Requirement already satisfied: networkx in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (3.3)
+Requirement already satisfied: matplotlib in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (3.9.2)
+Requirement already satisfied: pydot in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (3.0.2)
+Requirement already satisfied: langchain-core!=0.3.0,!=0.3.1,!=0.3.10,!=0.3.11,!=0.3.12,!=0.3.13,!=0.3.14,!=0.3.2,!=0.3.3,!=0.3.4,!=0.3.5,!=0.3.6,!=0.3.7,!=0.3.8,!=0.3.9,<0.4.0,>=0.2.43 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langgraph) (0.3.19)
+Requirement already satisfied: langgraph-checkpoint<3.0.0,>=2.0.4 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langgraph) (2.0.5)
+Requirement already satisfied: langgraph-sdk<0.2.0,>=0.1.32 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langgraph) (0.1.36)
+Requirement already satisfied: PyYAML>=5.3 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langchain) (6.0.1)
+Requirement already satisfied: SQLAlchemy<3,>=1.4 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langchain) (2.0.36)
+Requirement already satisfied: aiohttp<4.0.0,>=3.8.3 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langchain) (3.9.5)
+Requirement already satisfied: langchain-text-splitters<0.4.0,>=0.3.0 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langchain) (0.3.0)
+Requirement already satisfied: langsmith<0.2.0,>=0.1.17 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langchain) (0.1.137)
+Requirement already satisfied: numpy<2.0.0,>=1.26.0 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langchain) (1.26.4)
+Requirement already satisfied: pydantic<3.0.0,>=2.7.4 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langchain) (2.9.2)
+Requirement already satisfied: requests<3,>=2 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langchain) (2.32.3)
+Requirement already satisfied: tenacity!=8.4.0,<10,>=8.1.0 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langchain) (9.0.0)
+Requirement already satisfied: openai<2.0.0,>=1.52.0 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langchain-openai) (1.52.2)
+Requirement already satisfied: tiktoken<1,>=0.7 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langchain-openai) (0.7.0)
+Requirement already satisfied: dataclasses-json<0.7,>=0.5.7 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langchain_community) (0.6.6)
+Requirement already satisfied: pydantic-settings<3.0.0,>=2.4.0 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langchain_community) (2.6.0)
+Requirement already satisfied: contourpy>=1.0.1 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from matplotlib) (1.3.1)
+Requirement already satisfied: cycler>=0.10 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from matplotlib) (0.12.1)
+Requirement already satisfied: fonttools>=4.22.0 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from matplotlib) (4.55.0)
+Requirement already satisfied: kiwisolver>=1.3.1 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from matplotlib) (1.4.7)
+Requirement already satisfied: packaging>=20.0 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from matplotlib) (23.2)
+Requirement already satisfied: pillow>=8 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from matplotlib) (11.0.0)
+Requirement already satisfied: pyparsing>=2.3.1 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from matplotlib) (3.1.2)
+Requirement already satisfied: python-dateutil>=2.7 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from matplotlib) (2.9.0.post0)
+Requirement already satisfied: aiosignal>=1.1.2 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from aiohttp<4.0.0,>=3.8.3->langchain) (1.3.1)
+Requirement already satisfied: attrs>=17.3.0 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from aiohttp<4.0.0,>=3.8.3->langchain) (23.2.0)
+Requirement already satisfied: frozenlist>=1.1.1 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from aiohttp<4.0.0,>=3.8.3->langchain) (1.4.1)
+Requirement already satisfied: multidict<7.0,>=4.5 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from aiohttp<4.0.0,>=3.8.3->langchain) (6.0.5)
+Requirement already satisfied: yarl<2.0,>=1.0 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from aiohttp<4.0.0,>=3.8.3->langchain) (1.9.4)
+Requirement already satisfied: marshmallow<4.0.0,>=3.18.0 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from dataclasses-json<0.7,>=0.5.7->langchain_community) (3.21.3)
+Requirement already satisfied: typing-inspect<1,>=0.4.0 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from dataclasses-json<0.7,>=0.5.7->langchain_community) (0.9.0)
+Requirement already satisfied: jsonpatch<2.0,>=1.33 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langchain-core!=0.3.0,!=0.3.1,!=0.3.10,!=0.3.11,!=0.3.12,!=0.3.13,!=0.3.14,!=0.3.2,!=0.3.3,!=0.3.4,!=0.3.5,!=0.3.6,!=0.3.7,!=0.3.8,!=0.3.9,<0.4.0,>=0.2.43->langgraph) (1.33)
+Requirement already satisfied: typing-extensions>=4.7 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langchain-core!=0.3.0,!=0.3.1,!=0.3.10,!=0.3.11,!=0.3.12,!=0.3.13,!=0.3.14,!=0.3.2,!=0.3.3,!=0.3.4,!=0.3.5,!=0.3.6,!=0.3.7,!=0.3.8,!=0.3.9,<0.4.0,>=0.2.43->langgraph) (4.12.1)
+Requirement already satisfied: msgpack<2.0.0,>=1.1.0 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langgraph-checkpoint<3.0.0,>=2.0.4->langgraph) (1.1.0)
+Requirement already satisfied: httpx>=0.25.2 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langgraph-sdk<0.2.0,>=0.1.32->langgraph) (0.27.0)
+Requirement already satisfied: httpx-sse>=0.4.0 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langgraph-sdk<0.2.0,>=0.1.32->langgraph) (0.4.0)
+Requirement already satisfied: orjson>=3.10.1 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langgraph-sdk<0.2.0,>=0.1.32->langgraph) (3.10.3)
+Requirement already satisfied: requests-toolbelt<2.0.0,>=1.0.0 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from langsmith<0.2.0,>=0.1.17->langchain) (1.0.0)
+Requirement already satisfied: anyio<5,>=3.5.0 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from openai<2.0.0,>=1.52.0->langchain-openai) (4.4.0)
+Requirement already satisfied: distro<2,>=1.7.0 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from openai<2.0.0,>=1.52.0->langchain-openai) (1.9.0)
+Requirement already satisfied: jiter<1,>=0.4.0 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from openai<2.0.0,>=1.52.0->langchain-openai) (0.5.0)
+Requirement already satisfied: sniffio in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from openai<2.0.0,>=1.52.0->langchain-openai) (1.3.1)
+Requirement already satisfied: tqdm>4 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from openai<2.0.0,>=1.52.0->langchain-openai) (4.66.4)
+Requirement already satisfied: annotated-types>=0.6.0 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from pydantic<3.0.0,>=2.7.4->langchain) (0.7.0)
+Requirement already satisfied: pydantic-core==2.23.4 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from pydantic<3.0.0,>=2.7.4->langchain) (2.23.4)
+Requirement already satisfied: six>=1.5 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from python-dateutil>=2.7->matplotlib) (1.16.0)
+Requirement already satisfied: charset-normalizer<4,>=2 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from requests<3,>=2->langchain) (3.3.2)
+Requirement already satisfied: idna<4,>=2.5 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from requests<3,>=2->langchain) (3.7)
+Requirement already satisfied: urllib3<3,>=1.21.1 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from requests<3,>=2->langchain) (2.2.1)
+Requirement already satisfied: certifi>=2017.4.17 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from requests<3,>=2->langchain) (2024.6.2)
+Requirement already satisfied: regex>=2022.1.18 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from tiktoken<1,>=0.7->langchain-openai) (2024.5.15)
+Requirement already satisfied: httpcore==1.* in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from httpx>=0.25.2->langgraph-sdk<0.2.0,>=0.1.32->langgraph) (1.0.5)
+Requirement already satisfied: h11<0.15,>=0.13 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from httpcore==1.*->httpx>=0.25.2->langgraph-sdk<0.2.0,>=0.1.32->langgraph) (0.14.0)
+Requirement already satisfied: jsonpointer>=1.9 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from jsonpatch<2.0,>=1.33->langchain-core!=0.3.0,!=0.3.1,!=0.3.10,!=0.3.11,!=0.3.12,!=0.3.13,!=0.3.14,!=0.3.2,!=0.3.3,!=0.3.4,!=0.3.5,!=0.3.6,!=0.3.7,!=0.3.8,!=0.3.9,<0.4.0,>=0.2.43->langgraph) (2.4)
+Requirement already satisfied: mypy-extensions>=0.3.0 in $HOME/.pyenv/versions/3.12.3/lib/python3.12/site-packages (from typing-inspect<1,>=0.4.0->dataclasses-json<0.7,>=0.5.7->langchain_community) (1.0.0)
 ```
 
 # Import required libraries and export environment variables
@@ -191,7 +191,7 @@ def test_db_connection():
         # Set the path to the database and create a connection
         db_path = os.getenv("DATABASE")
         conn = sqlite3.connect(db_path)
-        
+
         # Simple test query
         cursor = conn.cursor()
         cursor.execute("SELECT COUNT(*) FROM tracks")
@@ -201,7 +201,7 @@ def test_db_connection():
         conn.close()
         print(f"Database connection successful. Found {track_count} tracks.")
         return True
-        
+
     except Exception as e:
         # Notify users there was an error
         print(f"Database connection failed: {e}")
@@ -353,7 +353,7 @@ class DiscoveryAgent:
         """Perform schema discovery and return a graph representation."""
         logger.info("Performing discovery...")
         prompt = "For all tables in this database, show the table name, column name, column type, if its optional. Also show Foreign key references to other columns. Do not show examples. Output only as json."
-        
+
         # Invoke the agent executor with the discovery prompt
         response = self.agent_executor.invoke({"input": prompt, "db_name": self.config.db})
 
@@ -439,10 +439,10 @@ Invoking: `sql_db_schema` with `{'table_names': 'albums, artists, customers, emp
 
 [0m[33;1m[1;3m
 CREATE TABLE albums (
-	"AlbumId" INTEGER NOT NULL, 
-	"Title" NVARCHAR(160) NOT NULL, 
-	"ArtistId" INTEGER NOT NULL, 
-	PRIMARY KEY ("AlbumId"), 
+	"AlbumId" INTEGER NOT NULL,
+	"Title" NVARCHAR(160) NOT NULL,
+	"ArtistId" INTEGER NOT NULL,
+	PRIMARY KEY ("AlbumId"),
 	FOREIGN KEY("ArtistId") REFERENCES artists ("ArtistId")
 )
 
@@ -456,8 +456,8 @@ AlbumId	Title	ArtistId
 
 
 CREATE TABLE artists (
-	"ArtistId" INTEGER NOT NULL, 
-	"Name" NVARCHAR(120), 
+	"ArtistId" INTEGER NOT NULL,
+	"Name" NVARCHAR(120),
 	PRIMARY KEY ("ArtistId")
 )
 
@@ -471,20 +471,20 @@ ArtistId	Name
 
 
 CREATE TABLE customers (
-	"CustomerId" INTEGER NOT NULL, 
-	"FirstName" NVARCHAR(40) NOT NULL, 
-	"LastName" NVARCHAR(20) NOT NULL, 
-	"Company" NVARCHAR(80), 
-	"Address" NVARCHAR(70), 
-	"City" NVARCHAR(40), 
-	"State" NVARCHAR(40), 
-	"Country" NVARCHAR(40), 
-	"PostalCode" NVARCHAR(10), 
-	"Phone" NVARCHAR(24), 
-	"Fax" NVARCHAR(24), 
-	"Email" NVARCHAR(60) NOT NULL, 
-	"SupportRepId" INTEGER, 
-	PRIMARY KEY ("CustomerId"), 
+	"CustomerId" INTEGER NOT NULL,
+	"FirstName" NVARCHAR(40) NOT NULL,
+	"LastName" NVARCHAR(20) NOT NULL,
+	"Company" NVARCHAR(80),
+	"Address" NVARCHAR(70),
+	"City" NVARCHAR(40),
+	"State" NVARCHAR(40),
+	"Country" NVARCHAR(40),
+	"PostalCode" NVARCHAR(10),
+	"Phone" NVARCHAR(24),
+	"Fax" NVARCHAR(24),
+	"Email" NVARCHAR(60) NOT NULL,
+	"SupportRepId" INTEGER,
+	PRIMARY KEY ("CustomerId"),
 	FOREIGN KEY("SupportRepId") REFERENCES employees ("EmployeeId")
 )
 
@@ -498,22 +498,22 @@ CustomerId	FirstName	LastName	Company	Address	City	State	Country	PostalCode	Phon
 
 
 CREATE TABLE employees (
-	"EmployeeId" INTEGER NOT NULL, 
-	"LastName" NVARCHAR(20) NOT NULL, 
-	"FirstName" NVARCHAR(20) NOT NULL, 
-	"Title" NVARCHAR(30), 
-	"ReportsTo" INTEGER, 
-	"BirthDate" DATETIME, 
-	"HireDate" DATETIME, 
-	"Address" NVARCHAR(70), 
-	"City" NVARCHAR(40), 
-	"State" NVARCHAR(40), 
-	"Country" NVARCHAR(40), 
-	"PostalCode" NVARCHAR(10), 
-	"Phone" NVARCHAR(24), 
-	"Fax" NVARCHAR(24), 
-	"Email" NVARCHAR(60), 
-	PRIMARY KEY ("EmployeeId"), 
+	"EmployeeId" INTEGER NOT NULL,
+	"LastName" NVARCHAR(20) NOT NULL,
+	"FirstName" NVARCHAR(20) NOT NULL,
+	"Title" NVARCHAR(30),
+	"ReportsTo" INTEGER,
+	"BirthDate" DATETIME,
+	"HireDate" DATETIME,
+	"Address" NVARCHAR(70),
+	"City" NVARCHAR(40),
+	"State" NVARCHAR(40),
+	"Country" NVARCHAR(40),
+	"PostalCode" NVARCHAR(10),
+	"Phone" NVARCHAR(24),
+	"Fax" NVARCHAR(24),
+	"Email" NVARCHAR(60),
+	PRIMARY KEY ("EmployeeId"),
 	FOREIGN KEY("ReportsTo") REFERENCES employees ("EmployeeId")
 )
 
@@ -527,8 +527,8 @@ EmployeeId	LastName	FirstName	Title	ReportsTo	BirthDate	HireDate	Address	City	St
 
 
 CREATE TABLE genres (
-	"GenreId" INTEGER NOT NULL, 
-	"Name" NVARCHAR(120), 
+	"GenreId" INTEGER NOT NULL,
+	"Name" NVARCHAR(120),
 	PRIMARY KEY ("GenreId")
 )
 
@@ -542,13 +542,13 @@ GenreId	Name
 
 
 CREATE TABLE invoice_items (
-	"InvoiceLineId" INTEGER NOT NULL, 
-	"InvoiceId" INTEGER NOT NULL, 
-	"TrackId" INTEGER NOT NULL, 
-	"UnitPrice" NUMERIC(10, 2) NOT NULL, 
-	"Quantity" INTEGER NOT NULL, 
-	PRIMARY KEY ("InvoiceLineId"), 
-	FOREIGN KEY("TrackId") REFERENCES tracks ("TrackId"), 
+	"InvoiceLineId" INTEGER NOT NULL,
+	"InvoiceId" INTEGER NOT NULL,
+	"TrackId" INTEGER NOT NULL,
+	"UnitPrice" NUMERIC(10, 2) NOT NULL,
+	"Quantity" INTEGER NOT NULL,
+	PRIMARY KEY ("InvoiceLineId"),
+	FOREIGN KEY("TrackId") REFERENCES tracks ("TrackId"),
 	FOREIGN KEY("InvoiceId") REFERENCES invoices ("InvoiceId")
 )
 
@@ -562,16 +562,16 @@ InvoiceLineId	InvoiceId	TrackId	UnitPrice	Quantity
 
 
 CREATE TABLE invoices (
-	"InvoiceId" INTEGER NOT NULL, 
-	"CustomerId" INTEGER NOT NULL, 
-	"InvoiceDate" DATETIME NOT NULL, 
-	"BillingAddress" NVARCHAR(70), 
-	"BillingCity" NVARCHAR(40), 
-	"BillingState" NVARCHAR(40), 
-	"BillingCountry" NVARCHAR(40), 
-	"BillingPostalCode" NVARCHAR(10), 
-	"Total" NUMERIC(10, 2) NOT NULL, 
-	PRIMARY KEY ("InvoiceId"), 
+	"InvoiceId" INTEGER NOT NULL,
+	"CustomerId" INTEGER NOT NULL,
+	"InvoiceDate" DATETIME NOT NULL,
+	"BillingAddress" NVARCHAR(70),
+	"BillingCity" NVARCHAR(40),
+	"BillingState" NVARCHAR(40),
+	"BillingCountry" NVARCHAR(40),
+	"BillingPostalCode" NVARCHAR(10),
+	"Total" NUMERIC(10, 2) NOT NULL,
+	PRIMARY KEY ("InvoiceId"),
 	FOREIGN KEY("CustomerId") REFERENCES customers ("CustomerId")
 )
 
@@ -585,8 +585,8 @@ InvoiceId	CustomerId	InvoiceDate	BillingAddress	BillingCity	BillingState	Billing
 
 
 CREATE TABLE media_types (
-	"MediaTypeId" INTEGER NOT NULL, 
-	"Name" NVARCHAR(120), 
+	"MediaTypeId" INTEGER NOT NULL,
+	"Name" NVARCHAR(120),
 	PRIMARY KEY ("MediaTypeId")
 )
 
@@ -600,10 +600,10 @@ MediaTypeId	Name
 
 
 CREATE TABLE playlist_track (
-	"PlaylistId" INTEGER NOT NULL, 
-	"TrackId" INTEGER NOT NULL, 
-	PRIMARY KEY ("PlaylistId", "TrackId"), 
-	FOREIGN KEY("TrackId") REFERENCES tracks ("TrackId"), 
+	"PlaylistId" INTEGER NOT NULL,
+	"TrackId" INTEGER NOT NULL,
+	PRIMARY KEY ("PlaylistId", "TrackId"),
+	FOREIGN KEY("TrackId") REFERENCES tracks ("TrackId"),
 	FOREIGN KEY("PlaylistId") REFERENCES playlists ("PlaylistId")
 )
 
@@ -617,8 +617,8 @@ PlaylistId	TrackId
 
 
 CREATE TABLE playlists (
-	"PlaylistId" INTEGER NOT NULL, 
-	"Name" NVARCHAR(120), 
+	"PlaylistId" INTEGER NOT NULL,
+	"Name" NVARCHAR(120),
 	PRIMARY KEY ("PlaylistId")
 )
 
@@ -632,18 +632,18 @@ PlaylistId	Name
 
 
 CREATE TABLE tracks (
-	"TrackId" INTEGER NOT NULL, 
-	"Name" NVARCHAR(200) NOT NULL, 
-	"AlbumId" INTEGER, 
-	"MediaTypeId" INTEGER NOT NULL, 
-	"GenreId" INTEGER, 
-	"Composer" NVARCHAR(220), 
-	"Milliseconds" INTEGER NOT NULL, 
-	"Bytes" INTEGER, 
-	"UnitPrice" NUMERIC(10, 2) NOT NULL, 
-	PRIMARY KEY ("TrackId"), 
-	FOREIGN KEY("MediaTypeId") REFERENCES media_types ("MediaTypeId"), 
-	FOREIGN KEY("GenreId") REFERENCES genres ("GenreId"), 
+	"TrackId" INTEGER NOT NULL,
+	"Name" NVARCHAR(200) NOT NULL,
+	"AlbumId" INTEGER,
+	"MediaTypeId" INTEGER NOT NULL,
+	"GenreId" INTEGER,
+	"Composer" NVARCHAR(220),
+	"Milliseconds" INTEGER NOT NULL,
+	"Bytes" INTEGER,
+	"UnitPrice" NUMERIC(10, 2) NOT NULL,
+	PRIMARY KEY ("TrackId"),
+	FOREIGN KEY("MediaTypeId") REFERENCES media_types ("MediaTypeId"),
+	FOREIGN KEY("GenreId") REFERENCES genres ("GenreId"),
 	FOREIGN KEY("AlbumId") REFERENCES albums ("AlbumId")
 )
 
@@ -653,7 +653,7 @@ TrackId	Name	AlbumId	MediaTypeId	GenreId	Composer	Milliseconds	Bytes	UnitPrice
 1	For Those About To Rock (We Salute You)	1	1	1	Angus Young, Malcolm Young, Brian Johnson	343719	11170334	0.99
 2	Balls to the Wall	2	2	1	None	342562	5510424	0.99
 3	Fast As a Shark	3	2	1	F. Baltes, S. Kaufman, U. Dirkscneider & W. Hoffman	230619	3990994	0.99
-*/[0m[32;1m[1;3m```json
+*/[0m[32;1m[1;3m``​`json
 [
     {
         "tableName": "albums",
@@ -1128,7 +1128,7 @@ TrackId	Name	AlbumId	MediaTypeId	GenreId	Composer	Milliseconds	Bytes	UnitPrice
         ]
     }
 ]
-```[0m
+``​`[0m
 
 [1m> Finished chain.[0m
 ```
@@ -1316,7 +1316,7 @@ class InferenceAgent:
         try:
             if db_graph:
                 print(f"\n🔍 Analyzing query with graph: '{text}'")
-                
+
                 # Analyze the question with the database graph
                 graph_analysis = self.analyze_question_with_graph(db_graph, text)
                 print(f"\n📊 Graph Analysis Results:")
@@ -1466,7 +1466,7 @@ If the input is database related, it triggers the planning and delegation proces
 ```python
 def classify_user_input(state: ConversationState) -> ConversationState:
     """Classifies user input to determine if it requires database access."""
-    
+
     # Define a system prompt for classifying input into predefined categories
     system_prompt = """You are an input classifier. Classify the user's input into one of these categories:
     - DATABASE_QUERY: Questions about data, requiring database access
@@ -1621,16 +1621,16 @@ def discover_database(state: ConversationState) -> ConversationState:
     # Check if the database graph is already present in the state
     if state.get('db_graph') is None:
         logger.info("Performing one-time database schema discovery...")
-        
+
         # Use the DiscoveryAgent to generate the database graph
         discovery_agent = DiscoveryAgent()
         graph = discovery_agent.discover()
-        
+
         logger.info("Database schema discovery complete - this will be reused for future queries")
-        
+
         # Update the state with the discovered database graph
         return {**state, "db_graph": graph}
-    
+
     # Return the existing state if the database graph already exists
     return state
 ```
@@ -1746,10 +1746,10 @@ Invoking: `sql_db_schema` with `{'table_names': 'albums, artists, customers, emp
 
 [0m[33;1m[1;3m
 CREATE TABLE albums (
-	"AlbumId" INTEGER NOT NULL, 
-	"Title" NVARCHAR(160) NOT NULL, 
-	"ArtistId" INTEGER NOT NULL, 
-	PRIMARY KEY ("AlbumId"), 
+	"AlbumId" INTEGER NOT NULL,
+	"Title" NVARCHAR(160) NOT NULL,
+	"ArtistId" INTEGER NOT NULL,
+	PRIMARY KEY ("AlbumId"),
 	FOREIGN KEY("ArtistId") REFERENCES artists ("ArtistId")
 )
 
@@ -1763,8 +1763,8 @@ AlbumId	Title	ArtistId
 
 
 CREATE TABLE artists (
-	"ArtistId" INTEGER NOT NULL, 
-	"Name" NVARCHAR(120), 
+	"ArtistId" INTEGER NOT NULL,
+	"Name" NVARCHAR(120),
 	PRIMARY KEY ("ArtistId")
 )
 
@@ -1778,20 +1778,20 @@ ArtistId	Name
 
 
 CREATE TABLE customers (
-	"CustomerId" INTEGER NOT NULL, 
-	"FirstName" NVARCHAR(40) NOT NULL, 
-	"LastName" NVARCHAR(20) NOT NULL, 
-	"Company" NVARCHAR(80), 
-	"Address" NVARCHAR(70), 
-	"City" NVARCHAR(40), 
-	"State" NVARCHAR(40), 
-	"Country" NVARCHAR(40), 
-	"PostalCode" NVARCHAR(10), 
-	"Phone" NVARCHAR(24), 
-	"Fax" NVARCHAR(24), 
-	"Email" NVARCHAR(60) NOT NULL, 
-	"SupportRepId" INTEGER, 
-	PRIMARY KEY ("CustomerId"), 
+	"CustomerId" INTEGER NOT NULL,
+	"FirstName" NVARCHAR(40) NOT NULL,
+	"LastName" NVARCHAR(20) NOT NULL,
+	"Company" NVARCHAR(80),
+	"Address" NVARCHAR(70),
+	"City" NVARCHAR(40),
+	"State" NVARCHAR(40),
+	"Country" NVARCHAR(40),
+	"PostalCode" NVARCHAR(10),
+	"Phone" NVARCHAR(24),
+	"Fax" NVARCHAR(24),
+	"Email" NVARCHAR(60) NOT NULL,
+	"SupportRepId" INTEGER,
+	PRIMARY KEY ("CustomerId"),
 	FOREIGN KEY("SupportRepId") REFERENCES employees ("EmployeeId")
 )
 
@@ -1805,22 +1805,22 @@ CustomerId	FirstName	LastName	Company	Address	City	State	Country	PostalCode	Phon
 
 
 CREATE TABLE employees (
-	"EmployeeId" INTEGER NOT NULL, 
-	"LastName" NVARCHAR(20) NOT NULL, 
-	"FirstName" NVARCHAR(20) NOT NULL, 
-	"Title" NVARCHAR(30), 
-	"ReportsTo" INTEGER, 
-	"BirthDate" DATETIME, 
-	"HireDate" DATETIME, 
-	"Address" NVARCHAR(70), 
-	"City" NVARCHAR(40), 
-	"State" NVARCHAR(40), 
-	"Country" NVARCHAR(40), 
-	"PostalCode" NVARCHAR(10), 
-	"Phone" NVARCHAR(24), 
-	"Fax" NVARCHAR(24), 
-	"Email" NVARCHAR(60), 
-	PRIMARY KEY ("EmployeeId"), 
+	"EmployeeId" INTEGER NOT NULL,
+	"LastName" NVARCHAR(20) NOT NULL,
+	"FirstName" NVARCHAR(20) NOT NULL,
+	"Title" NVARCHAR(30),
+	"ReportsTo" INTEGER,
+	"BirthDate" DATETIME,
+	"HireDate" DATETIME,
+	"Address" NVARCHAR(70),
+	"City" NVARCHAR(40),
+	"State" NVARCHAR(40),
+	"Country" NVARCHAR(40),
+	"PostalCode" NVARCHAR(10),
+	"Phone" NVARCHAR(24),
+	"Fax" NVARCHAR(24),
+	"Email" NVARCHAR(60),
+	PRIMARY KEY ("EmployeeId"),
 	FOREIGN KEY("ReportsTo") REFERENCES employees ("EmployeeId")
 )
 
@@ -1834,8 +1834,8 @@ EmployeeId	LastName	FirstName	Title	ReportsTo	BirthDate	HireDate	Address	City	St
 
 
 CREATE TABLE genres (
-	"GenreId" INTEGER NOT NULL, 
-	"Name" NVARCHAR(120), 
+	"GenreId" INTEGER NOT NULL,
+	"Name" NVARCHAR(120),
 	PRIMARY KEY ("GenreId")
 )
 
@@ -1849,13 +1849,13 @@ GenreId	Name
 
 
 CREATE TABLE invoice_items (
-	"InvoiceLineId" INTEGER NOT NULL, 
-	"InvoiceId" INTEGER NOT NULL, 
-	"TrackId" INTEGER NOT NULL, 
-	"UnitPrice" NUMERIC(10, 2) NOT NULL, 
-	"Quantity" INTEGER NOT NULL, 
-	PRIMARY KEY ("InvoiceLineId"), 
-	FOREIGN KEY("TrackId") REFERENCES tracks ("TrackId"), 
+	"InvoiceLineId" INTEGER NOT NULL,
+	"InvoiceId" INTEGER NOT NULL,
+	"TrackId" INTEGER NOT NULL,
+	"UnitPrice" NUMERIC(10, 2) NOT NULL,
+	"Quantity" INTEGER NOT NULL,
+	PRIMARY KEY ("InvoiceLineId"),
+	FOREIGN KEY("TrackId") REFERENCES tracks ("TrackId"),
 	FOREIGN KEY("InvoiceId") REFERENCES invoices ("InvoiceId")
 )
 
@@ -1869,16 +1869,16 @@ InvoiceLineId	InvoiceId	TrackId	UnitPrice	Quantity
 
 
 CREATE TABLE invoices (
-	"InvoiceId" INTEGER NOT NULL, 
-	"CustomerId" INTEGER NOT NULL, 
-	"InvoiceDate" DATETIME NOT NULL, 
-	"BillingAddress" NVARCHAR(70), 
-	"BillingCity" NVARCHAR(40), 
-	"BillingState" NVARCHAR(40), 
-	"BillingCountry" NVARCHAR(40), 
-	"BillingPostalCode" NVARCHAR(10), 
-	"Total" NUMERIC(10, 2) NOT NULL, 
-	PRIMARY KEY ("InvoiceId"), 
+	"InvoiceId" INTEGER NOT NULL,
+	"CustomerId" INTEGER NOT NULL,
+	"InvoiceDate" DATETIME NOT NULL,
+	"BillingAddress" NVARCHAR(70),
+	"BillingCity" NVARCHAR(40),
+	"BillingState" NVARCHAR(40),
+	"BillingCountry" NVARCHAR(40),
+	"BillingPostalCode" NVARCHAR(10),
+	"Total" NUMERIC(10, 2) NOT NULL,
+	PRIMARY KEY ("InvoiceId"),
 	FOREIGN KEY("CustomerId") REFERENCES customers ("CustomerId")
 )
 
@@ -1892,8 +1892,8 @@ InvoiceId	CustomerId	InvoiceDate	BillingAddress	BillingCity	BillingState	Billing
 
 
 CREATE TABLE media_types (
-	"MediaTypeId" INTEGER NOT NULL, 
-	"Name" NVARCHAR(120), 
+	"MediaTypeId" INTEGER NOT NULL,
+	"Name" NVARCHAR(120),
 	PRIMARY KEY ("MediaTypeId")
 )
 
@@ -1907,10 +1907,10 @@ MediaTypeId	Name
 
 
 CREATE TABLE playlist_track (
-	"PlaylistId" INTEGER NOT NULL, 
-	"TrackId" INTEGER NOT NULL, 
-	PRIMARY KEY ("PlaylistId", "TrackId"), 
-	FOREIGN KEY("TrackId") REFERENCES tracks ("TrackId"), 
+	"PlaylistId" INTEGER NOT NULL,
+	"TrackId" INTEGER NOT NULL,
+	PRIMARY KEY ("PlaylistId", "TrackId"),
+	FOREIGN KEY("TrackId") REFERENCES tracks ("TrackId"),
 	FOREIGN KEY("PlaylistId") REFERENCES playlists ("PlaylistId")
 )
 
@@ -1924,8 +1924,8 @@ PlaylistId	TrackId
 
 
 CREATE TABLE playlists (
-	"PlaylistId" INTEGER NOT NULL, 
-	"Name" NVARCHAR(120), 
+	"PlaylistId" INTEGER NOT NULL,
+	"Name" NVARCHAR(120),
 	PRIMARY KEY ("PlaylistId")
 )
 
@@ -1939,18 +1939,18 @@ PlaylistId	Name
 
 
 CREATE TABLE tracks (
-	"TrackId" INTEGER NOT NULL, 
-	"Name" NVARCHAR(200) NOT NULL, 
-	"AlbumId" INTEGER, 
-	"MediaTypeId" INTEGER NOT NULL, 
-	"GenreId" INTEGER, 
-	"Composer" NVARCHAR(220), 
-	"Milliseconds" INTEGER NOT NULL, 
-	"Bytes" INTEGER, 
-	"UnitPrice" NUMERIC(10, 2) NOT NULL, 
-	PRIMARY KEY ("TrackId"), 
-	FOREIGN KEY("MediaTypeId") REFERENCES media_types ("MediaTypeId"), 
-	FOREIGN KEY("GenreId") REFERENCES genres ("GenreId"), 
+	"TrackId" INTEGER NOT NULL,
+	"Name" NVARCHAR(200) NOT NULL,
+	"AlbumId" INTEGER,
+	"MediaTypeId" INTEGER NOT NULL,
+	"GenreId" INTEGER,
+	"Composer" NVARCHAR(220),
+	"Milliseconds" INTEGER NOT NULL,
+	"Bytes" INTEGER,
+	"UnitPrice" NUMERIC(10, 2) NOT NULL,
+	PRIMARY KEY ("TrackId"),
+	FOREIGN KEY("MediaTypeId") REFERENCES media_types ("MediaTypeId"),
+	FOREIGN KEY("GenreId") REFERENCES genres ("GenreId"),
 	FOREIGN KEY("AlbumId") REFERENCES albums ("AlbumId")
 )
 
@@ -1969,7 +1969,7 @@ TrackId	Name	AlbumId	MediaTypeId	GenreId	Composer	Milliseconds	Bytes	UnitPrice
 ```
 
 ```text
-[32;1m[1;3m```json
+[32;1m[1;3m``​`json
 [
     {
         "tableName": "albums",
@@ -2444,7 +2444,7 @@ TrackId	Name	AlbumId	MediaTypeId	GenreId	Composer	Milliseconds	Bytes	UnitPrice
         ]
     }
 ]
-```[0m
+``​`[0m
 
 [1m> Finished chain.[0m
 ```
@@ -2516,7 +2516,7 @@ TrackId	Name	AlbumId	MediaTypeId	GenreId	Composer	Milliseconds	Bytes	UnitPrice
 ```
 
 ```text
-State after second invoke: {'question': 'Who are the top 3 artists by number of tracks?', 'input_type': 'DATABASE_QUERY', 'plan': [], 'db_results': "Step: Inference: Count tracks per artist\nResult: Query Executed: SELECT artists.Name, COUNT(tracks.TrackId) AS TrackCount FROM artists JOIN tracks ON artists.ArtistId = tracks.AlbumId GROUP BY artists.ArtistId\nResults: Error: (sqlite3.OperationalError) no such column: tracks.AlbumId\n\nSummary: The query encountered an error because there is no 'AlbumId' column in the 'tracks' table. The correct column to join the tables on is 'ArtistId'.\n\nStep: Inference: Identify the top 3 artists with the highest number of tracks\nResult: Query Executed: \n```sql\nSELECT artists.Name AS Artist, COUNT(tracks.TrackId) AS TrackCount \nFROM artists \nJOIN albums ON artists.ArtistId = albums.ArtistId \nJOIN tracks ON albums.AlbumId = tracks.AlbumId \nGROUP BY artists.ArtistId \nORDER BY TrackCount DESC \nLIMIT 3\n```\n\nResults: \n```\n1. Iron Maiden - 213 tracks\n2. U2 - 135 tracks\n3. Led Zeppelin - 114 tracks\n```\n\nSummary: The top 3 artists with the highest number of tracks are Iron Maiden with 213 tracks, U2 with 135 tracks, and Led Zeppelin with 114 tracks.\n\nStep: General: Provide the list of the top 3 artists by number of tracks\nResult: Provide the list of the top 3 artists by number of tracks", 'response': '- Iron Maiden: 213 tracks\n- U2: 135 tracks\n- Led Zeppelin: 114 tracks', 'db_graph': <networkx.classes.graph.Graph object at 0x15672d2e0>}
+State after second invoke: {'question': 'Who are the top 3 artists by number of tracks?', 'input_type': 'DATABASE_QUERY', 'plan': [], 'db_results': "Step: Inference: Count tracks per artist\nResult: Query Executed: SELECT artists.Name, COUNT(tracks.TrackId) AS TrackCount FROM artists JOIN tracks ON artists.ArtistId = tracks.AlbumId GROUP BY artists.ArtistId\nResults: Error: (sqlite3.OperationalError) no such column: tracks.AlbumId\n\nSummary: The query encountered an error because there is no 'AlbumId' column in the 'tracks' table. The correct column to join the tables on is 'ArtistId'.\n\nStep: Inference: Identify the top 3 artists with the highest number of tracks\nResult: Query Executed: \n``​`sql\nSELECT artists.Name AS Artist, COUNT(tracks.TrackId) AS TrackCount \nFROM artists \nJOIN albums ON artists.ArtistId = albums.ArtistId \nJOIN tracks ON albums.AlbumId = tracks.AlbumId \nGROUP BY artists.ArtistId \nORDER BY TrackCount DESC \nLIMIT 3\n``​`\n\nResults: \n``​`\n1. Iron Maiden - 213 tracks\n2. U2 - 135 tracks\n3. Led Zeppelin - 114 tracks\n``​`\n\nSummary: The top 3 artists with the highest number of tracks are Iron Maiden with 213 tracks, U2 with 135 tracks, and Led Zeppelin with 114 tracks.\n\nStep: General: Provide the list of the top 3 artists by number of tracks\nResult: Provide the list of the top 3 artists by number of tracks", 'response': '- Iron Maiden: 213 tracks\n- U2: 135 tracks\n- Led Zeppelin: 114 tracks', 'db_graph': <networkx.classes.graph.Graph object at 0x15672d2e0>}
 Response 2: - Iron Maiden: 213 tracks
 - U2: 135 tracks
 - Led Zeppelin: 114 tracks

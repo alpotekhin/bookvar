@@ -12,6 +12,17 @@ GPU простаивает, если batch не готов. Data pipeline дол
 batch быстрее, чем модель обрабатывает текущий, и не тратить compute на
 бессмысленный padding.
 
+## Полные источники и задание
+
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week02_fast_pipelines/lecture.pdf|EDLS Week 2 — полная лекция]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week02_fast_pipelines/seminar/practice.ipynb|EDLS Week 2 — seminar notebook]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week02_fast_pipelines/homework/README|EDLS Week 2 — homework]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/data_engineering|Harvard CS249r — Data Engineering]].
+
+В EDLS этот материал дан как цепочка оптимизаций, которые нужно измерять:
+baseline loader → parallel workers → pinned memory и prefetch → dynamic
+padding/bucketing/packing. Именно в таком порядке его стоит воспроизводить.
+
 ## Что хранить
 
 > **Адаптация, не дословная цитата:** EDLS week 2, PDF p. 26,
