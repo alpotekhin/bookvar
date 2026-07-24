@@ -60,6 +60,10 @@ FlashAttention не делает внимание разреженным и не
 
 ## Блочный проход через SRAM
 
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/gpu-memory-hierarchy.svg]]
+
+*Harvard ML Systems, Vol. II, `performance_engineering.qmd`: on-chip SRAM мала, но существенно быстрее HBM; [оригинальный SVG](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/gpu-memory-hierarchy.svg), CC BY-NC-SA 4.0.*
+
 Большая схема Tri Dao на странице Stanford CRFM показывает весь forward pass.
 Блоки $K_j,V_j$ поочерёдно загружаются из HBM в SRAM. Для каждого блока $Q_i$
 вычисляется небольшая плитка $Q_iK_j^\top$, сразу применяется локальный softmax
@@ -178,6 +182,10 @@ FlashAttention может реализовывать causal или sliding-windo
 решениями.
 
 ## Как понять, что kernel действительно используется
+
+FlashAttention — частный случай fusion: промежуточный тензор выгодно потребить до записи в HBM. EDLS week 6 разбирает тот же аргумент на fused QKV, RoPE, cross-entropy, RMSNorm и SwiGLU; реализации связаны с [[02 Areas/ML & DL/00 Учебник/10 ML Systems/07 Profiling ML-нагрузки|главой о profiling]], а исходный [worked notebook закреплён точным commit](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week06_dl_arithmetic/seminar/practice.ipynb). Компилятор может слить pointwise-операции, Triton — выразить kernel, библиотека — предоставить вручную настроенный schedule; profiler должен подтвердить путь.
+
+На prefill много строк Q и крупные tiles загружают tensor cores. На decode новая Q обычно одна на sequence, а paged KV читается из HBM; нужен decode/paged-attention kernel. Ускорение prefill не доказывает улучшение TPOT.
 
 В PyTorch функция
 [`scaled_dot_product_attention`](https://pytorch.org/docs/stable/generated/torch.nn.functional.scaled_dot_product_attention.html)

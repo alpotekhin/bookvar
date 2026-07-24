@@ -51,6 +51,10 @@ primary_sources:
 
 ## Orca: планирование на уровне итерации
 
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/inference/continuous-batching.svg]]
+
+*Harvard ML Systems, Vol. II, `inference.qmd`: continuous batching освобождает слот на границе итерации; [оригинальный SVG](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/inference/images/svg/continuous-batching.svg), CC BY-NC-SA 4.0.*
+
 Orca ввела **iteration-level scheduling**. Планировщик вызывает модель не до
 завершения фиксированной группы, а на одну итерацию. После неё он удаляет
 завершившиеся последовательности, принимает новые и формирует следующий пакет.
@@ -86,6 +90,8 @@ forward pass. Автор: Aleksa Gordić; лицензия на странице
 requests.
 
 ## Что выбирает планировщик на каждом шаге
+
+Минимальный scheduler хранит переходы `WAITING -> RUNNING_PREFILL -> RUNNING_DECODE -> FINISHED`; при нехватке блоков возможен `RUNNING -> PREEMPTED -> WAITING`. На итерации он снимает завершённые запросы, освобождает KV-блоки, вычисляет token/KV budget, выбирает decode-токены и prefill chunks, резервирует блоки и только затем запускает model runner. Этот порядок не позволяет принять работу, для которой нет состояния.
 
 В устойчивом абстрактном описании цикл состоит из пяти действий.
 

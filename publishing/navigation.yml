@@ -172,6 +172,8 @@ sections:
       - source: 00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md
         source_en: en/00 Textbook/14 Inference and optimization/57 Quantizing language models.md
         route: textbook/inference/quantization
+      - source: 00 Учебник/14 Inference и оптимизация/57a KV-cache compression и offload.md
+        route: textbook/inference/kv-cache-compression-offload
       - source: 00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md
         source_en: en/00 Textbook/14 Inference and optimization/58 Speculative decoding.md
         route: textbook/inference/speculative-decoding
@@ -184,6 +186,8 @@ sections:
       - source: 00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md
         source_en: en/00 Textbook/14 Inference and optimization/58b Benchmarking SLOs and inference operations.md
         route: textbook/inference/benchmarking-slo
+      - source: 00 Учебник/14 Inference и оптимизация/58c Queueing и capacity planning.md
+        route: textbook/inference/queueing-capacity-planning
       - source: 00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md
         route: textbook/evaluation/models-contamination
       - source: 00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning.md
@@ -417,6 +421,8 @@ sections:
           - label: 57. Квантизация языковых моделей
             label_en: 57. Quantizing language models
             route: textbook/inference/quantization
+          - label: 57.1 KV-cache compression и offload
+            route: textbook/inference/kv-cache-compression-offload
           - label: 58. Спекулятивное декодирование
             label_en: 58. Speculative decoding
             route: textbook/inference/speculative-decoding
@@ -429,6 +435,8 @@ sections:
           - label: 58.3 Benchmarking, SLO и эксплуатация inference
             label_en: 58.3 Benchmarking, SLOs, and inference operations
             route: textbook/inference/benchmarking-slo
+          - label: 58.4 Queueing и capacity planning
+            route: textbook/inference/queueing-capacity-planning
           - label: 59. Оценивание моделей и контаминация
             route: textbook/evaluation/models-contamination
           - label: 60. Embeddings и metric learning

@@ -148,6 +148,10 @@ weight-read latency. Decode хранит много долгоживущих KV 
 
 ## Что именно меняет disaggregation
 
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/inference/disaggregated-serving.svg]]
+
+*Harvard ML Systems, Vol. II, `inference.qmd`: независимые prefill/decode pools с KV handoff; [pinned original](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/inference/images/svg/disaggregated-serving.svg), CC BY-NC-SA 4.0.*
+
 В disaggregated architecture имеются как минимум два независимо масштабируемых
 типа model instances. Prefill instance получает tokens, вычисляет KV cache и
 первый token. После этого decode instance должен получить совместимое KV state,

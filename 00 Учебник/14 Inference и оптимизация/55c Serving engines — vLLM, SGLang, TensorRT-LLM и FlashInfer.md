@@ -8,6 +8,14 @@ last_verified: 2026-07-22
 
 # Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer
 
+Эта глава не переопределяет prefill/decode, KV-cache или continuous batching:
+их канонические механизмы находятся соответственно в [[55a Физика LLM inference — prefill, decode и roofline|физике inference]],
+[[55 KV-cache, пакетирование и PagedAttention|главе о KV-памяти]] и
+[[55b Scheduling — continuous batching, chunked prefill и prefix caching|главе
+о scheduling]]. Здесь один и тот же набор механизмов сравнивается как
+архитектура конкретных runtime. Оригинальный разбор Aleksa Gordić и материалы
+vLLM ниже сохранены в исходной форме; мосты добавлены вокруг них.
+
 После загрузки весов и токенизатора модель ещё не становится сервисом. Один
 вызов `generate` может последовательно обработать prompt и выпустить ответ, но
 производственная система одновременно принимает запросы разной длины, меняет
@@ -263,4 +271,3 @@ runtime выдержит производственный SLO.
 - [FlashInfer documentation](https://docs.flashinfer.ai/).
 - [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention|KV-cache, пакетирование и PagedAttention]]
 - [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/56 FlashAttention|FlashAttention]]
-
