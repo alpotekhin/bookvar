@@ -81,7 +81,7 @@ $$u_t=g_t+e_t,\quad q_t=C(u_t),\quad e_{t+1}=u_t-q_t.$$
 
 ## Источники
 
-- EDLS, [week 3: distributed training](https://github.com/mryab/efficient-dl-systems).
+- EDLS, pinned commit `e632aa89…`, [`week03_data_parallel/lecture.pdf`, PDF pp. 24–35 “All-Reduce data parallel”/“Faster allreduce”/Ring, pp. 39–51 Gossip, pp. 52–62 gradient compression/Error Feedback/PowerSGD](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week03_data_parallel/lecture.pdf).
 - Harvard Edge ML Systems Book, [Collective Communication](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/collective_communication/collective_communication.qmd), sections `sec-collective-communication-primitives`, `sec-collective-communication-allreduce`.
 - Harvard Edge ML Systems Book, commit `45ecc8d…`, [Distributed Training, `sec-distributed-training-systems-systems-data-parallelism-0c8f`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/distributed_training.qmd).
 - Vogels et al., [PowerSGD](https://arxiv.org/abs/1905.13727), 2019.
