@@ -12,6 +12,17 @@ primary_sources:
 
 # FlashAttention: точное внимание с меньшим обменом памятью
 
+## Исходные материалы и измерение
+
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week06_dl_arithmetic/lecture.pdf|EDLS Week 6 — activation logistics и fused kernels]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week06_dl_arithmetic/seminar/practice.ipynb|EDLS Week 6 — notebook]];
+- [[02 Areas/ML & DL/Papers/Flash Attention|FlashAttention — карточка paper]];
+- [[02 Areas/ML & DL/Papers/Flash Attention 2|FlashAttention-2 — карточка paper]].
+
+Paper задаёт алгоритм и доказательство exactness; EDLS помещает его в реальный
+Transformer step. Проверяйте не только latency kernel, но и peak memory,
+end-to-end step time и применимость backend к нужным shape/dtype/mask.
+
 Формула внимания содержит два матричных умножения и softmax:
 
 $$

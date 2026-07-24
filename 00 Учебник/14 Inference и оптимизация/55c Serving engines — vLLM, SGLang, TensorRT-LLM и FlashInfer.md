@@ -8,6 +8,18 @@ last_verified: 2026-07-22
 
 # Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer
 
+## Полный курс, на котором основана глава
+
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week08_inference_software/lecture.pdf|EDLS Week 8 — полная лекция]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week08_inference_software/seminar.ipynb|EDLS Week 8 — seminar notebook]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week08_inference_software/homework/homework_week8.ipynb|EDLS Week 8 — полный homework]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/model_serving|Harvard CS249r — Model Serving]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/inference|Harvard CS249r — Inference]].
+
+Оригинальный [Inside vLLM](https://www.aleksagordic.com/blog/vllm) остаётся
+основным walkthrough vLLM V1; локальные EDLS и Harvard главы добавляют
+исполняемый учебный контекст и сравнение с полным serving lifecycle.
+
 Эта глава не переопределяет prefill/decode, KV-cache или continuous batching:
 их канонические механизмы находятся соответственно в [[55a Физика LLM inference — prefill, decode и roofline|физике inference]],
 [[55 KV-cache, пакетирование и PagedAttention|главе о KV-памяти]] и

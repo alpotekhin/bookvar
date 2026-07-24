@@ -12,6 +12,18 @@ primary_sources:
 
 # KV-cache, пакетирование и PagedAttention
 
+## Полные исходные материалы
+
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week08_inference_software/lecture.pdf|EDLS Week 8 — полная лекция]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week08_inference_software/seminar.ipynb|EDLS Week 8 — seminar notebook]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week08_inference_software/homework/homework_week8.ipynb|EDLS Week 8 — inference-engine homework]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/inference|Harvard CS249r — Inference]].
+
+EDLS показывает KV-cache как исполняемую структуру engine, Harvard — как часть
+полного serving path. После чтения этой главы переходите к
+[[02 Areas/ML & DL/06 Практика/14 Собрать минимальный inference engine|практике
+по минимальному inference engine]].
+
 Определения prefill, decode и roofline канонически выведены в [[55a Физика LLM inference — prefill, decode и roofline]]. Здесь предмет уже: размещение растущего состояния многих запросов и загрузка ускорителя.
 
 При обучении Transformer получает прямоугольный пакет токенов и обрабатывает

@@ -15,6 +15,17 @@ primary_sources:
 
 # Раздельное обслуживание prefill и decode
 
+## Системный контекст
+
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/inference|Harvard CS249r — Inference]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/network_fabrics|Harvard CS249r — Network Fabrics]];
+- [[02 Areas/ML & DL/05 Источники/LMCache/LMCache MP mode — transfer paths|LMCache — transfer paths]];
+- [[02 Areas/ML & DL/05 Источники/LMCache/KV cache as persistent inference state|LMCache — persistent inference state]].
+
+Разделение prefill/decode переносит KV-cache через сеть, поэтому его нельзя
+обсуждать отдельно от размера состояния, fabric bandwidth, queueing и
+placement. Локальные главы выше дают именно эти четыре части расчёта.
+
 Во время генерации один запрос дважды предъявляет к системе почти противоположные
 требования. Сначала модель получает весь prompt и строит для него KV cache. Затем
 она много раз исполняет короткий forward pass, каждый раз добавляя ровно один
