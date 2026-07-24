@@ -93,6 +93,24 @@ collectives. Типовые паттерны:
 Nsight Compute нужен после Systems, когда выбран конкретный kernel: occupancy,
 memory throughput, Tensor Core instructions, stalls и roofline position.
 
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/profiling-hierarchy.svg]]
+
+*Источник: Harvard CS249r, Vol. II preview, Performance Engineering,
+`profiling-hierarchy.svg`, commit `45ecc8d…`, CC BY-NC-SA 4.0.*
+
+## End-to-end кейс
+
+Baseline после warmup: step median/p95 420/470 ms. `py-spy` показывает ожидание
+`next(loader)`. PyTorch trace раскладывает median: 110 ms loader wait, 18 ms
+H2D, 275 ms CUDA kernels, 17 ms launch gaps. Nsight Systems подтверждает:
+pageable H2D не перекрывается с compute.
+
+После `pin_memory`, persistent workers и bounded prefetch loader wait почти
+целиком перекрыт, critical path — 304 ms. Затем trace показывает сотни мелких
+elementwise kernels; `torch.compile` даёт 286 ms. Непрофилированная повторная
+серия даёт median/p95 288/315 ms при тех же tokens и loss. Так разделяются
+причина, эффект изменения и perturbation самого profiler.
+
 ## Воспроизводимый цикл
 
 1. Зафиксировать workload, hardware/software versions и baseline distribution.
@@ -101,6 +119,15 @@ memory throughput, Tensor Core instructions, stalls и roofline position.
 4. Изменить одну вещь.
 5. Повторить benchmark без profiler overhead.
 6. Проверить correctness и memory peak.
+
+Вместе с trace сохраняют git commit, command/config, input shapes и token count,
+GPU/driver/CUDA/cuDNN/NCCL, PyTorch/compiler versions, clocks/power mode,
+warmup/active schedule, rank/host и before-after benchmark. PyTorch export
+делают через `tensorboard_trace_handler`; Nsight сохраняют в `.nsys-rep`,
+memory snapshot — в versioned `.pickle`. Trace может содержать stack paths,
+shapes и NVTX labels с пользовательскими данными — перед публикацией его
+очищают. Сравнение артефактов разных версий без manifest ненадёжно: fusion,
+operator names и private snapshot API меняются.
 
 Framework layer также платит dispatch tax: eager graph удобно отлаживать, но
 Python и operator dispatch заметны при мелких операциях. Compilation/fusion
@@ -113,7 +140,7 @@ Python и operator dispatch заметны при мелких операция�
 
 ## Источники
 
-- [EDLS week 2 lecture](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week02_fast_pipelines/lecture.pdf)
+- [EDLS week 2 lecture](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week02_fast_pipelines/lecture.pdf) — “Profiling: what and why”, “How to profile Python/GPU/PyTorch code?”, “PyTorch Profiler + trace viewer”, “Nsight Systems/Nsight Compute”, “Profiling: typical patterns”; title locators used because incremental slides repeat in the PDF.
 - [EDLS week 2 profiler practice](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week02_fast_pipelines/seminar/practice.ipynb)
 - [PyTorch Profiler](https://pytorch.org/tutorials/recipes/recipes/profiler_recipe.html)
 - [PyTorch Memory Snapshot](https://pytorch.org/docs/stable/torch_cuda_memory.html)

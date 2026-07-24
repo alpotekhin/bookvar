@@ -2,103 +2,121 @@
 title: GPU, CUDA и иерархия памяти
 type: textbook-chapter
 status: draft
-last_verified: 2026-07-23
+last_verified: 2026-07-24
 source_language: mixed
 ---
 
 # GPU, CUDA и иерархия памяти
 
-GPU ускоряет DL не магически: он исполняет много однотипной арифметики
-параллельно. Реальная скорость появляется, когда работа регулярна, данные
-переиспользуются близко к вычислителям, а host не заставляет device ждать.
+GPU быстр, когда много одинаковой работы можно запланировать одновременно, а
+данные переиспользуются рядом с ALU.
 
-## Host, device, kernel
+## От grid до SM: исполнение и планирование
 
-> In CUDA, we launch kernels from the host that are executed in parallel on the
-> device. Kernels are executed by threads grouped in thread blocks of limited
-> size. Multiple thread blocks are arranged in grids.
+Host ставит kernel launch в очередь device. Grid делится на thread blocks; block
+назначается одному Streaming Multiprocessor (SM), где threads группируются в
+warps по 32 lanes. Warp scheduler выбирает готовый warp каждый цикл. Если warp
+ждёт память, другой скрывает latency — при условии, что он resident и готов.
 
-CPU-host формирует аргументы и помещает kernel launch в очередь. GPU-device
-распределяет blocks по Streaming Multiprocessors (SM). Block живёт на одном SM,
-может синхронизировать свои threads и совместно использовать shared memory.
-Grid может быть 1D/2D/3D — это способ адресовать задачу, а не новая физика.
+**Occupancy** — resident warps / аппаратный максимум. Её ограничивают threads per
+block, shared memory и registers. Максимальная occupancy не равна максимальной
+скорости: kernel с большим reuse может осознанно расходовать registers/shared
+memory и выигрывать при меньшей occupancy.
 
-## SIMT, warp и divergence
+SIMT исполняет одну инструкцию для активных lanes. При divergent `if/else` warp
+проходит пути с масками последовательно. Tail tiles и число blocks, не кратное
+числу SM, создают tile/wave quantization.
 
-> **SIMT (Single Instruction, Multiple Thread).** On a physical level, threads
-> are executed in groups of 32 called warps. A warp executes one instruction at
-> a time: in case of branching, all paths need to be taken.
-
-Если половина warp идёт по `if`, а половина по `else`, hardware маскирует
-неактивные lanes и последовательно проходит обе ветки. Результат корректен, но
-полезная ширина исполнения падает. Нерегулярность также создают:
-
-- **tile quantization** — размеры матрицы не кратны tile;
-- **wave quantization** — число tiles плохо делится на число SM;
-- нехватка registers/shared memory, уменьшающая occupancy.
-
-## Иерархия памяти
-
-Путь становится медленнее и вместительнее по мере удаления:
+## Оригинальная схема: где живут work и bytes
 
 ```text
-registers → shared memory / L1 → L2 → HBM (device)
-                                  ↕ PCIe / NVLink
-                              RAM (host) → SSD/network
+HOST RAM ── PCIe/NVLink ──► DEVICE HBM ─► L2 (общий)
+                                   │
+                    ┌──────────────┴──────────────┐
+                    ▼                             ▼
+                  SM 0                          SM N
+          warp schedulers                warp schedulers
+          registers/thread               registers/thread
+          shared memory/block            shared memory/block
+          L1/cache                       L1/cache
+                    └── Tensor/Core pipelines ──┘
 ```
 
-Registers принадлежат thread, shared memory — block, caches — GPU, HBM хранит
-тензоры. Harvard формулирует главный вывод так: специализация ускорителей
-увеличила compute быстрее, чем bandwidth, поэтому data movement всё чаще
-ограничивает производительность.
+*Оригинальная учебная схема Bookvar; синтез EDLS Week 1, PDF pp. 6–10, и
+Harvard CS249r Hardware Acceleration § “Evolution from SIMD to SIMT
+architectures”, locator
+`sec-hardware-acceleration-evolution-simd-simt-architectures-e1fd`, и
+§ “Memory hierarchy”, locator `sec-hardware-acceleration-memory-hierarchy-1839`.
+Не является копией исходной фигуры.*
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/foundation/hw_acceleration_energy_ladder.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/gpu-memory-hierarchy.svg]]
 
-*Источник: Harvard CS249r, Hardware Acceleration,
-`hw_acceleration_energy_ladder.svg`, CC BY-NC-SA 4.0; величины
-technology-specific.*
+*Оригинальная иллюстрация Harvard CS249r Vol. II, Performance Engineering,
+§ “Memory Hierarchy”, `gpu-memory-hierarchy.svg`, CC BY-NC-SA 4.0.*
 
-## PCIe и pinned memory
+## Memory access: coalescing, banks, spills
 
-> GPU has a separate memory unit (called device memory). Need to copy from host
-> memory and back (PCIe 4.0 x16 — 32 GB/s peak). Memory transfer is often a
-> bottleneck. Pinned (page-locked) memory access is much faster.
+- **Coalescing**: соседние lanes должны обращаться к соседним адресам, чтобы
+  warp обслуживался минимальным числом memory transactions. Strided access
+  превращает один полезный запрос в несколько cache-line/sector transactions.
+- **Shared-memory bank conflict**: разные адреса одного bank сериализуются
+  (broadcast одного адреса — особый быстрый случай). Padding tile, например
+  `[32][33]` вместо `[32][32]`, часто убирает конфликт при transpose.
+- **Register spill**: если компилятору не хватает registers, значения уходят в
+  local memory, которая физически находится в device memory и кэшируется.
+  “Local” означает scope thread, а не близость.
 
-32 GB/s — контекст слайда EDLS, не характеристика любой системы. HBM обычно на
-порядки быстрее PCIe, поэтому копирование маленькими порциями разрушает
-throughput. Page-locked host buffers позволяют DMA и асинхронное копирование,
-но pinning расходует дефицитную RAM — используют разумный pool, а не pin всего
-датасета.
+### Численный пример транзакций
 
-## Асинхронный запуск
+Warp читает 32 FP32 = 128 B. При выровненном contiguous access полезные 128 B
+укладываются в минимальное число секторов. При stride 32 elements lanes
+затрагивают 32 разнесённые области: payload тот же, но transferred bytes могут
+вырасти примерно до $32\times128=4096$ B, то есть полезность линии около 3%.
+Точное число зависит от архитектуры и cache state; важно считать transactions,
+а не только payload.
 
-> By default, CUDA kernel calls and device transfers are asynchronous. You can
-> send several kernels and wait for results.
+## Tiling и Tensor Cores
 
-Python может закончить enqueue раньше GPU. `tensor.item()`, печать CUDA tensor,
-копирование device→host и явный `synchronize()` создают границу ожидания.
-Streams позволяют перекрывать независимые kernels и transfer; CUDA Graphs
-уменьшают launch overhead для повторяемой последовательности.
+Наивный GEMM многократно читает $A$ и $B$ из HBM. Tiled kernel загружает их
+фрагменты в shared memory, синхронизирует block и переиспользует элементы для
+многих FMA. Tile больше — reuse выше, но растут shared memory/register pressure
+и риск tail waste. Tensor Cores выполняют matrix multiply-accumulate над
+фиксированными фрагментами и форматами; выигрыш требует подходящих dtype,
+alignment/layout и размеров, а accumulation precision надо выбирать осознанно.
 
-### Пример: почему batching важен
+## PCIe, NVLink и overlap
 
-100 копирований по 1 MB несут тот же payload, что одно 100 MB, но оплачивают
-latency запуска 100 раз. Если latency операции $\ell=10\,\mu s$, только overhead
-равен 1 ms против 0,01 ms. Это один из источников $L_{\text{lat}}$ Iron Law.
+EDLS Week 1 приводит PCIe 4.0 x16 ≈ 32 GB/s peak (PDF pp. 11–12): это контекст,
+не универсальная характеристика. NVLink даёт более быстрые device links, но
+топология и поколение определяют реальный путь. Page-locked host memory
+позволяет DMA и async H2D; pinning всей RAM вредно.
 
-## Практическая проверка
+CUDA calls обычно enqueue asynchronous work. **Stream** сохраняет порядок внутри
+себя; разные streams могут перекрываться при отсутствии зависимостей и наличии
+resources/copy engines. **Event** отмечает точку device timeline: им измеряют
+GPU interval или задают `stream.wait_event`, не блокируя весь device. Default
+stream semantics и скрытые `.item()`, D2H, printing могут сериализовать путь.
 
-1. Тензоры действительно на нужном device?
-2. Shapes кратны эффективным GEMM tiles?
-3. В hot path нет `.item()` и скрытых D2H?
-4. H2D идёт из pinned memory с `non_blocking=True`?
-5. Trace показывает overlap, а не только надежду на него?
+### Pipeline example
+
+Для трёх batches с copy 3 ms и compute 7 ms последовательность занимает 30 ms.
+Double buffering в двух streams даёт в идеале $3+3\cdot7=24$ ms: copy batch
+$i+1$ перекрывается с compute batch $i$. Проверять overlap следует timeline:
+асинхронность API сама его не гарантирует.
+
+## Практический разбор kernel
+
+1. Достаточно ли blocks/warps для всех SM?
+2. Что ограничивает occupancy: registers, shared memory или block size?
+3. Coalesced ли global loads, нет ли bank conflicts и spills?
+4. Сколько HBM transactions устраняет tile?
+5. Используется ли Tensor Core path?
+6. Видны ли overlap и зависимости streams/events в trace?
 
 ## Источники
 
-- [EDLS week 1 lecture](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week01_intro/lecture.pdf)
-- [Harvard CS249r, Hardware Acceleration](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/hw_acceleration/hw_acceleration.qmd)
-- [CUDA Programming Guide](https://docs.nvidia.com/cuda/cuda-c-programming-guide/)
+- [EDLS Week 1 lecture, pinned e632aa8](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week01_intro/lecture.pdf) — PDF pp. 6–20
+- [Harvard CS249r, Hardware Acceleration, pinned 45ecc8d](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/hw_acceleration/hw_acceleration.qmd) — §§ “GPU Architecture”, “Memory Hierarchy”, “Computation Scheduling”
 
 ← [[02 Areas/ML & DL/00 Учебник/10 ML Systems/01 Модель как часть системы|Модель как часть системы]] ·
 [[02 Areas/ML & DL/00 Учебник/10 ML Systems/03 Измерение производительности и roofline|Измерение производительности и roofline]] →

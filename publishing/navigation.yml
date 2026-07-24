@@ -313,6 +313,9 @@ sections:
             route: textbook/moe/mixture-of-experts
           - label: 40. Mamba, RWKV, RetNet и гибридные архитектуры
             route: textbook/modern-llm/sequence-model-alternatives
+      - label: VI. Вычислительные основы ML-систем
+        label_en: VI. Computational foundations of ML systems
+        items:
           - label: S1. Модель как часть системы
             route: textbook/ml-systems/model-as-part-of-system
           - label: S2. GPU, CUDA и иерархия памяти
@@ -327,8 +330,8 @@ sections:
             route: textbook/ml-systems/data-pipeline-padding-packing
           - label: S7. Profiling ML-нагрузки
             route: textbook/ml-systems/profiling
-      - label: VI. Обучение LLM
-        label_en: VI. Training language models
+      - label: VII. Обучение LLM
+        label_en: VII. Training language models
         items:
           - label: 41. Сбор, очистка и смеси данных
             route: textbook/pretraining/data-pipeline
@@ -358,8 +361,8 @@ sections:
             route: textbook/reasoning/test-time-compute
           - label: 53. Синтетические данные и учебные программы
             route: textbook/pretraining/synthetic-data-curricula
-      - label: VII. Эксплуатация и системы вокруг модели
-        label_en: VII. Inference and systems around the model
+      - label: VIII. Эксплуатация и системы вокруг модели
+        label_en: VIII. Inference and systems around the model
         items:
           - label: 54. Декодирование и выбор следующего токена
             label_en: 54. Decoding and selecting the next token

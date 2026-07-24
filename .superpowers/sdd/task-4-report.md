@@ -22,13 +22,13 @@ were added locally. No push, PR, deploy, or merge was performed.
 
 | Chapter | Source sections used | Transfer labels | Figures | Words |
 |---|---|---|---|---:|
-| 01 Модель как часть системы | Harvard Vol. I Introduction: D·A·M Taxonomy, Iron Law of ML Systems, energy tax/hierarchy; ML Systems: Purpose and Deployment Paradigm Framework/physical constraints | English source excerpts retained; Russian connecting and worked-example prose is editorial | `introduction_iron_law_bars.svg`, `introduction_energy_hierarchy.svg` | 544 |
-| 02 GPU, CUDA и иерархия памяти | EDLS week 1 lecture: GPU/CUDA execution and timing; Harvard Hardware Acceleration: acceleration fundamentals, parallel computing, memory/energy hierarchy | Imported course concepts in source language where quoted; Russian derivation and bridge prose is editorial/adapted | `hw_acceleration_energy_ladder.svg` | 592 |
-| 03 Измерение производительности и roofline | EDLS week 1 lecture: bandwidth, FLOP/s, CUDA measurement; Harvard Benchmarking: ML Benchmarking Framework, measurement challenges, tail latency; Harvard Hardware Acceleration: roofline | Source equations and claims adapted with device-context caveats; measurement procedure is editorial synthesis | `hw_acceleration_roofline_elbow.svg`, `benchmarking_tail_latency_gap.svg` | 378 |
-| 04 Арифметика Transformer и MoE | complete EDLS week 6 lecture; Harvard Neural Computation: matrix operations and memory accounting | EDLS calculations adapted and re-derived; Bookvar connective prose is editorial | none | 654 |
-| 05 Численные форматы и mixed precision | EDLS week 2 lecture: FP formats, AMP, FP8/MXFP8, utilization; Harvard training context through the transfer matrix | Device/version-specific numerical claims are attributed; derivations and decision rules are editorial | none | 540 |
-| 06 Data pipeline, padding и packing | EDLS week 2 lecture; week 2 dynamic-padding homework task 2; Harvard data-pipeline context through the gap matrix | Course mechanisms adapted; examples and causal bridges are editorial | none | 427 |
-| 07 Profiling ML-нагрузки | EDLS week 2 lecture and profiler practice; EDLS week 6 seminar context; Harvard Frameworks: execution problem and dispatch tax | Tool workflows adapted with explicit scope; diagnostic ladder is editorial synthesis | `frameworks_dispatch_tax_divergence.svg` | 519 |
+| 01 Модель как часть системы | Harvard Vol. I Introduction and ML Systems, with exact named sections/anchors in the chapter | Russian adaptation; PPDF is explicitly labeled a Bookvar mnemonic, not a Harvard term; two short verbatim excerpts are labeled | `introduction_iron_law_bars.svg`, `introduction_energy_hierarchy.svg` | 911 |
+| 02 GPU, CUDA и иерархия памяти | EDLS week 1 lecture; Harvard Hardware Acceleration “Acceleration Fundamentals” and hardware/memory hierarchy | Source concepts adapted; text SM diagram is an editorial execution map and registered Harvard diagram is unchanged | `gpu-memory-hierarchy.svg` | 732 |
+| 03 Измерение производительности и roofline | EDLS week 1 lecture; Harvard Benchmarking framework/measurement challenges and Hardware Acceleration roofline | Source equations adapted; harness, A/B and anti-gaming procedure are editorial synthesis | `benchmarking_tail_latency_gap.svg`, `roofline-model.svg` | 678 |
+| 04 Арифметика Transformer и MoE | complete EDLS week 6 slides 4–146; Harvard Neural Computation and Model Training | EDLS calculations re-derived with slide locators; custom schedule diagrams are explicitly explanatory text diagrams | `training_optimizer_memory.svg` | 1969 |
+| 05 Численные форматы и mixed precision | EDLS week 2 named slide sections; FP8 paper; PyTorch AMP | Device/version-specific claims and adaptation status are explicit | `hw_acceleration_energy_ladder.svg` | 903 |
+| 06 Data pipeline, padding и packing | EDLS week 2 named slide sections and dynamic-padding homework task 2 | Course mechanisms adapted; padding diagram is a derived quantitative ledger with inputs and efficiency shown | derived padding ledger | 770 |
+| 07 Profiling ML-нагрузки | EDLS week 2 named slide sections/practice; Harvard Frameworks | Tool workflow and end-to-end case are editorial synthesis with source locators | `profiling-hierarchy.svg`, `frameworks_dispatch_tax_divergence.svg` | 730 |
 
 All Harvard figures are pre-registered under
 `00 Учебник/Assets/Figures/curated/ml-systems/harvard/`, retain visible
@@ -91,8 +91,8 @@ required-topic scan
   diagnosis.
 - Claims with hardware- or software-version dependence are not presented as
   universal constants.
-- Chapter 01 keeps the Harvard systems framing in English and limits Russian
-  additions to connective explanation and one worked calculation.
+- Chapter 01 now distinguishes Harvard concepts from the Bookvar PPDF mnemonic;
+  no adapted prose is presented as a verbatim source excerpt.
 - The pages are calculation-led rather than definition-only.
 - Existing unrelated modification to
   `docs/superpowers/plans/2026-07-23-course-material-ingestion.md` was preserved
@@ -103,3 +103,50 @@ required-topic scan
 Main Task 4 commit:
 `9ebb1bd7865b900192b23a08f1706f4b3ab5e930`
 (`Add computational foundations for ML systems`).
+
+## Review remediation
+
+The first review returned `CHANGES REQUIRED`; the compact first drafts were not
+accepted as textbook-depth. The correction pass:
+
+- fixes activation dimensionality to `O(LNH) = O(LBSH)` and adds a per-layer
+  attention/MLP/norm activation ledger, FlashAttention and checkpointing;
+- distinguishes one MoE projection (`2kHI`) from full SwiGLU (`6kHI`);
+- covers the complete EDLS week 6 logistics sequence, Llama 7B/70B,
+  Qwen 235B-A32B, DeepSeek-V3, FSDP/NCCL/overlap, fusion/Liger, TP/EP and
+  GPipe/1F1B/ZeroBubble/DualPipeV;
+- expands benchmarking, GPU execution, numerical formats, input pipeline and
+  profiling to the requested mechanisms and worked examples;
+- creates a distinct sidebar module VI and renumbers training/operations to
+  VII/VIII; the manifest regression was updated to require eight modules;
+- corrects chapter 01's previous link to the immediately preceding architecture
+  chapter and adds honest section/slide locators throughout.
+
+Final correction verification:
+
+```text
+publishing npm test: 98/98 passed
+publishing build: passed
+publishing check:links: 0 broken internal routes, fragments, or files
+Astro production build: 574 pages; no ERROR/parse diagnostics
+render inspection: 14 corrected desktop/narrow captures opened
+```
+
+Formula self-check used direct arithmetic, independently of the prose:
+
+```text
+Llama 7B block:
+  4H^2 = 67,108,864 attention parameters
+  3HI = 135,266,304 SwiGLU parameters
+  total = 202,375,168 per layer; 6,476,005,376 over 32 layers
+  forward linear work at N=8192 = 3,315,714,752,512 FLOP
+
+activation ledger at B=1,S=8192,H=4096,I=11008,n_h=32:
+  residual = 67,108,864 bytes
+  two MLP intermediates = 360,710,144 bytes
+  one materialized attention matrix = 4,294,967,296 bytes
+
+MoE example S=8192,k=8,H=7168,I=2048:
+  full SwiGLU = 5,772,436,045,824 FLOP = 7.216 ms at 800 TFLOP/s
+  one projection = 1,924,145,348,608 FLOP = 2.405 ms
+```

@@ -11,6 +11,16 @@ source_language: mixed
 Меньше бит означает меньше memory/communication traffic и доступ к быстрым
 Tensor Cores, но одновременно меньше precision или dynamic range.
 
+## Encoding, rounding и пределы
+
+Нормальное двоичное число хранит
+$x=(-1)^s2^{e-\mathrm{bias}}(1.f)$. Экспонента задаёт range, fraction —
+расстояние между соседними числами. При cast значение округляется (обычно
+round-to-nearest, ties-to-even); слишком малое становится subnormal или нулём,
+слишком большое — `inf` или крайним конечным значением согласно формату и
+операции. FP16 точнее BF16 около единицы, но BF16 сохраняет порядок range FP32.
+Накопление длинной суммы поэтому делают в FP32 даже при узких operands.
+
 ## Форматы
 
 | Формат | Знак | Экспонента | Мантисса | Практический контекст |
@@ -27,6 +37,12 @@ PyTorch 1.12 — это version-specific поведение, которое не
 другую версию. FP8 throughput также зависит от GPU (в EDLS пример — H100),
 CUDA, kernels, shapes и accumulation dtype.
 
+Tensor Core доступен не по одному `dtype`: kernel должен поддерживать format,
+layout и shapes. Эффективность выше при подходящем tile/alignment, а маленькая
+или «хвостатая» матрица может не насытить устройство. Фиксируют GPU/CUDA/
+PyTorch/math mode, затем в Profiler/Nsight проверяют имя kernel и Tensor Core
+instructions. Догадываться об использовании Tensor Core по типу tensor нельзя.
+
 ## Mixed precision
 
 > Training in pure FP16 hardly works. Some operations (matrix multiplication)
@@ -36,6 +52,23 @@ Autocast выбирает low precision для подходящих GEMM/convolu
 чувствительные reductions/normalization в более широком формате. Accumulation
 часто шире input. Оптимизатор обновляет FP32 **master weights**, после чего
 рабочая low-precision копия используется в forward.
+
+Полный AMP-flow:
+
+```python
+optimizer.zero_grad(set_to_none=True)
+with torch.autocast("cuda", dtype=torch.float16):
+    loss = model(batch)
+scaler.scale(loss).backward()
+scaler.unscale_(optimizer)       # до clipping
+torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm)
+scaler.step(optimizer)           # пропускает step при inf/nan
+scaler.update()
+```
+
+При gradient accumulation loss нормируют на microsteps, а `step/update`
+вызывают только на границе логического batch. GEMM partial sums, reductions,
+softmax statistics и optimizer update обычно сохраняют в более широком типе.
 
 ### Loss scaling
 
@@ -69,6 +102,34 @@ FP8 values разделяют компактно представленный sc
 block. Результаты H100/Transformer Engine нельзя объявлять свойством «FP8
 вообще».
 
+Формально $q=\mathrm{clip}_{FP8}(\mathrm{round}(x/s))$, $\hat x=sq$. Scale
+выбирают по `amax=max(abs(x))`, иногда по истории amax: current scaling быстрее
+реагирует, delayed scaling дешевле, но отстаёт от смены распределения. Нужны
+отдельные scales для weights, activations и gradients, а также saturation,
+zero-rate, amax history и loss telemetry.
+
+В MXFP8 маленький block (типичный размер в microscaling-спецификациях — 32
+значения; поддержка platform-specific) делит общий power-of-two scale. Outlier
+портит квантование только своего блока, но появляются metadata, требования к
+axis/layout и зависимость от MX-aware kernels.
+
+## Worked example: memory throughput
+
+Оператор читает два и пишет один tensor по $10^8$ элементов. FP32 traffic —
+1,2 GB, BF16 — 0,6 GB. При эффективных 1,5 TB/s:
+
+$$t_{FP32}\ge0{,}80\text{ ms},\qquad t_{BF16}\ge0{,}40\text{ ms}.$$
+
+Это верхняя надежда на 2× от bytes, не обещание end-to-end: launch, conversion
+и compute остаются. Для Adam на 1B параметров AMP всё ещё может занимать
+16–18 GB model states, хотя activations уменьшаются вдвое.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/foundation/hw_acceleration_energy_ladder.svg]]
+
+*Источник визуала: Harvard CS249r, Hardware Acceleration,
+`hw_acceleration_energy_ladder.svg`, commit `45ecc8d…`, CC BY-NC-SA 4.0.
+Числа technology-specific; здесь важен качественный вывод о data movement.*
+
 ## MFU и HFU
 
 $$MFU=\frac{\text{model FLOP per step}/t_{\text{step}}}
@@ -83,7 +144,7 @@ checkpointing HFU может быть выше MFU. Сравнивать чис�
 
 ## Источники
 
-- [EDLS week 2 lecture](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week02_fast_pipelines/lecture.pdf)
+- [EDLS week 2 lecture](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week02_fast_pipelines/lecture.pdf) — “Floating point numbers”, “Tensor Cores”, “Mixed precision training”, “Memory savings of AMP”, “FP8 training”; title locators used because incremental slides repeat in the PDF.
 - [FP8 Formats for Deep Learning](https://arxiv.org/abs/2209.05433)
 - [PyTorch AMP](https://pytorch.org/docs/stable/amp.html)
 
