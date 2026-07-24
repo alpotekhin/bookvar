@@ -47,11 +47,27 @@ KV в четыре раза, хотя число query-голов не меня�
 
 ## Три уровня сжатия
 
+Три уровня отвечают на разные вопросы: *какой вектор создаёт модель*, *какие
+позиции участвуют в attention* и *где физически находится вычисленное
+состояние*. Их нельзя складывать в один коэффициент без отдельной проверки
+качества и latency.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/edls/inference-algorithms/kv-token-level-slide-71.png]]
+
+*Token-level: уменьшить число KV-позиций, читаемых attention kernel, либо
+переместить их в RAM/SSD/network. Efficient DL Systems, week 9, slide 71;
+[полный оригинальный слайд в pinned lecture](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week09_inference_algorithms/lecture.pdf).*
+
 **На уровне модели** уменьшают число или размер хранимых векторов. MQA/GQA
 разделяют K,V между query-головами. MLA проецирует состояние в низкоразмерное
 латентное пространство; это архитектурное решение, а не drop-in оптимизация
 готовой MHA-модели. Такие методы нужно закладывать в обучение или преобразование
 архитектуры.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/edls/inference-algorithms/kv-model-level-slide-72.png]]
+
+*Model-level: GQA, MLA/DSA и GDN меняют само представление состояния. Efficient
+DL Systems, week 9, slide 72; полный оригинальный слайд без редактирования.*
 
 **На уровне токенов** решают, все ли прошлые позиции должны оставаться в
 быстром кеше. Sliding window сохраняет недавнее окно. StreamingLLM удерживает
@@ -67,6 +83,18 @@ Cache-aware routing направляет запрос к replica, уже име�
 держат горячие блоки в HBM, более холодные — в host DRAM, SSD или удалённом
 хранилище. Эти решения сохраняют семантику модели, но добавляют индексацию,
 политику вытеснения и передачу данных.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/edls/inference-algorithms/kv-system-level-slide-73.png]]
+
+*System-level: prefix sharing, cache-aware load balancing, cascades,
+prefill/decode disaggregation и heterogeneous clusters. Efficient DL Systems,
+week 9, slide 73; полный оригинальный слайд из pinned source.*
+
+| уровень | что уменьшается | качество модели | критическая цена |
+|---|---|---|---|
+| model | $H_{kv}$ или размер latent state | требует обученной архитектуры | совместимость kernel/model |
+| token | число сохранённых/прочитанных позиций | маска или история может измениться | retrieval и long-context accuracy |
+| system | дубли и HBM residency | точное при полном fetch/reuse | lookup, transfer и tail latency |
 
 ## KV-quantization
 
@@ -107,12 +135,49 @@ latency. Но decode нужен очередной набор K,V на кажд�
 равна $4.295/24\approx0.179$ s — неприемлемо для интерактивного TPOT без
 перекрытия и выборочного fetch.
 
+### Residency, eviction и fetch
+
+Состояние блока проходит явный автомат:
+
+`HBM_RESIDENT -> EVICTING -> DRAM_RESIDENT -> SSD_RESIDENT`
+
+и обратно:
+
+`SSD_RESIDENT -> FETCHING_DRAM -> PREFETCHING_HBM -> HBM_RESIDENT`.
+
+Только `HBM_RESIDENT` блок можно передать attention kernel. Во время `EVICTING`
+reference count запрещает allocator переиспользовать страницы; во время
+`FETCHING` scheduler либо перекрывает чтение с другими слоями/запросами, либо
+учитывает stall в TPOT. Dirty означает новые append-позиции, ещё не отражённые
+в нижнем tier.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/lmcache-blog-2026/mp-transfer-paths.png]]
+
+*Три пути перемещения KV между workers показывают, что staging и transport
+являются частью critical path. Оригинал: Jiayue Chen, Tony Lin and LMCache Team,
+[Understanding LMCache MP Mode Transfer Paths](https://blog.lmcache.ai/en/2026/06/15/understanding-lmcache-mp-mode-transfer-paths-a-beginners-guide/);
+изображение сохранено в оригинальной форме.*
+
 Практический cascade хранит горячее окно в HBM, заранее подкачивает нужные блоки,
 перекрывает transfer с вычислением других слоёв и ограничивает число одновременных
 miss. Block table должна различать residency и логическую позицию; eviction
 нельзя завершать, пока активный kernel читает блок. При отказе удалённого tier
 политика явно выбирает recompute, admission rejection или деградацию, а не
 молчаливую потерю контекста.
+
+| tier | типичная роль | capacity | latency/bandwidth risk |
+|---|---|---:|---|
+| HBM | active decode window, ближайшие слои | минимальная | самый быстрый, дефицитный |
+| host DRAM | warm prefixes и prefetch staging | больше | PCIe/CXL transfer попадает в TPOT |
+| local SSD | cold reusable prefixes | ещё больше | queue depth и read amplification |
+| network/object tier | shared cache между replicas | максимальная | tail, congestion, failure domain |
+
+Eviction по LRU прост, но не знает будущего attention. Cost-aware policy
+сравнивает `fetch_time` с `recompute_prefill_time`, reuse probability и deadline.
+Для интерактивного запроса выгоднее оставить короткий горячий suffix; для
+agentic workload — общий system/tool prefix. Сильное token eviction уменьшает
+оба времени, но рискует качеством; lossless offload сохраняет качество, но
+переносит цену в latency.
 
 ## Проверка конфигурации
 

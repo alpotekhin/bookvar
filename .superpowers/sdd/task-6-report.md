@@ -125,6 +125,99 @@ Headless Chrome inspected:
 ## Scope audit
 
 Task changes are limited to inference chapters, navigation and this report.
-The pre-existing modified shared plan file remains excluded. No source registry,
-English fallback page, protected imported article, deploy state or remote was
+The pre-existing modified shared plan file remains excluded. Review remediation
+also adds four pinned EDLS slide renders and their provenance registry entries.
+No English fallback page, protected imported article, deploy state or remote was
 modified.
+
+## Review remediation
+
+Review found one mathematical defect and four depth/visual gaps. The remediation
+changes the earlier scope statement only for provenance: four original EDLS
+slide renders and their asset-registry entries are now included.
+
+### Speculative-decoding notation
+
+Chapter 58 now uses one convention everywhere: draft distribution $p$, target
+distribution $q$, candidate $x\sim p$, acceptance
+$\min(1,q(x)/p(x))$, residual proportional to $(q-p)_+$. The erroneous later
+paragraph that swapped $p,q$ was replaced by an unconditional-mass proof:
+accepted mass `min(p,q)` plus correction `(q-p)+` equals `q`. Greedy
+verification remains explicitly distinct.
+
+### Quantization depth
+
+Chapter 57 now gives:
+
+- E4M3FN and E5M2 bit layouts, finite ranges, normal/subnormal minima;
+- scalar E2M1 value set and saturation;
+- OCP MXFP4: 32-element blocks, E8M0 scale and 4.25 effective bits;
+- NVIDIA NVFP4: 16-element blocks, E4M3 block scale, FP32 global scale,
+  1D activation and 16×16 2D weight layout;
+- a 4096×4096 W4A16/W8A8 execution and byte ledger;
+- orthogonal-rotation algebra, offline absorption versus online fusion,
+  attention/RoPE constraints and an explicit verification ablation.
+
+Exact locators are EDLS week 9 slides 29, 36–55; OCP MX v1.0 Table 1/§5.3;
+CUDA `__nv_fp4_e2m1`; NVIDIA Transformer Engine NVFP4; and SpinQuant.
+
+### EAGLE depth and visual
+
+Chapter 58 separates EAGLE-1 feature regression plus token loss and shifted
+token input, EAGLE-2 confidence-weighted dynamic tree, and EAGLE-3 direct token
+loss, multi-layer feature fusion and training-time test. Proposal,
+tree-attention verification and KV rollback are explicit. A worked
+10-ms-target example shows 2.71× at accepted length 4.2 but slowdown at 1.4,
+making non-universality quantitative.
+
+The original EDLS slide 64 is registered and embedded:
+
+- `eagle-method-slide-64.png`
+- source SHA `e632aa89...`, page 64
+- rendered full slide, no crop/edit
+- PNG SHA-256 `c88f42fc89fc3e689ed751916854c70c40e9b128127a1a665bed31d31a8157f7`
+
+### KV visual layer
+
+Chapter 57a now embeds the three original EDLS taxonomy slides:
+
+- token-level slide 71, SHA-256 `0e6d59e080984086b425ad3ac2d073ef3aed70d9546455fe2c61865c62b8f7fd`;
+- model-level slide 72, SHA-256 `2f929ef94a51ff5bcbc6f83dae1aee643de4d6115ddc6ed98df073de7d849878`;
+- system-level slide 73, SHA-256 `b48e2be8523e45859a1f81312b2fdb1a25448ded6f6e23d2357bc1c820f282dc`.
+
+It also reuses the protected original LMCache MP transfer image and adds an
+explicit `HBM -> DRAM -> SSD` residency/evict/fetch state sequence, tier table
+and quality-versus-latency comparison. All four imported EDLS PNGs are
+registered with exact commit/page, SHA, license and `used_in`.
+
+### EDLS Qwen3-4B exhaustive audit
+
+The audit covered week 8 lecture, README, seminar and homework notebook:
+
+- lecture: 37 pages; qualitative prefill/decode on pages 11–12 and
+  memory hierarchy on page 21; no Qwen measurements or hardware identity;
+- seminar: zero saved output cells;
+- homework: zero saved output cells;
+- README: links only.
+
+Thus the requested stored measurements are absent, not merely overlooked.
+Chapter 58b marks the requirement unresolved, records both prompt-shape suites,
+warmup/run count, synchronization, metric formulas, the `eager` versus actual
+`flex_attention` code mismatch, and a copy-pasteable pinned notebook execution
+protocol. Closing it requires explicit authorization to download Qwen3-4B and
+an external CUDA run with `nvidia-smi`, software versions and raw samples; no
+model download/run occurred in Task 6.
+
+### Remediation verification
+
+- `publishing/npm test`: 10 files, 98 tests passed.
+- `publishing/pnpm build`: passed.
+- `publishing/npm run check:links`: 0 broken links.
+- `publishing/npm run test:output`: 1 file, 8 tests passed.
+- `site/pnpm check`: 0 errors, 0 warnings, 0 hints.
+- `site/pnpm build`: 594 pages and 595 indexed HTML files built.
+- all four imported PNG SHA-256 values match both manifests.
+- desktop render of speculative decoding is clean.
+- 412-pixel render of KV-cache offload reproduces the pre-existing,
+  site-wide horizontal overflow in the shared layout; the new figures are not
+  the source of that overflow.

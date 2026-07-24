@@ -5617,3 +5617,55 @@ assets:
     used_in: []
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
+  - id: curated-edls-week09-eagle-method-slide-64-c88f42fc89fc
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/edls/inference-algorithms/eagle-method-slide-64.png
+    author: Efficient DL Systems course contributors
+    source_url: https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week09_inference_algorithms/lecture.pdf#page=64
+    commit: e632aa89ca9e6638d52e1b686095e7442faffbb0
+    sha256: c88f42fc89fc3e689ed751916854c70c40e9b128127a1a665bed31d31a8157f7
+    license: MIT repository; embedded paper figures retain original attribution
+    license_url: https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/LICENSE
+    modifications: rendered full PDF slide 64 to PNG without crop or visual editing
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-edls-week09-kv-token-slide-71-0e6d59e08098
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/edls/inference-algorithms/kv-token-level-slide-71.png
+    author: Efficient DL Systems course contributors
+    source_url: https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week09_inference_algorithms/lecture.pdf#page=71
+    commit: e632aa89ca9e6638d52e1b686095e7442faffbb0
+    sha256: 0e6d59e080984086b425ad3ac2d073ef3aed70d9546455fe2c61865c62b8f7fd
+    license: MIT repository
+    license_url: https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/LICENSE
+    modifications: rendered full PDF slide 71 to PNG without crop or visual editing
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/57a KV-cache compression и offload.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-edls-week09-kv-model-slide-72-2f929ef94a51
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/edls/inference-algorithms/kv-model-level-slide-72.png
+    author: Efficient DL Systems course contributors
+    source_url: https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week09_inference_algorithms/lecture.pdf#page=72
+    commit: e632aa89ca9e6638d52e1b686095e7442faffbb0
+    sha256: 2f929ef94a51ff5bcbc6f83dae1aee643de4d6115ddc6ed98df073de7d849878
+    license: MIT repository
+    license_url: https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/LICENSE
+    modifications: rendered full PDF slide 72 to PNG without crop or visual editing
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/57a KV-cache compression и offload.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-edls-week09-kv-system-slide-73-b48e2be8523e
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/edls/inference-algorithms/kv-system-level-slide-73.png
+    author: Efficient DL Systems course contributors
+    source_url: https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week09_inference_algorithms/lecture.pdf#page=73
+    commit: e632aa89ca9e6638d52e1b686095e7442faffbb0
+    sha256: b48e2be8523e45859a1f81312b2fdb1a25448ded6f6e23d2357bc1c820f282dc
+    license: MIT repository
+    license_url: https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/LICENSE
+    modifications: rendered full PDF slide 73 to PNG without crop or visual editing
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/57a KV-cache compression и offload.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository

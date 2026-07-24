@@ -311,3 +311,35 @@ assets:
     modified: false
     used_in:
       - 00 Учебник/14 Inference и оптимизация/58c Queueing и capacity planning.md
+  - file: edls/inference-algorithms/eagle-method-slide-64.png
+    author: Efficient DL Systems course contributors
+    source_url: https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week09_inference_algorithms/lecture.pdf
+    commit: e632aa89ca9e6638d52e1b686095e7442faffbb0
+    license: MIT repository; embedded paper figures retain original attribution
+    modified: true
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md
+  - file: edls/inference-algorithms/kv-token-level-slide-71.png
+    author: Efficient DL Systems course contributors
+    source_url: https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week09_inference_algorithms/lecture.pdf
+    commit: e632aa89ca9e6638d52e1b686095e7442faffbb0
+    license: MIT repository
+    modified: true
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/57a KV-cache compression и offload.md
+  - file: edls/inference-algorithms/kv-model-level-slide-72.png
+    author: Efficient DL Systems course contributors
+    source_url: https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week09_inference_algorithms/lecture.pdf
+    commit: e632aa89ca9e6638d52e1b686095e7442faffbb0
+    license: MIT repository
+    modified: true
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/57a KV-cache compression и offload.md
+  - file: edls/inference-algorithms/kv-system-level-slide-73.png
+    author: Efficient DL Systems course contributors
+    source_url: https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week09_inference_algorithms/lecture.pdf
+    commit: e632aa89ca9e6638d52e1b686095e7442faffbb0
+    license: MIT repository
+    modified: true
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/57a KV-cache compression и offload.md
