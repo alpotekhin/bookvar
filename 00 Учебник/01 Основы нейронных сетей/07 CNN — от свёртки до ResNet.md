@@ -11,6 +11,12 @@ primary_sources:
 
 # CNN: от свёртки до ResNet
 
+**Полный исполняемый модуль:** [[05 Источники/Courses/Harvard ML Systems/tinytorch/09_convolutions|TinyTorch 09 — Convolutions]]. Модуль реализует `Conv2d`, `MaxPool2d` и `AvgPool2d` явными операциями, делая видимыми формы тензоров и вычислительную стоимость пространственной свёртки.
+
+Полная оригинальная англоязычная памятка Stanford — от свёртки и padding до
+типичных архитектур и transfer learning — сохранена в
+[[05 Источники/Courses/Stanford CS230 Cheatsheets/en/cheatsheet-convolutional-neural-networks.pdf|Convolutional Neural Networks Cheatsheet]].
+
 Полносвязный слой не знает, что соседние пиксели связаны, а один и тот же объект
 может находиться в разных частях изображения. Convolutional neural network
 встраивает два предположения: локальные признаки собираются из ближайших

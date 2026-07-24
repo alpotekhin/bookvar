@@ -12,6 +12,8 @@ primary_sources:
 
 # KV-cache, пакетирование и PagedAttention
 
+**Полный исполняемый модуль:** [[05 Источники/Courses/Harvard ML Systems/tinytorch/18_memoization|TinyTorch 18 — Memoization]]. В нём общая идея memoization применяется к авторегрессионной генерации через `KVCache` с добавлением новых состояний за $O(1)$ и отдельным учётом памяти.
+
 ## Полные исходные материалы
 
 - [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week08_inference_software/lecture.pdf|EDLS Week 8 — полная лекция]];

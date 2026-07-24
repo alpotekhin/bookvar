@@ -12,6 +12,10 @@ primary_sources:
 
 # Seq2Seq и bottleneck фиксированного вектора
 
+Оригинальная англоязычная сводка Stanford по sequence-to-sequence, beam search
+и attention доступна в
+[[05 Источники/Courses/Stanford CS230 Cheatsheets/en/cheatsheet-recurrent-neural-networks.pdf|Recurrent Neural Networks Cheatsheet]].
+
 Классификатор выдаёт один ответ, а переводчик должен породить
 последовательность, длина которой не обязана совпадать с длиной входа. Нельзя
 просто сопоставить первой позиции источника первую позицию перевода: порядок

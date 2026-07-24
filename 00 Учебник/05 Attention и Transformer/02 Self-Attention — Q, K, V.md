@@ -11,6 +11,8 @@ primary_sources:
 
 # Self-Attention изнутри: Q, K, V
 
+**Полный исполняемый модуль:** [[05 Источники/Courses/Harvard ML Systems/tinytorch/12_attention|TinyTorch 12 — Attention]]. В нём реализуются scaled dot-product и multi-head attention, causal masking и проверки обработки последовательностей с явной квадратичной стоимостью по длине контекста.
+
 ## Зачем слову смотреть на другие слова
 
 Входная таблица сопоставляет токену один и тот же исходный вектор во всех

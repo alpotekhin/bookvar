@@ -10,6 +10,13 @@ primary_sources:
 
 # Вычислительный граф и обратное распространение ошибки
 
+**Полный исполняемый модуль:** [[05 Источники/Courses/Harvard ML Systems/tinytorch/06_autograd|TinyTorch 06 — Autograd]]. Модуль расширяет `Tensor` вычислительным графом и reverse-mode `backward()` и проверяет полученные градиенты математическими тестами.
+
+Полный англоязычный вывод обратного распространения и исходные схемы доступны в
+[[05 Источники/Courses/Machine Learning Visualized/book/main.pdf|Machine Learning Visualized — Complete Book]].
+Компактная формульная сводка по вычислительному графу и оптимизации сохранена в
+[[05 Источники/Courses/Stanford CS230 Cheatsheets/en/super-cheatsheet-deep-learning.pdf|Stanford CS230 — Complete Deep Learning Cheatsheet]].
+
 Нейронная сеть во время обучения представляет собой большую составную функцию.
 Она получает пример, последовательно преобразует его и в конце выдаёт число,
 показывающее величину ошибки. Чтобы уменьшить эту ошибку, необходимо понять, как

@@ -12,6 +12,20 @@ primary_sources:
 
 # Tool use: от вызова функции к действию
 
+## Полные notebooks для разбора
+
+Все примеры сохранены в исходном виде: с авторским текстом, кодом, результатами
+выполнения и иллюстрациями.
+
+- [[02 Areas/ML & DL/05 Источники/Courses/GenAI Agents/all_agents_tutorials/simple_question_answering_agent.ipynb|Simple Question Answering Agent]] полезен как контрольный пример. В нём есть только шаблон prompt и вызов модели: функция `get_answer` называется агентом, но модель не выбирает действие и не получает наблюдение от среды.
+- [[02 Areas/ML & DL/05 Источники/Courses/GenAI Agents/all_agents_tutorials/task_oriented_agent.ipynb|Task-Oriented Agent]] показывает первый настоящий контракт инструментов: функции суммаризации и перевода обёрнуты в `StructuredTool`, аргументы описаны Pydantic-схемой, а `AgentExecutor` ограничивает число итераций.
+- [[02 Areas/ML & DL/05 Источники/Courses/GenAI Agents/all_agents_tutorials/langgraph-tutorial.ipynb|LangGraph Tutorial]] выносит состояние и порядок вычислений в граф. Это пример явного workflow, хотя не каждый его узел является внешним инструментом.
+- [[02 Areas/ML & DL/05 Источники/Courses/GenAI Agents/all_agents_tutorials/mcp-tutorial.ipynb|MCP Tutorial]] вводит MCP как стандартный интерфейс обнаружения и вызова внешних ресурсов и инструментов.
+- [[02 Areas/ML & DL/05 Источники/Courses/GenAI Agents/all_agents_tutorials/document_intake_agent_langgraph.ipynb|Document Intake Agent]] показывает прикладной случай: формат документа определяется детерминированно, конвертация выполняется внешним API, а условное ребро LangGraph выбирает дальнейший путь.
+
+Такой порядок не смешивает три разных механизма: обычный вызов модели,
+структурированный вызов функции и управление многошаговым процессом.
+
 Языковая модель не открывает веб-страницу и не запускает программу. Она лишь
 порождает последовательность токенов, которая **описывает желаемое действие**.
 Между такой последовательностью и реальным изменением мира всегда находится

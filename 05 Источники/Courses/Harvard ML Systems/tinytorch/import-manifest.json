@@ -1,0 +1,202 @@
+[
+  {
+    "module": "01_tensor",
+    "title": "Tensor Foundation",
+    "source_path": "tinytorch/src/01_tensor/01_tensor.py",
+    "metadata_path": "tinytorch/src/01_tensor/module.yaml",
+    "source_sha256": "d84293d44ec0d018b111f481d2859e2c6bec92a0d759dabce9180d77ffe9574c",
+    "metadata_sha256": "49548e0c6188c8dbbfa8d07f39e3a3173a27d3dcd0446ef668a2e7306b33eab6",
+    "source_commit": "2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd",
+    "output": "05 Источники/Courses/Harvard ML Systems/tinytorch/01_tensor.md"
+  },
+  {
+    "module": "02_activations",
+    "title": "Activations",
+    "source_path": "tinytorch/src/02_activations/02_activations.py",
+    "metadata_path": "tinytorch/src/02_activations/module.yaml",
+    "source_sha256": "fcf5f5874f82b1df0e77e8e6437dcc4c6c0978fee328bfa6726c0d150be584ea",
+    "metadata_sha256": "c0aaa7512b4a5115a3affeb123c40427c0689e5e86912e883f5e51d4327d0427",
+    "source_commit": "2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd",
+    "output": "05 Источники/Courses/Harvard ML Systems/tinytorch/02_activations.md"
+  },
+  {
+    "module": "03_layers",
+    "title": "Layers",
+    "source_path": "tinytorch/src/03_layers/03_layers.py",
+    "metadata_path": "tinytorch/src/03_layers/module.yaml",
+    "source_sha256": "1d6edfbbd921e4f64458486e6764ee5cbe7db64c0cde560946f17fff427e7bbf",
+    "metadata_sha256": "c25b3f419ea956075b3a06bfa881ecff1798660dbcf1f5b2c090b6256eb9c796",
+    "source_commit": "2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd",
+    "output": "05 Источники/Courses/Harvard ML Systems/tinytorch/03_layers.md"
+  },
+  {
+    "module": "04_losses",
+    "title": "Losses",
+    "source_path": "tinytorch/src/04_losses/04_losses.py",
+    "metadata_path": "tinytorch/src/04_losses/module.yaml",
+    "source_sha256": "a27cabca4cc0387c432ec7a2712e4dd260b131816d9a344c80226a0b1a8bc334",
+    "metadata_sha256": "be61f5da4ba6d5b8e6a6a8badae0158e123b447c0b4b19fec560f35a83cb1777",
+    "source_commit": "2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd",
+    "output": "05 Источники/Courses/Harvard ML Systems/tinytorch/04_losses.md"
+  },
+  {
+    "module": "05_dataloader",
+    "title": "DataLoader",
+    "source_path": "tinytorch/src/05_dataloader/05_dataloader.py",
+    "metadata_path": "tinytorch/src/05_dataloader/module.yaml",
+    "source_sha256": "39a404cb8a1d66bb15acc5e2158ea336c2f6c766591ff211ff11056ad534700e",
+    "metadata_sha256": "578d1cf85b2837148d95d0619b1930724ae2f57708bc1acb2aaeabce18c07fc7",
+    "source_commit": "2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd",
+    "output": "05 Источники/Courses/Harvard ML Systems/tinytorch/05_dataloader.md"
+  },
+  {
+    "module": "06_autograd",
+    "title": "Autograd",
+    "source_path": "tinytorch/src/06_autograd/06_autograd.py",
+    "metadata_path": "tinytorch/src/06_autograd/module.yaml",
+    "source_sha256": "e72fdbd0e38b761a201f55ebdd28ba689cff70e215d596b2511ff2f086de624d",
+    "metadata_sha256": "911ee17008100896deabb60b0f5ba5c1a26efdc720cd71689e12ae61bd28c5e9",
+    "source_commit": "2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd",
+    "output": "05 Источники/Courses/Harvard ML Systems/tinytorch/06_autograd.md"
+  },
+  {
+    "module": "07_optimizers",
+    "title": "Optimizers",
+    "source_path": "tinytorch/src/07_optimizers/07_optimizers.py",
+    "metadata_path": "tinytorch/src/07_optimizers/module.yaml",
+    "source_sha256": "22007594ee23720dd354498aad78db68fb135cf01391d4ac614712711780510e",
+    "metadata_sha256": "d42ca18e09da5dcb3ce11561f52cb574f3ba90a087e8b1e886746cc7e939da4e",
+    "source_commit": "2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd",
+    "output": "05 Источники/Courses/Harvard ML Systems/tinytorch/07_optimizers.md"
+  },
+  {
+    "module": "08_training",
+    "title": "Training",
+    "source_path": "tinytorch/src/08_training/08_training.py",
+    "metadata_path": "tinytorch/src/08_training/module.yaml",
+    "source_sha256": "4aa529fdf34728d2346d6172645332297c49126c3e89b39f3e122955cbbca7c3",
+    "metadata_sha256": "16cece9316e85986bf9ef0281ca4b325c19a3fe5840a6a6a3d3606f6b5bb0792",
+    "source_commit": "2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd",
+    "output": "05 Источники/Courses/Harvard ML Systems/tinytorch/08_training.md"
+  },
+  {
+    "module": "09_convolutions",
+    "title": "Convolutions",
+    "source_path": "tinytorch/src/09_convolutions/09_convolutions.py",
+    "metadata_path": "tinytorch/src/09_convolutions/module.yaml",
+    "source_sha256": "824db6bc17530d23bfd91d4261462fba3786d019020813e0cfd40055785d86d1",
+    "metadata_sha256": "1bb6ba4faa38edb362d962c9309fb293bf06315decbcb4746326514390bc2273",
+    "source_commit": "2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd",
+    "output": "05 Источники/Courses/Harvard ML Systems/tinytorch/09_convolutions.md"
+  },
+  {
+    "module": "10_tokenization",
+    "title": "Tokenization",
+    "source_path": "tinytorch/src/10_tokenization/10_tokenization.py",
+    "metadata_path": "tinytorch/src/10_tokenization/module.yaml",
+    "source_sha256": "15ea8736339cb2e0a9767dd8907d8fd6627323467f21a9c89d568d9942caf685",
+    "metadata_sha256": "b18f1efc54e4a3f1ebb1d1828dfbba5e75fa2609340c89bebb7613aef553dc75",
+    "source_commit": "2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd",
+    "output": "05 Источники/Courses/Harvard ML Systems/tinytorch/10_tokenization.md"
+  },
+  {
+    "module": "11_embeddings",
+    "title": "Embeddings",
+    "source_path": "tinytorch/src/11_embeddings/11_embeddings.py",
+    "metadata_path": "tinytorch/src/11_embeddings/module.yaml",
+    "source_sha256": "95554cfd84cece0dfb7658268c26d1e55ade772cdd838931bb147c246870a733",
+    "metadata_sha256": "b9ff016434178e3c39cb2f0cef511ce97282595387ad3ac966fc4cc45fda602d",
+    "source_commit": "2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd",
+    "output": "05 Источники/Courses/Harvard ML Systems/tinytorch/11_embeddings.md"
+  },
+  {
+    "module": "12_attention",
+    "title": "Attention",
+    "source_path": "tinytorch/src/12_attention/12_attention.py",
+    "metadata_path": "tinytorch/src/12_attention/module.yaml",
+    "source_sha256": "8ac46ee8c2d4dbb12dc70adc5bf28aef93a63ce8fcfe09d770b8ab580a65c859",
+    "metadata_sha256": "8d3230601f150c13efd044026b6d3dac6d0b7e5eea0d17894e327be1dd8ff481",
+    "source_commit": "2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd",
+    "output": "05 Источники/Courses/Harvard ML Systems/tinytorch/12_attention.md"
+  },
+  {
+    "module": "13_transformers",
+    "title": "Transformers",
+    "source_path": "tinytorch/src/13_transformers/13_transformers.py",
+    "metadata_path": "tinytorch/src/13_transformers/module.yaml",
+    "source_sha256": "4bee86a7a73618a90c55c1d3e9e9f79d297dfdb15592b141ef23bc9aa47af188",
+    "metadata_sha256": "33972814233308f36873e3f4b8256350254232034530a2334680d4bbd1b1e82f",
+    "source_commit": "2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd",
+    "output": "05 Источники/Courses/Harvard ML Systems/tinytorch/13_transformers.md"
+  },
+  {
+    "module": "14_profiling",
+    "title": "Profiling",
+    "source_path": "tinytorch/src/14_profiling/14_profiling.py",
+    "metadata_path": "tinytorch/src/14_profiling/module.yaml",
+    "source_sha256": "4bb04e93df0b26646a1a0f18547b4360409bf13244ea27c26d0090c6bf2d32bb",
+    "metadata_sha256": "14b3766140875727d4768e13b6c29fe1614bfc99f94962707ec7a50aa6884c40",
+    "source_commit": "2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd",
+    "output": "05 Источники/Courses/Harvard ML Systems/tinytorch/14_profiling.md"
+  },
+  {
+    "module": "15_quantization",
+    "title": "Quantization",
+    "source_path": "tinytorch/src/15_quantization/15_quantization.py",
+    "metadata_path": "tinytorch/src/15_quantization/module.yaml",
+    "source_sha256": "fb29b79e5b23831f4783500f9bff9133556ffcf1bf2d4b12e1a3a560f54e8544",
+    "metadata_sha256": "fff12715f35a7db7d37bdc7729b70c05efbf52ecb7fc33312bab45405df6d774",
+    "source_commit": "2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd",
+    "output": "05 Источники/Courses/Harvard ML Systems/tinytorch/15_quantization.md"
+  },
+  {
+    "module": "16_compression",
+    "title": "Compression",
+    "source_path": "tinytorch/src/16_compression/16_compression.py",
+    "metadata_path": "tinytorch/src/16_compression/module.yaml",
+    "source_sha256": "f0f0e584975387141a126fe64c5a196fa8b5893e39d5e71aba9b1f40196630cd",
+    "metadata_sha256": "bfe762e3e495f95c533ed79a76d57b3cdacf651caf5736735fbabd1caec301b7",
+    "source_commit": "2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd",
+    "output": "05 Источники/Courses/Harvard ML Systems/tinytorch/16_compression.md"
+  },
+  {
+    "module": "17_acceleration",
+    "title": "Acceleration",
+    "source_path": "tinytorch/src/17_acceleration/17_acceleration.py",
+    "metadata_path": "tinytorch/src/17_acceleration/module.yaml",
+    "source_sha256": "086a0cde202f1ff134b33111ad0b2836109f12e39edc455aac5e893f0b86f2f5",
+    "metadata_sha256": "659aef78388a7c57b501145c7b2592801eb6bdacfc4a54e7807c58064ab3c370",
+    "source_commit": "2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd",
+    "output": "05 Источники/Courses/Harvard ML Systems/tinytorch/17_acceleration.md"
+  },
+  {
+    "module": "18_memoization",
+    "title": "Memoization",
+    "source_path": "tinytorch/src/18_memoization/18_memoization.py",
+    "metadata_path": "tinytorch/src/18_memoization/module.yaml",
+    "source_sha256": "8b59b51b87ce1864aa7479d3ae59a7eb1e727f4731f16e89c1ae4d6d015832a8",
+    "metadata_sha256": "1adb906f5656b6c369f85eaa6e24e11b6dd212bce8d9570b2fd6ca70aec5693e",
+    "source_commit": "2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd",
+    "output": "05 Источники/Courses/Harvard ML Systems/tinytorch/18_memoization.md"
+  },
+  {
+    "module": "19_benchmarking",
+    "title": "Benchmarking",
+    "source_path": "tinytorch/src/19_benchmarking/19_benchmarking.py",
+    "metadata_path": "tinytorch/src/19_benchmarking/module.yaml",
+    "source_sha256": "7369360962cf8a1cfdc6cc04013e15f35f430f4beb71d0414c7c4a55aaff8713",
+    "metadata_sha256": "09d8318e0eff225b56af6b17f7018eba926999017d18b6da5706d491a568a61f",
+    "source_commit": "2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd",
+    "output": "05 Источники/Courses/Harvard ML Systems/tinytorch/19_benchmarking.md"
+  },
+  {
+    "module": "20_capstone",
+    "title": "Capstone",
+    "source_path": "tinytorch/src/20_capstone/20_capstone.py",
+    "metadata_path": "tinytorch/src/20_capstone/module.yaml",
+    "source_sha256": "262ad2b53a99c4141803c288bb2923c414392352411b3c52f7b08e5be040858f",
+    "metadata_sha256": "7db5c462ab758d2c9c1191335b26db5d67cb489a2aa255c3776fb00e91e2d453",
+    "source_commit": "2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd",
+    "output": "05 Источники/Courses/Harvard ML Systems/tinytorch/20_capstone.md"
+  }
+]

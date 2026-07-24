@@ -10,6 +10,13 @@ primary_sources:
 
 # Нейрон и многослойный перцептрон
 
+**Полный исполняемый модуль:** [[05 Источники/Courses/Harvard ML Systems/tinytorch/03_layers|TinyTorch 03 — Layers]]. Модуль реализует `Linear`, инициализацию весов, `Dropout` и учёт параметров, после чего проверяет отдельные компоненты слоя.
+
+Полное исходное изложение перцептрона, многослойной сети и градиентного обучения
+сохранено в [[05 Источники/Courses/Machine Learning Visualized/book/main.pdf|Machine Learning Visualized — Complete Book]].
+Решающее правило перцептрона можно исследовать в
+[[05 Источники/Courses/Machine Learning Visualized/chapter3/interactive_perceptron|Interactive Perceptron]].
+
 Многослойный перцептрон строит сложную функцию из двух повторяющихся действий:
 линейного преобразования и поэлементной нелинейности. Та же конструкция лежит
 в основе feed-forward sublayer Transformer; меняются ширина, активация и способ

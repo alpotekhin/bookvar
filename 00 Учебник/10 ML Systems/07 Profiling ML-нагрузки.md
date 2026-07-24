@@ -8,6 +8,8 @@ source_language: mixed
 
 # Profiling ML-нагрузки
 
+**Полный исполняемый модуль:** [[05 Источники/Courses/Harvard ML Systems/tinytorch/14_profiling|TinyTorch 14 — Profiling]]. Модуль строит `Profiler` для подсчёта параметров и FLOP, измерения памяти и распределения latency, то есть связывает trace с количественной моделью нагрузки.
+
 Benchmarking говорит, что программа медленная; profiling показывает, где
 исчезает время и память. Начинают с самого дешёвого уровня и углубляются только
 после локализации bottleneck.

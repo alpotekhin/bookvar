@@ -11,6 +11,9 @@ primary_sources:
 
 # Autoencoder и variational autoencoder
 
+Полный исходный раздел об autoencoder, его функции потерь и обучении сохранён в
+[[05 Источники/Courses/Machine Learning Visualized/book/main.pdf|Machine Learning Visualized — Complete Book]].
+
 Autoencoder получает объект $x$, сжимает его в код $z$ и пытается восстановить
 $x$. Обычный autoencoder учит детерминированное представление; variational
 autoencoder учит распределение латентных переменных и получает генеративную
