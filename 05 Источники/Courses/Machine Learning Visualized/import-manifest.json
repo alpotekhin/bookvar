@@ -1,0 +1,33 @@
+[
+  {
+    "source_path": "README.md",
+    "kind": "markdown",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/Machine Learning Visualized/README.md",
+    "source_sha256": "47e024ac09ca5e5a59144b8b32bc9baf3fafd8c7cd0b5f3d3995b889c04178fd"
+  },
+  {
+    "source_path": "chapter1/interactive_linear_regression.md",
+    "kind": "markdown",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/Machine Learning Visualized/chapter1/interactive_linear_regression.md",
+    "source_sha256": "5562f1d2b680fe6dab846398460572b46fa9297945fe98c89812636ec560b5fe"
+  },
+  {
+    "source_path": "chapter3/interactive_perceptron.md",
+    "kind": "markdown",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/Machine Learning Visualized/chapter3/interactive_perceptron.md",
+    "source_sha256": "783b5a7b300a60ea6aba65a754ee3ced836d8871fbf3e409c95db4efc77f8402"
+  },
+  {
+    "source_path": "chapter3/interactive_logistic_regression.md",
+    "kind": "markdown",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/Machine Learning Visualized/chapter3/interactive_logistic_regression.md",
+    "source_sha256": "1da538c89ebeffa21247259f35984bbf718d8cd976a2e947b995bc00857788db"
+  },
+  {
+    "source_path": "book/main.pdf",
+    "kind": "slides",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/Machine Learning Visualized/book/main.pdf.md",
+    "source_sha256": "735a9f9e2d06f011ce7911b11e89cac06e69c14db2f5b47b34231644f5f826bf",
+    "pages": 55
+  }
+]

@@ -1,0 +1,432 @@
+[
+  {
+    "source_path": "README.md",
+    "kind": "markdown",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/README.md",
+    "source_sha256": "271575aa1f2af2c26914be8fefbb540458f53a34bf3d8226eb716e17ceb16fb4"
+  },
+  {
+    "source_path": "all_agents_tutorials/Academic_Task_Learning_Agent_LangGraph.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/Academic_Task_Learning_Agent_LangGraph.ipynb.md",
+    "source_sha256": "9ce59f53eb63e5b8163e6418b4ff0ab703a6a6f7135084451df66004f9487989",
+    "cells": 67,
+    "saved_outputs": 2
+  },
+  {
+    "source_path": "all_agents_tutorials/ClauseAI.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/ClauseAI.ipynb.md",
+    "source_sha256": "dab7d7504e735183c79920590751cb2e9e36feeb82130b1b83249dec1e0edf15",
+    "cells": 30,
+    "saved_outputs": 8
+  },
+  {
+    "source_path": "all_agents_tutorials/ContentIntelligence.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/ContentIntelligence.ipynb.md",
+    "source_sha256": "d954aff03113e9a388abbfe60fb8241402eaf6bb005584119d7b9c966fc8aad7",
+    "cells": 22,
+    "saved_outputs": 5
+  },
+  {
+    "source_path": "all_agents_tutorials/EU_Green_Compliance_FAQ_Bot.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/EU_Green_Compliance_FAQ_Bot.ipynb.md",
+    "source_sha256": "f7c12fa09f4b2e2e8541afd090af58992478bc89e916672df9eb9f0b2c47311b",
+    "cells": 41,
+    "saved_outputs": 6
+  },
+  {
+    "source_path": "all_agents_tutorials/Gutenbergs_Sage.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/Gutenbergs_Sage.ipynb.md",
+    "source_sha256": "ed116d508a0b27599d722f27148fc5b6adbed9ab9e4cbf2947a29701f7d2d152",
+    "cells": 25,
+    "saved_outputs": 4
+  },
+  {
+    "source_path": "all_agents_tutorials/HR_AI-Assistant.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/HR_AI-Assistant.ipynb.md",
+    "source_sha256": "6550f68cc5502331e1200e14224cbe6224ed96f6f62cacc47f2503cbd0e9d77e",
+    "cells": 24,
+    "saved_outputs": 4
+  },
+  {
+    "source_path": "all_agents_tutorials/Hr_AI_Agent.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/Hr_AI_Agent.ipynb.md",
+    "source_sha256": "576d563e55ddfdd6904ae474fb2a95b40e0c68ab0d8adc1691f8ba45cb19282f",
+    "cells": 22,
+    "saved_outputs": 4
+  },
+  {
+    "source_path": "all_agents_tutorials/ShopGenie.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/ShopGenie.ipynb.md",
+    "source_sha256": "7906e76661896bdb294f1356d76d87766dece99badc2aa35d237d08fca45a0ff",
+    "cells": 26,
+    "saved_outputs": 5
+  },
+  {
+    "source_path": "all_agents_tutorials/Weather_Disaster_Management_AI_AGENT.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/Weather_Disaster_Management_AI_AGENT.ipynb.md",
+    "source_sha256": "ecb9813b2ca8673561c33a4d3d5843ad7120703a5e174a2ba3b19ab7cab1e23b",
+    "cells": 131,
+    "saved_outputs": 4
+  },
+  {
+    "source_path": "all_agents_tutorials/agent_hackathon_genAI_career_assistant.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/agent_hackathon_genAI_career_assistant.ipynb.md",
+    "source_sha256": "9b61977f1b2be9f840fc4f006dd8905c1bee11381e200fa87968f6ae36326c3f",
+    "cells": 52,
+    "saved_outputs": 59
+  },
+  {
+    "source_path": "all_agents_tutorials/ai_driven_ml_and_datascience_assistant.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/ai_driven_ml_and_datascience_assistant.ipynb.md",
+    "source_sha256": "9843d24f4cc7502fccfb30c34e77276649d85314deb18341c83401b70dca349e",
+    "cells": 14,
+    "saved_outputs": 6
+  },
+  {
+    "source_path": "all_agents_tutorials/ainsight_langgraph.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/ainsight_langgraph.ipynb.md",
+    "source_sha256": "fd31c09cef30657b2c73eae4139353c9dc4f19e5360a70ec42b0e94ee8bdbbc3",
+    "cells": 32,
+    "saved_outputs": 1
+  },
+  {
+    "source_path": "all_agents_tutorials/art_agent.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/art_agent.ipynb.md",
+    "source_sha256": "f537a8edc73beb6a2000c205e7b1e629d512bd459d85b3cb5013d779b58ca457",
+    "cells": 27,
+    "saved_outputs": 6
+  },
+  {
+    "source_path": "all_agents_tutorials/blog_writer_swarm.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/blog_writer_swarm.ipynb.md",
+    "source_sha256": "1e3be3f328654dfc73de7bef8a8dc814a5a8dcdaf869a272294d6e7f15fdd2ea",
+    "cells": 17,
+    "saved_outputs": 1
+  },
+  {
+    "source_path": "all_agents_tutorials/business_meme_generator.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/business_meme_generator.ipynb.md",
+    "source_sha256": "9fb087b20c8c5170c075bb11ab1ea0b3d3f32ed3cefca61a71acb466cb2ac0dc",
+    "cells": 18,
+    "saved_outputs": 8
+  },
+  {
+    "source_path": "all_agents_tutorials/car_buyer_agent_langgraph.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/car_buyer_agent_langgraph.ipynb.md",
+    "source_sha256": "b1d7ce9917f411355d587f862d0e1170369658291460370b12ad96a0c91af9f7",
+    "cells": 36,
+    "saved_outputs": 0
+  },
+  {
+    "source_path": "all_agents_tutorials/chiron_learning_agent_langgraph.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/chiron_learning_agent_langgraph.ipynb.md",
+    "source_sha256": "bd44a7ce663b4ac1889c776ed6c574002015378a6b97582a60e38d64c2f619c0",
+    "cells": 57,
+    "saved_outputs": 13
+  },
+  {
+    "source_path": "all_agents_tutorials/contextual_quoting_agentic_system.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/contextual_quoting_agentic_system.ipynb.md",
+    "source_sha256": "b36606d710eb2c7b9fa0f622620104eafc9b560476ce5f539b1e81878b221552",
+    "cells": 101,
+    "saved_outputs": 2
+  },
+  {
+    "source_path": "all_agents_tutorials/customer_support_agent_langgraph.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/customer_support_agent_langgraph.ipynb.md",
+    "source_sha256": "5e1880b5162de1be2d3bbb0ab91d78438dbeef4309cc778affdbac92059d02fa",
+    "cells": 18,
+    "saved_outputs": 2
+  },
+  {
+    "source_path": "all_agents_tutorials/database_discovery_fleet.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/database_discovery_fleet.ipynb.md",
+    "source_sha256": "e821ed5895515c25bca56265e3a13626f3550e684017c28375d8d7c2bf265e9a",
+    "cells": 42,
+    "saved_outputs": 20
+  },
+  {
+    "source_path": "all_agents_tutorials/document_intake_agent_langgraph.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/document_intake_agent_langgraph.ipynb.md",
+    "source_sha256": "c6025af41a963d5b9a86fb38cf8e41b6adb2f6677ec3e93dec98d36b78f34b36",
+    "cells": 39,
+    "saved_outputs": 0
+  },
+  {
+    "source_path": "all_agents_tutorials/e2e_testing_agent.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/e2e_testing_agent.ipynb.md",
+    "source_sha256": "d638e97910a7eed81896cef4b677345f7b47b2421527663c98a178e37818281a",
+    "cells": 51,
+    "saved_outputs": 1
+  },
+  {
+    "source_path": "all_agents_tutorials/essay_grading_system_langgraph.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/essay_grading_system_langgraph.ipynb.md",
+    "source_sha256": "b4a600d905fe318ef4c886253f5552ea1d01e00529f07976f245083cedcc00ee",
+    "cells": 19,
+    "saved_outputs": 1
+  },
+  {
+    "source_path": "all_agents_tutorials/generate_podcast_agent_langgraph.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/generate_podcast_agent_langgraph.ipynb.md",
+    "source_sha256": "b12ac952af72dd1703161dacb65e2873de6567f15d600875013606bd61bedf61",
+    "cells": 67,
+    "saved_outputs": 8
+  },
+  {
+    "source_path": "all_agents_tutorials/gif_animation_generator_langgraph.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/gif_animation_generator_langgraph.ipynb.md",
+    "source_sha256": "8694cdf7c8ed690978bdeead39513fce4786a5966f57b241204aa3873bea97a0",
+    "cells": 19,
+    "saved_outputs": 1
+  },
+  {
+    "source_path": "all_agents_tutorials/graph_inspector_system_langgraph.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/graph_inspector_system_langgraph.ipynb.md",
+    "source_sha256": "3d408c2142bef1d59df239f89cc6086ac615457134a46734ab076dee9e1cd408",
+    "cells": 50,
+    "saved_outputs": 1
+  },
+  {
+    "source_path": "all_agents_tutorials/grocery_management_agents_system.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/grocery_management_agents_system.ipynb.md",
+    "source_sha256": "4e1b8b5ea8daf70c6a1ce8a69ffe1cbbc54e5c9668deae3578396851aabd548a",
+    "cells": 31,
+    "saved_outputs": 4
+  },
+  {
+    "source_path": "all_agents_tutorials/journalism_focused_ai_assistant_langgraph.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/journalism_focused_ai_assistant_langgraph.ipynb.md",
+    "source_sha256": "2792cd3de0a40095e5fe18b61103599aaa23bf5cd3f374c14a735a2bf112dbb4",
+    "cells": 70,
+    "saved_outputs": 9
+  },
+  {
+    "source_path": "all_agents_tutorials/langgraph-tutorial.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/langgraph-tutorial.ipynb.md",
+    "source_sha256": "4ed8f456106fd2ed9273b558c50be2a9974e7d4af370c5e30ef14e37f492ccdd",
+    "cells": 18,
+    "saved_outputs": 2
+  },
+  {
+    "source_path": "all_agents_tutorials/mcp-tutorial.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/mcp-tutorial.ipynb.md",
+    "source_sha256": "49797c6db87ae3d34f44f87bb1fc553ce91a5087c71207d85b262b1ed6c29b0b",
+    "cells": 30,
+    "saved_outputs": 9
+  },
+  {
+    "source_path": "all_agents_tutorials/memory-agent-tutorial.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/memory-agent-tutorial.ipynb.md",
+    "source_sha256": "2285c348fe0b4db8d6163385e35207bab98b53ae7c5e54eabf5ee2c86966cb90",
+    "cells": 39,
+    "saved_outputs": 3
+  },
+  {
+    "source_path": "all_agents_tutorials/memory_enhanced_conversational_agent.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/memory_enhanced_conversational_agent.ipynb.md",
+    "source_sha256": "d14823710b8e988075adfef08efadf4782148adf87cf69e9984977e671ac4e24",
+    "cells": 16,
+    "saved_outputs": 2
+  },
+  {
+    "source_path": "all_agents_tutorials/multi_agent_collaboration_system.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/multi_agent_collaboration_system.ipynb.md",
+    "source_sha256": "b6a3a5c9160a13a17066a98bdb550f0fd5d40a33ab82b98189712cd4f6aa5b05",
+    "cells": 25,
+    "saved_outputs": 1
+  },
+  {
+    "source_path": "all_agents_tutorials/murder_mystery_agent_langgraph.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/murder_mystery_agent_langgraph.ipynb.md",
+    "source_sha256": "3ff6b527c1da84d73b8b0dc910fe09fc537427d6be58fa7f71a21d97f1423e16",
+    "cells": 24,
+    "saved_outputs": 32
+  },
+  {
+    "source_path": "all_agents_tutorials/music_compositor_agent_langgraph.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/music_compositor_agent_langgraph.ipynb.md",
+    "source_sha256": "948f738ed58caf81650ebcf1c29c6959ddc5e435d7e2d347d52bbc6bd8246d5e",
+    "cells": 19,
+    "saved_outputs": 3
+  },
+  {
+    "source_path": "all_agents_tutorials/news_tldr_langgraph.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/news_tldr_langgraph.ipynb.md",
+    "source_sha256": "574567d0d819bb07a467222b51e55d1e531933bdeff8b8b88fed3422fc304c77",
+    "cells": 36,
+    "saved_outputs": 4
+  },
+  {
+    "source_path": "all_agents_tutorials/project_manager_assistant_agent.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/project_manager_assistant_agent.ipynb.md",
+    "source_sha256": "38d97ecffe742c56052e00ebfce29c26447ba625c84c45a23fc96b7de21a287b",
+    "cells": 43,
+    "saved_outputs": 11
+  },
+  {
+    "source_path": "all_agents_tutorials/research_team_autogen.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/research_team_autogen.ipynb.md",
+    "source_sha256": "05651ed26009ce2765af03dbeae24c844c4a52c477460624b0cf5225c3c44146",
+    "cells": 23,
+    "saved_outputs": 2
+  },
+  {
+    "source_path": "all_agents_tutorials/sales_call_analyzer_agent.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/sales_call_analyzer_agent.ipynb.md",
+    "source_sha256": "db14932b79688d363116e46b8d0e3299f3147dc04ed4bcc3c6521018853fd80a",
+    "cells": 23,
+    "saved_outputs": 0
+  },
+  {
+    "source_path": "all_agents_tutorials/scientific_paper_agent_langgraph.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/scientific_paper_agent_langgraph.ipynb.md",
+    "source_sha256": "a28ed612486e28e107e93d6afc4dd6e3fde2f53cef0cc63eb97d6f0230d234e1",
+    "cells": 37,
+    "saved_outputs": 8
+  },
+  {
+    "source_path": "all_agents_tutorials/search_the_internet_and_summarize.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/search_the_internet_and_summarize.ipynb.md",
+    "source_sha256": "1ddc48e338a07791ce04d1d94cf0221dededb87844439bef26cb3303d3ff7052",
+    "cells": 16,
+    "saved_outputs": 1
+  },
+  {
+    "source_path": "all_agents_tutorials/self_healing_code.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/self_healing_code.ipynb.md",
+    "source_sha256": "a1f1b7d52979b7f714698d5ba283932259f6f6c4492d50600849bf8d164247d9",
+    "cells": 30,
+    "saved_outputs": 11
+  },
+  {
+    "source_path": "all_agents_tutorials/self_improving_agent.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/self_improving_agent.ipynb.md",
+    "source_sha256": "1844acef356e8a59bc7a072fdfae94597847a7d055d0ca8aafcac3429f92621c",
+    "cells": 17,
+    "saved_outputs": 2
+  },
+  {
+    "source_path": "all_agents_tutorials/simple_conversational_agent-pydanticai.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/simple_conversational_agent-pydanticai.ipynb.md",
+    "source_sha256": "d342dc60b78c6e57ebc2ee0eef187a0795c19b0cabe9dec079628cf75985f527",
+    "cells": 16,
+    "saved_outputs": 2
+  },
+  {
+    "source_path": "all_agents_tutorials/simple_conversational_agent.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/simple_conversational_agent.ipynb.md",
+    "source_sha256": "0ca4e947c23dac7632a49a84ce6b8ad3398be4b574ffeb2803c3e8aebad62d7d",
+    "cells": 20,
+    "saved_outputs": 2
+  },
+  {
+    "source_path": "all_agents_tutorials/simple_data_analysis_agent_notebook-pydanticai.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/simple_data_analysis_agent_notebook-pydanticai.ipynb.md",
+    "source_sha256": "436662fc658be850aa0ea6d64263a2ac573cb9f7b8475cc0f5b9fc288ba621a2",
+    "cells": 21,
+    "saved_outputs": 2
+  },
+  {
+    "source_path": "all_agents_tutorials/simple_data_analysis_agent_notebook.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/simple_data_analysis_agent_notebook.ipynb.md",
+    "source_sha256": "6a282960e930913a6e13f5dd0bbc920fa571240d376664d95f889631fce31053",
+    "cells": 12,
+    "saved_outputs": 4
+  },
+  {
+    "source_path": "all_agents_tutorials/simple_question_answering_agent.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/simple_question_answering_agent.ipynb.md",
+    "source_sha256": "7e989dcab6ee819f4714c38041d1626c297d0cdb411370adbad7405dc7e0490c",
+    "cells": 16,
+    "saved_outputs": 2
+  },
+  {
+    "source_path": "all_agents_tutorials/simple_travel_planner_langgraph.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/simple_travel_planner_langgraph.ipynb.md",
+    "source_sha256": "8bd48fca682df6d22d9b9fe1e5eb1e94f3f99da49cedc54c9e723565d8529902",
+    "cells": 19,
+    "saved_outputs": 3
+  },
+  {
+    "source_path": "all_agents_tutorials/systematic_review_of_scientific_articles.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/systematic_review_of_scientific_articles.ipynb.md",
+    "source_sha256": "c95de65e98d4aa0207038d6553a9f5818337db7392e1a8834b9c6a548a9a386e",
+    "cells": 47,
+    "saved_outputs": 2
+  },
+  {
+    "source_path": "all_agents_tutorials/task_oriented_agent.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/task_oriented_agent.ipynb.md",
+    "source_sha256": "c4c7c750e661770229bd5d3151c27d26439108111d44dc21c1743e7165750ce1",
+    "cells": 16,
+    "saved_outputs": 2
+  },
+  {
+    "source_path": "all_agents_tutorials/taskifier.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/taskifier.ipynb.md",
+    "source_sha256": "1d0358f3258ffd511422c2afb6eedec774c688da549f27191534551edb6cacd2",
+    "cells": 33,
+    "saved_outputs": 2
+  },
+  {
+    "source_path": "all_agents_tutorials/tts_poem_generator_agent_langgraph.ipynb",
+    "kind": "notebook",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/GenAI Agents/all_agents_tutorials/tts_poem_generator_agent_langgraph.ipynb.md",
+    "source_sha256": "a8a6c93147d0693a3f3e3fca7ced305655aed42b6a6a27d365f0a699a1ef9277",
+    "cells": 17,
+    "saved_outputs": 17
+  }
+]

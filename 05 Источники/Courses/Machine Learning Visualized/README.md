@@ -1,0 +1,105 @@
+---
+title: "Machine Learning Visualized"
+type: external-resource
+status: imported-source
+language: original
+source_kind: markdown
+source_commit: 950f8ec4671c0790cdd867514cc114fea01f5ab0
+---
+
+> [!note] Original source material
+> This page preserves [`README.md`](https://github.com/gavinkhung/machine-learning-visualized/blob/950f8ec4671c0790cdd867514cc114fea01f5ab0/README.md) from
+> *Machine Learning Visualized* at commit `950f8ec4671c0790cdd867514cc114fea01f5ab0`. License:
+> [MIT](https://github.com/gavinkhung/machine-learning-visualized/blob/950f8ec4671c0790cdd867514cc114fea01f5ab0/LICENSE). Bookvar changed only
+> publication markup, link paths, and characters required for safe rendering.
+
+![website](https://github.com/gavinkhung/machine-learning-visualized/raw/950f8ec4671c0790cdd867514cc114fea01f5ab0/gifs/home.gif)
+
+URL: [https://ml-visualized.com/](https://ml-visualized.com/)
+
+Machine Learning Visualized is a [Jupyter Book](https://jupyterbook.org/en/stable/intro.html) containing Jupyter Notebooks that implement and mathematically derive machine learning algorithms from first-principles.
+
+There are also Interactive Notebooks built with Marimo that allow you to see how the weights influence the loss functions.
+
+The output of each notebook is a visualization of the machine learning algorithm throughout its training phase, ultimately converging at its optimal weights.
+
+There is a separate Github Repository for each machine learning algorithm. Thus, this repository is simply the code to configure and build the Jupyter Book. At a very high level, Jupyter Books allow you to build a website with Markdown files and Jupyter Notebooks. Notice that none of the Jupyter Notebooks are in this repository. There is a SH script to download the relevant Jupyter Notebooks from other Github Repos. Once that is complete, the Jupyter Book can be built. The website is updated using the GitHub Action at `.github/workflows/ci.yml` after every commit or pull request. To build the website locally, see the Usage section below.
+
+## Jupyter Notebooks
+
+- [Neural Networks Repo](https://github.com/gavinkhung/neural-network)
+- [Autoencoder Repo](https://github.com/gavinkhung/autoencoder)
+- [Logistic Regression Repo](https://github.com/gavinkhung/logistic-regression)
+- [Perceptron Repo](https://github.com/gavinkhung/perceptron)
+- [Principal Component Analysis Repo](https://github.com/gavinkhung/pca)
+- [K Means Repo](https://github.com/gavinkhung/k-means-clustering/)
+- [Gradient Descent Repo](https://github.com/gavinkhung/gradient-descent)
+
+## Jupyter Book Info
+
+Table of Contents and structure of the book is specified at `_toc.yml`.
+
+Configuration is specified at `_config.yml`.
+
+For more information, check out the [Jupyter Book Docs](https://jupyterbook.org/en/stable/intro.html).
+
+## Usage
+
+### Step 1: Download the Jupyter Notebooks
+
+```sh
+chmod +x ./download_notebooks.sh
+./download_notebooks.sh
+```
+
+### Step 2: Building the Jupyter Book
+
+#### Option 1: jupyter-book CLI
+
+```sh
+pip install -U jupyter-book
+jupyter-book build .
+```
+
+#### Option 2: Docker Compose
+
+```sh
+docker compose run --rm jupyter-book
+docker compose down --remove-orphans --volumes --rmi local
+```
+
+#### Option 3: Docker
+
+```sh
+docker build -f Dockerfile.book -t jupyter-book .
+docker run --rm -v "$(pwd)":/usr/src/app jupyter-book
+
+docker stop jupyter-book
+docker rm jupyter-book
+docker rmi jupyter-book
+```
+
+### Step 3: Open the Jupyter Book
+
+Navigate to `_build/html/index.html`
+
+## Build EPUB (NEW)
+
+```sh
+brew install --cask mactex
+nbmerge $(ls chapter1/*.ipynb chapter2/*.ipynb chapter3/*.ipynb chapter4/*.ipynb | sort) -o book/combined.ipynb
+jupyter nbconvert --to latex book/combined.ipynb
+
+docker build -f Dockerfile.pandoc -t my-pandoc .
+docker run --rm -v $(pwd):/data my-pandoc pandoc book/combined.tex -o book/combined.epub --mathml --embed-resources --standalone
+```
+
+## Output
+
+### Marimo Interactive Notebooks
+
+![Marimo](https://github.com/gavinkhung/machine-learning-visualized/raw/950f8ec4671c0790cdd867514cc114fea01f5ab0/gifs/marimo.gif)
+
+### Mathematically Explained
+
+![latex](https://github.com/gavinkhung/machine-learning-visualized/raw/950f8ec4671c0790cdd867514cc114fea01f5ab0/gifs/latex.gif)

@@ -705,6 +705,140 @@ sections:
         route: sources/harvard-ml-systems
       - source: 05 Источники/Courses/Efficient DL Systems.md
         route: sources/efficient-dl-systems
+      - source: 05 Источники/Courses/Stanford CS230 Cheatsheets.md
+        route: sources/stanford-cs230-cheatsheets
+      - source: 05 Источники/Courses/Stanford CS230 Cheatsheets/README.md
+        route: sources/courses/stanford-cs230-cheatsheets/overview
+      - source: 05 Источники/Courses/Stanford CS230 Cheatsheets/en/cheatsheet-convolutional-neural-networks.pdf.md
+        route: sources/courses/stanford-cs230-cheatsheets/cnn
+      - source: 05 Источники/Courses/Stanford CS230 Cheatsheets/en/cheatsheet-recurrent-neural-networks.pdf.md
+        route: sources/courses/stanford-cs230-cheatsheets/rnn
+      - source: 05 Источники/Courses/Stanford CS230 Cheatsheets/en/cheatsheet-deep-learning-tips-tricks.pdf.md
+        route: sources/courses/stanford-cs230-cheatsheets/tips-and-tricks
+      - source: 05 Источники/Courses/Stanford CS230 Cheatsheets/en/super-cheatsheet-deep-learning.pdf.md
+        route: sources/courses/stanford-cs230-cheatsheets/complete
+      - source: 05 Источники/Courses/Machine Learning Visualized.md
+        route: sources/machine-learning-visualized
+      - source: 05 Источники/Courses/Machine Learning Visualized/README.md
+        route: sources/courses/machine-learning-visualized/overview
+      - source: 05 Источники/Courses/Machine Learning Visualized/book/main.pdf.md
+        route: sources/courses/machine-learning-visualized/complete-book
+      - source: 05 Источники/Courses/Machine Learning Visualized/chapter1/interactive_linear_regression.md
+        route: sources/courses/machine-learning-visualized/interactive-linear-regression
+      - source: 05 Источники/Courses/Machine Learning Visualized/chapter3/interactive_perceptron.md
+        route: sources/courses/machine-learning-visualized/interactive-perceptron
+      - source: 05 Источники/Courses/Machine Learning Visualized/chapter3/interactive_logistic_regression.md
+        route: sources/courses/machine-learning-visualized/interactive-logistic-regression
+      - source: 05 Источники/Courses/GenAI Agents.md
+        route: sources/genai-agents
+      - source: 05 Источники/Courses/GenAI Agents/README.md
+        route: sources/courses/genai-agents/overview
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/Academic_Task_Learning_Agent_LangGraph.ipynb.md
+        route: sources/courses/genai-agents/academic-task-learning-agent-langgraph
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/ClauseAI.ipynb.md
+        route: sources/courses/genai-agents/clauseai
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/ContentIntelligence.ipynb.md
+        route: sources/courses/genai-agents/contentintelligence
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/EU_Green_Compliance_FAQ_Bot.ipynb.md
+        route: sources/courses/genai-agents/eu-green-compliance-faq-bot
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/Gutenbergs_Sage.ipynb.md
+        route: sources/courses/genai-agents/gutenbergs-sage
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/HR_AI-Assistant.ipynb.md
+        route: sources/courses/genai-agents/hr-ai-assistant
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/Hr_AI_Agent.ipynb.md
+        route: sources/courses/genai-agents/hr-ai-agent
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/ShopGenie.ipynb.md
+        route: sources/courses/genai-agents/shopgenie
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/Weather_Disaster_Management_AI_AGENT.ipynb.md
+        route: sources/courses/genai-agents/weather-disaster-management-ai-agent
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/agent_hackathon_genAI_career_assistant.ipynb.md
+        route: sources/courses/genai-agents/agent-hackathon-genai-career-assistant
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/ai_driven_ml_and_datascience_assistant.ipynb.md
+        route: sources/courses/genai-agents/ai-driven-ml-and-datascience-assistant
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/ainsight_langgraph.ipynb.md
+        route: sources/courses/genai-agents/ainsight-langgraph
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/art_agent.ipynb.md
+        route: sources/courses/genai-agents/art-agent
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/blog_writer_swarm.ipynb.md
+        route: sources/courses/genai-agents/blog-writer-swarm
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/business_meme_generator.ipynb.md
+        route: sources/courses/genai-agents/business-meme-generator
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/car_buyer_agent_langgraph.ipynb.md
+        route: sources/courses/genai-agents/car-buyer-agent-langgraph
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/chiron_learning_agent_langgraph.ipynb.md
+        route: sources/courses/genai-agents/chiron-learning-agent-langgraph
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/contextual_quoting_agentic_system.ipynb.md
+        route: sources/courses/genai-agents/contextual-quoting-agentic-system
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/customer_support_agent_langgraph.ipynb.md
+        route: sources/courses/genai-agents/customer-support-agent-langgraph
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/database_discovery_fleet.ipynb.md
+        route: sources/courses/genai-agents/database-discovery-fleet
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/document_intake_agent_langgraph.ipynb.md
+        route: sources/courses/genai-agents/document-intake-agent-langgraph
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/e2e_testing_agent.ipynb.md
+        route: sources/courses/genai-agents/e2e-testing-agent
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/essay_grading_system_langgraph.ipynb.md
+        route: sources/courses/genai-agents/essay-grading-system-langgraph
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/generate_podcast_agent_langgraph.ipynb.md
+        route: sources/courses/genai-agents/generate-podcast-agent-langgraph
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/gif_animation_generator_langgraph.ipynb.md
+        route: sources/courses/genai-agents/gif-animation-generator-langgraph
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/graph_inspector_system_langgraph.ipynb.md
+        route: sources/courses/genai-agents/graph-inspector-system-langgraph
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/grocery_management_agents_system.ipynb.md
+        route: sources/courses/genai-agents/grocery-management-agents-system
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/journalism_focused_ai_assistant_langgraph.ipynb.md
+        route: sources/courses/genai-agents/journalism-focused-ai-assistant-langgraph
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/langgraph-tutorial.ipynb.md
+        route: sources/courses/genai-agents/langgraph-tutorial
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/mcp-tutorial.ipynb.md
+        route: sources/courses/genai-agents/mcp-tutorial
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/memory-agent-tutorial.ipynb.md
+        route: sources/courses/genai-agents/memory-agent-tutorial
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/memory_enhanced_conversational_agent.ipynb.md
+        route: sources/courses/genai-agents/memory-enhanced-conversational-agent
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/multi_agent_collaboration_system.ipynb.md
+        route: sources/courses/genai-agents/multi-agent-collaboration-system
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/murder_mystery_agent_langgraph.ipynb.md
+        route: sources/courses/genai-agents/murder-mystery-agent-langgraph
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/music_compositor_agent_langgraph.ipynb.md
+        route: sources/courses/genai-agents/music-compositor-agent-langgraph
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/news_tldr_langgraph.ipynb.md
+        route: sources/courses/genai-agents/news-tldr-langgraph
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/project_manager_assistant_agent.ipynb.md
+        route: sources/courses/genai-agents/project-manager-assistant-agent
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/research_team_autogen.ipynb.md
+        route: sources/courses/genai-agents/research-team-autogen
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/sales_call_analyzer_agent.ipynb.md
+        route: sources/courses/genai-agents/sales-call-analyzer-agent
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/scientific_paper_agent_langgraph.ipynb.md
+        route: sources/courses/genai-agents/scientific-paper-agent-langgraph
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/search_the_internet_and_summarize.ipynb.md
+        route: sources/courses/genai-agents/search-the-internet-and-summarize
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/self_healing_code.ipynb.md
+        route: sources/courses/genai-agents/self-healing-code
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/self_improving_agent.ipynb.md
+        route: sources/courses/genai-agents/self-improving-agent
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/simple_conversational_agent-pydanticai.ipynb.md
+        route: sources/courses/genai-agents/simple-conversational-agent-pydanticai
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/simple_conversational_agent.ipynb.md
+        route: sources/courses/genai-agents/simple-conversational-agent
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/simple_data_analysis_agent_notebook-pydanticai.ipynb.md
+        route: sources/courses/genai-agents/simple-data-analysis-agent-notebook-pydanticai
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/simple_data_analysis_agent_notebook.ipynb.md
+        route: sources/courses/genai-agents/simple-data-analysis-agent-notebook
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/simple_question_answering_agent.ipynb.md
+        route: sources/courses/genai-agents/simple-question-answering-agent
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/simple_travel_planner_langgraph.ipynb.md
+        route: sources/courses/genai-agents/simple-travel-planner-langgraph
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/systematic_review_of_scientific_articles.ipynb.md
+        route: sources/courses/genai-agents/systematic-review-of-scientific-articles
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/task_oriented_agent.ipynb.md
+        route: sources/courses/genai-agents/task-oriented-agent
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/taskifier.ipynb.md
+        route: sources/courses/genai-agents/taskifier
+      - source: 05 Источники/Courses/GenAI Agents/all_agents_tutorials/tts_poem_generator_agent_langgraph.ipynb.md
+        route: sources/courses/genai-agents/tts-poem-generator-agent-langgraph
       - source: 05 Источники/Courses/Efficient DL Systems/README.md
         route: sources/courses/efficient-dl-systems/course-readme
       - source: 05 Источники/Courses/Efficient DL Systems/week01_intro/README.md
@@ -849,6 +983,10 @@ sections:
         route: sources/source-maps/efficient-dl-systems-transfer
       - source: 05 Источники/Source maps/ML systems — Bookvar gap matrix.md
         route: sources/source-maps/ml-systems-bookvar-gaps
+      - source: 05 Источники/Source maps/HSE ML course — link map.md
+        route: sources/source-maps/hse-ml-course
+      - source: 05 Источники/Source maps/LLMs Practical Guide — link map.md
+        route: sources/source-maps/llms-practical-guide
       - source: Papers/LLaMA 2.md
         route: sources/papers/llama-2
       - source: Papers/GPT 2.0.md

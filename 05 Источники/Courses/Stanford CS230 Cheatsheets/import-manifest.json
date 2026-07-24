@@ -1,0 +1,36 @@
+[
+  {
+    "source_path": "README.md",
+    "kind": "markdown",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/Stanford CS230 Cheatsheets/README.md",
+    "source_sha256": "278fda317c21b9a14c5a260c2bc325291dfdcd62778ab70035351f8717b19148"
+  },
+  {
+    "source_path": "en/cheatsheet-convolutional-neural-networks.pdf",
+    "kind": "slides",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/Stanford CS230 Cheatsheets/en/cheatsheet-convolutional-neural-networks.pdf.md",
+    "source_sha256": "fa15be4c10bb03df201da4a51a788ffe408ec4a25415b4003d37f52f50f6fe08",
+    "pages": 5
+  },
+  {
+    "source_path": "en/cheatsheet-recurrent-neural-networks.pdf",
+    "kind": "slides",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/Stanford CS230 Cheatsheets/en/cheatsheet-recurrent-neural-networks.pdf.md",
+    "source_sha256": "4c2f929d0cbcb8dbd1e83570ec6e409e49e0f4d35b4130a68284b552feafeb1a",
+    "pages": 5
+  },
+  {
+    "source_path": "en/cheatsheet-deep-learning-tips-tricks.pdf",
+    "kind": "slides",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/Stanford CS230 Cheatsheets/en/cheatsheet-deep-learning-tips-tricks.pdf.md",
+    "source_sha256": "b430c6910d140df2a8fa79219f7a2dc8177b3ae77c5ed13db0eacc2359286ea8",
+    "pages": 3
+  },
+  {
+    "source_path": "en/super-cheatsheet-deep-learning.pdf",
+    "kind": "slides",
+    "output": "05 \u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438/Courses/Stanford CS230 Cheatsheets/en/super-cheatsheet-deep-learning.pdf.md",
+    "source_sha256": "d5c7f5f63cd118a6e5508fa42dbe1b6fe6f30b3b815589ec6003acc952a4915f",
+    "pages": 13
+  }
+]
