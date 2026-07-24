@@ -64,6 +64,18 @@
   margin-inline: auto;
 }
 
+/* Harvard's margin figures carry intentionally tiny intrinsic dimensions.
+   In a full-width Bookvar chapter they need an explicit responsive reading
+   size; source SVG bytes remain untouched. */
+.sl-markdown-content img[src*='/curated/ml-systems/harvard/'],
+.sl-markdown-content img[src*='/curated/ml-systems/bookvar/'] {
+  width: min(100%, 36rem);
+}
+
+.sl-markdown-content img[src$='/data/data_engineering_storage_latency_hierarchy.svg'] {
+  width: min(100%, 28rem);
+}
+
 /* Legacy reference pages can still contain Mermaid diagrams. Keep them
    readable without letting wide SVG canvases stretch the article column. */
 .mermaid {

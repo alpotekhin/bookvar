@@ -1,7 +1,7 @@
 # Section VI visual audit report
 
-Date: 2026-07-24  
-Scope: `00 Учебник/10 ML Systems/*.md`  
+Date: 2026-07-24
+Scope: `00 Учебник/10 ML Systems/*.md`
 Pinned Harvard source: `/private/tmp/bookvar-cs249r-source` at
 `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
 
@@ -38,19 +38,42 @@ addition to color, and SHA-256 records in both registries.
 - Astro check: 0 errors, 0 warnings, 0 hints.
 - Astro build: 594 pages.
 - Published-output suite: 8/8 tests passed.
-- `git diff --check`: passed.
+- Scoped `git diff --check` passed for authored files. A repository-wide
+  `git diff --check` reports trailing whitespace inside the imported
+  `diagnostic-flow.svg`; `cmp` confirms that file remains byte-for-byte equal
+  to pinned upstream, so its source bytes were intentionally not normalized.
 - Built HTML contains all new image URLs; output tests found no broken internal
   routes, fragments, or files.
 - Figure counts verified from the seven Markdown sources: `4/3/3/4/3/3/4`.
 
 ## Render inspection
 
-The local built site was served at `127.0.0.1`; however, the Codex browser
-runtime reported that no browser backend was available, so desktop/narrow
-screenshots could not be captured in this run. Structural responsive checks
-still passed: all new SVGs use scalable `viewBox` coordinates without fixed CSS
-width, and the Starlight build emits them through the standard responsive
-article-image path. This is the only remaining verification gap.
+The first desktop inspection found
+`data_engineering_storage_latency_hierarchy.svg` at approximately 97 px inside
+a 617 px article column. The imported SVG intentionally retains its upstream
+`72.63pt` intrinsic width; a source-specific site rule now presents it at
+`min(100%, 28rem)` (448 px desktop maximum). The remaining Section VI Harvard
+and Bookvar figures use `min(100%, 36rem)` (576 px desktop maximum). At a
+narrow viewport both rules collapse to the content width and cannot overflow.
+
+The corrected build therefore changes the expected rendered widths from
+intrinsic values as low as roughly 97–108 px to 448 px for the storage ladder
+and up to 576 px for the other anchors. The Codex browser runtime was not
+available to this worker for a second screenshot pass; desktop/narrow
+screenshots remain an external verification item, while CSS/output structure
+and responsive bounds were verified locally.
+
+## Review correction
+
+- The padding/bucketing/packing ledger now omits EOS in all three panels.
+  For document lengths `[8, 7, 3, 2]`, useful tokens stay constant at 20:
+  padding uses 32 slots (62.5%), bucketing 22 (90.9%), and packing 20 (100%).
+  Packed document boundaries are drawn as metadata/mask separators and consume
+  no token slot in this comparison.
+- The GPU chapter's roofline elbow now follows the arithmetic-intensity bridge
+  `$I=F/Q_{\mathrm{HBM}}`, directly adjacent to the concept it explains.
+- Seven reused assets now have matching `used_in` and SHA-256 fields in the
+  local ML Systems manifest and the global asset registry.
 
 ## Provenance notes
 

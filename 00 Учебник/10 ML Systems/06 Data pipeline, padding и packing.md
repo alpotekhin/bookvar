@@ -56,10 +56,12 @@ $1452/(4\cdot1024)\approx35{,}4\%$: почти две трети token-level com
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/bookvar/padding-bucketing-packing-ledger.svg]]
 
-*Оригинальная учебная схема Bookvar: один набор длин проведён через padding,
-bucketing и packing, поэтому знаменатель token efficiency можно проверить
-визуально. Синтез и числовой пример по EDLS week 2, slide “Optimal sequence
-processing” (pinned `e632aa8…`), и формулам этой главы; CC BY 4.0,
+*Оригинальная учебная схема Bookvar: один набор длин `[8, 7, 3, 2]` проведён
+через padding, bucketing и packing. EOS последовательно исключён из всех трёх
+панелей: полезны 20 исходных токенов, занято соответственно 32, 22 и 20 слотов,
+то есть utilisation равен 62,5%, 90,9% и 100%. Граница packed-документов —
+metadata/mask, а не дополнительный слот. Синтез по EDLS week 2, slide “Optimal
+sequence processing” (pinned `e632aa8…`), и формулам этой главы; CC BY 4.0,
 derivation `bookvar-original`, не копия исходной фигуры.*
 
 ## Bucketing
