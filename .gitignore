@@ -4,6 +4,8 @@
 .worktrees/
 raw/
 node_modules/
+.cache/mlsysbook/
+__pycache__/
 .astro/
 site/dist/
 site/.astro/
