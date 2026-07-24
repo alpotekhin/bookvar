@@ -59,7 +59,6 @@ assets:
     modified: false
     sha256: 4d20898ae8244de893577b70fc843b4c24f444842056f32d0cfcdc3169e42b5e
     used_in:
-      - 00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md
       - 00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md
   - file: harvard/foundation/hw_acceleration_energy_ladder.svg
     author: Harvard Edge ML Systems Book contributors
@@ -252,7 +251,6 @@ assets:
     sha256: 6b23d97b249a7d6841aaea70af6827148003f5f6806978a91aedcf3b553cfcf8
     used_in:
       - 00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md
-      - 00 Учебник/14 Inference и оптимизация/56 FlashAttention.md
   - file: harvard/performance/flashattention-tiling.svg
     author: Harvard Edge ML Systems Book contributors
     source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/flashattention-tiling.svg
@@ -278,7 +276,6 @@ assets:
     sha256: 8240e8b8971d7a69e115bd7643dd96b7bd9bbc9de2bf94815b51bdecef2b3a4d
     used_in:
       - 00 Учебник/10 ML Systems/07 Profiling ML-нагрузки.md
-      - 00 Учебник/14 Inference и оптимизация/56 FlashAttention.md
   - file: harvard/performance/block-quantization.svg
     author: Harvard Edge ML Systems Book contributors
     source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/block-quantization.svg

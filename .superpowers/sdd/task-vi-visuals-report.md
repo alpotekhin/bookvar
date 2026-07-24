@@ -75,6 +75,24 @@ and responsive bounds were verified locally.
 - Seven reused assets now have matching `used_in` and SHA-256 fields in the
   local ML Systems manifest and the global asset registry.
 
+## Final metadata audit
+
+The final focused audit covered the seven reused Section VI anchors plus the
+Bookvar padding/bucketing/packing ledger. For every `used_in` value it checked
+that the Markdown file exists and contains the asset basename; it also compared
+sorted `used_in` and SHA-256 fields between the local and global registries.
+All eight assets passed.
+
+Three phantom references were removed from both registries:
+
+- `hw_acceleration_roofline_elbow.svg` → chapter 03;
+- `operator-fusion.svg` → chapter 14/56;
+- `optimization-decision-tree.svg` → chapter 14/56.
+
+Their actual Section VI references remain. The editorial ledger global ID is
+now `curated-bookvar-padding-bucketing-packing-ledger-svg-c01bab8fa293`,
+matching the first 12 characters of its current SHA-256.
+
 ## Provenance notes
 
 No EDLS raster/slides were copied, so no unresolved third-party figure

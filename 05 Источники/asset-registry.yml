@@ -5259,7 +5259,6 @@ assets:
     sha256: 4d20898ae8244de893577b70fc843b4c24f444842056f32d0cfcdc3169e42b5e
     used_in:
       - 00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md
-      - 00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
   - id: curated-harvard-harvard-foundation-hw-acceleration-energy-ladder-svg-f7d298e7765a
@@ -5499,7 +5498,6 @@ assets:
     sha256: 6b23d97b249a7d6841aaea70af6827148003f5f6806978a91aedcf3b553cfcf8
     used_in:
       - 00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md
-      - 00 Учебник/14 Inference и оптимизация/56 FlashAttention.md
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
   - id: curated-harvard-harvard-performance-flashattention-tiling-svg-7c84d90bdbb9
@@ -5535,7 +5533,6 @@ assets:
     sha256: 8240e8b8971d7a69e115bd7643dd96b7bd9bbc9de2bf94815b51bdecef2b3a4d
     used_in:
       - 00 Учебник/10 ML Systems/07 Profiling ML-нагрузки.md
-      - 00 Учебник/14 Inference и оптимизация/56 FlashAttention.md
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
   - id: curated-harvard-harvard-inference-batching-strategies-svg-eb33debb5730
@@ -5638,7 +5635,7 @@ assets:
       - 00 Учебник/10 ML Systems/07 Profiling ML-нагрузки.md
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
-  - id: curated-bookvar-padding-bucketing-packing-ledger-svg-9efe3221e7c3
+  - id: curated-bookvar-padding-bucketing-packing-ledger-svg-c01bab8fa293
     asset: 00 Учебник/Assets/Figures/curated/ml-systems/bookvar/padding-bucketing-packing-ledger.svg
     author: Bookvar contributors
     source_url: https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week02_fast_pipelines/lecture.pdf
