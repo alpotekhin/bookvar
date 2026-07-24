@@ -11,6 +11,59 @@ const systemsAssetRoot = resolve(
 );
 const trackedFigurePattern = /\.(svg|png|jpe?g|gif|webp)$/i;
 
+type SystemsAsset = {
+  file?: unknown;
+  author?: unknown;
+  source_url?: unknown;
+  commit?: unknown;
+  license?: unknown;
+  modified?: unknown;
+  used_in?: unknown;
+};
+
+function requireNonEmptyString(value: unknown, field: string): string {
+  if (typeof value !== 'string' || value.trim().length === 0) {
+    throw new Error(`${field} must be a non-empty string`);
+  }
+  return value;
+}
+
+function validateSystemsManifest(assets: SystemsAsset[]): void {
+  const files = new Set<string>();
+
+  for (const asset of assets) {
+    const file = requireNonEmptyString(asset.file, 'file');
+    requireNonEmptyString(asset.author, `author for ${file}`);
+    requireNonEmptyString(asset.license, `license for ${file}`);
+    if (typeof asset.modified !== 'boolean') {
+      throw new Error(`modified for ${file} must be boolean`);
+    }
+    if (!Array.isArray(asset.used_in) || asset.used_in.length === 0) {
+      throw new Error(`used_in for ${file} must be a non-empty array`);
+    }
+    for (const usage of asset.used_in) {
+      requireNonEmptyString(usage, `used_in item for ${file}`);
+    }
+
+    const sourceUrl = requireNonEmptyString(asset.source_url, `source_url for ${file}`);
+    const sourceMatch = sourceUrl.match(/^https:\/\/github\.com\/.+\/blob\/([0-9a-f]{40})\//);
+    if (!sourceMatch) {
+      throw new Error(`source_url for ${file} must pin a 40-character GitHub commit`);
+    }
+    const commit = requireNonEmptyString(asset.commit, `commit for ${file}`);
+    if (!/^[0-9a-f]{40}$/.test(commit)) {
+      throw new Error(`commit for ${file} must be a 40-character SHA`);
+    }
+    if (sourceMatch[1] !== commit) {
+      throw new Error(`source_url SHA must equal commit for ${file}`);
+    }
+    if (files.has(file)) {
+      throw new Error(`duplicate manifest file: ${file}`);
+    }
+    files.add(file);
+  }
+}
+
 function sha256(path: string): string {
   return createHash('sha256').update(readFileSync(path)).digest('hex');
 }
@@ -63,12 +116,35 @@ describe('publication asset registry', () => {
       .map(String)
       .filter((file) => /\.(svg|png|jpe?g|gif|webp)$/i.test(file));
 
+    validateSystemsManifest(manifest.assets);
     expect([...registered].sort()).toEqual(actual.sort());
-    for (const asset of manifest.assets) {
-      expect(asset.source_url).toMatch(/^https:\/\/github\.com\/.+\/blob\/[0-9a-f]{40}\//);
-      expect(asset.commit).toMatch(/^[0-9a-f]{40}$/);
-      expect(asset.used_in.length).toBeGreaterThan(0);
-    }
+  });
+
+  const commit = '0123456789abcdef0123456789abcdef01234567';
+  const validSystemsAsset = {
+    file: 'figure.svg',
+    author: 'Example Author',
+    source_url: `https://github.com/example/course/blob/${commit}/figure.svg`,
+    commit,
+    license: 'CC BY 4.0',
+    modified: false,
+    used_in: ['00 Учебник/example.md']
+  };
+  const invalidSystemsManifests: Array<[string, SystemsAsset[], RegExp]> = [
+    ['empty file', [{ ...validSystemsAsset, file: '  ' }], /file/],
+    ['empty author', [{ ...validSystemsAsset, author: '' }], /author/],
+    ['empty license', [{ ...validSystemsAsset, license: '' }], /license/],
+    ['non-boolean modified', [{ ...validSystemsAsset, modified: 'false' }], /modified/],
+    ['empty used_in', [{ ...validSystemsAsset, used_in: [] }], /used_in/],
+    ['blank used_in item', [{ ...validSystemsAsset, used_in: [''] }], /used_in/],
+    ['unpinned source_url', [{ ...validSystemsAsset, source_url: 'https://github.com/example/course/blob/main/figure.svg' }], /source_url/],
+    ['invalid commit', [{ ...validSystemsAsset, commit: 'main' }], /commit/],
+    ['duplicate file', [validSystemsAsset, { ...validSystemsAsset }], /duplicate.*file/i],
+    ['source SHA mismatch', [{ ...validSystemsAsset, commit: 'abcdef0123456789abcdef0123456789abcdef01' }], /source_url.*commit/i]
+  ];
+
+  it.each(invalidSystemsManifests)('rejects ML systems manifest rows with %s', (_label, assets, error) => {
+    expect(() => validateSystemsManifest(assets)).toThrow(error);
   });
 
   it('stores decodable image data matching every tracked figure extension', () => {
