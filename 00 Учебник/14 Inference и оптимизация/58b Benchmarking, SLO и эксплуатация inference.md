@@ -165,7 +165,49 @@ ITL требует особой осторожности. Можно объед�
 
 Pinned notebook [`week08_inference_software/seminar.ipynb`](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week08_inference_software/seminar.ipynb) фиксирует `Qwen/Qwen3-4B`, `transformers==4.53.0`, FP16 и доступный CUDA GPU. Prefill с `use_cache=True` измеряется после двух warmup и усредняется по четырём синхронизированным запускам; decode использует greedy `model.generate(max_new_tokens=256)`. Затем формы сравниваются с `attn_implementation="flash_attention_2"`.
 
-В pinned notebook нет сохранённых outputs и имени GPU. Поэтому здесь нельзя приписать источнику числа throughput: количественный результат — точные определения `prefill tokens / synchronized time`, `generated tokens / total generate time` и peak-memory delta. Decode-величина включает prefill, что notebook помечает как приближение. Новые числа публикуются только вместе с GPU, CUDA/PyTorch, batch и длинами.
+Аудит охватил все артефакты pinned week 8. В 37-страничной lecture pages
+11–12 показывают качественную разницу context decoding/prefill и generation,
+page 21 — SRAM/HBM/DRAM для FlashAttention; таблицы Qwen throughput и имени
+устройства нет. `seminar.ipynb` и `homework/homework_week8.ipynb` содержат
+**ноль сохранённых output cells**. README лишь ссылается на эти три файла.
+Следовательно требование «добавить измеренные значения Qwen3-4B с
+hardware/software context» остаётся **unresolved in the pinned source**:
+приписать курсу числа невозможно.
+
+Notebook задаёт две нагрузки. Сначала batch sizes
+`[1,4,8,16,32,64,128]` из случайных строк по 64 символа; затем для сравнения
+attention implementations — `[1,4,8,16,32]` строк по 2048 символов.
+Prefill metric равна `input_ids.numel() / mean(synchronized_time)`; память —
+`max_memory_allocated - model_memory`. Decode metric равна
+`256 * batch / total_generate_time`, но включает prefill, что сам notebook
+помечает как приближение. Код создаёт baseline с `attn_implementation="eager"`,
+а второй экземпляр фактически с `"flex_attention"`; текстовая фраза
+«FlashAttention-2» не совпадает с этим аргументом и должна быть исправлена до
+публикации новых чисел.
+
+Внешний run требует явной авторизации на загрузку Qwen3-4B и доступ к CUDA GPU;
+в этой работе он не выполнялся. После разрешения воспроизводимый запуск должен
+начинаться так:
+
+```bash
+git clone https://github.com/mryab/efficient-dl-systems.git
+git -C efficient-dl-systems checkout e632aa89ca9e6638d52e1b686095e7442faffbb0
+python3 -m venv .venv-edls8
+.venv-edls8/bin/pip install "transformers==4.53.0" torch jupyter numpy
+.venv-edls8/bin/jupyter nbconvert \
+  --to notebook --execute \
+  --ExecutePreprocessor.timeout=-1 \
+  --output seminar.executed.ipynb \
+  efficient-dl-systems/week08_inference_software/seminar.ipynb
+```
+
+Перед model load нужно сохранить `nvidia-smi -q`, GPU name/VRAM,
+driver/CUDA, `torch.__version__`, `transformers.__version__`, precision,
+attention implementation и SHA notebook. Для честного результата следует
+разделить prefill и 256 decode steps, использовать CUDA events или
+`perf_counter` с synchronize, сохранить все per-run samples, median/p95 и
+peak HBM. Только выполненный notebook вместе с этим environment record может
+закрыть unresolved measurement requirement.
 
 Стоимость prefill зависит от длины prompt, decode — от числа генерируемых
 токенов и текущей длины контекста, а память — от суммы живых KV-cache. Поэтому
