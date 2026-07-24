@@ -161,6 +161,12 @@ ITL требует особой осторожности. Можно объед�
 
 ## Workload важнее названия GPU
 
+### EDLS week 8: воспроизводимое измерение Qwen3-4B
+
+Pinned notebook [`week08_inference_software/seminar.ipynb`](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week08_inference_software/seminar.ipynb) фиксирует `Qwen/Qwen3-4B`, `transformers==4.53.0`, FP16 и доступный CUDA GPU. Prefill с `use_cache=True` измеряется после двух warmup и усредняется по четырём синхронизированным запускам; decode использует greedy `model.generate(max_new_tokens=256)`. Затем формы сравниваются с `attn_implementation="flash_attention_2"`.
+
+В pinned notebook нет сохранённых outputs и имени GPU. Поэтому здесь нельзя приписать источнику числа throughput: количественный результат — точные определения `prefill tokens / synchronized time`, `generated tokens / total generate time` и peak-memory delta. Decode-величина включает prefill, что notebook помечает как приближение. Новые числа публикуются только вместе с GPU, CUDA/PyTorch, batch и длинами.
+
 Стоимость prefill зависит от длины prompt, decode — от числа генерируемых
 токенов и текущей длины контекста, а память — от суммы живых KV-cache. Поэтому
 пары средних длин недостаточно. Следует сохранять совместное распределение
@@ -288,3 +294,4 @@ throughput и goodput, ошибки/отмены, стоимость в GPU-hour
 - vLLM, [Benchmarking Dashboard](https://docs.vllm.ai/en/latest/benchmarking/dashboard.html) — публикуемый подход к сравнению throughput и latency; конкретные результаты зависят от версии.
 
 **Предыдущая глава:** [[58a2 Раздельное обслуживание prefill и decode|Раздельное обслуживание prefill и decode]]
+**Следующая глава:** [[58c Queueing и capacity planning|Queueing и capacity planning]]

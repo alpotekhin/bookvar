@@ -160,6 +160,10 @@ model placement недостаточна.
 
 ## Tensor parallelism: матрица разделена внутри слоя
 
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/inference/tensor-parallel-routing.svg]]
+
+*Harvard ML Systems, Vol. II, tensor-parallel routing; [pinned original](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/inference/images/svg/tensor-parallel-routing.svg), CC BY-NC-SA 4.0.*
+
 Megatron-LM выбрал сопряжённую пару column-parallel и row-parallel linear.
 Первую матрицу MLP делят по output dimension. GeLU или SwiGLU можно вычислить
 локально над каждым fragment, не синхронизируя нелинейность. Вторую матрицу делят
@@ -190,6 +194,10 @@ collective latency никуда не исчезает. С другой стор�
 стоимость токена, чем две независимые TP4 replicas.
 
 ## Pipeline parallelism: слои разделены по глубине
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/inference/pipeline-parallel-routing.svg]]
+
+*Harvard ML Systems, Vol. II, pipeline-parallel routing; [pinned original](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/inference/images/svg/pipeline-parallel-routing.svg), CC BY-NC-SA 4.0.*
 
 PP назначает последовательные слои разным stages. Активация проходит stage 0,
 передаётся stage 1 и так далее. В отличие от TP, большинство слоёв не вызывает
@@ -245,6 +253,10 @@ query distribution и KV sharding: можно разделить KV по heads, 
 между ranks.
 
 ## Expert parallelism: параметры распределены, токены движутся
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/inference/expert-parallel-routing.svg]]
+
+*Harvard ML Systems, Vol. II, expert-parallel routing; [pinned original](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/inference/images/svg/expert-parallel-routing.svg), CC BY-NC-SA 4.0.*
 
 Dense MLP применяет одни weights ко всем токенам. В MoE имеется $E$ экспертов, а
 router выбирает для токена обычно $k\ll E$. EP распределяет experts между ranks,

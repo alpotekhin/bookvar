@@ -117,6 +117,12 @@ $$
 
 ## Roofline: вычисления ограничены либо арифметикой, либо памятью
 
+Общая модель roofline введена в [[02 Areas/ML & DL/00 Учебник/10 ML Systems/03 Измерение производительности и roofline|главе об измерении производительности]]. Здесь она применяется к inference. Для Transformer с $P$ параметров dense forward требует примерно $2P$ FLOP на токен. Prefill с $S$ позициями превращает линейные слои в крупные GEMM и повторно использует блоки весов; decode при малом batch снова читает почти $P b_w$ байтов ради одного токена. Его интенсивность порядка $2/b_w$ FLOP/byte до учёта KV и часто лежит слева от roofline knee.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/prefill-vs-decode-roofline.svg]]
+
+*Harvard ML Systems, Vol. II, `performance_engineering.qmd`: prefill приближается к compute roof, decode остаётся у bandwidth roof; [оригинальный SVG в pinned commit](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/prefill-vs-decode-roofline.svg), CC BY-NC-SA 4.0.*
+
 Модель roofline сопоставляет три величины. Пусть устройство способно выполнять
 $C_{\max}$ FLOP/s и читать из HBM с пропускной способностью $W_{\max}$ байт/с.
 Для операции с $F$ FLOPs и $M$ прочитанными или записанными байтами её
@@ -211,6 +217,8 @@ batch size обычно сначала быстро растёт, затем в�
 допустимое число запросов, является отправной точкой настройки сервера.
 
 ## KV-cache меняет повторные вычисления на память
+
+Для $L$ слоёв, $H_{kv}$ KV-голов, размера головы $D$ и $b$ байтов на элемент кеш одного токена равен $2LH_{kv}Db$ байт, а batch занимает $2BLH_{kv}DSb$. В MHA $H_{kv}=H_q$; GQA и MQA уменьшают именно $H_{kv}$. Для 32 слоёв, 8 KV-голов, $D=128$ и BF16 это 128 KiB/токен, то есть 4 GiB на контекст 32k.
 
 В причинном внимании для новой позиции $t$
 

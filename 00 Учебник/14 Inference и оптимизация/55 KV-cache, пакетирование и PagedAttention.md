@@ -12,6 +12,8 @@ primary_sources:
 
 # KV-cache, пакетирование и PagedAttention
 
+Определения prefill, decode и roofline канонически выведены в [[55a Физика LLM inference — prefill, decode и roofline]]. Здесь предмет уже: размещение растущего состояния многих запросов и загрузка ускорителя.
+
 При обучении Transformer получает прямоугольный пакет токенов и обрабатывает
 все позиции параллельно. У сервера другая нагрузка: запросы приходят в разные
 моменты, имеют разные входы и заканчивают ответы после разного числа шагов.
@@ -138,6 +140,12 @@ PagedAttention](https://arxiv.org/abs/2309.06180), приведён в лекц�
 достаточной сумме свободных байтов.
 
 ## PagedAttention: логическая последовательность, физические блоки
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/inference/kv-cache-fragmentation.svg]]
+
+*Harvard ML Systems, Vol. II, `inference.qmd`: резервирование максимальной длины создаёт внутреннюю и внешнюю фрагментацию; [оригинальный SVG](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/inference/images/svg/kv-cache-fragmentation.svg), CC BY-NC-SA 4.0.*
+
+PagedAttention хранит таблицу `logical block -> physical block`; физические блоки не обязаны быть смежными, а последний теряет не более `block_size-1` позиций. Copy-on-write позволяет hypotheses делить префикс до расхождения. Paging убирает резерв `max_seq_len`, но block table, metadata, неполный хвост и workspace остаются в memory ledger.
 
 PagedAttention переносит идею страничной виртуальной памяти. Кеш одной
 последовательности делится на **логические блоки** фиксированного числа токенов.
