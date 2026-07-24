@@ -26,6 +26,14 @@ Benchmarking говорит, что программа медленная; profi
 `nvidia-smi utilization=100%` означает лишь, что GPU исполнял хоть что-то в
 sampling interval: dummy wait kernel тоже может дать 100%. Это не MFU.
 
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/diagnostic-flow.svg]]
+
+*Оригинальная иллюстрация Harvard CS249r, Vol. II, Performance Engineering,
+§ “Iron Law Diagnostic Flowchart”, locator
+`sec-performance-engineering-iron-law`, commit `45ecc8d…`,
+CC BY-NC-SA 4.0; файл не изменён. Дерево фиксирует порядок исключения I/O, CPU
+и communication stalls до перехода к kernel-level диагнозу.*
+
 ## CPU: py-spy
 
 Sampling profiler периодически снимает stacks и почти не меняет программу:
@@ -132,6 +140,14 @@ operator names и private snapshot API меняются.
 Framework layer также платит dispatch tax: eager graph удобно отлаживать, но
 Python и operator dispatch заметны при мелких операциях. Compilation/fusion
 помогают только если trace действительно показывает этот режим.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/optimization-decision-tree.svg]]
+
+*Оригинальная иллюстрация Harvard CS249r, Vol. II, Performance Engineering,
+§ “Optimization decision tree”, locator
+`sec-performance-engineering-optimization-decision-tree`, commit `45ecc8d…`,
+CC BY-NC-SA 4.0; файл не изменён. Она превращает установленный bottleneck в
+выбор класса вмешательства и удерживает profiling перед optimization.*
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/foundation/frameworks_dispatch_tax_divergence.svg]]
 

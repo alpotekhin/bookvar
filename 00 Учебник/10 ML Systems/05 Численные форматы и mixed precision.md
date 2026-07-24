@@ -115,6 +115,13 @@ zero-rate, amax history и loss telemetry.
 портит квантование только своего блока, но появляются metadata, требования к
 axis/layout и зависимость от MX-aware kernels.
 
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/block-quantization.svg]]
+
+*Оригинальная иллюстрация Harvard CS249r, Vol. II, Performance Engineering,
+§ “Block quantization”, locator `sec-performance-engineering-quantization`,
+commit `45ecc8d…`, CC BY-NC-SA 4.0; файл не изменён. Разбиение tensor на
+локальные блоки показывает, почему выброс ухудшает scale только своей группы.*
+
 ## Worked example: memory throughput
 
 Оператор читает два и пишет один tensor по $10^8$ элементов. FP32 traffic —
@@ -125,6 +132,14 @@ $$t_{FP32}\ge0{,}80\text{ ms},\qquad t_{BF16}\ge0{,}40\text{ ms}.$$
 Это верхняя надежда на 2× от bytes, не обещание end-to-end: launch, conversion
 и compute остаются. Для Adam на 1B параметров AMP всё ещё может занимать
 16–18 GB model states, хотя activations уменьшаются вдвое.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/foundation/training_optimizer_memory.svg]]
+
+*Оригинальная иллюстрация Harvard CS249r, Vol. I, Training,
+§ “Memory decomposition”, locator `sec-model-training-memory-decomposition`,
+commit `45ecc8d…`, CC BY-NC-SA 4.0; файл не изменён. Ledger отделяет веса,
+градиенты и состояния оптимизатора: узкий forward dtype не означает такое же
+уменьшение всей памяти training.*
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/foundation/hw_acceleration_energy_ladder.svg]]
 

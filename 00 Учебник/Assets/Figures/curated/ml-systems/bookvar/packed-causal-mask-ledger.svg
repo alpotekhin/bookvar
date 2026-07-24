@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" role="img" aria-labelledby="title desc">
+  <title id="title">Обычная causal mask и block-diagonal mask для packed документов</title>
+  <desc id="desc">Слева документ B может обращаться к прошлым токенам документа A. Справа block-diagonal causal mask запрещает эти междокументные связи, сохраняя причинность внутри каждого сегмента.</desc>
+  <style>
+    text{font-family:Inter,Arial,sans-serif;fill:#172033}.h{font-size:24px;font-weight:700}.s{font-size:17px}.cell{stroke:#fff;stroke-width:2}.yes{fill:#3478c9}.leak{fill:#d95d5d}.no{fill:#edf1f6}.frame{fill:none;stroke:#596579;stroke-width:2}.cut{stroke:#172033;stroke-width:4}
+  </style>
+  <text x="30" y="38" class="h">Packed [A₁ A₂ A₃ | B₁ B₂ B₃]: кто видит кого?</text>
+  <g transform="translate(55 90)">
+    <text x="0" y="-18" class="h">Обычная causal mask</text>
+    <g>
+      <rect class="yes cell" x="0" y="0" width="45" height="45"/><rect class="no cell" x="45" y="0" width="225" height="45"/>
+      <rect class="yes cell" x="0" y="45" width="90" height="45"/><rect class="no cell" x="90" y="45" width="180" height="45"/>
+      <rect class="yes cell" x="0" y="90" width="135" height="45"/><rect class="no cell" x="135" y="90" width="135" height="45"/>
+      <rect class="leak cell" x="0" y="135" width="135" height="45"/><rect class="yes cell" x="135" y="135" width="45" height="45"/><rect class="no cell" x="180" y="135" width="90" height="45"/>
+      <rect class="leak cell" x="0" y="180" width="135" height="45"/><rect class="yes cell" x="135" y="180" width="90" height="45"/><rect class="no cell" x="225" y="180" width="45" height="45"/>
+      <rect class="leak cell" x="0" y="225" width="135" height="45"/><rect class="yes cell" x="135" y="225" width="135" height="45"/>
+      <rect class="frame" width="270" height="270"/><path class="cut" d="M135 0v270M0 135h270"/>
+    </g>
+    <text x="0" y="305" class="s">красное: B читает A → leakage</text>
+  </g>
+  <g transform="translate(500 90)">
+    <text x="0" y="-18" class="h">Block-diagonal causal</text>
+    <g>
+      <rect class="yes cell" x="0" y="0" width="45" height="45"/><rect class="no cell" x="45" y="0" width="225" height="45"/>
+      <rect class="yes cell" x="0" y="45" width="90" height="45"/><rect class="no cell" x="90" y="45" width="180" height="45"/>
+      <rect class="yes cell" x="0" y="90" width="135" height="45"/><rect class="no cell" x="135" y="90" width="135" height="45"/>
+      <rect class="no cell" x="0" y="135" width="135" height="45"/><rect class="yes cell" x="135" y="135" width="45" height="45"/><rect class="no cell" x="180" y="135" width="90" height="45"/>
+      <rect class="no cell" x="0" y="180" width="135" height="45"/><rect class="yes cell" x="135" y="180" width="90" height="45"/><rect class="no cell" x="225" y="180" width="45" height="45"/>
+      <rect class="no cell" x="0" y="225" width="135" height="45"/><rect class="yes cell" x="135" y="225" width="135" height="45"/>
+      <rect class="frame" width="270" height="270"/><path class="cut" d="M135 0v270M0 135h270"/>
+    </g>
+    <text x="0" y="305" class="s">B видит только прошлое внутри B</text>
+  </g>
+  <g transform="translate(220 440)"><rect class="yes" width="22" height="22"/><text x="30" y="18" class="s">разрешено</text><rect class="leak" x="150" width="22" height="22"/><text x="180" y="18" class="s">междокументный доступ</text><rect class="no" x="420" width="22" height="22"/><text x="450" y="18" class="s">запрещено</text></g>
+</svg>

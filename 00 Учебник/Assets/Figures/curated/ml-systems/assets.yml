@@ -23,6 +23,15 @@ assets:
     modified: false
     used_in:
       - 00 Учебник/10 ML Systems/01 Модель как часть системы.md
+  - file: harvard/foundation/ml_systems_deployment_span.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/ml_systems/images/svg/ml_systems_deployment_span.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    sha256: 296bb2c0b6ed094f776d6ba59715227ae79887f1b9f4e9b18a2ae0d5d009640c
+    used_in:
+      - 00 Учебник/10 ML Systems/01 Модель как часть системы.md
   - file: harvard/foundation/frameworks_dispatch_tax_divergence.svg
     author: Harvard Edge ML Systems Book contributors
     source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/frameworks/images/svg/frameworks_dispatch_tax_divergence.svg
@@ -39,6 +48,7 @@ assets:
     modified: false
     used_in:
       - 00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md
+      - 00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md
   - file: harvard/foundation/hw_acceleration_roofline_elbow.svg
     author: Harvard Edge ML Systems Book contributors
     source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/hw_acceleration/images/svg/hw_acceleration_roofline_elbow.svg
@@ -47,6 +57,7 @@ assets:
     modified: false
     used_in:
       - 00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md
+      - 00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md
   - file: harvard/foundation/hw_acceleration_energy_ladder.svg
     author: Harvard Edge ML Systems Book contributors
     source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/hw_acceleration/images/svg/hw_acceleration_energy_ladder.svg
@@ -61,6 +72,15 @@ assets:
     commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
     license: CC BY-NC-SA 4.0
     modified: false
+    used_in:
+      - 00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md
+  - file: harvard/foundation/benchmarking_confidence_detectability.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/benchmarking/images/svg/benchmarking_confidence_detectability.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    sha256: 13d8e440e099438cc6b1b530e7559cca085d7a09057fb47e320e2840e6d91168
     used_in:
       - 00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md
   - file: harvard/distributed/five-level-model.svg
@@ -126,6 +146,7 @@ assets:
     license: CC BY-NC-SA 4.0
     modified: false
     used_in:
+      - 00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md
       - 00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism.md
   - file: harvard/distributed/moe-all-to-all-routing.svg
     author: Harvard Edge ML Systems Book contributors
@@ -134,7 +155,17 @@ assets:
     license: CC BY-NC-SA 4.0
     modified: false
     used_in:
+      - 00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md
       - 00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism.md
+  - file: harvard/distributed/distributed_training_memory_budget.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/images/svg/distributed_training_memory_budget.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    sha256: 2c3994815fd37fcf0d335c16a591860cde0ea8c1d6b7c2109af3dba1c797753c
+    used_in:
+      - 00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md
   - file: harvard/distributed/zero-memory-partitioning.svg
     author: Harvard Edge ML Systems Book contributors
     source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/images/svg/zero-memory-partitioning.svg
@@ -214,6 +245,7 @@ assets:
     license: CC BY-NC-SA 4.0
     modified: false
     used_in:
+      - 00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md
       - 00 Учебник/14 Inference и оптимизация/56 FlashAttention.md
   - file: harvard/performance/flashattention-tiling.svg
     author: Harvard Edge ML Systems Book contributors
@@ -238,7 +270,55 @@ assets:
     license: CC BY-NC-SA 4.0
     modified: false
     used_in:
+      - 00 Учебник/10 ML Systems/07 Profiling ML-нагрузки.md
       - 00 Учебник/14 Inference и оптимизация/56 FlashAttention.md
+  - file: harvard/performance/block-quantization.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/block-quantization.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    sha256: bf5a098a20c40e4df50919f6d9b9564690a6a4d93ad4115049873cb8f07affc2
+    used_in:
+      - 00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md
+  - file: harvard/performance/diagnostic-flow.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/diagnostic-flow.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    sha256: 7d4ff073291dab794eccb0ab71691adbfe4af43e78938861145c5846c70db103
+    used_in:
+      - 00 Учебник/10 ML Systems/07 Profiling ML-нагрузки.md
+  - file: harvard/data/data_engineering_storage_latency_hierarchy.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/data_engineering/images/svg/data_engineering_storage_latency_hierarchy.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    sha256: f95d2489900bd977c591fd0397249a1964c01c487ca4b94dccdcadefa7723909
+    used_in:
+      - 00 Учебник/10 ML Systems/06 Data pipeline, padding и packing.md
+  - file: bookvar/padding-bucketing-packing-ledger.svg
+    author: Bookvar contributors
+    source_url: https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week02_fast_pipelines/lecture.pdf
+    commit: e632aa89ca9e6638d52e1b686095e7442faffbb0
+    license: CC BY 4.0
+    modified: true
+    derivation: "Bookvar-original slot ledger derived from the chapter formulas and EDLS slide Optimal sequence processing; not a copy of the source slide."
+    sha256: 9efe3221e7c3c9b060c93c76a50dacc34613ce88e08c1d1c2b50b829970fbe47
+    used_in:
+      - 00 Учебник/10 ML Systems/06 Data pipeline, padding и packing.md
+  - file: bookvar/packed-causal-mask-ledger.svg
+    author: Bookvar contributors
+    source_url: https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week02_fast_pipelines/lecture.pdf
+    commit: e632aa89ca9e6638d52e1b686095e7442faffbb0
+    license: CC BY 4.0
+    modified: true
+    derivation: "Bookvar-original mask ledger derived from causal masking and segment isolation; not a copy of the source slide."
+    sha256: 2ae7f1bc4b225b47b76d03a585acda6fce9546cf7ea65b41a398cdfac8c84a70
+    used_in:
+      - 00 Учебник/10 ML Systems/06 Data pipeline, padding и packing.md
   - file: harvard/inference/batching-strategies.svg
     author: Harvard Edge ML Systems Book contributors
     source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/inference/images/svg/batching-strategies.svg

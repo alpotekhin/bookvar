@@ -65,6 +65,14 @@ quality: “samples/s” бессмысленен, если варианты с�
 число samples и независимых runs. Minimum полезен как нижняя оценка kernel cost,
 но не как production SLO.
 
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/foundation/benchmarking_confidence_detectability.svg]]
+
+*Оригинальная иллюстрация Harvard CS249r, Vol. I, Benchmarking,
+§ “Statistical confidence”, locator
+`sec-benchmarking-statistical-confidence`, commit `45ecc8d…`,
+CC BY-NC-SA 4.0; файл не изменён. Маркер сопоставляет размер выборки с
+минимальным различимым изменением и не даёт принять шум за регрессию.*
+
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/foundation/benchmarking_tail_latency_gap.svg]]
 
 *Оригинальная иллюстрация Harvard CS249r Vol. I, Benchmarking,
