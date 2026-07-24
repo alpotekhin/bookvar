@@ -119,4 +119,4 @@ Build/link/output evidence:
 - Source figures are original registered course/book assets with attribution.
 - No deploy, remote operation, PR, push, or merge was performed.
 
-Commit: `9323e57` (report updated in the same commit by amend).
+Content commit: `27c16bb68ba9442599ba046aa3a175bc4b3bb232`.
