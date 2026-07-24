@@ -1,1 +1,313 @@
-assets: []
+assets:
+  - file: harvard/foundation/introduction_iron_law_bars.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/introduction/images/svg/introduction_iron_law_bars.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    used_in:
+      - 00 Учебник/10 ML Systems/01 Модель как часть системы.md
+  - file: harvard/foundation/introduction_energy_hierarchy.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/introduction/images/svg/introduction_energy_hierarchy.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    used_in:
+      - 00 Учебник/10 ML Systems/01 Модель как часть системы.md
+  - file: harvard/foundation/ml_systems_memory_wall_divergence.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/ml_systems/images/svg/ml_systems_memory_wall_divergence.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    used_in:
+      - 00 Учебник/10 ML Systems/01 Модель как часть системы.md
+  - file: harvard/foundation/frameworks_dispatch_tax_divergence.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/frameworks/images/svg/frameworks_dispatch_tax_divergence.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    used_in:
+      - 00 Учебник/10 ML Systems/07 Profiling ML-нагрузки.md
+  - file: harvard/foundation/training_optimizer_memory.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/training/images/svg/training_optimizer_memory.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    used_in:
+      - 00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md
+  - file: harvard/foundation/hw_acceleration_roofline_elbow.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/hw_acceleration/images/svg/hw_acceleration_roofline_elbow.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    used_in:
+      - 00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md
+  - file: harvard/foundation/hw_acceleration_energy_ladder.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/hw_acceleration/images/svg/hw_acceleration_energy_ladder.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    used_in:
+      - 00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md
+  - file: harvard/foundation/benchmarking_tail_latency_gap.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/benchmarking/images/svg/benchmarking_tail_latency_gap.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    used_in:
+      - 00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md
+  - file: harvard/distributed/five-level-model.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/network_fabrics/images/svg/five-level-model.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    used_in:
+      - 00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints.md
+  - file: harvard/distributed/gpudirect-data-path.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/network_fabrics/images/svg/gpudirect-data-path.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    used_in:
+      - 00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints.md
+  - file: harvard/distributed/complete-data-path.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/data_storage/images/svg/complete-data-path.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    used_in:
+      - 00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints.md
+  - file: harvard/distributed/collective-primitives-overview.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/collective_communication/images/svg/collective-primitives-overview.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    used_in:
+      - 00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md
+  - file: harvard/distributed/ring-allreduce.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/collective_communication/images/svg/ring-allreduce.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    used_in:
+      - 00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md
+  - file: harvard/distributed/data-parallel-flow.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/images/svg/data-parallel-flow.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    used_in:
+      - 00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md
+  - file: harvard/distributed/tensor-parallel-split.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/images/svg/tensor-parallel-split.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    used_in:
+      - 00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism.md
+  - file: harvard/distributed/pipeline-parallelism.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/images/svg/pipeline-parallelism.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    used_in:
+      - 00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism.md
+  - file: harvard/distributed/moe-all-to-all-routing.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/images/svg/moe-all-to-all-routing.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    used_in:
+      - 00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism.md
+  - file: harvard/distributed/zero-memory-partitioning.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/images/svg/zero-memory-partitioning.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    used_in:
+      - 00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor.md
+  - file: harvard/distributed/3d-parallelism-cube.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/images/svg/3d-parallelism-cube.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    used_in:
+      - 00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism.md
+  - file: harvard/distributed/parallelism-decision-tree.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/images/svg/parallelism-decision-tree.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    used_in:
+      - 00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism.md
+  - file: harvard/distributed/failure-domains.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/fault_tolerance/images/svg/failure-domains.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    used_in:
+      - 00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration.md
+  - file: harvard/distributed/young-daly-optimization.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/fault_tolerance/images/svg/young-daly-optimization.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    used_in:
+      - 00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration.md
+  - file: harvard/distributed/topology-placement.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/fleet_orchestration/images/svg/topology-placement.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    used_in:
+      - 00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration.md
+  - file: harvard/performance/profiling-hierarchy.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/profiling-hierarchy.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    used_in:
+      - 00 Учебник/10 ML Systems/07 Profiling ML-нагрузки.md
+  - file: harvard/performance/roofline-model.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/roofline-model.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    used_in:
+      - 00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md
+  - file: harvard/performance/gpu-memory-hierarchy.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/gpu-memory-hierarchy.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    used_in:
+      - 00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md
+  - file: harvard/performance/operator-fusion.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/operator-fusion.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/56 FlashAttention.md
+  - file: harvard/performance/flashattention-tiling.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/flashattention-tiling.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/56 FlashAttention.md
+  - file: harvard/performance/prefill-vs-decode-roofline.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/prefill-vs-decode-roofline.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md
+  - file: harvard/performance/optimization-decision-tree.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/optimization-decision-tree.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/56 FlashAttention.md
+  - file: harvard/inference/batching-strategies.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/inference/images/svg/batching-strategies.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md
+  - file: harvard/inference/continuous-batching.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/inference/images/svg/continuous-batching.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md
+  - file: harvard/inference/kv-cache-fragmentation.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/inference/images/svg/kv-cache-fragmentation.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md
+  - file: harvard/inference/disaggregated-serving.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/inference/images/svg/disaggregated-serving.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md
+  - file: harvard/inference/queuing-hockey-stick.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/inference/images/svg/queuing-hockey-stick.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/58c Queueing и capacity planning.md
+  - file: harvard/inference/tensor-parallel-routing.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/inference/images/svg/tensor-parallel-routing.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md
+  - file: harvard/inference/pipeline-parallel-routing.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/inference/images/svg/pipeline-parallel-routing.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md
+  - file: harvard/inference/expert-parallel-routing.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/inference/images/svg/expert-parallel-routing.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md
+  - file: harvard/inference/ttft-tpot-timeline.svg
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/images/ttft-tpot-timeline.svg
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    license: CC BY-NC-SA 4.0
+    modified: false
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/58c Queueing и capacity planning.md
