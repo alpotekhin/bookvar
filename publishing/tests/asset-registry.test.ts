@@ -271,6 +271,9 @@ describe('publication asset registry', () => {
         derivation?: string;
         provenance_confirmation?: string;
         source_asset?: string;
+        source_url?: string;
+        commit?: string;
+        metadata_status?: string;
       }>;
     };
     const curatedRoot = resolve(root, '00 Учебник/Assets/Figures/curated');
@@ -293,6 +296,17 @@ describe('publication asset registry', () => {
     expect(new Set(curatedEntries.map(({ id }) => id)).size).toBe(curatedEntries.length);
     for (const entry of curatedEntries) {
       expect(entry.id).toMatch(/^curated-[a-z0-9-]+-[a-f0-9]{12}$/);
+      if (!entry.source_asset) {
+        expect(entry.provenance_confirmation).toBe('pinned-upstream-repository');
+        const sourceMatch = entry.source_url?.match(
+          /^https:\/\/github\.com\/[^/]+\/[^/]+\/blob\/([0-9a-f]{40})\/.+/
+        );
+        expect(sourceMatch, `Curated upstream source must be a pinned GitHub blob: ${entry.asset}`).toBeTruthy();
+        expect(entry.commit).toMatch(/^[0-9a-f]{40}$/);
+        expect(sourceMatch?.[1]).toBe(entry.commit);
+        expect(entry.metadata_status).toBe('verified');
+        continue;
+      }
       expect(entry.provenance_confirmation).toBe('user-confirmed-open-materials');
       expect(entry.source_asset).toMatch(/^raw\/papers\//);
       const sourceAsset = resolve(root, entry.source_asset as string);
