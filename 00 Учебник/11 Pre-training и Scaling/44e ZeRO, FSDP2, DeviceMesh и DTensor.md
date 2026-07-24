@@ -7,6 +7,17 @@ last_updated: 2026-07-24
 
 # 44e. ZeRO, FSDP2, DeviceMesh и DTensor
 
+## Полный маршрут EDLS
+
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week05_fsdp/lecture.pdf|EDLS Week 5 — полная лекция]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week05_fsdp/seminar.pdf|EDLS Week 5 — seminar slides]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week05_fsdp/homework/README|EDLS Week 5 — homework]];
+- [[02 Areas/ML & DL/06 Практика/12 Собрать и проверить FSDP|практика FSDP и переносимого checkpoint]].
+
+Здесь особенно важно не ограничиваться API: lecture и seminar показывают
+lifetime полных параметров во время all-gather и reduce-scatter. Именно эти
+временные materializations объясняют peak memory и выбор wrap policy.
+
 DDP реплицирует параметры $P$, gradients $G$ и optimizer state $O$. ZeRO последовательно делит их по data-parallel rank:
 
 ## Что нужно знать и чему научимся

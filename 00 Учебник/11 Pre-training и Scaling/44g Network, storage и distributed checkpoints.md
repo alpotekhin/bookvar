@@ -7,6 +7,18 @@ last_updated: 2026-07-24
 
 # 44g. Network, storage и distributed checkpoints
 
+## Полные главы Harvard CS249r
+
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/network_fabrics|Network Fabrics]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/data_storage|Data Storage]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/fault_tolerance|Fault Tolerance]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/collective_communication|Collective Communication]].
+
+Это четыре полные главы, а не список ссылок «для дальнейшего чтения». Network
+fabrics объясняет путь collective; data storage — путь dataset и checkpoint;
+fault tolerance — зачем checkpoint существует как протокол восстановления;
+collective communication связывает topology с распределённой записью shards.
+
 Collective не живёт в абстрактном «канале». Байты проходят HBM, accelerator interconnect, NIC, кабель, switches и обратный путь. Пять уровней Harvard — link, transport, topology, fabric behavior, cluster design — помогают найти место, где nominal bandwidth перестал быть effective.
 
 ## Что нужно знать и чему научимся
