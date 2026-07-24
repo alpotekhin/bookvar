@@ -52,11 +52,12 @@ KV в четыре раза, хотя число query-голов не меня�
 состояние*. Их нельзя складывать в один коэффициент без отдельной проверки
 качества и latency.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/edls/inference-algorithms/kv-token-level-slide-71.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/editorial/kv-token-level.svg]]
 
-*Token-level: уменьшить число KV-позиций, читаемых attention kernel, либо
-переместить их в RAM/SSD/network. Efficient DL Systems, week 9, slide 71;
-[полный оригинальный слайд в pinned lecture](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week09_inference_algorithms/lecture.pdf).*
+*Оригинальная редакционная схема Bookvar по taxonomy из §4 и Figure 4 работы
+Haoyang Li et al.,
+[A Survey on Large Language Model Acceleration based on KV Cache Management](https://arxiv.org/abs/2412.19442).
+Внешнее artwork не использовано.*
 
 **На уровне модели** уменьшают число или размер хранимых векторов. MQA/GQA
 разделяют K,V между query-головами. MLA проецирует состояние в низкоразмерное
@@ -64,10 +65,11 @@ KV в четыре раза, хотя число query-голов не меня�
 готовой MHA-модели. Такие методы нужно закладывать в обучение или преобразование
 архитектуры.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/edls/inference-algorithms/kv-model-level-slide-72.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/editorial/kv-model-level.svg]]
 
-*Model-level: GQA, MLA/DSA и GDN меняют само представление состояния. Efficient
-DL Systems, week 9, slide 72; полный оригинальный слайд без редактирования.*
+*Оригинальная редакционная схема Bookvar по §5 и Figure 5 той же
+[survey](https://arxiv.org/abs/2412.19442): GQA, MLA и родственные подходы
+меняют представление состояния. Внешнее artwork не использовано.*
 
 **На уровне токенов** решают, все ли прошлые позиции должны оставаться в
 быстром кеше. Sliding window сохраняет недавнее окно. StreamingLLM удерживает
@@ -84,11 +86,13 @@ Cache-aware routing направляет запрос к replica, уже име�
 хранилище. Эти решения сохраняют семантику модели, но добавляют индексацию,
 политику вытеснения и передачу данных.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/edls/inference-algorithms/kv-system-level-slide-73.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/editorial/kv-system-level.svg]]
 
-*System-level: prefix sharing, cache-aware load balancing, cascades,
-prefill/decode disaggregation и heterogeneous clusters. Efficient DL Systems,
-week 9, slide 73; полный оригинальный слайд из pinned source.*
+*Оригинальная редакционная схема Bookvar по §6 и Figure 6 той же
+[survey](https://arxiv.org/abs/2412.19442): prefix sharing, cache-aware routing,
+scheduling и storage tiers. Композиция создана с нуля; внешнее artwork не
+использовано. У arXiv-версии survey указана только non-exclusive distribution
+license, не лицензия на повторное использование иллюстраций.*
 
 | уровень | что уменьшается | качество модели | критическая цена |
 |---|---|---|---|

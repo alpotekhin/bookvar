@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
+  <title id="title">System-level KV-cache optimization</title><desc id="desc">Original editorial diagram of prefix-aware routing, shared blocks, scheduling, and HBM DRAM SSD storage tiers.</desc>
+  <defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#24756a"/></marker><style>.t{font:700 34px Arial;fill:#142522}.h{font:700 21px Arial;fill:#142522}.b{font:17px Arial;fill:#314743}.s{font:15px Arial;fill:#526763}.c{fill:#f5fbf9;stroke:#24756a;stroke-width:3}.p{fill:#f3f1ff;stroke:#6757a5;stroke-width:2}.hot{fill:#ffe9dc;stroke:#c55b24;stroke-width:2}.warm{fill:#fff8e8;stroke:#bb7a12;stroke-width:2}.cold{fill:#eef4ff;stroke:#496da8;stroke-width:2}.l{stroke:#24756a;stroke-width:3;fill:none;marker-end:url(#a)}.d{stroke:#6757a5;stroke-width:3;stroke-dasharray:8 7;fill:none;marker-end:url(#a)}</style></defs>
+  <rect width="1200" height="680" fill="#fff"/><text x="55" y="60" class="t">System-level: reuse, route, schedule, tier</text><text x="55" y="92" class="s">Семантика модели сохраняется, если fetch возвращает полный KV state</text>
+  <rect x="55" y="150" width="220" height="110" rx="16" class="p"/><text x="84" y="194" class="h">Requests</text><text x="84" y="226" class="b">shared prefix IDs</text>
+  <rect x="370" y="135" width="265" height="140" rx="16" class="c"/><text x="400" y="180" class="h">Prefix-aware router</text><text x="400" y="212" class="b">cache locality + load</text><text x="400" y="242" class="b">replica selection</text>
+  <rect x="735" y="125" width="330" height="160" rx="16" class="p"/><text x="765" y="170" class="h">Scheduler</text><text x="765" y="202" class="b">batch / preempt / fairness</text><text x="765" y="234" class="b">prefill ↔ decode coordination</text>
+  <path d="M275 205H370M635 205H735" class="l"/>
+  <rect x="160" y="410" width="230" height="115" rx="16" class="hot"/><text x="195" y="454" class="h">HBM · hot</text><text x="195" y="486" class="b">active/shared blocks</text>
+  <rect x="485" y="410" width="230" height="115" rx="16" class="warm"/><text x="520" y="454" class="h">DRAM · warm</text><text x="520" y="486" class="b">evicted, fetchable</text>
+  <rect x="810" y="410" width="230" height="115" rx="16" class="cold"/><text x="845" y="454" class="h">SSD/remote · cold</text><text x="845" y="486" class="b">capacity, tail risk</text>
+  <path d="M390 450H485M715 450H810" class="l"/><path d="M485 500H390M810 500H715" class="d"/><path d="M900 285V360H275V410" class="d"/>
+  <text x="55" y="605" class="s">Источник taxonomy: Li et al., arXiv:2412.19442, §6 и Fig. 6.</text><text x="55" y="632" class="s">Схема и композиция Bookvar; внешнее artwork не использовано.</text>
+</svg>

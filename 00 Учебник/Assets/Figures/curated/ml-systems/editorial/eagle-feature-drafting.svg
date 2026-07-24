@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
+  <title id="title">EAGLE feature-level drafting and verification</title>
+  <desc id="desc">Original editorial diagram showing a frozen target model, a lightweight feature drafter, a candidate tree, parallel target verification, and KV rollback.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#24756a"/></marker>
+    <style>
+      .t{font:700 34px Inter,Arial,sans-serif;fill:#142522}.h{font:700 23px Inter,Arial,sans-serif;fill:#142522}.b{font:18px Inter,Arial,sans-serif;fill:#314743}.s{font:15px Inter,Arial,sans-serif;fill:#526763}.box{fill:#f5fbf9;stroke:#24756a;stroke-width:3}.draft{fill:#fff8e8;stroke:#bb7a12;stroke-width:3}.verify{fill:#f3f1ff;stroke:#6757a5;stroke-width:3}.line{fill:none;stroke:#24756a;stroke-width:3;marker-end:url(#arrow)}.dash{fill:none;stroke:#6757a5;stroke-width:3;stroke-dasharray:9 8;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="680" fill="#fff"/>
+  <text x="60" y="62" class="t">EAGLE: draft признаков, проверка токенов</text>
+  <text x="60" y="94" class="s">Редакционная схема Bookvar; композиция и графика созданы с нуля</text>
+  <rect x="60" y="155" width="250" height="170" rx="18" class="box"/>
+  <text x="90" y="198" class="h">Frozen target</text>
+  <text x="90" y="232" class="b">embedding + body</text>
+  <text x="90" y="265" class="b">feature fₜ</text>
+  <text x="90" y="298" class="b">target logits q</text>
+  <rect x="390" y="155" width="270" height="170" rx="18" class="draft"/>
+  <text x="420" y="198" class="h">Lightweight drafter</text>
+  <text x="420" y="232" class="b">feature fₜ + shifted token</text>
+  <text x="420" y="265" class="b">→ feature f̂ₜ₊₁</text>
+  <text x="420" y="298" class="b">→ draft logits p</text>
+  <path d="M310 240H390" class="line"/>
+  <rect x="755" y="130" width="375" height="250" rx="18" class="draft"/>
+  <text x="790" y="174" class="h">Candidate tree</text>
+  <circle cx="930" cy="215" r="17" fill="#bb7a12"/><circle cx="855" cy="275" r="17" fill="#e6ae4b"/><circle cx="1005" cy="275" r="17" fill="#e6ae4b"/>
+  <circle cx="815" cy="335" r="17" fill="#f5d99d"/><circle cx="895" cy="335" r="17" fill="#f5d99d"/><circle cx="965" cy="335" r="17" fill="#f5d99d"/><circle cx="1045" cy="335" r="17" fill="#f5d99d"/>
+  <path d="M930 232L855 258M930 232L1005 258M855 292L815 318M855 292L895 318M1005 292L965 318M1005 292L1045 318" stroke="#bb7a12" stroke-width="3" fill="none"/>
+  <path d="M660 240H755" class="line"/>
+  <rect x="300" y="445" width="600" height="150" rx="18" class="verify"/>
+  <text x="335" y="490" class="h">Один parallel target-pass</text>
+  <text x="335" y="527" class="b">tree-attention mask → accept longest valid prefix</text>
+  <text x="335" y="560" class="b">reject branch → correction token + KV rollback</text>
+  <path d="M943 380V420H600V445" class="dash"/>
+  <path d="M300 520H210V325" class="dash"/>
+  <text x="60" y="645" class="s">Факты: Li, Wei, Zhang &amp; Zhang, EAGLE, arXiv:2401.15077, §3 и Fig. 4; внешнее artwork не использовано.</text>
+</svg>
