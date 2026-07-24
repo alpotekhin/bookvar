@@ -116,7 +116,14 @@ $i+1$ перекрывается с compute batch $i$. Проверять overla
 ## Источники
 
 - [EDLS Week 1 lecture, pinned e632aa8](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week01_intro/lecture.pdf) — PDF pp. 6–20
-- [Harvard CS249r, Hardware Acceleration, pinned 45ecc8d](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/hw_acceleration/hw_acceleration.qmd) — §§ “GPU Architecture”, “Memory Hierarchy”, “Computation Scheduling”
+- [Harvard CS249r, Hardware Acceleration, pinned 45ecc8d](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/hw_acceleration/hw_acceleration.qmd) —
+  §§ “Compute Units and Execution Models”
+  (`sec-hardware-acceleration-compute-units-execution-models-f406`),
+  “Evolution from SIMD to SIMT architectures”
+  (`sec-hardware-acceleration-evolution-simd-simt-architectures-e1fd`),
+  “Memory hierarchy”
+  (`sec-hardware-acceleration-memory-hierarchy-1839`) и “Hardware Mapping”
+  (`sec-hardware-acceleration-hardware-mapping-fundamentals-neural-networks-f9a9`)
 
 ← [[02 Areas/ML & DL/00 Учебник/10 ML Systems/01 Модель как часть системы|Модель как часть системы]] ·
 [[02 Areas/ML & DL/00 Учебник/10 ML Systems/03 Измерение производительности и roofline|Измерение производительности и roofline]] →
