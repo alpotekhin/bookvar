@@ -54,6 +54,14 @@ $1452/(4\cdot1024)\approx35{,}4\%$: почти две трети token-level com
 потрачены на padding. Поэтому samples хранят без padding, а `collate_fn`
 дополняет только до maximum текущего batch.
 
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/bookvar/padding-bucketing-packing-ledger.svg]]
+
+*Оригинальная учебная схема Bookvar: один набор длин проведён через padding,
+bucketing и packing, поэтому знаменатель token efficiency можно проверить
+визуально. Синтез и числовой пример по EDLS week 2, slide “Optimal sequence
+processing” (pinned `e632aa8…`), и формулам этой главы; CC BY 4.0,
+derivation `bookvar-original`, не копия исходной фигуры.*
+
 ## Bucketing
 
 Группировка близких длин уменьшает $L_{\max}$. Полная сортировка ухудшает
@@ -89,6 +97,13 @@ decode. Manifest хранит checksum, schema, records/tokens, preprocessing ve
 и tokenizer commit; tokenizer также фиксирует normalization, vocabulary,
 special-token ids и BOS/EOS policy.
 
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/data/data_engineering_storage_latency_hierarchy.svg]]
+
+*Оригинальная иллюстрация Harvard CS249r, Vol. I, Data Engineering,
+§ “Storage systems”, locator `sec-data-engineering-storage-systems`,
+commit `45ecc8d…`, CC BY-NC-SA 4.0; файл не изменён. Иерархия заставляет
+сопоставить locality, latency и capacity до выбора формата и размера shard.*
+
 В `DataLoader` каждый worker имеет replica dataset и prefetch queue. Настройки
 `num_workers`, `prefetch_factor`, `persistent_workers`, `pin_memory` и batch
 size меняют единый RAM/CPU/I/O budget. Примерный скрытый запас равен
@@ -108,6 +123,14 @@ kernel, согласованные `position_ids` и labels `-100` на запр
 Synthetic-тест: изменение tokens A не должно менять logits B. Continuous-stream
 objective, напротив, сознательно разрешает переход через EOS — режимы нельзя
 смешивать.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/bookvar/packed-causal-mask-ledger.svg]]
+
+*Оригинальная учебная схема Bookvar: две матрицы выполняют проверку
+«может ли B читать A» для обычной и block-diagonal causal mask. Выведено из
+определения causal masking и segment isolation в этом разделе; EDLS week 2,
+slide “Optimal sequence processing”, служит источником постановки задачи.
+CC BY 4.0, derivation `bookvar-original`, не копия исходной фигуры.*
 
 ## Каркас pipeline
 

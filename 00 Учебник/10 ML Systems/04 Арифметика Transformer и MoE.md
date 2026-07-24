@@ -149,6 +149,14 @@ checkpointing — множитель и recompute time.
 Architecture”/optimizer-state accounting, figure `training_optimizer_memory.svg`,
 commit `45ecc8d…`, CC BY-NC-SA 4.0. Рисунок импортирован без изменений.*
 
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/distributed_training_memory_budget.svg]]
+
+*Оригинальная иллюстрация Harvard CS249r, Vol. II, Distributed Training,
+§ “Hybrid parallelism memory budget”, locator
+`sec-distributed-training-systems-systems-hybrid-parallelism`,
+commit `45ecc8d…`, CC BY-NC-SA 4.0; файл не изменён. Общий ledger разделён на
+weights, optimizer и activations, чтобы sharding не смешивался с peak buffers.*
+
 FSDP шарит параметры, gradients и optimizer state между $p$ ranks. Идеальный
 resident ledger становится примерно $(16\text{-}18)P/p$, но перед вычислением
 слоя нужен AllGather weights, после backward — ReduceScatter gradients.
@@ -241,6 +249,14 @@ GroupedGEMM запускает матрицы experts совместно, но �
 workload в плотный: число tokens на expert задаёт разные $M$ dimensions.
 Load imbalance, padding до capacity и stragglers уменьшают utilization.
 
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/moe-all-to-all-routing.svg]]
+
+*Оригинальная иллюстрация Harvard CS249r, Vol. II, Distributed Training,
+§ “Expert parallelism (mixture of experts)”, locator
+`sec-distributed-training-systems-systems-expert-parallelism-mixture-experts-bc45`,
+commit `45ecc8d…`, CC BY-NC-SA 4.0; файл не изменён. Dispatch и combine
+показаны как две отдельные All-to-All фазы вокруг локального expert compute.*
+
 ### Qwen 235B-A32B: почему FSDP становится дорогим
 
 EDLS slides 122–123 приводят для Qwen 3 235B слой около 5 GB BF16 и сравнивают
@@ -301,6 +317,14 @@ stage 1: .. F1 B1 F2 B2 F3 B3 F4 B4
 GPipe держит активации всех $m$ microbatches; 1F1B ограничивает число живых
 microbatches и раньше освобождает память. Грубая bubble fraction
 $(p-1)/(m+p-1)$: при $p=8,m=32$ это $7/39\approx18\%$.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/pipeline-parallelism.svg]]
+
+*Оригинальная иллюстрация Harvard CS249r, Vol. II, Distributed Training,
+§ “Pipeline parallelism”, locator
+`sec-distributed-training-systems-systems-pipeline-parallelism-8748`,
+commit `45ecc8d…`, CC BY-NC-SA 4.0; файл не изменён. Пространственное деление
+слоёв по stages связывает расписание microbatches с передачей activations.*
 
 ### ZeroBubble
 

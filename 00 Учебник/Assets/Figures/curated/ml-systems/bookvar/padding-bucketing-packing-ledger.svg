@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" role="img" aria-labelledby="title desc">
+  <title id="title">Сравнение padding, bucketing и packing на одном наборе длин</title>
+  <desc id="desc">Три панели показывают, как одинаковые документы длиной 8, 7, 3 и 2 токена занимают 32 слота при общем padding, 22 слота после bucketing и 24 слота в двух packed-последовательностях. Полезных токенов во всех случаях 20.</desc>
+  <style>
+    text{font-family:Inter,Arial,sans-serif;fill:#172033}.h{font-size:25px;font-weight:700}.s{font-size:17px}.n{font-size:15px}.box{fill:#f7f9fc;stroke:#8894a7;stroke-width:2}.tok{fill:#3478c9}.pad{fill:#fff;stroke:#a7b0bf;stroke-width:1.5;stroke-dasharray:5 4}.eos{fill:#ec9a29}.sep{stroke:#172033;stroke-width:2}
+  </style>
+  <text x="30" y="36" class="h">Один набор длин → три стратегии размещения</text>
+  <g transform="translate(30 70)">
+    <rect class="box" width="280" height="390" rx="12"/>
+    <text x="18" y="36" class="h">Dynamic padding</text><text x="18" y="64" class="s">Lmax = 8, 20 / 32 = 62,5%</text>
+    <g transform="translate(18 92)">
+      <rect class="tok" width="240" height="34" rx="4"/>
+      <rect class="tok" y="52" width="210" height="34" rx="4"/><rect class="pad" x="210" y="52" width="30" height="34"/>
+      <rect class="tok" y="104" width="90" height="34" rx="4"/><rect class="pad" x="90" y="104" width="150" height="34"/>
+      <rect class="tok" y="156" width="60" height="34" rx="4"/><rect class="pad" x="60" y="156" width="180" height="34"/>
+    </g>
+    <text x="18" y="320" class="s">12 пустых слотов</text><text x="18" y="350" class="n">Один длинный пример растягивает весь batch.</text>
+  </g>
+  <g transform="translate(340 70)">
+    <rect class="box" width="280" height="390" rx="12"/>
+    <text x="18" y="36" class="h">Bucketing</text><text x="18" y="64" class="s">8+8 и 3+3: 20 / 22 = 90,9%</text>
+    <g transform="translate(18 92)">
+      <rect class="tok" width="240" height="34" rx="4"/>
+      <rect class="tok" y="52" width="210" height="34" rx="4"/><rect class="pad" x="210" y="52" width="30" height="34"/>
+      <rect class="tok" y="122" width="90" height="34" rx="4"/>
+      <rect class="tok" y="174" width="60" height="34" rx="4"/><rect class="pad" x="60" y="174" width="30" height="34"/>
+    </g>
+    <text x="18" y="320" class="s">2 пустых слота</text><text x="18" y="350" class="n">Близкие длины делят свой локальный Lmax.</text>
+  </g>
+  <g transform="translate(650 70)">
+    <rect class="box" width="280" height="390" rx="12"/>
+    <text x="18" y="36" class="h">Packing</text><text x="18" y="64" class="s">2 × 12: 20 / 24 = 83,3%</text>
+    <g transform="translate(18 104)">
+      <rect class="tok" width="160" height="42" rx="4"/><rect class="eos" x="160" width="20" height="42"/><rect class="tok" x="180" width="40" height="42"/><rect class="eos" x="220" width="20" height="42"/>
+      <rect class="tok" y="76" width="140" height="42" rx="4"/><rect class="eos" x="140" y="76" width="20" height="42"/><rect class="tok" x="160" y="76" width="60" height="42"/><rect class="eos" x="220" y="76" width="20" height="42"/>
+      <text x="0" y="160" class="n">синий = токены · оранжевый = EOS</text>
+    </g>
+    <text x="18" y="320" class="s">4 boundary-слота</text><text x="18" y="350" class="n">Экономия требует масок и правил границ.</text>
+  </g>
+  <text x="30" y="500" class="s">Ledger считает занятые слоты, а не обещает одинаковую стоимость kernels.</text>
+</svg>
