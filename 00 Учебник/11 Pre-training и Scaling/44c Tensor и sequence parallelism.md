@@ -32,7 +32,7 @@ $$X\in\mathbb R^{T\times D},\quad A\in\mathbb R^{D\times H},\quad B\in\mathbb R^
 
 Backward выполняет обратные transitions: gradient replicated output проходит локальный $B_r^\top$, shards hidden-gradient объединяются, а weight-gradients остаются при соответствующих weight shards.
 
-Для activation $T\times D$ ring AllReduce передаёт на rank $2(p-1)TD/p$ элементов. При $T=8192,D=8192,p=8$, BF16 это 112 MiB на rank на одну редукцию. Повторение в каждом блоке объясняет, почему TP обычно остаётся внутри NVLink-domain.
+Для activation $T\times D$ ring AllReduce передаёт на rank $2(p-1)TD/p$ элементов. При $T=8192,D=8192,p=8$ исходный BF16 tensor содержит $8192^2\cdot2=134\,217\,728$ B = 128 MiB. Ring factor $2(8-1)/8=1.75$ даёт 224 MiB на rank на одну редукцию. Это именно переданный объём, а не размер локального tensor; повторение в каждом блоке объясняет, почему TP обычно остаётся внутри NVLink-domain.
 
 ## Attention TP: heads, QKV и output
 
@@ -129,7 +129,7 @@ TP делит weights и крупную GEMM, но вызывает collectives 
 
 ## Источники
 
-- EDLS, [week 4](https://github.com/mryab/efficient-dl-systems), tensor/sequence parallelism.
+- EDLS, pinned commit `e632aa89…`, [`week04_large_models/lecture.pdf`, PDF pp. 40–45 “Tensor-parallel training”, pp. 46–47 “Sequence Parallelism”](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week04_large_models/lecture.pdf), and [`week04_large_models/practice_part2.ipynb`](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week04_large_models/practice_part2.ipynb).
 - Harvard Edge ML Systems Book, commit `45ecc8d…`, [Distributed Training, `sec-distributed-training-systems-systems-tensor-parallelism-d76e` and `sec-distributed-training-parallelism-infrastructure`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/distributed_training.qmd).
 - Korthikanti et al., [Reducing Activation Recomputation in Large Transformer Models](https://arxiv.org/abs/2205.05198), §4 sequence parallelism, 2022.
 - Jacobs et al., [DeepSpeed Ulysses](https://arxiv.org/abs/2309.14509), §3, 2023.

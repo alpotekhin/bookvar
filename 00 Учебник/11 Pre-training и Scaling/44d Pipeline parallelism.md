@@ -96,7 +96,7 @@ S3    .  .  . F0 B0 F1 B1 F2 B2 F3 B3  .  .  .
 - **Steady state:** S3 чередует `B0,F1,B1,F2,…`; upstream stages чередуют направления, когда gradient дошёл до них.
 - **Drain:** после последнего `F3` gradients `B3` проходят S3→S0 в slot 10–13.
 
-Для короткого $m=p=4$ 1F1B не уменьшает число slot: фундаментальные fill/drain dependencies остаются. Зато peak незавершённых forward снижается на поздних стадиях: S3 хранит не четыре activation, а обычно одну; S2 — не более трёх в показанном schedule. S0 всё ещё должен прогреть pipeline четырьмя forward. При $m\gg p$ установившееся чередование занимает большую часть шага, а память ограничивается числом warm-up microbatches, порядка $p-i$, вместо $m$ для GPipe.
+Для короткого $m=p=4$ 1F1B не уменьшает число slot: фундаментальные fill/drain dependencies остаются. Зато peak незавершённых forward зависит от стадии. В показанном schedule после соответствующих slots максимумы равны S0=4, S1=4, S2=3, S3=1: поздняя стадия начинает backward раньше, а первая всё ещё должна прогреть весь pipeline. При $m\gg p$ число live microbatches ограничивается warm-up и локальным порядком операций, а не $m$ как в GPipe; конкретный peak нужно считать из timeline, а не подставлять одно $p-i$ для всех стадий.
 
 ### Псевдокод 1F1B
 
@@ -127,7 +127,7 @@ Activation ledger для стадии $i$:
 
 $$M_{\mathrm{act},i}=n_{\mathrm{live},i}\cdot M_{\mathrm{saved\ per\ microbatch},i}.$$
 
-Если local stage сохраняет 900 MiB на микропакет, GPipe с $m=16$ требует до 14.1 GiB; 1F1B на S2 четырехстадийного pipeline при $n_{\mathrm{live}}\le2$ — около 1.76 GiB. Это не универсальное число: checkpointing внутри стадии меняет saved set.
+Если local stage сохраняет 900 MiB на микропакет, GPipe с $m=16$ требует до 14.1 GiB. Для **показанного** 1F1B schedule S2 достигает $n_{\mathrm{live}}=3$, поэтому $3\cdot900=2700$ MiB = 2.64 GiB; S3 при peak 1 требует 900 MiB, а S0 при peak 4 — 3.52 GiB. Это stage-dependent ledger, не универсальная граница: при другом $m$, interleaving или checkpointing saved set и live counts меняются.
 
 ## Полная конфигурация
 
@@ -158,7 +158,7 @@ $$M_{\mathrm{act},i}=n_{\mathrm{live},i}\cdot M_{\mathrm{saved\ per\ microbatch}
 
 ## Источники
 
-- EDLS, [week 4](https://github.com/mryab/efficient-dl-systems), pipeline-parallel schedules.
+- EDLS, pinned commit `e632aa89…`, [`week04_large_models/lecture.pdf`, PDF pp. 23–27 model-parallel/GPipe, pp. 28–33 bubble/1F1B/ZeroBubble/PipeDream, pp. 34–38 “Pipelining Recap”](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week04_large_models/lecture.pdf), and [`week04_large_models/practice_part2.ipynb`](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week04_large_models/practice_part2.ipynb).
 - Huang et al., [GPipe](https://arxiv.org/abs/1811.06965), Algorithm 1 and pipeline partitioning, 2019.
 - Narayanan et al., [Efficient Large-Scale Language Model Training](https://arxiv.org/abs/2104.04473), §3.2, PipeDream-Flush/1F1B, 2021.
 - Harvard Edge ML Systems Book, commit `45ecc8d…`, [Distributed Training, `sec-distributed-training-systems-systems-pipeline-parallelism-8748` and `sec-distributed-training-systems-systems-model-parallelism-tradeoffs`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/distributed_training.qmd).

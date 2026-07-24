@@ -79,7 +79,7 @@ Async prefetch запускает H2D следующего состояния д
 
 ## Источники
 
-- EDLS, [week 4](https://github.com/mryab/efficient-dl-systems), activation checkpointing and offload.
+- EDLS, pinned commit `e632aa89…`, [`week04_large_models/lecture.pdf`, PDF pp. 11–15 “Gradient checkpointing”, pp. 17–22 “Memory offloading”](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week04_large_models/lecture.pdf), and [`week04_large_models/practice_part1.ipynb`](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week04_large_models/practice_part1.ipynb).
 - Chen et al., [Training Deep Nets with Sublinear Memory Cost](https://arxiv.org/abs/1604.06174), 2016.
 - PyTorch, [activation checkpointing documentation](https://pytorch.org/docs/stable/checkpoint.html).
 - PyTorch, [Selective Activation Checkpointing, sections “Selective Activation Checkpoint” and “Memory Budget API”](https://pytorch.org/blog/activation-checkpointing-techniques/).

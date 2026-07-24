@@ -78,7 +78,7 @@ Checkpoint сохраняет global logical DTensor независимо от �
 
 ## Источники
 
-- EDLS, [week 5](https://github.com/mryab/efficient-dl-systems), ZeRO/FSDP/DeviceMesh/DTensor.
+- EDLS, pinned commit `e632aa89…`, [`week05_fsdp/lecture.pdf`, PDF pp. 13–31 FSDP units/lifetimes/overlap, pp. 54–70 sharding levels/ZeRO/hybrid/FSDP2](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week05_fsdp/lecture.pdf), and [`week05_fsdp/seminar.pdf`, PDF pp. 5–10 DeviceMesh/DTensor, pp. 11–20 FSDP2/hooks/memory, pp. 35–36 PyTorch DCP](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week05_fsdp/seminar.pdf).
 - Rajbhandari et al., [ZeRO](https://arxiv.org/abs/1910.02054), 2019.
 - PyTorch, [FSDP2 tutorial, “How FSDP2 works” and “2D parallelism”](https://pytorch.org/tutorials/intermediate/FSDP_tutorial.html), [fully_shard API](https://pytorch.org/docs/stable/distributed.fsdp.fully_shard.html), и [Distributed Checkpoint, `get_state_dict`/`set_state_dict`](https://pytorch.org/docs/stable/distributed.checkpoint.html).
 - Harvard Edge ML Systems Book, commit `45ecc8d…`, [Distributed Training, `sec-distributed-training-systems-systems-zero-redundancy-optimizer-zero-20bd` and `sec-distributed-training-systems-systems-fully-sharded-data-parallel-fsdp-79a3`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/distributed_training.qmd).

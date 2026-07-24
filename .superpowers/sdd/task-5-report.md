@@ -186,3 +186,52 @@ exit 0
 ```
 
 The pre-existing modified plan file remained excluded from Task 5 staging.
+
+## Final rereview remediation
+
+The second narrow rereview corrected two ledger errors and expanded the hybrid
+parallelism proof:
+
+- 44c now derives `[8192,8192]` BF16 as 128 MiB and applies the ring factor
+  `2*(8-1)/8=1.75`, giving 224 MiB/rank rather than 112 MiB.
+- 44d counts live forward activations directly from the displayed schedule:
+  S0=4, S1=4, S2=3, S3=1. At 900 MiB/microbatch S2 is 2700 MiB = 2.64 GiB;
+  the former `<=2`/1.76-GiB claim was removed.
+- 44f now defines the full `(edp=2,ep=8,pp=8,tp=8)` coordinate system and
+  rank flattening, enumerates TP/PP/EP/EDP/dense-DP groups for rank 750,
+  distinguishes dense and expert weight/optimizer ownership, follows forward
+  and backward all-to-all state, derives 128-MiB group payload and 14-MiB/rank
+  off-rank traffic, and specifies numerical/group-membership verification.
+
+All generic EDLS repository/week citations in 44a–44f were replaced with pinned
+commit `e632aa89ca9e6638d52e1b686095e7442faffbb0`, exact paths, and locators
+verified from downloaded PDF text:
+
+- week 3 lecture pp. 24–35, 39–51, 52–62;
+- week 4 lecture pp. 11–22, 23–47, 72–76 plus the two named practice notebooks;
+- week 5 lecture pp. 13–31 and 54–70; seminar pp. 5–20 and 35–36;
+- week 6 lecture pp. 117–144.
+
+Formula audit output:
+
+```text
+44c PASS: tensor=128 MiB, ring factor=1.75, volume=224 MiB/rank
+44d PASS: S2 peak=3, 2700 MiB = 2.64 GiB
+44f PASS: rank=750, world=1024, payload=128 MiB, source=16 MiB,
+remote=14 MiB, received=2048, expert avg=256
+```
+
+Focused searches found no remaining generic EDLS links in 44a–44f and no stale
+`112 MiB`, `n_live<=2`, or `1.76 GiB` claims. The unrelated pre-existing plan
+modification remained outside staging.
+
+Fresh post-rereview verification:
+
+```text
+publishing/npm test: 10 files, 98 tests passed
+site/pnpm check: 0 errors, 0 warnings, 0 hints
+site/pnpm build: 590 pages built; Pagefind completed
+publishing/check:links: 0 broken routes, fragments, or files
+publishing/test:output: 1 file, 8 tests passed
+git diff --check: exit 0
+```
