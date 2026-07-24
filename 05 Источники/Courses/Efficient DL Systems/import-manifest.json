@@ -1,0 +1,272 @@
+[
+  {
+    "source_path": "week01_intro/seminar.ipynb",
+    "kind": "notebook",
+    "output": "05 Источники/Courses/Efficient DL Systems/week01_intro/seminar.ipynb.md",
+    "source_sha256": "25d3ee8771adcd9a9811112e3cee2fb1e6da34526378f9c21cabd6ace057fc27",
+    "cells": 78,
+    "saved_outputs": 41
+  },
+  {
+    "source_path": "week02_fast_pipelines/seminar/practice.ipynb",
+    "kind": "notebook",
+    "output": "05 Источники/Courses/Efficient DL Systems/week02_fast_pipelines/seminar/practice.ipynb.md",
+    "source_sha256": "593c9cd95f3ad33a0944d0bc46a98660aefe7409caeb567fee80d8eb59caa161",
+    "cells": 90,
+    "saved_outputs": 54
+  },
+  {
+    "source_path": "week03_data_parallel/practice.ipynb",
+    "kind": "notebook",
+    "output": "05 Источники/Courses/Efficient DL Systems/week03_data_parallel/practice.ipynb.md",
+    "source_sha256": "9367fbbb5bf3abea727267e64f21c77c7f49563becbb8e8955443c95877cc03c",
+    "cells": 33,
+    "saved_outputs": 0
+  },
+  {
+    "source_path": "week04_large_models/practice_part1.ipynb",
+    "kind": "notebook",
+    "output": "05 Источники/Courses/Efficient DL Systems/week04_large_models/practice_part1.ipynb.md",
+    "source_sha256": "4a4c0f687079b4fd4cd804bbfded5ffe511cbed3c6a31905037025e100142f02",
+    "cells": 15,
+    "saved_outputs": 20
+  },
+  {
+    "source_path": "week04_large_models/practice_part2.ipynb",
+    "kind": "notebook",
+    "output": "05 Источники/Courses/Efficient DL Systems/week04_large_models/practice_part2.ipynb.md",
+    "source_sha256": "f410e22675549b38a04a57b8de4466479d231a2f91464427f85a89eab5b1a6f3",
+    "cells": 30,
+    "saved_outputs": 17
+  },
+  {
+    "source_path": "week06_dl_arithmetic/seminar/practice.ipynb",
+    "kind": "notebook",
+    "output": "05 Источники/Courses/Efficient DL Systems/week06_dl_arithmetic/seminar/practice.ipynb.md",
+    "source_sha256": "ece05d94b1fe7ab8d656a282d941989642dc394dd65eaf1227483ffef0c473e7",
+    "cells": 60,
+    "saved_outputs": 0
+  },
+  {
+    "source_path": "week08_inference_software/homework/homework_week8.ipynb",
+    "kind": "notebook",
+    "output": "05 Источники/Courses/Efficient DL Systems/week08_inference_software/homework/homework_week8.ipynb.md",
+    "source_sha256": "bb8e0f4b929c0b3db6e4479b6c6a6e0d4a6b023e4b8a92f203af629793f0a2ee",
+    "cells": 54,
+    "saved_outputs": 0
+  },
+  {
+    "source_path": "week08_inference_software/seminar.ipynb",
+    "kind": "notebook",
+    "output": "05 Источники/Courses/Efficient DL Systems/week08_inference_software/seminar.ipynb.md",
+    "source_sha256": "da9e0318007379db227c448da621d0174f940c8517f30706fe9ef0a018b7f77b",
+    "cells": 65,
+    "saved_outputs": 0
+  },
+  {
+    "source_path": "week09_inference_algorithms/homework/homework.ipynb",
+    "kind": "notebook",
+    "output": "05 Источники/Courses/Efficient DL Systems/week09_inference_algorithms/homework/homework.ipynb.md",
+    "source_sha256": "4db6a4e789b75f7d1fd790eb8481fd186e100ec549a9df67b0c73ba09d45dcbc",
+    "cells": 98,
+    "saved_outputs": 0
+  },
+  {
+    "source_path": "week09_inference_algorithms/seminar.ipynb",
+    "kind": "notebook",
+    "output": "05 Источники/Courses/Efficient DL Systems/week09_inference_algorithms/seminar.ipynb.md",
+    "source_sha256": "cd483eec4de31de688ecc2bd85e7f5e302397b1e7f7bdd012df7792aa0dd9637",
+    "cells": 38,
+    "saved_outputs": 10
+  },
+  {
+    "source_path": "README.md",
+    "kind": "readme",
+    "output": "05 Источники/Courses/Efficient DL Systems/README.md",
+    "source_sha256": "1dcbadac70a8f331f48f2be88191013f64ef874b57223852cfa66359b657aebe"
+  },
+  {
+    "source_path": "week01_intro/README.md",
+    "kind": "readme",
+    "output": "05 Источники/Courses/Efficient DL Systems/week01_intro/README.md",
+    "source_sha256": "9795d8dbbb1b17210823390b8b81585078cdfd15b83af8d36ff5ac4e31067d8c"
+  },
+  {
+    "source_path": "week02_fast_pipelines/README.md",
+    "kind": "readme",
+    "output": "05 Источники/Courses/Efficient DL Systems/week02_fast_pipelines/README.md",
+    "source_sha256": "f7f09bd1c4487d5aaf59b72d0ec4b7a3409d3918838639cd6b58940c8722d888"
+  },
+  {
+    "source_path": "week02_fast_pipelines/homework/README.md",
+    "kind": "readme",
+    "output": "05 Источники/Courses/Efficient DL Systems/week02_fast_pipelines/homework/README.md",
+    "source_sha256": "597ceab7a9e0f1a103f076b6c314a4553ae5468f3f75d4264fd3a7a4934e9532"
+  },
+  {
+    "source_path": "week03_data_parallel/README.md",
+    "kind": "readme",
+    "output": "05 Источники/Courses/Efficient DL Systems/week03_data_parallel/README.md",
+    "source_sha256": "a5f54ed4a02a6772b2d3dca4e4c2469b441638f24e642f8e2dd44553263ba428"
+  },
+  {
+    "source_path": "week03_data_parallel/homework/README.md",
+    "kind": "readme",
+    "output": "05 Источники/Courses/Efficient DL Systems/week03_data_parallel/homework/README.md",
+    "source_sha256": "f636c2860348c16a7cb247661d3173ad4f3253782b99d41951540255a906af21"
+  },
+  {
+    "source_path": "week04_large_models/README.md",
+    "kind": "readme",
+    "output": "05 Источники/Courses/Efficient DL Systems/week04_large_models/README.md",
+    "source_sha256": "dd99ac386469825281feb5a775363b8ae18a6341700a0d2bc49b9843ff5282a2"
+  },
+  {
+    "source_path": "week05_fsdp/README.md",
+    "kind": "readme",
+    "output": "05 Источники/Courses/Efficient DL Systems/week05_fsdp/README.md",
+    "source_sha256": "568e6f4e475586894905f8a9438843a01c8e12e3257163938497f04ab3d1ee85"
+  },
+  {
+    "source_path": "week05_fsdp/homework/README.md",
+    "kind": "readme",
+    "output": "05 Источники/Courses/Efficient DL Systems/week05_fsdp/homework/README.md",
+    "source_sha256": "13234cb9c9b909bf3cf9b803f600d119e55992ccc296ed650a115d33aadc79a5"
+  },
+  {
+    "source_path": "week06_dl_arithmetic/README.md",
+    "kind": "readme",
+    "output": "05 Источники/Courses/Efficient DL Systems/week06_dl_arithmetic/README.md",
+    "source_sha256": "c292fe4c51344b8203f5a882254e6246bf56d257c8b2d31fcc05c20135bda1f5"
+  },
+  {
+    "source_path": "week06_dl_arithmetic/homework/README.md",
+    "kind": "readme",
+    "output": "05 Источники/Courses/Efficient DL Systems/week06_dl_arithmetic/homework/README.md",
+    "source_sha256": "795092519af8076e79e5a29c31015815974a1345823f8a08ea55441aa3f27e9f"
+  },
+  {
+    "source_path": "week07_application_deployment/00_basics/non-smokers-repo/README.md",
+    "kind": "readme",
+    "output": "05 Источники/Courses/Efficient DL Systems/week07_application_deployment/00_basics/non-smokers-repo/README.md",
+    "source_sha256": "e38e38b2367594f5c65bbbcc8466196efadc67728eb04207372f196ca725ba6e"
+  },
+  {
+    "source_path": "week07_application_deployment/00_basics/smokers-repo/README.md",
+    "kind": "readme",
+    "output": "05 Источники/Courses/Efficient DL Systems/week07_application_deployment/00_basics/smokers-repo/README.md",
+    "source_sha256": "8a138d92e2a87036475ecad3a7ba889ff18dd718a3c30c4bc1a66d875cfa1e86"
+  },
+  {
+    "source_path": "week07_application_deployment/01_python_server/README.md",
+    "kind": "readme",
+    "output": "05 Источники/Courses/Efficient DL Systems/week07_application_deployment/01_python_server/README.md",
+    "source_sha256": "4d400329693ddd416505b6adac208d30b5e1a2caf157fcee0eb3127643595a2e"
+  },
+  {
+    "source_path": "week07_application_deployment/02_docker/README.md",
+    "kind": "readme",
+    "output": "05 Источники/Courses/Efficient DL Systems/week07_application_deployment/02_docker/README.md",
+    "source_sha256": "71a0241690bb810d84de64d1ad2520f86e952b1e9687e496212e4b449ff60c4a"
+  },
+  {
+    "source_path": "week07_application_deployment/03_metrics/README.md",
+    "kind": "readme",
+    "output": "05 Источники/Courses/Efficient DL Systems/week07_application_deployment/03_metrics/README.md",
+    "source_sha256": "089ed4bf3e04ec65e679a527f30dcb2f80d40a2ed91512c588023e17088afda4"
+  },
+  {
+    "source_path": "week07_application_deployment/README.md",
+    "kind": "readme",
+    "output": "05 Источники/Courses/Efficient DL Systems/week07_application_deployment/README.md",
+    "source_sha256": "da6d7f0c06df83ba3e879120ac413b419a88836642f758dc51ef7ddfcbd552e6"
+  },
+  {
+    "source_path": "week08_inference_software/README.md",
+    "kind": "readme",
+    "output": "05 Источники/Courses/Efficient DL Systems/week08_inference_software/README.md",
+    "source_sha256": "b15c8d0ae78a2c3557066f83c803f7bed92be6d8fda76a1b07200e276f508452"
+  },
+  {
+    "source_path": "week09_inference_algorithms/README.md",
+    "kind": "readme",
+    "output": "05 Источники/Courses/Efficient DL Systems/week09_inference_algorithms/README.md",
+    "source_sha256": "884f747b15338cd94aad55059805b75c46618ccb09c0f923bdad3c20890bb329"
+  },
+  {
+    "source_path": "week09_inference_algorithms/homework/README.md",
+    "kind": "readme",
+    "output": "05 Источники/Courses/Efficient DL Systems/week09_inference_algorithms/homework/README.md",
+    "source_sha256": "bae8febb20081116f0d2ef64f4a2c3385eea5871126c9e9af44e65c23c8f3a38"
+  },
+  {
+    "source_path": "week01_intro/lecture.pdf",
+    "kind": "slides",
+    "output": "05 Источники/Courses/Efficient DL Systems/week01_intro/lecture.pdf.md",
+    "source_sha256": "5e7cf4b9e28184c4651ee96ca2e645347a96971ff264fa8e36ae380b2414076a",
+    "pages": 24
+  },
+  {
+    "source_path": "week02_fast_pipelines/lecture.pdf",
+    "kind": "slides",
+    "output": "05 Источники/Courses/Efficient DL Systems/week02_fast_pipelines/lecture.pdf.md",
+    "source_sha256": "2293800cf75b02803b91509d50ae76ca21c9e2ebb41fb3c35d3a5a95353e2b20",
+    "pages": 44
+  },
+  {
+    "source_path": "week03_data_parallel/lecture.pdf",
+    "kind": "slides",
+    "output": "05 Источники/Courses/Efficient DL Systems/week03_data_parallel/lecture.pdf.md",
+    "source_sha256": "d81b47f8eb116db698a9d9262c7c86ed9dbf4f8bf602fe958a6eaec104c6ef01",
+    "pages": 66
+  },
+  {
+    "source_path": "week04_large_models/lecture.pdf",
+    "kind": "slides",
+    "output": "05 Источники/Courses/Efficient DL Systems/week04_large_models/lecture.pdf.md",
+    "source_sha256": "9f0189721f15d6b2642b0c6e8f25fb7b5ded962af50870d169ea6fc47505d454",
+    "pages": 90
+  },
+  {
+    "source_path": "week05_fsdp/lecture.pdf",
+    "kind": "slides",
+    "output": "05 Источники/Courses/Efficient DL Systems/week05_fsdp/lecture.pdf.md",
+    "source_sha256": "cb6c37b8944cbaf662f9a06cfa996981a07cbd363ba812fa4b2095d5ec6fc3ac",
+    "pages": 71
+  },
+  {
+    "source_path": "week05_fsdp/seminar.pdf",
+    "kind": "slides",
+    "output": "05 Источники/Courses/Efficient DL Systems/week05_fsdp/seminar.pdf.md",
+    "source_sha256": "76e3d309d5c2279a95783a8d04930f4cf0e6d1b8c3f31ca6fe580f1b0c020b97",
+    "pages": 42
+  },
+  {
+    "source_path": "week06_dl_arithmetic/lecture.pdf",
+    "kind": "slides",
+    "output": "05 Источники/Courses/Efficient DL Systems/week06_dl_arithmetic/lecture.pdf.md",
+    "source_sha256": "64b6f4285f9fe9bc62bf8293f3585eb26e738d493723b22c2301c58a5a191215",
+    "pages": 147
+  },
+  {
+    "source_path": "week07_application_deployment/Effdl26-07.pdf",
+    "kind": "slides",
+    "output": "05 Источники/Courses/Efficient DL Systems/week07_application_deployment/Effdl26-07.pdf.md",
+    "source_sha256": "2c038c7ce21a9bc5d224b439f0526c9fe35fa68b11ee5c724535f3f0fed463b0",
+    "pages": 15
+  },
+  {
+    "source_path": "week08_inference_software/lecture.pdf",
+    "kind": "slides",
+    "output": "05 Источники/Courses/Efficient DL Systems/week08_inference_software/lecture.pdf.md",
+    "source_sha256": "16d2bd3e8735bf98cc3a961ac2dd9eb6c1f02aaa12f3254ac1df338923a3e3c4",
+    "pages": 37
+  },
+  {
+    "source_path": "week09_inference_algorithms/lecture.pdf",
+    "kind": "slides",
+    "output": "05 Источники/Courses/Efficient DL Systems/week09_inference_algorithms/lecture.pdf.md",
+    "source_sha256": "fb8ba7959af5482cad3e7a037dc8677e2bd49c4ea05b9a8bc895a00a5993f0de",
+    "pages": 88
+  }
+]

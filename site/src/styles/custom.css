@@ -8,6 +8,14 @@
   --handbook-panel: color-mix(in srgb, var(--sl-color-gray-6) 70%, transparent);
 }
 
+.source-pdf {
+  width: 100%;
+  min-height: 75vh;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.5rem;
+  background: var(--sl-color-gray-7);
+}
+
 :root[data-theme='light'] {
   --sl-color-accent-low: #d8eee9;
   --sl-color-accent: #176e61;
