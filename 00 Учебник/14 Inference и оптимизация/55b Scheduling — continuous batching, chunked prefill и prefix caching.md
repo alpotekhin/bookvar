@@ -14,6 +14,18 @@ primary_sources:
 
 # Scheduling: continuous batching, chunked prefill и prefix caching
 
+## Полная реализация и системный контекст
+
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week08_inference_software/lecture.pdf|EDLS Week 8 — полная лекция]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week08_inference_software/seminar.ipynb|EDLS Week 8 — seminar notebook]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week08_inference_software/homework/homework_week8.ipynb|EDLS Week 8 — homework]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/inference|Harvard CS249r — Inference]].
+
+Notebook и homework сохраняют scheduler state и request lifecycle в коде.
+Глава ниже нужна, чтобы разбирать policy: какие запросы допускаются в batch,
+когда prefill дробится и почему cache hit меняет не только compute, но и
+очередь.
+
 Пакетирование обычной нейронной сети предполагает, что примеры начинают и
 заканчивают вычисление вместе. Для авторегрессионного сервера это предположение
 неверно. Запросы приходят в разные моменты, входы имеют разную длину, а число

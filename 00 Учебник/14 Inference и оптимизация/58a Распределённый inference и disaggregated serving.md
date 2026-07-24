@@ -15,6 +15,18 @@ primary_sources:
 
 # Параллелизм и коллективные операции в LLM inference
 
+## Полные главы по compute и communication
+
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/inference|Harvard CS249r — Inference]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/collective_communication|Harvard CS249r — Collective Communication]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/network_fabrics|Harvard CS249r — Network Fabrics]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week08_inference_software/lecture.pdf|EDLS Week 8 — полная лекция]].
+
+Эти источники разделяют две задачи, которые часто смешивают: поместить и
+ускорить один model replica и увеличить число независимо обслуживаемых
+запросов. Ни одна схема TP/PP/EP/DP не оценивается без topology и collective
+traffic.
+
 Распределённый inference нужен по двум разным причинам. Иногда один экземпляр
 модели не помещается в память одного ускорителя или не укладывается в требуемую
 задержку. Тогда вычисление одного запроса приходится разделять между несколькими

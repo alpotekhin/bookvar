@@ -12,6 +12,19 @@ primary_sources:
 
 # KV-cache compression и offload
 
+## Полные материалы о внешнем KV-слое
+
+- [[02 Areas/ML & DL/05 Источники/LMCache/LMCache — карта материалов|LMCache — карта полного корпуса]];
+- [[02 Areas/ML & DL/05 Источники/LMCache/KV cache as persistent inference state|KV cache as persistent inference state]];
+- [[02 Areas/ML & DL/05 Источники/LMCache/LMCache — an external KV cache layer|External KV cache layer]];
+- [[02 Areas/ML & DL/05 Источники/LMCache/LMCache MP mode — transfer paths|MP mode and transfer paths]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/inference|Harvard CS249r — Inference]].
+
+LMCache-материалы сохранены отдельным корпусом на исходном английском. Здесь
+они встроены в линейный маршрут после локального KV-cache: сначала решается
+размещение в HBM, затем compression, offload, transfer и reuse за пределами
+одного engine process.
+
 Квантизация весов освобождает HBM, но не останавливает рост состояния запроса.
 После каждого decode-шага к KV-cache каждого слоя добавляются ключ и значение.
 Поэтому модель, которая легко помещается при коротком prompt, может исчерпать

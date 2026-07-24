@@ -13,6 +13,17 @@ primary_sources:
 
 # Физика LLM inference: prefill, decode и roofline
 
+## Полные источники для расчёта
+
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/inference|Harvard CS249r — Inference]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/performance_engineering|Harvard CS249r — Performance Engineering]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week08_inference_software/lecture.pdf|EDLS Week 8 — полная лекция]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week06_dl_arithmetic/lecture.pdf|EDLS Week 6 — arithmetic and logistics]].
+
+Читайте их в таком порядке: сначала два режима запроса, затем roofline,
+после этого ресурсную арифметику конкретной модели. Это позволяет получить
+предсказание bottleneck до запуска benchmark и проверить его profiler-ом.
+
 Один ответ языковой модели выглядит как единая операция лишь со стороны
 пользователя. Для ускорителя это два существенно разных режима работы. Сначала
 модель одновременно обрабатывает все токены входа и строит их внутреннее

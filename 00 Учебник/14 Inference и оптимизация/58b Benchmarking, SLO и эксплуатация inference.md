@@ -12,6 +12,17 @@ primary_sources:
 
 # Benchmarking, SLO и эксплуатация LLM inference
 
+## Полные источники и воспроизводимый workload
+
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/benchmarking|Harvard CS249r — Benchmarking]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/inference|Harvard CS249r — Inference]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/model_serving|Harvard CS249r — Model Serving]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week08_inference_software/homework/homework_week8.ipynb|EDLS Week 8 — inference homework]].
+
+Harvard задаёт правила benchmark и serving metrics; EDLS даёт engine, на
+котором их можно воспроизвести. Фиксируйте arrival process, prompt/output
+lengths, concurrency, cache policy и SLO — иначе сравниваются разные задачи.
+
 Число `tokens/s` без описания нагрузки почти ничего не говорит о качестве
 сервиса. Один и тот же сервер может показать высокий throughput в offline batch,
 но заставлять интерактивного пользователя ждать первый токен несколько секунд.

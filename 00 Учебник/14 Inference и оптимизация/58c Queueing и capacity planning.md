@@ -10,6 +10,17 @@ primary_sources:
 
 # Queueing и capacity planning
 
+## Материалы для перехода от kernel к service
+
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/inference|Harvard CS249r — Inference]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/benchmarking|Harvard CS249r — Benchmarking]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/model_serving|Harvard CS249r — Model Serving]];
+- [[02 Areas/ML & DL/06 Практика/17 Развернуть наблюдаемый ML сервис|практика наблюдаемого сервиса и load test]].
+
+Эта глава завершает inference-маршрут: измеренный service time превращается в
+capacity только после добавления arrival process, queue discipline и tail SLO.
+Практика требует показать как рабочую точку, так и режим насыщения.
+
 Пиковое число токенов в секунду не отвечает на вопрос, сколько пользователей
 выдержит сервис. Запрос может провести больше времени в очереди, чем на GPU, а
 при приближении к насыщению небольшая вариация длины превращается в длинный хвост
