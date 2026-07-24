@@ -115,6 +115,22 @@ sections:
         route: textbook/pretraining/scaling-laws
       - source: 00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md
         route: textbook/pretraining/distributed-systems
+      - source: 00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md
+        route: textbook/pretraining/processes-collectives-ddp
+      - source: 00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload.md
+        route: textbook/pretraining/gradient-checkpointing-offload
+      - source: 00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism.md
+        route: textbook/pretraining/tensor-sequence-parallelism
+      - source: 00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism.md
+        route: textbook/pretraining/pipeline-parallelism
+      - source: 00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor.md
+        route: textbook/pretraining/zero-fsdp2-devicemesh-dtensor
+      - source: 00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism.md
+        route: textbook/pretraining/expert-hybrid-parallelism
+      - source: 00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints.md
+        route: textbook/pretraining/network-storage-checkpoints
+      - source: 00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration.md
+        route: textbook/pretraining/fault-tolerance-orchestration
       - source: 00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md
         route: textbook/post-training/sft-instruction-data
       - source: 00 Учебник/12 Post-training и Alignment/02 Preference data.md
@@ -341,6 +357,22 @@ sections:
             route: textbook/pretraining/scaling-laws
           - label: 44. Distributed training и mixed precision
             route: textbook/pretraining/distributed-systems
+          - label: 44a. Processes, collectives и DDP
+            route: textbook/pretraining/processes-collectives-ddp
+          - label: 44b. Gradient checkpointing и offload
+            route: textbook/pretraining/gradient-checkpointing-offload
+          - label: 44c. Tensor и sequence parallelism
+            route: textbook/pretraining/tensor-sequence-parallelism
+          - label: 44d. Pipeline parallelism
+            route: textbook/pretraining/pipeline-parallelism
+          - label: 44e. ZeRO, FSDP2, DeviceMesh и DTensor
+            route: textbook/pretraining/zero-fsdp2-devicemesh-dtensor
+          - label: 44f. Expert и hybrid parallelism
+            route: textbook/pretraining/expert-hybrid-parallelism
+          - label: 44g. Network, storage и distributed checkpoints
+            route: textbook/pretraining/network-storage-checkpoints
+          - label: 44h. Fault tolerance и fleet orchestration
+            route: textbook/pretraining/fault-tolerance-orchestration
           - label: 45. SFT и instruction data
             route: textbook/post-training/sft-instruction-data
           - label: 46. Preference data
