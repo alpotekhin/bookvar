@@ -168,6 +168,7 @@ CC BY-NC-SA 4.0; файл не изменён. Она превращает ус�
 
 ## Источники
 
+- [[05 Источники/Courses/Harvard ML Systems/vol1/frameworks|Harvard ML Systems, Vol. I — ML Frameworks]] — полная локальная глава: computational graphs, automatic differentiation, eager/operator dispatch, compilation, interoperability и границы framework abstraction.
 - [EDLS week 2 lecture](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week02_fast_pipelines/lecture.pdf) — “Profiling: what and why”, “How to profile Python/GPU/PyTorch code?”, “PyTorch Profiler + trace viewer”, “Nsight Systems/Nsight Compute”, “Profiling: typical patterns”; title locators used because incremental slides repeat in the PDF.
 - [EDLS week 2 profiler practice](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week02_fast_pipelines/seminar/practice.ipynb)
 - [PyTorch Profiler](https://pytorch.org/tutorials/recipes/recipes/profiler_recipe.html)

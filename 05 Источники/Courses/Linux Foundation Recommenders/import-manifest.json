@@ -1,0 +1,74 @@
+[
+  {
+    "source_path": "examples/01_prepare_data/data_split.ipynb",
+    "kind": "notebook",
+    "output": "05 Источники/Courses/Linux Foundation Recommenders/examples/01_prepare_data/data_split.ipynb.md",
+    "source_sha256": "aaffd1704390506f27dd8cd12996ed2630dd3dc4c5564f79278a4b5e7d92160b",
+    "cells": 66,
+    "saved_outputs": 15
+  },
+  {
+    "source_path": "examples/02_model_collaborative_filtering/baseline_deep_dive.ipynb",
+    "kind": "notebook",
+    "output": "05 Источники/Courses/Linux Foundation Recommenders/examples/02_model_collaborative_filtering/baseline_deep_dive.ipynb.md",
+    "source_sha256": "d6f4a72743fd81bb2bc7b708731e5045fc0f8e69df771daacacb7f4ca8849fbb",
+    "cells": 23,
+    "saved_outputs": 18
+  },
+  {
+    "source_path": "examples/02_model_collaborative_filtering/sar_deep_dive.ipynb",
+    "kind": "notebook",
+    "output": "05 Источники/Courses/Linux Foundation Recommenders/examples/02_model_collaborative_filtering/sar_deep_dive.ipynb.md",
+    "source_sha256": "4612cb9605ebc51959b41a1c6245fd343a21a718f51e380d3af8abbf7c17384d",
+    "cells": 24,
+    "saved_outputs": 4
+  },
+  {
+    "source_path": "examples/02_model_collaborative_filtering/ncf_deep_dive.ipynb",
+    "kind": "notebook",
+    "output": "05 Источники/Courses/Linux Foundation Recommenders/examples/02_model_collaborative_filtering/ncf_deep_dive.ipynb.md",
+    "source_sha256": "d5a88774e81d80bc5508a4acd67a1547555829b343136001f798128068ffd5bb",
+    "cells": 46,
+    "saved_outputs": 27
+  },
+  {
+    "source_path": "examples/00_quick_start/sasrec_amazon.ipynb",
+    "kind": "notebook",
+    "output": "05 Источники/Courses/Linux Foundation Recommenders/examples/00_quick_start/sasrec_amazon.ipynb.md",
+    "source_sha256": "9e7c2da99ad0d0cb6b2447281a5930fcd4e002555d0cdcbe9c1e5e729df45150",
+    "cells": 18,
+    "saved_outputs": 20
+  },
+  {
+    "source_path": "examples/03_evaluate/evaluation.ipynb",
+    "kind": "notebook",
+    "output": "05 Источники/Courses/Linux Foundation Recommenders/examples/03_evaluate/evaluation.ipynb.md",
+    "source_sha256": "da5729abdf5a6551b352d02545331fd4e8e0eabe78516d6d7821e661933ff8e2",
+    "cells": 75,
+    "saved_outputs": 27
+  },
+  {
+    "source_path": "examples/03_evaluate/als_movielens_diversity_metrics.ipynb",
+    "kind": "notebook",
+    "output": "05 Источники/Courses/Linux Foundation Recommenders/examples/03_evaluate/als_movielens_diversity_metrics.ipynb.md",
+    "source_sha256": "6e273ab083e82a5ee42be31e46ebf4dc170af05cb265e26516eb93cb5d41713b",
+    "cells": 51,
+    "saved_outputs": 27
+  },
+  {
+    "source_path": "examples/05_operationalize/als_movie_o16n.ipynb",
+    "kind": "notebook",
+    "output": "05 Источники/Courses/Linux Foundation Recommenders/examples/05_operationalize/als_movie_o16n.ipynb.md",
+    "source_sha256": "0fd4d68f1261fa3f85913d755d872d7faf5c66a45ab48292deea347efa75332f",
+    "cells": 54,
+    "saved_outputs": 16
+  },
+  {
+    "source_path": "examples/06_benchmarks/movielens.ipynb",
+    "kind": "notebook",
+    "output": "05 Источники/Courses/Linux Foundation Recommenders/examples/06_benchmarks/movielens.ipynb.md",
+    "source_sha256": "9633e4b6aefce9ab4a934a0ddf0072d0e554de2a52db8ae488308d64d07d61db",
+    "cells": 24,
+    "saved_outputs": 16
+  }
+]

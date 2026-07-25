@@ -1,0 +1,57 @@
+[
+  {
+    "source_path": "chapter_recommender-systems/index.md",
+    "output": "05 Источники/Courses/Dive into Deep Learning — Recommender Systems/index.md",
+    "source_sha256": "049b221b60c65ea1ad47ce26582c31d65f7653e09d7c1fd509b526166b3220f8"
+  },
+  {
+    "source_path": "chapter_recommender-systems/recsys-intro.md",
+    "output": "05 Источники/Courses/Dive into Deep Learning — Recommender Systems/recsys-intro.md",
+    "source_sha256": "1648bc094289e58c12b8bcfc0e92a63d03599e98635c2cc87ffc7a120f8e943b"
+  },
+  {
+    "source_path": "chapter_recommender-systems/movielens.md",
+    "output": "05 Источники/Courses/Dive into Deep Learning — Recommender Systems/movielens.md",
+    "source_sha256": "54a13bf73e33abb0df24010cf6b4abdf12046aca18527e984cfce18bd0dcfe56"
+  },
+  {
+    "source_path": "chapter_recommender-systems/mf.md",
+    "output": "05 Источники/Courses/Dive into Deep Learning — Recommender Systems/mf.md",
+    "source_sha256": "e8ca4da25cfb70587ee68f25623764ca301a3ef353cd444ee32c4ae24781f397"
+  },
+  {
+    "source_path": "chapter_recommender-systems/autorec.md",
+    "output": "05 Источники/Courses/Dive into Deep Learning — Recommender Systems/autorec.md",
+    "source_sha256": "f160f763045e81b5dae576e7fc87279a535f51cb4dfe79e7e479ab3f241cef29"
+  },
+  {
+    "source_path": "chapter_recommender-systems/ranking.md",
+    "output": "05 Источники/Courses/Dive into Deep Learning — Recommender Systems/ranking.md",
+    "source_sha256": "786082c050d472221442db39d316e5ecf2e003b79f553b86c2c5603af79821ba"
+  },
+  {
+    "source_path": "chapter_recommender-systems/neumf.md",
+    "output": "05 Источники/Courses/Dive into Deep Learning — Recommender Systems/neumf.md",
+    "source_sha256": "4643a7d2fe9391cc3bc68dcca8c7ff9b54aac90c4e58d96096c0f5c344a712b9"
+  },
+  {
+    "source_path": "chapter_recommender-systems/seqrec.md",
+    "output": "05 Источники/Courses/Dive into Deep Learning — Recommender Systems/seqrec.md",
+    "source_sha256": "0bd6057f68d139b4595f822ab6a3399467df96947b014b7b087e0db6df3c0bed"
+  },
+  {
+    "source_path": "chapter_recommender-systems/ctr.md",
+    "output": "05 Источники/Courses/Dive into Deep Learning — Recommender Systems/ctr.md",
+    "source_sha256": "c6b9b965208b64026cd538d961329ac61280b23a0b40a20b0370488447dd287b"
+  },
+  {
+    "source_path": "chapter_recommender-systems/fm.md",
+    "output": "05 Источники/Courses/Dive into Deep Learning — Recommender Systems/fm.md",
+    "source_sha256": "7c5a2043946b5ea40575f164247f110049069f41625d15d4220986b3fd2e65a7"
+  },
+  {
+    "source_path": "chapter_recommender-systems/deepfm.md",
+    "output": "05 Источники/Courses/Dive into Deep Learning — Recommender Systems/deepfm.md",
+    "source_sha256": "b3993cfc07604ac09ed185cc6b48ba15514701a4d458da392eb1894444766c00"
+  }
+]

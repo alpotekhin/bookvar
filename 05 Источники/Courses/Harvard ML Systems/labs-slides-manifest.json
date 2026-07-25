@@ -1,0 +1,554 @@
+[
+  {
+    "kind": "lab",
+    "source": "labs/vol1/lab_00_introduction.py",
+    "output": "05 Источники/Courses/Harvard ML Systems/labs/vol1/lab_00_introduction.md",
+    "route": "sources/courses/harvard-ml-systems/labs/vol1/lab-00-introduction",
+    "sha256": "68ed806ad82ca633e80ebabc7926daf0c25b2b6f9d874f1941d4403938b15500",
+    "title": "VOL1 Lab — Introduction"
+  },
+  {
+    "kind": "lab",
+    "source": "labs/vol1/lab_01_ml_intro.py",
+    "output": "05 Источники/Courses/Harvard ML Systems/labs/vol1/lab_01_ml_intro.md",
+    "route": "sources/courses/harvard-ml-systems/labs/vol1/lab-01-ml-intro",
+    "sha256": "7788cd8bf66e00f755fb3f1f826f57098b47378106fe55a757283c2184c32f49",
+    "title": "VOL1 Lab — Ml Intro"
+  },
+  {
+    "kind": "lab",
+    "source": "labs/vol1/lab_02_ml_systems.py",
+    "output": "05 Источники/Courses/Harvard ML Systems/labs/vol1/lab_02_ml_systems.md",
+    "route": "sources/courses/harvard-ml-systems/labs/vol1/lab-02-ml-systems",
+    "sha256": "004f309d4c7ff4838690cb72e541f62d87069349a3e62eca4be01db07c8db3fa",
+    "title": "VOL1 Lab — Ml Systems"
+  },
+  {
+    "kind": "lab",
+    "source": "labs/vol1/lab_03_ml_workflow.py",
+    "output": "05 Источники/Courses/Harvard ML Systems/labs/vol1/lab_03_ml_workflow.md",
+    "route": "sources/courses/harvard-ml-systems/labs/vol1/lab-03-ml-workflow",
+    "sha256": "93b0196375cb889b6557f2c4377d9a01f16c894afafa7f38628bddb0a703402a",
+    "title": "VOL1 Lab — Ml Workflow"
+  },
+  {
+    "kind": "lab",
+    "source": "labs/vol1/lab_04_data_engr.py",
+    "output": "05 Источники/Courses/Harvard ML Systems/labs/vol1/lab_04_data_engr.md",
+    "route": "sources/courses/harvard-ml-systems/labs/vol1/lab-04-data-engr",
+    "sha256": "496b8fd2508dda4ad68c3c8cc51dfe5c44035023a36e1e2bc2bfe023f7fcb953",
+    "title": "VOL1 Lab — Data Engr"
+  },
+  {
+    "kind": "lab",
+    "source": "labs/vol1/lab_05_nn_compute.py",
+    "output": "05 Источники/Courses/Harvard ML Systems/labs/vol1/lab_05_nn_compute.md",
+    "route": "sources/courses/harvard-ml-systems/labs/vol1/lab-05-nn-compute",
+    "sha256": "7cc2be9b8ab05c92303ff615a4695437ee57deda0d1a1634ea875aed1f3190f3",
+    "title": "VOL1 Lab — Nn Compute"
+  },
+  {
+    "kind": "lab",
+    "source": "labs/vol1/lab_06_nn_arch.py",
+    "output": "05 Источники/Courses/Harvard ML Systems/labs/vol1/lab_06_nn_arch.md",
+    "route": "sources/courses/harvard-ml-systems/labs/vol1/lab-06-nn-arch",
+    "sha256": "181ccf098b317f439b3f5ec5a739ba618f31abee400598ad86875b476665f9a6",
+    "title": "VOL1 Lab — Nn Arch"
+  },
+  {
+    "kind": "lab",
+    "source": "labs/vol1/lab_07_ml_frameworks.py",
+    "output": "05 Источники/Courses/Harvard ML Systems/labs/vol1/lab_07_ml_frameworks.md",
+    "route": "sources/courses/harvard-ml-systems/labs/vol1/lab-07-ml-frameworks",
+    "sha256": "f20820e4a59aa6a9735b2288130ffa5e7dc72bc34df9e4ba6bf86cdeb6c25918",
+    "title": "VOL1 Lab — Ml Frameworks"
+  },
+  {
+    "kind": "lab",
+    "source": "labs/vol1/lab_08_model_train.py",
+    "output": "05 Источники/Courses/Harvard ML Systems/labs/vol1/lab_08_model_train.md",
+    "route": "sources/courses/harvard-ml-systems/labs/vol1/lab-08-model-train",
+    "sha256": "4064f98d0048428af7507083be592a53651efbac30faf4c54fc0b8c1cfe1d76d",
+    "title": "VOL1 Lab — Model Train"
+  },
+  {
+    "kind": "lab",
+    "source": "labs/vol1/lab_09_data_selection.py",
+    "output": "05 Источники/Courses/Harvard ML Systems/labs/vol1/lab_09_data_selection.md",
+    "route": "sources/courses/harvard-ml-systems/labs/vol1/lab-09-data-selection",
+    "sha256": "2c9b7159f921ff9bceef64dbac0ca4a67d6986e6fdb5e47276719fd57d4c219c",
+    "title": "VOL1 Lab — Data Selection"
+  },
+  {
+    "kind": "lab",
+    "source": "labs/vol1/lab_10_model_compress.py",
+    "output": "05 Источники/Courses/Harvard ML Systems/labs/vol1/lab_10_model_compress.md",
+    "route": "sources/courses/harvard-ml-systems/labs/vol1/lab-10-model-compress",
+    "sha256": "91b9f786295921dba651f13733668965734c838aa4fbc10c37208b36d939c097",
+    "title": "VOL1 Lab — Model Compress"
+  },
+  {
+    "kind": "lab",
+    "source": "labs/vol1/lab_11_hw_accel.py",
+    "output": "05 Источники/Courses/Harvard ML Systems/labs/vol1/lab_11_hw_accel.md",
+    "route": "sources/courses/harvard-ml-systems/labs/vol1/lab-11-hw-accel",
+    "sha256": "f92b8d45b173847c7f935601e770634084ac9e67f1b36c0b66d0d82f0c24ccb3",
+    "title": "VOL1 Lab — Hw Accel"
+  },
+  {
+    "kind": "lab",
+    "source": "labs/vol1/lab_12_perf_bench.py",
+    "output": "05 Источники/Courses/Harvard ML Systems/labs/vol1/lab_12_perf_bench.md",
+    "route": "sources/courses/harvard-ml-systems/labs/vol1/lab-12-perf-bench",
+    "sha256": "966e7c77004315a9ab27a2e712839a8c12ef464420d4f1f80120f79be24a1ad6",
+    "title": "VOL1 Lab — Perf Bench"
+  },
+  {
+    "kind": "lab",
+    "source": "labs/vol1/lab_13_model_serving.py",
+    "output": "05 Источники/Courses/Harvard ML Systems/labs/vol1/lab_13_model_serving.md",
+    "route": "sources/courses/harvard-ml-systems/labs/vol1/lab-13-model-serving",
+    "sha256": "0a2c4c17e0395736f4c235fac7e0f4412e8a7ab65b756b5f27c412bd39ca6a08",
+    "title": "VOL1 Lab — Model Serving"
+  },
+  {
+    "kind": "lab",
+    "source": "labs/vol1/lab_14_ml_ops.py",
+    "output": "05 Источники/Courses/Harvard ML Systems/labs/vol1/lab_14_ml_ops.md",
+    "route": "sources/courses/harvard-ml-systems/labs/vol1/lab-14-ml-ops",
+    "sha256": "ce245d29828180dacebfb812f437a25ea879fefd7763e18c9ba3e4660d1731ea",
+    "title": "VOL1 Lab — Ml Ops"
+  },
+  {
+    "kind": "lab",
+    "source": "labs/vol1/lab_15_responsible_engr.py",
+    "output": "05 Источники/Courses/Harvard ML Systems/labs/vol1/lab_15_responsible_engr.md",
+    "route": "sources/courses/harvard-ml-systems/labs/vol1/lab-15-responsible-engr",
+    "sha256": "d9ec0b577cf745356fa2466621d53901d279c6af4d8d514a68241ffcc8deb284",
+    "title": "VOL1 Lab — Responsible Engr"
+  },
+  {
+    "kind": "lab",
+    "source": "labs/vol1/lab_16_ml_conclusion.py",
+    "output": "05 Источники/Courses/Harvard ML Systems/labs/vol1/lab_16_ml_conclusion.md",
+    "route": "sources/courses/harvard-ml-systems/labs/vol1/lab-16-ml-conclusion",
+    "sha256": "ca7033613b1be29d38d497c68e0dbf8c5f4adc9cc2e8d0e4c6fdb5f9a4802f6b",
+    "title": "VOL1 Lab — Ml Conclusion"
+  },
+  {
+    "kind": "lab",
+    "source": "labs/vol2/lab_01_introduction.py",
+    "output": "05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_01_introduction.md",
+    "route": "sources/courses/harvard-ml-systems/labs/vol2/lab-01-introduction",
+    "sha256": "41563385c6a50493b6f93815d922f6cf02344feed5224defb5b5cff3029ed94a",
+    "title": "VOL2 Lab — Introduction"
+  },
+  {
+    "kind": "lab",
+    "source": "labs/vol2/lab_02_compute_infra.py",
+    "output": "05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_02_compute_infra.md",
+    "route": "sources/courses/harvard-ml-systems/labs/vol2/lab-02-compute-infra",
+    "sha256": "737fbc905b098f708b5516596ade69ddde2fa5b34a713f7ad96d7309d533eccd",
+    "title": "VOL2 Lab — Compute Infra"
+  },
+  {
+    "kind": "lab",
+    "source": "labs/vol2/lab_03_communication.py",
+    "output": "05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_03_communication.md",
+    "route": "sources/courses/harvard-ml-systems/labs/vol2/lab-03-communication",
+    "sha256": "858216429a3f88a534b5e08b8965e3d0aa9f3aedb22d2dc49523066adcee8939",
+    "title": "VOL2 Lab — Communication"
+  },
+  {
+    "kind": "lab",
+    "source": "labs/vol2/lab_04_data_storage.py",
+    "output": "05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_04_data_storage.md",
+    "route": "sources/courses/harvard-ml-systems/labs/vol2/lab-04-data-storage",
+    "sha256": "980efe73660c3270a44bb04bcc72601b40a5d691ca537ed80b35578eae6fc1aa",
+    "title": "VOL2 Lab — Data Storage"
+  },
+  {
+    "kind": "lab",
+    "source": "labs/vol2/lab_05_dist_train.py",
+    "output": "05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_05_dist_train.md",
+    "route": "sources/courses/harvard-ml-systems/labs/vol2/lab-05-dist-train",
+    "sha256": "400c776d523f8a282369ac1d1cc83918b3280fcff58aa5d724899be881f6806b",
+    "title": "VOL2 Lab — Dist Train"
+  },
+  {
+    "kind": "lab",
+    "source": "labs/vol2/lab_06_collective_communication.py",
+    "output": "05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_06_collective_communication.md",
+    "route": "sources/courses/harvard-ml-systems/labs/vol2/lab-06-collective-communication",
+    "sha256": "5b2b9b5827f05f441299eb21c5441166f776c09f77a4808757c1d92744ad4ff5",
+    "title": "VOL2 Lab — Collective Communication"
+  },
+  {
+    "kind": "lab",
+    "source": "labs/vol2/lab_07_fault_tolerance.py",
+    "output": "05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_07_fault_tolerance.md",
+    "route": "sources/courses/harvard-ml-systems/labs/vol2/lab-07-fault-tolerance",
+    "sha256": "98c518f10fa80189dd84e5cec5edd1feaa166da8ece478cb788699b66e8f8a63",
+    "title": "VOL2 Lab — Fault Tolerance"
+  },
+  {
+    "kind": "lab",
+    "source": "labs/vol2/lab_08_fleet_orch.py",
+    "output": "05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_08_fleet_orch.md",
+    "route": "sources/courses/harvard-ml-systems/labs/vol2/lab-08-fleet-orch",
+    "sha256": "85936097b5a4cf9747c5724323a67d99fa6503a91901d63a758522dc9d9dfe1b",
+    "title": "VOL2 Lab — Fleet Orch"
+  },
+  {
+    "kind": "lab",
+    "source": "labs/vol2/lab_09_perf_engineering.py",
+    "output": "05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_09_perf_engineering.md",
+    "route": "sources/courses/harvard-ml-systems/labs/vol2/lab-09-perf-engineering",
+    "sha256": "610454e785c393c7375fea944d6ebac0796d570f29d055285b02c31b3cea36eb",
+    "title": "VOL2 Lab — Perf Engineering"
+  },
+  {
+    "kind": "lab",
+    "source": "labs/vol2/lab_10_inference.py",
+    "output": "05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_10_inference.md",
+    "route": "sources/courses/harvard-ml-systems/labs/vol2/lab-10-inference",
+    "sha256": "82b6f9a57c635a3026319e976dca90ce34bc2605bd71d9856af8271de9e4e239",
+    "title": "VOL2 Lab — Inference"
+  },
+  {
+    "kind": "lab",
+    "source": "labs/vol2/lab_11_edge_intelligence.py",
+    "output": "05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_11_edge_intelligence.md",
+    "route": "sources/courses/harvard-ml-systems/labs/vol2/lab-11-edge-intelligence",
+    "sha256": "6490ab7647d2ce7b9a9d9c60dbec87b821bcad2f76434024864c9e85d385353d",
+    "title": "VOL2 Lab — Edge Intelligence"
+  },
+  {
+    "kind": "lab",
+    "source": "labs/vol2/lab_12_ops_scale.py",
+    "output": "05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_12_ops_scale.md",
+    "route": "sources/courses/harvard-ml-systems/labs/vol2/lab-12-ops-scale",
+    "sha256": "ec9b37e07f0579cc9937656d65d886efd79a560576f8b49038deea48ad7e6046",
+    "title": "VOL2 Lab — Ops Scale"
+  },
+  {
+    "kind": "lab",
+    "source": "labs/vol2/lab_13_security_privacy.py",
+    "output": "05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_13_security_privacy.md",
+    "route": "sources/courses/harvard-ml-systems/labs/vol2/lab-13-security-privacy",
+    "sha256": "782c0221fccf55f1399a39b0386bba46ac81a55bf7951e45cb9d6cd42bc74324",
+    "title": "VOL2 Lab — Security Privacy"
+  },
+  {
+    "kind": "lab",
+    "source": "labs/vol2/lab_14_robust_ai.py",
+    "output": "05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_14_robust_ai.md",
+    "route": "sources/courses/harvard-ml-systems/labs/vol2/lab-14-robust-ai",
+    "sha256": "d14d43df65c6a1c3a62eca666050fdcba9955bb0d6657068c8b536936242d6f9",
+    "title": "VOL2 Lab — Robust Ai"
+  },
+  {
+    "kind": "lab",
+    "source": "labs/vol2/lab_15_sustainable_ai.py",
+    "output": "05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_15_sustainable_ai.md",
+    "route": "sources/courses/harvard-ml-systems/labs/vol2/lab-15-sustainable-ai",
+    "sha256": "484c46a5d4741b47dcb902ad9da2953005c90f3d98646f74cd06acca5e9ca4b1",
+    "title": "VOL2 Lab — Sustainable Ai"
+  },
+  {
+    "kind": "lab",
+    "source": "labs/vol2/lab_16_responsible_ai.py",
+    "output": "05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_16_responsible_ai.md",
+    "route": "sources/courses/harvard-ml-systems/labs/vol2/lab-16-responsible-ai",
+    "sha256": "e734748522d4f34e8c7e76903e923548184f4df49f4ce5f1cdf9f2afc839c9d5",
+    "title": "VOL2 Lab — Responsible Ai"
+  },
+  {
+    "kind": "lab",
+    "source": "labs/vol2/lab_17_fleet_synthesis.py",
+    "output": "05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_17_fleet_synthesis.md",
+    "route": "sources/courses/harvard-ml-systems/labs/vol2/lab-17-fleet-synthesis",
+    "sha256": "9ffefa34829d91e50de124d52ee48a6c8c53dcdc8024b1f86ac060b1a795cbec",
+    "title": "VOL2 Lab — Fleet Synthesis"
+  },
+  {
+    "kind": "slides",
+    "source": "slides/vol1/00_course_overview/00_course_overview.tex",
+    "output": "05 Источники/Courses/Harvard ML Systems/slides/vol1/00_course_overview.md",
+    "route": "sources/courses/harvard-ml-systems/slides/vol1/00-course-overview",
+    "sha256": "583f8798a589656effda66e48a2400a1b7e70eb340e7ed2d8adf578e3c56c474",
+    "title": "VOL1 Slides — Course Overview"
+  },
+  {
+    "kind": "slides",
+    "source": "slides/vol1/01_introduction/01_introduction.tex",
+    "output": "05 Источники/Courses/Harvard ML Systems/slides/vol1/01_introduction.md",
+    "route": "sources/courses/harvard-ml-systems/slides/vol1/01-introduction",
+    "sha256": "016bb92092f8175f97400ff87b657dbc98701c1245e866a99684fc2874effae0",
+    "title": "VOL1 Slides — Introduction"
+  },
+  {
+    "kind": "slides",
+    "source": "slides/vol1/02_ml_systems/02_ml_systems.tex",
+    "output": "05 Источники/Courses/Harvard ML Systems/slides/vol1/02_ml_systems.md",
+    "route": "sources/courses/harvard-ml-systems/slides/vol1/02-ml-systems",
+    "sha256": "fb45faf49385bcea94528fb058302bcd510138fd70d4043ebe5e485a245a18de",
+    "title": "VOL1 Slides — Ml Systems"
+  },
+  {
+    "kind": "slides",
+    "source": "slides/vol1/03_ml_workflow/03_ml_workflow.tex",
+    "output": "05 Источники/Courses/Harvard ML Systems/slides/vol1/03_ml_workflow.md",
+    "route": "sources/courses/harvard-ml-systems/slides/vol1/03-ml-workflow",
+    "sha256": "a5680e46c681dca965a8a5c72863841589991e92b02c8f17346e16b0414096b4",
+    "title": "VOL1 Slides — Ml Workflow"
+  },
+  {
+    "kind": "slides",
+    "source": "slides/vol1/04_data_engineering/04_data_engineering.tex",
+    "output": "05 Источники/Courses/Harvard ML Systems/slides/vol1/04_data_engineering.md",
+    "route": "sources/courses/harvard-ml-systems/slides/vol1/04-data-engineering",
+    "sha256": "d05632f87480fd7f1296c85359a5caa6a44ae598e4ec7c1d5f9b42f12679a162",
+    "title": "VOL1 Slides — Data Engineering"
+  },
+  {
+    "kind": "slides",
+    "source": "slides/vol1/05_nn_computation/05_nn_computation.tex",
+    "output": "05 Источники/Courses/Harvard ML Systems/slides/vol1/05_nn_computation.md",
+    "route": "sources/courses/harvard-ml-systems/slides/vol1/05-nn-computation",
+    "sha256": "fd319fbb81fc61de108c46064ce1310a7a0b0bdf51f4b0da70198755ae61e807",
+    "title": "VOL1 Slides — Nn Computation"
+  },
+  {
+    "kind": "slides",
+    "source": "slides/vol1/06_nn_architectures/06_nn_architectures.tex",
+    "output": "05 Источники/Courses/Harvard ML Systems/slides/vol1/06_nn_architectures.md",
+    "route": "sources/courses/harvard-ml-systems/slides/vol1/06-nn-architectures",
+    "sha256": "84dbcefc2446075b7cd0090247d4e4c6cefa1192f39a7c5511893f73cfab7d5a",
+    "title": "VOL1 Slides — Nn Architectures"
+  },
+  {
+    "kind": "slides",
+    "source": "slides/vol1/07_frameworks/07_frameworks.tex",
+    "output": "05 Источники/Courses/Harvard ML Systems/slides/vol1/07_frameworks.md",
+    "route": "sources/courses/harvard-ml-systems/slides/vol1/07-frameworks",
+    "sha256": "b5d314d3947bcd73d3a17d67374b6c6986e36c80833c8c341c5a878ef4a7ecbe",
+    "title": "VOL1 Slides — Frameworks"
+  },
+  {
+    "kind": "slides",
+    "source": "slides/vol1/08_training/08_training.tex",
+    "output": "05 Источники/Courses/Harvard ML Systems/slides/vol1/08_training.md",
+    "route": "sources/courses/harvard-ml-systems/slides/vol1/08-training",
+    "sha256": "dd4882835e47b4e73efa5204d2de0d64340a4dc6ab322b1fa57083ae5dc8efe3",
+    "title": "VOL1 Slides — Training"
+  },
+  {
+    "kind": "slides",
+    "source": "slides/vol1/09_data_selection/09_data_selection.tex",
+    "output": "05 Источники/Courses/Harvard ML Systems/slides/vol1/09_data_selection.md",
+    "route": "sources/courses/harvard-ml-systems/slides/vol1/09-data-selection",
+    "sha256": "c0ce3b87c3cee9cc6ec8b8eeac3076952467c93aef32581562c89c99974c163b",
+    "title": "VOL1 Slides — Data Selection"
+  },
+  {
+    "kind": "slides",
+    "source": "slides/vol1/10_model_compression/10_model_compression.tex",
+    "output": "05 Источники/Courses/Harvard ML Systems/slides/vol1/10_model_compression.md",
+    "route": "sources/courses/harvard-ml-systems/slides/vol1/10-model-compression",
+    "sha256": "0a775e4d2a9f7aa3a3b64f2895a016d5cec6e07c7b8aa856fbc4581e1d6cf588",
+    "title": "VOL1 Slides — Model Compression"
+  },
+  {
+    "kind": "slides",
+    "source": "slides/vol1/11_hw_acceleration/11_hw_acceleration.tex",
+    "output": "05 Источники/Courses/Harvard ML Systems/slides/vol1/11_hw_acceleration.md",
+    "route": "sources/courses/harvard-ml-systems/slides/vol1/11-hw-acceleration",
+    "sha256": "880eab49bc79eed75a07658a95adb92497c016de2fbb669dcb0757b117aa3a8c",
+    "title": "VOL1 Slides — Hw Acceleration"
+  },
+  {
+    "kind": "slides",
+    "source": "slides/vol1/12_benchmarking/12_benchmarking.tex",
+    "output": "05 Источники/Courses/Harvard ML Systems/slides/vol1/12_benchmarking.md",
+    "route": "sources/courses/harvard-ml-systems/slides/vol1/12-benchmarking",
+    "sha256": "65266a65b87b9f44b3c56408dd926d3abf98e9647f48dbfdad77a0d3cf1b4418",
+    "title": "VOL1 Slides — Benchmarking"
+  },
+  {
+    "kind": "slides",
+    "source": "slides/vol1/13_model_serving/13_model_serving.tex",
+    "output": "05 Источники/Courses/Harvard ML Systems/slides/vol1/13_model_serving.md",
+    "route": "sources/courses/harvard-ml-systems/slides/vol1/13-model-serving",
+    "sha256": "17d0eb900d696263d0f85e58c971c20fd52abcf09265dbaaab5c4e4ee18801ce",
+    "title": "VOL1 Slides — Model Serving"
+  },
+  {
+    "kind": "slides",
+    "source": "slides/vol1/14_ml_ops/14_ml_ops.tex",
+    "output": "05 Источники/Courses/Harvard ML Systems/slides/vol1/14_ml_ops.md",
+    "route": "sources/courses/harvard-ml-systems/slides/vol1/14-ml-ops",
+    "sha256": "c47cdf8edb1d91ab7d7ed9c298b9e7f6bcdc7e30a9045a45b8d9134af155e32d",
+    "title": "VOL1 Slides — Ml Ops"
+  },
+  {
+    "kind": "slides",
+    "source": "slides/vol1/15_responsible_engr/15_responsible_engr.tex",
+    "output": "05 Источники/Courses/Harvard ML Systems/slides/vol1/15_responsible_engr.md",
+    "route": "sources/courses/harvard-ml-systems/slides/vol1/15-responsible-engr",
+    "sha256": "f9a86c9a21f1147389edfaed37ec9071fa9d117e031e3e5d0bd81a0dd9f2a8fc",
+    "title": "VOL1 Slides — Responsible Engr"
+  },
+  {
+    "kind": "slides",
+    "source": "slides/vol1/16_conclusion/16_conclusion.tex",
+    "output": "05 Источники/Courses/Harvard ML Systems/slides/vol1/16_conclusion.md",
+    "route": "sources/courses/harvard-ml-systems/slides/vol1/16-conclusion",
+    "sha256": "ee04e24731b33d41a1a7f5163401dbd884ac003b7fcebffe150233328588d130",
+    "title": "VOL1 Slides — Conclusion"
+  },
+  {
+    "kind": "slides",
+    "source": "slides/vol2/00_course_overview/00_course_overview.tex",
+    "output": "05 Источники/Courses/Harvard ML Systems/slides/vol2/00_course_overview.md",
+    "route": "sources/courses/harvard-ml-systems/slides/vol2/00-course-overview",
+    "sha256": "70efde76c5b65e9291f7bb29fb60cc2aa51e1ac5f3814160146396e5a567b63f",
+    "title": "VOL2 Slides — Course Overview"
+  },
+  {
+    "kind": "slides",
+    "source": "slides/vol2/01_introduction/01_introduction.tex",
+    "output": "05 Источники/Courses/Harvard ML Systems/slides/vol2/01_introduction.md",
+    "route": "sources/courses/harvard-ml-systems/slides/vol2/01-introduction",
+    "sha256": "60a1d8371324e9af84d6be7433a01d6490ec7351a3d838746d70367bfebee2ea",
+    "title": "VOL2 Slides — Introduction"
+  },
+  {
+    "kind": "slides",
+    "source": "slides/vol2/02_compute_infrastructure/02_compute_infrastructure.tex",
+    "output": "05 Источники/Courses/Harvard ML Systems/slides/vol2/02_compute_infrastructure.md",
+    "route": "sources/courses/harvard-ml-systems/slides/vol2/02-compute-infrastructure",
+    "sha256": "9f7632eea594e34731a2e575a772afaea2d93b09c599e9abddaa6ff076c17883",
+    "title": "VOL2 Slides — Compute Infrastructure"
+  },
+  {
+    "kind": "slides",
+    "source": "slides/vol2/03_network_fabrics/03_network_fabrics.tex",
+    "output": "05 Источники/Courses/Harvard ML Systems/slides/vol2/03_network_fabrics.md",
+    "route": "sources/courses/harvard-ml-systems/slides/vol2/03-network-fabrics",
+    "sha256": "3405a3ee7e1aaeaa24cff2bfd21f5de3ec7efb678790f5fc26cd018208461f8d",
+    "title": "VOL2 Slides — Network Fabrics"
+  },
+  {
+    "kind": "slides",
+    "source": "slides/vol2/04_data_storage/04_data_storage.tex",
+    "output": "05 Источники/Courses/Harvard ML Systems/slides/vol2/04_data_storage.md",
+    "route": "sources/courses/harvard-ml-systems/slides/vol2/04-data-storage",
+    "sha256": "f660d0820fa2f233bc0d4322056ece7607c968f7ea821a472365aefd65a85566",
+    "title": "VOL2 Slides — Data Storage"
+  },
+  {
+    "kind": "slides",
+    "source": "slides/vol2/05_distributed_training/05_distributed_training.tex",
+    "output": "05 Источники/Courses/Harvard ML Systems/slides/vol2/05_distributed_training.md",
+    "route": "sources/courses/harvard-ml-systems/slides/vol2/05-distributed-training",
+    "sha256": "2b875221b249fc55aae6bd9ca4af80fd9dc5fc11f249a112e9dd801518358070",
+    "title": "VOL2 Slides — Distributed Training"
+  },
+  {
+    "kind": "slides",
+    "source": "slides/vol2/06_collective_communication/06_collective_communication.tex",
+    "output": "05 Источники/Courses/Harvard ML Systems/slides/vol2/06_collective_communication.md",
+    "route": "sources/courses/harvard-ml-systems/slides/vol2/06-collective-communication",
+    "sha256": "9d99967212e900bc48eac665bc37de97eb6f7b68a953230fb94cb70859dbe30f",
+    "title": "VOL2 Slides — Collective Communication"
+  },
+  {
+    "kind": "slides",
+    "source": "slides/vol2/07_fault_tolerance/07_fault_tolerance.tex",
+    "output": "05 Источники/Courses/Harvard ML Systems/slides/vol2/07_fault_tolerance.md",
+    "route": "sources/courses/harvard-ml-systems/slides/vol2/07-fault-tolerance",
+    "sha256": "585b17779fbeff5511c46f3d956dccbefc22902ecb64caa0d3f3c119f3b1272e",
+    "title": "VOL2 Slides — Fault Tolerance"
+  },
+  {
+    "kind": "slides",
+    "source": "slides/vol2/08_fleet_orchestration/08_fleet_orchestration.tex",
+    "output": "05 Источники/Courses/Harvard ML Systems/slides/vol2/08_fleet_orchestration.md",
+    "route": "sources/courses/harvard-ml-systems/slides/vol2/08-fleet-orchestration",
+    "sha256": "58f823fa2ae4e1a0225216d6214fee580adc1346e5a2ec7a2528bb0a3d87337f",
+    "title": "VOL2 Slides — Fleet Orchestration"
+  },
+  {
+    "kind": "slides",
+    "source": "slides/vol2/09_performance_engineering/09_performance_engineering.tex",
+    "output": "05 Источники/Courses/Harvard ML Systems/slides/vol2/09_performance_engineering.md",
+    "route": "sources/courses/harvard-ml-systems/slides/vol2/09-performance-engineering",
+    "sha256": "f264acdbf7c487a55e9389ec2cb64972025780d279af0139d69906637f5b168e",
+    "title": "VOL2 Slides — Performance Engineering"
+  },
+  {
+    "kind": "slides",
+    "source": "slides/vol2/10_inference/10_inference.tex",
+    "output": "05 Источники/Courses/Harvard ML Systems/slides/vol2/10_inference.md",
+    "route": "sources/courses/harvard-ml-systems/slides/vol2/10-inference",
+    "sha256": "c4bd3440691c4e5e73ad5629364a1b6e11e05c096036f2d06d92e86637f88653",
+    "title": "VOL2 Slides — Inference"
+  },
+  {
+    "kind": "slides",
+    "source": "slides/vol2/11_edge_intelligence/11_edge_intelligence.tex",
+    "output": "05 Источники/Courses/Harvard ML Systems/slides/vol2/11_edge_intelligence.md",
+    "route": "sources/courses/harvard-ml-systems/slides/vol2/11-edge-intelligence",
+    "sha256": "c94a214ce667d351652530ac846ffe74354540f027a1ee213b399d33cc1c4ed8",
+    "title": "VOL2 Slides — Edge Intelligence"
+  },
+  {
+    "kind": "slides",
+    "source": "slides/vol2/12_ops_scale/12_ops_scale.tex",
+    "output": "05 Источники/Courses/Harvard ML Systems/slides/vol2/12_ops_scale.md",
+    "route": "sources/courses/harvard-ml-systems/slides/vol2/12-ops-scale",
+    "sha256": "ef63aa3bd042f2cc84218bd5c12032417fadfb980ad737a21cae4e396c1e04a1",
+    "title": "VOL2 Slides — Ops Scale"
+  },
+  {
+    "kind": "slides",
+    "source": "slides/vol2/13_security_privacy/13_security_privacy.tex",
+    "output": "05 Источники/Courses/Harvard ML Systems/slides/vol2/13_security_privacy.md",
+    "route": "sources/courses/harvard-ml-systems/slides/vol2/13-security-privacy",
+    "sha256": "5251f3239fbbe7a0399e8de0543105b1f561cb0939bffbbce68f4a534edb1684",
+    "title": "VOL2 Slides — Security Privacy"
+  },
+  {
+    "kind": "slides",
+    "source": "slides/vol2/14_robust_ai/14_robust_ai.tex",
+    "output": "05 Источники/Courses/Harvard ML Systems/slides/vol2/14_robust_ai.md",
+    "route": "sources/courses/harvard-ml-systems/slides/vol2/14-robust-ai",
+    "sha256": "f799908a24df63cac820ba406d700b03c9394d13242befa16efd81c8332fbdb1",
+    "title": "VOL2 Slides — Robust Ai"
+  },
+  {
+    "kind": "slides",
+    "source": "slides/vol2/15_sustainable_ai/15_sustainable_ai.tex",
+    "output": "05 Источники/Courses/Harvard ML Systems/slides/vol2/15_sustainable_ai.md",
+    "route": "sources/courses/harvard-ml-systems/slides/vol2/15-sustainable-ai",
+    "sha256": "9d75de9f77e360f6d8f37e9943c2578dc712ad4ba3c757e6fe0a63c13a136ad0",
+    "title": "VOL2 Slides — Sustainable Ai"
+  },
+  {
+    "kind": "slides",
+    "source": "slides/vol2/16_responsible_ai/16_responsible_ai.tex",
+    "output": "05 Источники/Courses/Harvard ML Systems/slides/vol2/16_responsible_ai.md",
+    "route": "sources/courses/harvard-ml-systems/slides/vol2/16-responsible-ai",
+    "sha256": "e32fee18c7740c8e0b55de95ee3d428ef53914d1b6e5277f9b297c3e5266af86",
+    "title": "VOL2 Slides — Responsible Ai"
+  },
+  {
+    "kind": "slides",
+    "source": "slides/vol2/17_conclusion/17_conclusion.tex",
+    "output": "05 Источники/Courses/Harvard ML Systems/slides/vol2/17_conclusion.md",
+    "route": "sources/courses/harvard-ml-systems/slides/vol2/17-conclusion",
+    "sha256": "d62780cfa0fcd11974cac062a8362b95ec6f7c139d3827c731a73b3fe3cd4cd4",
+    "title": "VOL2 Slides — Conclusion"
+  }
+]

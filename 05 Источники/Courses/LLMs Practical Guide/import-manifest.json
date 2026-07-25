@@ -1,0 +1,147 @@
+{
+  "repository": "https://github.com/Mooler0410/LLMsPracticalGuide",
+  "commit": "c4a39847f5455b8383dffee55c4fe9e5e16966a4",
+  "license_status": "no-repository-license-found",
+  "page_count": 4,
+  "route_count": 5,
+  "media_count": 10,
+  "editable_source_count": 2,
+  "pages": [
+    {
+      "title": "The Practical Guides for Large Language Models",
+      "kind": "curated-survey-index",
+      "source_path": "README.md",
+      "source_url": "https://github.com/Mooler0410/LLMsPracticalGuide/blob/c4a39847f5455b8383dffee55c4fe9e5e16966a4/README.md",
+      "output": "05 Источники/Courses/LLMs Practical Guide/README.md",
+      "route": "sources/courses/llms-practical-guide/guide",
+      "source_sha256": "d89a1e9c2c4290bc646b8e609e2a94de1e176eb19e23b7f31dbdc2817c0a2ce1",
+      "source_bytes": 33062,
+      "source_lines": 583,
+      "source_words": 4383
+    },
+    {
+      "title": "Lesson — Social Game: One Night Ultimate Werewolf",
+      "kind": "case-study",
+      "source_path": "awesome_examples/social_game_werewolf.md",
+      "source_url": "https://github.com/Mooler0410/LLMsPracticalGuide/blob/c4a39847f5455b8383dffee55c4fe9e5e16966a4/awesome_examples/social_game_werewolf.md",
+      "output": "05 Источники/Courses/LLMs Practical Guide/awesome_examples/social_game_werewolf.md",
+      "route": "sources/courses/llms-practical-guide/examples/social-game-werewolf",
+      "source_sha256": "14df6a3480b1105d7823e727af142c6df38f8ddf673bfccdd1015ca47e75d8de",
+      "source_bytes": 20858,
+      "source_lines": 174,
+      "source_words": 1283
+    },
+    {
+      "title": "Lesson — Table-based Question Answering",
+      "kind": "case-study",
+      "source_path": "awesome_examples/tableQA.md",
+      "source_url": "https://github.com/Mooler0410/LLMsPracticalGuide/blob/c4a39847f5455b8383dffee55c4fe9e5e16966a4/awesome_examples/tableQA.md",
+      "output": "05 Источники/Courses/LLMs Practical Guide/awesome_examples/tableQA.md",
+      "route": "sources/courses/llms-practical-guide/examples/table-qa",
+      "source_sha256": "ea7de9950bf4245b8de6c3395328d45862c6ed4166406d680707878a3912f017",
+      "source_bytes": 5584,
+      "source_lines": 190,
+      "source_words": 918
+    },
+    {
+      "title": "Evolutionary-tree figure change log",
+      "kind": "source-change-log",
+      "source_path": "source/README.md",
+      "source_url": "https://github.com/Mooler0410/LLMsPracticalGuide/blob/c4a39847f5455b8383dffee55c4fe9e5e16966a4/source/README.md",
+      "output": "05 Источники/Courses/LLMs Practical Guide/source/README.md",
+      "route": "sources/courses/llms-practical-guide/source/change-log",
+      "source_sha256": "f9870d2b784f88374a2da969bafec1f782231c6665882728fb6544ceb4a01af0",
+      "source_bytes": 198,
+      "source_lines": 5,
+      "source_words": 35
+    }
+  ],
+  "media": [
+    {
+      "source_path": "imgs/decision.png",
+      "source_url": "https://github.com/Mooler0410/LLMsPracticalGuide/blob/c4a39847f5455b8383dffee55c4fe9e5e16966a4/imgs/decision.png",
+      "output": "Assets/Sources/LLMs Practical Guide/imgs/decision.png",
+      "sha256": "510b9f2413772027002635a6d89f62a12b5f3b24cc3669455f0c321d96672c61",
+      "bytes": 526042
+    },
+    {
+      "source_path": "imgs/models-colorgrey.jpg",
+      "source_url": "https://github.com/Mooler0410/LLMsPracticalGuide/blob/c4a39847f5455b8383dffee55c4fe9e5e16966a4/imgs/models-colorgrey.jpg",
+      "output": "Assets/Sources/LLMs Practical Guide/imgs/models-colorgrey.jpg",
+      "sha256": "5af70d51075678e873394489ae8c104c7a6cad5f772146c382192cbd35d2ff6c",
+      "bytes": 664382
+    },
+    {
+      "source_path": "imgs/qr_version.jpg",
+      "source_url": "https://github.com/Mooler0410/LLMsPracticalGuide/blob/c4a39847f5455b8383dffee55c4fe9e5e16966a4/imgs/qr_version.jpg",
+      "output": "Assets/Sources/LLMs Practical Guide/imgs/qr_version.jpg",
+      "sha256": "405d535c6b9725d3caa8ccf6bb7cfc32eaa2f771470e9253462d50c61d680a0a",
+      "bytes": 687930
+    },
+    {
+      "source_path": "imgs/survey-gif-test.gif",
+      "source_url": "https://github.com/Mooler0410/LLMsPracticalGuide/blob/c4a39847f5455b8383dffee55c4fe9e5e16966a4/imgs/survey-gif-test.gif",
+      "output": "Assets/Sources/LLMs Practical Guide/imgs/survey-gif-test.gif",
+      "sha256": "4de7390d9567b1d565f5b85d92b97c3cd13c814cebf32fa72b6c35143794f5d0",
+      "bytes": 7584112
+    },
+    {
+      "source_path": "imgs/tree.jpg",
+      "source_url": "https://github.com/Mooler0410/LLMsPracticalGuide/blob/c4a39847f5455b8383dffee55c4fe9e5e16966a4/imgs/tree.jpg",
+      "output": "Assets/Sources/LLMs Practical Guide/imgs/tree.jpg",
+      "sha256": "afd1fcccd634129ff943ae91e5b55e0c30314c1c89af5743dd4d54ee4a0072d1",
+      "bytes": 242646
+    },
+    {
+      "source_path": "imgs/tree.png",
+      "source_url": "https://github.com/Mooler0410/LLMsPracticalGuide/blob/c4a39847f5455b8383dffee55c4fe9e5e16966a4/imgs/tree.png",
+      "output": "Assets/Sources/LLMs Practical Guide/imgs/tree.png",
+      "sha256": "f115a23ac3c60ee094e6f0fbb7518ecb97705c7725b61c26a70df30b2928e6e4",
+      "bytes": 111094
+    },
+    {
+      "source_path": "awesome_examples/imgs/example_1_chatgpt_evidence.png",
+      "source_url": "https://github.com/Mooler0410/LLMsPracticalGuide/blob/c4a39847f5455b8383dffee55c4fe9e5e16966a4/awesome_examples/imgs/example_1_chatgpt_evidence.png",
+      "output": "Assets/Sources/LLMs Practical Guide/awesome_examples/imgs/example_1_chatgpt_evidence.png",
+      "sha256": "1129b61bcc02d1a86697f2696b482effd994e95228e3c03607312e7fb6fb88fb",
+      "bytes": 95695
+    },
+    {
+      "source_path": "awesome_examples/imgs/example_1_gpt4_evidence.png",
+      "source_url": "https://github.com/Mooler0410/LLMsPracticalGuide/blob/c4a39847f5455b8383dffee55c4fe9e5e16966a4/awesome_examples/imgs/example_1_gpt4_evidence.png",
+      "output": "Assets/Sources/LLMs Practical Guide/awesome_examples/imgs/example_1_gpt4_evidence.png",
+      "sha256": "cf481f320c7ed61e3356fa1861545deee7fd23d5988cc69d2cc76861b9279d3d",
+      "bytes": 82483
+    },
+    {
+      "source_path": "awesome_examples/imgs/example_2_chatgpt_evidence.png",
+      "source_url": "https://github.com/Mooler0410/LLMsPracticalGuide/blob/c4a39847f5455b8383dffee55c4fe9e5e16966a4/awesome_examples/imgs/example_2_chatgpt_evidence.png",
+      "output": "Assets/Sources/LLMs Practical Guide/awesome_examples/imgs/example_2_chatgpt_evidence.png",
+      "sha256": "d3b7fa2fe6d73e94a5c8e6039be77ad5054f2e4be57f530c49e08a88bca634ad",
+      "bytes": 70814
+    },
+    {
+      "source_path": "awesome_examples/imgs/example_2_gpt4_evidence.png",
+      "source_url": "https://github.com/Mooler0410/LLMsPracticalGuide/blob/c4a39847f5455b8383dffee55c4fe9e5e16966a4/awesome_examples/imgs/example_2_gpt4_evidence.png",
+      "output": "Assets/Sources/LLMs Practical Guide/awesome_examples/imgs/example_2_gpt4_evidence.png",
+      "sha256": "f82b3ee61bbc84e0e3dbf12478463077a1fa6d4a18099a55f2ab73f3fd77fea4",
+      "bytes": 75930
+    }
+  ],
+  "editable_sources": [
+    {
+      "source_path": "source/figure_gif.pptx",
+      "source_url": "https://github.com/Mooler0410/LLMsPracticalGuide/blob/c4a39847f5455b8383dffee55c4fe9e5e16966a4/source/figure_gif.pptx",
+      "output": "05 Источники/Courses/LLMs Practical Guide/source/figure_gif.pptx",
+      "sha256": "1398b691b58b394199897f12fa262f5436ed877423fe851559c2f7594c6847b7",
+      "bytes": 1673595
+    },
+    {
+      "source_path": "source/figure_still.pptx",
+      "source_url": "https://github.com/Mooler0410/LLMsPracticalGuide/blob/c4a39847f5455b8383dffee55c4fe9e5e16966a4/source/figure_still.pptx",
+      "output": "05 Источники/Courses/LLMs Practical Guide/source/figure_still.pptx",
+      "sha256": "646276926d2288d0ae48f725d2f3d8b9e5538858b6004fed3884232f6b29dc1a",
+      "bytes": 1747828
+    }
+  ]
+}

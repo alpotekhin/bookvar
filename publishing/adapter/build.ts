@@ -60,7 +60,8 @@ const SIDEBAR_SECTION_ORDER = ['textbook', 'models', 'sources', 'practice', 'que
 function visibleInSidebar(route: string): boolean {
   return !route.includes('/legacy/')
     && !route.startsWith('sources/papers/')
-    && !route.startsWith('sources/courses/');
+    && !route.startsWith('sources/courses/')
+    && !route.startsWith('sources/imbalanced-learn/');
 }
 
 const IMAGE_EXTENSION = /\.(?:png|jpe?g|webp|svg|gif)$/i;

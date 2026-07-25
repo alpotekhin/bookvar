@@ -1,0 +1,71 @@
+schema_version: 1
+source:
+  project: imbalanced-learn
+  repository: https://github.com/scikit-learn-contrib/imbalanced-learn
+  version: 0.14.2
+  commit: 8504e95f0160f61d1b617ca66f779646d2ee609e
+  imported_at: 2026-07-24
+  license: MIT
+  license_url: https://github.com/scikit-learn-contrib/imbalanced-learn/blob/8504e95f0160f61d1b617ca66f779646d2ee609e/LICENSE
+files:
+  - path: original/LICENSE
+    upstream_path: LICENSE
+    sha256: fbcab88e3daf0f2f9248f5a774e97915b7a1a36da76a78c6a5baaa07095ef644
+  - path: original/user-guide/introduction.rst
+    upstream_path: doc/introduction.rst
+    sha256: 07502004bf49b25b725a99f35d7c77fa90f0cf03eb98c77dbcc109bb540fc4f1
+  - path: original/user-guide/over_sampling.rst
+    upstream_path: doc/over_sampling.rst
+    sha256: c3ea4989fad8ecc8cbb28b3fd794877fbbbc5d3622063ce934beb20509409249
+  - path: original/user-guide/under_sampling.rst
+    upstream_path: doc/under_sampling.rst
+    sha256: 3f00c53b8796178e39c829dc65e3c2ed387e22a61b91ff378dc4d97d477f771d
+  - path: original/user-guide/combine.rst
+    upstream_path: doc/combine.rst
+    sha256: abe9d8702a0ecba1f273dee6beda52f5155c1514768a55ff46fdd439ac6d7084
+  - path: original/user-guide/ensemble.rst
+    upstream_path: doc/ensemble.rst
+    sha256: 64faa14c0188484d757b8d1d0a5d386cb479fd77a20b770cb1b7e9c8b69080a5
+  - path: original/user-guide/miscellaneous.rst
+    upstream_path: doc/miscellaneous.rst
+    sha256: bf17eca6ce63abb920df3dbfae339c8d9c24a9cb06207ae3caad6643534ad123
+  - path: original/user-guide/metrics.rst
+    upstream_path: doc/metrics.rst
+    sha256: a63ed81eb1690196cda691ec961341a61e4788e0d3bfe76486a38ae9bcdf6518
+  - path: original/user-guide/model_selection.rst
+    upstream_path: doc/model_selection.rst
+    sha256: 81f300e5f3dd6f37c843dbdf37ecb572b0a85019d16f58931001a160572afee5
+  - path: original/user-guide/common_pitfalls.rst
+    upstream_path: doc/common_pitfalls.rst
+    sha256: d976977d0eb755812b112d790d2ca8976a0b0e05efab8c20d8971656079e02f8
+  - path: original/user-guide/zzz_references.rst
+    upstream_path: doc/zzz_references.rst
+    sha256: b2ded582fa6492cce6d0e612e8402f5717d114a5d0b7d47f4ee5ff1778b3d57e
+  - path: original/user-guide/refs.bib
+    upstream_path: doc/bibtex/refs.bib
+    sha256: cb605ef8de376dd05bc6cb8e5d3b7cff31df60543898bb9300a492efad58e614
+  - path: original/gallery/plot_impact_imbalanced_classes.py
+    upstream_path: examples/applications/plot_impact_imbalanced_classes.py
+    sha256: 9741399615f4216de0d472c87e43e57806f7f92a57e563fa285e1d7dd04ee1d4
+  - path: original/gallery/plot_comparison_over_sampling.py
+    upstream_path: examples/over-sampling/plot_comparison_over_sampling.py
+    sha256: 6d1d251269ff290af942f7584840cebdb7c7e5d555d7c6de520280380867a801
+  - path: original/gallery/plot_comparison_under_sampling.py
+    upstream_path: examples/under-sampling/plot_comparison_under_sampling.py
+    sha256: 53afa5bf91b8d29de8ad7f000e7dda1ed78b72cdf07a0c620ed1a8215b755376
+  - path: original/gallery/plot_illustration_tomek_links.py
+    upstream_path: examples/under-sampling/plot_illustration_tomek_links.py
+    sha256: 514b79580e49b45c1d27b90dde1dde3157ce9f3092cbd6ee39b57b323736b5a4
+  - path: original/gallery/plot_bagging_classifier.py
+    upstream_path: examples/ensemble/plot_bagging_classifier.py
+    sha256: b757672aa69dd2cf1294b1803d712dfdb64ef7923ee6a912fcf4b50f89f7c0fa
+  - path: original/gallery/plot_comparison_ensemble_classifier.py
+    upstream_path: examples/ensemble/plot_comparison_ensemble_classifier.py
+    sha256: 8752e6e2f4f78ac00c1e67182c8e600b6f37eb2bb3fd94b33718f5d3658fee0b
+  - path: original/gallery/plot_metrics.py
+    upstream_path: examples/evaluation/plot_metrics.py
+    sha256: 748be36e07b324adef90a85b8784c03c2c4585affaedd2f8772208d8244bd7bc
+  - path: original/gallery/plot_pipeline_classification.py
+    upstream_path: examples/pipeline/plot_pipeline_classification.py
+    sha256: adeb634da81911b85e42ee397ee8c6ad848dba7d1218f4c9597d52a80a6e9aca
+

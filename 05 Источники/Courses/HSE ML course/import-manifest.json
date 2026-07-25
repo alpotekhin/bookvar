@@ -1,0 +1,894 @@
+[
+  {
+    "season": "ml1-2026-spring",
+    "kind": "jupyter-notebook",
+    "source": "ml1-2026-spring/homework-practice/homework-practice-01-tabular/homework-practice-01-pandas.ipynb",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/homework-practice/homework-practice-01-tabular/homework-practice-01-pandas.ipynb.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/homework-practice/homework-practice-01-tabular/homework-practice-01-pandas-ipynb",
+    "sha256": "a42c2c43e28e9c1ac4bf4ff90c54037c6392884ff3cfbc6b1059677bce353f22",
+    "assets": []
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "jupyter-notebook",
+    "source": "ml1-2026-spring/homework-practice/homework-practice-01-tabular/homework-practice-01-polars.ipynb",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/homework-practice/homework-practice-01-tabular/homework-practice-01-polars.ipynb.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/homework-practice/homework-practice-01-tabular/homework-practice-01-polars-ipynb",
+    "sha256": "fd5fcf33affacc8e3b80754ae7f3bf32752eab8f0e62f1b704b830a95e07b2cd",
+    "assets": []
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "python-source",
+    "source": "ml1-2026-spring/homework-practice/homework-practice-02-gd/descents.py",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/homework-practice/homework-practice-02-gd/descents.py.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/homework-practice/homework-practice-02-gd/descents-py",
+    "sha256": "eb860899c3d331056002d664e200be42e6a1bce33f380266265a24042abaea31",
+    "assets": []
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "jupyter-notebook",
+    "source": "ml1-2026-spring/homework-practice/homework-practice-02-gd/homework-practice-02-gd.ipynb",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/homework-practice/homework-practice-02-gd/homework-practice-02-gd.ipynb.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/homework-practice/homework-practice-02-gd/homework-practice-02-gd-ipynb",
+    "sha256": "0eecdd4fadee9b8801b414c48cfba6ee567a611e0c38f199b4f77f8019c4175d",
+    "assets": []
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "python-source",
+    "source": "ml1-2026-spring/homework-practice/homework-practice-02-gd/interfaces.py",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/homework-practice/homework-practice-02-gd/interfaces.py.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/homework-practice/homework-practice-02-gd/interfaces-py",
+    "sha256": "746830ec56c12b88829be0067ed3bbd9574b52593b13b6429a0b6dcbf3588863",
+    "assets": []
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "python-source",
+    "source": "ml1-2026-spring/homework-practice/homework-practice-02-gd/linear_regression.py",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/homework-practice/homework-practice-02-gd/linear_regression.py.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/homework-practice/homework-practice-02-gd/linear-regression-py",
+    "sha256": "7985a2f99624dcb685736a563836273d12d8c3bc53c0a4155a65734427c8737b",
+    "assets": []
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "jupyter-notebook",
+    "source": "ml1-2026-spring/homework-practice/homework-practice-03-features/homework-practice-03-advanced.ipynb",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/homework-practice/homework-practice-03-features/homework-practice-03-advanced.ipynb.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/homework-practice/homework-practice-03-features/homework-practice-03-advanced-ipynb",
+    "sha256": "4d3989c37e5f34d1d93d0ecbc6f9e66ac5a3c2193bfb9c831ee937789ab18ba8",
+    "assets": []
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "jupyter-notebook",
+    "source": "ml1-2026-spring/homework-practice/homework-practice-03-features/homework-practice-03-base.ipynb",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/homework-practice/homework-practice-03-features/homework-practice-03-base.ipynb.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/homework-practice/homework-practice-03-features/homework-practice-03-base-ipynb",
+    "sha256": "5b588ecc655f8b48f8d862738587ae5257abe9049ce831cf3451ec229ab738b5",
+    "assets": []
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "jupyter-notebook",
+    "source": "ml1-2026-spring/homework-practice/homework-practice-05-trees/homework-practice-05-trees.ipynb",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/homework-practice/homework-practice-05-trees/homework-practice-05-trees.ipynb.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/homework-practice/homework-practice-05-trees/homework-practice-05-trees-ipynb",
+    "sha256": "81a9cbac7a98b7ff94736eba8260e8a5c2ad73b47033680006311d20b7fd6a6f",
+    "assets": [
+      "Assets/Sources/HSE ML course/ml1-2026-spring/homework-practice/homework-practice-05-trees/homework-practice-05-trees/cell-8-output-1.png"
+    ]
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "python-source",
+    "source": "ml1-2026-spring/homework-practice/homework-practice-05-trees/hw5code.py",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/homework-practice/homework-practice-05-trees/hw5code.py.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/homework-practice/homework-practice-05-trees/hw5code-py",
+    "sha256": "dbb94a083678451aaa7cd31125029b56821005d412dec08c79e3a6eb8f2bc879",
+    "assets": []
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "python-source",
+    "source": "ml1-2026-spring/homework-practice/homework-practice-06-boosting/boosting.py",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/homework-practice/homework-practice-06-boosting/boosting.py.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/homework-practice/homework-practice-06-boosting/boosting-py",
+    "sha256": "e90671ae8b002d17c82700d647769f64d32a0038bf4a878ff7128da2429518d6",
+    "assets": []
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "jupyter-notebook",
+    "source": "ml1-2026-spring/homework-practice/homework-practice-06-boosting/homework_practice_06_boosting.ipynb",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/homework-practice/homework-practice-06-boosting/homework_practice_06_boosting.ipynb.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/homework-practice/homework-practice-06-boosting/homework-practice-06-boosting-ipynb",
+    "sha256": "64de74ae082c63c535d0415e59ac37835f868efb5cafb3217d44bca7c1baf410",
+    "assets": []
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "jupyter-notebook",
+    "source": "ml1-2026-spring/homework-practice/homework-practice-bonus-XAI.ipynb",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/homework-practice/homework-practice-bonus-XAI.ipynb.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/homework-practice/homework-practice-bonus-xai-ipynb",
+    "sha256": "d41a6014481020d064b26df19a6cd1afd591e58af09ebfb7949f6104a2184b8b",
+    "assets": []
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "jupyter-notebook",
+    "source": "ml1-2026-spring/homework-practice/homework_practice_04_dl.ipynb",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/homework-practice/homework_practice_04_dl.ipynb.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/homework-practice/homework-practice-04-dl-ipynb",
+    "sha256": "3428dd2a44ec97c7777debb1887bab2d1a6f29e953abf767e0ef9ce9d22291bb",
+    "assets": [
+      "Assets/Sources/HSE ML course/ml1-2026-spring/homework-practice/homework_practice_04_dl/cell-19-output-1.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/homework-practice/homework_practice_04_dl/cell-31-output-2.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/homework-practice/homework_practice_04_dl/cell-31-output-3.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/homework-practice/homework_practice_04_dl/cell-49-output-4.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/homework-practice/homework_practice_04_dl/cell-50-output-5.png"
+    ]
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "pdf",
+    "source": "ml1-2026-spring/homework-theory/homework-theory-01-linear-models.pdf",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/homework-theory/homework-theory-01-linear-models.pdf.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/homework-theory/homework-theory-01-linear-models-pdf",
+    "sha256": "fc9fe5556f110418daa26cfe2d61570b400086080035f57a92b9e92034896012",
+    "assets": [
+      "05 Источники/Courses/HSE ML course/ml1-2026-spring/homework-theory/homework-theory-01-linear-models.pdf"
+    ]
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "pdf",
+    "source": "ml1-2026-spring/homework-theory/homework-theory-02-derivatives.pdf",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/homework-theory/homework-theory-02-derivatives.pdf.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/homework-theory/homework-theory-02-derivatives-pdf",
+    "sha256": "b3edb88d0e0acfd795bfbad3be56a4b95a9c878efa68b66f0cab74616fbac3d6",
+    "assets": [
+      "05 Источники/Courses/HSE ML course/ml1-2026-spring/homework-theory/homework-theory-02-derivatives.pdf"
+    ]
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "pdf",
+    "source": "ml1-2026-spring/homework-theory/homework-theory-03-linclass.pdf",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/homework-theory/homework-theory-03-linclass.pdf.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/homework-theory/homework-theory-03-linclass-pdf",
+    "sha256": "6530207ed5ad00cd0ee610c128e2cb2dbca1ca0845727661a7a241c74e8806c7",
+    "assets": [
+      "05 Источники/Courses/HSE ML course/ml1-2026-spring/homework-theory/homework-theory-03-linclass.pdf"
+    ]
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "pdf",
+    "source": "ml1-2026-spring/homework-theory/homework-theory-04-cnn.pdf",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/homework-theory/homework-theory-04-cnn.pdf.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/homework-theory/homework-theory-04-cnn-pdf",
+    "sha256": "0c89739c1c0f15d75ee3f6e5f41d282a4e73a0be867bc9cac27652bb28617cb5",
+    "assets": [
+      "05 Источники/Courses/HSE ML course/ml1-2026-spring/homework-theory/homework-theory-04-cnn.pdf"
+    ]
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "pdf",
+    "source": "ml1-2026-spring/lecture-notes/lecture01-intro.pdf",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/lecture-notes/lecture01-intro.pdf.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/lecture-notes/lecture01-intro-pdf",
+    "sha256": "6de1fc79ef9cff81a9590edcfa420e1d9d3a4ffef539a83200c6077b9e2112c1",
+    "assets": [
+      "05 Источники/Courses/HSE ML course/ml1-2026-spring/lecture-notes/lecture01-intro.pdf"
+    ]
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "pdf",
+    "source": "ml1-2026-spring/lecture-notes/lecture02-linregr.pdf",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/lecture-notes/lecture02-linregr.pdf.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/lecture-notes/lecture02-linregr-pdf",
+    "sha256": "08f1c1c3a05f2b6d54e5e30baa7953a6b0b4821e06464bba02486a7b06b10912",
+    "assets": [
+      "05 Источники/Courses/HSE ML course/ml1-2026-spring/lecture-notes/lecture02-linregr.pdf"
+    ]
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "pdf",
+    "source": "ml1-2026-spring/lecture-notes/lecture03-linregr.pdf",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/lecture-notes/lecture03-linregr.pdf.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/lecture-notes/lecture03-linregr-pdf",
+    "sha256": "43964a36144c73b2c43d13af6335bba1a9a0211a3f37265d6bb02253cd48dd51",
+    "assets": [
+      "05 Источники/Courses/HSE ML course/ml1-2026-spring/lecture-notes/lecture03-linregr.pdf"
+    ]
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "pdf",
+    "source": "ml1-2026-spring/lecture-notes/lecture04-linclass.pdf",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/lecture-notes/lecture04-linclass.pdf.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/lecture-notes/lecture04-linclass-pdf",
+    "sha256": "7ceaa42033940966a9bae3c946a26d6d3269f70975f9ec01fafda05350d5d27d",
+    "assets": [
+      "05 Источники/Courses/HSE ML course/ml1-2026-spring/lecture-notes/lecture04-linclass.pdf"
+    ]
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "pdf",
+    "source": "ml1-2026-spring/lecture-notes/lecture05-linclass.pdf",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/lecture-notes/lecture05-linclass.pdf.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/lecture-notes/lecture05-linclass-pdf",
+    "sha256": "0712bef69094c1e8b70236741fb96bd6ee91bcbc24cc44312720e6f5658cecc5",
+    "assets": [
+      "05 Источники/Courses/HSE ML course/ml1-2026-spring/lecture-notes/lecture05-linclass.pdf"
+    ]
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "pdf",
+    "source": "ml1-2026-spring/lecture-notes/lecture06-linclass.pdf",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/lecture-notes/lecture06-linclass.pdf.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/lecture-notes/lecture06-linclass-pdf",
+    "sha256": "47b3321dc6874d760dac5d547aaefb7efbf86b40e90a76e19ef42511856b5ed1",
+    "assets": [
+      "05 Источники/Courses/HSE ML course/ml1-2026-spring/lecture-notes/lecture06-linclass.pdf"
+    ]
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "pdf",
+    "source": "ml1-2026-spring/lecture-notes/lecture07-deeplearning.pdf",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/lecture-notes/lecture07-deeplearning.pdf.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/lecture-notes/lecture07-deeplearning-pdf",
+    "sha256": "b271c06f2ea617169c3a7111d24092940e1d936a0d9ffc81527327ece603138c",
+    "assets": [
+      "05 Источники/Courses/HSE ML course/ml1-2026-spring/lecture-notes/lecture07-deeplearning.pdf"
+    ]
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "pdf",
+    "source": "ml1-2026-spring/lecture-notes/lecture09-trees.pdf",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/lecture-notes/lecture09-trees.pdf.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/lecture-notes/lecture09-trees-pdf",
+    "sha256": "a9942ef03287976852bac4a96cc6b26e3265fde652b239d0d0790b5613a999c5",
+    "assets": [
+      "05 Источники/Courses/HSE ML course/ml1-2026-spring/lecture-notes/lecture09-trees.pdf"
+    ]
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "pdf",
+    "source": "ml1-2026-spring/lecture-notes/lecture10-ensembles.pdf",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/lecture-notes/lecture10-ensembles.pdf.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/lecture-notes/lecture10-ensembles-pdf",
+    "sha256": "c56ac36f79568d22cae7bf83b72a74ed3605078d15c557e39797b748335f0577",
+    "assets": [
+      "05 Источники/Courses/HSE ML course/ml1-2026-spring/lecture-notes/lecture10-ensembles.pdf"
+    ]
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "pdf",
+    "source": "ml1-2026-spring/lecture-notes/lecture11-ensembles.pdf",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/lecture-notes/lecture11-ensembles.pdf.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/lecture-notes/lecture11-ensembles-pdf",
+    "sha256": "e64bfd333b720fd66d8fb71d94a6acd12a29aa6c35f14da800b0c2c4e53c1611",
+    "assets": [
+      "05 Источники/Courses/HSE ML course/ml1-2026-spring/lecture-notes/lecture11-ensembles.pdf"
+    ]
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "pdf",
+    "source": "ml1-2026-spring/lecture-notes/lecture12-ensembles.pdf",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/lecture-notes/lecture12-ensembles.pdf.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/lecture-notes/lecture12-ensembles-pdf",
+    "sha256": "89bc59f9610077280b3e984d3f65a5a92b02bb49ea06d46846112116d10f57a0",
+    "assets": [
+      "05 Источники/Courses/HSE ML course/ml1-2026-spring/lecture-notes/lecture12-ensembles.pdf"
+    ]
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "jupyter-notebook",
+    "source": "ml1-2026-spring/seminars/sem01-data.ipynb",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem01-data.ipynb.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem01-data-ipynb",
+    "sha256": "07a89cf8a50cda054e79715062ae59c73c2fbb0230fe7f24713c35adbdfbea0e",
+    "assets": [
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem01-data/cell-5-output-1.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem01-data/cell-12-output-2.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem01-data/cell-14-output-3.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem01-data/cell-16-markdown-4.jpg",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem01-data/cell-18-markdown-5.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem01-data/cell-20-markdown-6.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem01-data/cell-22-markdown-7.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem01-data/cell-23-markdown-8.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem01-data/cell-28-output-9.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem01-data/cell-33-markdown-10.jpg"
+    ]
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "jupyter-notebook",
+    "source": "ml1-2026-spring/seminars/sem01-pandas.ipynb",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem01-pandas.ipynb.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem01-pandas-ipynb",
+    "sha256": "95473ce513fa689e8b82f45e03116fdda3c0f40f9066b88e56a141d00c4fbdb8",
+    "assets": [
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem01-pandas/cell-99-output-1.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem01-pandas/cell-101-output-2.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem01-pandas/cell-102-output-3.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem01-pandas/cell-103-output-4.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem01-pandas/cell-128-output-5.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem01-pandas/cell-130-output-6.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem01-pandas/cell-139-output-7.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem01-pandas/cell-145-output-8.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem01-pandas/cell-160-output-9.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem01-pandas/cell-161-output-10.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem01-pandas/cell-163-output-11.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem01-pandas/cell-165-output-12.png"
+    ]
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "jupyter-notebook",
+    "source": "ml1-2026-spring/seminars/sem01-polars.ipynb",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem01-polars.ipynb.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem01-polars-ipynb",
+    "sha256": "a5e09340154772970d0c9129a896eb1c0b52b7dbeac7d3d3287a511faf0eb431",
+    "assets": [
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem01-polars/cell-112-output-1.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem01-polars/cell-113-output-2.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem01-polars/cell-114-output-3.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem01-polars/cell-138-output-4.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem01-polars/cell-140-output-5.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem01-polars/cell-152-output-6.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem01-polars/cell-159-output-7.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem01-polars/cell-176-output-8.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem01-polars/cell-177-output-9.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem01-polars/cell-179-output-10.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem01-polars/cell-181-output-11.png"
+    ]
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "jupyter-notebook",
+    "source": "ml1-2026-spring/seminars/sem02-charts.ipynb",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem02-charts.ipynb.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem02-charts-ipynb",
+    "sha256": "5dc8ef03077fae99ed0898acf52da7d5098e6bb287948060fca61952346f8172",
+    "assets": [
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-6-output-1.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-9-output-2.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-11-output-3.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-13-output-4.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-15-output-5.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-18-output-6.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-20-output-7.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-22-output-8.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-24-output-9.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-27-output-10.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-29-output-11.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-31-output-12.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-32-output-13.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-33-output-14.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-38-output-15.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-40-output-16.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-43-output-17.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-45-output-18.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-48-output-19.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-50-output-20.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-53-output-21.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-56-output-22.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-58-output-23.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-60-output-24.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-62-output-25.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-64-output-26.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-66-output-27.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-66-output-28.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-68-output-29.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-74-output-30.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-76-output-31.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-80-output-32.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-82-output-33.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-84-output-34.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-86-output-35.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-88-output-36.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-90-output-37.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-92-output-38.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-97-output-39.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-99-output-40.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-103-output-41.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-105-output-42.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-107-output-43.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-111-output-44.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-113-output-45.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-115-output-46.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-117-output-47.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-119-output-48.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-121-output-49.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-123-output-50.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-125-output-51.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-127-output-52.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-129-output-53.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-charts/cell-131-output-54.png"
+    ]
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "jupyter-notebook",
+    "source": "ml1-2026-spring/seminars/sem02-sklearn-linreg.ipynb",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem02-sklearn-linreg.ipynb.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem02-sklearn-linreg-ipynb",
+    "sha256": "26eab6c2ea1d9f6832a9bd46f9fec18f37e8ee9cb9021816e2a9ab971ccdf9c1",
+    "assets": [
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-sklearn-linreg/cell-6-output-1.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-sklearn-linreg/cell-17-output-2.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-sklearn-linreg/cell-20-output-3.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-sklearn-linreg/cell-22-output-4.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-sklearn-linreg/cell-39-output-5.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-sklearn-linreg/cell-42-output-6.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-sklearn-linreg/cell-44-output-7.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-sklearn-linreg/cell-61-output-8.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-sklearn-linreg/cell-65-output-9.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-sklearn-linreg/cell-70-output-10.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-sklearn-linreg/cell-77-output-11.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-sklearn-linreg/cell-83-output-12.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-sklearn-linreg/cell-86-output-13.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-sklearn-linreg/cell-90-output-14.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem02-sklearn-linreg/cell-91-output-15.png"
+    ]
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "jupyter-notebook",
+    "source": "ml1-2026-spring/seminars/sem03-gd.ipynb",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem03-gd.ipynb.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem03-gd-ipynb",
+    "sha256": "0b588402068f1294373db8767f09f9307ac1d333e2b6126799a05f3134a42176",
+    "assets": []
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "jupyter-notebook",
+    "source": "ml1-2026-spring/seminars/sem03-numpy.ipynb",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem03-numpy.ipynb.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem03-numpy-ipynb",
+    "sha256": "dc22d38c6aea910e292beaf0292ccf57876ef25ea4c6938b472b71dfcabbc08d",
+    "assets": []
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "jupyter-notebook",
+    "source": "ml1-2026-spring/seminars/sem04-features.ipynb",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem04-features.ipynb.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem04-features-ipynb",
+    "sha256": "3d7b75db6770753a7fd358884e323da698751858cc90858a53daf845faae00e4",
+    "assets": [
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem04-features/cell-10-output-1.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem04-features/cell-14-output-2.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem04-features/cell-26-output-3.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem04-features/cell-36-output-4.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem04-features/cell-38-output-5.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem04-features/cell-40-output-6.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem04-features/cell-42-output-7.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem04-features/cell-44-output-8.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem04-features/cell-122-output-9.png"
+    ]
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "pdf",
+    "source": "ml1-2026-spring/seminars/sem04-features.pdf",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem04-features.pdf.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem04-features-pdf",
+    "sha256": "7705da49703293e97b078b05efa7a04f2612f70749ed37ffc7ea5efa1cd3a4b8",
+    "assets": [
+      "05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem04-features.pdf"
+    ]
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "pdf",
+    "source": "ml1-2026-spring/seminars/sem05-linclass-metrics.pdf",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem05-linclass-metrics.pdf.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem05-linclass-metrics-pdf",
+    "sha256": "628b75652ff4c1b1d68e7402f7122e702921a14f99ec5572c354ebea9c2c0d2d",
+    "assets": [
+      "05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem05-linclass-metrics.pdf"
+    ]
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "jupyter-notebook",
+    "source": "ml1-2026-spring/seminars/sem06-calibration.ipynb",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem06-calibration.ipynb.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem06-calibration-ipynb",
+    "sha256": "a4db84a1e94a0e164a8bbab9c4da4331ad637937b3fc54ef5853e3f6ad683a60",
+    "assets": [
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem06-calibration/cell-14-output-1.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem06-calibration/cell-16-output-2.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem06-calibration/cell-25-output-3.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem06-calibration/cell-40-output-4.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem06-calibration/cell-48-output-5.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem06-calibration/cell-51-output-6.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem06-calibration/cell-56-output-7.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem06-calibration/cell-58-output-8.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem06-calibration/cell-62-output-9.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem06-calibration/cell-63-output-10.png"
+    ]
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "pdf",
+    "source": "ml1-2026-spring/seminars/sem06-calibration.pdf",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem06-calibration.pdf.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem06-calibration-pdf",
+    "sha256": "239cacebb443129aa58e4899efdc0554e259a95e0d77ce18e74052140e6b1dd9",
+    "assets": [
+      "05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem06-calibration.pdf"
+    ]
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "jupyter-notebook",
+    "source": "ml1-2026-spring/seminars/sem07-torch-mlp.ipynb",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem07-torch-mlp.ipynb.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem07-torch-mlp-ipynb",
+    "sha256": "5db61d07c98d8dca3a294661773d5f08ed05e0f29e3dccd7b677d0f010832fde",
+    "assets": [
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem07-torch-mlp/cell-122-output-1.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem07-torch-mlp/cell-125-output-2.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem07-torch-mlp/cell-130-output-3.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem07-torch-mlp/cell-134-output-4.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem07-torch-mlp/cell-134-output-5.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem07-torch-mlp/cell-137-output-6.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem07-torch-mlp/cell-137-output-7.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem07-torch-mlp/cell-139-output-8.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem07-torch-mlp/cell-139-output-9.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem07-torch-mlp/cell-155-output-10.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem07-torch-mlp/cell-155-output-11.png"
+    ]
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "jupyter-notebook",
+    "source": "ml1-2026-spring/seminars/sem08-torch-cnn.ipynb",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem08-torch-cnn.ipynb.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem08-torch-cnn-ipynb",
+    "sha256": "6da659ebb3c14e4bc56b79b71c05762c6f421ed6fbb1ee3eff70adef09d65fe5",
+    "assets": [
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem08-torch-cnn/cell-42-output-1.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem08-torch-cnn/cell-49-output-2.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem08-torch-cnn/cell-50-output-3.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem08-torch-cnn/cell-51-output-4.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem08-torch-cnn/cell-76-output-5.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem08-torch-cnn/cell-77-output-6.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem08-torch-cnn/cell-78-output-7.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem08-torch-cnn/cell-115-output-8.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem08-torch-cnn/cell-116-output-9.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem08-torch-cnn/cell-120-output-10.png"
+    ]
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "jupyter-notebook",
+    "source": "ml1-2026-spring/seminars/sem09-trees.ipynb",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem09-trees.ipynb.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem09-trees-ipynb",
+    "sha256": "8efbdf5f29274b92c28cd0260042a3fc227aeb6b64d784b4efb989d28fbc525a",
+    "assets": [
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem09-trees/cell-7-output-1.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem09-trees/cell-13-output-2.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem09-trees/cell-19-output-3.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem09-trees/cell-25-output-4.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem09-trees/cell-36-output-5.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem09-trees/cell-43-output-6.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem09-trees/cell-54-output-7.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem09-trees/cell-56-output-8.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem09-trees/cell-58-output-9.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem09-trees/cell-60-output-10.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem09-trees/cell-64-output-11.png"
+    ]
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "pdf",
+    "source": "ml1-2026-spring/seminars/sem10-bvd.pdf",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem10-bvd.pdf.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem10-bvd-pdf",
+    "sha256": "dc73d434573ef6d50c94f00d3b5c9cf3cfc8ba0b2895de480b25a2ed2254053c",
+    "assets": [
+      "05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem10-bvd.pdf"
+    ]
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "pdf",
+    "source": "ml1-2026-spring/seminars/sem11-gbm-part1.pdf",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem11-gbm-part1.pdf.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem11-gbm-part1-pdf",
+    "sha256": "363f25ec2719219ad5fbf5c827900e7b98f914d03c3e43ef2881a363a6f4a89f",
+    "assets": [
+      "05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem11-gbm-part1.pdf"
+    ]
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "pdf",
+    "source": "ml1-2026-spring/seminars/sem11-gbm-part2.pdf",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem11-gbm-part2.pdf.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem11-gbm-part2-pdf",
+    "sha256": "820468842252f698f96814bfff646ca31131d36553ad4a9c950be1bc92a9b47d",
+    "assets": [
+      "05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem11-gbm-part2.pdf"
+    ]
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "jupyter-notebook",
+    "source": "ml1-2026-spring/seminars/sem12-clustering.ipynb",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem12-clustering.ipynb.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem12-clustering-ipynb",
+    "sha256": "948b624534e68a0fe3ed054c83b9470fd4b27b5ad5262ddc4b8e147ba14e9d68",
+    "assets": [
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem12-clustering/cell-14-output-1.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem12-clustering/cell-18-output-2.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem12-clustering/cell-20-output-3.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem12-clustering/cell-23-output-4.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem12-clustering/cell-27-output-5.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem12-clustering/cell-32-output-6.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem12-clustering/cell-34-output-7.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem12-clustering/cell-43-output-8.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem12-clustering/cell-46-output-9.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem12-clustering/cell-49-output-10.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem12-clustering/cell-53-output-11.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem12-clustering/cell-59-output-12.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem12-clustering/cell-62-output-13.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem12-clustering/cell-62-output-14.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem12-clustering/cell-62-output-15.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem12-clustering/cell-62-output-16.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem12-clustering/cell-66-output-17.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem12-clustering/cell-70-output-18.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem12-clustering/cell-75-output-19.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem12-clustering/cell-77-output-20.png"
+    ]
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "pdf",
+    "source": "ml1-2026-spring/seminars/sem12-clustering.pdf",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem12-clustering.pdf.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem12-clustering-pdf",
+    "sha256": "b701069de0bcd71150c2d23083c40f0073237b9adefb4c18daf288c9774a5287",
+    "assets": [
+      "05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem12-clustering.pdf"
+    ]
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "jupyter-notebook",
+    "source": "ml1-2026-spring/seminars/sem13-pca-tsne.ipynb",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem13-pca-tsne.ipynb.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem13-pca-tsne-ipynb",
+    "sha256": "314f0a14ddf08aa868765058036c37c0f346215ffebb9fb83790e59f7f0430f1",
+    "assets": [
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem13-pca-tsne/cell-4-output-1.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem13-pca-tsne/cell-6-output-2.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem13-pca-tsne/cell-13-output-3.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem13-pca-tsne/cell-15-output-4.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem13-pca-tsne/cell-17-output-5.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem13-pca-tsne/cell-19-output-6.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem13-pca-tsne/cell-21-output-7.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem13-pca-tsne/cell-28-output-8.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem13-pca-tsne/cell-30-output-9.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem13-pca-tsne/cell-32-output-10.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem13-pca-tsne/cell-40-output-11.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem13-pca-tsne/cell-42-output-12.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem13-pca-tsne/cell-45-output-13.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem13-pca-tsne/cell-47-output-14.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem13-pca-tsne/cell-53-output-15.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem13-pca-tsne/cell-54-output-16.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem13-pca-tsne/cell-56-output-17.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem13-pca-tsne/cell-59-output-18.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem13-pca-tsne/cell-62-output-19.png",
+      "Assets/Sources/HSE ML course/ml1-2026-spring/seminars/sem13-pca-tsne/cell-64-output-20.png"
+    ]
+  },
+  {
+    "season": "ml1-2026-spring",
+    "kind": "pdf",
+    "source": "ml1-2026-spring/seminars/sem13-pca.pdf",
+    "output": "05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem13-pca.pdf.md",
+    "route": "sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem13-pca-pdf",
+    "sha256": "b27cf6897910ce69ebafee3de36f21434387c1ecb483016b5272cfcdf026db69",
+    "assets": [
+      "05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem13-pca.pdf"
+    ]
+  },
+  {
+    "season": "ml2-2026-spring",
+    "kind": "jupyter-notebook",
+    "source": "ml2-2026-spring/homeworks-practice/homework-practice-08-unsupervised.ipynb",
+    "output": "05 Источники/Courses/HSE ML course/ml2-2026-spring/homeworks-practice/homework-practice-08-unsupervised.ipynb.md",
+    "route": "sources/courses/hse-ml-course/ml2-2026-spring/homeworks-practice/homework-practice-08-unsupervised-ipynb",
+    "sha256": "cd5d2b29b178b2b324a8deacdc8721baf0c49e7dc6ff25ef9447e1a114294e2a",
+    "assets": []
+  },
+  {
+    "season": "ml2-2026-spring",
+    "kind": "jupyter-notebook",
+    "source": "ml2-2026-spring/homeworks-practice/homework-practice-09-imbalanced.ipynb",
+    "output": "05 Источники/Courses/HSE ML course/ml2-2026-spring/homeworks-practice/homework-practice-09-imbalanced.ipynb.md",
+    "route": "sources/courses/hse-ml-course/ml2-2026-spring/homeworks-practice/homework-practice-09-imbalanced-ipynb",
+    "sha256": "f2f5283b39ef95b29aac6b07ed0794e86d05f635def5732cc39115a82c0d604d",
+    "assets": []
+  },
+  {
+    "season": "ml2-2026-spring",
+    "kind": "jupyter-notebook",
+    "source": "ml2-2026-spring/homeworks-practice/homework-practice-10-recommendations/homework-practice-10-recommendations.ipynb",
+    "output": "05 Источники/Courses/HSE ML course/ml2-2026-spring/homeworks-practice/homework-practice-10-recommendations/homework-practice-10-recommendations.ipynb.md",
+    "route": "sources/courses/hse-ml-course/ml2-2026-spring/homeworks-practice/homework-practice-10-recommendations/homework-practice-10-recommendations-ipynb",
+    "sha256": "c4709872826eada927b64ff632f695f7905685af3bfb63d4292ab0be54fc9b6b",
+    "assets": []
+  },
+  {
+    "season": "ml2-2026-spring",
+    "kind": "jupyter-notebook",
+    "source": "ml2-2026-spring/homeworks-practice/homework-practice-11-random-features/homework-practice-11-random-features.ipynb",
+    "output": "05 Источники/Courses/HSE ML course/ml2-2026-spring/homeworks-practice/homework-practice-11-random-features/homework-practice-11-random-features.ipynb.md",
+    "route": "sources/courses/hse-ml-course/ml2-2026-spring/homeworks-practice/homework-practice-11-random-features/homework-practice-11-random-features-ipynb",
+    "sha256": "de2c0cc4d3a121a491080a6c6a705fe7a233a70126f18c8cc8a53addceed6009",
+    "assets": []
+  },
+  {
+    "season": "ml2-2026-spring",
+    "kind": "python-source",
+    "source": "ml2-2026-spring/homeworks-practice/homework-practice-11-random-features/homework_practice_11_kernel_regression.py",
+    "output": "05 Источники/Courses/HSE ML course/ml2-2026-spring/homeworks-practice/homework-practice-11-random-features/homework_practice_11_kernel_regression.py.md",
+    "route": "sources/courses/hse-ml-course/ml2-2026-spring/homeworks-practice/homework-practice-11-random-features/homework-practice-11-kernel-regression-py",
+    "sha256": "fcb2456907f2ba32f62c22d6ad5681e003a54a05fe6aca7277a74420b202a3b5",
+    "assets": []
+  },
+  {
+    "season": "ml2-2026-spring",
+    "kind": "python-source",
+    "source": "ml2-2026-spring/homeworks-practice/homework-practice-11-random-features/homework_practice_11_rff.py",
+    "output": "05 Источники/Courses/HSE ML course/ml2-2026-spring/homeworks-practice/homework-practice-11-random-features/homework_practice_11_rff.py.md",
+    "route": "sources/courses/hse-ml-course/ml2-2026-spring/homeworks-practice/homework-practice-11-random-features/homework-practice-11-rff-py",
+    "sha256": "5f863da2fa781544ee51fdf5f02de0038cdb8c2bffc6d400206626813cd1969f",
+    "assets": []
+  },
+  {
+    "season": "ml2-2026-spring",
+    "kind": "jupyter-notebook",
+    "source": "ml2-2026-spring/homeworks-practice/homework-practice-12-em/homework-practice-12-em.ipynb",
+    "output": "05 Источники/Courses/HSE ML course/ml2-2026-spring/homeworks-practice/homework-practice-12-em/homework-practice-12-em.ipynb.md",
+    "route": "sources/courses/hse-ml-course/ml2-2026-spring/homeworks-practice/homework-practice-12-em/homework-practice-12-em-ipynb",
+    "sha256": "c43ff86379052d17ce29eab8fec5d16e993efd733dda935fbdfd13fcba6a50e8",
+    "assets": []
+  },
+  {
+    "season": "ml2-2026-spring",
+    "kind": "python-source",
+    "source": "ml2-2026-spring/homeworks-practice/homework-practice-12-em/metrics.py",
+    "output": "05 Источники/Courses/HSE ML course/ml2-2026-spring/homeworks-practice/homework-practice-12-em/metrics.py.md",
+    "route": "sources/courses/hse-ml-course/ml2-2026-spring/homeworks-practice/homework-practice-12-em/metrics-py",
+    "sha256": "10612dc75b3f7c40b37ea55357074b287c7298ce6e917e5ecae455a0fc26d941",
+    "assets": []
+  },
+  {
+    "season": "ml2-2026-spring",
+    "kind": "python-source",
+    "source": "ml2-2026-spring/homeworks-practice/homework-practice-12-em/models.py",
+    "output": "05 Источники/Courses/HSE ML course/ml2-2026-spring/homeworks-practice/homework-practice-12-em/models.py.md",
+    "route": "sources/courses/hse-ml-course/ml2-2026-spring/homeworks-practice/homework-practice-12-em/models-py",
+    "sha256": "c78a6dd830bd9b8257c8b909fccedb2f4fcd6344752ac0d51e4f6950ef183529",
+    "assets": []
+  },
+  {
+    "season": "ml2-2026-spring",
+    "kind": "python-source",
+    "source": "ml2-2026-spring/homeworks-practice/homework-practice-12-em/preprocessing.py",
+    "output": "05 Источники/Courses/HSE ML course/ml2-2026-spring/homeworks-practice/homework-practice-12-em/preprocessing.py.md",
+    "route": "sources/courses/hse-ml-course/ml2-2026-spring/homeworks-practice/homework-practice-12-em/preprocessing-py",
+    "sha256": "34771d6e2df8d8257ae12ef760217186f7fe11df3da53e0de427418523b4e01c",
+    "assets": []
+  },
+  {
+    "season": "ml2-2026-spring",
+    "kind": "jupyter-notebook",
+    "source": "ml2-2026-spring/homeworks-practice/homework-practice-bonus-knn.ipynb",
+    "output": "05 Источники/Courses/HSE ML course/ml2-2026-spring/homeworks-practice/homework-practice-bonus-knn.ipynb.md",
+    "route": "sources/courses/hse-ml-course/ml2-2026-spring/homeworks-practice/homework-practice-bonus-knn-ipynb",
+    "sha256": "7e75224ede9ec12e85c8f77b6653fb964be9a1f3425ff616c69a41764fb03f07",
+    "assets": []
+  },
+  {
+    "season": "ml2-2026-spring",
+    "kind": "pdf",
+    "source": "ml2-2026-spring/seminars/sem01-pca.pdf",
+    "output": "05 Источники/Courses/HSE ML course/ml2-2026-spring/seminars/sem01-pca.pdf.md",
+    "route": "sources/courses/hse-ml-course/ml2-2026-spring/seminars/sem01-pca-pdf",
+    "sha256": "774b1038fe71da39a7ba4770597d260f5ef5922e220db7a4e5c162af20b5e873",
+    "assets": [
+      "05 Источники/Courses/HSE ML course/ml2-2026-spring/seminars/sem01-pca.pdf"
+    ]
+  },
+  {
+    "season": "ml2-2026-spring",
+    "kind": "jupyter-notebook",
+    "source": "ml2-2026-spring/seminars/sem02-clustering.ipynb",
+    "output": "05 Источники/Courses/HSE ML course/ml2-2026-spring/seminars/sem02-clustering.ipynb.md",
+    "route": "sources/courses/hse-ml-course/ml2-2026-spring/seminars/sem02-clustering-ipynb",
+    "sha256": "41ee406ed586f897e94b2409b0d29076838790762bff9d263c28eddb6cc5df65",
+    "assets": [
+      "Assets/Sources/HSE ML course/ml2-2026-spring/seminars/sem02-clustering/cell-13-output-1.png",
+      "Assets/Sources/HSE ML course/ml2-2026-spring/seminars/sem02-clustering/cell-17-output-2.png",
+      "Assets/Sources/HSE ML course/ml2-2026-spring/seminars/sem02-clustering/cell-19-output-3.png",
+      "Assets/Sources/HSE ML course/ml2-2026-spring/seminars/sem02-clustering/cell-22-output-4.png",
+      "Assets/Sources/HSE ML course/ml2-2026-spring/seminars/sem02-clustering/cell-26-output-5.png",
+      "Assets/Sources/HSE ML course/ml2-2026-spring/seminars/sem02-clustering/cell-28-output-6.png",
+      "Assets/Sources/HSE ML course/ml2-2026-spring/seminars/sem02-clustering/cell-36-output-7.png",
+      "Assets/Sources/HSE ML course/ml2-2026-spring/seminars/sem02-clustering/cell-39-output-8.png",
+      "Assets/Sources/HSE ML course/ml2-2026-spring/seminars/sem02-clustering/cell-42-output-9.png",
+      "Assets/Sources/HSE ML course/ml2-2026-spring/seminars/sem02-clustering/cell-46-output-10.png",
+      "Assets/Sources/HSE ML course/ml2-2026-spring/seminars/sem02-clustering/cell-52-output-11.png",
+      "Assets/Sources/HSE ML course/ml2-2026-spring/seminars/sem02-clustering/cell-55-output-12.png",
+      "Assets/Sources/HSE ML course/ml2-2026-spring/seminars/sem02-clustering/cell-55-output-13.png",
+      "Assets/Sources/HSE ML course/ml2-2026-spring/seminars/sem02-clustering/cell-55-output-14.png",
+      "Assets/Sources/HSE ML course/ml2-2026-spring/seminars/sem02-clustering/cell-55-output-15.png",
+      "Assets/Sources/HSE ML course/ml2-2026-spring/seminars/sem02-clustering/cell-59-output-16.png",
+      "Assets/Sources/HSE ML course/ml2-2026-spring/seminars/sem02-clustering/cell-63-output-17.png",
+      "Assets/Sources/HSE ML course/ml2-2026-spring/seminars/sem02-clustering/cell-68-output-18.png",
+      "Assets/Sources/HSE ML course/ml2-2026-spring/seminars/sem02-clustering/cell-70-output-19.png"
+    ]
+  },
+  {
+    "season": "ml2-2026-spring",
+    "kind": "pdf",
+    "source": "ml2-2026-spring/seminars/sem03-graph-clustering.pdf",
+    "output": "05 Источники/Courses/HSE ML course/ml2-2026-spring/seminars/sem03-graph-clustering.pdf.md",
+    "route": "sources/courses/hse-ml-course/ml2-2026-spring/seminars/sem03-graph-clustering-pdf",
+    "sha256": "c853f1d19536e296f1baab960e70dafe391b6a55d00666db954b688b7e79f604",
+    "assets": [
+      "05 Источники/Courses/HSE ML course/ml2-2026-spring/seminars/sem03-graph-clustering.pdf"
+    ]
+  },
+  {
+    "season": "ml2-2026-spring",
+    "kind": "jupyter-notebook",
+    "source": "ml2-2026-spring/seminars/sem04-graph.ipynb",
+    "output": "05 Источники/Courses/HSE ML course/ml2-2026-spring/seminars/sem04-graph.ipynb.md",
+    "route": "sources/courses/hse-ml-course/ml2-2026-spring/seminars/sem04-graph-ipynb",
+    "sha256": "e9272bf176e98d5338db48061195ef36f47a7b6174cc6a9cea2c83b7911520bf",
+    "assets": [
+      "Assets/Sources/HSE ML course/ml2-2026-spring/seminars/sem04-graph/cell-14-output-1.png",
+      "Assets/Sources/HSE ML course/ml2-2026-spring/seminars/sem04-graph/cell-48-output-2.png",
+      "Assets/Sources/HSE ML course/ml2-2026-spring/seminars/sem04-graph/cell-63-output-3.png"
+    ]
+  },
+  {
+    "season": "ml2-2026-spring",
+    "kind": "pdf",
+    "source": "ml2-2026-spring/seminars/sem04-graph.pdf",
+    "output": "05 Источники/Courses/HSE ML course/ml2-2026-spring/seminars/sem04-graph.pdf.md",
+    "route": "sources/courses/hse-ml-course/ml2-2026-spring/seminars/sem04-graph-pdf",
+    "sha256": "83d2556d0dd03b56eb079dac060ddf40e8775fc302807756c1d9785967b47297",
+    "assets": [
+      "05 Источники/Courses/HSE ML course/ml2-2026-spring/seminars/sem04-graph.pdf"
+    ]
+  }
+]

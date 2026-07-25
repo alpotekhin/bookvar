@@ -1,0 +1,65 @@
+[
+  {
+    "source": "mlcourse-topic7.html",
+    "output": "05 Источники/Courses/Advanced Unsupervised and Classical ML/mlcourse-topic7.html.md",
+    "sha256": "287c192afaee3aa6b86895499aba258cb786b8d241e92583d9d9d8c68c19dfbc",
+    "url": "https://mlcourse.ai/book/topic07/topic7_pca_clustering.html",
+    "repository": "https://github.com/Yorko/mlcourse.ai",
+    "upstream_commit": "f966c2c9dfdc684e3cf4d338b4af08a75ca8ed1b",
+    "license": "CC BY-NC-SA 4.0"
+  },
+  {
+    "source": "distill-misread-tsne.html",
+    "output": "05 Источники/Courses/Advanced Unsupervised and Classical ML/distill-misread-tsne.html.md",
+    "sha256": "fc0fc797b11ef2bd4cf74aeeb296a07f74bb91b557b4b8ec0af5df75ce441c7d",
+    "url": "https://distill.pub/2016/misread-tsne/",
+    "repository": "https://github.com/distillpub/post--misread-tsne",
+    "upstream_commit": "f2492b469bec8aaa7aa83cc828081e14a295414d",
+    "license": "CC BY 2.0"
+  },
+  {
+    "source": "umap-parameters.rst",
+    "output": "05 Источники/Courses/Advanced Unsupervised and Classical ML/umap-parameters.rst.md",
+    "sha256": "fd742cd673a3219e75db03342f00a669ffc7db3dc092e5686ae72543c1d7749c",
+    "url": "https://github.com/lmcinnes/umap/blob/e82ed0d457b566b043ef44f4007a7149b0daca74/doc/parameters.rst",
+    "repository": "https://github.com/lmcinnes/umap",
+    "upstream_commit": "e82ed0d457b566b043ef44f4007a7149b0daca74",
+    "license": "BSD-3-Clause"
+  },
+  {
+    "source": "sklearn-pca-iris.py",
+    "output": "05 Источники/Courses/Advanced Unsupervised and Classical ML/sklearn-pca-iris.py.md",
+    "sha256": "331b3d876607892dcb18ab083589adbdc35238fccdd3d98cf7878204637843df",
+    "url": "https://github.com/scikit-learn/scikit-learn/blob/b9530aa1fa5b00d933a8f258a094befea41aa86c/examples/decomposition/plot_pca_iris.py",
+    "repository": "https://github.com/scikit-learn/scikit-learn",
+    "upstream_commit": "b9530aa1fa5b00d933a8f258a094befea41aa86c",
+    "license": "BSD-3-Clause"
+  },
+  {
+    "source": "sklearn-tsne-perplexity.py",
+    "output": "05 Источники/Courses/Advanced Unsupervised and Classical ML/sklearn-tsne-perplexity.py.md",
+    "sha256": "f1f92de1b51b31ed5ef1fb83382cbe803febee1839fa8b198ba695e7bed2d5a6",
+    "url": "https://github.com/scikit-learn/scikit-learn/blob/b9530aa1fa5b00d933a8f258a094befea41aa86c/examples/manifold/plot_t_sne_perplexity.py",
+    "repository": "https://github.com/scikit-learn/scikit-learn",
+    "upstream_commit": "b9530aa1fa5b00d933a8f258a094befea41aa86c",
+    "license": "BSD-3-Clause"
+  },
+  {
+    "source": "sklearn-gmm-covariances.py",
+    "output": "05 Источники/Courses/Advanced Unsupervised and Classical ML/sklearn-gmm-covariances.py.md",
+    "sha256": "eb48a8a15938f21794a0ca7cb0791c2b8b0a93509ed01e96f514708ee42c14df",
+    "url": "https://github.com/scikit-learn/scikit-learn/blob/b9530aa1fa5b00d933a8f258a094befea41aa86c/examples/mixture/plot_gmm_covariances.py",
+    "repository": "https://github.com/scikit-learn/scikit-learn",
+    "upstream_commit": "b9530aa1fa5b00d933a8f258a094befea41aa86c",
+    "license": "BSD-3-Clause"
+  },
+  {
+    "source": "sklearn-kernel-approximation.py",
+    "output": "05 Источники/Courses/Advanced Unsupervised and Classical ML/sklearn-kernel-approximation.py.md",
+    "sha256": "aa1f427fd80796cb4010445c85c8b36d5aa260ccaa6b0989147e38de07994aa0",
+    "url": "https://github.com/scikit-learn/scikit-learn/blob/b9530aa1fa5b00d933a8f258a094befea41aa86c/examples/miscellaneous/plot_kernel_approximation.py",
+    "repository": "https://github.com/scikit-learn/scikit-learn",
+    "upstream_commit": "b9530aa1fa5b00d933a8f258a094befea41aa86c",
+    "license": "BSD-3-Clause"
+  }
+]

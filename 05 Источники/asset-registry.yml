@@ -5199,6 +5199,119 @@ assets:
     used_in: []
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
+  - id: curated-sklearn-pca-iris-21d57f4be28d
+    asset: 00 Учебник/Assets/Figures/curated/advanced-unsupervised-classical/pca-iris.png
+    author: The scikit-learn developers
+    source_url: https://github.com/scikit-learn/scikit-learn/blob/9a210f70301a76c7ff3ea68cdec3748ec58834be/examples/decomposition/plot_pca_iris.py
+    commit: 9a210f70301a76c7ff3ea68cdec3748ec58834be
+    sha256: 21d57f4be28d03fd3ae90992ce79c774d3f4e719e99e69225e3c3a06817edcb6
+    license: BSD-3-Clause
+    license_url: https://github.com/scikit-learn/scikit-learn/blob/9a210f70301a76c7ff3ea68cdec3748ec58834be/COPYING
+    modifications: copied without visual modification from the official scikit-learn Gallery
+    used_in:
+      - 00 Учебник/01 Классическое машинное обучение/07 PCA, t-SNE и UMAP.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-sklearn-tsne-perplexity-8ef42e4f3a74
+    asset: 00 Учебник/Assets/Figures/curated/advanced-unsupervised-classical/tsne-perplexity.png
+    author: The scikit-learn developers
+    source_url: https://github.com/scikit-learn/scikit-learn/blob/9a210f70301a76c7ff3ea68cdec3748ec58834be/examples/manifold/plot_t_sne_perplexity.py
+    commit: 9a210f70301a76c7ff3ea68cdec3748ec58834be
+    sha256: 8ef42e4f3a74ca6f683274b665f58b67bceaa3a64a5b05aa9651b46076de1fca
+    license: BSD-3-Clause
+    license_url: https://github.com/scikit-learn/scikit-learn/blob/9a210f70301a76c7ff3ea68cdec3748ec58834be/COPYING
+    modifications: copied without visual modification from the official scikit-learn Gallery
+    used_in:
+      - 00 Учебник/01 Классическое машинное обучение/07 PCA, t-SNE и UMAP.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-sklearn-gmm-covariances-9d7bb54f8193
+    asset: 00 Учебник/Assets/Figures/curated/advanced-unsupervised-classical/gmm-covariances.png
+    author: The scikit-learn developers
+    source_url: https://github.com/scikit-learn/scikit-learn/blob/9a210f70301a76c7ff3ea68cdec3748ec58834be/examples/mixture/plot_gmm_covariances.py
+    commit: 9a210f70301a76c7ff3ea68cdec3748ec58834be
+    sha256: 9d7bb54f81933ca67fce76a00962ae6c80f3d5b6be9d98721ed0925e393151e5
+    license: BSD-3-Clause
+    license_url: https://github.com/scikit-learn/scikit-learn/blob/9a210f70301a76c7ff3ea68cdec3748ec58834be/COPYING
+    modifications: copied without visual modification from the official scikit-learn Gallery
+    used_in:
+      - 00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-sklearn-kernel-approximation-b808d4b6766c
+    asset: 00 Учебник/Assets/Figures/curated/advanced-unsupervised-classical/kernel-approximation.png
+    author: The scikit-learn developers
+    source_url: https://github.com/scikit-learn/scikit-learn/blob/9a210f70301a76c7ff3ea68cdec3748ec58834be/examples/miscellaneous/plot_kernel_approximation.py
+    commit: 9a210f70301a76c7ff3ea68cdec3748ec58834be
+    sha256: b808d4b6766ce45f062505ac510aca24ce82aa3fb23442fe22d2741c1a5d015a
+    license: BSD-3-Clause
+    license_url: https://github.com/scikit-learn/scikit-learn/blob/9a210f70301a76c7ff3ea68cdec3748ec58834be/COPYING
+    modifications: copied without visual modification from the official scikit-learn Gallery
+    used_in:
+      - 00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-sklearn-spectral-clustering-comparison-907292aa7295
+    asset: 00 Учебник/Assets/Figures/curated/advanced-unsupervised-classical/spectral-clustering-comparison.png
+    author: The scikit-learn developers
+    source_url: https://github.com/scikit-learn/scikit-learn/blob/9a210f70301a76c7ff3ea68cdec3748ec58834be/examples/cluster/plot_cluster_comparison.py
+    commit: 9a210f70301a76c7ff3ea68cdec3748ec58834be
+    sha256: 907292aa7295368a977a3b5bbc1052dd1612dcd0661d30f58d05777bd9d61365
+    license: BSD-3-Clause
+    license_url: https://github.com/scikit-learn/scikit-learn/blob/9a210f70301a76c7ff3ea68cdec3748ec58834be/COPYING
+    modifications: copied without visual modification from the official scikit-learn Gallery
+    used_in:
+      - 00 Учебник/01 Классическое машинное обучение/06a Спектральная кластеризация и графовый Laplacian.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: imbalanced-learn-over-sampling-2266119a6c01
+    asset: 00 Учебник/Assets/Figures/imbalanced-learning/plot_comparison_over_sampling.png
+    author: The imbalanced-learn developers
+    source_url: https://imbalanced-learn.org/stable/auto_examples/over-sampling/plot_comparison_over_sampling.html
+    license: MIT
+    license_url: https://github.com/scikit-learn-contrib/imbalanced-learn/blob/8504e95f0160f61d1b617ca66f779646d2ee609e/LICENSE
+    modifications: copied without visual modification from the official 0.14.2 gallery build
+    used_in:
+      - 00 Учебник/18 Evaluation и методология/59a Несбалансированная классификация.md
+    metadata_status: verified
+    upstream_commit: 8504e95f0160f61d1b617ca66f779646d2ee609e
+    sha256: 2266119a6c018ecec5a7a508309b8046a7b5479b2c6dd649f080b0ba0fbf4d3d
+  - id: imbalanced-learn-under-sampling-3c04f9462afe
+    asset: 00 Учебник/Assets/Figures/imbalanced-learning/plot_comparison_under_sampling.png
+    author: The imbalanced-learn developers
+    source_url: https://imbalanced-learn.org/stable/auto_examples/under-sampling/plot_comparison_under_sampling.html
+    license: MIT
+    license_url: https://github.com/scikit-learn-contrib/imbalanced-learn/blob/8504e95f0160f61d1b617ca66f779646d2ee609e/LICENSE
+    modifications: copied without visual modification from the official 0.14.2 gallery build
+    used_in:
+      - 00 Учебник/18 Evaluation и методология/59a Несбалансированная классификация.md
+    metadata_status: verified
+    upstream_commit: 8504e95f0160f61d1b617ca66f779646d2ee609e
+    sha256: 3c04f9462afe2ab2cbe5718fe77c8bc4dc08a8394a57e1ffe1984d5afc6ba745
+  - id: imbalanced-learn-tomek-links-080cccea77b7
+    asset: 00 Учебник/Assets/Figures/imbalanced-learning/plot_illustration_tomek_links.png
+    author: The imbalanced-learn developers
+    source_url: https://imbalanced-learn.org/stable/auto_examples/under-sampling/plot_illustration_tomek_links.html
+    license: MIT
+    license_url: https://github.com/scikit-learn-contrib/imbalanced-learn/blob/8504e95f0160f61d1b617ca66f779646d2ee609e/LICENSE
+    modifications: copied without visual modification from the official 0.14.2 gallery build
+    used_in:
+      - 00 Учебник/18 Evaluation и методология/59a Несбалансированная классификация.md
+    metadata_status: verified
+    upstream_commit: 8504e95f0160f61d1b617ca66f779646d2ee609e
+    sha256: 080cccea77b781b5587bb827e47f17c25fbcc9a29e18c6b9c35d4bda6d21741c
+  - id: imbalanced-learn-ensemble-comparison-67f60248afea
+    asset: 00 Учебник/Assets/Figures/imbalanced-learning/plot_comparison_ensemble_classifier.png
+    author: The imbalanced-learn developers
+    source_url: https://imbalanced-learn.org/stable/auto_examples/ensemble/plot_comparison_ensemble_classifier.html
+    license: MIT
+    license_url: https://github.com/scikit-learn-contrib/imbalanced-learn/blob/8504e95f0160f61d1b617ca66f779646d2ee609e/LICENSE
+    modifications: copied without visual modification from the official 0.14.2 gallery build
+    used_in:
+      - 00 Учебник/18 Evaluation и методология/59a Несбалансированная классификация.md
+    metadata_status: verified
+    upstream_commit: 8504e95f0160f61d1b617ca66f779646d2ee609e
+    sha256: 67f60248afea8384d6d5678bdac36ee4371e08a00035bd7e2c467ca16a186048
   - id: curated-harvard-harvard-foundation-introduction-energy-hierarchy-svg-baab8f6f1d53
     asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/foundation/introduction_energy_hierarchy.svg
     author: Harvard Edge ML Systems Book contributors
