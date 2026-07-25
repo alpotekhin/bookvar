@@ -176,12 +176,12 @@ describe('loadManifest', () => {
     }]);
   });
 
-  it('defines eight real textbook modules plus system prerequisites without changing flat routes', () => {
+  it('defines nine real textbook modules plus system prerequisites without changing flat routes', () => {
     const root = join(import.meta.dirname, '..', '..');
     const textbook = loadManifest(join(root, 'publishing', 'navigation.yml')).sections
       .find((section) => section.id === 'textbook')!;
     const modules = textbook.sidebar?.filter((item) => 'items' in item) ?? [];
-    expect(modules).toHaveLength(8);
+    expect(modules).toHaveLength(10);
 
     const flattenSidebar = (items: NonNullable<typeof textbook.sidebar>): typeof items =>
       items.flatMap((item) => 'route' in item ? [item] : flattenSidebar(item.items));

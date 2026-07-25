@@ -89,6 +89,20 @@ describe('static handbook output', () => {
     }
   });
 
+  it('does not silently emit empty textbook articles', async () => {
+    const manifest = YAML.parse(await readFile(join(rootDir, 'publishing', 'navigation.yml'), 'utf8'));
+    const routes: string[] = manifest.sections.flatMap(
+      (section: { pages: Array<{ route: string }> }) =>
+        section.pages.map((page) => page.route).filter((route) => route.startsWith('textbook/'))
+    );
+
+    for (const route of routes) {
+      const outputRoute = route.endsWith('/index') ? route.slice(0, -'/index'.length) : route;
+      const html = await readFile(join(distDir, outputRoute, 'index.html'), 'utf8');
+      expect(html, route).not.toContain('<div class="sl-markdown-content"></div>');
+    }
+  });
+
   it('includes previous and next links on an interior handbook page', async () => {
     const html = await readFile(
       join(distDir, 'textbook', 'transformer', 'self-attention', 'index.html'),

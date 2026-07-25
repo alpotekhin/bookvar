@@ -1,0 +1,1607 @@
+[
+  {
+    "source_path": "jupyter-book/appendix/acknowledgement.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/appendix/acknowledgement.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/appendix/acknowledgement",
+    "sha256": "67484154a1844ca264e8d8920a46d718b012635aa1fa738412edea48ff12496d"
+  },
+  {
+    "source_path": "jupyter-book/appendix/datasets_intro.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/appendix/datasets_intro.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/appendix/datasets-intro",
+    "sha256": "6a98bb95a22403712bf3aa82f64c74928a114bfbc45f2321abd69e495d123b73"
+  },
+  {
+    "source_path": "jupyter-book/appendix/glossary.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/appendix/glossary.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/appendix/glossary",
+    "sha256": "9fa28bca25358ab0893558bb1b0a748a04250dae4e5d50ad27ba4038a8f96329"
+  },
+  {
+    "source_path": "jupyter-book/appendix/notebook_timings.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/appendix/notebook_timings.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/appendix/notebook-timings",
+    "sha256": "48b8a7c23cd0b980c9749478d4ff68bea4ce1b8df8b382f644de3ef36fce11f1"
+  },
+  {
+    "source_path": "jupyter-book/appendix/toc_redirect.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/appendix/toc_redirect.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/appendix/toc-redirect",
+    "sha256": "7e5626b79ae6af255d7635c7c30f74ee1499bf47d649363f8d78412724fea6ad"
+  },
+  {
+    "source_path": "jupyter-book/clustering/clustering_assumptions_index.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/clustering/clustering_assumptions_index.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/clustering/clustering-assumptions-index",
+    "sha256": "ec26a10efe06254f77d923c5fe282b61be2d19f95ebafd8db96dfc7a0ac405d3"
+  },
+  {
+    "source_path": "jupyter-book/clustering/clustering_kmeans_index.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/clustering/clustering_kmeans_index.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/clustering/clustering-kmeans-index",
+    "sha256": "e314e7e3ca3797a8527b7982c119e6add4e1e2e3cfc4651dcae995e50f7af7fc"
+  },
+  {
+    "source_path": "jupyter-book/clustering/clustering_module_intro.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/clustering/clustering_module_intro.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/clustering/clustering-module-intro",
+    "sha256": "0ba95aeaedaeca47b89bc97c812ffa5737b0a4bc8b827fefd6dbf5a4e8da5dce"
+  },
+  {
+    "source_path": "jupyter-book/clustering/clustering_module_take_away.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/clustering/clustering_module_take_away.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/clustering/clustering-module-take-away",
+    "sha256": "0d6762361461dc864c4d46af977352d9264c7cb9283d37db114ca4aa711257a8"
+  },
+  {
+    "source_path": "jupyter-book/clustering/clustering_quiz_m4_01.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/clustering/clustering_quiz_m4_01.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/clustering/clustering-quiz-m4-01",
+    "sha256": "615971ea354be6ceb0cf3b4f0c19fdfeb11f4ec3b36716b6dd08840b0fb55fec"
+  },
+  {
+    "source_path": "jupyter-book/clustering/clustering_quiz_m4_02.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/clustering/clustering_quiz_m4_02.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/clustering/clustering-quiz-m4-02",
+    "sha256": "77f1e60d92ad81efed5b448a33c3e3b7d9525e7a81a79e1978af03a7252c9c50"
+  },
+  {
+    "source_path": "jupyter-book/clustering/clustering_wrap_up_quiz.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/clustering/clustering_wrap_up_quiz.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/clustering/clustering-wrap-up-quiz",
+    "sha256": "1c6662130af82c31c52684cb9f1ad956683735cd6bc690aa6dd709be49773ac9"
+  },
+  {
+    "source_path": "jupyter-book/concluding_remarks.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/concluding_remarks.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/concluding-remarks",
+    "sha256": "90333215c6cfd31835a62598634529e2e5c35be741c8ee749d3de58f8d56529e"
+  },
+  {
+    "source_path": "jupyter-book/concluding_remarks_video.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/concluding_remarks_video.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/concluding-remarks-video",
+    "sha256": "7d8dbae4e530ab5721e8f627d06a5357df4e43b59dbe0e44e6a27fb48da8f18f"
+  },
+  {
+    "source_path": "jupyter-book/ensemble/bagging_slides.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/ensemble/bagging_slides.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/ensemble/bagging-slides",
+    "sha256": "02dd9a6d8d56eedd52d0a95f5c9e29a2682ba58a20cd989a20cf483aa01d0a9d"
+  },
+  {
+    "source_path": "jupyter-book/ensemble/boosting_slides.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/ensemble/boosting_slides.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/ensemble/boosting-slides",
+    "sha256": "1dea9153df963b8a11f80d6bb58823876ba493f9ce41af54878db3bf75a0bdfb"
+  },
+  {
+    "source_path": "jupyter-book/ensemble/ensemble_boosting_index.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/ensemble/ensemble_boosting_index.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/ensemble/ensemble-boosting-index",
+    "sha256": "eb837be98101c0950610406556acc39c5776645c2f51fd06a5184a4c7be67d6c"
+  },
+  {
+    "source_path": "jupyter-book/ensemble/ensemble_bootstrap_index.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/ensemble/ensemble_bootstrap_index.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/ensemble/ensemble-bootstrap-index",
+    "sha256": "374a16aad19768a2079c8b2ceefd4abb5811742c7c3ab009e759f1d8eec0bacc"
+  },
+  {
+    "source_path": "jupyter-book/ensemble/ensemble_hyperparameters_index.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/ensemble/ensemble_hyperparameters_index.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/ensemble/ensemble-hyperparameters-index",
+    "sha256": "03b95e8c79daecaa1638f878f616824116ece0d74ddfa6538c4aed2352fb030d"
+  },
+  {
+    "source_path": "jupyter-book/ensemble/ensemble_module_intro.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/ensemble/ensemble_module_intro.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/ensemble/ensemble-module-intro",
+    "sha256": "bb237e053304d34c24cff49302d2bfe0dc458bfdee802168aac3c56af6b123ae"
+  },
+  {
+    "source_path": "jupyter-book/ensemble/ensemble_module_take_away.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/ensemble/ensemble_module_take_away.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/ensemble/ensemble-module-take-away",
+    "sha256": "1060bcaaffec9af48a235968ad768e3cf93aa7610e83ecdd1152774de1b0f367"
+  },
+  {
+    "source_path": "jupyter-book/ensemble/ensemble_quiz_m6_01.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/ensemble/ensemble_quiz_m6_01.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/ensemble/ensemble-quiz-m6-01",
+    "sha256": "1e4165d1729aeb701430053ea69e5a0254e244676a1f2b9359daf1a4aff18376"
+  },
+  {
+    "source_path": "jupyter-book/ensemble/ensemble_quiz_m6_02.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/ensemble/ensemble_quiz_m6_02.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/ensemble/ensemble-quiz-m6-02",
+    "sha256": "8b06b7bd2dae16ce53708c73469489c1b980176a8477f27bf27fdbfda57ad7e0"
+  },
+  {
+    "source_path": "jupyter-book/ensemble/ensemble_quiz_m6_03.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/ensemble/ensemble_quiz_m6_03.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/ensemble/ensemble-quiz-m6-03",
+    "sha256": "8f3b2c853ac70d93a87ece500ed57b2dd29e2d1d07a9034045d41e9e2e6cbca8"
+  },
+  {
+    "source_path": "jupyter-book/ensemble/ensemble_wrap_up_quiz.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/ensemble/ensemble_wrap_up_quiz.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/ensemble/ensemble-wrap-up-quiz",
+    "sha256": "c199d2a71a76398b9a7e93ec1fab9a24d626d16b93f3df96004ae3934dfeed66"
+  },
+  {
+    "source_path": "jupyter-book/evaluation/cross_validation_baseline_index.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/evaluation/cross_validation_baseline_index.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/evaluation/cross-validation-baseline-index",
+    "sha256": "098d9db23481d25d0dedaac8563724edaaaebb675c231f7965f341c659e76674"
+  },
+  {
+    "source_path": "jupyter-book/evaluation/cross_validation_choices_index.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/evaluation/cross_validation_choices_index.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/evaluation/cross-validation-choices-index",
+    "sha256": "d3e1eb3729be2b37b15d2f76cb60017606603e310168ccc04a3933001120d8b0"
+  },
+  {
+    "source_path": "jupyter-book/evaluation/cross_validation_nested_index.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/evaluation/cross_validation_nested_index.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/evaluation/cross-validation-nested-index",
+    "sha256": "b2a62d529f95d7ae3d6e01b3b6b9156c0126042b88e70c51e13606efe5a1683c"
+  },
+  {
+    "source_path": "jupyter-book/evaluation/evaluation_module_intro.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/evaluation/evaluation_module_intro.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/evaluation/evaluation-module-intro",
+    "sha256": "08dc73bd210f89ada27df2384811adbad62fa4eb4e364d4f2a86bcb7c44190b7"
+  },
+  {
+    "source_path": "jupyter-book/evaluation/evaluation_module_take_away.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/evaluation/evaluation_module_take_away.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/evaluation/evaluation-module-take-away",
+    "sha256": "dc0e86ee09be1bb861cda65cb3903d581da9030a7746dd6a6f83d1e509569ce4"
+  },
+  {
+    "source_path": "jupyter-book/evaluation/evaluation_quiz_m7_01.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/evaluation/evaluation_quiz_m7_01.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/evaluation/evaluation-quiz-m7-01",
+    "sha256": "174823a363a2e70d4b338737b56a833c25a6a9913c149d94fcbba8cb48665fa6"
+  },
+  {
+    "source_path": "jupyter-book/evaluation/evaluation_quiz_m7_02.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/evaluation/evaluation_quiz_m7_02.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/evaluation/evaluation-quiz-m7-02",
+    "sha256": "4efe6e89ec9e580cbf6c0195c169862f2e1c8920ebb3e0a527ee5b02c83ad261"
+  },
+  {
+    "source_path": "jupyter-book/evaluation/evaluation_quiz_m7_03.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/evaluation/evaluation_quiz_m7_03.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/evaluation/evaluation-quiz-m7-03",
+    "sha256": "93c7458185330b568c4e97e9c5542edbd8c1e3424f7e015daf061d88f2b66d21"
+  },
+  {
+    "source_path": "jupyter-book/evaluation/evaluation_quiz_m7_04.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/evaluation/evaluation_quiz_m7_04.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/evaluation/evaluation-quiz-m7-04",
+    "sha256": "05568957fda964b069728506b3909ccc8df410f36998a0a7dc0d3dd023bdb249"
+  },
+  {
+    "source_path": "jupyter-book/evaluation/evaluation_quiz_m7_05.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/evaluation/evaluation_quiz_m7_05.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/evaluation/evaluation-quiz-m7-05",
+    "sha256": "c897aa0f70c27b4362e43f9ca73a6ba89b32d4e3b41a55f4d0419ffb65fe3d55"
+  },
+  {
+    "source_path": "jupyter-book/evaluation/evaluation_wrap_up_quiz.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/evaluation/evaluation_wrap_up_quiz.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/evaluation/evaluation-wrap-up-quiz",
+    "sha256": "d0b9409217bb5fbe55968aa578e1c3c28c87394a69108129f002d9862621fb30"
+  },
+  {
+    "source_path": "jupyter-book/evaluation/metrics_classification_index.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/evaluation/metrics_classification_index.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/evaluation/metrics-classification-index",
+    "sha256": "3911103637931dbc57f875584d3099713e2bd3ab56e3b7a80890a71130ebfa0c"
+  },
+  {
+    "source_path": "jupyter-book/evaluation/metrics_regression_index.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/evaluation/metrics_regression_index.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/evaluation/metrics-regression-index",
+    "sha256": "6915ddf4b65bc769362c5d80cca22f583768f72b87197ee1bd4a60bd9743927c"
+  },
+  {
+    "source_path": "jupyter-book/feature_selection/feature_selection_limitation_index.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/feature_selection/feature_selection_limitation_index.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/feature-selection/feature-selection-limitation-index",
+    "sha256": "9b97c7395102783e30793d72d32d449f5afa84e5ef3437aa2f8eddf52db0565b"
+  },
+  {
+    "source_path": "jupyter-book/feature_selection/feature_selection_module_intro.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/feature_selection/feature_selection_module_intro.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/feature-selection/feature-selection-module-intro",
+    "sha256": "76e6e8faac358054d83ac03a7638d9610e21258bf74679be44f7cea659539c49"
+  },
+  {
+    "source_path": "jupyter-book/feature_selection/feature_selection_module_take_away.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/feature_selection/feature_selection_module_take_away.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/feature-selection/feature-selection-module-take-away",
+    "sha256": "5f492c429c3aa94f356780d25f0a21ebf24aaaf0b8f1e83812a716ef0cacf1e2"
+  },
+  {
+    "source_path": "jupyter-book/feature_selection/feature_selection_quiz.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/feature_selection/feature_selection_quiz.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/feature-selection/feature-selection-quiz",
+    "sha256": "6b35808d3f6e9e23444768230c04e8c3137b598456395338ed153a7d111659c0"
+  },
+  {
+    "source_path": "jupyter-book/index.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/index.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book",
+    "sha256": "9624368b889cf0c9d41d24826139d49549e4141ff3048c81230c48441c994ad2"
+  },
+  {
+    "source_path": "jupyter-book/interpretation/interpretation_quiz.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/interpretation/interpretation_quiz.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/interpretation/interpretation-quiz",
+    "sha256": "f5783cf9a1973702a9d657cf18c1e92ca7ec33e6711235226aab8265384b6296"
+  },
+  {
+    "source_path": "jupyter-book/linear_models/linear_models_intuitions_index.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/linear_models/linear_models_intuitions_index.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/linear-models/linear-models-intuitions-index",
+    "sha256": "35318bb6eb31ca78247d343642a56f6aa6e7aea8c47d3028bbec836f32d4425c"
+  },
+  {
+    "source_path": "jupyter-book/linear_models/linear_models_module_intro.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/linear_models/linear_models_module_intro.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/linear-models/linear-models-module-intro",
+    "sha256": "ccb8c73f986fa0e43c535b6e968c4a24a3b794ab8d9964668eda82155a431a99"
+  },
+  {
+    "source_path": "jupyter-book/linear_models/linear_models_module_take_away.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/linear_models/linear_models_module_take_away.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/linear-models/linear-models-module-take-away",
+    "sha256": "dc6c4d16c8b5ea0b6ffb6a3d9b5c317635584a0a5b7bbc7e1c549b8fb0ca77ba"
+  },
+  {
+    "source_path": "jupyter-book/linear_models/linear_models_non_linear_index.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/linear_models/linear_models_non_linear_index.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/linear-models/linear-models-non-linear-index",
+    "sha256": "9d4d64502edc2fc1fe26a8819c8f5162c8df4d2c79bbe0f6d9892a7dc38698e8"
+  },
+  {
+    "source_path": "jupyter-book/linear_models/linear_models_quiz_m4_01.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/linear_models/linear_models_quiz_m4_01.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/linear-models/linear-models-quiz-m4-01",
+    "sha256": "8f6921bbc3bf5e8b8ec6b7f638fb9bef0c4c3c65832f170f307a0e6aeeddf512"
+  },
+  {
+    "source_path": "jupyter-book/linear_models/linear_models_quiz_m4_02.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/linear_models/linear_models_quiz_m4_02.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/linear-models/linear-models-quiz-m4-02",
+    "sha256": "ad13925655057823d14ab4e66bc7e794e28c8eace6c2ace95e5ef709cb0decce"
+  },
+  {
+    "source_path": "jupyter-book/linear_models/linear_models_quiz_m4_03.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/linear_models/linear_models_quiz_m4_03.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/linear-models/linear-models-quiz-m4-03",
+    "sha256": "f71d1acb79fa35f41e8cb582c960a4321bfcfd4128231d817cce751ca1f120a2"
+  },
+  {
+    "source_path": "jupyter-book/linear_models/linear_models_regularization_index.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/linear_models/linear_models_regularization_index.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/linear-models/linear-models-regularization-index",
+    "sha256": "3f81568212f8f201683c038ee6715fab204cab4ff4926f4b96748d6d3dded7c9"
+  },
+  {
+    "source_path": "jupyter-book/linear_models/linear_models_slides.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/linear_models/linear_models_slides.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/linear-models/linear-models-slides",
+    "sha256": "26bf2c002318899a15c355d08b5fccc9ec7e082015721ffb218001369511e347"
+  },
+  {
+    "source_path": "jupyter-book/linear_models/linear_models_wrap_up_quiz.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/linear_models/linear_models_wrap_up_quiz.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/linear-models/linear-models-wrap-up-quiz",
+    "sha256": "60b2cc78e90f716831880ac5f2c53143de2414ef6b0cc7917a0b3d41376a7b73"
+  },
+  {
+    "source_path": "jupyter-book/linear_models/regularized_linear_models_slides.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/linear_models/regularized_linear_models_slides.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/linear-models/regularized-linear-models-slides",
+    "sha256": "15ace847491480a371c53d2bbb858b8cc017632402a3b7fac5455e9d11e69f66"
+  },
+  {
+    "source_path": "jupyter-book/ml_concepts/quiz_intro_01.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/ml_concepts/quiz_intro_01.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/ml-concepts/quiz-intro-01",
+    "sha256": "0bc23824793143da27d1cb33ed12a8a79bf0605be527c4484566f9fe438fa113"
+  },
+  {
+    "source_path": "jupyter-book/ml_concepts/slides.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/ml_concepts/slides.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/ml-concepts/slides",
+    "sha256": "a39ef16b8c2dbf7a446a525dfa8592d9eebaece94333d09504bcc8a8d756024a"
+  },
+  {
+    "source_path": "jupyter-book/overfit/bias_vs_variance_quiz_m2_03.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/overfit/bias_vs_variance_quiz_m2_03.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/overfit/bias-vs-variance-quiz-m2-03",
+    "sha256": "5dc43b753d3a729abb2de722f43143063ec5d816f611c7dc5107bfb23bd32f7e"
+  },
+  {
+    "source_path": "jupyter-book/overfit/bias_vs_variance_slides.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/overfit/bias_vs_variance_slides.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/overfit/bias-vs-variance-slides",
+    "sha256": "8d23296c273818b3140c584c4407e24be81a3bb0f1d2f741bf676c1ea6dd42f1"
+  },
+  {
+    "source_path": "jupyter-book/overfit/learning_validation_curves_quiz_m2_02.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/overfit/learning_validation_curves_quiz_m2_02.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/overfit/learning-validation-curves-quiz-m2-02",
+    "sha256": "2b078dd89d47a7149990fbd9844731fe70e850162e082633ce790a813a08d901"
+  },
+  {
+    "source_path": "jupyter-book/overfit/learning_validation_curves_slides.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/overfit/learning_validation_curves_slides.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/overfit/learning-validation-curves-slides",
+    "sha256": "0b2d495266eb476333a294eba505ad0b8ac06e428579701657d48a8359d3227a"
+  },
+  {
+    "source_path": "jupyter-book/overfit/overfit_bias_variance_index.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/overfit/overfit_bias_variance_index.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/overfit/overfit-bias-variance-index",
+    "sha256": "6ed22f79c4f7bdd7e32b8f1da93cb2c2f6c2d481bd0a7f185e1916aad992d5c5"
+  },
+  {
+    "source_path": "jupyter-book/overfit/overfit_module_intro.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/overfit/overfit_module_intro.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/overfit/overfit-module-intro",
+    "sha256": "130c40babb24e24a902cc3e3ad77aa9374e36a5e8aa22752c7cd743a67cc5e32"
+  },
+  {
+    "source_path": "jupyter-book/overfit/overfit_overfitting_underfitting_index.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/overfit/overfit_overfitting_underfitting_index.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/overfit/overfit-overfitting-underfitting-index",
+    "sha256": "541f8e121c01e7f34e1ce9a4a18b87cb6b2be331fbb3ca2950397b85aa4ef960"
+  },
+  {
+    "source_path": "jupyter-book/overfit/overfit_take_away.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/overfit/overfit_take_away.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/overfit/overfit-take-away",
+    "sha256": "399a90d840749fc78d3076252a425cb9dbf601972e6660c43c3d02f7beda77e7"
+  },
+  {
+    "source_path": "jupyter-book/overfit/overfit_validation_learning_curves_index.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/overfit/overfit_validation_learning_curves_index.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/overfit/overfit-validation-learning-curves-index",
+    "sha256": "f488723c44dafc1d33619156db262a0b6c5bc3bacb147c3c7f4d36b28f0ec4de"
+  },
+  {
+    "source_path": "jupyter-book/overfit/overfit_wrap_up_quiz.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/overfit/overfit_wrap_up_quiz.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/overfit/overfit-wrap-up-quiz",
+    "sha256": "8ee35c5b1d9ab05a2c410e4819e5c549e27b305ec74fd2fff4e52208dabb7845"
+  },
+  {
+    "source_path": "jupyter-book/overfit/overfitting_vs_under_fitting_quiz_m2_01.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/overfit/overfitting_vs_under_fitting_quiz_m2_01.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/overfit/overfitting-vs-under-fitting-quiz-m2-01",
+    "sha256": "8aa443ef11905ba81a7c7ae536b0a70b0cf00145b6110e4dfce910f5d0ed94e7"
+  },
+  {
+    "source_path": "jupyter-book/overfit/overfitting_vs_under_fitting_slides.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/overfit/overfitting_vs_under_fitting_slides.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/overfit/overfitting-vs-under-fitting-slides",
+    "sha256": "568dfdcbe2c803989e30ad0926e1cb2e30380ae16e03fb42f65b3970b4e0a46d"
+  },
+  {
+    "source_path": "jupyter-book/predictive_modeling_pipeline/01_tabular_data_exploration_index.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/predictive_modeling_pipeline/01_tabular_data_exploration_index.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/predictive-modeling-pipeline/01-tabular-data-exploration-index",
+    "sha256": "8d49465539669fd7020868a8a1526ba3acd51ba1165b073b10090df37fbe381b"
+  },
+  {
+    "source_path": "jupyter-book/predictive_modeling_pipeline/01_tabular_data_exploration_quiz_m1_01.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/predictive_modeling_pipeline/01_tabular_data_exploration_quiz_m1_01.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/predictive-modeling-pipeline/01-tabular-data-exploration-quiz-m1-01",
+    "sha256": "895f14b4cd776d06c444a8a21185d4ecd65f3fcacb742e3b456d6a2d7948af2d"
+  },
+  {
+    "source_path": "jupyter-book/predictive_modeling_pipeline/02_numerical_pipeline_index.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/predictive_modeling_pipeline/02_numerical_pipeline_index.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/predictive-modeling-pipeline/02-numerical-pipeline-index",
+    "sha256": "0fccb485be49b28f90b5b8675b95217cb8e6fe01739f2471d720b84a426003ab"
+  },
+  {
+    "source_path": "jupyter-book/predictive_modeling_pipeline/02_numerical_pipeline_quiz_m1_02.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/predictive_modeling_pipeline/02_numerical_pipeline_quiz_m1_02.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/predictive-modeling-pipeline/02-numerical-pipeline-quiz-m1-02",
+    "sha256": "8ed5662fa5fd9e4555f1d60a75c5721be891b67957db70ea1745b32d66cd56a2"
+  },
+  {
+    "source_path": "jupyter-book/predictive_modeling_pipeline/02_numerical_pipeline_video_cross_validation.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/predictive_modeling_pipeline/02_numerical_pipeline_video_cross_validation.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/predictive-modeling-pipeline/02-numerical-pipeline-video-cross-validation",
+    "sha256": "f4d1917f46ef1d71c9a40e2b01f72644aad1708856b706c06100db7adf9ba320"
+  },
+  {
+    "source_path": "jupyter-book/predictive_modeling_pipeline/03_categorical_pipeline_index.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/predictive_modeling_pipeline/03_categorical_pipeline_index.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/predictive-modeling-pipeline/03-categorical-pipeline-index",
+    "sha256": "3076a480c81f4f555aebe391d1a3559d3cbccf8b2aa81f407b05cb0dd3b8855c"
+  },
+  {
+    "source_path": "jupyter-book/predictive_modeling_pipeline/03_categorical_pipeline_quiz_m1_03.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/predictive_modeling_pipeline/03_categorical_pipeline_quiz_m1_03.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/predictive-modeling-pipeline/03-categorical-pipeline-quiz-m1-03",
+    "sha256": "b1bccd82bb5468c6aac8c6a644ec0012b24d748e0436e8a4611f1bf390370b68"
+  },
+  {
+    "source_path": "jupyter-book/predictive_modeling_pipeline/03_categorical_pipeline_visualization_video.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/predictive_modeling_pipeline/03_categorical_pipeline_visualization_video.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/predictive-modeling-pipeline/03-categorical-pipeline-visualization-video",
+    "sha256": "2bb097bbb8bec4aa5218c9230ba6c714b23e1132f1c2363bd4e9c17d490381a8"
+  },
+  {
+    "source_path": "jupyter-book/predictive_modeling_pipeline/predictive_modeling_module_intro.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/predictive_modeling_pipeline/predictive_modeling_module_intro.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/predictive-modeling-pipeline/predictive-modeling-module-intro",
+    "sha256": "238844d8a04bce5b53148c410dbb2dddbe2d04170f6a7ad9527ff45ffe63f42e"
+  },
+  {
+    "source_path": "jupyter-book/predictive_modeling_pipeline/predictive_modeling_module_take_away.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/predictive_modeling_pipeline/predictive_modeling_module_take_away.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/predictive-modeling-pipeline/predictive-modeling-module-take-away",
+    "sha256": "e100ade30a2b911141eb1ba94c5f3e97fcb2b8435fecaa63ec3615b467db0292"
+  },
+  {
+    "source_path": "jupyter-book/predictive_modeling_pipeline/wrap_up_quiz.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/predictive_modeling_pipeline/wrap_up_quiz.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/predictive-modeling-pipeline/wrap-up-quiz",
+    "sha256": "ec4bc8e412049bfd78b69efee952cb0e1c433d0804864bfcc75e28bed9e1db70"
+  },
+  {
+    "source_path": "jupyter-book/toc.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/toc.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/toc",
+    "sha256": "97e941492cbd9ee4961183d1708fc5f5aa289e85ad4afb012a2df9413884c1d3"
+  },
+  {
+    "source_path": "jupyter-book/trees/slides.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/trees/slides.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/trees/slides",
+    "sha256": "c36fcbc5bfee815c2863b619fd1487bfbe8a64ffc768ed1bfdbba9a964c3ec31"
+  },
+  {
+    "source_path": "jupyter-book/trees/trees_classification_index.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/trees/trees_classification_index.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/trees/trees-classification-index",
+    "sha256": "481b700db3bd2ecd19ec9f8a2722101e0e305f927b48cba7efabb966b4f83de8"
+  },
+  {
+    "source_path": "jupyter-book/trees/trees_hyperparameters_index.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/trees/trees_hyperparameters_index.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/trees/trees-hyperparameters-index",
+    "sha256": "190e823ccae7d365be7bd2bea072d165aa994372cc689dba06d9e3af737991f9"
+  },
+  {
+    "source_path": "jupyter-book/trees/trees_intuitions_index.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/trees/trees_intuitions_index.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/trees/trees-intuitions-index",
+    "sha256": "3162099309c3fd1da264c44c5a21a52a0f0eb61a3d611bb2a46cacf298da3fad"
+  },
+  {
+    "source_path": "jupyter-book/trees/trees_module_intro.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/trees/trees_module_intro.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/trees/trees-module-intro",
+    "sha256": "fa7b8f66c07f1c563dfcd0ea7ed8bdc01db9c55198a07565e937db740785f292"
+  },
+  {
+    "source_path": "jupyter-book/trees/trees_module_take_away.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/trees/trees_module_take_away.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/trees/trees-module-take-away",
+    "sha256": "9c2bceb7c0393e7a473d50055dcbbe7285c70029d72d326c5851282c1a2e9c3b"
+  },
+  {
+    "source_path": "jupyter-book/trees/trees_quiz_m5_01.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/trees/trees_quiz_m5_01.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/trees/trees-quiz-m5-01",
+    "sha256": "b156559416e4ead29cc5d2445b7c2f6e48685033b4da62d83992120d77c84723"
+  },
+  {
+    "source_path": "jupyter-book/trees/trees_quiz_m5_02.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/trees/trees_quiz_m5_02.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/trees/trees-quiz-m5-02",
+    "sha256": "e01a12ff87f77dcfd4cbabd8aab2dc5ff874315dbd3e76ee0898830bccf9239f"
+  },
+  {
+    "source_path": "jupyter-book/trees/trees_quiz_m5_03.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/trees/trees_quiz_m5_03.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/trees/trees-quiz-m5-03",
+    "sha256": "62b7494e6bdf5dacdb0e99e1a01659f172ff99f12ccab8c470689dafd8a6777b"
+  },
+  {
+    "source_path": "jupyter-book/trees/trees_quiz_m5_04.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/trees/trees_quiz_m5_04.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/trees/trees-quiz-m5-04",
+    "sha256": "8f29d85c589183094556fe79fc7e5c36d9a8f1bb1cfe12819e65f08df2ec1a19"
+  },
+  {
+    "source_path": "jupyter-book/trees/trees_regression_index.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/trees/trees_regression_index.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/trees/trees-regression-index",
+    "sha256": "492dbf64789591767b0af89a3265caf75046d2fa1cf9358daaf93d09d0452eb8"
+  },
+  {
+    "source_path": "jupyter-book/trees/trees_wrap_up_quiz.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/trees/trees_wrap_up_quiz.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/trees/trees-wrap-up-quiz",
+    "sha256": "db70e19bc2301620cbc6d15c4b0fdc9e31d92a2dc927c143f4827fd475978fe5"
+  },
+  {
+    "source_path": "jupyter-book/tuning/parameter_tuning_automated_index.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/tuning/parameter_tuning_automated_index.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/tuning/parameter-tuning-automated-index",
+    "sha256": "d3a33f86e6229316276a8547501d87aa0553cb5281c4174663b875293977f3f4"
+  },
+  {
+    "source_path": "jupyter-book/tuning/parameter_tuning_automated_quiz_m3_02.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/tuning/parameter_tuning_automated_quiz_m3_02.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/tuning/parameter-tuning-automated-quiz-m3-02",
+    "sha256": "59cb70d5f8157f59df01e227d3ab09078dad559d7238fe9e52f9aea76ca1fb03"
+  },
+  {
+    "source_path": "jupyter-book/tuning/parameter_tuning_manual_index.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/tuning/parameter_tuning_manual_index.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/tuning/parameter-tuning-manual-index",
+    "sha256": "355c3c412253b840e41698fc047cc1e62a38f19401264a65534f9e5b64bf4076"
+  },
+  {
+    "source_path": "jupyter-book/tuning/parameter_tuning_manual_quiz_m3_01.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/tuning/parameter_tuning_manual_quiz_m3_01.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/tuning/parameter-tuning-manual-quiz-m3-01",
+    "sha256": "d6072a519d394e8b3ca271408e0508eb0ae140033ac8f2b301e76b1f4d4de580"
+  },
+  {
+    "source_path": "jupyter-book/tuning/parameter_tuning_module_intro.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/tuning/parameter_tuning_module_intro.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/tuning/parameter-tuning-module-intro",
+    "sha256": "77926dcd7c7305453847ea91912f885868250f3a5eb5e061e9c836e7218ba325"
+  },
+  {
+    "source_path": "jupyter-book/tuning/parameter_tuning_module_take_away.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/tuning/parameter_tuning_module_take_away.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/tuning/parameter-tuning-module-take-away",
+    "sha256": "eb0c835324ab384d4ebf975dd94d5e254280a5c6a597ca02deb85edeca3c5fdc"
+  },
+  {
+    "source_path": "jupyter-book/tuning/parameter_tuning_parallel_plot_video.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/tuning/parameter_tuning_parallel_plot_video.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/tuning/parameter-tuning-parallel-plot-video",
+    "sha256": "2035cbac8dd2fd271ac782f28ddcd7a6790cea4ad023ca5993a4c1cd6eefffee"
+  },
+  {
+    "source_path": "jupyter-book/tuning/parameter_tuning_wrap_up_quiz.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/tuning/parameter_tuning_wrap_up_quiz.md.md",
+    "route": "sources/courses/scikit-learn-mooc/jupyter-book/tuning/parameter-tuning-wrap-up-quiz",
+    "sha256": "928757bd0bdf948c00962f52bdf45f89375d9577b9c76aa5894fb95c65aaee8f"
+  },
+  {
+    "source_path": "python_scripts/01_tabular_data_exploration.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/01_tabular_data_exploration.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/01-tabular-data-exploration",
+    "sha256": "69b5c8a9d3d7d9b8b334f7b014ea6b0b53dfd706d08ad73ac6d3b9d5091178da",
+    "cells": 38
+  },
+  {
+    "source_path": "python_scripts/01_tabular_data_exploration_ex_01.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/01_tabular_data_exploration_ex_01.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/01-tabular-data-exploration-ex-01",
+    "sha256": "68301ec5ac207807b5393ef99b967a0355a393f1dff7a41cc621523ff2f15e5b",
+    "cells": 13
+  },
+  {
+    "source_path": "python_scripts/01_tabular_data_exploration_sol_01.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/01_tabular_data_exploration_sol_01.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/01-tabular-data-exploration-sol-01",
+    "sha256": "18079c7a8c16961d13058a9304b105d8e62dd87a63f8dca7b5403f0a2329218b",
+    "cells": 13
+  },
+  {
+    "source_path": "python_scripts/02_numerical_pipeline_cross_validation.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/02_numerical_pipeline_cross_validation.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/02-numerical-pipeline-cross-validation",
+    "sha256": "f51a3d9989e5b5f64d205197725f69ba3f6bd3321051cc79d610723c996a4eb1",
+    "cells": 14
+  },
+  {
+    "source_path": "python_scripts/02_numerical_pipeline_ex_00.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/02_numerical_pipeline_ex_00.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/02-numerical-pipeline-ex-00",
+    "sha256": "99db2cdb7e3502d39963cab9f525c03af2b7ac0f289755d30d9b271c8c32d558",
+    "cells": 15
+  },
+  {
+    "source_path": "python_scripts/02_numerical_pipeline_ex_01.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/02_numerical_pipeline_ex_01.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/02-numerical-pipeline-ex-01",
+    "sha256": "0cb4c1cec2629197cdee8d13d2b7d81fd3b98fa2e571e66c0f90d899f42073ef",
+    "cells": 10
+  },
+  {
+    "source_path": "python_scripts/02_numerical_pipeline_hands_on.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/02_numerical_pipeline_hands_on.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/02-numerical-pipeline-hands-on",
+    "sha256": "b206b2ebda8052ddf27e18c5b5bbc3be0a05040f03c68c9cda2cdfb60349b6d9",
+    "cells": 32
+  },
+  {
+    "source_path": "python_scripts/02_numerical_pipeline_introduction.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/02_numerical_pipeline_introduction.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/02-numerical-pipeline-introduction",
+    "sha256": "ef3eeb62e556103254462923afa48e0ce5b9e3c1addd1faad8037559ca06eecf",
+    "cells": 38
+  },
+  {
+    "source_path": "python_scripts/02_numerical_pipeline_scaling.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/02_numerical_pipeline_scaling.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/02-numerical-pipeline-scaling",
+    "sha256": "de8f0abd8f721c47ce250b8bc99062d3081a9a2423f4f7de92314b4c4a72cb69",
+    "cells": 40
+  },
+  {
+    "source_path": "python_scripts/02_numerical_pipeline_sol_00.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/02_numerical_pipeline_sol_00.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/02-numerical-pipeline-sol-00",
+    "sha256": "feda371cd614e46b17a46fbecbdeb49fad6ff07aa3ce3062f5ebbe8871c67946",
+    "cells": 15
+  },
+  {
+    "source_path": "python_scripts/02_numerical_pipeline_sol_01.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/02_numerical_pipeline_sol_01.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/02-numerical-pipeline-sol-01",
+    "sha256": "fc5372adcda1a27ac374796a42f9273260c545851bd88ea473262d82ba0a4dee",
+    "cells": 10
+  },
+  {
+    "source_path": "python_scripts/03_categorical_pipeline.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/03_categorical_pipeline.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/03-categorical-pipeline",
+    "sha256": "1382ee0f937ba4457eb8c19152a6e4718c6f9252bb63ddf37b15831b9e34fad1",
+    "cells": 43
+  },
+  {
+    "source_path": "python_scripts/03_categorical_pipeline_column_transformer.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/03_categorical_pipeline_column_transformer.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/03-categorical-pipeline-column-transformer",
+    "sha256": "26dc075425b2f549a59aa1bf957316a917a3cd8abdc5ac2d21040be1a263fca7",
+    "cells": 32
+  },
+  {
+    "source_path": "python_scripts/03_categorical_pipeline_ex_01.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/03_categorical_pipeline_ex_01.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/03-categorical-pipeline-ex-01",
+    "sha256": "ad1733a3b6ef6b3e4a62951eb2a8e29f8c7aaba6db254bede7f8a272be65f88e",
+    "cells": 11
+  },
+  {
+    "source_path": "python_scripts/03_categorical_pipeline_ex_02.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/03_categorical_pipeline_ex_02.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/03-categorical-pipeline-ex-02",
+    "sha256": "db83ede34bee3b4670dec2cbc43a98f7963691b5b2aa5462988c2cd4a9c22425",
+    "cells": 14
+  },
+  {
+    "source_path": "python_scripts/03_categorical_pipeline_sol_01.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/03_categorical_pipeline_sol_01.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/03-categorical-pipeline-sol-01",
+    "sha256": "5803955580b2b43b7b9a680363db7efac6250acc125221e2d6acdc049d3bc400",
+    "cells": 11
+  },
+  {
+    "source_path": "python_scripts/03_categorical_pipeline_sol_02.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/03_categorical_pipeline_sol_02.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/03-categorical-pipeline-sol-02",
+    "sha256": "d9f3f9047682f8f21e79b5cb239a95af46ed7f9ab73a7dadc977f55fefc93f92",
+    "cells": 14
+  },
+  {
+    "source_path": "python_scripts/03_categorical_pipeline_visualization.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/03_categorical_pipeline_visualization.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/03-categorical-pipeline-visualization",
+    "sha256": "a76c1f5b4a968cf2ba30aaba83d04f3a436fdde9ae8ef6e7022c0c7922d5cc07",
+    "cells": 22
+  },
+  {
+    "source_path": "python_scripts/clustering_ex_01.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/clustering_ex_01.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/clustering-ex-01",
+    "sha256": "62f5636942f9cda0aa3ebfd44f72e51ed10a0cf18b42b14a14236c829c2bad3a",
+    "cells": 17
+  },
+  {
+    "source_path": "python_scripts/clustering_ex_02.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/clustering_ex_02.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/clustering-ex-02",
+    "sha256": "10084246c0fc2465733c70ce2897f81556a398a6bd4568b3b9964e2eafa7b3dc",
+    "cells": 15
+  },
+  {
+    "source_path": "python_scripts/clustering_hdbscan.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/clustering_hdbscan.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/clustering-hdbscan",
+    "sha256": "20c5e06c1a7f3b5fc4f95f778c4f9415403cc456482f9242a750f91b623a5328",
+    "cells": 32
+  },
+  {
+    "source_path": "python_scripts/clustering_kmeans.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/clustering_kmeans.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/clustering-kmeans",
+    "sha256": "063b5c79aa0e51277758e714c53d6a40ae10ab4c774938cee10e92623c0ada71",
+    "cells": 37
+  },
+  {
+    "source_path": "python_scripts/clustering_sol_01.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/clustering_sol_01.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/clustering-sol-01",
+    "sha256": "ea7220f30a2d7c26a6e3bbba831546f455166d101711fa2120e999a165e86227",
+    "cells": 19
+  },
+  {
+    "source_path": "python_scripts/clustering_sol_02.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/clustering_sol_02.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/clustering-sol-02",
+    "sha256": "acff5de24e524a65db3edd061eadae305758174daab8f5dd34948ad77c01f9de",
+    "cells": 15
+  },
+  {
+    "source_path": "python_scripts/clustering_supervised_metrics.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/clustering_supervised_metrics.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/clustering-supervised-metrics",
+    "sha256": "dcb5918963be85727b488266202766e8134501285c99c85b666bdf22ec4b939a",
+    "cells": 13
+  },
+  {
+    "source_path": "python_scripts/clustering_transformer.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/clustering_transformer.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/clustering-transformer",
+    "sha256": "273fead9d709f30a33390552e7eead813397574b59dfc431ef7a9e4ffde9feb1",
+    "cells": 18
+  },
+  {
+    "source_path": "python_scripts/cross_validation_baseline.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/cross_validation_baseline.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/cross-validation-baseline",
+    "sha256": "7b5a30f5f5081eaa4b7779578fc0966d9f4a177e6aa019004a1e0a4faa4150fe",
+    "cells": 18
+  },
+  {
+    "source_path": "python_scripts/cross_validation_ex_01.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/cross_validation_ex_01.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/cross-validation-ex-01",
+    "sha256": "28a21a0d5cc57907c05865c852103d721a83f07a11e79c45d75a92638409a425",
+    "cells": 11
+  },
+  {
+    "source_path": "python_scripts/cross_validation_ex_02.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/cross_validation_ex_02.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/cross-validation-ex-02",
+    "sha256": "c13a2f071b3acca146e0c0937c991b8af6540055052b346bde4819e4fd6cf494",
+    "cells": 16
+  },
+  {
+    "source_path": "python_scripts/cross_validation_grouping.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/cross_validation_grouping.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/cross-validation-grouping",
+    "sha256": "3ad929ed4c0a2086039fce3e71e1c7f6c37bab2e4742dcd596429e59ec0daeb5",
+    "cells": 28
+  },
+  {
+    "source_path": "python_scripts/cross_validation_learning_curve.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/cross_validation_learning_curve.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/cross-validation-learning-curve",
+    "sha256": "89f86c156cc82d2a1929e4b70731ad74b5d965e0507107de718cd155adb1e991",
+    "cells": 11
+  },
+  {
+    "source_path": "python_scripts/cross_validation_nested.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/cross_validation_nested.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/cross-validation-nested",
+    "sha256": "2fab4f3981fcc158d6cd37b92beef5783955279d974752cbfb25051c06fc8de5",
+    "cells": 16
+  },
+  {
+    "source_path": "python_scripts/cross_validation_sol_01.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/cross_validation_sol_01.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/cross-validation-sol-01",
+    "sha256": "16fd252d782cbc2bae0de7d4f53063281367fcac67e5409c9d7a77df0b310f06",
+    "cells": 11
+  },
+  {
+    "source_path": "python_scripts/cross_validation_sol_02.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/cross_validation_sol_02.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/cross-validation-sol-02",
+    "sha256": "fa9902cb5fdef35f54afb47278c57035f58c91f8462ca8bdf961b3ca66632f62",
+    "cells": 16
+  },
+  {
+    "source_path": "python_scripts/cross_validation_stratification.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/cross_validation_stratification.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/cross-validation-stratification",
+    "sha256": "cf77154fc0347d6f7a573f13801968c7caf59fe28bebe14c05d68ca72cf7ce4a",
+    "cells": 31
+  },
+  {
+    "source_path": "python_scripts/cross_validation_time.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/cross_validation_time.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/cross-validation-time",
+    "sha256": "c0b8c1fa6e35b3767ca65fc8e90bd0e5080be13cf100a386f1fa03aa6c63dd55",
+    "cells": 28
+  },
+  {
+    "source_path": "python_scripts/cross_validation_train_test.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/cross_validation_train_test.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/cross-validation-train-test",
+    "sha256": "73493f4031d7a9f3bac5d44f07a797e59d40675bf72395e09b5983ebe98e61fa",
+    "cells": 45
+  },
+  {
+    "source_path": "python_scripts/cross_validation_validation_curve.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/cross_validation_validation_curve.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/cross-validation-validation-curve",
+    "sha256": "f64690ec3df095177435b0818f65eca0c0a8b0728eab957c97d8d346bdb102dd",
+    "cells": 14
+  },
+  {
+    "source_path": "python_scripts/datasets_adult_census.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/datasets_adult_census.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/datasets-adult-census",
+    "sha256": "27f663ff66f72aadd972ad58ef3a830bc2eecf3f31c7b6ebe85ee202a9246323",
+    "cells": 7
+  },
+  {
+    "source_path": "python_scripts/datasets_ames_housing.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/datasets_ames_housing.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/datasets-ames-housing",
+    "sha256": "a4b010bf8da58dd692de848b34ea269984ca8646d31d22ff067d5c4e242dab5c",
+    "cells": 25
+  },
+  {
+    "source_path": "python_scripts/datasets_bike_rides.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/datasets_bike_rides.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/datasets-bike-rides",
+    "sha256": "f2bf3b9f12ed3789819c9b5545e75ee62b7a318fb2ed2724771d5d77bf235968",
+    "cells": 31
+  },
+  {
+    "source_path": "python_scripts/datasets_blood_transfusion.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/datasets_blood_transfusion.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/datasets-blood-transfusion",
+    "sha256": "9a83bb6c71d7aeeb68e1f90ae0d788e3008dc37806986aa6f65d766f87cf7d37",
+    "cells": 20
+  },
+  {
+    "source_path": "python_scripts/datasets_california_housing.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/datasets_california_housing.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/datasets-california-housing",
+    "sha256": "c0d80d2918577e8a987466c9a3399ea3888091647a78321fd0468e2e8678f76b",
+    "cells": 30
+  },
+  {
+    "source_path": "python_scripts/dev_features_importance.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/dev_features_importance.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/dev-features-importance",
+    "sha256": "12de0721876d3ac7df163dbd6e8cd1beeca552b57c9aa1efd6cb227af6807003",
+    "cells": 63
+  },
+  {
+    "source_path": "python_scripts/ensemble_adaboost.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/ensemble_adaboost.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/ensemble-adaboost",
+    "sha256": "859bc45b8c26defb8558224f86cb2e3fd08b439b21cec78cde1d21b5d11194df",
+    "cells": 21
+  },
+  {
+    "source_path": "python_scripts/ensemble_bagging.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/ensemble_bagging.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/ensemble-bagging",
+    "sha256": "5f9e65f0277b766ffb425a22e06eca647bfce39a72bb9ddb3a1b752bb7d67bf6",
+    "cells": 31
+  },
+  {
+    "source_path": "python_scripts/ensemble_ex_01.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/ensemble_ex_01.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/ensemble-ex-01",
+    "sha256": "7ae39bc5b902d944f8334115d54e2b622adea204049877823b1833bf79961992",
+    "cells": 7
+  },
+  {
+    "source_path": "python_scripts/ensemble_ex_02.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/ensemble_ex_02.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/ensemble-ex-02",
+    "sha256": "40210cc7c28640790bfd000f5ab9767434d8ec7c27242209d6840afcaac6f721",
+    "cells": 11
+  },
+  {
+    "source_path": "python_scripts/ensemble_ex_03.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/ensemble_ex_03.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/ensemble-ex-03",
+    "sha256": "6e06a552f0e09f930b40ac804752949dc0a092151bf1d4dd4ceae5c0a830da84",
+    "cells": 15
+  },
+  {
+    "source_path": "python_scripts/ensemble_ex_04.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/ensemble_ex_04.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/ensemble-ex-04",
+    "sha256": "61dba5cfd44cca49635a17e38eb869f1a6766ea7903df706317e1131c1fd63dc",
+    "cells": 14
+  },
+  {
+    "source_path": "python_scripts/ensemble_gradient_boosting.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/ensemble_gradient_boosting.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/ensemble-gradient-boosting",
+    "sha256": "7c45bd722f54ba8814659884ff3e2f49977c57d89c5a3b9a2c2431821d063eb6",
+    "cells": 30
+  },
+  {
+    "source_path": "python_scripts/ensemble_hist_gradient_boosting.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/ensemble_hist_gradient_boosting.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/ensemble-hist-gradient-boosting",
+    "sha256": "86af454468b83e003499ee8e7558d7fe387a1fa56f3a9aae76f07758d3640a85",
+    "cells": 17
+  },
+  {
+    "source_path": "python_scripts/ensemble_hyperparameters.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/ensemble_hyperparameters.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/ensemble-hyperparameters",
+    "sha256": "0d28e969c175628ef32d351250c73ed35232bb22c6c6b26261c6f46adb164616",
+    "cells": 14
+  },
+  {
+    "source_path": "python_scripts/ensemble_introduction.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/ensemble_introduction.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/ensemble-introduction",
+    "sha256": "5726a1b75344014de7a8168be00faa14ca0f45d381531f77f0f2f0f25f4aa7f3",
+    "cells": 11
+  },
+  {
+    "source_path": "python_scripts/ensemble_random_forest.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/ensemble_random_forest.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/ensemble-random-forest",
+    "sha256": "972d73639ab53cb10f988a683fd74430764a7c9f573b019abe04175850ceeaa7",
+    "cells": 15
+  },
+  {
+    "source_path": "python_scripts/ensemble_sol_01.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/ensemble_sol_01.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/ensemble-sol-01",
+    "sha256": "7e98c13c93202f1b75b6b6092e5262f2efe10b3ce82b9f20fff57a338d8661a7",
+    "cells": 7
+  },
+  {
+    "source_path": "python_scripts/ensemble_sol_02.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/ensemble_sol_02.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/ensemble-sol-02",
+    "sha256": "65538c8fd7ca83e838cfd97d3fff8fb967296f5cb3e5b76c81b6588b9b785017",
+    "cells": 11
+  },
+  {
+    "source_path": "python_scripts/ensemble_sol_03.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/ensemble_sol_03.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/ensemble-sol-03",
+    "sha256": "25d3c45a9d35ee0bc3ca076c131b469b8b009cf15da9c865c8df053aae29f2cf",
+    "cells": 15
+  },
+  {
+    "source_path": "python_scripts/ensemble_sol_04.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/ensemble_sol_04.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/ensemble-sol-04",
+    "sha256": "6ac86389e3fb82a91f9be38becdd757efe1bb8fc0fb5d24fa9c4132a4172ba47",
+    "cells": 14
+  },
+  {
+    "source_path": "python_scripts/feature_selection_ex_01.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/feature_selection_ex_01.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/feature-selection-ex-01",
+    "sha256": "16c473a9005d54fc5847d0f7400856ce0f76869becad83a0ab19fef520dd0a58",
+    "cells": 10
+  },
+  {
+    "source_path": "python_scripts/feature_selection_introduction.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/feature_selection_introduction.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/feature-selection-introduction",
+    "sha256": "e73ac1d992300efcbaea382ae756a4a70e30e885684c6d494ecd0c114038d347",
+    "cells": 20
+  },
+  {
+    "source_path": "python_scripts/feature_selection_limitation_model.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/feature_selection_limitation_model.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/feature-selection-limitation-model",
+    "sha256": "c4dea3a7a6616b4b7363925da99b630bf0fc69ec15b7ab7e9cce0294c67cde8b",
+    "cells": 14
+  },
+  {
+    "source_path": "python_scripts/feature_selection_sol_01.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/feature_selection_sol_01.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/feature-selection-sol-01",
+    "sha256": "e1ee42f2240638f7475b9db7d1d6f7aa1e21211996fd7559d8dff2453409484b",
+    "cells": 10
+  },
+  {
+    "source_path": "python_scripts/linear_models_ex_01.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/linear_models_ex_01.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/linear-models-ex-01",
+    "sha256": "2ab2dd924948451c62cbca1872dc894eb33eca072d54f70d4cbe585c7939d616",
+    "cells": 12
+  },
+  {
+    "source_path": "python_scripts/linear_models_ex_02.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/linear_models_ex_02.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/linear-models-ex-02",
+    "sha256": "d3c491a532ba3bee94b0ce16be12d6ef41cc65bed21d13328b20a3537cd70265",
+    "cells": 21
+  },
+  {
+    "source_path": "python_scripts/linear_models_ex_03.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/linear_models_ex_03.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/linear-models-ex-03",
+    "sha256": "7ca95919beaee2a4293f6c54d72b206fcc622334cb85a5146d955935af8bb58f",
+    "cells": 21
+  },
+  {
+    "source_path": "python_scripts/linear_models_ex_04.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/linear_models_ex_04.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/linear-models-ex-04",
+    "sha256": "e342d180bf4e2f8e5a5dc9e0e3f8ab634705d0e958e710eee6d7eff6627b68c8",
+    "cells": 14
+  },
+  {
+    "source_path": "python_scripts/linear_models_feature_engineering_classification.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/linear_models_feature_engineering_classification.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/linear-models-feature-engineering-classification",
+    "sha256": "e634b8074c1e4f63c2164d273b33a60912478b837d273f8aafe5aa1e0a6ea08a",
+    "cells": 38
+  },
+  {
+    "source_path": "python_scripts/linear_models_regularization.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/linear_models_regularization.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/linear-models-regularization",
+    "sha256": "e4abac188c456566ffc028939eb826606a927ede6996dc14fc88e3e9332e376b",
+    "cells": 50
+  },
+  {
+    "source_path": "python_scripts/linear_models_sol_01.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/linear_models_sol_01.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/linear-models-sol-01",
+    "sha256": "34ba7fbdb32a82223beeef43fb68073d19578c2837dc684531940aed5ae11593",
+    "cells": 12
+  },
+  {
+    "source_path": "python_scripts/linear_models_sol_02.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/linear_models_sol_02.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/linear-models-sol-02",
+    "sha256": "751725a22adc40fe728cda29c4194ec78a2dbf3269787dadfd3d473e126f220e",
+    "cells": 21
+  },
+  {
+    "source_path": "python_scripts/linear_models_sol_03.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/linear_models_sol_03.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/linear-models-sol-03",
+    "sha256": "3fcf18aa3dc37d1deb4b2b8c355441648c5aa5d5d1c87e79301f64d9fc8b92f2",
+    "cells": 22
+  },
+  {
+    "source_path": "python_scripts/linear_models_sol_04.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/linear_models_sol_04.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/linear-models-sol-04",
+    "sha256": "166ae1414c0154eea306a72ce21af77cb5306300fd784f8452cbb174747065ec",
+    "cells": 14
+  },
+  {
+    "source_path": "python_scripts/linear_regression_in_sklearn.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/linear_regression_in_sklearn.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/linear-regression-in-sklearn",
+    "sha256": "1e6e8ec5ab22dfbd47868df136b8ef34c38feea2c1963de3fc6426aa741e2b33",
+    "cells": 16
+  },
+  {
+    "source_path": "python_scripts/linear_regression_non_linear_link.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/linear_regression_non_linear_link.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/linear-regression-non-linear-link",
+    "sha256": "3ad7d6fa56fa7bded9fdfddb2a66d78c60afcb5b6686e9153de1ec638f06908c",
+    "cells": 42
+  },
+  {
+    "source_path": "python_scripts/linear_regression_without_sklearn.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/linear_regression_without_sklearn.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/linear-regression-without-sklearn",
+    "sha256": "eddba7d14af280694df78d48e16bf2769f63f09dedd6b49fe1258e63a470e50d",
+    "cells": 25
+  },
+  {
+    "source_path": "python_scripts/logistic_regression.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/logistic_regression.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/logistic-regression",
+    "sha256": "faa07b41b17dc7c1554b9707c25d644a210a248611e6aa25094a4a0b2c809bbb",
+    "cells": 26
+  },
+  {
+    "source_path": "python_scripts/metrics_classification.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/metrics_classification.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/metrics-classification",
+    "sha256": "c46ce2468b6b48f9e3338c666519644113ddbc20f97eaa9043c45deed08df674",
+    "cells": 46
+  },
+  {
+    "source_path": "python_scripts/metrics_ex_01.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/metrics_ex_01.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/metrics-ex-01",
+    "sha256": "c50783c3566aa9b716761a61d9fb6305975d20bacb6440863383cb71caa6de30",
+    "cells": 17
+  },
+  {
+    "source_path": "python_scripts/metrics_ex_02.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/metrics_ex_02.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/metrics-ex-02",
+    "sha256": "793ca8e8a4641ceaad8532f09151f6763bca09aefc9533b824ba1d7be0be0c96",
+    "cells": 11
+  },
+  {
+    "source_path": "python_scripts/metrics_regression.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/metrics_regression.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/metrics-regression",
+    "sha256": "e2f2f93695cfa019e627da58f8c75e2953ef430536f9748953ccf2951de0fc87",
+    "cells": 26
+  },
+  {
+    "source_path": "python_scripts/metrics_sol_01.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/metrics_sol_01.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/metrics-sol-01",
+    "sha256": "ef92e41dcaff7fcf3504c38a9199e14df538649d28263798c007eadf70fbbea5",
+    "cells": 17
+  },
+  {
+    "source_path": "python_scripts/metrics_sol_02.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/metrics_sol_02.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/metrics-sol-02",
+    "sha256": "82bd226cbccd2db79d722dd6f1a758dc57937d54abd8bc22c691791c551dd1ec",
+    "cells": 12
+  },
+  {
+    "source_path": "python_scripts/parameter_tuning_ex_02.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/parameter_tuning_ex_02.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/parameter-tuning-ex-02",
+    "sha256": "6ea39a93e0a6c85db280d165534ee3e13d55ca60626f1a62429c4a5fb08819c4",
+    "cells": 7
+  },
+  {
+    "source_path": "python_scripts/parameter_tuning_ex_03.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/parameter_tuning_ex_03.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/parameter-tuning-ex-03",
+    "sha256": "0e33712e252913f1859f44b7752db37f45d6fb1729f3358de57a407b1f99c788",
+    "cells": 6
+  },
+  {
+    "source_path": "python_scripts/parameter_tuning_grid_search.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/parameter_tuning_grid_search.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/parameter-tuning-grid-search",
+    "sha256": "e3fa2a230fc2abf968540bff47e7cf9659cefacb31e0ecf45fc211a603f5459a",
+    "cells": 36
+  },
+  {
+    "source_path": "python_scripts/parameter_tuning_manual.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/parameter_tuning_manual.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/parameter-tuning-manual",
+    "sha256": "438a1eaa188c2db2a6bdde4a70e0e5ee1fa13a1a9d251755bdf807504e36268b",
+    "cells": 18
+  },
+  {
+    "source_path": "python_scripts/parameter_tuning_nested.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/parameter_tuning_nested.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/parameter-tuning-nested",
+    "sha256": "bb502cbe71802298503d2d02a4742c288d5107fda1943088de83f43c164683bd",
+    "cells": 22
+  },
+  {
+    "source_path": "python_scripts/parameter_tuning_parallel_plot.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/parameter_tuning_parallel_plot.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/parameter-tuning-parallel-plot",
+    "sha256": "c9ae287f067dd5d08a2bc3ae23bd9afe56620ba0cf77947ca6e841091b2da68c",
+    "cells": 12
+  },
+  {
+    "source_path": "python_scripts/parameter_tuning_randomized_search.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/parameter_tuning_randomized_search.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/parameter-tuning-randomized-search",
+    "sha256": "3e5a69dfb02af0a4e2e4fc9f21338132ac2051432e745ed4e6114bf89078d70e",
+    "cells": 26
+  },
+  {
+    "source_path": "python_scripts/parameter_tuning_sol_02.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/parameter_tuning_sol_02.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/parameter-tuning-sol-02",
+    "sha256": "a681947abf4429c43bfc9c08712a6fba6a22acbcfeb117c4a1cdfbe4c5807ade",
+    "cells": 7
+  },
+  {
+    "source_path": "python_scripts/parameter_tuning_sol_03.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/parameter_tuning_sol_03.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/parameter-tuning-sol-03",
+    "sha256": "56a3632a31af76499e6a770e5c2ac84c3afe77253d4ac32cf756c00448c4fee6",
+    "cells": 6
+  },
+  {
+    "source_path": "python_scripts/trees_classification.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/trees_classification.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/trees-classification",
+    "sha256": "453cdb6f1cb4e9227818ee0d2ad4750d1aae86ef8321c68c49b621e71e577b08",
+    "cells": 30
+  },
+  {
+    "source_path": "python_scripts/trees_dataset.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/trees_dataset.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/trees-dataset",
+    "sha256": "6403a57c59bb220fec403b1bbe14972196b7e34556f3f52bf2cd084669f8a42e",
+    "cells": 10
+  },
+  {
+    "source_path": "python_scripts/trees_ex_01.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/trees_ex_01.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/trees-ex-01",
+    "sha256": "96dd0579252f50217a6e76fb001f76c753ba649b6f2b751323ef4bf1faa6ae5f",
+    "cells": 12
+  },
+  {
+    "source_path": "python_scripts/trees_ex_02.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/trees_ex_02.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/trees-ex-02",
+    "sha256": "4889a8e52da124fcf02ccaf7e0653c83d760955bd8c5b4e1d38f6b79274b5f2e",
+    "cells": 13
+  },
+  {
+    "source_path": "python_scripts/trees_hyperparameters.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/trees_hyperparameters.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/trees-hyperparameters",
+    "sha256": "a57d6842338fa5dce8a31e5fcab77095d62d21e1c56ae0f19a36b83eb0a75001",
+    "cells": 32
+  },
+  {
+    "source_path": "python_scripts/trees_regression.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/trees_regression.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/trees-regression",
+    "sha256": "ddc6eeff09001f8300ebc35f3ae017659aeac7eb251a5024ffe246f00d0d5cfd",
+    "cells": 21
+  },
+  {
+    "source_path": "python_scripts/trees_sol_01.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/trees_sol_01.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/trees-sol-01",
+    "sha256": "e0d502af745a3e707d779ff7e14d8159e74824f2adb403788c4e1a1b8a34424c",
+    "cells": 12
+  },
+  {
+    "source_path": "python_scripts/trees_sol_02.py",
+    "kind": "jupytext-notebook",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/python_scripts/trees_sol_02.py.md",
+    "route": "sources/courses/scikit-learn-mooc/python-scripts/trees-sol-02",
+    "sha256": "07fccc6c7d5c933b7f38c9ebad4ec0af7de6e1b74e544308afbd7e44ee23cc2f",
+    "cells": 13
+  },
+  {
+    "source_path": "slides/README.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/slides/README.md.md",
+    "route": "sources/courses/scikit-learn-mooc/slides/readme",
+    "sha256": "e97ca85541b907eb8057558d7b889c0b814821f7146e34cd48dd78f657ff53f2"
+  },
+  {
+    "source_path": "slides/bagging.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/slides/bagging.md.md",
+    "route": "sources/courses/scikit-learn-mooc/slides/bagging",
+    "sha256": "fc75d256c59f1c05d5f9ebcacf8b6ba7119f319e10d28aade010269e44ed26f2"
+  },
+  {
+    "source_path": "slides/bias_vs_variance.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/slides/bias_vs_variance.md.md",
+    "route": "sources/courses/scikit-learn-mooc/slides/bias-vs-variance",
+    "sha256": "97ec53407d44d282e9d9f8cedb94cac5474fd3fb7a8ae3031ae6f07d62c34c48"
+  },
+  {
+    "source_path": "slides/boosting.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/slides/boosting.md.md",
+    "route": "sources/courses/scikit-learn-mooc/slides/boosting",
+    "sha256": "e6363873df979b1a1651c8ae8cfae32648c2c129761d5c77dc5572cb9e0a2402"
+  },
+  {
+    "source_path": "slides/concluding_remarks.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/slides/concluding_remarks.md.md",
+    "route": "sources/courses/scikit-learn-mooc/slides/concluding-remarks",
+    "sha256": "19a54f4757cfe609dd0a055c8826025d339ab8532719b7bfa39db780d3c20c77"
+  },
+  {
+    "source_path": "slides/ensemble.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/slides/ensemble.md.md",
+    "route": "sources/courses/scikit-learn-mooc/slides/ensemble",
+    "sha256": "c98390c4e4070891e5da0198b4d6112a11a3d0aa0f7783b0e6ea2d18b927ca0f"
+  },
+  {
+    "source_path": "slides/intro_cross_validation.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/slides/intro_cross_validation.md.md",
+    "route": "sources/courses/scikit-learn-mooc/slides/intro-cross-validation",
+    "sha256": "2ed3feb26e9683edf9fa3e7dd5712fe895cc8fc8a4c299bc7457bd8480f378c3"
+  },
+  {
+    "source_path": "slides/intro_words.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/slides/intro_words.md.md",
+    "route": "sources/courses/scikit-learn-mooc/slides/intro-words",
+    "sha256": "564c2aa093779ce04ffa4948892784c72634047d3d9f8f715b028077651950a7"
+  },
+  {
+    "source_path": "slides/learning_validation_curves.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/slides/learning_validation_curves.md.md",
+    "route": "sources/courses/scikit-learn-mooc/slides/learning-validation-curves",
+    "sha256": "3e10e59060e383d123ae57c9eed6a7874cdbe918191828b047da8ccdf15159cd"
+  },
+  {
+    "source_path": "slides/linear_models.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/slides/linear_models.md.md",
+    "route": "sources/courses/scikit-learn-mooc/slides/linear-models",
+    "sha256": "c3f0b0624732201c1004d4c23c4395e4ca3d89b39f2351eb1ab64ae3cd6210ac"
+  },
+  {
+    "source_path": "slides/ml_concepts.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/slides/ml_concepts.md.md",
+    "route": "sources/courses/scikit-learn-mooc/slides/ml-concepts",
+    "sha256": "80b9a7ae99603492817b55b76288a173af7ab42ec11118a51ffa5499e808f564"
+  },
+  {
+    "source_path": "slides/overfitting_vs_underfitting.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/slides/overfitting_vs_underfitting.md.md",
+    "route": "sources/courses/scikit-learn-mooc/slides/overfitting-vs-underfitting",
+    "sha256": "ad7f1a4343613976f952993014e1ddd14c36991d8b54d84f3c2c94080f6dbfe7"
+  },
+  {
+    "source_path": "slides/regularized_linear_models.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/slides/regularized_linear_models.md.md",
+    "route": "sources/courses/scikit-learn-mooc/slides/regularized-linear-models",
+    "sha256": "4ffb5bae81bdac19db63f80b8600decde02722a2ad0ae239243e1e25803fc0f4"
+  },
+  {
+    "source_path": "slides/trees.md",
+    "kind": "markdown",
+    "output": "05 Источники/Courses/Scikit-learn MOOC/slides/trees.md.md",
+    "route": "sources/courses/scikit-learn-mooc/slides/trees",
+    "sha256": "3d996e8efca04c98c26cc0b2baeef2551f318a12c5b4c8f1dc24f6e3d7a5080a"
+  }
+]

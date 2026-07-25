@@ -21,6 +21,40 @@ sections:
         route: textbook/ml-foundations/train-validation-test
       - source: 00 Учебник/00 Математические и ML-основания/06 Переобучение, регуляризация и оценивание.md
         route: textbook/ml-foundations/generalization-regularization
+      - source: 00 Учебник/01 Классическое машинное обучение/00 Карта модуля.md
+        route: textbook/classical-ml/index
+      - source: 00 Учебник/01 Классическое машинное обучение/01 Задача обучения и predictive pipeline.md
+        route: textbook/classical-ml/predictive-pipeline
+      - source: 00 Учебник/01 Классическое машинное обучение/02 Линейная регрессия и классификация.md
+        route: textbook/classical-ml/linear-models
+      - source: 00 Учебник/01 Классическое машинное обучение/03 Деревья решений.md
+        route: textbook/classical-ml/decision-trees
+      - source: 00 Учебник/01 Классическое машинное обучение/04 Bagging, random forest и gradient boosting.md
+        route: textbook/classical-ml/ensembles
+      - source: 00 Учебник/01 Классическое машинное обучение/05 Оценивание, кросс-валидация и выбор порога.md
+        route: textbook/classical-ml/evaluation
+      - source: 00 Учебник/01 Классическое машинное обучение/06 Кластеризация и её ограничения.md
+        route: textbook/classical-ml/clustering
+      - source: 00 Учебник/01 Классическое машинное обучение/06a Спектральная кластеризация и графовый Laplacian.md
+        route: textbook/classical-ml/spectral-clustering
+      - source: 00 Учебник/01 Классическое машинное обучение/07 PCA, t-SNE и UMAP.md
+        route: textbook/classical-ml/dimensionality-reduction
+      - source: 00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM.md
+        route: textbook/classical-ml/gmm-em
+      - source: 00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features.md
+        route: textbook/classical-ml/kernels-svm-rff
+      - source: 00 Учебник/02 Рекомендательные системы/00 Карта модуля.md
+        route: textbook/recommender-systems/index
+      - source: 00 Учебник/02 Рекомендательные системы/01 Задача рекомендации, данные и pipeline.md
+        route: textbook/recommender-systems/task-data-pipeline
+      - source: 00 Учебник/02 Рекомендательные системы/02 Collaborative filtering и matrix factorization.md
+        route: textbook/recommender-systems/collaborative-filtering-matrix-factorization
+      - source: 00 Учебник/02 Рекомендательные системы/03 Ranking и нейронные рекомендательные модели.md
+        route: textbook/recommender-systems/ranking-neural-models
+      - source: 00 Учебник/02 Рекомендательные системы/04 Последовательные рекомендации и признаки.md
+        route: textbook/recommender-systems/sequential-feature-aware
+      - source: 00 Учебник/02 Рекомендательные системы/05 Оценивание и эксплуатация.md
+        route: textbook/recommender-systems/evaluation-operations
       - source: 00 Учебник/01 Основы нейронных сетей/01 Нейрон и MLP.md
         route: textbook/neural-networks/mlp
       - source: 00 Учебник/01 Основы нейронных сетей/02 Функции активации.md
@@ -196,6 +230,8 @@ sections:
         route: textbook/deployment/edge-federated
       - source: 00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md
         route: textbook/evaluation/models-contamination
+      - source: 00 Учебник/18 Evaluation и методология/59a Несбалансированная классификация.md
+        route: textbook/evaluation/imbalanced-classification
       - source: 00 Учебник/18 Evaluation и методология/59a Responsible systems.md
         route: textbook/evaluation/responsible-systems
       - source: 00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning.md
@@ -257,8 +293,47 @@ sections:
             route: textbook/ml-foundations/train-validation-test
           - label: 6. Переобучение, регуляризация и оценивание
             route: textbook/ml-foundations/generalization-regularization
-      - label: II. Нейронные сети
-        label_en: II. Neural networks
+      - label: II. Классическое машинное обучение
+        label_en: II. Classical machine learning
+        items:
+          - label: Карта модуля и источники
+            route: textbook/classical-ml/index
+          - label: Задача обучения и predictive pipeline
+            route: textbook/classical-ml/predictive-pipeline
+          - label: Линейная регрессия и классификация
+            route: textbook/classical-ml/linear-models
+          - label: Деревья решений
+            route: textbook/classical-ml/decision-trees
+          - label: Bagging, random forest и gradient boosting
+            route: textbook/classical-ml/ensembles
+          - label: Оценивание, кросс-валидация и выбор порога
+            route: textbook/classical-ml/evaluation
+          - label: Кластеризация и её ограничения
+            route: textbook/classical-ml/clustering
+          - label: Спектральная кластеризация и graph Laplacian
+            route: textbook/classical-ml/spectral-clustering
+          - label: PCA, t-SNE и UMAP
+            route: textbook/classical-ml/dimensionality-reduction
+          - label: Gaussian mixture и EM
+            route: textbook/classical-ml/gmm-em
+          - label: Kernels, SVM и random Fourier features
+            route: textbook/classical-ml/kernels-svm-rff
+      - label: Рекомендательные системы
+        items:
+          - label: Карта модуля и полные источники
+            route: textbook/recommender-systems/index
+          - label: Задача рекомендации, данные и pipeline
+            route: textbook/recommender-systems/task-data-pipeline
+          - label: Collaborative filtering и matrix factorization
+            route: textbook/recommender-systems/collaborative-filtering-matrix-factorization
+          - label: Ranking и нейронные модели
+            route: textbook/recommender-systems/ranking-neural-models
+          - label: Последовательные рекомендации и признаки
+            route: textbook/recommender-systems/sequential-feature-aware
+          - label: Оценивание и эксплуатация
+            route: textbook/recommender-systems/evaluation-operations
+      - label: III. Нейронные сети
+        label_en: III. Neural networks
         items:
           - label: 7. Нейрон и MLP
             route: textbook/neural-networks/mlp
@@ -276,8 +351,8 @@ sections:
             route: textbook/neural-networks/cnn-lenet-resnet
           - label: 14. Autoencoder и VAE
             route: textbook/neural-networks/autoencoder-vae
-      - label: III. Текст до Transformer
-        label_en: III. Text before the Transformer
+      - label: IV. Текст до Transformer
+        label_en: IV. Text before the Transformer
         items:
           - label: 15. Представление текста числами
             route: textbook/text-representation/numerical-representation
@@ -295,8 +370,8 @@ sections:
             route: textbook/recurrent-networks/seq2seq-bottleneck
           - label: 22. Attention для перевода
             route: textbook/transformer/from-seq2seq-to-transformer
-      - label: IV. Transformer, BERT и GPT
-        label_en: IV. Transformer, BERT, and GPT
+      - label: V. Transformer, BERT и GPT
+        label_en: V. Transformer, BERT, and GPT
         items:
           - label: 23. Self-Attention — Q, K, V
             route: textbook/transformer/self-attention
@@ -318,8 +393,8 @@ sections:
             route: textbook/models/gpt-3
           - label: 31. T5 — text-to-text Transformer
             route: textbook/models/t5
-      - label: V. Анатомия современной LLM
-        label_en: V. Anatomy of a modern LLM
+      - label: VI. Анатомия современной LLM
+        label_en: VI. Anatomy of a modern LLM
         items:
           - label: LLaMA как базовая архитектура
             route: textbook/modern-llm/llama-architecture
@@ -341,8 +416,8 @@ sections:
             route: textbook/moe/mixture-of-experts
           - label: 40. Mamba, RWKV, RetNet и гибридные архитектуры
             route: textbook/modern-llm/sequence-model-alternatives
-      - label: VI. Вычислительные основы ML-систем
-        label_en: VI. Computational foundations of ML systems
+      - label: VII. Вычислительные основы ML-систем
+        label_en: VII. Computational foundations of ML systems
         items:
           - label: S1. Модель как часть системы
             route: textbook/ml-systems/model-as-part-of-system
@@ -358,8 +433,8 @@ sections:
             route: textbook/ml-systems/data-pipeline-padding-packing
           - label: S7. Profiling ML-нагрузки
             route: textbook/ml-systems/profiling
-      - label: VII. Обучение LLM
-        label_en: VII. Training language models
+      - label: VIII. Обучение LLM
+        label_en: VIII. Training language models
         items:
           - label: 41. Сбор, очистка и смеси данных
             route: textbook/pretraining/data-pipeline
@@ -405,8 +480,8 @@ sections:
             route: textbook/reasoning/test-time-compute
           - label: 53. Синтетические данные и учебные программы
             route: textbook/pretraining/synthetic-data-curricula
-      - label: VIII. Эксплуатация и системы вокруг модели
-        label_en: VIII. Inference and systems around the model
+      - label: IX. Эксплуатация и системы вокруг модели
+        label_en: IX. Inference and systems around the model
         items:
           - label: 54. Декодирование и выбор следующего токена
             label_en: 54. Decoding and selecting the next token
@@ -453,6 +528,9 @@ sections:
             route: textbook/deployment/edge-federated
           - label: 59. Оценивание моделей и контаминация
             route: textbook/evaluation/models-contamination
+          - label: 59.1 Несбалансированная классификация
+            label_en: 59.1 Imbalanced classification
+            route: textbook/evaluation/imbalanced-classification
           - label: 59.1 Ответственные ML-системы
             route: textbook/evaluation/responsible-systems
           - label: 60. Embeddings и metric learning
@@ -721,6 +799,66 @@ sections:
         route: sources/community-repositories
       - source: 05 Источники/Курсы.md
         route: sources/kursy
+      - source: 05 Источники/Courses/Advanced Unsupervised and Classical ML.md
+        route: sources/courses/advanced-unsupervised-classical/index
+      - source: 05 Источники/Courses/Advanced Unsupervised and Classical ML/mlcourse-topic7.html.md
+        route: sources/courses/advanced-unsupervised-classical/mlcourse-topic7
+      - source: 05 Источники/Courses/Advanced Unsupervised and Classical ML/distill-misread-tsne.html.md
+        route: sources/courses/advanced-unsupervised-classical/distill-tsne
+      - source: 05 Источники/Courses/Advanced Unsupervised and Classical ML/umap-parameters.rst.md
+        route: sources/courses/advanced-unsupervised-classical/umap-parameters
+      - source: 05 Источники/Courses/Advanced Unsupervised and Classical ML/sklearn-pca-iris.py.md
+        route: sources/courses/advanced-unsupervised-classical/pca-iris
+      - source: 05 Источники/Courses/Advanced Unsupervised and Classical ML/sklearn-tsne-perplexity.py.md
+        route: sources/courses/advanced-unsupervised-classical/tsne-perplexity
+      - source: 05 Источники/Courses/Advanced Unsupervised and Classical ML/sklearn-gmm-covariances.py.md
+        route: sources/courses/advanced-unsupervised-classical/gmm-covariances
+      - source: 05 Источники/Courses/Advanced Unsupervised and Classical ML/sklearn-kernel-approximation.py.md
+        route: sources/courses/advanced-unsupervised-classical/kernel-approximation
+      - source: 05 Источники/Courses/Dive into Deep Learning — Recommender Systems.md
+        route: sources/courses/d2l-recommender-systems/index
+      - source: 05 Источники/Courses/Dive into Deep Learning — Recommender Systems/index.md
+        route: sources/courses/d2l-recommender-systems/chapter-index
+      - source: 05 Источники/Courses/Dive into Deep Learning — Recommender Systems/recsys-intro.md
+        route: sources/courses/d2l-recommender-systems/overview
+      - source: 05 Источники/Courses/Dive into Deep Learning — Recommender Systems/movielens.md
+        route: sources/courses/d2l-recommender-systems/movielens
+      - source: 05 Источники/Courses/Dive into Deep Learning — Recommender Systems/mf.md
+        route: sources/courses/d2l-recommender-systems/matrix-factorization
+      - source: 05 Источники/Courses/Dive into Deep Learning — Recommender Systems/autorec.md
+        route: sources/courses/d2l-recommender-systems/autorec
+      - source: 05 Источники/Courses/Dive into Deep Learning — Recommender Systems/ranking.md
+        route: sources/courses/d2l-recommender-systems/personalized-ranking
+      - source: 05 Источники/Courses/Dive into Deep Learning — Recommender Systems/neumf.md
+        route: sources/courses/d2l-recommender-systems/neural-collaborative-filtering
+      - source: 05 Источники/Courses/Dive into Deep Learning — Recommender Systems/seqrec.md
+        route: sources/courses/d2l-recommender-systems/sequence-aware
+      - source: 05 Источники/Courses/Dive into Deep Learning — Recommender Systems/ctr.md
+        route: sources/courses/d2l-recommender-systems/ctr-prediction
+      - source: 05 Источники/Courses/Dive into Deep Learning — Recommender Systems/fm.md
+        route: sources/courses/d2l-recommender-systems/factorization-machines
+      - source: 05 Источники/Courses/Dive into Deep Learning — Recommender Systems/deepfm.md
+        route: sources/courses/d2l-recommender-systems/deepfm
+      - source: 05 Источники/Courses/Linux Foundation Recommenders.md
+        route: sources/courses/lf-recommenders/index
+      - source: 05 Источники/Courses/Linux Foundation Recommenders/examples/01_prepare_data/data_split.ipynb.md
+        route: sources/courses/lf-recommenders/data-splitting
+      - source: 05 Источники/Courses/Linux Foundation Recommenders/examples/02_model_collaborative_filtering/baseline_deep_dive.ipynb.md
+        route: sources/courses/lf-recommenders/baseline-deep-dive
+      - source: 05 Источники/Courses/Linux Foundation Recommenders/examples/02_model_collaborative_filtering/sar_deep_dive.ipynb.md
+        route: sources/courses/lf-recommenders/sar-deep-dive
+      - source: 05 Источники/Courses/Linux Foundation Recommenders/examples/02_model_collaborative_filtering/ncf_deep_dive.ipynb.md
+        route: sources/courses/lf-recommenders/ncf-deep-dive
+      - source: 05 Источники/Courses/Linux Foundation Recommenders/examples/00_quick_start/sasrec_amazon.ipynb.md
+        route: sources/courses/lf-recommenders/sasrec-amazon
+      - source: 05 Источники/Courses/Linux Foundation Recommenders/examples/03_evaluate/evaluation.ipynb.md
+        route: sources/courses/lf-recommenders/evaluation
+      - source: 05 Источники/Courses/Linux Foundation Recommenders/examples/03_evaluate/als_movielens_diversity_metrics.ipynb.md
+        route: sources/courses/lf-recommenders/diversity-metrics
+      - source: 05 Источники/Courses/Linux Foundation Recommenders/examples/05_operationalize/als_movie_o16n.ipynb.md
+        route: sources/courses/lf-recommenders/als-operationalization
+      - source: 05 Источники/Courses/Linux Foundation Recommenders/examples/06_benchmarks/movielens.ipynb.md
+        route: sources/courses/lf-recommenders/movielens-benchmark
       - source: 05 Источники/Courses/Harvard ML Systems.md
         route: sources/harvard-ml-systems
       - source: 05 Источники/Courses/Efficient DL Systems.md
@@ -1039,14 +1177,780 @@ sections:
         route: sources/courses/harvard-ml-systems/tinytorch/19-benchmarking
       - source: 05 Источники/Courses/Harvard ML Systems/tinytorch/20_capstone.md
         route: sources/courses/harvard-ml-systems/tinytorch/20-capstone
+      - source: 05 Источники/Courses/Scikit-learn MOOC.md
+        route: sources/courses/scikit-learn-mooc/index
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/appendix/acknowledgement.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/appendix/acknowledgement
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/appendix/datasets_intro.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/appendix/datasets-intro
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/appendix/glossary.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/appendix/glossary
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/appendix/notebook_timings.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/appendix/notebook-timings
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/appendix/toc_redirect.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/appendix/toc-redirect
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/clustering/clustering_assumptions_index.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/clustering/clustering-assumptions-index
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/clustering/clustering_kmeans_index.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/clustering/clustering-kmeans-index
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/clustering/clustering_module_intro.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/clustering/clustering-module-intro
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/clustering/clustering_module_take_away.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/clustering/clustering-module-take-away
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/clustering/clustering_quiz_m4_01.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/clustering/clustering-quiz-m4-01
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/clustering/clustering_quiz_m4_02.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/clustering/clustering-quiz-m4-02
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/clustering/clustering_wrap_up_quiz.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/clustering/clustering-wrap-up-quiz
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/concluding_remarks.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/concluding-remarks
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/concluding_remarks_video.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/concluding-remarks-video
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/ensemble/bagging_slides.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/ensemble/bagging-slides
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/ensemble/boosting_slides.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/ensemble/boosting-slides
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/ensemble/ensemble_boosting_index.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/ensemble/ensemble-boosting-index
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/ensemble/ensemble_bootstrap_index.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/ensemble/ensemble-bootstrap-index
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/ensemble/ensemble_hyperparameters_index.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/ensemble/ensemble-hyperparameters-index
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/ensemble/ensemble_module_intro.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/ensemble/ensemble-module-intro
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/ensemble/ensemble_module_take_away.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/ensemble/ensemble-module-take-away
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/ensemble/ensemble_quiz_m6_01.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/ensemble/ensemble-quiz-m6-01
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/ensemble/ensemble_quiz_m6_02.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/ensemble/ensemble-quiz-m6-02
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/ensemble/ensemble_quiz_m6_03.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/ensemble/ensemble-quiz-m6-03
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/ensemble/ensemble_wrap_up_quiz.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/ensemble/ensemble-wrap-up-quiz
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/evaluation/cross_validation_baseline_index.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/evaluation/cross-validation-baseline-index
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/evaluation/cross_validation_choices_index.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/evaluation/cross-validation-choices-index
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/evaluation/cross_validation_nested_index.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/evaluation/cross-validation-nested-index
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/evaluation/evaluation_module_intro.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/evaluation/evaluation-module-intro
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/evaluation/evaluation_module_take_away.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/evaluation/evaluation-module-take-away
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/evaluation/evaluation_quiz_m7_01.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/evaluation/evaluation-quiz-m7-01
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/evaluation/evaluation_quiz_m7_02.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/evaluation/evaluation-quiz-m7-02
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/evaluation/evaluation_quiz_m7_03.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/evaluation/evaluation-quiz-m7-03
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/evaluation/evaluation_quiz_m7_04.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/evaluation/evaluation-quiz-m7-04
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/evaluation/evaluation_quiz_m7_05.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/evaluation/evaluation-quiz-m7-05
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/evaluation/evaluation_wrap_up_quiz.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/evaluation/evaluation-wrap-up-quiz
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/evaluation/metrics_classification_index.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/evaluation/metrics-classification-index
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/evaluation/metrics_regression_index.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/evaluation/metrics-regression-index
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/feature_selection/feature_selection_limitation_index.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/feature-selection/feature-selection-limitation-index
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/feature_selection/feature_selection_module_intro.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/feature-selection/feature-selection-module-intro
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/feature_selection/feature_selection_module_take_away.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/feature-selection/feature-selection-module-take-away
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/feature_selection/feature_selection_quiz.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/feature-selection/feature-selection-quiz
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/index.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/interpretation/interpretation_quiz.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/interpretation/interpretation-quiz
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/linear_models/linear_models_intuitions_index.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/linear-models/linear-models-intuitions-index
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/linear_models/linear_models_module_intro.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/linear-models/linear-models-module-intro
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/linear_models/linear_models_module_take_away.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/linear-models/linear-models-module-take-away
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/linear_models/linear_models_non_linear_index.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/linear-models/linear-models-non-linear-index
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/linear_models/linear_models_quiz_m4_01.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/linear-models/linear-models-quiz-m4-01
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/linear_models/linear_models_quiz_m4_02.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/linear-models/linear-models-quiz-m4-02
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/linear_models/linear_models_quiz_m4_03.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/linear-models/linear-models-quiz-m4-03
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/linear_models/linear_models_regularization_index.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/linear-models/linear-models-regularization-index
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/linear_models/linear_models_slides.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/linear-models/linear-models-slides
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/linear_models/linear_models_wrap_up_quiz.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/linear-models/linear-models-wrap-up-quiz
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/linear_models/regularized_linear_models_slides.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/linear-models/regularized-linear-models-slides
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/ml_concepts/quiz_intro_01.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/ml-concepts/quiz-intro-01
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/ml_concepts/slides.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/ml-concepts/slides
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/overfit/bias_vs_variance_quiz_m2_03.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/overfit/bias-vs-variance-quiz-m2-03
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/overfit/bias_vs_variance_slides.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/overfit/bias-vs-variance-slides
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/overfit/learning_validation_curves_quiz_m2_02.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/overfit/learning-validation-curves-quiz-m2-02
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/overfit/learning_validation_curves_slides.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/overfit/learning-validation-curves-slides
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/overfit/overfit_bias_variance_index.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/overfit/overfit-bias-variance-index
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/overfit/overfit_module_intro.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/overfit/overfit-module-intro
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/overfit/overfit_overfitting_underfitting_index.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/overfit/overfit-overfitting-underfitting-index
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/overfit/overfit_take_away.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/overfit/overfit-take-away
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/overfit/overfit_validation_learning_curves_index.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/overfit/overfit-validation-learning-curves-index
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/overfit/overfit_wrap_up_quiz.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/overfit/overfit-wrap-up-quiz
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/overfit/overfitting_vs_under_fitting_quiz_m2_01.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/overfit/overfitting-vs-under-fitting-quiz-m2-01
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/overfit/overfitting_vs_under_fitting_slides.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/overfit/overfitting-vs-under-fitting-slides
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/predictive_modeling_pipeline/01_tabular_data_exploration_index.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/predictive-modeling-pipeline/01-tabular-data-exploration-index
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/predictive_modeling_pipeline/01_tabular_data_exploration_quiz_m1_01.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/predictive-modeling-pipeline/01-tabular-data-exploration-quiz-m1-01
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/predictive_modeling_pipeline/02_numerical_pipeline_index.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/predictive-modeling-pipeline/02-numerical-pipeline-index
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/predictive_modeling_pipeline/02_numerical_pipeline_quiz_m1_02.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/predictive-modeling-pipeline/02-numerical-pipeline-quiz-m1-02
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/predictive_modeling_pipeline/02_numerical_pipeline_video_cross_validation.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/predictive-modeling-pipeline/02-numerical-pipeline-video-cross-validation
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/predictive_modeling_pipeline/03_categorical_pipeline_index.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/predictive-modeling-pipeline/03-categorical-pipeline-index
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/predictive_modeling_pipeline/03_categorical_pipeline_quiz_m1_03.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/predictive-modeling-pipeline/03-categorical-pipeline-quiz-m1-03
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/predictive_modeling_pipeline/03_categorical_pipeline_visualization_video.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/predictive-modeling-pipeline/03-categorical-pipeline-visualization-video
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/predictive_modeling_pipeline/predictive_modeling_module_intro.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/predictive-modeling-pipeline/predictive-modeling-module-intro
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/predictive_modeling_pipeline/predictive_modeling_module_take_away.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/predictive-modeling-pipeline/predictive-modeling-module-take-away
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/predictive_modeling_pipeline/wrap_up_quiz.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/predictive-modeling-pipeline/wrap-up-quiz
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/toc.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/toc
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/trees/slides.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/trees/slides
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/trees/trees_classification_index.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/trees/trees-classification-index
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/trees/trees_hyperparameters_index.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/trees/trees-hyperparameters-index
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/trees/trees_intuitions_index.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/trees/trees-intuitions-index
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/trees/trees_module_intro.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/trees/trees-module-intro
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/trees/trees_module_take_away.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/trees/trees-module-take-away
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/trees/trees_quiz_m5_01.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/trees/trees-quiz-m5-01
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/trees/trees_quiz_m5_02.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/trees/trees-quiz-m5-02
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/trees/trees_quiz_m5_03.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/trees/trees-quiz-m5-03
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/trees/trees_quiz_m5_04.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/trees/trees-quiz-m5-04
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/trees/trees_regression_index.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/trees/trees-regression-index
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/trees/trees_wrap_up_quiz.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/trees/trees-wrap-up-quiz
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/tuning/parameter_tuning_automated_index.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/tuning/parameter-tuning-automated-index
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/tuning/parameter_tuning_automated_quiz_m3_02.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/tuning/parameter-tuning-automated-quiz-m3-02
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/tuning/parameter_tuning_manual_index.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/tuning/parameter-tuning-manual-index
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/tuning/parameter_tuning_manual_quiz_m3_01.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/tuning/parameter-tuning-manual-quiz-m3-01
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/tuning/parameter_tuning_module_intro.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/tuning/parameter-tuning-module-intro
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/tuning/parameter_tuning_module_take_away.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/tuning/parameter-tuning-module-take-away
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/tuning/parameter_tuning_parallel_plot_video.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/tuning/parameter-tuning-parallel-plot-video
+      - source: 05 Источники/Courses/Scikit-learn MOOC/jupyter-book/tuning/parameter_tuning_wrap_up_quiz.md.md
+        route: sources/courses/scikit-learn-mooc/jupyter-book/tuning/parameter-tuning-wrap-up-quiz
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/01_tabular_data_exploration.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/01-tabular-data-exploration
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/01_tabular_data_exploration_ex_01.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/01-tabular-data-exploration-ex-01
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/01_tabular_data_exploration_sol_01.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/01-tabular-data-exploration-sol-01
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/02_numerical_pipeline_cross_validation.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/02-numerical-pipeline-cross-validation
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/02_numerical_pipeline_ex_00.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/02-numerical-pipeline-ex-00
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/02_numerical_pipeline_ex_01.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/02-numerical-pipeline-ex-01
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/02_numerical_pipeline_hands_on.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/02-numerical-pipeline-hands-on
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/02_numerical_pipeline_introduction.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/02-numerical-pipeline-introduction
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/02_numerical_pipeline_scaling.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/02-numerical-pipeline-scaling
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/02_numerical_pipeline_sol_00.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/02-numerical-pipeline-sol-00
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/02_numerical_pipeline_sol_01.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/02-numerical-pipeline-sol-01
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/03_categorical_pipeline.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/03-categorical-pipeline
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/03_categorical_pipeline_column_transformer.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/03-categorical-pipeline-column-transformer
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/03_categorical_pipeline_ex_01.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/03-categorical-pipeline-ex-01
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/03_categorical_pipeline_ex_02.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/03-categorical-pipeline-ex-02
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/03_categorical_pipeline_sol_01.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/03-categorical-pipeline-sol-01
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/03_categorical_pipeline_sol_02.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/03-categorical-pipeline-sol-02
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/03_categorical_pipeline_visualization.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/03-categorical-pipeline-visualization
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/clustering_ex_01.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/clustering-ex-01
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/clustering_ex_02.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/clustering-ex-02
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/clustering_hdbscan.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/clustering-hdbscan
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/clustering_kmeans.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/clustering-kmeans
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/clustering_sol_01.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/clustering-sol-01
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/clustering_sol_02.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/clustering-sol-02
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/clustering_supervised_metrics.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/clustering-supervised-metrics
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/clustering_transformer.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/clustering-transformer
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/cross_validation_baseline.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/cross-validation-baseline
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/cross_validation_ex_01.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/cross-validation-ex-01
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/cross_validation_ex_02.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/cross-validation-ex-02
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/cross_validation_grouping.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/cross-validation-grouping
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/cross_validation_learning_curve.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/cross-validation-learning-curve
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/cross_validation_nested.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/cross-validation-nested
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/cross_validation_sol_01.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/cross-validation-sol-01
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/cross_validation_sol_02.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/cross-validation-sol-02
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/cross_validation_stratification.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/cross-validation-stratification
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/cross_validation_time.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/cross-validation-time
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/cross_validation_train_test.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/cross-validation-train-test
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/cross_validation_validation_curve.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/cross-validation-validation-curve
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/datasets_adult_census.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/datasets-adult-census
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/datasets_ames_housing.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/datasets-ames-housing
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/datasets_bike_rides.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/datasets-bike-rides
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/datasets_blood_transfusion.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/datasets-blood-transfusion
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/datasets_california_housing.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/datasets-california-housing
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/dev_features_importance.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/dev-features-importance
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/ensemble_adaboost.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/ensemble-adaboost
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/ensemble_bagging.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/ensemble-bagging
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/ensemble_ex_01.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/ensemble-ex-01
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/ensemble_ex_02.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/ensemble-ex-02
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/ensemble_ex_03.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/ensemble-ex-03
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/ensemble_ex_04.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/ensemble-ex-04
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/ensemble_gradient_boosting.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/ensemble-gradient-boosting
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/ensemble_hist_gradient_boosting.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/ensemble-hist-gradient-boosting
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/ensemble_hyperparameters.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/ensemble-hyperparameters
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/ensemble_introduction.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/ensemble-introduction
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/ensemble_random_forest.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/ensemble-random-forest
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/ensemble_sol_01.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/ensemble-sol-01
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/ensemble_sol_02.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/ensemble-sol-02
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/ensemble_sol_03.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/ensemble-sol-03
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/ensemble_sol_04.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/ensemble-sol-04
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/feature_selection_ex_01.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/feature-selection-ex-01
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/feature_selection_introduction.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/feature-selection-introduction
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/feature_selection_limitation_model.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/feature-selection-limitation-model
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/feature_selection_sol_01.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/feature-selection-sol-01
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/linear_models_ex_01.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/linear-models-ex-01
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/linear_models_ex_02.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/linear-models-ex-02
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/linear_models_ex_03.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/linear-models-ex-03
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/linear_models_ex_04.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/linear-models-ex-04
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/linear_models_feature_engineering_classification.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/linear-models-feature-engineering-classification
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/linear_models_regularization.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/linear-models-regularization
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/linear_models_sol_01.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/linear-models-sol-01
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/linear_models_sol_02.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/linear-models-sol-02
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/linear_models_sol_03.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/linear-models-sol-03
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/linear_models_sol_04.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/linear-models-sol-04
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/linear_regression_in_sklearn.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/linear-regression-in-sklearn
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/linear_regression_non_linear_link.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/linear-regression-non-linear-link
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/linear_regression_without_sklearn.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/linear-regression-without-sklearn
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/logistic_regression.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/logistic-regression
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/metrics_classification.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/metrics-classification
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/metrics_ex_01.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/metrics-ex-01
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/metrics_ex_02.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/metrics-ex-02
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/metrics_regression.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/metrics-regression
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/metrics_sol_01.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/metrics-sol-01
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/metrics_sol_02.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/metrics-sol-02
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/parameter_tuning_ex_02.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/parameter-tuning-ex-02
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/parameter_tuning_ex_03.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/parameter-tuning-ex-03
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/parameter_tuning_grid_search.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/parameter-tuning-grid-search
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/parameter_tuning_manual.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/parameter-tuning-manual
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/parameter_tuning_nested.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/parameter-tuning-nested
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/parameter_tuning_parallel_plot.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/parameter-tuning-parallel-plot
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/parameter_tuning_randomized_search.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/parameter-tuning-randomized-search
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/parameter_tuning_sol_02.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/parameter-tuning-sol-02
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/parameter_tuning_sol_03.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/parameter-tuning-sol-03
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/trees_classification.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/trees-classification
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/trees_dataset.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/trees-dataset
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/trees_ex_01.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/trees-ex-01
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/trees_ex_02.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/trees-ex-02
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/trees_hyperparameters.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/trees-hyperparameters
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/trees_regression.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/trees-regression
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/trees_sol_01.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/trees-sol-01
+      - source: 05 Источники/Courses/Scikit-learn MOOC/python_scripts/trees_sol_02.py.md
+        route: sources/courses/scikit-learn-mooc/python-scripts/trees-sol-02
+      - source: 05 Источники/Courses/Scikit-learn MOOC/slides/README.md.md
+        route: sources/courses/scikit-learn-mooc/slides/readme
+      - source: 05 Источники/Courses/Scikit-learn MOOC/slides/bagging.md.md
+        route: sources/courses/scikit-learn-mooc/slides/bagging
+      - source: 05 Источники/Courses/Scikit-learn MOOC/slides/bias_vs_variance.md.md
+        route: sources/courses/scikit-learn-mooc/slides/bias-vs-variance
+      - source: 05 Источники/Courses/Scikit-learn MOOC/slides/boosting.md.md
+        route: sources/courses/scikit-learn-mooc/slides/boosting
+      - source: 05 Источники/Courses/Scikit-learn MOOC/slides/concluding_remarks.md.md
+        route: sources/courses/scikit-learn-mooc/slides/concluding-remarks
+      - source: 05 Источники/Courses/Scikit-learn MOOC/slides/ensemble.md.md
+        route: sources/courses/scikit-learn-mooc/slides/ensemble
+      - source: 05 Источники/Courses/Scikit-learn MOOC/slides/intro_cross_validation.md.md
+        route: sources/courses/scikit-learn-mooc/slides/intro-cross-validation
+      - source: 05 Источники/Courses/Scikit-learn MOOC/slides/intro_words.md.md
+        route: sources/courses/scikit-learn-mooc/slides/intro-words
+      - source: 05 Источники/Courses/Scikit-learn MOOC/slides/learning_validation_curves.md.md
+        route: sources/courses/scikit-learn-mooc/slides/learning-validation-curves
+      - source: 05 Источники/Courses/Scikit-learn MOOC/slides/linear_models.md.md
+        route: sources/courses/scikit-learn-mooc/slides/linear-models
+      - source: 05 Источники/Courses/Scikit-learn MOOC/slides/ml_concepts.md.md
+        route: sources/courses/scikit-learn-mooc/slides/ml-concepts
+      - source: 05 Источники/Courses/Scikit-learn MOOC/slides/overfitting_vs_underfitting.md.md
+        route: sources/courses/scikit-learn-mooc/slides/overfitting-vs-underfitting
+      - source: 05 Источники/Courses/Scikit-learn MOOC/slides/regularized_linear_models.md.md
+        route: sources/courses/scikit-learn-mooc/slides/regularized-linear-models
+      - source: 05 Источники/Courses/Scikit-learn MOOC/slides/trees.md.md
+        route: sources/courses/scikit-learn-mooc/slides/trees
+      # BEGIN GENERATED HARVARD LABS AND SLIDES
+      - source: 05 Источники/Courses/Harvard ML Systems/labs/vol1/lab_00_introduction.md
+        route: sources/courses/harvard-ml-systems/labs/vol1/lab-00-introduction
+      - source: 05 Источники/Courses/Harvard ML Systems/labs/vol1/lab_01_ml_intro.md
+        route: sources/courses/harvard-ml-systems/labs/vol1/lab-01-ml-intro
+      - source: 05 Источники/Courses/Harvard ML Systems/labs/vol1/lab_02_ml_systems.md
+        route: sources/courses/harvard-ml-systems/labs/vol1/lab-02-ml-systems
+      - source: 05 Источники/Courses/Harvard ML Systems/labs/vol1/lab_03_ml_workflow.md
+        route: sources/courses/harvard-ml-systems/labs/vol1/lab-03-ml-workflow
+      - source: 05 Источники/Courses/Harvard ML Systems/labs/vol1/lab_04_data_engr.md
+        route: sources/courses/harvard-ml-systems/labs/vol1/lab-04-data-engr
+      - source: 05 Источники/Courses/Harvard ML Systems/labs/vol1/lab_05_nn_compute.md
+        route: sources/courses/harvard-ml-systems/labs/vol1/lab-05-nn-compute
+      - source: 05 Источники/Courses/Harvard ML Systems/labs/vol1/lab_06_nn_arch.md
+        route: sources/courses/harvard-ml-systems/labs/vol1/lab-06-nn-arch
+      - source: 05 Источники/Courses/Harvard ML Systems/labs/vol1/lab_07_ml_frameworks.md
+        route: sources/courses/harvard-ml-systems/labs/vol1/lab-07-ml-frameworks
+      - source: 05 Источники/Courses/Harvard ML Systems/labs/vol1/lab_08_model_train.md
+        route: sources/courses/harvard-ml-systems/labs/vol1/lab-08-model-train
+      - source: 05 Источники/Courses/Harvard ML Systems/labs/vol1/lab_09_data_selection.md
+        route: sources/courses/harvard-ml-systems/labs/vol1/lab-09-data-selection
+      - source: 05 Источники/Courses/Harvard ML Systems/labs/vol1/lab_10_model_compress.md
+        route: sources/courses/harvard-ml-systems/labs/vol1/lab-10-model-compress
+      - source: 05 Источники/Courses/Harvard ML Systems/labs/vol1/lab_11_hw_accel.md
+        route: sources/courses/harvard-ml-systems/labs/vol1/lab-11-hw-accel
+      - source: 05 Источники/Courses/Harvard ML Systems/labs/vol1/lab_12_perf_bench.md
+        route: sources/courses/harvard-ml-systems/labs/vol1/lab-12-perf-bench
+      - source: 05 Источники/Courses/Harvard ML Systems/labs/vol1/lab_13_model_serving.md
+        route: sources/courses/harvard-ml-systems/labs/vol1/lab-13-model-serving
+      - source: 05 Источники/Courses/Harvard ML Systems/labs/vol1/lab_14_ml_ops.md
+        route: sources/courses/harvard-ml-systems/labs/vol1/lab-14-ml-ops
+      - source: 05 Источники/Courses/Harvard ML Systems/labs/vol1/lab_15_responsible_engr.md
+        route: sources/courses/harvard-ml-systems/labs/vol1/lab-15-responsible-engr
+      - source: 05 Источники/Courses/Harvard ML Systems/labs/vol1/lab_16_ml_conclusion.md
+        route: sources/courses/harvard-ml-systems/labs/vol1/lab-16-ml-conclusion
+      - source: 05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_01_introduction.md
+        route: sources/courses/harvard-ml-systems/labs/vol2/lab-01-introduction
+      - source: 05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_02_compute_infra.md
+        route: sources/courses/harvard-ml-systems/labs/vol2/lab-02-compute-infra
+      - source: 05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_03_communication.md
+        route: sources/courses/harvard-ml-systems/labs/vol2/lab-03-communication
+      - source: 05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_04_data_storage.md
+        route: sources/courses/harvard-ml-systems/labs/vol2/lab-04-data-storage
+      - source: 05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_05_dist_train.md
+        route: sources/courses/harvard-ml-systems/labs/vol2/lab-05-dist-train
+      - source: 05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_06_collective_communication.md
+        route: sources/courses/harvard-ml-systems/labs/vol2/lab-06-collective-communication
+      - source: 05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_07_fault_tolerance.md
+        route: sources/courses/harvard-ml-systems/labs/vol2/lab-07-fault-tolerance
+      - source: 05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_08_fleet_orch.md
+        route: sources/courses/harvard-ml-systems/labs/vol2/lab-08-fleet-orch
+      - source: 05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_09_perf_engineering.md
+        route: sources/courses/harvard-ml-systems/labs/vol2/lab-09-perf-engineering
+      - source: 05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_10_inference.md
+        route: sources/courses/harvard-ml-systems/labs/vol2/lab-10-inference
+      - source: 05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_11_edge_intelligence.md
+        route: sources/courses/harvard-ml-systems/labs/vol2/lab-11-edge-intelligence
+      - source: 05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_12_ops_scale.md
+        route: sources/courses/harvard-ml-systems/labs/vol2/lab-12-ops-scale
+      - source: 05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_13_security_privacy.md
+        route: sources/courses/harvard-ml-systems/labs/vol2/lab-13-security-privacy
+      - source: 05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_14_robust_ai.md
+        route: sources/courses/harvard-ml-systems/labs/vol2/lab-14-robust-ai
+      - source: 05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_15_sustainable_ai.md
+        route: sources/courses/harvard-ml-systems/labs/vol2/lab-15-sustainable-ai
+      - source: 05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_16_responsible_ai.md
+        route: sources/courses/harvard-ml-systems/labs/vol2/lab-16-responsible-ai
+      - source: 05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_17_fleet_synthesis.md
+        route: sources/courses/harvard-ml-systems/labs/vol2/lab-17-fleet-synthesis
+      - source: 05 Источники/Courses/Harvard ML Systems/slides/vol1/00_course_overview.md
+        route: sources/courses/harvard-ml-systems/slides/vol1/00-course-overview
+      - source: 05 Источники/Courses/Harvard ML Systems/slides/vol1/01_introduction.md
+        route: sources/courses/harvard-ml-systems/slides/vol1/01-introduction
+      - source: 05 Источники/Courses/Harvard ML Systems/slides/vol1/02_ml_systems.md
+        route: sources/courses/harvard-ml-systems/slides/vol1/02-ml-systems
+      - source: 05 Источники/Courses/Harvard ML Systems/slides/vol1/03_ml_workflow.md
+        route: sources/courses/harvard-ml-systems/slides/vol1/03-ml-workflow
+      - source: 05 Источники/Courses/Harvard ML Systems/slides/vol1/04_data_engineering.md
+        route: sources/courses/harvard-ml-systems/slides/vol1/04-data-engineering
+      - source: 05 Источники/Courses/Harvard ML Systems/slides/vol1/05_nn_computation.md
+        route: sources/courses/harvard-ml-systems/slides/vol1/05-nn-computation
+      - source: 05 Источники/Courses/Harvard ML Systems/slides/vol1/06_nn_architectures.md
+        route: sources/courses/harvard-ml-systems/slides/vol1/06-nn-architectures
+      - source: 05 Источники/Courses/Harvard ML Systems/slides/vol1/07_frameworks.md
+        route: sources/courses/harvard-ml-systems/slides/vol1/07-frameworks
+      - source: 05 Источники/Courses/Harvard ML Systems/slides/vol1/08_training.md
+        route: sources/courses/harvard-ml-systems/slides/vol1/08-training
+      - source: 05 Источники/Courses/Harvard ML Systems/slides/vol1/09_data_selection.md
+        route: sources/courses/harvard-ml-systems/slides/vol1/09-data-selection
+      - source: 05 Источники/Courses/Harvard ML Systems/slides/vol1/10_model_compression.md
+        route: sources/courses/harvard-ml-systems/slides/vol1/10-model-compression
+      - source: 05 Источники/Courses/Harvard ML Systems/slides/vol1/11_hw_acceleration.md
+        route: sources/courses/harvard-ml-systems/slides/vol1/11-hw-acceleration
+      - source: 05 Источники/Courses/Harvard ML Systems/slides/vol1/12_benchmarking.md
+        route: sources/courses/harvard-ml-systems/slides/vol1/12-benchmarking
+      - source: 05 Источники/Courses/Harvard ML Systems/slides/vol1/13_model_serving.md
+        route: sources/courses/harvard-ml-systems/slides/vol1/13-model-serving
+      - source: 05 Источники/Courses/Harvard ML Systems/slides/vol1/14_ml_ops.md
+        route: sources/courses/harvard-ml-systems/slides/vol1/14-ml-ops
+      - source: 05 Источники/Courses/Harvard ML Systems/slides/vol1/15_responsible_engr.md
+        route: sources/courses/harvard-ml-systems/slides/vol1/15-responsible-engr
+      - source: 05 Источники/Courses/Harvard ML Systems/slides/vol1/16_conclusion.md
+        route: sources/courses/harvard-ml-systems/slides/vol1/16-conclusion
+      - source: 05 Источники/Courses/Harvard ML Systems/slides/vol2/00_course_overview.md
+        route: sources/courses/harvard-ml-systems/slides/vol2/00-course-overview
+      - source: 05 Источники/Courses/Harvard ML Systems/slides/vol2/01_introduction.md
+        route: sources/courses/harvard-ml-systems/slides/vol2/01-introduction
+      - source: 05 Источники/Courses/Harvard ML Systems/slides/vol2/02_compute_infrastructure.md
+        route: sources/courses/harvard-ml-systems/slides/vol2/02-compute-infrastructure
+      - source: 05 Источники/Courses/Harvard ML Systems/slides/vol2/03_network_fabrics.md
+        route: sources/courses/harvard-ml-systems/slides/vol2/03-network-fabrics
+      - source: 05 Источники/Courses/Harvard ML Systems/slides/vol2/04_data_storage.md
+        route: sources/courses/harvard-ml-systems/slides/vol2/04-data-storage
+      - source: 05 Источники/Courses/Harvard ML Systems/slides/vol2/05_distributed_training.md
+        route: sources/courses/harvard-ml-systems/slides/vol2/05-distributed-training
+      - source: 05 Источники/Courses/Harvard ML Systems/slides/vol2/06_collective_communication.md
+        route: sources/courses/harvard-ml-systems/slides/vol2/06-collective-communication
+      - source: 05 Источники/Courses/Harvard ML Systems/slides/vol2/07_fault_tolerance.md
+        route: sources/courses/harvard-ml-systems/slides/vol2/07-fault-tolerance
+      - source: 05 Источники/Courses/Harvard ML Systems/slides/vol2/08_fleet_orchestration.md
+        route: sources/courses/harvard-ml-systems/slides/vol2/08-fleet-orchestration
+      - source: 05 Источники/Courses/Harvard ML Systems/slides/vol2/09_performance_engineering.md
+        route: sources/courses/harvard-ml-systems/slides/vol2/09-performance-engineering
+      - source: 05 Источники/Courses/Harvard ML Systems/slides/vol2/10_inference.md
+        route: sources/courses/harvard-ml-systems/slides/vol2/10-inference
+      - source: 05 Источники/Courses/Harvard ML Systems/slides/vol2/11_edge_intelligence.md
+        route: sources/courses/harvard-ml-systems/slides/vol2/11-edge-intelligence
+      - source: 05 Источники/Courses/Harvard ML Systems/slides/vol2/12_ops_scale.md
+        route: sources/courses/harvard-ml-systems/slides/vol2/12-ops-scale
+      - source: 05 Источники/Courses/Harvard ML Systems/slides/vol2/13_security_privacy.md
+        route: sources/courses/harvard-ml-systems/slides/vol2/13-security-privacy
+      - source: 05 Источники/Courses/Harvard ML Systems/slides/vol2/14_robust_ai.md
+        route: sources/courses/harvard-ml-systems/slides/vol2/14-robust-ai
+      - source: 05 Источники/Courses/Harvard ML Systems/slides/vol2/15_sustainable_ai.md
+        route: sources/courses/harvard-ml-systems/slides/vol2/15-sustainable-ai
+      - source: 05 Источники/Courses/Harvard ML Systems/slides/vol2/16_responsible_ai.md
+        route: sources/courses/harvard-ml-systems/slides/vol2/16-responsible-ai
+      - source: 05 Источники/Courses/Harvard ML Systems/slides/vol2/17_conclusion.md
+        route: sources/courses/harvard-ml-systems/slides/vol2/17-conclusion
+      # END GENERATED HARVARD LABS AND SLIDES
+      # BEGIN GENERATED HSE ML COURSE
+      - source: 05 Источники/Courses/HSE ML course.md
+        route: sources/courses/hse-ml-course/index
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/homework-practice/homework-practice-01-tabular/homework-practice-01-pandas.ipynb.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/homework-practice/homework-practice-01-tabular/homework-practice-01-pandas-ipynb
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/homework-practice/homework-practice-01-tabular/homework-practice-01-polars.ipynb.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/homework-practice/homework-practice-01-tabular/homework-practice-01-polars-ipynb
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/homework-practice/homework-practice-02-gd/descents.py.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/homework-practice/homework-practice-02-gd/descents-py
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/homework-practice/homework-practice-02-gd/homework-practice-02-gd.ipynb.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/homework-practice/homework-practice-02-gd/homework-practice-02-gd-ipynb
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/homework-practice/homework-practice-02-gd/interfaces.py.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/homework-practice/homework-practice-02-gd/interfaces-py
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/homework-practice/homework-practice-02-gd/linear_regression.py.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/homework-practice/homework-practice-02-gd/linear-regression-py
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/homework-practice/homework-practice-03-features/homework-practice-03-advanced.ipynb.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/homework-practice/homework-practice-03-features/homework-practice-03-advanced-ipynb
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/homework-practice/homework-practice-03-features/homework-practice-03-base.ipynb.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/homework-practice/homework-practice-03-features/homework-practice-03-base-ipynb
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/homework-practice/homework-practice-05-trees/homework-practice-05-trees.ipynb.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/homework-practice/homework-practice-05-trees/homework-practice-05-trees-ipynb
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/homework-practice/homework-practice-05-trees/hw5code.py.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/homework-practice/homework-practice-05-trees/hw5code-py
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/homework-practice/homework-practice-06-boosting/boosting.py.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/homework-practice/homework-practice-06-boosting/boosting-py
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/homework-practice/homework-practice-06-boosting/homework_practice_06_boosting.ipynb.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/homework-practice/homework-practice-06-boosting/homework-practice-06-boosting-ipynb
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/homework-practice/homework-practice-bonus-XAI.ipynb.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/homework-practice/homework-practice-bonus-xai-ipynb
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/homework-practice/homework_practice_04_dl.ipynb.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/homework-practice/homework-practice-04-dl-ipynb
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/homework-theory/homework-theory-01-linear-models.pdf.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/homework-theory/homework-theory-01-linear-models-pdf
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/homework-theory/homework-theory-02-derivatives.pdf.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/homework-theory/homework-theory-02-derivatives-pdf
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/homework-theory/homework-theory-03-linclass.pdf.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/homework-theory/homework-theory-03-linclass-pdf
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/homework-theory/homework-theory-04-cnn.pdf.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/homework-theory/homework-theory-04-cnn-pdf
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/lecture-notes/lecture01-intro.pdf.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/lecture-notes/lecture01-intro-pdf
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/lecture-notes/lecture02-linregr.pdf.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/lecture-notes/lecture02-linregr-pdf
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/lecture-notes/lecture03-linregr.pdf.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/lecture-notes/lecture03-linregr-pdf
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/lecture-notes/lecture04-linclass.pdf.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/lecture-notes/lecture04-linclass-pdf
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/lecture-notes/lecture05-linclass.pdf.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/lecture-notes/lecture05-linclass-pdf
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/lecture-notes/lecture06-linclass.pdf.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/lecture-notes/lecture06-linclass-pdf
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/lecture-notes/lecture07-deeplearning.pdf.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/lecture-notes/lecture07-deeplearning-pdf
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/lecture-notes/lecture09-trees.pdf.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/lecture-notes/lecture09-trees-pdf
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/lecture-notes/lecture10-ensembles.pdf.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/lecture-notes/lecture10-ensembles-pdf
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/lecture-notes/lecture11-ensembles.pdf.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/lecture-notes/lecture11-ensembles-pdf
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/lecture-notes/lecture12-ensembles.pdf.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/lecture-notes/lecture12-ensembles-pdf
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem01-data.ipynb.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem01-data-ipynb
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem01-pandas.ipynb.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem01-pandas-ipynb
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem01-polars.ipynb.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem01-polars-ipynb
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem02-charts.ipynb.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem02-charts-ipynb
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem02-sklearn-linreg.ipynb.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem02-sklearn-linreg-ipynb
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem03-gd.ipynb.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem03-gd-ipynb
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem03-numpy.ipynb.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem03-numpy-ipynb
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem04-features.ipynb.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem04-features-ipynb
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem04-features.pdf.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem04-features-pdf
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem05-linclass-metrics.pdf.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem05-linclass-metrics-pdf
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem06-calibration.ipynb.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem06-calibration-ipynb
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem06-calibration.pdf.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem06-calibration-pdf
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem07-torch-mlp.ipynb.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem07-torch-mlp-ipynb
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem08-torch-cnn.ipynb.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem08-torch-cnn-ipynb
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem09-trees.ipynb.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem09-trees-ipynb
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem10-bvd.pdf.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem10-bvd-pdf
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem11-gbm-part1.pdf.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem11-gbm-part1-pdf
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem11-gbm-part2.pdf.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem11-gbm-part2-pdf
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem12-clustering.ipynb.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem12-clustering-ipynb
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem12-clustering.pdf.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem12-clustering-pdf
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem13-pca-tsne.ipynb.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem13-pca-tsne-ipynb
+      - source: 05 Источники/Courses/HSE ML course/ml1-2026-spring/seminars/sem13-pca.pdf.md
+        route: sources/courses/hse-ml-course/ml1-2026-spring/seminars/sem13-pca-pdf
+      - source: 05 Источники/Courses/HSE ML course/ml2-2026-spring/homeworks-practice/homework-practice-08-unsupervised.ipynb.md
+        route: sources/courses/hse-ml-course/ml2-2026-spring/homeworks-practice/homework-practice-08-unsupervised-ipynb
+      - source: 05 Источники/Courses/HSE ML course/ml2-2026-spring/homeworks-practice/homework-practice-09-imbalanced.ipynb.md
+        route: sources/courses/hse-ml-course/ml2-2026-spring/homeworks-practice/homework-practice-09-imbalanced-ipynb
+      - source: 05 Источники/Courses/HSE ML course/ml2-2026-spring/homeworks-practice/homework-practice-10-recommendations/homework-practice-10-recommendations.ipynb.md
+        route: sources/courses/hse-ml-course/ml2-2026-spring/homeworks-practice/homework-practice-10-recommendations/homework-practice-10-recommendations-ipynb
+      - source: 05 Источники/Courses/HSE ML course/ml2-2026-spring/homeworks-practice/homework-practice-11-random-features/homework-practice-11-random-features.ipynb.md
+        route: sources/courses/hse-ml-course/ml2-2026-spring/homeworks-practice/homework-practice-11-random-features/homework-practice-11-random-features-ipynb
+      - source: 05 Источники/Courses/HSE ML course/ml2-2026-spring/homeworks-practice/homework-practice-11-random-features/homework_practice_11_kernel_regression.py.md
+        route: sources/courses/hse-ml-course/ml2-2026-spring/homeworks-practice/homework-practice-11-random-features/homework-practice-11-kernel-regression-py
+      - source: 05 Источники/Courses/HSE ML course/ml2-2026-spring/homeworks-practice/homework-practice-11-random-features/homework_practice_11_rff.py.md
+        route: sources/courses/hse-ml-course/ml2-2026-spring/homeworks-practice/homework-practice-11-random-features/homework-practice-11-rff-py
+      - source: 05 Источники/Courses/HSE ML course/ml2-2026-spring/homeworks-practice/homework-practice-12-em/homework-practice-12-em.ipynb.md
+        route: sources/courses/hse-ml-course/ml2-2026-spring/homeworks-practice/homework-practice-12-em/homework-practice-12-em-ipynb
+      - source: 05 Источники/Courses/HSE ML course/ml2-2026-spring/homeworks-practice/homework-practice-12-em/metrics.py.md
+        route: sources/courses/hse-ml-course/ml2-2026-spring/homeworks-practice/homework-practice-12-em/metrics-py
+      - source: 05 Источники/Courses/HSE ML course/ml2-2026-spring/homeworks-practice/homework-practice-12-em/models.py.md
+        route: sources/courses/hse-ml-course/ml2-2026-spring/homeworks-practice/homework-practice-12-em/models-py
+      - source: 05 Источники/Courses/HSE ML course/ml2-2026-spring/homeworks-practice/homework-practice-12-em/preprocessing.py.md
+        route: sources/courses/hse-ml-course/ml2-2026-spring/homeworks-practice/homework-practice-12-em/preprocessing-py
+      - source: 05 Источники/Courses/HSE ML course/ml2-2026-spring/homeworks-practice/homework-practice-bonus-knn.ipynb.md
+        route: sources/courses/hse-ml-course/ml2-2026-spring/homeworks-practice/homework-practice-bonus-knn-ipynb
+      - source: 05 Источники/Courses/HSE ML course/ml2-2026-spring/seminars/sem01-pca.pdf.md
+        route: sources/courses/hse-ml-course/ml2-2026-spring/seminars/sem01-pca-pdf
+      - source: 05 Источники/Courses/HSE ML course/ml2-2026-spring/seminars/sem02-clustering.ipynb.md
+        route: sources/courses/hse-ml-course/ml2-2026-spring/seminars/sem02-clustering-ipynb
+      - source: 05 Источники/Courses/HSE ML course/ml2-2026-spring/seminars/sem03-graph-clustering.pdf.md
+        route: sources/courses/hse-ml-course/ml2-2026-spring/seminars/sem03-graph-clustering-pdf
+      - source: 05 Источники/Courses/HSE ML course/ml2-2026-spring/seminars/sem04-graph.ipynb.md
+        route: sources/courses/hse-ml-course/ml2-2026-spring/seminars/sem04-graph-ipynb
+      - source: 05 Источники/Courses/HSE ML course/ml2-2026-spring/seminars/sem04-graph.pdf.md
+        route: sources/courses/hse-ml-course/ml2-2026-spring/seminars/sem04-graph-pdf
+      # END GENERATED HSE ML COURSE
+      - source: 05 Источники/imbalanced-learn/0.14.2/published/index.md
+        route: sources/imbalanced-learn/0-14-2
+      - source: 05 Источники/imbalanced-learn/0.14.2/published/license.md
+        route: sources/imbalanced-learn/0-14-2/license
+      - source: 05 Источники/imbalanced-learn/0.14.2/published/user-guide/introduction.md
+        route: sources/imbalanced-learn/0-14-2/user-guide/introduction
+      - source: 05 Источники/imbalanced-learn/0.14.2/published/user-guide/over-sampling.md
+        route: sources/imbalanced-learn/0-14-2/user-guide/over-sampling
+      - source: 05 Источники/imbalanced-learn/0.14.2/published/user-guide/under-sampling.md
+        route: sources/imbalanced-learn/0-14-2/user-guide/under-sampling
+      - source: 05 Источники/imbalanced-learn/0.14.2/published/user-guide/combine.md
+        route: sources/imbalanced-learn/0-14-2/user-guide/combine
+      - source: 05 Источники/imbalanced-learn/0.14.2/published/user-guide/ensemble.md
+        route: sources/imbalanced-learn/0-14-2/user-guide/ensemble
+      - source: 05 Источники/imbalanced-learn/0.14.2/published/user-guide/miscellaneous.md
+        route: sources/imbalanced-learn/0-14-2/user-guide/miscellaneous
+      - source: 05 Источники/imbalanced-learn/0.14.2/published/user-guide/metrics.md
+        route: sources/imbalanced-learn/0-14-2/user-guide/metrics
+      - source: 05 Источники/imbalanced-learn/0.14.2/published/user-guide/model-selection.md
+        route: sources/imbalanced-learn/0-14-2/user-guide/model-selection
+      - source: 05 Источники/imbalanced-learn/0.14.2/published/user-guide/common-pitfalls.md
+        route: sources/imbalanced-learn/0-14-2/user-guide/common-pitfalls
+      - source: 05 Источники/imbalanced-learn/0.14.2/published/user-guide/references.md
+        route: sources/imbalanced-learn/0-14-2/user-guide/references
+      - source: 05 Источники/imbalanced-learn/0.14.2/published/user-guide/bibliography.md
+        route: sources/imbalanced-learn/0-14-2/user-guide/bibliography
+      - source: 05 Источники/imbalanced-learn/0.14.2/published/gallery/plot-impact-imbalanced-classes.md
+        route: sources/imbalanced-learn/0-14-2/gallery/plot-impact-imbalanced-classes
+      - source: 05 Источники/imbalanced-learn/0.14.2/published/gallery/plot-comparison-over-sampling.md
+        route: sources/imbalanced-learn/0-14-2/gallery/plot-comparison-over-sampling
+      - source: 05 Источники/imbalanced-learn/0.14.2/published/gallery/plot-comparison-under-sampling.md
+        route: sources/imbalanced-learn/0-14-2/gallery/plot-comparison-under-sampling
+      - source: 05 Источники/imbalanced-learn/0.14.2/published/gallery/plot-illustration-tomek-links.md
+        route: sources/imbalanced-learn/0-14-2/gallery/plot-illustration-tomek-links
+      - source: 05 Источники/imbalanced-learn/0.14.2/published/gallery/plot-bagging-classifier.md
+        route: sources/imbalanced-learn/0-14-2/gallery/plot-bagging-classifier
+      - source: 05 Источники/imbalanced-learn/0.14.2/published/gallery/plot-comparison-ensemble-classifier.md
+        route: sources/imbalanced-learn/0-14-2/gallery/plot-comparison-ensemble-classifier
+      - source: 05 Источники/imbalanced-learn/0.14.2/published/gallery/plot-metrics.md
+        route: sources/imbalanced-learn/0-14-2/gallery/plot-metrics
+      - source: 05 Источники/imbalanced-learn/0.14.2/published/gallery/plot-pipeline-classification.md
+        route: sources/imbalanced-learn/0-14-2/gallery/plot-pipeline-classification
       - source: 05 Источники/Source maps/Harvard ML Systems — complete transfer matrix.md
         route: sources/source-maps/harvard-ml-systems-transfer
       - source: 05 Источники/Source maps/Efficient DL Systems — complete transfer matrix.md
         route: sources/source-maps/efficient-dl-systems-transfer
       - source: 05 Источники/Source maps/ML systems — Bookvar gap matrix.md
         route: sources/source-maps/ml-systems-bookvar-gaps
+      - source: 05 Источники/Source maps/Единый реестр покрытия источников.md
+        route: sources/source-maps/complete-source-coverage
       - source: 05 Источники/Source maps/HSE ML course — link map.md
         route: sources/source-maps/hse-ml-course
+      # BEGIN GENERATED LLMS PRACTICAL GUIDE
+      - source: 05 Источники/Courses/LLMs Practical Guide.md
+        route: sources/courses/llms-practical-guide
+      - source: 05 Источники/Courses/LLMs Practical Guide/README.md
+        route: sources/courses/llms-practical-guide/guide
+      - source: 05 Источники/Courses/LLMs Practical Guide/awesome_examples/social_game_werewolf.md
+        route: sources/courses/llms-practical-guide/examples/social-game-werewolf
+      - source: 05 Источники/Courses/LLMs Practical Guide/awesome_examples/tableQA.md
+        route: sources/courses/llms-practical-guide/examples/table-qa
+      - source: 05 Источники/Courses/LLMs Practical Guide/source/README.md
+        route: sources/courses/llms-practical-guide/source/change-log
+      # END GENERATED LLMS PRACTICAL GUIDE
       - source: 05 Источники/Source maps/LLMs Practical Guide — link map.md
         route: sources/source-maps/llms-practical-guide
       - source: Papers/LLaMA 2.md
