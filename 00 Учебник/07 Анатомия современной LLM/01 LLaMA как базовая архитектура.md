@@ -2,7 +2,7 @@
 title: LLaMA как базовая архитектура
 type: textbook-chapter
 status: canonical
-last_updated: 2026-07-18
+last_updated: 2026-07-31
 previous: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна]]"
 next: "[[02 Areas/ML & DL/00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA]]"
 primary_sources:
@@ -13,10 +13,6 @@ primary_sources:
 ---
 
 # LLaMA как базовая архитектура современной LLM
-
-Системное сравнение архитектурных индуктивных смещений, вычислительной
-интенсивности и memory wall сохранено в полной главе
-[[05 Источники/Courses/Harvard ML Systems/vol1/nn_architectures|Neural Network Architectures]].
 
 LLaMA не вводит новый класс нейронных сетей. Это причинный Transformer, в
 котором несколько накопившихся к 2023 году решений собраны в простой и хорошо
@@ -55,6 +51,17 @@ x₀ ∈ ℝ[T × d_model]
    ↓ vocabulary projection
 logits ∈ ℝ[T × |V|]
 ```
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/atlas-courses-official/llama3-architecture.png]]
+
+*Общий путь Llama 3 от входных токенов через embedding и повторяющиеся блоки
+`self-attention → feedforward network` к следующему токену. Сначала проследите
+верхнюю стрелку слева направо, затем пунктирную стрелку авторегрессии: выходной
+токен становится частью следующего входа. Схема намеренно не раскрывает
+RMSNorm, RoPE, SwiGLU и residual paths — их нужно восстановить по формулам ниже.
+Автор: Meta Llama Team; источник: [The Llama 3 Herd of Models, Figure 1,
+p. 4](https://arxiv.org/pdf/2407.21783#page=4). Локальный файл — фрагмент
+официального PDF без изменения содержания.*
 
 Каждый block выполняет две разные работы:
 
@@ -103,6 +110,30 @@ $$
 
 Поэтому «LLaMA architecture» — не альтернатива Transformer. Это конкретная
 современная конфигурация decoder-only Transformer.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/atlas-remainder-official/gpt-decoder-block.png]]
+
+*Decoder-only путь GPT-2: позиции проходят через повторяющиеся masked
+self-attention и feed-forward blocks. Рисунок полезно сравнить со схемой Llama
+3 выше: внешний скелет не изменился. Изменения LLaMA находятся **внутри** этих
+двух прямоугольников и вокруг residual stream, а не в новом направлении потока.
+Автор: Jay Alammar, [The Illustrated GPT-2](https://jalammar.github.io/illustrated-gpt2/),
+[прямой файл](https://jalammar.github.io/images/gpt2/gpt-2-transformer-xl-bert-3.png),
+CC BY-NC-SA 4.0.*
+
+Если сопоставить поколения по одним и тем же архитектурным осям, переход
+выглядит так:
+
+| Модель | Нормализация | Позиция | FFN | Организация K/V-heads |
+|---|---|---|---|---|
+| GPT-1 | post-LayerNorm | learned absolute embeddings | GELU | MHA |
+| GPT-2 / GPT-3 | pre-LayerNorm и final norm | learned absolute embeddings | GELU | MHA |
+| LLaMA 1 | pre-RMSNorm и final norm | RoPE на Q/K | SwiGLU | MHA |
+| Llama 2 | тот же базовый recipe | RoPE | SwiGLU | MHA; GQA в 70B |
+| Llama 3 | pre-RMSNorm | RoPE | SwiGLU | GQA |
+
+Таблица не является перечнем всех различий. Она изолирует устройство блока:
+tokenizer, данные, длина контекста и post-training сравниваются отдельно.
 
 ## Изменение 1: normalization переехала перед подслоем
 
@@ -286,6 +317,17 @@ $$
 \operatorname{SiLU}(z)=z\sigma(z).
 $$
 
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-32-34/cs336-silu-vs-relu.png]]
+
+*SiLU, ReLU и тождественная функция. На отрицательной полуоси ReLU обнуляет
+сигнал, а SiLU сохраняет небольшую гладкую отрицательную область; при больших
+положительных значениях SiLU приближается к линейной функции. В схеме SwiGLU
+ниже синяя функция применяется к gate-ветви, тогда как value-ветвь остаётся
+линейной до поэлементного умножения. Источник: Stanford CS336, Assignment 1:
+Basics, Figure 3,
+[с. 21](https://github.com/stanford-cs336/assignment1-basics/blob/main/cs336_assignment1_basics.pdf#page=21),
+[репозиторий задания](https://github.com/stanford-cs336/assignment1-basics).*
+
 ```text
                     ┌→ Wg → SiLU ─┐
 x [d_model] ────────┤              × → Wd → output [d_model]
@@ -383,6 +425,15 @@ Output projection возвращает тот же $d=4096$, иначе residual
 В более поздних Llama число KV heads может быть меньше query heads. Это GQA —
 следующая глава. Важно не приписывать GQA исходной LLaMA 1 как универсальную
 характеристику всего семейства.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gqa/mha-gqa-mqa.png]]
+
+*Слева у каждой query-head собственная пара K/V — это MHA в LLaMA 1. В центре
+несколько query-heads указывают на одну пару K/V — GQA в Llama 2 70B и Llama 3.
+Здесь рисунок отмечает границу между поколениями; расчёт KV-cache и компромисс
+качество/скорость вынесены в следующую главу. Источник: Joshua Ainslie et al.,
+[GQA: Training Generalized Multi-Query Transformer Models from Multi-Head
+Checkpoints, Figure 2](https://aclanthology.org/2023.emnlp-main.298/).*
 
 ## LLaMA 1, Llama 2 и Llama 3 — не одна конфигурация
 
@@ -499,6 +550,10 @@ $$
   — хороший предшествующий маршрут от GPT-2 block к современным деталям.
 - [Michael Brenndoerfer — LLaMA Components](https://mbrenndoerfer.com/writing/llama-components-rmsnorm-swiglu-rope)
   — интерактивный разбор RMSNorm, SwiGLU и RoPE.
+- [Harvard Edge ML Systems — Neural Network Architectures](https://mlsysbook.ai/vol1/nn_architectures/nn_architectures.html)
+  — системное сравнение архитектур, вычислительной интенсивности и memory wall;
+  локальная копия сохранена в
+  [[05 Источники/Courses/Harvard ML Systems/vol1/nn_architectures]].
 
 ### Внутри базы
 

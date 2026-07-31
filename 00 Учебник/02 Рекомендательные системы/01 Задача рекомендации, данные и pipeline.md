@@ -91,6 +91,22 @@ $(i_1,\ldots,i_t)$. Цель — следующий объект $i_{t+1}$ ил�
 Логировать только клики недостаточно. Без impression и candidate logs нельзя
 отличить «пользователь отверг item» от «item не был доступен модели».
 
+На практике речь идёт не просто о двух моделях, а о последовательном сужении
+пространства решений:
+
+| Стадия | Типичный масштаб | Допустимая стоимость на item | Что может быть потеряно |
+|---|---:|---|---|
+| Доступный каталог | $10^6$–$10^8$ | фильтр по индексу | новые или временно недоступные items |
+| Candidate generation | $10^3$–$10^4$ | dot product, ANN, простые правила | relevant item из-за низкого retrieval recall |
+| Ranking | $10^2$–$10^3$ | богатые cross-features и DNN | правильный порядок внутри candidates |
+| Re-ranking | $10$–$10^2$ | slate-level constraints | relevance ради diversity, fairness или inventory |
+| Serving | $K$ показов | cache, fallback, deadline | весь treatment при timeout или ошибке |
+
+Числа здесь задают порядок величины, а не универсальную конфигурацию. Главный
+инвариант — логировать вход и выход каждой стадии. Тогда падение final metric
+можно разложить на candidate recall, качество ranker, действие filters и
+фактическую доставку slate пользователю.
+
 ## Split должен имитировать будущее
 
 Случайный split взаимодействий часто переносит поздние события пользователя в
@@ -127,6 +143,16 @@ normalization уже содержат test information.
 однако легче production-задачи и исключает пользователей с одной записью.
 Поэтому разумный отчёт содержит оба среза: warm-start ranking и отдельный
 cold-start protocol.
+
+| Временная область | Разрешено использовать | Запрещено использовать |
+|---|---|---|
+| До cutoff | события, availability, признаки и статистики с timestamp не позже cutoff | исправленные задним числом поля, если их не было в момент решения |
+| Label window | только построение target после зафиксированного observation time | обновление embeddings, popularity или vocabulary |
+| Test/replay | candidates и каталог, действительно доступные в момент запроса | современное состояние каталога и будущие interactions |
+
+Эта таблица важнее выбора конкретной функции `train_test_split`: leakage чаще
+возникает не в строках interactions, а в feature join, negative sampler или
+item availability snapshot.
 
 ```python
 events = events.sort_values(["user_id", "timestamp"])
@@ -170,6 +196,15 @@ for user, positive in positives:
 
 В experiment report обязательно указывают sampler, число negatives и
 исключение прежних positives. Иначе loss и ranking metrics невоспроизводимы.
+
+![[Assets/Sources/Dive into Deep Learning — Recommender Systems/rec-ranking.svg]]
+
+*Pairwise ranking в представлении D2L: один positive item должен получить score
+выше sampled negative для того же пользователя. Следует смотреть на разность
+двух scores — именно её увеличивает BPR, а не на попытку присвоить каждому item
+абсолютно «правильную» оценку. Источник: Zhang et al., [Dive into Deep Learning:
+Personalized Ranking](https://d2l.ai/chapter_recommender-systems/ranking.html),
+лицензия [CC BY-SA 4.0](https://github.com/d2l-ai/d2l-en/blob/master/LICENSE-SUMMARY).*
 
 ## Candidate generation — часть задачи
 
@@ -216,8 +251,8 @@ late-arriving information. Третье исключает рекомендац�
 
 ## Baseline раньше архитектуры
 
-Полный notebook с global mean, user bias, item bias и matrix factorization:
-[[05 Источники/Courses/Linux Foundation Recommenders/examples/02_model_collaborative_filtering/baseline_deep_dive.ipynb|LF Recommenders: Baseline recommender deep dive]].
+Пошаговый расчёт global mean, user bias, item bias и matrix factorization
+приведён в [[05 Источники/Courses/Linux Foundation Recommenders/examples/02_model_collaborative_filtering/baseline_deep_dive.ipynb|LF Recommenders: Baseline recommender deep dive]].
 
 Минимальный набор:
 
