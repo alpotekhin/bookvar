@@ -2032,6 +2032,18 @@ assets:
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/d2l/unfolded-rnn.svg
+  - id: curated-d2l-rnn-bptt-202607310001
+    asset: 00 Учебник/Assets/Figures/curated/d2l-recurrent/rnn-bptt.svg
+    author: Dive into Deep Learning contributors
+    source_url: https://d2l.ai/chapter_recurrent-neural-networks/bptt.html
+    license: CC BY-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-sa/4.0/
+    modifications: copied without modification from the open course
+    used_in:
+      - 00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/d2l/rnn-bptt.svg
   - id: curated-d2l-lstm-gates-00000000000c
     asset: 00 Учебник/Assets/Figures/curated/d2l-recurrent/lstm-gates.svg
     author: Dive into Deep Learning contributors
@@ -2088,10 +2100,23 @@ assets:
     license_url: https://creativecommons.org/licenses/by-sa/4.0/
     modifications: copied without modification from the open course
     used_in:
+      - 00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора.md
       - 00 Учебник/05 Attention и Transformer/01 От Seq2Seq к Transformer.md
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/d2l/seq2seq-attention-details.svg
+  - id: curated-linux-foundation-recommenders-architecture-202607310001
+    asset: 00 Учебник/Assets/Figures/curated/linux-foundation-recommenders-architecture.png
+    author: Linux Foundation Recommenders contributors
+    source_url: https://github.com/recommenders-team/recommenders/blob/6232b154548c955315650d58dca6bf1411c56020/examples/05_operationalize/als_movie_o16n.ipynb
+    license: MIT
+    license_url: https://github.com/recommenders-team/recommenders/blob/main/LICENSE
+    modifications: copied without modification; stored locally for reliable rendering
+    used_in:
+      - 00 Учебник/02 Рекомендательные системы/05 Оценивание и эксплуатация.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/linux-foundation-recommenders/reco-arch.png
   - id: curated-voita-ngram-window-000000000011
     asset: 00 Учебник/Assets/Figures/curated/voita-language-modeling/ngram-window.png
     author: Lena Voita
