@@ -2,28 +2,32 @@
 title: Измерение производительности и roofline
 type: textbook-chapter
 status: draft
-last_verified: 2026-07-24
+last_verified: 2026-07-31
 source_language: mixed
 ---
 
 # Измерение производительности и roofline
 
-**Полный исполняемый модуль:** [[05 Источники/Courses/Harvard ML Systems/tinytorch/19_benchmarking|TinyTorch 19 — Benchmarking]]. Модуль строит единый benchmarking harness для latency и сравнений вариантов модели, включая повторные измерения, абляции и стандартный формат результата.
+Утверждение «новое ядро быстрее на 30%» имеет смысл только вместе с условиями
+измерения. Первый запуск включает компиляцию и выделение памяти, следующий может
+читать данные из кэша, а несинхронный вызов CUDA закончится для CPU раньше, чем
+GPU выполнит работу. Даже честно полученное среднее скрывает редкие задержки,
+которые определяют время синхронного шага или пользовательский SLO.
 
-Benchmark — воспроизводимый эксперимент, а не одно число.
+Поэтому benchmark — это воспроизводимый эксперимент, а не одно число. Сначала
+фиксируют границу измеряемого пути и рабочую нагрузку, затем собирают
+распределение повторных измерений и только после этого объясняют результат через
+объём вычислений, движение данных и модель roofline.
 
-## Полные источники и практикум
+## Материалы и практикум
 
 - [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/benchmarking|Harvard CS249r — Benchmarking]]: спецификация benchmark, harness, статистика и правила отчётности.
 - [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/performance_engineering|Harvard CS249r — Performance Engineering]]: Iron Law, roofline и диагностический процесс.
 - [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week01_intro/seminar.ipynb|EDLS Week 1 — seminar notebook]]: измерения, которые можно повторить локально.
 
-Встроенные копии сохраняют полный английский текст, исходные рисунки и
-notebook. Глава ниже нужна как последовательность действий: сначала определить
-границу эксперимента, затем получить распределение измерений и только после
-этого объяснять результат через roofline.
+- [[05 Источники/Courses/Harvard ML Systems/tinytorch/19_benchmarking|TinyTorch 19 — Benchmarking]]: исполняемый модуль с единым измерительным стендом, повторными запусками и стандартным форматом результата.
 
-## Benchmark specification и harness
+## Спецификация эксперимента и измерительный стенд
 
 До запуска фиксируют:
 
@@ -92,7 +96,7 @@ CC BY-NC-SA 4.0; файл не изменён. Маркер сопоставля
 § “Inference metrics”, locator `sec-benchmarking-inference-metrics-78d4`,
 CC BY-NC-SA 4.0.*
 
-## Power и energy
+## Мощность и энергия
 
 Power — W в моменте, energy — $\int P(t)dt$ в J. Сравнивают также
 J/token, J/sample и energy-to-quality. Sampling должен охватывать warm steady
@@ -116,7 +120,7 @@ HBM-bound, но не L2-bound; cache hit меняет $Q_{\rm HBM}$, а не FLO
 § “The roofline model”, locator `sec-performance-engineering-roofline`,
 CC BY-NC-SA 4.0.*
 
-### Worked ridge и A/B
+### Численный пример и сравнение A/B
 
 Пусть $P_{\rm peak}=120$ TFLOP/s, HBM $BW=1.5$ TB/s. Тогда
 $I^*=80$ FLOP/B.

@@ -8,20 +8,13 @@ source_language: mixed
 
 # GPU, CUDA и иерархия памяти
 
-**Полный исполняемый модуль:** [[05 Источники/Courses/Harvard ML Systems/tinytorch/17_acceleration|TinyTorch 17 — Acceleration]]. Исходный код сопоставляет базовые, векторизованные и fused operations и проверяет, как уменьшение обращений к памяти меняет throughput.
-
 GPU быстр, когда много одинаковой работы можно запланировать одновременно, а
-данные переиспользуются рядом с ALU.
-
-## Полный материал и лабораторная работа
-
-- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/hw_acceleration|Harvard CS249r — Hardware Acceleration]]: SIMD/SIMT, устройство GPU, memory hierarchy и специализированные ускорители.
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week01_intro/lecture.pdf|EDLS Week 1 — lecture]]: оригинальные слайды курса.
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week01_intro/seminar.ipynb|EDLS Week 1 — seminar notebook]]: исполняемые измерения CPU/GPU, матричного умножения и памяти.
-
-Сначала прочитайте Harvard до раздела *Memory hierarchy*, затем пройдите
-notebook EDLS. Следующие параграфы дают словарь, с которым проще разбирать
-timeline и результаты измерений.
+данные переиспользуются рядом с ALU. Само число ядер почти ничего не говорит о
+скорости программы: один kernel загружает вычислительные блоки полезной работой,
+а другой проводит большую часть времени в ожидании памяти, простаивает из-за
+ветвлений или запускает слишком мало блоков. Чтобы отличать эти случаи, нужно
+понимать сразу две вещи — как GPU планирует threads и как данные проходят через
+его иерархию памяти.
 
 ## От grid до SM: исполнение и планирование
 
@@ -133,6 +126,10 @@ $i+1$ перекрывается с compute batch $i$. Проверять overla
 
 ## Источники
 
+- [[05 Источники/Courses/Harvard ML Systems/tinytorch/17_acceleration|TinyTorch 17 — Acceleration]] — исполняемое сравнение базовых, векторизованных и fused operations.
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/hw_acceleration|Harvard CS249r — Hardware Acceleration]] — SIMD/SIMT, устройство GPU, memory hierarchy и специализированные ускорители.
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week01_intro/lecture.pdf|EDLS Week 1 — lecture]] — оригинальные слайды курса.
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week01_intro/seminar.ipynb|EDLS Week 1 — seminar notebook]] — измерения CPU/GPU, матричного умножения и памяти.
 - [EDLS Week 1 lecture, pinned e632aa8](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week01_intro/lecture.pdf) — PDF pp. 6–20
 - [Harvard CS249r, Hardware Acceleration, pinned 45ecc8d](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/hw_acceleration/hw_acceleration.qmd) —
   §§ “Compute Units and Execution Models”
