@@ -381,7 +381,7 @@ sections:
             route: textbook/transformer/positional-information
           - label: 26. Полный encoder-decoder Transformer
             route: textbook/transformer/full-transformer
-          - label: Три архитектурных паттерна
+          - label: Вводная. Три архитектурных паттерна
             route: textbook/transformer/encoder-decoder-patterns
           - label: 27. BERT, RoBERTa и DeBERTa
             route: textbook/models/bert-roberta-deberta
@@ -396,7 +396,7 @@ sections:
       - label: VI. Анатомия современной LLM
         label_en: VI. Anatomy of a modern LLM
         items:
-          - label: LLaMA как базовая архитектура
+          - label: Вводная. LLaMA как базовая архитектура
             route: textbook/modern-llm/llama-architecture
           - label: 32. Современный decoder block
             route: textbook/modern-llm/decoder-block
@@ -444,21 +444,21 @@ sections:
             route: textbook/pretraining/scaling-laws
           - label: 44. Distributed training и mixed precision
             route: textbook/pretraining/distributed-systems
-          - label: 44a. Processes, collectives и DDP
+          - label: 44.1 Processes, collectives и DDP
             route: textbook/pretraining/processes-collectives-ddp
-          - label: 44b. Gradient checkpointing и offload
+          - label: 44.2 Gradient checkpointing и offload
             route: textbook/pretraining/gradient-checkpointing-offload
-          - label: 44c. Tensor и sequence parallelism
+          - label: 44.3 Tensor и sequence parallelism
             route: textbook/pretraining/tensor-sequence-parallelism
-          - label: 44d. Pipeline parallelism
+          - label: 44.4 Pipeline parallelism
             route: textbook/pretraining/pipeline-parallelism
-          - label: 44e. ZeRO, FSDP2, DeviceMesh и DTensor
+          - label: 44.5 ZeRO, FSDP2, DeviceMesh и DTensor
             route: textbook/pretraining/zero-fsdp2-devicemesh-dtensor
-          - label: 44f. Expert и hybrid parallelism
+          - label: 44.6 Expert и hybrid parallelism
             route: textbook/pretraining/expert-hybrid-parallelism
-          - label: 44g. Network, storage и distributed checkpoints
+          - label: 44.7 Network, storage и distributed checkpoints
             route: textbook/pretraining/network-storage-checkpoints
-          - label: 44h. Fault tolerance и fleet orchestration
+          - label: 44.8 Fault tolerance и fleet orchestration
             route: textbook/pretraining/fault-tolerance-orchestration
           - label: 45. SFT и instruction data
             route: textbook/post-training/sft-instruction-data
@@ -476,7 +476,7 @@ sections:
             route: textbook/post-training/grpo-deepseek-r1
           - label: 52. Reasoning distillation
             route: textbook/post-training/reasoning-distillation
-          - label: Test-time compute
+          - label: Углубление. Test-time compute
             route: textbook/reasoning/test-time-compute
           - label: 53. Синтетические данные и учебные программы
             route: textbook/pretraining/synthetic-data-curricula
@@ -531,7 +531,7 @@ sections:
           - label: 59.1 Несбалансированная классификация
             label_en: 59.1 Imbalanced classification
             route: textbook/evaluation/imbalanced-classification
-          - label: 59.1 Ответственные ML-системы
+          - label: 59.2 Ответственные ML-системы
             route: textbook/evaluation/responsible-systems
           - label: 60. Embeddings и metric learning
             route: textbook/retrieval/embeddings-metric-learning
@@ -667,6 +667,8 @@ sections:
         route: sources/papers/deepseek-r1
       - source: Courses/Stanford CS224N/Lecture 03 — Backpropagation and Neural Networks.md
         route: sources/courses/cs224n-lecture-03
+      - source: Courses/Stanford CS224N/Lecture 10 — Prompting, RLHF and DPO.md
+        route: sources/courses/cs224n-lecture-10
       - source: Courses/Stanford CS224N/Lecture 11 — Benchmarking and Evaluation.md
         route: sources/courses/cs224n-lecture-11
       - source: Concepts/Training/Alignment.md
