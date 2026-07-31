@@ -1,28 +1,26 @@
 ---
-title: Fault tolerance и fleet orchestration
+title: Отказоустойчивость и управление вычислительным кластером
 type: textbook-chapter
 status: canonical
-last_updated: 2026-07-24
+last_updated: 2026-07-31
 ---
 
-# 44h. Fault tolerance и fleet orchestration
+# Отказоустойчивость и управление вычислительным кластером
 
-## Полные главы Harvard CS249r
+Синхронный обучающий запуск останавливается, если хотя бы один из его процессов
+перестаёт участвовать в коллективных операциях. Поэтому увеличение числа GPU
+повышает не только скорость, но и вероятность прерывания. Если среднее время
+между независимыми отказами одного устройства равно $M$, то грубая оценка для
+запуска на $N$ устройствах составляет $M/N$. При $M=5$ лет и $N=1024$ получается
+около 43 часов. Многонедельное предобучение почти наверняка встретит отказ, и
+восстановление для него является обычной ветвью исполнения, а не аварийным
+исключением.
 
-- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/fault_tolerance|Fault Tolerance]];
-- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/fleet_orchestration|Fleet Orchestration]];
-- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/ops_scale|ML Operations at Scale]].
-
-Читайте их как одну последовательность: сначала модель отказа и checkpoint,
-затем размещение и перезапуск workloads, после этого — наблюдаемость и
-операционные процедуры всего fleet. Глава Bookvar ниже связывает эту
-последовательность с LLM pre-training job.
-
-При синхронном обучении отказ одного rank останавливает world. Если независимый MTBF устройства равен $M$, то грубый MTBF job на $N$ устройствах — $M/N$. Для $M=5$ лет и $N=1024$ это около 42.8 часа: многонедельный запуск обязан проектировать recovery как штатный путь.
-
-## Что нужно знать и чему научимся
-
-Нужны durable checkpoints из 44g и process groups из 44a. После главы можно вывести checkpoint interval, разделить fail-stop и SDC, описать elastic state transition и принять решение между немедленным фрагментированным и отложенным компактным размещением.
+Надёжная система должна ответить на три разных вопроса. Как обнаружить, что
+вычисления прекратились или незаметно испортились? Из какого согласованного
+состояния продолжить работу? Где разместить новый набор процессов, чтобы
+коллективные операции снова использовали компактную топологию? Эти решения
+связывают checkpoints из предыдущей главы с планировщиком всего кластера.
 
 ## Домены отказа и silent corruption
 
@@ -96,6 +94,9 @@ Job на 256 GPU ждёт compact block 2 h или может стартоват
 
 ## Источники
 
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/fault_tolerance|Harvard CS249r: Fault Tolerance]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/fleet_orchestration|Harvard CS249r: Fleet Orchestration]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/ops_scale|Harvard CS249r: ML Operations at Scale]].
 - Harvard Edge ML Systems Book, [Fault Tolerance](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/fault_tolerance/fault_tolerance.qmd), sections `sec-fault-tolerance-failure-models`, `sec-fault-tolerance-checkpoint-optimization`, `sec-fault-tolerance-silent-data-corruption`.
 - Harvard Edge ML Systems Book, commit `45ecc8d…`, [Fleet Orchestration, `sec-fleet-orchestration-gang-scheduling`, `sec-fleet-orchestration-topology-aware-placement`, `sec-fleet-orchestration-slurm` and `sec-fleet-orchestration-kubernetes`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/fleet_orchestration/fleet_orchestration.qmd).
 - Daly, [A Higher Order Estimate of the Optimum Checkpoint Interval](https://doi.org/10.1016/j.future.2004.11.016), 2006.

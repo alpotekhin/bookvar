@@ -456,9 +456,9 @@ sections:
             route: textbook/pretraining/zero-fsdp2-devicemesh-dtensor
           - label: 44.6 Expert и hybrid parallelism
             route: textbook/pretraining/expert-hybrid-parallelism
-          - label: 44.7 Network, storage и distributed checkpoints
+          - label: 44.7 Сеть, хранилище и распределённые checkpoints
             route: textbook/pretraining/network-storage-checkpoints
-          - label: 44.8 Fault tolerance и fleet orchestration
+          - label: 44.8 Отказоустойчивость и управление кластером
             route: textbook/pretraining/fault-tolerance-orchestration
           - label: 45. SFT и instruction data
             route: textbook/post-training/sft-instruction-data
