@@ -7,22 +7,9 @@ last_updated: 2026-07-24
 
 # 44e. ZeRO, FSDP2, DeviceMesh и DTensor
 
-## Полный маршрут EDLS
-
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week05_fsdp/lecture.pdf|EDLS Week 5 — полная лекция]];
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week05_fsdp/seminar.pdf|EDLS Week 5 — seminar slides]];
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week05_fsdp/homework/README|EDLS Week 5 — homework]];
-- [[02 Areas/ML & DL/06 Практика/12 Собрать и проверить FSDP|практика FSDP и переносимого checkpoint]].
-
-Здесь особенно важно не ограничиваться API: lecture и seminar показывают
-lifetime полных параметров во время all-gather и reduce-scatter. Именно эти
-временные materializations объясняют peak memory и выбор wrap policy.
+AllGather/ReduceScatter из [[44a Processes, collectives и DDP]] и layouts из [[44c Tensor и sequence parallelism]] позволяют проследить parameter shard от покоя до materialization, gradient reduction, optimizer update и checkpoint. Это, в свою очередь, объясняет выбор unit boundary и prefetch без скрытого пика памяти.
 
 DDP реплицирует параметры $P$, gradients $G$ и optimizer state $O$. ZeRO последовательно делит их по data-parallel rank:
-
-## Что нужно знать и чему научимся
-
-Нужны AllGather/ReduceScatter из 44a и layouts из 44c. Цель — проследить parameter shard от покоя до materialization, gradient reduction, optimizer update и checkpoint, а затем выбрать unit boundary и prefetch без скрытого peak.
 
 | Режим | Реплицировано | Разделено | постоянная память на rank |
 |---|---|---|---:|
@@ -86,6 +73,15 @@ optimizer.step(local_parameter_shard, grad_shard, local_state)
 Checkpoint сохраняет global logical DTensor независимо от текущего placement. Каждый rank пишет shards, planner фиксирует global shapes, dtype, keys и mapping. При restore на другой mesh shards перераспределяются. Обязательны optimizer/scheduler/scaler, RNG и data position; проверка — следующий шаг, а не успешный `load`.
 
 Для 70B-модели условный state 1.12 TB. При aggregate storage bandwidth 200 GB/s идеальный lower bound 5.6 s; если каждый из 64 rank создаёт тысячи файлов, metadata и contention увеличат время. Поэтому distributed save использует крупные shards и staging.
+
+## Материалы для практики
+
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week05_fsdp/lecture.pdf|EDLS Week 5 — полная лекция]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week05_fsdp/seminar.pdf|EDLS Week 5 — seminar slides]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week05_fsdp/homework/README|EDLS Week 5 — homework]];
+- [[02 Areas/ML & DL/06 Практика/12 Собрать и проверить FSDP|практика FSDP и переносимого checkpoint]].
+
+Лекция и seminar позволяют увидеть lifetime полных параметров во время AllGather и ReduceScatter. Именно временные materializations объясняют peak memory и выбор wrap policy, поэтому здесь важно не ограничиваться только API.
 
 ## Источники
 

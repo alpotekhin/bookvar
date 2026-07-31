@@ -9,22 +9,7 @@ last_updated: 2026-07-24
 
 Один процесс обслуживает одно устройство. Его `rank` — номер в группе, `world_size=N` — число участников; группы позволяют выполнять разные collectives на разных осях параллелизма. Point-to-point `send/recv` задают обмен явно, collective выражает общий шаблон и позволяет библиотеке выбрать алгоритм.
 
-## Полный маршрут по исходным материалам
-
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week03_data_parallel/lecture.pdf|EDLS Week 3 — полная лекция]];
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week03_data_parallel/practice.ipynb|EDLS Week 3 — исходный practice notebook]];
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week03_data_parallel/homework/README|EDLS Week 3 — homework]];
-- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/collective_communication|Harvard CS249r — Collective Communication]];
-- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/distributed_training|Harvard CS249r — Distributed Training]].
-
-Лекцию EDLS следует проходить вместе с notebook: схемы ring, gossip и gradient
-compression становятся проверяемыми только после измерения message size,
-latency и effective bandwidth. Harvard дополняет эксперимент систематическим
-разбором топологий и collective algorithms.
-
-## Что нужно знать и чему научимся
-
-Нужны только tensors и synchronous data parallelism. После главы можно восстановить shape/state переход любого collective, оценить latency/bandwidth lower bound, написать DDP-step и отличить полезное overlap от нарисованного profiler-ом суммарного времени.
+Чтобы разобраться в работе DDP, достаточно понимать tensors и synchronous data parallelism. Дальше мы проследим, как меняются shape и состояние данных в collectives, оценим latency и bandwidth, соберём DDP-step и отделим действительно скрытое коммуникационное время от простой суммы NCCL kernels в профиле.
 
 ## От сообщений к коллективным операциям
 
@@ -91,6 +76,16 @@ $$u_t=g_t+e_t,\quad q_t=C(u_t),\quad e_{t+1}=u_t-q_t.$$
 ## Проверка
 
 На двух rank с одинаковым seed сравнивают один DDP-step с single-process global batch: loss до update, усреднённые gradients и параметры после update. Затем искусственно задерживают один rank: ожидаемый результат не меняется, а step time показывает straggler amplification.
+
+## Материалы для практики
+
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week03_data_parallel/lecture.pdf|EDLS Week 3 — полная лекция]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week03_data_parallel/practice.ipynb|EDLS Week 3 — исходный practice notebook]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week03_data_parallel/homework/README|EDLS Week 3 — homework]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/collective_communication|Harvard CS249r — Collective Communication]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/distributed_training|Harvard CS249r — Distributed Training]].
+
+Лекцию EDLS полезно проходить вместе с notebook: схемы ring, gossip и gradient compression становятся проверяемыми после измерения message size, latency и effective bandwidth. Harvard дополняет эксперимент систематическим разбором топологий и collective algorithms.
 
 ## Источники
 

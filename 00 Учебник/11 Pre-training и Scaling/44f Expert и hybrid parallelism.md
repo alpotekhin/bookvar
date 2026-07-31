@@ -7,23 +7,9 @@ last_updated: 2026-07-24
 
 # 44f. Expert и hybrid parallelism
 
-## Полные исходные материалы
-
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week06_dl_arithmetic/lecture.pdf|EDLS Week 6 — model-state, activation и MoE logistics]];
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week06_dl_arithmetic/seminar/practice.ipynb|EDLS Week 6 — notebook]];
-- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/distributed_training|Harvard CS249r — Distributed Training]];
-- [[02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving|полная глава Bookvar о механике MoE]].
-
-Expert parallelism нельзя выбирать отдельно от router load и topology:
-all-to-all возникает из token dispatch, а объём работы каждого rank зависит от
-фактического распределения токенов. EDLS даёт ресурсный ledger, Harvard —
-системный контекст гибридных осей.
-
 Архитектуру router, auxiliary loss и capacity разбирает [[02 Mixture of Experts — routing, capacity и serving]]. Здесь вопрос системный: как доставить выбранные токены владельцам экспертов и вернуть outputs в исходный порядок.
 
-## Что нужно знать и чему научимся
-
-Нужны all-to-all из 44a, TP/SP из 44c и process meshes из 44e. После главы можно проследить token state через dispatch/GroupedGEMM/combine, рассчитать payload и imbalance, а затем разместить EP вместе с TP, PP и DP без нарушения divisibility constraints.
+Expert parallelism нельзя выбирать отдельно от router load и topology: all-to-all возникает из token dispatch, а объём работы каждого rank зависит от фактического распределения токенов. Опираясь на all-to-all из [[44a Processes, collectives и DDP]], TP/SP из [[44c Tensor и sequence parallelism]] и process meshes из [[44e ZeRO, FSDP2, DeviceMesh и DTensor]], проследим token state через dispatch, GroupedGEMM и combine, рассчитаем payload и imbalance, а затем совместим EP с TP, PP и DP без нарушения divisibility constraints.
 
 ## Dispatch, compute, combine
 
@@ -104,6 +90,15 @@ Backward повторяет коммуникационный граф в обр�
 *Источник: Harvard Edge ML Systems Book, [Distributed Training, figure `fig-parallelism-decision-tree`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/distributed_training.qmd), CC BY-NC-SA 4.0.*
 
 Проверка MoE системы сравнивает token-to-expert assignments, counts per expert, reconstructed output и weight-gradients с single-rank implementation. В профиле нужны all-to-all bytes, skew $\rho$, доля padding/dropped tokens и GroupedGEMM utilization.
+
+## Материалы для практики
+
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week06_dl_arithmetic/lecture.pdf|EDLS Week 6 — model-state, activation и MoE logistics]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week06_dl_arithmetic/seminar/practice.ipynb|EDLS Week 6 — notebook]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/distributed_training|Harvard CS249r — Distributed Training]];
+- [[02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving|полная глава Bookvar о механике MoE]].
+
+EDLS даёт ресурсный ledger, а Harvard — системный контекст гибридных осей. Вместе с notebook они позволяют сопоставить расчётные объёмы dispatch и combine с фактическим распределением токенов и временем all-to-all.
 
 ## Источники
 

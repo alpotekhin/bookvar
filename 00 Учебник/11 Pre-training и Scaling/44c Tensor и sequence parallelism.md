@@ -7,22 +7,9 @@ last_updated: 2026-07-24
 
 # 44c. Tensor, sequence и context parallelism
 
-## Полные исходные материалы
-
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week04_large_models/lecture.pdf|EDLS Week 4 — полная лекция]];
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week04_large_models/practice_part2.ipynb|EDLS Week 4 — practice part 2]];
-- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/distributed_training|Harvard CS249r — Distributed Training]];
-- [[02 Areas/ML & DL/06 Практика/11 Разрезать Transformer по TP и SP|практика TP/SP]].
-
-Практику начинайте с двух linear layers: пока для каждого rank не подписаны
-локальные shapes и collectives, переносить тот же разрез на attention и MLP
-рано. Harvard-глава помещает этот разрез в общую систему осей параллелизма.
-
 Три похожих названия скрывают разные layouts. Tensor parallelism (TP) делит hidden dimensions и веса внутри слоя. Megatron sequence parallelism (SP) делит **только sequence-local activation** вокруг LayerNorm/dropout и работает вместе с TP. Context/attention parallelism делит сам длинный контекст и меняет способ вычисления attention — например, Ulysses all-to-all или Ring Attention.
 
-## Предпосылки и цели
-
-Нужны формы Transformer из глав об attention, collectives из [[44a Processes, collectives и DDP]] и memory ledger из [[44b Gradient checkpointing и offload]]. После главы можно проследить layout каждого tensor, назвать collective на каждой границе и проверить distributed layer против dense.
+Опираясь на формы Transformer из глав об attention, collectives из [[44a Processes, collectives и DDP]] и memory ledger из [[44b Gradient checkpointing и offload]], проследим layout каждого tensor, collective на каждой границе и способ проверить distributed layer против dense.
 
 ## Tensor parallelism для MLP
 
@@ -137,6 +124,15 @@ TP делит weights и крупную GEMM, но вызывает collectives 
 4. Для SP проверить LayerNorm mean/variance по hidden $D$, не по sequence shard.
 5. Для Ring сравнить online-softmax `(max,sum)` с dense stable softmax и causal mask.
 6. Профиль должен показать именно ожидаемые collectives и bytes; лишний implicit redistribution — ошибка layout design.
+
+## Материалы для практики
+
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week04_large_models/lecture.pdf|EDLS Week 4 — полная лекция]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week04_large_models/practice_part2.ipynb|EDLS Week 4 — practice part 2]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/distributed_training|Harvard CS249r — Distributed Training]];
+- [[02 Areas/ML & DL/06 Практика/11 Разрезать Transformer по TP и SP|практика TP/SP]].
+
+Практику удобно начинать с двух linear layers: сначала для каждого rank подписать локальные shapes и collectives и только затем перенести тот же разрез на attention и MLP. Harvard-глава помещает этот разрез в общую систему осей параллелизма.
 
 ## Источники
 
