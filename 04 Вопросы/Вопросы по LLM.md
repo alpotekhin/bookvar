@@ -23,13 +23,13 @@ last_verified: 2026-07-20
 - Как связаны cross-entropy, perplexity и выбранный токенизатор? →
   [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/42 Next-token prediction#Перплексия|Перплексия]]
 - Как из isoFLOP-экспериментов получают compute-optimal пару размера модели и
-  числа токенов? → [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/43 Scaling laws#IsoFLOP-профили: наблюдаем минимум, а не угадываем его|IsoFLOP-профили]]
+  числа токенов? → [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/43 Scaling laws#Почему при фиксированном бюджете появляется минимум|IsoFLOP-профили]]
 - Почему Chinchilla-optimal модель для обучения может быть неоптимальна с учётом
-  многократного inference? → [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/43 Scaling laws#Где простая модель перестаёт работать|Границы scaling laws]]
+  многократного inference? → [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/43 Scaling laws#Оптимум обучения не равен оптимуму продукта|Train-optimal и inference-aware scaling]]
 - Какие состояния занимают память при обучении и что именно шардируют
-  DDP, FSDP/ZeRO, TP и PP? → [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision#Оси параллелизма|Оси параллелизма]]
+  DDP, FSDP/ZeRO, TP и PP? → [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision#Как оси складываются в одну конфигурацию|Оси параллелизма]]
 - Чем FP16, BF16 и FP8 различаются по диапазону, точности и требованиям к
-  масштабированию? → [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision#Смешанная точность|Смешанная точность]]
+  масштабированию? → [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision#Смешанная точность как часть алгоритма|Смешанная точность]]
 
 ## Post-training и alignment
 
