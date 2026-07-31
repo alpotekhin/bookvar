@@ -2,17 +2,16 @@
 title: Задача рекомендации, данные и pipeline
 type: textbook-chapter
 status: canonical
-last_updated: 2026-07-24
+last_updated: 2026-07-31
 ---
 
 # Задача рекомендации, данные и pipeline
 
-Исходное изложение терминов и постановок находится в
-[[05 Источники/Courses/Dive into Deep Learning — Recommender Systems/recsys-intro|D2L: Overview of Recommender Systems]].
-Полный разбор MovieLens, его формата и вариантов split сохранён в
-[[05 Источники/Courses/Dive into Deep Learning — Recommender Systems/movielens|D2L: The MovieLens Dataset]].
-Практический notebook с random, chronological и stratified splitting:
-[[05 Источники/Courses/Linux Foundation Recommenders/examples/01_prepare_data/data_split.ipynb|LF Recommenders: Data splitting techniques]].
+Рекомендательная система выбирает не абстрактно «похожий объект», а конкретное
+действие в конкретный момент: какие фильмы показать на главной, какие товары
+допустить до ranking или какое уведомление отправить. До выбора модели нужно
+определить единицу такого решения, наблюдаемый сигнал и момент, относительно
+которого прошлое отделяется от будущего.
 
 ## Сначала определить событие и решение
 
@@ -267,3 +266,9 @@ $$
 
 Эти ошибки нельзя исправить архитектурой. Сначала строится проверяемый dataset и
 evaluation contract, затем выбирается модель.
+
+## Материалы и практикум
+
+- [[05 Источники/Courses/Dive into Deep Learning — Recommender Systems/recsys-intro|D2L — Overview of Recommender Systems]] — основные постановки и термины.
+- [[05 Источники/Courses/Dive into Deep Learning — Recommender Systems/movielens|D2L — The MovieLens Dataset]] — формат данных и варианты split.
+- [[05 Источники/Courses/Linux Foundation Recommenders/examples/01_prepare_data/data_split.ipynb|Linux Foundation Recommenders — Data splitting techniques]] — random, chronological и stratified splitting в исполняемом notebook.

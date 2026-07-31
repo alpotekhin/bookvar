@@ -2,7 +2,7 @@
 title: LSTM и GRU
 type: textbook-chapter
 status: canonical
-last_updated: 2026-07-20
+last_updated: 2026-07-31
 previous: "[[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT]]"
 next: "[[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора]]"
 primary_sources:
@@ -11,10 +11,6 @@ primary_sources:
 ---
 
 # LSTM и GRU
-
-Полная исходная памятка Stanford с уравнениями всех gates, схемами ячейки и
-сравнением LSTM/GRU сохранена в
-[[05 Источники/Courses/Stanford CS230 Cheatsheets/en/cheatsheet-recurrent-neural-networks.pdf|Recurrent Neural Networks Cheatsheet]].
 
 Простая RNN переносит память через повторяющееся нелинейное преобразование.
 Чтобы факт с первого шага повлиял на сотый, сигнал должен пережить длинное
@@ -218,6 +214,7 @@ Cho et al.; исторические детали — с первичной ра
 - Stanford CS224N, [Notes 5: Language Models, RNN, GRU and LSTM](https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1234/readings/cs224n-2023-notes05-LM_RNN.pdf).
 - Zhang et al., [Dive into Deep Learning, ch. 10](https://d2l.ai/chapter_recurrent-modern/index.html), CC BY-SA 4.0.
 - Chris Olah, [Understanding LSTM Networks](https://colah.github.io/posts/2015-08-Understanding-LSTMs/) — пошаговая визуальная линия операций LSTM и сопоставление с GRU.
+- [[05 Источники/Courses/Stanford CS230 Cheatsheets/en/cheatsheet-recurrent-neural-networks.pdf|Stanford CS230 — Recurrent Neural Networks Cheatsheet]] — уравнения gates и компактное сравнение LSTM/GRU.
 
 **Назад:** [[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT]] ·
 **Дальше:** [[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора]]

@@ -2,7 +2,7 @@
 title: Seq2Seq и bottleneck фиксированного вектора
 type: textbook-chapter
 status: canonical
-last_updated: 2026-07-20
+last_updated: 2026-07-31
 previous: "[[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU]]"
 next: "[[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/01 От Seq2Seq к Transformer]]"
 primary_sources:
@@ -11,10 +11,6 @@ primary_sources:
 ---
 
 # Seq2Seq и bottleneck фиксированного вектора
-
-Оригинальная англоязычная сводка Stanford по sequence-to-sequence, beam search
-и attention доступна в
-[[05 Источники/Courses/Stanford CS230 Cheatsheets/en/cheatsheet-recurrent-neural-networks.pdf|Recurrent Neural Networks Cheatsheet]].
 
 Классификатор выдаёт один ответ, а переводчик должен породить
 последовательность, длина которой не обязана совпадать с длиной входа. Нельзя
@@ -173,6 +169,7 @@ bottleneck и переход к attention — курсу Lena Voita. Архит�
 - Sutskever, Vinyals, Le, [Sequence to Sequence Learning with Neural Networks](https://arxiv.org/abs/1409.3215), 2014 — LSTM Seq2Seq, reversing source order и beam search.
 - Jurafsky, Martin, [Speech and Language Processing, ch. 13](https://web.stanford.edu/~jurafsky/slp3/13.pdf) — машинный перевод и encoder-decoder.
 - Stanford CS224N, [Notes 6: Neural Machine Translation, Seq2Seq and Attention](https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1234/readings/cs224n-2023-notes06-NMT_seq2seq_attention.pdf).
+- [[05 Источники/Courses/Stanford CS230 Cheatsheets/en/cheatsheet-recurrent-neural-networks.pdf|Stanford CS230 — Recurrent Neural Networks Cheatsheet]] — компактная англоязычная сводка по Seq2Seq, beam search и attention.
 - Zhang et al., [Dive into Deep Learning, §10.7](https://d2l.ai/chapter_recurrent-modern/seq2seq.html), CC BY-SA 4.0.
 - Lena Voita, [Seq2seq and Attention](https://lena-voita.github.io/nlp_course/seq2seq_and_attention.html) — визуальная линия от fixed-vector bottleneck к attention.
 

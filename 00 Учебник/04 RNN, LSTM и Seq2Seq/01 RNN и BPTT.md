@@ -2,7 +2,7 @@
 title: RNN и обратное распространение во времени
 type: textbook-chapter
 status: canonical
-last_updated: 2026-07-20
+last_updated: 2026-07-31
 previous: "[[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram]]"
 next: "[[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU]]"
 primary_sources:
@@ -11,10 +11,6 @@ primary_sources:
 ---
 
 # RNN и обратное распространение во времени
-
-Оригинальная англоязычная памятка Stanford с развёрткой RNN во времени,
-уравнениями BPTT, LSTM/GRU и типовыми tensor shapes сохранена в
-[[05 Источники/Courses/Stanford CS230 Cheatsheets/en/cheatsheet-recurrent-neural-networks.pdf|Recurrent Neural Networks Cheatsheet]].
 
 N-граммная модель видит только заранее выбранное число предыдущих слов. Для
 предложения `кошка, которую вчера принесли домой, уснула` это означает неприятный
@@ -174,6 +170,7 @@ Rumelhart et al.
 - Rumelhart, Hinton, Williams, [Learning representations by back-propagating errors](https://doi.org/10.1038/323533a0), 1986 — backpropagation для общих параметризованных вычислений.
 - Jurafsky, Martin, [Speech and Language Processing, ch. 8](https://web.stanford.edu/~jurafsky/slp3/8.pdf) — RNN-языковые модели и обучение.
 - Stanford CS224N, [Notes 5: Language Models, RNN, GRU and LSTM](https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1234/readings/cs224n-2023-notes05-LM_RNN.pdf).
+- [[05 Источники/Courses/Stanford CS230 Cheatsheets/en/cheatsheet-recurrent-neural-networks.pdf|Stanford CS230 — Recurrent Neural Networks Cheatsheet]] — развёртка RNN, BPTT, LSTM/GRU и типовые tensor shapes.
 - Zhang et al., [Dive into Deep Learning, ch. 9](https://d2l.ai/chapter_recurrent-neural-networks/index.html), CC BY-SA 4.0.
 
 **Назад:** [[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram]] ·

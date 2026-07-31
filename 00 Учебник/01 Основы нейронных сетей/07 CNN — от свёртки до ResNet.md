@@ -2,7 +2,7 @@
 title: CNN — от свёртки до ResNet
 type: textbook-chapter
 status: canonical
-last_updated: 2026-07-20
+last_updated: 2026-07-31
 primary_sources:
   - https://d2l.ai/chapter_convolutional-neural-networks/index.html
   - https://cs231n.github.io/convolutional-networks/
@@ -10,12 +10,6 @@ primary_sources:
 ---
 
 # CNN: от свёртки до ResNet
-
-**Полный исполняемый модуль:** [[05 Источники/Courses/Harvard ML Systems/tinytorch/09_convolutions|TinyTorch 09 — Convolutions]]. Модуль реализует `Conv2d`, `MaxPool2d` и `AvgPool2d` явными операциями, делая видимыми формы тензоров и вычислительную стоимость пространственной свёртки.
-
-Полная оригинальная англоязычная памятка Stanford — от свёртки и padding до
-типичных архитектур и transfer learning — сохранена в
-[[05 Источники/Courses/Stanford CS230 Cheatsheets/en/cheatsheet-convolutional-neural-networks.pdf|Convolutional Neural Networks Cheatsheet]].
 
 Полносвязный слой не знает, что соседние пиксели связаны, а один и тот же объект
 может находиться в разных частях изображения. Convolutional neural network
@@ -172,6 +166,8 @@ dilated causal convolution лежит в WaveNet. CNN вычисляет лок�
 
 ## Источники
 
+- [[05 Источники/Courses/Harvard ML Systems/tinytorch/09_convolutions|TinyTorch 09 — Convolutions]] — исполняемые `Conv2d` и pooling с явными формами тензоров.
+- [[05 Источники/Courses/Stanford CS230 Cheatsheets/en/cheatsheet-convolutional-neural-networks.pdf|Stanford CS230 — Convolutional Neural Networks Cheatsheet]].
 - D2L, [Convolutional Neural Networks](https://d2l.ai/chapter_convolutional-neural-networks/index.html).
 - Stanford CS231n, [Convolutional Networks](https://cs231n.github.io/convolutional-networks/).
 - LeCun et al., [Gradient-Based Learning Applied to Document Recognition](http://yann.lecun.com/exdb/publis/pdf/lecun-98.pdf).
