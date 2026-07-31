@@ -2,7 +2,7 @@
 title: Современный decoder block
 type: textbook-chapter
 status: reviewed
-last_updated: 2026-07-20
+last_updated: 2026-07-31
 primary_sources:
   - https://github.com/stanford-cs336/assignment1-basics/blob/main/cs336_assignment1_basics.pdf
   - https://arxiv.org/abs/2302.13971
@@ -13,7 +13,9 @@ primary_sources:
 
 На вход слоя поступает не последовательность слов и не распределение по словарю, а таблица векторов
 
-$$X\in\mathbb{R}^{B\times T\times d_{\text{model}}}.$$
+$$
+X\in\mathbb{R}^{B\times T\times d_{\mathrm{model}}}.
+$$
 
 Здесь $B$ — размер пакета, $T$ — число уже известных модели токенов, а
 $d_{\text{model}}$ — ширина скрытого представления. Задача блока — уточнить каждый
@@ -60,13 +62,51 @@ LLaMA закрепила ставшую типичной комбинацию RM
 параметры RoPE, ширину FFN и иногда сам порядок подслоёв. Поэтому сначала нужно
 понять инвариантный поток тензоров, а уже затем читать конфигурацию модели.
 
+## От GPT-2 к LLaMA: что сохранилось, а что заменили
+
+На схеме Jay Alammar представление одной позиции поднимается через
+последовательность одинаковых decoder blocks. Внутри каждого блока сначала
+стоит masked self-attention, затем FFN. Это главный инвариант decoder-only
+Transformer: attention читает предыдущий контекст, FFN преобразует полученный
+вектор, а после последнего блока состояние позиции используется для
+предсказания следующего токена.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-30/gpt2-transformer-block-vectors-2.png]]
+
+*GPT-2-подобный путь представления через стек decoder blocks. Источник: Jay
+Alammar, [The Illustrated GPT-2](https://jalammar.github.io/illustrated-gpt2/),
+[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/). Читайте
+рисунок снизу вверх: embedding позиции поступает в masked self-attention,
+затем в FFN, а выход блока становится входом следующего. Схема намеренно
+скрывает LayerNorm и residual connections; их расположение нельзя
+восстанавливать по этому рисунку.*
+
+Сопоставим эту схему с блоком CS336 выше. Каркас `attention → FFN` не
+изменился, но внутренние операции стали другими:
+
+| Компонент | GPT-2-like block | LLaMA-like block | Зачем изменили |
+|---|---|---|---|
+| положение normalization | pre-LayerNorm в GPT-2 | pre-RMSNorm | RMSNorm не вычитает среднее и вычисляется проще |
+| позиционная информация | обучаемый абсолютный embedding | RoPE внутри $Q$ и $K$ | относительная геометрия позиций входит прямо в attention score |
+| FFN | две проекции и GELU | три проекции и SwiGLU | multiplicative gate управляет прохождением признаков |
+| attention heads | MHA | MHA или GQA, в зависимости от размера | меньше KV-голов сокращает KV-cache и bandwidth на decode |
+| bias | обычно есть в linear/LayerNorm | во многих LLaMA-проекциях отсутствует | немного меньше параметров и операций |
+
+Важно различать исторические версии. Оригинальный Transformer 2017 года был
+post-norm, но GPT-2 уже перенёс LayerNorm перед attention и FFN. Поэтому
+переход к LLaMA — не переход от post-norm к pre-norm, а замена LayerNorm на
+RMSNorm вместе с заменой positional embeddings и обычной GELU-FFN. Две
+остаточные поправки и неизменная внешняя форма `[B,T,d_model]` сохранились.
+
 ## Что происходит внутри attention
 
 Пусть для численного примера `B=1`, `T=3`, `d_model=8`, `n_heads=2` и
 `head_dim=4`. После первой RMSNorm форма остаётся `[1, 3, 8]`. Линейные проекции
 строят query, key и value:
 
-$$Q=X_nW_Q,\qquad K=X_nW_K,\qquad V=X_nW_V.$$
+$$
+Q=X_nW_Q,\qquad K=X_nW_K,\qquad V=X_nW_V.
+$$
 
 При обычном multi-head attention все три тензора имеют форму `[1, 3, 2, 4]`.
 RoPE поворачивает пары координат только у $Q$ и $K$. После перестановки осей
@@ -88,6 +128,21 @@ key/value-голов — 8; несколько query-голов использу
 это уменьшает параметры K/V-проекций, а при генерации — размер KV-cache. Перед
 матричным произведением K/V логически распространяются на соответствующие
 query-группы, но хранить физические копии необязательно.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gqa/mha-gqa-mqa.png]]
+
+*Сопоставление MHA, GQA и MQA. Источник: Joshua Ainslie et al.,
+[GQA: Training Generalized Multi-Query Transformer Models from Multi-Head
+Checkpoints](https://aclanthology.org/2023.emnlp-main.298/), Figure 2. Считайте
+снизу вверх: число синих query-голов одинаково во всех трёх вариантах; меняется
+только число независимых пар keys/values. В центральной части каждая группа
+query-голов указывает на одну K/V-пару — это и есть grouped-query attention.*
+
+Например, при `n_heads=32`, `n_kv_heads=8` и `head_dim=128` тензор $Q$ после
+проекции имеет форму `[B,T,32,128]`, а $K$ и $V$ — `[B,T,8,128]`. Каждая
+K/V-голова обслуживает четыре query-головы. Размер K/V-проекций и кэша
+уменьшается в четыре раза по сравнению с MHA, но число query-голов и ширина
+выхода attention остаются прежними.
 
 ## Что происходит внутри SwiGLU
 
@@ -175,4 +230,3 @@ def decoder_block(x, positions, causal_mask):
 - [Meta, Llama 3 reference implementation](https://github.com/meta-llama/llama3/blob/main/llama/model.py) — точный порядок операций, GQA, RoPE и KV-cache.
 - [Karpathy, Let’s build GPT](https://www.youtube.com/watch?v=kCc8FmEb1nY) и [nanoGPT](https://github.com/karpathy/nanoGPT/blob/master/model.py) — лучший кодовый переход от bigram-модели к GPT, но архитектура там ближе к GPT-2: LayerNorm, GELU и обучаемые абсолютные позиции. Поэтому она полезна как предыстория, а не как спецификация LLaMA-подобного блока.
 - [Jurafsky & Martin, Speech and Language Processing, гл. 8](https://web.stanford.edu/~jurafsky/slp3/8.pdf) и [D2L, The Transformer Architecture](https://d2l.ai/chapter_attention-mechanisms-and-transformers/transformer.html) подробно объясняют классический Transformer; различия современного декодера нужно сверять с CS336 и реализацией конкретной модели.
-

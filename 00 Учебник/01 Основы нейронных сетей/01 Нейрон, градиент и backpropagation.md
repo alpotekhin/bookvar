@@ -2,20 +2,13 @@
 title: Вычислительный граф и backpropagation
 type: textbook-chapter
 status: canonical
-last_updated: 2026-07-18
+last_updated: 2026-07-31
 primary_sources:
   - https://github.com/karpathy/micrograd
   - https://colah.github.io/posts/2015-08-Backprop/
 ---
 
 # Вычислительный граф и обратное распространение ошибки
-
-**Полный исполняемый модуль:** [[05 Источники/Courses/Harvard ML Systems/tinytorch/06_autograd|TinyTorch 06 — Autograd]]. Модуль расширяет `Tensor` вычислительным графом и reverse-mode `backward()` и проверяет полученные градиенты математическими тестами.
-
-Полный англоязычный вывод обратного распространения и исходные схемы доступны в
-[[05 Источники/Courses/Machine Learning Visualized/book/main.pdf|Machine Learning Visualized — Complete Book]].
-Компактная формульная сводка по вычислительному графу и оптимизации сохранена в
-[[05 Источники/Courses/Stanford CS230 Cheatsheets/en/super-cheatsheet-deep-learning.pdf|Stanford CS230 — Complete Deep Learning Cheatsheet]].
 
 Нейронная сеть во время обучения представляет собой большую составную функцию.
 Она получает пример, последовательно преобразует его и в конце выдаёт число,
@@ -384,6 +377,9 @@ $$
 
 ## Источники
 
+- [[05 Источники/Courses/Harvard ML Systems/tinytorch/06_autograd|TinyTorch 06 — Autograd]] — исполняемый reverse-mode `backward()` и проверки градиентов.
+- [[05 Источники/Courses/Machine Learning Visualized/book/main.pdf|Machine Learning Visualized — Complete Book]] — англоязычный вывод и исходные схемы.
+- [[05 Источники/Courses/Stanford CS230 Cheatsheets/en/super-cheatsheet-deep-learning.pdf|Stanford CS230 — Complete Deep Learning Cheatsheet]].
 - [Andrej Karpathy — The spelled-out intro to neural networks and backpropagation](https://www.youtube.com/watch?v=VMj-3S1tku0)
 - [karpathy/micrograd](https://github.com/karpathy/micrograd)
 - [Chris Olah — Calculus on Computational Graphs: Backpropagation](https://colah.github.io/posts/2015-08-Backprop/)

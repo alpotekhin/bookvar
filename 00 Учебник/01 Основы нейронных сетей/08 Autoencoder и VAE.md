@@ -2,7 +2,7 @@
 title: Autoencoder и variational autoencoder
 type: textbook-chapter
 status: canonical
-last_updated: 2026-07-20
+last_updated: 2026-07-31
 primary_sources:
   - https://lilianweng.github.io/posts/2018-08-12-vae/
   - https://arxiv.org/abs/1312.6114
@@ -10,9 +10,6 @@ primary_sources:
 ---
 
 # Autoencoder и variational autoencoder
-
-Полный исходный раздел об autoencoder, его функции потерь и обучении сохранён в
-[[05 Источники/Courses/Machine Learning Visualized/book/main.pdf|Machine Learning Visualized — Complete Book]].
 
 Autoencoder получает объект $x$, сжимает его в код $z$ и пытается восстановить
 $x$. Обычный autoencoder учит детерминированное представление; variational
@@ -163,6 +160,7 @@ latent space и декодирует результат обратно.
 
 ## Источники
 
+- [[05 Источники/Courses/Machine Learning Visualized/book/main.pdf|Machine Learning Visualized — Complete Book]] — исходный раздел об autoencoder и reconstruction loss.
 - Lilian Weng, [From Autoencoder to Beta-VAE](https://lilianweng.github.io/posts/2018-08-12-vae/).
 - Kingma, Welling, [Auto-Encoding Variational Bayes](https://arxiv.org/abs/1312.6114).
 - Carl Doersch, [Tutorial on Variational Autoencoders](https://arxiv.org/abs/1606.05908).
