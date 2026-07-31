@@ -4858,7 +4858,7 @@ assets:
     source_url: https://arxiv.org/pdf/2010.11929
     license: open paper material; reuse confirmed by repository owner
     license_url: https://arxiv.org/pdf/2010.11929
-    modifications: Figure 1 rendered from official paper and cropped without content changes
+    modifications: Figure 1 rendered from the official paper; caption and surrounding page text removed, complete architecture diagram preserved
     used_in: ["00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md"]
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
@@ -4894,7 +4894,7 @@ assets:
     source_url: https://arxiv.org/pdf/2301.12597
     license: open paper material; reuse confirmed by repository owner
     license_url: https://arxiv.org/pdf/2301.12597
-    modifications: Figure 2 rendered from official paper and cropped without content changes
+    modifications: Figure 2 rendered from the official paper; surrounding page text and caption removed, diagram content preserved
     used_in: ["00 Учебник/16 Multimodal Models/64a Connectors и fusion.md"]
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
@@ -4918,7 +4918,7 @@ assets:
     source_url: https://arxiv.org/pdf/2409.17146
     license: open paper material; reuse confirmed by repository owner
     license_url: https://arxiv.org/pdf/2409.17146
-    modifications: Figure 5 rendered from official paper and cropped without content changes
+    modifications: Figure 5 rendered from the official paper; caption and surrounding page text removed, complete image-tokenization diagram preserved
     used_in: ["00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md"]
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
@@ -4954,7 +4954,7 @@ assets:
     source_url: https://arxiv.org/pdf/2412.05271
     license: open paper material; reuse confirmed by repository owner
     license_url: https://arxiv.org/pdf/2412.05271
-    modifications: Figure 4 rendered from official paper and cropped without content changes
+    modifications: Figure 4 rendered from the official paper; surrounding page text removed, both training-pipeline panels preserved
     used_in: ["00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные.md"]
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
@@ -4984,17 +4984,41 @@ assets:
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/vlm-2026/2409.12191.pdf
     derivation: pdf-page-render-crop
+  - id: curated-vlm2026-pix2struct-figure1-30034161ebd2
+    asset: 00 Учебник/Assets/Figures/curated/vlm-2026/pix2struct-figure1-tasks.png
+    author: Kenton Lee et al.
+    source_url: https://arxiv.org/pdf/2210.03347
+    license: open paper material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/pdf/2210.03347
+    modifications: Figure 1 rendered from the official paper; caption and surrounding page text removed, task examples preserved
+    used_in: ["00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding.md"]
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/vlm-2026/2210.03347.pdf
+    derivation: pdf-page-render-crop
   - id: curated-vlm2026-qwen25omni-figure2-6a1a5c7d1f45
     asset: 00 Учебник/Assets/Figures/curated/vlm-2026/qwen25omni-figure2-thinker-talker.png
     author: Jin Xu et al.
     source_url: https://arxiv.org/pdf/2503.20215
     license: open paper material; reuse confirmed by repository owner
     license_url: https://arxiv.org/pdf/2503.20215
-    modifications: Figure 2 rendered from official paper and cropped without content changes
+    modifications: Figure 2 rendered from the official paper; surrounding page text and logo removed, complete Thinker-Talker diagram preserved
     used_in: ["00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md"]
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/vlm-2026/2503.20215.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-vlm2026-imagebind-figure1-96c0ae5b7af5
+    asset: 00 Учебник/Assets/Figures/curated/vlm-2026/imagebind-figure1-capabilities.png
+    author: Rohit Girdhar et al.
+    source_url: https://arxiv.org/pdf/2305.05665
+    license: open paper material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/pdf/2305.05665
+    modifications: Figure 1 rendered from the official paper; caption and surrounding page text removed, three capability panels preserved
+    used_in: ["00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md"]
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/vlm-2026/2305.05665.pdf
     derivation: pdf-page-render-crop
   - id: curated-vlm2026-qwen25omni-figure3-a2a2295cd274
     asset: 00 Учебник/Assets/Figures/curated/vlm-2026/qwen25omni-figure3-tmrope.png
@@ -5014,7 +5038,7 @@ assets:
     source_url: https://cs231n.stanford.edu/slides/2025/lecture_16.pdf
     license: open course material; reuse confirmed by repository owner
     license_url: https://cs231n.stanford.edu/slides/2025/lecture_16.pdf
-    modifications: PDF page 48 rendered without content changes
+    modifications: PDF page 50 rendered without content changes; slide compares Winoground, CREPE, ARO, and related compositionality tests
     used_in: ["00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM.md"]
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials

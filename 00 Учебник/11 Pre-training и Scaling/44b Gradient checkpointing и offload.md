@@ -7,22 +7,9 @@ last_updated: 2026-07-24
 
 # 44b. Gradient checkpointing и offload
 
-## Полные исходные материалы
-
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week04_large_models/lecture.pdf|EDLS Week 4 — полная лекция]];
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week04_large_models/practice_part1.ipynb|EDLS Week 4 — practice part 1]];
-- [[02 Areas/ML & DL/06 Практика/10 Измерить checkpointing и offload|практическая работа Bookvar с единым протоколом измерения]].
-
-Исходный notebook оставлен целиком: в нём можно увидеть, какие activations
-перестают жить до backward, какие operators вычисляются повторно и когда offload
-добавляет копирование на критический путь. Текст главы ниже нужен для расчёта
-компромисса memory–compute до запуска эксперимента.
-
 Backward требует промежуточные значения forward. Если сохранять активации всех $L$ блоков, память грубо растёт как $O(LBSD)$ для batch $B$, sequence $S$ и hidden size $D$. Gradient checkpointing оставляет только границы сегментов и повторяет внутренний forward во время backward.
 
-## Что нужно знать и чему научимся
-
-Нужны устройство Transformer-блока, automatic differentiation и различие HBM, host DRAM и NVMe. После главы можно составить ledger сохранённых tensors, выбрать selective policy по bytes/FLOPs, построить prefetch timeline и доказать, что оптимизация не изменила gradient.
+Зная устройство Transformer-блока, automatic differentiation и различия между HBM, host DRAM и NVMe, можно перейти от общей идеи к точному memory ledger: определить, какие tensors сохранять, какие пересчитывать, как построить prefetch timeline и как проверить, что экономия памяти не изменила gradient.
 
 ## Что именно занимает память
 
@@ -87,6 +74,14 @@ Async prefetch запускает H2D следующего состояния д
 Сначала измеряют пик по категориям. Если доминируют активации — checkpointing; optimizer state — ZeRO-1/offload; параметры — FSDP/ZeRO-3; временный tensor одного operator — изменить kernel/TP. Комбинация допустима, но её проверяют timeline: checkpointing увеличивает compute window и иногда помогает скрыть prefetch, а иногда конкурирует с ним за memory bandwidth.
 
 Проверка состоит из двух частей. Численная: logits, loss и gradients с сохранением RNG совпадают с baseline в выбранном допуске. Системная: peak allocated/reserved HBM, bytes D2H/H2D, recompute FLOPs и exposed transfer time сняты с одного и того же шага.
+
+## Материалы для практики
+
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week04_large_models/lecture.pdf|EDLS Week 4 — полная лекция]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week04_large_models/practice_part1.ipynb|EDLS Week 4 — practice part 1]];
+- [[02 Areas/ML & DL/06 Практика/10 Измерить checkpointing и offload|практическая работа Bookvar с единым протоколом измерения]].
+
+В исходном notebook можно увидеть, какие activations перестают жить до backward, какие operators вычисляются повторно и когда offload добавляет копирование на критический путь. Его удобно использовать для проверки рассчитанного в главе компромисса memory–compute.
 
 ## Источники
 
