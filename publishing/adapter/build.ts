@@ -205,10 +205,15 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
   const statuses = new Map(parsed.map(({ entry, page }) => [entry.route, page.status]));
   const translatedLabel = (labelEn?: string): Pick<SidebarEntry, 'translations'> =>
     labelEn ? { translations: { en: labelEn } } : {};
+  const translatedPageLabel = (label: string, labelEn: string | undefined): string | undefined => {
+    if (!labelEn) return undefined;
+    const prefix = label.match(/^((?:S\d+|\d+(?:\.\d+)?)\.\s+)/)?.[1] ?? '';
+    return prefix && !labelEn.startsWith(prefix) ? `${prefix}${labelEn}` : labelEn;
+  };
   const sidebarItems = (items: PublicationSidebarItem[]): SidebarEntry[] => items.map((item) => 'route' in item
     ? {
         label: item.label,
-        ...translatedLabel(item.labelEn ?? titlesEn.get(item.route)),
+        ...translatedLabel(item.labelEn ?? translatedPageLabel(item.label, titlesEn.get(item.route))),
         slug: item.route
       }
     : {

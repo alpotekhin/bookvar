@@ -2,7 +2,8 @@
 title: "CS224N — Lecture 10: Prompting, Instruction Finetuning, and DPO/RLHF"
 course: "Stanford CS224N"
 lecture: 10
-type: course-note
+type: source-note
+status: legacy
 raw: "[[02 Areas/ML & DL/raw/courses/Stanford CS224N/slides/cs224n-spr2024-lecture10-prompting-rlhf]]"
 concepts: ["[[02 Areas/ML & DL/Concepts/Inference/In-context Learning|In-Context Learning]]", "[[02 Areas/ML & DL/Concepts/Training/RLHF|RLHF]]", "[[02 Areas/ML & DL/Concepts/Training/DPO|DPO]]", "[[02 Areas/ML & DL/Concepts/Training/Instruction Tuning|Instruction Tuning]]", "[[02 Areas/ML & DL/Concepts/NLP/Few-Shot Learning|Few-Shot Learning]]"]
 ---

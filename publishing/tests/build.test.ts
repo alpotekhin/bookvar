@@ -153,7 +153,7 @@ describe('buildPublication', () => {
       '      - source: Notes/Page B.md',
       '        route: page-b',
       '    sidebar:',
-      '      - label: Первая страница',
+      '      - label: 28. Первая страница',
       '        route: nested/page-a',
       '      - label: Вторая страница',
       '        route: page-b'
@@ -179,7 +179,7 @@ describe('buildPublication', () => {
       label: 'Учебник',
       translations: { en: 'Textbook' },
       items: [
-        { label: 'Первая страница', translations: { en: 'Page A in English' }, slug: 'nested/page-a' },
+        { label: '28. Первая страница', translations: { en: '28. Page A in English' }, slug: 'nested/page-a' },
         { label: 'Вторая страница', slug: 'page-b' }
       ]
     }]);

@@ -2,13 +2,16 @@
 title: Учебник по NLP и LLM
 type: textbook-chapter
 status: active
-last_updated: 2026-07-20
+last_updated: 2026-07-31
 ---
 
 # Учебник по NLP и LLM
 
 Последовательный визуальный курс: от производной и представления текста до
-современных языковых моделей, обучения рассуждению, поиска и агентных систем.
+современных языковых моделей, их обучения, развёртывания и использования в
+поисковых и агентных системах. Числа обозначают основной маршрут; помеченные
+как «вводная», «углубление» и `S` страницы поясняют переходы или дают системную
+подготовку, но не разрывают последовательность основных глав.
 
 > [!info] Как устроена база
 > Учебник задаёт порядок чтения. [[02 Areas/ML & DL/01 Справочник/_index|Справочник]]
@@ -32,8 +35,8 @@ last_updated: 2026-07-20
 ### II. Классическое машинное обучение
 
 Этот блок устраняет скачок от общих функций потерь сразу к нейронным сетям.
-Он основан на полном оригинальном курсе Inria/scikit-learn и содержит не только
-определения, но исходные лекции, notebooks, упражнения, решения и 212 рисунков.
+Основные главы дают связный маршрут, а карта модуля ведёт к исходным лекциям,
+тетрадям с кодом и упражнениям курса Inria/scikit-learn.
 
 - [[02 Areas/ML & DL/00 Учебник/01 Классическое машинное обучение/00 Карта модуля|Карта модуля и источники]]
 - [[02 Areas/ML & DL/00 Учебник/01 Классическое машинное обучение/01 Задача обучения и predictive pipeline]]
@@ -42,6 +45,21 @@ last_updated: 2026-07-20
 - [[02 Areas/ML & DL/00 Учебник/01 Классическое машинное обучение/04 Bagging, random forest и gradient boosting]]
 - [[02 Areas/ML & DL/00 Учебник/01 Классическое машинное обучение/05 Оценивание, кросс-валидация и выбор порога]]
 - [[02 Areas/ML & DL/00 Учебник/01 Классическое машинное обучение/06 Кластеризация и её ограничения]]
+- [[02 Areas/ML & DL/00 Учебник/01 Классическое машинное обучение/06a Спектральная кластеризация и графовый Laplacian|Углубление: спектральная кластеризация и графовый лапласиан]]
+- [[02 Areas/ML & DL/00 Учебник/01 Классическое машинное обучение/07 PCA, t-SNE и UMAP|Углубление: снижение размерности]]
+- [[02 Areas/ML & DL/00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM|Углубление: смеси распределений и EM]]
+- [[02 Areas/ML & DL/00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features|Углубление: ядровые методы и SVM]]
+
+Рекомендательные системы образуют самостоятельное прикладное ответвление этого
+блока. Его можно пройти сразу после классического ML или вернуться к нему перед
+главами о поиске и ранжировании:
+
+- [[02 Areas/ML & DL/00 Учебник/02 Рекомендательные системы/00 Карта модуля|Карта рекомендательных систем]]
+- [[02 Areas/ML & DL/00 Учебник/02 Рекомендательные системы/01 Задача рекомендации, данные и pipeline|Задача рекомендации и данные]]
+- [[02 Areas/ML & DL/00 Учебник/02 Рекомендательные системы/02 Collaborative filtering и matrix factorization|Коллаборативная фильтрация и матричная факторизация]]
+- [[02 Areas/ML & DL/00 Учебник/02 Рекомендательные системы/03 Ranking и нейронные рекомендательные модели|Ранжирование и нейронные модели]]
+- [[02 Areas/ML & DL/00 Учебник/02 Рекомендательные системы/04 Последовательные рекомендации и признаки|Последовательные рекомендации]]
+- [[02 Areas/ML & DL/00 Учебник/02 Рекомендательные системы/05 Оценивание и эксплуатация|Оценивание и эксплуатация]]
 
 ### III. Нейронные сети
 
@@ -72,7 +90,7 @@ last_updated: 2026-07-20
 25. [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/04 Позиционная информация]]
 26. [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/03 Полный Transformer|Полный encoder-decoder Transformer]]
 
-Перед BERT и GPT: [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|как из общего Transformer получаются encoder-only, decoder-only и encoder–decoder модели]].
+Вводная перед BERT и GPT: [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|как из общего Transformer получаются encoder-only, decoder-only и encoder–decoder модели]].
 27. [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa]]
 28. [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение]]
 29. [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык]]
@@ -80,6 +98,8 @@ last_updated: 2026-07-20
 31. [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer]]
 
 ### VI. Анатомия современной LLM
+
+Вводная: [[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура|как LLaMA закрепила базовый облик современной открытой LLM]].
 
 32. [[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/02 Современный decoder block]]
 33. [[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual]]
@@ -102,13 +122,13 @@ last_updated: 2026-07-20
 объясняют пределы исполнения, арифметика и численные форматы дают бюджет шага,
 а input pipeline и profiling учат находить фактическое узкое место.
 
-1. [[02 Areas/ML & DL/00 Учебник/10 ML Systems/01 Модель как часть системы]]
-2. [[02 Areas/ML & DL/00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти]]
-3. [[02 Areas/ML & DL/00 Учебник/10 ML Systems/03 Измерение производительности и roofline]]
-4. [[02 Areas/ML & DL/00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE]]
-5. [[02 Areas/ML & DL/00 Учебник/10 ML Systems/05 Численные форматы и mixed precision]]
-6. [[02 Areas/ML & DL/00 Учебник/10 ML Systems/06 Data pipeline, padding и packing]]
-7. [[02 Areas/ML & DL/00 Учебник/10 ML Systems/07 Profiling ML-нагрузки]]
+S1. [[02 Areas/ML & DL/00 Учебник/10 ML Systems/01 Модель как часть системы]]
+S2. [[02 Areas/ML & DL/00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти]]
+S3. [[02 Areas/ML & DL/00 Учебник/10 ML Systems/03 Измерение производительности и roofline]]
+S4. [[02 Areas/ML & DL/00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE]]
+S5. [[02 Areas/ML & DL/00 Учебник/10 ML Systems/05 Численные форматы и mixed precision]]
+S6. [[02 Areas/ML & DL/00 Учебник/10 ML Systems/06 Data pipeline, padding и packing]]
+S7. [[02 Areas/ML & DL/00 Учебник/10 ML Systems/07 Profiling ML-нагрузки]]
 
 ### VIII. Обучение LLM
 
@@ -116,6 +136,14 @@ last_updated: 2026-07-20
 42. [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/42 Next-token prediction]]
 43. [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/43 Scaling laws]]
 44. [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision]]
+    - 44.1. [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP|Процессы, коллективные операции и DDP]]
+    - 44.2. [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload|Gradient checkpointing и offload]]
+    - 44.3. [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism|Tensor и sequence parallelism]]
+    - 44.4. [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism|Pipeline parallelism]]
+    - 44.5. [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor|ZeRO, FSDP2, DeviceMesh и DTensor]]
+    - 44.6. [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism|Expert и hybrid parallelism]]
+    - 44.7. [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints|Сеть, хранилище и распределённые checkpoints]]
+    - 44.8. [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration|Отказоустойчивость и управление кластером]]
 45. [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/01 SFT и instruction data]]
 46. [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/02 Preference data]]
 47. [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/03 Reward modeling]]
@@ -125,10 +153,10 @@ last_updated: 2026-07-20
 51. [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1]]
 52. [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/08 Reasoning distillation]]
 
-После обучения reasoning-моделей находится отдельная
-сквозная глава: [[02 Areas/ML & DL/00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute|как распределять дополнительные вычисления во время ответа]].
-Она связывает RLVR, verifiers, best-of-N, последовательное исправление и поиск,
-не вводя ещё один номер в основной программе.
+Углубление после обучения моделей рассуждения:
+[[02 Areas/ML & DL/00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute|как распределять дополнительные вычисления во время ответа]].
+Глава связывает RLVR, проверяющие программы, выбор лучшего из нескольких ответов,
+последовательное исправление и поиск, не вводя ещё один номер в основной маршрут.
 
 53. [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы]]
 
@@ -141,11 +169,18 @@ last_updated: 2026-07-20
     - 55.3. [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/55c Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer|Serving engines: vLLM, SGLang, TensorRT-LLM и FlashInfer]]
 56. [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/56 FlashAttention]]
 57. [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей]]
+    - 57.1. [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/57a KV-cache compression и offload|Сжатие и выгрузка KV-cache]]
 58. [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование]]
     - 58.1. [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving|Параллелизм и коллективные операции]]
     - 58.2. [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/58a2 Раздельное обслуживание prefill и decode|Раздельное обслуживание prefill и decode]]
     - 58.3. [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference|Benchmarking, SLO и эксплуатация inference]]
+    - 58.4. [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/58c Queueing и capacity planning|Очереди и планирование мощности]]
+    - 58.5. [[02 Areas/ML & DL/00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow|Жизненный цикл ML-модели]]
+    - 58.6. [[02 Areas/ML & DL/00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps|MLOps: от артефакта до наблюдаемого сервиса]]
+    - 58.7. [[02 Areas/ML & DL/00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment|Edge- и federated-развёртывание]]
 59. [[02 Areas/ML & DL/00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация]]
+    - 59.1. [[02 Areas/ML & DL/00 Учебник/18 Evaluation и методология/59a Несбалансированная классификация|Несбалансированная классификация]]
+    - 59.2. [[02 Areas/ML & DL/00 Учебник/18 Evaluation и методология/59a Responsible systems|Ответственные ML-системы]]
 60. [[02 Areas/ML & DL/00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning]]
 61. [[02 Areas/ML & DL/00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid]]
 62. [[02 Areas/ML & DL/00 Учебник/15 Embeddings, Retrieval и RAG/62 Reranking — cross-encoder и late interaction]]

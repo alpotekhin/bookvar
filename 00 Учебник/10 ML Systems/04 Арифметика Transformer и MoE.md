@@ -8,21 +8,29 @@ source_language: mixed
 
 # Арифметика Transformer и MoE
 
-Эта глава превращает архитектуру в ведомость ресурсов. Мы считаем не только
-параметры и FLOP, но и живые активации, состояния оптимизатора, байты HBM и
-коммуникации. Именно такой порядок использует полная лекция EDLS week 6:
-**data logistics → local GPU logistics → elementwise/fusion → model-state
-logistics → activation logistics → MoE logistics** (slides 4–146).
+Запись «модель содержит 70 миллиардов параметров» почти ничего не говорит о
+том, можно ли её обучить на данном кластере. Параметры нужно хранить, перед
+вычислением слоя — доставлять к ускорителю, для обратного прохода — сохранять
+или пересчитывать активации, а градиенты — передавать между устройствами. У
+разреженной MoE-модели к этому добавляется пересылка представлений токенов между
+экспертами. Поэтому архитектуру полезно сразу переводить в четыре отдельные
+величины: число операций, объём памяти, сетевой обмен и время жизни тензоров.
+
+Такой расчёт ниже выполняется последовательно: сначала для одного плотного слоя,
+затем для полной модели и состояний оптимизатора, после чего добавляются
+шардинг, конвейерный параллелизм и маршрутизация MoE. Основой численных примеров
+служит шестая лекция курса Efficient DL Systems; в конце главы указаны точные
+слайды и дополнительные материалы для самостоятельной проверки.
 
 Обозначения: $B$ — число sequences, $S$ — длина, $N=BS$ — число токенов
 microbatch, $H$ — hidden width, $I$ — FFN width, $L$ — слои, $V$ — vocabulary,
 $n_h,n_{kv}$ — query- и KV-heads, $d$ — head width, $E$ — experts, $k$ —
 top-$k$. Один BF16-элемент занимает $b=2$ bytes.
 
-## Полная лекция, notebook и главы справочника
+## Материалы для воспроизведения расчётов
 
 - [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week06_dl_arithmetic/lecture.pdf|EDLS Week 6 — полная лекция, 146 слайдов]].
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week06_dl_arithmetic/seminar/practice.ipynb|EDLS Week 6 — seminar notebook]]: profiling, fusion и память на исполняемых примерах.
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week06_dl_arithmetic/seminar/practice.ipynb|EDLS Week 6 — семинарская тетрадь]]: профилирование, объединение операций и память на исполняемых примерах.
 - [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week06_dl_arithmetic/homework/README|EDLS Week 6 — homework]]: исходное задание курса.
 - [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/nn_computation|Harvard CS249r — Neural Computation]] и [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/model_compression|Model Compression]].
 
@@ -99,7 +107,7 @@ $$F_{\ell,\text{linear}}\approx2N\cdot202{,}4\text{ M}=3{,}32\text{ TFLOP}.$$
 сопоставляют эту нижнюю границу с H100 memory/compute time: фактическое время
 выше из-за elementwise kernels, launch gaps и неполной эффективности.
 
-## Activation ledger: где появляется $O(LNH)$
+## Учёт активаций: где появляется $O(LNH)$
 
 Поскольку $N=BS$, базовое состояние одного residual stream имеет форму
 $[B,S,H]$ и занимает $bNH$ bytes. Для $L$ слоёв минимальный порядок сохранённых
@@ -140,7 +148,7 @@ $2bBn_{kv}Sd=2bNn_{kv}d$.
 тензор. Это объясняет, почему FlashAttention меняет сам порядок памяти, а
 checkpointing — множитель и recompute time.
 
-## Model-state ledger и FSDP
+## Состояния модели и FSDP
 
 Типичный Adam mixed-precision ledger:
 
@@ -193,7 +201,7 @@ layer i + 1:                [all-gather i+1][ forward i+1 ]
 коммуникации конкурируют за topology links и требуют корректных NCCL streams
 и dependencies.
 
-## Локальная логистика: fusion и Liger
+## Объединение операций и Liger Kernel
 
 После больших GEMM остаются RMSNorm, RoPE, SwiGLU, dropout, cross-entropy и
 optimizer updates. У каждого может быть малая arithmetic intensity:
@@ -210,7 +218,7 @@ torch.compile/Triton и Liger Kernel; slide 74 рекомендует Liger ка
 лекции**, не утверждение о любой версии библиотеки: kernel eligibility нужно
 проверять trace и tests для конкретных shapes/dtypes.
 
-## Dense worked maps: 7B и 70B
+## Расчёт для плотных моделей 7B и 70B
 
 EDLS slides 24–30 дают слой-за-слоем memory maps для 100M, 1B, 7B, Llama 70B,
 Qwen 30B-A3B и Qwen 235B-A32B. Их назначение — различать:
@@ -308,7 +316,7 @@ TP режет каждую expert matrix и требует collectives вокр�
 от того, что дороже на реальной topology: repeated activation collectives,
 weight traffic или token All-to-All.
 
-## PP schedules: memory, bubble и коммуникации
+## Расписания конвейера: память, простой и коммуникации
 
 PP делит $L$ слоёв между $p$ stages. Payload границы microbatch —
 приблизительно $bNH$ bytes forward и столько же gradients backward.
@@ -348,8 +356,9 @@ weight-gradient ($B_w$), который можно отложить. ZeroBubble 
 ZeroBubble: [ F ][ Bx ][ Bw from another microbatch ]
 ```
 
-Это meaningful schedule, а не обещание нулевого overhead: дробление меняет
-dependencies, peak gradients и число kernel launches.
+Название ZeroBubble не означает отсутствия любых накладных расходов: разделение
+обратного прохода меняет зависимости, пиковый объём градиентов и число запусков
+ядер.
 
 ### DualPipeV
 
