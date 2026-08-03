@@ -7,6 +7,11 @@ import sidebar from './generated-sidebar.mjs';
 
 function rejectNonAsciiMath() {
   return (tree, file) => {
+    // Source-native course pages are preserved verbatim. Several notebooks use
+    // perfectly valid localized labels such as `\\text{граница}` in KaTeX;
+    // applying Bookvar's authoring lint to those imports made Starlight skip
+    // their rendered content. Keep the stricter rule for our own pages only.
+    if (file.path?.includes('/generated/sources/')) return;
     const visit = (node) => {
       if ((node.type === 'math' || node.type === 'inlineMath') && /[^\x00-\x7F]/.test(node.value)) {
         throw new Error(`Non-ASCII text in LaTeX at ${file.path}: ${node.value}`);

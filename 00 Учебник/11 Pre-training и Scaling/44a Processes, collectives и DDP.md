@@ -9,7 +9,10 @@ last_updated: 2026-07-24
 
 Один процесс обслуживает одно устройство. Его `rank` — номер в группе, `world_size=N` — число участников; группы позволяют выполнять разные collectives на разных осях параллелизма. Point-to-point `send/recv` задают обмен явно, collective выражает общий шаблон и позволяет библиотеке выбрать алгоритм.
 
-Чтобы разобраться в работе DDP, достаточно понимать tensors и synchronous data parallelism. Дальше мы проследим, как меняются shape и состояние данных в collectives, оценим latency и bandwidth, соберём DDP-step и отделим действительно скрытое коммуникационное время от простой суммы NCCL kernels в профиле.
+Работу DDP определяют изменения формы и состояния данных в коллективных
+операциях, стоимость передачи и порядок вычислений одного шага. Сумма времени
+NCCL-kernels в профиле при этом не равна задержке на критическом пути: часть
+обмена может перекрываться с обратным проходом.
 
 ## От сообщений к коллективным операциям
 
@@ -77,17 +80,15 @@ $$u_t=g_t+e_t,\quad q_t=C(u_t),\quad e_{t+1}=u_t-q_t.$$
 
 На двух rank с одинаковым seed сравнивают один DDP-step с single-process global batch: loss до update, усреднённые gradients и параметры после update. Затем искусственно задерживают один rank: ожидаемый результат не меняется, а step time показывает straggler amplification.
 
-## Материалы для практики
+## Практика и первоисточники
 
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week03_data_parallel/lecture.pdf|EDLS Week 3 — полная лекция]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week03_data_parallel/lecture.pdf|EDLS Week 3 — лекция]];
 - [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week03_data_parallel/practice.ipynb|EDLS Week 3 — исходный practice notebook]];
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week03_data_parallel/homework/README|EDLS Week 3 — homework]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week03_data_parallel/homework/README|EDLS Week 3 — практическое задание]];
 - [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/collective_communication|Harvard CS249r — Collective Communication]];
 - [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/distributed_training|Harvard CS249r — Distributed Training]].
 
 Лекцию EDLS полезно проходить вместе с notebook: схемы ring, gossip и gradient compression становятся проверяемыми после измерения message size, latency и effective bandwidth. Harvard дополняет эксперимент систематическим разбором топологий и collective algorithms.
-
-## Источники
 
 - EDLS, pinned commit `e632aa89…`, [`week03_data_parallel/lecture.pdf`, PDF pp. 24–35 “All-Reduce data parallel”/“Faster allreduce”/Ring, pp. 39–51 Gossip, pp. 52–62 gradient compression/Error Feedback/PowerSGD](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week03_data_parallel/lecture.pdf).
 - Harvard Edge ML Systems Book, [Collective Communication](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/collective_communication/collective_communication.qmd), sections `sec-collective-communication-primitives`, `sec-collective-communication-allreduce`.

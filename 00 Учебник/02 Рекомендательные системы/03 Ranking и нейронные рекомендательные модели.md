@@ -13,18 +13,6 @@ Ranking — «какой из доступных объектов должен �
 items, а хорошо откалиброванный CTR predictor не обязательно создаёт лучший
 slate после фильтров и diversity re-ranking.
 
-Полные исходные главы D2L:
-
-- [[05 Источники/Courses/Dive into Deep Learning — Recommender Systems/ranking|Personalized Ranking]];
-- [[05 Источники/Courses/Dive into Deep Learning — Recommender Systems/autorec|AutoRec]];
-- [[05 Источники/Courses/Dive into Deep Learning — Recommender Systems/neumf|Neural Collaborative Filtering]];
-- [[05 Источники/Courses/Dive into Deep Learning — Recommender Systems/fm|Factorization Machines]];
-- [[05 Источники/Courses/Dive into Deep Learning — Recommender Systems/deepfm|DeepFM]].
-
-Практический полный цикл NeuMF — от negative sampling до leave-one-out
-evaluation и pretraining — сохранён в
-[[05 Источники/Courses/Linux Foundation Recommenders/examples/02_model_collaborative_filtering/ncf_deep_dive.ipynb|LF Recommenders: NCF deep dive]].
-
 ## Pointwise, pairwise и listwise постановки
 
 **Pointwise** loss рассматривает каждую пару отдельно:
@@ -75,8 +63,8 @@ $$
 
 ![[Assets/Sources/Dive into Deep Learning — Recommender Systems/rec-ranking.svg]]
 
-Источник рисунка и derivation:
-[[05 Источники/Courses/Dive into Deep Learning — Recommender Systems/ranking|D2L: Personalized Ranking]].
+Источник рисунка и вывод функции потерь: [D2L — Personalized Ranking for
+Recommender Systems](https://d2l.ai/chapter_recommender-systems/ranking.html).
 
 ### Как loss реагирует на margin
 
@@ -156,9 +144,6 @@ $$
 постоянно меняющегося каталога. Архитектура также не решает exposure bias и
 cold start сама по себе.
 
-Полный код с masked evaluator и MovieLens experiment:
-[[05 Источники/Courses/Dive into Deep Learning — Recommender Systems/autorec|D2L: AutoRec]].
-
 ## Neural Collaborative Filtering
 
 NeuMF объединяет две ветви.
@@ -185,6 +170,10 @@ $$
 $$
 
 ![[Assets/Sources/Dive into Deep Learning — Recommender Systems/rec-neumf.svg]]
+
+*Архитектура NeuMF из главы [Neural Collaborative Filtering for Personalized
+Ranking](https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/chapter_recommender-systems/neumf.md)
+книги Dive into Deep Learning, CC BY-SA 4.0; исходный SVG не изменён.*
 
 В исходной архитектуре GMF и MLP могут иметь разные embedding tables: одной
 ветви не приходится одновременно служить multiplicative и nonlinear
@@ -259,8 +248,6 @@ $$
 $$
 
 которое стоит $O(kd)$, а для sparse input — $O(k\,\mathrm{nnz}(x))$.
-Полный вывод и код:
-[[05 Источники/Courses/Dive into Deep Learning — Recommender Systems/fm|D2L: Factorization Machines]].
 
 ## DeepFM: low-order и high-order interactions
 
@@ -285,8 +272,8 @@ $$
 
 ![[Assets/Sources/Dive into Deep Learning — Recommender Systems/rec-deepfm.svg]]
 
-Источник:
-[[05 Источники/Courses/Dive into Deep Learning — Recommender Systems/deepfm|D2L: DeepFM]].
+Источник: [D2L — Deep Factorization
+Machines](https://d2l.ai/chapter_recommender-systems/deepfm.html).
 
 DeepFM естественен для feature-rich CTR ranking, но не для scoring миллионов
 items на запрос. Обычно retrieval сначала сокращает каталог, затем ranker
@@ -357,10 +344,11 @@ calibration проверяется отдельно.
 
 Тогда название архитектуры перестаёт заменять описание эксперимента.
 
-## Первоисточники и продолжение
+## Практика и первоисточники
 
 - [[05 Источники/Courses/Dive into Deep Learning — Recommender Systems/ranking|D2L: BPR and hinge loss]];
 - [[05 Источники/Courses/Dive into Deep Learning — Recommender Systems/neumf|D2L: NeuMF]];
+- [[05 Источники/Courses/Dive into Deep Learning — Recommender Systems/autorec|D2L: AutoRec]];
 - [[05 Источники/Courses/Linux Foundation Recommenders/examples/02_model_collaborative_filtering/ncf_deep_dive.ipynb|LF: NCF deep dive]];
 - [[05 Источники/Courses/Dive into Deep Learning — Recommender Systems/fm|D2L: FM]];
 - [[05 Источники/Courses/Dive into Deep Learning — Recommender Systems/deepfm|D2L: DeepFM]];

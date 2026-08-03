@@ -9,7 +9,10 @@ last_updated: 2026-07-24
 
 Три похожих названия скрывают разные layouts. Tensor parallelism (TP) делит hidden dimensions и веса внутри слоя. Megatron sequence parallelism (SP) делит **только sequence-local activation** вокруг LayerNorm/dropout и работает вместе с TP. Context/attention parallelism делит сам длинный контекст и меняет способ вычисления attention — например, Ulysses all-to-all или Ring Attention.
 
-Опираясь на формы Transformer из глав об attention, collectives из [[44a Processes, collectives и DDP]] и memory ledger из [[44b Gradient checkpointing и offload]], проследим layout каждого tensor, collective на каждой границе и способ проверить distributed layer против dense.
+Для каждого тензора нужно явно задать layout, коллективную операцию на границе
+и проверку распределённого слоя относительно плотного. Здесь используются формы
+Transformer из глав об attention, collectives из [[44a Processes, collectives и DDP]]
+и memory ledger из [[44b Gradient checkpointing и offload]].
 
 ## Tensor parallelism для MLP
 
@@ -125,16 +128,14 @@ TP делит weights и крупную GEMM, но вызывает collectives 
 5. Для Ring сравнить online-softmax `(max,sum)` с dense stable softmax и causal mask.
 6. Профиль должен показать именно ожидаемые collectives и bytes; лишний implicit redistribution — ошибка layout design.
 
-## Материалы для практики
+## Практика и первоисточники
 
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week04_large_models/lecture.pdf|EDLS Week 4 — полная лекция]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week04_large_models/lecture.pdf|EDLS Week 4 — лекция]];
 - [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week04_large_models/practice_part2.ipynb|EDLS Week 4 — practice part 2]];
 - [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/distributed_training|Harvard CS249r — Distributed Training]];
 - [[02 Areas/ML & DL/06 Практика/11 Разрезать Transformer по TP и SP|практика TP/SP]].
 
 Практику удобно начинать с двух linear layers: сначала для каждого rank подписать локальные shapes и collectives и только затем перенести тот же разрез на attention и MLP. Harvard-глава помещает этот разрез в общую систему осей параллелизма.
-
-## Источники
 
 - EDLS, pinned commit `e632aa89…`, [`week04_large_models/lecture.pdf`, PDF pp. 40–45 “Tensor-parallel training”, pp. 46–47 “Sequence Parallelism”](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week04_large_models/lecture.pdf), and [`week04_large_models/practice_part2.ipynb`](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week04_large_models/practice_part2.ipynb).
 - Harvard Edge ML Systems Book, commit `45ecc8d…`, [Distributed Training, `sec-distributed-training-systems-systems-tensor-parallelism-d76e` and `sec-distributed-training-parallelism-infrastructure`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/distributed_training.qmd).

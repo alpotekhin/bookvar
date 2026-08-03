@@ -1,7 +1,7 @@
 ---
 title: SSM, рекуррентные модели и гибридные архитектуры
 type: textbook-chapter
-status: canonical
+status: legacy
 last_updated: 2026-07-20
 previous: "[[02 Areas/ML & DL/00 Учебник/10 Атлас современных архитектур/01 Llama, Qwen и DeepSeek как эволюция блока]]"
 next: "[[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных]]"

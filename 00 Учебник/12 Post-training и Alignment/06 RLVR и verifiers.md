@@ -308,7 +308,9 @@ $1-0.01^4-0.99^4\approx0.0394$. То есть около 96% групп почт
 - [TRL advanced multi-reward cookbook](https://huggingface.co/learn/cookbook/trl_grpo_reasoning_advanced_reward)
   — runnable пример нескольких reward functions.
 
-## Практикум
+## Практика и первоисточники
+
+### Задания
 
 1. Сгенерируйте 500 линейных уравнений с решением, вычисленным отдельной
    программой.
@@ -326,7 +328,7 @@ $1-0.01^4-0.99^4\approx0.0394$. То есть около 96% групп почт
 8. Попробуйте обмануть собственную программу разбора. После исправления
    проверяющей программы пересчитайте старые ответы новой версией.
 
-## Курсы и объяснения
+### Объяснения и реализации
 
 - Nathan Lambert — [RLHF Book, Lecture 3: RL и RLVR](https://rlhfbook.com/teach/course/lec3-chap6-p1/),
   включая доступные слайды.
@@ -335,7 +337,7 @@ $1-0.01^4-0.99^4\approx0.0394$. То есть около 96% групп почт
 - DeepLearning.AI — [Reinforcement Learning from Human Feedback](https://www.deeplearning.ai/courses/reinforcement-learning-from-human-feedback):
   основы награды, стратегии и KL-дивергенции; RLVR меняет прежде всего источник награды.
 
-## Первоисточники
+### Первоисточники
 
 - Cobbe et al., 2021 — [Training Verifiers to Solve Math Word Problems](https://arxiv.org/abs/2110.14168).
 - Lightman et al., 2023 — [Let’s Verify Step by Step](https://arxiv.org/abs/2305.20050).

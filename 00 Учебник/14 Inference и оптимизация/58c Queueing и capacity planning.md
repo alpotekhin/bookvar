@@ -10,23 +10,12 @@ primary_sources:
 
 # Queueing и capacity planning
 
-## Материалы для перехода от kernel к service
-
-- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/inference|Harvard CS249r — Inference]];
-- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/benchmarking|Harvard CS249r — Benchmarking]];
-- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/model_serving|Harvard CS249r — Model Serving]];
-- [[02 Areas/ML & DL/06 Практика/17 Развернуть наблюдаемый ML сервис|практика наблюдаемого сервиса и load test]].
-
-Эта глава завершает inference-маршрут: измеренный service time превращается в
-capacity только после добавления arrival process, queue discipline и tail SLO.
-Практика требует показать как рабочую точку, так и режим насыщения.
-
 Пиковое число токенов в секунду не отвечает на вопрос, сколько пользователей
 выдержит сервис. Запрос может провести больше времени в очереди, чем на GPU, а
 при приближении к насыщению небольшая вариация длины превращается в длинный хвост
-задержки. Определения TTFT, TPOT и goodput канонически заданы в
-[[58b Benchmarking, SLO и эксплуатация inference|главе о benchmarking]];
-здесь они становятся ограничениями модели очередей и плана мощности.
+задержки. В [[58b Benchmarking, SLO и эксплуатация inference|предыдущей главе]]
+были введены TTFT, TPOT и goodput. Здесь эти метрики становятся ограничениями,
+по которым мы определяем допустимую длину очереди и необходимое число реплик.
 
 ## Из времени запроса получается бюджет SLO
 
@@ -155,7 +144,12 @@ preemption, errors и стоимость. Затем повторяют с burst
 реальным распределением длин. Последняя SLO-compliant ступень, уменьшенная на
 операционный headroom, и есть заявляемая capacity.
 
-## Источники
+## Практика и первоисточники
+
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/inference|Harvard CS249r — Inference]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/benchmarking|Harvard CS249r — Benchmarking]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/model_serving|Harvard CS249r — Model Serving]].
+- [[02 Areas/ML & DL/06 Практика/17 Развернуть наблюдаемый ML сервис|Развернуть наблюдаемый ML-сервис и провести нагрузочный тест]].
 
 - Harvard Edge ML Systems Book, [Model Serving](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/model_serving/model_serving.qmd), разделы о latency budget, queueing и Little's Law.
 - Harvard Edge ML Systems Book, [Inference](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/inference/inference.qmd), разделы batching, queueing, KV capacity и routing.

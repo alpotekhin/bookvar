@@ -9,12 +9,16 @@ last_updated: 2026-07-24
 
 Pipeline parallelism делит не матрицу, а последовательность слоёв. Если модель из 48 Transformer-блоков не помещается на одном GPU, четыре стадии могут хранить по 12 блоков. Цена такого размещения — зависимости между стадиями: стадия $i+1$ не начнёт forward микропакета, пока не получит activation от $i$, а стадия $i$ не начнёт backward, пока не получит gradient activation от $i+1$.
 
-Используя forward/backward, gradient accumulation и point-to-point `send/recv` из [[44a Processes, collectives и DDP]], разберём четыре задачи:
+Корректная конфигурация pipeline parallelism должна решить четыре задачи:
 
 1. построить dependency-valid GPipe и 1F1B timeline;
 2. вывести bubble из числа пустых slot, а activation memory — из числа незавершённых forward;
 3. рассчитать формы и объём межстадийных тензоров;
 4. проверить pipeline против непараллельного запуска.
+
+Зависимости между стадиями выражаются через forward/backward, gradient
+accumulation и point-to-point `send/recv`, введённые в
+[[44a Processes, collectives и DDP]].
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/pipeline-parallelism.svg]]
 
@@ -154,14 +158,12 @@ $$M_{\mathrm{act},i}=n_{\mathrm{live},i}\cdot M_{\mathrm{saved\ per\ microbatch}
 5. Профиль подтверждает ожидаемые live activation counts, bubble slots и отсутствие blocking gaps.
 6. Повторить для неполного последнего batch, tied weights и restart между optimizer steps.
 
-## Материалы для практики
+## Практика и первоисточники
 
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week04_large_models/lecture.pdf|EDLS Week 4 — полная лекция]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week04_large_models/lecture.pdf|EDLS Week 4 — лекция]];
 - [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/distributed_training|Harvard CS249r — Distributed Training]].
 
 В EDLS pipeline parallelism рассматривается рядом с memory pressure больших моделей, а в Harvard — рядом с data и tensor parallelism. Первая версия помогает посчитать bubble для конкретного schedule, вторая — понять, когда pipeline становится подходящей осью разбиения всей системы.
-
-## Источники
 
 - EDLS, pinned commit `e632aa89…`, [`week04_large_models/lecture.pdf`, PDF pp. 23–27 model-parallel/GPipe, pp. 28–33 bubble/1F1B/ZeroBubble/PipeDream, pp. 34–38 “Pipelining Recap”](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week04_large_models/lecture.pdf), and [`week04_large_models/practice_part2.ipynb`](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week04_large_models/practice_part2.ipynb).
 - Huang et al., [GPipe](https://arxiv.org/abs/1811.06965), Algorithm 1 and pipeline partitioning, 2019.

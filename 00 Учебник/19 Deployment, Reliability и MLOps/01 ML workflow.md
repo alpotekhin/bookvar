@@ -18,19 +18,11 @@ primary_sources:
 успешно решил свою локальную задачу, а собранная система оказалась
 непригодной.
 
-Системно организованный процесс разработки нужен именно для предотвращения
-таких разрывов. Это не перечень
-этапов и не название набора инструментов, а способ вести разработку так, чтобы
+Процесс разработки должен предотвращать такие разрывы. Это не перечень
+этапов и не название набора инструментов, а способ вести работу так, чтобы
 ограничения среды проходили через весь жизненный цикл модели. Данные,
 алгоритм и вычислительная среда проектируются совместно, а наблюдения из
 эксплуатации возвращаются в постановку задачи, сбор данных и обучение.
-
-## Полные оригинальные материалы
-
-- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/ml_workflow|Harvard CS249r — ML Workflow]] — полная англоязычная глава с шестью стадиями жизненного цикла, interface specifications, case studies и расчётами;
-- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/ml_ops|Harvard CS249r — ML Operations]] — переход от жизненного цикла к воспроизводимой эксплуатации;
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week07_application_deployment/Effdl26-07.pdf|Efficient DL Systems, week 7 — Application Deployment]] — оригинальные слайды про HTTP, Python-сервис, Docker, оркестрацию и метрики;
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week07_application_deployment/README|Efficient DL Systems, week 7 — practical stands]] — маршрут по исходному коду практикума.
 
 ## Два параллельных контура
 
@@ -201,10 +193,8 @@ headers и body. API должно различать как минимум:
   очереди;
 - корректный ответ модели с указанной версией.
 
-[[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week07_application_deployment/01_python_server/README|Практикум с Python-сервером]]
-из Efficient DL Systems показывает минимальный путь от traced VGG16 к
-HTTP-сервису. Минимальный сервер полезен, чтобы увидеть границу API, но Flask
-сервер разработки Flask не является средой промышленной эксплуатации. Нужны
+Минимальный сервер полезен, чтобы увидеть границу API, но встроенный сервер
+разработки Flask не предназначен для промышленной эксплуатации. Нужны
 управляемые рабочие процессы, сроки выполнения запросов, ограничение их размера,
 корректное завершение, проверки состояния и обратный прокси-сервер или ingress.
 
@@ -213,14 +203,12 @@ HTTP-сервису. Минимальный сервер полезен, что�
 содержать точную версию модели либо получать её из реестра с проверкой
 контрольной суммы. Конфигурация и секреты не зашиваются в образ. Сборка должна
 быть повторяемой, а процесс — работать от непривилегированного пользователя.
-Исходный практикум:
-[[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week07_application_deployment/02_docker/README|Контейнеризованный сервер]].
 
-Один контейнер не решает задачу доступности и масштаба. Несколько replicas
-получают трафик через load balancer; orchestrator следит за желаемым числом
-экземпляров, размещает их на узлах и заменяет упавшие. Readiness означает, что
-процесс уже загрузил модель и готов отвечать; liveness — что он не застрял.
-Смешение этих probes создаёт restart loop: тяжёлая загрузка модели ошибочно
+Один контейнер не решает задачу доступности и масштаба. Несколько экземпляров
+получают трафик через балансировщик; оркестратор поддерживает их требуемое число,
+размещает на узлах и заменяет упавшие. Проверка готовности (*readiness*) означает, что
+процесс уже загрузил модель и готов отвечать; проверка жизнеспособности (*liveness*) — что он не застрял.
+Смешение этих проверок создаёт цикл перезапусков: тяжёлая загрузка модели ошибочно
 принимается за смерть процесса.
 
 ## 6. Обратная связь из эксплуатации
@@ -233,9 +221,9 @@ HTTP-сервису. Минимальный сервер полезен, что�
 | Данные и модель | схема, свежесть, сдвиг распределения, уверенность, срезы | реальный результат при задержанных метках |
 | Продукт | конверсия, потери от мошенничества, жалобы, ручная отмена решений | точная техническая причина изменения |
 
-[[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week07_application_deployment/03_metrics/README|Metrics stand]]
-показывает механическую часть: приложение экспортирует метрики, Prometheus их
-собирает, Grafana визуализирует. Содержательная часть сложнее: метрика нужна
+Механическая часть наблюдаемости состоит в том, что приложение экспортирует
+метрики, Prometheus их собирает, а Grafana визуализирует. Содержательная часть
+сложнее: метрика нужна
 только тогда, когда с ней связано ожидаемое состояние, порог, владелец и
 действие. Десятки графиков без правил оповещения не образуют контур обратной
 связи.
@@ -290,12 +278,20 @@ $2^{N_{stage}-1}$. Это не универсальный закон стоим�
 `r42`. Такой сигнал можно превратить в исправление и новую автоматическую
 проверку.
 
-## Источники и дальнейшее чтение
+## Практика и первоисточники
 
-- Harvard Edge ML Systems Book, [ML Workflow](https://mlsysbook.ai/vol1/ml_workflow/ml_workflow.html), полный локальный оригинал: [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/ml_workflow]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/ml_workflow|Harvard CS249r — ML Workflow]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/ml_ops|Harvard CS249r — ML Operations]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week07_application_deployment/Effdl26-07.pdf|Efficient DL Systems — Application Deployment]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week07_application_deployment/README|Маршрут по практическим стендам Efficient DL Systems]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week07_application_deployment/01_python_server/README|Практикум с Python-сервером]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week07_application_deployment/02_docker/README|Контейнеризованный сервер]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week07_application_deployment/03_metrics/README|Стенд с Prometheus и Grafana]].
+
+- Harvard Edge ML Systems Book, [ML Workflow](https://mlsysbook.ai/vol1/ml_workflow/ml_workflow.html); [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/ml_workflow|локальная копия исходной главы]].
 - Amershi et al., [Software Engineering for Machine Learning: A Case Study](https://doi.org/10.1109/ICSE-SEIP.2019.00042).
 - Beede et al., [A Human-Centered Evaluation of a Deep Learning System Deployed in Clinics](https://doi.org/10.1145/3313831.3376718).
-- Efficient DL Systems, [week 7 at commit `e632aa8`](https://github.com/mryab/efficient-dl-systems/tree/e632aa89ca9e6638d52e1b686095e7442faffbb0/week07_application_deployment), MIT; локальная копия слайдов и практикума приведена выше.
+- Efficient DL Systems, [Application Deployment at commit `e632aa8`](https://github.com/mryab/efficient-dl-systems/tree/e632aa89ca9e6638d52e1b686095e7442faffbb0/week07_application_deployment), MIT.
 
 ← [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/58c Queueing и capacity planning|Queueing и capacity planning]]
 · Далее: [[02 MLOps]]

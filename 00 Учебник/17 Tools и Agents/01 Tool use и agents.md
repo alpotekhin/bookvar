@@ -1,7 +1,7 @@
 ---
 title: Инструменты, агентный цикл и исполняющая среда
 type: textbook-chapter
-status: canonical
+status: legacy
 last_updated: 2026-07-20
 prerequisites:
   - "[[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/01 Vision-language и omni models]]"

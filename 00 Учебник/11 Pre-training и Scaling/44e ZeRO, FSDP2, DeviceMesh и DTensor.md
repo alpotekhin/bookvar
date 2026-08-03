@@ -74,16 +74,17 @@ Checkpoint сохраняет global logical DTensor независимо от �
 
 Для 70B-модели условный state 1.12 TB. При aggregate storage bandwidth 200 GB/s идеальный lower bound 5.6 s; если каждый из 64 rank создаёт тысячи файлов, metadata и contention увеличат время. Поэтому distributed save использует крупные shards и staging.
 
-## Материалы для практики
+## Практика и первоисточники
 
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week05_fsdp/lecture.pdf|EDLS Week 5 — полная лекция]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week05_fsdp/lecture.pdf|EDLS Week 5 — лекция]];
 - [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week05_fsdp/seminar.pdf|EDLS Week 5 — seminar slides]];
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week05_fsdp/homework/README|EDLS Week 5 — homework]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week05_fsdp/homework/README|EDLS Week 5 — практическое задание]];
 - [[02 Areas/ML & DL/06 Практика/12 Собрать и проверить FSDP|практика FSDP и переносимого checkpoint]].
 
-Лекция и seminar позволяют увидеть lifetime полных параметров во время AllGather и ReduceScatter. Именно временные materializations объясняют peak memory и выбор wrap policy, поэтому здесь важно не ограничиваться только API.
-
-## Источники
+Пиковую память определяют моменты, когда AllGather материализует полные параметры,
+и то, как долго они остаются в памяти до освобождения. Поэтому границы
+FSDP-модулей выбирают по времени жизни временно собранных параметров, а не только
+по удобству программного интерфейса.
 
 - EDLS, pinned commit `e632aa89…`, [`week05_fsdp/lecture.pdf`, PDF pp. 13–31 FSDP units/lifetimes/overlap, pp. 54–70 sharding levels/ZeRO/hybrid/FSDP2](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week05_fsdp/lecture.pdf), and [`week05_fsdp/seminar.pdf`, PDF pp. 5–10 DeviceMesh/DTensor, pp. 11–20 FSDP2/hooks/memory, pp. 35–36 PyTorch DCP](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week05_fsdp/seminar.pdf).
 - Rajbhandari et al., [ZeRO](https://arxiv.org/abs/1910.02054), 2019.

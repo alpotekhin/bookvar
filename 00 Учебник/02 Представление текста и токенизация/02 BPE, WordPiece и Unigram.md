@@ -12,8 +12,6 @@ next: "[[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BP
 
 # Токенизация: BPE, WordPiece и Unigram
 
-**Полный исполняемый модуль:** [[05 Источники/Courses/Harvard ML Systems/tinytorch/10_tokenization|TinyTorch 10 — Tokenization]]. В исходном коде реализованы character tokenizer и BPE, включая построение словаря и взаимно согласованные операции encode/decode.
-
 Языковая модель не получает строку текста напрямую. Между строкой и входной
 таблицей векторов находится токенизатор: он разбивает текст на элементы
 фиксированного словаря и заменяет их целочисленными идентификаторами. От этого
@@ -338,7 +336,7 @@ Findings of NAACL 2024. Изображение восстановлено из �
 6. Сравнить результат с `tiktoken`.
 7. Проверить русский, emoji, числа и Python-код.
 
-## Что должно остаться после главы
+## Краткие итоги
 
 - Токенизатор выбирает элементы словаря до входа в нейронную сеть.
 - Подсловные методы балансируют размер словаря и длину последовательности.
@@ -351,6 +349,7 @@ Findings of NAACL 2024. Изображение восстановлено из �
 
 ## Источники
 
+- [[05 Источники/Courses/Harvard ML Systems/tinytorch/10_tokenization|TinyTorch 10 — Tokenization]] — реализация character tokenizer и BPE, включая построение словаря и согласованные `encode`/`decode`.
 - [Andrej Karpathy — Let’s build the GPT Tokenizer](https://www.youtube.com/watch?v=zduSFxRajkE)
 - [karpathy/minbpe](https://github.com/karpathy/minbpe)
 - [Stanford CS336 — Tokenization](https://stanford-cs336.github.io/spring2025/)

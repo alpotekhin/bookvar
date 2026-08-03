@@ -48,7 +48,7 @@ Y [B, C_out, H_out, W_out]
 ```
 
 Число параметров $C_{out}C_{in}k_hk_w$ не зависит от размера изображения. В
-fully connected layer оно росло бы вместе с $H\cdot W$.
+полносвязном слое оно росло бы вместе с $H\cdot W$.
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-local-connectivity.jpeg]]
 
@@ -95,7 +95,7 @@ Pooling или convolution со stride агрегируют соседние п�
 ## LeNet-5
 
 LeNet показала полный шаблон ранней CNN: convolution → nonlinearity → pooling,
-повторение блока и несколько fully connected layers для классификации.
+повторение блока и несколько полносвязных слоёв для классификации.
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/d2l/lenet.svg]]
 
@@ -104,7 +104,7 @@ LeNet показала полный шаблон ранней CNN: convolution �
 CC BY-SA 4.0.*
 
 Главное наследие LeNet — не конкретные размеры, а alternating hierarchy:
-пространственный feature extractor постепенно увеличивает число каналов и
+пространственный экстрактор признаков постепенно увеличивает число каналов и
 уменьшает разрешение.
 
 ## AlexNet, VGG и переход к глубине
@@ -115,7 +115,7 @@ $3\times3$ convolutions перед downsampling. Два слоя $3\times3$ да
 field, сопоставимый с $5\times5$, но добавляют нелинейность между операциями.
 
 Простое добавление слоёв, однако, привело к degradation problem: более глубокая
-сеть могла иметь выше training error, хотя теоретически могла реализовать
+сеть могла иметь более высокую ошибку на обучающей выборке, хотя теоретически могла реализовать
 identity в лишних слоях.
 
 Эта последовательность важна как история снятия ограничений. LeNet показала,
@@ -127,7 +127,7 @@ identity в лишних слоях.
 
 ## ResNet
 
-ResNet заменяет прямое обучение отображения на residual update:
+ResNet заменяет прямое обучение отображения на остаточное обновление:
 
 $$
 y=x+F(x).
@@ -155,12 +155,12 @@ dilated causal convolution лежит в WaveNet. CNN вычисляет лок�
 позициями. Современные vision-language системы часто используют ViT вместо CNN,
 но convolution остаётся важным inductive bias и компонентом гибридных моделей.
 
-## Что нужно унести из главы
+## Краткие итоги
 
 - Convolution использует locality и weight sharing.
 - Channels — разные обучаемые карты признаков; spatial axes сохраняют положение.
 - Stride, padding и dilation определяют размер выхода и receptive field.
-- LeNet задала базовый pipeline, VGG систематизировала блоки, ResNet открыла путь
+- LeNet задала базовый конвейер, VGG систематизировала блоки, ResNet открыла путь
   к очень глубоким сетям.
 - Residual learning является общим принципом CNN и Transformer.
 

@@ -9,7 +9,7 @@ aliases:
 prerequisites:
   - "[[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/08 Reasoning distillation]]"
 next:
-  - "[[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/01 KV-cache, batching и FlashAttention]]"
+  - "[[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы]]"
 primary_sources:
   - https://arxiv.org/abs/2203.11171
   - https://arxiv.org/abs/2305.10601

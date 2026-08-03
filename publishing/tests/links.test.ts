@@ -23,7 +23,7 @@ describe('convertWikiSyntax', () => {
         '[Page](/resolved-route/)',
         '[читаемый текст](/resolved-route/)',
         '[Page](/resolved-route/#раздел)',
-        '![attention](../../assets/Figures/attention.svg)'
+        '[![attention](../../assets/Figures/attention.svg)](../../assets/Figures/attention.svg)'
       ].join('\n'),
       unresolved: [],
       allowlisted: []

@@ -37,7 +37,8 @@ SIMT исполняет одну инструкцию для активных la
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/gpu-memory-hierarchy.svg]]
 
 *Оригинальная иллюстрация Harvard CS249r Vol. II, Performance Engineering,
-§ “Memory Hierarchy”, `gpu-memory-hierarchy.svg`, CC BY-NC-SA 4.0.*
+§ “Memory Hierarchy”; [исходный SVG](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/gpu-memory-hierarchy.svg),
+CC BY-NC-SA 4.0.*
 
 Схему следует читать снизу вверх. Registers принадлежат отдельному thread,
 shared memory — thread block, L2 и HBM разделяются большим числом SM. Чем дальше
@@ -84,15 +85,17 @@ compute ceiling.
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/foundation/hw_acceleration_roofline_elbow.svg]]
 
 *Оригинальная иллюстрация Harvard CS249r, Vol. I, Hardware Acceleration,
-§ “Roofline Model”, locator `sec-hardware-acceleration-roofline-model-42ff`,
-commit `45ecc8d…`, CC BY-NC-SA 4.0; файл не изменён. Точка слева от ridge
+§ “Roofline Model”, locator `sec-hardware-acceleration-roofline-model-42ff`;
+[исходный SVG](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/hw_acceleration/images/svg/hw_acceleration_roofline_elbow.svg),
+CC BY-NC-SA 4.0; файл не изменён. Точка слева от ridge
 показывает режим, где дополнительная арифметика не заменяет доставку байтов.*
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/operator-fusion.svg]]
 
 *Оригинальная иллюстрация Harvard CS249r, Vol. II, Performance Engineering,
-§ “Operator Fusion”, locator `sec-performance-engineering-operator-fusion`,
-commit `45ecc8d…`, CC BY-NC-SA 4.0; файл не изменён. Сопоставление отдельных
+§ “Operator Fusion”, locator `sec-performance-engineering-operator-fusion`;
+[исходный SVG](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/operator-fusion.svg),
+CC BY-NC-SA 4.0; файл не изменён. Сопоставление отдельных
 kernels и fused kernel делает видимыми устранённые промежуточные записи в HBM.*
 
 ## PCIe, NVLink и overlap
@@ -124,7 +127,7 @@ $i+1$ перекрывается с compute batch $i$. Проверять overla
 5. Используется ли Tensor Core path?
 6. Видны ли overlap и зависимости streams/events в trace?
 
-## Источники
+## Практика и первоисточники
 
 - [[05 Источники/Courses/Harvard ML Systems/tinytorch/17_acceleration|TinyTorch 17 — Acceleration]] — исполняемое сравнение базовых, векторизованных и fused operations.
 - [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/hw_acceleration|Harvard CS249r — Hardware Acceleration]] — SIMD/SIMT, устройство GPU, memory hierarchy и специализированные ускорители.

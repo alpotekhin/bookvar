@@ -27,19 +27,6 @@ primary_sources:
 группами, приватность, возможность оспорить решение, происхождение данных и
 стоимость эксплуатации для среды.
 
-> [!info] Полные первоисточники
-> Эта глава собирает учебный маршрут по трём полным главам *Machine Learning
-> Systems*. В Bookvar доступны оригиналы с иллюстрациями, таблицами, примерами и
-> упражнениями:
->
-> - [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/responsible_engr|Responsible Engineering]];
-> - [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/responsible_ai|Responsible AI]];
-> - [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/sustainable_ai|Sustainable AI]].
->
-> Vijay Janapa Reddi et al., *Machine Learning Systems*, версия источника
-> `2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd`, лицензия
-> [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
-
 ## Ответственность — свойство всей системы
 
 Проблема редко принадлежит одной модели. Её можно локализовать по трём
@@ -62,8 +49,7 @@ primary_sources:
 
 *Локализация сбоя на оси данных на примере системы найма Amazon. Оригинальная
 иллюстрация из Vijay Janapa Reddi et al.,
-[Responsible Engineering](https://mlsysbook.ai/vol1/responsible_engr/responsible_engr.html);
-[[05 Источники/Courses/Harvard ML Systems/vol1/responsible_engr|локальная полная глава]].
+[Responsible Engineering](https://mlsysbook.ai/vol1/responsible_engr/responsible_engr.html).
 Лицензия CC BY-NC-SA 4.0.*
 
 Это разложение не означает, что достаточно исправить один слой. Если
@@ -104,8 +90,7 @@ COMPAS доля ложных положительных решений для ч
 
 *Несовместимость распространённых критериев справедливости при различающихся
 базовых частотах. Оригинальная иллюстрация из Vijay Janapa Reddi et al.,
-[Responsible AI](https://mlsysbook.ai/vol2/responsible_ai/responsible_ai.html);
-[[05 Источники/Courses/Harvard ML Systems/vol2/responsible_ai|локальная полная глава]].
+[Responsible AI](https://mlsysbook.ai/vol2/responsible_ai/responsible_ai.html).
 Лицензия CC BY-NC-SA 4.0.*
 
 Поэтому критерий выбирают из цены ошибки в конкретном решении. Для кредитования
@@ -138,8 +123,7 @@ COMPAS доля ложных положительных решений для ч
 
 *Как решения системы меняют будущие данные и могут усиливать первоначальное
 смещение. Оригинальная иллюстрация из
-[Responsible AI](https://mlsysbook.ai/vol2/responsible_ai/responsible_ai.html);
-[[05 Источники/Courses/Harvard ML Systems/vol2/responsible_ai|локальный оригинал]].
+[Responsible AI](https://mlsysbook.ai/vol2/responsible_ai/responsible_ai.html).
 Лицензия CC BY-NC-SA 4.0.*
 
 Третья причина — сдвиг распределения. Даже справедливый на исторической выборке
@@ -167,8 +151,7 @@ SHAP/LIME и saliency maps являются приближёнными опис�
 
 *Контур производственного контроля объединяет входы, модельные показатели,
 результаты по группам и действия при отклонении. Оригинальная иллюстрация из
-[Responsible AI](https://mlsysbook.ai/vol2/responsible_ai/responsible_ai.html);
-[[05 Источники/Courses/Harvard ML Systems/vol2/responsible_ai|локальная полная глава]].
+[Responsible AI](https://mlsysbook.ai/vol2/responsible_ai/responsible_ai.html).
 Лицензия CC BY-NC-SA 4.0.*
 
 ## Документация должна быть исполнимой
@@ -184,8 +167,7 @@ pipeline не должен обучать модель на наборе без 
 
 *Структура data card переводит происхождение, назначение и риски набора в
 проверяемые поля. Оригинальная иллюстрация из
-[Responsible Engineering](https://mlsysbook.ai/vol1/responsible_engr/responsible_engr.html);
-[[05 Источники/Courses/Harvard ML Systems/vol1/responsible_engr|локальная полная глава]].
+[Responsible Engineering](https://mlsysbook.ai/vol1/responsible_engr/responsible_engr.html).
 Лицензия CC BY-NC-SA 4.0.*
 
 Lineage отвечает на вопрос «из чего это получено»: исходная запись →
@@ -228,8 +210,7 @@ $$
 
 *Операционные и воплощённые выбросы принадлежат разным стадиям жизненного цикла.
 Оригинальная иллюстрация из Vijay Janapa Reddi et al.,
-[Sustainable AI](https://mlsysbook.ai/vol2/sustainable_ai/sustainable_ai.html);
-[[05 Источники/Courses/Harvard ML Systems/vol2/sustainable_ai|локальная полная глава]].
+[Sustainable AI](https://mlsysbook.ai/vol2/sustainable_ai/sustainable_ai.html).
 Лицензия CC BY-NC-SA 4.0.*
 
 Оптимизация должна учитывать единицу полезной работы: джоули на запрос или
@@ -243,8 +224,7 @@ effect, когда удешевление одного запроса приво
 
 *Prefill и decode имеют разные профили вычислений и энергии, поэтому средняя
 энергия «на запрос» скрывает механизм оптимизации. Оригинальная иллюстрация из
-[Sustainable AI](https://mlsysbook.ai/vol2/sustainable_ai/sustainable_ai.html);
-[[05 Источники/Courses/Harvard ML Systems/vol2/sustainable_ai|локальный оригинал]].
+[Sustainable AI](https://mlsysbook.ai/vol2/sustainable_ai/sustainable_ai.html).
 Лицензия CC BY-NC-SA 4.0.*
 
 ## Предрелизная проверка
@@ -270,11 +250,21 @@ effect, когда удешевление одного запроса приво
 компромиссы названы, измерены, связаны с владельцем решения и продолжают
 проверяться после выпуска.
 
-## Связанные страницы
+## Практика и первоисточники
+
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/responsible_engr|Responsible Engineering]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/responsible_ai|Responsible AI]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/sustainable_ai|Sustainable AI]].
+
+Все три главы относятся к Vijay Janapa Reddi et al., *Machine Learning
+Systems*, snapshot `2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd`, лицензия
+[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+
+### Связанные страницы
 
 - [[02 Areas/ML & DL/00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация|Оценивание моделей и контаминация]]
 - [[02 Areas/ML & DL/01 Справочник/Security и Robustness/01 Security и privacy|Security и privacy]]
 - [[02 Areas/ML & DL/01 Справочник/Security и Robustness/02 Robustness|Robustness]]
 
-← [[02 Areas/ML & DL/00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация|Оценивание моделей и контаминация]]
+← [[02 Areas/ML & DL/00 Учебник/18 Evaluation и методология/59a Несбалансированная классификация|Несбалансированная классификация]]
 · Далее: [[02 Areas/ML & DL/00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning|Embeddings и metric learning]]

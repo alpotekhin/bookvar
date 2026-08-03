@@ -459,7 +459,9 @@ policy_old.load_state_dict(policy.state_dict())
 - расхождение награды и качества, при котором служебная оценка растёт, а
   независимая проверка — нет.
 
-## 12. Практика
+## Практика и первоисточники
+
+### Задания
 
 1. Для вероятностей `A=0.6`, `B=0.4` и наград `1`, `−1` вычислите $J$ и
    оценку REINFORCE для каждого возможного выбранного действия.
@@ -473,15 +475,15 @@ policy_old.load_state_dict(policy.state_dict())
 6. Возьмите десять ответов разной длины. Проверьте, меняется ли оценка модели награды после
    добавления корректного, но ненужного абзаца.
 
-## 13. Источники и хорошие объяснения
+### Литература и реализации
 
-### Первоисточники
+#### Первоисточники
 
 - Schulman et al., [Proximal Policy Optimization Algorithms](https://arxiv.org/abs/1707.06347).
 - Stiennon et al., [Learning to summarize from human feedback](https://arxiv.org/abs/2009.01325).
 - Ouyang et al., [Training language models to follow instructions with human feedback](https://arxiv.org/abs/2203.02155).
 
-### Курсы и реализации
+#### Объяснения и реализации
 
 - OpenAI, [Spinning Up: Proximal Policy Optimization](https://spinningup.openai.com/en/latest/algorithms/ppo.html) — последовательный разбор ограниченной целевой функции.
 - Nathan Lambert, [RLHF Book](https://rlhfbook.com/) — модели награды и RLHF применительно к языковым моделям.

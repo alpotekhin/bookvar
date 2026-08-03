@@ -1,7 +1,7 @@
 ---
 title: Оценивание и воспроизводимость моделей и агентных систем
 type: textbook-chapter
-status: canonical
+status: legacy
 last_updated: 2026-07-20
 prerequisites:
   - "[[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/01 Tool use и agents]]"

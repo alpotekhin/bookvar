@@ -13,13 +13,6 @@ Collaborative filtering строит рекомендации по совмес�
 обязательно. Модель получает разреженную матрицу взаимодействий и восстанавливает
 в ней структуру.
 
-Полный вывод matrix factorization и исполняемая реализация сохранены в
-[[05 Источники/Courses/Dive into Deep Learning — Recommender Systems/mf|D2L: Matrix Factorization]].
-Практические реализации двух разных collaborative baselines находятся в
-[[05 Источники/Courses/Linux Foundation Recommenders/examples/02_model_collaborative_filtering/baseline_deep_dive.ipynb|LF Recommenders: baseline deep dive]]
-и
-[[05 Источники/Courses/Linux Foundation Recommenders/examples/02_model_collaborative_filtering/sar_deep_dive.ipynb|LF Recommenders: SAR deep dive]].
-
 ## Матрица взаимодействий
 
 Пусть $R\in\mathbb R^{m\times n}$: строки соответствуют пользователям, столбцы
@@ -144,8 +137,8 @@ $$
 
 ![[Assets/Sources/Dive into Deep Learning — Recommender Systems/rec-mf.svg]]
 
-Источник рисунка и полная реализация:
-[[05 Источники/Courses/Dive into Deep Learning — Recommender Systems/mf|D2L: Matrix Factorization]].
+Источник рисунка и полная реализация: [D2L — Matrix
+Factorization](https://d2l.ai/chapter_recommender-systems/mf.html).
 
 В терминах всей матрицы произведение $PQ^\top$ имеет ранг не выше $d$.
 Координаты latent space не обязаны совпадать с жанрами или категориями,

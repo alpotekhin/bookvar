@@ -1,7 +1,7 @@
 ---
 title: Распределённое обучение и форматы чисел
 type: textbook-chapter
-status: canonical
+status: legacy
 last_updated: 2026-07-20
 primary_sources:
   - https://cs336.stanford.edu/

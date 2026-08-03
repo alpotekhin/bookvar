@@ -10,16 +10,9 @@ primary_sources:
 
 # Нейрон и многослойный перцептрон
 
-**Полный исполняемый модуль:** [[05 Источники/Courses/Harvard ML Systems/tinytorch/03_layers|TinyTorch 03 — Layers]]. Модуль реализует `Linear`, инициализацию весов, `Dropout` и учёт параметров, после чего проверяет отдельные компоненты слоя.
-
-Полное исходное изложение перцептрона, многослойной сети и градиентного обучения
-сохранено в [[05 Источники/Courses/Machine Learning Visualized/book/main.pdf|Machine Learning Visualized — Complete Book]].
-Решающее правило перцептрона можно исследовать в
-[[05 Источники/Courses/Machine Learning Visualized/chapter3/interactive_perceptron|Interactive Perceptron]].
-
 Многослойный перцептрон строит сложную функцию из двух повторяющихся действий:
 линейного преобразования и поэлементной нелинейности. Та же конструкция лежит
-в основе feed-forward sublayer Transformer; меняются ширина, активация и способ
+в основе feed-forward-подслоя Transformer; меняются ширина, активация и способ
 соединения ветвей, но математическое ядро остаётся узнаваемым.
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-mlp-layered.jpeg]]
@@ -76,7 +69,7 @@ H  [B, d_hidden]
 ```
 
 Каждый столбец $W_1$ задаёт один скрытый нейрон. Все примеры проходят через те
-же веса, а bias распространяется по batch axis с помощью broadcasting.
+же веса, а вектор смещений распространяется по оси пакета с помощью broadcasting.
 
 Формы — часть определения слоя, а не техническая подробность. При соглашении
 `X @ W` внутренняя размерность должна совпасть:
@@ -149,8 +142,8 @@ Stanford CS231n, [Neural Networks Part 1](https://cs231n.github.io/neural-networ
 ## Что именно обучается
 
 Для MLP с одним скрытым слоем параметрами являются
-$\theta=\{W_1,b_1,W_2,b_2\}$. Forward pass выдаёт prediction, loss сравнивает
-его с target, backpropagation вычисляет производные по всем четырём тензорам, а
+$\theta=\{W_1,b_1,W_2,b_2\}$. Прямой проход выдаёт предсказание, функция потерь сравнивает
+его с целевым значением, backpropagation вычисляет производные по всем четырём тензорам, а
 optimizer обновляет их.
 
 Минимальная реализация в PyTorch:
@@ -168,7 +161,7 @@ class MLP(torch.nn.Module):
 ```
 
 Последний слой возвращает logits. Применять softmax внутри модели перед
-`CrossEntropyLoss` не нужно: устойчивое вычисление log-softmax уже входит в loss.
+`CrossEntropyLoss` не нужно: устойчивое вычисление log-softmax уже входит в функцию потерь.
 
 ## Ширина, глубина и число параметров
 
@@ -182,7 +175,7 @@ $$
 повторно использовать признаки в иерархической композиции. Теорема об
 универсальной аппроксимации говорит, что достаточно широкий MLP способен
 приблизить большой класс функций, но не обещает, что нужная ширина будет
-разумной, данные достаточными, а gradient descent найдёт подходящие параметры.
+разумной, данные достаточными, а градиентный спуск найдёт подходящие параметры.
 
 ## MLP внутри Transformer
 
@@ -196,7 +189,7 @@ Attention переносит информацию между позициями;
 каждой позиции. В LLaMA обычная активация заменена gated-конструкцией SwiGLU,
 но формы по-прежнему проходят путь `d_model → d_ff → d_model`.
 
-## Что нужно унести из главы
+## Краткие итоги
 
 - Нейрон — affine map и нелинейность; один нейрон задаёт линейную границу.
 - Слой векторизует множество нейронов в матричное умножение.
@@ -206,6 +199,9 @@ Attention переносит информацию между позициями;
 
 ## Источники
 
+- [[05 Источники/Courses/Harvard ML Systems/tinytorch/03_layers|TinyTorch 03 — Layers]] — реализация `Linear`, инициализации, `Dropout` и учёта параметров.
+- [[05 Источники/Courses/Machine Learning Visualized/book/main.pdf|Machine Learning Visualized — Complete Book]] — исходное изложение перцептрона и градиентного обучения.
+- [[05 Источники/Courses/Machine Learning Visualized/chapter3/interactive_perceptron|Interactive Perceptron]] — интерактивное исследование решающего правила.
 - Dive into Deep Learning, [Multilayer Perceptrons](https://d2l.ai/chapter_multilayer-perceptrons/mlp.html).
 - Stanford CS231n, [Neural Networks Part 1](https://cs231n.github.io/neural-networks-1/).
 - Michael Nielsen, [A visual proof that neural nets can compute any function](http://neuralnetworksanddeeplearning.com/chap4.html).

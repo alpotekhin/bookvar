@@ -25,13 +25,6 @@ primary_sources:
 Федеративное обучение не гарантирует приватности само по себе: градиенты, веса
 и метаданные участия тоже могут раскрывать информацию.
 
-## Полный оригинальный материал
-
-- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/edge_intelligence|Harvard CS249r — Edge Intelligence]] — полная англоязычная глава об ограничениях устройств, адаптации, эффективности данных, FedAvg, планировании, приватности, интеграции и риске;
-- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/ml_ops|Harvard CS249r — ML Operations]], разделы о периферийном развёртывании, наблюдении и управлении;
-- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/ops_scale|Harvard CS249r — ML Operations at Scale]], разделы об управлении парком устройств и риске выпуска;
-- McMahan et al., [Communication-Efficient Learning of Deep Networks from Decentralized Data](https://proceedings.mlr.press/v54/mcmahan17a.html) — исходная работа о FedAvg.
-
 ## Сначала выбрать, где находится вычисление и состояние
 
 ![[02 Areas/ML & DL/Assets/Sources/Harvard ML Systems/vol2/edge_intelligence/centralized-vs-decentralized.svg]]
@@ -270,10 +263,11 @@ rollback_baseline
 $\theta^t$: update выражен относительно другой точки. Coordinator либо
 отклоняет stale update, либо применяет явно определённый asynchronous protocol.
 
-Rollout также стратифицируется по hardware, OS/runtime, geography и network.
-Успех на flagship phones не доказывает совместимость с memory-constrained
-devices. Сначала проверяют representative matrix, затем небольшой cohort каждой
-поддерживаемой strata, а не только общий процент fleet.
+Выпуск также разделяют по оборудованию, версии операционной системы и среды
+исполнения, географии и типу сети. Успех на флагманских телефонах не доказывает
+совместимость с устройствами, ограниченными по памяти. Сначала проверяют
+представительную матрицу устройств, затем небольшую группу каждого
+поддерживаемого класса, а не только общий процент парка.
 
 ## Distributed validation и rollback
 
@@ -295,8 +289,8 @@ adapter. Источник: Harvard Edge ML Systems Book,
 [Edge Intelligence, figure 16](https://mlsysbook.ai/vol2/edge_intelligence/edge_intelligence.html#fig-shadow-validation),
 CC BY-NC-SA 4.0.*
 
-Confidence — слабый proxy: модель может быть уверенно неверной. Shadow baseline
-полезен как один из сигналов, но без labels не гарантирует улучшения. Для
+Уверенность — слабый косвенный показатель: модель может быть уверенно неверной. Теневая эталонная версия
+полезна как один из сигналов, но без меток не гарантирует улучшения. Для
 критических решений local adaptation ограничивают доверенной областью,
 сохраняют verified baseline и определяют abstention/fallback.
 
@@ -306,7 +300,7 @@ Rollback должен работать без сети. Устройство х�
 отозвать плохую global version, остановить новые rounds и запретить
 скомпрометированную adaptation policy.
 
-## Tiered policy вместо одного решения для всей fleet
+## Разные правила для разных классов устройств
 
 ![[02 Areas/ML & DL/Assets/Sources/Harvard ML Systems/vol2/edge_intelligence/dd09997f717cd80246a06c24b2bbfed980693784.svg]]
 
@@ -345,14 +339,17 @@ personalization. Размер replay buffer, частота updates и communica
 Ответы образуют deployment contract. Без него federated learning остаётся
 алгоритмом усреднения, а не производственной системой.
 
-## Источники и дальнейшее чтение
+## Практика и первоисточники
 
-- Harvard Edge ML Systems Book, [Edge Intelligence](https://mlsysbook.ai/vol2/edge_intelligence/edge_intelligence.html), полный локальный оригинал: [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/edge_intelligence]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/edge_intelligence|Harvard CS249r — Edge Intelligence]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/ml_ops|Harvard CS249r — ML Operations]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/ops_scale|Harvard CS249r — ML Operations at Scale]].
+
+- Harvard Edge ML Systems Book, [Edge Intelligence](https://mlsysbook.ai/vol2/edge_intelligence/edge_intelligence.html); [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/edge_intelligence|локальная копия исходной главы]].
 - McMahan et al., [Communication-Efficient Learning of Deep Networks from Decentralized Data](https://proceedings.mlr.press/v54/mcmahan17a.html).
 - Kairouz et al., [Advances and Open Problems in Federated Learning](https://arxiv.org/abs/1912.04977).
 - Li et al., [Federated Learning: Challenges, Methods, and Future Directions](https://doi.org/10.1109/MSP.2020.2975749).
 - Bonawitz et al., [Practical Secure Aggregation for Privacy-Preserving Machine Learning](https://doi.org/10.1145/3133956.3133982).
 - Cai et al., [TinyTL: Reduce Activations, Not Trainable Parameters](https://arxiv.org/abs/2007.11622).
 
-← [[02 MLOps]] · Далее:
-[[02 Areas/ML & DL/00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация|Оценивание моделей и контаминация]]
+← [[02 MLOps]] · Далее: [[02 Areas/ML & DL/00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация|Оценивание моделей и контаминация]]

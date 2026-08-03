@@ -97,7 +97,7 @@ $$B_{tok}=B_{micro}\cdot L\cdot n_{acc}\cdot n_{DP},$$
 | потери по доменам | корзины проверочной выборки | перекос смеси данных |
 | свободная генерация | фиксированные запросы и декодирование | разрыв между правдоподобием и поведением |
 
-## Первоисточники и курсы
+## Практика и первоисточники
 
 - Bengio et al. [A Neural Probabilistic Language Model](https://www.jmlr.org/papers/v3/bengio03a.html), 2003.
 - Radford et al. [Language Models are Unsupervised Multitask Learners](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf), 2019.

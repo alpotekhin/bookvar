@@ -19,14 +19,6 @@ GPU выполнит работу. Даже честно полученное с
 распределение повторных измерений и только после этого объясняют результат через
 объём вычислений, движение данных и модель roofline.
 
-## Материалы и практикум
-
-- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/benchmarking|Harvard CS249r — Benchmarking]]: спецификация benchmark, harness, статистика и правила отчётности.
-- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/performance_engineering|Harvard CS249r — Performance Engineering]]: Iron Law, roofline и диагностический процесс.
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week01_intro/seminar.ipynb|EDLS Week 1 — seminar notebook]]: измерения, которые можно повторить локально.
-
-- [[05 Источники/Courses/Harvard ML Systems/tinytorch/19_benchmarking|TinyTorch 19 — Benchmarking]]: исполняемый модуль с единым измерительным стендом, повторными запусками и стандартным форматом результата.
-
 ## Спецификация эксперимента и измерительный стенд
 
 До запуска фиксируют:
@@ -86,15 +78,17 @@ quality: “samples/s” бессмысленен, если варианты с�
 
 *Оригинальная иллюстрация Harvard CS249r, Vol. I, Benchmarking,
 § “Statistical confidence”, locator
-`sec-benchmarking-statistical-confidence`, commit `45ecc8d…`,
+`sec-benchmarking-statistical-confidence`; [исходный SVG](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/benchmarking/images/svg/benchmarking_confidence_detectability.svg),
 CC BY-NC-SA 4.0; файл не изменён. Маркер сопоставляет размер выборки с
 минимальным различимым изменением и не даёт принять шум за регрессию.*
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/foundation/benchmarking_tail_latency_gap.svg]]
 
 *Оригинальная иллюстрация Harvard CS249r Vol. I, Benchmarking,
-§ “Inference metrics”, locator `sec-benchmarking-inference-metrics-78d4`,
-CC BY-NC-SA 4.0.*
+§ “Inference metrics”, locator `sec-benchmarking-inference-metrics-78d4`;
+[исходный SVG](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/benchmarking/images/svg/benchmarking_tail_latency_gap.svg),
+CC BY-NC-SA 4.0. Сравните медиану с правым хвостом распределения: небольшой
+сдвиг типичного запроса может скрывать существенно худший p99.*
 
 ## Мощность и энергия
 
@@ -117,7 +111,8 @@ HBM-bound, но не L2-bound; cache hit меняет $Q_{\rm HBM}$, а не FLO
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/roofline-model.svg]]
 
 *Оригинальная иллюстрация Harvard CS249r Vol. II, Performance Engineering,
-§ “The roofline model”, locator `sec-performance-engineering-roofline`,
+§ “The roofline model”, locator `sec-performance-engineering-roofline`;
+[исходный SVG](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/roofline-model.svg),
 CC BY-NC-SA 4.0.*
 
 ### Численный пример и сравнение A/B
@@ -150,7 +145,12 @@ $I\approx1365$ FLOP/B. Это algorithmic lower bound; profiler traffic вклю
 - не скрывать OOM, failures, queueing и tail latency;
 - публиковать both microbenchmark и end-to-end effect, raw samples и protocol.
 
-## Источники
+## Практика и первоисточники
+
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/benchmarking|Harvard CS249r — Benchmarking]]: спецификация benchmark, harness, статистика и правила отчётности.
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/performance_engineering|Harvard CS249r — Performance Engineering]]: Iron Law, roofline и диагностический процесс.
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week01_intro/seminar.ipynb|EDLS Week 1 — seminar notebook]]: измерения, которые можно повторить локально.
+- [[05 Источники/Courses/Harvard ML Systems/tinytorch/19_benchmarking|TinyTorch 19 — Benchmarking]]: исполняемый модуль с единым измерительным стендом, повторными запусками и стандартным форматом результата.
 
 - [EDLS Week 1 lecture, pinned e632aa8](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week01_intro/lecture.pdf) — PDF pp. 13–20
 - [Harvard CS249r Vol. I, Benchmarking, pinned 45ecc8d](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/benchmarking/benchmarking.qmd)

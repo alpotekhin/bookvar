@@ -75,15 +75,13 @@ Async prefetch запускает H2D следующего состояния д
 
 Проверка состоит из двух частей. Численная: logits, loss и gradients с сохранением RNG совпадают с baseline в выбранном допуске. Системная: peak allocated/reserved HBM, bytes D2H/H2D, recompute FLOPs и exposed transfer time сняты с одного и того же шага.
 
-## Материалы для практики
+## Практика и первоисточники
 
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week04_large_models/lecture.pdf|EDLS Week 4 — полная лекция]];
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week04_large_models/lecture.pdf|EDLS Week 4 — лекция]];
 - [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week04_large_models/practice_part1.ipynb|EDLS Week 4 — practice part 1]];
 - [[02 Areas/ML & DL/06 Практика/10 Измерить checkpointing и offload|практическая работа Bookvar с единым протоколом измерения]].
 
 В исходном notebook можно увидеть, какие activations перестают жить до backward, какие operators вычисляются повторно и когда offload добавляет копирование на критический путь. Его удобно использовать для проверки рассчитанного в главе компромисса memory–compute.
-
-## Источники
 
 - EDLS, pinned commit `e632aa89…`, [`week04_large_models/lecture.pdf`, PDF pp. 11–15 “Gradient checkpointing”, pp. 17–22 “Memory offloading”](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week04_large_models/lecture.pdf), and [`week04_large_models/practice_part1.ipynb`](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week04_large_models/practice_part1.ipynb).
 - Chen et al., [Training Deep Nets with Sublinear Memory Cost](https://arxiv.org/abs/1604.06174), 2016.

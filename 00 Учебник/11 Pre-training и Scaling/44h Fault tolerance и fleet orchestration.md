@@ -92,7 +92,7 @@ Job на 256 GPU ждёт compact block 2 h или может стартоват
 5. Повторить restore при допустимом изменении DP topology.
 6. Провести SDC drill: checksum/canary должен остановить продвижение corrupted checkpoint.
 
-## Источники
+## Практика и первоисточники
 
 - [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/fault_tolerance|Harvard CS249r: Fault Tolerance]].
 - [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/fleet_orchestration|Harvard CS249r: Fleet Orchestration]].

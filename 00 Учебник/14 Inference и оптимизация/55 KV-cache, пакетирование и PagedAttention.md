@@ -12,21 +12,11 @@ primary_sources:
 
 # KV-cache, пакетирование и PagedAttention
 
-**Полный исполняемый модуль:** [[05 Источники/Courses/Harvard ML Systems/tinytorch/18_memoization|TinyTorch 18 — Memoization]]. В нём общая идея memoization применяется к авторегрессионной генерации через `KVCache` с добавлением новых состояний за $O(1)$ и отдельным учётом памяти.
-
-## Полные исходные материалы
-
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week08_inference_software/lecture.pdf|EDLS Week 8 — полная лекция]];
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week08_inference_software/seminar.ipynb|EDLS Week 8 — seminar notebook]];
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week08_inference_software/homework/homework_week8.ipynb|EDLS Week 8 — inference-engine homework]];
-- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/inference|Harvard CS249r — Inference]].
-
-EDLS показывает KV-cache как исполняемую структуру engine, Harvard — как часть
-полного serving path. После чтения этой главы переходите к
-[[02 Areas/ML & DL/06 Практика/14 Собрать минимальный inference engine|практике
-по минимальному inference engine]].
-
-Определения prefill, decode и roofline канонически выведены в [[55a Физика LLM inference — prefill, decode и roofline]]. Здесь предмет уже: размещение растущего состояния многих запросов и загрузка ускорителя.
+В [[55a Физика LLM inference — prefill, decode и roofline|предыдущей главе]] мы
+разобрали две фазы генерации и оценили их вычислительную стоимость. Теперь
+рассмотрим другую задачу: как разместить в памяти ускорителя растущее состояние
+множества одновременных запросов и при этом не оставлять значительную часть HBM
+неиспользованной.
 
 При обучении Transformer получает прямоугольный пакет токенов и обрабатывает
 все позиции параллельно. У сервера другая нагрузка: запросы приходят в разные
@@ -159,8 +149,6 @@ PagedAttention](https://arxiv.org/abs/2309.06180), приведён в лекц�
 
 *Harvard ML Systems, Vol. II, `inference.qmd`: резервирование максимальной длины создаёт внутреннюю и внешнюю фрагментацию; [оригинальный SVG](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/inference/images/svg/kv-cache-fragmentation.svg), CC BY-NC-SA 4.0.*
 
-PagedAttention хранит таблицу `logical block -> physical block`; физические блоки не обязаны быть смежными, а последний теряет не более `block_size-1` позиций. Copy-on-write позволяет hypotheses делить префикс до расхождения. Paging убирает резерв `max_seq_len`, но block table, metadata, неполный хвост и workspace остаются в memory ledger.
-
 PagedAttention переносит идею страничной виртуальной памяти. Кеш одной
 последовательности делится на **логические блоки** фиксированного числа токенов.
 Таблица блоков сопоставляет их с любыми свободными **физическими блоками** в
@@ -241,7 +229,14 @@ admission control оценивает не только текущую занят
 Один пакет одинаковых запросов показывает скорость ядра, но не проверяет
 continuous batching, фрагментацию и планировщик.
 
-## Источники и дальнейшее чтение
+## Практика и первоисточники
+
+- [[05 Источники/Courses/Harvard ML Systems/tinytorch/18_memoization|TinyTorch 18 — реализация KVCache и учёт памяти]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week08_inference_software/lecture.pdf|Efficient DL Systems — устройство inference engine]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week08_inference_software/seminar.ipynb|Практикум Efficient DL Systems по inference software]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week08_inference_software/homework/homework_week8.ipynb|Задание Efficient DL Systems по inference engine]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/inference|Harvard CS249r — Inference]].
+- [[02 Areas/ML & DL/06 Практика/14 Собрать минимальный inference engine|Собрать минимальный inference engine]].
 
 - Stanford CS336, [Lecture 10: Inference](https://cs336.stanford.edu/) — связное объяснение prefill/decode, арифметической интенсивности, batching и paging.
 - Kwon et al., [Efficient Memory Management for Large Language Model Serving with PagedAttention](https://arxiv.org/abs/2309.06180) — исходный алгоритм и анализ фрагментации.
