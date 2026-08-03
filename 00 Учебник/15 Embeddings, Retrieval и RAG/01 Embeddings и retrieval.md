@@ -1,7 +1,7 @@
 ---
 title: "Поиск: BM25, эмбеддинги и переранжирование"
 type: textbook-chapter
-status: canonical
+status: legacy
 last_updated: 2026-07-20
 prerequisites:
   - "[[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings]]"

@@ -1,7 +1,7 @@
 ---
 title: RNN, LSTM и Seq2Seq
 type: textbook-chapter
-status: canonical
+status: legacy
 last_updated: 2026-07-18
 primary_sources:
   - https://www.bioinf.jku.at/publications/older/2604.pdf

@@ -8,26 +8,6 @@ last_verified: 2026-07-22
 
 # Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer
 
-## Полный курс, на котором основана глава
-
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week08_inference_software/lecture.pdf|EDLS Week 8 — полная лекция]];
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week08_inference_software/seminar.ipynb|EDLS Week 8 — seminar notebook]];
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week08_inference_software/homework/homework_week8.ipynb|EDLS Week 8 — полный homework]];
-- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/model_serving|Harvard CS249r — Model Serving]];
-- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/inference|Harvard CS249r — Inference]].
-
-Оригинальный [Inside vLLM](https://www.aleksagordic.com/blog/vllm) остаётся
-основным walkthrough vLLM V1; локальные EDLS и Harvard главы добавляют
-исполняемый учебный контекст и сравнение с полным serving lifecycle.
-
-Эта глава не переопределяет prefill/decode, KV-cache или continuous batching:
-их канонические механизмы находятся соответственно в [[55a Физика LLM inference — prefill, decode и roofline|физике inference]],
-[[55 KV-cache, пакетирование и PagedAttention|главе о KV-памяти]] и
-[[55b Scheduling — continuous batching, chunked prefill и prefix caching|главе
-о scheduling]]. Здесь один и тот же набор механизмов сравнивается как
-архитектура конкретных runtime. Оригинальный разбор Aleksa Gordić и материалы
-vLLM ниже сохранены в исходной форме; мосты добавлены вокруг них.
-
 После загрузки весов и токенизатора модель ещё не становится сервисом. Один
 вызов `generate` может последовательно обработать prompt и выпустить ответ, но
 производственная система одновременно принимает запросы разной длины, меняет
@@ -164,7 +144,9 @@ Figure 2 статьи SGLang. Источник: Lianmin Zheng et al.,
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/sglang-radixattention-figure3.png]]
 
 *Девять состояний radix tree при последовательных запросах, вставках и
-вытеснении. Источник: Zheng et al., SGLang paper, Figure 3.*
+вытеснении. Источник: Zheng et al.,
+[SGLang: Efficient Execution of Structured Language Model Programs](https://papers.nips.cc/paper_files/paper/2024/file/724be4472168f31ba1c9ac630f15dec8-Paper-Conference.pdf),
+Figure 3.*
 
 RadixAttention и PagedAttention решают разные задачи. Paging отвечает за
 физическое размещение блоков и уменьшение фрагментации. Radix tree индексирует
@@ -273,7 +255,13 @@ runtime выдержит производственный SLO.
 работах. Основной учебник объясняет, какие вопросы задать новой версии runtime и
 как интерпретировать её устройство.
 
-## Источники и дальнейшее чтение
+## Практика и первоисточники
+
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week08_inference_software/lecture.pdf|Efficient DL Systems — inference software]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week08_inference_software/seminar.ipynb|Практикум Efficient DL Systems по serving engine]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week08_inference_software/homework/homework_week8.ipynb|Задание Efficient DL Systems по serving engine]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/model_serving|Harvard CS249r — Model Serving]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/inference|Harvard CS249r — Inference]].
 
 - Stanford CS336, [Lecture 10: Inference](https://cs336.stanford.edu/).
 - Aleksa Gordić, [Inside vLLM: Anatomy of a High-Throughput LLM Inference System](https://www.aleksagordic.com/blog/vllm).

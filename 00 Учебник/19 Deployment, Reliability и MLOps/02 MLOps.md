@@ -24,13 +24,6 @@ MLOps — это дисциплина, которая связывает про�
 состояние системы, обнаружить значимое изменение, установить причину, собрать
 кандидата, проверить его и безопасно изменить трафик.
 
-## Полные оригинальные материалы
-
-- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/ml_ops|Harvard CS249r — ML Operations]] — полная глава об эксплуатации одной модели, техническом долге, хранилищах признаков, CI/CD, наблюдении, инцидентах и уровнях зрелости;
-- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/ops_scale|Harvard CS249r — ML Operations at Scale]] — полный материал об эксплуатации парка моделей, платформенной инженерии, зависимостях, выпуске и FinOps;
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week07_application_deployment/Effdl26-07.pdf|Efficient DL Systems — TCP/IP, HTTP, Docker, orchestration, Prometheus и Grafana]];
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week07_application_deployment/03_metrics/README|Efficient DL Systems — metrics stand]].
-
 ## Что именно требуется воспроизвести
 
 Результат модели определяется не одним commit:
@@ -323,16 +316,16 @@ operations. Источник: Harvard Edge ML Systems Book,
 [ML Operations at Scale, figure 1](https://mlsysbook.ai/vol2/ops_scale/ops_scale.html#fig-n-models-complexity),
 CC BY-NC-SA 4.0.*
 
-Платформа оправдана не количеством модных компонентов, а повторяющимся toil и
-общими зависимостями. Для нескольких моделей отдельные pipelines могут быть
-дешевле platform team. При десятках и сотнях моделей появляются:
+Платформа оправдана не количеством модных компонентов, а повторяющейся ручной работой и
+общими зависимостями. Для нескольких моделей отдельные конвейеры могут быть
+дешевле отдельной платформенной команды. При десятках и сотнях моделей появляются:
 
-- общий registry и dependency graph;
-- self-service deployment с едиными policy gates;
-- shared feature and data infrastructure;
+- общий реестр и граф зависимостей;
+- самостоятельное развёртывание по единым правилам допуска;
+- общая инфраструктура признаков и данных;
 - multi-tenant training и serving;
-- централизованная cost attribution;
-- fleet-wide telemetry и correlated incident detection.
+- централизованный учёт стоимости;
+- телеметрия всего парка и обнаружение связанных инцидентов.
 
 Экономика зависит от амортизации:
 
@@ -342,15 +335,15 @@ $$
 \frac{N_{models}\,T_{saved}\,C_{engineer}}{C_{platform}}.
 $$
 
-Формула не доказывает конкретный порог, но требует посчитать его. Platform team
-стоимостью 120 тысяч долларов в месяц, экономящая каждой из 50 model teams по
+Формула не доказывает конкретный порог, но требует посчитать его. Платформенная команда
+стоимостью 120 тысяч долларов в месяц, экономящая каждой из 50 модельных команд по
 20 часов при полной стоимости часа 150 долларов, возвращает 150 тысяч —
 ROI 1,25. Для 20 моделей та же платформа экономит только 60 тысяч и пока не
 окупается.
 
-Multi-tenancy приносит statistical multiplexing: пики разных команд не всегда
-совпадают, поэтому общая fleet использует hardware лучше выделенных квот.
-Однако средняя utilization опасна как единственная цель. Перегруженная система
+Многопользовательская платформа позволяет статистически мультиплексировать нагрузку: пики разных команд не всегда
+совпадают, поэтому общий парк использует оборудование лучше выделенных квот.
+Однако средняя утилизация опасна как единственная цель. Перегруженная система
 может показывать высокий процент GPU и неприемлемое queue time. Нужны useful
 throughput, SLO attainment, preemption waste и доля времени, когда доступен
 компактный topology для крупных jobs.
@@ -371,10 +364,15 @@ prediction восстановить модель, данные и конфигу
 что новый release прошёл policy gates. Если нет, инструменты существуют, а
 операционный контур — ещё нет.
 
-## Источники и дальнейшее чтение
+## Практика и первоисточники
 
-- Harvard Edge ML Systems Book, [ML Operations](https://mlsysbook.ai/vol1/ml_ops/ml_ops.html), полный локальный оригинал: [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/ml_ops]].
-- Harvard Edge ML Systems Book, [ML Operations at Scale](https://mlsysbook.ai/vol2/ops_scale/ops_scale.html), полный локальный оригинал: [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/ops_scale]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/ml_ops|Harvard CS249r — ML Operations]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/ops_scale|Harvard CS249r — ML Operations at Scale]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week07_application_deployment/Effdl26-07.pdf|Efficient DL Systems — развёртывание и наблюдаемость]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week07_application_deployment/03_metrics/README|Стенд с метриками Efficient DL Systems]].
+
+- Harvard Edge ML Systems Book, [ML Operations](https://mlsysbook.ai/vol1/ml_ops/ml_ops.html); [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/ml_ops|локальная копия исходной главы]].
+- Harvard Edge ML Systems Book, [ML Operations at Scale](https://mlsysbook.ai/vol2/ops_scale/ops_scale.html); [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/ops_scale|локальная копия исходной главы]].
 - Sculley et al., [Hidden Technical Debt in Machine Learning Systems](https://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems).
 - Breck et al., [The ML Test Score](https://doi.org/10.1109/BigData.2017.8258038).
 - Kreuzberger, Kühl and Hirschl, [Machine Learning Operations: Overview, Definition, and Architecture](https://doi.org/10.1109/ACCESS.2023.3262138).

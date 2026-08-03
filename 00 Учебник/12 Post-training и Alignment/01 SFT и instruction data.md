@@ -7,13 +7,13 @@ aliases: [Instruction tuning, Supervised fine-tuning]
 primary_sources:
   - https://arxiv.org/abs/2203.02155
   - https://arxiv.org/abs/2109.01652
-prerequisites: "[[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/02 Distributed training и precision]]"
+prerequisites: "[[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision]]"
 next: "[[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/02 Preference data]]"
 ---
 
 # SFT: обучение на примерах желаемого поведения
 
-> [!abstract] Результат урока
+> [!abstract] Ориентир главы
 > После этой главы вы сможете превратить запись диалога в токены и метки,
 > вручную вычислить кросс-энтропию только по ответу ассистента, написать
 > минимальный шаг SFT и объяснить, почему хороший набор инструктивных данных —
@@ -286,7 +286,9 @@ SFT хорошо задаёт шаблон диалога, стиль, синт�
 формата, фактической точности, длины, безопасности и сохранения прежних
 возможностей.
 
-## Практикум
+## Практика и первоисточники
+
+### Задания
 
 1. Возьмите два многоходовых диалога. Постройте метки для режимов «все ответы
    ассистента» и «только последний». Объясните, где расходятся градиенты.
@@ -298,7 +300,7 @@ SFT хорошо задаёт шаблон диалога, стиль, синт�
 5. Найдите в наборе 20 почти одинаковых синтетических ответов. Предложите правило
    дедупликации, которое не удалит содержательно разные решения.
 
-## Курсы и объяснения
+### Объяснения и реализации
 
 - Andrej Karpathy, [State of GPT](https://karpathy.ai/stateofgpt.pdf) — переход
   base model → assistant и место SFT в полном pipeline.
@@ -312,7 +314,7 @@ SFT хорошо задаёт шаблон диалога, стиль, синт�
 - Stanford [CS336](https://cs336.stanford.edu/spring2025/) — Lecture 15 и
   Assignment 5 для инженерного понимания SFT/RLHF.
 
-## Первичные источники
+### Первоисточники
 
 - Ouyang et al., [Training language models to follow instructions with human
   feedback](https://arxiv.org/abs/2203.02155), 2022.

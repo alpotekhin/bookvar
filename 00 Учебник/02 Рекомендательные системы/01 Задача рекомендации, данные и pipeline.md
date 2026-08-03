@@ -252,7 +252,8 @@ late-arriving information. Третье исключает рекомендац�
 ## Baseline раньше архитектуры
 
 Пошаговый расчёт global mean, user bias, item bias и matrix factorization
-приведён в [[05 Источники/Courses/Linux Foundation Recommenders/examples/02_model_collaborative_filtering/baseline_deep_dive.ipynb|LF Recommenders: Baseline recommender deep dive]].
+приведён в notebook [Linux Foundation Recommenders — Baseline recommender deep
+dive](https://github.com/recommenders-team/recommenders/blob/main/examples/02_model_collaborative_filtering/baseline_deep_dive.ipynb).
 
 Минимальный набор:
 

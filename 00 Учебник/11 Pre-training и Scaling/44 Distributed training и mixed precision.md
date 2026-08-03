@@ -415,7 +415,7 @@ batch и сравнивают его с непрерывным control run.
 - [[44g Network, storage и distributed checkpoints|Сеть, хранилище и distributed checkpoints]] — физический путь данных.
 - [[44h Fault tolerance и fleet orchestration|Отказоустойчивость и управление кластером]] — сбои, recovery и планирование.
 
-## Источники и материалы для углубления
+## Практика и первоисточники
 
 - Stanford CS336, [Lecture 8: Parallelism](https://github.com/stanford-cs336/lectures/blob/main/lecture_08.pdf) — memory accounting, data/tensor/pipeline parallelism и композиция осей.
 - Efficient Deep Learning Systems, [week 2: Fast Pipelines and Mixed Precision](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week02_fast_pipelines/lecture.pdf), [week 3: Data Parallel Training](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week03_data_parallel/lecture.pdf), [week 4: Model Parallelism](https://github.com/mryab/efficient-dl-systems/tree/e632aa89ca9e6638d52e1b686095e7442faffbb0/week04_model_parallel) и [week 5: FSDP](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week05_fsdp/lecture.pdf).

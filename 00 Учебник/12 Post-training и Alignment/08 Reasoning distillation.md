@@ -329,7 +329,9 @@ ACCELERATE_LOG_LEVEL=info accelerate launch \
 помогает организовать массовое создание синтетических данных, но сам по себе не
 определяет функцию потерь дистилляции.
 
-## Практикум
+## Практика и первоисточники
+
+### Задания
 
 1. Для 1000 задач сгенерируйте по четыре решения учителя и сохраните неудачные попытки.
 2. Реализуйте проверку и укажите происхождение каждого решения.
@@ -343,7 +345,7 @@ ACCELERATE_LOG_LEVEL=info accelerate launch \
 8. Проведите оценивание с теми же параметрами генерации и отдельным генератором новых задач.
 9. В отчёте разделите улучшения от объёма данных, фильтрации и самой функции потерь.
 
-## Курсы и объяснения
+### Объяснения и реализации
 
 - Hugging Face — [Open-R1 course/project](https://huggingface.co/reasoning-course)
   и [Open-R1 Update #2](https://huggingface.co/blog/open-r1/update-2).
@@ -351,7 +353,7 @@ ACCELERATE_LOG_LEVEL=info accelerate launch \
 - Hinton, Vinyals, Dean — исходная статья и классическое объяснение мягких целей:
   [Distilling the Knowledge in a Neural Network](https://arxiv.org/abs/1503.02531).
 
-## Первоисточники
+### Первоисточники
 
 - Hinton et al., 2015 — [Distilling the Knowledge in a Neural Network](https://arxiv.org/abs/1503.02531).
 - DeepSeek-AI, 2025 — [DeepSeek-R1](https://arxiv.org/abs/2501.12948):

@@ -18,30 +18,17 @@ source_language: mixed
 
 Такой расчёт ниже выполняется последовательно: сначала для одного плотного слоя,
 затем для полной модели и состояний оптимизатора, после чего добавляются
-шардинг, конвейерный параллелизм и маршрутизация MoE. Основой численных примеров
-служит шестая лекция курса Efficient DL Systems; в конце главы указаны точные
-слайды и дополнительные материалы для самостоятельной проверки.
+шардинг, конвейерный параллелизм и маршрутизация MoE.
 
 Обозначения: $B$ — число sequences, $S$ — длина, $N=BS$ — число токенов
 microbatch, $H$ — hidden width, $I$ — FFN width, $L$ — слои, $V$ — vocabulary,
 $n_h,n_{kv}$ — query- и KV-heads, $d$ — head width, $E$ — experts, $k$ —
 top-$k$. Один BF16-элемент занимает $b=2$ bytes.
 
-## Материалы для воспроизведения расчётов
-
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week06_dl_arithmetic/lecture.pdf|EDLS Week 6 — полная лекция, 146 слайдов]].
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week06_dl_arithmetic/seminar/practice.ipynb|EDLS Week 6 — семинарская тетрадь]]: профилирование, объединение операций и память на исполняемых примерах.
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week06_dl_arithmetic/homework/README|EDLS Week 6 — homework]]: исходное задание курса.
-- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/nn_computation|Harvard CS249r — Neural Computation]] и [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/model_compression|Model Compression]].
-
-EDLS задаёт порядок расчёта ресурсов; Harvard даёт более широкий системный
-контекст. Формулы ниже — рабочая ведомость, по которой можно проверить
-конкретную конфигурацию Transformer или MoE, а не замена полной лекции.
-
 ## Нулевая стадия: данные тоже входят в step time
 
-EDLS начинает не с GEMM, а с простоя: CPU читает и готовит batch, пока дорогой
-GPU ждёт (slides 4–7). Синхронный шаг
+До первого GEMM система уже может терять время: CPU читает и готовит batch, пока
+GPU ждёт. Для синхронного шага
 
 $$T_{\text{step}}=T_{\text{load}}+T_{\text{compute}}$$
 
@@ -103,9 +90,9 @@ quadratic attention и vocabulary projection не доминируют.
 
 $$F_{\ell,\text{linear}}\approx2N\cdot202{,}4\text{ M}=3{,}32\text{ TFLOP}.$$
 
-На 800 TFLOP/s идеальный forward слоя — 4,15 ms. EDLS slides 86–88 специально
-сопоставляют эту нижнюю границу с H100 memory/compute time: фактическое время
-выше из-за elementwise kernels, launch gaps и неполной эффективности.
+На 800 TFLOP/s идеальный прямой проход через слой занял бы 4,15 мс. Это лишь
+нижняя граница: обращения к памяти, поэлементные ядра, паузы между их запусками
+и неполная загрузка вычислительных блоков увеличивают фактическое время.
 
 ## Учёт активаций: где появляется $O(LNH)$
 
@@ -138,10 +125,10 @@ $2bBn_{kv}Sd=2bNn_{kv}d$.
   intermediates пересчитывает в backward. Для $L$ блоков это уменьшает главный
   ledger до порядка $LbNH$ плюс временные активации одного пересчитываемого
   блока.
-- Selective checkpointing оставляет дорогие GEMM outputs и пересчитывает
-  дешёвые norm/activation операции либо наоборот в зависимости от memory
-  budget. EDLS slides 93–104 показывают, почему «не все активации одинаково
-  дорого вычислять».
+- Selective checkpointing выбирает, какие активации хранить, с учётом стоимости
+  их повторного вычисления. Результаты дорогих GEMM обычно выгоднее сохранить,
+  а выходы сравнительно дешёвых нормализаций и функций активации — вычислить
+  заново. Выбор зависит от доступной памяти и профиля конкретной модели.
 
 Для $B=1,S=8192,H=4096,I=11008$ один residual — 67,1 MB, а два MLP projections
 — около 360,7 MB. Полная attention matrix при $n_h=32$ — 4,29 GB на один
@@ -165,22 +152,23 @@ checkpointing — множитель и recompute time.
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/foundation/training_optimizer_memory.svg]]
 
 *Источник: Harvard CS249r, Vol. I, Model Training, section “Memory
-Architecture”/optimizer-state accounting, figure `training_optimizer_memory.svg`,
-commit `45ecc8d…`, CC BY-NC-SA 4.0. Рисунок импортирован без изменений.*
+Architecture”/optimizer-state accounting; [исходный SVG](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/training/images/svg/training_optimizer_memory.svg),
+CC BY-NC-SA 4.0. Рисунок импортирован без изменений.*
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/distributed_training_memory_budget.svg]]
 
 *Оригинальная иллюстрация Harvard CS249r, Vol. II, Distributed Training,
 § “Hybrid parallelism memory budget”, locator
-`sec-distributed-training-systems-systems-hybrid-parallelism`,
-commit `45ecc8d…`, CC BY-NC-SA 4.0; файл не изменён. Общий ledger разделён на
+`sec-distributed-training-systems-systems-hybrid-parallelism`;
+[исходный SVG](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/images/svg/distributed_training_memory_budget.svg),
+CC BY-NC-SA 4.0; файл не изменён. Общий ledger разделён на
 weights, optimizer и activations, чтобы sharding не смешивался с peak buffers.*
 
 FSDP шарит параметры, gradients и optimizer state между $p$ ranks. Идеальный
 resident ledger становится примерно $(16\text{-}18)P/p$, но перед вычислением
 слоя нужен AllGather weights, после backward — ReduceScatter gradients.
-EDLS slides 82–91 рассматривают FSDP как **логистику**, а не бесплатное
-сокращение памяти.
+Поэтому FSDP следует понимать как управление перемещением и временем жизни
+состояний модели, а не как бесплатное сокращение памяти.
 
 Для BF16 слоя с $P_\ell$ параметрами каждый rank должен получить порядка
 $2P_\ell(p-1)/p$ bytes на AllGather и отправить сопоставимый объём на
@@ -196,10 +184,10 @@ layer i + 1:                [all-gather i+1][ forward i+1 ]
                               ^ полезный overlap ^
 ```
 
-Слишком ранний prefetch держит несколько full-parameter buffers; слишком
-поздний оставляет GPU ждать NCCL. Slides 89–90 также предупреждают, что
-коммуникации конкурируют за topology links и требуют корректных NCCL streams
-и dependencies.
+Слишком ранняя предварительная загрузка удерживает несколько буферов с полными
+параметрами; слишком поздняя заставляет GPU ждать NCCL. Коллективные операции
+к тому же конкурируют за одни и те же линии связи, поэтому их потоки и
+зависимости должны быть согласованы с вычислениями.
 
 ## Объединение операций и Liger Kernel
 
@@ -212,16 +200,15 @@ Fusion выполняет цепочку в одном kernel и держит п
 register/shared memory. Если три elementwise стадии читают и пишут tensor
 размера $M$, независимое исполнение перемещает примерно $6M$ bytes, fused —
 около $2M$; теоретическое bandwidth speedup до $3\times$, но register pressure
-и occupancy могут его уменьшить. EDLS slides 39–81 разбирают locality,
-torch.compile/Triton и Liger Kernel; slide 74 рекомендует Liger как источник
-готовых kernels, включая memory-efficient loss. Это **адаптация содержания
-лекции**, не утверждение о любой версии библиотеки: kernel eligibility нужно
-проверять trace и tests для конкретных shapes/dtypes.
+и occupancy могут его уменьшить. Готовые реализации таких операций, включая
+экономную по памяти функцию потерь, есть в Liger Kernel. Возможность применить
+конкретное ядро зависит от версии библиотеки, формы тензоров и типов данных;
+это проверяют по трассировке и тестам, а не предполагают заранее.
 
 ## Расчёт для плотных моделей 7B и 70B
 
-EDLS slides 24–30 дают слой-за-слоем memory maps для 100M, 1B, 7B, Llama 70B,
-Qwen 30B-A3B и Qwen 235B-A32B. Их назначение — различать:
+При расчёте памяти для моделей от 100M до Llama 70B и Qwen 235B-A32B важно
+различать четыре категории:
 
 1. persistent weights/optimizer states;
 2. layer-local full weights после FSDP gather;
@@ -232,11 +219,11 @@ Qwen 30B-A3B и Qwen 235B-A32B. Их назначение — различать
 
 $$P_{\text{ffn}}=3\cdot8192\cdot28672\approx704{,}6\text{ M},$$
 
-то есть 1,41 GB BF16 — значение того же порядка, что slide 28. Даже если
+то есть 1,41 GB в BF16. Даже если
 persistent state разделён на 1024 GPU, один gathered layer всё ещё требует
 гигабайты; поэтому peak определяется schedule gather/free, а не средним
-$P/p$. Slides 109–113 показывают вариант TP=2: матрицы и compute делятся, но
-появляются activation collectives.
+$P/p$. При TP=2 матрицы и вычисления делятся пополам, но появляются
+коллективные обмены активациями.
 
 ## MoE: stored parameters ≠ active FLOP
 
@@ -272,31 +259,31 @@ Load imbalance, padding до capacity и stragglers уменьшают utilizati
 
 *Оригинальная иллюстрация Harvard CS249r, Vol. II, Distributed Training,
 § “Expert parallelism (mixture of experts)”, locator
-`sec-distributed-training-systems-systems-expert-parallelism-mixture-experts-bc45`,
-commit `45ecc8d…`, CC BY-NC-SA 4.0; файл не изменён. Dispatch и combine
+`sec-distributed-training-systems-systems-expert-parallelism-mixture-experts-bc45`;
+[исходный SVG](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/images/svg/moe-all-to-all-routing.svg),
+CC BY-NC-SA 4.0; файл не изменён. Dispatch и combine
 показаны как две отдельные All-to-All фазы вокруг локального expert compute.*
 
 ### Qwen 235B-A32B: почему FSDP становится дорогим
 
-EDLS slides 122–123 приводят для Qwen 3 235B слой около 5 GB BF16 и сравнивают
-идеальное forward time с FSDP communication. Смысл расчёта: sparse compute
-использует лишь $k$ experts, но обычный FSDP AllGather перемещает все expert
-weights. При 200 GB/s 5 GB имеют нижнюю границу 25 ms только на чтение по
-fabric, прежде чем считать protocol/topology overhead. EP размещает experts
-постоянно и вместо weights пересылает token activations.
+В использованном в курсе расчёте для Qwen 3 235B один слой занимает около
+5 GB в BF16. Разреженные вычисления используют лишь $k$ экспертов, но обычный
+FSDP AllGather перемещает веса всех экспертов. При 200 GB/s перенос 5 GB имеет
+нижнюю границу 25 ms ещё до учёта накладных расходов протокола и топологии. EP
+размещает экспертов постоянно и вместо весов пересылает представления токенов.
 
 ### DeepSeek-V3 671B
 
-Slides 124–126 повторяют карту для DeepSeek-V3: около 21 GB BF16 на слой в
-приведённой конфигурации. Это не универсальная характеристика всех
-implementations, а оценка конкретного slide. Даже 1 TB/s дал бы 21 ms на
-полный перенос слоя; sparse active compute может быть короче. Отсюда
-необходимость EP/PP и topology-aware placement.
+Для приведённой конфигурации DeepSeek-V3 аналогичная оценка даёт около 21 GB
+в BF16 на слой. Это не универсальная характеристика любой реализации. Даже
+пропускная способность 1 TB/s дала бы нижнюю границу 21 ms на
+полный перенос слоя; вычисления только по активным экспертам могут завершиться
+быстрее. Отсюда необходимость EP/PP и размещения с учётом топологии сети.
 
-### TP=8 и EP=8: исправленный worked example
+### TP=8 и EP=8: численный пример
 
-Пусть $S=8192,E=256,k=8,H=7168,I=2048$, как на EDLS slides 131–132.
-Полный SwiGLU compute на один token batch:
+Пусть $S=8192,E=256,k=8,H=7168,I=2048$.
+Полный объём вычислений SwiGLU для одного пакета токенов:
 
 $$
 F_{\mathrm{SwiGLU}}=6SkHI
@@ -304,8 +291,8 @@ F_{\mathrm{SwiGLU}}=6SkHI
 \approx 5.77\,\mathrm{TFLOP}.
 $$
 
-На 800 TFLOP/s идеал — 7,2 ms. Число около 2,4–2,5 ms в исходном slide
-относится к **одному GroupedGEMM projection**:
+На 800 TFLOP/s идеал — 7,2 ms. Важно не спутать эту оценку с 2,4–2,5 ms для
+**одной проекции GroupedGEMM**:
 
 $$
 2SkHI\approx1.92\,\mathrm{TFLOP}\Rightarrow2.4\,\mathrm{ms}.
@@ -341,15 +328,16 @@ $(p-1)/(m+p-1)$: при $p=8,m=32$ это $7/39\approx18\%$.
 
 *Оригинальная иллюстрация Harvard CS249r, Vol. II, Distributed Training,
 § “Pipeline parallelism”, locator
-`sec-distributed-training-systems-systems-pipeline-parallelism-8748`,
-commit `45ecc8d…`, CC BY-NC-SA 4.0; файл не изменён. Пространственное деление
+`sec-distributed-training-systems-systems-pipeline-parallelism-8748`;
+[исходный SVG](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/images/svg/pipeline-parallelism.svg),
+CC BY-NC-SA 4.0; файл не изменён. Пространственное деление
 слоёв по stages связывает расписание microbatches с передачей activations.*
 
 ### ZeroBubble
 
 Backward содержит input-gradient ($B_x$), нужный предыдущему stage, и
-weight-gradient ($B_w$), который можно отложить. ZeroBubble (EDLS slide 142)
-ставит $B_w$ в idle slots:
+weight-gradient ($B_w$), который можно отложить. ZeroBubble помещает $B_w$ в
+периоды простоя:
 
 ```text
 обычно:     [ F ][idle][ Bx+Bw ][idle]
@@ -362,9 +350,8 @@ ZeroBubble: [ F ][ Bx ][ Bw from another microbatch ]
 
 ### DualPipeV
 
-DualPipeV (slide 143) ведёт microbatches по V-shaped placement в двух
-направлениях. Пока один поток ждёт MoE All-to-All, другой выполняет local
-compute:
+DualPipeV ведёт микробатчи по V-образному размещению в двух направлениях. Пока
+один поток ждёт MoE All-to-All, другой выполняет локальные вычисления:
 
 ```text
 stream A: stage 0 → 1 → 2 → 3
@@ -406,11 +393,16 @@ bandwidth.
 6. Нарисовать microbatch schedule и посчитать bubble/live activations.
 7. Проверить расчёт profiler trace и allocator snapshot.
 
-## Источники и статус переноса
+## Практика и первоисточники
 
-- [EDLS week 6, complete lecture, slides 4–146](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week06_dl_arithmetic/lecture.pdf) —
-  основной источник структуры, model maps и численных примеров. Формулы выше
-  адаптированы и дополнительно выведены; slide-specific числа явно помечены.
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week06_dl_arithmetic/lecture.pdf|EDLS Week 6 — лекция по арифметике глубокого обучения]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week06_dl_arithmetic/seminar/practice.ipynb|EDLS Week 6 — семинарская тетрадь]]: профилирование, объединение операций и память на исполняемых примерах.
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week06_dl_arithmetic/homework/README|EDLS Week 6 — практическое задание]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/nn_computation|Harvard CS249r — Neural Computation]] и [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/model_compression|Model Compression]].
+
+- [EDLS week 6, slides 4–146](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week06_dl_arithmetic/lecture.pdf) —
+  источник структуры, model maps и численных примеров; числа, относящиеся к
+  конкретным слайдам, явно помечены.
 - [Harvard CS249r, Neural Computation, “Matrix Operations”](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/nn_computation/nn_computation.qmd) —
   связь MAC/GEMM и системного bottleneck.
 - [Harvard CS249r, Model Training, “Memory Architecture”](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/training/training.qmd) —

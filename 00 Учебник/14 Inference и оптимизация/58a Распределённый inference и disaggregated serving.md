@@ -15,18 +15,6 @@ primary_sources:
 
 # Параллелизм и коллективные операции в LLM inference
 
-## Полные главы по compute и communication
-
-- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/inference|Harvard CS249r — Inference]];
-- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/collective_communication|Harvard CS249r — Collective Communication]];
-- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/network_fabrics|Harvard CS249r — Network Fabrics]];
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week08_inference_software/lecture.pdf|EDLS Week 8 — полная лекция]].
-
-Эти источники разделяют две задачи, которые часто смешивают: поместить и
-ускорить один model replica и увеличить число независимо обслуживаемых
-запросов. Ни одна схема TP/PP/EP/DP не оценивается без topology и collective
-traffic.
-
 Распределённый inference нужен по двум разным причинам. Иногда один экземпляр
 модели не помещается в память одного ускорителя или не укладывается в требуемую
 задержку. Тогда вычисление одного запроса приходится разделять между несколькими
@@ -36,8 +24,9 @@ GPU. В другом случае модель прекрасно помещае
 GPU, однако перемещают разные данные, ограничиваются разными каналами связи и
 по-разному влияют на задержку одного пользователя.
 
-Эта глава строится вокруг простого вопроса: **какой тензор разделён, где он
-находится до операции и где должен оказаться после неё?** Аббревиатуры DP, TP, PP,
+Для каждого способа параллелизма полезно задать один и тот же вопрос: **какой
+тензор разделён, где он находится до операции и где должен оказаться после неё?**
+Аббревиатуры DP, TP, PP,
 SP, CP и EP полезны только после ответа на этот вопрос. Если следить за формой и
 расположением тензоров, становится понятно, зачем системе нужны `all-reduce`,
 `all-gather`, `reduce-scatter`, `all-to-all` и point-to-point передача, почему TP
@@ -99,7 +88,7 @@ AllGather нужен, когда последующая операция не м
 
 *ReduceScatter сначала редуцирует соответствующие элементы входов, затем оставляет
 на каждом rank только его часть результата. Источник: официальная документация
-NCCL.*
+[NCCL Collective Operations](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html).*
 
 Пусть каждый rank вычислил partial output $y_i$ одной и той же глобальной формы.
 Полный результат равен $y=\sum_i y_i$. Если следующая операция допускает
@@ -113,7 +102,7 @@ ReduceScatter сразу оставляет $1/p$ результата. Это �
 
 *AllReduce возвращает результат редукции всем ranks. Его можно мыслить как
 ReduceScatter, за которым следует AllGather. Источник: официальная документация
-NCCL.*
+[NCCL Collective Operations](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html).*
 
 AllReduce возникает в классическом Megatron TP после row-parallel projection:
 GPU вычисляют частичные суммы по разрезанному contracting dimension, а следующий
@@ -136,7 +125,7 @@ $$
 
 *При AllToAll каждый rank отправляет отдельный fragment каждому назначению и
 получает отдельный fragment от каждого источника. Источник: официальная
-документация NCCL.*
+документация [NCCL Collective Operations](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html).*
 
 AllToAll — не редукция. Это глобальная перестановка размещения. В MoE router
 назначает каждый токен одному или нескольким экспертам; tokens, находящиеся на
@@ -375,7 +364,12 @@ TP16×DP1 занимают те же шестнадцать GPU, но дают �
 budget и network traffic. Именно поэтому benchmark должен публиковать layout, а
 не только модель и число ускорителей.
 
-## Источники и дальнейшее чтение
+## Практика и первоисточники
+
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/inference|Harvard CS249r — Inference]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/collective_communication|Harvard CS249r — Collective Communication]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/network_fabrics|Harvard CS249r — Network Fabrics]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week08_inference_software/lecture.pdf|Efficient DL Systems — распределённый inference]].
 
 - Austin et al., [How to Scale Your Model: Sharded Matrices](https://jax-ml.github.io/scaling-book/sharding/) — вывод collectives из размещения distributed tensors.
 - Austin et al., [All About Transformer Inference](https://jax-ml.github.io/scaling-book/inference/) — sharding prefill, decode и KV cache с roofline-анализом.

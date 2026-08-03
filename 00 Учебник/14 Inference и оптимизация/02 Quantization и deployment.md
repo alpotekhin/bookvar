@@ -1,7 +1,7 @@
 ---
 title: Квантизация и развёртывание языковых моделей
 type: textbook-chapter
-status: canonical
+status: legacy
 last_updated: 2026-07-20
 prerequisites:
   - "[[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/01 KV-cache, batching и FlashAttention]]"

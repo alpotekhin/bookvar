@@ -135,7 +135,7 @@ Normalization”, Figure 3 и Tables 3–5,
 
 ### Численная устойчивость реализации
 
-Квадраты half-precision значений могут переполниться до вычисления среднего.
+Квадраты значений пониженной точности могут переполниться до вычисления среднего.
 Поэтому CS336 явно требует временно перейти к `float32`, а затем вернуть исходный
 тип:
 
@@ -251,4 +251,3 @@ SwiGLU — за функцию внутри FFN. Один механизм не�
 - [Shazeer, GLU Variants Improve Transformer](https://arxiv.org/abs/2002.05202) — единая запись GLU-вариантов и абляции при сопоставимом бюджете параметров.
 - [Jurafsky & Martin, гл. 8](https://web.stanford.edu/~jurafsky/slp3/8.pdf) подробнее всего вводят LayerNorm и FFN классического Transformer. [D2L, Residual Networks](https://d2l.ai/chapter_convolutional-modern/resnet.html) даёт более наглядную исходную мотивацию residual connections, но не объясняет современную LLM-сборку.
 - [Karpathy, nanoGPT `Block`](https://github.com/karpathy/nanoGPT/blob/master/model.py) — компактная реализация pre-norm GPT-2; для RMSNorm и SwiGLU она сознательно не служит reference, поскольку использует LayerNorm и GELU-MLP.
-

@@ -236,7 +236,8 @@ RNN + attention решил bottleneck, но сохранил recurrent backbone:
 - [Lena Voita — Seq2seq and Attention](https://lena-voita.github.io/nlp_course/seq2seq_and_attention.html)
 
 Первый источник особенно хорош как визуальная история механизмов памяти; второй
-— как строгий учебный маршрут с формулами, вариантами функции оценки и анализом голов.
+— как последовательный разбор с формулами, вариантами функции оценки и анализом
+голов внимания.
 
 ## 7. Три термина, которые нельзя смешивать
 
@@ -266,7 +267,7 @@ context = torch.einsum("bt,btd->bd", weights, encoder_states)
 Обратите внимание: здесь decoder создаёт один запрос к encoder memory. В
 self-attention следующей главы все $T$ позиций создадут запросы одновременно.
 
-## Что должно остаться после главы
+## Краткие итоги
 
 - Attention появился до Transformer.
 - Первая ключевая роль — decoder-to-encoder soft alignment.
@@ -290,7 +291,6 @@ self-attention следующей главы все $T$ позиций созд�
 - [Distill — Attention and Augmented Recurrent Neural Networks](https://distill.pub/2016/augmented-rnns/)
 - [Jay Alammar — Visualizing Neural Machine Translation](https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/)
 - [[02 Areas/ML & DL/Courses/Stanford CS224N/Lecture 07 — Attention|CS224N: Attention]]
-- [[02 Areas/ML & DL/05 Источники/Визуальные материалы и лицензии|Как в Bookvar отбираются и атрибутируются иллюстрации]]
 
 **Назад:** [[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора]] ·
 **Дальше:** [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V]]

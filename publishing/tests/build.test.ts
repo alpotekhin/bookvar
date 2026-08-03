@@ -95,7 +95,9 @@ describe('buildPublication', () => {
     expect(metadata.slug).toBe('nested/page-a');
     expect(generated).toContain(`[Page B](${publicationBase}/page-b/)`);
     expect(generated).toContain('Missing');
-    expect(generated).toContain(`![chart](${publicationBase}/assets/Figures/chart.svg)`);
+    expect(generated).toContain(
+      `[![chart](${publicationBase}/assets/Figures/chart.svg)](${publicationBase}/assets/Figures/chart.svg)`
+    );
     expect(readFileSync(join(options.outputDir, 'page-b.md'), 'utf8'))
       .toContain(':::caution[Check]\nBody\n:::');
     expect(JSON.parse(readFileSync(options.reportPath, 'utf8'))).toMatchObject({
@@ -185,6 +187,50 @@ describe('buildPublication', () => {
     }]);
   });
 
+  it('keeps deep source archives out of textbook search without removing their pages', async () => {
+    const options = fixture('Course archive', 'Textbook chapter');
+    write(options.manifestPath, [
+      'site_title: Fixture',
+      'sections:',
+      '  - id: textbook',
+      '    title: Textbook',
+      '    pages:',
+      '      - source: Notes/Page B.md',
+      '        route: textbook/page-b',
+      '  - id: sources',
+      '    title: Sources',
+      '    pages:',
+      '      - source: Notes/Page A.md',
+      '        route: sources/courses/example/lecture'
+    ].join('\n'));
+
+    await buildPublication(options);
+
+    const chapter = matter(readFileSync(
+      join(options.outputDir, 'textbook', 'page-b.md'),
+      'utf8'
+    )).data;
+    const archive = matter(readFileSync(
+      join(options.outputDir, 'sources', 'courses', 'example', 'lecture.md'),
+      'utf8'
+    )).data;
+    expect(chapter).not.toHaveProperty('pagefind');
+    expect(archive.pagefind).toBe(false);
+  });
+
+  it('makes protocol-relative links in imported HTML explicitly external', async () => {
+    const options = fixture(
+      '<a href="//commons.wikimedia.org/wiki/User:Chire">Chire</a>\n' +
+      '<img src="//upload.wikimedia.org/example.png" alt="Example">'
+    );
+
+    await buildPublication(options);
+
+    const generated = readFileSync(join(options.outputDir, 'nested', 'page-a.md'), 'utf8');
+    expect(generated).toContain('href="https://commons.wikimedia.org/wiki/User:Chire"');
+    expect(generated).toContain('src="https://upload.wikimedia.org/example.png"');
+  });
+
   it('resolves Russian canonical paths from English pages when the target is translated', async () => {
     const options = fixture('Русская страница A', 'Русская страница B');
     write(join(options.rootDir, 'English', 'Page A.md'), [
@@ -213,9 +259,8 @@ describe('buildPublication', () => {
     await buildPublication(options);
 
     const generated = readFileSync(join(options.outputDir, 'nested', 'page-a.md'), 'utf8');
-    expect(generated).toContain(
-      `${publicationBase}/assets/Figures%20With%20Spaces/chart%20one.svg`
-    );
+    const assetHref = `${publicationBase}/assets/Figures%20With%20Spaces/chart%20one.svg`;
+    expect(generated).toContain(`[![chart one](${assetHref})](${assetHref})`);
   });
 
   it('preserves manifest-defined nested textbook groups, labels, and slugs', async () => {

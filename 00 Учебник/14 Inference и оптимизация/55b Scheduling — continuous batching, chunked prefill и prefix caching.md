@@ -14,18 +14,6 @@ primary_sources:
 
 # Scheduling: continuous batching, chunked prefill и prefix caching
 
-## Полная реализация и системный контекст
-
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week08_inference_software/lecture.pdf|EDLS Week 8 — полная лекция]];
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week08_inference_software/seminar.ipynb|EDLS Week 8 — seminar notebook]];
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week08_inference_software/homework/homework_week8.ipynb|EDLS Week 8 — homework]];
-- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/inference|Harvard CS249r — Inference]].
-
-Notebook и homework сохраняют scheduler state и request lifecycle в коде.
-Глава ниже нужна, чтобы разбирать policy: какие запросы допускаются в batch,
-когда prefill дробится и почему cache hit меняет не только compute, но и
-очередь.
-
 Пакетирование обычной нейронной сети предполагает, что примеры начинают и
 заканчивают вычисление вместе. Для авторегрессионного сервера это предположение
 неверно. Запросы приходят в разные моменты, входы имеют разную длину, а число
@@ -103,9 +91,12 @@ requests.
 
 ## Что выбирает планировщик на каждом шаге
 
-Минимальный scheduler хранит переходы `WAITING -> RUNNING_PREFILL -> RUNNING_DECODE -> FINISHED`; при нехватке блоков возможен `RUNNING -> PREEMPTED -> WAITING`. На итерации он снимает завершённые запросы, освобождает KV-блоки, вычисляет token/KV budget, выбирает decode-токены и prefill chunks, резервирует блоки и только затем запускает model runner. Этот порядок не позволяет принять работу, для которой нет состояния.
+Запрос проходит несколько состояний: ожидает запуска (`WAITING`), обрабатывает
+вход (`RUNNING_PREFILL`), генерирует ответ (`RUNNING_DECODE`) и завершается
+(`FINISHED`). Если KV-блоков не хватает, работающий запрос может быть временно
+вытеснен и возвращён в очередь: `RUNNING -> PREEMPTED -> WAITING`.
 
-В устойчивом абстрактном описании цикл состоит из пяти действий.
+Одна итерация планировщика состоит из пяти действий.
 
 1. Планировщик обновляет состояния: удаляет завершившиеся запросы и учитывает
    освобождённые блоки.
@@ -283,7 +274,12 @@ continuous batching. SARATHI остаётся источником анализ�
 хронологии: она позволяет увидеть, какое ограничение устраняет каждый механизм
 и какую цену он добавляет.
 
-## Источники
+## Практика и первоисточники
+
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week08_inference_software/lecture.pdf|Efficient DL Systems — планирование inference]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week08_inference_software/seminar.ipynb|Практикум по состоянию планировщика и жизненному циклу запроса]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week08_inference_software/homework/homework_week8.ipynb|Задание по inference engine]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/inference|Harvard CS249r — Inference]].
 
 - Yu et al., [Orca: A Distributed Serving System for Transformer-Based Generative Models](https://www.usenix.org/system/files/osdi22-yu.pdf) — iteration-level scheduling и selective batching.
 - Agrawal et al., [SARATHI](https://arxiv.org/abs/2308.16369) — chunked prefill и decode-maximal batching.

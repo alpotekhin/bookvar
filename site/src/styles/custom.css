@@ -8,6 +8,13 @@
   --handbook-panel: color-mix(in srgb, var(--sl-color-gray-6) 70%, transparent);
 }
 
+/* Tables and display math provide their own horizontal scrollers. Do not let
+   their intrinsic width create a second scrollbar for the whole document. */
+html,
+body {
+  overflow-x: clip;
+}
+
 .source-pdf {
   width: 100%;
   min-height: 75vh;
@@ -50,10 +57,20 @@
 .sl-markdown-content .katex-display,
 .sl-markdown-content pre,
 .sl-markdown-content table {
+  box-sizing: border-box;
+  min-width: 0;
+  width: 100%;
   max-width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
+}
+
+/* Wide formulas and table rows have large intrinsic widths. They should
+   scroll inside their own reading area instead of widening the entire page. */
+.sl-markdown-content .katex-display,
+.sl-markdown-content table {
+  contain: inline-size;
 }
 
 .sl-markdown-content .katex-display {

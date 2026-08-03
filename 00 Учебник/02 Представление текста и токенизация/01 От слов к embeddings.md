@@ -12,8 +12,6 @@ next: "[[02 Areas/ML & DL/00 Учебник/02 Представление тек
 
 # Word2Vec, GloVe и распределительные представления
 
-**Полный исполняемый модуль:** [[05 Источники/Courses/Harvard ML Systems/tinytorch/11_embeddings|TinyTorch 11 — Embeddings]]. Модуль реализует обучаемую таблицу embeddings, синусоидальные и обучаемые позиционные представления и анализирует стоимость lookup и хранения.
-
 В предыдущей главе идентификатор токена служил адресом строки в таблице. Теперь
 нужно понять, откуда в этой строке появляется языковая информация. Классический
 ответ распределительной семантики таков: свойства слова восстанавливаются по
@@ -278,7 +276,7 @@ $$
 4. Проверьте, меняется ли ближайшее окружение.
 5. Сравните поисковую модель и обычный BERT на парах предложений.
 
-## Что должно остаться после главы
+## Краткие итоги
 
 - Одноединичный вектор и идентификатор токена кодируют идентичность, но не
   сходство.
@@ -291,6 +289,7 @@ $$
 
 ## Источники
 
+- [[05 Источники/Courses/Harvard ML Systems/tinytorch/11_embeddings|TinyTorch 11 — Embeddings]] — реализация обучаемой таблицы embeddings и позиционных представлений с анализом стоимости lookup и хранения.
 - [Lena Voita — Word Embeddings](https://lena-voita.github.io/nlp_course/word_embeddings.html)
 - [Mikolov et al. — Efficient Estimation of Word Representations in Vector Space](https://arxiv.org/abs/1301.3781)
 - [Pennington, Socher, Manning — GloVe: Global Vectors for Word Representation](https://aclanthology.org/D14-1162/)

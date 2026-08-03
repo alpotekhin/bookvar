@@ -13,10 +13,6 @@ Tensor Cores, но одновременно меньше precision или dynami
 
 ## От определения формата до работающего training loop
 
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week02_fast_pipelines/lecture.pdf|EDLS Week 2 — полная лекция]]: численные форматы, Tensor Cores и mixed precision.
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week02_fast_pipelines/seminar/practice.ipynb|EDLS Week 2 — seminar notebook]]: исходный код и измерения.
-- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/training|Harvard CS249r — Training]]: связь численной точности с полным training pipeline.
-
 Практический критерий здесь двойной: ускорение должно быть измерено на
 целевом железе, а численная эквивалентность — проверена по loss curve и
 downstream quality, не только по отсутствию `NaN`.
@@ -55,10 +51,9 @@ instructions. Догадываться об использовании Tensor Co
 
 ## Mixed precision
 
-> **Адаптация, не дословная цитата:** EDLS week 2, PDF p. 18,
-> slide “Mixed precision training”. Pure FP16 обычно нестабилен: GEMM можно
-> выполнять в узком формате, тогда как softmax, normalization и accumulation
-> часто требуют более широкой точности.
+Выполнять всё обучение в FP16 обычно нельзя без потери устойчивости. Матричные
+умножения хорошо работают в узком формате, тогда как softmax, нормализация и
+накопление сумм часто требуют более высокой точности.
 
 Autocast выбирает low precision для подходящих GEMM/convolution и оставляет
 чувствительные reductions/normalization в более широком формате. Accumulation
@@ -93,9 +88,9 @@ $$
 Inf/NaN и постепенно увеличивает после стабильных шагов. BF16 обычно меньше
 нуждается в scaling благодаря 8-битной экспоненте.
 
-## Почему AMP не всегда экономит optimizer memory
+## Почему AMP не всегда экономит память оптимизатора
 
-EDLS ledger для Adam:
+Для Adam полный расчёт памяти выглядит так:
 
 - FP32: weight 4 + gradient 4 + moments 8 = 16 B/parameter;
 - AMP: low-precision weight 2 + master weight 4 + gradient 2 (иногда 4) +
@@ -128,8 +123,9 @@ axis/layout и зависимость от MX-aware kernels.
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/block-quantization.svg]]
 
 *Оригинальная иллюстрация Harvard CS249r, Vol. II, Performance Engineering,
-§ “Block quantization”, locator `sec-performance-engineering-quantization`,
-commit `45ecc8d…`, CC BY-NC-SA 4.0; файл не изменён. Разбиение tensor на
+§ “Block quantization”, locator `sec-performance-engineering-quantization`;
+[исходный SVG](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/block-quantization.svg),
+CC BY-NC-SA 4.0; файл не изменён. Разбиение tensor на
 локальные блоки показывает, почему выброс ухудшает scale только своей группы.*
 
 ## Worked example: memory throughput
@@ -146,15 +142,17 @@ $$t_{FP32}\ge0{,}80\text{ ms},\qquad t_{BF16}\ge0{,}40\text{ ms}.$$
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/foundation/training_optimizer_memory.svg]]
 
 *Оригинальная иллюстрация Harvard CS249r, Vol. I, Training,
-§ “Memory decomposition”, locator `sec-model-training-memory-decomposition`,
-commit `45ecc8d…`, CC BY-NC-SA 4.0; файл не изменён. Ledger отделяет веса,
+§ “Memory decomposition”, locator `sec-model-training-memory-decomposition`;
+[исходный SVG](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/training/images/svg/training_optimizer_memory.svg),
+CC BY-NC-SA 4.0; файл не изменён. Ledger отделяет веса,
 градиенты и состояния оптимизатора: узкий forward dtype не означает такое же
 уменьшение всей памяти training.*
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/foundation/hw_acceleration_energy_ladder.svg]]
 
-*Источник визуала: Harvard CS249r, Hardware Acceleration,
-`hw_acceleration_energy_ladder.svg`, commit `45ecc8d…`, CC BY-NC-SA 4.0.
+*Источник визуала: Harvard CS249r, Hardware Acceleration; [исходный
+SVG](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/hw_acceleration/images/svg/hw_acceleration_energy_ladder.svg),
+CC BY-NC-SA 4.0.
 Числа technology-specific; здесь важен качественный вывод о data movement.*
 
 ## MFU и HFU
@@ -166,10 +164,15 @@ $$
 MFU считает полезную модельную арифметику; recompute обычно не добавляют в
 числитель. HFU считает фактически выполненную hardware arithmetic, поэтому при
 checkpointing HFU может быть выше MFU. Сравнивать числа можно только при
-одинаковой формуле FLOP и одном hardware precision peak. EDLS приводит
-`MFU > 45%` лишь как rule of thumb, не как универсальную границу качества.
+одинаковой формуле FLOP и одном пиковом значении для выбранной точности.
+Значение `MFU > 45%` иногда используют как грубый ориентир, но оно не является
+универсальной границей качества реализации.
 
-## Источники
+## Практика и первоисточники
+
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week02_fast_pipelines/lecture.pdf|EDLS Week 2 — лекция]]: численные форматы, Tensor Cores и mixed precision.
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week02_fast_pipelines/seminar/practice.ipynb|EDLS Week 2 — семинарская тетрадь]]: исходный код и измерения.
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/training|Harvard CS249r — Training]]: связь численной точности с полным training pipeline.
 
 - [EDLS week 2 lecture](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week02_fast_pipelines/lecture.pdf) — “Floating point numbers”, “Tensor Cores”, “Mixed precision training”, “Memory savings of AMP”, “FP8 training”; title locators used because incremental slides repeat in the PDF.
 - [FP8 Formats for Deep Learning](https://arxiv.org/abs/2209.05433)

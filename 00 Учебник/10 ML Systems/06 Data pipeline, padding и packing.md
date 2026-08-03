@@ -8,28 +8,18 @@ source_language: mixed
 
 # Data pipeline, padding и packing
 
-**Полный исполняемый модуль:** [[05 Источники/Courses/Harvard ML Systems/tinytorch/05_dataloader|TinyTorch 05 — DataLoader]]. Исходный код реализует абстракции `Dataset` и `TensorDataset`, формирование batch, перемешивание и итерацию по данным и позволяет измерить свойства этого минимального pipeline.
-
 GPU простаивает, если batch не готов. Data pipeline должен доставлять следующий
 batch быстрее, чем модель обрабатывает текущий, и не тратить compute на
 бессмысленный padding.
 
-## Полные источники и задание
-
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week02_fast_pipelines/lecture.pdf|EDLS Week 2 — полная лекция]].
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week02_fast_pipelines/seminar/practice.ipynb|EDLS Week 2 — seminar notebook]].
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week02_fast_pipelines/homework/README|EDLS Week 2 — homework]].
-- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/data_engineering|Harvard CS249r — Data Engineering]].
-
-В EDLS этот материал дан как цепочка оптимизаций, которые нужно измерять:
-baseline loader → parallel workers → pinned memory и prefetch → dynamic
-padding/bucketing/packing. Именно в таком порядке его стоит воспроизводить.
+Оптимизации конвейера следует вводить и измерять последовательно: baseline
+loader → parallel workers → pinned memory и prefetch → dynamic
+padding/bucketing/packing.
 
 ## Что хранить
 
-> **Адаптация, не дословная цитата:** EDLS week 2, PDF p. 26,
-> slide “Bottlenecks in data loading”. Pipeline разделяется на два связанных
-> вопроса: что читать и как доставлять прочитанное к модели.
+Конвейер данных решает два связанных вопроса: в каком виде хранить обучающие
+примеры и как вовремя доставлять их модели.
 
 Raw files удобны для просмотра, но множество мелких файлов создаёт metadata и
 network overhead. Для structured data подходят Arrow/Protobuf/msgpack или
@@ -49,9 +39,9 @@ storage → read shards → deserialize/decode → augment/tokenize
 Параллельные workers помогают, пока не упираются в storage bandwidth, CPU,
 RAM или duplicated worker state. Prefetch перекрывает стадии; bounded queue
 предотвращает бесконтрольный рост памяти. Для изображений decoder и тяжёлые
-augmentations могут быть bottleneck; EDLS указывает Pillow-SIMD,
-jpeg-turbo/nvJPEG, DALI и GPU augmentations как варианты, а не универсальный
-рецепт.
+augmentations могут стать узким местом. Pillow-SIMD, jpeg-turbo/nvJPEG, DALI
+и обработка на GPU предлагают разные способы его устранить; выбор определяется
+профилем нагрузки, а не названием библиотеки.
 
 ## Dynamic padding
 
@@ -67,15 +57,13 @@ $1452/(4\cdot1024)\approx35{,}4\%$: почти две трети token-level com
 потрачены на padding. Поэтому samples хранят без padding, а `collate_fn`
 дополняет только до maximum текущего batch.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/bookvar/padding-bucketing-packing-ledger.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/edls/optimal-sequence-processing.png]]
 
-*Оригинальная учебная схема Bookvar: один набор длин `[8, 7, 3, 2]` проведён
-через padding, bucketing и packing. EOS последовательно исключён из всех трёх
-панелей: полезны 20 исходных токенов, занято соответственно 32, 22 и 20 слотов,
-то есть utilisation равен 62,5%, 90,9% и 100%. Граница packed-документов —
-metadata/mask, а не дополнительный слот. Синтез по EDLS week 2, slide “Optimal
-sequence processing” (pinned `e632aa8…`), и формулам этой главы; CC BY 4.0,
-derivation `bookvar-original`, не копия исходной фигуры.*
+*Слева видно, сколько пустых позиций появляется, если последовательности
+дополнять до общей длины; справа — два более плотных batch после группировки и
+packing. Это исходный слайд “Optimal sequence processing” из
+[Efficient DL Systems, week 2](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week02_fast_pipelines/lecture.pdf),
+CC BY 4.0.*
 
 ## Bucketing
 
@@ -115,8 +103,9 @@ special-token ids и BOS/EOS policy.
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/data/data_engineering_storage_latency_hierarchy.svg]]
 
 *Оригинальная иллюстрация Harvard CS249r, Vol. I, Data Engineering,
-§ “Storage systems”, locator `sec-data-engineering-storage-systems`,
-commit `45ecc8d…`, CC BY-NC-SA 4.0; файл не изменён. Иерархия заставляет
+§ “Storage systems”, locator `sec-data-engineering-storage-systems`;
+[исходный SVG](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/data_engineering/images/svg/data_engineering_storage_latency_hierarchy.svg),
+CC BY-NC-SA 4.0; файл не изменён. Иерархия заставляет
 сопоставить locality, latency и capacity до выбора формата и размера shard.*
 
 В `DataLoader` каждый worker имеет replica dataset и prefetch queue. Настройки
@@ -138,14 +127,6 @@ kernel, согласованные `position_ids` и labels `-100` на запр
 Synthetic-тест: изменение tokens A не должно менять logits B. Continuous-stream
 objective, напротив, сознательно разрешает переход через EOS — режимы нельзя
 смешивать.
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/bookvar/packed-causal-mask-ledger.svg]]
-
-*Оригинальная учебная схема Bookvar: две матрицы выполняют проверку
-«может ли B читать A» для обычной и block-diagonal causal mask. Выведено из
-определения causal masking и segment isolation в этом разделе; EDLS week 2,
-slide “Optimal sequence processing”, служит источником постановки задачи.
-CC BY 4.0, derivation `bookvar-original`, не копия исходной фигуры.*
 
 ## Каркас pipeline
 
@@ -191,7 +172,13 @@ useful=1452, slots=4096, efficiency=35.4%
 CPU utilization, read bandwidth и H2D overlap. Рост batches/s может скрывать
 меньше полезных tokens или изменение length distribution.
 
-## Источники
+## Практика и первоисточники
+
+- [[05 Источники/Courses/Harvard ML Systems/tinytorch/05_dataloader|TinyTorch 05 — DataLoader]]: исполняемая реализация `Dataset`, `TensorDataset`, формирования batch, перемешивания и итерации по данным.
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week02_fast_pipelines/lecture.pdf|EDLS Week 2 — лекция]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week02_fast_pipelines/seminar/practice.ipynb|EDLS Week 2 — семинарская тетрадь]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week02_fast_pipelines/homework/README|EDLS Week 2 — практическое задание]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/data_engineering|Harvard CS249r — Data Engineering]].
 
 - [EDLS week 2 lecture](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week02_fast_pipelines/lecture.pdf) — “Bottlenecks in data loading”, “Storage formats”, “Minimizing preprocessing time”, “Optimal sequence processing”; title locators used because incremental slides repeat in the PDF.
 - [EDLS week 2 dynamic-padding homework](https://github.com/mryab/efficient-dl-systems/tree/e632aa89ca9e6638d52e1b686095e7442faffbb0/week02_fast_pipelines/homework/task2)

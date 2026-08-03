@@ -13,7 +13,7 @@ primary_sources:
 
 # Данные предпочтений: как сравнение ответов становится обучающим сигналом
 
-> [!abstract] Результат урока
+> [!abstract] Ориентир главы
 > Вы сможете спроектировать задание на сравнение, превратить ранжирование в
 > обучающие пары, оценить согласие разметчиков и объяснить, почему выбранный и
 > отклонённый ответы отражают конкретные критерии и состав разметчиков, а не
@@ -279,7 +279,9 @@ def ranking_to_pairs(row, adjacent_only=False):
 | пары одного ранжирования попали в разные выборки | завышенную точность оценки |
 | критерии смешивают безопасность и стиль | непрозрачный компромисс в одном числе |
 
-## Практикум
+## Практика и первоисточники
+
+### Задания
 
 1. Напишите критерии для запроса про TCP/UDP и разберите конфликт «точнее, но на 15
    слов длиннее».
@@ -290,7 +292,7 @@ def ranking_to_pairs(row, adjacent_only=False):
    по качеству ответы.
 6. Составьте пять пар «убедительно, но неверно» против «просто, но правильно».
 
-## Курсы и объяснения
+### Объяснения и реализации
 
 - Nathan Lambert, [Preference Data](https://rlhfbook.com/c/11-preference-data) —
   interfaces, rankings/ratings, multi-turn, sourcing и biases.
@@ -302,7 +304,7 @@ def ranking_to_pairs(row, adjacent_only=False):
 - Nathan Lambert, [лекция 2](https://rlhfbook.com/teach/course/lec2-chap4-5-9/slides.pdf)
   — связь instruction data, comparisons, RM и rejection sampling.
 
-## Первичные источники
+### Первоисточники
 
 - Ouyang et al., [InstructGPT](https://arxiv.org/abs/2203.02155), Sections 3–4
   и Appendix B: selection labelers, demonstrations и rankings.

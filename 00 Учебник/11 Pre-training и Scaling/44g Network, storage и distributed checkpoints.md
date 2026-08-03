@@ -84,7 +84,7 @@ garbage_collect_only_generations_older_than_last_known_good()
 
 Для сети нужны per-link bandwidth, congestion, errors и p50/p99 collective duration; для storage — bytes/s, queue depth, metadata ops, dirty/staging bytes и checkpoint age. Средняя bandwidth скрывает один деградировавший link, который синхронно задерживает весь world.
 
-## Источники
+## Практика и первоисточники
 
 - [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/network_fabrics|Harvard CS249r: Network Fabrics]].
 - [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/data_storage|Harvard CS249r: Data Storage]].

@@ -88,24 +88,34 @@ sections:
       - source: 00 Учебник/05 Attention и Transformer/01 От Seq2Seq к Transformer.md
         route: textbook/transformer/from-seq2seq-to-transformer
       - source: 00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V.md
+        source_en: en/00 Textbook/05 Attention and Transformer/02 Self-Attention — Q, K, V.md
         route: textbook/transformer/self-attention
       - source: 00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров.md
+        source_en: en/00 Textbook/05 Attention and Transformer/03 Masking, multi-head attention, and tensor shapes.md
         route: textbook/transformer/masking-heads-shapes
       - source: 00 Учебник/05 Attention и Transformer/04 Позиционная информация.md
+        source_en: en/00 Textbook/05 Attention and Transformer/04 Positional information.md
         route: textbook/transformer/positional-information
       - source: 00 Учебник/05 Attention и Transformer/03 Полный Transformer.md
+        source_en: en/00 Textbook/05 Attention and Transformer/05 The complete Transformer.md
         route: textbook/transformer/full-transformer
       - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md
+        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/01 Three architectural patterns.md
         route: textbook/transformer/encoder-decoder-patterns
       - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md
+        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03 BERT, RoBERTa, and DeBERTa.md
         route: textbook/models/bert-roberta-deberta
       - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md
+        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/04 GPT-1 — generative pre-training.md
         route: textbook/models/gpt-1
       - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык.md
+        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/05 GPT-2 — zero-shot through language.md
         route: textbook/models/gpt-2
       - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning.md
+        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/06 GPT-3 — in-context learning.md
         route: textbook/models/gpt-3
       - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md
+        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/07 T5 — text-to-text Transformer.md
         route: textbook/models/t5
       - source: 00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md
         route: textbook/modern-llm/llama-architecture
@@ -318,7 +328,8 @@ sections:
             route: textbook/classical-ml/gmm-em
           - label: Kernels, SVM и random Fourier features
             route: textbook/classical-ml/kernels-svm-rff
-      - label: Рекомендательные системы
+      - label: III. Рекомендательные системы
+        label_en: III. Recommender systems
         items:
           - label: Карта модуля и полные источники
             route: textbook/recommender-systems/index
@@ -332,8 +343,8 @@ sections:
             route: textbook/recommender-systems/sequential-feature-aware
           - label: Оценивание и эксплуатация
             route: textbook/recommender-systems/evaluation-operations
-      - label: III. Нейронные сети
-        label_en: III. Neural networks
+      - label: IV. Нейронные сети
+        label_en: IV. Neural networks
         items:
           - label: 7. Нейрон и MLP
             route: textbook/neural-networks/mlp
@@ -351,8 +362,8 @@ sections:
             route: textbook/neural-networks/cnn-lenet-resnet
           - label: 14. Autoencoder и VAE
             route: textbook/neural-networks/autoencoder-vae
-      - label: IV. Текст до Transformer
-        label_en: IV. Text before the Transformer
+      - label: V. Текст до Transformer
+        label_en: V. Text before the Transformer
         items:
           - label: 15. Представление текста числами
             route: textbook/text-representation/numerical-representation
@@ -370,8 +381,8 @@ sections:
             route: textbook/recurrent-networks/seq2seq-bottleneck
           - label: 22. Attention для перевода
             route: textbook/transformer/from-seq2seq-to-transformer
-      - label: V. Transformer, BERT и GPT
-        label_en: V. Transformer, BERT, and GPT
+      - label: VI. Transformer, BERT и GPT
+        label_en: VI. Transformer, BERT, and GPT
         items:
           - label: 23. Self-Attention — Q, K, V
             route: textbook/transformer/self-attention
@@ -393,8 +404,8 @@ sections:
             route: textbook/models/gpt-3
           - label: 31. T5 — text-to-text Transformer
             route: textbook/models/t5
-      - label: VI. Анатомия современной LLM
-        label_en: VI. Anatomy of a modern LLM
+      - label: VII. Анатомия современной LLM
+        label_en: VII. Anatomy of a modern LLM
         items:
           - label: Вводная. LLaMA как базовая архитектура
             route: textbook/modern-llm/llama-architecture
@@ -416,8 +427,8 @@ sections:
             route: textbook/moe/mixture-of-experts
           - label: 40. Mamba, RWKV, RetNet и гибридные архитектуры
             route: textbook/modern-llm/sequence-model-alternatives
-      - label: VII. Вычислительные основы ML-систем
-        label_en: VII. Computational foundations of ML systems
+      - label: VIII. Вычислительные основы ML-систем
+        label_en: VIII. Computational foundations of ML systems
         items:
           - label: S1. Модель как часть системы
             route: textbook/ml-systems/model-as-part-of-system
@@ -433,8 +444,8 @@ sections:
             route: textbook/ml-systems/data-pipeline-padding-packing
           - label: S7. Profiling ML-нагрузки
             route: textbook/ml-systems/profiling
-      - label: VIII. Обучение LLM
-        label_en: VIII. Training language models
+      - label: IX. Обучение LLM
+        label_en: IX. Training language models
         items:
           - label: 41. Сбор, очистка и смеси данных
             route: textbook/pretraining/data-pipeline
@@ -480,8 +491,8 @@ sections:
             route: textbook/reasoning/test-time-compute
           - label: 53. Синтетические данные и учебные программы
             route: textbook/pretraining/synthetic-data-curricula
-      - label: IX. Эксплуатация и системы вокруг модели
-        label_en: IX. Inference and systems around the model
+      - label: X. Инференс и serving
+        label_en: X. Inference and serving
         items:
           - label: 54. Декодирование и выбор следующего токена
             label_en: 54. Decoding and selecting the next token
@@ -520,6 +531,9 @@ sections:
             route: textbook/inference/benchmarking-slo
           - label: 58.4 Queueing и capacity planning
             route: textbook/inference/queueing-capacity-planning
+      - label: XI. Эксплуатация и оценивание
+        label_en: XI. Operations and evaluation
+        items:
           - label: 58.5 ML workflow
             route: textbook/deployment/ml-workflow
           - label: 58.6 MLOps — от артефакта до наблюдаемого сервиса
@@ -533,6 +547,9 @@ sections:
             route: textbook/evaluation/imbalanced-classification
           - label: 59.2 Ответственные ML-системы
             route: textbook/evaluation/responsible-systems
+      - label: XII. Retrieval и RAG
+        label_en: XII. Retrieval and RAG
+        items:
           - label: 60. Embeddings и metric learning
             route: textbook/retrieval/embeddings-metric-learning
           - label: 61. Retrieval — от BM25 до dense и hybrid
@@ -541,6 +558,9 @@ sections:
             route: textbook/retrieval/reranking
           - label: 63. RAG — полный конвейер
             route: textbook/rag/full-pipeline
+      - label: XIII. Мультимодальные модели
+        label_en: XIII. Multimodal models
+        items:
           - label: 64. Мультимодальные модели
             label_en: 64. Multimodal models
             route: textbook/multimodal/models
@@ -562,6 +582,9 @@ sections:
           - label: 64.6 Оценивание, отказы и serving VLM
             label_en: 64.6 Evaluation, failure modes, and VLM serving
             route: textbook/multimodal/evaluation-serving
+      - label: XIV. Инструменты и агенты
+        label_en: XIV. Tools and agents
+        items:
           - label: 65. Tool use — от вызова функции к действию
             route: textbook/agents/tool-use
           - label: 66. Agent harness и context engineering
@@ -2095,6 +2118,25 @@ sections:
         route: sources/courses/stanford-cs336/cs336-tokenization
       - source: Courses/Stanford CS336/CS336 — Mixture of Experts.md
         route: sources/courses/stanford-cs336/cs336-mixture-of-experts
+    sidebar:
+      - label: Библиотека источников
+        label_en: Source library
+        route: sources/index
+      - label: Реестр источников
+        label_en: Source registry
+        route: sources/registry
+      - label: Авторы и образовательные сайты
+        label_en: Authors and educational sites
+        route: sources/avtory-i-sayty
+      - label: Репозитории сообщества
+        label_en: Community repositories
+        route: sources/community-repositories
+      - label: Курсы
+        label_en: Courses
+        route: sources/kursy
+      - label: Визуальные материалы и лицензии
+        label_en: Visual materials and licenses
+        route: sources/visual-materials-licenses
   - id: questions
     title: Вопросы
     title_en: Questions

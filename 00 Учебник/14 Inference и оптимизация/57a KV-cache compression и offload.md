@@ -12,19 +12,6 @@ primary_sources:
 
 # KV-cache compression и offload
 
-## Полные материалы о внешнем KV-слое
-
-- [[02 Areas/ML & DL/05 Источники/LMCache/LMCache — карта материалов|LMCache — карта полного корпуса]];
-- [[02 Areas/ML & DL/05 Источники/LMCache/KV cache as persistent inference state|KV cache as persistent inference state]];
-- [[02 Areas/ML & DL/05 Источники/LMCache/LMCache — an external KV cache layer|External KV cache layer]];
-- [[02 Areas/ML & DL/05 Источники/LMCache/LMCache MP mode — transfer paths|MP mode and transfer paths]];
-- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/inference|Harvard CS249r — Inference]].
-
-LMCache-материалы сохранены отдельным корпусом на исходном английском. Здесь
-они встроены в линейный маршрут после локального KV-cache: сначала решается
-размещение в HBM, затем compression, offload, transfer и reuse за пределами
-одного engine process.
-
 Квантизация весов освобождает HBM, но не останавливает рост состояния запроса.
 После каждого decode-шага к KV-cache каждого слоя добавляются ключ и значение.
 Поэтому модель, которая легко помещается при коротком prompt, может исчерпать
@@ -65,12 +52,14 @@ KV в четыре раза, хотя число query-голов не меня�
 состояние*. Их нельзя складывать в один коэффициент без отдельной проверки
 качества и latency.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/editorial/kv-token-level.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/kv-survey-figure4-sparsity.png]]
 
-*Оригинальная редакционная схема Bookvar по taxonomy из §4 и Figure 4 работы
-Haoyang Li et al.,
-[A Survey on Large Language Model Acceleration based on KV Cache Management](https://arxiv.org/abs/2412.19442).
-Внешнее artwork не использовано.*
+*Полное attention хранит и читает состояние всех прошлых позиций; sparse
+attention оставляет лишь выбранные связи. Это исходный Figure 4 из обзора
+Haoyang Li et al., [A Survey on Large Language Model Acceleration based on KV
+Cache Management](https://arxiv.org/abs/2412.19442). Ниже важно различать саму
+разреженность attention и конкретную политику, которая решает, какие KV-пары
+сохранить.*
 
 **На уровне модели** уменьшают число или размер хранимых векторов. MQA/GQA
 разделяют K,V между query-головами. MLA проецирует состояние в низкоразмерное
@@ -78,11 +67,12 @@ Haoyang Li et al.,
 готовой MHA-модели. Такие методы нужно закладывать в обучение или преобразование
 архитектуры.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/editorial/kv-model-level.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-35-36/cs336-mha-gqa-mqa-mla.png]]
 
-*Оригинальная редакционная схема Bookvar по §5 и Figure 5 той же
-[survey](https://arxiv.org/abs/2412.19442): GQA, MLA и родственные подходы
-меняют представление состояния. Внешнее artwork не использовано.*
+*Слева направо уменьшается объём состояния, которое приходится кешировать:
+MHA хранит отдельные K,V для каждой query-head, GQA и MQA разделяют их между
+головами, MLA кеширует сжатое latent-представление. Иллюстрация из материалов
+[Stanford CS336](https://stanford-cs336.github.io/spring2025/), без изменений.*
 
 **На уровне токенов** решают, все ли прошлые позиции должны оставаться в
 быстром кеше. Sliding window сохраняет недавнее окно. StreamingLLM удерживает
@@ -98,14 +88,6 @@ Cache-aware routing направляет запрос к replica, уже име�
 держат горячие блоки в HBM, более холодные — в host DRAM, SSD или удалённом
 хранилище. Эти решения сохраняют семантику модели, но добавляют индексацию,
 политику вытеснения и передачу данных.
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/editorial/kv-system-level.svg]]
-
-*Оригинальная редакционная схема Bookvar по §6 и Figure 6 той же
-[survey](https://arxiv.org/abs/2412.19442): prefix sharing, cache-aware routing,
-scheduling и storage tiers. Композиция создана с нуля; внешнее artwork не
-использовано. У arXiv-версии survey указана только non-exclusive distribution
-license, не лицензия на повторное использование иллюстраций.*
 
 | уровень | что уменьшается | качество модели | критическая цена |
 |---|---|---|---|
@@ -205,7 +187,13 @@ p95 длины и хвосту одновременности, а не по ср
 только если увеличившийся goodput перекрывает цену декодирования, miss и потери
 качества.
 
-## Источники
+## Практика и первоисточники
+
+- [[02 Areas/ML & DL/05 Источники/LMCache/LMCache — карта материалов|LMCache — карта материалов]].
+- [[02 Areas/ML & DL/05 Источники/LMCache/KV cache as persistent inference state|KV cache как сохраняемое состояние inference]].
+- [[02 Areas/ML & DL/05 Источники/LMCache/LMCache — an external KV cache layer|LMCache как внешний слой KV-cache]].
+- [[02 Areas/ML & DL/05 Источники/LMCache/LMCache MP mode — transfer paths|LMCache MP mode и пути передачи]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/inference|Harvard CS249r — Inference]].
 
 - Efficient DL Systems, [week 9 lecture at pinned commit](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week09_inference_algorithms/lecture.pdf), раздел `KV cache compression` — трёхуровневая таксономия и worked VRAM ledger.
 - Shazeer, [Fast Transformer Decoding: One Write-Head is All You Need](https://arxiv.org/abs/1911.02150) — MQA.

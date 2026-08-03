@@ -69,7 +69,8 @@ function convertEmbed(
   const assetPath = expression.replace(/^Assets\//, '');
   const filename = basename(assetPath);
   const alt = filename.replace(IMAGE_EXTENSION, '');
-  return `![${alt}](../../assets/${assetPath})`;
+  const assetHref = `../../assets/${assetPath}`;
+  return `[![${alt}](${assetHref})](${assetHref})`;
 }
 
 export function convertWikiSyntax(

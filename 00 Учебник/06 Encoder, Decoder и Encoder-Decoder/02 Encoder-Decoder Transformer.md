@@ -1,7 +1,7 @@
 ---
 title: Encoder-Decoder Transformer
 type: textbook-chapter
-status: canonical
+status: legacy
 last_updated: 2026-07-20
 primary_sources: [https://arxiv.org/abs/1706.03762]
 ---

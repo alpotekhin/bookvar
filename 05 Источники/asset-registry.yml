@@ -3383,7 +3383,7 @@ assets:
     source_url: https://arxiv.org/abs/2310.08560
     license: open educational material; reuse confirmed by repository owner
     license_url: https://arxiv.org/abs/2310.08560
-    modifications: official PDF figure cropped without content changes
+    modifications: Figure 3 rendered from the official PDF; the complete memory-hierarchy diagram is preserved, while the original caption and surrounding body text are removed because Bookvar provides its own linked caption
     used_in:
       - 00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md
     metadata_status: verified
@@ -3913,7 +3913,7 @@ assets:
     source_url: https://mml-book.github.io/book/mml-book.pdf
     license: free-to-view educational book; reuse confirmed by repository owner
     license_url: https://mml-book.github.io/
-    modifications: Figure 2.1 rendered from page 17 and cropped to the figure area
+    modifications: Figure 2.1 rendered from page 17; the diagram is preserved, while the page header, original side caption, and surrounding text are removed because Bookvar provides its own linked caption
     used_in:
       - 00 Учебник/00 Математические и ML-основания/01 Векторы, матрицы и тензоры.md
     metadata_status: verified
@@ -3939,7 +3939,7 @@ assets:
     source_url: https://mml-book.github.io/book/mml-book.pdf
     license: free-to-view educational book; reuse confirmed by repository owner
     license_url: https://mml-book.github.io/
-    modifications: Figure 5.3 rendered from page 141 and cropped to the figure area
+    modifications: Figure 5.3 rendered from page 141; the complete secant-to-tangent diagram is preserved, while the page header and original side caption are removed because Bookvar provides its own linked caption
     used_in:
       - 00 Учебник/00 Математические и ML-основания/02 Производная и градиент.md
     metadata_status: verified
@@ -3965,7 +3965,21 @@ assets:
     source_url: https://mml-book.github.io/book/mml-book.pdf
     license: free-to-view educational book; reuse confirmed by repository owner
     license_url: https://mml-book.github.io/
-    modifications: Figure 5.7 rendered from page 155 and cropped to the figure area
+    modifications: Figure 5.7a rendered from page 155; the first construction is separated from the page header, side caption, and Figure 5.7b so that it remains readable at textbook width
+    used_in:
+      - 00 Учебник/00 Математические и ML-основания/02 Производная и градиент.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/mml-book.pdf
+    source_page: 155
+    derivation: pdf-page-render-crop
+  - id: curated-mml-matrix-gradient-flatten-000000000a2b
+    asset: 00 Учебник/Assets/Figures/curated/foundations-source-first/mml-matrix-gradient-flatten.png
+    author: Marc Peter Deisenroth; A. Aldo Faisal; Cheng Soon Ong
+    source_url: https://mml-book.github.io/book/mml-book.pdf
+    license: free-to-view educational book; reuse confirmed by repository owner
+    license_url: https://mml-book.github.io/
+    modifications: Figure 5.7b rendered from page 155; the second construction is separated from the page header, side caption, and Figure 5.7a so that it remains readable at textbook width
     used_in:
       - 00 Учебник/00 Математические и ML-основания/02 Производная и градиент.md
     metadata_status: verified
@@ -3979,7 +3993,7 @@ assets:
     source_url: https://mml-book.github.io/book/mml-book.pdf
     license: free-to-view educational book; reuse confirmed by repository owner
     license_url: https://mml-book.github.io/
-    modifications: Figure 5.8 rendered from page 160 and cropped to the figure area
+    modifications: Figure 5.8 rendered from page 160; the complete computation graph is preserved, while the page header, original side caption, and surrounding body text are removed because Bookvar provides its own linked caption
     used_in:
       - 00 Учебник/00 Математические и ML-основания/02 Производная и градиент.md
     metadata_status: verified
@@ -4464,7 +4478,7 @@ assets:
     source_url: https://arxiv.org/abs/1907.11692
     license: open-paper-material; reuse confirmed by repository owner
     license_url: https://arxiv.org/abs/1907.11692
-    modifications: Table 1 rendered from page 4 and cropped without content changes
+    modifications: Table 1 rendered from page 4 with its complete original caption
     used_in:
       - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md
     metadata_status: verified
@@ -4478,7 +4492,7 @@ assets:
     source_url: https://arxiv.org/abs/2006.03654
     license: open-paper-material; reuse confirmed by repository owner
     license_url: https://arxiv.org/abs/2006.03654
-    modifications: Equation 4 rendered from page 4 and cropped without content changes
+    modifications: Equation 4 rendered from page 4 and cropped to the complete equation block, without clipped surrounding paragraphs
     used_in:
       - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md
     metadata_status: verified
@@ -4570,7 +4584,7 @@ assets:
     source_url: https://arxiv.org/abs/1606.08415
     license: open-paper-material; reuse confirmed by repository owner
     license_url: https://arxiv.org/abs/1606.08415
-    modifications: Figure 1 rendered from page 2 and cropped without content changes
+    modifications: Figure 1 rendered from page 2 with its complete original caption and without surrounding body-text fragments
     used_in:
       - 00 Учебник/01 Основы нейронных сетей/02 Функции активации.md
     metadata_status: verified
@@ -5954,3 +5968,42 @@ assets:
       - 00 Учебник/14 Inference и оптимизация/57a KV-cache compression и offload.md
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
+  - id: curated-edls-optimal-sequence-processing-6a2a5fa8a007
+    asset: 00 Учебник/Assets/Figures/curated/ml-systems/edls/optimal-sequence-processing.png
+    author: Dmitry Ryabinin, Efficient DL Systems contributors
+    source_url: https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week02_fast_pipelines/lecture.pdf#page=31
+    commit: e632aa89ca9e6638d52e1b686095e7442faffbb0
+    sha256: 6a2a5fa8a00798d145a1af0b20f278d189249163f93951db08754cffee63705e
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    modifications: rendered from page 31 of the pinned course PDF; slide content unchanged
+    used_in:
+      - 00 Учебник/10 ML Systems/06 Data pipeline, padding и packing.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-inference-serving-eagle-figure6-ab36c95b4207
+    asset: 00 Учебник/Assets/Figures/curated/inference-serving/eagle-figure6-pipeline.png
+    source_asset: raw/papers/eagle/images/figure6-pipeline.png
+    author: Yuhui Li, Fangyun Wei, Chao Zhang, Hongyang Zhang
+    source_url: https://arxiv.org/pdf/2401.15077
+    sha256: ab36c95b42077ea9048dae8c703e5c2f92aeafe4ee37d650df72b12e99d6078a
+    license: arXiv non-exclusive distribution license
+    license_url: https://arxiv.org/licenses/nonexclusive-distrib/1.0/
+    modifications: cropped from Figure 6 of the original paper; diagram content unchanged
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+  - id: curated-inference-serving-kv-survey-figure4-5b2309cb5749
+    asset: 00 Учебник/Assets/Figures/curated/inference-serving/kv-survey-figure4-sparsity.png
+    source_asset: raw/papers/kv-cache-survey/images/figure4-sparsity.png
+    author: Haoyang Li et al.
+    source_url: https://arxiv.org/pdf/2412.19442
+    sha256: 5b2309cb57495fa3ccc977daafc46ccb23478fedc3b2f78647f52a36a6881c13
+    license: arXiv non-exclusive distribution license
+    license_url: https://arxiv.org/licenses/nonexclusive-distrib/1.0/
+    modifications: cropped from Figure 4 of the original survey; diagram content unchanged
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/57a KV-cache compression и offload.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials

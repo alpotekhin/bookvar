@@ -13,8 +13,6 @@ primary_sources:
 
 # Собираем Transformer: от блока к BERT, GPT и LLaMA
 
-**Полный исполняемый модуль:** [[05 Источники/Courses/Harvard ML Systems/tinytorch/13_transformers|TinyTorch 13 — Transformers]]. Исходный модуль собирает `TransformerBlock` из attention, MLP и layer normalization и проверяет компоненты вместе с авторегрессионной генерацией.
-
 Механизм внимания выполняет только одну часть работы: переносит информацию между
 позициями. После такого обмена каждой позиции всё ещё нужно преобразовать
 полученные признаки, а глубокой сети — провести сигнал через десятки слоёв без
@@ -24,9 +22,9 @@ primary_sources:
 Порядок этих компонентов исторически менялся. Оригинальный Transformer был
 энкодер-декодером с нормализацией после остаточного сложения. BERT оставил
 энкодер, GPT — причинный декодер без cross-attention, а LLaMA изменила
-нормализацию, позиционный механизм и FFN. В этой главе одна схема не выдаётся за
-все варианты: сначала собирается архитектура 2017 года, затем каждое семейство
-описывается как точное отличие от неё.
+нормализацию, позиционный механизм и FFN. Поэтому архитектура 2017 года служит
+исходной точкой, а BERT, GPT и LLaMA определяются через конкретные изменения её
+блоков и связей.
 
 ## 1. Главная декомпозиция
 
@@ -44,10 +42,10 @@ primary_sources:
 только attention, модели не хватит нелинейного преобразования собранной
 информации.
 
-## 2. Residual stream
+## 2. Остаточный поток
 
-Удобнее всего понимать Transformer не как башню коробок, а как поток
-$x\in\mathbb{R}^{B\times T\times d}$, к которому подслои добавляют updates:
+Удобнее всего понимать Transformer не как башню из блоков, а как поток
+$x\in\mathbb{R}^{B\times T\times d}$, к которому подслои добавляют свои изменения:
 
 $$
 x\leftarrow x+\operatorname{Attention}(\operatorname{Norm}(x)),
@@ -57,7 +55,7 @@ $$
 x\leftarrow x+\operatorname{FFN}(\operatorname{Norm}(x)).
 $$
 
-Это современная **pre-norm** запись. Residual path сохраняет общий интерфейс
+Это современная запись **pre-norm**. Остаточный путь сохраняет общий интерфейс
 между слоями: каждый подслой принимает и возвращает `B × T × d_model`.
 
 Оригинальный Transformer использовал **post-norm**:
@@ -66,7 +64,7 @@ $$
 x\leftarrow\operatorname{LayerNorm}(x+\operatorname{Sublayer}(x)).
 $$
 
-Нельзя рисовать pre-norm LLaMA block и подписывать его «оригинальный
+Нельзя рисовать pre-norm-блок LLaMA и подписывать его «оригинальный
 Transformer»: порядок операций влияет на обучение и является архитектурным
 различием.
 
@@ -94,10 +92,10 @@ $$
 \big(\operatorname{SiLU}(xW_g)\odot xW_u\big)W_d.
 $$
 
-## 4. Порядок позиций
+## 4. Информация о позиции
 
-Self-attention без position information не знает, какой token первый:
-перестановка входных rows переставит outputs тем же образом. Поэтому модели нужен
+Self-attention без позиционной информации не знает, какой токен первый:
+перестановка строк входного тензора так же переставит строки результата. Поэтому модели нужен
 позиционный сигнал.
 
 Оригинальный Transformer прибавлял sinusoidal encoding:
@@ -112,72 +110,72 @@ $$
 
 Но это не универсальное свойство Transformer:
 
-- BERT и ранние GPT используют learned absolute position embeddings;
+- BERT и ранние GPT используют обучаемые абсолютные позиционные представления;
 - LLaMA применяет RoPE к Q и K внутри каждого слоя;
 - другие семейства используют relative bias, ALiBi и их варианты.
 
 ## 5. Оригинальный encoder block
 
-Encoder получает input embeddings + positions. Каждый из $N$ блоков содержит:
+Энкодер получает входные и позиционные представления. Каждый из $N$ блоков содержит:
 
-1. full multi-head self-attention;
+1. полное multi-head self-attention;
 2. residual + LayerNorm;
 3. position-wise FFN;
 4. residual + LayerNorm.
 
-Full attention означает: каждая непустая input position может читать каждую
-другую. Encoder выдаёт contextual representations всего входа.
+Полное внимание означает: каждая непустая входная позиция может читать каждую
+другую. Энкодер возвращает контекстные представления всего входа.
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/Transformer_encoder.png]]
 
 *Jay Alammar, [The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/):
-encoder как self-attention и FFN с residual path. Эта схема позволяет сначала
+энкодер как self-attention и FFN с остаточным путём. Эта схема позволяет сначала
 проследить один блок, прежде чем переходить к полному стеку.*
 
 ## 6. Оригинальный decoder block
 
 Decoder содержит три подслоя:
 
-1. masked self-attention по уже известному target prefix;
-2. cross-attention к encoder output;
+1. masked self-attention по уже известному префиксу целевой последовательности;
+2. cross-attention к выходу энкодера;
 3. FFN.
 
 В cross-attention:
 
 $$
-Q=\text{decoder states},\qquad K,V=\text{encoder outputs}.
+Q=\mathrm{decoder\ states},\qquad K,V=\mathrm{encoder\ outputs}.
 $$
 
-Это наследник идеи Bahdanau: decoder читает source memory. Отличаются scoring,
-multi-head organization и отсутствие recurrent decoder state.
+Это развитие идеи Bahdanau: декодер читает память исходной последовательности. Отличаются функция совместимости,
+организация голов внимания и отсутствие рекуррентного состояния декодера.
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/The_transformer_encoder_decoder_stack.png]]
 
 *Jay Alammar, [The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/):
-развёрнутый encoder-decoder stack. Encoder outputs становятся K и V для
-cross-attention каждого decoder block.*
+развёрнутый стек энкодера и декодера. Выходы энкодера становятся K и V для
+cross-attention каждого блока декодера.*
 
-## 7. Training и inference
+## 7. Обучение и генерация
 
-Во время training target сдвигается:
+Во время обучения целевая последовательность сдвигается:
 
 ```text
-decoder input:  <BOS> Чёрный кот спит
-labels:          Чёрный кот    спит <EOS>
+вход декодера:  <BOS> Чёрный кот спит
+метки:                 Чёрный кот спит <EOS>
 ```
 
-Causal mask гарантирует, что строка позиции $t$ не использует labels справа.
-Все позиции можно обработать одним большим tensor operation.
+Causal mask гарантирует, что позиция $t$ не использует метки справа.
+Все позиции при этом можно обработать одной тензорной операцией.
 
-Во время inference следующий token неизвестен. Цикл повторяется:
+Во время генерации следующий токен неизвестен. На каждом шаге модель:
 
-1. вычислить logits следующего token;
-2. выбрать или sample token;
-3. добавить его к prefix;
-4. вычислить следующий step.
+1. вычисляет логиты следующего токена;
+2. выбирает токен или сэмплирует его из распределения;
+3. добавляет токен к префиксу;
+4. переходит к следующему шагу.
 
-KV-cache сохраняет K/V прошлых positions и не вычисляет их заново. Но зависимость
-`token t+1` от выбранного `token t` остаётся, поэтому autoregressive generation
+KV-cache сохраняет K/V прошлых позиций и не вычисляет их заново. Но зависимость
+токена $t+1$ от выбранного токена $t$ остаётся, поэтому авторегрессионная генерация
 последовательна по времени.
 
 ## 8. Три архитектурные ветви
@@ -185,49 +183,50 @@ KV-cache сохраняет K/V прошлых positions и не вычисля�
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-30/gpt-2-transformer-xl-bert-3.png]]
 
 *Jay Alammar, «The Illustrated GPT-2»: наглядное сравнение decoder-only GPT-2,
-encoder-only BERT и recurrent extension Transformer-XL.
+encoder-only BERT и рекуррентного расширения Transformer-XL.
 [Оригинальная статья](https://jalammar.github.io/illustrated-gpt2/).*
 
-Ниже мы расширяем эту готовую картинку текстовым diff до LLaMA. Собственная
-схема здесь не нужна: новое знание — не внешний вид прямоугольников, а точный
-список изменившихся механизмов.
+От GPT-2 к LLaMA меняется не общий силуэт декодера, а устройство его частей:
+абсолютные позиционные эмбеддинги уступают место RoPE, LayerNorm — RMSNorm, а
+обычная двухслойная FFN — вентильной SwiGLU. Поэтому полезнее сопоставить эти
+механизмы по пунктам, чем рисовать ещё один почти одинаковый набор блоков.
 
 ### Encoder-only: BERT
 
-BERT оставляет encoder stack:
+BERT оставляет стек энкодера:
 
-- full bidirectional self-attention;
-- token + segment + learned position embeddings;
+- полное двунаправленное self-attention;
+- представления токенов, сегментов и обучаемые позиционные представления;
 - masked language modeling;
 - в оригинале также next sentence prediction.
 
 При MLM выбирается 15% WordPieces; из них 80% заменяются на `[MASK]`, 10% — на
-случайный token, 10% остаются неизменными. Loss считается по выбранным позициям.
-BERT не является autoregressive generator: его pre-training objective учит
-восстанавливать скрытые части, а не продолжать prefix слева направо.
+случайный токен, 10% остаются неизменными. Функция потерь считается по выбранным позициям.
+BERT не является авторегрессионным генератором: задача предобучения учит его
+восстанавливать скрытые части, а не продолжать префикс слева направо.
 
 ### Decoder-only: GPT
 
-GPT использует causal stack без encoder и без cross-attention:
+GPT использует причинный стек без энкодера и без cross-attention:
 
 - masked self-attention;
 - FFN;
-- learned position embeddings в ранних GPT;
-- next-token objective.
+- обучаемые позиционные представления в ранних GPT;
+- предсказание следующего токена.
 
-GPT-1 не «изобрёл decoder-only Transformer», а показал перенос generative
-pre-training на downstream NLP tasks. GPT-2 затем масштабировал модель и данные
-и сделал акцент на zero-shot behavior.
+GPT-1 не «изобрёл decoder-only Transformer», а показал, что генеративное
+предобучение переносится на прикладные задачи NLP. GPT-2 затем масштабировал модель и данные
+и сделал акцент на решении задач без дополнительных обучающих примеров.
 
 ### Modern decoder-only: LLaMA
 
 LLaMA сохраняет causal decoder, но меняет детали:
 
 - pre-normalization с RMSNorm;
-- RoPE вместо absolute position embeddings;
+- RoPE вместо абсолютных позиционных представлений;
 - SwiGLU вместо ReLU FFN;
-- no biases в ряде линейных слоёв;
-- в поздних Llama variants — grouped-query attention.
+- отсутствие смещений в ряде линейных слоёв;
+- grouped-query attention в поздних версиях Llama.
 
 Важно: LLaMA 1 использовала multi-head attention. Нельзя задним числом приписать
 GQA всему семейству или самой первой версии.
@@ -236,17 +235,17 @@ GQA всему семейству или самой первой версии.
 
 | Компонент | Transformer 2017 | BERT Base | GPT-1 | LLaMA 1 |
 |---|---|---|---|---|
-| stack | encoder-decoder | encoder | causal decoder | causal decoder |
+| архитектура | encoder-decoder | encoder | causal decoder | causal decoder |
 | norm layout | Post-LN | Post-LN | Post-LN-like | Pre-RMSNorm |
 | activation / FFN | ReLU | GELU | GELU | SwiGLU |
-| positions | sinusoidal | learned absolute | learned absolute | RoPE |
+| позиции | sinusoidal | learned absolute | learned absolute | RoPE |
 | cross-attention | decoder only | нет | нет | нет |
-| objective | translation | MLM + NSP | next token + fine-tune | next token |
+| задача обучения | translation | MLM + NSP | next token + fine-tune | next token |
 
 Эта таблица иллюстрирует правильный способ описывать новые модели: не повторять
 весь Transformer, а фиксировать, что сохранено и что изменено.
 
-## 10. Почему Transformer вытеснил recurrent backbone
+## 10. Почему Transformer вытеснил рекуррентную основу
 
 В сравнении оригинальной статьи:
 
@@ -256,15 +255,15 @@ GQA всему семейству или самой первой версии.
 | recurrent | $O(Td^2)$ | $O(T)$ | $O(T)$ |
 | convolution | $O(kTd^2)$ | $O(1)$ | $O(\log_k T)$ |
 
-Ключевой выигрыш — параллельное training computation и короткий путь между
-любыми positions. Цена — quadratic interaction matrix. При очень длинном
+Ключевой выигрыш — параллельные вычисления при обучении и короткий путь между
+любыми позициями. Цена — квадратичная матрица взаимодействий. При очень длинном
 контексте $T^2$ становится главным ограничением и порождает отдельную линию:
 FlashAttention, sparse/sliding-window attention, linear attention и SSM.
 
 > [!warning] Таблица зависит от режима
-> $O(1)$ sequential operations относится к обработке уже известной sequence в
-> слое, а не к генерации неизвестных будущих tokens. И self-attention не всегда
-> дешевле recurrence: соотношение зависит от $T$, $d$, hardware и реализации.
+> $O(1)$ последовательных операций относится к обработке уже известной последовательности в
+> слое, а не к генерации неизвестных будущих токенов. И self-attention не всегда
+> дешевле рекуррентной сети: соотношение зависит от $T$, $d$, оборудования и реализации.
 
 ## 11. Минимальный современный causal block
 
@@ -283,9 +282,9 @@ class Block(nn.Module):
         return x
 ```
 
-Это LLaMA-like skeleton, не оригинальный Transformer. Для точного 2017 decoder
-нужно добавить encoder, cross-attention, LayerNorm post-residual, ReLU FFN и
-sinusoidal positions.
+Это каркас блока, близкого к LLaMA, а не оригинальный Transformer. Для точного декодера 2017 года
+нужно добавить энкодер, cross-attention, LayerNorm после остаточного сложения, ReLU FFN и
+синусоидальные позиции.
 
 ## 12. Как читать реальный код
 
@@ -294,14 +293,14 @@ sinusoidal positions.
 1. [Karpathy `ng-video-lecture`](https://github.com/karpathy/ng-video-lecture) —
    механизм виден целиком и помещается в голове.
 2. [Karpathy `build-nanogpt`](https://github.com/karpathy/build-nanogpt) —
-   точное воспроизведение GPT-2 124M, data pipeline, initialization и training.
+   точное воспроизведение GPT-2 124M, конвейер данных, инициализация и обучение.
 3. [Meta Llama 3 reference code](https://github.com/meta-llama/llama3/blob/main/llama/model.py) —
    RoPE, RMSNorm, SwiGLU и GQA в современной реализации.
 
-`nanoGPT` полезен как компактный исторический reference, но сам автор теперь
+`nanoGPT` полезен как компактная историческая реализация, но сам автор теперь
 направляет к более современному `nanochat`.
 
-## 13. Проверка понимания через трассировку shapes
+## 13. Проверка форм тензоров
 
 Для causal LLM:
 
@@ -317,19 +316,19 @@ residual after FFN        [B, T, d]
 vocabulary logits         [B, T, |Vocab|]
 ```
 
-Если shape неожиданно меняется вдоль residual stream, это почти всегда означает
-пропущенную projection или ошибочную конкатенацию heads.
+Если форма неожиданно меняется вдоль остаточного потока, это почти всегда означает
+пропущенную проекцию или ошибочную конкатенацию голов.
 
-## Что должно остаться после главы
+## Краткие итоги
 
-- Original Transformer — encoder-decoder, а не GPT-подобная башня.
-- Encoder block: full self-attention + FFN.
-- Original decoder block: causal self-attention + cross-attention + FFN.
-- Attention отвечает за communication; FFN — за token-wise nonlinear compute.
-- Residual stream сохраняет `B × T × d_model`.
-- BERT, GPT и LLaMA различаются не только маской, но objective, positions,
-  normalization и FFN.
-- Modern LLM diagram нельзя выдавать за точную схему статьи 2017 года.
+- Оригинальный Transformer — encoder-decoder, а не GPT-подобная башня.
+- Блок энкодера состоит из полного self-attention и FFN.
+- Блок оригинального декодера содержит causal self-attention, cross-attention и FFN.
+- Attention переносит информацию между позициями; FFN нелинейно преобразует каждую позицию отдельно.
+- Остаточный поток сохраняет форму `B × T × d_model`.
+- BERT, GPT и LLaMA различаются не только маской, но и задачей обучения, позиционным механизмом,
+  нормализацией и FFN.
+- Схему современной LLM нельзя выдавать за точную схему статьи 2017 года.
 
 ## Источники и интерактивы
 
@@ -342,6 +341,7 @@ vocabulary logits         [B, T, |Vocab|]
 
 ### Код и объяснения
 
+- [[05 Источники/Courses/Harvard ML Systems/tinytorch/13_transformers|TinyTorch 13 — Transformers]] — исполняемая сборка `TransformerBlock` из attention, MLP и layer normalization с авторегрессионной генерацией.
 - [Harvard — The Annotated Transformer](https://nlp.seas.harvard.edu/annotated-transformer/)
 - [Karpathy — Let’s build GPT from scratch](https://www.youtube.com/watch?v=kCc8FmEb1nY)
 - [Karpathy — Let’s reproduce GPT-2](https://www.youtube.com/watch?v=l8pRSuU81PU)

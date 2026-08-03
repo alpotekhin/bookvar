@@ -1,7 +1,7 @@
 ---
 title: Выбор токенов и генерация
 type: textbook-chapter
-status: canonical
+status: legacy
 last_updated: 2026-07-18
 ---
 

@@ -187,12 +187,28 @@ describe('loadManifest', () => {
     }]);
   });
 
-  it('defines nine real textbook modules plus system prerequisites without changing flat routes', () => {
+  it('defines fourteen readable textbook modules without changing flat routes', () => {
     const root = join(import.meta.dirname, '..', '..');
     const textbook = loadManifest(join(root, 'publishing', 'navigation.yml')).sections
       .find((section) => section.id === 'textbook')!;
     const modules = textbook.sidebar?.filter((item) => 'items' in item) ?? [];
-    expect(modules).toHaveLength(10);
+    expect(modules).toHaveLength(14);
+    expect(modules.map((module) => module.label)).toEqual([
+      'I. Математические и ML-основания',
+      'II. Классическое машинное обучение',
+      'III. Рекомендательные системы',
+      'IV. Нейронные сети',
+      'V. Текст до Transformer',
+      'VI. Transformer, BERT и GPT',
+      'VII. Анатомия современной LLM',
+      'VIII. Вычислительные основы ML-систем',
+      'IX. Обучение LLM',
+      'X. Инференс и serving',
+      'XI. Эксплуатация и оценивание',
+      'XII. Retrieval и RAG',
+      'XIII. Мультимодальные модели',
+      'XIV. Инструменты и агенты'
+    ]);
 
     const flattenSidebar = (items: NonNullable<typeof textbook.sidebar>): typeof items =>
       items.flatMap((item) => 'route' in item ? [item] : flattenSidebar(item.items));

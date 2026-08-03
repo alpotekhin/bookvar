@@ -497,7 +497,9 @@ B, B точнее C, а C безопаснее A. Одно число не об�
 вопроса: какой data schema, какой implicit preference model, есть ли reference,
 и откуда берутся candidates во время training.
 
-## 15. Практика
+## Практика и первоисточники
+
+### Задания
 
 1. Воспроизведите ручной пример при $\beta=0.1$, $1$ и $5$. Постройте sigmoid
    weight как функцию margin.
@@ -514,20 +516,20 @@ B, B точнее C, а C безопаснее A. Одно число не об�
 7. Сравните DPO и SFT только на chosen: какие gradients получает rejected и
    почему результаты различаются?
 
-## 16. Проверка понимания
+### Проверка понимания
 
 Вопросы к этой главе вынесены в
 [[02 Areas/ML & DL/04 Вопросы/Вопросы по LLM#Post-training и alignment|«Вопросы по LLM»]].
 
-## 17. Источники и объяснения
+### Литература и реализации
 
-### Первоисточник
+#### Первоисточник
 
 - Rafailov et al., [Direct Preference Optimization: Your Language Model is
   Secretly a Reward Model](https://arxiv.org/abs/2305.18290). Особенно Figure 1,
   Equations 1–7, gradient после Eq. 7, Figure 2 и Appendix A.
 
-### Курсы и код
+#### Объяснения и код
 
 - Stanford CS224N, Nathan Lambert, *Life after DPO* — локальные slides:
   `raw/courses/Stanford CS224N/slides/cs224n-spr2024-lecture15-life-after-dpo-lambert.pdf`.

@@ -64,6 +64,23 @@ function visibleInSidebar(route: string): boolean {
     && !route.startsWith('sources/imbalanced-learn/');
 }
 
+function searchableInPublication(route: string): boolean {
+  // Deep source archives are supporting evidence, not chapters. Keep them
+  // available through the curated source indexes and direct links, but do not
+  // let mechanically extracted slides, papers, and notebooks dominate the
+  // textbook search results.
+  return !route.startsWith('sources/courses/')
+    && !route.startsWith('sources/papers/')
+    && !route.startsWith('sources/imbalanced-learn/');
+}
+
+function normalizeProtocolRelativeHtmlUrls(markdown: string): string {
+  // Imported notebooks often preserve HTML copied from Wikimedia and other
+  // sites with `//host/path` URLs. Astro otherwise treats these as local
+  // publication paths during static rendering.
+  return markdown.replace(/\b(href|src)=(['"])\/\//gi, '$1=$2https://');
+}
+
 const IMAGE_EXTENSION = /\.(?:png|jpe?g|webp|svg|gif)$/i;
 const EMBED = /!\[\[([^\]\n]+)\]\]/g;
 
@@ -176,7 +193,8 @@ function prepareAssets(rootDir: string, markdown: string): { markdown: string; a
     const filename = asset.publicPath.slice(asset.publicPath.lastIndexOf('/') + 1);
     const alt = filename.replace(IMAGE_EXTENSION, '');
     const href = asset.publicPath.split('/').map(encodeURIComponent).join('/');
-    return `![${alt}](${publicationBasePath()}/assets/${href})`;
+    const assetHref = `${publicationBasePath()}/assets/${href}`;
+    return `[![${alt}](${assetHref})](${assetHref})`;
   });
   return { markdown: converted, assets };
 }
@@ -407,15 +425,18 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
       : [];
     const unresolved = page.status === 'legacy' ? [] : converted.unresolved;
     const allowlisted = [...converted.allowlisted, ...legacyUnresolved];
-    const markdown = removeLeadingSourceHeading(convertCallouts(converted.markdown));
+    const markdown = normalizeProtocolRelativeHtmlUrls(
+      removeLeadingSourceHeading(convertCallouts(converted.markdown))
+    );
     const outputRoute = locale ? `${locale}/${entry.route}` : entry.route;
     const target = contained(outputDir, `${outputRoute}.md`, 'Output');
     await mkdir(dirname(target), { recursive: true });
-    const metadata: Record<string, string | Date> = {
+    const metadata: Record<string, string | boolean | Date> = {
       title: page.title,
       description: page.title,
       slug: outputRoute
     };
+    if (!searchableInPublication(entry.route)) metadata.pagefind = false;
     if (page.lastUpdated) metadata.lastUpdated = new Date(page.lastUpdated);
     await writeFile(target, matter.stringify(markdown, metadata), 'utf8');
 

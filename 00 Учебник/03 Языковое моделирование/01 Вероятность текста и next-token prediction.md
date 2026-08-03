@@ -1,7 +1,7 @@
 ---
 title: Вероятность текста и предсказание следующего токена
 type: textbook-chapter
-status: canonical
+status: legacy
 last_updated: 2026-07-18
 ---
 

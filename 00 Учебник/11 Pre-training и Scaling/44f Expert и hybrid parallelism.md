@@ -9,7 +9,14 @@ last_updated: 2026-07-24
 
 Архитектуру router, auxiliary loss и capacity разбирает [[02 Mixture of Experts — routing, capacity и serving]]. Здесь вопрос системный: как доставить выбранные токены владельцам экспертов и вернуть outputs в исходный порядок.
 
-Expert parallelism нельзя выбирать отдельно от router load и topology: all-to-all возникает из token dispatch, а объём работы каждого rank зависит от фактического распределения токенов. Опираясь на all-to-all из [[44a Processes, collectives и DDP]], TP/SP из [[44c Tensor и sequence parallelism]] и process meshes из [[44e ZeRO, FSDP2, DeviceMesh и DTensor]], проследим token state через dispatch, GroupedGEMM и combine, рассчитаем payload и imbalance, а затем совместим EP с TP, PP и DP без нарушения divisibility constraints.
+Expert parallelism нельзя выбирать отдельно от router load и topology:
+all-to-all возникает из token dispatch, а объём работы каждого rank зависит от
+фактического распределения токенов. Полный путь включает dispatch, GroupedGEMM
+и combine; для него нужно рассчитать payload и imbalance, а затем совместить EP
+с TP, PP и DP без нарушения divisibility constraints. При этом используются
+all-to-all из [[44a Processes, collectives и DDP]], TP/SP из
+[[44c Tensor и sequence parallelism]] и process meshes из
+[[44e ZeRO, FSDP2, DeviceMesh и DTensor]].
 
 ## Dispatch, compute, combine
 
@@ -91,7 +98,7 @@ Backward повторяет коммуникационный граф в обр�
 
 Проверка MoE системы сравнивает token-to-expert assignments, counts per expert, reconstructed output и weight-gradients с single-rank implementation. В профиле нужны all-to-all bytes, skew $\rho$, доля padding/dropped tokens и GroupedGEMM utilization.
 
-## Материалы для практики
+## Практика и первоисточники
 
 - [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week06_dl_arithmetic/lecture.pdf|EDLS Week 6 — model-state, activation и MoE logistics]];
 - [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week06_dl_arithmetic/seminar/practice.ipynb|EDLS Week 6 — notebook]];
@@ -99,8 +106,6 @@ Backward повторяет коммуникационный граф в обр�
 - [[02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving|полная глава Bookvar о механике MoE]].
 
 EDLS даёт ресурсный ledger, а Harvard — системный контекст гибридных осей. Вместе с notebook они позволяют сопоставить расчётные объёмы dispatch и combine с фактическим распределением токенов и временем all-to-all.
-
-## Источники
 
 - EDLS, pinned commit `e632aa89…`, [`week06_dl_arithmetic/lecture.pdf`, slides/PDF pp. 117–120 MoE/GroupedGEMM, pp. 127–136 TP versus EP and communication arithmetic, pp. 137–144 PP/1F1B/ZeroBubble/DualPipeV](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week06_dl_arithmetic/lecture.pdf); earlier architectural context: [`week04_large_models/lecture.pdf`, PDF pp. 72–76 Expert Parallelism/Switch Transformer](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week04_large_models/lecture.pdf).
 - Harvard Edge ML Systems Book, commit `45ecc8d…`, [Distributed Training, `sec-distributed-training-systems-systems-expert-parallelism-b896` and `sec-distributed-training-systems-systems-hybrid-parallelism-5674`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/distributed_training.qmd).

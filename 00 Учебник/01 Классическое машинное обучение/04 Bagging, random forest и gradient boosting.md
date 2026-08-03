@@ -63,11 +63,6 @@ out-of-bag set. Их можно использовать для дополнит
 validation pass, хотя финальная схема оценки всё равно должна соответствовать
 структуре данных.
 
-Полные notebooks:
-
-- [[05 Источники/Courses/Scikit-learn MOOC/python_scripts/ensemble_bagging.py|Bagging]];
-- [[05 Источники/Courses/Scikit-learn MOOC/python_scripts/ensemble_random_forest.py|Random forest]].
-
 ## Gradient boosting
 
 Boosting строит additive model:
@@ -243,10 +238,12 @@ split. Увеличение числа деревьев обычно стаби�
 split смешивает прошлое и будущее или одного пользователя между folds, более
 выразительный boosting лишь лучше использует утечку.
 
-Полный исходный модуль:
+## Практика и первоисточники
 
 - [[05 Источники/Courses/Scikit-learn MOOC/slides/bagging.md.md|Bagging slides]];
 - [[05 Источники/Courses/Scikit-learn MOOC/slides/boosting.md.md|Boosting slides]];
+- [[05 Источники/Courses/Scikit-learn MOOC/python_scripts/ensemble_bagging.py|Bagging]];
+- [[05 Источники/Courses/Scikit-learn MOOC/python_scripts/ensemble_random_forest.py|Random forest]];
 - [[05 Источники/Courses/Scikit-learn MOOC/python_scripts/ensemble_adaboost.py|AdaBoost]];
 - [[05 Источники/Courses/Scikit-learn MOOC/python_scripts/ensemble_gradient_boosting.py|Gradient boosting]];
 - [[05 Источники/Courses/Scikit-learn MOOC/python_scripts/ensemble_hist_gradient_boosting.py|Histogram gradient boosting]];

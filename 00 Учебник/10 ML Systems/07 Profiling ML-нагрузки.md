@@ -8,21 +8,14 @@ source_language: mixed
 
 # Profiling ML-нагрузки
 
-**Полный исполняемый модуль:** [[05 Источники/Courses/Harvard ML Systems/tinytorch/14_profiling|TinyTorch 14 — Profiling]]. Модуль строит `Profiler` для подсчёта параметров и FLOP, измерения памяти и распределения latency, то есть связывает trace с количественной моделью нагрузки.
-
 Benchmarking говорит, что программа медленная; profiling показывает, где
 исчезает время и память. Начинают с самого дешёвого уровня и углубляются только
 после локализации bottleneck.
 
 ## Полный диагностический маршрут
 
-- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/performance_engineering|Harvard CS249r — Performance Engineering]]: диагностическое дерево, roofline и анализ bottleneck.
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week02_fast_pipelines/seminar/practice.ipynb|EDLS Week 2 — profiler practice]].
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week06_dl_arithmetic/seminar/practice.ipynb|EDLS Week 6 — arithmetic and profiling practice]].
-
-Notebook следует читать вместе с trace: название operator само по себе не
-объясняет задержку. Сначала находят пустоты и зависимости на timeline, затем
-переходят к operator- и kernel-level counters.
+Название оператора само по себе не объясняет задержку. Сначала находят пустоты и
+зависимости на timeline, затем переходят к operator- и kernel-level counters.
 
 ## Иерархия инструментов
 
@@ -42,7 +35,7 @@ sampling interval: dummy wait kernel тоже может дать 100%. Это �
 
 *Оригинальная иллюстрация Harvard CS249r, Vol. II, Performance Engineering,
 § “Iron Law Diagnostic Flowchart”, locator
-`sec-performance-engineering-iron-law`, commit `45ecc8d…`,
+`sec-performance-engineering-iron-law`; [исходный SVG](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/diagnostic-flow.svg),
 CC BY-NC-SA 4.0; файл не изменён. Дерево фиксирует порядок исключения I/O, CPU
 и communication stalls до перехода к kernel-level диагнозу.*
 
@@ -115,8 +108,11 @@ memory throughput, Tensor Core instructions, stalls и roofline position.
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/profiling-hierarchy.svg]]
 
-*Источник: Harvard CS249r, Vol. II preview, Performance Engineering,
-`profiling-hierarchy.svg`, commit `45ecc8d…`, CC BY-NC-SA 4.0.*
+*Источник: Harvard CS249r, Vol. II preview, Performance Engineering; [исходный
+SVG](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/profiling-hierarchy.svg),
+CC BY-NC-SA 4.0. Сопоставьте строку с наблюдаемым симптомом: общая задержка ведёт
+к системному профилю, а уже локализованный медленный kernel — к аппаратным
+счётчикам.*
 
 ## End-to-end кейс
 
@@ -157,16 +153,24 @@ Python и operator dispatch заметны при мелких операция�
 
 *Оригинальная иллюстрация Harvard CS249r, Vol. II, Performance Engineering,
 § “Optimization decision tree”, locator
-`sec-performance-engineering-optimization-decision-tree`, commit `45ecc8d…`,
+`sec-performance-engineering-optimization-decision-tree`; [исходный
+SVG](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/optimization-decision-tree.svg),
 CC BY-NC-SA 4.0; файл не изменён. Она превращает установленный bottleneck в
 выбор класса вмешательства и удерживает profiling перед optimization.*
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/foundation/frameworks_dispatch_tax_divergence.svg]]
 
-*Источник: Harvard CS249r, Frameworks,
-`frameworks_dispatch_tax_divergence.svg`, CC BY-NC-SA 4.0.*
+*Источник: Harvard CS249r, Frameworks; [исходный SVG](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/frameworks/images/svg/frameworks_dispatch_tax_divergence.svg),
+CC BY-NC-SA 4.0. Сравните расхождение кривых при уменьшении размера операции:
+если полезная работа сокращается быстрее стоимости dispatch, bottleneck лежит
+выше уровня GPU-kernel.*
 
-## Источники
+## Практика и первоисточники
+
+- [[05 Источники/Courses/Harvard ML Systems/tinytorch/14_profiling|TinyTorch 14 — Profiling]]: исполняемый `Profiler` для подсчёта параметров и FLOP, измерения памяти и распределения latency.
+- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/performance_engineering|Harvard CS249r — Performance Engineering]]: диагностическое дерево, roofline и анализ bottleneck.
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week02_fast_pipelines/seminar/practice.ipynb|EDLS Week 2 — практика профилирования]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week06_dl_arithmetic/seminar/practice.ipynb|EDLS Week 6 — практика арифметики и профилирования]].
 
 - [[05 Источники/Courses/Harvard ML Systems/vol1/frameworks|Harvard ML Systems, Vol. I — ML Frameworks]] — полная локальная глава: computational graphs, automatic differentiation, eager/operator dispatch, compilation, interoperability и границы framework abstraction.
 - [EDLS week 2 lecture](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week02_fast_pipelines/lecture.pdf) — “Profiling: what and why”, “How to profile Python/GPU/PyTorch code?”, “PyTorch Profiler + trace viewer”, “Nsight Systems/Nsight Compute”, “Profiling: typical patterns”; title locators used because incremental slides repeat in the PDF.

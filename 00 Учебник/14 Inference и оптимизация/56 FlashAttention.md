@@ -12,17 +12,6 @@ primary_sources:
 
 # FlashAttention: точное внимание с меньшим обменом памятью
 
-## Исходные материалы и измерение
-
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week06_dl_arithmetic/lecture.pdf|EDLS Week 6 — activation logistics и fused kernels]];
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week06_dl_arithmetic/seminar/practice.ipynb|EDLS Week 6 — notebook]];
-- [[02 Areas/ML & DL/Papers/Flash Attention|FlashAttention — карточка paper]];
-- [[02 Areas/ML & DL/Papers/Flash Attention 2|FlashAttention-2 — карточка paper]].
-
-Paper задаёт алгоритм и доказательство exactness; EDLS помещает его в реальный
-Transformer step. Проверяйте не только latency kernel, но и peak memory,
-end-to-end step time и применимость backend к нужным shape/dtype/mask.
-
 Формула внимания содержит два матричных умножения и softmax:
 
 $$
@@ -194,7 +183,13 @@ FlashAttention может реализовывать causal или sliding-windo
 
 ## Как понять, что kernel действительно используется
 
-FlashAttention — частный случай fusion: промежуточный тензор выгодно потребить до записи в HBM. EDLS week 6 разбирает тот же аргумент на fused QKV, RoPE, cross-entropy, RMSNorm и SwiGLU; реализации связаны с [[02 Areas/ML & DL/00 Учебник/10 ML Systems/07 Profiling ML-нагрузки|главой о profiling]], а исходный [worked notebook закреплён точным commit](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week06_dl_arithmetic/seminar/practice.ipynb). Компилятор может слить pointwise-операции, Triton — выразить kernel, библиотека — предоставить вручную настроенный schedule; profiler должен подтвердить путь.
+FlashAttention — частный случай слияния операций: промежуточный тензор выгодно
+использовать сразу, не записывая его в HBM. Тот же принцип применяется к QKV,
+RoPE, cross-entropy, RMSNorm и SwiGLU. Компилятор может объединить поэлементные
+операции, Triton — выразить специализированное ядро, а библиотека — предоставить
+вручную настроенную реализацию. Во всех случаях фактический путь нужно
+подтвердить профилировщиком; методика такой проверки разобрана в
+[[02 Areas/ML & DL/00 Учебник/10 ML Systems/07 Profiling ML-нагрузки|главе о профилировании]].
 
 На prefill много строк Q и крупные tiles загружают tensor cores. На decode новая Q обычно одна на sequence, а paged KV читается из HBM; нужен decode/paged-attention kernel. Ускорение prefill не доказывает улучшение TPOT.
 
@@ -216,7 +211,12 @@ FlashAttention — частный случай fusion: промежуточны�
 часть времени занимают MLP, коммуникации или чтение KV-cache на decode, общий
 выигрыш будет меньше локального.
 
-## Источники и дальнейшее чтение
+## Практика и первоисточники
+
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week06_dl_arithmetic/lecture.pdf|Efficient DL Systems — обмен активациями и fused kernels]].
+- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week06_dl_arithmetic/seminar/practice.ipynb|Практикум Efficient DL Systems по FlashAttention]].
+- [[02 Areas/ML & DL/Papers/Flash Attention|Карточка FlashAttention]].
+- [[02 Areas/ML & DL/Papers/Flash Attention 2|Карточка FlashAttention-2]].
 
 - Dao et al., [FlashAttention](https://arxiv.org/abs/2205.14135) — IO-aware постановка, алгоритм и доказательство точности.
 - Tri Dao, [FlashAttention-2 at Stanford CRFM](https://crfm.stanford.edu/2023/07/17/flash2.html) — наиболее наглядные схемы tiling и разбиения warp.

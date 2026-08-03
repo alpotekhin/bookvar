@@ -1,7 +1,7 @@
 ---
 title: "Инференс языковой модели: KV-кеш, пакетирование и FlashAttention"
 type: textbook-chapter
-status: canonical
+status: legacy
 last_updated: 2026-07-20
 prerequisites:
   - "[[02 Areas/ML & DL/00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute]]"

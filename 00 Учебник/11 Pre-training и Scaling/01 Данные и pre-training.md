@@ -1,7 +1,7 @@
 ---
 title: Данные и предобучение
 type: textbook-chapter
-status: canonical
+status: legacy
 last_updated: 2026-07-20
 primary_sources:
   - https://cs336.stanford.edu/

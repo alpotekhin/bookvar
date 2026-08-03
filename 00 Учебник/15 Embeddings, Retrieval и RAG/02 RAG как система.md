@@ -1,7 +1,7 @@
 ---
 title: RAG как система
 type: textbook-chapter
-status: canonical
+status: legacy
 last_updated: 2026-07-20
 prerequisites:
   - "[[02 Areas/ML & DL/00 Учебник/15 Embeddings, Retrieval и RAG/01 Embeddings и retrieval]]"

@@ -32,7 +32,7 @@ Philipp Schmid, Sourab Mangrulkar, Younes Belkada, Pedro Cuenca; страниц�
 
 ## Router и top-k
 
-Для token state $x_t\in\mathbb R^d$ router выдаёт $N$ logits:
+Для состояния токена $x_t\in\mathbb R^d$ маршрутизатор выдаёт $N$ логитов:
 
 $$
 z_t=x_tW_r,\qquad p_t=\operatorname{softmax}(z_t),\qquad
@@ -47,10 +47,11 @@ y_t=\sum_{i\in S_t}\alpha_{t,i}E_i(x_t),
 \alpha_{t,i}=\frac{p_{t,i}}{\sum_{j\in S_t}p_{t,j}}.
 $$
 
-Top-1 (Switch) проще dispatch и смешивание. Top-2 (GShard, Mixtral) даёт второй
-маршрут и взвешенную комбинацию, но удваивает assignments. Не выбранные эксперты
-не получают gradient от LM loss этого токена. Top-k дискретен; router обучается
-через непрерывные веса выбранных путей и вспомогательные losses.
+При top-1, как в Switch, пересылка и смешивание проще. Top-2, используемый в
+GShard и Mixtral, добавляет второй маршрут и взвешенную комбинацию, но удваивает
+число назначений. Невыбранные эксперты не получают градиент от основной функции
+потерь для этого токена. Операция top-k дискретна; маршрутизатор обучается через
+непрерывные веса выбранных путей и вспомогательные функции потерь.
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/modern-37-40-moe/sparse-routing.png]]
 
@@ -75,11 +76,12 @@ P_{total}\approx P_D+NP_E,
 P_{active/token}\approx P_D+kP_E.
 $$
 
-Но active parameters — не точные FLOPs: attention и embeddings общие, router и
-communication добавляют работу, а веса всех экспертов должны быть доступны в
+Но число активных параметров не равно точному числу FLOP: attention и вложения
+общие, а маршрутизация и обмен данными добавляют работу. Кроме того, веса всех
+экспертов должны быть доступны в
 совокупной памяти. Mixtral 8×7B — не восемь независимых 7B моделей.
 
-## Почему routing collapse сам себя усиливает
+## Почему коллапс маршрутизации усиливает сам себя
 
 Случайно полезный эксперт получает больше токенов, быстрее улучшается и становится
 ещё привлекательнее. Редкие эксперты недообучаются, а GPU популярного эксперта
@@ -97,15 +99,15 @@ $$
 $$
 
 $f_i$ дискретна, $P_i$ дифференцируема. Минимум поощряет равномерные назначения,
-но слишком большой $\alpha$ заставляет router балансировать вопреки LM quality.
+но слишком большой $\alpha$ заставляет маршрутизатор балансировать нагрузку в ущерб основной задаче.
 Router z-loss
 
 $$
 \mathcal L_z=\beta\left(\log\sum_i e^{z_i}\right)^2
 $$
 
-сдерживает величину logits и помогает численной устойчивости. На практике router
-softmax нередко считают в FP32, даже если experts работают в BF16.
+сдерживает величину логитов и помогает численной устойчивости. На практике
+softmax маршрутизатора нередко считают в FP32, даже если эксперты работают в BF16.
 
 DeepSeek-V3 применяет динамические bias для выбора: перегруженному эксперту bias
 понижают, недогруженному повышают. Bias влияет на top-k, но не на вес смешивания;
@@ -114,7 +116,7 @@ DeepSeek-V3 применяет динамические bias для выбора
 
 ## Capacity и dropped tokens
 
-Для $M$ токенов, $N$ experts и top-$k$ всего $Mk$ назначений. Средняя нагрузка:
+Для $M$ токенов, $N$ экспертов и top-$k$ получается $Mk$ назначений. Средняя нагрузка:
 
 $$
 \bar C=\frac{Mk}{N},\qquad
@@ -122,13 +124,15 @@ C=\left\lceil c\frac{Mk}{N}\right\rceil,
 $$
 
 где $c$ — capacity factor. При $M=4096,N=8,k=2,c=1.25$ получаем $C=1280$
-мест на эксперта. Всего выделяется 10240 slots для 8192 assignments: запас 25%.
+мест на эксперта. Всего выделяется 10240 мест для 8192 назначений: запас 25%.
 
-Статические buffers удобны XLA/accelerators, но overflow требует решения:
-отбросить expert branch и оставить residual, отправить к следующему эксперту или
-использовать dynamic routing. Большая capacity снижает drops, но увеличивает
-padding, memory и communication. Современный dropless MoE не устраняет дисбаланс:
-ragged kernels и самый загруженный rank всё равно влияют на latency.
+Статические буферы удобны для XLA и ускорителей, но при переполнении нужно либо
+отбросить ветвь эксперта и оставить остаточный путь, либо выбрать другого
+эксперта, либо использовать динамическую маршрутизацию. Большая ёмкость снижает
+число отброшенных назначений, но увеличивает заполнение пустыми значениями,
+память и обмен данными. MoE без отбрасывания токенов всё равно страдает от
+дисбаланса: ядра для групп разного размера и самый загруженный процесс влияют
+на задержку всего слоя.
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-37-40-audit/megablocks-expert-matmuls.png]]
 
@@ -142,8 +146,8 @@ ragged kernels и самый загруженный rank всё равно вл�
 
 ## Expert parallelism: два all-to-all
 
-Экспертов раскладывают по ranks. После top-k токены находятся на data-parallel
-ranks, а нужные weights — на expert ranks:
+Экспертов распределяют по процессам. После top-k представления токенов находятся
+у процессов параллелизма данных, а нужные веса — у процессов параллелизма экспертов:
 
 1. Router вычисляет назначения локальных токенов и группирует строки по
    `destination rank, expert id`.
@@ -156,9 +160,10 @@ ranks, а нужные weights — на expert ranks:
    ranks. Там строки восстанавливают в исходном порядке и складывают с весами
    router $\alpha_{t,i}$.
 
-Таким образом, пересылается не готовый ответ слоя, а token representation до
-эксперта и результат после него. Если на rank пришло существенно больше строк,
-чем на остальные, весь collective ждёт этот rank: равномерное среднее число
+Таким образом, пересылается не готовый ответ слоя, а представление токена до
+эксперта и результат после него. Если на один процесс пришло существенно больше
+строк, чем на остальные, вся коллективная операция ждёт этот процесс:
+равномерное среднее число
 назначений ещё не гарантирует короткий step time.
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-37-40-audit/switch-parallelism.png]]
@@ -172,43 +177,46 @@ Noam Shazeer, [Switch Transformers](https://arxiv.org/abs/2101.03961), повт�
 публикация в [Hugging Face MoE Explained](https://huggingface.co/blog/moe),
 [прямой файл](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/moe/10_parallelism.png).*
 
-Top-2 может переслать token state дважды. Communication на слой приблизительно
+Top-2 может переслать состояние токена дважды. Объём обмена на слой приблизительно
 растёт с $Mk d$ элементов **в каждом направлении**; фактический объём также
 зависит от dtype, padding и того, остаётся ли часть назначений локальной.
 Expert parallelism комбинируют с tensor, pipeline и data parallelism; группы
 collective нельзя выбирать независимо.
-Хороший layout держит communication внутри быстрых NVLink domains, а replication
-популярных experts иногда выгоднее строгого sharding.
+Удачное размещение удерживает обмен внутри быстрых доменов NVLink, а репликация
+популярных экспертов иногда выгоднее строгого разделения.
 
 ## Стабильность обучения
 
-Практический checklist:
+Практический контрольный список:
 
-- считать router в повышенной точности и мониторить max logits/z-loss;
-- логировать долю assignments, probability mass, entropy и overflow **по слоям**;
+- считать маршрутизатор в повышенной точности и отслеживать максимальный логит и z-loss;
+- записывать долю назначений, массу вероятности, энтропию и переполнение **по слоям**;
 - проверять баланс по глобальному batch, а не одному microbatch;
-- давать каждому expert достаточно tokens для эффективного GEMM;
-- аккуратно инициализировать router, использовать jitter/noise там, где это
+- давать каждому эксперту достаточно токенов для эффективного GEMM;
+- аккуратно инициализировать маршрутизатор, использовать случайное возмущение там, где это
   подтверждено экспериментом;
-- различать expert collapse и semantic specialization;
-- отслеживать worst-rank load и all-to-all time вместе с LM loss.
+- различать коллапс экспертов и их содержательную специализацию;
+- отслеживать максимальную нагрузку процесса и время all-to-all вместе с основной функцией потерь.
 
-Shared experts DeepSeekMoE выполняются для каждого токена и учат общие знания;
-мелкозернистые routed experts дают больше комбинаций при близком active budget.
-Это уменьшает дублирование, но shared branch снова делает часть compute dense.
+Общие эксперты DeepSeekMoE выполняются для каждого токена и усваивают общие
+закономерности; мелкозернистые маршрутизируемые эксперты дают больше комбинаций
+при близком числе активных параметров. Это уменьшает дублирование, но общая
+ветвь снова делает часть вычислений плотной.
 
 ## Serving: FLOPs экономятся, latency — не автоматически
 
-Prefill даёт много token rows и хорошо загружает grouped GEMM. Decode приносит по
-одному новому токену на sequence: experts получают маленькие и неравномерные
-группы, kernel launch и network latency становятся заметны. Continuous batching
-улучшает заполнение, но routes заранее неизвестны.
+Предзаполнение даёт много строк токенов и хорошо загружает сгруппированные GEMM.
+При декодировании каждая последовательность приносит по одному новому токену:
+эксперты получают маленькие и неравномерные группы, поэтому становятся заметны
+затраты на запуск ядер и задержка сети. Непрерывное пакетирование улучшает
+заполнение, но маршруты заранее неизвестны.
 
-Weights всех experts должны находиться в GPU/CPU memory или подгружаться. Offload
-редких experts может уменьшить VRAM, но tail latency взрывается при cache miss.
-Quantization снижает память, однако router и collective остаются. Для
-single-device low-latency dense model часто проще; MoE особенно силён для
-throughput на крупном кластере.
+Веса всех экспертов должны находиться в памяти GPU или CPU либо подгружаться по
+требованию. Выгрузка редких экспертов уменьшает VRAM, но промах в кэше резко
+увеличивает хвостовую задержку. Квантование снижает расход памяти, однако
+маршрутизация и коллективные операции остаются. Для малой задержки на одном
+устройстве плотная модель часто проще; преимущество MoE заметнее при высокой
+пропускной способности на крупном кластере.
 
 | Метрика | Что обязательно измерять |
 |---|---|
@@ -229,18 +237,7 @@ throughput на крупном кластере.
 - объяснить router collapse, z-loss и loss-free bias balancing;
 - сравнить training prefill-like throughput с decode serving.
 
-## Сопоставление учебных объяснений и источники
-
-| Подраздел | Выбранная основа объяснения | Почему она сильнее сравненных альтернатив | Готовый визуал |
-|---|---|---|---|
-| router/top-k | [Hugging Face MoE Explained](https://huggingface.co/blog/moe) | пошагово выводит noisy top-k; Switch paper сразу переходит к top-1 system design | HF MoE-layer и routing figures выше |
-| total/active budget | [Mixtral](https://arxiv.org/abs/2401.04088) | даёт проверяемый 8×7B case; общие FSDL/Chip Huyen материалы не раскладывают shared weights | готовая HF MoE-layer figure |
-| load balance | [Switch Transformer](https://arxiv.org/abs/2101.03961) | определяет $f_i$, $P_i$ и auxiliary loss; visual guide даёт интуицию без полного вывода | формула из Switch, HF routing visual |
-| z-loss/stability | [ST-MoE](https://arxiv.org/abs/2202.08906) | связывает magnitude logits, precision и stability экспериментально; HF пересказывает результат | paper formula и monitoring checklist |
-| capacity/overflow | [GShard](https://arxiv.org/abs/2006.16668) + [HF MoE Explained](https://huggingface.co/blog/moe) | GShard задаёт статические buffers, HF яснее объясняет trade-off capacity factor | численный расчёт 4096 tokens |
-| expert parallelism | [GShard](https://arxiv.org/abs/2006.16668) + [Switch](https://arxiv.org/abs/2101.03961) | GShard описывает dispatch/collectives как sharding problem; Switch наглядно сопоставляет раскладку weights и data; CS336 даёт общий distributed baseline | оригинальная Figure Switch выше |
-| loss-free balancing | [DeepSeek-V3](https://arxiv.org/abs/2412.19437) | первично различает selection bias и mixing weights; блоги часто ошибочно говорят «без losses» | алгоритм bias update адаптирован словами |
-| serving | [HF MoE Explained](https://huggingface.co/blog/moe) + [MegaBlocks](https://arxiv.org/abs/2211.15841) | соединяет VRAM/offload с dropless block-sparse kernels; FSDL даёт общий serving framework | оригинальная Figure MegaBlocks + таблица метрик |
+## Источники
 
 - [Stanford CS336](https://cs336.stanford.edu/) — conditional computation и
   distributed cost; [CS25](https://web.stanford.edu/class/cs25/) — доклады о
