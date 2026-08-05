@@ -79,6 +79,71 @@ describe('buildPublication', () => {
     expect(publicationHref('textbook/index')).toBe(`${publicationBase}/textbook/`);
     expect(publicationHref('textbook/chapter')).toBe(`${publicationBase}/textbook/chapter/`);
   });
+  it('keeps compatibility redirects out of the search index', async () => {
+    const options = fixture('Compatibility page.');
+    const source = readFileSync(options.sourcePath, 'utf8')
+      .replace('status: stable', 'status: redirect');
+    write(options.sourcePath, source);
+
+    await buildPublication(options);
+
+    const generated = matter(readFileSync(
+      join(options.outputDir, 'nested', 'page-a.md'),
+      'utf8'
+    ));
+    expect(generated.data.pagefind).toBe(false);
+  });
+  it('rejects incomplete source fragment attribution metadata', async () => {
+    const options = fixture('Original excerpt.');
+    const source = readFileSync(options.sourcePath, 'utf8').replace(
+      'last_updated: 2026-07-17',
+      [
+        'last_updated: 2026-07-17',
+        'source_fragment:',
+        '  author: Course Author',
+        '  course: Systems Course',
+        '  source_url: https://github.com/example/course/blob/0123456789abcdef0123456789abcdef01234567/lecture.md',
+        '  language: en',
+        '  transformation: original excerpt'
+      ].join('\n')
+    );
+    write(options.sourcePath, source);
+
+    await expect(buildPublication(options)).rejects.toThrow(
+      'source_fragment.license must be a non-empty string'
+    );
+  });
+
+  it('renders complete source fragment attribution without changing excerpt language', async () => {
+    const options = fixture('Original excerpt stays in English.');
+    const source = readFileSync(options.sourcePath, 'utf8').replace(
+      'last_updated: 2026-07-17',
+      [
+        'last_updated: 2026-07-17',
+        'source_fragment:',
+        '  author: Course Author',
+        '  course: Systems Course',
+        '  source_url: https://github.com/example/course/blob/0123456789abcdef0123456789abcdef01234567/lecture.md',
+        '  license: CC BY 4.0',
+        '  language: en',
+        '  transformation: original excerpt'
+      ].join('\n')
+    );
+    write(options.sourcePath, source);
+
+    await buildPublication(options);
+
+    const generated = matter(readFileSync(join(options.outputDir, 'nested', 'page-a.md'), 'utf8'));
+    expect(generated.content).toContain('<aside class="source-attribution"');
+    expect(generated.content).toContain('Original course material');
+    expect(generated.content).toContain('<strong>Systems Course</strong>');
+    expect(generated.content).toContain('Course Author');
+    expect(generated.content).toContain('Language: en');
+    expect(generated.content).toContain('License: CC BY 4.0');
+    expect(generated.content).toContain('Modification: original excerpt');
+    expect(generated.content).toContain('href="https://github.com/example/course/blob/0123456789abcdef0123456789abcdef01234567/lecture.md"');
+    expect(generated.content).toContain('Original excerpt stays in English.');
+  });
   it('generates nested pages, converted Markdown, copied assets, and a warning report without mutating sources', async () => {
     const options = fixture();
     const before = readFileSync(options.sourcePath);

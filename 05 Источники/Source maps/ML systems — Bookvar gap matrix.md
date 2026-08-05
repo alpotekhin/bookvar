@@ -30,6 +30,7 @@ last_updated: 2026-07-24
 | KV cache, scheduling, and mini-engine | chapters 55–55c; practice 14 | H-V2-10, E-08-L, E-08-S, E-08-H | integrated |
 | Kernels and compilation | chapter 56; practice 13 | H-V2-09, E-06-S, E-06-A | integrated |
 | Quantization and KV compression | chapters 57–57a; practice 15 | H-V1-10, H-SIM-06, E-09-L, E-09-S | integrated |
+| General model compression | chapter 57b; TinyTorch 16 | H-V1-10, H-L1-10, H-SL1-10 | integrated |
 | Speculative decoding | chapter 58; practice 16 | E-09-L, E-09-H | integrated |
 | Queueing, SLO, and capacity | chapters 58b–58c | H-V1-13, H-V2-10, H-SIM-10, E-08-S | integrated |
 | Workflow, deployment, and MLOps | deployment chapters 01–03; practice 17 | H-V1-03, H-V1-14, H-V2-11, H-V2-12, E-07 | integrated |

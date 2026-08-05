@@ -3,8 +3,8 @@ title: Эффективный attention
 type: research-line
 status: active
 started: 2019
-last_updated: 2026-07-20
-last_verified: 2026-07-20
+last_updated: 2026-08-06
+last_verified: 2026-08-06
 key_concepts: [FlashAttention, MQA, GQA, MLA, KV-Cache]
 key_models: [LLaMA 2, Mistral, DeepSeek-V2, DeepSeek-V3]
 primary_sources:
@@ -13,6 +13,21 @@ primary_sources:
 ---
 
 # Эффективный attention
+
+## Три источника стоимости
+
+На обучении и prefill строятся большие матрицы по всей последовательности;
+стоимость растёт квадратично, а activations занимают память. На decode новый
+токен имеет один query, но читает K/V всего префикса; операция часто ограничена
+bandwidth, а KV-cache растёт с batch и контекстом. Поэтому можно не менять
+математику, сжимать KV или менять набор связей — это разные исследования.
+
+[Longformer (2020)](https://arxiv.org/abs/2004.05150) разреживает матрицу связей
+и тем самым меняет функцию. [Multi-Query Attention
+(2019)](https://arxiv.org/abs/1911.02150) сохраняет отдельные query-heads, но
+делит одну пару K/V, уменьшая cache и чтение на decode. [Grouped-Query Attention
+(2023)](https://arxiv.org/abs/2305.13245) предлагает промежуточное число групп и
+способ конвертировать MHA-checkpoint коротким uptraining.
 
 ## Тезис
 
@@ -42,6 +57,27 @@ softmax вычисляются в SRAM, а накопленный выход п�
 - KV-компрессия меняет представление ключей и значений;
 - sparse/linear pattern меняет множество доступных взаимодействий.
 
+## FlashAttention: exact attention как I/O-задача
+
+[FlashAttention (2022)](https://arxiv.org/abs/2205.14135) исходит из иерархии
+памяти GPU. Наивная реализация материализует scores в HBM и несколько раз их
+читает. Tiling переносит блоки Q, K и V в SRAM, а online softmax накапливает
+нормированный результат без полной матрицы. Экономия получена из меньшего
+движения данных, а не из аппроксимации.
+
+[FlashAttention-2 (2023)](https://arxiv.org/abs/2307.08691) сократил
+не-матричные операции и лучше разделил работу между thread blocks и warps.
+Выигрыш зависит от causal mask, head dimension, длины и GPU; асимптотика
+остаётся квадратичной, хотя предел памяти отодвигается.
+
+## Латентное сжатие KV
+
+[DeepSeek-V2 (2024)](https://arxiv.org/abs/2405.04434) предложил MLA: вместо
+отдельных K/V heads кешируется низкоразмерное латентное представление, из
+которого компоненты восстанавливаются проекциями. Это не просто новая
+группировка heads. Преимущество в bytes/token нужно проверять вместе с ценой
+проекций, RoPE-компонентом и поддержкой конкретного inference engine.
+
 ## Сравнение
 
 | Подход | Экономит | Меняет модель | Типичная цена |
@@ -57,6 +93,17 @@ softmax вычисляются в SRAM, а накопленный выход п�
 Training throughput, prefill latency, decode latency и peak memory — разные
 метрики. FlashAttention особенно важен для больших матриц prefill/training;
 KV-cache compression — для memory-bound autoregressive decoding.
+
+## Состояние доказательств
+
+FlashAttention — наиболее строго установленный результат: алгоритм exact, а
+ускорение воспроизводится при подходящих shapes. Для MQA/GQA хорошо подтверждено
+уменьшение KV-cache; влияние на качество зависит от групп и обучения. MLA
+показал сильный end-to-end рецепт в DeepSeek, но контролируемых сравнений при
+одинаковых данных меньше. Sparse и linear attention имеют лучшую асимптотику,
+однако optimized dense kernels нередко выигрывают на практических длинах.
+Поэтому FLOPs нужно дополнять measured latency, memory и quality на одинаковом
+hardware и workload.
 
 ## Открытые вопросы
 

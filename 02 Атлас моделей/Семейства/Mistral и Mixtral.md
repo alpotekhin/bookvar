@@ -5,7 +5,7 @@ organization: Mistral AI
 first_release: 2023-09
 latest_verified_release: Mistral Medium 3.5 and current 2026 specialist releases
 latest_open_generalist: Mistral Large 3
-last_verified: 2026-07-20
+last_verified: 2026-08-06
 architecture_base: decoder-only Transformer; dense and sparse MoE
 modalities: [text, image, audio]
 status: active
@@ -33,6 +33,10 @@ Mistral 7B в 2023 году показал, насколько далеко мо
 ## Неизменное ядро и механизмы
 
 Dense и MoE-линии остаются causal decoders с RoPE/RMSNorm/SwiGLU-подобным блоком. GQA уменьшает KV-cache. Sliding window ограничивает внимание слоя последними `W` токенами, но через глубину информация распространяется дальше; поздние Mistral не обязаны сохранять SWA, это проверяется по config. В Mixtral router выбирает два experts только для FFN: attention не размножается по экспертам. Active parameters описывают FLOPs, а не размер checkpoint.
+
+![[00 Учебник/Assets/Figures/curated/mixtral-of-experts/smoe-layer.png]]
+
+*Рисунок: Albert Q. Jiang et al., Figure 1 из [Mixtral of Experts](https://arxiv.org/pdf/2401.04088). Router вычисляет веса маршрутизации и отправляет каждый токен двум выбранным FFN-экспертам; их выходы складываются с этими весами. Полупрозрачные эксперты присутствуют в checkpoint, но для данного токена не вычисляются. Рисунок относится только к экспертному FFN: attention в Mixtral остаётся общим для всех маршрутов. Локальная копия перенесена из официального paper extraction без визуальных изменений.*
 
 ## Tokenizer, данные и post-training
 

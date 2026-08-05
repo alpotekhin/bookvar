@@ -34,4 +34,16 @@ describe('publication workflow policy', () => {
       }
     }
   });
+
+  it('keeps rich article media and attribution inside the reading column', () => {
+    const css = readFileSync(resolve(root, 'site/src/styles/custom.css'), 'utf8');
+
+    expect(css).toMatch(/\.sl-markdown-content img\s*\{[^}]*max-width:\s*100%[^}]*height:\s*auto/s);
+    expect(css).toMatch(/\.sl-markdown-content \.katex-display[\s\S]*?overflow-x:\s*auto/);
+    expect(css).toMatch(/\.sl-markdown-content table[\s\S]*?overflow-x:\s*auto/);
+    expect(css).toMatch(/\.sl-markdown-content pre[\s\S]*?overflow-x:\s*auto/);
+    expect(css).toMatch(/\.sl-markdown-content figure\s*\{[^}]*max-width:\s*100%/s);
+    expect(css).toMatch(/\.sl-markdown-content figcaption\s*\{[^}]*overflow-wrap:\s*anywhere/s);
+    expect(css).toMatch(/\.source-attribution\s*\{[^}]*max-width:\s*100%[^}]*overflow-wrap:\s*anywhere/s);
+  });
 });

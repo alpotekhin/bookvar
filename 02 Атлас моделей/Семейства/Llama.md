@@ -4,7 +4,7 @@ type: model-family
 organization: Meta
 first_release: 2023-02
 latest_verified_release: Llama 4 Scout and Maverick
-last_verified: 2026-07-20
+last_verified: 2026-08-06
 architecture_base: decoder-only Transformer
 modalities: [text, image]
 status: active

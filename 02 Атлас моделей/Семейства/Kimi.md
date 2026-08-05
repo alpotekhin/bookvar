@@ -4,7 +4,7 @@ type: model-family
 organization: Moonshot AI
 first_release: 2023
 latest_verified_release: Kimi K2.5
-last_verified: 2026-07-20
+last_verified: 2026-08-06
 architecture_base: decoder-only Transformer; later MLA-MoE and hybrid linear attention
 modalities: [text, image, video]
 status: active

@@ -3,7 +3,7 @@ title: MHA, MQA и GQA
 type: textbook-chapter
 status: canonical
 last_updated: 2026-07-20
-previous: "[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура]]"
+previous: "[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/04 RoPE]]"
 next: "[[02 Areas/ML & DL/00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache]]"
 primary_sources:
   - https://arxiv.org/abs/1911.02150

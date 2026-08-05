@@ -4,7 +4,7 @@ type: model-family
 organization: DeepSeek AI
 first_release: 2023
 latest_verified_release: DeepSeek-V3.2
-last_verified: 2026-07-20
+last_verified: 2026-08-06
 architecture_base: decoder-only Transformer and sparse MoE
 modalities: [text]
 status: active
@@ -44,6 +44,10 @@ DeepSeek важен не одним benchmark-релизом, а последо�
 ## Post-training, reasoning и tools
 
 R1-Zero получил наблюдаемое long-chain reasoning через group-relative policy optimization на проверяемых задачах без предварительного SFT. Полный R1 добавил cold-start данные, reasoning-oriented RL, rejection sampling/SFT для общих задач и финальную RL стадию. Distilled Qwen/Llama checkpoints — не маленькие копии архитектуры V3: это dense student-модели, обученные на данных R1. Agentic/tool benchmarks V3.2 относятся к post-training и scaffold; они не следуют из sparse attention сами по себе.
+
+![[00 Учебник/Assets/Figures/deepseek-r1-figure1-hq.png]]
+
+*Рисунок: DeepSeek-AI, Figure 1 из [DeepSeek-R1](https://arxiv.org/pdf/2501.12948). Во время RL у R1-Zero одновременно растут точность на AIME и средняя длина ответа. Графики не доказывают, что длиннее всегда значит лучше: они показывают динамику конкретного эксперимента, в котором policy постепенно расходует больше вычислений на проверяемую задачу. Поэтому reasoning-релиз следует читать как изменение post-training, а не как новый тип decoder-блока.*
 
 ## Inference и serving
 

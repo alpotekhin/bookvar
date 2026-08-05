@@ -4,7 +4,7 @@ type: textbook-chapter
 status: canonical
 last_updated: 2026-07-20
 previous: "[[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V]]"
-next: "[[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/03 Полный Transformer]]"
+next: "[[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/04 Позиционная информация]]"
 primary_sources:
   - https://arxiv.org/abs/1706.03762
   - https://lena-voita.github.io/nlp_course/seq2seq_and_attention.html

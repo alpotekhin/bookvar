@@ -4,7 +4,7 @@ type: model-family
 organization: NVIDIA
 first_release: 2023
 latest_verified_release: Nemotron 3 Ultra and Nano Omni
-last_verified: 2026-07-20
+last_verified: 2026-08-06
 architecture_base: dense derivatives then hybrid Mamba-Transformer LatentMoE
 modalities: [text, image, video, audio]
 status: active
@@ -36,6 +36,10 @@ Mamba-2 несёт дешёвое состояние на каждом шаге,
 ## Данные и post-training
 
 Nemotron 3 раскрывает необычно много компонентов: synthetic pretraining corpus почти 10T токенов для Nano, 25T для Super, weights, recipes и NeMo software. Super предобучался с NVFP4 на части оборудования; это формат вычислений обучения, а не только постфактум quantization. Multi-environment RL через NeMo Gym учит reasoning, tool use и регулируемый thinking budget. Ultra применяет multi-teacher on-policy distillation.
+
+![[00 Учебник/Assets/Figures/curated/topics-53-59-source-first/nemotron-generate-rank-filter.png]]
+
+*Рисунок: NVIDIA, [Leverage Our Latest Open Models for Synthetic Data Generation with NVIDIA Nemotron-4-340B](https://developer.nvidia.com/blog/leverage-our-latest-open-models-for-synthetic-data-generation-with-nvidia-nemotron-4-340b/). Instruct-модель сначала генерирует несколько ответов, Reward-модель присваивает им оценки, после чего фильтр собирает отобранный синтетический набор. Это схема линии Nemotron-4, а не pre-training Nemotron 3; здесь она нужна, чтобы отделить происхождение обучающих примеров от архитектуры Mamba–Transformer. Локальная копия перенесена без визуальных изменений.*
 
 Ранние Llama Nemotron переиспользуют pretrained Llama: их улучшение нельзя приписывать новому pre-training. NAS меняет глубину/ширину выбранного backbone, затем distillation и RL возвращают качество. Это другой путь, чем обучение Nemotron 3 с нуля.
 

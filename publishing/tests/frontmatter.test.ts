@@ -30,6 +30,7 @@ describe('readPage', () => {
       type: 'textbook-chapter',
       status: 'stable',
       lastUpdated: '2026-07-17',
+      sourceFragments: [],
       body: '# Внимание\n\nТекст главы.'
     });
     expect(raw).toContain('last_updated: 2026-07-17');

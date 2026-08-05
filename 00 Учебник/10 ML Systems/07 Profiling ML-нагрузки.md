@@ -165,6 +165,109 @@ CC BY-NC-SA 4.0. Сравните расхождение кривых при у�
 если полезная работа сокращается быстрее стоимости dispatch, bottleneck лежит
 выше уровня GPU-kernel.*
 
+## От Python-функции до kernel: где находится framework
+
+Вычислительный граф из главы об обратном распространении описывает зависимости
+между операциями. Для исполнения этого описания framework решает ещё три
+задачи: когда запускать операцию, какие промежуточные значения сохранить для
+градиента и как отобразить высокоуровневую операцию на конкретное устройство.
+Поэтому PyTorch, JAX или TensorFlow — не просто библиотеки тензоров. Между
+записью `y = layer(x)` и инструкциями GPU находится стек преобразований.
+
+```text
+Python/module API
+    ↓ operator dispatch, shapes, dtype, device
+eager trace or captured graph
+    ↓ automatic differentiation / backward graph
+graph transformations and decomposition
+    ↓ fusion, layout, memory planning, scheduling
+backend IR and generated kernels
+    ↓ runtime launch, streams, allocator, collectives
+CPU / GPU / accelerator
+```
+
+Eager execution немедленно передаёт каждый оператор runtime. Оно удобно для
+отладки и динамического control flow, но платит Python и dispatch overhead на
+каждом шаге. Graph execution сначала фиксирует зависимости, после чего может
+увидеть несколько операторов сразу. Цена — compilation latency, guards на
+формы и типы, возможные graph breaks и необходимость перекомпиляции при новом
+варианте входа.
+
+### Capture не равен optimization
+
+Получить graph — ещё не значит ускорить программу. Compiler должен доказать,
+что преобразование сохраняет семантику, выбрать decomposition сложного
+оператора, согласовать layout, распланировать промежуточную память и создать
+kernel для целевого backend. Динамическая форма, изменение Python state,
+data-dependent branch или неподдержанный custom operator способны разорвать
+граф и вернуть часть исполнения в eager.
+
+Для `torch.compile` полезно отдельно измерять:
+
+- cold compile time;
+- число уникальных graphs и recompilations;
+- долю шага внутри compiled regions;
+- steady-state latency при тех же shapes;
+- корректность outputs и gradients;
+- peak memory, потому что fusion меняет lifetime тензоров.
+
+Компиляция оправдана, если deployment выполнит достаточно шагов, чтобы
+амортизировать cold cost, а captured workload остаётся стабильным.
+
+## Fusion как устранение движения данных
+
+Пусть две поэлементные операции читают и записывают activation размера $N$.
+При раздельном исполнении промежуточный тензор записывается в HBM и снова
+читается. Fused kernel держит его в регистрах или shared memory и делает один
+launch. Арифметика почти не меняется; исчезают лишние bytes и dispatch.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/operator-fusion.svg]]
+
+*Слева отдельные kernels материализуют промежуточные результаты в глобальной
+памяти; справа fused kernel сохраняет их ближе к вычислительным блокам.
+Источник: Harvard CS249r, Vol. II, [Performance Engineering — Operator
+Fusion](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/operator-fusion.svg),
+CC BY-NC-SA 4.0, исходный SVG не изменён.*
+
+Fusion не всегда улучшает результат. Слишком крупный kernel может увеличить
+register pressure, снизить occupancy, усложнить scheduling или повторно
+вычислять дорогие значения. Поэтому решение принимается по timeline и kernel
+counters, а не по числу объединённых operators.
+
+## Interoperability: graph как контракт с границами
+
+ONNX и другие переносимые IR помогают передать структуру модели между
+framework и inference runtime. Они фиксируют граф операторов, shapes/types и
+веса, но не переносят автоматически Python preprocessing, tokenizer, sampling,
+custom kernels и всю семантику динамической модели. Экспорт считается
+проверенным после сравнения outputs на representative inputs, включая крайние
+длины и динамические shapes.
+
+Полезно различать три артефакта:
+
+1. checkpoint хранит параметры для конкретной реализации;
+2. exported graph описывает вычисление в заданном operator set;
+3. compiled engine содержит план под конкретные hardware, shapes и precision.
+
+Смена артефакта меняет область воспроизводимости. Engine нельзя считать
+универсальным продолжением checkpoint, если его tactic selection и calibration
+зависят от GPU или профиля форм.
+
+## Диагноз по уровню стека
+
+| Наблюдение | Вероятный уровень | Следующее доказательство |
+|---|---|---|
+| длинные CPU gaps между короткими kernels | Python/dispatch | CPU stack + CUDA API timeline |
+| graph breaks и частые recompilations | capture/guards | compiler logs и набор входных shapes |
+| много HBM traffic между elementwise ops | graph/kernel | fusion candidate + memory trace |
+| один большой медленный GEMM | kernel/hardware | Nsight Compute roofline и Tensor Core use |
+| правильный eager, неверный engine | export/backend | layer-wise output comparison |
+
+Эта таблица связывает framework с profiling: оптимизация должна происходить на
+том уровне, на котором найдено ограничение. Переписывать CUDA kernel бессмысленно,
+если GPU ждёт Python; включать compiler бессмысленно, если один GEMM уже занимает
+весь critical path и работает у аппаратного потолка.
+
 ## Практика и первоисточники
 
 - [[05 Источники/Courses/Harvard ML Systems/tinytorch/14_profiling|TinyTorch 14 — Profiling]]: исполняемый `Profiler` для подсчёта параметров и FLOP, измерения памяти и распределения latency.

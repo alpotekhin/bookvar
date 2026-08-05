@@ -4,7 +4,7 @@ type: model-family
 organization: OpenAI
 first_release: 2018
 latest_verified_release: GPT-5.6 Sol, Terra and Luna
-last_verified: 2026-07-20
+last_verified: 2026-08-06
 architecture_base: decoder-only Transformer
 modalities: [text, image, audio]
 status: active-partially-closed

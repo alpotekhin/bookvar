@@ -4,7 +4,7 @@ type: model-family
 organization: state-spaces research team
 first_release: 2023
 latest_verified_release: Mamba-3
-last_verified: 2026-07-20
+last_verified: 2026-08-06
 architecture_base: selective state-space model
 modalities: [sequence]
 status: active-research

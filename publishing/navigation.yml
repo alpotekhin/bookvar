@@ -218,6 +218,8 @@ sections:
         route: textbook/inference/quantization
       - source: 00 Учебник/14 Inference и оптимизация/57a KV-cache compression и offload.md
         route: textbook/inference/kv-cache-compression-offload
+      - source: 00 Учебник/14 Inference и оптимизация/57b Сжатие моделей — pruning, distillation и low-rank.md
+        route: textbook/inference/model-compression-pruning-distillation-low-rank
       - source: 00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md
         source_en: en/00 Textbook/14 Inference and optimization/58 Speculative decoding.md
         route: textbook/inference/speculative-decoding
@@ -517,6 +519,8 @@ sections:
             route: textbook/inference/quantization
           - label: 57.1 KV-cache compression и offload
             route: textbook/inference/kv-cache-compression-offload
+          - label: 57.2 Pruning, distillation и low-rank compression
+            route: textbook/inference/model-compression-pruning-distillation-low-rank
           - label: 58. Спекулятивное декодирование
             label_en: 58. Speculative decoding
             route: textbook/inference/speculative-decoding
@@ -886,6 +890,8 @@ sections:
         route: sources/courses/lf-recommenders/movielens-benchmark
       - source: 05 Источники/Courses/Harvard ML Systems.md
         route: sources/harvard-ml-systems
+      - source: 05 Источники/Courses/Harvard ML Systems/Labs and slides.md
+        route: sources/courses/harvard-ml-systems/labs-and-slides
       - source: 05 Источники/Courses/Efficient DL Systems.md
         route: sources/efficient-dl-systems
       - source: 05 Источники/Courses/Stanford CS230 Cheatsheets.md
@@ -2178,6 +2184,8 @@ sections:
         route: practice/05-izmerit-kv-cache-i-quantization
       - source: 06 Практика/06 Измерить CUDA без самообмана.md
         route: practice/06-izmerit-cuda-bez-samoobmana
+      - source: 06 Практика/06a Проверить mixed precision и loss scaling.md
+        route: practice/06a-proverit-mixed-precision-loss-scaling
       - source: 06 Практика/07 Построить roofline и найти bottleneck.md
         route: practice/07-postroit-roofline-i-nayti-bottleneck
       - source: 06 Практика/08 Ускорить data pipeline.md
@@ -2200,3 +2208,5 @@ sections:
         route: practice/16-proverit-speculative-decoding-i-rollback-kv
       - source: 06 Практика/17 Развернуть наблюдаемый ML сервис.md
         route: practice/17-razvernut-nablyudaemyy-ml-servis
+      - source: 06 Практика/18 Harvard ML Systems — интерактивные design labs.md
+        route: practice/18-harvard-ml-systems-interactive-design-labs

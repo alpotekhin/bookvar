@@ -4,7 +4,7 @@ type: model-family
 organization: Shanghai AI Laboratory
 first_release: 2023
 latest_verified_release: InternLM3-8B-Instruct
-last_verified: 2026-07-20
+last_verified: 2026-08-06
 architecture_base: decoder-only Transformer
 modalities: [text]
 status: active-ecosystem

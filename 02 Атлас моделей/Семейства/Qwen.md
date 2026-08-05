@@ -4,7 +4,7 @@ type: model-family
 organization: Alibaba Qwen Team
 first_release: 2023-08
 latest_verified_release: Qwen3.6
-last_verified: 2026-07-20
+last_verified: 2026-08-06
 architecture_base: decoder-only Transformer; later sparse MoE and hybrid linear attention
 modalities: [text, image, audio]
 status: active
@@ -48,6 +48,10 @@ Qwen с первого поколения использует большой by
 ## Pre-training, post-training и tools
 
 Qwen2.5 и Qwen3 связывают рост в code/math не с новым attention, а с расширением и очисткой corpora, synthetic data и distillation. Qwen3 описывает две pre-training стадии общего знания и reasoning-related данных, затем long-context extension. Post-training сочетает long-CoT cold start, reasoning RL, mode fusion и general RL. Native tool use зависит от instruct checkpoint, шаблона Hermes/Qwen и корректного parser в serving engine.
+
+![[00 Учебник/Assets/Figures/qwen25-figure1-hq.png]]
+
+*Рисунок: Qwen Team, Figure 1 из [Qwen2.5 Technical Report](https://arxiv.org/pdf/2412.15115). Сопоставление Qwen1.5-72B, Qwen2-72B и Qwen2.5-72B связывает рост объёма предобучения с результатами на Math, MBPP, BBH и MMLU. Это не контролируемая абляция одного фактора, но хороший ориентир для чтения семейства: крупнейший сдвиг между этими релизами произошёл в данных и режиме обучения, а не в замене Transformer-блока. Локальная копия — crop исходного рисунка без изменения содержания.*
 
 ## Inference и serving
 

@@ -4,7 +4,7 @@ type: model-family
 organization: Google DeepMind
 first_release: 2024-02
 latest_verified_release: Gemma 3 and specialized Gemma 3 variants
-last_verified: 2026-07-20
+last_verified: 2026-08-06
 architecture_base: compact decoder-only Transformer
 modalities: [text, image]
 status: active

@@ -4,7 +4,7 @@ type: model-family
 organization: Databricks Mosaic Research
 first_release: 2024
 latest_verified_release: DBRX Base and Instruct
-last_verified: 2026-07-20
+last_verified: 2026-08-06
 architecture_base: sparse MoE decoder-only Transformer
 modalities: [text]
 status: stable-single-generation

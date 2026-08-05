@@ -19,6 +19,7 @@ last_updated: 2026-07-18
 | [[02 Areas/ML & DL/06 Практика/04 Проследить RLVR pipeline в Open-R1|Проследить RLVR в Open-R1]] | SFT, policy gradient | 2–3 часа | Карта данных, генерации, verifier и обновления policy |
 | [[02 Areas/ML & DL/06 Практика/05 Измерить KV-cache и quantization|Измерить KV-cache и квантование]] | Inference basics | 1–2 часа | Таблица памяти, скорости и ошибки квантования |
 | [[02 Areas/ML & DL/06 Практика/06 Измерить CUDA без самообмана|Измерить CUDA без самообмана]] | Python, PyTorch, CUDA | 1–2 часа | Воспроизводимый benchmark и profiler trace |
+| [[02 Areas/ML & DL/06 Практика/06a Проверить mixed precision и loss scaling|Проверить mixed precision и loss scaling]] | PyTorch, CUDA, численные форматы | 2–3 часа | Trace, memory/accuracy table и воспроизводимый underflow case |
 | [[02 Areas/ML & DL/06 Практика/07 Построить roofline и найти bottleneck|Построить roofline]] | FLOP, bytes, CUDA timing | 2–3 часа | Roofline целевого GPU и проверенный диагноз bottleneck |
 | [[02 Areas/ML & DL/06 Практика/08 Ускорить data pipeline|Ускорить data pipeline]] | DataLoader, tokenizer | 2–4 часа | Timeline и сравнение padding/bucketing/packing |
 | [[02 Areas/ML & DL/06 Практика/09 Реализовать ring all-reduce|Реализовать ring all-reduce]] | Distributed PyTorch | 3–5 часов | Collective, тесты и bandwidth curve |
@@ -30,9 +31,11 @@ last_updated: 2026-07-18
 | [[02 Areas/ML & DL/06 Практика/15 Реализовать W8A8 и SmoothQuant|W8A8 и SmoothQuant]] | Quantization basics | 3–5 часов | Калибровка, accuracy и kernel-level benchmark |
 | [[02 Areas/ML & DL/06 Практика/16 Проверить speculative decoding и rollback KV|Speculative decoding]] | Sampling, KV-cache | 4–6 часов | Корректный acceptance и rollback cache |
 | [[02 Areas/ML & DL/06 Практика/17 Развернуть наблюдаемый ML сервис|Наблюдаемый ML-сервис]] | HTTP, Docker, metrics | 4–8 часов | Контейнер, dashboard и load-test |
+| [[02 Areas/ML & DL/06 Практика/18 Harvard ML Systems — интерактивные design labs|Harvard ML Systems design labs]] | Вычислительные основы и системное мышление | 1–3 часа на лабораторию | Prediction, sweep, artifact и design ledger |
 
 Первая интерактивная лаборатория уже доступна на сайте. Работы 06–17 используют
 полностью импортированные оригинальные лекции, notebooks и homework EDLS: ссылки
 внутри каждой работы ведут не на краткий пересказ, а на исходный учебный
-материал. По мере развития сайта измерительные стенды можно переносить в
-интерактивные демо, не меняя постановку эксперимента.
+материал. Работа 18 связывает 34 оригинальные Harvard Marimo labs с каноническими
+главами и единым форматом design ledger. По мере развития сайта измерительные
+стенды можно переносить в интерактивные демо, не меняя постановку эксперимента.

@@ -81,6 +81,27 @@ function normalizeProtocolRelativeHtmlUrls(markdown: string): string {
   return markdown.replace(/\b(href|src)=(['"])\/\//gi, '$1=$2https://');
 }
 
+function escapeHtml(value: string): string {
+  return value
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;');
+}
+
+function renderSourceAttribution(page: Awaited<ReturnType<typeof readPage>>): string {
+  if (page.sourceFragments.length === 0) return '';
+  return page.sourceFragments.map((fragment) => [
+    '<aside class="source-attribution" aria-label="Source attribution">',
+    '  <p class="source-attribution__label">Original course material</p>',
+    `  <p><strong>${escapeHtml(fragment.course)}</strong> · ${escapeHtml(fragment.author)}</p>`,
+    `  <p>Language: ${fragment.language} · License: ${escapeHtml(fragment.license)} · Modification: ${fragment.transformation}</p>`,
+    `  <p><a href="${escapeHtml(fragment.sourceUrl)}">Open the pinned source</a></p>`,
+    '</aside>'
+  ].join('\n')).join('\n\n') + '\n\n';
+}
+
 const IMAGE_EXTENSION = /\.(?:png|jpe?g|webp|svg|gif)$/i;
 const EMBED = /!\[\[([^\]\n]+)\]\]/g;
 
@@ -425,7 +446,7 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
       : [];
     const unresolved = page.status === 'legacy' ? [] : converted.unresolved;
     const allowlisted = [...converted.allowlisted, ...legacyUnresolved];
-    const markdown = normalizeProtocolRelativeHtmlUrls(
+    const markdown = renderSourceAttribution(page) + normalizeProtocolRelativeHtmlUrls(
       removeLeadingSourceHeading(convertCallouts(converted.markdown))
     );
     const outputRoute = locale ? `${locale}/${entry.route}` : entry.route;
@@ -436,7 +457,9 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
       description: page.title,
       slug: outputRoute
     };
-    if (!searchableInPublication(entry.route)) metadata.pagefind = false;
+    if (!searchableInPublication(entry.route) || ['redirect', 'legacy'].includes(page.status)) {
+      metadata.pagefind = false;
+    }
     if (page.lastUpdated) metadata.lastUpdated = new Date(page.lastUpdated);
     await writeFile(target, matter.stringify(markdown, metadata), 'utf8');
 

@@ -4,7 +4,7 @@ type: model-family
 organization: AI21 Labs
 first_release: 2024
 latest_verified_release: Jamba2
-last_verified: 2026-07-20
+last_verified: 2026-08-06
 architecture_base: hybrid Transformer-Mamba MoE
 modalities: [text]
 status: active

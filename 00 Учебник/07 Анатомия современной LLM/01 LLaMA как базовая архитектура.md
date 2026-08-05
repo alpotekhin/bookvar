@@ -3,8 +3,8 @@ title: LLaMA как базовая архитектура
 type: textbook-chapter
 status: canonical
 last_updated: 2026-07-31
-previous: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна]]"
-next: "[[02 Areas/ML & DL/00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA]]"
+previous: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer]]"
+next: "[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/02 Современный decoder block]]"
 primary_sources:
   - https://arxiv.org/abs/2302.13971
   - https://arxiv.org/abs/1910.07467
@@ -550,7 +550,7 @@ $$
   — хороший предшествующий маршрут от GPT-2 block к современным деталям.
 - [Michael Brenndoerfer — LLaMA Components](https://mbrenndoerfer.com/writing/llama-components-rmsnorm-swiglu-rope)
   — интерактивный разбор RMSNorm, SwiGLU и RoPE.
-- [Harvard Edge ML Systems — Neural Network Architectures](https://mlsysbook.ai/vol1/nn_architectures/nn_architectures.html)
+- [Harvard ML Systems Book — Neural Network Architectures](https://mlsysbook.ai/vol1/nn_architectures/nn_architectures.html)
   — системное сравнение архитектур, вычислительной интенсивности и ограничений
   пропускной способности памяти.
 

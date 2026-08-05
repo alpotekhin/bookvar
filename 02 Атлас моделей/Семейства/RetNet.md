@@ -4,7 +4,7 @@ type: model-family
 organization: Microsoft Research
 first_release: 2023
 latest_verified_release: RetNet
-last_verified: 2026-07-20
+last_verified: 2026-08-06
 architecture_base: retention network
 modalities: [sequence]
 status: research

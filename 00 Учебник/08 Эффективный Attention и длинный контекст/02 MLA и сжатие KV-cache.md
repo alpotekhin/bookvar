@@ -4,7 +4,7 @@ type: textbook-chapter
 status: canonical
 last_updated: 2026-07-20
 previous: "[[02 Areas/ML & DL/00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA]]"
-next: "[[02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating]]"
+next: "[[02 Areas/ML & DL/00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание]]"
 primary_sources:
   - https://arxiv.org/abs/2405.04434
   - https://github.com/deepseek-ai/DeepSeek-V3/blob/main/inference/model.py

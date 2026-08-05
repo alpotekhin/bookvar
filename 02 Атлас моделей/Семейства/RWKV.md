@@ -4,7 +4,7 @@ type: model-family
 organization: RWKV community
 first_release: 2021
 latest_verified_release: RWKV-7 G1
-last_verified: 2026-07-20
+last_verified: 2026-08-06
 architecture_base: recurrent linear-attention language model
 modalities: [text]
 status: active-research

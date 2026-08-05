@@ -4,7 +4,7 @@ type: model-family
 organization: Zhipu AI, Z.ai and Tsinghua KEG
 first_release: 2021
 latest_verified_release: GLM-5.1
-last_verified: 2026-07-20
+last_verified: 2026-08-06
 architecture_base: autoregressive blank infilling; later causal MoE
 modalities: [text, image]
 status: active

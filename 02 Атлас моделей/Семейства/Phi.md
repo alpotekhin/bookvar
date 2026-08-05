@@ -4,7 +4,7 @@ type: model-family
 organization: Microsoft
 first_release: 2023-06
 latest_verified_release: Phi-4 family
-last_verified: 2026-07-20
+last_verified: 2026-08-06
 architecture_base: compact decoder-only Transformer
 modalities: [text, image, audio]
 status: active

@@ -384,7 +384,7 @@ $C$ дают слишком гладкую границу. Поэтому пар
 нескольких feature maps либо увеличить $D$ до устойчивого режима. Сравнивать
 разные $D$ нужно при повторно настроенной regularization linear head.
 
-## Исходные материалы и полные версии
+## Практика и первоисточники
 
 - MML, Chapter 12, *Classification with Support Vector Machines*,
   [страница книги и PDF](https://mml-book.com/), CC BY-NC-SA 4.0.

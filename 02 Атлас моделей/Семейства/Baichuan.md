@@ -4,7 +4,7 @@ type: model-family
 organization: Baichuan Intelligence
 first_release: 2023
 latest_verified_release: Baichuan-M3-235B
-last_verified: 2026-07-20
+last_verified: 2026-08-06
 architecture_base: decoder-only Transformer and medical models
 modalities: [text, image, audio]
 status: active-specialized

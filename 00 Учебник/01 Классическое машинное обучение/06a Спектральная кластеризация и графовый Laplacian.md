@@ -252,7 +252,7 @@ supervised model, preprocessing, affinity tuning и выбор $K$ должны 
 граф создан произвольным RBF по плохо подготовленным признакам, красивое
 разбиение остаётся гипотезой.
 
-## Исходные материалы и практика
+## Практика и первоисточники
 
 - [[05 Источники/Courses/HSE ML course/ml2-2026-spring/seminars/sem03-graph-clustering.pdf.md|HSE ML: полный семинар «Graph Clustering»]] —
   четырёхстраничный вывод Laplacian identity, RatioCut relaxation и алгоритма;

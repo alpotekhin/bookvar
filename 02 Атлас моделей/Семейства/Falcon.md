@@ -4,7 +4,7 @@ type: model-family
 organization: Technology Innovation Institute
 first_release: 2023
 latest_verified_release: Falcon-H1 Arabic and Falcon Perception
-last_verified: 2026-07-20
+last_verified: 2026-08-06
 architecture_base: decoder Transformer then parallel Mamba-attention hybrid
 modalities: [text, image]
 status: active

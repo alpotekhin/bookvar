@@ -321,7 +321,7 @@ extensions, вероятностная формулировка GMM полезн
 7. Если Gaussian assumptions явно нарушены, сравнить альтернативную density
    model вместо добавления всё новых компонент.
 
-## Исходные материалы и полные версии
+## Практика и первоисточники
 
 - MML, Chapter 11, *Density Estimation with Gaussian Mixture Models*,
   [страница книги и PDF](https://mml-book.com/), CC BY-NC-SA 4.0.

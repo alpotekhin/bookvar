@@ -76,6 +76,20 @@ describe('static handbook output', () => {
     expect(figure).not.toContain('<p>![');
   });
 
+  it('ships responsive rules for figures, formulas, tables, and attributed source blocks', async () => {
+    const assetsDir = join(distDir, '_astro');
+    const { readdir } = await import('node:fs/promises');
+    const styles = (await readdir(assetsDir)).filter((file) => file.endsWith('.css'));
+    const css = (await Promise.all(styles.map((file) => readFile(join(assetsDir, file), 'utf8')))).join('\n');
+
+    expect(css).toContain('.sl-markdown-content img');
+    expect(css).toContain('max-width:100%');
+    expect(css).toContain('.katex-display');
+    expect(css).toContain('overflow-x:auto');
+    expect(css).toContain('.source-attribution');
+    expect(css).toContain('overflow-wrap:anywhere');
+  });
+
   it('emits every manifest route as Russian HTML', async () => {
     const manifest = YAML.parse(await readFile(join(rootDir, 'publishing', 'navigation.yml'), 'utf8'));
     const routes: string[] = manifest.sections.flatMap(

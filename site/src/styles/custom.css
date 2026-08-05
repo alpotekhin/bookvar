@@ -89,6 +89,38 @@ body {
   margin-inline: auto;
 }
 
+.sl-markdown-content figure {
+  max-width: 100%;
+  margin-inline: 0;
+}
+
+.sl-markdown-content figcaption {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.source-attribution {
+  box-sizing: border-box;
+  max-width: 100%;
+  margin-block: 1.5rem 2rem;
+  padding: 1rem 1.15rem;
+  overflow-wrap: anywhere;
+  border-left: 3px solid var(--sl-color-accent);
+  background: var(--handbook-panel);
+}
+
+.source-attribution p {
+  margin-block: 0.35rem;
+}
+
+.source-attribution__label {
+  color: var(--sl-color-accent);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 /* Harvard's margin figures carry intentionally tiny intrinsic dimensions.
    In a full-width Bookvar chapter they need an explicit responsive reading
    size; source SVG bytes remain untouched. */

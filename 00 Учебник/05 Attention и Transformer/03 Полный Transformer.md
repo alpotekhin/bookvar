@@ -3,7 +3,7 @@ title: Собираем Transformer — от блока к BERT, GPT и LLaMA
 type: textbook-chapter
 status: canonical
 last_updated: 2026-07-18
-previous: "[[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V]]"
+previous: "[[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/04 Позиционная информация]]"
 next: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна]]"
 primary_sources:
   - https://arxiv.org/abs/1706.03762

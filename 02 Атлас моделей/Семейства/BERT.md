@@ -4,7 +4,7 @@ type: model-family
 organization: Google
 first_release: 2018
 latest_verified_release: BERT and descendants
-last_verified: 2026-07-20
+last_verified: 2026-08-06
 architecture_base: encoder-only Transformer
 modalities: [text]
 status: foundational

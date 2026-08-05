@@ -2,25 +2,73 @@
 title: Проследить RLVR pipeline в Open-R1
 type: practice
 status: canonical
-last_updated: 2026-07-16
+last_updated: 2026-08-06
 ---
 
 # Проследить RLVR pipeline в Open-R1
 
-По [Open-R1](https://github.com/huggingface/open-r1) проследите:
+RLVR часто описывают одной стрелкой «генерация → verifier → reward → update».
+Практическая работа заставляет восстановить каждый контракт этой стрелки по
+реальному коду и провести один маленький пример от исходной задачи до
+обучающего сигнала.
+
+## Исходный проект
+
+Работайте с [Hugging Face Open-R1](https://github.com/huggingface/open-r1).
+Зафиксируйте commit и выберите одну задачу с программно проверяемым ответом.
+Перед запуском прочитайте:
+
+- [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers]];
+- [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1]];
+- [[02 Areas/ML & DL/03 Исследовательские линии/RLHF → DPO → RLVR]].
+
+## Карта конвейера
+
+Для каждого перехода укажите concrete type, обязательные поля и место в коде:
 
 ```text
-dataset → prompt → rollout → parser → verifier → reward →
-group advantages → policy update → evaluation
+dataset record → rendered prompt → sampled completion → parsed answer
+→ verifier result → scalar reward → group advantages → policy loss
 ```
 
-Отдельно выпишите:
+Не объединяйте parser и verifier. Parser отвечает, удалось ли извлечь ответ из
+текста; verifier — удовлетворяет ли извлечённый объект правилу задачи.
 
-- что является environment;
-- что именно проверяет reward;
-- как обрабатывается invalid format;
-- какие shortcuts может найти policy;
-- какой baseline доказывает пользу RL, а не только данных.
+## Минимальный воспроизводимый пример
 
-Связано: [[02 Areas/ML & DL/03 Исследовательские линии/RLHF → DPO → RLVR]].
+Возьмите один prompt и сохраните не менее восьми completions при фиксированных
+sampling parameters. Для каждой completion запишите:
 
+| completion id | parse status | extracted answer | correctness | format reward | total reward |
+|---|---|---|---:|---:|---:|
+
+Затем вручную пересчитайте нормированные group advantages по формулам выбранной
+реализации. Проверьте крайние случаи: все rewards одинаковы, ни один ответ не
+парсится, правильный ответ имеет неверный формат, parser извлекает несколько
+кандидатов.
+
+## Проверка reward hacking
+
+Сконструируйте минимум три adversarial completions:
+
+1. правильное число находится в рассуждении, но финальный ответ неверен;
+2. финальный ответ записан в неожиданном, но семантически допустимом формате;
+3. текст пытается использовать слабость parser или verifier.
+
+Для каждого случая сначала предскажите результат, затем запустите pipeline и
+сравните. Если verifier принимает нежелательный ответ, сформулируйте regression
+test, а не только словесное замечание.
+
+## Что сдать
+
+- карту файлов и функций с pinned links;
+- сохранённые prompts, completions и rewards;
+- ручную и программную проверку advantages;
+- тесты для parser/verifier edge cases;
+- описание environment, invalid-format policy и возможных shortcuts;
+- baseline, который отделяет пользу RL от пользы новых данных или более
+  сильного генератора.
+
+Работа закончена, когда одна запись dataset проходит через все стадии без
+скрытых преобразований, а каждый scalar в policy loss можно связать с исходным
+completion и конкретным решением verifier.

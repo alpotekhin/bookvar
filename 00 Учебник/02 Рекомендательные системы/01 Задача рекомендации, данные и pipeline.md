@@ -303,7 +303,7 @@ $$
 Эти ошибки нельзя исправить архитектурой. Сначала строится проверяемый dataset и
 evaluation contract, затем выбирается модель.
 
-## Материалы и практикум
+## Практика и первоисточники
 
 - [[05 Источники/Courses/Dive into Deep Learning — Recommender Systems/recsys-intro|D2L — Overview of Recommender Systems]] — основные постановки и термины.
 - [[05 Источники/Courses/Dive into Deep Learning — Recommender Systems/movielens|D2L — The MovieLens Dataset]] — формат данных и варианты split.

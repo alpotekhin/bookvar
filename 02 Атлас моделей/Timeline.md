@@ -2,6 +2,7 @@
 title: Хронология моделей и технологий LLM
 type: concept
 last_updated: 2026-07-21
+last_verified: 2026-08-06
 status: active
 ---
 

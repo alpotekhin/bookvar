@@ -170,6 +170,7 @@ S7. [[02 Areas/ML & DL/00 Учебник/10 ML Systems/07 Profiling ML-нагр�
 56. [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/56 FlashAttention]]
 57. [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей]]
     - 57.1. [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/57a KV-cache compression и offload|Сжатие и выгрузка KV-cache]]
+    - 57.2. [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/57b Сжатие моделей — pruning, distillation и low-rank|Pruning, distillation и low-rank compression]]
 58. [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование]]
     - 58.1. [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving|Параллелизм и коллективные операции]]
     - 58.2. [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/58a2 Раздельное обслуживание prefill и decode|Раздельное обслуживание prefill и decode]]

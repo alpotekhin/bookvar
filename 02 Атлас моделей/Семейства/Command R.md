@@ -4,7 +4,7 @@ type: model-family
 organization: Cohere
 first_release: 2024
 latest_verified_release: Command A+
-last_verified: 2026-07-20
+last_verified: 2026-08-06
 architecture_base: decoder-only Transformer then MoE
 modalities: [text, image]
 status: active
