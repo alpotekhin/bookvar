@@ -2,8 +2,8 @@
 title: Обзоры направлений
 type: concept
 status: active
-last_updated: 2026-07-16
-last_verified: 2026-07-16
+last_updated: 2026-09-01
+last_verified: 2026-09-01
 ---
 
 # Обзоры направлений
@@ -14,6 +14,7 @@ last_verified: 2026-07-16
 - [[02 Areas/ML & DL/03 Исследовательские линии/RLHF → DPO → RLVR|Выравнивание: RLHF → DPO → RLVR]]
 - [[02 Areas/ML & DL/03 Исследовательские линии/Длинный контекст|Длинный контекст]]
 - [[02 Areas/ML & DL/03 Исследовательские линии/Эффективный attention|Эффективный attention]]
+- [[02 Areas/ML & DL/03 Исследовательские линии/Альтернативы полному attention и stateful sequence models|Альтернативы полному attention и stateful sequence models]]
 - [[02 Areas/ML & DL/03 Исследовательские линии/Sparse и MoE-модели|Sparse- и MoE-модели]]
 - [[02 Areas/ML & DL/03 Исследовательские линии/Reasoning и test-time compute|Reasoning и test-time compute]]
 - [[02 Areas/ML & DL/03 Исследовательские линии/Синтетические данные и дистилляция|Синтетические данные и дистилляция]]
