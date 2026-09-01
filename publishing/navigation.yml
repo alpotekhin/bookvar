@@ -667,8 +667,18 @@ sections:
         route: research/synthetic-data-distillation
       - source: 03 Исследовательские линии/Длинный контекст.md
         route: research/long-context
+      - source: 03 Исследовательские линии/Альтернативы полному attention и stateful sequence models.md
+        route: research/stateful-sequence-models
       - source: 05 Источники/_index.md
         route: sources/index
+      - source: 05 Источники/Papers/TTT layers.md
+        route: sources/papers/ttt-layers
+      - source: 05 Источники/Papers/End-to-End Test-Time Training.md
+        route: sources/papers/ttt-e2e
+      - source: 05 Источники/Papers/Gated Delta Networks.md
+        route: sources/papers/gated-delta-networks
+      - source: 05 Источники/Papers/Recall in efficient sequence models.md
+        route: sources/papers/recall-efficient-sequence-models
       - source: 05 Источники/LMCache/LMCache — карта материалов.md
         source_en: en/05 Sources/LMCache/LMCache — map of materials.md
         route: sources/lmcache/index

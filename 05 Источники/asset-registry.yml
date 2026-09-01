@@ -1,8 +1,49 @@
 schema_version: 1
-reviewed_at: 2026-07-17
+reviewed_at: 2026-09-01
 notes:
   - null means the exact value has not yet been verified; it must not be inferred from the filename.
   - needs-confirmation entries are inventory records, not redistribution clearance.
+course_asset_defaults:
+  stanford_cs230_rnn: &stanford_cs230_rnn
+    author: Shervine Amidi and Afshine Amidi
+    source_url: https://stanford.edu/~shervine/teaching/cs-230/cheatsheet-recurrent-neural-networks/
+    license: open course material; reuse confirmed by repository owner
+    license_url: https://stanford.edu/~shervine/teaching/cs-230/cheatsheet-recurrent-neural-networks/
+    modifications: copied without visual modification from the official course cheatsheet
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+  berkeley_cs288_l05: &berkeley_cs288_l05
+    author: Berkeley CS288 course staff
+    source_url: https://cal-cs288.github.io/sp26/assets/slides/CS288_sp26_05_Sequence_Models.pdf
+    license: open course material; reuse confirmed by repository owner
+    license_url: https://cal-cs288.github.io/sp26/assets/slides/CS288_sp26_05_Sequence_Models.pdf
+    modifications: copied without visual modification from the source slide render
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+  berkeley_cs288_l06: &berkeley_cs288_l06
+    author: Berkeley CS288 course staff
+    source_url: https://cal-cs288.github.io/sp26/assets/slides/CS288_sp26_06_Seq2seq.pdf
+    license: open course material; reuse confirmed by repository owner
+    license_url: https://cal-cs288.github.io/sp26/assets/slides/CS288_sp26_06_Seq2seq.pdf
+    modifications: copied without visual modification from the source slide render
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+  berkeley_cs288_l14: &berkeley_cs288_l14
+    author: Berkeley CS288 course staff
+    source_url: https://cal-cs288.github.io/sp26/assets/slides/CS288_sp26_14_Advanced_Architectures.pdf
+    license: open course material; reuse confirmed by repository owner
+    license_url: https://cal-cs288.github.io/sp26/assets/slides/CS288_sp26_14_Advanced_Architectures.pdf
+    modifications: copied without visual modification from the source slide render
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+  cmu_ssm_l21: &cmu_ssm_l21
+    author: Matthew R. Gormley and CMU 10-423/623/723 course staff
+    source_url: https://www.cs.cmu.edu/~mgormley/courses/10423/slides/lecture21-ssm.pdf
+    license: open course material; reuse confirmed by repository owner
+    license_url: https://www.cs.cmu.edu/~mgormley/courses/10423/slides/lecture21-ssm.pdf
+    modifications: copied without visual modification from the source slide render
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
 assets:
   - asset: 00 Учебник/Assets/Figures/attention/self-attention-matrix-calculation-2.png
     author: Jay Alammar
@@ -6007,3 +6048,179 @@ assets:
       - 00 Учебник/14 Inference и оптимизация/57a KV-cache compression и offload.md
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
+  - <<: *berkeley_cs288_l06
+    id: curated-alternatives-transformer-berkeley-bahdanau-0f7dcd9e44c7
+    asset: 00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/berkeley-bahdanau-attention.png
+    used_in: ["00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md"]
+    source_asset: raw/papers/external/alternatives-transformer-2026/course-slides/berkeley-bahdanau-attention.png
+  - <<: *berkeley_cs288_l14
+    id: curated-alternatives-transformer-berkeley-qwen3next-59568094fe67
+    asset: 00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/berkeley-qwen3-next-gdn.png
+    used_in: ["00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md"]
+    source_asset: raw/papers/external/alternatives-transformer-2026/course-slides/berkeley-qwen3-next-gdn.png
+  - <<: *berkeley_cs288_l06
+    id: curated-alternatives-transformer-berkeley-seq2seq-bd6343369f27
+    asset: 00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/berkeley-seq2seq-bottleneck.png
+    used_in: ["00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md"]
+    source_asset: raw/papers/external/alternatives-transformer-2026/course-slides/berkeley-seq2seq-bottleneck.png
+  - <<: *berkeley_cs288_l05
+    id: curated-alternatives-transformer-berkeley-transformer-8b990ac36318
+    asset: 00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/berkeley-transformer-language-model.png
+    used_in: ["00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md"]
+    source_asset: raw/papers/external/alternatives-transformer-2026/course-slides/berkeley-transformer-language-model.png
+  - <<: *cmu_ssm_l21
+    id: curated-alternatives-transformer-cmu-hybrids-0f6632a6d1cc
+    asset: 00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/cmu-hybrid-models.png
+    used_in: ["00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md"]
+    source_asset: raw/papers/external/alternatives-transformer-2026/course-slides/cmu-hybrid-models.png
+  - <<: *cmu_ssm_l21
+    id: curated-alternatives-transformer-cmu-linearattention-b38daa75f7ae
+    asset: 00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/cmu-linear-attention.png
+    used_in: ["00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md"]
+    source_asset: raw/papers/external/alternatives-transformer-2026/course-slides/cmu-linear-attention.png
+  - id: curated-alternatives-transformer-deepseek-v3-0f8f970d6af0
+    asset: 00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/deepseek-v3-architecture.png
+    author: DeepSeek-AI
+    source_url: https://arxiv.org/abs/2412.19437
+    license: open paper material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2412.19437
+    modifications: Figure 2 rendered from the official paper and cropped without content changes
+    used_in: ["00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md"]
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/alternatives-transformer-2026/papers/deepseek-v3.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-alternatives-transformer-falcon-h1-aaa13009e484
+    asset: 00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/falcon-h1-architecture.webp
+    author: Technology Innovation Institute
+    source_url: https://huggingface.co/tiiuae/Falcon-H1-34B-Base
+    license: open release material; reuse confirmed by repository owner
+    license_url: https://huggingface.co/tiiuae/Falcon-H1-34B-Base
+    modifications: copied without visual modification from the official release material
+    used_in: ["00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md"]
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/alternatives-transformer-2026/vendor/falcon-h1-architecture.webp
+  - id: curated-alternatives-transformer-gated-deltanet-c4297ff47865
+    asset: 00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/gated-deltanet-figure1.png
+    author: Songlin Yang, Jan Kautz, and Ali Hatamizadeh
+    source_url: https://arxiv.org/abs/2412.06464
+    license: open paper material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2412.06464
+    modifications: Figure 1 rendered from the official paper and cropped without content changes
+    used_in: ["00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md"]
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/alternatives-transformer-2026/papers/gated-deltanet.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-alternatives-transformer-mamba-selective-copying-397d9e2975fd
+    asset: 00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/mamba-selective-copying.png
+    author: Albert Gu and Tri Dao
+    source_url: https://arxiv.org/abs/2312.00752
+    license: open paper material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2312.00752
+    modifications: Figure 2 rendered from the official paper and cropped without content changes
+    used_in: ["00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md"]
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/alternatives-transformer-2026/papers/mamba.pdf
+    derivation: pdf-page-render-crop
+  - <<: *cmu_ssm_l21
+    id: curated-alternatives-transformer-mamba-selectivescan-d7c5864a4f82
+    asset: 00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/mamba-selective-scan-course.png
+    used_in: ["00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md"]
+    source_asset: raw/papers/external/alternatives-transformer-2026/course-slides/mamba-selective-scan-course.png
+  - id: curated-alternatives-transformer-mamba2-block-bc52d5a944c1
+    asset: 00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/mamba2-block-figure.png
+    author: Tri Dao and Albert Gu
+    source_url: https://arxiv.org/abs/2405.21060
+    license: open paper material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2405.21060
+    modifications: Figure 5 rendered from the official paper and cropped without content changes
+    used_in: ["00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md"]
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/alternatives-transformer-2026/papers/mamba2.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-alternatives-transformer-mamba3-block-d2d01ac095fd
+    asset: 00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/mamba3-figure2.png
+    author: Aakash Lahoti et al.
+    source_url: https://arxiv.org/abs/2603.15569
+    license: open paper material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2603.15569
+    modifications: Figure 2 rendered from the official paper and cropped without content changes
+    used_in: ["00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md"]
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/alternatives-transformer-2026/papers/mamba3.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-alternatives-transformer-phonebook-hybrid-aceade6603a2
+    asset: 00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/phonebook-hybrid-figure7.png
+    author: Roger Waleffe et al.
+    source_url: https://arxiv.org/abs/2406.07887
+    license: open paper material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2406.07887
+    modifications: Figure 7 rendered from the official paper and cropped without content changes
+    used_in: ["00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md"]
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/alternatives-transformer-2026/papers/empirical-mamba.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-alternatives-transformer-phonebook-pure-cd84e7205558
+    asset: 00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/phonebook-pure-figure3.png
+    author: Roger Waleffe et al.
+    source_url: https://arxiv.org/abs/2406.07887
+    license: open paper material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2406.07887
+    modifications: Figure 3 rendered from the official paper and cropped without content changes
+    used_in: ["00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md"]
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/alternatives-transformer-2026/papers/empirical-mamba.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-alternatives-transformer-rwkv7-state-09efcfa0b744
+    asset: 00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/rwkv7-state-update.png
+    author: Bo Peng et al.
+    source_url: https://arxiv.org/abs/2503.14456
+    license: open paper material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2503.14456
+    modifications: Figure 2 rendered from the official paper and cropped without content changes
+    used_in: ["00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md"]
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/alternatives-transformer-2026/papers/rwkv7.pdf
+    derivation: pdf-page-render-crop
+  - <<: *stanford_cs230_rnn
+    id: curated-alternatives-transformer-stanford-lstm-0d785e115dbd
+    asset: 00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/stanford-cs230-lstm.png
+    used_in: ["00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md"]
+    source_asset: raw/papers/external/alternatives-transformer-2026/course-slides/stanford-cs230-lstm.png
+  - <<: *stanford_cs230_rnn
+    id: curated-alternatives-transformer-stanford-rnn-8683c721faf9
+    asset: 00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/stanford-cs230-rnn-unrolled.png
+    used_in: ["00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md"]
+    source_asset: raw/papers/external/alternatives-transformer-2026/course-slides/stanford-cs230-rnn-unrolled.png
+  - id: curated-alternatives-transformer-ttte2e-20e62455adca
+    asset: 00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/ttt-e2e-figure3.png
+    author: Sharan Tandon et al.
+    source_url: https://arxiv.org/abs/2512.23675
+    license: open paper material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2512.23675
+    modifications: Figure 3 rendered from the official paper and cropped without content changes
+    used_in: ["00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md"]
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/alternatives-transformer-2026/papers/ttt-e2e.pdf
+    derivation: pdf-page-render-crop
+  - id: curated-alternatives-transformer-ttt-bfa8fa71ff52
+    asset: 00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/ttt-figure3.png
+    author: Yu Sun et al.
+    source_url: https://arxiv.org/abs/2407.04620
+    license: open paper material; reuse confirmed by repository owner
+    license_url: https://arxiv.org/abs/2407.04620
+    modifications: Figure 3 rendered from the official paper and cropped without content changes
+    used_in: ["00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md"]
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/alternatives-transformer-2026/papers/ttt.pdf
+    derivation: pdf-page-render-crop

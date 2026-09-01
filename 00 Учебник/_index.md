@@ -2,7 +2,7 @@
 title: Учебник по NLP и LLM
 type: textbook-chapter
 status: active
-last_updated: 2026-07-31
+last_updated: 2026-09-01
 ---
 
 # Учебник по NLP и LLM
