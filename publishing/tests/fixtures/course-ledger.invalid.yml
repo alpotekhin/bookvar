@@ -1,0 +1,77 @@
+source_manifest:
+  schema_version: 1
+  course: Invalid fixture
+  offering: Spring 2026
+  integration_base_commit: 0123456789abcdef0123456789abcdef01234567
+  retrieved_at: 2026-09-04
+  objects:
+    - id: lecture-01
+      kind: lecture
+      source_authority: official-course
+      verification_status: verified
+      lecturer_or_author: Example Lecturer
+      meeting_date: 2026-01-12
+      title: Foundations
+      canonical_url: https://github.com/example/course/blob/0123456789abcdef0123456789abcdef01234567/lecture.md
+      revision_or_checksum: 0123456789abcdef0123456789abcdef01234567
+      local_path: Lectures/lecture-01.md
+      mime: text/markdown
+      bytes: 128
+      page_count: 1
+      language: en
+      rights_status: licensed
+      rights_evidence: https://example.edu/course-license
+      retrieved_at: 2026-09-04
+source_units:
+  schema_version: 1
+  units:
+    - id: lecture-01-section
+      source_object: lecture-01
+      kind: section
+      title: Foundations
+coverage:
+  schema_version: 1
+  rows:
+    - id: coverage-invalid
+      source_object: lecture-01
+      source_unit: lecture-01-section
+      source_location: Lectures/lecture-01.md#foundations
+      kind: section
+      title: Foundations
+      disposition:
+        - integrated
+        - source-only
+      destination: textbook/foundations.md
+      destination_anchor: foundations
+      primary_sources:
+        - lecture-01
+visuals:
+  schema_version: 1
+  rows:
+    - id: visual-invalid
+      source_object: lecture-01
+      source_location: Lectures/lecture-01.md#figure-1
+      question: How do the stages connect?
+      sequence_members: []
+      disposition: integrated
+      destination: textbook/foundations.md
+      destination_anchor: foundations-figure
+      parent_sha256: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+      transformation: lossless crop
+      caption: A visual without its local asset.
+      attribution: Example Lecturer
+      rights_status: licensed
+      rights_holder: Example University
+      rights_scope: textbook reuse
+      license_identifier: CC BY 4.0
+      license_url: https://creativecommons.org/licenses/by/4.0/
+      rights_evidence: https://example.edu/course-license
+      rendered_route: sources/courses/fixture#figure-1
+      desktop_evidence: checked-desktop.png
+      narrow_evidence: checked-narrow.png
+      reviewer: Example Reviewer
+      checked_at: 2026-09-04
+asset_registry:
+  assets: []
+files:
+  - courses/fixture/Lectures/lecture-01.md

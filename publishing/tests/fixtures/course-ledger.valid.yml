@@ -1,0 +1,149 @@
+source_manifest:
+  schema_version: 1
+  course: Fixture Systems
+  offering: Spring 2026
+  integration_base_commit: 0123456789abcdef0123456789abcdef01234567
+  retrieved_at: 2026-09-04
+  objects:
+    - id: lecture-01
+      kind: lecture
+      source_authority: official-course
+      verification_status: verified
+      lecturer_or_author: Example Lecturer
+      meeting_date: 2026-01-12
+      title: Foundations
+      canonical_url: https://github.com/example/course/blob/0123456789abcdef0123456789abcdef01234567/lecture.md
+      revision_or_checksum: 0123456789abcdef0123456789abcdef01234567
+      local_path: Lectures/lecture-01.md
+      mime: text/markdown
+      bytes: 128
+      page_count: 1
+      language: en
+      rights_status: licensed
+      rights_evidence: https://example.edu/course-license
+      retrieved_at: 2026-09-04
+source_units:
+  schema_version: 1
+  units:
+    - id: lecture-01-section
+      source_object: lecture-01
+      source_location: Lectures/lecture-01.md#foundations
+      kind: section
+      title: Foundations
+    - id: lecture-01-example
+      source_object: lecture-01
+      source_location: Lectures/lecture-01.md#example
+      kind: worked-example
+      title: Example
+    - id: lecture-01-reading
+      source_object: lecture-01
+      source_location: Lectures/lecture-01.md#reading
+      kind: reading
+      title: Reading
+    - id: lecture-01-admin
+      source_object: lecture-01
+      source_location: Lectures/lecture-01.md#admin
+      kind: administrative
+      title: Administrative note
+coverage:
+  schema_version: 1
+  rows:
+    - id: coverage-integrated
+      source_object: lecture-01
+      source_unit: lecture-01-section
+      source_location: Lectures/lecture-01.md#foundations
+      kind: section
+      title: Foundations
+      disposition: integrated
+      destination: textbook/foundations.md
+      destination_anchor: foundations
+      primary_sources:
+        - lecture-01
+    - id: coverage-existing
+      source_object: lecture-01
+      source_unit: lecture-01-example
+      source_location: Lectures/lecture-01.md#example
+      kind: worked-example
+      title: Example
+      disposition: covered-existing
+      destination: textbook/existing.md
+      destination_anchor: existing-example
+      primary_sources:
+        - lecture-01
+    - id: coverage-source-only
+      source_object: lecture-01
+      source_unit: lecture-01-reading
+      source_location: Lectures/lecture-01.md#reading
+      kind: reading
+      title: Reading
+      disposition: source-only
+      destination: courses/fixture/_index.md
+      destination_anchor: source-reading
+      reason: Retained for provenance.
+      primary_sources:
+        - lecture-01
+    - id: coverage-excluded
+      source_object: lecture-01
+      source_unit: lecture-01-admin
+      source_location: Lectures/lecture-01.md#admin
+      kind: administrative
+      title: Administrative note
+      disposition: excluded
+      reason: Administrative material is outside the textbook scope.
+      evidence: https://example.edu/course-scope
+      primary_sources:
+        - lecture-01
+visuals:
+  schema_version: 1
+  rows:
+    - id: visual-01
+      source_object: lecture-01
+      source_location: Lectures/lecture-01.md#figure-1
+      question: How do the stages connect?
+      sequence_members:
+        - order: 1
+          source_location: Lectures/lecture-01.md#figure-1
+        - order: 2
+          source_location: Lectures/lecture-01.md#figure-2
+      disposition: integrated
+      destination: textbook/foundations.md
+      destination_anchor: foundations-figure
+      local_file: 00 Учебник/Assets/Figures/fixture/visual-01.png
+      parent_sha256: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+      transformation: lossless crop
+      caption: A two-stage course visual.
+      attribution: Example Lecturer, Fixture Systems Spring 2026
+      rights_status: licensed
+      rights_holder: Example University
+      rights_scope: textbook reuse
+      license_identifier: CC BY 4.0
+      license_url: https://creativecommons.org/licenses/by/4.0/
+      rights_evidence: https://example.edu/course-license
+      rendered_route: sources/courses/fixture#figure-1
+      desktop_evidence: checked-desktop.png
+      narrow_evidence: checked-narrow.png
+      reviewer: Example Reviewer
+      checked_at: 2026-09-04
+asset_registry:
+  assets:
+    - asset: 00 Учебник/Assets/Figures/fixture/visual-01.png
+      metadata_status: verified
+files:
+  - courses/fixture/Lectures/lecture-01.md
+  - textbook/foundations.md
+  - textbook/existing.md
+  - courses/fixture/_index.md
+  - 00 Учебник/Assets/Figures/fixture/visual-01.png
+pages:
+  textbook/foundations.md: |
+    ---
+    source_unit_id: lecture-01-section
+    ---
+    # Foundations
+  textbook/existing.md: |
+    ---
+    source_unit_id: lecture-01-example
+    ---
+    # Existing example
+  courses/fixture/_index.md: |
+    # Fixture source hub
