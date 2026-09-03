@@ -32,10 +32,23 @@ const dispositions = new Set(['integrated', 'covered-existing', 'source-only', '
 const authorities = new Set(['official-course', 'official-author', 'primary-paper', 'third-party-mirror', 'bookvar-original']);
 const rights = new Set(['licensed', 'permission-recorded', 'link-only', 'unknown']);
 const sourceObjectKinds = new Set(['executable-lecture', 'pdf', 'assignment', 'video']);
+const semanticUnitKinds = new Set([
+  'section',
+  'mechanism',
+  'derivation',
+  'experiment',
+  'worked-example',
+  'failure-mode',
+  'figure',
+  'table',
+  'code-trace',
+  'visual-sequence',
+  'administrative'
+]);
 const unitKindsByObject = new Map<string, ReadonlySet<string>>([
-  ['executable-lecture', new Set(['section-boundary', 'rendered-text', 'rendered-image', 'rendered-link'])],
-  ['pdf', new Set(['page', 'heading', 'figure', 'table', 'multi-page-build'])],
-  ['assignment', new Set(['task', 'deliverable', 'test-interface', 'evaluation-requirement'])],
+  ['executable-lecture', new Set(['section-boundary', 'rendered-text', 'rendered-image', 'rendered-link', ...semanticUnitKinds])],
+  ['pdf', new Set(['page', 'heading', 'figure', 'table', 'multi-page-build', ...semanticUnitKinds])],
+  ['assignment', new Set(['task', 'deliverable', 'test-interface', 'evaluation-requirement', ...semanticUnitKinds])],
   ['video', new Set(['segment', 'frame', 'transcript-event'])]
 ]);
 
@@ -298,6 +311,27 @@ function checkedSeconds(unit: Row, name: string, sourceObject: SourceObject, lab
 
 function validateUnitShape(unit: Row, sourceObject: SourceObject, kind: string, label: string): void {
   integer(unit.order, `${label}.order`, 1);
+  // `figure` and `table` predate the semantic ledger extension for PDF rows.
+  // Treat them as semantic only when the extractor supplies an explicit stable ID.
+  const usesSemanticShape = semanticUnitKinds.has(kind)
+    && (!(kind === 'figure' || kind === 'table') || unit.semantic_id !== undefined);
+  if (usesSemanticShape) {
+    field(unit, 'semantic_id', label);
+    if (sourceObject.kind === 'executable-lecture') {
+      const start = integer(unit.event_start, `${label}.event_start`, 1);
+      const end = integer(unit.event_end, `${label}.event_end`, 1);
+      if (end < start) fail(`${label}.event_end must be greater than or equal to event_start`);
+    } else {
+      if (unit.page !== undefined) {
+        checkedPage(unit, 'page', sourceObject, label);
+      } else {
+        const start = checkedPage(unit, 'page_start', sourceObject, label);
+        const end = checkedPage(unit, 'page_end', sourceObject, label);
+        if (end < start) fail(`${label}.page_end must be greater than or equal to page_start`);
+      }
+    }
+    return;
+  }
   if (sourceObject.kind === 'executable-lecture') {
     if (kind === 'section-boundary') {
       const level = integer(unit.heading_level, `${label}.heading_level`, 1);
@@ -461,6 +495,7 @@ function visualRights(entry: Row, label: string): string {
 function visuals(
   document: Row,
   objects: ReadonlyMap<string, SourceObject>,
+  units: ReadonlyMap<string, SourceUnit>,
   repositoryRoot: string,
   courseRoot: string,
   registered: ReadonlySet<string>
@@ -473,6 +508,16 @@ function visuals(
     const objectId = field(entry, 'source_object', label);
     const sourceObject = objects.get(objectId);
     if (!sourceObject) fail(`${label} refers to unknown source object: ${objectId}`);
+    if (entry.source_units !== undefined) {
+      const linkedUnits = list(entry.source_units, `${label}.source_units`);
+      if (linkedUnits.length === 0) fail(`${label}.source_units must not be empty`);
+      for (const [index, value] of linkedUnits.entries()) {
+        const unitId = text(value, `${label}.source_units[${index}]`);
+        const unit = units.get(unitId);
+        if (!unit) fail(`${label}.source_units refers to unknown source unit: ${unitId}`);
+        if (unit.sourceObject !== objectId) fail(`${label}.source_units refers to a unit owned by another source object`);
+      }
+    }
     field(entry, 'source_location', label);
     exactVisualLocation(entry, sourceObject, label);
     field(entry, 'question', label);
@@ -515,7 +560,7 @@ export function validateCourseLedger(courseRoot: string, options: CourseLedgerOp
   const objects = manifest(yaml(resolve(absoluteCourseRoot, 'source-manifest.yml')), absoluteCourseRoot);
   const units = sourceUnits(yaml(resolve(absoluteCourseRoot, 'source-units.yml')), objects);
   coverage(yaml(resolve(absoluteCourseRoot, 'coverage.yml')), objects, units, repositoryRoot, absoluteCourseRoot);
-  visuals(yaml(resolve(absoluteCourseRoot, 'visuals.yml')), objects, repositoryRoot, absoluteCourseRoot, assetPaths(assetRegistryPath));
+  visuals(yaml(resolve(absoluteCourseRoot, 'visuals.yml')), objects, units, repositoryRoot, absoluteCourseRoot, assetPaths(assetRegistryPath));
 }
 
 /** Validate real ledgers only after their course directories have been created. */

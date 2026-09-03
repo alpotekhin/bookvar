@@ -78,5 +78,38 @@
     "status": "permission-recorded",
     "scope": "local educational preservation and later attributed textbook reuse",
     "evidence": "User confirmed open educational reuse on 2026-09-04 for local educational preservation and later attributed textbook reuse; this is a permission record, not a named license. Explicit repository license files are preserved."
+  },
+  "generated_audit": {
+    "extractor_revision": "stanford-cs336-semantic-audit-v2",
+    "extractor_sha256": "0e83001350f51c213b8ad1be8754607f88621002a24cb59bff1adef649deddf9",
+    "semantic_review_sha256": "0fce3469ba594da49fe3dc72cf5deeb041db5777d9d8cf46c2ce886b7c237565",
+    "tool_versions": {
+      "edtrace": "0.1.15",
+      "pdfinfo": "26.04.0",
+      "pdftotext": "26.04.0",
+      "pdfimages": "26.04.0"
+    },
+    "archive": {
+      "artifacts": 902,
+      "bytes": 306200342
+    },
+    "ledgers": {
+      "source-manifest.yml": {
+        "sha256": "986c4b54da7dffe2e625c3621535d30ad2ef2f782666e0863e6fb51dd108bec1",
+        "records": 23
+      },
+      "source-units.yml": {
+        "sha256": "f664bbbe23bd3dc034bef8efa8dcd835a5edfe5a62ef539cadef8a279b1a8ecf",
+        "records": 785
+      },
+      "coverage.yml": {
+        "sha256": "1f0e054fb1f75f9842df604aa3b8f6693aedcb0d4d612b4aebcaff56f7d97c07",
+        "records": 785
+      },
+      "visuals.yml": {
+        "sha256": "a3538b636c71084aaffc969436b75bbb176a594dcc30d1c8da19963d8a4ab607",
+        "records": 149
+      }
+    }
   }
 }

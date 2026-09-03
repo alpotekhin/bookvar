@@ -11,18 +11,24 @@ last_verified: 2026-09-04
 Последовательное изучение идёт по каноническим главам учебника; здесь сохранены
 оригинальные англоязычные материалы, их dependency closure и аудит границ.
 
-Статус: **inventory complete; editorial integration pending**. Все извлечённые
-units пока имеют disposition `source-only`: для них ещё не подтверждены конкретные
-destination headings с reciprocal `source_unit_id`.
+Статус: **inventory complete; editorial integration pending**. Учебные units
+пока имеют disposition `source-only`; административные units явно исключены
+с причиной и evidence. Конкретные textbook destinations ещё не подтверждены.
 
 ## Реестры аудита
 
 - [source-manifest.yml](source-manifest.yml) — объекты и pinned revisions;
-- [source-units.yml](source-units.yml) — extraction index;
+- [semantic-review.json](semantic-review.json) — reviewed per-source semantic boundaries;
+- [source-units.yml](source-units.yml) — semantic extraction index;
 - [coverage.yml](coverage.yml) — одна строка покрытия на каждый source unit;
-- [visuals.yml](visuals.yml) — event/page-level visual ledger;
+- [visuals.yml](visuals.yml) — semantic figure/table/code-trace/derivation sequences;
 - [artifact-inventory.json](artifact-inventory.json) — SHA-256 каждого файла;
 - [snapshot-lock.json](snapshot-lock.json) — SHA репозиториев и архивов.
+
+Извлечение executable lectures идёт из архивированных edtrace renderings;
+PDF/handout spans проверяются Poppler. Версии инструментов, extractor SHA,
+ledger SHA/counts и parent checksums записаны в `snapshot-lock.json`/visual ledger.
+Raw page/raster detections служат evidence и не становятся отдельными teaching visuals.
 
 ## Pinned revisions
 
@@ -73,185 +79,185 @@ destination headings с reciprocal `source_unit_id`.
 ### lecture-01: Overview, tokenization
 
 - local path: `Lectures/repository/lecture_01.py`;
-- extracted units: 510;
-- visual/event-page rows: 14;
-- baseline disposition: `source-only` — требуется последующая редакционная интеграция.
+- extracted units: 54;
+- semantic visual rows: 15;
+- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
 
 <a id="lecture-02"></a>
 ### lecture-02: PyTorch (einops), resource accounting (FLOPs, memory, arithmetic intensity)
 
 - local path: `Lectures/repository/lecture_02.py`;
-- extracted units: 239;
-- visual/event-page rows: 11;
-- baseline disposition: `source-only` — требуется последующая редакционная интеграция.
+- extracted units: 24;
+- semantic visual rows: 8;
+- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
 
 <a id="lecture-03"></a>
 ### lecture-03: Architectures, hyperparameters
 
 - local path: `Lectures/repository/lecture_03.pdf`;
-- extracted units: 182;
-- visual/event-page rows: 176;
-- baseline disposition: `source-only` — требуется последующая редакционная интеграция.
+- extracted units: 10;
+- semantic visual rows: 4;
+- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
 
 <a id="lecture-04"></a>
 ### lecture-04: Attention alternatives and mixture of experts
 
 - local path: `Lectures/repository/lecture_04.pdf`;
-- extracted units: 166;
-- visual/event-page rows: 162;
-- baseline disposition: `source-only` — требуется последующая редакционная интеграция.
+- extracted units: 9;
+- semantic visual rows: 4;
+- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
 
 <a id="lecture-05"></a>
 ### lecture-05: GPUs, TPUs
 
 - local path: `Lectures/repository/lecture_05.pdf`;
-- extracted units: 139;
-- visual/event-page rows: 138;
-- baseline disposition: `source-only` — требуется последующая редакционная интеграция.
+- extracted units: 10;
+- semantic visual rows: 6;
+- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
 
 <a id="lecture-06"></a>
 ### lecture-06: Kernels, Triton
 
 - local path: `Lectures/repository/lecture_06.py`;
-- extracted units: 268;
-- visual/event-page rows: 7;
-- baseline disposition: `source-only` — требуется последующая редакционная интеграция.
+- extracted units: 21;
+- semantic visual rows: 9;
+- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
 
 <a id="lecture-07"></a>
 ### lecture-07: Parallelism
 
 - local path: `Lectures/repository/lecture_07.py`;
-- extracted units: 119;
-- visual/event-page rows: 7;
-- baseline disposition: `source-only` — требуется последующая редакционная интеграция.
+- extracted units: 12;
+- semantic visual rows: 5;
+- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
 
 <a id="lecture-08"></a>
 ### lecture-08: Parallelism
 
 - local path: `Lectures/repository/lecture_08.pdf`;
-- extracted units: 161;
-- visual/event-page rows: 159;
-- baseline disposition: `source-only` — требуется последующая редакционная интеграция.
+- extracted units: 10;
+- semantic visual rows: 5;
+- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
 
 <a id="lecture-09"></a>
 ### lecture-09: Scaling laws
 
 - local path: `Lectures/repository/lecture_09.pdf`;
-- extracted units: 159;
-- visual/event-page rows: 150;
-- baseline disposition: `source-only` — требуется последующая редакционная интеграция.
+- extracted units: 9;
+- semantic visual rows: 4;
+- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
 
 <a id="lecture-10"></a>
 ### lecture-10: Inference
 
 - local path: `Lectures/repository/lecture_10.py`;
-- extracted units: 344;
-- visual/event-page rows: 28;
-- baseline disposition: `source-only` — требуется последующая редакционная интеграция.
+- extracted units: 30;
+- semantic visual rows: 14;
+- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
 
 <a id="lecture-11"></a>
 ### lecture-11: Scaling laws
 
 - local path: `Lectures/repository/lecture_11.pdf`;
-- extracted units: 144;
-- visual/event-page rows: 139;
-- baseline disposition: `source-only` — требуется последующая редакционная интеграция.
+- extracted units: 7;
+- semantic visual rows: 4;
+- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
 
 <a id="lecture-12"></a>
 ### lecture-12: Evaluation
 
 - local path: `Lectures/repository/lecture_12.py`;
-- extracted units: 314;
-- visual/event-page rows: 43;
-- baseline disposition: `source-only` — требуется последующая редакционная интеграция.
+- extracted units: 36;
+- semantic visual rows: 29;
+- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
 
 <a id="lecture-13"></a>
 ### lecture-13: Data (sources, datasets)
 
 - local path: `Lectures/repository/lecture_13.py`;
-- extracted units: 468;
-- visual/event-page rows: 18;
-- baseline disposition: `source-only` — требуется последующая редакционная интеграция.
+- extracted units: 16;
+- semantic visual rows: 8;
+- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
 
 <a id="lecture-14"></a>
 ### lecture-14: Data (filtering, deduplication, mixing, synthetic data)
 
 - local path: `Lectures/repository/lecture_14.py`;
-- extracted units: 299;
-- visual/event-page rows: 18;
-- baseline disposition: `source-only` — требуется последующая редакционная интеграция.
+- extracted units: 15;
+- semantic visual rows: 10;
+- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
 
 <a id="lecture-15"></a>
 ### lecture-15: Mid/post-training (SFT/RLHF)
 
 - local path: `Lectures/repository/lecture_15.pdf`;
-- extracted units: 159;
-- visual/event-page rows: 156;
-- baseline disposition: `source-only` — требуется последующая редакционная интеграция.
+- extracted units: 8;
+- semantic visual rows: 4;
+- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
 
 <a id="lecture-16"></a>
 ### lecture-16: Post-training - RLVR
 
 - local path: `Lectures/repository/lecture_16.pdf`;
-- extracted units: 164;
-- visual/event-page rows: 161;
-- baseline disposition: `source-only` — требуется последующая редакционная интеграция.
+- extracted units: 8;
+- semantic visual rows: 5;
+- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
 
 <a id="lecture-17"></a>
 ### lecture-17: Alignment - multimodality
 
 - local path: `Lectures/repository/lecture_17.py`;
-- extracted units: 230;
-- visual/event-page rows: 32;
-- baseline disposition: `source-only` — требуется последующая редакционная интеграция.
+- extracted units: 10;
+- semantic visual rows: 7;
+- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
 
 <a id="assignment-01"></a>
 ### assignment-01: Assignment 1: Basics
 
 - local path: `Assignments/assignment1-basics`;
-- extracted units: 253;
-- visual/event-page rows: 47;
-- baseline disposition: `source-only` — требуется последующая редакционная интеграция.
+- extracted units: 148;
+- semantic visual rows: 1;
+- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
 
 <a id="assignment-02"></a>
 ### assignment-02: Assignment 2: Systems
 
 - local path: `Assignments/assignment2-systems`;
-- extracted units: 200;
-- visual/event-page rows: 50;
-- baseline disposition: `source-only` — требуется последующая редакционная интеграция.
+- extracted units: 101;
+- semantic visual rows: 3;
+- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
 
 <a id="assignment-03"></a>
 ### assignment-03: Assignment 3: Scaling
 
 - local path: `Assignments/assignment3-scaling`;
-- extracted units: 53;
-- visual/event-page rows: 8;
-- baseline disposition: `source-only` — требуется последующая редакционная интеграция.
+- extracted units: 16;
+- semantic visual rows: 1;
+- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
 
 <a id="assignment-04"></a>
 ### assignment-04: Assignment 4: Data
 
 - local path: `Assignments/assignment4-data`;
-- extracted units: 100;
-- visual/event-page rows: 16;
-- baseline disposition: `source-only` — требуется последующая редакционная интеграция.
+- extracted units: 70;
+- semantic visual rows: 1;
+- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
 
 <a id="assignment-05"></a>
 ### assignment-05: Assignment 5: Alignment and Reasoning RL
 
 - local path: `Assignments/assignment5-alignment`;
-- extracted units: 182;
-- visual/event-page rows: 39;
-- baseline disposition: `source-only` — требуется последующая редакционная интеграция.
+- extracted units: 84;
+- semantic visual rows: 1;
+- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
 
 <a id="assignment-05-safety-supplement"></a>
 ### assignment-05-safety-supplement: Assignment 5 optional supplement: safety, instruction tuning, and RLHF
 
 - local path: `Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf`;
-- extracted units: 104;
-- visual/event-page rows: 18;
-- baseline disposition: `source-only` — требуется последующая редакционная интеграция.
+- extracted units: 77;
+- semantic visual rows: 1;
+- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
 
 ## Права и атрибуция
 

@@ -262,6 +262,11 @@ describe('course ingestion ledger', () => {
       /sequence_members.*must not be empty/i
     ],
     [
+      'visuals linked to unknown semantic source units',
+      (bundle) => { visual(bundle, 'visual-01').source_units = ['missing-unit']; },
+      /source_units.*unknown source unit/i
+    ],
+    [
       'visuals without exact pages or frames',
       (bundle) => { delete visual(bundle, 'visual-01').source_pages; },
       /source_pages.*list/i
@@ -297,5 +302,18 @@ describe('course ingestion ledger', () => {
     const bundle = clone(fixture('course-ledger.valid.yml'));
     mutate(bundle);
     expect(() => validate(bundle)).toThrow(error);
+  });
+
+  it('accepts source-aware semantic units with exact executable event scopes', () => {
+    const bundle = clone(fixture('course-ledger.valid.yml'));
+    const example = unit(bundle, 'lecture-01-example');
+    example.kind = 'worked-example';
+    example.semantic_id = 'worked-example';
+    example.event_start = 2;
+    example.event_end = 3;
+    delete example.content_sha256;
+    coverageRow(bundle, 'coverage-existing').kind = 'worked-example';
+    visual(bundle, 'visual-01').source_units = ['lecture-01-example'];
+    validate(bundle);
   });
 });

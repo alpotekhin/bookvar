@@ -34,9 +34,11 @@ METADATA_ROOT = COURSE_ROOT / "Metadata"
 LOCK_PATH = COURSE_ROOT / "snapshot-lock.json"
 INVENTORY_PATH = COURSE_ROOT / "artifact-inventory.json"
 HUB_PATH = COURSE_ROOT / "_index.md"
+SEMANTIC_REVIEW_PATH = COURSE_ROOT / "semantic-review.json"
 RETRIEVED_AT = "2026-09-04"
 COURSE_URL = "https://cs336.stanford.edu/"
 GITHUB_ORG = "stanford-cs336"
+EXTRACTOR_REVISION = "stanford-cs336-semantic-audit-v2"
 USER_PERMISSION = (
     "User confirmed open educational reuse on 2026-09-04 for local educational "
     "preservation and later attributed textbook reuse; this is a permission "
@@ -175,6 +177,52 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
+def poppler_version(tool: str) -> str:
+    result = subprocess.run(
+        [tool, "-v"],
+        check=True,
+        capture_output=True,
+        text=True,
+        timeout=30,
+    )
+    output = "\n".join(part for part in (result.stdout, result.stderr) if part)
+    match = re.search(r"(?:version\s+)?(\d+\.\d+\.\d+)", output)
+    if not match:
+        raise RuntimeError(f"cannot determine {tool} version")
+    return match.group(1)
+
+
+def edtrace_version() -> str:
+    lock_text = (LECTURES_ROOT / "uv.lock").read_text("utf-8")
+    match = re.search(
+        r'^\[\[package\]\]\s*\nname = "edtrace"\s*\nversion = "([^"]+)"',
+        lock_text,
+        flags=re.MULTILINE,
+    )
+    if not match:
+        raise RuntimeError("cannot determine pinned edtrace version")
+    return match.group(1)
+
+
+def extraction_provenance() -> dict[str, str]:
+    return {
+        "edtrace": edtrace_version(),
+        "pdfinfo": poppler_version("pdfinfo"),
+        "pdftotext": poppler_version("pdftotext"),
+        "pdfimages": poppler_version("pdfimages"),
+        "extractor_revision": EXTRACTOR_REVISION,
+        "extractor_sha256": sha256_file(Path(__file__)),
+        "semantic_review_sha256": sha256_file(SEMANTIC_REVIEW_PATH),
+    }
+
+
+def semantic_review() -> dict[str, Any]:
+    value = json.loads(SEMANTIC_REVIEW_PATH.read_text("utf-8"))
+    if not isinstance(value, dict) or value.get("schema_version") != 1:
+        raise RuntimeError(f"invalid semantic review specification: {SEMANTIC_REVIEW_PATH}")
+    return value
+
+
 def relative(path: Path) -> str:
     return path.relative_to(COURSE_ROOT).as_posix()
 
@@ -283,90 +331,6 @@ def clean_title(value: str, fallback: str) -> str:
     return value[:180] if value else fallback
 
 
-def literal_string(call: ast.Call, index: int = 0) -> str | None:
-    if len(call.args) <= index:
-        return None
-    value = call.args[index]
-    return value.value if isinstance(value, ast.Constant) and isinstance(value.value, str) else None
-
-
-def call_name(call: ast.Call) -> str | None:
-    if isinstance(call.func, ast.Name):
-        return call.func.id
-    if isinstance(call.func, ast.Attribute):
-        return call.func.attr
-    return None
-
-
-def python_lecture_events(path: Path, sha: str) -> list[dict[str, Any]]:
-    source = path.read_text("utf-8")
-    tree = ast.parse(source)
-    events: list[dict[str, Any]] = []
-    rendered_calls = {"text", "image", "link", "code", "table", "plot", "bar", "line"}
-    for node in ast.walk(tree):
-        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
-            events.append(
-                {
-                    "line": node.lineno,
-                    "column": node.col_offset,
-                    "kind": "section-boundary",
-                    "title": clean_title(node.name.replace("_", " "), "Section"),
-                    "heading_level": 2,
-                }
-            )
-        elif isinstance(node, ast.Call) and call_name(node) in rendered_calls:
-            name = call_name(node)
-            literal = literal_string(node)
-            source_text = ast.get_source_segment(source, node) or f"{name}()"
-            if name == "image":
-                asset = literal or f"unresolved-event-{node.lineno}"
-                asset_url = (
-                    f"https://raw.githubusercontent.com/{GITHUB_ORG}/lectures/"
-                    f"{sha}/{asset.lstrip('/')}"
-                    if literal
-                    else f"https://github.com/{GITHUB_ORG}/lectures/blob/{sha}/{path.name}#L{node.lineno}"
-                )
-                events.append(
-                    {
-                        "line": node.lineno,
-                        "column": node.col_offset,
-                        "kind": "rendered-image",
-                        "title": clean_title(Path(asset).name, f"Image event at line {node.lineno}"),
-                        "asset_url": asset_url,
-                    }
-                )
-            elif name == "link":
-                target = literal
-                if target is None:
-                    for keyword in node.keywords:
-                        if keyword.arg == "url" and isinstance(keyword.value, ast.Constant):
-                            target = keyword.value.value
-                if not isinstance(target, str) or not re.match(r"https?://", target):
-                    target = f"https://github.com/{GITHUB_ORG}/lectures/blob/{sha}/{path.name}#L{node.lineno}"
-                events.append(
-                    {
-                        "line": node.lineno,
-                        "column": node.col_offset,
-                        "kind": "rendered-link",
-                        "title": clean_title(literal or source_text, f"Link at line {node.lineno}"),
-                        "target_url": target,
-                    }
-                )
-            else:
-                title = clean_title(literal or source_text, f"Rendered event at line {node.lineno}")
-                events.append(
-                    {
-                        "line": node.lineno,
-                        "column": node.col_offset,
-                        "kind": "rendered-text",
-                        "title": title,
-                        "content_sha256": sha256_bytes(source_text.encode("utf-8")),
-                        "visual_event": name in {"code", "table", "plot", "bar", "line"},
-                    }
-                )
-    return sorted(events, key=lambda event: (event["line"], event["column"], event["kind"]))
-
-
 def trace_path(filename: str) -> Path:
     return LECTURES_ROOT / "var/traces" / f"{Path(filename).stem}.json"
 
@@ -411,6 +375,9 @@ def trace_renderings(filename: str, sha: str) -> list[dict[str, Any]]:
                             "title": clean_title(heading.group(2), f"Trace heading {step_number}"),
                             "heading_level": len(heading.group(1)),
                             "source_location": location,
+                            "source_line": source_line,
+                            "rendering_type": rendering_type,
+                            "text": text_value,
                         }
                     )
                 else:
@@ -421,6 +388,9 @@ def trace_renderings(filename: str, sha: str) -> list[dict[str, Any]]:
                             "title": clean_title(text_value, f"Trace text {step_number}"),
                             "content_sha256": sha256_bytes(text_value.encode("utf-8")),
                             "source_location": location,
+                            "source_line": source_line,
+                            "rendering_type": rendering_type,
+                            "text": text_value,
                         }
                     )
             elif rendering_type == "image":
@@ -438,6 +408,9 @@ def trace_renderings(filename: str, sha: str) -> list[dict[str, Any]]:
                         "title": clean_title(Path(asset).name, f"Trace image {step_number}"),
                         "asset_url": asset_url,
                         "source_location": location,
+                        "source_line": source_line,
+                        "rendering_type": rendering_type,
+                        "asset": asset,
                     }
                 )
             elif rendering_type == "link":
@@ -458,6 +431,9 @@ def trace_renderings(filename: str, sha: str) -> list[dict[str, Any]]:
                         ),
                         "target_url": target,
                         "source_location": location,
+                        "source_line": source_line,
+                        "rendering_type": rendering_type,
+                        "text": data if isinstance(data, str) else target,
                     }
                 )
     return events
@@ -507,6 +483,7 @@ def pinned_blob(repository: str, sha: str, path: str) -> str:
 
 def source_manifest(lock: dict[str, Any]) -> dict[str, Any]:
     revisions = {item["repository"]: item["revision"] for item in lock["repositories"]}
+    assignment_review = semantic_review()["assignments"]
     objects: list[dict[str, Any]] = []
     for number, meeting_date, title, lecturer, filename in SCHEDULE:
         if filename is None:
@@ -538,8 +515,8 @@ def source_manifest(lock: dict[str, Any]) -> dict[str, Any]:
     for number, repository, title, released in ASSIGNMENT_META:
         sha = revisions[repository]
         path = ASSIGNMENTS_ROOT / repository
-        handouts = sorted(path.glob("*.pdf"))
-        page_count = sum(pdf_page_count(pdf) for pdf in handouts) or 1
+        handout = COURSE_ROOT / assignment_review[f"assignment-{number:02d}"]["handout"]
+        page_count = pdf_page_count(handout)
         objects.append(
             {
                 "id": f"assignment-{number:02d}",
@@ -605,377 +582,120 @@ def source_manifest(lock: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def slug(value: str) -> str:
+    result = re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
+    if not result:
+        raise RuntimeError(f"cannot form stable semantic id from {value!r}")
+    return result
+
+
 def make_unit(
     object_id: str,
-    order: int,
+    semantic_id: str,
     kind: str,
     source_location: str,
     title: str,
+    sort_key: tuple[int, int, str],
     **fields: Any,
 ) -> dict[str, Any]:
     return {
-        "id": f"{object_id}-unit-{order:04d}",
+        "id": f"{object_id}-{slug(semantic_id)}",
         "source_object": object_id,
-        "order": order,
+        "order": 0,
         "source_location": source_location,
         "kind": kind,
-        "title": clean_title(title, f"{object_id} unit {order}"),
+        "title": clean_title(title, semantic_id),
+        "semantic_id": semantic_id,
+        "_sort_key": sort_key,
         **fields,
     }
 
 
-def executable_units(
-    number: int,
-    filename: str,
-    sha: str,
-) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
-    object_id = f"lecture-{number:02d}"
-    path = trace_path(filename)
-    events = trace_renderings(filename, sha)
-    units: list[dict[str, Any]] = []
-    visuals: list[dict[str, Any]] = []
-    for order, event in enumerate(events, start=1):
-        location = event["source_location"]
-        fields = {
-            key: event[key]
-            for key in ("heading_level", "content_sha256", "asset_url", "target_url")
-            if key in event
-        }
-        units.append(make_unit(object_id, order, event["kind"], location, event["title"], **fields))
-        if event["kind"] == "rendered-image" or event.get("visual_event"):
-            visual_kind = "image" if event["kind"] == "rendered-image" else "rendered code/table trace"
-            visuals.append(
-                source_only_visual(
-                    f"{object_id}-visual-{len(visuals) + 1:04d}",
-                    object_id,
-                    location,
-                    [event["step"]],
-                    f"What does this {visual_kind} contribute to {object_id}?",
-                    [location],
-                    object_id,
-                    sha256_file(path),
-                    "edtrace JSON event stream, rendering audit v1",
-                )
-            )
-    return units, visuals
-
-
-def pdf_units_and_visuals(
-    object_id: str,
-    path: Path,
-) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
-    units: list[dict[str, Any]] = []
-    visuals: list[dict[str, Any]] = []
-    pages = pdf_pages(path)
-    checksum = sha256_file(path)
-    images_by_page: dict[int, list[dict[str, Any]]] = {}
-    for image in pdf_embedded_images(path):
-        images_by_page.setdefault(image["page"], []).append(image)
-    for page_number, page_text in enumerate(pages, start=1):
-        title = first_page_title(page_text, f"Page {page_number}")
-        location = f"{relative(path)}#page={page_number}"
-        units.append(
-            make_unit(
-                object_id,
-                len(units) + 1,
-                "page",
-                location,
-                title,
-                page=page_number,
-            )
-        )
-        visuals.append(
-            source_only_visual(
-                f"{object_id}-visual-page-{page_number:04d}",
-                object_id,
-                location,
-                [page_number],
-                f"What visual argument, figure, table, derivation, or example appears on page {page_number}?",
-                [location],
-                object_id,
-                checksum,
-                "Poppler pdftotext/pdfinfo, page audit v1",
-            )
-        )
-        for block_index, block in enumerate(re.split(r"\n\s*\n", page_text), start=1):
-            line = clean_title(block.splitlines()[0] if block.splitlines() else "", "")
-            if not line or len(line) > 140:
-                continue
-            if re.search(
-                r"(?i)^(?:\d+(?:\.\d+)*\s+|example|experiment|failure|derivation|"
-                r"evaluation|results?|summary|architecture|method|attention|training|data)",
-                line,
-            ):
-                units.append(
-                    make_unit(
-                        object_id,
-                        len(units) + 1,
-                        "heading",
-                        f"{location}:block={block_index}",
-                        line,
-                        page=page_number,
-                        heading_level=2,
-                    )
-                )
-        for image in images_by_page.get(page_number, []):
-            image_location = f"{location}:image={image['number']}"
-            units.append(
-                make_unit(
-                    object_id,
-                    len(units) + 1,
-                    "figure",
-                    image_location,
-                    (
-                        f"Embedded image {image['number']} "
-                        f"({image['width']}x{image['height']})"
-                    ),
-                    page=page_number,
-                    figure_label=f"pdf-image-{image['number']}",
-                )
-            )
-            visuals.append(
-                source_only_visual(
-                    f"{object_id}-visual-image-{image['number']:04d}",
-                    object_id,
-                    image_location,
-                    [page_number],
-                    f"What argument does embedded image {image['number']} support?",
-                    [image_location],
-                    object_id,
-                    checksum,
-                    "Poppler pdfimages, embedded-image audit v1",
-                )
-            )
+def finalize_units(units: list[dict[str, Any]], object_id: str) -> list[dict[str, Any]]:
+    units.sort(key=lambda unit: tuple(unit["_sort_key"]))
+    ids: set[str] = set()
+    semantic_ids: set[str] = set()
     for order, unit in enumerate(units, start=1):
+        unit.pop("_sort_key")
         unit["order"] = order
-        unit["id"] = f"{object_id}-unit-{order:04d}"
-    return units, visuals
+        if unit["id"] in ids:
+            raise RuntimeError(f"{object_id}: duplicate source-unit id {unit['id']}")
+        ids.add(unit["id"])
+        semantic = unit.get("semantic_id")
+        if semantic in semantic_ids:
+            raise RuntimeError(f"{object_id}: duplicate semantic id {semantic}")
+        semantic_ids.add(semantic)
+    return units
 
 
-def assignment_handout_paths(repository: str) -> list[Path]:
-    root = ASSIGNMENTS_ROOT / repository
-    if repository == "assignment5-alignment":
-        return [
-            path
-            for path in sorted(root.glob("*.pdf"))
-            if "supplement_safety_rlhf" not in path.name
-        ]
-    return sorted(root.glob("*.pdf"))
+def normalized_text(value: str) -> str:
+    return re.sub(r"\s+", " ", value).strip().casefold()
 
 
-def assignment_units(
-    number: int,
-    repository: str,
-) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
-    object_id = f"assignment-{number:02d}"
-    root = ASSIGNMENTS_ROOT / repository
-    records: list[tuple[str, str, str, dict[str, Any]]] = []
-    visuals: list[dict[str, Any]] = []
-    for handout in assignment_handout_paths(repository):
-        checksum = sha256_file(handout)
-        images_by_page: dict[int, list[dict[str, Any]]] = {}
-        for image in pdf_embedded_images(handout):
-            images_by_page.setdefault(image["page"], []).append(image)
-        for page_number, page_text in enumerate(pdf_pages(handout), start=1):
-            location = f"{relative(handout)}#page={page_number}"
-            title = first_page_title(page_text, f"Handout page {page_number}")
-            records.append(
-                (
-                    "task",
-                    location,
-                    title,
-                    {"task_id": f"handout-page-{page_number}"},
-                )
-            )
-            visuals.append(
-                source_only_visual(
-                    f"{object_id}-visual-{handout.stem}-page-{page_number:04d}",
-                    object_id,
-                    location,
-                    [page_number],
-                    f"What task, result, table, or experiment is specified on handout page {page_number}?",
-                    [location],
-                    object_id,
-                    checksum,
-                    "Poppler pdftotext/pdfinfo, page audit v1",
-                )
-            )
-            for image in images_by_page.get(page_number, []):
-                image_location = f"{location}:image={image['number']}"
-                visuals.append(
-                    source_only_visual(
-                        (
-                            f"{object_id}-visual-{handout.stem}-"
-                            f"image-{image['number']:04d}"
-                        ),
-                        object_id,
-                        image_location,
-                        [page_number],
-                        f"What assignment mechanism does embedded image {image['number']} specify?",
-                        [image_location],
-                        object_id,
-                        checksum,
-                        "Poppler pdfimages, embedded-image audit v1",
-                    )
-                )
-            for block_index, block in enumerate(re.split(r"\n\s*\n", page_text), start=1):
-                first = clean_title(block.splitlines()[0] if block.splitlines() else "", "")
-                if not first or len(first) > 150:
-                    continue
-                if not re.search(
-                    r"(?i)(problem|task|experiment|writeup|deliverable|submit|report|"
-                    r"evaluation|leaderboard|reproduc|points?|benchmark|test)",
-                    block,
-                ):
-                    continue
-                kind = "task"
-                field = {"task_id": f"handout-p{page_number}-b{block_index}"}
-                if re.search(r"(?i)(writeup|deliverable|submit|report)", block):
-                    kind = "deliverable"
-                    field = {"deliverable_id": f"handout-p{page_number}-b{block_index}"}
-                elif re.search(r"(?i)(evaluation|leaderboard|reproduc|points?|benchmark)", block):
-                    kind = "evaluation-requirement"
-                    field = {"criterion_id": f"handout-p{page_number}-b{block_index}"}
-                records.append(
-                    (
-                        kind,
-                        f"{location}:block={block_index}",
-                        first,
-                        field,
-                    )
-                )
-    for adapter in sorted(root.rglob("adapters.py")):
-        tree = ast.parse(adapter.read_text("utf-8"))
-        for node in ast.walk(tree):
-            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
-                records.append(
-                    (
-                        "task",
-                        f"{relative(adapter)}#L{node.lineno}",
-                        f"Implement {node.name}",
-                        {"task_id": node.name},
-                    )
-                )
-    for test_path in sorted(root.rglob("test*.py")):
-        tree = ast.parse(test_path.read_text("utf-8"))
-        for node in ast.walk(tree):
-            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name.startswith("test"):
-                records.append(
-                    (
-                        "test-interface",
-                        f"{relative(test_path)}#L{node.lineno}",
-                        node.name.replace("_", " "),
-                        {"interface_name": node.name},
-                    )
-                )
-    readme = root / "README.md"
-    if readme.exists():
-        for line_number, line in enumerate(readme.read_text("utf-8").splitlines(), start=1):
-            match = re.match(r"^(#{1,6})\s+(.+)$", line)
-            if match:
-                slug = re.sub(r"[^a-z0-9]+", "-", match.group(2).lower()).strip("-")
-                records.append(
-                    (
-                        "deliverable",
-                        f"{relative(readme)}#L{line_number}",
-                        match.group(2),
-                        {"deliverable_id": f"readme-{slug or line_number}"},
-                    )
-                )
-    units = [
-        make_unit(object_id, order, kind, location, title, **fields)
-        for order, (kind, location, title, fields) in enumerate(records, start=1)
-    ]
-    return units, visuals
+def page_span(spec: dict[str, Any], page_count: int, label: str) -> list[int]:
+    values = spec.get("pages")
+    if (
+        not isinstance(values, list)
+        or len(values) not in (1, 2)
+        or not all(isinstance(page, int) for page in values)
+    ):
+        raise RuntimeError(f"{label}: pages must contain one page or inclusive start/end")
+    start = values[0]
+    end = values[-1]
+    if start < 1 or end < start or end > page_count:
+        raise RuntimeError(f"{label}: invalid page span {values} for {page_count} pages")
+    return list(range(start, end + 1))
 
 
-def safety_units_and_visuals() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
-    object_id = "assignment-05-safety-supplement"
-    path = ASSIGNMENTS_ROOT / "assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf"
-    records: list[tuple[str, str, str, dict[str, Any]]] = []
-    visuals: list[dict[str, Any]] = []
-    checksum = sha256_file(path)
-    images_by_page: dict[int, list[dict[str, Any]]] = {}
-    for image in pdf_embedded_images(path):
-        images_by_page.setdefault(image["page"], []).append(image)
-    for page_number, page_text in enumerate(pdf_pages(path), start=1):
-        location = f"{relative(path)}#page={page_number}"
-        records.append(
-            (
-                "task",
-                location,
-                first_page_title(page_text, f"Safety supplement page {page_number}"),
-                {"task_id": f"safety-page-{page_number}"},
-            )
-        )
-        visuals.append(
-            source_only_visual(
-                f"{object_id}-visual-page-{page_number:04d}",
-                object_id,
-                location,
-                [page_number],
-                f"What safety/RLHF task, evaluation, or result appears on page {page_number}?",
-                [location],
-                object_id,
-                checksum,
-                "Poppler pdftotext/pdfinfo, page audit v1",
-            )
-        )
-        for image in images_by_page.get(page_number, []):
-            image_location = f"{location}:image={image['number']}"
-            visuals.append(
-                source_only_visual(
-                    f"{object_id}-visual-image-{image['number']:04d}",
-                    object_id,
-                    image_location,
-                    [page_number],
-                    f"What safety/RLHF mechanism does embedded image {image['number']} specify?",
-                    [image_location],
-                    object_id,
-                    checksum,
-                    "Poppler pdfimages, embedded-image audit v1",
-                )
-            )
-        for block_index, block in enumerate(re.split(r"\n\s*\n", page_text), start=1):
-            first = clean_title(block.splitlines()[0] if block.splitlines() else "", "")
-            if not first or len(first) > 150:
-                continue
-            if not re.search(
-                r"(?i)(problem|task|experiment|writeup|deliverable|submit|report|"
-                r"evaluation|reproduc|points?|benchmark|test|safety|DPO|RLHF|SFT)",
-                block,
-            ):
-                continue
-            kind = "task"
-            fields: dict[str, Any] = {"task_id": f"safety-p{page_number}-b{block_index}"}
-            if re.search(r"(?i)(writeup|deliverable|submit|report)", block):
-                kind = "deliverable"
-                fields = {"deliverable_id": f"safety-p{page_number}-b{block_index}"}
-            elif re.search(r"(?i)(evaluation|reproduc|points?|benchmark)", block):
-                kind = "evaluation-requirement"
-                fields = {"criterion_id": f"safety-p{page_number}-b{block_index}"}
-            records.append((kind, f"{location}:block={block_index}", first, fields))
-    units = [
-        make_unit(object_id, order, kind, location, title, **fields)
-        for order, (kind, location, title, fields) in enumerate(records, start=1)
-    ]
-    return units, visuals
+def page_fields(pages: list[int]) -> dict[str, int]:
+    if len(pages) == 1:
+        return {"page": pages[0]}
+    return {"page_start": pages[0], "page_end": pages[-1]}
+
+
+def semantic_page_location(path: Path, pages: list[int], semantic_id: str) -> str:
+    if len(pages) == 1:
+        scope = f"page={pages[0]}"
+    else:
+        scope = f"pages={pages[0]}-{pages[-1]}"
+    return f"{relative(path)}#{scope}:semantic={semantic_id}"
+
+
+def require_page_evidence(
+    pages_text: list[str],
+    pages: list[int],
+    evidence: Any,
+    label: str,
+) -> str:
+    if not isinstance(evidence, str) or not evidence.strip():
+        raise RuntimeError(f"{label}: evidence_text must be a non-empty string")
+    selected = normalized_text("\n".join(pages_text[page - 1] for page in pages))
+    if normalized_text(evidence) not in selected:
+        raise RuntimeError(f"{label}: evidence_text not found in reviewed page span: {evidence!r}")
+    return evidence
 
 
 def source_only_visual(
     visual_id: str,
+    semantic_id: str,
+    visual_kind: str,
     object_id: str,
     source_location: str,
     locations: list[int],
     question: str,
     sequence_locations: list[str],
-    anchor: str,
+    source_units: list[str],
     parent_sha256: str,
     extraction_tool: str,
+    provenance: dict[str, str],
+    **fields: Any,
 ) -> dict[str, Any]:
     return {
         "id": visual_id,
+        "semantic_id": semantic_id,
+        "visual_kind": visual_kind,
         "source_object": object_id,
+        "source_units": source_units,
         "source_location": source_location,
         "source_pages": locations,
         "question": question,
@@ -985,10 +705,10 @@ def source_only_visual(
         ],
         "disposition": "source-only",
         "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-        "destination_anchor": anchor,
+        "destination_anchor": object_id,
         "reason": (
-            "Baseline visual audit: the original is preserved at exact event/page "
-            "scope; no canonical textbook placement has yet been reviewed."
+            "Reviewed semantic visual is preserved at exact event/page scope; "
+            "canonical textbook placement remains pending."
         ),
         "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
         "rights_status": "permission-recorded",
@@ -998,71 +718,776 @@ def source_only_visual(
         "license_url": COURSE_URL,
         "rights_evidence": USER_PERMISSION,
         "parent_sha256": parent_sha256,
+        "extractor_sha256": provenance["extractor_sha256"],
+        "extractor_revision": provenance["extractor_revision"],
         "extraction_tool": extraction_tool,
         "rendered_route": "/sources/courses/stanford-cs336-spring-2026/",
         "desktop_evidence": "pending editorial integration; source archive inspected",
         "narrow_evidence": "pending editorial integration; source archive inspected",
         "reviewer": "Codex source audit",
         "checked_at": RETRIEVED_AT,
+        **fields,
     }
+
+
+def executable_units(
+    number: int,
+    filename: str,
+    sha: str,
+    review: dict[str, Any],
+    provenance: dict[str, str],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    object_id = f"lecture-{number:02d}"
+    trace = trace_path(filename)
+    source = LECTURES_ROOT / filename
+    events = trace_renderings(filename, sha)
+    if not events:
+        raise RuntimeError(f"{object_id}: edtrace has no renderings")
+    trace_steps = len(trace_document(filename)["steps"])
+    headings = [event for event in events if event["kind"] == "section-boundary"]
+    administrative_titles = {
+        normalized_text(title) for title in review.get("administrative_headings", [])
+    }
+    matched_administrative: set[str] = set()
+    units: list[dict[str, Any]] = []
+    visuals: list[dict[str, Any]] = []
+
+    for index, event in enumerate(headings):
+        start = event["step"]
+        next_start = headings[index + 1]["step"] if index + 1 < len(headings) else trace_steps + 1
+        end = max(start, next_start - 1)
+        normalized_title = normalized_text(event["title"])
+        is_administrative = normalized_title in administrative_titles
+        if is_administrative:
+            matched_administrative.add(normalized_title)
+        semantic_id = (
+            f"administrative-{slug(event['title'])}"
+            if is_administrative
+            else f"section-{start}-{slug(event['title'])}"
+        )
+        location = f"{relative(trace)}#steps={start}-{end}:semantic={semantic_id}"
+        fields: dict[str, Any] = {
+            "event_start": start,
+            "event_end": end,
+            "heading_level": event["heading_level"],
+            "source_line_start": event.get("source_line"),
+            "source_line_end": headings[index + 1].get("source_line") - 1
+            if index + 1 < len(headings)
+            and isinstance(headings[index + 1].get("source_line"), int)
+            else event.get("source_line"),
+        }
+        if is_administrative:
+            fields.update(
+                {
+                    "exclusion_reason": (
+                        "Course logistics, policy, or assignment administration is preserved "
+                        "but excluded from teaching-content coverage."
+                    ),
+                    "exclusion_evidence": event["title"],
+                }
+            )
+        units.append(
+            make_unit(
+                object_id,
+                semantic_id,
+                "administrative" if is_administrative else "section",
+                location,
+                event["title"],
+                (start, 0, semantic_id),
+                **fields,
+            )
+        )
+    unmatched = administrative_titles - matched_administrative
+    if unmatched:
+        raise RuntimeError(f"{object_id}: unmatched administrative headings: {sorted(unmatched)}")
+
+    for spec in review.get("constructs", []):
+        line_start = spec["line_start"]
+        line_end = spec["line_end"]
+        selected = [
+            event
+            for event in events
+            if isinstance(event.get("source_line"), int)
+            and line_start <= event["source_line"] <= line_end
+        ]
+        if not selected:
+            raise RuntimeError(f"{object_id}/{spec['semantic_id']}: no edtrace events in reviewed lines")
+        start = min(event["step"] for event in selected)
+        end = max(event["step"] for event in selected)
+        location = (
+            f"{relative(trace)}#steps={start}-{end}:"
+            f"lines={line_start}-{line_end}:semantic={spec['semantic_id']}"
+        )
+        units.append(
+            make_unit(
+                object_id,
+                spec["semantic_id"],
+                spec["kind"],
+                location,
+                spec["title"],
+                (start, 1, spec["semantic_id"]),
+                event_start=start,
+                event_end=end,
+                source_line_start=line_start,
+                source_line_end=line_end,
+                evidence_locations=[event["source_location"] for event in selected],
+            )
+        )
+
+    claimed_images: set[str] = set()
+    for spec in review.get("visual_sequences", []):
+        line_start = spec["line_start"]
+        line_end = spec["line_end"]
+        selected = [
+            event
+            for event in events
+            if isinstance(event.get("source_line"), int)
+            and line_start <= event["source_line"] <= line_end
+        ]
+        if not selected:
+            raise RuntimeError(f"{object_id}/{spec['semantic_id']}: no visual sequence events")
+        start = min(event["step"] for event in selected)
+        end = max(event["step"] for event in selected)
+        source_pages = sorted({event["step"] for event in selected})
+        location = (
+            f"{relative(trace)}#steps={start}-{end}:"
+            f"lines={line_start}-{line_end}:semantic={spec['semantic_id']}"
+        )
+        unit = make_unit(
+            object_id,
+            spec["semantic_id"],
+            spec["kind"],
+            location,
+            spec["title"],
+            (start, 2, spec["semantic_id"]),
+            event_start=start,
+            event_end=end,
+            source_line_start=line_start,
+            source_line_end=line_end,
+            evidence_locations=[event["source_location"] for event in selected],
+        )
+        units.append(unit)
+        if spec.get("claim_images"):
+            claimed_images.update(
+                event["source_location"] for event in selected if event["kind"] == "rendered-image"
+            )
+        visuals.append(
+            source_only_visual(
+                f"{object_id}-visual-{slug(spec['semantic_id'])}",
+                spec["semantic_id"],
+                spec["visual_kind"],
+                object_id,
+                location,
+                source_pages,
+                spec["question"],
+                [event["source_location"] for event in selected],
+                [unit["id"]],
+                sha256_file(trace),
+                f"edtrace {provenance['edtrace']} archived JSON rendering stream",
+                provenance,
+                source_parent_sha256=sha256_file(source),
+                source_lines=[line_start, line_end],
+            )
+        )
+
+    for event in events:
+        if event["kind"] != "rendered-image" or event["source_location"] in claimed_images:
+            continue
+        match = re.search(r"rendering=(\d+)$", event["source_location"])
+        rendering_number = int(match.group(1)) if match else 1
+        semantic_id = f"figure-step-{event['step']}-rendering-{rendering_number}"
+        nearest_heading = next(
+            (heading["title"] for heading in reversed(headings) if heading["step"] <= event["step"]),
+            object_id,
+        )
+        title = clean_title(
+            Path(event.get("asset", "figure")).stem.replace("_", " ").replace("-", " "),
+            f"Figure in {nearest_heading}",
+        )
+        unit = make_unit(
+            object_id,
+            semantic_id,
+            "figure",
+            event["source_location"],
+            title,
+            (event["step"], 3, semantic_id),
+            event_start=event["step"],
+            event_end=event["step"],
+            source_line_start=event.get("source_line"),
+            source_line_end=event.get("source_line"),
+            asset_url=event["asset_url"],
+        )
+        units.append(unit)
+        visuals.append(
+            source_only_visual(
+                f"{object_id}-visual-{semantic_id}",
+                semantic_id,
+                "figure",
+                object_id,
+                event["source_location"],
+                [event["step"]],
+                f"How does {title} support the lecture section “{nearest_heading}”?",
+                [event["source_location"]],
+                [unit["id"]],
+                sha256_file(trace),
+                f"edtrace {provenance['edtrace']} archived image rendering",
+                provenance,
+                source_parent_sha256=sha256_file(source),
+                asset_url=event["asset_url"],
+            )
+        )
+    return finalize_units(units, object_id), visuals
+
+
+def pdf_units_and_visuals(
+    object_id: str,
+    path: Path,
+    review: dict[str, Any],
+    provenance: dict[str, str],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]:
+    pages_text = pdf_pages(path)
+    checksum = sha256_file(path)
+    units: list[dict[str, Any]] = []
+    visuals: list[dict[str, Any]] = []
+    for spec in review.get("units", []):
+        pages = page_span(spec, len(pages_text), f"{object_id}/{spec['semantic_id']}")
+        evidence = require_page_evidence(
+            pages_text,
+            pages,
+            spec.get("evidence_text"),
+            f"{object_id}/{spec['semantic_id']}",
+        )
+        units.append(
+            make_unit(
+                object_id,
+                spec["semantic_id"],
+                spec["kind"],
+                semantic_page_location(path, pages, spec["semantic_id"]),
+                spec["title"],
+                (pages[0], 0, spec["semantic_id"]),
+                evidence_text=evidence,
+                **page_fields(pages),
+            )
+        )
+    units_by_semantic_id = {unit["semantic_id"]: unit for unit in units}
+    embedded_images = pdf_embedded_images(path)
+    for spec in review.get("visuals", []):
+        semantic_id = spec["semantic_id"]
+        linked_unit = units_by_semantic_id.get(semantic_id)
+        if linked_unit is None:
+            raise RuntimeError(f"{object_id}/{semantic_id}: visual lacks a reviewed semantic unit")
+        pages = page_span(spec, len(pages_text), f"{object_id}/{semantic_id} visual")
+        raster_evidence = [
+            image for image in embedded_images if image["page"] in set(pages)
+        ]
+        location = semantic_page_location(path, pages, semantic_id)
+        visuals.append(
+            source_only_visual(
+                f"{object_id}-visual-{slug(semantic_id)}",
+                semantic_id,
+                spec["visual_kind"],
+                object_id,
+                location,
+                pages,
+                spec["question"],
+                [
+                    f"{relative(path)}#page={page}:semantic={semantic_id}"
+                    for page in pages
+                ],
+                [linked_unit["id"]],
+                checksum,
+                (
+                    f"Poppler pdftotext {provenance['pdftotext']} semantic page review; "
+                    f"pdfimages {provenance['pdfimages']} raster evidence"
+                ),
+                provenance,
+                raster_evidence=raster_evidence,
+            )
+        )
+    raster_summary = {
+        "source_object": object_id,
+        "source_path": relative(path),
+        "parent_sha256": checksum,
+        "detected_images": len(embedded_images),
+        "treatment": (
+            "pdfimages detections are evidence attached to reviewed semantic sequences; "
+            "they are not independent teaching visuals."
+        ),
+    }
+    return finalize_units(units, object_id), visuals, raster_summary
+
+
+def marker_title(text: str, match: re.Match[str], group: int, fallback: str) -> str:
+    title = clean_title(match.group(group), "")
+    if title:
+        return title
+    for line in text[match.end() :].splitlines():
+        title = clean_title(line, "")
+        if title:
+            return title
+    return fallback
+
+
+def assignment_units(
+    object_id: str,
+    repository: str,
+    review: dict[str, Any],
+    provenance: dict[str, str],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]:
+    root = ASSIGNMENTS_ROOT / repository
+    handout = COURSE_ROOT / review["handout"]
+    if handout.parent != root:
+        raise RuntimeError(f"{object_id}: reviewed handout is outside {repository}")
+    pages_text = pdf_pages(handout)
+    checksum = sha256_file(handout)
+    units: list[dict[str, Any]] = []
+    visuals: list[dict[str, Any]] = []
+    task_ids: list[str] = []
+    deliverable_count = 0
+    current_task: str | None = None
+    problem_pattern = re.compile(r"(?m)^\s*Problem \(([^)]+)\):\s*(.*?)\s*$")
+    deliverable_pattern = re.compile(r"(?m)^\s*Deliverable:\s*(.*?)\s*$")
+
+    for page_number, page_text in enumerate(pages_text, start=1):
+        markers: list[tuple[int, str, re.Match[str]]] = [
+            (match.start(), "problem", match) for match in problem_pattern.finditer(page_text)
+        ]
+        markers.extend(
+            (match.start(), "deliverable", match)
+            for match in deliverable_pattern.finditer(page_text)
+        )
+        for offset, marker_kind, match in sorted(markers, key=lambda value: value[0]):
+            if marker_kind == "problem":
+                task_id = match.group(1).strip()
+                current_task = task_id
+                task_ids.append(task_id)
+                units.append(
+                    make_unit(
+                        object_id,
+                        f"task-{task_id}",
+                        "task",
+                        f"{relative(handout)}#page={page_number}:problem={task_id}",
+                        marker_title(page_text, match, 2, task_id.replace("_", " ")),
+                        (page_number, offset, f"task-{task_id}"),
+                        task_id=task_id,
+                        page=page_number,
+                    )
+                )
+            else:
+                deliverable_count += 1
+                deliverable_id = (
+                    f"{current_task or 'general'}-{deliverable_count:03d}"
+                )
+                units.append(
+                    make_unit(
+                        object_id,
+                        f"deliverable-{deliverable_id}",
+                        "deliverable",
+                        (
+                            f"{relative(handout)}#page={page_number}:"
+                            f"deliverable={deliverable_count}"
+                        ),
+                        marker_title(
+                            page_text,
+                            match,
+                            1,
+                            f"Deliverable for {current_task or 'assignment'}",
+                        ),
+                        (page_number, offset, f"deliverable-{deliverable_id}"),
+                        deliverable_id=deliverable_id,
+                        task_id=current_task,
+                        page=page_number,
+                    )
+                )
+    expected_task_ids = review.get("expected_task_ids")
+    if task_ids != expected_task_ids:
+        raise RuntimeError(
+            f"{object_id}: named problem closure mismatch; "
+            f"expected {expected_task_ids}, extracted {task_ids}"
+        )
+    if deliverable_count != review.get("expected_deliverables"):
+        raise RuntimeError(
+            f"{object_id}: deliverable closure mismatch; "
+            f"expected {review.get('expected_deliverables')}, extracted {deliverable_count}"
+        )
+
+    test_paths = sorted(
+        {
+            path
+            for pattern in review.get("test_globs", [])
+            for path in root.glob(pattern)
+            if path.is_file()
+        }
+    )
+    test_count = 0
+    for test_path in test_paths:
+        tree = ast.parse(test_path.read_text("utf-8"))
+        functions = sorted(
+            (
+                node
+                for node in ast.walk(tree)
+                if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+                and node.name.startswith("test")
+            ),
+            key=lambda node: node.lineno,
+        )
+        for node in functions:
+            test_count += 1
+            semantic_id = (
+                f"test-{slug(test_path.relative_to(root).as_posix())}-"
+                f"{node.lineno}-{node.name}"
+            )
+            units.append(
+                make_unit(
+                    object_id,
+                    semantic_id,
+                    "test-interface",
+                    f"{relative(test_path)}#L{node.lineno}",
+                    f"Test contract: {node.name.replace('_', ' ')}",
+                    (len(pages_text) + 1, node.lineno, semantic_id),
+                    interface_name=node.name,
+                    test_file=test_path.relative_to(root).as_posix(),
+                )
+            )
+    if test_count != review.get("expected_test_interfaces"):
+        raise RuntimeError(
+            f"{object_id}: test-interface closure mismatch; "
+            f"expected {review.get('expected_test_interfaces')}, extracted {test_count}"
+        )
+
+    for spec in review.get("administrative", []):
+        pages = page_span(spec, len(pages_text), f"{object_id}/{spec['semantic_id']}")
+        evidence = require_page_evidence(
+            pages_text, pages, spec.get("evidence_text"), f"{object_id}/{spec['semantic_id']}"
+        )
+        units.append(
+            make_unit(
+                object_id,
+                spec["semantic_id"],
+                "administrative",
+                semantic_page_location(handout, pages, spec["semantic_id"]),
+                spec["title"],
+                (pages[0], -2, spec["semantic_id"]),
+                exclusion_reason=spec["reason"],
+                exclusion_evidence=evidence,
+                evidence_text=evidence,
+                **page_fields(pages),
+            )
+        )
+    for spec in review.get("evaluation", []):
+        page = spec["page"]
+        pages = [page]
+        evidence = require_page_evidence(
+            pages_text, pages, spec.get("evidence_text"), f"{object_id}/{spec['semantic_id']}"
+        )
+        units.append(
+            make_unit(
+                object_id,
+                spec["semantic_id"],
+                "evaluation-requirement",
+                semantic_page_location(handout, pages, spec["semantic_id"]),
+                spec["title"],
+                (page, -1, spec["semantic_id"]),
+                criterion_id=spec["criterion_id"],
+                page=page,
+                evidence_text=evidence,
+            )
+        )
+    embedded_images = pdf_embedded_images(handout)
+    for spec in review.get("visuals", []):
+        pages = page_span(spec, len(pages_text), f"{object_id}/{spec['semantic_id']}")
+        evidence = require_page_evidence(
+            pages_text, pages, spec.get("evidence_text"), f"{object_id}/{spec['semantic_id']}"
+        )
+        location = semantic_page_location(handout, pages, spec["semantic_id"])
+        unit = make_unit(
+            object_id,
+            spec["semantic_id"],
+            spec["kind"],
+            location,
+            spec["title"],
+            (pages[0], -1, spec["semantic_id"]),
+            evidence_text=evidence,
+            **page_fields(pages),
+        )
+        units.append(unit)
+        visuals.append(
+            source_only_visual(
+                f"{object_id}-visual-{slug(spec['semantic_id'])}",
+                spec["semantic_id"],
+                spec["visual_kind"],
+                object_id,
+                location,
+                pages,
+                spec["question"],
+                [
+                    f"{relative(handout)}#page={page}:semantic={spec['semantic_id']}"
+                    for page in pages
+                ],
+                [unit["id"]],
+                checksum,
+                (
+                    f"Poppler pdftotext {provenance['pdftotext']} semantic handout review; "
+                    f"pdfimages {provenance['pdfimages']} raster evidence"
+                ),
+                provenance,
+                raster_evidence=[
+                    image for image in embedded_images if image["page"] in set(pages)
+                ],
+            )
+        )
+    raster_summary = {
+        "source_object": object_id,
+        "source_path": relative(handout),
+        "parent_sha256": checksum,
+        "detected_images": len(embedded_images),
+        "treatment": (
+            "pdfimages detections are evidence attached to reviewed semantic sequences; "
+            "they are not independent teaching visuals."
+        ),
+    }
+    return finalize_units(units, object_id), visuals, raster_summary
+
+
+def coverage_row(unit: dict[str, Any]) -> dict[str, Any]:
+    row = {
+        "id": f"coverage-{unit['id']}",
+        "source_object": unit["source_object"],
+        "source_unit": unit["id"],
+        "source_location": unit["source_location"],
+        "kind": unit["kind"],
+        "title": unit["title"],
+        "primary_sources": [unit["source_object"]],
+    }
+    if unit["kind"] == "administrative":
+        row.update(
+            {
+                "disposition": "excluded",
+                "reason": unit["exclusion_reason"],
+                "evidence": unit["exclusion_evidence"],
+            }
+        )
+    else:
+        row.update(
+            {
+                "disposition": "source-only",
+                "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
+                "destination_anchor": unit["source_object"],
+                "reason": SOURCE_ONLY_REASON,
+            }
+        )
+    return row
 
 
 def build_ledgers(lock: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any], dict[str, Any]]:
     revisions = {item["repository"]: item["revision"] for item in lock["repositories"]}
+    review = semantic_review()
+    provenance = extraction_provenance()
+    executable_ids = {
+        f"lecture-{number:02d}"
+        for number, _, _, _, filename in SCHEDULE
+        if filename and filename.endswith(".py")
+    }
+    pdf_ids = {
+        f"lecture-{number:02d}"
+        for number, _, _, _, filename in SCHEDULE
+        if filename and filename.endswith(".pdf")
+    }
+    assignment_ids = {
+        *(f"assignment-{number:02d}" for number, _, _, _ in ASSIGNMENT_META),
+        "assignment-05-safety-supplement",
+    }
+    expected_review_sets = {
+        "executable_lectures": executable_ids,
+        "pdf_lectures": pdf_ids,
+        "assignments": assignment_ids,
+    }
+    for section, expected in expected_review_sets.items():
+        actual = set(review.get(section, {}))
+        if actual != expected:
+            raise RuntimeError(
+                f"semantic review {section} closure mismatch: "
+                f"missing={sorted(expected - actual)}, extra={sorted(actual - expected)}"
+            )
+
     manifest = source_manifest(lock)
     units: list[dict[str, Any]] = []
     visuals: list[dict[str, Any]] = []
+    raster_summaries: list[dict[str, Any]] = []
     for number, _, _, _, filename in SCHEDULE:
         if filename is None:
             continue
+        object_id = f"lecture-{number:02d}"
         path = LECTURES_ROOT / filename
         if path.suffix == ".py":
-            new_units, new_visuals = executable_units(number, filename, revisions["lectures"])
+            new_units, new_visuals = executable_units(
+                number,
+                filename,
+                revisions["lectures"],
+                review["executable_lectures"][object_id],
+                provenance,
+            )
         else:
-            new_units, new_visuals = pdf_units_and_visuals(f"lecture-{number:02d}", path)
+            new_units, new_visuals, summary = pdf_units_and_visuals(
+                object_id,
+                path,
+                review["pdf_lectures"][object_id],
+                provenance,
+            )
+            raster_summaries.append(summary)
         units.extend(new_units)
         visuals.extend(new_visuals)
     for number, repository, _, _ in ASSIGNMENT_META:
-        new_units, new_visuals = assignment_units(number, repository)
+        object_id = f"assignment-{number:02d}"
+        new_units, new_visuals, summary = assignment_units(
+            object_id,
+            repository,
+            review["assignments"][object_id],
+            provenance,
+        )
         units.extend(new_units)
         visuals.extend(new_visuals)
-    safety_units, safety_visuals = safety_units_and_visuals()
+        raster_summaries.append(summary)
+    safety_units, safety_visuals, safety_summary = assignment_units(
+        "assignment-05-safety-supplement",
+        "assignment5-alignment",
+        review["assignments"]["assignment-05-safety-supplement"],
+        provenance,
+    )
     units.extend(safety_units)
     visuals.extend(safety_visuals)
-    coverage_rows = [
-        {
-            "id": f"coverage-{unit['id']}",
-            "source_object": unit["source_object"],
-            "source_unit": unit["id"],
-            "source_location": unit["source_location"],
-            "kind": unit["kind"],
-            "title": unit["title"],
-            "disposition": "source-only",
-            "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-            "destination_anchor": unit["source_object"],
-            "reason": SOURCE_ONLY_REASON,
-            "primary_sources": [unit["source_object"]],
-        }
-        for unit in units
-    ]
+    raster_summaries.append(safety_summary)
     return (
         manifest,
-        {"schema_version": 1, "units": units},
-        {"schema_version": 1, "rows": coverage_rows},
+        {
+            "schema_version": 1,
+            "review_method": review["review_method"],
+            "semantic_review_sha256": provenance["semantic_review_sha256"],
+            "units": units,
+        },
+        {
+            "schema_version": 1,
+            "semantic_review_sha256": provenance["semantic_review_sha256"],
+            "rows": [coverage_row(unit) for unit in units],
+        },
         {
             "schema_version": 1,
             "audit_method": (
-                "Executable lectures: Python AST event inventory. PDFs and assignment "
-                "handouts: Poppler page-by-page text/page audit. Each row is one event "
-                "or page, never a whole deck."
+                "Executable lectures use archived edtrace JSON renderings grouped by reviewed "
+                "source-line/event scopes. PDF lectures and assignments use reviewed semantic "
+                "page spans; Poppler raster detections are evidence, never standalone visuals."
             ),
+            "extraction_provenance": provenance,
+            "raster_evidence_summary": raster_summaries,
             "rows": visuals,
         },
     )
 
 
+def document_bytes(value: dict[str, Any]) -> bytes:
+    return (json.dumps(value, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+
+
 def write_json_yaml(path: Path, value: dict[str, Any]) -> None:
-    path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", "utf-8")
+    path.write_bytes(document_bytes(value))
+
+
+def generated_document_map(
+    documents: tuple[dict[str, Any], dict[str, Any], dict[str, Any], dict[str, Any]],
+) -> dict[str, dict[str, Any]]:
+    return dict(zip(GENERATED_LEDGER_FILES, documents, strict=True))
+
+
+def document_record_count(filename: str, document: dict[str, Any]) -> int:
+    key = "objects" if filename == "source-manifest.yml" else (
+        "units" if filename == "source-units.yml" else "rows"
+    )
+    records = document.get(key)
+    if not isinstance(records, list):
+        raise RuntimeError(f"{filename}: missing {key} records")
+    return len(records)
+
+
+def generated_audit(
+    documents: dict[str, dict[str, Any]],
+    inventory: dict[str, Any],
+) -> dict[str, Any]:
+    provenance = documents["visuals.yml"]["extraction_provenance"]
+    inventory_rows = inventory.get("files", [])
+    return {
+        "extractor_revision": provenance["extractor_revision"],
+        "extractor_sha256": provenance["extractor_sha256"],
+        "semantic_review_sha256": provenance["semantic_review_sha256"],
+        "tool_versions": {
+            key: provenance[key]
+            for key in ("edtrace", "pdfinfo", "pdftotext", "pdfimages")
+        },
+        "archive": {
+            "artifacts": len(inventory_rows),
+            "bytes": sum(
+                row.get("bytes", 0)
+                for row in inventory_rows
+                if isinstance(row, dict) and isinstance(row.get("bytes"), int)
+            ),
+        },
+        "ledgers": {
+            filename: {
+                "sha256": sha256_bytes(document_bytes(document)),
+                "records": document_record_count(filename, document),
+            }
+            for filename, document in documents.items()
+        },
+    }
+
+
+def validate_generated_documents(
+    actual: dict[str, dict[str, Any]],
+    expected: dict[str, dict[str, Any]],
+    lock: dict[str, Any],
+    failures: list[str],
+) -> None:
+    audit = lock.get("generated_audit")
+    if not isinstance(audit, dict):
+        failures.append("snapshot lock lacks generated_audit")
+        return
+    locked_ledgers = audit.get("ledgers")
+    if not isinstance(locked_ledgers, dict):
+        failures.append("snapshot lock lacks generated ledger hashes/counts")
+        return
+    for filename in GENERATED_LEDGER_FILES:
+        actual_document = actual.get(filename)
+        expected_document = expected.get(filename)
+        if actual_document != expected_document:
+            failures.append(f"{filename}: deterministic extraction mismatch")
+        if not isinstance(actual_document, dict) or not isinstance(expected_document, dict):
+            continue
+        locked = locked_ledgers.get(filename)
+        if not isinstance(locked, dict):
+            failures.append(f"{filename}: missing locked ledger audit")
+            continue
+        expected_hash = sha256_bytes(document_bytes(expected_document))
+        actual_hash = sha256_bytes(document_bytes(actual_document))
+        if locked.get("sha256") != expected_hash:
+            failures.append(f"{filename}: locked SHA-256 differs from deterministic extraction")
+        if locked.get("sha256") != actual_hash:
+            failures.append(f"{filename}: generated ledger SHA-256 mismatch")
+        expected_count = document_record_count(filename, expected_document)
+        actual_count = document_record_count(filename, actual_document)
+        if locked.get("records") != expected_count:
+            failures.append(f"{filename}: locked record count differs from deterministic extraction")
+        if locked.get("records") != actual_count:
+            failures.append(f"{filename}: generated ledger record count mismatch")
+    provenance = expected.get("visuals.yml", {}).get("extraction_provenance", {})
+    for key in ("extractor_revision", "extractor_sha256", "semantic_review_sha256"):
+        if audit.get(key) != provenance.get(key):
+            failures.append(f"snapshot lock {key} differs from deterministic extraction")
+    tool_versions = audit.get("tool_versions")
+    if not isinstance(tool_versions, dict):
+        failures.append("snapshot lock lacks extraction tool versions")
+    else:
+        for key in ("edtrace", "pdfinfo", "pdftotext", "pdfimages"):
+            if tool_versions.get(key) != provenance.get(key):
+                failures.append(f"snapshot lock tool version differs for {key}")
 
 
 def artifact_inventory() -> dict[str, Any]:
@@ -1097,18 +1522,24 @@ def hub_markdown(lock: dict[str, Any], manifest: dict[str, Any], units: dict[str
         "Последовательное изучение идёт по каноническим главам учебника; здесь сохранены",
         "оригинальные англоязычные материалы, их dependency closure и аудит границ.",
         "",
-        "Статус: **inventory complete; editorial integration pending**. Все извлечённые",
-        "units пока имеют disposition `source-only`: для них ещё не подтверждены конкретные",
-        "destination headings с reciprocal `source_unit_id`.",
+        "Статус: **inventory complete; editorial integration pending**. Учебные units",
+        "пока имеют disposition `source-only`; административные units явно исключены",
+        "с причиной и evidence. Конкретные textbook destinations ещё не подтверждены.",
         "",
         "## Реестры аудита",
         "",
         "- [source-manifest.yml](source-manifest.yml) — объекты и pinned revisions;",
-        "- [source-units.yml](source-units.yml) — extraction index;",
+        "- [semantic-review.json](semantic-review.json) — reviewed per-source semantic boundaries;",
+        "- [source-units.yml](source-units.yml) — semantic extraction index;",
         "- [coverage.yml](coverage.yml) — одна строка покрытия на каждый source unit;",
-        "- [visuals.yml](visuals.yml) — event/page-level visual ledger;",
+        "- [visuals.yml](visuals.yml) — semantic figure/table/code-trace/derivation sequences;",
         "- [artifact-inventory.json](artifact-inventory.json) — SHA-256 каждого файла;",
         "- [snapshot-lock.json](snapshot-lock.json) — SHA репозиториев и архивов.",
+        "",
+        "Извлечение executable lectures идёт из архивированных edtrace renderings;",
+        "PDF/handout spans проверяются Poppler. Версии инструментов, extractor SHA,",
+        "ledger SHA/counts и parent checksums записаны в `snapshot-lock.json`/visual ledger.",
+        "Raw page/raster detections служат evidence и не становятся отдельными teaching visuals.",
         "",
         "## Pinned revisions",
         "",
@@ -1157,8 +1588,8 @@ def hub_markdown(lock: dict[str, Any], manifest: dict[str, Any], units: dict[str
                 "",
                 f"- local path: `{source_object['local_path']}`;",
                 f"- extracted units: {unit_counts.get(object_id, 0)};",
-                f"- visual/event-page rows: {visual_counts.get(object_id, 0)};",
-                "- baseline disposition: `source-only` — требуется последующая редакционная интеграция.",
+                f"- semantic visual rows: {visual_counts.get(object_id, 0)};",
+                "- baseline: teaching content is `source-only`; reviewed administration is `excluded`.",
                 "",
             ]
         )
@@ -1175,6 +1606,27 @@ def hub_markdown(lock: dict[str, Any], manifest: dict[str, Any], units: dict[str
         ]
     )
     return "\n".join(lines)
+
+
+def write_generated_ledgers(lock: dict[str, Any], inventory: dict[str, Any]) -> None:
+    documents_tuple = build_ledgers(lock)
+    documents = generated_document_map(documents_tuple)
+    lock["generated_audit"] = generated_audit(documents, inventory)
+    write_json_yaml(LOCK_PATH, lock)
+    for filename, document in documents.items():
+        write_json_yaml(COURSE_ROOT / filename, document)
+    manifest, units, _, visuals = documents_tuple
+    HUB_PATH.write_text(hub_markdown(lock, manifest, units, visuals), "utf-8")
+
+
+def regenerate_ledgers() -> None:
+    failures: list[str] = []
+    lock = read_json(LOCK_PATH, failures)
+    inventory = read_json(INVENTORY_PATH, failures)
+    if failures:
+        raise RuntimeError("\n".join(failures))
+    write_generated_ledgers(lock, inventory)
+    check()
 
 
 def refresh() -> None:
@@ -1214,17 +1666,9 @@ def refresh() -> None:
             "evidence": USER_PERMISSION,
         },
     }
-    write_json_yaml(LOCK_PATH, lock)
     inventory = artifact_inventory()
     write_json_yaml(INVENTORY_PATH, inventory)
-    manifest, units, coverage, visuals = build_ledgers(lock)
-    for filename, value in zip(
-        GENERATED_LEDGER_FILES,
-        (manifest, units, coverage, visuals),
-        strict=True,
-    ):
-        write_json_yaml(COURSE_ROOT / filename, value)
-    HUB_PATH.write_text(hub_markdown(lock, manifest, units, visuals), "utf-8")
+    write_generated_ledgers(lock, inventory)
     check()
 
 
@@ -1310,6 +1754,32 @@ def check() -> None:
         if path.is_file()
     }
     require(actual_paths == expected_paths, "artifact inventory does not match archived file set", failures)
+    locked_archive = lock.get("generated_audit", {}).get("archive", {})
+    require(
+        isinstance(locked_archive, dict)
+        and locked_archive.get("artifacts") == len(inventory_rows),
+        "locked archive artifact count mismatch",
+        failures,
+    )
+    archive_bytes = sum(
+        row.get("bytes", 0)
+        for row in inventory_rows
+        if isinstance(row, dict) and isinstance(row.get("bytes"), int)
+    )
+    require(
+        isinstance(locked_archive, dict)
+        and locked_archive.get("bytes") == archive_bytes,
+        "locked archive byte count mismatch",
+        failures,
+    )
+    actual_documents = {
+        "source-manifest.yml": manifest,
+        "source-units.yml": source_units,
+        "coverage.yml": coverage,
+        "visuals.yml": visuals,
+    }
+    expected_documents = generated_document_map(build_ledgers(lock))
+    validate_generated_documents(actual_documents, expected_documents, lock, failures)
     objects = manifest.get("objects", [])
     object_ids = {item.get("id") for item in objects if isinstance(item, dict)}
     require(len([value for value in object_ids if isinstance(value, str) and value.startswith("lecture-")]) == 17, "manifest must contain 17 lectures", failures)
@@ -1333,6 +1803,50 @@ def check() -> None:
     require(len(unit_ids) == len(set(unit_ids)), "duplicate extraction unit ids", failures)
     require(len(coverage_ids) == len(set(coverage_ids)), "duplicate coverage source_unit ids", failures)
     require(set(unit_ids) == set(coverage_ids), "every source unit must have exactly one coverage row", failures)
+    forbidden_proxy_kinds = {"page", "rendered-text", "rendered-link"}
+    require(
+        forbidden_proxy_kinds.isdisjoint(
+            {
+                unit.get("kind")
+                for unit in units
+                if isinstance(unit, dict)
+            }
+        ),
+        "proxy page/rendered-text/rendered-link units are forbidden",
+        failures,
+    )
+    semantic_locations: set[tuple[Any, Any]] = set()
+    units_by_id: dict[str, dict[str, Any]] = {}
+    coverage_by_unit = {
+        row.get("source_unit"): row
+        for row in rows
+        if isinstance(row, dict)
+    }
+    for unit in units if isinstance(units, list) else []:
+        if not isinstance(unit, dict):
+            continue
+        unit_id = unit.get("id")
+        if isinstance(unit_id, str):
+            units_by_id[unit_id] = unit
+        location_key = (unit.get("source_object"), unit.get("source_location"))
+        require(
+            location_key not in semantic_locations,
+            f"duplicate semantic source location: {location_key}",
+            failures,
+        )
+        semantic_locations.add(location_key)
+        if unit.get("kind") == "administrative":
+            coverage_row_value = coverage_by_unit.get(unit_id)
+            require(
+                isinstance(coverage_row_value, dict)
+                and coverage_row_value.get("disposition") == "excluded"
+                and isinstance(coverage_row_value.get("reason"), str)
+                and bool(coverage_row_value.get("reason", "").strip())
+                and isinstance(coverage_row_value.get("evidence"), str)
+                and bool(coverage_row_value.get("evidence", "").strip()),
+                f"administrative unit lacks excluded coverage reason/evidence: {unit_id}",
+                failures,
+            )
     units_by_object: dict[str, int] = {}
     for unit in units if isinstance(units, list) else []:
         if isinstance(unit, dict) and isinstance(unit.get("source_object"), str):
@@ -1350,14 +1864,96 @@ def check() -> None:
         "duplicate visual row ids",
         failures,
     )
+    visual_locations: set[tuple[Any, Any]] = set()
+    has_multi_event = False
+    has_multi_page = False
     for row in visual_rows if isinstance(visual_rows, list) else []:
         if isinstance(row, dict):
             require(row.get("source_object") in object_ids, f"orphan visual row: {row.get('id')}", failures)
+            location_key = (row.get("source_object"), row.get("source_location"))
+            require(
+                location_key not in visual_locations,
+                f"duplicate semantic visual location: {location_key}",
+                failures,
+            )
+            visual_locations.add(location_key)
             require(
                 isinstance(row.get("source_pages"), list) and bool(row.get("source_pages")),
                 f"visual row lacks exact event/page scope: {row.get('id')}",
                 failures,
             )
+            linked_units = row.get("source_units")
+            require(
+                isinstance(linked_units, list) and bool(linked_units),
+                f"visual row lacks semantic source-unit linkage: {row.get('id')}",
+                failures,
+            )
+            for unit_id in linked_units if isinstance(linked_units, list) else []:
+                linked_unit = units_by_id.get(unit_id)
+                require(
+                    linked_unit is not None
+                    and linked_unit.get("source_object") == row.get("source_object"),
+                    f"visual row links an unknown or foreign source unit: {row.get('id')}",
+                    failures,
+                )
+            members = row.get("sequence_members")
+            require(
+                isinstance(members, list) and bool(members),
+                f"visual row lacks sequence members: {row.get('id')}",
+                failures,
+            )
+            require(
+                isinstance(row.get("semantic_id"), str)
+                and isinstance(row.get("visual_kind"), str),
+                f"visual row lacks semantic classification: {row.get('id')}",
+                failures,
+            )
+            require(
+                row.get("extractor_sha256")
+                == visuals.get("extraction_provenance", {}).get("extractor_sha256"),
+                f"visual row extractor hash mismatch: {row.get('id')}",
+                failures,
+            )
+            require(
+                isinstance(row.get("parent_sha256"), str)
+                and re.fullmatch(r"[a-f0-9]{64}", row["parent_sha256"]) is not None,
+                f"visual row parent hash is invalid: {row.get('id')}",
+                failures,
+            )
+            if isinstance(members, list) and len(members) > 1:
+                if "var/traces" in str(row.get("source_location")):
+                    has_multi_event = True
+                if "#pages=" in str(row.get("source_location")):
+                    has_multi_page = True
+    require(has_multi_event, "visual ledger lacks a reviewed multi-event sequence", failures)
+    require(has_multi_page, "visual ledger lacks a reviewed multi-page sequence", failures)
+    lecture_six_tables = [
+        row
+        for row in visual_rows
+        if isinstance(row, dict)
+        and row.get("source_object") == "lecture-06"
+        and row.get("semantic_id") == "accelerator-memory-hierarchy-table"
+    ]
+    require(
+        len(lecture_six_tables) == 1
+        and lecture_six_tables[0].get("visual_kind") == "table"
+        and lecture_six_tables[0].get("source_pages") == list(range(8, 21))
+        and len(lecture_six_tables[0].get("sequence_members", [])) == 13,
+        "Lecture 6 accelerator table must be one 13-event sequence over steps 8-20",
+        failures,
+    )
+    assignment_two_semantics = {
+        row.get("semantic_id")
+        for row in visual_rows
+        if isinstance(row, dict) and row.get("source_object") == "assignment-02"
+    }
+    require(
+        {"nsight-systems-trace", "distributed-rank-topology"}.issubset(
+            assignment_two_semantics
+        ),
+        "Assignment 2 orphan raster semantics are missing",
+        failures,
+    )
     hub = HUB_PATH.read_text("utf-8")
     require("## 19 встреч курса" in hub, "hub does not expose all 19 meetings", failures)
     require("## Реестры аудита" in hub, "hub does not expose the ledgers", failures)
@@ -1419,6 +2015,11 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     modes = parser.add_mutually_exclusive_group(required=True)
     modes.add_argument("--refresh", action="store_true", help="download and regenerate the frozen source layer")
+    modes.add_argument(
+        "--regenerate-ledgers",
+        action="store_true",
+        help="regenerate semantic ledgers from the frozen archive without network access",
+    )
     modes.add_argument("--check", action="store_true", help="validate the frozen source layer without network access")
     modes.add_argument(
         "--check-upstream-drift",
@@ -1433,6 +2034,8 @@ def main() -> int:
     try:
         if args.refresh:
             refresh()
+        elif args.regenerate_ledgers:
+            regenerate_ledgers()
         elif args.check:
             check()
         else:

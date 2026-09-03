@@ -1,0 +1,689 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-09-04",
+  "review_method": "Per-source review of every executable lecture edtrace and source file, every PDF lecture page outline with representative raster inspection, and every assignment handout, adapter, and test tree. Page and pdfimages detections are evidence only; they never create units or visuals on their own.",
+  "executable_lectures": {
+    "lecture-01": {
+      "administrative_headings": [
+        "Why you should take this course",
+        "Why you should not take this course",
+        "How you can follow along at home",
+        "Assignments",
+        "AI policy",
+        "Compute",
+        "Assignment 1 (basics)",
+        "Assignment 2 (systems)",
+        "Assignment 3 (scaling laws)",
+        "Assignment 4 (data)",
+        "Assignment 5 (alignment)"
+      ],
+      "constructs": [
+        {
+          "semantic_id": "tokenizer-granularity-examples",
+          "kind": "worked-example",
+          "title": "Character, byte, word, and BPE tokenization examples",
+          "line_start": 591,
+          "line_end": 727
+        },
+        {
+          "semantic_id": "tokenizer-boundary-failure-modes",
+          "kind": "failure-mode",
+          "title": "Unicode, vocabulary, and word-boundary failure modes",
+          "line_start": 627,
+          "line_end": 697
+        }
+      ],
+      "visual_sequences": [
+        {
+          "semantic_id": "bpe-merge-code-trace",
+          "kind": "code-trace",
+          "visual_kind": "code-trace",
+          "title": "BPE pair counting and merge training trace",
+          "question": "How does repeated adjacent-pair counting turn a byte vocabulary into learned BPE merges?",
+          "line_start": 698,
+          "line_end": 753,
+          "claim_images": false
+        }
+      ],
+      "sample": "The BPE merge trace is indexed as one code sequence; course logistics and AI policy are explicit excluded administrative units."
+    },
+    "lecture-02": {
+      "administrative_headings": [],
+      "constructs": [
+        {
+          "semantic_id": "tensor-memory-accounting",
+          "kind": "derivation",
+          "title": "Tensor storage and mixed-precision memory accounting",
+          "line_start": 113,
+          "line_end": 183
+        },
+        {
+          "semantic_id": "gradient-accumulation-example",
+          "kind": "worked-example",
+          "title": "Gradient accumulation and activation-checkpointing example",
+          "line_start": 683,
+          "line_end": 790
+        }
+      ],
+      "visual_sequences": [
+        {
+          "semantic_id": "floating-point-format-comparison",
+          "kind": "visual-sequence",
+          "visual_kind": "figure",
+          "title": "FP32, FP16, BF16, and FP8 representation comparison",
+          "question": "Which exponent and mantissa trade-offs explain the range, precision, and memory behavior of each numeric format?",
+          "line_start": 113,
+          "line_end": 183,
+          "claim_images": true
+        },
+        {
+          "semantic_id": "arithmetic-intensity-derivation",
+          "kind": "derivation",
+          "visual_kind": "derivation",
+          "title": "Arithmetic-intensity derivation from ReLU to matrix multiplication",
+          "question": "How do bytes moved and FLOPs change from elementwise operations through matrix-vector products to matrix multiplication?",
+          "line_start": 338,
+          "line_end": 470,
+          "claim_images": true
+        }
+      ],
+      "sample": "The numeric-format images form one reviewed comparison, while arithmetic intensity is one multi-event derivation rather than dozens of render calls."
+    },
+    "lecture-06": {
+      "administrative_headings": [],
+      "constructs": [
+        {
+          "semantic_id": "benchmark-profile-experiment",
+          "kind": "experiment",
+          "title": "Benchmarking versus profiling GPU kernels",
+          "line_start": 144,
+          "line_end": 260
+        },
+        {
+          "semantic_id": "kernel-fusion-failure-mode",
+          "kind": "failure-mode",
+          "title": "Naive GeLU launch and HBM-traffic failure mode",
+          "line_start": 262,
+          "line_end": 304
+        },
+        {
+          "semantic_id": "triton-softmax-worked-example",
+          "kind": "worked-example",
+          "title": "Fused Triton softmax and tiled row-sum worked examples",
+          "line_start": 392,
+          "line_end": 537
+        }
+      ],
+      "visual_sequences": [
+        {
+          "semantic_id": "accelerator-memory-hierarchy-table",
+          "kind": "table",
+          "visual_kind": "table",
+          "title": "A100, H100, and B200 memory hierarchy comparison",
+          "question": "How do capacity and bandwidth change across registers, shared memory, L2, and HBM on A100, H100, and B200?",
+          "line_start": 42,
+          "line_end": 54,
+          "claim_images": false
+        },
+        {
+          "semantic_id": "gelu-profiler-comparison",
+          "kind": "code-trace",
+          "visual_kind": "code-trace",
+          "title": "Naive, builtin, and compiled GeLU profiler traces",
+          "question": "Which profiler events reveal the extra kernel launches and HBM traffic removed by fusion?",
+          "line_start": 287,
+          "line_end": 301,
+          "claim_images": false
+        },
+        {
+          "semantic_id": "matmul-tiling-derivation",
+          "kind": "derivation",
+          "visual_kind": "derivation",
+          "title": "Matrix multiplication tiling and arithmetic-intensity derivation",
+          "question": "How does loading reusable A and B tiles into shared memory raise arithmetic intensity?",
+          "line_start": 546,
+          "line_end": 580,
+          "claim_images": true
+        }
+      ],
+      "sample": "The 13 renderings at source lines 42-54 are one accelerator table sequence spanning edtrace steps 8-20."
+    },
+    "lecture-07": {
+      "administrative_headings": [],
+      "constructs": [
+        {
+          "semantic_id": "collective-communication-mechanisms",
+          "kind": "mechanism",
+          "title": "Broadcast, reduce, all-reduce, and reduce-scatter collectives",
+          "line_start": 75,
+          "line_end": 208
+        },
+        {
+          "semantic_id": "distributed-benchmark-experiment",
+          "kind": "experiment",
+          "title": "All-reduce versus reduce-scatter benchmarking",
+          "line_start": 287,
+          "line_end": 374
+        }
+      ],
+      "visual_sequences": [
+        {
+          "semantic_id": "collective-operation-code-trace",
+          "kind": "code-trace",
+          "visual_kind": "code-trace",
+          "title": "Collective communication construction trace",
+          "question": "How do point-to-point transfers compose into broadcast, reduce, all-reduce, and reduce-scatter?",
+          "line_start": 75,
+          "line_end": 208,
+          "claim_images": true
+        },
+        {
+          "semantic_id": "parallelism-strategy-comparison",
+          "kind": "visual-sequence",
+          "visual_kind": "figure",
+          "title": "Data, tensor, and pipeline parallelism comparison",
+          "question": "Which tensors, parameters, and pipeline stages are partitioned by the three parallelism strategies?",
+          "line_start": 375,
+          "line_end": 492,
+          "claim_images": true
+        }
+      ],
+      "sample": "Collective operations and the three parallelism strategies are grouped as progressive communication/code sequences."
+    },
+    "lecture-10": {
+      "administrative_headings": [],
+      "constructs": [
+        {
+          "semantic_id": "inference-arithmetic-intensity",
+          "kind": "derivation",
+          "title": "Prefill and decode arithmetic-intensity derivation",
+          "line_start": 162,
+          "line_end": 286
+        },
+        {
+          "semantic_id": "dynamic-workload-failure-mode",
+          "kind": "failure-mode",
+          "title": "Static batching fragmentation and dynamic workload failure modes",
+          "line_start": 553,
+          "line_end": 605
+        }
+      ],
+      "visual_sequences": [
+        {
+          "semantic_id": "naive-versus-cached-inference",
+          "kind": "visual-sequence",
+          "visual_kind": "figure",
+          "title": "Naive versus KV-cached autoregressive inference",
+          "question": "Which activations are recomputed in naive decoding and retained by the KV cache?",
+          "line_start": 162,
+          "line_end": 286,
+          "claim_images": true
+        },
+        {
+          "semantic_id": "kv-cache-attention-alternatives",
+          "kind": "visual-sequence",
+          "visual_kind": "figure",
+          "title": "GQA, MLA, CLA, local attention, and DeepSeek v4 cache trade-offs",
+          "question": "How does each attention variant reduce KV-cache bytes, and what accuracy or expressiveness trade-off follows?",
+          "line_start": 371,
+          "line_end": 448,
+          "claim_images": true
+        },
+        {
+          "semantic_id": "paged-attention-memory-sequence",
+          "kind": "visual-sequence",
+          "visual_kind": "figure",
+          "title": "PagedAttention fragmentation, block mapping, sharing, and parallelism",
+          "question": "How do logical blocks remove contiguous-allocation fragmentation and enable sharing across sequences?",
+          "line_start": 576,
+          "line_end": 605,
+          "claim_images": true
+        }
+      ],
+      "sample": "Naive/cached decoding and the five PagedAttention diagrams are preserved as two causal visual sequences."
+    },
+    "lecture-12": {
+      "administrative_headings": [],
+      "constructs": [
+        {
+          "semantic_id": "evaluation-validity-failure-modes",
+          "kind": "failure-mode",
+          "title": "Contamination, invalidity, and benchmark realism failure modes",
+          "line_start": 314,
+          "line_end": 370
+        },
+        {
+          "semantic_id": "benchmark-design-worked-examples",
+          "kind": "worked-example",
+          "title": "Exam, chat, agentic, reasoning, and safety benchmark examples",
+          "line_start": 108,
+          "line_end": 313
+        }
+      ],
+      "visual_sequences": [
+        {
+          "semantic_id": "agentic-benchmark-evidence-chain",
+          "kind": "visual-sequence",
+          "visual_kind": "figure",
+          "title": "Agentic benchmark task, agent, and result evidence chain",
+          "question": "How do SWE-bench, Terminal-Bench, CyBench, and MLE-bench connect task construction to agent behavior and reported results?",
+          "line_start": 208,
+          "line_end": 256,
+          "claim_images": true
+        },
+        {
+          "semantic_id": "benchmark-validity-sequence",
+          "kind": "failure-mode",
+          "visual_kind": "figure",
+          "title": "Benchmark contamination and exchangeability failure sequence",
+          "question": "Which leakage and exchangeability failures make a benchmark score cease to measure the intended capability?",
+          "line_start": 314,
+          "line_end": 370,
+          "claim_images": true
+        }
+      ],
+      "sample": "Benchmark screenshots are grouped by evaluative argument, including a dedicated contamination/validity failure sequence."
+    },
+    "lecture-13": {
+      "administrative_headings": [],
+      "constructs": [
+        {
+          "semantic_id": "copyright-consent-failure-modes",
+          "kind": "failure-mode",
+          "title": "Copyright, consent, robots.txt, and provenance failure modes",
+          "line_start": 90,
+          "line_end": 240
+        },
+        {
+          "semantic_id": "dataset-composition-examples",
+          "kind": "worked-example",
+          "title": "C4, The Pile, Dolma, DCLM, and Common Pile composition examples",
+          "line_start": 364,
+          "line_end": 625
+        }
+      ],
+      "visual_sequences": [
+        {
+          "semantic_id": "common-crawl-data-pipeline",
+          "kind": "visual-sequence",
+          "visual_kind": "figure",
+          "title": "Common Crawl acquisition and WET extraction pipeline",
+          "question": "How does a crawler produce WARC/WET artifacts that later language-model datasets filter and transform?",
+          "line_start": 241,
+          "line_end": 296,
+          "claim_images": true
+        },
+        {
+          "semantic_id": "dataset-lineage-case-studies",
+          "kind": "visual-sequence",
+          "visual_kind": "figure",
+          "title": "Open pretraining dataset lineage and filtering case studies",
+          "question": "How do source mixtures and filtering pipelines differ across C4, The Pile, Dolma, DCLM, and Common Pile?",
+          "line_start": 364,
+          "line_end": 625,
+          "claim_images": true
+        }
+      ],
+      "sample": "Common Crawl is a pipeline sequence; later dataset figures are grouped by lineage and filtering decisions."
+    },
+    "lecture-14": {
+      "administrative_headings": [],
+      "constructs": [
+        {
+          "semantic_id": "quality-filter-experiment",
+          "kind": "experiment",
+          "title": "Quality filtering rules, classifiers, and scale experiments",
+          "line_start": 60,
+          "line_end": 144
+        },
+        {
+          "semantic_id": "deduplication-collision-failure-modes",
+          "kind": "failure-mode",
+          "title": "Exact and fuzzy deduplication collision and recall failure modes",
+          "line_start": 145,
+          "line_end": 323
+        }
+      ],
+      "visual_sequences": [
+        {
+          "semantic_id": "minhash-lsh-derivation",
+          "kind": "derivation",
+          "visual_kind": "derivation",
+          "title": "Jaccard, MinHash, and locality-sensitive hashing derivation",
+          "question": "How do MinHash collisions estimate Jaccard similarity and LSH bands turn that estimate into candidate pairs?",
+          "line_start": 145,
+          "line_end": 323,
+          "claim_images": true
+        },
+        {
+          "semantic_id": "post-training-data-pipelines",
+          "kind": "visual-sequence",
+          "visual_kind": "figure",
+          "title": "Synthetic reasoning and agent-data pipeline comparison",
+          "question": "How do OpenThoughts and SWE-style pipelines construct, filter, execute, and verify post-training data?",
+          "line_start": 409,
+          "line_end": 470,
+          "claim_images": true
+        }
+      ],
+      "sample": "MinHash and LSH are one derivation sequence; agent-data diagrams form a separate generate-filter-verify sequence."
+    },
+    "lecture-17": {
+      "administrative_headings": [],
+      "constructs": [
+        {
+          "semantic_id": "contrastive-vision-language-training",
+          "kind": "mechanism",
+          "title": "CLIP and SigLIP contrastive vision-language training",
+          "line_start": 48,
+          "line_end": 123
+        },
+        {
+          "semantic_id": "multimodal-tokenization-failure-modes",
+          "kind": "failure-mode",
+          "title": "Resolution, token count, and modality-transfer failure modes",
+          "line_start": 148,
+          "line_end": 267
+        }
+      ],
+      "visual_sequences": [
+        {
+          "semantic_id": "clip-siglip-training-sequence",
+          "kind": "visual-sequence",
+          "visual_kind": "figure",
+          "title": "CLIP and SigLIP training and scaling sequence",
+          "question": "How do paired encoders, contrastive objectives, and sigmoid loss change the training and scaling contract?",
+          "line_start": 48,
+          "line_end": 123,
+          "claim_images": true
+        },
+        {
+          "semantic_id": "llava-onevision-progression",
+          "kind": "visual-sequence",
+          "visual_kind": "figure",
+          "title": "LLaVA to LLaVA-OneVision architecture, data, and transfer progression",
+          "question": "How does the connector architecture expand from single-image instruction tuning to any-resolution image and video transfer?",
+          "line_start": 124,
+          "line_end": 194,
+          "claim_images": true
+        },
+        {
+          "semantic_id": "qwen-vl-training-stages",
+          "kind": "visual-sequence",
+          "visual_kind": "figure",
+          "title": "Qwen-VL through Qwen3-VL training-stage sequence",
+          "question": "Which encoder, positional, data, and staged-training changes accumulate across the Qwen-VL generations?",
+          "line_start": 195,
+          "line_end": 267,
+          "claim_images": true
+        }
+      ],
+      "sample": "LLaVA-OneVision and Qwen-VL images are grouped into architecture-data-training progressions rather than singleton screenshots."
+    }
+  },
+  "pdf_lectures": {
+    "lecture-03": {
+      "units": [
+        {"semantic_id": "architecture-framing", "kind": "section", "title": "Transformer baseline and architecture comparison", "pages": [2, 9], "evidence_text": "Outline and goals"},
+        {"semantic_id": "normalization-stability", "kind": "derivation", "title": "Pre-norm, post-norm, RMSNorm, and gradient stability", "pages": [10, 19], "evidence_text": "Pre-vs-post norm"},
+        {"semantic_id": "rmsnorm-validation", "kind": "experiment", "title": "RMSNorm runtime and performance validation", "pages": [15, 17], "evidence_text": "Why RMSNorm"},
+        {"semantic_id": "gated-activations", "kind": "mechanism", "title": "Gated activation variants and parallel feed-forward layers", "pages": [20, 29], "evidence_text": "Activations"},
+        {"semantic_id": "rope-derivation", "kind": "derivation", "title": "RoPE relative-position invariance derivation", "pages": [30, 35], "evidence_text": "Many variations in position embeddings"},
+        {"semantic_id": "hyperparameter-evidence", "kind": "experiment", "title": "Feed-forward, head, aspect-ratio, vocabulary, and regularization evidence", "pages": [36, 51], "evidence_text": "Hyperparameters"},
+        {"semantic_id": "softmax-stability-failures", "kind": "failure-mode", "title": "Softmax instability, z-loss, QK norm, and logit soft-capping", "pages": [52, 56], "evidence_text": "Stability tricks"},
+        {"semantic_id": "kv-cache-attention", "kind": "mechanism", "title": "GQA and MQA KV-cache cost reduction", "pages": [57, 63], "evidence_text": "Attention heads"},
+        {"semantic_id": "sparse-attention", "kind": "mechanism", "title": "Sparse and interleaved long-range attention", "pages": [64, 66], "evidence_text": "Sparse"},
+        {"semantic_id": "recap", "kind": "section", "title": "Architecture and hyperparameter recap", "pages": [67], "evidence_text": "Recap"}
+      ],
+      "visuals": [
+        {"semantic_id": "rope-derivation", "visual_kind": "derivation", "question": "How do rotations make query-key inner products depend on relative rather than absolute position?", "pages": [31, 35]},
+        {"semantic_id": "hyperparameter-evidence", "visual_kind": "table", "question": "Which empirical tables support stable feed-forward, head-dimension, aspect-ratio, vocabulary, and regularization choices?", "pages": [37, 50]},
+        {"semantic_id": "softmax-stability-failures", "visual_kind": "derivation", "question": "Where do exponential logits become unstable and how do z-loss, QK norm, and soft-capping intervene?", "pages": [53, 56]},
+        {"semantic_id": "kv-cache-attention", "visual_kind": "derivation", "question": "How do MQA and GQA change incremental attention arithmetic intensity and KV-cache movement?", "pages": [58, 63]}
+      ],
+      "sample": "Pages 31-35 progressively derive RoPE; pages 37-50 are reviewed empirical tables rather than generic page visuals."
+    },
+    "lecture-04": {
+      "units": [
+        {"semantic_id": "attention-alternatives", "kind": "section", "title": "Attention alternatives and hybrid sequence models", "pages": [2, 13], "evidence_text": "Attention alternatives"},
+        {"semantic_id": "linear-attention-recurrence", "kind": "derivation", "title": "Linear-attention recurrent form and gated state updates", "pages": [4, 10], "evidence_text": "Linear attention"},
+        {"semantic_id": "moe-motivation", "kind": "section", "title": "Mixture-of-experts motivation and scaling evidence", "pages": [14, 24], "evidence_text": "Mixture of experts"},
+        {"semantic_id": "moe-routing", "kind": "mechanism", "title": "Top-k expert routing and architecture variants", "pages": [25, 35], "evidence_text": "What MoEs generally look like"},
+        {"semantic_id": "moe-training-failures", "kind": "failure-mode", "title": "Discrete routing, load balance, stability, and fine-tuning failures", "pages": [36, 50], "evidence_text": "How do we train MoEs"},
+        {"semantic_id": "routing-ablations", "kind": "experiment", "title": "Expert granularity, sharing, and balancing ablations", "pages": [33, 49], "evidence_text": "Various ablations"},
+        {"semantic_id": "moe-upcycling", "kind": "worked-example", "title": "MiniCPM and Qwen MoE upcycling examples", "pages": [51, 53], "evidence_text": "upcycling"},
+        {"semantic_id": "deepseek-moe-case", "kind": "worked-example", "title": "DeepSeek MoE v1-v3, MLA, and MTP case study", "pages": [54, 59], "evidence_text": "DeepSeek MoE"},
+        {"semantic_id": "recap", "kind": "section", "title": "Attention alternatives and MoE recap", "pages": [60], "evidence_text": "MoE summary"}
+      ],
+      "visuals": [
+        {"semantic_id": "linear-attention-recurrence", "visual_kind": "derivation", "question": "How does associativity turn quadratic attention into a recurrent state update, and how do gates alter that state?", "pages": [4, 10]},
+        {"semantic_id": "moe-routing", "visual_kind": "derivation", "question": "How do token-choice top-k scores, shared experts, and fine-grained experts determine sparse computation?", "pages": [27, 35]},
+        {"semantic_id": "moe-training-failures", "visual_kind": "figure", "question": "How do stochastic routing, auxiliary losses, and router bias address imbalance and instability?", "pages": [36, 49]},
+        {"semantic_id": "deepseek-moe-case", "visual_kind": "figure", "question": "Which architectural changes accumulate from DeepSeek MoE v1 through v3, MLA, and MTP?", "pages": [54, 59]}
+      ],
+      "sample": "The top-k routing equation on page 31 belongs to a pages 27-35 routing sequence; balancing failures are separate."
+    },
+    "lecture-05": {
+      "units": [
+        {"semantic_id": "gpu-anatomy", "kind": "section", "title": "GPU execution and memory anatomy", "pages": [2, 19], "evidence_text": "Outline and goals"},
+        {"semantic_id": "roofline-performance", "kind": "mechanism", "title": "Roofline model and GPU performance constraints", "pages": [20, 23], "evidence_text": "Making ML workloads fast"},
+        {"semantic_id": "low-precision-intensity", "kind": "derivation", "title": "Low-precision arithmetic-intensity derivation", "pages": [24, 29], "evidence_text": "Low precision"},
+        {"semantic_id": "operator-fusion", "kind": "worked-example", "title": "Operator fusion for sin-squared plus cos-squared", "pages": [30, 33], "evidence_text": "Operator fusion"},
+        {"semantic_id": "activation-recomputation", "kind": "worked-example", "title": "Activation recomputation memory-traffic example", "pages": [34, 36], "evidence_text": "recomputation"},
+        {"semantic_id": "coalescing-failures", "kind": "failure-mode", "title": "Control divergence and uncoalesced DRAM access failures", "pages": [23, 39], "evidence_text": "Control divergence"},
+        {"semantic_id": "tiling-derivation", "kind": "derivation", "title": "Matrix tiling and shared-memory reuse derivation", "pages": [40, 44], "evidence_text": "tiling"},
+        {"semantic_id": "matrix-mystery", "kind": "experiment", "title": "Matrix-size performance mystery and wave quantization", "pages": [45, 48], "evidence_text": "matrix mystery"},
+        {"semantic_id": "flashattention-derivation", "kind": "derivation", "title": "FlashAttention tiled online-softmax derivation", "pages": [50, 54], "evidence_text": "Flash Attention"},
+        {"semantic_id": "recap", "kind": "section", "title": "GPU performance recap", "pages": [55], "evidence_text": "Recap"}
+      ],
+      "visuals": [
+        {"semantic_id": "gpu-anatomy", "visual_kind": "figure", "question": "How do SMs, threads, blocks, registers, caches, and HBM compose the GPU execution hierarchy?", "pages": [8, 14]},
+        {"semantic_id": "operator-fusion", "visual_kind": "figure", "question": "Why does fusing five pointwise operations remove repeated warehouse-to-factory memory trips?", "pages": [30, 33]},
+        {"semantic_id": "activation-recomputation", "visual_kind": "derivation", "question": "When does recomputing activations reduce total memory reads and writes despite extra FLOPs?", "pages": [34, 36]},
+        {"semantic_id": "tiling-derivation", "visual_kind": "derivation", "question": "How does tile size control shared-memory reuse and global-memory traffic?", "pages": [40, 44]},
+        {"semantic_id": "matrix-mystery", "visual_kind": "experiment", "question": "How do alignment and wave quantization explain periodic matrix-multiplication throughput?", "pages": [45, 48]},
+        {"semantic_id": "flashattention-derivation", "visual_kind": "derivation", "question": "How do tiled QK products and online softmax eliminate materialization of the full attention matrix?", "pages": [50, 54]}
+      ],
+      "sample": "The tiling diagram on page 42 is interpreted with its pages 40-44 derivation; the matrix mystery remains a distinct experiment."
+    },
+    "lecture-08": {
+      "units": [
+        {"semantic_id": "networking-collectives", "kind": "section", "title": "Networking topologies and collective communication", "pages": [2, 13], "evidence_text": "Outline and goals"},
+        {"semantic_id": "zero-sharding", "kind": "mechanism", "title": "Data parallelism and ZeRO stages 1-3", "pages": [14, 30], "evidence_text": "Standard LLM parallelization"},
+        {"semantic_id": "zero-memory-accounting", "kind": "derivation", "title": "ZeRO communication and memory accounting", "pages": [16, 28], "evidence_text": "ZeRO stage 3 (aka FSDP) shard everything"},
+        {"semantic_id": "pipeline-parallelism", "kind": "mechanism", "title": "Pipeline parallelism and microbatch scheduling", "pages": [31, 38], "evidence_text": "model parallelism"},
+        {"semantic_id": "pipeline-bubble-failure", "kind": "failure-mode", "title": "Pipeline bubble and batch-size utilization failure", "pages": [33, 38], "evidence_text": "utilization"},
+        {"semantic_id": "width-parallelism", "kind": "mechanism", "title": "Tensor, sequence, expert, and context parallelism", "pages": [39, 54], "evidence_text": "width axes"},
+        {"semantic_id": "activation-memory", "kind": "derivation", "title": "Activation-memory scaling under tensor and sequence parallelism", "pages": [44, 49], "evidence_text": "activation memory"},
+        {"semantic_id": "parallelism-comparison", "kind": "table", "title": "Parallelism trade-off and 3D composition tables", "pages": [55, 62], "evidence_text": "parallelism table"},
+        {"semantic_id": "model-strategy-cases", "kind": "worked-example", "title": "DeepSeek, Llama, Gemma, Mixtral, Nemotron, and Qwen strategies", "pages": [63, 72], "evidence_text": "Recent LMs"},
+        {"semantic_id": "recap", "kind": "section", "title": "LLM parallelism recap", "pages": [73], "evidence_text": "Recap"}
+      ],
+      "visuals": [
+        {"semantic_id": "networking-collectives", "visual_kind": "figure", "question": "How do reduce-scatter/all-gather and network topology constrain multi-accelerator communication?", "pages": [6, 13]},
+        {"semantic_id": "zero-sharding", "visual_kind": "figure", "question": "Which model states move or remain resident at each ZeRO stage, and when can communication overlap compute?", "pages": [15, 28]},
+        {"semantic_id": "pipeline-parallelism", "visual_kind": "figure", "question": "How do microbatches fill a pipeline and where does the utilization bubble remain?", "pages": [31, 38]},
+        {"semantic_id": "width-parallelism", "visual_kind": "figure", "question": "How do tensor, sequence, expert, and context parallelism partition width and activations?", "pages": [39, 54]},
+        {"semantic_id": "parallelism-comparison", "visual_kind": "table", "question": "How do memory, communication, batch scaling, and ease-of-use trade off across parallelism methods?", "pages": [55, 62]}
+      ],
+      "sample": "The FSDP timeline on page 26 belongs to the ZeRO pages 15-28 sequence with memory and communication accounting."
+    },
+    "lecture-09": {
+      "units": [
+        {"semantic_id": "scaling-history", "kind": "section", "title": "History and motivation of empirical scaling laws", "pages": [2, 12], "evidence_text": "Taking scaling seriously"},
+        {"semantic_id": "data-scaling", "kind": "mechanism", "title": "Power-law data scaling", "pages": [13, 27], "evidence_text": "power law"},
+        {"semantic_id": "mean-estimation-derivation", "kind": "derivation", "title": "Mean-estimation and intrinsic-dimension scaling derivations", "pages": [16, 20], "evidence_text": "mean estimation"},
+        {"semantic_id": "data-scaling-failures", "kind": "failure-mode", "title": "Distribution shift, repetition, finiteness, and blind extrapolation failures", "pages": [21, 26], "evidence_text": "distribution shift"},
+        {"semantic_id": "engineering-scaling", "kind": "experiment", "title": "Architecture, optimizer, depth, batch, and learning-rate scaling evidence", "pages": [28, 42], "evidence_text": "model engineering"},
+        {"semantic_id": "joint-model-data-scaling", "kind": "derivation", "title": "Joint model-data-compute scaling and Chinchilla methods", "pages": [43, 56], "evidence_text": "more data or bigger"},
+        {"semantic_id": "isoflops-experiment", "kind": "experiment", "title": "Chinchilla minimum-run, IsoFLOPs, and joint-fit experiments", "pages": [46, 53], "evidence_text": "Chinchilla"},
+        {"semantic_id": "train-inference-tradeoff", "kind": "failure-mode", "title": "Train-optimal versus inference-aware compute allocation", "pages": [54], "evidence_text": "train-optimal"},
+        {"semantic_id": "recap", "kind": "section", "title": "Scaling-law recap", "pages": [57], "evidence_text": "Recap"}
+      ],
+      "visuals": [
+        {"semantic_id": "data-scaling", "visual_kind": "figure", "question": "Why does loss become approximately linear in log data size across tasks and models?", "pages": [13, 20]},
+        {"semantic_id": "data-scaling-failures", "visual_kind": "figure", "question": "How do distribution shift, repeated examples, and finite data alter effective scaling?", "pages": [21, 26]},
+        {"semantic_id": "engineering-scaling", "visual_kind": "experiment", "question": "Which controlled sweeps show scale-sensitive versus stable architecture and optimizer choices?", "pages": [29, 42]},
+        {"semantic_id": "isoflops-experiment", "visual_kind": "experiment", "question": "How do fixed-FLOP loss valleys yield optimal parameter and token power laws?", "pages": [46, 53]}
+      ],
+      "sample": "The IsoFLOPs curves on page 48 are one pages 46-53 experimental sequence, distinct from training/inference allocation."
+    },
+    "lecture-11": {
+      "units": [
+        {"semantic_id": "minicpm-scaling", "kind": "worked-example", "title": "MiniCPM muP, WSD, and Chinchilla scaling recipe", "pages": [2, 18], "evidence_text": "MiniCPM"},
+        {"semantic_id": "deepseek-scaling", "kind": "worked-example", "title": "DeepSeek and recent-model scaling recipes", "pages": [19, 30], "evidence_text": "DeepSeek"},
+        {"semantic_id": "optimizer-scaling", "kind": "experiment", "title": "Learning-rate, batch, optimizer, and Muon scaling experiments", "pages": [31, 43], "evidence_text": "Optimizer scaling"},
+        {"semantic_id": "mup-derivation", "kind": "derivation", "title": "Maximum-update parametrization derivation", "pages": [44, 50], "evidence_text": "Maximum update"},
+        {"semantic_id": "mup-robustness", "kind": "experiment", "title": "muP replication and robustness experiments", "pages": [51, 57], "evidence_text": "Replicating muP"},
+        {"semantic_id": "mup-failure-modes", "kind": "failure-mode", "title": "RMSNorm gain, exotic optimizer, and weight-decay failures for muP", "pages": [53, 56], "evidence_text": "not robust"},
+        {"semantic_id": "recap", "kind": "section", "title": "Scaling in the wild recap", "pages": [58], "evidence_text": "Recap"}
+      ],
+      "visuals": [
+        {"semantic_id": "minicpm-scaling", "visual_kind": "experiment", "question": "How do muP, WSD restarts, and model-data sweeps make MiniCPM scaling economical?", "pages": [8, 18]},
+        {"semantic_id": "deepseek-scaling", "visual_kind": "experiment", "question": "How do DeepSeek and later models fit batch, learning rate, and IsoFLOPs trends?", "pages": [19, 30]},
+        {"semantic_id": "mup-derivation", "visual_kind": "derivation", "question": "Which initialization and update scalings keep activations and feature learning stable as width grows?", "pages": [44, 50]},
+        {"semantic_id": "mup-robustness", "visual_kind": "experiment", "question": "Where does muP transfer across architecture changes, and where do gains, optimizers, or weight decay break it?", "pages": [51, 57]}
+      ],
+      "sample": "Pages 47-50 are a continuous muP derivation; pages 51-57 separately test its claimed robustness."
+    },
+    "lecture-15": {
+      "units": [
+        {"semantic_id": "posttraining-framing", "kind": "section", "title": "From pretraining to controllable instruction following", "pages": [2, 6], "evidence_text": "class thus far"},
+        {"semantic_id": "sft-data", "kind": "worked-example", "title": "Instruction-tuning data progression, style, knowledge, and safety", "pages": [7, 27], "evidence_text": "ingredients in SFT"},
+        {"semantic_id": "midtraining", "kind": "mechanism", "title": "Midtraining and two-phase training", "pages": [28, 30], "evidence_text": "Midtraining"},
+        {"semantic_id": "preference-data", "kind": "section", "title": "RLHF preference-data collection and annotator effects", "pages": [31, 48], "evidence_text": "second part of RLHF"},
+        {"semantic_id": "ppo-dpo", "kind": "mechanism", "title": "PPO and DPO optimization for preferences", "pages": [49, 61], "evidence_text": "How do we RLHF"},
+        {"semantic_id": "dpo-derivation", "kind": "derivation", "title": "DPO derivation from the KL-regularized RLHF objective", "pages": [56, 58], "evidence_text": "DPO"},
+        {"semantic_id": "rlhf-failure-modes", "kind": "failure-mode", "title": "Reward overoptimization and mode-collapse failures", "pages": [62, 64], "evidence_text": "watch out"},
+        {"semantic_id": "recap", "kind": "section", "title": "SFT and RLHF recap", "pages": [65], "evidence_text": "Recap"}
+      ],
+      "visuals": [
+        {"semantic_id": "sft-data", "visual_kind": "figure", "question": "How do instruction datasets change in style, source, factuality, and safety coverage from FLAN to modern mixtures?", "pages": [9, 27]},
+        {"semantic_id": "preference-data", "visual_kind": "figure", "question": "How do collection protocol, compensation, demographics, and synthetic feedback shape preference data?", "pages": [35, 48]},
+        {"semantic_id": "dpo-derivation", "visual_kind": "derivation", "question": "How does solving the KL-regularized optimum for implied reward yield the DPO pairwise loss?", "pages": [56, 58]},
+        {"semantic_id": "rlhf-failure-modes", "visual_kind": "figure", "question": "How do reward overoptimization and entropy collapse appear across RLHF optimizers?", "pages": [62, 64]}
+      ],
+      "sample": "The three-page DPO derivation is separated from empirical overoptimization and mode-collapse failures."
+    },
+    "lecture-16": {
+      "units": [
+        {"semantic_id": "ppo", "kind": "mechanism", "title": "PPO objectives, rollout loop, reward shaping, and GAE", "pages": [2, 17], "evidence_text": "class thus far"},
+        {"semantic_id": "grpo", "kind": "derivation", "title": "GRPO objective and group-relative advantage derivation", "pages": [18, 24], "evidence_text": "GRPO"},
+        {"semantic_id": "grpo-bias-failures", "kind": "failure-mode", "title": "GRPO invalid baseline and length-bias failures", "pages": [22, 24], "evidence_text": "valid baseline"},
+        {"semantic_id": "r1-case", "kind": "worked-example", "title": "DeepSeek R1 and R1-Zero training case study", "pages": [25, 38], "evidence_text": "Deepseek R1"},
+        {"semantic_id": "kimi-case", "kind": "worked-example", "title": "Kimi K1.5 data, RL, length control, and infrastructure case study", "pages": [39, 48], "evidence_text": "Kimi"},
+        {"semantic_id": "qwen-case", "kind": "worked-example", "title": "Qwen3 reasoning, agentic RL, and expert-model case study", "pages": [49, 60], "evidence_text": "Qwen 3"},
+        {"semantic_id": "rlvr-experiments", "kind": "experiment", "title": "RLVR scaling, ablation, and expert-iteration comparisons", "pages": [28, 48], "evidence_text": "Controlled setting"},
+        {"semantic_id": "recap", "kind": "section", "title": "RLVR recap", "pages": [61], "evidence_text": "Recap"}
+      ],
+      "visuals": [
+        {"semantic_id": "ppo", "visual_kind": "code-trace", "question": "How do rollout collection, reward shaping, GAE, and clipped updates connect in a practical PPO loop?", "pages": [10, 16]},
+        {"semantic_id": "grpo", "visual_kind": "derivation", "question": "Which PPO components disappear in GRPO, and how do group normalization and length normalization change the gradient?", "pages": [18, 24]},
+        {"semantic_id": "r1-case", "visual_kind": "figure", "question": "How do cold-start SFT, reasoning RL, later SFT/RLHF, and distillation compose the R1 pipeline?", "pages": [25, 38]},
+        {"semantic_id": "kimi-case", "visual_kind": "figure", "question": "How do difficulty filtering, length control, curriculum, and RL infrastructure compose the Kimi pipeline?", "pages": [39, 48]},
+        {"semantic_id": "qwen-case", "visual_kind": "figure", "question": "How do thinking-mode fusion, test-time scaling, agentic data, and expert RL compose Qwen3 post-training?", "pages": [49, 60]}
+      ],
+      "sample": "Pages 18-24 form the GRPO derivation and bias sequence; R1, Kimi, and Qwen remain separate case studies."
+    }
+  },
+  "assignments": {
+    "assignment-01": {
+      "handout": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf",
+      "expected_task_ids": ["unicode1", "unicode2", "train_bpe", "train_bpe_tinystories", "train_bpe_expts_owt", "tokenizer", "tokenizer_experiments", "linear", "embedding", "rmsnorm", "positionwise_feedforward", "rope", "softmax", "scaled_dot_product_attention", "multihead_self_attention", "transformer_block", "transformer_lm", "transformer_accounting", "cross_entropy", "learning_rate_tuning", "adamw", "adamw_accounting", "learning_rate_schedule", "gradient_clipping", "data_loading", "checkpointing", "training_together", "decoding", "experiment_log", "learning_rate", "batch_size_experiment", "generate", "layer_norm_ablation", "pre_norm_ablation", "no_pos_emb", "swiglu_ablation", "main_experiment", "leaderboard"],
+      "expected_deliverables": 57,
+      "test_globs": ["tests/test*.py"],
+      "expected_test_interfaces": 48,
+      "administrative": [{"semantic_id": "course-policy-and-setup", "title": "Submission, collaboration, AI-tool, and low-resource guidance", "pages": [1, 2], "reason": "Administrative course policy and environment setup are preserved but are not textbook teaching content.", "evidence_text": "AI autocomplete"}],
+      "evaluation": [
+        {"semantic_id": "bpe-runtime", "criterion_id": "bpe-runtime", "title": "BPE training completes under two minutes with multiprocessing", "page": 10, "evidence_text": "under 2 minutes"},
+        {"semantic_id": "tinystories-loss", "criterion_id": "tinystories-loss", "title": "TinyStories validation loss is at most 1.45", "page": 40, "evidence_text": "at most 1.45"},
+        {"semantic_id": "leaderboard-budget", "criterion_id": "leaderboard-budget", "title": "Leaderboard model minimizes validation loss within 0.75 B200-hours", "page": 46, "evidence_text": "0.75 B200-hours"}
+      ],
+      "visuals": [{"semantic_id": "transformer-construction-sequence", "kind": "visual-sequence", "visual_kind": "derivation", "title": "Transformer component-to-full-model construction sequence", "question": "How do linear, embedding, RMSNorm, SwiGLU, RoPE, attention, and block contracts compose the full Transformer LM?", "pages": [18, 27], "evidence_text": "Implementing the linear module"}],
+      "sample": "Problems and Deliverable markers define units; the cover and AI policy are excluded rather than mislabeled as tasks."
+    },
+    "assignment-02": {
+      "handout": "Assignments/assignment2-systems/cs336_assignment2_systems.pdf",
+      "expected_task_ids": ["benchmarking_script", "nsys_profile", "mixed_precision_accumulation", "benchmarking_mixed_precision", "memory_profiling", "gradient_checkpointing", "pytorch_attention", "torch_compile", "flash_forward", "flash_backward", "flash_benchmarking", "distributed_communication_single_node", "naive_ddp", "naive_ddp_benchmarking", "minimal_ddp_flat_benchmarking", "ddp_overlap_individual_parameters", "ddp_overlap_individual_parameters_benchmarking", "optimizer_state_sharding", "optimizer_state_sharding_accounting", "fsdp", "fsdp_accounting", "alternate_ring_all_reduce", "data_parallel_calcs", "fsdp_calcs", "tp_calcs", "fsdp_tp_calcs", "leaderboard"],
+      "expected_deliverables": 58,
+      "test_globs": ["tests/test*.py"],
+      "expected_test_interfaces": 8,
+      "administrative": [{"semantic_id": "systems-setup", "title": "Assignment setup and imported basics model", "pages": [1, 2], "reason": "Repository setup and submission mechanics are preserved but excluded from teaching coverage.", "evidence_text": "Setup"}],
+      "evaluation": [
+        {"semantic_id": "benchmark-synchronization", "criterion_id": "benchmark-synchronization", "title": "GPU benchmarks warm up and synchronize before timing", "page": 4, "evidence_text": "torch.cuda.synchronize"},
+        {"semantic_id": "flashattention-tests", "criterion_id": "flashattention-tests", "title": "FlashAttention forward and backward implementations pass focused tests", "page": 28, "evidence_text": "test_flash_backward"},
+        {"semantic_id": "distributed-benchmark-controls", "criterion_id": "distributed-benchmark-controls", "title": "Distributed benchmarks control warmup, synchronization, ranks, and backend", "page": 32, "evidence_text": "warm-up steps"},
+        {"semantic_id": "leaderboard-timing", "criterion_id": "leaderboard-timing", "title": "Leaderboard evaluation times a complete forward-and-backward training step", "page": 48, "evidence_text": "forward-and-backward"}
+      ],
+      "visuals": [
+        {"semantic_id": "nsight-systems-trace", "kind": "code-trace", "visual_kind": "code-trace", "title": "Nsight Systems timeline with NVTX attention ranges", "question": "How do CUDA activity, NVTX ranges, and kernel launches identify time spent inside attention?", "pages": [5], "evidence_text": "Figure 1"},
+        {"semantic_id": "flashattention-online-softmax", "kind": "derivation", "visual_kind": "derivation", "title": "FlashAttention-2 tiling, online softmax, and backward recomputation", "question": "How do tiled scores, running normalization statistics, and recomputation remove quadratic memory materialization?", "pages": [23, 29], "evidence_text": "FlashAttention"},
+        {"semantic_id": "distributed-rank-topology", "kind": "figure", "visual_kind": "figure", "title": "Local, global, and node ranks in a two-node topology", "question": "How do local rank, global rank, and node rank identify eight workers across two machines?", "pages": [32], "evidence_text": "Figure 3"}
+      ],
+      "sample": "The two embedded rasters on pages 5 and 32 now have semantic source units and coverage; FlashAttention is a multi-page derivation."
+    },
+    "assignment-03": {
+      "handout": "Assignments/assignment3-scaling/cs336_assignment3_scaling.pdf",
+      "expected_task_ids": ["chinchilla_isoflops", "scaling_laws"],
+      "expected_deliverables": 3,
+      "test_globs": ["tests/test*.py"],
+      "expected_test_interfaces": 7,
+      "administrative": [{"semantic_id": "scaling-policy", "title": "Submission, AI-tool, and shared training-API policy", "pages": [1, 2], "reason": "Grading, AI policy, and queue administration are preserved but excluded from teaching coverage.", "evidence_text": "Statement on AI tools"}],
+      "evaluation": [
+        {"semantic_id": "isoflops-reproduction", "criterion_id": "isoflops-reproduction", "title": "IsoFLOPs fit reproduces model-size and dataset-size scaling plots", "page": 3, "evidence_text": "plot showing"},
+        {"semantic_id": "leaderboard-budget", "criterion_id": "leaderboard-budget", "title": "Scaling-law prediction targets the best validation loss at 48 B200-hours", "page": 8, "evidence_text": "48 B200-hours"}
+      ],
+      "visuals": [{"semantic_id": "isoflops-fit-workflow", "kind": "visual-sequence", "visual_kind": "experiment", "title": "IsoFLOPs fitting and extrapolation workflow", "question": "How do fixed-compute training curves yield minima and power-law extrapolations for model and data size?", "pages": [2, 3], "evidence_text": "IsoFLOPs"}],
+      "sample": "The two named problems, three deliverables, API budget, and seven tests replace eight generic page tasks."
+    },
+    "assignment-04": {
+      "handout": "Assignments/assignment4-data/cs336_assignment4_data.pdf",
+      "expected_task_ids": ["look_at_cc", "extract_text", "language_identification", "mask_pii", "harmful_content", "gopher_quality_filters", "quality_classifier", "exact_deduplication", "minhash_deduplication", "filter_data", "inspect_filtered_data", "tokenize_data", "train_model"],
+      "expected_deliverables": 31,
+      "test_globs": ["tests/test*.py"],
+      "expected_test_interfaces": 21,
+      "administrative": [{"semantic_id": "data-assignment-setup", "title": "Shared Common Crawl paths and assignment setup", "pages": [1, 2], "reason": "Environment and shared-data path setup are operational administration, not textbook units.", "evidence_text": "Filtering Common Crawl"}],
+      "evaluation": [
+        {"semantic_id": "classifier-evaluation", "criterion_id": "classifier-evaluation", "title": "Language, harm, and quality classifiers report concrete behavior and error analysis", "page": 9, "evidence_text": "quality classifier"},
+        {"semantic_id": "pipeline-runtime", "criterion_id": "pipeline-runtime", "title": "End-to-end filtering reports runtime and inspected kept/discarded samples", "page": 14, "evidence_text": "Runtime"},
+        {"semantic_id": "model-validation", "criterion_id": "model-validation", "title": "Filtered-data training reports best validation loss and learning curve", "page": 16, "evidence_text": "validation loss"}
+      ],
+      "visuals": [{"semantic_id": "minhash-lsh-deduplication", "kind": "derivation", "visual_kind": "derivation", "title": "MinHash signature and LSH banding workflow", "question": "How do n-gram sets become signatures, bands, candidate pairs, and finally deduplicated documents?", "pages": [10, 12], "evidence_text": "MinHash"}],
+      "sample": "Exact markers yield 13 tasks and 31 deliverables; MinHash/LSH is a reviewed three-page derivation."
+    },
+    "assignment-05": {
+      "handout": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf",
+      "expected_task_ids": ["prompting_baselines", "baseline_calcs", "tokenize_prompt_and_output", "get_response_log_probs", "compute_rollout_rewards", "compute_group_normalized_rewards_grpo", "compute_policy_gradient_loss_on_policy", "aggregate_loss_across_microbatch_sequence", "grpo_train_step_standard_on_policy", "grpo_experiments_standard_on_policy", "grpo_learning_rate", "grpo_prompt_ablation", "think_about_length_normalization", "compute_group_normalized_rewards_drgrpo", "aggregate_loss_across_microbatch_constant", "think_about_rft", "derive_difficulty_reweightings", "think_about_advantage_normalization", "compute_group_normalized_rewards_maxrl", "grpo_train_step_variants_on_policy", "grpo_experiments_variants_on_policy", "derive_surrogate_objectives", "compute_policy_gradient_loss_off_policy", "think_about_importance_reweighting", "compute_policy_gradient_loss_off_policy_gspo", "grpo_train_step_off_policy", "grpo_experiments_off_policy", "try_your_own"],
+      "expected_deliverables": 36,
+      "test_globs": ["tests/test_grpo.py"],
+      "expected_test_interfaces": 14,
+      "administrative": [{"semantic_id": "alignment-submission", "title": "Writeup and code submission instructions", "pages": [1, 2], "reason": "Submission packaging is preserved but excluded from instructional coverage.", "evidence_text": "writeup.pdf"}],
+      "evaluation": [
+        {"semantic_id": "prompting-baselines", "criterion_id": "prompting-baselines", "title": "Zero-shot, few-shot, and chain-of-thought GSM8K baselines report metrics and examples", "page": 7, "evidence_text": "evaluation metrics"},
+        {"semantic_id": "grpo-correctness", "criterion_id": "grpo-correctness", "title": "GRPO implementation supplies correctness evidence and reaches at least 25 percent validation accuracy", "page": 25, "evidence_text": "at least 25"},
+        {"semantic_id": "learning-rate-sweep", "criterion_id": "learning-rate-sweep", "title": "Learning-rate sweep includes values below and above the default", "page": 26, "evidence_text": "less than"},
+        {"semantic_id": "on-off-policy-comparison", "criterion_id": "on-off-policy-comparison", "title": "On-policy variants and off-policy estimators are compared with fixed hyperparameters and plots", "page": 38, "evidence_text": "Keeping hyperparameters fixed"}
+      ],
+      "visuals": [{"semantic_id": "on-policy-grpo-derivation", "kind": "derivation", "visual_kind": "derivation", "title": "Policy-gradient to on-policy GRPO derivation", "question": "How do trajectories, returns, baselines, normalization, and token aggregation produce the GRPO algorithm?", "pages": [8, 13], "evidence_text": "Language models as policies"}],
+      "sample": "Twenty-eight named problems and fourteen real tests are retained; the GRPO derivation spans pages 8-13."
+    },
+    "assignment-05-safety-supplement": {
+      "handout": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf",
+      "expected_task_ids": ["mmlu_baseline", "gsm8k_baseline", "alpaca_eval_baseline", "sst_baseline", "look_at_sft", "data_loading", "sft_script", "sft", "mmlu_sft", "gsm8k_sft", "alpaca_eval_sft", "sst_sft", "red_teaming", "look_at_hh", "dpo_loss", "dpo_training"],
+      "expected_deliverables": 46,
+      "test_globs": ["tests/test_data.py", "tests/test_dpo.py", "tests/test_metrics.py"],
+      "expected_test_interfaces": 7,
+      "administrative": [{"semantic_id": "safety-setup", "title": "Model volumes, helper scripts, and repository setup", "pages": [1, 2], "reason": "Environment, volume, and helper-script setup are preserved but excluded from teaching coverage.", "evidence_text": "Models and shared volumes"}],
+      "evaluation": [
+        {"semantic_id": "mmlu-metric", "criterion_id": "mmlu-metric", "title": "MMLU parses answer letters and reports accuracy, throughput, failures, and error analysis", "page": 4, "evidence_text": "Evaluation metric"},
+        {"semantic_id": "gsm8k-metric", "criterion_id": "gsm8k-metric", "title": "GSM8K parses final numbers and reports accuracy, throughput, failures, and error analysis", "page": 5, "evidence_text": "Evaluation metric"},
+        {"semantic_id": "alpacaeval-metric", "criterion_id": "alpacaeval-metric", "title": "AlpacaEval reports win rate, length-controlled win rate, throughput, and errors", "page": 6, "evidence_text": "winrate"},
+        {"semantic_id": "safety-metric", "criterion_id": "safety-metric", "title": "SimpleSafetyTests reports safe-output proportion and qualitative errors", "page": 8, "evidence_text": "safe"},
+        {"semantic_id": "sft-comparison", "criterion_id": "sft-comparison", "title": "SFT evaluation compares MMLU, GSM8K, AlpacaEval, and safety against baselines", "page": 14, "evidence_text": "comparison"},
+        {"semantic_id": "dpo-comparison", "criterion_id": "dpo-comparison", "title": "DPO evaluation compares AlpacaEval, safety, GSM8K, and MMLU against SFT", "page": 18, "evidence_text": "compare"}
+      ],
+      "visuals": [{"semantic_id": "dpo-objective-and-training", "kind": "derivation", "visual_kind": "derivation", "title": "DPO objective, preference data, loss, and training sequence", "question": "How do chosen/rejected responses, reference-policy ratios, per-instance loss, and training evaluation compose DPO?", "pages": [15, 18], "evidence_text": "DPO Objective"}],
+      "sample": "Safety, SFT, and DPO tasks use named problems, 46 deliverables, seven relevant tests, and explicit benchmark metrics."
+    }
+  }
+}
