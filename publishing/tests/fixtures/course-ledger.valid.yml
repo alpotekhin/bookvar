@@ -6,7 +6,7 @@ source_manifest:
   retrieved_at: 2026-09-04
   objects:
     - id: lecture-01
-      kind: lecture
+      kind: executable-lecture
       source_authority: official-course
       verification_status: verified
       lecturer_or_author: Example Lecturer
@@ -22,29 +22,181 @@ source_manifest:
       rights_status: licensed
       rights_evidence: https://example.edu/course-license
       retrieved_at: 2026-09-04
+    - id: pdf-01
+      kind: pdf
+      source_authority: official-course
+      verification_status: verified
+      lecturer_or_author: Example Lecturer
+      meeting_date: 2026-01-12
+      title: Foundation slides
+      canonical_url: https://example.edu/slides.pdf
+      revision_or_checksum: dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+      local_path: Slides/foundations.pdf
+      mime: application/pdf
+      bytes: 256
+      page_count: 2
+      language: en
+      rights_status: licensed
+      rights_evidence: https://example.edu/course-license
+      retrieved_at: 2026-09-04
+    - id: assignment-01
+      kind: assignment
+      source_authority: official-course
+      verification_status: verified
+      lecturer_or_author: Example Lecturer
+      meeting_date: 2026-01-13
+      title: Foundation assignment
+      canonical_url: https://example.edu/assignment
+      revision_or_checksum: eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+      local_path: Assignments/assignment-01.md
+      mime: text/markdown
+      bytes: 192
+      page_count: 1
+      language: en
+      rights_status: licensed
+      rights_evidence: https://example.edu/course-license
+      retrieved_at: 2026-09-04
+    - id: video-01
+      kind: video
+      source_authority: official-course
+      verification_status: verified
+      lecturer_or_author: Example Lecturer
+      meeting_date: 2026-01-12
+      title: Foundation recording
+      canonical_url: https://example.edu/recording.mp4
+      revision_or_checksum: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+      local_path: Videos/lecture-01.mp4
+      mime: video/mp4
+      bytes: 1024
+      video_metadata:
+        duration_seconds: 10
+        frame_rate: 30
+        frame_count: 300
+      language: en
+      rights_status: link-only
+      rights_evidence: https://example.edu/course-rights
+      retrieved_at: 2026-09-04
 source_units:
   schema_version: 1
   units:
     - id: lecture-01-section
       source_object: lecture-01
       source_location: Lectures/lecture-01.md#foundations
-      kind: section
+      kind: section-boundary
+      order: 1
+      heading_level: 2
       title: Foundations
     - id: lecture-01-example
       source_object: lecture-01
       source_location: Lectures/lecture-01.md#example
-      kind: worked-example
+      kind: rendered-text
+      order: 2
+      content_sha256: bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
       title: Example
     - id: lecture-01-reading
       source_object: lecture-01
       source_location: Lectures/lecture-01.md#reading
-      kind: reading
+      kind: rendered-link
+      order: 3
+      target_url: https://example.edu/reading
       title: Reading
     - id: lecture-01-admin
       source_object: lecture-01
-      source_location: Lectures/lecture-01.md#admin
-      kind: administrative
-      title: Administrative note
+      source_location: Lectures/lecture-01.md#admin-image
+      kind: rendered-image
+      order: 4
+      asset_url: https://example.edu/admin.png
+      title: Administrative image
+    - id: pdf-01-page
+      source_object: pdf-01
+      source_location: Slides/foundations.pdf#page=1
+      kind: page
+      order: 1
+      page: 1
+      title: Slide page 1
+    - id: pdf-01-heading
+      source_object: pdf-01
+      source_location: Slides/foundations.pdf#page=1&heading=foundations
+      kind: heading
+      order: 2
+      page: 1
+      heading_level: 1
+      title: Foundations heading
+    - id: pdf-01-figure
+      source_object: pdf-01
+      source_location: Slides/foundations.pdf#page=1&figure=1
+      kind: figure
+      order: 3
+      page: 1
+      figure_label: Figure 1
+      title: Pipeline figure
+    - id: pdf-01-table
+      source_object: pdf-01
+      source_location: Slides/foundations.pdf#page=2&table=1
+      kind: table
+      order: 4
+      page: 2
+      table_label: Table 1
+      title: Comparison table
+    - id: pdf-01-build
+      source_object: pdf-01
+      source_location: Slides/foundations.pdf#pages=1-2
+      kind: multi-page-build
+      order: 5
+      page_start: 1
+      page_end: 2
+      title: Progressive pipeline build
+    - id: assignment-01-task
+      source_object: assignment-01
+      source_location: Assignments/assignment-01.md#task
+      kind: task
+      order: 1
+      task_id: task-1
+      title: Implement the pipeline
+    - id: assignment-01-deliverable
+      source_object: assignment-01
+      source_location: Assignments/assignment-01.md#deliverable
+      kind: deliverable
+      order: 2
+      deliverable_id: submission-1
+      title: Pipeline implementation
+    - id: assignment-01-test
+      source_object: assignment-01
+      source_location: Assignments/assignment-01.md#tests
+      kind: test-interface
+      order: 3
+      interface_name: pytest
+      title: Test command
+    - id: assignment-01-evaluation
+      source_object: assignment-01
+      source_location: Assignments/assignment-01.md#evaluation
+      kind: evaluation-requirement
+      order: 4
+      criterion_id: criterion-1
+      title: Correctness requirement
+    - id: video-01-segment
+      source_object: video-01
+      source_location: Videos/lecture-01.mp4#t=0,5
+      kind: segment
+      order: 1
+      start_seconds: 0
+      end_seconds: 5
+      title: Pipeline overview
+    - id: video-01-frame
+      source_object: video-01
+      source_location: Videos/lecture-01.mp4#frame=150
+      kind: frame
+      order: 2
+      frame: 150
+      title: Pipeline frame
+    - id: video-01-transcript
+      source_object: video-01
+      source_location: Videos/lecture-01.mp4#t=5,10
+      kind: transcript-event
+      order: 3
+      start_seconds: 5
+      end_seconds: 10
+      title: Pipeline transcript
 coverage:
   schema_version: 1
   rows:
@@ -52,7 +204,7 @@ coverage:
       source_object: lecture-01
       source_unit: lecture-01-section
       source_location: Lectures/lecture-01.md#foundations
-      kind: section
+      kind: section-boundary
       title: Foundations
       disposition: integrated
       destination: textbook/foundations.md
@@ -63,7 +215,7 @@ coverage:
       source_object: lecture-01
       source_unit: lecture-01-example
       source_location: Lectures/lecture-01.md#example
-      kind: worked-example
+      kind: rendered-text
       title: Example
       disposition: covered-existing
       destination: textbook/existing.md
@@ -74,7 +226,7 @@ coverage:
       source_object: lecture-01
       source_unit: lecture-01-reading
       source_location: Lectures/lecture-01.md#reading
-      kind: reading
+      kind: rendered-link
       title: Reading
       disposition: source-only
       destination: courses/fixture/_index.md
@@ -85,20 +237,141 @@ coverage:
     - id: coverage-excluded
       source_object: lecture-01
       source_unit: lecture-01-admin
-      source_location: Lectures/lecture-01.md#admin
-      kind: administrative
-      title: Administrative note
+      source_location: Lectures/lecture-01.md#admin-image
+      kind: rendered-image
+      title: Administrative image
       disposition: excluded
       reason: Administrative material is outside the textbook scope.
       evidence: https://example.edu/course-scope
       primary_sources:
         - lecture-01
+    - id: coverage-pdf-page
+      source_object: pdf-01
+      source_unit: pdf-01-page
+      source_location: Slides/foundations.pdf#page=1
+      kind: page
+      title: Slide page 1
+      disposition: excluded
+      reason: Schema fixture only.
+      evidence: https://example.edu/course-scope
+      primary_sources: [pdf-01]
+    - id: coverage-pdf-heading
+      source_object: pdf-01
+      source_unit: pdf-01-heading
+      source_location: Slides/foundations.pdf#page=1&heading=foundations
+      kind: heading
+      title: Foundations heading
+      disposition: excluded
+      reason: Schema fixture only.
+      evidence: https://example.edu/course-scope
+      primary_sources: [pdf-01]
+    - id: coverage-pdf-figure
+      source_object: pdf-01
+      source_unit: pdf-01-figure
+      source_location: Slides/foundations.pdf#page=1&figure=1
+      kind: figure
+      title: Pipeline figure
+      disposition: excluded
+      reason: Schema fixture only.
+      evidence: https://example.edu/course-scope
+      primary_sources: [pdf-01]
+    - id: coverage-pdf-table
+      source_object: pdf-01
+      source_unit: pdf-01-table
+      source_location: Slides/foundations.pdf#page=2&table=1
+      kind: table
+      title: Comparison table
+      disposition: excluded
+      reason: Schema fixture only.
+      evidence: https://example.edu/course-scope
+      primary_sources: [pdf-01]
+    - id: coverage-pdf-build
+      source_object: pdf-01
+      source_unit: pdf-01-build
+      source_location: Slides/foundations.pdf#pages=1-2
+      kind: multi-page-build
+      title: Progressive pipeline build
+      disposition: excluded
+      reason: Schema fixture only.
+      evidence: https://example.edu/course-scope
+      primary_sources: [pdf-01]
+    - id: coverage-assignment-task
+      source_object: assignment-01
+      source_unit: assignment-01-task
+      source_location: Assignments/assignment-01.md#task
+      kind: task
+      title: Implement the pipeline
+      disposition: excluded
+      reason: Schema fixture only.
+      evidence: https://example.edu/course-scope
+      primary_sources: [assignment-01]
+    - id: coverage-assignment-deliverable
+      source_object: assignment-01
+      source_unit: assignment-01-deliverable
+      source_location: Assignments/assignment-01.md#deliverable
+      kind: deliverable
+      title: Pipeline implementation
+      disposition: excluded
+      reason: Schema fixture only.
+      evidence: https://example.edu/course-scope
+      primary_sources: [assignment-01]
+    - id: coverage-assignment-test
+      source_object: assignment-01
+      source_unit: assignment-01-test
+      source_location: Assignments/assignment-01.md#tests
+      kind: test-interface
+      title: Test command
+      disposition: excluded
+      reason: Schema fixture only.
+      evidence: https://example.edu/course-scope
+      primary_sources: [assignment-01]
+    - id: coverage-assignment-evaluation
+      source_object: assignment-01
+      source_unit: assignment-01-evaluation
+      source_location: Assignments/assignment-01.md#evaluation
+      kind: evaluation-requirement
+      title: Correctness requirement
+      disposition: excluded
+      reason: Schema fixture only.
+      evidence: https://example.edu/course-scope
+      primary_sources: [assignment-01]
+    - id: coverage-video-segment
+      source_object: video-01
+      source_unit: video-01-segment
+      source_location: Videos/lecture-01.mp4#t=0,5
+      kind: segment
+      title: Pipeline overview
+      disposition: excluded
+      reason: Schema fixture only.
+      evidence: https://example.edu/course-scope
+      primary_sources: [video-01]
+    - id: coverage-video-frame
+      source_object: video-01
+      source_unit: video-01-frame
+      source_location: Videos/lecture-01.mp4#frame=150
+      kind: frame
+      title: Pipeline frame
+      disposition: excluded
+      reason: Schema fixture only.
+      evidence: https://example.edu/course-scope
+      primary_sources: [video-01]
+    - id: coverage-video-transcript
+      source_object: video-01
+      source_unit: video-01-transcript
+      source_location: Videos/lecture-01.mp4#t=5,10
+      kind: transcript-event
+      title: Pipeline transcript
+      disposition: excluded
+      reason: Schema fixture only.
+      evidence: https://example.edu/course-scope
+      primary_sources: [video-01]
 visuals:
   schema_version: 1
   rows:
     - id: visual-01
       source_object: lecture-01
       source_location: Lectures/lecture-01.md#figure-1
+      source_pages: [1]
       question: How do the stages connect?
       sequence_members:
         - order: 1
@@ -124,12 +397,37 @@ visuals:
       narrow_evidence: checked-narrow.png
       reviewer: Example Reviewer
       checked_at: 2026-09-04
+    - id: visual-source-only
+      source_object: video-01
+      source_location: Videos/lecture-01.mp4#frame=30
+      source_frames: [30]
+      question: What does the recorded frame show?
+      sequence_members:
+        - order: 1
+          source_location: Videos/lecture-01.mp4#frame=30
+      disposition: source-only
+      destination: courses/fixture/_index.md
+      destination_anchor: video-frame
+      reason: Kept on the source hub because reuse is not authorized.
+      attribution: Example Lecturer, Fixture Systems Spring 2026
+      rights_status: link-only
+      rights_holder: Example University
+      rights_scope: source-page linking only
+      rights_evidence: https://example.edu/course-rights
+      rendered_route: sources/courses/fixture#video-frame
+      desktop_evidence: checked-desktop.png
+      narrow_evidence: checked-narrow.png
+      reviewer: Example Reviewer
+      checked_at: 2026-09-04
 asset_registry:
   assets:
     - asset: 00 Учебник/Assets/Figures/fixture/visual-01.png
       metadata_status: verified
 files:
   - courses/fixture/Lectures/lecture-01.md
+  - courses/fixture/Slides/foundations.pdf
+  - courses/fixture/Assignments/assignment-01.md
+  - courses/fixture/Videos/lecture-01.mp4
   - textbook/foundations.md
   - textbook/existing.md
   - courses/fixture/_index.md
@@ -140,6 +438,8 @@ pages:
     source_unit_id: lecture-01-section
     ---
     # Foundations
+
+    ## Foundations figure
   textbook/existing.md: |
     ---
     source_unit_id: lecture-01-example
@@ -147,3 +447,7 @@ pages:
     # Existing example
   courses/fixture/_index.md: |
     # Fixture source hub
+
+    ## Source reading
+
+    ## Video frame

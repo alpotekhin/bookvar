@@ -6,7 +6,7 @@ source_manifest:
   retrieved_at: 2026-09-04
   objects:
     - id: lecture-01
-      kind: lecture
+      kind: executable-lecture
       source_authority: official-course
       verification_status: verified
       lecturer_or_author: Example Lecturer
@@ -27,7 +27,9 @@ source_units:
   units:
     - id: lecture-01-section
       source_object: lecture-01
-      kind: section
+      kind: section-boundary
+      order: 1
+      heading_level: 2
       title: Foundations
 coverage:
   schema_version: 1
@@ -36,7 +38,7 @@ coverage:
       source_object: lecture-01
       source_unit: lecture-01-section
       source_location: Lectures/lecture-01.md#foundations
-      kind: section
+      kind: section-boundary
       title: Foundations
       disposition:
         - integrated
@@ -51,6 +53,7 @@ visuals:
     - id: visual-invalid
       source_object: lecture-01
       source_location: Lectures/lecture-01.md#figure-1
+      source_pages: [1]
       question: How do the stages connect?
       sequence_members: []
       disposition: integrated
