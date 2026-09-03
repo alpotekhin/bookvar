@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "course": "Stanford CS336 Spring 2026",
+  "retrieved_at": "2026-09-04",
+  "course_page": {
+    "url": "https://cs336.stanford.edu/",
+    "local_path": "Metadata/course.html",
+    "sha256": "bd57fae299fec60afedb5a22edb325a68107fa1af0cd83641695470587f7a4a7"
+  },
+  "repositories": [
+    {
+      "repository": "lectures",
+      "canonical_url": "https://github.com/stanford-cs336/lectures/tree/8b59b50730766695c2ffedd1a79c50cd09b9eb91",
+      "revision": "8b59b50730766695c2ffedd1a79c50cd09b9eb91",
+      "archive_url": "https://codeload.github.com/stanford-cs336/lectures/tar.gz/8b59b50730766695c2ffedd1a79c50cd09b9eb91",
+      "archive_sha256": "07cf6581dfb7678d6bc6e60c17810002ed1315dc0370e1823a39375d9d6fa0a7"
+    },
+    {
+      "repository": "assignment1-basics",
+      "canonical_url": "https://github.com/stanford-cs336/assignment1-basics/tree/a158843b20107949f1a8d7df1b05cd33b9166712",
+      "revision": "a158843b20107949f1a8d7df1b05cd33b9166712",
+      "archive_url": "https://codeload.github.com/stanford-cs336/assignment1-basics/tar.gz/a158843b20107949f1a8d7df1b05cd33b9166712",
+      "archive_sha256": "0a9057370ba2f2b24db288c8903e36dea5483f021c0281f73bbe1b6400f21b4c"
+    },
+    {
+      "repository": "assignment2-systems",
+      "canonical_url": "https://github.com/stanford-cs336/assignment2-systems/tree/ca8bc81a59b70516f7ebb2da4808daade877c736",
+      "revision": "ca8bc81a59b70516f7ebb2da4808daade877c736",
+      "archive_url": "https://codeload.github.com/stanford-cs336/assignment2-systems/tar.gz/ca8bc81a59b70516f7ebb2da4808daade877c736",
+      "archive_sha256": "919a2f09fa24d6b1a29ae5a988e3974925511c2072d043e5203d112fb3456d6a"
+    },
+    {
+      "repository": "assignment3-scaling",
+      "canonical_url": "https://github.com/stanford-cs336/assignment3-scaling/tree/03e9372992e913061b9e78b5cfcb62ad8a87de35",
+      "revision": "03e9372992e913061b9e78b5cfcb62ad8a87de35",
+      "archive_url": "https://codeload.github.com/stanford-cs336/assignment3-scaling/tar.gz/03e9372992e913061b9e78b5cfcb62ad8a87de35",
+      "archive_sha256": "62de8a200c1438054d8fab05e2423f31b6c19c6f1b2d1672a7a56e41801ea964"
+    },
+    {
+      "repository": "assignment4-data",
+      "canonical_url": "https://github.com/stanford-cs336/assignment4-data/tree/0555bea66369872d912652debf10b115ca0688c8",
+      "revision": "0555bea66369872d912652debf10b115ca0688c8",
+      "archive_url": "https://codeload.github.com/stanford-cs336/assignment4-data/tar.gz/0555bea66369872d912652debf10b115ca0688c8",
+      "archive_sha256": "398c32f5e20324cad2d6074f37ce02482292ec588b0541c32a41f35b559b61b7"
+    },
+    {
+      "repository": "assignment5-alignment",
+      "canonical_url": "https://github.com/stanford-cs336/assignment5-alignment/tree/c2734a26308710949fe13226960a1e8cece94b7e",
+      "revision": "c2734a26308710949fe13226960a1e8cece94b7e",
+      "archive_url": "https://codeload.github.com/stanford-cs336/assignment5-alignment/tar.gz/c2734a26308710949fe13226960a1e8cece94b7e",
+      "archive_sha256": "b57ebd994247be796c97a18c6853ae94490fdc456cf79746b53857ac18ec35c4"
+    },
+    {
+      "repository": "stanford-cs336.github.io",
+      "canonical_url": "https://github.com/stanford-cs336/stanford-cs336.github.io/tree/25d740fd9060cc6613163b5b88ca88a5f64138ff",
+      "revision": "25d740fd9060cc6613163b5b88ca88a5f64138ff",
+      "archive_url": "https://codeload.github.com/stanford-cs336/stanford-cs336.github.io/tar.gz/25d740fd9060cc6613163b5b88ca88a5f64138ff",
+      "archive_sha256": "d45fb4b4907a185b607baef242c70f365ab65da8dd1eaaedf655bb319d43ca36"
+    }
+  ],
+  "guest_slots": [
+    {
+      "meeting": 18,
+      "date": "2026-06-01",
+      "title": "Guest lecture: Daniel Selsam",
+      "artifact_status": "official artifact unavailable",
+      "source": "https://cs336.stanford.edu/"
+    },
+    {
+      "meeting": 19,
+      "date": "2026-06-03",
+      "title": "Guest lecture: Dan Fu",
+      "artifact_status": "official artifact unavailable",
+      "source": "https://cs336.stanford.edu/"
+    }
+  ],
+  "rights_record": {
+    "status": "permission-recorded",
+    "scope": "local educational preservation and later attributed textbook reuse",
+    "evidence": "User confirmed open educational reuse on 2026-09-04 for local educational preservation and later attributed textbook reuse; this is a permission record, not a named license. Explicit repository license files are preserved."
+  }
+}

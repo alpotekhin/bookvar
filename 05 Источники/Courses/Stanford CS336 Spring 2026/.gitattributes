@@ -1,0 +1,4 @@
+# Frozen byte-for-byte upstream archives; authored ledgers remain text-diffable.
+Lectures/repository/** -diff
+Assignments/** -diff
+Metadata/** -diff

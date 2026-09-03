@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cs336.stanford.edu/sitemap.xml
