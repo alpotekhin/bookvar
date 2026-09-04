@@ -1,6 +1,9 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
+import YAML from 'yaml';
+
+import { loadManifest, type PublicationSidebarItem } from '../adapter/manifest.js';
 
 const root = resolve(import.meta.dirname, '../..');
 
@@ -45,5 +48,62 @@ describe('publication workflow policy', () => {
     expect(css).toMatch(/\.sl-markdown-content figure\s*\{[^}]*max-width:\s*100%/s);
     expect(css).toMatch(/\.sl-markdown-content figcaption\s*\{[^}]*overflow-wrap:\s*anywhere/s);
     expect(css).toMatch(/\.source-attribution\s*\{[^}]*max-width:\s*100%[^}]*overflow-wrap:\s*anywhere/s);
+  });
+
+  it('places pinned course hubs only under Источники → Курсы and preserves textbook concept navigation', () => {
+    const manifest = loadManifest(resolve(root, 'publishing/navigation.yml'));
+    const sources = manifest.sections.find((section) => section.id === 'sources');
+    const textbook = manifest.sections.find((section) => section.id === 'textbook');
+    const courses = sources?.sidebar?.find((item) => item.label === 'Курсы');
+    const courseItems = courses && 'items' in courses
+      ? courses.items.filter((item): item is Extract<PublicationSidebarItem, { route: string }> => 'route' in item)
+      : [];
+    const hubRoutes = [
+      'sources/courses/stanford-cs336-spring-2026/index',
+      'sources/courses/berkeley-advanced-llm-agents-spring-2025/index'
+    ];
+
+    expect(courseItems.map((item) => item.route)).toEqual([
+      'sources/kursy',
+      ...hubRoutes
+    ]);
+    expect(textbook?.pages.some((page) => hubRoutes.includes(page.route))).toBe(false);
+    expect(textbook?.sidebar?.some((item) => 'route' in item && hubRoutes.includes(item.route))).toBe(false);
+    expect(textbook?.pages.some((page) => page.route === 'textbook/transformer/self-attention')).toBe(true);
+  });
+
+  it('keeps the four legacy Stanford notes on disk but out of publication navigation', () => {
+    const manifest = loadManifest(resolve(root, 'publishing/navigation.yml'));
+    const publishedSources = new Set(manifest.sections.flatMap((section) => section.pages.map((page) => page.source)));
+    const legacySources = [
+      'Courses/Stanford CS336/CS336 — Inference.md',
+      'Courses/Stanford CS336/CS336 — Scaling Laws.md',
+      'Courses/Stanford CS336/CS336 — Tokenization.md',
+      'Courses/Stanford CS336/CS336 — Mixture of Experts.md'
+    ];
+
+    for (const source of legacySources) {
+      expect(readFileSync(resolve(root, source), 'utf8'), source).toContain('status: legacy');
+      expect(publishedSources.has(source), source).toBe(false);
+    }
+  });
+
+  it('links the source library index to both pinned course hubs', () => {
+    const sourceIndex = readFileSync(resolve(root, '05 Источники/_index.md'), 'utf8');
+    const navigation = YAML.parse(readFileSync(resolve(root, 'publishing/navigation.yml'), 'utf8')) as {
+      sections: Array<{ pages: Array<{ source: string; route: string }> }>;
+    };
+    const routes = new Map(navigation.sections.flatMap((section) =>
+      section.pages.map((page) => [page.source, page.route] as const)
+    ));
+    const hubs = [
+      '05 Источники/Courses/Stanford CS336 Spring 2026/_index.md',
+      '05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md'
+    ];
+
+    for (const hub of hubs) {
+      expect(routes.get(hub), hub).toBeDefined();
+      expect(sourceIndex, hub).toContain(`[[02 Areas/ML & DL/${hub.slice(0, -'.md'.length)}`);
+    }
   });
 });

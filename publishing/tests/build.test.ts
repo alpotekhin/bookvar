@@ -741,6 +741,102 @@ describe('buildPublication', () => {
     )).toBe('<svg>fixture</svg>');
   });
 
+  it('rewrites a standard Markdown link to a registered publication page', async () => {
+    const options = fixture('[Page B](Page B.md)');
+
+    await buildPublication(options);
+
+    const generated = readFileSync(join(options.outputDir, 'nested', 'page-a.md'), 'utf8');
+    expect(generated).toContain(`[Page B](${publicationBase}/page-b/)`);
+  });
+
+  it('rewrites registered course notes to routes and copies only linked source artifacts route-relatively', async () => {
+    const options = fixture('unused');
+    const courseSource = '05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025';
+    const courseRoute = 'sources/courses/berkeley-advanced-llm-agents-spring-2025';
+    const hub = join(options.rootDir, courseSource, '_index.md');
+    const reading = join(options.rootDir, courseSource, 'Readings', 'meeting-01-reading-01.md');
+    const linkedArtifacts = [
+      ['Lectures/deck.pdf', 'pdf'],
+      ['Lectures/lecture.py', 'python'],
+      ['audit.json', 'json'],
+      ['coverage.yml', 'yaml'],
+      ['page-index.txt', 'text'],
+      ['Assignments/assignment/README.md', 'markdown']
+    ] as const;
+    write(hub, [
+      '---',
+      'title: Course hub',
+      'type: source-note',
+      'status: verified',
+      '---',
+      '[Reading](Readings/meeting-01-reading-01.md)',
+      ...linkedArtifacts.map(([path]) => `[Artifact](${path})`)
+    ].join('\n'));
+    write(reading, [
+      '# Reading',
+      'Source-native reading.'
+    ].join('\n'));
+    for (const [path, contents] of linkedArtifacts) {
+      write(join(options.rootDir, courseSource, path), contents);
+    }
+    write(options.manifestPath, [
+      'site_title: Fixture',
+      'sections:',
+      '  - id: sources',
+      '    title: Sources',
+      '    pages:',
+      `      - source: ${courseSource}/_index.md`,
+      `        route: ${courseRoute}/index`,
+      `      - source: ${courseSource}/Readings/meeting-01-reading-01.md`,
+      `        route: ${courseRoute}/readings/meeting-01-reading-01`
+    ].join('\n'));
+
+    await buildPublication(options);
+
+    const generated = readFileSync(join(options.outputDir, courseRoute, 'index.md'), 'utf8');
+    expect(generated).toContain(
+      `[Reading](${publicationBase}/${courseRoute}/readings/meeting-01-reading-01/)`
+    );
+    for (const [path, contents] of linkedArtifacts) {
+      expect(generated).toContain(
+        `[Artifact](${publicationBase}/${courseRoute}/${path.split('/').map(encodeURIComponent).join('/')})`
+      );
+      expect(readFileSync(
+        join(options.rootDir, 'site', 'public', courseRoute, path),
+        'utf8'
+      )).toBe(contents);
+    }
+  });
+
+  it('rejects a linked course artifact that escapes the publication root before cleanup', async () => {
+    const options = fixture('unused');
+    const courseSource = '05 Источники/Courses/Stanford CS336 Spring 2026';
+    const hub = join(options.rootDir, courseSource, '_index.md');
+    write(hub, [
+      '---',
+      'title: Course hub',
+      'type: source-note',
+      'status: verified',
+      '---',
+      '[Escape](../../../../outside.pdf)'
+    ].join('\n'));
+    write(options.manifestPath, [
+      'site_title: Fixture',
+      'sections:',
+      '  - id: sources',
+      '    title: Sources',
+      '    pages:',
+      `      - source: ${courseSource}/_index.md`,
+      '        route: sources/courses/stanford-cs336-spring-2026/index'
+    ].join('\n'));
+    const stale = join(options.outputDir, 'stale.md');
+    write(stale, 'must survive failed preflight');
+
+    await expect(buildPublication(options)).rejects.toThrow(/Linked source artifact path escapes rootDir/);
+    expect(readFileSync(stale, 'utf8')).toBe('must survive failed preflight');
+  });
+
   it('refuses to clean rootDir itself as the generated output directory', async () => {
     const options = fixture('Body');
     options.outputDir = options.rootDir;

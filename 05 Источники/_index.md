@@ -11,6 +11,8 @@ last_updated: 2026-07-23
 - [[02 Areas/ML & DL/05 Источники/Авторы и сайты]]
 - [[02 Areas/ML & DL/05 Источники/Community repositories]]
 - [[02 Areas/ML & DL/05 Источники/Курсы]]
+- [[02 Areas/ML & DL/05 Источники/Courses/Stanford CS336 Spring 2026/_index|Stanford CS336 — Spring 2026]]
+- [[02 Areas/ML & DL/05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index|Berkeley Advanced LLM Agents — Spring 2025]]
 - [[02 Areas/ML & DL/05 Источники/Визуальные материалы и лицензии]]
 - [[02 Areas/ML & DL/05 Источники/LMCache/LMCache — карта материалов|LMCache: architecture, storage, transfer, and operations]]
 

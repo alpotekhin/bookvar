@@ -1,4 +1,4 @@
-import { access, copyFile, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { access, copyFile, mkdir, readFile, realpath, rm, writeFile } from 'node:fs/promises';
 import { dirname, isAbsolute, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import matter from 'gray-matter';
@@ -187,6 +187,79 @@ function contained(root: string, candidate: string, label: string): string {
   return absolute;
 }
 
+const COURSE_PUBLICATIONS = [
+  {
+    sourceRoot: '05 Источники/Courses/Stanford CS336 Spring 2026',
+    routeRoot: 'sources/courses/stanford-cs336-spring-2026'
+  },
+  {
+    sourceRoot: '05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025',
+    routeRoot: 'sources/courses/berkeley-advanced-llm-agents-spring-2025'
+  }
+] as const;
+const LINKED_SOURCE_ARTIFACT = /\.(?:pdf|py|json|ya?ml|txt|md)$/i;
+const MARKDOWN_LINK = /(?<!!)\[([^\]\n]+)\]\(([^)\n]+)\)/g;
+
+function prepareLinkedCourseArtifacts(
+  rootDir: string,
+  source: string,
+  route: string,
+  markdown: string,
+  routeBySource: ReadonlyMap<string, string>
+): { markdown: string; artifacts: Asset[] } {
+  const course = COURSE_PUBLICATIONS.find(({ routeRoot }) =>
+    route === `${routeRoot}/index` || route.startsWith(`${routeRoot}/`)
+  );
+  const artifacts: Asset[] = [];
+  const converted = markdown.replace(MARKDOWN_LINK, (match, label: string, rawTarget: string) => {
+    const target = rawTarget.trim();
+    if (
+      target === ''
+      || target.startsWith('#')
+      || target.startsWith('/')
+      || /^[a-z][a-z0-9+.-]*:/i.test(target)
+    ) {
+      return match;
+    }
+
+    const suffixAt = target.search(/[?#]/);
+    const encodedPath = suffixAt === -1 ? target : target.slice(0, suffixAt);
+    const suffix = suffixAt === -1 ? '' : target.slice(suffixAt);
+    let decodedPath: string;
+    try {
+      decodedPath = decodeURIComponent(encodedPath);
+    } catch {
+      return match;
+    }
+    if (!course && !/\.md$/i.test(decodedPath)) return match;
+    const targetSource = join(dirname(source), decodedPath).split(sep).join('/');
+    const targetPath = contained(rootDir, targetSource, 'Linked source artifact');
+    const normalizedSource = relative(rootDir, targetPath).split(sep).join('/');
+    const targetRoute = routeBySource.get(normalizedSource);
+    if (targetRoute) {
+      return `[${label}](${publicationHref(targetRoute)}${suffix})`;
+    }
+    if (!course || !LINKED_SOURCE_ARTIFACT.test(decodedPath)) return match;
+
+    const courseRoot = resolve(rootDir, course.sourceRoot);
+    const sourceOffset = relative(courseRoot, targetPath);
+    if (
+      sourceOffset === ''
+      || sourceOffset === '..'
+      || sourceOffset.startsWith(`..${sep}`)
+      || isAbsolute(sourceOffset)
+    ) {
+      throw new Error(`Linked source artifact path escapes course root: ${target}`);
+    }
+    const publicPath = join(course.routeRoot, sourceOffset).split(sep).join('/');
+    contained(rootDir, publicPath, 'Linked source artifact destination');
+    artifacts.push({ source: targetPath, publicPath });
+    const href = publicPath.split('/').map(encodeURIComponent).join('/');
+    return `[${label}](${publicationBasePath()}/${href}${suffix})`;
+  });
+  return { markdown: converted, artifacts };
+}
+
 function normalizeAsset(rootDir: string, expression: string): Asset {
   const target = expression.split('|', 1)[0].replaceAll('\\', '/');
   if (isAbsolute(target) || target.split('/').includes('..')) {
@@ -220,6 +293,22 @@ function prepareAssets(rootDir: string, markdown: string): { markdown: string; a
   return { markdown: converted, assets };
 }
 
+const SOURCE_NATIVE_BERKELEY_READING =
+  /^05 Источники\/Courses\/Berkeley Advanced LLM Agents Spring 2025\/Readings\/meeting-\d{2}-reading-\d{2}\.md$/;
+
+function readPublicationPage(sourcePath: string, raw: string): ReturnType<typeof readPage> {
+  if (!SOURCE_NATIVE_BERKELEY_READING.test(sourcePath)) return readPage(sourcePath, raw);
+  const title = raw.match(/^#\s+(.+?)\s*$/m)?.[1];
+  if (!title) {
+    throw new Error(`Source-native Berkeley reading is missing its title heading: ${sourcePath}`);
+  }
+  return readPage(sourcePath, matter.stringify(raw, {
+    title,
+    type: 'source-note',
+    status: 'verified'
+  }));
+}
+
 export async function buildPublication(options: BuildOptions): Promise<void> {
   const rootDir = resolve(options.rootDir);
   const outputOffset = relative(rootDir, resolve(options.outputDir));
@@ -228,14 +317,17 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
   const manifest = loadManifest(options.manifestPath);
   const allowlist = loadLinkAllowlist(join(dirname(options.manifestPath), 'link-allowlist.json'));
   const entries = manifest.sections.flatMap((section) => section.pages);
+  const routeBySource = new Map(entries.map((entry) => [
+    entry.source.replaceAll('\\', '/'), entry.route
+  ]));
   const parsed = await Promise.all(entries.map(async (entry) => {
     const sourcePath = contained(rootDir, entry.source, 'Source');
     const raw = await readFile(sourcePath, 'utf8');
-    const page = readPage(entry.source, raw);
+    const page = readPublicationPage(entry.source, raw);
     if (!entry.sourceEn) return { entry, page };
     const sourceEnPath = contained(rootDir, entry.sourceEn, 'Source');
     const rawEn = await readFile(sourceEnPath, 'utf8');
-    return { entry, page, pageEn: readPage(entry.sourceEn, rawEn) };
+    return { entry, page, pageEn: readPublicationPage(entry.sourceEn, rawEn) };
   }));
   const titles = new Map(parsed.map(({ entry, page }) => [entry.route, page.title]));
   const titlesEn = new Map(parsed
@@ -324,6 +416,7 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
   });
 
   const assetsByPublicPath = new Map<string, Asset>();
+  const linkedArtifactsByPublicPath = new Map<string, Asset>();
   const localizedPages = parsed.flatMap(({ entry, page, pageEn }) => [
     { entry, page, source: entry.source, locale: undefined },
     ...(pageEn && entry.sourceEn
@@ -331,7 +424,19 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
       : [])
   ]);
   const preparedPages = localizedPages.map(({ entry, page, source, locale }) => {
-    const prepared = prepareAssets(rootDir, page.body);
+    const linked = prepareLinkedCourseArtifacts(rootDir, source, entry.route, page.body, routeBySource);
+    for (const artifact of linked.artifacts) {
+      const existing = linkedArtifactsByPublicPath.get(artifact.publicPath);
+      if (existing && existing.source !== artifact.source) {
+        throw new Error([
+          `Linked source artifact destination collision: ${artifact.publicPath}`,
+          `- ${relative(rootDir, existing.source)}`,
+          `- ${relative(rootDir, artifact.source)}`
+        ].join('\n'));
+      }
+      linkedArtifactsByPublicPath.set(artifact.publicPath, artifact);
+    }
+    const prepared = prepareAssets(rootDir, linked.markdown);
     for (const asset of prepared.assets) {
       const existing = assetsByPublicPath.get(asset.publicPath);
       if (existing && existing.source !== asset.source) {
@@ -353,6 +458,21 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
     }
   }
 
+  const realRoot = await realpath(rootDir);
+  for (const artifact of linkedArtifactsByPublicPath.values()) {
+    try {
+      await access(artifact.source);
+      const realSource = await realpath(artifact.source);
+      const sourceOffset = relative(realRoot, realSource);
+      if (sourceOffset === '..' || sourceOffset.startsWith(`..${sep}`) || isAbsolute(sourceOffset)) {
+        throw new Error(`Linked source artifact path escapes rootDir: ${relative(rootDir, artifact.source)}`);
+      }
+    } catch (error) {
+      if (error instanceof Error && error.message.startsWith('Linked source artifact path escapes')) throw error;
+      throw new Error(`Missing linked source artifact: ${relative(rootDir, artifact.source)}`, { cause: error });
+    }
+  }
+
   await rm(outputDir, { recursive: true, force: true });
   await mkdir(outputDir, { recursive: true });
   const sidebarPath = contained(rootDir, 'site/generated-sidebar.mjs', 'Sidebar');
@@ -365,6 +485,16 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
   const assetDir = join(rootDir, 'site', 'public', 'assets');
   await rm(assetDir, { recursive: true, force: true });
   await mkdir(assetDir, { recursive: true });
+  const publicDir = contained(rootDir, 'site/public', 'Public');
+  const publishedCourseRoots = new Set(entries.flatMap((entry) =>
+    COURSE_PUBLICATIONS
+      .filter(({ routeRoot }) => entry.route === `${routeRoot}/index` || entry.route.startsWith(`${routeRoot}/`))
+      .map(({ routeRoot }) => routeRoot)
+  ));
+  for (const routeRoot of publishedCourseRoots) {
+    await rm(contained(publicDir, routeRoot, 'Linked source artifact root'), { recursive: true, force: true });
+  }
+
   const report = { pages: [] as Array<{
     source: string;
     route: string;
@@ -485,6 +615,18 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
       await copyFile(asset.source, destination);
     } catch (error) {
       throw new Error(`Missing asset: ${relative(rootDir, asset.source)}`, { cause: error });
+    }
+  }
+  for (const artifact of linkedArtifactsByPublicPath.values()) {
+    const destination = contained(publicDir, artifact.publicPath, 'Linked source artifact');
+    await mkdir(dirname(destination), { recursive: true });
+    try {
+      await copyFile(artifact.source, destination);
+    } catch (error) {
+      throw new Error(
+        `Missing linked source artifact: ${relative(rootDir, artifact.source)}`,
+        { cause: error }
+      );
     }
   }
 

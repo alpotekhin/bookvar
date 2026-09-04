@@ -828,6 +828,84 @@ sections:
         route: sources/community-repositories
       - source: 05 Источники/Курсы.md
         route: sources/kursy
+      - source: 05 Источники/Courses/Stanford CS336 Spring 2026/_index.md
+        route: sources/courses/stanford-cs336-spring-2026/index
+      - source: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md
+        route: sources/courses/berkeley-advanced-llm-agents-spring-2025/index
+      - source: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Readings/meeting-01-reading-01.md
+        route: sources/courses/berkeley-advanced-llm-agents-spring-2025/readings/meeting-01-reading-01
+      - source: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Readings/meeting-01-reading-02.md
+        route: sources/courses/berkeley-advanced-llm-agents-spring-2025/readings/meeting-01-reading-02
+      - source: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Readings/meeting-01-reading-03.md
+        route: sources/courses/berkeley-advanced-llm-agents-spring-2025/readings/meeting-01-reading-03
+      - source: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Readings/meeting-02-reading-01.md
+        route: sources/courses/berkeley-advanced-llm-agents-spring-2025/readings/meeting-02-reading-01
+      - source: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Readings/meeting-02-reading-02.md
+        route: sources/courses/berkeley-advanced-llm-agents-spring-2025/readings/meeting-02-reading-02
+      - source: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Readings/meeting-02-reading-03.md
+        route: sources/courses/berkeley-advanced-llm-agents-spring-2025/readings/meeting-02-reading-03
+      - source: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Readings/meeting-03-reading-01.md
+        route: sources/courses/berkeley-advanced-llm-agents-spring-2025/readings/meeting-03-reading-01
+      - source: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Readings/meeting-03-reading-02.md
+        route: sources/courses/berkeley-advanced-llm-agents-spring-2025/readings/meeting-03-reading-02
+      - source: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Readings/meeting-03-reading-03.md
+        route: sources/courses/berkeley-advanced-llm-agents-spring-2025/readings/meeting-03-reading-03
+      - source: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Readings/meeting-04-reading-01.md
+        route: sources/courses/berkeley-advanced-llm-agents-spring-2025/readings/meeting-04-reading-01
+      - source: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Readings/meeting-04-reading-02.md
+        route: sources/courses/berkeley-advanced-llm-agents-spring-2025/readings/meeting-04-reading-02
+      - source: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Readings/meeting-04-reading-03.md
+        route: sources/courses/berkeley-advanced-llm-agents-spring-2025/readings/meeting-04-reading-03
+      - source: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Readings/meeting-05-reading-01.md
+        route: sources/courses/berkeley-advanced-llm-agents-spring-2025/readings/meeting-05-reading-01
+      - source: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Readings/meeting-05-reading-02.md
+        route: sources/courses/berkeley-advanced-llm-agents-spring-2025/readings/meeting-05-reading-02
+      - source: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Readings/meeting-06-reading-01.md
+        route: sources/courses/berkeley-advanced-llm-agents-spring-2025/readings/meeting-06-reading-01
+      - source: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Readings/meeting-06-reading-02.md
+        route: sources/courses/berkeley-advanced-llm-agents-spring-2025/readings/meeting-06-reading-02
+      - source: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Readings/meeting-06-reading-03.md
+        route: sources/courses/berkeley-advanced-llm-agents-spring-2025/readings/meeting-06-reading-03
+      - source: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Readings/meeting-06-reading-04.md
+        route: sources/courses/berkeley-advanced-llm-agents-spring-2025/readings/meeting-06-reading-04
+      - source: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Readings/meeting-07-reading-01.md
+        route: sources/courses/berkeley-advanced-llm-agents-spring-2025/readings/meeting-07-reading-01
+      - source: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Readings/meeting-07-reading-02.md
+        route: sources/courses/berkeley-advanced-llm-agents-spring-2025/readings/meeting-07-reading-02
+      - source: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Readings/meeting-08-reading-01.md
+        route: sources/courses/berkeley-advanced-llm-agents-spring-2025/readings/meeting-08-reading-01
+      - source: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Readings/meeting-08-reading-02.md
+        route: sources/courses/berkeley-advanced-llm-agents-spring-2025/readings/meeting-08-reading-02
+      - source: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Readings/meeting-08-reading-03.md
+        route: sources/courses/berkeley-advanced-llm-agents-spring-2025/readings/meeting-08-reading-03
+      - source: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Readings/meeting-08-reading-04.md
+        route: sources/courses/berkeley-advanced-llm-agents-spring-2025/readings/meeting-08-reading-04
+      - source: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Readings/meeting-09-reading-01.md
+        route: sources/courses/berkeley-advanced-llm-agents-spring-2025/readings/meeting-09-reading-01
+      - source: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Readings/meeting-09-reading-02.md
+        route: sources/courses/berkeley-advanced-llm-agents-spring-2025/readings/meeting-09-reading-02
+      - source: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Readings/meeting-09-reading-03.md
+        route: sources/courses/berkeley-advanced-llm-agents-spring-2025/readings/meeting-09-reading-03
+      - source: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Readings/meeting-10-reading-01.md
+        route: sources/courses/berkeley-advanced-llm-agents-spring-2025/readings/meeting-10-reading-01
+      - source: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Readings/meeting-10-reading-02.md
+        route: sources/courses/berkeley-advanced-llm-agents-spring-2025/readings/meeting-10-reading-02
+      - source: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Readings/meeting-10-reading-03.md
+        route: sources/courses/berkeley-advanced-llm-agents-spring-2025/readings/meeting-10-reading-03
+      - source: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Readings/meeting-10-reading-04.md
+        route: sources/courses/berkeley-advanced-llm-agents-spring-2025/readings/meeting-10-reading-04
+      - source: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Readings/meeting-11-reading-01.md
+        route: sources/courses/berkeley-advanced-llm-agents-spring-2025/readings/meeting-11-reading-01
+      - source: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Readings/meeting-11-reading-02.md
+        route: sources/courses/berkeley-advanced-llm-agents-spring-2025/readings/meeting-11-reading-02
+      - source: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Readings/meeting-12-reading-01.md
+        route: sources/courses/berkeley-advanced-llm-agents-spring-2025/readings/meeting-12-reading-01
+      - source: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Readings/meeting-12-reading-02.md
+        route: sources/courses/berkeley-advanced-llm-agents-spring-2025/readings/meeting-12-reading-02
+      - source: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Readings/meeting-12-reading-03.md
+        route: sources/courses/berkeley-advanced-llm-agents-spring-2025/readings/meeting-12-reading-03
+      - source: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Readings/meeting-12-reading-04.md
+        route: sources/courses/berkeley-advanced-llm-agents-spring-2025/readings/meeting-12-reading-04
       - source: 05 Источники/Courses/Advanced Unsupervised and Classical ML.md
         route: sources/courses/advanced-unsupervised-classical/index
       - source: 05 Источники/Courses/Advanced Unsupervised and Classical ML/mlcourse-topic7.html.md
@@ -2112,18 +2190,10 @@ sections:
         route: sources/papers/qwen-2-5-technical-report
       - source: Papers/Jamba SSM-Transformer Hybrid.md
         route: sources/papers/jamba-ssm-transformer-hybrid
-      - source: Courses/Stanford CS336/CS336 — Inference.md
-        route: sources/courses/stanford-cs336/cs336-inference
       - source: Courses/Stanford CS224N/Lecture 14 — Reasoning and Agents.md
         route: sources/courses/stanford-cs224n/lecture-14-reasoning-and-agents
       - source: Papers/GPT 1.0.md
         route: sources/papers/gpt-1-0
-      - source: Courses/Stanford CS336/CS336 — Scaling Laws.md
-        route: sources/courses/stanford-cs336/cs336-scaling-laws
-      - source: Courses/Stanford CS336/CS336 — Tokenization.md
-        route: sources/courses/stanford-cs336/cs336-tokenization
-      - source: Courses/Stanford CS336/CS336 — Mixture of Experts.md
-        route: sources/courses/stanford-cs336/cs336-mixture-of-experts
     sidebar:
       - label: Библиотека источников
         label_en: Source library
@@ -2139,7 +2209,14 @@ sections:
         route: sources/community-repositories
       - label: Курсы
         label_en: Courses
-        route: sources/kursy
+        items:
+          - label: Обзор курсов
+            label_en: Courses overview
+            route: sources/kursy
+          - label: Stanford CS336 — Spring 2026
+            route: sources/courses/stanford-cs336-spring-2026/index
+          - label: Berkeley Advanced LLM Agents — Spring 2025
+            route: sources/courses/berkeley-advanced-llm-agents-spring-2025/index
       - label: Визуальные материалы и лицензии
         label_en: Visual materials and licenses
         route: sources/visual-materials-licenses
