@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "semantic_review_sha256": "e0177f68e0975df7ed69c36913316e3fdde28cdaf9c95b8c68d242156b2b7615",
+  "semantic_review_sha256": "0dd492f1aa69d11aa3815aab7ce503f93341ac9ddb55689cbcc63dde3843a5b3",
   "rows": [
     {
       "id": "coverage-official-syllabus-coursework-and-schedule",
@@ -1177,12 +1177,12 @@
       "evidence": "The page adds no independent technical content."
     },
     {
-      "id": "coverage-meeting-04-slides-open-recipe-appendix",
+      "id": "coverage-meeting-04-slides-human-preference-evaluation",
       "source_object": "meeting-04-slides",
-      "source_unit": "meeting-04-slides-open-recipe-appendix",
+      "source_unit": "meeting-04-slides-human-preference-evaluation",
       "source_location": "Lectures/meeting-04-slides.pages.txt#physical-pages=155-155",
-      "kind": "section",
-      "title": "Appendix reference",
+      "kind": "figure",
+      "title": "Human Preference Evaluation",
       "primary_sources": [
         "meeting-04-slides"
       ],
@@ -2635,9 +2635,9 @@
       "id": "coverage-meeting-10-slides-minictx",
       "source_object": "meeting-10-slides",
       "source_unit": "meeting-10-slides-minictx",
-      "source_location": "Lectures/meeting-10-slides.pages.txt#physical-pages=106-115",
+      "source_location": "Lectures/meeting-10-slides.pages.txt#physical-pages=106-117",
       "kind": "experiment",
-      "title": "miniCTX contextual theorem proving",
+      "title": "miniCTX, accessibility gaps, and prover-method recap",
       "primary_sources": [
         "meeting-10-slides"
       ],
@@ -2650,15 +2650,15 @@
       "id": "coverage-meeting-10-slides-meeting-10-closing",
       "source_object": "meeting-10-slides",
       "source_unit": "meeting-10-slides-meeting-10-closing",
-      "source_location": "Lectures/meeting-10-slides.pages.txt#physical-pages=116-118",
+      "source_location": "Lectures/meeting-10-slides.pages.txt#physical-pages=118-118",
       "kind": "administrative",
-      "title": "Research recap and thanks",
+      "title": "Thanks and collaborator credits",
       "primary_sources": [
         "meeting-10-slides"
       ],
       "disposition": "excluded",
-      "reason": "recap title and closing slides",
-      "evidence": "These pages contain section recap/thanks without an additional technical mechanism."
+      "reason": "thanks and collaborator credits only",
+      "evidence": "The page thanks the audience and lists collaborators; it adds no independent technical content."
     },
     {
       "id": "coverage-meeting-10-reading-01-catalogue-record",

@@ -8,7 +8,7 @@ last_verified: 2026-09-04
 # Berkeley Advanced LLM Agents — Spring 2025
 
 [Официальная страница курса](https://rdi.berkeley.edu/adv-llm-agents/sp25) ·
-`source-manifest.yml` · `source-units.yml` · `coverage.yml` · `visuals.yml` ·
+`semantic-review.json` · `audit-contract.json` · `source-manifest.yml` · `source-units.yml` · `coverage.yml` · `visuals.yml` ·
 `snapshot-lock.json`
 
 Статус source layer: **inventory complete; editorial integration pending**.
@@ -41,6 +41,24 @@ visual disposition.
 Offline `python3 publishing/tools/import_berkeley_agents.py --check` заново
 извлекает page indexes, строит все четыре ledger-документа из review spec,
 проверяет locked syllabus membership, exact page closure и deterministic lock.
+
+### Независимый completeness contract
+
+`audit-contract.json` — отдельный вручную проверенный completeness anchor: он
+фиксирует exact `semantic_id`, title, kind, visual kind, physical-page range и
+disposition всех 161 смысловых секций, reason/evidence для exclusions и SHA-256
+каждого из 13 исходных PDF. Importer дополнительно hard-pin’ит SHA-256 самого
+contract. Поэтому изменение или схлопывание `semantic-review.json` не может
+стать новым baseline даже после согласованной пересборки всех четырёх ledgers,
+artifact inventory и snapshot lock.
+
+`--refresh` и `--regenerate-ledgers` **никогда не записывают**
+`audit-contract.json`. Для осознанного обновления нужно заново просмотреть все
+затронутые physical pages в ordered contact sheets, сверить page text, вручную
+изменить оба review-файла, проверить exact semantic/range/disposition diff,
+вычислить новый contract SHA-256 и явно обновить `AUDIT_CONTRACT_SHA256` в
+importer. Затем обязательны focused regressions, importer `--check`, ingestion
+и coverage validators, full publishing suite и scoped diff review.
 
 > [!danger]
 > В неизменённом official deck встречи 6 physical page 117 явно маркирован
@@ -96,7 +114,8 @@ Readings:
 
 Артефакты: [deck, 155 pages](Lectures/meeting-04-slides.pdf), recording metadata
 и 3 readings. Будущее назначение: Tülu, SFT mixtures, preference optimization,
-RLVR, test-time scaling и OLMo openness.
+RLVR, test-time scaling и OLMo openness. Physical page 155 сохранена как
+содержательный chart `Human Preference Evaluation`, а не generic appendix.
 
 Readings:
 
@@ -175,7 +194,9 @@ Readings:
 
 Артефакты: [deck, 118 pages](Lectures/meeting-10-slides.pdf), recording metadata
 и 4 readings. Будущее назначение: Lean-STaR, Draft-Sketch-Prove, LeanHammer,
-research workflows и miniCTX.
+research workflows и miniCTX. Pages 116–117 остаются source-only как
+содержательный accessibility/benchmarking и prover-method recap; только p.118
+имеет administrative `excluded` disposition.
 
 Readings:
 

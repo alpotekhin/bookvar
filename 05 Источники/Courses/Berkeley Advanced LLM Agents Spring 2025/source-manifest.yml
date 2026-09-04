@@ -1062,14 +1062,14 @@
       "kind": "assignment",
       "source_authority": "primary-paper",
       "verification_status": "verified",
-      "lecturer_or_author": "Google Project Zero Big Sleep team",
+      "lecturer_or_author": "the Big Sleep team",
       "meeting_date": "2025-03-03",
       "title": "From Naptime to Big Sleep: Using Large Language Models To Catch Vulnerabilities In Real-World Code",
       "canonical_url": "https://projectzero.google/2024/10/from-naptime-to-big-sleep.html",
-      "revision_or_checksum": "49e9f246ec87f5a4eaa60eb069fbb3b2c3b748f99f1f5a1aa2172ba51b96063b",
+      "revision_or_checksum": "3d675f946f5c998a2126f86e692a410947f0c7b2d2a4b537a710e191684ffce5",
       "local_path": "Readings/meeting-05-reading-02.md",
       "mime": "text/markdown",
-      "bytes": 698,
+      "bytes": 1137,
       "page_count": 1,
       "language": "en",
       "rights_status": "link-only",
@@ -1077,7 +1077,7 @@
       "retrieved_at": "2026-09-04",
       "catalogue_kind": "reading",
       "authors": [
-        "Google Project Zero Big Sleep team"
+        "the Big Sleep team"
       ],
       "year": 2024,
       "publication_date": "2024-11-01",
@@ -1085,7 +1085,31 @@
       "syllabus_url": "https://googleprojectzero.blogspot.com/2024/10/from-naptime-to-big-sleep.html",
       "syllabus_order": 2,
       "source_type": "official project article",
-      "relationship_to_deck": "primary source for technical claims"
+      "relationship_to_deck": "primary source for technical claims",
+      "source_byline": "the Big Sleep team",
+      "organizations": [
+        "Google Project Zero",
+        "Google DeepMind"
+      ],
+      "contributors": [
+        "Miltos Allamanis",
+        "Martin Arjovsky",
+        "Charles Blundell",
+        "Lars Buesing",
+        "Mark Brand",
+        "Sergei Glazunov",
+        "Dominik Maier",
+        "Petros Maniatis",
+        "Guilherme Marinho",
+        "Henryk Michalewski",
+        "Koushik Sen",
+        "Charles Sutton",
+        "Vaibhav Tulsyan",
+        "Marco Vanotti",
+        "Theophane Weber",
+        "Dan Zheng"
+      ],
+      "source_metadata_evidence_url": "https://projectzero.google/2024/10/from-naptime-to-big-sleep.html"
     },
     {
       "id": "meeting-06-recording",

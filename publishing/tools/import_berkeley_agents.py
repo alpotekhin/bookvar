@@ -4,12 +4,15 @@
 The checked-in PDFs are unchanged official artifacts.  The adjacent page-index
 files are deterministic ``pdftotext -layout`` search aids, never substitutes
 for the originals.  All ledger rows are rebuilt from ``semantic-review.json``,
-which records a direct page-by-page visual and semantic review at meaningful section scope.
+which records a direct page-by-page visual and semantic review at meaningful
+section scope.  Its exact semantic IDs, titles, kinds, ranges, dispositions,
+exclusion evidence, and parent PDF hashes must match the separately reviewed,
+hard-pinned ``audit-contract.json``; no generator writes that contract.
 
 ``--check`` is deliberately offline.  It independently re-extracts every PDF,
-validates exact physical-page closure, rebuilds all ledgers, and checks the
-immutable snapshot lock.  Network access exists only in ``--refresh`` and
-``--check-upstream-drift``.
+validates the independent completeness contract and exact physical-page
+closure, rebuilds all ledgers, and checks the deterministic snapshot lock.
+Network access exists only in ``--refresh`` and ``--check-upstream-drift``.
 """
 
 from __future__ import annotations
@@ -39,6 +42,8 @@ LECTURES_ROOT = COURSE_ROOT / "Lectures"
 READINGS_ROOT = COURSE_ROOT / "Readings"
 METADATA_ROOT = COURSE_ROOT / "Metadata"
 SEMANTIC_REVIEW_PATH = COURSE_ROOT / "semantic-review.json"
+AUDIT_CONTRACT_PATH = COURSE_ROOT / "audit-contract.json"
+AUDIT_CONTRACT_SHA256 = "71fc60d9c4717b85fa2b664876af02adf0098f340bee4a13eb55d13ae7812fb5"
 SYLLABUS_URL = "https://rdi.berkeley.edu/adv-llm-agents/sp25"
 SYLLABUS_PATH = METADATA_ROOT / "syllabus.html"
 BASE_COMMIT = "fad4d91373fcd94c18906bfaf209125188eb20cf"
@@ -60,7 +65,7 @@ RIGHTS_EVIDENCE = (
     "preservation and later attributed textbook reuse; this is a permission record, "
     "not a named license. Page-specific restrictions remain controlling."
 )
-EXTRACTOR_REVISION = "berkeley-advanced-llm-agents-semantic-audit-v1"
+EXTRACTOR_REVISION = "berkeley-advanced-llm-agents-semantic-audit-v2"
 PAGE_INDEX_TOOL = "pdftotext -layout (Poppler 26.04.0)"
 
 
@@ -95,6 +100,9 @@ class Reading:
     canonical_url: str
     syllabus_url: str
     source_type: str
+    source_byline: str | None = None
+    organizations: tuple[str, ...] = ()
+    contributors: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -240,7 +248,36 @@ def arxiv_reading(identifier: str, syllabus_url: str | None = None) -> Reading:
 
 
 SPECIAL_READINGS: tuple[Reading, ...] = (
-    Reading("big-sleep", "From Naptime to Big Sleep: Using Large Language Models To Catch Vulnerabilities In Real-World Code", ("Google Project Zero Big Sleep team",), 2024, "2024-11-01", "https://projectzero.google/2024/10/from-naptime-to-big-sleep.html", "https://googleprojectzero.blogspot.com/2024/10/from-naptime-to-big-sleep.html", "official project article"),
+    Reading(
+        "big-sleep",
+        "From Naptime to Big Sleep: Using Large Language Models To Catch Vulnerabilities In Real-World Code",
+        ("the Big Sleep team",),
+        2024,
+        "2024-11-01",
+        "https://projectzero.google/2024/10/from-naptime-to-big-sleep.html",
+        "https://googleprojectzero.blogspot.com/2024/10/from-naptime-to-big-sleep.html",
+        "official project article",
+        source_byline="the Big Sleep team",
+        organizations=("Google Project Zero", "Google DeepMind"),
+        contributors=(
+            "Miltos Allamanis",
+            "Martin Arjovsky",
+            "Charles Blundell",
+            "Lars Buesing",
+            "Mark Brand",
+            "Sergei Glazunov",
+            "Dominik Maier",
+            "Petros Maniatis",
+            "Guilherme Marinho",
+            "Henryk Michalewski",
+            "Koushik Sen",
+            "Charles Sutton",
+            "Vaibhav Tulsyan",
+            "Marco Vanotti",
+            "Theophane Weber",
+            "Dan Zheng",
+        ),
+    ),
     Reading("visualwebarena", "VisualWebArena: Evaluating Multimodal Agents on Realistic Visual Web Tasks", ("Jing Yu Koh", "Robert Lo", "Lawrence Jang", "Vikram Duvvur", "Ming Chong Lim", "Po-Yu Huang", "Graham Neubig", "Shuyan Zhou", "Ruslan Salakhutdinov", "Daniel Fried"), 2024, "2024-02-12", "https://jykoh.com/vwa", "https://jykoh.com/vwa", "official project page"),
     Reading("tree-search-agents", "Tree Search for Language Model Agents", ("Jing Yu Koh", "Stephen McAleer", "Daniel Fried", "Ruslan Salakhutdinov"), 2024, "2024-07-01", "https://arxiv.org/abs/2407.01476v1", "https://jykoh.com/search-agents", "official project page with pinned paper version"),
     Reading("deepmind-imo", "AI achieves silver-medal standard solving International Mathematical Olympiad problems", ("AlphaProof team", "AlphaGeometry team"), 2024, "2024-07-25", "https://deepmind.google/discover/blog/ai-solves-imo-problems-at-silver-medal-level/", "https://deepmind.google/discover/blog/ai-solves-imo-problems-at-silver-medal-level/", "official research article"),
@@ -366,6 +403,25 @@ def parse_syllabus_rows(payload: bytes) -> list[list[str]]:
     return [[normalized_url(href) for href in row] for row in parser.rows]
 
 
+def is_recording_link(href: str) -> bool:
+    parsed = urllib.parse.urlsplit(href)
+    return parsed.netloc == "youtube.com" and parsed.path.startswith("/live/")
+
+
+def is_official_slide_link(href: str) -> bool:
+    parsed = urllib.parse.urlsplit(href)
+    return (
+        parsed.netloc == "rdi.berkeley.edu"
+        and parsed.path.startswith("/adv-llm-agents/slides/")
+    )
+
+
+def is_teaching_row(row: list[str]) -> bool:
+    """Identify every course row independently of the pinned manifest."""
+
+    return any(is_recording_link(href) or is_official_slide_link(href) for href in row)
+
+
 def validate_syllabus_inventory(payload: bytes, failures: list[str]) -> None:
     """Assert every bundle member occurs together in its locked official row."""
 
@@ -375,7 +431,27 @@ def validate_syllabus_inventory(payload: bytes, failures: list[str]) -> None:
         failures.append(f"locked syllabus parse failed: {error}")
         return
 
-    course_rows: list[list[str]] = []
+    course_rows = [row for row in rows if is_teaching_row(row)]
+    if len(course_rows) != len(MEETINGS):
+        failures.append(
+            f"locked syllabus: expected exactly {len(MEETINGS)} teaching rows, found {len(course_rows)}"
+        )
+
+    expected_recordings = {
+        normalized_url(raw_recording_url(meeting)): meeting.number
+        for meeting in MEETINGS
+    }
+    for row_number, row in enumerate(course_rows, start=1):
+        recordings = [href for href in row if is_recording_link(href)]
+        if len(recordings) != 1:
+            failures.append(
+                f"locked syllabus: unexpected teaching row {row_number}: expected one recording link, found {recordings}"
+            )
+        elif recordings[0] not in expected_recordings:
+            failures.append(
+                f"locked syllabus: unexpected teaching row {row_number} absent from manifest: {recordings[0]}"
+            )
+
     for meeting in MEETINGS:
         recording = normalized_url(raw_recording_url(meeting))
         matching = [row for row in rows if recording in row]
@@ -385,7 +461,6 @@ def validate_syllabus_inventory(payload: bytes, failures: list[str]) -> None:
             )
             continue
         row = matching[0]
-        course_rows.append(row)
         expected = [
             recording,
             *(normalized_url(DECKS_BY_ID[deck_id].url) for deck_id in meeting.deck_ids),
@@ -422,6 +497,84 @@ def validate_syllabus_inventory(payload: bytes, failures: list[str]) -> None:
             failures.append(f"locked syllabus: expected 13 official PDF links, found {len(deck_links)}")
         if len(reading_links) != 37:
             failures.append(f"locked syllabus: expected 37 individual reading links, found {len(reading_links)}")
+
+
+def audit_contract_projection(review: dict[str, Any]) -> dict[str, Any]:
+    """Return the exact human-reviewed semantics protected by the audit contract."""
+
+    decks: list[dict[str, Any]] = []
+    for reviewed_deck in review.get("decks", []):
+        deck_id = reviewed_deck.get("id")
+        pinned_deck = DECKS_BY_ID.get(deck_id)
+        sections: list[dict[str, Any]] = []
+        for section in reviewed_deck.get("sections", []):
+            disposition = section.get("disposition", "source-only")
+            projected_section = {
+                "semantic_id": section.get("semantic_id"),
+                "title": section.get("title"),
+                "kind": section.get("kind"),
+                "visual_kind": section.get("visual_kind"),
+                "page_start": section.get("page_start"),
+                "page_end": section.get("page_end"),
+                "disposition": disposition,
+            }
+            if disposition == "excluded":
+                projected_section["reason"] = section.get("reason")
+                projected_section["evidence"] = section.get("evidence")
+            sections.append(projected_section)
+        decks.append({
+            "id": deck_id,
+            "source_pdf_sha256": pinned_deck.sha256 if pinned_deck else None,
+            "page_count": reviewed_deck.get("page_count"),
+            "sections": sections,
+        })
+    return {
+        "reviewed_at": review.get("reviewed_at"),
+        "reviewer": review.get("reviewer"),
+        "method": review.get("method"),
+        "decks": decks,
+    }
+
+
+def load_reviewed_audit_contract() -> dict[str, Any]:
+    """Load the manually reviewed completeness anchor; generators never write it."""
+
+    if not AUDIT_CONTRACT_PATH.exists():
+        raise ValueError("immutable reviewed audit contract is missing: audit-contract.json")
+    actual_sha = sha256_file(AUDIT_CONTRACT_PATH)
+    if actual_sha != AUDIT_CONTRACT_SHA256:
+        raise ValueError(
+            "immutable reviewed audit contract SHA mismatch; re-review every changed range and "
+            "explicitly update audit-contract.json plus AUDIT_CONTRACT_SHA256"
+        )
+    contract = load_document(AUDIT_CONTRACT_PATH)
+    failures: list[str] = []
+    if contract.get("schema_version") != 1:
+        failures.append("schema_version must be 1")
+    if contract.get("course") != COURSE_NAME or contract.get("offering") != OFFERING:
+        failures.append("course/offering identity mismatch")
+    if contract.get("generated_by_importer") is not False:
+        failures.append("generated_by_importer must be false")
+    if contract.get("deck_count") != len(DECKS):
+        failures.append(f"deck_count must be {len(DECKS)}")
+    if contract.get("physical_page_count") != sum(deck.pages for deck in DECKS):
+        failures.append(f"physical_page_count must be {sum(deck.pages for deck in DECKS)}")
+    protected = contract.get("semantic_review_contract")
+    if not isinstance(protected, dict):
+        failures.append("semantic_review_contract must be a mapping")
+    else:
+        sections = [
+            section
+            for deck in protected.get("decks", [])
+            for section in deck.get("sections", [])
+        ]
+        if contract.get("semantic_section_count") != len(sections):
+            failures.append("semantic_section_count does not match the protected section inventory")
+    if not contract.get("update_workflow"):
+        failures.append("update_workflow must document the manual re-review process")
+    if failures:
+        raise ValueError("immutable reviewed audit contract invalid: " + "; ".join(failures))
+    return contract
 
 
 def semantic_review() -> dict[str, Any]:
@@ -478,6 +631,14 @@ def semantic_review() -> dict[str, Any]:
             )
     if failures:
         raise ValueError("\n".join(failures))
+    contract = load_reviewed_audit_contract()
+    protected = contract["semantic_review_contract"]
+    actual = audit_contract_projection(review)
+    if actual != protected:
+        raise ValueError(
+            "semantic-review.json differs from the immutable reviewed audit contract; "
+            "regeneration cannot redefine reviewed semantic completeness"
+        )
     return review
 
 
@@ -489,11 +650,21 @@ def reading_rows() -> Iterable[tuple[Meeting, int, str, Reading]]:
 
 def reading_note(meeting: Meeting, order: int, reading: Reading) -> bytes:
     authors = "; ".join(reading.authors)
+    source_metadata = ""
+    if reading.source_byline:
+        source_metadata += f"- Source byline: {reading.source_byline}\n"
+    if reading.organizations:
+        source_metadata += f"- Organizations: {'; '.join(reading.organizations)}\n"
+    if reading.contributors:
+        source_metadata += f"- Contributors: {'; '.join(reading.contributors)}\n"
+    if reading.source_byline or reading.organizations or reading.contributors:
+        source_metadata += f"- Source metadata evidence: {reading.canonical_url}\n"
     text = (
         f"# {reading.title}\n\n"
         f"Metadata-only catalogue record for meeting {meeting.number}: {meeting.title}. "
         "No copyrighted paper body is mirrored.\n\n"
         f"- Authors: {authors}\n"
+        f"{source_metadata}"
         f"- Publication date: {reading.publication_date}\n"
         f"- Canonical pinned/project URL: {reading.canonical_url}\n"
         f"- Original syllabus URL: {reading.syllabus_url}\n"
@@ -756,6 +927,14 @@ def build_manifest() -> dict[str, Any]:
                 "source_type": reading.source_type,
                 "relationship_to_deck": "primary source for technical claims",
             })
+            if reading.source_byline:
+                reading_object["source_byline"] = reading.source_byline
+            if reading.organizations:
+                reading_object["organizations"] = list(reading.organizations)
+            if reading.contributors:
+                reading_object["contributors"] = list(reading.contributors)
+            if reading.source_byline or reading.organizations or reading.contributors:
+                reading_object["source_metadata_evidence_url"] = reading.canonical_url
             objects.append(reading_object)
             meeting_reading_ids.append(object_id)
         reading_ids_by_meeting[meeting.number] = meeting_reading_ids
@@ -998,7 +1177,7 @@ def build_visuals(review: dict[str, Any]) -> dict[str, Any]:
                 "parent_sha256": deck.sha256,
                 "extractor_sha256": review_hash,
                 "extractor_revision": EXTRACTOR_REVISION,
-                "extraction_tool": f"human ordered contact-sheet review plus {PAGE_INDEX_TOOL}",
+                "extraction_tool": f"Codex-assisted ordered contact-sheet review plus {PAGE_INDEX_TOOL}",
                 "rendered_route": RENDERED_ROUTE,
                 "desktop_evidence": "pending editorial integration; exact source pages visually inspected",
                 "narrow_evidence": "pending editorial integration; exact source pages visually inspected",
@@ -1216,6 +1395,7 @@ def source_file_entries() -> list[dict[str, Any]]:
     paths: list[tuple[str, Path]] = [
         ("Metadata/syllabus.html", SYLLABUS_PATH),
         ("semantic-review.json", SEMANTIC_REVIEW_PATH),
+        ("audit-contract.json", AUDIT_CONTRACT_PATH),
         ("publishing/tools/import_berkeley_agents.py", Path(__file__).resolve()),
     ]
     for deck in DECKS:
@@ -1251,6 +1431,7 @@ def build_snapshot_lock(documents: dict[str, dict[str, Any]]) -> dict[str, Any]:
         },
         "generated_audit": {
             "semantic_review_sha256": sha256_file(SEMANTIC_REVIEW_PATH),
+            "audit_contract_sha256": sha256_file(AUDIT_CONTRACT_PATH),
             "importer_sha256": sha256_file(Path(__file__).resolve()),
             "extractor_revision": EXTRACTOR_REVISION,
             "page_index_tool": PAGE_INDEX_TOOL,
@@ -1276,6 +1457,7 @@ def build_snapshot_lock(documents: dict[str, dict[str, Any]]) -> dict[str, Any]:
 
 
 def build_artifact_inventory(documents: dict[str, dict[str, Any]]) -> dict[str, Any]:
+    audit_contract = load_reviewed_audit_contract()
     manifest = documents["source-manifest.yml"]
     units = documents["source-units.yml"]
     coverage = documents["coverage.yml"]
@@ -1285,6 +1467,12 @@ def build_artifact_inventory(documents: dict[str, dict[str, Any]]) -> dict[str, 
         "course": COURSE_NAME,
         "offering": OFFERING,
         "status": "inventory complete; editorial integration pending",
+        "audit_contract": {
+            "local_path": "audit-contract.json",
+            "sha256": AUDIT_CONTRACT_SHA256,
+            "generated_by_importer": False,
+            "semantic_section_count": audit_contract["semantic_section_count"],
+        },
         "counts": {
             "meeting_bundles": len(manifest["meeting_bundles"]),
             "official_pdfs": sum(len(bundle["decks"]) for bundle in manifest["meeting_bundles"]),

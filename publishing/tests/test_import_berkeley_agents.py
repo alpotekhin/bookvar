@@ -5,7 +5,9 @@ import hashlib
 import importlib.util
 import json
 import re
+import shutil
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -64,6 +66,21 @@ class BerkeleyAgentsSourceAuditTest(unittest.TestCase):
         failures: list[str] = []
         importer.validate_syllabus_inventory(payload.replace(needle, replacement, 1), failures)
         self.assertTrue(any("unexpected artifact link" in failure for failure in failures))
+
+    def test_syllabus_membership_rejects_whole_unknown_teaching_row(self) -> None:
+        importer = self._load_importer()
+        payload = (COURSE_ROOT / "Metadata/syllabus.html").read_bytes()
+        extra_row = b"""
+        <table><tr>
+          <td>Apr 28</td>
+          <td><a href="https://www.youtube.com/live/reviewer-attack-13">Unknown recording</a></td>
+          <td><a href="https://rdi.berkeley.edu/adv-llm-agents/slides/unknown-13.pdf">Unknown deck</a></td>
+          <td><a href="https://arxiv.org/abs/2504.99999">Unknown reading</a></td>
+        </tr></table>
+        """
+        failures: list[str] = []
+        importer.validate_syllabus_inventory(payload + extra_row, failures)
+        self.assertTrue(any("unexpected teaching row" in failure for failure in failures), failures)
 
     def test_jan_27_preserves_the_extra_intro_deck(self) -> None:
         first = self.manifest["meeting_bundles"][0]
@@ -133,6 +150,49 @@ class BerkeleyAgentsSourceAuditTest(unittest.TestCase):
                 self.assertTrue(row["reason"])
                 self.assertTrue(row["evidence"])
 
+    def test_sampled_semantics_preserve_substantive_closing_pages(self) -> None:
+        review = read_document("semantic-review.json")
+        reviewed_decks = {deck["id"]: deck for deck in review["decks"]}
+
+        meeting_four_page = next(
+            section
+            for section in reviewed_decks["meeting-04-slides"]["sections"]
+            if section["page_start"] <= 155 <= section["page_end"]
+        )
+        self.assertEqual(
+            {
+                key: meeting_four_page[key]
+                for key in ("title", "semantic_id", "kind", "page_start", "page_end", "visual_kind")
+            },
+            {
+                "title": "Human Preference Evaluation",
+                "semantic_id": "human-preference-evaluation",
+                "kind": "figure",
+                "page_start": 155,
+                "page_end": 155,
+                "visual_kind": "evaluation-chart",
+            },
+        )
+        self.assertNotIn("disposition", meeting_four_page)
+
+        meeting_ten = reviewed_decks["meeting-10-slides"]["sections"]
+        recap = next(section for section in meeting_ten if section["page_start"] <= 116 <= section["page_end"])
+        self.assertEqual((recap["page_start"], recap["page_end"]), (106, 117))
+        self.assertEqual(recap["semantic_id"], "minictx")
+        self.assertEqual(recap["title"], "miniCTX, accessibility gaps, and prover-method recap")
+        self.assertEqual(recap["kind"], "experiment")
+        self.assertNotIn("disposition", recap)
+        closing = next(section for section in meeting_ten if section["page_start"] <= 118 <= section["page_end"])
+        self.assertEqual((closing["page_start"], closing["page_end"]), (118, 118))
+        self.assertEqual(closing["kind"], "administrative")
+        self.assertEqual(closing["disposition"], "excluded")
+
+        units = {unit["semantic_id"]: unit for unit in self.units["units"] if "semantic_id" in unit}
+        coverage = {row["source_unit"]: row for row in self.coverage["rows"]}
+        for semantic_id in ("human-preference-evaluation", "minictx"):
+            self.assertEqual(coverage[units[semantic_id]["id"]]["disposition"], "source-only")
+        self.assertEqual(coverage[units["meeting-10-closing"]["id"]]["disposition"], "excluded")
+
     def test_visual_ledger_closes_every_deck_page_and_links_provenance(self) -> None:
         deck_ids = [deck for bundle in self.manifest["meeting_bundles"] for deck in bundle["decks"]]
         objects = {row["id"]: row for row in self.manifest["objects"]}
@@ -155,6 +215,14 @@ class BerkeleyAgentsSourceAuditTest(unittest.TestCase):
                 self.assertTrue(row["extraction_tool"])
                 pages.extend(row["source_pages"])
             self.assertEqual(pages, list(range(1, objects[deck_id]["page_count"] + 1)), deck_id)
+
+    def test_visual_review_method_is_codex_assisted_and_reviewer_is_explicit(self) -> None:
+        expected_method = (
+            "Codex-assisted ordered contact-sheet review plus "
+            "pdftotext -layout (Poppler 26.04.0)"
+        )
+        self.assertTrue(all(row["extraction_tool"] == expected_method for row in self.visuals["rows"]))
+        self.assertTrue(all(row["reviewer"] == "Codex source audit" for row in self.visuals["rows"]))
 
     def test_required_multi_member_sequences_are_real(self) -> None:
         by_semantic_id = {row.get("semantic_id"): row for row in self.visuals["rows"]}
@@ -194,6 +262,47 @@ class BerkeleyAgentsSourceAuditTest(unittest.TestCase):
             self.assertEqual(row["primary_sources"], [unit["source_object"]])
             self.assertEqual(row["secondary_sources"], bundle["decks"])
             self.assertEqual(row["disposition"], "source-only")
+
+    def test_big_sleep_preserves_primary_byline_organizations_and_contributors(self) -> None:
+        expected_contributors = [
+            "Miltos Allamanis",
+            "Martin Arjovsky",
+            "Charles Blundell",
+            "Lars Buesing",
+            "Mark Brand",
+            "Sergei Glazunov",
+            "Dominik Maier",
+            "Petros Maniatis",
+            "Guilherme Marinho",
+            "Henryk Michalewski",
+            "Koushik Sen",
+            "Charles Sutton",
+            "Vaibhav Tulsyan",
+            "Marco Vanotti",
+            "Theophane Weber",
+            "Dan Zheng",
+        ]
+        reading = next(row for row in self.manifest["objects"] if row["id"] == "meeting-05-reading-02")
+        self.assertEqual(reading["authors"], ["the Big Sleep team"])
+        self.assertEqual(reading["source_byline"], "the Big Sleep team")
+        self.assertEqual(reading["organizations"], ["Google Project Zero", "Google DeepMind"])
+        self.assertEqual(reading["contributors"], expected_contributors)
+        self.assertEqual(
+            reading["canonical_project_url"],
+            "https://projectzero.google/2024/10/from-naptime-to-big-sleep.html",
+        )
+        self.assertEqual(
+            reading.get("source_metadata_evidence_url"),
+            "https://projectzero.google/2024/10/from-naptime-to-big-sleep.html",
+        )
+        note = (COURSE_ROOT / reading["local_path"]).read_text("utf-8")
+        self.assertIn("- Source byline: the Big Sleep team", note)
+        self.assertIn("- Organizations: Google Project Zero; Google DeepMind", note)
+        self.assertIn("- Source metadata evidence: https://projectzero.google/2024/10/from-naptime-to-big-sleep.html", note)
+        self.assertIn(
+            "- Contributors: " + "; ".join(expected_contributors),
+            note,
+        )
 
     def test_practice_provenance_is_explicit_and_mirror_is_excluded(self) -> None:
         practice = self.manifest["practice_provenance"]
@@ -260,6 +369,115 @@ class BerkeleyAgentsSourceAuditTest(unittest.TestCase):
         importer.validate_generated_documents(truncated, expected, forged_lock, failures)
         self.assertTrue(any("deterministic extraction mismatch" in failure for failure in failures))
 
+    def test_reviewed_audit_contract_is_exact_and_hard_pinned(self) -> None:
+        importer = self._load_importer()
+        contract_path = COURSE_ROOT / "audit-contract.json"
+        payload = contract_path.read_bytes()
+        self.assertEqual(hashlib.sha256(payload).hexdigest(), importer.AUDIT_CONTRACT_SHA256)
+        contract = importer.load_reviewed_audit_contract()
+        self.assertIs(contract["generated_by_importer"], False)
+        self.assertEqual(contract["deck_count"], 13)
+        self.assertEqual(contract["physical_page_count"], 1254)
+        self.assertEqual(contract["semantic_section_count"], 161)
+        self.assertEqual(
+            contract["semantic_review_contract"],
+            importer.audit_contract_projection(read_document("semantic-review.json")),
+        )
+
+        with tempfile.TemporaryDirectory() as temporary:
+            mutated_path = Path(temporary) / "audit-contract.json"
+            mutated_path.write_bytes(payload.replace(
+                b'"learning-to-reason-framing"',
+                b'"collapsed-meeting-02"',
+                1,
+            ))
+            original_path = importer.AUDIT_CONTRACT_PATH
+            importer.AUDIT_CONTRACT_PATH = mutated_path
+            try:
+                with self.assertRaisesRegex(ValueError, "audit contract SHA mismatch"):
+                    importer.load_reviewed_audit_contract()
+            finally:
+                importer.AUDIT_CONTRACT_PATH = original_path
+
+    def test_reviewed_audit_contract_rejects_collapse_after_full_regeneration(self) -> None:
+        importer = self._load_importer()
+        with tempfile.TemporaryDirectory() as temporary:
+            isolated_course = Path(temporary) / "course"
+            shutil.copytree(COURSE_ROOT, isolated_course)
+            original_paths = {
+                "COURSE_ROOT": importer.COURSE_ROOT,
+                "LECTURES_ROOT": importer.LECTURES_ROOT,
+                "READINGS_ROOT": importer.READINGS_ROOT,
+                "METADATA_ROOT": importer.METADATA_ROOT,
+                "SEMANTIC_REVIEW_PATH": importer.SEMANTIC_REVIEW_PATH,
+                "SYLLABUS_PATH": importer.SYLLABUS_PATH,
+            }
+            replacement_paths = {
+                "COURSE_ROOT": isolated_course,
+                "LECTURES_ROOT": isolated_course / "Lectures",
+                "READINGS_ROOT": isolated_course / "Readings",
+                "METADATA_ROOT": isolated_course / "Metadata",
+                "SEMANTIC_REVIEW_PATH": isolated_course / "semantic-review.json",
+                "SYLLABUS_PATH": isolated_course / "Metadata/syllabus.html",
+            }
+            if hasattr(importer, "AUDIT_CONTRACT_PATH"):
+                original_paths["AUDIT_CONTRACT_PATH"] = importer.AUDIT_CONTRACT_PATH
+                replacement_paths["AUDIT_CONTRACT_PATH"] = isolated_course / "audit-contract.json"
+            try:
+                for name, path in replacement_paths.items():
+                    setattr(importer, name, path)
+
+                contract_before = importer.AUDIT_CONTRACT_PATH.read_bytes()
+                importer.regenerate()
+                self.assertEqual(importer.AUDIT_CONTRACT_PATH.read_bytes(), contract_before)
+                self.assertEqual(hashlib.sha256(contract_before).hexdigest(), importer.AUDIT_CONTRACT_SHA256)
+
+                review = importer.load_document(importer.SEMANTIC_REVIEW_PATH)
+                meeting_two = next(deck for deck in review["decks"] if deck["id"] == "meeting-02-slides")
+                meeting_two["sections"] = [{
+                    "title": "All meeting 2 slides",
+                    "semantic_id": "collapsed-meeting-02",
+                    "kind": "section",
+                    "page_start": 1,
+                    "page_end": 106,
+                    "visual_kind": "orientation",
+                }]
+                importer.write_document(importer.SEMANTIC_REVIEW_PATH, review)
+
+                with self.assertRaisesRegex(ValueError, "audit contract"):
+                    importer.regenerate()
+
+                manifest = importer.build_manifest()
+                units = importer.build_units(review)
+                coverage = importer.build_coverage(manifest, units, review)
+                visuals = importer.build_visuals(review)
+                regenerated = {
+                    "source-manifest.yml": manifest,
+                    "source-units.yml": units,
+                    "coverage.yml": coverage,
+                    "visuals.yml": visuals,
+                }
+                for name, document in regenerated.items():
+                    importer.write_document(isolated_course / name, document)
+                importer.write_document(
+                    isolated_course / "artifact-inventory.json",
+                    importer.build_artifact_inventory(regenerated),
+                )
+                importer.write_document(
+                    isolated_course / "snapshot-lock.json",
+                    importer.build_snapshot_lock(regenerated),
+                )
+
+                self.assertEqual(
+                    len([unit for unit in units["units"] if unit["source_object"] == "meeting-02-slides"]),
+                    1,
+                )
+                failures = importer.check()
+                self.assertTrue(any("audit contract" in failure.lower() for failure in failures), failures)
+            finally:
+                for name, path in original_paths.items():
+                    setattr(importer, name, path)
+
     def test_page_closure_rejects_semantic_omission_even_with_forged_lock(self) -> None:
         importer = self._load_importer()
         failures: list[str] = []
@@ -304,6 +522,16 @@ class BerkeleyAgentsSourceAuditTest(unittest.TestCase):
         self.assertIn("CONFIDENTIAL", row["evidence"])
         self.assertNotIn("license_identifier", row)
         self.assertNotIn("license_url", row)
+
+    def test_shared_registry_verification_dates_cover_the_reviewed_berkeley_entry(self) -> None:
+        registries = (
+            REPOSITORY_ROOT / "05 Источники/Курсы.md",
+            REPOSITORY_ROOT / "05 Источники/Source maps/Единый реестр покрытия источников.md",
+        )
+        for registry in registries:
+            frontmatter = "\n".join(registry.read_text("utf-8").splitlines()[:12])
+            self.assertIn("last_verified: 2026-09-04", frontmatter, registry)
+
     @staticmethod
     def _load_importer():
         spec = importlib.util.spec_from_file_location("import_berkeley_agents", IMPORTER_PATH)

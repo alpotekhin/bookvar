@@ -3,6 +3,12 @@
   "course": "Berkeley Advanced LLM Agents",
   "offering": "Spring 2025",
   "status": "inventory complete; editorial integration pending",
+  "audit_contract": {
+    "local_path": "audit-contract.json",
+    "sha256": "71fc60d9c4717b85fa2b664876af02adf0098f340bee4a13eb55d13ae7812fb5",
+    "generated_by_importer": false,
+    "semantic_section_count": 161
+  },
   "counts": {
     "meeting_bundles": 12,
     "official_pdfs": 13,

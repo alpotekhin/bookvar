@@ -11,25 +11,26 @@
     "official_pdf_pages": 1254
   },
   "generated_audit": {
-    "semantic_review_sha256": "e0177f68e0975df7ed69c36913316e3fdde28cdaf9c95b8c68d242156b2b7615",
-    "importer_sha256": "fa4d4cd56c292fa25db1f0bcfc2f07b60d7007ed08392ca2cea94e39a2cf6459",
-    "extractor_revision": "berkeley-advanced-llm-agents-semantic-audit-v1",
+    "semantic_review_sha256": "0dd492f1aa69d11aa3815aab7ce503f93341ac9ddb55689cbcc63dde3843a5b3",
+    "audit_contract_sha256": "71fc60d9c4717b85fa2b664876af02adf0098f340bee4a13eb55d13ae7812fb5",
+    "importer_sha256": "337438e9072c55724c421c4399623aff5b5e9984bfbe6c2f50ac6c6436dc4cbb",
+    "extractor_revision": "berkeley-advanced-llm-agents-semantic-audit-v2",
     "page_index_tool": "pdftotext -layout (Poppler 26.04.0)",
     "ledgers": {
       "source-manifest.yml": {
-        "sha256": "23814288480bb94bb5b84547af20b89e2608a85a82f3cbf3365cadf8688fb9da",
+        "sha256": "36b6ef5ee1c5efc407b1e13a98a73ca22fb7c95771ce5a8b09b1021a5d186611",
         "records": 64
       },
       "source-units.yml": {
-        "sha256": "fa2620d19e8034c7a3754e48319441605f86d231be50f42fd3fba34bfe5ed3de",
+        "sha256": "abdfc6e44b6332675eff9c5372cb67cca55f2e6ceb56bff44a62d7469a070d8e",
         "records": 212
       },
       "coverage.yml": {
-        "sha256": "3c947e8422c1631f4f415b0f3f56e3dfa510fa28ab38279702ad110a42fa5b34",
+        "sha256": "47adb0258e8819a92cab0c8ea39de166f91b9e55278d6d7451641e10c3782cdb",
         "records": 212
       },
       "visuals.yml": {
-        "sha256": "cc3602701f19e64f66f327825894e8d2a2585475883401a19b366af3220ce3da",
+        "sha256": "c7c296690f253789bb25e46e824172438f852b044d329338c5a8faefd1782155",
         "records": 161
       }
     }
@@ -42,13 +43,18 @@
     },
     {
       "path": "semantic-review.json",
-      "bytes": 34804,
-      "sha256": "e0177f68e0975df7ed69c36913316e3fdde28cdaf9c95b8c68d242156b2b7615"
+      "bytes": 34883,
+      "sha256": "0dd492f1aa69d11aa3815aab7ce503f93341ac9ddb55689cbcc63dde3843a5b3"
+    },
+    {
+      "path": "audit-contract.json",
+      "bytes": 57947,
+      "sha256": "71fc60d9c4717b85fa2b664876af02adf0098f340bee4a13eb55d13ae7812fb5"
     },
     {
       "path": "publishing/tools/import_berkeley_agents.py",
-      "bytes": 80583,
-      "sha256": "fa4d4cd56c292fa25db1f0bcfc2f07b60d7007ed08392ca2cea94e39a2cf6459"
+      "bytes": 88722,
+      "sha256": "337438e9072c55724c421c4399623aff5b5e9984bfbe6c2f50ac6c6436dc4cbb"
     },
     {
       "path": "Lectures/meeting-01-intro.pdf",
@@ -247,8 +253,8 @@
     },
     {
       "path": "Readings/meeting-05-reading-02.md",
-      "bytes": 698,
-      "sha256": "49e9f246ec87f5a4eaa60eb069fbb3b2c3b748f99f1f5a1aa2172ba51b96063b"
+      "bytes": 1137,
+      "sha256": "3d675f946f5c998a2126f86e692a410947f0c7b2d2a4b537a710e191684ffce5"
     },
     {
       "path": "Readings/meeting-06-reading-01.md",

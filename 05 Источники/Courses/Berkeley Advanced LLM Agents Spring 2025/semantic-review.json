@@ -96,7 +96,7 @@
         {"title": "OLMo pretraining and openness", "semantic_id": "olmo-pretraining", "kind": "section", "page_start": 143, "page_end": 152, "visual_kind": "system-sequence"},
         {"title": "Open-recipe research synthesis", "semantic_id": "open-recipe-synthesis", "kind": "section", "page_start": 153, "page_end": 153, "visual_kind": "synthesis"},
         {"title": "Thanks slide", "semantic_id": "meeting-04-closing", "kind": "administrative", "page_start": 154, "page_end": 154, "visual_kind": "administrative", "disposition": "excluded", "reason": "closing slide only", "evidence": "The page adds no independent technical content."},
-        {"title": "Appendix reference", "semantic_id": "open-recipe-appendix", "kind": "section", "page_start": 155, "page_end": 155, "visual_kind": "appendix"}
+        {"title": "Human Preference Evaluation", "semantic_id": "human-preference-evaluation", "kind": "figure", "page_start": 155, "page_end": 155, "visual_kind": "evaluation-chart"}
       ]
     },
     {
@@ -202,8 +202,8 @@
         {"title": "Advanced prover recap", "semantic_id": "advanced-prover-recap", "kind": "section", "page_start": 90, "page_end": 94, "visual_kind": "synthesis"},
         {"title": "Research-workflow divider", "semantic_id": "meeting-10-research-divider", "kind": "administrative", "page_start": 95, "page_end": 95, "visual_kind": "administrative", "disposition": "excluded", "reason": "section divider", "evidence": "The page is a navigation divider."},
         {"title": "Theorem-proving research workflow", "semantic_id": "proving-research-workflow", "kind": "mechanism", "page_start": 96, "page_end": 105, "visual_kind": "workflow-sequence"},
-        {"title": "miniCTX contextual theorem proving", "semantic_id": "minictx", "kind": "experiment", "page_start": 106, "page_end": 115, "visual_kind": "benchmark-sequence"},
-        {"title": "Research recap and thanks", "semantic_id": "meeting-10-closing", "kind": "administrative", "page_start": 116, "page_end": 118, "visual_kind": "administrative", "disposition": "excluded", "reason": "recap title and closing slides", "evidence": "These pages contain section recap/thanks without an additional technical mechanism."}
+        {"title": "miniCTX, accessibility gaps, and prover-method recap", "semantic_id": "minictx", "kind": "experiment", "page_start": 106, "page_end": 117, "visual_kind": "benchmark-and-synthesis-sequence"},
+        {"title": "Thanks and collaborator credits", "semantic_id": "meeting-10-closing", "kind": "administrative", "page_start": 118, "page_end": 118, "visual_kind": "administrative", "disposition": "excluded", "reason": "thanks and collaborator credits only", "evidence": "The page thanks the audience and lists collaborators; it adds no independent technical content."}
       ]
     },
     {

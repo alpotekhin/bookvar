@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "review_method": "Every physical page of every official PDF was inspected in ordered contact sheets, cross-checked against pdftotext -layout output, and grouped into explicitly named semantic sections. Administrative pages and the source-marked confidential page are explicit exclusions; no keyword or one-row-per-page proxy was used.",
-  "semantic_review_sha256": "e0177f68e0975df7ed69c36913316e3fdde28cdaf9c95b8c68d242156b2b7615",
+  "semantic_review_sha256": "0dd492f1aa69d11aa3815aab7ce503f93341ac9ddb55689cbcc63dde3843a5b3",
   "units": [
     {
       "id": "official-syllabus-coursework-and-schedule",
@@ -837,13 +837,13 @@
       "page_end": 154
     },
     {
-      "id": "meeting-04-slides-open-recipe-appendix",
+      "id": "meeting-04-slides-human-preference-evaluation",
       "source_object": "meeting-04-slides",
       "order": 15,
       "source_location": "Lectures/meeting-04-slides.pages.txt#physical-pages=155-155",
-      "kind": "section",
-      "title": "Appendix reference",
-      "semantic_id": "open-recipe-appendix",
+      "kind": "figure",
+      "title": "Human Preference Evaluation",
+      "semantic_id": "human-preference-evaluation",
       "page_start": 155,
       "page_end": 155
     },
@@ -1850,22 +1850,22 @@
       "id": "meeting-10-slides-minictx",
       "source_object": "meeting-10-slides",
       "order": 13,
-      "source_location": "Lectures/meeting-10-slides.pages.txt#physical-pages=106-115",
+      "source_location": "Lectures/meeting-10-slides.pages.txt#physical-pages=106-117",
       "kind": "experiment",
-      "title": "miniCTX contextual theorem proving",
+      "title": "miniCTX, accessibility gaps, and prover-method recap",
       "semantic_id": "minictx",
       "page_start": 106,
-      "page_end": 115
+      "page_end": 117
     },
     {
       "id": "meeting-10-slides-meeting-10-closing",
       "source_object": "meeting-10-slides",
       "order": 14,
-      "source_location": "Lectures/meeting-10-slides.pages.txt#physical-pages=116-118",
+      "source_location": "Lectures/meeting-10-slides.pages.txt#physical-pages=118-118",
       "kind": "administrative",
-      "title": "Research recap and thanks",
+      "title": "Thanks and collaborator credits",
       "semantic_id": "meeting-10-closing",
-      "page_start": 116,
+      "page_start": 118,
       "page_end": 118
     },
     {
