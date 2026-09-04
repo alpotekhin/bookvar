@@ -1,0 +1,2851 @@
+=== PHYSICAL PAGE 1 OF 114 ===
+Formal Reasoning Meets LLMs:
+Towards AI for Mathematics and
+         Verification
+
+
+
+                Kaiyu Yang
+       Research Scientist @ Meta FAIR
+
+=== PHYSICAL PAGE 2 OF 114 ===
+AI Arms Race in Math and Coding
+
+
+
+
+           Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                         2
+                                   Verification
+
+=== PHYSICAL PAGE 3 OF 114 ===
+AI Arms Race in Math and Coding
+
+
+
+
+           Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                         3
+                                   Verification
+
+=== PHYSICAL PAGE 4 OF 114 ===
+AI Arms Race in Math and Coding
+
+
+
+
+           Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                         4
+                                   Verification
+
+=== PHYSICAL PAGE 5 OF 114 ===
+AI Arms Race in Math and Coding
+
+
+
+
+           Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                         5
+                                   Verification
+
+=== PHYSICAL PAGE 6 OF 114 ===
+Why Math and Coding?
+• Proxies for complex reasoning and planning
+   • Important in human intelligence; challenging for LLMs
+   • Unlimited applications: travel planning, calendar scheduling, etc.
+
+
+
+• Relatively easy to evaluate
+   • Math: check the answers
+   • Coding: run unit tests
+   • Writing a crime fiction? Composing a symphony?
+
+
+
+
+                        Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                      6
+                                                Verification
+
+=== PHYSICAL PAGE 7 OF 114 ===
+How LLMs are Trained to Solve Math
+Problems?
+• Supervised finetuning (SFT): “Good data is all you need!”
+
+
+
+
+• Reinforcement learning (RL): “Verifiability is all you need!”
+
+
+
+• Methods are straightforward, but the devil is in the details, e.g., data curation/
+  cleaning, infrastructures for training and inference
+
+                          Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                        7
+                                                  Verification
+
+=== PHYSICAL PAGE 8 OF 114 ===
+   Supervised Finetuning on Mathematical
+   Data
+
+
+
+
+LLM pretrained
+on text and code
+
+
+                   Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                 8
+                                           Verification
+
+=== PHYSICAL PAGE 9 OF 114 ===
+   Supervised Finetuning on Mathematical
+   Data
+         Math-related
+         web documents
+
+
+
+
+LLM pretrained     Base math
+on text and code   LLM
+
+
+                               Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                             9
+                                                       Verification
+
+=== PHYSICAL PAGE 10 OF 114 ===
+   Supervised Finetuning on Mathematical
+   Data
+         Math-related
+         web documents
+                         Problems w/ step-
+                         by-step solutions
+
+
+
+
+LLM pretrained     Base math             Finetuned
+on text and code   LLM                   math LLM
+
+
+                                  Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                                10
+                                                          Verification
+
+=== PHYSICAL PAGE 11 OF 114 ===
+                Supervised Finetuning on Mathematical
+                Data
+                      Math-related
+                      web documents                                                              Problem: Suppose that the sum of the squares of two
+                                      Problems w/ step-                                          complex numbers and is 7, and the sum of their cubes
+                                                                                                 is 10. List all possible values for + , separated by
+                                      by-step solutions                                          commas.
+                                                             Problems w/ tool-
+                                                             integrated solutions                Solution: Let’s use `sympy` to calculate and print all
+                                                                                                 possible values for + .
+
+
+
+
+                                                                                                        >>> [-5, -5, 1, 1, 4, 4]
+
+                                                                                                 Removing duplicates, the possible values for        + are
+             LLM pretrained     Base math             Finetuned             Tool-                \boxed{-5, 1, 4}
+             on text and code   LLM                   math LLM              integrated
+                                                                            math LLM
+                                               Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                                                                                      11
+𝑥
+
+
+
+
+𝑥
+𝑥
+𝑥𝑦   𝑦
+     𝑦
+         𝑦
+                                                                       Verification
+
+=== PHYSICAL PAGE 12 OF 114 ===
+                Supervised Finetuning on Mathematical
+                Data
+                      Math-related
+                      web documents                                                             Problem: Suppose that the sum of the squares of two
+                                      Problems w/ step-                                         complex numbers and is 7, and the sum of their cubes
+                                                                                                is 10. List all possible values for + , separated by
+                                      by-step solutions                                         commas.
+                                                            Problems w/ tool-
+                                                            integrated solutions                Solution: Let’s use `sympy` to calculate and print all
+                                                                                                possible values for + .
+
+
+
+
+                                                                                                       >>> [-5, -5, 1, 1, 4, 4]
+
+                                                                                                Removing duplicates, the possible values for        + are
+             LLM pretrained     Base math            Finetuned             Tool-                \boxed{-5, 1, 4}
+             on text and code   LLM                  math LLM              integrated
+                                                                           math LLM
+                                              Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                                                                                     12
+𝑥
+
+
+
+
+𝑥
+𝑥
+𝑥𝑦   𝑦
+     𝑦
+         𝑦
+                                                                      Verification
+
+=== PHYSICAL PAGE 13 OF 114 ===
+              Supervised Finetuning on Mathematical
+              Data
+             • Training data is foremost important                                         Problem: Suppose that the sum of the squares of two
+                                                                                           complex numbers and is 7, and the sum of their cubes
+                 • Problems + (step-by-step, tool-integrated)                              is 10. List all possible values for + , separated by
+                                                                                           commas.
+                   solutions curated by humans and LLMs
+                 • Size of largest public datasets: ~900K                                   Solution: Let’s use `sympy` to calculate and print all
+                                                                                            possible values for + .
+                                [Li et al.,
+                                NuminaMath-1.5]
+
+
+
+
+                                                                                                   >>> [-5, -5, 1, 1, 4, 4]
+
+                                                                                            Removing duplicates, the possible values for        +
+                                                                                            are \boxed{-5, 1, 4}
+
+
+
+
+                                         Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                                                                                13
+𝑥
+
+
+
+
+𝑥
+𝑥𝑦
+𝑥    𝑦
+     𝑦
+         𝑦
+                                                                 Verification
+
+=== PHYSICAL PAGE 14 OF 114 ===
+              Supervised Finetuning on Mathematical
+              Data
+             • Training data is foremost important                                         Problem: Suppose that the sum of the squares of two
+                                                                                           complex numbers and is 7, and the sum of their cubes
+                 • Problems + (step-by-step, tool-integrated)                              is 10. List all possible values for + , separated by
+                                                                                           commas.
+                   solutions curated by humans and LLMs
+                 • Size of largest public datasets: ~900K                                   Solution: Let’s use `sympy` to calculate and print all
+                                                                                            possible values for + .
+                                [Li et al.,
+                                NuminaMath-1.5]
+
+
+
+             • What if the data has final answers but not
+               intermediate steps ?                                                                >>> [-5, -5, 1, 1, 4, 4]
+
+                                                                                            Removing duplicates, the possible values for        +
+                                                                                            are \boxed{-5, 1, 4}
+
+
+
+
+                                         Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                                                                                14
+𝑥
+
+
+
+
+𝑥
+𝑥𝑦
+𝑥    𝑦
+     𝑦
+         𝑦
+                                                                 Verification
+
+=== PHYSICAL PAGE 15 OF 114 ===
+             Reinforcement Learning on Verifiable
+             Problems
+                                                                           Problem: Suppose that the sum of the squares of two
+                                                                           complex numbers and is 7, and the sum of their cubes
+                                                                           is 10. List all possible values for + , separated by
+                                                                           commas.
+
+                                                                            Solution: Let’s use `sympy` to calculate and print all
+                                                                            possible values for + .
+
+
+
+
+                                                                                   >>> [-5, -5, 1, 1, 4, 4]
+
+                                                                            Removing duplicates, the possible values for        +
+                                                                            are \boxed{-5, 1, 4}
+
+
+
+
+                         Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                                                                15
+𝑥
+
+
+
+
+𝑥
+𝑥
+𝑥𝑦   𝑦
+     𝑦
+         𝑦
+                                                 Verification
+
+=== PHYSICAL PAGE 16 OF 114 ===
+             Reinforcement Learning on Verifiable
+             Problems
+                                                                           Problem: Suppose that the sum of the squares of two
+                                                                           complex numbers and is 7, and the sum of their cubes
+                                                                           is 10. List all possible values for + , separated by
+                                                                           commas.
+
+                                                                            Solution: Let’s use `sympy` to calculate and print all
+                                                                            possible values for + .
+
+
+
+
+                                                                                   >>> [-5, -5, 1, 1, 4, 4]
+
+                                                                            Removing duplicates, the possible values for        +
+                                                                            are \boxed{-5, 1, 4}
+
+
+
+
+                         Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                                                                16
+𝑥
+
+
+
+
+𝑥
+𝑥
+𝑥𝑦   𝑦
+     𝑦
+         𝑦
+                                                 Verification
+
+=== PHYSICAL PAGE 17 OF 114 ===
+             Reinforcement Learning on Verifiable
+             Problems
+                  Solution: ... \boxed{-5, 1,                                          Problem: Suppose that the sum of the squares of two
+                  4}                                                                   complex numbers and is 7, and the sum of their cubes
+                                                                                       is 10. List all possible values for + , separated by
+                                                                                       commas.
+
+                                                                                        Solution: Let’s use `sympy` to calculate and print all
+                                                                                        possible values for + .
+
+
+
+
+                                                                                               >>> [-5, -5, 1, 1, 4, 4]
+
+                                                                                        Removing duplicates, the possible values for        +
+                                                                                        are \boxed{-5, 1, 4}
+
+
+
+
+                                     Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                                                                            17
+𝑥
+
+
+
+
+𝑥
+𝑥
+𝑥𝑦   𝑦
+     𝑦
+         𝑦
+                                                             Verification
+
+=== PHYSICAL PAGE 18 OF 114 ===
+             Reinforcement Learning on Verifiable
+             Problems
+                       Solution: ... \boxed{-5, 1,                                          Problem: Suppose that the sum of the squares of two
+                       4}                                                                   complex numbers and is 7, and the sum of their cubes
+                                                                                            is 10. List all possible values for + , separated by
+                                                                                            commas.
+
+                                                                                             Solution: Let’s use `sympy` to calculate and print all
+                                                                                             possible values for + .
+
+
+
+             • Verify the model’s solution by comparing the final
+               answer with the ground truth
+
+                                                                                                    >>> [-5, -5, 1, 1, 4, 4]
+
+                                                                                             Removing duplicates, the possible values for        +
+                                                                                             are \boxed{-5, 1, 4}
+
+
+
+
+                                          Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                                                                                 18
+𝑥
+
+
+
+
+𝑥
+𝑥𝑦
+𝑥    𝑦
+     𝑦
+         𝑦
+                                                                  Verification
+
+=== PHYSICAL PAGE 19 OF 114 ===
+             Reinforcement Learning on Verifiable
+             Problems
+                       Solution: ... \boxed{-5, 1,                                          Problem: Suppose that the sum of the squares of two
+                       4}                                                                   complex numbers and is 7, and the sum of their cubes
+                                                                                            is 10. List all possible values for + , separated by
+                          Solution: …\boxed{-2,                                             commas.
+                          6}
+                                                                                             Solution: Let’s use `sympy` to calculate and print all
+                                                                                             possible values for + .
+
+
+
+             • Verify the model’s solution by comparing the final
+               answer with the ground truth
+
+                                                                                                    >>> [-5, -5, 1, 1, 4, 4]
+
+                                                                                             Removing duplicates, the possible values for        +
+                                                                                             are \boxed{-5, 1, 4}
+
+
+
+
+                                          Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                                                                                 19
+𝑥
+
+
+
+
+𝑥
+𝑥𝑦
+𝑥    𝑦
+     𝑦
+         𝑦
+                                                                  Verification
+
+=== PHYSICAL PAGE 20 OF 114 ===
+               Reinforcement Learning on Verifiable
+               Problems
+                          Solution: ... \boxed{-5, 1,                                          Problem: Suppose that the sum of the squares of two
+             Reward       4}                                                                   complex numbers and is 7, and the sum of their cubes
+                                                                                               is 10. List all possible values for + , separated by
+                             Solution: …\boxed{-2,                                             commas.
+                             6}
+                                                                                                Solution: Let’s use `sympy` to calculate and print all
+                                                                                                possible values for + .
+                                        Feedback
+
+                • Verify the model’s solution by comparing the final
+                  answer with the ground truth
+                • RL algorithms such as GRPO optimize the model
+                  to achieve high rewards                                                              >>> [-5, -5, 1, 1, 4, 4]
+
+                    • Popularized by DeepSeek-R1[Guo et al., 2025]                              Removing duplicates, the possible values for        +
+                                                                                                are \boxed{-5, 1, 4}
+
+
+
+
+                                             Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                                                                                    20
+𝑥
+
+
+
+
+𝑥
+𝑥
+𝑥𝑦   𝑦
+     𝑦
+         𝑦
+                                                                     Verification
+
+=== PHYSICAL PAGE 21 OF 114 ===
+Reinforcement Learning on Verifiable
+Problems
+
+
+
+
+            Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                          21
+                                    Verification
+
+=== PHYSICAL PAGE 22 OF 114 ===
+               Reinforcement Learning on Verifiable
+               Problems
+                          Solution: ... \boxed{-5, 1,                                          Problem: Suppose that the sum of the squares of two
+             Reward       4}                                                                   complex numbers and is 7, and the sum of their cubes
+                                                                                               is 10. List all possible values for + , separated by
+                             Solution: …\boxed{-2,                                             commas.
+                             6}
+                                                                                                Solution: Let’s use `sympy` to calculate and print all
+                                                                                                possible values for + .
+                                        Feedback
+
+                • Verify the model’s solution by comparing the final
+                  answer with the ground truth
+                • RL algorithms such as GRPO optimize the model
+                  to achieve high rewards                                                              >>> [-5, -5, 1, 1, 4, 4]
+
+                    • Popularized by DeepSeek-R1[Guo et al., 2025]                              Removing duplicates, the possible values for        +
+                • The solution must be verifiable, e.g., w/                                     are \boxed{-5, 1, 4}
+
+                  numeric answers. Not applicable to proofs?
+                                             Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                                                                                    22
+𝑥
+
+
+
+
+𝑥
+𝑥
+𝑥𝑦   𝑦
+     𝑦
+         𝑦
+                                                                     Verification
+
+=== PHYSICAL PAGE 23 OF 114 ===
+How LLMs are Trained to Solve Math
+Problems?
+• State-of-the-art math LLM ≈ strong pretrained model + two post-training
+  techniques + marvelous engineering
+
+   • Supervised finetuning (SFT): “Good data is all you need!”
+
+   • Reinforcement learning (RL): “Verifiability is all you need!”
+
+
+
+
+                        Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                      23
+                                                Verification
+
+=== PHYSICAL PAGE 24 OF 114 ===
+How LLMs are Trained to Solve Math
+Problems?
+• State-of-the-art math LLM ≈ strong pretrained model + two post-training
+  techniques + marvelous engineering
+
+   • Supervised finetuning (SFT): “Good data is all you need!”
+
+   • Reinforcement learning (RL): “Verifiability is all you need!”
+
+
+
+• Will AI soon “solve mathematics”?
+
+
+
+
+                        Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                      24
+                                                Verification
+
+=== PHYSICAL PAGE 25 OF 114 ===
+Gap 1: Pre-college Math -> Advanced Math
+• Existing successes are mostly on pre-college math, e.g., AIME, IMO
+• LLMs struggle with more advanced math, e.g., mathematical research
+
+
+
+
+• o3’s FrontierMath results come with caveats
+• How to solve problems w/o numeric answers?
+
+
+                        Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                      25
+                                                Verification
+
+=== PHYSICAL PAGE 26 OF 114 ===
+Gap 2: Guessing Answers -> Writing Proofs
+• LLMs struggle to generate valid proofs
+
+
+
+
+                         [Kevin Buzzard “Can AI do maths yet? Thoughts from a mathematician”
+                         2024]
+
+
+
+
+                        Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                               26
+                                                Verification
+
+=== PHYSICAL PAGE 27 OF 114 ===
+Gap 2: Guessing Answers -> Writing Proofs
+• LLMs struggle to generate valid proofs
+
+
+
+
+                          [Kevin Buzzard “Can AI do maths yet? Thoughts from a mathematician”
+                          2024]
+
+
+
+
+                       [Petrov et al. "Proof or Bluff? Evaluating LLMs on 2025 USA Math Olympiad"
+                       2025]
+
+                        Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                                    27
+                                                Verification
+
+=== PHYSICAL PAGE 28 OF 114 ===
+Gap 2: Guessing Answers -> Writing Proofs
+• LLMs struggle to generate valid proofs
+
+
+
+
+                        Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                      28
+                                                Verification
+
+=== PHYSICAL PAGE 29 OF 114 ===
+LLMs Alone are Not Enough
+• Current math LLMs rely heavily on data and verifiability
+
+
+• Data scarcity
+   • Limited to data-rich domains, e.g., pre-college math
+   • Cannot tackle advanced math or proofs
+• Lack of verifiability
+   • Solutions can only be evaluated by comparing with the ground truth
+   • Limited to problems with numeric solutions, e.g., GSM8K, MATH
+   • Not applicable to most problems in advanced math
+
+
+
+                        Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                      29
+                                                Verification
+
+=== PHYSICAL PAGE 30 OF 114 ===
+Formal Mathematical Reasoning
+• Our position paper
+• Mathematical reasoning grounded in formal systems, e.g.,
+   • First/higher-order logic
+   • Dependent type theory
+   • Computer programs & formal specifications
+• Formal environments can verify proofs and provide automatic feedback
+   • Verification enables rigorous evaluation of reasoning
+   • Learning from feedback mitigates data scarcity
+• Integrating formal reasoning and LLMs’ informal reasoning
+
+
+
+                        Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                      30
+                                                Verification
+
+=== PHYSICAL PAGE 31 OF 114 ===
+The Missing Ingredient: Formal Reasoning
+
+
+
+                        [Yang et al. "Formal Mathematical Reasoning: A New Frontier in AI"
+                        2024]
+• Mathematical reasoning grounded in formal systems, e.g.,
+     • First/higher-order logic, dependent type theory
+     • Computer programs & formal specifications
+• Formal systems can verify proofs and provide automatic feedback
+     • Learning from feedback mitigates data scarcity
+     • Verification enables rigorous evaluation of reasoning
+• We need to integrate formal reasoning with informal reasoning by LLMs
+
+
+                                Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                              31
+                                                        Verification
+
+=== PHYSICAL PAGE 32 OF 114 ===
+Proof Assistants (Interactive Theorem
+Provers)
+• Programming languages for writing formal math and software
+
+
+
+
+                       Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                     32
+                                               Verification
+
+=== PHYSICAL PAGE 33 OF 114 ===
+Formalizing Mathematics in Lean
+
+                                      Lean file
+
+
+
+
+           Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                         33
+                                   Verification
+
+=== PHYSICAL PAGE 34 OF 114 ===
+   Formalizing Mathematics in Lean
+
+                Proof tree                                               Lean file
+
+            n:ℕ                Local context
+            ⊢ add 0 n = n      ⊢ Goal
+
+                Tactic
+                induction
+⊢ add 0 0 = 0       n     n’ : ℕ
+                          ih: add 0 n’ = n’
+  rfl                     ⊢ add 0 (n’+1) = n’+1
+
+                      simp [add, ih]
+
+
+
+
+                                              Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                                            34
+                                                                      Verification
+
+=== PHYSICAL PAGE 35 OF 114 ===
+   Formalizing Mathematics in Lean
+
+                Proof tree                                               Lean file                          Project
+
+            n:ℕ                Local context
+            ⊢ add 0 n = n      ⊢ Goal
+
+                Tactic
+                induction
+⊢ add 0 0 = 0       n     n’ : ℕ
+                          ih: add 0 n’ = n’
+  rfl                     ⊢ add 0 (n’+1) = n’+1
+
+                      simp [add, ih]
+
+
+
+
+                                              Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                                                      35
+                                                                      Verification
+
+=== PHYSICAL PAGE 36 OF 114 ===
+   Formalizing Mathematics in Lean
+
+                Proof tree                                               Lean file                          Project
+
+            n:ℕ                Local context
+            ⊢ add 0 n = n      ⊢ Goal
+
+                Tactic
+                induction
+⊢ add 0 0 = 0       n     n’ : ℕ
+                          ih: add 0 n’ = n’
+  rfl                     ⊢ add 0 (n’+1) = n’+1
+
+                      simp [add, ih]
+
+
+
+
+                                              Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                                                      36
+                                                                      Verification
+
+=== PHYSICAL PAGE 37 OF 114 ===
+Example of AI + Lean: AlphaProof
+• Large-scale search and reinforcement learning using feedback from Lean
+
+
+
+
+   [Google DeepMind "AI achieves silver-medal standard solving International Mathematical Olympiad problems"
+   2024]
+                               Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                                               37
+                                                       Verification
+
+=== PHYSICAL PAGE 38 OF 114 ===
+AI Meets Formal Mathematics
+
+
+
+
+           Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                         38
+                                   Verification
+
+=== PHYSICAL PAGE 39 OF 114 ===
+AI Meets Formal Mathematics
+• Theorems and proofs are
+  represented formally in Lean
+• Lean can check if the proof is
+  correct. No room for hallucination
+
+
+
+
+                        Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                      39
+                                                Verification
+
+=== PHYSICAL PAGE 40 OF 114 ===
+AI Meets Formal Mathematics
+
+
+
+
+           Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                         40
+                                   Verification
+
+=== PHYSICAL PAGE 41 OF 114 ===
+AI Meets Formal Mathematics
+
+
+
+
+           Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                         41
+                                   Verification
+
+=== PHYSICAL PAGE 42 OF 114 ===
+AI Meets Formal Mathematics
+
+
+
+
+           Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                         42
+                                   Verification
+
+=== PHYSICAL PAGE 43 OF 114 ===
+LLMs for Theorem Proving
+• We can train LLMs to generate either
+   • Next steps in the proof (a.k.a. tactic)
+   • Complete proofs
+• Proof steps can be assembled into complete
+  proofs using search algorithms
+• How to generate the next step?
+
+
+
+
+                         Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                       43
+                                                 Verification
+
+=== PHYSICAL PAGE 44 OF 114 ===
+LLMs for Theorem Proving
+• We can train LLMs to generate either
+   • Next steps in the proof (a.k.a. tactic)
+   • Complete proofs
+• Proof steps can be assembled into complete
+  proofs using search algorithms
+• How to generate the next step?
+   • Learn from human-written formal proofs
+
+
+
+
+                         Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                       44
+                                                 Verification
+
+=== PHYSICAL PAGE 45 OF 114 ===
+Machine Learning for Predicting the Next
+Step
+• Classical ML algorithms, e.g., KNN                   [Gauthier et al. "TacticToe: Learning to Prove with Tactics" 2018]
+
+
+
+• Deep neural networks
+                 [Huang et al. “GamePad: A Learning Environment for Theorem Proving” ICLR 2019]
+                 [Yang et al. “Learning to Prove Theorems via Interacting with Proof Assistants” ICML 2019]
+                 [Yang et al. “Learning to Prove Theorems via Interacting with Proof Assistants” ICML 2019]
+                 [Bansal et al. "HOList: An Environment for Machine Learning of Higher-Order Theorem Proving" ICML
+                 2019]
+
+
+                 [Polu and Sutskever "Generative Language Modeling for Automated Theorem Proving"
+• LLMs           2020]
+                 [Lample et al. "HyperTree Proof Search for Neural Theorem Proving" NeurIPS 2022]
+                 [Han et al. "Proof Artifact Co-training for Theorem Proving with Language Models" ICLR
+                 2022]
+                 …
+                          Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                                                    45
+                                                  Verification
+
+=== PHYSICAL PAGE 46 OF 114 ===
+LeanDojo
+
+
+
+            [Yang et al. “LeanDojo: Theorem Proving in Lean using Language Models” NeurIPS
+            2023]
+
+• Previous LLM-based provers are private
+• LeanDojo provides open-source
+   • Data for training and evaluation
+   • Trained model checkpoints
+   • Tools for extracting data and interacting with Lean
+                            Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                             46
+                                                    Verification
+
+=== PHYSICAL PAGE 47 OF 114 ===
+LeanDojo
+
+
+
+
+          Data       LeanDojo Benchmark
+        extraction • 98,641 theorems and proofs
+                    •    217,639 tactics
+                    •    129,162 premises
+ Lean
+
+
+                 Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                               47
+                                         Verification
+
+=== PHYSICAL PAGE 48 OF 114 ===
+LeanDojo
+
+
+
+
+          Data       LeanDojo Benchmark
+        extraction • 98,641 theorems and proofs                           Training
+                    •    217,639 tactics
+                    •    129,162 premises
+ Lean                                                                          Machine learning model
+
+
+                 Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                                  48
+                                         Verification
+
+=== PHYSICAL PAGE 49 OF 114 ===
+LeanDojo
+
+                 Prove theorems by Interaction
+
+
+
+
+          Data       LeanDojo Benchmark
+        extraction • 98,641 theorems and proofs                           Training
+                    •    217,639 tactics
+                    •    129,162 premises
+ Lean                                                                          Machine learning model
+
+
+                 Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                                  49
+                                         Verification
+
+=== PHYSICAL PAGE 50 OF 114 ===
+Retrieval-Augmented Prover (ReProver)
+• Given a state, we retrieve premises from the set of all accessible premises
+
+
+
+
+                       Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                     50
+                                               Verification
+
+=== PHYSICAL PAGE 51 OF 114 ===
+Retrieval-Augmented Prover (ReProver)
+• Given a state, we retrieve premises from the set of all accessible premises
+
+
+
+
+                       Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                     51
+                                               Verification
+
+=== PHYSICAL PAGE 52 OF 114 ===
+Retrieval-Augmented Prover (ReProver)
+• Given a state, we retrieve premises from the set of all accessible premises
+
+
+
+
+                       Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                     52
+                                               Verification
+
+=== PHYSICAL PAGE 53 OF 114 ===
+Retrieval-Augmented Prover (ReProver)
+• Given a state, we retrieve premises from the set of all accessible premises
+• Retrieved premises are concatenated with the state and used for tactic
+  generation
+
+
+
+
+                       Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                     53
+                                               Verification
+
+=== PHYSICAL PAGE 54 OF 114 ===
+Retrieval-Augmented Prover (ReProver)
+• Given a state, we retrieve premises from the set of all accessible premises
+• Retrieved premises are concatenated with the state and used for tactic
+  generation
+
+
+
+
+                       Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                     54
+                                               Verification
+
+=== PHYSICAL PAGE 55 OF 114 ===
+   Summary: A Typical Neural Theorem Prover
+                                                                                             , ih]
+                                                                                            d
+                                                                                         [ad
+Proof search                                                                     sim
+                                                                                       p
+                                                          n’ : ℕ                        rw [ih]
+                                                          ih: add 0 n’ = n’                          …
+                                ⊢ add 0 0 = 0       rfl                                lin
+                                                          ⊢ add 0 (n’+1) =                ari
+                                                                                             th
+                                n’ : ℕ                    n’+1
+                                                           …
+                                                                                                     …
+                                ih: add 0 n’ = n’
+                                                           …
+                        n       ⊢ add 0 (n’+1) =
+                 uc             n’+1
+                   tio
+                       n                                                                                            Tactic
+                ind                                                  n’ : ℕ
+                                                           …         ih: add 0 n’ = n’
+                                                                                                                    generation
+                                ⊢ add 0 0 = 0                        ⊢ add 0 (n’+1) =                                       simp [add, ih]
+n:ℕ                   cases n
+                                                           …         n’+1
+                                                                   Local context +                                          rw [ih]
+⊢ add 0 n = n                   n’ : ℕ
+                                ⊢ add 0 (n’+1) =                   goal                                                     linarith
+                                                           …
+                 ex             n’+1
+                     l
+                  fa
+                       so                                  …                                             Language         Tactic
+                                                                                                         model            suggestion
+                                n:ℕ                        …                                                              s
+                                ⊢ false
+                                                                   Formal math library
+                                                           …
+
+                                                                                                                                       55
+
+=== PHYSICAL PAGE 56 OF 114 ===
+
+=== PHYSICAL PAGE 57 OF 114 ===
+Limitations
+• LLMs work well in domains with abundant data, but novel mathematical research
+  is data-scarce
+• The “action space” in proving mathematical theorems large
+   • Go: 19x19 board. Math: infinite?
+   • Hard to cover the space uniformly by human-created data
+   • Exploration is difficult in reinforcement learning
+
+=== PHYSICAL PAGE 58 OF 114 ===
+                                                                                                Taming the Action Space in Proving Inequalities
+                                                                                                                                                                                                    [Li et al. "Proving Olympiad Inequalities by Synergizing LLMs and Symbolic Reasoning" ICLR
+                                                                                                                                                                                                    2025]
+
+                                                                                                                                                    Given , , three reals, prove that                                                                                              Given , , three reals, prove that
+                                                                                                                                                                                        +               +    ≤     +   +                                                                     +        +       ≤     +   +
+
+                                                                                                                                                                                                                                                                                                                  Apply Cauchy-Schwarz
+
+                                                                                                                                                                                                                                                                                   (     +       )(       +       )≤    +   +
+                                                                                                                                                                                                                                             Neural network
+                                                                                                                                                                                                                                                                                                                  Apply AM-GM
+                                                                                                                                                                                                                                                     +                                   +       +        +
+                                                                                                                                                                                                                                                                                                                   ≤    +   +
+
+                                                                                                                                                                                                                                                  ∀∃ ⊨
+                                                                                                                                                                                                                                                    ∧       ∨                                                     Simplify
+                                                                                                                                                                                                                                                        =
+                                                                                                                                                                                                                                                                                         +        +        ≤       +    +
+
+                                                                                                                                                                                                                                              Symbolic tool
+
+                                                                                                                                                                                                            QED.                                                                                          QED.
+
+
+
+                                                            𝟐
+                                                                                                                                                                                                                           Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+𝐚
+
+
+
+
+𝒂
+𝒂
+𝒂
+
+
+
+
+𝐱
+
+
+
+
+𝑎
+𝑎
+    𝟐   𝒃
+        𝒃   𝒂
+
+
+
+
+                𝑏
+                𝑏
+                    𝟐   𝒂
+
+
+
+
+                        𝐲
+                            𝒃
+
+
+
+
+                            𝑐
+                            𝑐
+                                𝟏
+
+
+
+
+                                𝒃
+                                𝒃
+                                    𝟐
+
+
+
+
+                                            𝒃   𝒄
+                                                𝒄
+
+
+
+
+                                                        𝐳
+                                                            𝒃
+
+
+
+
+                                                                𝒄
+                                                                    𝟐
+
+
+
+
+                                                                        𝒄
+                                                                        𝒄   𝟐   𝒂
+                                                                                𝒂   𝒄
+                                                                                        𝟐       𝒄
+
+
+
+
+                                                                                                    𝒂
+                                                                                                        𝟐
+
+
+
+
+                                                                                                            𝒂
+                                                                                                            𝒂   𝒃
+                                                                                                                            𝒃
+
+
+
+
+                                                                                                                                𝒃
+                                                                                                                                    𝟐
+
+
+
+
+                                                                                                                                        𝒃
+                                                                                                                                        𝒃
+                                                                                                                                                𝒂
+
+
+
+
+                                                                                                                                                    𝟐
+
+
+
+
+                                                                                                                                                        𝒄
+                                                                                                                                                            𝒂
+
+
+
+
+                                                                                                                                                                𝒄
+                                                                                                                                                                𝒄
+                                                                                                                                                                    𝟐
+                                                                                                                                                                            𝒃
+
+
+
+
+                                                                                                                                                                                𝟐
+                                                                                                                                                                                    𝒃
+
+
+
+
+                                                                                                                                                                                        𝟐
+                                                                                                                                                                                            𝒄
+
+
+
+
+                                                                                                                                                                                                𝟐
+                                                                                                                                                                                                    𝒄
+
+
+
+
+                                                                                                                                                                                                        𝟐
+                                                                                                                                                                                                                                                   Verification
+        𝟐
+
+
+
+
+        𝟐                                                                                                   𝟐       𝟐
+                                                                                                                    𝟐   𝟐               𝟐
+                    𝟐                                                                                                                       𝟐
+                                                                                                                                            𝟐
+                                                    𝟐                                                                                                           𝟐       𝟐
+                                                                                                                                                                        𝟐
+                                                                        𝟐
+                                        𝟐                                                   𝟐
+
+=== PHYSICAL PAGE 59 OF 114 ===
+                                            Infinite Proof Search Space
+                                                                                                                                                                                                                                                                                          2         2
+                                                                                                                                                                             Problem: If , ,                                                     are positive reals and                       +         + 2 = 1, then
+                                                                                                                                                                                                                      1                           1             1                1                      1              1
+                                                                                                                                                                                                                     2+2
+                                                                                                                                                                                                                         +                       2+2
+                                                                                                                                                                                                                                                     +         2+2
+                                                                                                                                                                                                                                                                   ≤                 +                         +
+                                                                                                                                                                                                                                                                     6            + 2 6                 +    2       6 +   2
+
+
+                                                                                                                                                                                                                                                                                                                               Titu
+                                                                                                                                                 AM-GM (1)
+                                                                                                                                                                                                                                                                                                         1             1         1                    9
+                                                                                                                                                                                                                                                                                                        2+2
+                                                                                                                                                                                                                                                                                                            +         2+2
+                                                                                                                                                                                                                                                                                                                          +     2+2
+                                                                                                                                                                                                                                                                                                                                    ≤
+                                        1                    1                               1                                               1                                           1                                           1                                                                                                6     +6   +6       +       2+   2+ 2
+                                                +                        +                                       ≤                               +                                                     +
+                                2√2                     2√2                      2√2                                     6                    + 2 6                                      +           2               6               +       2
+                                                                                                                                                                                                                                                                        …
+                                                                                                                                                                                                                                                                                                  Rewrite                       …                         …
+                                                                                                                                                                                                                                 AM-GM (2)
+
+                                                                     …                                                                           …                                                                                                                  1
+                                                                                                                                                                                                                                                                             +
+                                                                                                                                                                                                                                                                                              1
+                                                                                                                                                                                                                                                                                                         +
+                                                                                                                                                                                                                                                                                                                       1
+                                                                                                                                                                                                                                                                                                                                ≤
+                                                                                                                                                                                                                                                                                                                                        1
+                                                                                                                                                                                                                                                                                                                                            +
+                                                                                                                                                                                                                                                                                                                                                 1
+                                                                                                                                                                                                                                                                                                                                                        +
+                                                                                                                                                                                                                                                                                                                                                                   1
+                                                                                                                                                                                                                                                           3   2
+                                                                                                                                                                                                                                                                   +2 2+ 2       3   2
+                                                                                                                                                                                                                                                                                         +2 2+2 2            3   2
+                                                                                                                                                                                                                                                                                                                     +2 2+2 2       6    + 2 6   +    2       6    +   2
+
+
+                                                         1                1                                           1                                                                                                                           −1
+                                                        2+2
+                                                            +            2+2
+                                                                             +                                       2+2
+                                                                                                                         ≤ 3[(6                                                  + 2 )(6                         +   2
+                                                                                                                                                                                                                         )(6                 + 2 )] 3
+
+
+                                                                                                                                                                                                                                                                                                                     …                  …
+                                                                                                                         …                                                                           …
+                                                                                                                                                                                                                                                                        >10,000 potential one-steps options
+                𝑎
+
+
+
+
+                                                                     𝑐
+                                            𝑏
+
+
+
+
+                                                                                                                                                                                                                         𝑏
+                                                                                                                                                                                                         𝑐
+                                                                                                                                                                                 𝑎
+                                                                                                                                                                     𝑐
+                                                                                                                                                             𝑏
+                                𝑏                        𝑐                                                                                                                                                   𝑎
+                                                                                                 𝑎   𝑏                   𝑐
+    𝑎
+
+
+
+
+                                                                                                                                                                                                                 𝑏
+                                                                                                                                                                                                 𝑎
+                                                                                                                                                                                             𝑐
+                                                                                                                                                                         𝑎
+                                                                                         𝑎   𝑏                       𝑐                       𝑏   𝑐
+
+
+
+
+                                                                                                                                                                 𝑏
+                                                                                                                                     𝑎
+        𝑎               𝑏           𝑐           𝑏                𝑎               𝑐                           𝑐
+
+
+
+
+                                                                                                                                                                             𝑏
+    𝑎                                                                                                                                                                                𝑎   𝑐
+                                                                                                                                                                                         𝑏           𝑐
+                                                                                                                 𝑐                                                                                                                                         𝑏
+                                                                                                         𝑏                                                                                                                                             𝑎
+                                                                                                                                                                                                                             𝑏                     𝑐
+                                                                                     𝑏                                                                                                                                                   𝑎
+                                                                                                                                                                                                                                 𝑐
+                                                                             𝑎                                                           𝑎
+                                                    𝑐
+                                                    𝑐
+    𝑎                                                                                                                                                    𝑎
+                            𝑏
+                            𝑏                                                                                                    𝑐
+
+
+
+
+                                                                                                                                                                                 𝑏
+                                                                                                                                                     𝑎                       𝑎
+                                                                                         𝑎   𝑏                                           𝑐
+                                                                                                                             𝑏
+                                                                                                                 𝑐                                                                           𝑐
+
+
+
+
+                    𝑏                   𝑐
+𝑎
+
+
+
+
+            𝑏           𝑐
+𝑎
+
+=== PHYSICAL PAGE 60 OF 114 ===
+ Manually Checking o1’s Proofs
+
+
+                                                                                      …
+
+
+
+
+                                      o1-preview   o3-mini   DeepSeek-R1 Gold medalists
+#Solved Olympiad-level Inequalities      0/20       3/20         4/20         15/20
+
+=== PHYSICAL PAGE 61 OF 114 ===
+                                                                Tactic Generation & Pruning
+                                                • We categorize the steps in inequality proving into two types:
+                                                                        1) Scaling: substitute the given inequality using a known lemma (e.g., Cauchy-
+                                                                           Schwarz)
+                                                                        2) Rewriting: transform the given inequality into an equivalent form
+                                                • We enumerate and prune the scaling tactics using symbolic tools
+
+                                                                                        Given , , three reals, prove that                                                                                                              Enumerate and prune all
+                                                                                                                                                                                                         (   +   )(   +   )≤   +   +
+                                                                                                                                 +                           +                       ≤   +   +                                         patterns using symbolic tools
+                                                                                                                                                                                                                                        u1:=1, u2:=1, v1:=a, v2:=b
+                                                                                                                                Pattern match                                                                                           u1:=a, u2:=1, v1:=1, v2:=b
+                                                                                                                                                                                                                                        u1:=c, u2:=b, v1:=a, v2:=c
+                                                                                                                                Cauchy_Schwarz_left_sqrt_2vars                                                                          u1:=1, u2:=1, v1:=a, v2:=b
+                                                                                                                                                                                 +       ≤       +   +                                  u1:=1, u2:=b, v1:=a, v2:=1
+                                                                                                                                                                                                                                        u1:=1, u2:=a, v1:=b, v2:=1
+                                                                                                                                                                                                                                          … …
+
+
+                                                                                                                                                                         𝟐
+                                                                                                                                                     𝟏
+                                                                                                                        𝟐
+                                                                                            𝟏
+
+
+
+
+    𝟏                                                   𝟐
+                                            𝟐
+                        𝟏
+
+
+
+
+                                                    𝒃                   𝒄                                                                                    𝒃
+                                                                                                    𝒃
+                                                                    𝟐                                                                                                            𝒄
+                    𝟐       𝒂                                                                                                    𝒂
+
+
+
+
+                                        𝒖
+            𝒗
+𝒖                                               𝒗                                                               𝒖
+                                                                                    𝒖                                                                                𝒗
+                                                                                                                                             𝒗
+
+
+
+
+                                    𝟐                       𝟐                                           𝟐                                                                            𝟐
+                                                                                                                                                                 𝟐
+                                                                            𝟐                                                            𝟐
+
+
+
+
+                                                                                                𝟐                           𝟐                            𝟐                   𝟐
+
+
+
+
+                                                                                                                                     𝒄
+                                                                                                            𝒃
+                                                                                𝒂
+𝒂       𝒃                       𝒃       𝒄                   𝒄   𝒂
+
+
+
+
+𝑎               𝑏           𝑐
+
+
+
+
+                                                                                        𝟐                           𝟐                            𝟐
+
+=== PHYSICAL PAGE 62 OF 114 ===
+                             Tactic Generation & Pruning
+                        • We categorize the steps in inequality proving into two types:
+                                 1) Scaling: substitute the given inequality using a known lemma (e.g., Cauchy-
+                                    Schwarz)
+                                 2) Rewriting: transform the given inequality into an equivalent form (e.g., fraction
+                                    reduction)
+
+                                                                                      Let's rewrite the inequality \( ab + bc + ca \leq a^2 + b^2 +
+                                 Given , , three reals, prove that                    c^2 \) step by step according to the rule \( xy + yz = y(x + z)
+                                                                                      \).
+                                                  +           +   ≤   +   +           ### Step 1: …
+                                                                                      ……
+                                                                                      ### Conclusion:
+                                 Prompt: You should rewrite the inequality given by   The inequality \( ab + bc + ca \leq a^2 + b^2 + c^2 \) can be
+                                 the user according to the rule x*y+y*z =             rewritten as:
+                                 y*(x+z)                                              \[
+                                 Please reason step by step                                        a(b-a)+b(c-b)+c(a-c) \leq 0
+                                 Problem: {problem}                                   \]
+
+
+                                                      𝒄
+                𝒃
+    𝒃
+𝒂                   𝒄    𝒄   𝒂    𝒂       𝒃
+
+
+
+
+            𝑐
+𝑎       𝑏
+
+
+
+
+                                              𝟐
+                                      𝟐                   𝟐
+
+=== PHYSICAL PAGE 63 OF 114 ===
+                                                                        LIPS: LLM-based Inequality Prover with Symbolic Reasoning
+
+                                                                        • Summary: we develop an inequality proving system, where LLM and symbolic
+                                                                          tools are used for rewriting and scaling the current inequality, respectively
+                                                                                                                                Given , , three reals, prove that
+                                                                                                                                                                                    +                                           +                               ≤                +   +             Tactic generation & pruning                                          Goal filtering & ranking
+                                                                                                                                                                                                                                                                            scale                  Scalin                                                              1.       (       +    )(     +   )≤       +       +
+                                                                                                                                                                                                                                                                            Cauchy_Schwarz_3vars   g                 +       +        ≤
+                                                                                                                                (                                           +                                       )(                              +                           )≤   +   +             (    +   )(       +       )≤       +   +                        2.           +       +       ≤( +       + )
+                                                                                                                                                                                                                                                                                                                                              ……                       …
+                                                                                                                                                                                                                                                                                                     Symbolic enumerating and pruning                                                       LLM ranking
+                                                                                                                                                                                                                                                                            scale AM_GM_2vars
+
+                                                                                                                                                                    +                                           +                                   +
+                                                                                                                                                                                                                                                                                ≤    +   +          Rewriting                                                                   +       +       ≤( + ) −             +
+                                                                                                                                                                                                                                                                                                               +     +    ≤( + + )                                              +       +       ≤
+                                                                                                                                                                                                                                                                                llm_simplify               ( −  ) + (  − )+ ( − )≤                                          …
+                                                                                                                                                                                                                                                                                                                                ……
+                                                                                                                                                                                                                                                                                                      LLM-generated transformation                                                          Symbolic filtering
+                                                                                                                                                                                +                                       +                               ≤                       +    +
+
+
+
+                                                                                                                                                                                                                                                                                                                : Proof step                      : Neural reasoning                    : Symbolic reasoning
+                                                                                                                                                                                                                                            QED.
+
+
+                                                                𝟐
+
+
+
+
+                                                                                                                                                                                                                        𝒃
+                                                                                                                                                                                𝒂                                                                   𝒄
+
+
+
+
+                            𝒂                                   𝒃                           𝟐                                                   𝒃
+                                                                                                                                                𝒃
+                                                                                                                                                𝒃                                                                                                                   𝒄
+                    𝟐                                                                                                                                                                                                                   𝒃
+                                                                                                                                                                                                                                        𝒃
+                                                                                                                                                                                                                                        𝒃
+                                                                                            𝟐                                                                                                       𝒂
+                                                                                                                                                                                                    𝒂
+                                                                                                                                                                                                    𝒂
+                    𝟐                                                                                   𝒄
+                    𝟐       𝒂                                                                                                                                                                                                                                       𝒄
+                            𝒂                                                                           𝒄
+                                                                                                        𝒄
+                                                                𝒃                                                                                                                                                                                                   𝒄
+                                                                𝒃                           𝟐
+
+
+
+
+                                                                                                                                                                                                                                𝟐                           𝟐
+                                                                                                                                                                                            𝟐
+
+
+
+
+𝒂       𝒃                                           𝒄
+                                                    𝒄                                                                                                                                       𝒄
+                                                                                                                                                                                            𝒄
+                                                                                                                                                    𝒂
+                                                                                                                                                    𝒂
+                                    𝒃
+                                    𝒃                                       𝒄                                                                                           𝒃
+                                                                                                                                                                        𝒃
+                                                                            𝒄
+𝒂       𝒃                                                                           𝒂                                       𝟑
+                                                                                                                            𝟑
+                                                                                    𝒂
+
+
+
+
+𝟑       𝒂                                                                                                                                                                                               𝒃           𝟐       𝒂       𝒄
+                                                                                                                                                                                                                                    𝒄   𝒃
+                                                            𝒃                                                                                                                                                                                                   𝒄
+                                                            𝒃
+                                                    𝟑
+                                                    𝒄
+                                                    𝟑               𝒄
+                                                                    𝒄       𝒄       𝒂           𝟑
+                                                                                                𝟑           𝒄
+                                                                                                            𝒄           𝒂
+                                                                                                                        𝒂
+𝟑                                   𝒃                                                                                                                               𝒂
+𝒂                                                                                                                               𝒂                                   𝒂
+                                                                                                                                                                    𝒃
+                    𝒃
+                    𝒃
+        𝒂
+        𝒃                                                                                                                                                                                               𝒃
+
+
+
+
+                                        𝟐                                                                                                                                                                       𝟐
+                                                                                                                                                            𝟐
+                                                                                                                                                            𝟐
+                                                                                                                                                            𝟐
+                                                                                                                    𝟐
+                                                                                                                    𝟐                                                                                                                                                       𝟐
+                                                                                                                                                                                                                                                                            𝟐
+                                        𝟐
+                                        𝟐                               𝟐                                           𝟐                                                                                                                                                       𝟐
+                                                                        𝟐                                                                                                                                                                   𝟐
+                                                                                                                                                                                                                                            𝟐
+                                                                                                                                                                                                                                            𝟐
+                                                                        𝟐                                                                                                                                       𝟐
+                                                                                                                                                                                                                𝟐
+
+
+
+
+    𝟐       𝒂                                                               𝒄                                                                                   𝒃
+𝒂                                                                               𝟐                                                                       𝒃
+                                                                                                                                𝒃
+                                𝒃                                                                                           𝒂
+                                    𝒃
+        𝒃
+𝒂                                                                                                                                                                                               𝒄
+                                                𝒃                   𝒄                                                                                                                                       𝒄
+                                                    𝒄                                   𝒄                       𝒂
+                                                                                    𝒂
+
+
+
+
+                                                                                                                                                                                                                                                        𝟎
+                                                                                                                                                                                                                            𝒄
+                                            𝒂                                                                                                                                               𝒂
+𝒂                                                                                                                               𝒃
+                                                                                                𝒄
+                𝒃                                                               𝒃                                                                                       𝒄
+
+
+
+
+                                𝑐
+                𝑏
+𝑎
+
+
+
+
+                                                                                                                                                                                                        𝟐
+                                                                                                                                                                                                        𝟐
+                                                                                                                                                                                    𝟐
+                                                                                                                                                                                    𝟐
+                                                                                                                                                                𝟐
+                                                                                                                                                                𝟐
+
+
+
+
+                                                                                                                                                                                                                                                                        𝟐
+
+
+
+
+        𝟐               𝟐                                                                                                                                                                                                                       𝟐
+                                                                                                                                                                                                                                                𝟐
+                                                                                                                                                                                                                    𝟐
+                                                                                                                                                                                                            𝟐
+                                                                                                                                                                                        𝟐
+                                                                                                                                                                            𝟐
+                                                                                                                                            𝟐
+                                                                                                                                    𝟐
+                                                                                                                            𝟐
+                                                                                                    𝟐
+                                                                            𝟐
+                                                        𝟐
+                                            𝟐                                                                                           𝟑                       𝟐
+                                                                                                                                        𝟑
+
+=== PHYSICAL PAGE 64 OF 114 ===
+ Experimental Results
+• Our system LIPS surpasses IMO Gold Medalists in inequality proving
+                                                             DeepSeek-R1                 Gold medalists    LIPS
+   #Solved Olympiad-level Inequalities*                              4/20                          15/20   16/20
+ * Problems are collected from IMO competitions, national team selection test, training quizzes.
+
+
+
+
+• LIPS achieves SoTA performance across various competition-level datasets
+
+=== PHYSICAL PAGE 65 OF 114 ===
+  Some Interesting Findings
+• LIPS finds novel proof paths expected to be impossible by human experts
+
+
+
+                                                                  Generated by LIPS
+
+
+
+
+           Evan Chen
+     (IMO Coach for Team USA)
+ “AM-GM alone is hopeless here...”
+                                                       LIPS succeeds with exactly AM-GM
+
+Source: https://web.evanchen.cc/handouts/Ineq/en.pdf
+
+=== PHYSICAL PAGE 66 OF 114 ===
+Takeaway
+• Challenge in theorem proving: How to efficiently explore an infinite action space?
+
+
+• Insights on a specific mathematical domain can be helpful
+
+
+• Open problem: generalizing across different domains?
+
+=== PHYSICAL PAGE 67 OF 114 ===
+Theorem Proving
+
+
+
+
+           Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                         67
+                                   Verification
+
+=== PHYSICAL PAGE 68 OF 114 ===
+Autoformalization
+
+
+
+
+        [Wu et al. "Autoformalization with Large Language Models" NeurIPS
+        2022]
+                   Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                                 68
+                                           Verification
+
+=== PHYSICAL PAGE 69 OF 114 ===
+Autoformalizing Theorems and Proofs
+
+
+
+
+      Informal              Formal
+                                      69
+
+=== PHYSICAL PAGE 70 OF 114 ===
+Autoformalizing Theorems and Proofs
+• Autoformalizing theorems: informal theorem → formal theorem
+
+
+
+
+           Informal                                     Formal
+                                                                 70
+
+=== PHYSICAL PAGE 71 OF 114 ===
+Autoformalizing Theorems and Proofs
+• Autoformalizing theorems: informal theorem → formal theorem
+• Autoformalizing proofs: informal theorem & proof + formal theorem → formal proof
+
+
+
+
+            Informal                                      Formal
+                                                                                 71
+
+=== PHYSICAL PAGE 72 OF 114 ===
+ Hard to Evaluate Autoformalized Theorems
+No reliable automatic evaluation
+
+
+
+
+            Informal               Formal
+                                            72
+
+=== PHYSICAL PAGE 73 OF 114 ===
+ Hard to Evaluate Autoformalized Theorems
+No reliable automatic evaluation
+                                   Alternatives
+
+
+
+
+            Informal                 Formal
+                                                  73
+
+=== PHYSICAL PAGE 74 OF 114 ===
+ Hard to Evaluate Autoformalized Theorems
+No reliable automatic evaluation
+                                   Alternatives
+
+
+
+                                      …
+
+
+
+
+            Informal                 Formal
+                                                  74
+
+=== PHYSICAL PAGE 75 OF 114 ===
+ Hard to Evaluate Autoformalized Theorems
+No reliable automatic evaluation
+                                       Alternatives
+• Equivalence checking is infeasible
+
+                                          …
+
+
+
+
+             Informal                    Formal
+                                                      75
+
+=== PHYSICAL PAGE 76 OF 114 ===
+ Hard to Evaluate Autoformalized Theorems
+No reliable automatic evaluation
+                                              Alternatives
+• Equivalence checking is infeasible
+• Human evaluation is expensive
+• Proxy metrics (e.g., BLEU) are inaccurate      …
+
+
+
+
+             Informal                           Formal
+                                                             76
+
+=== PHYSICAL PAGE 77 OF 114 ===
+ Reasoning Gaps in Informal Proofs
+• Informal proofs have reasoning gaps
+   • Explicit gaps: “left to the reader”
+   • Implicit gaps
+• Formal proofs must be gap-free
+
+
+
+
+              Informal                     Formal
+                                                    77
+
+=== PHYSICAL PAGE 78 OF 114 ===
+Key Challenges in Autoformalization
+• Theorems: No reliable automatic evaluation
+• Proofs: Reasoning gaps ubiquitous in informal proofs
+
+
+
+
+           Informal                                  Formal
+                                                              78
+
+=== PHYSICAL PAGE 79 OF 114 ===
+  Key Challenges in Autoformalization
+  • Theorems: No reliable automatic evaluation
+  • Proofs: Reasoning gaps ubiquitous in informal proofs
+
+
+
+
+Things intractable in general can be made tractable
+                in a specific domain
+             Informal                                  Formal
+                                                                79
+
+=== PHYSICAL PAGE 80 OF 114 ===
+ Euclidean Geometry
+An arena for human and machine intelligence
+
+
+
+
+     Euclid (Εὐκλείδης), 300 BC          [Trinh et al., AlphaGeometry, Nature 2024]
+
+                                                                                80
+
+=== PHYSICAL PAGE 81 OF 114 ===
+ Autoformalizing Euclidean Geometry
+• LeanEuclid: Benchmark for autoformalizing Euclidean geometry
+   • 48 from Euclid’s Elements; 125 from UniGeo [Chen et al., UniGeo, EMNLP 2022]
+
+
+
+
+                                                                                    81
+
+=== PHYSICAL PAGE 82 OF 114 ===
+ Autoformalizing Euclidean Geometry
+• LeanEuclid: Benchmark for autoformalizing Euclidean geometry
+   • 48 from Euclid’s Elements; 125 from UniGeo [Chen et al., UniGeo, EMNLP 2022]
+
+
+
+
+      Informal theorem, proof, diagram
+                                                                                    82
+
+=== PHYSICAL PAGE 83 OF 114 ===
+ Autoformalizing Euclidean Geometry
+• LeanEuclid: Benchmark for autoformalizing Euclidean geometry
+   • 48 from Euclid’s Elements; 125 from UniGeo [Chen et al., UniGeo, EMNLP 2022]
+
+
+
+
+      Informal theorem, proof, diagram                 Formal theorem & proof in Lean
+                                                                                    83
+
+=== PHYSICAL PAGE 84 OF 114 ===
+ Autoformalizing Euclidean Geometry
+• LeanEuclid: Benchmark for autoformalizing Euclidean geometry
+   • 48 from Euclid’s Elements; 125 from UniGeo [Chen et al., UniGeo, EMNLP 2022]
+
+
+
+
+            First to faithfully formalize proofs in
+                      Euclid’s Elements
+
+      Informal theorem, proof, diagram                 Formal theorem & proof in Lean
+                                                                                    84
+
+=== PHYSICAL PAGE 85 OF 114 ===
+                    Logical Gaps in Euclid’s Proofs
+                Elements, Book I, Proposition 24
+
+
+
+
+                                                |   |=|   |
+                                                |   |=|   |   ⟹   |   |>|   |
+                                               ∠     >∠
+𝐵
+𝐴
+𝐴   𝐵   𝐶
+        𝐵
+        𝐶   𝐴   𝐶    𝐷
+                     𝐸   𝐷   𝐸
+                             𝐹   𝐹
+                                 𝐸   𝐷   𝐹
+                                                                                85
+
+=== PHYSICAL PAGE 86 OF 114 ===
+                    Logical Gaps in Euclid’s Proofs
+                Elements, Book I, Proposition 24
+
+
+
+
+                                                |   |=|   |
+                                                |   |=|   |   ⟹   |   |>|   |
+                                               ∠     >∠
+𝐵
+𝐴
+𝐴   𝐵   𝐶
+        𝐵
+        𝐶   𝐴   𝐶    𝐷
+                     𝐸   𝐷   𝐸
+                             𝐹   𝐹
+                                 𝐸   𝐷   𝐹
+                                                                                86
+
+=== PHYSICAL PAGE 87 OF 114 ===
+                    Logical Gaps in Euclid’s Proofs
+                Elements, Book I, Proposition 24
+
+
+
+
+                                                |   |=|   |
+                                                |   |=|   |   ⟹   |   |>|   |
+                                               ∠     >∠
+𝐵
+𝐴
+𝐴   𝐵   𝐶
+        𝐵
+        𝐶   𝐴   𝐶    𝐷
+                     𝐸   𝐷   𝐸
+                             𝐹   𝐹
+                                 𝐸   𝐷   𝐹
+                                                                                87
+
+=== PHYSICAL PAGE 88 OF 114 ===
+                    Logical Gaps in Euclid’s Proofs
+                Elements, Book I, Proposition 24                                    Only need to prove∠       >∠
+
+
+
+
+                                                                      |   |=|   |
+                                                                      |   |=|   |   ⟹        |   |>|      |
+                                                                     ∠     >∠
+𝐵
+𝐴
+𝐴   𝐵   𝐶
+        𝐵
+        𝐶   𝐴   𝐶    𝐸
+                     𝐷   𝐷   𝐸
+                             𝐹   𝐹
+                                 𝐸   𝐷   𝐹
+
+
+
+
+                                             𝐸   𝐹   𝐺   𝐸   𝐺   𝐹
+                                                                                                               88
+
+=== PHYSICAL PAGE 89 OF 114 ===
+                                    Logical Gaps in Euclid’s Proofs
+                            Elements, Book I, Proposition 24                                                    Only need to prove∠         >∠
+                                                                                                                             △        is isosceles!
+                                                                                                                                 ∠     =∠
+
+
+
+
+                                                                                                  |   |=|   |
+                                                                                                  |   |=|   |   ⟹        |   |>|        |
+                                                                                                 ∠     >∠
+𝐴
+𝐴
+𝐵
+
+
+
+
+    𝐷
+        𝐵   𝐶
+            𝐶
+            𝐵
+
+
+
+
+                𝐺
+                    𝐴
+
+
+
+
+                    𝐷
+
+
+
+
+                        𝐹
+                            𝐶
+
+
+
+
+                            𝐺   𝐹
+                                     𝐷
+                                     𝐸   𝐷
+
+
+
+
+                                             𝐷
+                                                 𝐹
+                                                 𝐸   𝐸
+                                                     𝐹
+
+
+
+
+                                                         𝐹
+                                                             𝐷
+
+
+
+
+                                                                 𝐺
+                                                                     𝐹
+
+
+
+
+                                                                         𝐸   𝐹   𝐺   𝐸   𝐺   𝐹
+                                                                                                                                                      89
+
+=== PHYSICAL PAGE 90 OF 114 ===
+                    Logical Gaps in Euclid’s Proofs
+                Elements, Book I, Proposition 24
+
+
+
+
+                                                |   |=|   |
+                                                |   |=|   |   ⟹   |   |>|   |
+                                               ∠     >∠
+𝐵
+𝐴
+𝐴   𝐵   𝐶
+        𝐵
+        𝐶   𝐴   𝐶    𝐷
+                     𝐸   𝐷   𝐸
+                             𝐹   𝐹
+                                 𝐸   𝐷   𝐹
+
+
+
+
+                                                                                90
+
+=== PHYSICAL PAGE 91 OF 114 ===
+                    Logical Gaps in Euclid’s Proofs
+                Elements, Book I, Proposition 24
+
+
+
+
+                                                |   |=|   |
+                                                |   |=|   |   ⟹   |   |>|   |
+                                               ∠     >∠
+𝐵
+𝐴
+𝐴   𝐵   𝐶
+        𝐵
+        𝐶   𝐴   𝐶    𝐷
+                     𝐸   𝐷   𝐸
+                             𝐹   𝐹
+                                 𝐸   𝐷   𝐹
+
+
+
+
+                                                                                91
+
+=== PHYSICAL PAGE 92 OF 114 ===
+                    Logical Gaps in Euclid’s Proofs
+                Elements, Book I, Proposition 24
+
+
+
+
+                                                |   |=|   |
+                                                |   |=|   |   ⟹   |   |>|   |
+                                               ∠     >∠
+𝐵
+𝐴
+𝐴   𝐵   𝐶
+        𝐵
+        𝐶   𝐴   𝐶    𝐷
+                     𝐸   𝐷   𝐸
+                             𝐹   𝐹
+                                 𝐸   𝐷   𝐹
+
+
+
+
+                                                                                92
+
+=== PHYSICAL PAGE 93 OF 114 ===
+                                                                                                    △     is isosceles
+                                    Logical Gaps in Euclid’s Proofs                                 ∠     =∠       =
+
+                            Elements, Book I, Proposition 24
+
+
+
+
+                                                                              |   |=|   |
+                                                                              |   |=|   |   ⟹   |   |>|     |
+                                                                             ∠     >∠
+𝐵
+𝐴
+𝐴
+
+
+
+
+    𝐷
+        𝐵   𝐶
+            𝐵
+            𝐶
+
+
+
+
+                𝐺
+                    𝐴
+
+
+
+
+                    𝐷
+
+
+
+
+                        𝐹
+                            𝐶
+
+
+
+
+                            𝐺   𝐹
+                                     𝐷
+                                     𝐸   𝐷
+
+
+
+
+                                             𝐷
+                                                 𝐸
+                                                 𝐹   𝐹
+                                                     𝐸
+
+
+
+
+                                                         𝐹
+                                                             𝐷
+
+
+
+
+                                                                 𝐺
+                                                                     𝐹
+
+
+
+
+                                                                         𝛼
+                                                                                                                         93
+
+=== PHYSICAL PAGE 94 OF 114 ===
+                                                                                                        △     is isosceles
+                                    Logical Gaps in Euclid’s Proofs                                     ∠     =∠       =
+
+                            Elements, Book I, Proposition 24                                            Need to prove >
+
+
+
+
+                                                                                  |   |=|   |
+                                                                                  |   |=|   |   ⟹   |   |>|     |
+                                                                                 ∠     >∠
+𝐵
+𝐴
+𝐴
+
+
+
+
+    𝐷
+        𝐵   𝐶
+            𝐵
+            𝐶
+
+
+
+
+                𝐺
+                    𝐴
+
+
+
+
+                    𝐷
+
+
+
+
+                        𝐹
+                            𝐶
+
+
+
+
+                            𝐺   𝐹
+                                     𝐷
+                                     𝐸   𝐷
+
+
+
+
+                                             𝐷
+                                                 𝐹
+                                                 𝐸   𝐸
+                                                     𝐹
+
+
+
+
+                                                         𝐹
+                                                             𝐷
+
+
+
+
+                                                             𝑥   𝐺
+                                                                     𝐹
+
+
+
+
+                                                                         𝑦   𝛼
+                                                                                                                             94
+
+=== PHYSICAL PAGE 95 OF 114 ===
+                                                                                                                   △     is isosceles
+                                    Logical Gaps in Euclid’s Proofs                                                ∠     =∠        =
+
+                            Elements, Book I, Proposition 24                                                       Need to prove >
+
+                                                                                                                    ∠     =    +   <
+
+
+
+
+                                                                                             |   |=|   |
+                                                                                             |   |=|   |   ⟹   |   |>|     |
+                                                                                            ∠     >∠
+𝐵
+𝐴
+𝐴
+
+
+
+
+    𝐷
+    𝐷
+        𝐵   𝐶
+            𝐵
+            𝐶
+
+
+
+
+                𝐺
+                𝐺
+                    𝐴
+
+
+
+
+                    𝐷
+
+
+
+
+                        𝐹
+                        𝐸
+                            𝐶
+
+
+
+
+                            𝐺   𝐹
+
+
+
+
+                                    𝛼
+                                        𝐷
+                                        𝐸   𝐷
+
+
+
+
+                                                𝐷
+                                                    𝐸
+                                                    𝐹   𝐹
+                                                        𝐸
+
+
+
+
+                                                            𝐹   𝑦
+                                                                    𝐷
+
+
+
+
+                                                                    𝑥   𝐺
+                                                                            𝐹
+
+
+
+
+                                                                                𝜋   𝑦   𝛼
+                                                                                                                                        95
+
+=== PHYSICAL PAGE 96 OF 114 ===
+                                                                                                                               △         is isosceles
+                                        Logical Gaps in Euclid’s Proofs                                                        ∠         =∠        =
+
+                                Elements, Book I, Proposition 24                                                               Need to prove >
+
+                                                                                                                                   ∠      =    +   <
+
+                                                                                                                               ∠         =2 − −        <
+
+
+
+
+                                                                                                         |   |=|   |
+                                                                                                         |   |=|   |   ⟹   |       |>|     |
+                                                                                                        ∠     >∠
+𝐵
+𝐴
+𝐴
+
+
+
+
+    𝐷
+    𝐷
+    𝐷
+        𝐵   𝐶
+            𝐶
+            𝐵
+
+
+
+
+                𝐹
+                𝐺
+                𝐺
+                    𝐴
+
+
+
+
+                    𝐷
+
+
+
+
+                        𝐸   𝐸
+                            𝐹
+                                𝐶
+
+
+
+
+                                𝐺   𝐹
+
+
+
+
+                                        𝛼
+                                            𝐸
+                                            𝐷
+
+
+
+
+                                            𝜋
+                                                𝐷
+
+
+
+
+                                                    𝐷
+                                                        𝐸
+                                                        𝐹   𝐹
+                                                            𝐸
+
+
+
+
+                                                                𝐹   𝑦
+                                                                        𝐷
+
+
+
+
+                                                                        𝛼
+                                                                        𝑥   𝐺
+                                                                                𝐹
+
+
+
+
+                                                                                    𝜋   𝑥   𝑦   𝛼   𝜋
+                                                                                                                                                           96
+
+=== PHYSICAL PAGE 97 OF 114 ===
+                                                                                                                                           △         is isosceles
+                                            Logical Gaps in Euclid’s Proofs                                                                ∠         =∠        =
+
+                                    Elements, Book I, Proposition 24                                                                       Need to prove >
+
+                                                                                                                                               ∠      =    +   <
+
+                                                                                                                                           ∠         =2 − −        <
+
+                                                                                                                                                      ⟹
+                                                                                                                                                   2 − +   <2
+
+                                                                                                                                                           Q.E.D.
+
+
+                                                                                                                     |   |=|   |
+                                                                                                                     |   |=|   |   ⟹   |       |>|     |
+                                                                                                                    ∠     >∠
+𝜋
+    𝐴
+    𝐵
+    𝐴
+
+
+
+
+        𝐷
+        𝐷
+        𝐷
+            𝐵   𝐶
+                𝐵
+                𝐶
+
+
+
+
+                    𝐹
+                    𝐺
+                    𝐺
+                        𝐴
+
+
+
+
+                        𝐷
+
+
+
+
+                            𝐸   𝑥
+                                𝐸
+                                𝐹
+                                    𝐶
+
+
+
+
+                                    𝐺   𝐹
+
+
+
+
+                                            𝑦   𝛼
+                                                    𝐸
+                                                    𝐷
+
+
+
+
+                                                    𝜋
+                                                        𝐷
+
+
+
+
+                                                            𝐷
+                                                                𝐸
+                                                                𝐹   𝐸
+                                                                    𝐹
+
+
+
+
+                                                                        𝐹   𝑦   𝜋
+                                                                                    𝐷
+
+
+
+
+                                                                                    𝑥
+                                                                                    𝛼   𝐺
+                                                                                            𝐹
+
+
+
+
+                                                                                                𝜋   𝑥   𝑦   𝛼   𝜋
+                                                                                                                                                                       97
+
+=== PHYSICAL PAGE 98 OF 114 ===
+    Equivalence Checking Between Theorems
+    • Two theorems 1 and 2 are equivalent iff we can prove 1 ⟺ 2
+    • Symbolic reasoning engine based on SMT solvers
+
+
+
+
+𝑇
+𝑇
+𝑇   𝑇
+
+
+
+
+                                                                   98
+
+=== PHYSICAL PAGE 99 OF 114 ===
+ Diagrammatic Reasoning
+Ubiquitous reasoning gaps in Euclidean geometry
+
+• Geometry proofs rely on diagrams that are hard to formalize
+• Example: Euclid’s Elements, Book I, Proposition 1
+
+             One can construct a equilateral triangle given two distinct points
+
+
+
+
+                                                                                  99
+
+=== PHYSICAL PAGE 100 OF 114 ===
+ Diagrammatic Reasoning
+Ubiquitous reasoning gaps in Euclidean geometry
+
+• Geometry proofs rely on diagrams that are hard to formalize
+• Example: Euclid’s Elements, Book I, Proposition 1
+
+             One can construct a equilateral triangle given two distinct points
+
+
+
+
+                                                                                  100
+
+=== PHYSICAL PAGE 101 OF 114 ===
+ Diagrammatic Reasoning
+Ubiquitous reasoning gaps in Euclidean geometry
+
+• Geometry proofs rely on diagrams that are hard to formalize
+• Example: Euclid’s Elements, Book I, Proposition 1
+
+             One can construct a equilateral triangle given two distinct points
+
+
+
+
+                                                                                  101
+
+=== PHYSICAL PAGE 102 OF 114 ===
+ Diagrammatic Reasoning
+Ubiquitous reasoning gaps in Euclidean geometry
+
+• Geometry proofs rely on diagrams that are hard to formalize
+• Example: Euclid’s Elements, Book I, Proposition 1
+
+             One can construct a equilateral triangle given two distinct points
+
+
+
+
+                                                                                  102
+
+=== PHYSICAL PAGE 103 OF 114 ===
+ Diagrammatic Reasoning
+Ubiquitous reasoning gaps in Euclidean geometry
+
+• Geometry proofs rely on diagrams that are hard to formalize
+• Example: Euclid’s Elements, Book I, Proposition 1
+
+             One can construct a equilateral triangle given two distinct points
+
+
+
+
+                                                                                  103
+
+=== PHYSICAL PAGE 104 OF 114 ===
+ Diagrammatic Reasoning
+Ubiquitous reasoning gaps in Euclidean geometry
+
+• Geometry proofs rely on diagrams that are hard to formalize
+• Example: Euclid’s Elements, Book I, Proposition 1
+
+             One can construct a equilateral triangle given two distinct points
+
+
+
+
+                                                                  Did we prove C exists?
+
+
+
+
+                                                                                           104
+
+=== PHYSICAL PAGE 105 OF 114 ===
+ Modeling Diagrammatic Reasoning
+The Formal System E                         [Avigad et al., "A formal system for Euclid's Elements", 2008]
+
+ • Diagrammatic reasoning are logical consequences of "diagrammatic rules”
+
+
+
+
+ • We implement E in Lean and automate diagrammatic reasoning using SMT
+   solvers
+
+
+
+                                                                                                      105
+
+=== PHYSICAL PAGE 106 OF 114 ===
+Putting It Together
+
+
+
+
+                      106
+
+=== PHYSICAL PAGE 107 OF 114 ===
+Putting It Together
+
+
+
+
+                      107
+
+=== PHYSICAL PAGE 108 OF 114 ===
+Putting It Together
+
+
+
+
+                      108
+
+=== PHYSICAL PAGE 109 OF 114 ===
+Putting It Together
+
+
+
+
+                      109
+
+=== PHYSICAL PAGE 110 OF 114 ===
+Putting It Together
+
+
+
+
+                      110
+
+=== PHYSICAL PAGE 111 OF 114 ===
+Putting It Together
+
+
+
+
+                      111
+
+=== PHYSICAL PAGE 112 OF 114 ===
+Experiments: Autoformalizing Theorems
+
+
+
+
+                                        112
+
+=== PHYSICAL PAGE 113 OF 114 ===
+Takeaways
+• Two challenges in autoformalization
+   • Autoformalized theorems are difficult to evaluate
+   • Autoformalizing proofs require filling in reasoning gaps
+
+
+
+• They can be addresses leveraging knowledge in specific domains
+
+
+
+• Open problem: How to generalize across domains?
+
+
+
+                                                                   113
+
+=== PHYSICAL PAGE 114 OF 114 ===
+AI Meets Formal Mathematics
+
+
+
+
+           Formal Reasoning Meets LLMs: Towards AI for Mathematics and
+                                                                         114
+                                   Verification

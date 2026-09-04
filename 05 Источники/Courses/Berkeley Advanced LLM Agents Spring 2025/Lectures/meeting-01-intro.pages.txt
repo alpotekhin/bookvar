@@ -1,0 +1,164 @@
+=== PHYSICAL PAGE 1 OF 16 ===
+          CS 294/194-280:
+Advanced Large Language Model Agents
+
+=== PHYSICAL PAGE 2 OF 16 ===
+                      Teaching Staff
+▪ Instructor: Prof. Dawn Song
+▪ (guest) Co-instructors: Dr. Xinyun Chen, Dr. Kaiyu Yang
+▪ Head TA: Alex Pan
+▪ Readers: Tara Pande, Ashwin Dara, Jason Yan
+
+=== PHYSICAL PAGE 3 OF 16 ===
+Fall 2024: broad coverage of topics about LLM agents
+
+
+
+
+https://llmagents-learning.org/f24
+
+=== PHYSICAL PAGE 4 OF 16 ===
+Fall 2024: LLM Agents MOOC Hackathon Overview
+ ●   Participation: Close to 3000 developers and AI enthusiasts from around the globe
+ ●   Five Tracks:
+       ○ Applications: Build cutting-edge LLM agents
+       ○ Benchmarks: Create innovative AI agent evaluation benchmarks
+       ○ Fundamentals: Strengthen core agent capabilities
+       ○ Safety: Address critical safety challenges in AI
+       ○ Decentralized & Multi-Agents: Push the boundaries of multi-agent systems
+ ●   Sponsorship: Supported by industry leaders such as OpenAI, Google, AMD, Intel, and Amazon with more
+     than $200,000 in prizes and resources.
+ ●   Hackathon winners to be announced very soon
+
+=== PHYSICAL PAGE 5 OF 16 ===
+LLM agents: enabling LLMs to interact with the environment
+
+
+
+                       Memory       Action
+
+
+         Tool use
+
+
+
+
+         Retrieval      LLM        Feedback   Environment
+                     Reasoning &
+                       Planning
+
+                      Agent
+
+=== PHYSICAL PAGE 6 OF 16 ===
+Why empowering LLMs with the agent framework
+
+                           • Solving real-world tasks typically involves a
+                             trial-and-error process
+               Memory
+                           • Leveraging external tools and retrieving from external
+ Tool use                    knowledge expand LLM’s capabilities
+
+                           • Agent workflow facilitates complex tasks
+                              ○ Task decomposition
+ Retrieval      LLM           ○ Allocation of subtasks to specialized modules
+             Reasoning &
+               Planning       ○ Division of labor for project collaboration
+                              ○ Multi-agent generation inspires better responses
+              Agent
+
+=== PHYSICAL PAGE 7 OF 16 ===
+  LLM agents transformed various applications
+
+
+                                                                                                  • Education
+                                                                                                  • Law
+                                                                                                  • Finance
+           Code generation                                    Computer use
+Cursor, GitHub Copilot, Devin, Google Jules…   Anthropic Claude, Google Jarvis, OpenAI Operator   • Healthcare
+                                                                                                  • Cybersecurity
+                                                                                                     …
+
+
+
+
+          Personal assistant                                     Robotics
+      Google Astra, OpenAI GPT-4o,…               Figure AI, Tesla Optimus, NVIDIA GR00T…
+
+=== PHYSICAL PAGE 8 OF 16 ===
+Recent rapid progress of reasoning models
+ • Sep 2024: OpenAI o1
+ • Dec 2024: Gemini 2.0 Flash Thinking, OpenAI o3
+ • Jan 2025: DeepSeek-R1, Kimi k1.5
+
+
+
+
+            Progress from o1 -> o3              Progress from Gemini Thinking 1219 -> 0121
+
+=== PHYSICAL PAGE 9 OF 16 ===
+Impressive performance on competitive math and coding
+
+
+
+
+    Google DeepMind AlphaProof and AlphaGeometry 2   OpenAI o3 is ranked top 200 in Codeforces
+      achieve silver-medal performance in IMO 2024      competitive programming contests
+
+=== PHYSICAL PAGE 10 OF 16 ===
+Topics covered in this course
+
+ • Fundamental reasoning techniques
+    • Inference-time techniques
+    • Training techniques
+    • Search and planning
+ • LLMs for software engineering
+    • Code generation
+    • Code verification
+    • Web applications
+ • LLMs for mathematics
+    • Fundamental training techniques
+    • Autoformalization and theorem proving
+ • Agentic workflows, real-world applications
+ • Safety and ethics
+
+=== PHYSICAL PAGE 11 OF 16 ===
+                       Course Work
+▪ Weekly reading assignments & take-home quizzes
+   ▪ Due midnight PT Sunday before the next Monday’s lecture
+▪ 1 hands-on lab (released later in the semester)
+▪ Semester-long course project
+   ▪ Applications Track
+   ▪ Research Track
+
+=== PHYSICAL PAGE 12 OF 16 ===
+                              Grading
+             lecture attendance & weekly readings/quizzes
+                                    +
+▪   1 unit: article about the topic of a lecture (at least 2 pages)
+▪   2 units: lab + project (implementation not required)
+▪   3 units: lab + project with implementation
+▪   4 units: lab + project with significant implementation and
+    end-to-end demo
+
+=== PHYSICAL PAGE 13 OF 16 ===
+Grading
+
+=== PHYSICAL PAGE 14 OF 16 ===
+                              Class Project
+▪ Applications Track:
+   ▪   3-4 students per group
+   ▪   Focus on applied use cases of LLMs
+   ▪   Does not necessarily need to contribute novel research
+
+▪ Research Track:
+   ▪   2-3 students per group
+   ▪   Conduct novel research under the supervision of postdocs and graduate students
+   ▪   Goal of publishing in a workshop or conference
+   ▪   Students must apply to participate via a forthcoming Google Form
+
+=== PHYSICAL PAGE 15 OF 16 ===
+Timeline
+
+=== PHYSICAL PAGE 16 OF 16 ===
+             Course Website
+https://rdi.berkeley.edu/adv-llm-agents/

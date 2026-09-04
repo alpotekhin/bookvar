@@ -1,0 +1,1436 @@
+=== PHYSICAL PAGE 1 OF 93 ===
+Swarat Chaudhuri
+Computer Science
+The University of Texas at Austin
+
+
+
+
+Abstraction and Discovery with
+Large Language Model Agents
+
+=== PHYSICAL PAGE 2 OF 93 ===
+Mathematical discovery
+
+                         Conjecturing
+
+       Definitions                              Candidate theorems
+
+
+
+       Modeling                                    Reasoning
+
+                      Proofs, counterexamples
+
+AI for math: Automate conjecturing and proof
+
+=== PHYSICAL PAGE 3 OF 93 ===
+Scientific discovery
+
+                         Hypothese
+         Theorizing          s           Experimentation
+
+
+                             Data
+
+
+AI for science: Automate hypothesis generation and experiment
+design
+
+=== PHYSICAL PAGE 4 OF 93 ===
+Key ideas
+• Systematically search spaces of hypotheses, conjectures, and proofs
+
+• Use prior knowledge to prioritize directions of search
+
+• Learn, from experience, how and how not to search
+
+• Discover abstract concepts and tools, speeding up both search and learning.
+
+
+
+
+This talk: LLM agents with all four capabilities.
+
+=== PHYSICAL PAGE 5 OF 93 ===
+AI for Mathematical Discovery
+
+=== PHYSICAL PAGE 6 OF 93 ===
+                Are neural networks all you need?
+                      Math-related
+                      web documents                                                     Problem: Suppose that the sum of the squares of two
+                                      Problems w/ step-                                 complex numbers and is 7, and the sum of their cubes
+                                                                                        is 10. List all possible values for + , separated by
+                                      by-step solutions                                 commas.
+                                                          Problems w/ tool-
+                                                          integrated solutions          Solution: Let’s use `sympy` to calculate and print all
+                                                                                        possible values for + .
+
+
+
+
+                                                                                               >>> [-5, -5, 1, 1, 4, 4]
+
+                                                                                        Removing duplicates, the possible values for        + are
+             LLM pretrained     Base math            Finetuned          Tool-           \boxed{-5, 1, 4}
+             on text and code   LLM                  math LLM           integrated
+                                                                        math LLM
+
+                                      Fleureau et al. “How NuminaMath Won the 1st AIMO Progress Prize”
+𝑥
+
+
+
+
+𝑥
+𝑥
+𝑥𝑦   𝑦
+     𝑦
+         𝑦
+                                      2024
+
+=== PHYSICAL PAGE 7 OF 93 ===
+Are neural networks all you need?
+
+Putnam 2024, Problem A2
+
+
+
+
+Response from OpenAI o1
+
+=== PHYSICAL PAGE 8 OF 93 ===
+Weaknesses of the neural-only approach
+
+Data scarcity
+• Need traces or reward functions that enable rigorous mathematical reasoning
+• This is difficult beyond high-school or competition settings.
+
+Lack of verifiability
+• Natural-language reasoning is hard to verify
+• In applications like system verification, edge cases are especially critical.
+
+
+
+ Open question: Will scaling solve these problems?
+
+=== PHYSICAL PAGE 9 OF 93 ===
+Alternative: Formal representations
+ Informal Problem              Formal Problem
+ Statement                     Statement
+ “Prove that if a number is
+ even, its square is even as
+ well”
+
+
+
+     Neural                    Neural prover
+ autoformalizer
+
+
+
+ Formal Problem                                  Formal
+                                                  proof     QED!
+ Statement
+                                                assistant
+
+=== PHYSICAL PAGE 10 OF 93 ===
+Example: Formal Representations
+
+ theorem mod_arith_2
+ (x : ℕ) : x % 2 = 0 → (x * x) % 2 = 0 :=
+ begin
+   intro h,                  Goal
+                            11 goal Accomplished
+                               goal
+                            1 goal
+   rw nat.mul_mod,           x: ℕ
+                            x:
+                            x:   ℕ
+                                 ℕ
+                            h:
+                             h: xx %%% 222 === 000 → x * x % 2 =
+                                 x
+                            ⊢
+   rw h,                    ⊢
+                            0
+                             ⊢ x0
+                                0 %** 2x0 *=
+                                           %
+                                           % 2 0
+                                               (x
+                                               2 ==%002) % 2 = 0
+
+   rw nat.zero_mul,
+   refl,
+ end
+
+=== PHYSICAL PAGE 11 OF 93 ===
+Autoformalization
+
+
+
+
+            [Figure from Formal Mathematical Reasoning: A New Frontier in AI. Yang et al. 2
+
+=== PHYSICAL PAGE 12 OF 93 ===
+   Neural Theorem Proving
+                                                                                              , ih]
+                                                                                             d
+                                                                                        p [ad
+                                                           n’ : ℕ                 sim
+                                                                                         rw [ih]
+                                                           ih: add 0 n’ = n’                          …
+                                ⊢ add 0 0 = 0        rfl                                lin
+                                                           ⊢ add 0 (n’+1) =                ari
+                                                                                              th
+                                n’ : ℕ                     n’+1
+                                                            …
+                                                                                                      …
+                                ih: add 0 n’ = n’
+                                                            …
+                        n       ⊢ add 0 (n’+1) =
+                  tio           n’+1
+                 uc
+                      n                                                                                              Tactic
+                ind                                                   n’ : ℕ
+                                                            …         ih: add 0 n’ = n’
+                                                                                                                     generation
+                                ⊢ add 0 0 = 0                         ⊢ add 0 (n’+1) =                                       simp [add, ih]
+n:ℕ                   cases n
+                                                            …         n’+1
+                                                                    Local context +                                          rw [ih]
+⊢ add 0 n = n                   n’ : ℕ
+                                ⊢ add 0 (n’+1) =                    goal                                                     linarith
+                                                            …
+                 ex             n’+1
+                     l
+                  fa
+                       so                                   …                                             Language         Tactic
+                                                                                                          model            suggestion
+                                n:ℕ                         …                                                              s
+                                ⊢ false
+                                                                    Formal math library
+                                                            …
+
+
+
+
+                                                [Figure from Formal Mathematical Reasoning: A New Frontier in AI. Yang et al. 2
+
+=== PHYSICAL PAGE 13 OF 93 ===
+Alphaproof: Reinforcement learning for
+theorem-proving
+
+
+
+
+• Learn from both successes (proofs) and failures (disproofs).
+• Misformalized problems are still helpful for learning
+• Complement RL training with test-time RL on problem variants.
+
+
+  Google DeepMind "AI achieves silver-medal standard solving International Mathematical Olympiad problems”,
+  2024.
+
+=== PHYSICAL PAGE 14 OF 93 ===
+An In-Context Learning Agent for Formal
+Theorem-Proving
+Amitayush Thakur, George Tsoukalas, Yeming Wen, Jimmy Xin, Swarat Chaudhuri.
+Conference on Language Models, 2024.
+
+
+
+
+ Amitayush
+
+=== PHYSICAL PAGE 15 OF 93 ===
+                       Copra: LLM agents for formal theorem-proving
+                                                                          • Immediately leverage advances in LLMs
+                                    New proof state +1                    • Integrate natural-language and formal reasoning
+                                    Error messages, new goals
+                                                                          • Applicable even if there is no corpus of training problem
+                                                                          • In the longer run, source of traces for LLM finetuning.
+
+                             Frontier                    Proof
+                               LLM                     assistant
+
+                    Proof state
+
+
+                                           Action (tactic)     Answer
+                                                               + Proof
+
+
+                     Thakur, Tsoukalas, Wen, Xin, and Chaudhuri. An In-Context Learning Agent for Formal Theorem-Proving. COLM 2024.
+𝑠   𝑠
+    𝑎
+        𝑡   𝑡
+
+
+
+
+                𝑡
+                     https://arxiv.org/pdf/2310.04353.pdf.
+
+=== PHYSICAL PAGE 16 OF 93 ===
+   Copra: Theorem-proving via in-context learning
+Formal theorem + informal hints (optional)
+
+                                   COPRA
+                                                                 3. “Execute”
+                  1. Prompt                   2. Tactic          the tactic via
+                  Synthesis                   Parsing                proof
+                                                                 environment
+
+
+                 Lemma Database                             Feedback
+                                             4. Augment
+                                             the prompt;
+                  5. Query lemma             Backtrack if
+                     database                  needed               QED
+
+=== PHYSICAL PAGE 17 OF 93 ===
+Prompting and action parsing
+
+=== PHYSICAL PAGE 18 OF 93 ===
+Copra vs. GPT-4
+
+
+
+
+A Lean theorem and a correct
+                               A wrong “proof” generated by GPT-4
+Copra-generated proof
+
+=== PHYSICAL PAGE 19 OF 93 ===
+Aggregate
+Statistics
+
+=== PHYSICAL PAGE 20 OF 93 ===
+            Integrating natural-language and formal
+            reasoning
+
+            IMO 1959, Problem 1:
+                                    21 + 4
+            Prove that the fraction        is irreducible for every natural number .
+                                    14 + 3
+
+
+
+
+            Idea: Break the problem into subproblems and solve hierarchically.
+    𝑛
+
+
+
+
+𝑛
+
+
+
+
+        𝑛
+
+=== PHYSICAL PAGE 21 OF 93 ===
+1. Ask for an informal solution
+
+
+
+
+                                  O3-mini
+
+=== PHYSICAL PAGE 22 OF 93 ===
+2. Split the theorem into relevant sub-goals
+
+
+
+
+                                O3-
+                                mini
+
+=== PHYSICAL PAGE 23 OF 93 ===
+3. Ask Copra to solve the subproblems one by one.
+
+
+
+
+                         COPRA
+
+=== PHYSICAL PAGE 24 OF 93 ===
+4. Add all relevant lemmas already proved in the system
+prompt, along with the informal proof.
+
+
+
+
+                                             COPRA
+
+
+
+
+ o3-mini cannot solve the problem after splitting it into subproblems.
+ • `o3-mini` hallucinated a lemma “Nat.gcd_sub_right” while writing the proof.
+ • Copra can fix this hallucination lemma using Lean feedback.
+
+=== PHYSICAL PAGE 25 OF 93 ===
+Application in Formal Verification
+
+Formal verification:
+•   Mathematically model a system as a set of definitions
+•   Model system properties as theorems involving these definitions
+•   Prove the theorems
+
+=== PHYSICAL PAGE 26 OF 93 ===
+Example: Compiler Verification
+
+Language: Syntax + semantics
+• Syntax: A grammar defining the form of programs
+• Semantics: Rules defining executions of programs,
+
+
+Compiler: A set of rules translating programs from one language to another.
+
+
+Verification: Prove that the rules preserve semantics.
+
+=== PHYSICAL PAGE 27 OF 93 ===
+1. Define the source language
+(*Define the source language first*)
+Inductive binop : Set := Plus | Times.
+
+Inductive exp : Set :=
+ Const : nat -> exp
+  (* Binop is a function which takes exp and exp and gives
+exp.*)
+| Binop : binop -> exp -> exp -> exp.
+
+Definition binopDenote (b : binop) : nat -> nat -> nat :=
+match b with
+     | Plus => plus
+     | Times => mult
+end.
+
+Fixpoint expDenote (e: exp) : nat :=
+    match e with
+    | Const n => n
+    | Binop b e1 e2 =>
+      (binopDenote b) (expDenote e1) (expDenote e2)
+    end.
+
+=== PHYSICAL PAGE 28 OF 93 ===
+1. Define the source language
+(*Define the source language first*)
+Inductive binop : Set := Plus | Times.
+
+Inductive exp : Set :=
+ Const : nat -> exp
+  (* Binop is a function which takes exp and exp and gives
+exp.*)
+| Binop : binop -> exp -> exp -> exp.
+
+Definition binopDenote (b : binop) : nat -> nat -> nat :=
+match b with
+     | Plus => plus
+     | Times => mult
+end.
+
+Fixpoint expDenote (e: exp) : nat :=
+    match e with
+    | Const n => n
+    | Binop b e1 e2 =>
+      (binopDenote b) (expDenote e1) (expDenote e2)
+    end.
+
+=== PHYSICAL PAGE 29 OF 93 ===
+1. Define the source language
+
+(*Some examples in Source Language*)
+Eval simpl in expDenote (Const 42). (* 42 *)
+Eval simpl in expDenote (Binop Plus (Const 2) (Const 2)). (* 4 *)
+Eval simpl in expDenote (Binop Times (Binop Plus (Const 2) (Const 2)) (Const 7)). (*
+28 *)
+
+=== PHYSICAL PAGE 30 OF 93 ===
+2. Define the target language
+ (*Define the target language*)
+
+ (*Instructions can be either constants or binary operation*)
+ Inductive instr: Set :=
+ | iConst : nat -> instr
+ | iBinop : binop -> instr.
+
+ Definition prog := list instr. (*Program is a list of instructions*)
+
+ (*Instruction either pushes a constant to the stack or applies binop
+ on two elements on the stack*)
+ Definition stack := list nat.
+
+ Definition instrDenote (i : instr) (s: stack): option stack :=
+ match i with
+  | iConst n => Some (n :: s)
+  | iBinop b =>
+      match s with
+       | arg1 :: arg2 :: s' => Some ((binopDenote b) arg1 arg2 :: s')
+       | _ => None
+      end
+ end.
+
+=== PHYSICAL PAGE 31 OF 93 ===
+2. Define the target language
+
+ Fixpoint progDenote (p : prog) (s: stack) : option stack :=
+ match p with (*Run instructions one by one*)
+  | nil => Some s
+  | i::p' =>
+    match instrDenote i s with
+      | None => None
+      | Some s' => progDenote p' s'
+    end
+ end.
+
+ (*Check the execution of program once*)
+ Eval simpl in progDenote (iConst 32:: iConst 42 :: iBinop Plus :: nil)
+ nil.
+ (* Some (74 :: nil) *)
+
+=== PHYSICAL PAGE 32 OF 93 ===
+3. Define the compiler
+
+ (*Translation from source to target language i.e. Compiler*)
+ Fixpoint compile (e : exp): prog :=
+     match e with
+        | Const n => iConst n::nil
+        | Binop b e1 e2 => compile e2 ++ compile e1 ++ iBinop b :: nil
+     end.
+
+
+
+
+(*Convert the source language to target assembly language *)
+Eval simpl in compile (Binop Plus (Const 2) (Const 3)).
+(* iConst 3 :: iConst 2 :: iBinop Plus :: nil *)
+
+=== PHYSICAL PAGE 33 OF 93 ===
+4. Define a correctness theorem
+
+
+(*Ensure that the compiled program compiles correctly for all possible expr *)
+
+Theorem compile_correct:
+     forall e, progDenote (compile e) nil = Some (expDenote e::nil).
+
+=== PHYSICAL PAGE 34 OF 93 ===
+5. Ask Copra to produce the proof
+
+(*Ensure that the compiled program compiles correctly for all possible expr *)
+
+Theorem compile_correct:
+     forall e, progDenote (compile e) nil = Some (expDenote e::nil).
+
+
+
+
+Failure! ❌
+
+=== PHYSICAL PAGE 35 OF 93 ===
+5(a). Ask the LLM to invent a lemma
+
+=== PHYSICAL PAGE 36 OF 93 ===
+5(a). Ask the LLM to invent a lemma
+
+=== PHYSICAL PAGE 37 OF 93 ===
+5(b). Sample a proposed lemma
+
+
+ Target theorem:
+(*Ensure that the compiled program compiles correctly for all possible expr *)
+Theorem compile_correct: forall e, progDenote (compile e) nil = Some (expDenote e::nil).
+
+
+
+
+ Auxiliary lemma:
+
+ (*Prove if we can compile one instruction correctly first*)
+ Lemma compile_one_instr: forall e p s, progDenote (compile e ++ p)
+ s = progDenote p (expDenote e :: s).
+
+=== PHYSICAL PAGE 38 OF 93 ===
+5(c). Auto-generate proof of compile_one_instr
+
+ Lemma compile_one_instr : forall e p s, progDenote (compile e ++
+ p) s = progDenote p (expDenote e :: s).
+ Proof.
+      induction e using exp_ind.
+      intros p s.
+      unfold progDenote, compile, expDenote.
+      simpl.
+      reflexivity.
+      intros p s.
+      simpl.
+      rewrite app_assoc_reverse.
+      rewrite <- app_assoc.
+      rewrite IHe2.
+      rewrite IHe1.
+      reflexivity.
+ Qed.
+
+=== PHYSICAL PAGE 39 OF 93 ===
+5(d). Now auto-generate the proof of compile_correct
+
+
+Theorem compile_correct : forall e, progDenote (compile e) nil =
+Some (expDenote e::nil).
+Proof.
+     destruct e.
+     - simpl. reflexivity.
+     - simpl. rewrite compile_one_instr. rewrite compile_one_instr.
+reflexivity.
+Qed.
+
+=== PHYSICAL PAGE 40 OF 93 ===
+Summary: Mathematical Discovery with LLM Agents
+
+Language is an extraordinary powerful tool for mathematical reasoning.
+
+Frontier LLMs can prove nontrivial formal theorems with proof assistant feedback.
+
+Future work should expand these ideas in conjecturing and modeling tasks.
+
+
+
+  Question: Can prover-LLM interaction be entirely pushed to training
+  time?
+  • The prover teaches the LLM student about compositionality, type-safety,…
+  • Eventually, the teacher “retires”.
+
+=== PHYSICAL PAGE 41 OF 93 ===
+Open Challenges and Future Directions
+
+
+
+
+                                                                     https://arxiv.org/abs/2412.16075
+
+
+
+
+ Kaiyu Yang Dawn Song   Gabriel   Wenda Li   Kristin   Jingxuan He
+                        Poesia               Lauter
+
+=== PHYSICAL PAGE 42 OF 93 ===
+Open Challenges and Future Directions
+Overcoming the shortage of high-quality proof data
+
+• Strategies: Synthetic data, multilingual data, crowdsourcing
+
+
+
+
+    [Trinh et al., Alphageometry]               [Thakur et al., Proofwala]
+
+=== PHYSICAL PAGE 43 OF 93 ===
+Open Challenges and Future Directions
+Autoformalization, which is hard due to insufficient high-quality paired data
+
+• Strategies: Formalization with proof assistant feedback
+
+
+
+
+                                                         [Lu et al., Process-Driven Autoformalization]
+
+=== PHYSICAL PAGE 44 OF 93 ===
+Open Challenges and Future Directions
+
+Conjeturing and open-ended exploration
+Strategy: Self-play between a conjecturer and a prover
+
+
+
+
+                                                         [Poesia et al., Minimo]
+
+=== PHYSICAL PAGE 45 OF 93 ===
+AI for Scientific Discovery
+
+=== PHYSICAL PAGE 46 OF 93 ===
+Lifecycle of a scientific process
+
+=== PHYSICAL PAGE 47 OF 93 ===
+Lifecycle of a scientific process
+
+
+
+
+                 Problem: Apparent Retrograde Planetary Motion
+                 Theory: Heliocentric Model
+
+
+
+
+                                  c. The Astronomical Revolution: Copernicus- Kepler-Borelli
+
+=== PHYSICAL PAGE 48 OF 93 ===
+Lifecycle of a scientific process
+
+
+
+
+                                       Data Collection: Sample data in regime of
+                                       interest.
+
+
+Tycho Brahe’s observations of the planet Mars
+(1582-1600)
+                                                      c. The Astronomical Revolution: Copernicus- Kepler-Borelli
+
+=== PHYSICAL PAGE 49 OF 93 ===
+Lifecycle of a scientific process
+
+
+
+
+Analysis: Kepler’s Third
+         Law
+
+
+
+
+                           c. The Astronomical Revolution: Copernicus- Kepler-Borelli
+
+=== PHYSICAL PAGE 50 OF 93 ===
+Lifecycle of a scientific process
+
+
+
+
+Analysis: Kepler’s Third   Interpretation: Newton’s Law of Gravitation
+         Law
+
+
+
+
+                                      c. The Astronomical Revolution: Copernicus- Kepler-Borelli
+
+=== PHYSICAL PAGE 51 OF 93 ===
+Symbolic regression
+
+
+
+
+                           Kepler’s Third Law
+
+
+
+
+                      c. The Astronomical Revolution: Copernicus- Kepler-Borelli
+
+=== PHYSICAL PAGE 52 OF 93 ===
+Symbolic regression algorithms
+
+
+
+
+                                 c. PySR. Miles Cranmer
+
+=== PHYSICAL PAGE 53 OF 93 ===
+Symbolic Regression with PySR
+
+
+
+
+                                Credit: Miles Cranmer
+
+=== PHYSICAL PAGE 54 OF 93 ===
+Symbolic Regression’s impact
+
+
+
+
+                               Credit: Miles Cranmer
+
+=== PHYSICAL PAGE 55 OF 93 ===
+Sketch of PySR’s Exploration Space
+
+
+
+
+                                             Independent “islands” of
+                                                expressions, each
+                                               undergoing evolution
+
+
+
+
+Insight: LLMs can increase exploration in relevant parts of the search
+                              space.
+
+=== PHYSICAL PAGE 56 OF 93 ===
+LaSR: Symbolic Regression with a
+Learned Concept Library
+Arya Grayeli*, Atharva Sehgal*, Omar Costilla-Reyes, Miles Cranmer, Swarat Chaudhuri.
+Neural Information Processing Systems, 2024.
+
+
+
+
+  Arya      Atharva
+
+                                                              https://trishullab.github.io/lasr-web
+
+=== PHYSICAL PAGE 57 OF 93 ===
+What is a Concept?
+Desiderata 1: Symbolic Abstraction
+
+    Zipf’s Law       Moore’s Law     Arrhenius’ Equation
+
+
+
+
+                     ⬄“Power Law Trend”
+
+=== PHYSICAL PAGE 58 OF 93 ===
+    What is a Concept?
+    Desiderata II : Symbolic Guidance
+
+
+
+
+Concepts (by Physicist or LLM)
+  “Wave strain diminishes as
+     distance increases”           Guide the
+“Wave strain has extraordinarily
+                                   search for   h: strain
+      small magnitude”                          r: distance between the poles
+                                                Q: dipole moment
+
+=== PHYSICAL PAGE 59 OF 93 ===
+      Joint concept and program learning
+
+      Given
+        A universe       of concepts
+        •     “Wave strain diminishes as distance increases” , “power laws”, “sinusoidal functions”
+        A dataset
+        A space of programmatic hypotheses
+
+
+      Solve
+
+
+
+
+𝐶𝐷𝜋
+
+=== PHYSICAL PAGE 60 OF 93 ===
+                            Hypothesis Evolution
+
+LaSR
+
+
+
+       Concept Evolution                                     Concept Abstraction
+
+
+                                       Hypothesis
+                                        Evolution
+
+
+                                  Concept Library
+
+
+
+                           Concept              Concept
+                           Evolution           Abstraction
+
+=== PHYSICAL PAGE 61 OF 93 ===
+                                      Hypothesis Evolution
+
+LaSR                Hypothesis
+                    Populations   Dataset
+                                                             Concept
+                                                             Library
+                                                                             Best
+                                                                         Hypothesis per
+                                                                          Population            LLM Evolution
+                                                                                                provides neural
+                                                                                               guidance (over a
+                                  Symbolic                     LLM
+                                  Evolution
+                                                   or
+                                                             Evolution                          language prior)
+                                        For 106 operations
+
+
+       Concept Evolution                                                         Concept Abstraction
+
+
+                                                Hypothesis
+                                                 Evolution
+
+
+                                              Concept Library
+
+
+
+                                    Concept               Concept
+                                    Evolution            Abstraction
+
+=== PHYSICAL PAGE 62 OF 93 ===
+Hypothesis Evolution
+
+
+
+                                                                                      Mutation
+                                                                                      Symbolic
+                                                                                      Mutation
+
+
+
+                                                                                  Crossover
+                                                                                      Symbolic
+                         Program                                                      Crossover
+                        Population                         Best Program
+
+     Initialization                                                        Other Symbolic Operations
+
+                                              Evaluate                    Optimize
+  Symbolic Initialize                                                                             Simplify Tree
+                                                                          Constants
+
+
+
+                                                   Replace Oldest
+                                 x300 times
+
+=== PHYSICAL PAGE 63 OF 93 ===
+    Hypothesis Evolution
+
+
+
+                                                                                                                  Mutation
+                                                                                                     Symbolic
+                                                                                                                     or       LLM Mutation
+                                                                                                     Mutation
+
+
+
+                                                                                                                 Crossover
+                                                                                                     Symbolic
+                                                                                                                     or      LLM Crossover
+                                                    Program                                          Crossover
+                                                   Population                         Best Program
+
+                 Initialization                                                                         Other Symbolic Operations
+
+                                                                         Evaluate                     Optimize
+Symbolic Initialize    or         LLM Initialize                                                                             Simplify Tree
+                                                                                                      Constants
+
+
+
+                                                                              Replace Oldest
+                                                            x300 times
+
+=== PHYSICAL PAGE 64 OF 93 ===
+    Hypothesis Evolution
+
+
+
+                                                                                                                  Mutation
+                                                                                                     Symbolic
+                            Concept Library                                                                          or       LLM Mutation
+                                                                                                     Mutation
+
+
+
+                                                                                                                 Crossover
+                                                                                                     Symbolic
+                                                                                                                     or      LLM Crossover
+                                                    Program                                          Crossover
+                                                   Population                         Best Program
+
+                 Initialization                                                                         Other Symbolic Operations
+
+                                                                         Evaluate                     Optimize
+Symbolic Initialize    or         LLM Initialize                                                                             Simplify Tree
+                                                                                                      Constants
+
+
+
+                                                                              Replace Oldest
+                                                            x300 times
+
+=== PHYSICAL PAGE 65 OF 93 ===
+   Hypothesis Evolution
+
+import random
+
+def crossover(
+               expr1: SymTree,
+                                                                                                  Mutation
+               expr2: SymTree) -> SymTree:
+                                                                                     Symbolic
+# Randomly choose                   a node in expr1 to
+                        Concept Library
+                                                                                     Mutation
+                                                                                                     or       LLM Mutation
+
+remove
+...                                                                                              Crossover
+# Randomly choose a node in expr2                                                    Symbolic
+                                                                                                             LLM Crossover
+which will be added to eq1 Program
+                                                                                                     or
+                                                                                     Crossover
+                                                                      Best Program
+...                                         Population
+
+# ReturnInitialization
+                    new tree                                                            Other Symbolic Operations
+
+new_expr = ...                                         Evaluate                       Optimize
+Symbolic Initialize  or   LLM Initialize                                                                     Simplify Tree
+return new_expr                                                                       Constants
+
+
+
+                                                              Replace Oldest
+                                                 x300 times
+
+=== PHYSICAL PAGE 66 OF 93 ===
+    Hypothesis Evolution
+
+
+
+                                                                                                                  Mutation
+                                                                                                     Symbolic
+                            Concept Library                                                                          or       LLM Mutation
+                                                                                                     Mutation
+
+
+
+                                                                                                                 Crossover
+                                                                                                     Symbolic
+                                                                                                                     or      LLM Crossover
+                                                    Program                                          Crossover
+                                                   Population                         Best Program
+
+                 Initialization                                                                         Other Symbolic Operations
+
+                                                                         Evaluate                     Optimize
+Symbolic Initialize    or         LLM Initialize                                                                             Simplify Tree
+                                                                                                      Constants
+
+
+
+                                                                              Replace Oldest
+                                                            x300 times
+
+=== PHYSICAL PAGE 67 OF 93 ===
+                                      Hypothesis Evolution
+
+LaSR                Hypothesis
+                    Populations   Dataset
+                                                             Concept
+                                                             Library
+                                                                             Best
+                                                                         Hypothesis per
+                                                                          Population
+
+                                                                                                      LLM Abstraction
+                                                                                                       induces useful*
+                                  Symbolic                     LLM
+                                  Evolution
+                                                   or
+                                                             Evolution                                   abstractions.
+                                        For 106 operations
+
+
+       Concept Evolution                                                         Concept Abstraction
+
+
+                                                Hypothesis
+                                                 Evolution
+
+
+                                              Concept Library
+
+
+                                                                                          LLM Abstraction
+                                    Concept               Concept
+                                    Evolution            Abstraction
+
+
+                                                                                   “exponential growth/
+                                                                                         decay”
+
+=== PHYSICAL PAGE 68 OF 93 ===
+                                             Hypothesis Evolution
+
+
+LaSR                       Hypothesis
+                           Populations   Dataset
+                                                                    Concept
+                                                                    Library
+                                                                                    Best
+                                                                                Hypothesis per
+                                                                                 Population
+
+
+
+ LLM Concept
+  Crossover                              Symbolic
+                                                          or
+                                                                      LLM
+                                         Evolution                  Evolution
+  evolves all
+   concepts.                                   For 106 operations
+
+
+            Concept Evolution                                                           Concept Abstraction
+
+            “exponential growth/
+                  decay”                               Hypothesis
+                                                        Evolution
+
+
+                                                     Concept Library
+                “Depends on
+                temperature”
+                                                                                                 LLM Abstraction
+                                           Concept               Concept
+            LLM Concept Crossover          Evolution            Abstraction
+
+
+                                                                                          “exponential growth/
+                                                                                                decay”
+                “Boltzmann
+                Distribution”
+
+=== PHYSICAL PAGE 69 OF 93 ===
+Sketch of Search Space        After Phase 1:
+                         “Islands” of expressions
+
+=== PHYSICAL PAGE 70 OF 93 ===
+Sketch of Search Space        After Phase 2:
+                         Concepts for each “Island”
+
+Sinusoidal
+                                      Exponential
+  Trends
+                                        Trends
+
+
+
+
+                                  Linear
+         Power Law                Trends
+          Trends
+
+=== PHYSICAL PAGE 71 OF 93 ===
+Sketch of Search Space        After Phase 2:
+                         Concepts expose unknown
+                                  islands
+
+Sinusoidal
+                                     Exponential
+  Trends
+                                       Trends
+
+
+
+
+                                 Linear
+         Power Law               Trends
+          Trends
+
+=== PHYSICAL PAGE 72 OF 93 ===
+    Sketch of Search Space      After Phase 3:
+                             Concepts expose new
+                                  concepts.
+
+    Sinusoidal
+                                       Exponential
+      Trends
+                                         Trends
+
+Trignometric
+   Trends
+
+
+
+                                   Linear
+               Power Law           Trends
+                Trends
+
+=== PHYSICAL PAGE 73 OF 93 ===
+ LaSR: Overall Performance
+
+
+• Concept Guidance
+  accelerates discovery.
+
+
+
+• LaSR outperforms PySR even
+  with local language models
+  (llama-3-7b, 1%)
+
+=== PHYSICAL PAGE 74 OF 93 ===
+Human-provided hints
+
+
+
+
+User-provided
+hints accelerate
+hypothesis search
+
+=== PHYSICAL PAGE 75 OF 93 ===
+ Example: Coulomb’s Law
+
+
+
+
+Eq 10: Coulomb's Law         PySR’s Solution
+• Inverse Square Law         • Reduces to ground truth after 10 steps of
+                               simplification.
+• Directly proportional to   • Unwieldly
+  charges
+                             • Fitting more constants => more optimization
+• Force symmetric w.r.t        errors
+  charges
+
+=== PHYSICAL PAGE 76 OF 93 ===
+   Coulomb’s Law
+
+
+
+
+Eq 10: Coulomb's Law
+• Inverse Square Law
+• Directly proportional to   LaSR’s Solution
+  charges
+                             • Reduces to ground truth after 4 steps of
+• Force symmetric w.r.t        simplification
+  charges
+                             • Smaller models synthesize simpler equations!
+
+=== PHYSICAL PAGE 77 OF 93 ===
+   Coulomb’s law
+
+                              Iteration Discovered Concept
+                                    2 The good mathematical expressions exhibit […] with a
+                                      focus on power functions and trigonometric functions
+                                      […]
+                                    6 The good mathematical expressions exhibit […]
+                                      symmetry or regularity […]
+Eq 10: Coulomb's Law               24 The good mathematical expressions have […] with a
+                                      specific pattern of division and multiplication
+• Inverse Square Law
+                             LaSR’s Concepts (Limitations)
+• Directly proportional to
+  charges                    • Cannot guarantee factuality or correctness.
+• Force symmetric w.r.t      • Good concepts depend on LLM training.
+  charges                      Concepts can mislead scientists.
+
+=== PHYSICAL PAGE 78 OF 93 ===
+ Finding LLM Scaling Laws
+
+Step 1: Postulate Scaling
+Law
+
+
+Step 2: Measure model                          Google DeepMind MassiveText
+loss w.r.t hyper
+parameters.
+Step 3: Fit scaling law to
+dataset.
+
+                        Training Compute-Optimal Large Language Models, Hoffman et. al
+
+=== PHYSICAL PAGE 79 OF 93 ===
+ Finding LLM Scaling Laws with LaSR
+
+Step 1: Measure model loss
+                                                   Google DeepMind BIG-Bench
+w.r.t hyper parameters.                               (204 tasks, 55 LLMs, )
+
+
+
+Step 2: Use symbolic regression
+to postulate and fit scaling laws                            LaSR
+
+
+
+
+Step 3: Choose the scaling law
+that fits the data the best while
+using the least parameters.
+
+                                    Training Compute-Optimal Large Language Models, Hoffman
+
+=== PHYSICAL PAGE 80 OF 93 ===
+LLM Scaling Law
+
+
+
+
+• A large number of shots gives poor results for low-capability models
+• Once the models pass a capability threshold, having more shots helps
+
+=== PHYSICAL PAGE 81 OF 93 ===
+Qualitative Traits
+• Interaction between training hyper params (#steps) and testing hyper params
+  (#shots)
+
+
+
+
+• We can modify Chinchilla using empirical insights
+
+=== PHYSICAL PAGE 82 OF 93 ===
+Self-Evolving Visual Concept Library
+Using Vision-Language Critics
+Atharva Sehgal, Patrick Yuan, Ziniu Hu, Yisong Yue, Jennifer J Sun, Swarat Chaudhuri.
+Computer Vision and Pattern Recognition, 2025.
+
+
+
+
+  Atharva
+
+=== PHYSICAL PAGE 83 OF 93 ===
+Zero-shot transfer learning with VLMs
+
+
+                                    VLM         ?
+
+    Identify the adult bald eagle
+
+
+
+
+                                    VLM          ?
+
+     Identify the ever given.
+                                          [Menon & Vondrick, ICLR 2023]
+
+=== PHYSICAL PAGE 84 OF 93 ===
+Classification with visual concept descriptors
+
+                                            Large wings
+                                            Large beak
+                                      LLM   White head              VLM
+                                            Black body
+
+
+
+      Identify the adult bald eagle
+
+
+
+
+                                             Container ship
+                                      LLM    Evergreen               VLM
+                                             Stacked containers
+
+
+
+
+   Identify the ever given.                      [Menon & Vondrick, ICLR 2023]
+
+=== PHYSICAL PAGE 85 OF 93 ===
+Concept descriptors can be used to write code
+                                     def is_eagle(image):
+                                        image_patch = ImagePatch(image)
+                                        if not image_patch.exists('bird'):
+                                            return 'no'
+                                        eagle_patch = image_patch.find('bird')[0]
+                                        eagle_features = [
+                                           "large wings",
+                                           "large beak",
+                                           "white head",
+                                           "black body"
+                                           ]
+                                        p_eagle = 0.0
+                                        for feature in eagle_features:
+                                            p_eagle += eagle_patch.exists(feature)
+                                        p_eagle /= len(eagle_features)
+                                        return 'yes' if p_eagle >= 0.75 else 'no'
+Is this an image of an adult
+                               GPT
+         bald eagle?
+
+=== PHYSICAL PAGE 86 OF 93 ===
+Concept Refinement with Evolution
+
+=== PHYSICAL PAGE 87 OF 93 ===
+Concept Refinement with Evolution
+                               • VLM evaluates the similarity
+                                 between each image and its
+                                 associated concepts
+                                 compared to other images,
+                                 and computes a contrastive
+                                 score.
+
+                               • This score is used to refine the
+                                 library of visual concepts.
+
+=== PHYSICAL PAGE 88 OF 93 ===
+Sample Result
+
+=== PHYSICAL PAGE 89 OF 93 ===
+Summary: LLM Agents for Empirical Discovery
+
+LLM-directed evolution is a powerful tool for empirical scientific discovery.
+
+Frontier LLMs inject prior world knowledge into mutation/crossover
+operators.
+
+LLMs can be used to learn abstract concepts that accelerate evolution.
+
+All this can be applied to settings with visual inputs as well.
+
+=== PHYSICAL PAGE 90 OF 93 ===
+Open Challenges
+
+Hypothesis and concept verification
+
+Concept representations beyond natural language
+
+Scaling to larger search spaces and input dimensions
+
+Going beyond hypothesis generation to experiment design
+
+=== PHYSICAL PAGE 91 OF 93 ===
+Scientific discovery
+
+                            Hypothese
+          Theorizing            s            Experimentation
+
+
+                                Data
+
+
+LLM agents are extraordinarily powerful tools for scientific discovery.
+
+=== PHYSICAL PAGE 92 OF 93 ===
+Mathematical discovery
+
+                         Conjecturing
+
+       Definitions                              Candidate theorems
+
+
+
+       Modeling                                    Reasoning
+
+                      Proofs, counterexamples
+
+AI for math: Automate conjecturing and proof
+
+=== PHYSICAL PAGE 93 OF 93 ===
+Collaborators and Funders

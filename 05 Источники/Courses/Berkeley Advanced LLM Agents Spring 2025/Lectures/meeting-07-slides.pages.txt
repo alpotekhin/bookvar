@@ -1,0 +1,945 @@
+=== PHYSICAL PAGE 1 OF 106 ===
+Multimodal Agent
+From Perception to Action
+
+
+Caiming Xiong
+Salesforce AI Research
+@caimingxiong
+
+=== PHYSICAL PAGE 2 OF 106 ===
+Intelligence grows rapidly, even surpassing humans.
+
+
+
+
+hps://x.com/_jasonwei/status/1889096555254456397
+
+=== PHYSICAL PAGE 3 OF 106 ===
+                        Multimodal Agents
+
+                        ●   Computer tasks often involve
+                            multiple apps and interfaces
+                        ●   Powered by advancements in large
+                            vision-language-action models
+                            (VLA-Ms)
+                        ●   Make digital interactions more
+                            accessible and vastly increase
+                            human productivity
+
+
+
+
+Generated from Gemini
+
+=== PHYSICAL PAGE 4 OF 106 ===
+Coding Agents
+
+
+
+
+SWE-bench: Can Language Models Resolve Real-World GitHub Issues?, (Jimenez et al., 2023)
+MLE-bench: Evaluating Machine Learning Agents on Machine Learning Engineering, (Chan et al., 2024)
+
+=== PHYSICAL PAGE 5 OF 106 ===
+Web Agents
+
+
+
+
+World of Bits: An Open-Domain Platform for Web-Based Agents, (Shi et al., 2017)
+Mind2Web: Towards a Generalist Agent for the Web, (Deng et al., 2023)
+WebArena: A Realistic Web Environment for Building Autonomous Agents, (Zhou et al., 2023)
+Browsergym: a Gym Environment for Web Task Automation (Drouin et al., 2024)
+
+=== PHYSICAL PAGE 6 OF 106 ===
+Mobile Agents
+
+
+
+
+On the Eects of Data Scale on Computer Control Agents, (Li et al., 2024)
+
+=== PHYSICAL PAGE 7 OF 106 ===
+Physical Agents
+
+
+
+
+hps://www.ﬁgure.ai/news/helix
+
+=== PHYSICAL PAGE 8 OF 106 ===
+                        Agenda
+                        01   Environment/Benchmark:
+                             Should be reconﬁgurable and
+                             expandable
+
+                        02   Data: Diverse modalities,
+                             large-scale, covering a wide
+                             range of tasks
+
+                        03   Model/System: Uniﬁed
+                             vision-language-reasoning-action
+                             model, and long-context
+                             inference.
+
+Generated from Gemini
+
+=== PHYSICAL PAGE 9 OF 106 ===
+Computer Use
+Computer tasks often involve multiple apps and interfaces.
+
+
+
+ Task instruction 1: Update the bookkeeping sheet with my recent transactions over the past few days in the provided folder.
+
+=== PHYSICAL PAGE 10 OF 106 ===
+Current Benchmarks
+no real, scalable interactive environments
+
+                                                       Mind2Web                            WebArena
+
+
+
+
+           Only demos without executable environment                   Environments limited to specific apps or domains
+               ●          No execution based evaluation                 ●   Simplify agent’s observation and action spaces
+               ●          Cannot support interactive learning &         ●   Limit task scope, cannot support the evaluation of
+                          real-world exploration                            complex, real-world computer tasks
+
+
+
+Mind2Web: Towards a Generalist Agent for the Web
+WebArena: A Realistic Web Environment for Building Autonomous Agents
+
+=== PHYSICAL PAGE 11 OF 106 ===
+OSWorld
+the ﬁrst scalable, real computer environment
+
+
+                                                                            task initial env state setup                                                         get env state
+                                                                                                                                            Virtual Machine(s)
+           Task Initial State Setup Config
+
+                                                                                                  Observation
+                                                                                              screenshot         a11y-tree
+
+                                                                                                                                                                   Final State
+                                                                                                        input
+                                           input
+      Task Instruction                                             Agent                               predict
+      (See examples above)                                    (e.g., GPT-4V)                                                                                     Execution-based
+                                                                                                                                                                    Evaluation
+                                                                                               mouse
+                                                                                                                             OS   Arbitrary Apps   Interfaces
+                                                                                                                 keyboard
+
+                                                                                                       Action
+                                                                                                                                    OSWorld Environment
+
+
+
+
+OSWorld: Benchmarking Multimodal Agents for Open-Ended Tasks in Real Computer Environments, (Xie et al., 2024)
+
+=== PHYSICAL PAGE 12 OF 106 ===
+Agent Task Conﬁg
+
+                                         task initial env state setup                           Virtual Machine(s)   get env state
+  Task Initial State Setup Config
+                                                       Observation
+                                                     screenshot a11y-tree
+                                                                                                                       Final State
+                                                              input
+Task Instruction          input      Agent
+(See examples above)              (e.g., GPT-4V)             predict                                                 Execution-based
+                                                                                 OS   Arbitrary Apps   Interfaces       Evaluation
+                                                     mouse            keyboard
+                                                          Action                        OSWorld Environment
+
+
+ Given a computer task instruction:
+    ●      “Update the bookkeeping sheet with my recent transactions over the past few days in the provided folder.”
+
+
+
+
+   Task Instruction
+   (See examples above)
+
+=== PHYSICAL PAGE 13 OF 106 ===
+Agent Task Conﬁg
+Each computer task in OSWorld has a task initial state setup and evaluation conﬁg ﬁle.
+
+                                        Task Config
+                                        { "instruction": "Please update my bookkeeping sheet with the
+                                        recent transactions from the provided folder, detailing my expenses
+                                        over the past few days.",
+                                           "config": [{"type": "download",
+                                               "parameters": {"files": [
+                                        {"path": "/home/user/Desktop/my_bookkeeping.xlsx",
+                                          "url": "https://drive.google.com/uc?id=xxxx"},
+                                        {"path": "/home/user/Desktop/receipt_0.jpeg",
+                                          "url": "https://drive.google.com/uc?id=xxxx"},…]}},
+                                             {"type": "open",
+                                               "parameters": { "path":
+                                        "/home/user/Desktop/my_bookkeeping.xlsx"}}],
+                                            "evaluator": {"postconfig": [{"type": "activate_window",
+                                               "parameters": {"window_name": "my_bookkeeping.xlsx -
+                                        LibreOffice Calc",... ],
+                                             "result": {"type": "vm_file",
+     Task Initial State Setup Config           "path": "/home/user/Desktop/my_bookkeeping.xlsx",
+                                               "dest": "my_bookkeeping.xlsx"},
+                                             "expected": {"type": "cloud_file",
+                                               "path": "https://drive.google.com/uc?id=xxx",
+                                               "dest": "my_bookkeeping_gold.xlsx" },
+                                             "func": "compare_table",
+                                             "options": {
+   Task Instruction                            "rules": [{
+                                                   "type": "sheet_fuzzy",
+   (See examples above)
+                                                   "sheet_idx0": "RNSheet1",
+                                                   "sheet_idx1": "ENSheet1",
+                                                   "rules": [ {"range": [ "A1:A8",... }]}]
+                                        }
+
+=== PHYSICAL PAGE 14 OF 106 ===
+Agent Task Conﬁg
+The task initial state setup conﬁg is used to create a virtual machine instance, and initializes
+intermediate state for each computer task.
+
+
+
+
+                                       task initial env state setup                  Virtual Machine(s)
+     Task Initial State Setup Config
+
+
+
+
+   Task Instruction
+   (See examples above)
+                                                                      OS   Arbitrary Apps   Interfaces
+                                                                       Task-wise OSWorld Environment
+
+=== PHYSICAL PAGE 15 OF 106 ===
+Agent Observation
+Agent can receive natural language instruction, screenshots, the a11y tree, and customized
+streams such as terminal outputs.
+
+
+
+
+                                                                                      Accessibility tree
+                           Set-of-Marks
+                                          task initial env state setup                      Virtual Machine(s)
+     Task Initial State Setup Config
+                                                        Observation
+                                                      screenshot a11y-tree
+
+                                                             input
+   Task Instruction       input        Agent
+   (See examples above)            (e.g., GPT-4V)
+                                                                             OS   Arbitrary Apps   Interfaces
+                                                                              Task-wise OSWorld Environment
+
+=== PHYSICAL PAGE 16 OF 106 ===
+Agent Action Space
+After receives the observations at each step, the agent generates executable actions
+
+
+
+
+pyautogui.click(chrome_x, chrome_y) …     pyautogui.typewrite('sar 1 30 > …', interval=0.5)
+
+
+                                                                                                   Some examples of the mouse and keyboard actions
+
+
+                                                 task initial env state setup                                     Virtual Machine(s)
+       Task Initial State Setup Config
+                                                                Observation
+                                                             screenshot a11y-tree
+
+                                                                       input
+    Task Instruction       input           Agent
+    (See examples above)                (e.g., GPT-4V)                predict
+                                                                                              OS        Arbitrary Apps   Interfaces
+                                                              mouse            keyboard
+                                                                    Action                     Task-wise OSWorld Environment
+
+=== PHYSICAL PAGE 17 OF 106 ===
+   Agent Interaction Loop
+   The interaction loop between the agent and the environment repeats until an action that
+   marks termination.
+Task Instruction: monitor the system CPU for 30s and output the results
+
+
+
+
+  pyautogui.click(terminal_x, terminal_y)       pyautogui.click(focus_x, focus_y)             pyautogui.typewrite('sar 1 30 > …', interval=0.5)          Done
+
+
+
+                                                    task initial env state setup                                                   Virtual Machine(s)
+            Task Initial State Setup Config
+                                                                    Observation
+                                                                 screenshot a11y-tree
+
+                                                                           input
+         Task Instruction          input       Agent
+         (See examples above)               (e.g., GPT-4V)                predict
+                                                                                                        OS           Arbitrary Apps         Interfaces
+                                                                  mouse            keyboard
+                                                                       Action                               Task-wise OSWorld Environment
+
+=== PHYSICAL PAGE 18 OF 106 ===
+Agent Task Evaluation
+In OSWorld, we implement an execution-based reward function
+
+
+
+
+                                          task initial env state setup                           Virtual Machine(s)   get env state
+     Task Initial State Setup Config
+                                                        Observation
+                                                      screenshot a11y-tree
+                                                                                                                        Final State
+                                                               input
+   Task Instruction      input         Agent
+  (See examples above)             (e.g., GPT-4V)             predict                                                 Execution-based
+                                                                                  OS   Arbitrary Apps   Interfaces       Evaluation
+                                                      mouse            keyboard
+                                                           Action                  Task-wise OSWorld Environment
+
+=== PHYSICAL PAGE 19 OF 106 ===
+OSWorld benchmark dataset
+369 real-world computer tasks that involve real web and desktop apps in open domains, OS
+ﬁle I/O, and multi-app workﬂows. Each task example is annotated with
+ ●   A real-world task instruction from real users
+ ●   An initial state setup conﬁg to simulate human work in progress
+ ●   A custom execution-based evaluation script
+
+=== PHYSICAL PAGE 20 OF 106 ===
+OSWorld benchmark dataset
+
+=== PHYSICAL PAGE 21 OF 106 ===
+OSWorld benchmark dataset
+
+=== PHYSICAL PAGE 22 OF 106 ===
+OSWorld benchmark dataset
+
+                            ●   LLMs and VLMs from Mixtral and CogAgent
+                                (open-source), and GPT4, Gemini-pro, and
+                                Claude-3 (closed-source) as agents.
+
+
+                            ●   Prompt details (see left - much more
+                                complex prompting pipelines)
+
+
+                            ●   Temperature of 1.0 and top-p of 0.9
+
+
+                            ●   Providing the most recent 3 observations
+                                and actions as history context for each step.
+
+=== PHYSICAL PAGE 23 OF 106 ===
+OSWorld benchmark dataset
+
+ Evaluation settings:
+  ●   Accessibility tree
+  ●   Screenshot
+  ●   Screenshot + accessibility tree
+  ●   Set-of-Marks
+
+=== PHYSICAL PAGE 24 OF 106 ===
+OSWorld benchmark dataset
+                            ●   LLMs and VLMs are still far from being
+                                digital agents on real computers.
+
+
+                            ●   Agent performance ﬂuctuations vs.
+                                consistent human performance across
+                                diﬀerent types of computer tasks.
+
+
+                            ●   A11y tree and SoM’s eﬀectiveness varies by
+                                models.
+
+
+                            ●   VLM agents with screenshot-only setting
+                                show lower performance, but it should be
+                                the ultimate conﬁguration in the long run.
+
+=== PHYSICAL PAGE 25 OF 106 ===
+Result analysis of LLM/VLM agent baselines
+Higher screenshot resolution typically leads to improved performance
+
+=== PHYSICAL PAGE 26 OF 106 ===
+Result analysis of LLM/VLM agent baselines
+Longer text-based trajectory history context improves performance, unlike screenshot-only
+history, but poses eﬃciency challenges
+
+=== PHYSICAL PAGE 27 OF 106 ===
+Result analysis of LLM/VLM agent baselines
+●   The performance of VLM agents across diﬀerent OS is in strong correlation.
+
+●   Current VLM agents are not robust to UI layout and noise
+
+=== PHYSICAL PAGE 28 OF 106 ===
+Result analysis of LLM/VLM agent baselines
+●   The performance of VLM agents across diﬀerent OS is in strong correlation.
+
+●   Current VLM agents are not robust to UI layout and noise
+
+=== PHYSICAL PAGE 29 OF 106 ===
+Recent progress
+
+
+
+
+                                                            Anthropic computer use agent results on OSWorld
+
+
+
+
+hps://www.anthropic.com/news/3-5-models-and-computer-use
+
+=== PHYSICAL PAGE 30 OF 106 ===
+Recent progress
+
+
+
+
+https://openai.com/index/computer-using-agent/
+
+=== PHYSICAL PAGE 31 OF 106 ===
+Recent progress
+
+
+
+
+https://openai.com/index/computer-using-agent/
+
+=== PHYSICAL PAGE 32 OF 106 ===
+                        Agenda
+                        01   Environment/Benchmark:
+                             Should be reconﬁgurable and
+                             expandable
+
+                        02   Data: Diverse modalities,
+                             large-scale trajectory data,
+                             covering a wide range of tasks
+
+                        03   Model/System: Uniﬁed
+                             vision-language-reasoning-action
+                             model, and long-context
+                             inference.
+
+Generated from Gemini
+
+=== PHYSICAL PAGE 33 OF 106 ===
+Data Challenges for Agent Training
+●   Agent models require expensive human annotation to collect agent trajectory data.
+●   This contrasts with LLMs, which leverage existing text corpora.
+●   Human annotation is time-consuming, costly, and limits scalability.
+●   The cost and complexity of human annotation make it diﬃcult to collect diverse and
+    large-scale agent trajectory data.
+
+=== PHYSICAL PAGE 34 OF 106 ===
+No free large-scale trajectory corpus to crawl. Human
+annotation is so expensive!
+
+Why don't we let the model to synthesize?
+
+=== PHYSICAL PAGE 35 OF 106 ===
+Agenttrek: agent trajectory synthesis via guiding
+replay with web tutorials
+The internet contains a vast collection of tutorial-like text that provides step-by-step guidance
+on performing various tasks, particularly in GUI-based environments.
+
+
+
+
+Agenttrek: agent trajectory synthesis via guiding replay with web tutorials. (Xu et.al. 2024)
+
+=== PHYSICAL PAGE 36 OF 106 ===
+Automatic Tutorial Collection From Internet
+
+=== PHYSICAL PAGE 37 OF 106 ===
+AgentTrek Tutorial Source Data Flow
+
+=== PHYSICAL PAGE 38 OF 106 ===
+User Prompt for Classifying GUI Tutorials
+
+=== PHYSICAL PAGE 39 OF 106 ===
+Tag & Paraphrase
+                   ●   Platform and Target Environment:
+                       Speciﬁes the operating system, software
+                       version, and relevant dependencies.
+                   ●   Task Description: Provides a concise
+                       problem statement that deﬁnes the
+                       objective of the task.
+                   ●   Prerequisites: Lists necessary
+                       dependencies, tools, and background
+                       knowledge required to complete the task.
+                   ●   Step-by-Step Instructions: Oﬀers
+                       procedural guidance, including command
+                       syntax and sequential actions.
+                   ●   Expected Outcome: Deﬁnes the
+                       anticipated results or outputs upon
+                       successful task completion.
+                   ●
+
+=== PHYSICAL PAGE 40 OF 106 ===
+Trajectory Synthesis via Guided Replay
+
+=== PHYSICAL PAGE 41 OF 106 ===
+Example
+
+=== PHYSICAL PAGE 42 OF 106 ===
+Benchmark Comparison
+
+=== PHYSICAL PAGE 43 OF 106 ===
+Distribution of websites and domains
+
+=== PHYSICAL PAGE 44 OF 106 ===
+Comparison on WebArena
+
+=== PHYSICAL PAGE 45 OF 106 ===
+Takeaways
+●   Diverse task source with knowledge.
+●   Realistic trajectories with reasoning and
+    reﬂection.
+●   Scalable data synthesis to reuse web
+    corpus.
+
+●   However, from imitation learning to
+    reinforcement learning in environment.
+●   Combine with OSWorld (SFT→RL)
+
+=== PHYSICAL PAGE 46 OF 106 ===
+Does Multimodal LLM itself need action call capability?
+
+If does, can we crawl from web data?
+
+=== PHYSICAL PAGE 47 OF 106 ===
+Open-source MLLMs still fail at diﬃcult/complex
+questions
+
+
+
+
+   Finegrained OCR              Visual grounding & counting
+
+
+
+
+Multi-step recog. & reasoning       External knowledge
+
+=== PHYSICAL PAGE 48 OF 106 ===
+We introduce 🌮TACO: Multi-modal
+Action Models with Synthetic
+Chains-of-Thought-and-Action (CoTA)
+
+=== PHYSICAL PAGE 49 OF 106 ===
+
+=== PHYSICAL PAGE 50 OF 106 ===
+
+=== PHYSICAL PAGE 51 OF 106 ===
+
+=== PHYSICAL PAGE 52 OF 106 ===
+
+=== PHYSICAL PAGE 53 OF 106 ===
+Synthetic CoTA Generation Pipeline
+
+=== PHYSICAL PAGE 54 OF 106 ===
+
+=== PHYSICAL PAGE 55 OF 106 ===
+ Templates for programmatic data generation
+
+
+
+
+Action Set: OCR, GETOBJECTS, LOCALIZEOBJECTS, ESTIMATEOBJECTDEPTH,
+ESTIMATEREGIONDEPTH, GETIMAGETOTEXTSSIMILARITY, GETIMAGETOIMAGESSIMILARITY,
+GETTEXTTOIMAGESSIMILARITY, DETECTFACES, CROP, ZOOMIN, QUERYLANGUAGEMODEL,
+QUERYKNOWLEDGEBASE, CALCUATE, and SOLVEMATHEQUATION.
+
+=== PHYSICAL PAGE 56 OF 106 ===
+1. CoTA ﬁnetuning elicits multi-modal models' reasoning and
+action calling abilities and signiﬁcantly boosts their
+performance, which few-shot prompting fails to achieve.
+
+=== PHYSICAL PAGE 57 OF 106 ===
+2. Our best CoTA data recipe enables TACO to consistently beat
+instruction-tuned baselines by 1-4% on average across 8
+benchmarks, with signiﬁcant gains of up to 15% on MMVet.
+
+=== PHYSICAL PAGE 58 OF 106 ===
+3. Quality >> quantity: a) the smallest CoTA dataset results in
+better average performance and higher gains compared to
+larger datasets with a mix of CoTA, CoT and/or Direct
+examples.
+
+=== PHYSICAL PAGE 59 OF 106 ===
+3. Quality >> quantity: b) ﬁltering out Action-useless datasets
+also leads to performance gains.
+
+=== PHYSICAL PAGE 60 OF 106 ===
+4. Adding programmatic data can bring gains on some
+benchmarks but not on the average performance.
+
+=== PHYSICAL PAGE 61 OF 106 ===
+Takeaways
+
+●   Action call capability should be the default ability in MLLMs.
+●   CoTA ﬁnetuning >> few-shot CoTA.
+●   CoTA data consistently improves baselines trained on instruction-tuning data with only
+    direct answers.
+●   CoTA quality >> quantity.
+
+=== PHYSICAL PAGE 62 OF 106 ===
+                        Agenda
+                        01   Environment/Benchmark:
+                             Should be reconﬁgurable and
+                             expandable
+
+                        02   Data: Diverse modalities,
+                             large-scale trajectory data,
+                             covering a wide range of tasks
+
+                        03   Model/System: Uniﬁed
+                             vision-language-reasoning-acti
+                             on model, and long-context
+                             inference.
+
+Generated from Gemini
+
+=== PHYSICAL PAGE 63 OF 106 ===
+Aguvis: Uniﬁed Pure Vision Agents for
+   Autonomous GUI Interaction
+
+=== PHYSICAL PAGE 64 OF 106 ===
+Background
+
+●   Heterogeneous textual GUI interface representation
+
+●   Limited visual grounding capability
+
+●   Perform “reactive” low-level actions directly without reasoning
+
+=== PHYSICAL PAGE 65 OF 106 ===
+Observation: Complex and diﬀerent textual
+representation for GUI interface.
+
+
+
+
+   Web (HTML)         OS (AXTree)       Mobile (XML)
+
+=== PHYSICAL PAGE 66 OF 106 ===
+Diﬀerent observation representations result in diﬀerent action grounding
+spaces, even on the same platform.
+
+
+
+      Action
+      Type
+
+      click
+      hover
+      type
+      select
+
+
+  Simplified Browser API   Enhanced Browser API   Playwright Browser    PyAutoGUI OS
+       (Mind2Web)            (VisualWebArena)      HTML-based API      Vision-based API
+
+=== PHYSICAL PAGE 67 OF 106 ===
+Limited visual grounding capability
+
+=== PHYSICAL PAGE 68 OF 106 ===
+Perform “reactive” low-level actions directly
+without reasoning
+
+=== PHYSICAL PAGE 69 OF 106 ===
+Aguvis: Uniﬁed Pure Vision Agents for Autonomous
+GUI Interaction
+
+●     Heterogeneous textual GUI interface representation
+
+      -> Uniﬁed Vision-based perception and action space for GUI Interaction
+
+●     Limited visual grounding capability
+
+      -> Improving visual action grounding capability through training
+
+●     Perform “reactive” low-level actions directly without reasoning
+
+      -> Explicit reasoning process / inner monologue
+
+
+
+
+Aguvis: Uniﬁed Pure Vision Agents for Autonomous GUI Interaction (Xu et. al, 2024)
+
+=== PHYSICAL PAGE 70 OF 106 ===
+Aguvis: Uniﬁed Pure Vision Agents for Autonomous
+GUI Interaction
+
+=== PHYSICAL PAGE 71 OF 106 ===
+
+=== PHYSICAL PAGE 72 OF 106 ===
+Two-Stage Training
+
+=== PHYSICAL PAGE 73 OF 106 ===
+Data Collection Pipeline
+
+=== PHYSICAL PAGE 74 OF 106 ===
+Example of Inner monologue Augmentation
+
+=== PHYSICAL PAGE 75 OF 106 ===
+AGUVIS Collection: Open-source Uniﬁed Large
+Scale GUI Agent Data
+
+
+Stage 1: 1M+ GUI Grounding
+
+
+
+
+Stage 2: 35K multi-step
+trajectories with explicit inner
+monologue
+
+=== PHYSICAL PAGE 76 OF 106 ===
+Evaluation: GUI Grounding
+
+=== PHYSICAL PAGE 77 OF 106 ===
+Oﬄine Agent Evaluation: Mind2Web
+
+=== PHYSICAL PAGE 78 OF 106 ===
+Oﬄine Agent Evaluation: AndroidControl
+
+=== PHYSICAL PAGE 79 OF 106 ===
+Online Agent Evaluation
+
+
+
+
+  Browser Use (Mind2Web-live)   Mobile Use (AndroidWorld)
+
+=== PHYSICAL PAGE 80 OF 106 ===
+Analysis: Impact of Training Stages and Inner
+Monologue
+
+●   Both stages 1 and 2 contribute to Aguvis's performance.
+●   Inner monologue is crucial for both high-level reasoning and low-level action grounding.
+
+=== PHYSICAL PAGE 81 OF 106 ===
+Reasoning with inner monologue helps solving
+harder tasks.
+
+=== PHYSICAL PAGE 82 OF 106 ===
+Analysis: Cross-Platform Beneﬁts
+
+Despite being trained exclusively on web and mobile trajectory data, our model demonstrates
+strong generalization to desktop GUI tasks.
+
+=== PHYSICAL PAGE 83 OF 106 ===
+Takeaways
+
+●   AGUVIS is a uniﬁed framework that enables autonomous GUI agents to operate across
+    diﬀerent platforms using only visual observations.
+●   We need to improve both grounding and structured reasoning.
+
+
+
+●   Next, let’s discuss a bit on Video LLM.
+
+=== PHYSICAL PAGE 84 OF 106 ===
+Long Video meets Multimodal Agent
+
+=== PHYSICAL PAGE 85 OF 106 ===
+Standard approach for Video LMs
+●        Each frame encoded independently
+●        Concatenate per-frame token representations
+
+
+
+
+Token       Token    Token    Token       Token    Token
+ proj.       proj.    proj.    proj.       proj.    proj.
+
+=== PHYSICAL PAGE 86 OF 106 ===
+Sequential models
+
+Problem/motivation
+   We have too many tokens from too many frames
+    • Long-form videos: 10s of minutes, 1000s of frames -> 100,000s of tokens.
+   Not only for videos, but also for text and multimodal VLA
+    • Capture important details in long videos
+Objective
+  Construct a new SOTA foundation model for long sequential data
+    • Memory-based models like Token Turing Machines
+  Be eﬃcient!
+
+=== PHYSICAL PAGE 87 OF 106 ===
+xGen-MM-Vid (BLIP-3-Video)
+Introducing a new eﬃcient video foundation model
+
+
+
+
+BLIP-3-Video: You Only Need 32 Tokens to Represent a Video Even in VLMs, (Ryoo et.al. 2024)
+
+=== PHYSICAL PAGE 88 OF 106 ===
+ xGen-MM-Vid (BLIP-3-Video)
+Extension from xGen-MM (for images).
+“Temporal encoder” abstracts a video into a small # of visual tokens
+ ● 32~128 tokens per video
+
+
+
+
+ BLIP-3-Video: You Only Need 32 Tokens to Represent a Video Even in VLMs, (Ryoo et.al. 2024)
+
+=== PHYSICAL PAGE 89 OF 106 ===
+Sequential models
+Background
+
+What are sequential models?
+ ●   They take a sequence as an input
+ ●   They iterative process per-step input at a time.
+ ●   An easy example: LSTM/RNN
+
+=== PHYSICAL PAGE 90 OF 106 ===
+Diﬀerent types of temporal encoders
+
+=== PHYSICAL PAGE 91 OF 106 ===
+ (previous) Token Turing Machine                        Our new sequential encoder
+
+                                 .   Robot                                            .   Robot
+                                     control                                              control
+                     Outputs     .   vector                               Outputs     .   vector
+                                 .                          Grouped                   .
+                                                            memory
+
+                    Write                                                Write
+         Memory             Transformer                                          Transformer
+                    Read                                                 Read
+
+
+                  Tokens                                               Tokens
+                                                                         +
+                                                          Time stamp   Emb(t)
+             T                                            Embedding
+Inputs                                         Inputs
+
+=== PHYSICAL PAGE 92 OF 106 ===
+xGen-MM-Vid
+
+
+              Compared to other state-of-the-art models,
+              xGen-MM-Vid uses signiﬁcantly less number of
+              visual tokens (32 vs. 4608).
+
+
+
+
+              arXiv paper
+              website
+              tweet
+              podcasts
+              News articles
+
+=== PHYSICAL PAGE 93 OF 106 ===
+Experimental results
+
+=== PHYSICAL PAGE 94 OF 106 ===
+Multiple choice question - experiments
+
+=== PHYSICAL PAGE 95 OF 106 ===
+Ablation: Sequential model
+
+=== PHYSICAL PAGE 96 OF 106 ===
+Ablation: Number of frames and tokens
+
+Scaling our model (to digest more frames) enable better results
+
+=== PHYSICAL PAGE 97 OF 106 ===
+Video captioning experiments - examples
+
+=== PHYSICAL PAGE 98 OF 106 ===
+Blip-3-video uses online memory.
+How about oﬄine memory? RAG?
+
+=== PHYSICAL PAGE 99 OF 106 ===
+Generative Frame Sampler for Long Video
+Understanding
+
+-   Understanding long videos containing thousands of frames poses substantial challenge
+    and computational burden to VideoLLMs
+-   How to eﬃciently sample representative frames from the original video sequence?
+
+=== PHYSICAL PAGE 100 OF 106 ===
+RAG: CLIP-based sampling
+- cannot capture temporal
+relationships between frames
+- limited language understanding
+abilities
+- naive cosine similarity cannot
+achieve multi-hop reasoning
+
+=== PHYSICAL PAGE 101 OF 106 ===
+GenS-Video-150K Training Dataset
+
+-   (video, user instruction, relevant frames) samples that enable the GenS model to identify
+    salient frames for user instructions
+-   150K videos with an average duration of 647.5 seconds.
+-   Among these frames, 20% on average are annotated as relevant with ﬁne-grained
+    conﬁdence scores, providing dense supervision.
+
+=== PHYSICAL PAGE 102 OF 106 ===
+Generative Frame Sampler (GenS)
+-   Built upon an advanced long-context VideoLLM
+-   Predict relevant frame spans with conﬁdence scores as a natural language generation
+    task {“Frame Nstart-Nend: relevance score”, ...}
+-   Signiﬁcant improvement on long video understanding tasks
+
+=== PHYSICAL PAGE 103 OF 106 ===
+Train and Inference
+
+ -   Fine-tuning based on Aria: MoE with 3.9B activated parameters, SoTA video
+     understanding capabilities
+ -   Output represented as JSON-based format for both discrete frame annotations (e.g.,
+     {“frame number”: relevance score}) and continuous temporal spans (e.g., {“start frame -
+     end frame”: relevance score})
+ -   Trained on GenS-Video-150K + E.T. Instruct dataset (event localization)
+
+
+ -   Inference: sample frames from the input video at 1 FPS, inference within each 256-frame
+     interval using a sliding window approach
+
+=== PHYSICAL PAGE 104 OF 106 ===
+GenS signiﬁcantly improves Long Video QA
+
+=== PHYSICAL PAGE 105 OF 106 ===
+GenS is also SoTA on temporal grounding
+
+=== PHYSICAL PAGE 106 OF 106 ===
+Summary                                                Reasoning
+●   OSWorld (Environment)
+●   Agenttreck (Data Synthesis)
+●   TACO (Data Synthesis)
+●   Aguvis (Grounding & Reasoning)
+●   Blip-3-Video (Online Memory)           Grounding               Memory
+●   GenS (Oﬄine Memory)
+                                                        Models
+
+
+
+
+                                     Environment                            Data

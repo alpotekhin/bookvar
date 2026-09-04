@@ -1,0 +1,2011 @@
+=== PHYSICAL PAGE 1 OF 155 ===
+Open Training Recipes for
+   Accelerating
+Reasoning       the Science
+          in Language       of
+                         Models
+     Open Language Models
+          Hanna Hajishirzi
+
+=== PHYSICAL PAGE 2 OF 155 ===
+AI is here today due to open scientiﬁc
+practices and fully open models
+
+=== PHYSICAL PAGE 3 OF 155 ===
+Are we done with scientiﬁc LM
+research and innovation?
+
+=== PHYSICAL PAGE 4 OF 155 ===
+Research Still Needed
+     Science of      Extend LMs        Use LMs in
+     LMs             Beyond Text       Real World
+
+                     LMs for
+     Improve LMs                       LM Agents
+                     Science
+
+     Build Next
+     generation of   LMs for Health    Planning
+     LMs
+
+     Test-time       Mitigate LMs      Eicient
+     Inference       Risk and Biases   Models
+
+=== PHYSICAL PAGE 5 OF 155 ===
+To facilitate innovation and
+accelerate the science of LMs
+
+=== PHYSICAL PAGE 6 OF 155 ===
+              “AI institutes relying on proprietary models is like astronomy research
+              about the solar system based on pictures printed in newspapers.”
+
+
+
+
+   We need language models
+      that are fully open.
+
+Transparent            Reproducible                        Accessible
+
+=== PHYSICAL PAGE 7 OF 155 ===
+           Open Ecosystem to
+Accelerate Innovation in Language Models
+
+=== PHYSICAL PAGE 8 OF 155 ===
+Fully open ecosystem
+
+                                         o
+                                     OLMpen AI
+Develop, study, and advance LMs      Trul
+                                          y   o
+
+
+                                                               Data         Hardware
+
+Open, documented, and reproducible
+
+
+Empower AI community
+                                                   Open                      Closed
+                                                  weight   Infrastructure      API
+                                                  models                     models
+Public AI literacy
+
+=== PHYSICAL PAGE 9 OF 155 ===
+                                                Test-time
+  Pre training           Post Training
+                                                Inference
+
+
+
+
+Many slides from:
+Yizhong Wang, Nathan Lambert, Hamish Ivison, Faeze Brahman,
+Niklas Muennigho
+
+=== PHYSICAL PAGE 10 OF 155 ===
+                                       Test time
+Pre training    Post Training
+                                        Scaling
+
+                                       S1
+         2               -Instruct
+               OpenInstruct Toolkit
+               Safety Data & Toolkit
+
+=== PHYSICAL PAGE 11 OF 155 ===
+       2
+
+
+
+
+OLMo2 on par or beer than Llama3, Qwen2.5
+
+=== PHYSICAL PAGE 12 OF 155 ===
+
+=== PHYSICAL PAGE 13 OF 155 ===
+rivals DeepSeek and GPT4-o
+
+=== PHYSICAL PAGE 14 OF 155 ===
+                                                Test-time
+  Pre training          Post Training
+                                                Inference
+
+
+
+
+Many slides from:
+  Yizhong Wang, Nathan Lambert, Hamish Ivison, Faeze Brahman
+
+=== PHYSICAL PAGE 15 OF 155 ===
+        Building a modern LLM
+
+
+
+
+Pre-training               Post-training
+
+=== PHYSICAL PAGE 16 OF 155 ===
+                      Building a modern LLM
+
+
+
+
+              Pre-training                  Post-training
+
+
+
+
+Predict the next word in various contexts
+
+=== PHYSICAL PAGE 17 OF 155 ===
+                      Building a modern LLM
+                                                         Follow instructions
+
+                                            Serve apps                           Chat
+
+
+              Pre-training                                   Post-training
+
+
+                                            Avoid harm                         Use tools
+
+Predict the next word in various contexts
+                                                                Reason
+
+=== PHYSICAL PAGE 18 OF 155 ===
+Post Training for Alignment with Human Preferences
+
+
+
+
+           Post-training
+
+
+
+
+                               [Photo by @FanaHOVA on X]
+
+=== PHYSICAL PAGE 19 OF 155 ===
+Post Training for Tool Use /Agents
+
+
+                                     Searching
+
+
+
+
+          Post-training
+
+                                     Code
+                                     Execution
+
+=== PHYSICAL PAGE 20 OF 155 ===
+Post Training for Reasoning
+
+
+
+
+          Post-training
+
+=== PHYSICAL PAGE 21 OF 155 ===
+                                  Building a modern LLM
+
+
+                           Data      Models   Algorithms
+
+
+
+
+Mr. an M s. Dur y, of
+nu r u , Pri Dr e, we
+po t a t         t we
+pe c y o m , t a k
+ve m . The      r el
+pe     yo 'd e c      be
+in v i n h s an
+m te u , be e t     j
+di 't o d h h o s .
+
+                           Data                 Training   Evaluation
+
+=== PHYSICAL PAGE 22 OF 155 ===
+       Building a modern LLM
+
+
+                 Data
+• comes from different sources
+                                 Post-training
+• in different forms
+
+• targets for different
+  capabilities
+
+=== PHYSICAL PAGE 23 OF 155 ===
+How to use the right data in the right way?
+
+                       Data
+      • comes from different sources
+                                       Post-training
+      • in different forms
+
+      • targets for different
+        capabilities
+
+=== PHYSICAL PAGE 24 OF 155 ===
+       [Wang*, Ivison* et al., 2023]
+
+       [Ivison*, Wang* et al., 2023]
+
+       [Ivison, Wang et al., 2024]
+
+          [Lambert, …, Wang,
+Tülu     Dasigi, Hajishirzi, 2024]
+
+=== PHYSICAL PAGE 25 OF 155 ===
+           : Open Instruction Tuning Recipe
+u
+
+
+
+
+Best recipe for
+instruction data
+Jun 2023
+                   Best open model with
+                   preference data
+                   Nov 2023               Systematic study of
+                                          DPO vs PPO
+                                          June 2024
+
+=== PHYSICAL PAGE 26 OF 155 ===
+Open models & data
+                                  Open post-training recipe
+
+
+                 Tülu 1→2→2.5→3
+
+
+   Tülu 1
+ [Wang et al.,                      Tülu 3 [Lambert et al., Arxiv
+NeurIPS 2023]                                  2024]
+
+=== PHYSICAL PAGE 27 OF 155 ===
+Open models & data
+                                              Open post-training recipe
+
+
+                 Tülu 1→2→2.5→3
+
+
+   Tülu 1
+ [Wang et al.,                                   Tülu 3 [Lambert et al., Arxiv
+NeurIPS 2023]                                               2024]
+                 Fully-open LM
+
+
+
+
+                                 OLMo [Groeneveld et al., ACL
+                                          2024]                                  27
+
+=== PHYSICAL PAGE 28 OF 155 ===
+Open models & data
+                                              Open post-training recipe
+
+
+                 Tülu 1→2→2.5→3
+
+
+   Tülu 1
+ [Wang et al.,                                   Tülu 3 [Lambert et al., Arxiv
+NeurIPS 2023]                                               2024]
+                 Fully-open LM
+
+
+
+
+                                 OLMo [Groeneveld et al., ACL
+                                          2024]
+
+=== PHYSICAL PAGE 29 OF 155 ===
+       Training Recipe
+
+
+                            29
+                                      Veriﬁer
+
+
+
+                                       RLVR
+
+Pre-training
+               Base Model        Instruction-tuning   Tulu 3
+
+
+                                    Pref Tuning
+
+
+                                      Reward
+                                      Model
+
+=== PHYSICAL PAGE 30 OF 155 ===
+Getting Ingredients to Start With
+
+Successful adaptation starts with:
+ 1.   Meaningful evaluations for
+      targeted skills
+
+2.    Prompts of representative queries
+      for said skills
+
+3.    Check for Licenses
+
+4.    Decontamination
+
+=== PHYSICAL PAGE 31 OF 155 ===
+       Supervised Finetuning
+       (a.k.a Instruction Tuning)
+
+
+                            31
+                                      Veriﬁer
+
+
+
+                                       RLVR
+
+Pre-training
+               Base Model        Instruction-tuning   Tulu 3
+
+
+                                    Pref Tuning
+
+
+                                      Reward
+                                      Model
+
+=== PHYSICAL PAGE 32 OF 155 ===
+Supervised Finetuning
+● SFT (or Instruction tuning): Finetuning pretrained LMs with prompts and completions
+
+
+             Answer these questions one by one …         Give me a questionnaire for MBTI test.
+
+
+     Summarize the following document …
+
+
+   Write a love letter to my wife, mentioning …
+
+
+        Write a python code that can call the google   Extract the key points from the
+        map API …                                      following meeting transcript …
+
+=== PHYSICAL PAGE 33 OF 155 ===
+Data Curation
+                 • Costly
+                 • Time-consuming
+                 • High variance
+    How to
+  source data?
+
+=== PHYSICAL PAGE 34 OF 155 ===
+Data Curation
+                       • Costly
+                       • Time-consuming
+                       • High variance
+    How to
+  source data?
+
+
+
+
+                 Self-Instruct [Wang et al., ACL
+                              2023]
+                                                   34
+
+=== PHYSICAL PAGE 35 OF 155 ===
+Synthetic data
+                        • Costly
+                        • Time-consuming
+                        • High variance               Combining              ?
+     How to
+   source data?
+                                                         Hybrid Preferences
+                                                    [Miranda*, Wang* et al., 2023]
+
+
+
+
+                  Self-Instruct [Wang et al., ACL
+                               2023]
+
+=== PHYSICAL PAGE 36 OF 155 ===
+Data Curation
+
+
+
+                          36
+
+
+
+
+                                                                   Self-Instruct,
+   NaturalInstructions,
+                               Super-NaturalInstructions,        [Wang et al. 2023]
+   [Mishra et al 2022]
+                                  [Wang et al. 2022]
+
+
+
+
+      FLAN_v1,
+    [Wei et al 2022]                  InstructGPT,          Lots of instruction datasets …
+                                     [Wei et al 2022]
+
+=== PHYSICAL PAGE 37 OF 155 ===
+Supervised Finetuning: The role of data
+
+Two repeated and parallelizable tracks:
+1. Data curation: Curate data given targeted capabilities
+
+2. Data mixing: Mix data across capabilities
+
+    a. Substantial eort in ﬁltering data while maintaining performance.
+    b. Start fully with mixing before curation.
+
+=== PHYSICAL PAGE 38 OF 155 ===
+             Tülu 1: instruction tuning data mixing
+
+      SuperNI
+        CoT
+       Flan V2           created by human
+        Dolly
+  Open Assistant 1
+    Self-instruct
+Unnatural Instructions
+       Alpaca            synthesized with
+   Code-Alpaca
+   GPT4-Alpaca
+                         GPT-3/4
+        Baize
+     ShareGPT
+
+=== PHYSICAL PAGE 39 OF 155 ===
+             Tülu 1: instruction tuning data mixing
+                         Chat (vibe)
+
+      SuperNI
+        CoT
+       Flan V2
+        Dolly
+  Open Assistant 1
+    Self-instruct
+Unnatural Instructions
+       Alpaca
+   Code-Alpaca
+   GPT4-Alpaca
+        Baize
+     ShareGPT
+
+=== PHYSICAL PAGE 40 OF 155 ===
+             Tülu 1: instruction tuning data mixing
+                         Chat (vibe)   Knowledge   Reasoning   Coding   Multilinguality   Safety
+
+      SuperNI
+        CoT
+       Flan V2
+        Dolly
+  Open Assistant 1
+    Self-instruct
+Unnatural Instructions
+       Alpaca
+   Code-Alpaca
+   GPT4-Alpaca
+        Baize
+     ShareGPT
+
+=== PHYSICAL PAGE 41 OF 155 ===
+             Tülu 1: instruction tuning data mixing
+                         Chat Knowledge Reasoning Coding Multiling Safety   Average
+                                                         .
+      SuperNI
+        CoT
+       Flan V2
+        Dolly
+  Open Assistant 1
+    Self-instruct
+Unnatural Instructions
+       Alpaca
+   Code-Alpaca
+   GPT4-Alpaca
+        Baize
+     ShareGPT
+
+
+ Human + Synthetic
+
+=== PHYSICAL PAGE 42 OF 155 ===
+What type of data is useful for reasoning?
+● Response to reasoning queries are more than simple ﬁnal answer
+
+ Question: A store has a "Buy 2 Get 1 Free" deal on shirts. Each shirt costs $25. If
+ Sarah wants to buy 7 shirts, how much will she spend?
+
+ Chain-of-Thought Output:
+                                                                                              Requires
+ Let me break this down:
+ 1. With "Buy 2 Get 1 Free", every 3 shirts will cost the price of 2
+                                                                                              step-by-step
+ 2. 7 shirts can be grouped as: 2 complete sets (6 shirts) + 1 remaining shirt                thought process
+ 3. For the complete sets: * 6 shirts = 2 × (2 paid + 1 free) * Cost = 2 × (2 × $25) = $100   (aka CoT)
+ 4. For the remaining 1 shirt: * Cost = 1 × $25 = $25
+ 5. Total cost = $100 + $25 = $125
+
+ Therefore, Sarah will spend $125
+
+
+
+
+                                                                                                                42
+
+=== PHYSICAL PAGE 43 OF 155 ===
+Why Chain-of-Thought data for reasoning?
+Chain of Thought data
+
+󰗧 helps models handle complex, multi-step problems easier
+
+󰗧 reveals the model’s reasoning process43
+
+
+
+
+󰗧 makes it easier to spot errors in logic thus more trustworthy
+
+󰗧 resembles human thought process
+
+But …
+
+󰗬 Manual annotation challenges:
+
+    • time and cost intensive
+
+    • often requires expert annotations
+
+    • Diicult to scale
+
+=== PHYSICAL PAGE 44 OF 155 ===
+Why Chain-of-Thought data for reasoning?
+
+ CoT …
+
+ 󰗧 helps models handle complex, multi-step problems easier
+
+ 󰗧 reveals the model’s reasoning process
+                                     44
+
+
+
+
+ 󰗧 makes it easier to spot errors in logic thus more trustworthy
+
+ 󰗧 resembles human thought process
+
+ But …
+
+ 󰗬 Manual annotation challenges:
+
+     • time and cost intensive                                Expensive
+                                                          Time Consuming
+     • often requires expert annotations                 Not diverse enough
+     • Diicult to scale
+
+=== PHYSICAL PAGE 45 OF 155 ===
+Our Approach: Hybrid Data Creation
+
+
+                    45
+
+
+
+
+    Data mixing &
+       selection
+    from existing
+      resources
+
+=== PHYSICAL PAGE 46 OF 155 ===
+Our approach: Hybrid Data Creation
+
+
+                                           • Enable targeting specific
+                                             skills (e.g., math, code,
+                                             precise instruction
+                     46
+
+
+
+
+                                             following)
+                                           • Ensure high diversity
+     Data mixing &        Persona-driven
+                                           • Enable Scaling
+        selection         Data Synthesis
+     from existing
+       resources
+
+=== PHYSICAL PAGE 47 OF 155 ===
+Persona-driven Data generation for Scalability and Improved Diversity
+
+
+
+
+                                  47
+
+
+
+
+                    Photo from Ge et al. 2024
+
+=== PHYSICAL PAGE 48 OF 155 ===
+Persona-driven Data generation for Scalability and Improved Diversity
+
+
+
+
+                                  48
+
+
+
+
+                    Photo from Ge et al. 2024
+
+=== PHYSICAL PAGE 49 OF 155 ===
+Persona-driven Data generation for Scalability and Improved Diversity
+
+
+
+
+                                 49
+
+
+
+
+    ~250K Personas
+                                                 a coding problem     Precise Instruction Following
+
+                      ~150k hard math problems
+                      ~50k grade school math
+                      problems                   ~35k python coding       ~30k IF data
+
+=== PHYSICAL PAGE 50 OF 155 ===
+Persona-driven Data generation for Scalability and Improved Diversity
+
+
+
+
+                                 50
+
+
+
+
+    ~250K Personas
+                                                  a coding problem    Precise Instruction Following
+
+                      ~150k hard math problems
+                      ~50k grade school math
+                      problems                   ~35k python coding       ~30k IF data
+
+
+
+
+                                                                 GPT-4o /
+                                                                 Claude-sonnet
+                              Generate step-by-step solutions for {a math problem}
+
+=== PHYSICAL PAGE 51 OF 155 ===
+Impact of Persona-Driven Math Data
+                                                persona-driven synthetic
+                   public datasets    X         math problems
+
+            - General purpose (50K)   %   - Hard math problems (150K)
+            - NuminaMath-TIR (~64K)
+                        51
+                                          - Grade school math (~50K)
+
+=== PHYSICAL PAGE 52 OF 155 ===
+Impact of Persona-Driven Math Data
+
+  Adding more persona-driven math data,
+  consistently improve MATH performance
+                               52
+
+=== PHYSICAL PAGE 53 OF 155 ===
+Impact of Persona-Driven Math Data
+
+  Adding more persona-driven math data,   -   GSM8k improves (less than math)
+  consistently improve MATH performance
+                               53
+                                          -   Adding grade-school math helps
+
+=== PHYSICAL PAGE 54 OF 155 ===
+Improving data quality via voting / self-consistency
+
+
+
+                              54
+
+
+
+
+                                          Reasoning path   Answer
+
+
+
+
+Remove instances with no majority vote!
+
+=== PHYSICAL PAGE 55 OF 155 ===
+Less data, Same or Better Performance
+              Using only ~60% of the data, we are
+              still able to main the performance in
+              MATH and improve in GSM8K
+                        55
+
+=== PHYSICAL PAGE 56 OF 155 ===
+Other approaches to generate COT data
+
+1. Manual Human Annotation (e.g., GSM8K dataset): Annotators write step by step solutions
+  ● High-quality reasoning traces
+  ● Limited scale (only 7K)         56
+
+
+
+
+  ● Lack of diversity in reasoning styles
+2. Program-Aided Language Models (PAL): Convert math problems into Python code execution traces
+  • Guarantee correctness through execution
+  • Less natural language reasoning, less intuitive
+  • Limited to problems that can be coded
+3. Self-generated COT (self-ask): using LLMs to generate their reasoning paths
+  • Scalable to many problems
+  • Quality highly dependent on base model
+
+=== PHYSICAL PAGE 57 OF 155 ===
+                Capability-driven data mixing
+       Core capabilities
+
+                   Chat
+  Knowledge
+                     Reasoning             Better
+
+                                                           SFT
+       Coding                          Human + Synthetic
+
+          Safety     Multilinguality
+                                         data mix
+Math
+        Precise instruction
+        following
+               …
+
+=== PHYSICAL PAGE 58 OF 155 ===
+Data mixing for SFT
+
+
+
+
+  Training on real user interactions with strong models is helpful almost
+  across the board.
+
+  Safety training is largely orthogonal to the other skills.
+
+  Persona-based data synthesis is very useful for targeting new skills.
+
+=== PHYSICAL PAGE 59 OF 155 ===
+SFT performance potential
+
+
+
+
+  Lambert, Nathan et al. 2024. Tülu 3.
+
+=== PHYSICAL PAGE 60 OF 155 ===
+      Step 2: Preference tuning
+
+
+                            60
+                                      Veriﬁer
+
+
+
+                                       RLVR
+
+Pre-training
+               Base Model        Instruction-tuning   Tulu 3
+
+
+                                    Pref Tuning
+
+
+                                      Reward
+                                      Model
+
+=== PHYSICAL PAGE 61 OF 155 ===
+Step 2: Preference ﬁnetuning
+Preference judgments            Aligning to human preferences gives:
+
+Input: Write a haiku about AI    ●   Stronger training inﬂuence for style
+                                     and chat evaluations (e.g.
+Output 1: Sure, here’s a             ChatBotArena).
+haiku: …                         ●   Continue building capabilities of
+                                     skills from SFT, but lower absolute
+Output 2: Sorry, I cannot            magnitude of improvements.
+help you with that.
+
+=== PHYSICAL PAGE 62 OF 155 ===
+Step 2: Preference ﬁnetuning
+                                                     Preference judgments
+Aligning to human preferences gives:
+
+ ●   Stronger training inﬂuence for style and chat   Input: Write a haiku
+     evaluations (e.g. ChatBotArena).                about AI
+
+                                                     Output 1: Sure, here’s a
+ ●   Continue building capabilities of skills from
+                                                     haiku: …
+     SFT, but lower absolute magnitude of
+     improvements.                                   Output 2: Sorry, I cannot
+                                                     help you with that.
+
+=== PHYSICAL PAGE 63 OF 155 ===
+           Learning from human / AI feedback
+
+          Prompt : Explain the moon landing to a 6-year-old in a few sentences.
+
+              Response                                                     Response
+                                                        The moon landing was when some brave astronauts flew a
+ In 1969, astronauts Neil Armstrong and Buzz Aldrin     special spaceship all the way to the moon! They drove a
+ walked on the Moon for the first time, while Michael   little car called the Lunar Module and walked on the moon's
+ Collins stayed in the spaceship. They explored and     surface, leaving footprints in the dust. They even planted a
+ collected moon rocks, showing the world that humans    flag and brought back some moon rocks to show everyone
+ could visit another world in space.                    on Earth. It was a big adventure!
+
+
+
+
+Preference
+ instance
+
+=== PHYSICAL PAGE 64 OF 155 ===
+           Learning from human / AI feedback
+
+           Prompt : Explain the moon landing to a 6-year-old in a few sentences.
+
+              Response                                                         Response
+                                                            The moon landing was when some brave astronauts flew a
+ In 1969, astronauts Neil Armstrong and Buzz Aldrin         special spaceship all the way to the moon! They drove a
+ walked on the Moon for the first time, while Michael
+ Collins stayed in the spaceship. They explored and
+ collected moon rocks, showing the world that humans
+ could visit another world in space.
+                                                        <   little car called the Lunar Module and walked on the moon's
+                                                            surface, leaving footprints in the dust. They even planted a
+                                                            flag and brought back some moon rocks to show everyone
+                                                            on Earth. It was a big adventure!
+
+
+
+
+Preference                                      B is more engaging and
+                                                                                          RLHF
+ instance                                       suitable for 6-year-old
+
+=== PHYSICAL PAGE 65 OF 155 ===
+           Learning from human / AI feedback
+
+           Prompt : Explain the moon landing to a 6-year-old in a few sentences.
+
+              Response                                                         Response
+                                                            The moon landing was when some brave astronauts flew a
+ In 1969, astronauts Neil Armstrong and Buzz Aldrin         special spaceship all the way to the moon! They drove a
+ walked on the Moon for the first time, while Michael
+ Collins stayed in the spaceship. They explored and
+ collected moon rocks, showing the world that humans
+ could visit another world in space.
+                                                        <   little car called the Lunar Module and walked on the moon's
+                                                            surface, leaving footprints in the dust. They even planted a
+                                                            flag and brought back some moon rocks to show everyone
+                                                            on Earth. It was a big adventure!
+
+
+
+
+Preference                                      B is more engaging and
+                                                                                          RLAIF
+ instance                                       suitable for 6-year-old
+
+=== PHYSICAL PAGE 66 OF 155 ===
+Step 2: Unpacking RLHF
+
+=== PHYSICAL PAGE 67 OF 155 ===
+Step 2: Unpacking RLHF
+
+
+            Environment
+
+
+
+                      Reward
+
+    State                  Action
+
+
+
+            Policy:
+
+=== PHYSICAL PAGE 68 OF 155 ===
+          Step 2: Unpacking RLHF
+
+
+                         Environment
+
+
+
+                                   Reward
+
+              State                     Action
+Prompt:
+
+
+                      LM Policy:
+
+=== PHYSICAL PAGE 69 OF 155 ===
+          Step 2: Unpacking RLHF
+
+
+                         Environment
+
+
+
+                                   Reward
+
+              State                     Action
+Prompt:                                          Response:
+
+
+                      LM Policy:
+
+=== PHYSICAL PAGE 70 OF 155 ===
+          Step 2: Unpacking RLHF
+
+                Reward model
+
+
+
+
+                                Reward
+
+              State                  Action
+Prompt:                                       Response:
+
+                      LM
+                      Policy:
+
+=== PHYSICAL PAGE 71 OF 155 ===
+                     Step 2: Unpacking RLHF
+ Preference data:
+                           Reward model
+         Prompt:
+       Responses:
+       Preference:
+
+                                              Reward
+Policy training data:
+                         State                         Action
+        Prompt:                                                 Response:
+
+
+                                 LM Policy:
+
+
+
+                           [Christiano et al., 2017]
+
+=== PHYSICAL PAGE 72 OF 155 ===
+                     Step 2: Unpacking RLHF
+ Preference data:
+                           Reward model
+         Prompt:
+       Responses:
+       Preference:
+
+                                           Reward
+Policy training data:
+                         State                       Action
+        Prompt:                                               Response:
+
+
+
+
+           PPO
+           training:
+                            [Shulman et al., 2017]
+
+=== PHYSICAL PAGE 73 OF 155 ===
+                                             π: LLM policy
+RLHF objective → PPO                         πθ: base LLM
+                                             x: prompt
+                                             y: completion
+
+
+
+
+   Optimize “reward” inspired ▲   ▲ Constrain the model to
+   by human preferences           stay close to the base LM
+                                  (preferences are hard to
+                                  model)
+
+=== PHYSICAL PAGE 74 OF 155 ===
+What if we just use gradient ascent on this equation?
+
+
+
+The answer, with some math, is:
+Direct Preference Optimization (DPO)
+
+
+
+
+                                           Rafailov, Sharma, Mitchell et al. 2023
+
+=== PHYSICAL PAGE 75 OF 155 ===
+                     Step 2: Unpacking RLHF
+ Preference data:
+                           Reward model
+         Prompt:
+       Responses:
+       Preference:
+                            Train              Reward
+Policy training data:
+                         State                             Action
+        Prompt:                                                     Response:
+
+
+
+
+   DPO
+   training:
+                                 [Rafailov et al., 2023]
+
+=== PHYSICAL PAGE 76 OF 155 ===
+Preference Tuning Optimization Algorithm
+
+                                 Proximal Policy Optimization (PPO;
+                                 Schulman et al., 2017) ﬁrst trains a reward
+                                 model and then uses RL to optimize the
+                                 policy to maximize those rewards.
+
+                                 Direct Preference Optimization (DPO;
+                                 Rafailov et al., 2024) directly optimizes the
+                                 policy on the preference dataset; no
+                                 explicit reward model.
+
+                                 SimPO (Meng et al., 2024) does not use a
+                                 reference model.
+
+                                 Length-normalized DPO normalizes
+                                 log-likelihoods of preferred and rejected
+                                 responses by their lengths.
+
+=== PHYSICAL PAGE 77 OF 155 ===
+Preference Tuning Optimization Algorithm
+
+PPO consistently outperforms
+DPO, but at the cost of:
+ ● Implementation complexity
+ ● Memory usage, and
+ ● Throughput
+
+
+ Normally can get ~1% improvement
+  from switching from DPO to PPO
+
+=== PHYSICAL PAGE 78 OF 155 ===
+                  DPO vs. PPO
+       DPO                         PPO
+
+
+Preference
+                     Preference          Reward Model
+Data
+                     Data
+
+
+
+                                         Generations
+   Policy Model
+
+
+
+                         Prompts          Policy Model
+
+=== PHYSICAL PAGE 79 OF 155 ===
+                What components matter for LMs?
+
+
+
+  Average
+
+Performance
+
+
+
+
+              Initial SFT
+
+=== PHYSICAL PAGE 80 OF 155 ===
+                What components matter for LMs?
+
+
+                       DPO w.
+  Average                weak
+                       pref. data
+
+Performance
+
+
+
+
+              Initial SFT
+
+=== PHYSICAL PAGE 81 OF 155 ===
+                What components matter for LMs?
+
+                                    DPO w.
+                                     better
+                       DPO w.
+  Average
+                                    pref. data
+                         weak
+                       pref. data
+
+Performance
+
+
+
+
+              Initial SFT
+
+=== PHYSICAL PAGE 82 OF 155 ===
+                What components matter for LMs?
+                                                       PPO w.
+                                                 DPO    bigger
+                                                  ↓    reward
+                                    DPO w.             model
+                                                 PPO
+                                     better
+                       DPO w.
+  Average
+                                    pref. data
+                         weak
+                       pref. data
+
+Performance
+
+
+
+
+              Initial SFT
+
+=== PHYSICAL PAGE 83 OF 155 ===
+                What components matter for LMs?
+                                                       PPO w.
+                                                                 PPO w.
+                                                 DPO    bigger
+                                                                  mixed
+                                                  ↓    reward
+                                    DPO w.                       prompts
+                                                 PPO   model
+                                     better
+                       DPO w.
+  Average
+                                    pref. data
+                         weak
+                       pref. data
+
+Performance
+
+
+
+
+              Initial SFT
+
+=== PHYSICAL PAGE 84 OF 155 ===
+                      What components matter for LMs?
+                                                                                     PPO w.
+                                                                                                  PPO w.
+                                                                    DPO               bigger
+                                                                 Algorithm           Model         mixed
+                                                                                                    Data
+                                                                     ↓               reward
+                                                 DPO w.
+                                                 Data                                             prompts
+                                                                    PPO              model
+                                                  better
+                               DPO w.
+        Average
+                             Algorithm           pref. data
+                                weak
+                              pref. data
+
+      Performance
+
+
+
+
+                    Initial SFT
+
+                                           Ivison*, Wang* et al. 2023; Ivison, Wang et al. 2024
+Part 3: Open models & data                                                                                  84
+
+=== PHYSICAL PAGE 85 OF 155 ===
+Takeaways
+
+ ● Most important factor: High quality data
+
+ ● PPO beer than DPO in performance, but the cheapness
+   of DPO makes it more practical for development
+
+ ● Scaling RMs does not always yield beer downstream
+   models!
+
+ ● Using in-domain prompts can yield further performance
+   improvements
+
+=== PHYSICAL PAGE 86 OF 155 ===
+Putting all these for Tulu 3
+
+
+
+
+                               86
+
+=== PHYSICAL PAGE 87 OF 155 ===
+Putting all these for Tulu 3
+
+
+
+
+• We reﬁned and scaled up the Ultrafeedback [Cui et al., 2023] for preference data generation.
+
+                                                                                                 87
+
+=== PHYSICAL PAGE 88 OF 155 ===
+Putting all these for Tulu 3
+
+
+
+
+ • We experimented with SimPO [Meng et al., 2024], but ended up with the
+  length-normalized DPO.
+                                                                           88
+
+=== PHYSICAL PAGE 89 OF 155 ===
+ Step 2: Tulu 3 Preference tuning
+
+
+
+
+Using SFT vs new prompts   Off- vs On-policy preferences   Different LM Judges
+
+
+
+
+                                                                                 89
+
+=== PHYSICAL PAGE 90 OF 155 ===
+      Step 3: RLVR
+
+
+                            90
+                                      Veriﬁer
+
+
+
+                                       RLVR
+
+Pre-training
+               Base Model        Instruction-tuning   Tulu 3
+
+
+                                    Pref Tuning
+
+
+                                      Reward
+                                      Model
+
+=== PHYSICAL PAGE 91 OF 155 ===
+Over-optimization
+
+=== PHYSICAL PAGE 92 OF 155 ===
+Over-optimization
+
+=== PHYSICAL PAGE 93 OF 155 ===
+Over-optimization
+
+=== PHYSICAL PAGE 94 OF 155 ===
+Perils of over-optimization
+
+=== PHYSICAL PAGE 95 OF 155 ===
+               Why? Neural RM…
+
+
+
+What is a
+Tulu? A Tulu
+                                 Score: 10.5
+is a camel
+that…
+
+=== PHYSICAL PAGE 96 OF 155 ===
+               Why? Neural RM…
+
+
+
+What is a
+Tulu? A Tulu                     Score: 10.5
+is a camel
+that…
+
+=== PHYSICAL PAGE 97 OF 155 ===
+         Simplifying the reward model:
+             rule-based rewards
+
+
+                         if answer == gold label:
+   What is                  return 1
+                                                        Score: 1
+   2+2? 4.               else:
+                            return 0
+
+
+
+Can we just remove this complex setup and use simpler ‘models’…?
+
+=== PHYSICAL PAGE 98 OF 155 ===
+Tülu 3: RL with verifiable rewards
+
+            Reward model                 ��Problems (e.g., math) have
+                                              ground truth answers, but
+                                              no good thinking process.
+
+                               Reward
+
+          State                     Action
+Prompt:                                         Response:
+
+
+                  LM Policy:
+
+=== PHYSICAL PAGE 99 OF 155 ===
+     Tülu 3: RL with verifiable rewards
+Reward model    Verification function
+                            1 if correct
+                            0 otherwise
+
+
+
+                                    Reward
+
+               State                       Action
+    Prompt:                                         Response:
+
+
+                       LM Policy:
+
+=== PHYSICAL PAGE 100 OF 155 ===
+          Tülu 3: RL with verifiable rewards
+
+    GSM8K training set              Verification function
+                                             1 if correct
+     MATH training set
+                                             0 otherwise
+
+Precise instruction following
+                                                     Reward
+
+                                State                       Action
+          Prompt:                                                    Response:
+
+
+                                        LM Policy:
+
+=== PHYSICAL PAGE 101 OF 155 ===
+          Tülu 3: RL with verifiable rewards
+
+    GSM8K training set               Verification function
+Any supervised training?
+                                              1 if correct
+    MATH training set
+• w. ground truth answers                     0 otherwise
+
+•Precise
+    w.o. instruction following
+          thinking process
+                                                      Reward
+
+                                 State                       Action
+         Prompt:                                                      Response:
+
+
+                                         LM Policy:
+
+=== PHYSICAL PAGE 102 OF 155 ===
+                         Tülu 3: RL with verifiable rewards
+
+                  GSM8K training set                  Verification function
+                                                                               R1
+                                                               if correct
+                  MATH training set
+                                                               otherwise
+             Precise instruction following
+                                                                     Reward
+
+                                                State                       Action
+                        Prompt:                                                           Response:
+
+
+                                                        LM Policy:
+
+
+
+
+Part 3: Open models & data                   Lambert, …, Wang, Dasigi, Hajishirzi, 2024               10
+
+=== PHYSICAL PAGE 103 OF 155 ===
+Step 3: Reinforcement learning w. veriﬁable rewards
+
+  • ✅ Gold ﬁnal answers or veriﬁable constraints.
+  • ❌ intermediate chain of thoughts or not matching model.
+  • Classical RL! (We used PPO for optimization)
+  • We tried it using three datasets.
+
+
+
+
+                                                              1
+                                                              0
+                                                              3
+
+=== PHYSICAL PAGE 104 OF 155 ===
+                    Experimental Setup
+1. Start from Tulu 3 DPO and SFT
+
+2. Use a targeted dataset + paired veriﬁer
+
+3. Train with PPO
+
+                         Evaluation          Training Data
+
+
+                         GSM8k        GSM8k train set (~7k)
+
+                          MATH        MATH train set (~7k)
+
+                          IFEval      IF persona set(~15k)
+
+                          BBH          Flan dataset (~90k)
+
+=== PHYSICAL PAGE 105 OF 155 ===
+                    Experimental Setup
+1. Start from Tulu 3 DPO and SFT
+           1
+2. Use a 0
+        targeted dataset + paired veriﬁer
+           5
+
+
+3. Train with PPO
+
+=== PHYSICAL PAGE 106 OF 155 ===
+                    Experimental Setup
+1. Start from Tulu 3 DPO and SFT
+           1
+2. Use a 0
+        targeted dataset + paired veriﬁer
+           6
+
+
+3. Train with PPO
+
+=== PHYSICAL PAGE 107 OF 155 ===
+RL ﬁnetuning
+Training curves
+
+
+
+
+https://github.com/all
+enai/open-instruct
+
+=== PHYSICAL PAGE 108 OF 155 ===
+Training Curves
+
+
+
+
+GSM8k
+
+=== PHYSICAL PAGE 109 OF 155 ===
+    Training Curves
+
+
+1
+0
+9
+
+
+    GSM8k        MATH
+
+=== PHYSICAL PAGE 110 OF 155 ===
+    Training Curves
+
+
+1
+1
+0
+
+
+    GSM8k               MATH
+
+
+     No over-optimisation!
+
+=== PHYSICAL PAGE 111 OF 155 ===
+    Training Curves
+
+
+1
+1
+1
+
+
+    GSM8k        MATH
+
+
+
+
+    IFEval
+
+=== PHYSICAL PAGE 112 OF 155 ===
+    Training Curves
+
+
+1
+1
+2
+
+
+    GSM8k        MATH
+
+
+
+
+    IFEval       BBH
+
+=== PHYSICAL PAGE 113 OF 155 ===
+What training looks like
+“It just works” → lots of improvements to ﬁnd with near-term research.
+Example: OLMo 2 chaining multiple RLVR stages
+
+=== PHYSICAL PAGE 114 OF 155 ===
+RLVR is not really new!
+
+   Doing RL against binary / sparse signals is not that new. What has
+   changed?
+
+=== PHYSICAL PAGE 115 OF 155 ===
+Make it easier: Veriﬁable, rule-based rewards
+
+  Doing RL against binary / sparse signals is not that new. What has
+  changed?
+
+  A: base model quality (and knowledge of CoT)
+
+=== PHYSICAL PAGE 116 OF 155 ===
+Step 3: Reinforcement learning w. veriﬁable rewards
+                     Breaking it down…
+
+=== PHYSICAL PAGE 117 OF 155 ===
+Tülu 3 Smaller Scale: Surpassing cutting-edge models
+                       Open-weight models   Proprietary models
+
+
+
+
+                                                                 11
+                                                                 7
+
+=== PHYSICAL PAGE 118 OF 155 ===
+RLVR works beer at scale
+
+=== PHYSICAL PAGE 119 OF 155 ===
+Expect future improvements!
+
+=== PHYSICAL PAGE 120 OF 155 ===
+       Training Recipe
+
+
+                            12
+                             0        Veriﬁer
+
+
+
+                                       RLVR
+
+Pre-training
+               Base Model        Instruction-tuning   Tulu 3
+
+
+                                    Pref Tuning
+
+
+                                      Reward
+                                      Model
+
+=== PHYSICAL PAGE 121 OF 155 ===
+https://playground.allenai.org/
+
+=== PHYSICAL PAGE 122 OF 155 ===
+                                          Tülu & OLMo
+
+                                     Tülu: Fully-open post-training recipe
+                                                                                              Same
+                                                                                       post-training recipe
+
+
+
+                             Llama base models
+                                                                    OLMo: fully-open LM
+
+
+                                  Groeneveld et al, 2024 (ACL 2024 best theme paper)
+Part 3: Open models & data                                                                                    12
+
+=== PHYSICAL PAGE 123 OF 155 ===
+                               Test-time
+Pre training   Post Training
+                               Inference
+
+=== PHYSICAL PAGE 124 OF 155 ===
+Minimal recipe for Reasoning & Test-time scaling
+
+=== PHYSICAL PAGE 125 OF 155 ===
+Minimal recipe for Reasoning & Test-time scaling
+
+
+
+ Data          Test-time scaling
+  s1K     +      Budget forcing     =     s1
+
+=== PHYSICAL PAGE 126 OF 155 ===
+Data
+
+=== PHYSICAL PAGE 127 OF 155 ===
+      Data: Collect 59K questions
+
+
+s1-prob       Show that the uniform distribution on \\([0,1]\\] is not the convolution of
+                        two independent, identically distributed variables.
+
+
+
+
+s1-teasers   Suppose you roll three fair 100-sided die. What is the expected value of
+                                          the lowest roll?
+
+
+
+
+                                                                                   …
+
+=== PHYSICAL PAGE 128 OF 155 ===
+Data Filtering
+                             59K
+                 Quality
+                             52K
+                 Diiculty
+
+                             24K
+                 Diversity
+                             1K
+
+=== PHYSICAL PAGE 129 OF 155 ===
+                      Distill reasoning traces & answers
+
+An often-repeated fun fact is that humans produce more power per unit volume than stars. If the sun were the
+same size, but it produced the same amount of power per unit volume as a human, what would its surface
+temperature be?...
+
+=== PHYSICAL PAGE 130 OF 155 ===
+                      Distill reasoning traces & answers
+
+An often-repeated fun fact is that humans produce more power per unit volume than stars. If the sun were the
+same size, but it produced the same amount of power per unit volume as a human, what would its surface
+temperature be?...
+
+
+
+
+        s1: Google Gemini
+ The problem asks for the surface temperature of
+ the sun if it had the same size but produced
+ power per unit volume as a human.
+
+ First, let's find the power density of a human…
+
+=== PHYSICAL PAGE 131 OF 155 ===
+                      Distill reasoning traces & answers
+
+An often-repeated fun fact is that humans produce more power per unit volume than stars. If the sun were the
+same size, but it produced the same amount of power per unit volume as a human, what would its surface
+temperature be?...
+
+
+
+
+        s1: Google Gemini                                            s1.1: DeepSeek r1
+ The problem asks for the surface temperature of           Okay, so there's this fun fact saying that humans
+ the sun if it had the same size but produced              produce more power per unit volume than stars.
+ power per unit volume as a human.                         The question is asking if the Sun were the same
+                                                           size as a human (but with the same power per
+ First, let's find the power density of a human…           unit volume as a human), what would its surface
+                                                           temperature be? The answer choices are given,
+                                                           and I need to figure out which one is correct…
+
+=== PHYSICAL PAGE 132 OF 155 ===
+s1K: 1000 high-quality, difficult & diverse samples
+
+=== PHYSICAL PAGE 133 OF 155 ===
+Test-time scaling
+
+=== PHYSICAL PAGE 134 OF 155 ===
+Budget Forcing
+
+
+                 Force model to
+                 think longer by
+                 adding “Wait”
+
+=== PHYSICAL PAGE 135 OF 155 ===
+Training & Results
+
+=== PHYSICAL PAGE 136 OF 155 ===
+Test Time Scaling Results
+
+=== PHYSICAL PAGE 137 OF 155 ===
+Zooming In
+
+=== PHYSICAL PAGE 138 OF 155 ===
+Sequential vs. Parallel Test Time Scaling Method
+
+=== PHYSICAL PAGE 139 OF 155 ===
+Data Ablations   Scaling Ablations
+
+=== PHYSICAL PAGE 140 OF 155 ===
+ Scaling Ablations
+
+
+BF = Budet Forcing
+
+T/S/C-CC =
+Token/Step/Class-
+Conditonal Control
+
+
+RS = Rejection Sampling
+
+=== PHYSICAL PAGE 141 OF 155 ===
+                            s1: Simple test-time scaling
+ 1)   Train sample-efficient reasoning model
+
+
+                           1000 diverse
+                           samples
+
+
+
+
+Better MATH
+than o1
+
+
+
+
+                                               arxiv.org/abs/2501.19393
+
+=== PHYSICAL PAGE 142 OF 155 ===
+                            s1: Simple test-time scaling
+ 1)   Train sample-efficient reasoning model                2) Scale performance at test-time with budget forcing
+
+
+                           1000 diverse                                                        Force model to
+                           samples                                                             think longer by
+                                                                                               adding “Wait”
+
+
+
+
+Better MATH
+than o1                                                  Scale
+                                                         performance
+
+
+
+                                               arxiv.org/abs/2501.19393
+
+=== PHYSICAL PAGE 143 OF 155 ===
+                                     Test-time
+Pre training         Post Training
+                                     Inference
+
+
+
+
+ Open Pre Training
+
+=== PHYSICAL PAGE 144 OF 155 ===
+“Base” models via two stage training
+                         warmup to
+         learning        max (3e-4)
+         rate
+
+
+          3e-4
+
+
+
+
+         5e-5
+
+
+            0                                                       tokens
+           <10B tokens           Trillions of tokens   50B tokens
+
+=== PHYSICAL PAGE 145 OF 155 ===
+“Base” models via two stage training
+         learning
+         rate
+
+
+          3e-4                     cosine decay
+                                   to 5e-5
+
+
+
+
+         5e-5
+
+
+            0                                                  tokens
+           <10B tokens   Trillions of tokens      50B tokens
+
+=== PHYSICAL PAGE 146 OF 155 ===
+“Base” models via two stage training
+         learning
+         rate
+
+
+          3e-4
+
+
+
+
+                                                       linear to 0
+         5e-5
+
+
+            0                                                   tokens
+           <10B tokens   Trillions of tokens   50B tokens
+
+=== PHYSICAL PAGE 147 OF 155 ===
+“Base” models via two stage training
+         learning
+         rate
+                                    Pre-training                Mid-training
+
+          3e-4
+
+
+
+
+                                                           linear to 0
+         5e-5
+
+
+            0                                                         tokens
+           <10B tokens   Trillions of tokens       50B tokens
+
+=== PHYSICAL PAGE 148 OF 155 ===
+“Base” models via two stage training
+
+                                   Pre-training                        Mid-training
+                                  ➤ 99% training                      ➤ 1% training
+                                  budget, trillions of                budget only
+                                  tokens
+                                                                      ➤ upsample high
+                                  ➤ unstructured,                     quality, in-domain,
+                                  diverse text                        even SFT data
+
+                                  ➤ use “best” data                   ➤ best use of
+                                  close to your                       good data that
+                                  compute budget                      isn’t enough for
+                                                                      pretraining
+
+
+
+                                                                              tokens
+          <10B tokens   Trillions of tokens              50B tokens
+
+=== PHYSICAL PAGE 149 OF 155 ===
+Pretraining Data
+
+=== PHYSICAL PAGE 150 OF 155 ===
+Mid-training Data
+
+● Instruction data
+
+ ● Synthetic data
+
+ ● Domain upsampling
+
+ ● New data sources
+   scarce at stage 1
+
+=== PHYSICAL PAGE 151 OF 155 ===
+Improvement after mid-training
+
+=== PHYSICAL PAGE 152 OF 155 ===
+       2
+
+
+
+
+OLMo2 on par or beer than Llama3, Qwen2.5
+
+=== PHYSICAL PAGE 153 OF 155 ===
+Research Still Needed
+     Science of      Extend LMs        Use LMs in
+     LMs             Beyond Text       Real World
+
+                     LMs for
+     Improve LMs                       LM Agents
+                     Science
+
+     Build Next
+     generation of   LMs for Health    Planning
+     LMs
+
+     Test-time       Mitigate LMs      Eicient
+     Inference       Risk and Biases   Models
+
+=== PHYSICAL PAGE 154 OF 155 ===
+     Thanks to my students
+the OLMo team, and collaborators
+
+
+
+
+         … and many more (ordered arbitrarily)
+
+=== PHYSICAL PAGE 155 OF 155 ===
+Human Preference Evaluation
+
+
+
+
+             The largest studies for VLMs
+             with 325k pairwise comparisons
+             and 870 human annotators

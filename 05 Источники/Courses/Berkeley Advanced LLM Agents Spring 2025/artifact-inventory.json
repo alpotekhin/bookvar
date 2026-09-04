@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "course": "Berkeley Advanced LLM Agents",
+  "offering": "Spring 2025",
+  "status": "inventory complete; editorial integration pending",
+  "counts": {
+    "meeting_bundles": 12,
+    "official_pdfs": 13,
+    "physical_pdf_pages": 1254,
+    "recordings": 12,
+    "individual_readings": 37,
+    "source_objects": 64,
+    "semantic_units": 212,
+    "coverage_rows": 212,
+    "visual_rows": 161
+  },
+  "reading_distribution": [
+    3,
+    3,
+    3,
+    3,
+    2,
+    4,
+    2,
+    4,
+    3,
+    4,
+    2,
+    4
+  ],
+  "decks": [
+    {
+      "id": "meeting-01-intro",
+      "meeting_date": "2025-01-27",
+      "pages": 16,
+      "bytes": 1730219,
+      "sha256": "23e4671905c456b879bd92b6ca98fcd5b836f9d875aa3b0c6813f5e909a85f47",
+      "role": "additional official intro deck in meeting 1"
+    },
+    {
+      "id": "meeting-01-slides",
+      "meeting_date": "2025-01-27",
+      "pages": 74,
+      "bytes": 12364433,
+      "sha256": "7c17e9d9baf8a3759a016872c17b1f5cce2e4d7691698b2799f6e7a2bd7ff576",
+      "role": "official lecture deck"
+    },
+    {
+      "id": "meeting-02-slides",
+      "meeting_date": "2025-02-03",
+      "pages": 106,
+      "bytes": 20453927,
+      "sha256": "84b5901763f7fc08d5622c824784d3ca8d304ceaf613a8d4b2ef8529b0ee0be3",
+      "role": "official lecture deck"
+    },
+    {
+      "id": "meeting-03-slides",
+      "meeting_date": "2025-02-10",
+      "pages": 80,
+      "bytes": 10016389,
+      "sha256": "748182d9be6e05589bf0664b4e8c08f55671c8d70e1a64ab031ebcf02fc3fd07",
+      "role": "official lecture deck"
+    },
+    {
+      "id": "meeting-04-slides",
+      "meeting_date": "2025-02-24",
+      "pages": 155,
+      "bytes": 22415095,
+      "sha256": "6a4df80ff062cc6014b3c86d2d08d4256e059b5a9bf12a4926eda89327d37bf7",
+      "role": "official lecture deck"
+    },
+    {
+      "id": "meeting-05-slides",
+      "meeting_date": "2025-03-03",
+      "pages": 55,
+      "bytes": 3503777,
+      "sha256": "c242e0298f5c46adf38af284637209a0986db7fca2b63c626dd29218b5dd809e",
+      "role": "official lecture deck"
+    },
+    {
+      "id": "meeting-06-slides",
+      "meeting_date": "2025-03-10",
+      "pages": 126,
+      "bytes": 11619905,
+      "sha256": "62ee4ac4383854062ef2e04242337ccbc34d52aef87f16c3b88b1c797a7220a0",
+      "role": "official lecture deck"
+    },
+    {
+      "id": "meeting-07-slides",
+      "meeting_date": "2025-03-17",
+      "pages": 106,
+      "bytes": 21268799,
+      "sha256": "3f12ea7b44c64d43d3c3804596700feacda59a26290ba188935fdd5cdde3847d",
+      "role": "official lecture deck"
+    },
+    {
+      "id": "meeting-08-slides",
+      "meeting_date": "2025-03-31",
+      "pages": 112,
+      "bytes": 10975911,
+      "sha256": "94bd68c2fdb534d57459a8b96f2a80ada96fd14a58b36626016d4a9f601866ab",
+      "role": "official lecture deck"
+    },
+    {
+      "id": "meeting-09-slides",
+      "meeting_date": "2025-04-07",
+      "pages": 114,
+      "bytes": 3112537,
+      "sha256": "2117a841c12dfc6850290f85c87dd9d15cc8d0327d3740fffa5d3277dfb01001",
+      "role": "official lecture deck"
+    },
+    {
+      "id": "meeting-10-slides",
+      "meeting_date": "2025-04-14",
+      "pages": 118,
+      "bytes": 18176794,
+      "sha256": "1c91d93b766b12ae1ddaaf3dc5575e8b8011b06505f3f7a9404ec13520fec78d",
+      "role": "official lecture deck"
+    },
+    {
+      "id": "meeting-11-slides",
+      "meeting_date": "2025-04-21",
+      "pages": 93,
+      "bytes": 3920144,
+      "sha256": "ff4ecc5cacafe5d9fd3253ca28c968e8034466770c1e9d67481a7d51a7f70cc4",
+      "role": "official lecture deck"
+    },
+    {
+      "id": "meeting-12-slides",
+      "meeting_date": "2025-04-28",
+      "pages": 99,
+      "bytes": 6920712,
+      "sha256": "395a0add9ee6328bc4206a042b90dbc70063fc6a8aa0420ad4483ffe0d2cab6b",
+      "role": "official lecture deck"
+    }
+  ],
+  "restriction_flags": [
+    {
+      "source_object": "meeting-06-slides",
+      "physical_page": 117,
+      "disposition": "excluded",
+      "rights_scope": "do-not-reuse; preserve unchanged official archive only"
+    }
+  ]
+}

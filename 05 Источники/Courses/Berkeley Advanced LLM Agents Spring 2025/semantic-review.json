@@ -1,0 +1,248 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-09-04",
+  "reviewer": "Codex source audit",
+  "method": "Every physical page of every official PDF was inspected in ordered contact sheets, cross-checked against pdftotext -layout output, and grouped into explicitly named semantic sections. Administrative pages and the source-marked confidential page are explicit exclusions; no keyword or one-row-per-page proxy was used.",
+  "decks": [
+    {
+      "id": "meeting-01-intro",
+      "page_count": 16,
+      "artifact_role": "additional official intro deck in meeting 1",
+      "sections": [
+        {"title": "Course identity, instructors, and staff", "semantic_id": "course-identity-and-staff", "kind": "section", "page_start": 1, "page_end": 2, "visual_kind": "orientation"},
+        {"title": "Prior course context and the LLM-agent frame", "semantic_id": "prior-course-and-agent-frame", "kind": "section", "page_start": 3, "page_end": 5, "visual_kind": "comparison"},
+        {"title": "From language-model progress to reasoning agents", "semantic_id": "reasoning-agent-progress", "kind": "mechanism", "page_start": 6, "page_end": 9, "visual_kind": "concept-sequence"},
+        {"title": "Course topic map", "semantic_id": "course-topic-map", "kind": "section", "page_start": 10, "page_end": 10, "visual_kind": "topic-map"},
+        {"title": "Lab, grading, final project, and course timeline", "semantic_id": "official-coursework-contract", "kind": "section", "page_start": 11, "page_end": 15, "visual_kind": "coursework-sequence"},
+        {"title": "Course website pointer", "semantic_id": "course-website-pointer", "kind": "administrative", "page_start": 16, "page_end": 16, "visual_kind": "administrative", "disposition": "excluded", "reason": "administrative pointer only", "evidence": "The page contains only the course website pointer; the locked official syllabus is the authoritative catalogue source."}
+      ]
+    },
+    {
+      "id": "meeting-01-slides",
+      "page_count": 74,
+      "sections": [
+        {"title": "Inference-time reasoning orientation", "semantic_id": "inference-time-reasoning-orientation", "kind": "section", "page_start": 1, "page_end": 1, "visual_kind": "orientation"},
+        {"title": "Reasoning-model context and scaling premise", "semantic_id": "reasoning-model-context", "kind": "section", "page_start": 2, "page_end": 6, "visual_kind": "comparison"},
+        {"title": "Lecture outline before prompting", "semantic_id": "outline-before-prompting", "kind": "administrative", "page_start": 7, "page_end": 8, "visual_kind": "administrative", "disposition": "excluded", "reason": "repeated lecture outline", "evidence": "Pages are navigation dividers, not an independent technical claim."},
+        {"title": "Prompting for explicit reasoning", "semantic_id": "prompting-for-reasoning", "kind": "mechanism", "page_start": 9, "page_end": 14, "visual_kind": "worked-example"},
+        {"title": "Analogical reasoning and demonstration retrieval", "semantic_id": "analogical-reasoning", "kind": "mechanism", "page_start": 15, "page_end": 22, "visual_kind": "mechanism-sequence"},
+        {"title": "Automatic prompt optimization", "semantic_id": "automatic-prompt-optimization", "kind": "mechanism", "page_start": 23, "page_end": 28, "visual_kind": "mechanism-sequence"},
+        {"title": "Problem decomposition and Self-Discover", "semantic_id": "decomposition-and-self-discover", "kind": "mechanism", "page_start": 29, "page_end": 37, "visual_kind": "pipeline"},
+        {"title": "Lecture outline before self-consistency", "semantic_id": "outline-before-self-consistency", "kind": "administrative", "page_start": 38, "page_end": 38, "visual_kind": "administrative", "disposition": "excluded", "reason": "repeated lecture outline", "evidence": "The page is a navigation divider."},
+        {"title": "Self-consistency and sampling", "semantic_id": "self-consistency-sampling", "kind": "mechanism", "page_start": 39, "page_end": 44, "visual_kind": "mechanism-sequence"},
+        {"title": "Code-based selection and external verifiers", "semantic_id": "code-selection-and-verifiers", "kind": "mechanism", "page_start": 45, "page_end": 53, "visual_kind": "pipeline"},
+        {"title": "Tree of Thoughts search", "semantic_id": "tree-of-thoughts-search", "kind": "mechanism", "page_start": 54, "page_end": 58, "visual_kind": "search-tree"},
+        {"title": "Lecture outline before reflection", "semantic_id": "outline-before-reflection", "kind": "administrative", "page_start": 59, "page_end": 59, "visual_kind": "administrative", "disposition": "excluded", "reason": "repeated lecture outline", "evidence": "The page is a navigation divider."},
+        {"title": "Reflection and self-debugging", "semantic_id": "reflection-and-self-debugging", "kind": "mechanism", "page_start": 60, "page_end": 65, "visual_kind": "feedback-loop"},
+        {"title": "Self-correction failure modes and debate", "semantic_id": "self-correction-failure-modes", "kind": "failure-mode", "page_start": 66, "page_end": 69, "visual_kind": "comparison"},
+        {"title": "Compute, model capability, and the bitter lesson", "semantic_id": "compute-capability-bitter-lesson", "kind": "section", "page_start": 70, "page_end": 73, "visual_kind": "synthesis"},
+        {"title": "Closing slide", "semantic_id": "meeting-01-closing", "kind": "administrative", "page_start": 74, "page_end": 74, "visual_kind": "administrative", "disposition": "excluded", "reason": "closing slide only", "evidence": "The page adds no independent technical content."}
+      ]
+    },
+    {
+      "id": "meeting-02-slides",
+      "page_count": 106,
+      "sections": [
+        {"title": "Learning-to-reason framing", "semantic_id": "learning-to-reason-framing", "kind": "section", "page_start": 1, "page_end": 3, "visual_kind": "orientation"},
+        {"title": "Historical foundations of reasoning training", "semantic_id": "reasoning-training-foundations", "kind": "section", "page_start": 4, "page_end": 21, "visual_kind": "timeline"},
+        {"title": "Post-training and prompting recipes", "semantic_id": "posttraining-and-prompting", "kind": "mechanism", "page_start": 22, "page_end": 31, "visual_kind": "pipeline"},
+        {"title": "System-one failure cases and system-two motivation", "semantic_id": "system-one-to-system-two", "kind": "failure-mode", "page_start": 32, "page_end": 39, "visual_kind": "comparison"},
+        {"title": "Self-rewarding language-model setup", "semantic_id": "self-rewarding-setup", "kind": "mechanism", "page_start": 40, "page_end": 52, "visual_kind": "mechanism-sequence"},
+        {"title": "Self-rewarding experiments and results", "semantic_id": "self-rewarding-results", "kind": "experiment", "page_start": 53, "page_end": 73, "visual_kind": "empirical-sequence"},
+        {"title": "Iterative reasoning preference optimization", "semantic_id": "irpo", "kind": "mechanism", "page_start": 74, "page_end": 78, "visual_kind": "training-loop"},
+        {"title": "Transition from o1 to DeepSeek reasoning models", "semantic_id": "o1-deepseek-transition", "kind": "section", "page_start": 79, "page_end": 82, "visual_kind": "timeline"},
+        {"title": "Thinking language models", "semantic_id": "thinking-language-models", "kind": "mechanism", "page_start": 83, "page_end": 87, "visual_kind": "mechanism-sequence"},
+        {"title": "Meta-rewarding language models", "semantic_id": "meta-rewarding", "kind": "mechanism", "page_start": 88, "page_end": 94, "visual_kind": "feedback-loop"},
+        {"title": "EvalPlanner planning with feedback", "semantic_id": "evalplanner", "kind": "mechanism", "page_start": 95, "page_end": 102, "visual_kind": "planning-loop"},
+        {"title": "Learning-to-reason synthesis and research directions", "semantic_id": "learning-to-reason-synthesis", "kind": "section", "page_start": 103, "page_end": 105, "visual_kind": "synthesis"},
+        {"title": "Thanks slide", "semantic_id": "meeting-02-closing", "kind": "administrative", "page_start": 106, "page_end": 106, "visual_kind": "administrative", "disposition": "excluded", "reason": "closing slide only", "evidence": "The page adds no independent technical content."}
+      ]
+    },
+    {
+      "id": "meeting-03-slides",
+      "page_count": 80,
+      "sections": [
+        {"title": "Memory and planning orientation", "semantic_id": "memory-planning-orientation", "kind": "section", "page_start": 1, "page_end": 4, "visual_kind": "orientation"},
+        {"title": "Agent-first versus LLM-first system design", "semantic_id": "yu-su-agent-first-vs-llm-first", "kind": "visual-sequence", "page_start": 5, "page_end": 15, "visual_kind": "comparison-sequence"},
+        {"title": "Memory and planning outline", "semantic_id": "meeting-03-outline-a", "kind": "administrative", "page_start": 16, "page_end": 17, "visual_kind": "administrative", "disposition": "excluded", "reason": "lecture outline", "evidence": "Pages are navigation dividers."},
+        {"title": "Long-term memory and RAG limitations", "semantic_id": "long-term-memory-rag-problem", "kind": "failure-mode", "page_start": 18, "page_end": 24, "visual_kind": "comparison"},
+        {"title": "HippoRAG associative memory", "semantic_id": "yu-su-hipporag-memory-sequence", "kind": "visual-sequence", "page_start": 25, "page_end": 34, "visual_kind": "memory-sequence"},
+        {"title": "Memory takeaway", "semantic_id": "memory-takeaway", "kind": "section", "page_start": 35, "page_end": 35, "visual_kind": "synthesis"},
+        {"title": "Planning outline divider", "semantic_id": "meeting-03-outline-b", "kind": "administrative", "page_start": 36, "page_end": 36, "visual_kind": "administrative", "disposition": "excluded", "reason": "lecture outline", "evidence": "The page is a navigation divider."},
+        {"title": "Grokking planning and search", "semantic_id": "grokking-planning", "kind": "mechanism", "page_start": 37, "page_end": 52, "visual_kind": "empirical-sequence"},
+        {"title": "World-model outline divider", "semantic_id": "meeting-03-outline-c", "kind": "administrative", "page_start": 53, "page_end": 53, "visual_kind": "administrative", "disposition": "excluded", "reason": "lecture outline", "evidence": "The page is a navigation divider."},
+        {"title": "Planning paradigms for language agents", "semantic_id": "planning-paradigms", "kind": "mechanism", "page_start": 54, "page_end": 62, "visual_kind": "comparison"},
+        {"title": "World models for language-agent planning", "semantic_id": "yu-su-world-model-planning-sequence", "kind": "visual-sequence", "page_start": 63, "page_end": 71, "visual_kind": "planning-sequence"},
+        {"title": "Planning takeaways and open directions", "semantic_id": "planning-takeaways", "kind": "section", "page_start": 72, "page_end": 75, "visual_kind": "synthesis"},
+        {"title": "Closing and blank pages", "semantic_id": "meeting-03-closing", "kind": "administrative", "page_start": 76, "page_end": 78, "visual_kind": "administrative", "disposition": "excluded", "reason": "closing and intentionally blank pages", "evidence": "The pages add no independent technical content."},
+        {"title": "Appendix: parametric memory", "semantic_id": "parametric-memory-appendix", "kind": "section", "page_start": 79, "page_end": 80, "visual_kind": "appendix-comparison"}
+      ]
+    },
+    {
+      "id": "meeting-04-slides",
+      "page_count": 155,
+      "sections": [
+        {"title": "Open post-training ecosystem overview", "semantic_id": "open-posttraining-overview", "kind": "section", "page_start": 1, "page_end": 14, "visual_kind": "orientation"},
+        {"title": "Tülu post-training recipe", "semantic_id": "tulu-recipe", "kind": "mechanism", "page_start": 15, "page_end": 29, "visual_kind": "pipeline"},
+        {"title": "Supervised fine-tuning data construction", "semantic_id": "sft-data-construction", "kind": "mechanism", "page_start": 30, "page_end": 41, "visual_kind": "data-pipeline"},
+        {"title": "Chain-of-thought, personas, and data mixtures", "semantic_id": "cot-persona-data-mix", "kind": "mechanism", "page_start": 42, "page_end": 59, "visual_kind": "comparison-sequence"},
+        {"title": "Preference optimization from DPO to PPO", "semantic_id": "preference-optimization", "kind": "mechanism", "page_start": 60, "page_end": 85, "visual_kind": "training-sequence"},
+        {"title": "Tülu 3 preference recipe", "semantic_id": "tulu3-preference-recipe", "kind": "mechanism", "page_start": 86, "page_end": 89, "visual_kind": "pipeline"},
+        {"title": "Reinforcement learning with verifiable rewards", "semantic_id": "rlvr-method", "kind": "mechanism", "page_start": 90, "page_end": 103, "visual_kind": "training-loop"},
+        {"title": "RLVR experiments and scaling results", "semantic_id": "rlvr-results", "kind": "experiment", "page_start": 104, "page_end": 120, "visual_kind": "empirical-sequence"},
+        {"title": "Minimal post-training recipe", "semantic_id": "minimal-posttraining-recipe", "kind": "mechanism", "page_start": 121, "page_end": 125, "visual_kind": "pipeline"},
+        {"title": "S1K reasoning-data construction", "semantic_id": "s1k-data", "kind": "mechanism", "page_start": 126, "page_end": 132, "visual_kind": "data-pipeline"},
+        {"title": "Test-time scaling", "semantic_id": "test-time-scaling", "kind": "mechanism", "page_start": 133, "page_end": 142, "visual_kind": "scaling-sequence"},
+        {"title": "OLMo pretraining and openness", "semantic_id": "olmo-pretraining", "kind": "section", "page_start": 143, "page_end": 152, "visual_kind": "system-sequence"},
+        {"title": "Open-recipe research synthesis", "semantic_id": "open-recipe-synthesis", "kind": "section", "page_start": 153, "page_end": 153, "visual_kind": "synthesis"},
+        {"title": "Thanks slide", "semantic_id": "meeting-04-closing", "kind": "administrative", "page_start": 154, "page_end": 154, "visual_kind": "administrative", "disposition": "excluded", "reason": "closing slide only", "evidence": "The page adds no independent technical content."},
+        {"title": "Appendix reference", "semantic_id": "open-recipe-appendix", "kind": "section", "page_start": 155, "page_end": 155, "visual_kind": "appendix"}
+      ]
+    },
+    {
+      "id": "meeting-05-slides",
+      "page_count": 55,
+      "sections": [
+        {"title": "Coding-agent orientation", "semantic_id": "coding-agent-orientation", "kind": "section", "page_start": 1, "page_end": 4, "visual_kind": "orientation"},
+        {"title": "Coding-agent evaluation", "semantic_id": "coding-agent-evaluation", "kind": "experiment", "page_start": 5, "page_end": 14, "visual_kind": "benchmark-sequence"},
+        {"title": "SWE-agent interaction loop", "semantic_id": "swe-agent-loop", "kind": "mechanism", "page_start": 15, "page_end": 21, "visual_kind": "feedback-loop"},
+        {"title": "Coding-agent design comparisons", "semantic_id": "coding-agent-design-comparisons", "kind": "mechanism", "page_start": 22, "page_end": 34, "visual_kind": "comparison-sequence"},
+        {"title": "Capture-the-flag agents", "semantic_id": "ctf-agents", "kind": "worked-example", "page_start": 35, "page_end": 40, "visual_kind": "worked-example"},
+        {"title": "Vulnerability discovery problem and traditional workflow", "semantic_id": "vulnerability-discovery-problem", "kind": "section", "page_start": 41, "page_end": 45, "visual_kind": "comparison"},
+        {"title": "LLM-agent vulnerability-discovery loop", "semantic_id": "charles-sutton-vulnerability-discovery-loop", "kind": "visual-sequence", "page_start": 46, "page_end": 53, "visual_kind": "security-loop"},
+        {"title": "Coding-agent conclusions", "semantic_id": "coding-agent-conclusions", "kind": "section", "page_start": 54, "page_end": 55, "visual_kind": "synthesis"}
+      ]
+    },
+    {
+      "id": "meeting-06-slides",
+      "page_count": 126,
+      "sections": [
+        {"title": "Web-agent overview and demonstrations", "semantic_id": "web-agent-overview", "kind": "section", "page_start": 1, "page_end": 13, "visual_kind": "orientation"},
+        {"title": "VisualWebArena benchmark", "semantic_id": "visualwebarena", "kind": "experiment", "page_start": 14, "page_end": 28, "visual_kind": "benchmark-sequence"},
+        {"title": "Vision-language web agents", "semantic_id": "vision-language-web-agents", "kind": "mechanism", "page_start": 29, "page_end": 40, "visual_kind": "system-sequence"},
+        {"title": "Search-agent motivation", "semantic_id": "search-agent-motivation", "kind": "section", "page_start": 41, "page_end": 49, "visual_kind": "comparison"},
+        {"title": "Tree-search agents for web tasks", "semantic_id": "web-agent-tree-search", "kind": "mechanism", "page_start": 50, "page_end": 69, "visual_kind": "search-sequence"},
+        {"title": "Tree-search agent results", "semantic_id": "web-agent-tree-search-results", "kind": "experiment", "page_start": 70, "page_end": 77, "visual_kind": "empirical-sequence"},
+        {"title": "Inference-time self-training agent setup", "semantic_id": "insta-setup", "kind": "mechanism", "page_start": 78, "page_end": 89, "visual_kind": "training-loop"},
+        {"title": "Verification and inference-time scaling", "semantic_id": "insta-verification-scaling", "kind": "experiment", "page_start": 90, "page_end": 106, "visual_kind": "empirical-sequence"},
+        {"title": "Plan, sequence, and learn workflow", "semantic_id": "plan-sequence-learn", "kind": "mechanism", "page_start": 107, "page_end": 116, "visual_kind": "workflow-sequence"},
+        {"title": "Source-marked confidential page", "semantic_id": "nvidia-confidential-page", "kind": "administrative", "page_start": 117, "page_end": 117, "visual_kind": "restricted", "disposition": "excluded", "reason": "do-not-reuse: source-marked confidential", "evidence": "The unchanged official PDF page visibly states 'NVIDIA CONFIDENTIAL. DO NOT DISTRIBUTE.' This page-specific restriction overrides the general course permission record."},
+        {"title": "Proprietary-adjacent agent demonstration", "semantic_id": "proprietary-adjacent-demo", "kind": "worked-example", "page_start": 118, "page_end": 121, "visual_kind": "demo-sequence"},
+        {"title": "Web-agent synthesis", "semantic_id": "web-agent-synthesis", "kind": "section", "page_start": 122, "page_end": 123, "visual_kind": "synthesis"},
+        {"title": "Adversarial appendix", "semantic_id": "web-agent-adversarial-appendix", "kind": "failure-mode", "page_start": 124, "page_end": 125, "visual_kind": "appendix-comparison"},
+        {"title": "Closing slide", "semantic_id": "meeting-06-closing", "kind": "administrative", "page_start": 126, "page_end": 126, "visual_kind": "administrative", "disposition": "excluded", "reason": "closing slide only", "evidence": "The page adds no independent technical content."}
+      ]
+    },
+    {
+      "id": "meeting-07-slides",
+      "page_count": 106,
+      "sections": [
+        {"title": "GUI-agent landscape", "semantic_id": "gui-agent-landscape", "kind": "section", "page_start": 1, "page_end": 8, "visual_kind": "orientation"},
+        {"title": "OSWorld environment and evaluation", "semantic_id": "osworld", "kind": "experiment", "page_start": 9, "page_end": 31, "visual_kind": "benchmark-sequence"},
+        {"title": "GUI-agent outline divider", "semantic_id": "meeting-07-outline-a", "kind": "administrative", "page_start": 32, "page_end": 32, "visual_kind": "administrative", "disposition": "excluded", "reason": "lecture outline", "evidence": "The page is a navigation divider."},
+        {"title": "AgentTrek trajectory construction", "semantic_id": "agenttrek", "kind": "mechanism", "page_start": 33, "page_end": 45, "visual_kind": "data-pipeline"},
+        {"title": "TACO action and cognition", "semantic_id": "taco", "kind": "mechanism", "page_start": 46, "page_end": 61, "visual_kind": "system-sequence"},
+        {"title": "Generalist-agent outline divider", "semantic_id": "meeting-07-outline-b", "kind": "administrative", "page_start": 62, "page_end": 62, "visual_kind": "administrative", "disposition": "excluded", "reason": "lecture outline", "evidence": "The page is a navigation divider."},
+        {"title": "Aguvis unified pure-vision agents", "semantic_id": "aguvis", "kind": "mechanism", "page_start": 63, "page_end": 83, "visual_kind": "training-sequence"},
+        {"title": "xGen video understanding", "semantic_id": "xgen-video", "kind": "mechanism", "page_start": 84, "page_end": 98, "visual_kind": "system-sequence"},
+        {"title": "GenS generalist foundation agents", "semantic_id": "gens", "kind": "mechanism", "page_start": 99, "page_end": 105, "visual_kind": "system-sequence"},
+        {"title": "GUI-agent summary", "semantic_id": "gui-agent-summary", "kind": "section", "page_start": 106, "page_end": 106, "visual_kind": "synthesis"}
+      ]
+    },
+    {
+      "id": "meeting-08-slides",
+      "page_count": 112,
+      "sections": [
+        {"title": "AlphaProof orientation", "semantic_id": "alphaproof-orientation", "kind": "section", "page_start": 1, "page_end": 4, "visual_kind": "orientation"},
+        {"title": "Formal theorem-proving problem setup", "semantic_id": "formal-proving-setup", "kind": "section", "page_start": 5, "page_end": 13, "visual_kind": "formalization-sequence"},
+        {"title": "Lean proof demonstration", "semantic_id": "lean-proof-demo", "kind": "worked-example", "page_start": 14, "page_end": 22, "visual_kind": "proof-sequence"},
+        {"title": "Reinforcement learning and AlphaZero", "semantic_id": "rl-and-alphazero", "kind": "mechanism", "page_start": 23, "page_end": 34, "visual_kind": "training-loop"},
+        {"title": "AlphaProof premise", "semantic_id": "alphaproof-premise", "kind": "mechanism", "page_start": 35, "page_end": 42, "visual_kind": "system-sequence"},
+        {"title": "International Mathematical Olympiad problem setting", "semantic_id": "imo-setting", "kind": "section", "page_start": 43, "page_end": 53, "visual_kind": "problem-sequence"},
+        {"title": "AlphaProof at the IMO", "semantic_id": "alphaproof-imo-results", "kind": "experiment", "page_start": 54, "page_end": 76, "visual_kind": "empirical-sequence"},
+        {"title": "AlphaProof methods", "semantic_id": "alphaproof-methods", "kind": "mechanism", "page_start": 77, "page_end": 85, "visual_kind": "pipeline"},
+        {"title": "Test-time reinforcement learning", "semantic_id": "test-time-rl", "kind": "mechanism", "page_start": 86, "page_end": 92, "visual_kind": "training-loop"},
+        {"title": "Demonstration divider", "semantic_id": "meeting-08-demo-divider", "kind": "administrative", "page_start": 93, "page_end": 93, "visual_kind": "administrative", "disposition": "excluded", "reason": "demonstration divider", "evidence": "The page is a navigation divider."},
+        {"title": "Riemann zeta formalization demonstration", "semantic_id": "riemann-zeta-demo", "kind": "worked-example", "page_start": 94, "page_end": 107, "visual_kind": "proof-sequence"},
+        {"title": "Future of formal mathematical reasoning", "semantic_id": "formal-reasoning-future", "kind": "section", "page_start": 108, "page_end": 110, "visual_kind": "synthesis"},
+        {"title": "Thanks and closing", "semantic_id": "meeting-08-closing", "kind": "administrative", "page_start": 111, "page_end": 112, "visual_kind": "administrative", "disposition": "excluded", "reason": "closing slides only", "evidence": "The pages add no independent technical content."}
+      ]
+    },
+    {
+      "id": "meeting-09-slides",
+      "page_count": 114,
+      "sections": [
+        {"title": "Autoformalization capability race", "semantic_id": "autoformalization-capability-race", "kind": "section", "page_start": 1, "page_end": 6, "visual_kind": "orientation"},
+        {"title": "Supervised fine-tuning and verifiable-reward learning", "semantic_id": "autoformalization-sft-rlvr", "kind": "mechanism", "page_start": 7, "page_end": 24, "visual_kind": "training-sequence"},
+        {"title": "Informal-to-formal gaps", "semantic_id": "informal-formal-gaps", "kind": "failure-mode", "page_start": 25, "page_end": 31, "visual_kind": "comparison"},
+        {"title": "Lean foundations", "semantic_id": "lean-foundations", "kind": "section", "page_start": 32, "page_end": 42, "visual_kind": "formalization-sequence"},
+        {"title": "Lean theorem-proving pipeline", "semantic_id": "kaiyu-yang-lean-theorem-proving-pipeline", "kind": "visual-sequence", "page_start": 43, "page_end": 55, "visual_kind": "proof-pipeline"},
+        {"title": "Formalizing inequalities", "semantic_id": "formalizing-inequalities", "kind": "worked-example", "page_start": 56, "page_end": 66, "visual_kind": "proof-sequence"},
+        {"title": "Autoformalization challenges", "semantic_id": "autoformalization-challenges", "kind": "failure-mode", "page_start": 67, "page_end": 79, "visual_kind": "failure-sequence"},
+        {"title": "LeanEuclid representation", "semantic_id": "leaneuclid", "kind": "mechanism", "page_start": 80, "page_end": 84, "visual_kind": "representation-sequence"},
+        {"title": "Euclidean geometry logical-gap case study", "semantic_id": "euclid-logical-gap", "kind": "worked-example", "page_start": 85, "page_end": 97, "visual_kind": "proof-sequence"},
+        {"title": "Equivalence and diagram understanding", "semantic_id": "equivalence-and-diagrams", "kind": "mechanism", "page_start": 98, "page_end": 105, "visual_kind": "comparison-sequence"},
+        {"title": "End-to-end autoformalization", "semantic_id": "end-to-end-autoformalization", "kind": "mechanism", "page_start": 106, "page_end": 112, "visual_kind": "pipeline"},
+        {"title": "Autoformalization takeaway", "semantic_id": "autoformalization-takeaway", "kind": "section", "page_start": 113, "page_end": 114, "visual_kind": "synthesis"}
+      ]
+    },
+    {
+      "id": "meeting-10-slides",
+      "page_count": 118,
+      "sections": [
+        {"title": "Advanced theorem-proving expert frame", "semantic_id": "advanced-proving-frame", "kind": "section", "page_start": 1, "page_end": 3, "visual_kind": "orientation"},
+        {"title": "Informal and formal mathematics", "semantic_id": "informal-and-formal-math", "kind": "section", "page_start": 4, "page_end": 21, "visual_kind": "comparison-sequence"},
+        {"title": "Theorem-proving capability gap and agenda", "semantic_id": "proving-gap-and-agenda", "kind": "failure-mode", "page_start": 22, "page_end": 27, "visual_kind": "comparison"},
+        {"title": "Methods divider", "semantic_id": "meeting-10-methods-divider", "kind": "administrative", "page_start": 28, "page_end": 28, "visual_kind": "administrative", "disposition": "excluded", "reason": "section divider", "evidence": "The page is a navigation divider."},
+        {"title": "Lean-STaR self-training", "semantic_id": "lean-star", "kind": "mechanism", "page_start": 29, "page_end": 52, "visual_kind": "training-sequence"},
+        {"title": "Prover outline divider", "semantic_id": "meeting-10-outline", "kind": "administrative", "page_start": 53, "page_end": 53, "visual_kind": "administrative", "disposition": "excluded", "reason": "lecture outline", "evidence": "The page is a navigation divider."},
+        {"title": "Motivation for modular provers", "semantic_id": "modular-prover-motivation", "kind": "section", "page_start": 54, "page_end": 60, "visual_kind": "comparison"},
+        {"title": "Draft, Sketch, and Prove", "semantic_id": "draft-sketch-prove", "kind": "mechanism", "page_start": 61, "page_end": 69, "visual_kind": "proof-pipeline"},
+        {"title": "LeanHammer premise selection and proof search", "semantic_id": "leanhammer", "kind": "mechanism", "page_start": 70, "page_end": 89, "visual_kind": "system-sequence"},
+        {"title": "Advanced prover recap", "semantic_id": "advanced-prover-recap", "kind": "section", "page_start": 90, "page_end": 94, "visual_kind": "synthesis"},
+        {"title": "Research-workflow divider", "semantic_id": "meeting-10-research-divider", "kind": "administrative", "page_start": 95, "page_end": 95, "visual_kind": "administrative", "disposition": "excluded", "reason": "section divider", "evidence": "The page is a navigation divider."},
+        {"title": "Theorem-proving research workflow", "semantic_id": "proving-research-workflow", "kind": "mechanism", "page_start": 96, "page_end": 105, "visual_kind": "workflow-sequence"},
+        {"title": "miniCTX contextual theorem proving", "semantic_id": "minictx", "kind": "experiment", "page_start": 106, "page_end": 115, "visual_kind": "benchmark-sequence"},
+        {"title": "Research recap and thanks", "semantic_id": "meeting-10-closing", "kind": "administrative", "page_start": 116, "page_end": 118, "visual_kind": "administrative", "disposition": "excluded", "reason": "recap title and closing slides", "evidence": "These pages contain section recap/thanks without an additional technical mechanism."}
+      ]
+    },
+    {
+      "id": "meeting-11-slides",
+      "page_count": 93,
+      "sections": [
+        {"title": "Abstraction and discovery frame", "semantic_id": "abstraction-discovery-frame", "kind": "section", "page_start": 1, "page_end": 5, "visual_kind": "orientation"},
+        {"title": "Neural and formal reasoning systems", "semantic_id": "neural-and-formal-systems", "kind": "section", "page_start": 6, "page_end": 13, "visual_kind": "comparison"},
+        {"title": "COPRA in-context theorem proving", "semantic_id": "copra", "kind": "mechanism", "page_start": 14, "page_end": 24, "visual_kind": "feedback-loop"},
+        {"title": "Compiler verification with language models", "semantic_id": "compiler-verification", "kind": "worked-example", "page_start": 25, "page_end": 39, "visual_kind": "system-sequence"},
+        {"title": "Formal-reasoning summary and open directions", "semantic_id": "formal-reasoning-summary", "kind": "section", "page_start": 40, "page_end": 44, "visual_kind": "synthesis"},
+        {"title": "Discovery section divider", "semantic_id": "meeting-11-divider", "kind": "administrative", "page_start": 45, "page_end": 45, "visual_kind": "administrative", "disposition": "excluded", "reason": "section divider", "evidence": "The page is a navigation divider."},
+        {"title": "Scientific process and symbolic regression", "semantic_id": "scientific-process-symbolic-regression", "kind": "section", "page_start": 46, "page_end": 55, "visual_kind": "comparison-sequence"},
+        {"title": "LaSR concept-library discovery loop", "semantic_id": "swarat-chaudhuri-lasr-concept-library-sequence", "kind": "visual-sequence", "page_start": 56, "page_end": 73, "visual_kind": "discovery-loop"},
+        {"title": "LaSR examples and scaling", "semantic_id": "lasr-examples-and-scaling", "kind": "experiment", "page_start": 74, "page_end": 81, "visual_kind": "empirical-sequence"},
+        {"title": "Learning visual concepts", "semantic_id": "visual-concept-discovery", "kind": "experiment", "page_start": 82, "page_end": 88, "visual_kind": "concept-sequence"},
+        {"title": "Abstraction and discovery synthesis", "semantic_id": "abstraction-discovery-synthesis", "kind": "section", "page_start": 89, "page_end": 92, "visual_kind": "synthesis"},
+        {"title": "Collaborators slide", "semantic_id": "meeting-11-closing", "kind": "administrative", "page_start": 93, "page_end": 93, "visual_kind": "administrative", "disposition": "excluded", "reason": "credits slide only", "evidence": "The page is preserved for attribution but adds no independent technical content."}
+      ]
+    },
+    {
+      "id": "meeting-12-slides",
+      "page_count": 99,
+      "sections": [
+        {"title": "Agent-security frame", "semantic_id": "agent-security-frame", "kind": "section", "page_start": 1, "page_end": 9, "visual_kind": "orientation"},
+        {"title": "Hybrid agent-system attack surface", "semantic_id": "hybrid-agent-attack-surface", "kind": "failure-mode", "page_start": 10, "page_end": 18, "visual_kind": "system-sequence"},
+        {"title": "Threat-model outline divider", "semantic_id": "meeting-12-outline-a", "kind": "administrative", "page_start": 19, "page_end": 19, "visual_kind": "administrative", "disposition": "excluded", "reason": "lecture outline", "evidence": "The page is a navigation divider."},
+        {"title": "Agentic threat model", "semantic_id": "dawn-song-agentic-threat-model-sequence", "kind": "visual-sequence", "page_start": 20, "page_end": 29, "visual_kind": "threat-model-sequence"},
+        {"title": "SQL injection and remote-code-execution cases", "semantic_id": "agent-sql-rce-cases", "kind": "worked-example", "page_start": 30, "page_end": 38, "visual_kind": "attack-sequence"},
+        {"title": "Prompt injection and AgentPoison", "semantic_id": "prompt-injection-agentpoison", "kind": "failure-mode", "page_start": 39, "page_end": 50, "visual_kind": "attack-sequence"},
+        {"title": "Evaluation outline divider", "semantic_id": "meeting-12-outline-b", "kind": "administrative", "page_start": 51, "page_end": 51, "visual_kind": "administrative", "disposition": "excluded", "reason": "lecture outline", "evidence": "The page is a navigation divider."},
+        {"title": "Agent-safety evaluation and red teaming", "semantic_id": "agent-safety-evaluation", "kind": "experiment", "page_start": 52, "page_end": 62, "visual_kind": "evaluation-sequence"},
+        {"title": "Defense outline divider", "semantic_id": "meeting-12-outline-c", "kind": "administrative", "page_start": 63, "page_end": 63, "visual_kind": "administrative", "disposition": "excluded", "reason": "lecture outline", "evidence": "The page is a navigation divider."},
+        {"title": "Agent-defense mechanisms", "semantic_id": "agent-defense-mechanisms", "kind": "mechanism", "page_start": 64, "page_end": 75, "visual_kind": "defense-sequence"},
+        {"title": "Privilege control for agentic systems", "semantic_id": "dawn-song-privilege-control-sequence", "kind": "visual-sequence", "page_start": 76, "page_end": 90, "visual_kind": "privilege-control-sequence"},
+        {"title": "Monitoring, DataSentinel, and formal verification", "semantic_id": "agent-monitoring-and-verification", "kind": "mechanism", "page_start": 91, "page_end": 97, "visual_kind": "defense-sequence"},
+        {"title": "Agent-safety conclusion", "semantic_id": "agent-safety-conclusion", "kind": "section", "page_start": 98, "page_end": 98, "visual_kind": "synthesis"},
+        {"title": "Promotional closing slide", "semantic_id": "meeting-12-closing", "kind": "administrative", "page_start": 99, "page_end": 99, "visual_kind": "administrative", "disposition": "excluded", "reason": "promotional closing slide", "evidence": "The page advertises an external event and adds no course technical content."}
+      ]
+    }
+  ]
+}

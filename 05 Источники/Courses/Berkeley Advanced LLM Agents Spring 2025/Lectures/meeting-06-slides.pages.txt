@@ -1,0 +1,2242 @@
+=== PHYSICAL PAGE 1 OF 126 ===
+Multimodal Autonomous AI Agents
+
+           Russ Salakhutdinov
+          Machine Learning Department
+           Carnegie Mellon University
+
+=== PHYSICAL PAGE 2 OF 126 ===
+2
+
+
+Large Language Models
+                    In-context               Zero-shot
+                     learning                 abilities
+
+
+         Sensitive to                                 Strong text
+        word orderings                              representations
+                                  LLM
+
+
+      (Greater) sensitivity                         Generate long and
+       to input prompts                               coherent text
+                                   World
+                                 knowledge
+
+=== PHYSICAL PAGE 3 OF 126 ===
+3
+
+
+Autonomous AI Agents
+    ● Many productive tasks we perform
+      today are done on the computer
+        - And many of these are on the web
+
+    ● Many opportunities to automate menial
+      tasks
+
+    ● Augment human capabilities
+
+
+
+
+                                              Generated with DALLE
+
+=== PHYSICAL PAGE 4 OF 126 ===
+4
+
+
+Autonomous Agents
+
+=== PHYSICAL PAGE 5 OF 126 ===
+5
+
+
+Autonomous Agents
+
+
+
+
+                                                          🤖   ...
+
+
+
+
+    Task: “Create a set of PowerPoint slides to present
+    the content in this paper.”
+
+=== PHYSICAL PAGE 6 OF 126 ===
+6
+
+
+Autonomous Agents
+
+=== PHYSICAL PAGE 7 OF 126 ===
+7
+
+
+Web Agents
+                       Web
+                     Grounding
+
+
+
+
+          Visual
+                       LLM
+         Encoder
+
+                      HTML
+                   Understanding
+
+=== PHYSICAL PAGE 8 OF 126 ===
+8
+
+
+Web Agents
+                                  Web
+                                Grounding
+             Shunyu Yao, REACT Synergizing Reasoning and Acting in Language Models,
+             2023
+             Jason Wei et al, Chain of Thought Prompting Elicits Reasoning in Large
+             Language Models, 2022
+              Reiichiro Nakano et al, WebGPT: Browser-assisted Question-Answering
+          Visual
+              with Human Feedback, 2021.
+                                   LLM
+         Encoder
+              Xiang Deng et al, MIND2WEB: Towards a Generalist Agent for the Web,
+             2023
+             Timo Schick et al, Toolformer:
+                                 HTML       Language Models can Teach Themselves to
+             Use Tools, 2023
+                              Understanding
+             Shibo Hao et al, ToolkenGPT: Augmenting Frozen Language Models with
+             Massive Tools via Tool Embeddings, 2023
+             Yang et al., SWE-agent: Agent-Computer Interfaces Enable Automated
+             Software Engineering, 2024
+
+=== PHYSICAL PAGE 9 OF 126 ===
+9
+
+Task: Navigate to a page of a good Thai restaurant in Pittsburgh. It should have at
+least 200 reviews and 4.3 stars. Pick the one with the highest rating
+
+=== PHYSICAL PAGE 10 OF 126 ===
+10
+
+=== PHYSICAL PAGE 11 OF 126 ===
+11
+
+=== PHYSICAL PAGE 12 OF 126 ===
+12
+
+=== PHYSICAL PAGE 13 OF 126 ===
+13
+
+
+Talk Outline
+     ● VisualWebArena -- Evaluating Multimodal Agents on Realistic Visual
+       Web Tasks (Koh et al., ACL 2024)
+
+     ● Tree Search for Language Model Agents (Koh, McAleer, Fried,
+        Salakhutdinov, arXiv 2024)
+
+
+     ● Towards Internet-Scale Training For Agents (Trabucco, Sigurdsson,
+        Piramuthu, Salakhutdinov, arXiv 2025)
+
+=== PHYSICAL PAGE 14 OF 126 ===
+14
+
+
+WebArena
+                                                                                            Shuyan Zhou   Frank Xu
+
+     ● Most realistic web environment at the moment
+     ● Websites from popular categories (shopping, Reddit, GitLab)
+         -   Self-hosted open source re-implementations
+         -   Data from real websites (Amazon, Reddit, GitHub)
+     ● Tasks are easy for humans (78% success rate) but difficult for language
+       model agents (14%)
+     ● But: Tasks are designed to use just text and HTML source code
+     ● Messy HTML, JavaScript: usually minified or compressed for efficiency
+     ● Interactive elements don’t display correctly in HTML
+         ○ e.g., JavaScript/CSS code that moves objects after the page is loaded
+     ● Context length: HTML pages are complex, easily filling up > 100k tokens
+              Zhou*, Xu*, et al., 2023. “WebArena: A Realistic Web Environment for Building Autonomous Agents”
+
+=== PHYSICAL PAGE 15 OF 126 ===
+15
+
+
+HTML is insufficient
+
+
+
+
+     ● Messy HTML, JavaScript: usually minified or compressed for efficiency
+     ● Interactive elements don’t display correctly in HTML
+         ○ e.g., JavaScript/CSS code that moves objects after the page is loaded
+         ○ Spatial layout is also usually not conveyed well
+     ● Context length: HTML pages are complex, easily filling up > 100k tokens
+
+=== PHYSICAL PAGE 16 OF 126 ===
+16
+
+
+VisualWebArena
+                                                                                       Jing Yu   Shuyan Zhou   Frank Xu
+     ● Build and track the progress of multimodal agents                                 Koh
+
+
+     ● We design visually grounded tasks to test these abilities
+     ● Visual inputs (and outputs) allow for unique, interesting, and realistic tasks
+
+
+
+
+JY Koh, V. Duvvur, P. Huang, L. Jang, MC Lim, R. Lo, G. Neubig, S. Zhou, R. Salakhutdinov, D. Fried
+
+=== PHYSICAL PAGE 17 OF 126 ===
+17
+
+
+VisualWebArena: Classifields
+
+
+
+
+ Task: Find this exact
+ bike that's listed for
+ $300-500 and post a
+ comment offering $10
+ less than their asking
+ price.
+
+=== PHYSICAL PAGE 18 OF 126 ===
+18
+
+
+VisualWebArena: Shopping
+
+
+
+
+     Task: Buy the cheapest
+     color photo printer and
+     send it to Emily's place
+     (as shown in the image).
+
+=== PHYSICAL PAGE 19 OF 126 ===
+19
+
+
+VisualWebArena: Reddit
+
+
+
+
+Task: What is the 2022
+total nominal GDP of the
+area that produces most
+sugarcane in the year of
+2021? (in billion)?
+
+=== PHYSICAL PAGE 20 OF 126 ===
+20
+
+
+VisualWebArena
+     POMDP environment:                 ,
+     ●   Observations
+
+
+
+
+     ●   Actions          ●   Deterministic transition function
+
+
+                          ●   Reward function:
+
+=== PHYSICAL PAGE 21 OF 126 ===
+21
+
+
+
+
+ Image
+ Inputs:
+
+
+
+
+     Task: “Buy the cheapest color photo
+     printer and send it to Emily's place (as   Shopping
+     shown in the image).”
+
+=== PHYSICAL PAGE 22 OF 126 ===
+22
+
+
+            Task: “Buy the cheapest color photo printer and
+            send it to Emily's place (as shown in the image).”
+
+
+
+
+     Step 0: Start on the homepage of         Step 1: Navigate to the printers category.
+             OneStopMarket.
+
+=== PHYSICAL PAGE 23 OF 126 ===
+23
+
+
+            Task: “Buy the cheapest color photo printer and
+            send it to Emily's place (as shown in the image).”
+
+
+
+
+     Step 2: Sort by descending price.              Step 3: Click on the cheapest
+                                                         color photo printer.
+
+=== PHYSICAL PAGE 24 OF 126 ===
+24
+
+
+              Task: “Buy the cheapest color photo printer and
+              send it to Emily's place (as shown in the image).”
+
+
+
+
+     Step 4: Add it to the shopping cart.             Step 5: Proceed to checkout
+
+=== PHYSICAL PAGE 25 OF 126 ===
+25
+
+
+               Task: “Buy the cheapest color photo printer and
+               send it to Emily's place (as shown in the image).”
+
+
+
+
+     Step 6: Edit address to that of Emily’s              Step 7: Place the order
+                     place.
+
+=== PHYSICAL PAGE 26 OF 126 ===
+26
+
+
+VisualWebArena
+
+=== PHYSICAL PAGE 27 OF 126 ===
+27
+
+
+Execution Based Evaluation
+
+=== PHYSICAL PAGE 28 OF 126 ===
+LLM and VLM Agents
+
+=== PHYSICAL PAGE 29 OF 126 ===
+29
+
+
+Visual Language Models as Agents
+
+
+
+
+Accessibility tree / HTML
+representations: Cluttered with     VLM + SoM: Simplified representation with Set-of-
+unnecessary information, long and   Marks (SoM) prompting over interactable elements.
+confusing context.
+
+=== PHYSICAL PAGE 30 OF 126 ===
+30
+
+
+Visual Language Models as Agents
+
+=== PHYSICAL PAGE 31 OF 126 ===
+        31
+
+
+        Visual Language Models as Agents
+
+         User goal:         I’m trying to find this post. Navigate             Multimodal
+                            to the comment section for it.                        LLM
+
+
+                                                                     Let's think step-by-step… The objective
+                                                                     is to navigate to the find the post and
+                                                                     navigate to the comment section for it.
+                                                                     From the observation, I can see… To
+                                                                     navigate to this listing, I need to click
+                                                                     on the comment link associated with the
+                                                                     sushi. In summary, the next action I will
+             Observations                                            perform is ```click [34]```
+
+              :
+
+                                                                      Action   : click [34]
+
+
+                                      VLM + SoM: Simplified representation with Set-of-Marks (SoM)
+𝒐
+𝒂
+    𝒕
+    𝒕
+
+
+
+
+                                      prompting over interactable elements.
+
+=== PHYSICAL PAGE 32 OF 126 ===
+32
+
+
+Baseline Agents
+
+=== PHYSICAL PAGE 33 OF 126 ===
+33
+
+
+Baseline Agents: Text-based LLMs
+
+=== PHYSICAL PAGE 34 OF 126 ===
+34
+
+
+Baseline Agents: Multimodal LLMs
+
+=== PHYSICAL PAGE 35 OF 126 ===
+35
+
+
+
+
+     Successful execution trajectory of the GPT-4V + SoM agent on the task for blocking a user
+     that posted a certain picture
+
+=== PHYSICAL PAGE 36 OF 126 ===
+36
+
+
+Web Agent Architecture
+     ● Model architecture of our interactive agent:
+        - High-level Planning and Reasoning
+        - Observation Parsing
+        - Low-level Action Generation
+
+                      TYPE      CLICK   HOVER
+
+
+
+
+                      PARSING
+        Observed                        HTML +
+        Webpage                          Image
+                                                                          STOP
+                                                              Low-level
+                                                                                 Return
+                     PLANNING/                                 Actions
+                     REASONING
+                                        High-level
+        Objective                         Plans
+                                                     Refine
+
+=== PHYSICAL PAGE 37 OF 126 ===
+37
+
+
+Planning
+     High-level plans are important for long-sequence and complex objectives.
+     Task: Buy the highest rated product from the Beauty & Personal Care category within a budget under 20.
+
+     Step 1: Navigate to the Beauty & Personal Care               Step 2: Sort based on rating for that category (2 low-
+     Category (1 low-level action)                                level actions)
+
+
+                              CLICK                                                     SELECT
+
+                                                                                          SORT
+
+
+     Step 4: Buy the selected item (3 low-level actions)           Step 3: Select one item under 20 dollars (1 low-
+                                                                   level action)
+                       PAY                    ADD
+                                                                                         CLICK
+
+                       SHIP
+
+=== PHYSICAL PAGE 38 OF 126 ===
+38
+
+
+Measuring Productive Tasks
+VisualWebArena is a step towards building
+general purpose agents. But:
+•    Tasks are not very consequential: do not
+     represent significant economic value
+•    Tasks are simpler, as current LLM agents do not
+     even do well on these problems
+
+Long term: Automate productive,
+economically valuable tasks
+
+
+
+
+                                                       Examples from Collabora Online / LibreOffice.
+
+=== PHYSICAL PAGE 39 OF 126 ===
+39
+
+
+Common Failure Modes
+     • Long horizon reasoning and planning:
+         -   Models oscillate between two webpages, or get stuck in a loop
+         -   Correctly performing tasks but undoing them
+         -   Agents tend to stop exploration / execution too early
+
+
+     • Failures in visual processing
+         -   Clicking the wrong item
+         -   Identifying specific items in complex webpages
+         -   Spatial reasoning (“what are the prices of products in the first row?”)
+
+=== PHYSICAL PAGE 40 OF 126 ===
+40
+
+
+What is Missing?
+     • We need to do a lot more to close the gap:
+         -   Reasoning and Planning over long horizons
+         -   Allow agent to Search, execute and coordinate multiple instances in parallel and
+             ask for clarifications/confirmations
+         -   Strong vision-language-code models
+         -   Identifying the appropriate level of abstraction for agents (HTML/screenshots/
+             APIs)
+
+
+     - Multimodal models: Many real-world tasks require visual grounding to
+       effectively solve (e.g., every task involving PowerPoint, Excel, Photoshop). To
+       develop strong general agents, we will need to train and build strong vision-
+       language models.
+
+=== PHYSICAL PAGE 41 OF 126 ===
+41
+
+
+Talk Outline
+     ● VisualWebArena -- Evaluating Multimodal Agents on Realistic Visual
+       Web Tasks (Koh et al., ACL 2024)
+
+     ● Tree Search for Language Model Agents (Koh, McAleer, Fried,
+        Salakhutdinov, arXiv 2024)
+
+
+     ● Towards Internet-Scale Training For Agents (Trabucco, Sigurdsson,
+        Piramuthu, Salakhutdinov, arXiv 2025)
+
+=== PHYSICAL PAGE 42 OF 126 ===
+42
+
+
+Exponential Error Compounding in Agents
+
+       Accuracy @ k steps:
+
+       1 (single step)       5      10       30       50
+
+       90%               59.05%   34.87%   4.24%    0.52%
+
+       95%               77.38%   59.87%   21.46%   7.69%
+
+       99%               95.10%   90.44%   73.97%   60.50%
+
+       99.9%             99.50%   99.00%   97.04%   95.12%
+
+       99.99%            99.95%   99.90%   99.70%   99.50%
+
+=== PHYSICAL PAGE 43 OF 126 ===
+43
+
+
+Local Decisions; Global Consequences
+ “Add coconut milk to my cart”
+
+         click [31]
+                   0.5
+                         0.2…
+
+                           …
+                         0.2
+
+         click [24]                    ✓
+                   0.1
+
+=== PHYSICAL PAGE 44 OF 126 ===
+44
+
+
+Local Decisions; Global Consequences
+ “Add coconut milk to my cart”
+
+         click [31]
+                   0.5
+                         0.2…
+
+                           …
+                         0.2
+
+         click [24]                    ✓
+                   0.1
+
+=== PHYSICAL PAGE 45 OF 126 ===
+Search By Repeated Sampling
+  1.   Sample actions from
+       the language model until [STOP].
+
+
+
+
+                                  …
+
+                                  …
+
+
+
+
+Pan et al. 2024,
+                                                         45
+Autonomous Evaluation and Refinement of Digital Agents
+
+=== PHYSICAL PAGE 46 OF 126 ===
+Search By Repeated Sampling
+  1.   Sample actions from
+       the language model until
+       [STOP].
+  2.   Evaluate the resulting                            ✗
+       trajectory
+  3.   Repeat?
+
+                                  …
+
+                                  …
+
+
+
+
+Pan et al. 2024,
+                                                             46
+Autonomous Evaluation and Refinement of Digital Agents
+
+=== PHYSICAL PAGE 47 OF 126 ===
+Search By Repeated Sampling
+  1.   Sample actions from
+       the language model until
+       [STOP].
+  2.   Evaluate the resulting
+       trajectory
+  3.   Repeat?
+
+                                  …
+
+                                  …
+
+
+
+
+Pan et al. 2024,
+Autonomous Evaluation and Refinement of Digital Agents   ✗   47
+
+=== PHYSICAL PAGE 48 OF 126 ===
+Search By Repeated Sampling
+  1.   Sample actions from
+       the language model until
+       [STOP].
+  2.   Evaluate the resulting
+       trajectory
+  3.   Repeat?
+
+                                  …
+
+                                  …
+
+                                                         ✓
+
+Pan et al. 2024,
+                                                             48
+Autonomous Evaluation and Refinement of Digital Agents
+
+=== PHYSICAL PAGE 49 OF 126 ===
+49
+
+
+Search By Repeated Sampling
+
+
+
+                                                Repeated
+                                                sampling helps!
+
+
+
+
+     ● But the space is exponentially large. Can we guide exploration?
+     ● Key idea: apply value function to intermediate nodes.
+
+=== PHYSICAL PAGE 50 OF 126 ===
+50
+
+
+Our Method: Tree Search
+     ● Best-first search algorithm                      Jing Yu
+                                                          Koh
+
+     ● Ingredients:
+         ○ Baseline agent to propose                v = 0.35
+           actions.
+         ○ Way to backtrack in the
+           environment.
+         ○ A value function                         v = 0.55
+           to score and rerank candidate
+           states.
+
+         In this work, we prompt a multimodal LLM
+         (GPT-4o) to act as an evaluator.
+
+=== PHYSICAL PAGE 51 OF 126 ===
+                                                                                                                         51
+
+                 Task Instruction ( ): “Can you add this and the          Legend
+                 other canned fruit (of the same brand) that looks like
+                                                                          1   Step sequence   vv==1.0
+                                                                                                v =0.5
+                                                                                                    0.4   State values
+                 this, but red instead of brown to the comparison
+                 page?”                                                       Backtracking
+
+
+GPT-4o Agent
+
+
+
+
+GPT-4o Agent + Search
+
+
+
+
+Starting State
+
+=== PHYSICAL PAGE 52 OF 126 ===
+                                                                                                                         52
+
+                 Task Instruction ( ): “Can you add this and the          Legend
+                 other canned fruit (of the same brand) that looks like
+                                                                          1   Step sequence   vv==1.0
+                                                                                                v =0.5
+                                                                                                    0.4   State values
+                 this, but red instead of brown to the comparison
+                 page?”                                                       Backtracking
+
+
+GPT-4o Agent
+                    1
+
+
+GPT-4o Agent + Search
+                    1
+                  v = 0.5
+
+
+Starting State
+
+=== PHYSICAL PAGE 53 OF 126 ===
+                                                                                                                         53
+
+                 Task Instruction ( ): “Can you add this and the          Legend
+                 other canned fruit (of the same brand) that looks like
+                                                                          1   Step sequence   vv==1.0
+                                                                                                v =0.5
+                                                                                                    0.4   State values
+                 this, but red instead of brown to the comparison
+                 page?”                                                       Backtracking
+
+
+GPT-4o Agent
+                    1
+
+
+GPT-4o Agent + Search
+                    1
+                  v = 0.5
+
+
+Starting State
+
+=== PHYSICAL PAGE 54 OF 126 ===
+                                                                                                                         54
+
+                 Task Instruction ( ): “Can you add this and the          Legend
+                 other canned fruit (of the same brand) that looks like
+                                                                          1   Step sequence   vv==1.0
+                                                                                                v =0.5
+                                                                                                    0.4   State values
+                 this, but red instead of brown to the comparison
+                 page?”                                                       Backtracking
+
+
+GPT-4o Agent
+                    1                      2
+
+
+GPT-4o Agent + Search
+                    1                      2
+                  v = 0.5                v = 0.45
+
+
+Starting State
+
+
+                                         v = 0.45
+
+
+
+
+                                         v = 0.45
+
+=== PHYSICAL PAGE 55 OF 126 ===
+                                                                                                                         55
+
+                 Task Instruction ( ): “Can you add this and the          Legend
+                 other canned fruit (of the same brand) that looks like
+                                                                          1   Step sequence   vv==1.0
+                                                                                                v =0.5
+                                                                                                    0.4   State values
+                 this, but red instead of brown to the comparison
+                 page?”                                                       Backtracking
+
+
+GPT-4o Agent
+                    1                      2
+
+
+GPT-4o Agent + Search
+                    1                      2
+                  v = 0.5                v = 0.45
+
+
+Starting State
+
+
+                                         v = 0.45
+
+
+
+
+                                         v = 0.45
+
+=== PHYSICAL PAGE 56 OF 126 ===
+                                                                                                                               56
+
+                 Task Instruction ( ): “Can you add this and the                Legend
+                 other canned fruit (of the same brand) that looks like
+                                                                                1   Step sequence   vv==1.0
+                                                                                                      v =0.5
+                                                                                                          0.4   State values
+                 this, but red instead of brown to the comparison
+                 page?”                                                             Backtracking
+
+
+GPT-4o Agent
+                    1                      2
+
+
+GPT-4o Agent + Search
+                    1                      2
+                                                                            …
+                  v = 0.5                v = 0.45                 v = 0.4
+
+
+Starting State
+
+
+                                         v = 0.45
+
+
+
+
+                                         v = 0.45
+
+=== PHYSICAL PAGE 57 OF 126 ===
+                                                                                                                               57
+
+                 Task Instruction ( ): “Can you add this and the                Legend
+                 other canned fruit (of the same brand) that looks like
+                                                                                1   Step sequence   vv==1.0
+                                                                                                      v =0.5
+                                                                                                          0.4   State values
+                 this, but red instead of brown to the comparison
+                 page?”                                                             Backtracking
+
+
+GPT-4o Agent
+                    1                      2                        3
+
+
+GPT-4o Agent + Search
+                    1                      2
+                                                                            …
+                  v = 0.5                v = 0.45                 v = 0.4
+
+
+Starting State
+                                           3
+                                         v = 0.45
+
+
+
+
+                                         v = 0.45
+
+=== PHYSICAL PAGE 58 OF 126 ===
+                                                                                                                               58
+
+                 Task Instruction ( ): “Can you add this and the                Legend
+                 other canned fruit (of the same brand) that looks like
+                                                                                1   Step sequence   vv==1.0
+                                                                                                      v =0.5
+                                                                                                          0.4   State values
+                 this, but red instead of brown to the comparison
+                 page?”                                                             Backtracking
+
+
+GPT-4o Agent
+                    1                      2                        3
+
+
+GPT-4o Agent + Search
+                    1                      2
+                                                                            …
+                  v = 0.5                v = 0.45                 v = 0.4
+
+
+Starting State
+                                           3
+                                         v = 0.45                 v = 0.5
+
+
+
+
+                                         v = 0.45
+
+=== PHYSICAL PAGE 59 OF 126 ===
+                                                                                                                               59
+
+                 Task Instruction ( ): “Can you add this and the                Legend
+                 other canned fruit (of the same brand) that looks like
+                                                                                1   Step sequence   vv==1.0
+                                                                                                      v =0.5
+                                                                                                          0.4   State values
+                 this, but red instead of brown to the comparison
+                 page?”                                                             Backtracking
+
+
+GPT-4o Agent
+                    1                      2                        3                       4
+
+
+GPT-4o Agent + Search
+                    1                      2
+                                                                            …
+                  v = 0.5                v = 0.45                 v = 0.4
+
+
+Starting State
+                                           3                        4
+                                         v = 0.45                 v = 0.5
+
+
+
+
+                                         v = 0.45
+
+=== PHYSICAL PAGE 60 OF 126 ===
+                                                                                                                                 60
+
+                 Task Instruction ( ): “Can you add this and the                Legend
+                 other canned fruit (of the same brand) that looks like
+                                                                                1   Step sequence    vv==1.0
+                                                                                                       v =0.5
+                                                                                                           0.4   State values
+                 this, but red instead of brown to the comparison
+                 page?”                                                             Backtracking
+
+
+GPT-4o Agent
+                    1                      2                        3                       4                            ❌
+                                                                                                                       Failure
+
+
+
+GPT-4o Agent + Search
+                    1                      2
+                                                                            …
+                  v = 0.5                v = 0.45                 v = 0.4
+
+
+Starting State
+                                           3                        4
+                                         v = 0.45                 v = 0.5                 v = 0.55
+
+
+
+
+                                         v = 0.45
+
+=== PHYSICAL PAGE 61 OF 126 ===
+                                                                                                                                   61
+
+                 Task Instruction ( ): “Can you add this and the                Legend
+                 other canned fruit (of the same brand) that looks like
+                                                                                1   Step sequence    vv==1.0
+                                                                                                       v =0.5
+                                                                                                           0.4   State values
+                 this, but red instead of brown to the comparison
+                 page?”                                                             Backtracking
+
+
+GPT-4o Agent
+                    1                      2                        3                       4                                  ❌
+                                                                                                                         Failure
+
+
+
+GPT-4o Agent + Search
+                    1                      2
+                                                                            …
+                  v = 0.5                v = 0.45                 v = 0.4
+
+
+Starting State
+                                           3                        4                       5
+                                         v = 0.45                 v = 0.5                 v = 0.55                   v = 0.3
+
+
+
+
+                                         v = 0.45
+
+=== PHYSICAL PAGE 62 OF 126 ===
+                                                                                                                                       62
+
+                 Task Instruction ( ): “Can you add this and the                Legend
+                 other canned fruit (of the same brand) that looks like
+                                                                                1   Step sequence    vv==1.0
+                                                                                                       v =0.5
+                                                                                                           0.4   State values
+                 this, but red instead of brown to the comparison
+                 page?”                                                             Backtracking
+
+
+GPT-4o Agent
+                    1                      2                        3                       4                                  ❌
+                                                                                                                         Failure
+
+
+
+GPT-4o Agent + Search
+                    1                      2
+                                                                            …
+                  v = 0.5                v = 0.45                 v = 0.4
+
+
+Starting State
+                                           3                        4                       5
+                                                                                                                                   …
+                                         v = 0.45                 v = 0.5                 v = 0.55                   v = 0.3
+
+
+
+
+                                           6
+                                         v = 0.45
+
+=== PHYSICAL PAGE 63 OF 126 ===
+                                                                                                                                       63
+
+                 Task Instruction ( ): “Can you add this and the                Legend
+                 other canned fruit (of the same brand) that looks like
+                                                                                1   Step sequence    vv==1.0
+                                                                                                       v =0.5
+                                                                                                           0.4   State values
+                 this, but red instead of brown to the comparison
+                 page?”                                                             Backtracking
+
+
+GPT-4o Agent
+                    1                      2                        3                       4                                  ❌
+                                                                                                                         Failure
+
+
+
+GPT-4o Agent + Search
+                    1                      2
+                                                                            …
+                  v = 0.5                v = 0.45                 v = 0.4
+
+
+Starting State
+                                           3                        4                       5
+                                                                                                                                   …
+                                         v = 0.45                 v = 0.5                 v = 0.55                   v = 0.3
+
+
+
+
+                                           6
+                                         v = 0.45                v = 0.55
+
+
+
+
+                                                                  v = 0.5
+
+=== PHYSICAL PAGE 64 OF 126 ===
+                                                                                                                                       64
+
+                 Task Instruction ( ): “Can you add this and the                Legend
+                 other canned fruit (of the same brand) that looks like
+                                                                                1   Step sequence    vv==1.0
+                                                                                                       v =0.5
+                                                                                                           0.4   State values
+                 this, but red instead of brown to the comparison
+                 page?”                                                             Backtracking
+
+
+GPT-4o Agent
+                    1                      2                        3                       4                                  ❌
+                                                                                                                         Failure
+
+
+
+GPT-4o Agent + Search
+                    1                      2
+                                                                            …
+                  v = 0.5                v = 0.45                 v = 0.4
+
+
+Starting State
+                                           3                        4                       5
+                                                                                                                                   …
+                                         v = 0.45                 v = 0.5                 v = 0.55                   v = 0.3
+
+
+
+
+                                           6                        7
+                                         v = 0.45                v = 0.55
+
+
+
+
+                                                                  v = 0.5
+
+=== PHYSICAL PAGE 65 OF 126 ===
+                                                                                                                                       65
+
+                 Task Instruction ( ): “Can you add this and the                Legend
+                 other canned fruit (of the same brand) that looks like
+                                                                                1   Step sequence    vv==1.0
+                                                                                                       v =0.5
+                                                                                                           0.4   State values
+                 this, but red instead of brown to the comparison
+                 page?”                                                             Backtracking
+
+
+GPT-4o Agent
+                    1                      2                        3                       4                                  ❌
+                                                                                                                         Failure
+
+
+
+GPT-4o Agent + Search
+                    1                      2
+                                                                            …
+                  v = 0.5                v = 0.45                 v = 0.4
+
+
+Starting State
+                                           3                        4                       5
+                                                                                                                                   …
+                                         v = 0.45                 v = 0.5                 v = 0.55                   v = 0.3
+
+
+
+
+                                           6                        7
+                                         v = 0.45                v = 0.55                 v = 0.68
+
+
+
+
+                                                                  v = 0.5
+
+=== PHYSICAL PAGE 66 OF 126 ===
+                                                                                                                                       66
+
+                 Task Instruction ( ): “Can you add this and the                Legend
+                 other canned fruit (of the same brand) that looks like
+                                                                                1   Step sequence    vv==1.0
+                                                                                                       v =0.5
+                                                                                                           0.4   State values
+                 this, but red instead of brown to the comparison
+                 page?”                                                             Backtracking
+
+
+GPT-4o Agent
+                    1                      2                        3                       4                                  ❌
+                                                                                                                         Failure
+
+
+
+GPT-4o Agent + Search
+                    1                      2
+                                                                            …
+                  v = 0.5                v = 0.45                 v = 0.4
+
+
+Starting State
+                                           3                        4                       5
+                                                                                                                                   …
+                                         v = 0.45                 v = 0.5                 v = 0.55                   v = 0.3
+
+
+
+
+                                           6                        7                       8
+                                         v = 0.45                v = 0.55                 v = 0.68
+
+
+
+
+                                                                  v = 0.5
+
+=== PHYSICAL PAGE 67 OF 126 ===
+                                                                                                                                       67
+
+                 Task Instruction ( ): “Can you add this and the                Legend
+                 other canned fruit (of the same brand) that looks like
+                                                                                1   Step sequence    vv==1.0
+                                                                                                       v =0.5
+                                                                                                           0.4   State values
+                 this, but red instead of brown to the comparison
+                 page?”                                                             Backtracking
+
+
+GPT-4o Agent
+                    1                      2                        3                       4                                  ❌
+                                                                                                                         Failure
+
+
+
+GPT-4o Agent + Search
+                    1                      2
+                                                                            …
+                  v = 0.5                v = 0.45                 v = 0.4
+
+
+Starting State
+                                           3                        4                       5
+                                                                                                                                   …
+                                         v = 0.45                 v = 0.5                 v = 0.55                   v = 0.3
+
+
+
+
+                                           6                        7                       8
+                                                                                                                                   …
+                                         v = 0.45                v = 0.55                 v = 0.68                   v = 0.2
+
+
+
+
+                                                                  v = 0.5
+
+=== PHYSICAL PAGE 68 OF 126 ===
+                                                                                                                                       68
+
+                 Task Instruction ( ): “Can you add this and the                Legend
+                 other canned fruit (of the same brand) that looks like
+                                                                                1   Step sequence    vv==1.0
+                                                                                                       v =0.5
+                                                                                                           0.4   State values
+                 this, but red instead of brown to the comparison
+                 page?”                                                             Backtracking
+
+
+GPT-4o Agent
+                    1                      2                        3                       4                                  ❌
+                                                                                                                         Failure
+
+
+
+GPT-4o Agent + Search
+                    1                      2
+                                                                            …
+                  v = 0.5                v = 0.45                 v = 0.4
+
+
+Starting State
+                                           3                        4                       5
+                                                                                                                                   …
+                                         v = 0.45                 v = 0.5                 v = 0.55                   v = 0.3
+
+
+
+
+                                           6                        7                       8
+                                                                                                                                   …
+                                         v = 0.45                v = 0.55                 v = 0.68                   v = 0.2
+
+
+
+
+                                                                    9
+                                                                  v = 0.5
+
+=== PHYSICAL PAGE 69 OF 126 ===
+                                                                                                                                          69
+
+                 Task Instruction ( ): “Can you add this and the                Legend
+                 other canned fruit (of the same brand) that looks like
+                                                                                1   Step sequence       vv==1.0
+                                                                                                          v =0.5
+                                                                                                              0.4   State values
+                 this, but red instead of brown to the comparison
+                 page?”                                                             Backtracking
+
+
+GPT-4o Agent
+                    1                      2                        3                       4                                     ❌
+                                                                                                                            Failure
+
+
+
+GPT-4o Agent + Search
+                    1                      2
+                                                                            …
+                  v = 0.5                v = 0.45                 v = 0.4
+
+
+Starting State
+                                           3                        4                        5
+                                                                                                                                      …
+                                         v = 0.45                 v = 0.5                 v = 0.55                      v = 0.3
+
+
+
+
+                                           6                        7                        8
+                                                                                                                                      …
+                                         v = 0.45                v = 0.55                 v = 0.68                      v = 0.2
+
+
+
+
+                                                                    9                       10
+                                                                                                       ✅
+                                                                  v = 0.5                  v = 1.0   Success
+
+=== PHYSICAL PAGE 70 OF 126 ===
+70
+
+
+Results
+                   WebArena                       VisualWebArena
+     20%                         19%   28%                         26%
+
+                          15%
+     15%                               21%                  19%
+                                                    17%
+                  10%
+     10%                               14%
+           8%
+                                             8%
+     5%                                7%
+
+
+     0%                                0%
+           Llama-3-70B      GPT-4o           Llama-3-70B       GPT-4o
+               Baseline   w/ Search              Baseline   w/ Search
+
+=== PHYSICAL PAGE 71 OF 126 ===
+71
+
+
+Ablations
+
+=== PHYSICAL PAGE 72 OF 126 ===
+72
+
+
+Ablations
+     ● Having a good value function is
+       essential.
+     ● There is still a lot of headroom for
+       improving both the base agent policy,
+       and the value function.
+
+=== PHYSICAL PAGE 73 OF 126 ===
+73
+
+
+Qualitative Results
+
+=== PHYSICAL PAGE 74 OF 126 ===
+74
+
+
+Qualitative Results
+
+=== PHYSICAL PAGE 75 OF 126 ===
+75
+
+
+Limitations
+     ● Search is slow
+        -   We implemented backtracking in a relatively naive way (store actions in
+            a queue, take them again to get to the original state)
+
+     ● Dealing with destructive actions
+        -   Some things on the web are very difficult to undo, e.g., ordering an item
+
+=== PHYSICAL PAGE 76 OF 126 ===
+76
+
+
+Current Work
+     ● Search as a policy improvement function
+
+     ● Improving Value Function by fine-tuning instead of prompting
+
+     ● Explore compute tradeoff between improving baseline agent vs.
+       doing more search at inference time
+
+     ● What if we don’t have a perfect simulator – how can we collect
+       data at scale?
+
+=== PHYSICAL PAGE 77 OF 126 ===
+77
+
+
+Talk Outline
+     ● VisualWebArena -- Evaluating Multimodal Agents on Realistic Visual
+       Web Tasks (Koh et al., ACL 2024)
+
+     ● Tree Search for Language Model Agents (Koh, McAleer, Fried,
+        Salakhutdinov, arXiv 2024)
+
+
+     ● Towards Internet-Scale Training For Agents (Trabucco, Sigurdsson,
+        Piramuthu, Salakhutdinov, arXiv 2025)
+
+=== PHYSICAL PAGE 78 OF 126 ===
+78
+
+
+Agents Suffer From A Data Problem
+     ● Top LLMs fall short of humans by
+       68.92% on Visual Web Arena
+
+     ● LLMs are often trained offline, then
+       deployed zero-shot as agents
+
+
+
+                        LLM
+
+
+     Training Data      Test Environment
+                                              LLM   Multimodal LLMs   Human
+
+=== PHYSICAL PAGE 79 OF 126 ===
+79
+
+
+Agents Suffer From A Data Problem
+     ● Top LLMs fall short of humans by
+       68.92% on Visual Web Arena
+
+     ● Can synthetic tasks unlock
+       internet-scale training for agents?
+     .
+
+
+
+                         LLM
+
+
+     Training Data       Test Environment
+                                             LLM   Multimodal LLMs   Human
+
+=== PHYSICAL PAGE 80 OF 126 ===
+80
+
+
+Towards Internet-Scale Training For Agents (InSTA)
+     ● Can synthetic tasks unlock internet-scale training for agents?
+     ● Key Idea: use Llama to generate and verify synthetic agentic tasks
+
+
+       Stage 1: Task Generation     Stage 2: Task Evaluation          Stage 3: Data Collection
+
+
+
+
+                                                                           www.github.com
+       www.github.com                                                  www.stackoverflow.com
+                                                                            www.uefi.org
+                                                                         www.javatpoint.com
+                                                                               80
+                                                                      manuals.playstation.net
+                                                                       calculator.bcis.co.uk
+              Find a codebase for           Codebase found:       ✅        research.vu.nl
+                                                                                  ...
+      LLM     generating images     LLM     Flux supported:    ✅            (150k sites)
+              with Flux.1 [dev].
+                                            Task solved:      ✅
+
+=== PHYSICAL PAGE 81 OF 126 ===
+81
+
+
+Use Llama To Generate Agentic Tasks
+     ● Given a web domain as text (i.e. merseyferries.co.uk)
+     ● Propose a realistic task that an average user could complete in one
+       session.
+
+=== PHYSICAL PAGE 82 OF 126 ===
+82
+
+
+Use Llama To Generate Agentic Tasks
+      ● Given a web domain as text (i.e. merseyferries.co.uk)
+      ● Propose a realistic task that an average user could complete in one
+        session.
+
+     Llama-3.1-70B-Instruct: describe the “merseyferries.co.uk” site
+
+     Mersey Ferries (merseyferries.co.uk) is the official website for the famous Mersey Ferry service in
+     Liverpool, England. This website serves as a one-stop platform for users to access various services and
+     information related to the ferry operation. Here are some things a user can do on this site:
+      1. Plan a Journey: Users can plan their journey by checking the ferry timetable, which includes
+         departure and arrival times for both commuter and cruise services.
+      2. Book Tickets: Users can book tickets online for both commuter and cruise services, including the
+         popular Manchester Ship Canal Cruise and the Liverpool Bay Cruise.
+
+=== PHYSICAL PAGE 83 OF 126 ===
+83
+
+
+Use Llama To Generate Agentic Tasks
+
+
+
+
+     ● Heavy-tailed distribution, most tasks involve information retrieval
+     ● Crucially, tasks do not modify the state of the internet
+
+=== PHYSICAL PAGE 84 OF 126 ===
+84
+
+
+Generated Tasks
+     ● Tasks are diverse, and many require multiple steps of reasoning
+       (i.e., what makes a font suitable for a children’s book)
+
+         Web Domain            Generated Task
+
+         wordpress.org         Find a free and popular theme for a personal blog.
+
+         policies.google.com   Read Google's terms of service for using YouTube.
+
+         ec.europa.eu          Retrieve a report on the EU's climate change policy.
+
+         vimeo.com             Find a short film on environmental conservation.
+
+         fonts.adobe.com       Browse fonts suitable for a children's book.
+
+         apps.apple.com        Find the top-rated free productivity app for iPhone.
+
+=== PHYSICAL PAGE 85 OF 126 ===
+85
+
+
+Generated Tasks
+     ● Llama can identify facts that a site is likely to contain, such as the
+       meaning of the Om symbol
+
+         Web Domain             Generated Task
+
+         ancient-symbols.com    Look up the meaning of the Om symbol in ancient cultures.
+
+         petsforhomes.com.au    Find a list of available dogs for adoption in New South Wales.
+
+         timorousbeasties.com   View the latest fabric designs by the Timorous Beasties studio.
+
+         shop.nikon-image.com   Compare prices of the Nikon D850 and D500 cameras.
+
+         blueridgecountry.com   Find a scenic hiking trail in the Blue Ridge Mountains.
+
+         awg-fittings.com       Find the dimensions of a 1/2\" NPT fitting.
+
+=== PHYSICAL PAGE 86 OF 126 ===
+86
+
+
+Generated Tasks
+     ● Llama has broad knowledge of sites, such as for timorousbeasties.com,
+       an independent Scottish design studio (fairly obscure)
+
+        Web Domain             Generated Task
+
+        ancient-symbols.com    Look up the meaning of the Om symbol in ancient cultures.
+
+        petsforhomes.com.au    Find a list of available dogs for adoption in New South Wales.
+
+        timorousbeasties.com   View the latest fabric designs by the Timorous Beasties studio.
+
+        shop.nikon-image.com   Compare prices of the Nikon D850 and D500 cameras.
+
+        blueridgecountry.com   Find a scenic hiking trail in the Blue Ridge Mountains.
+
+        awg-fittings.com       Find the dimensions of a 1/2\" NPT fitting.
+
+=== PHYSICAL PAGE 87 OF 126 ===
+87
+
+
+Generated Tasks
+     View the latest fabric
+     designs by the Timorous
+     Beasties studio
+     ● Tasks are grounded,
+       even for sites in the tail
+       of the data distribution
+
+=== PHYSICAL PAGE 88 OF 126 ===
+88
+
+
+The Data Pipeline
+     ● Key Idea: use Llama to generate and verify synthetic agentic
+       tasks.
+
+
+
+       Stage 1: Task Generation     Stage 2: Task Evaluation          Stage 3: Data Collection
+
+
+
+
+                                                                           www.github.com
+       www.github.com                                                  www.stackoverflow.com
+                                                                            www.uefi.org
+                                                                         www.javatpoint.com
+                                                                               88
+                                                                      manuals.playstation.net
+                                                                       calculator.bcis.co.uk
+              Find a codebase for           Codebase found:       ✅        research.vu.nl
+                                                                                  ...
+      LLM     generating images     LLM     Flux supported:    ✅            (150k sites)
+              with Flux.1 [dev].
+                                            Task solved:      ✅
+
+=== PHYSICAL PAGE 89 OF 126 ===
+89
+
+
+The Data Pipeline
+     ● Key Idea: use Llama to generate and verify synthetic agentic tasks
+     ● How do we know when tasks are solved? Build on Llama models
+
+
+       Stage 1: Task Generation     Stage 2: Task Evaluation          Stage 3: Data Collection
+
+
+
+
+                                                                           www.github.com
+       www.github.com                                                  www.stackoverflow.com
+                                                                            www.uefi.org
+                                                                         www.javatpoint.com
+                                                                               89
+                                                                      manuals.playstation.net
+                                                                       calculator.bcis.co.uk
+              Find a codebase for           Codebase found:       ✅        research.vu.nl
+                                                                                  ...
+      LLM     generating images     LLM     Flux supported:    ✅            (150k sites)
+              with Flux.1 [dev].
+                                            Task solved:      ✅
+
+=== PHYSICAL PAGE 90 OF 126 ===
+90
+
+
+Automatic Task Verification
+     ● How do we know when tasks are solved?
+       -   Observe a sequence of actions, and the last observation
+       -   Estimate the probability the task is a success at the final step
+
+=== PHYSICAL PAGE 91 OF 126 ===
+91
+
+
+Automatic Task Verification
+     ● How do we know when tasks are solved?
+        -   Observe a sequence of actions, and the last observation
+        -   Estimate the probability the task is a success at the final step
+
+
+
+
+     ● Prompt Llama to rate its confidence the task is solved on a scale
+       from 0.0 (not possible) → 1.0 (certain)
+
+     ● Of 150,000 tasks, 14.6% are rated as a success with a confidence
+       of 1.0 by the Llama verifier, roughly 22,000 tasks
+
+=== PHYSICAL PAGE 92 OF 126 ===
+92
+
+
+Exploring The Data: InvasivePlantAtlas.org
+      Proposed Task: find invasive plant
+      species native to North America
+
+     Agent Response:
+
+     To find invasive plant species native to
+     North America, I will first click on the
+     link "All Species" to view the list of all
+     species.
+
+     Here is the action in JSON format:
+
+     ```json
+     {
+         "action_key": "click",
+         "action_kwargs": {},
+         "target_element_id": 12
+     }
+     ```
+
+=== PHYSICAL PAGE 93 OF 126 ===
+93
+
+
+Exploring The Data: InvasivePlantAtlas.org
+     Agent Response:
+
+     To find invasive plant species native to North
+     America, I will first click on the link "Home"
+     to go back to the main page and then click on
+     the link "Sources" to view the list of sources
+     that provide information on invasive plant
+     species native to North America.
+
+     However, since the link "Sources" is not on the
+     current page, I will first click on the link
+     "Home" to go back to the main page.
+
+     Here is the action in JSON format:
+
+     ```json                              Misread
+     {
+         "action_key": "click",
+                                           Page
+         "action_kwargs": {},
+         "target_element_id": 1
+     }
+     ```
+
+=== PHYSICAL PAGE 94 OF 126 ===
+94
+
+
+Exploring The Data: InvasivePlantAtlas.org
+     Agent Response:
+
+     To find invasive plant species native to North
+     America, I will first click on the link
+     "Sources" to view the list of sources that
+     provide information on invasive plant species
+     native to North America.
+
+     Here is the action in JSON format:
+
+     ```json
+     {
+         "action_key": "click",
+         "action_kwargs": {},
+         "target_element_id": 15
+     }
+     ```
+
+=== PHYSICAL PAGE 95 OF 126 ===
+95
+
+
+Exploring The Data: InvasivePlantAtlas.org
+     Agent Response:                                  actual click (element 25)
+
+     To find invasive plant species native to North
+     America, I will first click on the link "FONA"
+     under the "Native Range and Taxonomic
+     References" section, which stands for "Flora
+     of North America". This will take me to the
+     Flora of North America website, where I can
+     search for invasive plant species native to
+     North America.
+
+     Here is the action in JSON format:
+
+     ```json
+     {
+         "action_key": "click",
+         "action_kwargs": {},
+         "target_element_id": 25
+     }
+     ```
+
+=== PHYSICAL PAGE 96 OF 126 ===
+96
+
+
+Exploring The Data: InvasivePlantAtlas.org
+     Agent Response:
+
+     To find invasive plant species native to North
+     America, I will first click on the link "Sort on
+     “U.S. Nativity”" to sort the list by the
+     nativity of the plant species in the United
+     States.
+
+     Here is the action in JSON format:
+
+     ```json
+     {
+         "action_key": "click",
+         "action_kwargs": {},
+         "target_element_id": 20
+     }
+     ```
+
+=== PHYSICAL PAGE 97 OF 126 ===
+97
+
+
+Exploring The Data: InvasivePlantAtlas.org
+     Agent Response:
+
+     To find invasive plant species native to North
+     America, I will first scroll down the page to view the
+     list of invasive plant species that are native to
+     North America.
+
+     However, since the list is already sorted by "U.S.
+     Nativity" in ascending order, I can see that the first
+     165 plant species are native to North America.
+
+     Here is the action in JSON format:
+
+     ```json
+     {
+         "action_key": "stop",
+         "action_kwargs": {
+             "answer": "The first 165 plant species on the
+     list are invasive plant species native to North
+     America."
+         },
+         "target_element_id": null
+     }
+     ```
+
+=== PHYSICAL PAGE 98 OF 126 ===
+98
+
+
+Exploring The Data: InvasivePlantAtlas.org
+     Proposed Task: find invasive plant
+     species native to North America
+
+
+     ● Despite reasoning failures, the agent
+       self-corrected, and found the target
+       information
+
+     ● The Llama verifier evaluates this
+       trajectory as successful
+       with confidence = 1.0
+
+=== PHYSICAL PAGE 99 OF 126 ===
+99
+
+=== PHYSICAL PAGE 100 OF 126 ===
+100
+
+=== PHYSICAL PAGE 101 OF 126 ===
+101
+
+
+The Data Pipeline
+      ● We’ve covered generation and verification of synthetic agentic
+        tasks
+
+
+
+        Stage 1: Task Generation     Stage 2: Task Evaluation    Stage 3: Data Collection
+
+
+
+
+                                                                      www.github.com
+        www.github.com                                            www.stackoverflow.com
+                                                                       www.uefi.org
+                                                                    www.javatpoint.com
+                                                                         101
+                                                                 manuals.playstation.net
+                                                                  calculator.bcis.co.uk
+               Find a codebase for           Codebase found: ☑        research.vu.nl
+                                                                             ...
+       LLM     generating images     LLM     Flux supported: ☑         (150k sites)
+               with Flux.1 [dev].            Task solved: ☑
+
+=== PHYSICAL PAGE 102 OF 126 ===
+102
+
+
+The Data Pipeline
+      ● We’ve covered generation and verification of synthetic agentic
+        tasks
+      ● Now we can scale up data collection
+
+        Stage 1: Task Generation     Stage 2: Task Evaluation    Stage 3: Data Collection
+
+
+
+
+                                                                      www.github.com
+        www.github.com                                            www.stackoverflow.com
+                                                                       www.uefi.org
+                                                                    www.javatpoint.com
+                                                                         102
+                                                                 manuals.playstation.net
+                                                                  calculator.bcis.co.uk
+               Find a codebase for           Codebase found: ☑        research.vu.nl
+                                                                             ...
+       LLM     generating images     LLM     Flux supported: ☑         (150k sites)
+               with Flux.1 [dev].            Task solved: ☑
+
+=== PHYSICAL PAGE 103 OF 126 ===
+103
+
+
+Scaling Up To 150k Live Websites
+      ● We can use the Common Crawl PageRank to find important sites
+            -     97% accuracy in detecting and filtering harmful content
+            -     89% success rate in generating feasible tasks
+            -     82% accuracy in judging successful task completions
+
+                                                       N/A
+                                                             www.github.com
+                                                             Find a codebase for
+                                                       LLM   generating images
+                                                                                          Codebase found: ☑
+                                                             with Flux.1 [dev].
+                                                                                   LLM Flux supported: ☑
+                                                                                      103
+                                                                                          Task solved: ☑
+
+                                        Top 1M
+      The Internet                     PageRank              150k live websites         Attempt & Verify
+ [4] CommonCrawl, The Common Crawl Foundation, 2024.
+
+=== PHYSICAL PAGE 104 OF 126 ===
+104
+
+
+Results: Improving Efficiency
+                                ● Training on synthetic and
+                                  human demonstrations scale
+                                  faster than training on human
+                                  data
+
+                                ● Adding synthetic data improves
+                                  Step Accuracy by
+                                   -   +89.5% relative to human data
+                                       for Mind2Web
+                                   -   +122.1% relative to human
+                                       data for WebLINX
+
+=== PHYSICAL PAGE 105 OF 126 ===
+105
+
+
+Results: Improving Generalization
+
+
+
+
+      ● Training with only human demonstrations struggle with generalization
+      ● Adding synthetic data improves generalization by
+         -   +149.0% for WebLINX
+         -   +156.3% for Mind2Web
+
+=== PHYSICAL PAGE 106 OF 126 ===
+106
+
+
+Next Steps
+      ● There are 385M unique domains in the Common Crawl PageRank,
+        suggesting another 1000x more data could be available by scaling
+        further
+      ● Moving towards online RL
+
+=== PHYSICAL PAGE 107 OF 126 ===
+107
+
+
+Physical Agent: Long-horizon Robotic Manipulation Task
+      ● Model architecture of our interactive agent:
+         - High-level Planning
+         - Observation Parsing
+         - Low-level Action Generation
+
+                           Joint Angle Controls
+
+
+
+                        Parsing
+                        Module
+        Observed                             Semantic
+      Image + Depth                        Segmentation
+                                                                               STOP
+                                                                   Low-level
+                                                                                      Return
+                                                                    Actions
+                                            High-level
+          Objective                           Plans
+                       Planning
+                       Module                             Refine
+
+=== PHYSICAL PAGE 108 OF 126 ===
+108
+
+
+Plan-Sequence-Learn
+
+                                                                                                Murtaza Dalal
+
+
+
+
+ Plan-Seq-Learn (PSL): Language Model Guided RL for Solving Long Horizon Robotics, M Dalal, T
+ Chiruvolu, D Chaplot, R Salakhutdinov, ICLR 2024
+
+=== PHYSICAL PAGE 109 OF 126 ===
+            109
+
+
+            Planning Module
+               Manipulation tasks require complex interactions with environment
+               Low probability of success:
+            • Structured
+                  (        ) =language
+                                 (    1) ∗ (
+                                            plans:
+                                               2
+                                                     (object,
+                                                      1) ∗ (…)
+                                                                condition)
+            • Prompt: Task description, conditions, objects,
+            formatting
+
+
+                        Stage termination conditions: (grasp, place).
+                        Task description: The silver nut goes on the silver peg and the gold nut goes on the gold peg. Give me a simple plan to
+                        solve the task using only the stage termination conditions. Make sure the plan follows the formatting specified below and
+                        make sure to take into account object geometry.
+                        Formatting of output: a list in which each element looks like: (<object/region>, <stage termination condition>). Don't output
+                        anything else.
+
+                        Output:
+
+                        [(“silver nut”, “grasp”), (“silver peg”, “place”), (“gold nut”, “grasp”), (“gold peg”, “place”)]
+
+
+
+
+                                                                                𝑠
+                                                                            𝑎
+                                                                        𝑡
+                                                                    𝑘
+                                                                𝑠
+                                                            𝑎
+                                                        𝑡
+                                                    𝑃
+                                                𝑘
+                                            𝑠
+                                        𝑎
+                                    𝑡
+                                𝑃
+                            𝑠
+                        𝑠
+                    𝑒
+                𝑐
+            𝑐
+        𝑢                                                                               𝑃
+    𝑠
+𝑝                                                                                   𝑘
+
+=== PHYSICAL PAGE 110 OF 126 ===
+110
+
+
+Sequencing/Parsing Module:
+Grounding Language Plans in the Scene
+
+=== PHYSICAL PAGE 111 OF 126 ===
+111
+
+
+
+
+Learning Low-level Actions Module: Learning Local Control
+  • Learned RL policies for interaction
+  • Trained with task reward
+  • Single RL model instead of separate per stage
+  • Local instead of global observations
+
+=== PHYSICAL PAGE 112 OF 126 ===
+112
+
+
+
+
+Learning Low-level Actions Module: Learning Local Control
+  • Learned RL policies for interaction
+  • Trained with task reward
+  • Single RL model instead of separate per stage
+  • Local instead of global observations
+
+=== PHYSICAL PAGE 113 OF 126 ===
+113
+
+
+
+Full Pipeline Example
+
+=== PHYSICAL PAGE 114 OF 126 ===
+114
+
+
+
+Full Pipeline Example
+
+=== PHYSICAL PAGE 115 OF 126 ===
+115
+
+
+
+Full Pipeline Example
+
+=== PHYSICAL PAGE 116 OF 126 ===
+116
+
+
+
+Full Pipeline Example
+
+=== PHYSICAL PAGE 117 OF 126 ===
+PSL solves 25+ long-horizon robotics tasks across four benchmark
+     environment suites with greater than 85% success rates
+NVIDIA CONFIDENTIAL. DO NOT DISTRIBUTE.
+
+=== PHYSICAL PAGE 118 OF 126 ===
+
+=== PHYSICAL PAGE 119 OF 126 ===
+Generalizes to Novel Object Geometries/Categories
+
+
+
+
+                                                    8x
+
+=== PHYSICAL PAGE 120 OF 126 ===
+Manipulate novel objects with unseen receptacles
+
+
+
+
+                                                   8x
+
+=== PHYSICAL PAGE 121 OF 126 ===
+Manipulate Deformable Objects (not observed in sim!)
+
+
+
+
+                                                       8x
+
+=== PHYSICAL PAGE 122 OF 126 ===
+122
+
+
+Summary
+      ● VisualWebArena: a benchmark of realistic tasks designed to rigorously evaluate
+        and advance the capabilities of autonomous multimodal web agents
+
+      ● Inference-time search algorithm designed to enhance the capabilities of language
+        model agents on realistic web tasks
+
+      ● Data pipeline for large-scale generation and verification of synthetic web tasks,
+        powered by Llama models
+
+=== PHYSICAL PAGE 123 OF 126 ===
+123
+
+
+Summary
+      ● VisualWebArena: a benchmark of realistic tasks designed to rigorously evaluate and
+        advance the capabilities of autonomous multimodal web agents
+
+      ● Inference-time search algorithm designed to enhance the capabilities of language model
+        agents on realistic web tasks
+
+      ● Data pipeline for large-scale generation and verification of synthetic web tasks, powered
+        by Llama models
+
+      ● AI Safety and robustness, especially in the age of autonomous systems.
+
+=== PHYSICAL PAGE 124 OF 126 ===
+
+=== PHYSICAL PAGE 125 OF 126 ===
+
+=== PHYSICAL PAGE 126 OF 126 ===
+126
+
+
+
+
+      Thank you

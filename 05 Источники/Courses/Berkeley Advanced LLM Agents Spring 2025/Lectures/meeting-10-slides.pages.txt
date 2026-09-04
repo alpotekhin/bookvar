@@ -1,0 +1,1884 @@
+=== PHYSICAL PAGE 1 OF 118 ===
+Bridging Informal and Formal Mathematical
+Reasoning with AI
+
+
+Sean Welleck
+April 14, 2025
+Carnegie Mellon University
+
+=== PHYSICAL PAGE 2 OF 118 ===
+AI agents in expert domains
+
+
+
+
+   AI agents in expert domains
+
+     • Finance
+     • Medicine
+     • Mathematics
+
+
+
+
+                                 1
+
+=== PHYSICAL PAGE 3 OF 118 ===
+AI agents in expert domains
+
+
+
+
+   AI agents in expert domains
+
+     • Finance
+     • Medicine
+     • Mathematics
+         • Open-ended dialogue
+         • Come up with counterexamples
+         • Help write proofs
+         • ...
+
+
+
+
+                                          1
+
+=== PHYSICAL PAGE 4 OF 118 ===
+“Informal” mathematics
+
+
+
+
+Math as raw data (text, images, ...)
+  • Flexible
+  • Widely used
+  • Difficult to check
+
+
+
+
+                                       Language model solution.
+
+
+
+                                                                  2
+
+=== PHYSICAL PAGE 5 OF 118 ===
+Formal mathematics
+
+
+
+
+Math as source code
+  • Write a specification (e.g., 1+1=2)
+  • Write a proof
+  • Automatically checked
+      • Code compiles ≡ correct proof     Math as source code.
+
+
+
+
+                                                                 3
+
+=== PHYSICAL PAGE 6 OF 118 ===
+Formal mathematics
+
+
+
+
+Math as source code
+  • Write a specification (e.g., 1+1=2)
+  • Write a proof
+  • Automatically checked
+                                          Theorem proving languages
+      • Code compiles ≡ correct proof
+
+
+
+
+                                                                      3
+
+=== PHYSICAL PAGE 7 OF 118 ===
+Formal mathematics (Demo)
+
+
+
+
+        If R ⊆ S and S ⊆ T then R ⊆ T
+
+
+
+
+                                        4
+
+=== PHYSICAL PAGE 8 OF 118 ===
+How is formal math used in practice?
+
+
+
+
+   Growing use in mathematics:
+
+
+
+
+            Terence Tao’s Lean formalization project (October 2023)
+
+
+
+
+                                                                      5
+
+=== PHYSICAL PAGE 9 OF 118 ===
+How is formal math used in practice?
+
+
+
+
+   Growing use in mathematics:
+
+
+
+
+            Terence Tao’s Lean formalization project (October 2023)
+
+
+
+     • Lean Mathlib project: 1+ million lines of code, 300+ contributors
+
+
+
+
+                                                                           5
+
+=== PHYSICAL PAGE 10 OF 118 ===
+How is formal math used in practice?
+
+
+
+
+   Why?1
+
+     • Collaboration
+           • Break down a big problem into multiple pieces
+           • Anyone can submit code to solve a piece
+           • We know we can trust the code since it is automatically checked!
+
+
+
+
+   1 See e.g., Mathematics and the formal turn, AFM Aims and Scope
+
+
+                                                                                6
+
+=== PHYSICAL PAGE 11 OF 118 ===
+How is formal math used in practice?
+
+
+
+
+   Why?1
+
+     • Collaboration
+           • Break down a big problem into multiple pieces
+           • Anyone can submit code to solve a piece
+           • We know we can trust the code since it is automatically checked!
+     • Instant feedback
+
+
+
+
+   1 See e.g., Mathematics and the formal turn, AFM Aims and Scope
+
+
+                                                                                6
+
+=== PHYSICAL PAGE 12 OF 118 ===
+How is formal math used in practice?
+
+
+
+
+   Why?1
+
+     • Collaboration
+           • Break down a big problem into multiple pieces
+           • Anyone can submit code to solve a piece
+           • We know we can trust the code since it is automatically checked!
+     • Instant feedback
+     • Guaranteed correctness
+
+
+
+
+   1 See e.g., Mathematics and the formal turn, AFM Aims and Scope
+
+
+                                                                                6
+
+=== PHYSICAL PAGE 13 OF 118 ===
+How is formal math used in practice?
+
+
+
+
+   Why?1
+
+     • Collaboration
+             • Break down a big problem into multiple pieces
+             • Anyone can submit code to solve a piece
+             • We know we can trust the code since it is automatically checked!
+     • Instant feedback
+     • Guaranteed correctness
+     • ...
+
+
+
+   1 See e.g., Mathematics and the formal turn, AFM Aims and Scope
+
+
+                                                                                  6
+
+=== PHYSICAL PAGE 14 OF 118 ===
+Why is AI ∩ formal math important?
+
+
+
+
+   Formal math for AI
+
+     • Verifiable
+         • Prevent incorrect math and code generation
+         • Feedback signal for learning
+
+
+
+
+                                                        7
+
+=== PHYSICAL PAGE 15 OF 118 ===
+Why is AI ∩ formal math important?
+
+
+
+
+   Formal math for AI
+
+     • Verifiable
+         • Prevent incorrect math and code generation
+         • Feedback signal for learning
+     • Tests reasoning
+         • From easy: 1+1 = 2
+         • To hard: Fermat’s Last Theorem
+
+
+
+
+                                                        7
+
+=== PHYSICAL PAGE 16 OF 118 ===
+LLMs ∩ formal math
+
+
+
+
+                     gpt-f (2020)
+
+
+
+
+                                    8
+
+=== PHYSICAL PAGE 17 OF 118 ===
+LLMs ∩ formal math
+
+
+
+
+                     gpt-f (2020)
+
+
+
+
+                                    9
+
+=== PHYSICAL PAGE 18 OF 118 ===
+LLMs ∩ formal math
+
+
+
+  Rapid progress in methods based on language models:
+
+
+
+
+                 miniF2F benchmark performance, 2022-2024
+
+
+                                                            10
+
+=== PHYSICAL PAGE 19 OF 118 ===
+LLMs ∩ formal math
+
+
+
+
+  Generated International Math Olympiad solution in Lean
+  (DeepSeek Prover-1.5B, Xin et al 2024)
+                                                           11
+
+=== PHYSICAL PAGE 20 OF 118 ===
+LLMs ∩ formal math
+
+
+
+
+         Terence Tao’s Lean formalization project (October 2023)
+
+
+
+
+                                                                   12
+
+=== PHYSICAL PAGE 21 OF 118 ===
+LLMs ∩ formal math
+
+
+
+
+         Terence Tao’s Lean formalization project (October 2023)
+
+
+         So...why don’t people and AI always use formal math?
+
+
+
+
+                                                                   12
+
+=== PHYSICAL PAGE 22 OF 118 ===
+Key challenge: the informal-formal gap
+
+
+   Informal ideas, intuitions, and even proofs are difficult to express formally:
+
+
+
+
+     • Each step of reasoning needs to be specified in detail
+     • Requires a deep knowledge of the formal system
+
+
+                                                                                    13
+
+=== PHYSICAL PAGE 23 OF 118 ===
+Bridging Informal and Formal Mathematical Reasoning
+
+
+
+
+     This talk: Bridging Informal and Formal Mathematical Reasoning with AI
+
+
+
+
+                                                                              14
+
+=== PHYSICAL PAGE 24 OF 118 ===
+This talk: Bridging Informal and Formal
+
+
+
+    1. Informal thoughts
+
+
+
+
+    2. Informal provers
+
+
+
+
+    3. Research-level mathematics
+
+
+
+
+                                          15
+
+=== PHYSICAL PAGE 25 OF 118 ===
+This talk: Bridging Informal and Formal
+
+
+
+    1. Informal thoughts
+         • Training models to think informally
+              • Lean-STaR
+
+
+    2. Informal provers
+
+
+
+
+    3. Research-level mathematics
+
+
+
+
+                                                 15
+
+=== PHYSICAL PAGE 26 OF 118 ===
+This talk: Bridging Informal and Formal
+
+
+
+    1. Informal thoughts
+         • Training models to think informally
+              • Lean-STaR
+
+
+    2. Informal provers
+         • Sketching proofs and filling in the gaps
+              • Draft, Sketch, Prove
+              • LeanHammer
+
+
+    3. Research-level mathematics
+
+
+
+
+                                                      15
+
+=== PHYSICAL PAGE 27 OF 118 ===
+This talk: Bridging Informal and Formal
+
+
+
+    1. Informal thoughts
+         • Training models to think informally
+              • Lean-STaR
+
+
+    2. Informal provers
+         • Sketching proofs and filling in the gaps
+              • Draft, Sketch, Prove
+              • LeanHammer
+
+
+    3. Research-level mathematics
+         • Assisting in research-level projects
+              • Practical tools
+              • MiniCTX
+
+
+
+
+                                                      15
+
+=== PHYSICAL PAGE 28 OF 118 ===
+I: Informal thoughts
+
+=== PHYSICAL PAGE 29 OF 118 ===
+1. Training models to “think” — Lean-STaR
+
+
+
+
+   Lean-STaR: Learning to Interleave Thinking and Proving
+   Haohan Lin, Zhiqing Sun, Yiming Yang, Sean Welleck
+   ICLR 2025 (Spotlight)
+
+
+
+
+                                                            16
+
+=== PHYSICAL PAGE 30 OF 118 ===
+1. Training models to “think” — Neural theorem proving
+
+   Neural theorem proving
+
+
+
+
+     • Math as checkable code
+     • Proof: sequence of (state, step)
+                                                         17
+
+=== PHYSICAL PAGE 31 OF 118 ===
+1. Training models to “think” — Neural theorem proving
+
+
+
+   Language model-based proving:
+     • Train a model pθ (y |x) on a dataset D = {(x, y )}, e.g.,
+         • x: proof state
+         • y : next tactic (next “step”)
+         • D: extracted from theorems and proofs
+
+
+
+
+                                                                   18
+
+=== PHYSICAL PAGE 32 OF 118 ===
+1. Training models to “think” — Neural theorem proving
+
+
+
+   Language model-based proving:
+     • Train a model pθ (y |x) on a dataset D = {(x, y )}, e.g.,
+         • x: proof state
+         • y : next tactic (next “step”)
+         • D: extracted from theorems and proofs
+
+     • Generate proofs:
+
+
+
+
+                                Best-first search
+
+
+                                                                   18
+
+=== PHYSICAL PAGE 33 OF 118 ===
+1. Training models to “think” — Lean-STaR
+
+
+
+
+   Can we train a model to “think” before each step of formal reasoning?
+
+
+
+                                                                           19
+
+=== PHYSICAL PAGE 34 OF 118 ===
+1. Training models to “think” — Lean-STaR
+
+
+
+
+   Why?
+    • Plan proof steps
+    • Diversify search space
+    • More tokens can give more computational capacity
+
+                                                         20
+
+=== PHYSICAL PAGE 35 OF 118 ===
+1. Training models to “think” — Lean-STaR
+
+
+
+
+   Lean-STaR (Self-taught reasoner2 )
+   Learn to generate thoughts via reinforcement learning
+
+    1. Initialization
+    2. Reinforcement learning
+
+
+
+
+   2 Inspired by STaR: Bootstrapping Reasoning with Reasoning, Zelikman et al 2022
+
+
+                                                                                     21
+
+=== PHYSICAL PAGE 36 OF 118 ===
+1. Training models to “think” — Lean-STaR
+
+
+
+
+   1. Initialization
+
+
+
+
+                                            22
+
+=== PHYSICAL PAGE 37 OF 118 ===
+1. Training models to “think” — Lean-STaR
+
+
+
+
+   1. Initialization
+
+
+
+
+                                            22
+
+=== PHYSICAL PAGE 38 OF 118 ===
+1. Training models to “think” — Lean-STaR
+
+
+
+   2: Reinforcement learning
+
+
+
+
+                                            23
+
+=== PHYSICAL PAGE 39 OF 118 ===
+1. Training models to “think” — Lean-STaR
+
+
+
+   2: Reinforcement learning
+
+
+
+
+   Need:
+
+     • Method to generate proofs
+     • Learning algorithm
+
+                                            23
+
+=== PHYSICAL PAGE 40 OF 118 ===
+1. Training models to “think” — Lean-STaR
+
+
+
+
+        Best-first search: difficult to score (thought, tactic) candidates
+
+
+
+
+                                                                             24
+
+=== PHYSICAL PAGE 41 OF 118 ===
+1. Training models to “think” — Lean-STaR
+
+
+
+
+                     New sampling method
+
+
+                                            24
+
+=== PHYSICAL PAGE 42 OF 118 ===
+Training models to “think” — Lean-STaR
+
+
+
+
+   Algorithm: train on the successful proofs, and repeat:3
+
+     • Collect (state, thought, tactic) from successful proofs
+     • Train a new model pθ1 (thought, tactic|state)
+     • Generate proofs
+     • ...
+
+
+
+
+   3 I.e. Expert Iteration [Polu et al 2022], Rest-EM [Singh et al 2024]
+
+
+                                                                           25
+
+=== PHYSICAL PAGE 43 OF 118 ===
+Training models to “think” — Lean-STaR
+
+
+
+
+    • miniF2F: competition problems (AMC, AIME, IMO)
+
+
+
+
+                                                       26
+
+=== PHYSICAL PAGE 44 OF 118 ===
+Training models to “think” — Lean-STaR
+
+
+
+
+               50
+                                                  GPT-4
+               45
+                                      ReProver (retrieval-augmented)
+               40
+                                         COPRA (GPT-4 agent)
+               35
+                                          Lean-STaR 7B (start)
+
+
+   Pass rate
+               30                      Lean-STaR 7B (+ thoughts)
+               25                   Lean-STaR 7B (+ expert iteration)
+               20
+               15
+               10
+                5
+                0
+                    miniF2F test
+
+
+                                                                  27
+
+=== PHYSICAL PAGE 45 OF 118 ===
+Training models to “think” — Lean-STaR
+
+
+
+
+                50
+                                             GPT-4
+                45
+                                            ReProver
+                40
+                                     COPRA (GPT-4 agent)
+                35
+                                      Lean-STaR 7B (start)
+
+
+    Pass rate
+                30                       Lean-STaR 7B
+                25
+                20
+                15
+                10
+                 5
+                 0
+                     miniF2F test
+
+
+
+                                                             28
+
+=== PHYSICAL PAGE 46 OF 118 ===
+Training models to “think” — Lean-STaR
+
+
+
+
+         Increasing the search budget is more effective with thoughts
+
+
+                                                                        29
+
+=== PHYSICAL PAGE 47 OF 118 ===
+Training models to “think” — Lean-STaR
+
+
+
+
+          Example generated thoughts and proof from Lean-STaR
+
+
+
+
+                                                                30
+
+=== PHYSICAL PAGE 48 OF 118 ===
+Training models to “think” — Lean-STaR
+
+
+
+
+          Example generated thoughts and proof from Lean-STaR   31
+
+=== PHYSICAL PAGE 49 OF 118 ===
+Training models to “think” — After Lean-STaR
+
+   After Lean-STaR, incorporating thoughts became a widely-used
+   component of LLM-based theorem proving:
+
+
+
+
+                   Informal thoughts in DeepSeek Prover 1.5
+
+                                                                  32
+
+=== PHYSICAL PAGE 50 OF 118 ===
+Training models to “think” — After Lean-STaR
+
+   After Lean-STaR, incorporating thoughts became a widely-used
+   component of LLM-based theorem proving:
+
+
+
+
+               Informal thoughts in Kimina Prover (April 14 2025)
+
+                                                                    32
+
+=== PHYSICAL PAGE 51 OF 118 ===
+Training models to “think” — After Lean-STaR
+
+
+
+
+   More broadly, reasoning models that generate long chains-of-thought
+   have subsequently begun to revolutionize LLM reasoning:
+
+
+
+
+      OpenAI o1 reasoning model              DeepSeek R1 reasoning model
+
+
+
+
+                                                                           33
+
+=== PHYSICAL PAGE 52 OF 118 ===
+Training models to “think” — Lean-STaR
+
+
+
+
+   Recap: Lean-STaR
+
+    • Training on formal code may be insufficient to learn the underlying
+      thought process needed to produce the code
+    • Learn to generate thoughts via reinforcement learning
+
+
+
+
+                                                                            34
+
+=== PHYSICAL PAGE 53 OF 118 ===
+This talk: Bridging Informal and Formal
+
+
+
+
+    1. Informal thoughts
+
+    2. Informal provers
+         • Sketching proofs and filling in the gaps
+              • Draft, Sketch, Prove
+              • LeanHammer
+
+
+    3. Research-level mathematics
+
+
+
+
+                                                      35
+
+=== PHYSICAL PAGE 54 OF 118 ===
+II: Informal and formal provers
+
+=== PHYSICAL PAGE 55 OF 118 ===
+Combining informal and formal provers
+
+
+
+
+   Overall goal: combine high-level reasoning and low-level reasoning
+
+
+
+
+                                                                        36
+
+=== PHYSICAL PAGE 56 OF 118 ===
+Motivation: informal proofs and formal proofs
+
+
+
+
+               How would we write this as a formal proof?
+
+
+
+
+                                                            37
+
+=== PHYSICAL PAGE 57 OF 118 ===
+Motivation: informal proofs and formal proofs
+
+
+
+
+          A proof with a high-level sketch and low-level proof steps.
+
+
+
+                                                                        38
+
+=== PHYSICAL PAGE 58 OF 118 ===
+Low-level provers: Sledgehammer
+
+
+
+
+   Sledgehammer [Paulson 2010] calls out to external automated provers.
+
+     • First-order logic, higher-order logic, SMT
+
+
+
+
+                                                                          39
+
+=== PHYSICAL PAGE 59 OF 118 ===
+Low-level provers: Sledgehammer
+
+
+
+
+          Struggles due to the large search space of possible proofs
+
+
+
+
+                                                                       40
+
+=== PHYSICAL PAGE 60 OF 118 ===
+Idea: combine high-level and low-level proving
+
+
+
+
+         Idea: combine high-level (human, LLM) and low-level proving
+
+
+
+
+                                                                       41
+
+=== PHYSICAL PAGE 61 OF 118 ===
+Draft-Sketch-Prove
+
+
+
+
+   Draft, Sketch, Prove: Guiding Formal Theorem Provers with
+   Informal Proofs
+   Albert Q. Jiang, Sean Welleck, Jin Peng Zhou
+   Jiacheng Liu, Wenda Li, Mateja Jamnik
+   Guillaume Lample, Yuhuai Wu
+   ICLR 2023 (Oral)
+
+
+
+
+                                                               42
+
+=== PHYSICAL PAGE 62 OF 118 ===
+Draft-Sketch-Prove
+
+
+
+
+   Idea:
+   Draft an informal proof, translate it into a formal sketch, then use a
+   low-level prover to fill in the gaps.
+
+
+
+
+                                                                            43
+
+=== PHYSICAL PAGE 63 OF 118 ===
+Draft, Sketch, Prove
+
+
+
+
+Given informal theorem xI ,
+       formal theorem xF
+
+
+ 1. Draft yI ∼ p(·|xI )
+
+
+
+                              Human-written or LLM-generated draft
+
+
+
+
+                                                                     44
+
+=== PHYSICAL PAGE 64 OF 118 ===
+Draft, Sketch, Prove
+
+
+
+
+Given informal theorem xI ,
+       formal theorem xF
+
+
+ 1. Draft yI ∼ p(·|xI )
+  2. Sketch zF ∼ p(·|xF , xI , yI )
+
+
+                                      LLM-generated sketch
+
+
+
+
+                                                             44
+
+=== PHYSICAL PAGE 65 OF 118 ===
+Draft, Sketch, Prove
+
+
+
+
+Given informal theorem xI ,
+       formal theorem xF
+
+
+ 1. Draft yI ∼ p(·|xI )
+  2. Sketch zF ∼ p(·|xF , xI , yI )
+  3. Prove yF = f (xF , zF )
+
+                                      Low-level prover (Sledgehammer ) fills in the gaps
+
+
+
+
+                                                                                           44
+
+=== PHYSICAL PAGE 66 OF 118 ===
+Draft-sketch-prove
+
+
+
+
+                     45
+
+=== PHYSICAL PAGE 67 OF 118 ===
+Draft-sketch-prove
+
+
+
+
+                     Inference-time proof search scaling
+
+
+                                                           45
+
+=== PHYSICAL PAGE 68 OF 118 ===
+Draft-sketch-prove
+
+
+
+
+                 International Math Olympiad problem
+                                                       45
+
+=== PHYSICAL PAGE 69 OF 118 ===
+Draft, Sketch, Prove
+
+
+
+
+             Demo notebook: github.com/cmu-l3/ntptutorial-II
+
+
+
+
+                                                               46
+
+=== PHYSICAL PAGE 70 OF 118 ===
+Next: building a low-level prover for Lean
+
+
+
+
+   Recap:
+
+     • Draft-Sketch-Prove: generate high-level sketches and fill in gaps
+     • Isabelle’s Sledgehammer calls out to external provers to fill in gaps
+
+
+
+
+                                                                               47
+
+=== PHYSICAL PAGE 71 OF 118 ===
+Next: building a low-level prover for Lean
+
+
+
+
+   Recap:
+
+     • Draft-Sketch-Prove: generate high-level sketches and fill in gaps
+     • Isabelle’s Sledgehammer calls out to external provers to fill in gaps
+
+   Next: can we build a Sledgehammer for Lean?
+
+
+
+
+                                                                               47
+
+=== PHYSICAL PAGE 72 OF 118 ===
+LeanHammer
+
+
+
+
+  Premise Selection for a Lean Hammer
+  Thomas Zhu, Joshua Clune
+  Jeremy Avigad, Albert Q. Jiang, Sean Welleck
+  Under Review 2025
+
+
+
+
+                                                 48
+
+=== PHYSICAL PAGE 73 OF 118 ===
+What is a hammer?
+
+
+
+
+  A hammer integrates an automated theorem prover into an interactive
+  theorem prover
+
+
+
+
+                                                                        49
+
+=== PHYSICAL PAGE 74 OF 118 ===
+What is a hammer?
+
+
+
+
+  A hammer integrates an automated theorem prover into an interactive
+  theorem prover
+
+    • Interactive theorem prover: Lean, Isabelle, Coq
+        • A programming language that checks proofs
+
+
+
+
+                                                                        49
+
+=== PHYSICAL PAGE 75 OF 118 ===
+What is a hammer?
+
+
+
+
+  A hammer integrates an automated theorem prover into an interactive
+  theorem prover
+
+    • Interactive theorem prover: Lean, Isabelle, Coq
+        • A programming language that checks proofs
+
+
+    • Automated theorem prover: higher-order logic provers, SMT solvers
+        • Tries to automatically find proofs
+
+
+
+
+                                                                          49
+
+=== PHYSICAL PAGE 76 OF 118 ===
+Key challenge: Premise selection
+
+
+
+
+   Automated theorem provers (ATPs) struggle with the large search space
+   of possible proofs.
+
+     • Premise selection: select a small subset of theorems and definitions
+       that are likely to be useful for proving a given theorem.
+         • Around 250, 000 premises in Lean’s Mathlib
+         • Cuts down the prover’s search space
+
+
+
+
+                                                                              50
+
+=== PHYSICAL PAGE 77 OF 118 ===
+A hammer pipeline
+
+
+
+   A standard hammer pipeline:
+
+
+
+
+                                 51
+
+=== PHYSICAL PAGE 78 OF 118 ===
+A hammer pipeline
+
+
+
+   A standard hammer pipeline:
+
+
+
+
+   Pre-existing components:
+     • Translation: LeanAuto [Qian et al 2025]
+     • ATP: Zipperposition [Cruanes et al 2015]
+     • Reconstruction: Duper [Clune et al 2024]
+
+
+
+                                                  51
+
+=== PHYSICAL PAGE 79 OF 118 ===
+A hammer pipeline
+
+
+
+   A standard hammer pipeline:
+
+
+
+
+   Our challenge:
+     • Premise selection
+     • Put it all together to create LeanHammer
+
+
+
+
+                                                  51
+
+=== PHYSICAL PAGE 80 OF 118 ===
+LeanHammer — Neural premise selection
+
+
+   Idea: frame premise selection as retrieval with a neural language model
+
+
+
+
+                                                                             52
+
+=== PHYSICAL PAGE 81 OF 118 ===
+LeanHammer — Neural premise selection
+
+
+   Idea: frame premise selection as retrieval with a neural language model
+
+
+
+
+     • Transformer encoder embeds the state and candidate premises
+
+
+
+
+                                                                             52
+
+=== PHYSICAL PAGE 82 OF 118 ===
+LeanHammer — Neural premise selection
+
+
+   Idea: frame premise selection as retrieval with a neural language model
+
+
+
+
+     • Transformer encoder embeds the state and candidate premises
+     • Contrastive loss on (state, {premise+ }, {premise− }) examples
+          • Nuance in how to collect and format examples
+
+
+                                                                             52
+
+=== PHYSICAL PAGE 83 OF 118 ===
+LeanHammer — Putting it all together
+
+
+   Idea: combine the premise selector and ATP with a tree search
+
+
+
+
+   Tree search: Aesop [Limperg & From 2023]
+
+
+
+
+                                                                   53
+
+=== PHYSICAL PAGE 84 OF 118 ===
+LeanHammer — Putting it all together
+
+
+   Idea: combine the premise selector and ATP with a tree search
+
+
+
+
+   Tree search: Aesop [Limperg & From 2023]
+
+    1. Queries the automated theorem prover using the premises
+    2. Applies tactics (e.g. apply, simp all) using the premises
+
+
+
+
+                                                                   53
+
+=== PHYSICAL PAGE 85 OF 118 ===
+LeanHammer — Putting it all together
+
+
+   Idea: combine the premise selector and ATP with a tree search
+
+
+
+
+   Tree search: Aesop [Limperg & From 2023]
+
+    1. Queries the automated theorem prover using the premises
+    2. Applies tactics (e.g. apply, simp all) using the premises
+
+                 Goes beyond the standard hammer pipeline!
+
+                                                                   53
+
+=== PHYSICAL PAGE 86 OF 118 ===
+LeanHammer
+
+
+
+
+  As a user, simply issue hammer at any step of a proof:
+
+
+
+
+                            LeanHammer in action
+
+
+
+
+                                                           54
+
+=== PHYSICAL PAGE 87 OF 118 ===
+LeanHammer — Demo
+
+  Demo: start with human-written proof sketch (from Mathematics in Lean)
+
+
+
+
+                                                                           55
+
+=== PHYSICAL PAGE 88 OF 118 ===
+LeanHammer — Demo
+
+  Demo: fill in the gaps (sorrys) with LeanHammer
+
+
+
+
+                                                    56
+
+=== PHYSICAL PAGE 89 OF 118 ===
+LeanHammer — Quantitative results
+
+
+   Varying the premise selector within LeanHammer:
+
+                    50
+                                                          No premise selection
+                    45
+                                                           ReProver retriever
+                    40
+                                                                MePO
+
+
+
+
+   Proof rate (%)
+                    35                                  LeanHammer retriever
+                    30                               LeanHammer retriever ∪ MePO
+                    25                                   Ground truth premises
+                    20
+                    15
+                    10
+                     5
+                     0
+                         Held-out mathlib theorems
+
+
+
+                                                                              57
+
+=== PHYSICAL PAGE 90 OF 118 ===
+Recap
+
+
+
+  Two approaches for combining informal and formal provers:
+
+
+
+
+                                                              58
+
+=== PHYSICAL PAGE 91 OF 118 ===
+Recap
+
+
+
+  Two approaches for combining informal and formal provers:
+
+    • Draft-Sketch-Prove (DSP)
+        • LLM drafts informal proof, generates formal sketch
+        • Low-level prover (Sledgehammer) fills in low-level details
+
+
+
+
+                                                                       58
+
+=== PHYSICAL PAGE 92 OF 118 ===
+Recap
+
+
+
+  Two approaches for combining informal and formal provers:
+
+    • Draft-Sketch-Prove (DSP)
+        • LLM drafts informal proof, generates formal sketch
+        • Low-level prover (Sledgehammer) fills in low-level details
+
+    • LeanHammer
+        • Brings hammer functionality to Lean
+        • Neural premise selection + tree search + automated theorem proving
+        • Enables filling in proof sketches with hammer command
+
+
+
+
+                                                                               58
+
+=== PHYSICAL PAGE 93 OF 118 ===
+Recap
+
+
+
+  Two approaches for combining informal and formal provers:
+
+    • Draft-Sketch-Prove (DSP)
+        • LLM drafts informal proof, generates formal sketch
+        • Low-level prover (Sledgehammer) fills in low-level details
+
+    • LeanHammer
+        • Brings hammer functionality to Lean
+        • Neural premise selection + tree search + automated theorem proving
+        • Enables filling in proof sketches with hammer command
+
+  Even small neural networks are powerful! (retriever: < 100M params)
+
+
+
+                                                                               58
+
+=== PHYSICAL PAGE 94 OF 118 ===
+This talk: Bridging Informal and Formal
+
+
+
+
+    1. Informal thoughts
+
+    2. Informal provers
+
+    3. Research-level mathematics
+         • Assisting in research-level projects
+         • Practical tools
+         • MiniCTX
+
+
+
+
+                                                  59
+
+=== PHYSICAL PAGE 95 OF 118 ===
+III: Research-level mathematics
+
+=== PHYSICAL PAGE 96 OF 118 ===
+What does it look like to formalize research-level math?4
+
+
+
+
+   4 Formalizing the proof of PFR in Lean4 using Blueprint: a short tour by Terence Tao
+
+
+                                                                                          60
+
+=== PHYSICAL PAGE 97 OF 118 ===
+What does it look like to formalize research-level math?4
+
+
+
+
+   4 Formalizing the proof of PFR in Lean4 using Blueprint: a short tour by Terence Tao
+
+
+                                                                                          60
+
+=== PHYSICAL PAGE 98 OF 118 ===
+Where can AI help?
+
+
+   As a start, can AI help with filling in small parts of the blueprint?
+
+
+
+
+                                                                           61
+
+=== PHYSICAL PAGE 99 OF 118 ===
+Where can AI help? — Challenges
+
+
+
+
+   Accessibility gap:
+
+     • Some methods are hard to integrate into tools
+         • Not open-source (AlphaProof, ...)
+         • Expensive to run (MCTS, ...)
+
+
+
+
+                                                       62
+
+=== PHYSICAL PAGE 100 OF 118 ===
+Where can AI help? — Challenges
+
+
+
+
+   Accessibility gap:
+
+     • Some methods are hard to integrate into tools
+         • Not open-source (AlphaProof, ...)
+         • Expensive to run (MCTS, ...)
+
+                 However, there are already tools available!
+
+
+
+
+                                                               62
+
+=== PHYSICAL PAGE 101 OF 118 ===
+Where can AI help? — Existing tools
+
+
+
+
+             LLMLean: https://github.com/cmu-l3/llmlean
+
+
+
+
+                                                          63
+
+=== PHYSICAL PAGE 102 OF 118 ===
+Where can AI help? — Existing tools
+
+
+
+
+             LLMLean: https://github.com/cmu-l3/llmlean
+
+
+
+
+                                                          63
+
+=== PHYSICAL PAGE 103 OF 118 ===
+Where can AI help? — Existing tools
+
+
+
+
+      LLMLean example on Polynomial Freiman Rusza Conjecture project
+
+
+
+
+                                                                       63
+
+=== PHYSICAL PAGE 104 OF 118 ===
+Where can AI help? — Benchmarking gap
+
+
+
+
+   • Self-contained
+   • Uses standard results
+
+
+                                        64
+
+=== PHYSICAL PAGE 105 OF 118 ===
+Where can AI help? — Benchmarking gap
+
+
+
+
+   • Self-contained
+   • Uses standard results   • Part of a project
+                             • Uses new definitions and lemmas
+
+                                                                 64
+
+=== PHYSICAL PAGE 106 OF 118 ===
+miniCTX
+
+
+
+
+  miniCTX: Neural Theorem Proving with (Long-)Contexts
+  Jiewen Hu, Thomas Zhu, Sean Welleck
+  ICLR 2025 (Oral)
+
+
+
+
+                                                         65
+
+=== PHYSICAL PAGE 107 OF 118 ===
+miniCTX
+
+
+
+
+  Research-level theorems depend on newly-formalized context
+
+    • (context, theorem) → proof
+        • Context: repository of code, new definitions, auxiliary lemmas
+
+
+
+
+                                                                           66
+
+=== PHYSICAL PAGE 108 OF 118 ===
+miniCTX
+
+
+
+
+  miniCTX:
+  Test models on real Lean projects:5
+
+    • “Future mathlib”: theorems added after a time cutoff
+    • Recent projects: PFR, PrimeNumberTheorem, ...
+
+
+
+
+   5 + tools for easily adding new projects: https://github.com/cmu-l3/ntp-toolkit
+
+
+                                                                                     67
+
+=== PHYSICAL PAGE 109 OF 118 ===
+miniCTX
+
+
+
+
+  miniCTX:
+  Test models on real Lean projects:5
+
+    • “Future mathlib”: theorems added after a time cutoff
+    • Recent projects: PFR, PrimeNumberTheorem, ...
+
+  Periodically updated with new projects to stay ahead of LLM training
+  cutoffs.
+
+
+
+
+   5 + tools for easily adding new projects: https://github.com/cmu-l3/ntp-toolkit
+
+
+                                                                                     67
+
+=== PHYSICAL PAGE 110 OF 118 ===
+miniCTX
+
+
+
+
+                                            Cross-file: dependencies span files
+
+ In-file: dependencies appear in the file
+                                                                                  68
+
+=== PHYSICAL PAGE 111 OF 118 ===
+miniCTX — preceding code context
+
+   Does context actually matter? A simple experiment.
+
+
+
+
+       “File tuning”: train on (preceding code, state, next-tactic) examples
+                                                                               69
+
+=== PHYSICAL PAGE 112 OF 118 ===
+miniCTX
+
+
+
+
+  Two methods can have similar performance on competition problems, but
+  vastly difference performance on actual projects
+
+
+
+
+                                                                          70
+
+=== PHYSICAL PAGE 113 OF 118 ===
+miniCTX
+
+
+
+
+          Premise selection helps with cross-file dependencies.
+
+
+
+
+                                                                  71
+
+=== PHYSICAL PAGE 114 OF 118 ===
+miniCTX — LLMLean
+
+
+
+
+  File-tuned model is deployed in LLMLean:
+
+
+
+
+                     https://github.com/cmu-l3/llmlean
+
+
+
+
+                                                         72
+
+=== PHYSICAL PAGE 115 OF 118 ===
+miniCTX
+
+
+
+
+  Benchmark, models, code are open-source:
+    • Data/models: https://huggingface.co/l3lab
+    • Data extraction: https://github.com/cmu-l3/ntp-toolkit
+    • Evaluation: https://github.com/cmu-l3/minictx-eval
+
+
+
+
+                                                               73
+
+=== PHYSICAL PAGE 116 OF 118 ===
+Recap: Towards AI for Research-Level Formalization
+
+
+
+
+   Formalizing research-level math has unique challenges
+
+     • Accessibility gap exists between AI advances and real-world
+       formalization
+          • But we have some tools available!
+     • Benchmarking gap exists between competition problems and
+       real-world formalization
+          • miniCTX tests the ability to generalize to new, real-world projects
+
+
+
+
+                                                                                  74
+
+=== PHYSICAL PAGE 117 OF 118 ===
+This talk: Bridging Informal and Formal
+
+
+
+    1. Informal thoughts
+         • Training models to think informally
+              • Lean-STaR
+
+
+    2. Informal provers
+         • Sketching proofs and filling in the gaps
+              • Draft, Sketch, Prove
+              • LeanHammer
+
+
+    3. Research-level mathematics
+         • Assisting in research-level projects
+         • Practical tools
+         • MiniCTX
+
+
+
+                                                      75
+
+=== PHYSICAL PAGE 118 OF 118 ===
+Thank you!
+
+
+  Collaborators on works in this talk (alphabetical by last name):
+   • Jeremy Avigad (CMU)                    • Wenda Li (Edinburgh)
+   • Joshua Clune (CMU)                     • Jiacheng Liu (Washington)
+   • Jiewen Hu (CMU)                        • Zhiqing Sun (CMU, OpenAI)
+   • Mateja Jamnik (Cambridge)              • Yuhuai (Tony) Wu (Google, X.ai)
+   • Albert Q. Jiang (Cambridge, Mistral)   • Yiming Yang (CMU)
+   • Timothee Lacroix (Meta, Mistral)       • Jin Peng Zhou (Cornell)
+   • Guillaume Lample (Meta, Mistral)       • Thomas Zhu (CMU)
+   • Haohan Lin (Tsinghua)
+
+                                  Sean Welleck
+                        CMU School of Computer Science
+                     Learning, Language, and Logic (L3) Lab
+                               wellecks@cmu.edu
+
+                                                                                76

@@ -1,0 +1,3272 @@
+{
+  "schema_version": 1,
+  "semantic_review_sha256": "e0177f68e0975df7ed69c36913316e3fdde28cdaf9c95b8c68d242156b2b7615",
+  "rows": [
+    {
+      "id": "coverage-official-syllabus-coursework-and-schedule",
+      "source_object": "official-syllabus",
+      "source_unit": "official-syllabus-coursework-and-schedule",
+      "source_location": "Metadata/syllabus.html#course-schedule-and-coursework",
+      "kind": "section",
+      "title": "Official schedule, reading lists, lab, and project contract",
+      "primary_sources": [
+        "official-syllabus"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "practice-provenance",
+      "reason": "Authoritative source-only evidence for schedule, bundle membership, and the public practice boundary."
+    },
+    {
+      "id": "coverage-meeting-01-recording-full-session",
+      "source_object": "meeting-01-recording",
+      "source_unit": "meeting-01-recording-full-session",
+      "source_location": "https://www.youtube.com/watch?v=g0Dwtf3BH-0#t=0s",
+      "kind": "segment",
+      "title": "Full official recording: Inference-Time Techniques for LLM Reasoning",
+      "primary_sources": [
+        "meeting-01-recording"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-01",
+      "reason": "Official recording metadata is pinned for the source baseline; no media body is mirrored."
+    },
+    {
+      "id": "coverage-meeting-01-intro-course-identity-and-staff",
+      "source_object": "meeting-01-intro",
+      "source_unit": "meeting-01-intro-course-identity-and-staff",
+      "source_location": "Lectures/meeting-01-intro.pages.txt#physical-pages=1-2",
+      "kind": "section",
+      "title": "Course identity, instructors, and staff",
+      "primary_sources": [
+        "meeting-01-intro"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-01",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-01-intro-prior-course-and-agent-frame",
+      "source_object": "meeting-01-intro",
+      "source_unit": "meeting-01-intro-prior-course-and-agent-frame",
+      "source_location": "Lectures/meeting-01-intro.pages.txt#physical-pages=3-5",
+      "kind": "section",
+      "title": "Prior course context and the LLM-agent frame",
+      "primary_sources": [
+        "meeting-01-intro"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-01",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-01-intro-reasoning-agent-progress",
+      "source_object": "meeting-01-intro",
+      "source_unit": "meeting-01-intro-reasoning-agent-progress",
+      "source_location": "Lectures/meeting-01-intro.pages.txt#physical-pages=6-9",
+      "kind": "mechanism",
+      "title": "From language-model progress to reasoning agents",
+      "primary_sources": [
+        "meeting-01-intro"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-01",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-01-intro-course-topic-map",
+      "source_object": "meeting-01-intro",
+      "source_unit": "meeting-01-intro-course-topic-map",
+      "source_location": "Lectures/meeting-01-intro.pages.txt#physical-pages=10-10",
+      "kind": "section",
+      "title": "Course topic map",
+      "primary_sources": [
+        "meeting-01-intro"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-01",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-01-intro-official-coursework-contract",
+      "source_object": "meeting-01-intro",
+      "source_unit": "meeting-01-intro-official-coursework-contract",
+      "source_location": "Lectures/meeting-01-intro.pages.txt#physical-pages=11-15",
+      "kind": "section",
+      "title": "Lab, grading, final project, and course timeline",
+      "primary_sources": [
+        "meeting-01-intro"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-01",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-01-intro-course-website-pointer",
+      "source_object": "meeting-01-intro",
+      "source_unit": "meeting-01-intro-course-website-pointer",
+      "source_location": "Lectures/meeting-01-intro.pages.txt#physical-pages=16-16",
+      "kind": "administrative",
+      "title": "Course website pointer",
+      "primary_sources": [
+        "meeting-01-intro"
+      ],
+      "disposition": "excluded",
+      "reason": "administrative pointer only",
+      "evidence": "The page contains only the course website pointer; the locked official syllabus is the authoritative catalogue source."
+    },
+    {
+      "id": "coverage-meeting-01-slides-inference-time-reasoning-orientation",
+      "source_object": "meeting-01-slides",
+      "source_unit": "meeting-01-slides-inference-time-reasoning-orientation",
+      "source_location": "Lectures/meeting-01-slides.pages.txt#physical-pages=1-1",
+      "kind": "section",
+      "title": "Inference-time reasoning orientation",
+      "primary_sources": [
+        "meeting-01-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-01",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-01-slides-reasoning-model-context",
+      "source_object": "meeting-01-slides",
+      "source_unit": "meeting-01-slides-reasoning-model-context",
+      "source_location": "Lectures/meeting-01-slides.pages.txt#physical-pages=2-6",
+      "kind": "section",
+      "title": "Reasoning-model context and scaling premise",
+      "primary_sources": [
+        "meeting-01-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-01",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-01-slides-outline-before-prompting",
+      "source_object": "meeting-01-slides",
+      "source_unit": "meeting-01-slides-outline-before-prompting",
+      "source_location": "Lectures/meeting-01-slides.pages.txt#physical-pages=7-8",
+      "kind": "administrative",
+      "title": "Lecture outline before prompting",
+      "primary_sources": [
+        "meeting-01-slides"
+      ],
+      "disposition": "excluded",
+      "reason": "repeated lecture outline",
+      "evidence": "Pages are navigation dividers, not an independent technical claim."
+    },
+    {
+      "id": "coverage-meeting-01-slides-prompting-for-reasoning",
+      "source_object": "meeting-01-slides",
+      "source_unit": "meeting-01-slides-prompting-for-reasoning",
+      "source_location": "Lectures/meeting-01-slides.pages.txt#physical-pages=9-14",
+      "kind": "mechanism",
+      "title": "Prompting for explicit reasoning",
+      "primary_sources": [
+        "meeting-01-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-01",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-01-slides-analogical-reasoning",
+      "source_object": "meeting-01-slides",
+      "source_unit": "meeting-01-slides-analogical-reasoning",
+      "source_location": "Lectures/meeting-01-slides.pages.txt#physical-pages=15-22",
+      "kind": "mechanism",
+      "title": "Analogical reasoning and demonstration retrieval",
+      "primary_sources": [
+        "meeting-01-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-01",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-01-slides-automatic-prompt-optimization",
+      "source_object": "meeting-01-slides",
+      "source_unit": "meeting-01-slides-automatic-prompt-optimization",
+      "source_location": "Lectures/meeting-01-slides.pages.txt#physical-pages=23-28",
+      "kind": "mechanism",
+      "title": "Automatic prompt optimization",
+      "primary_sources": [
+        "meeting-01-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-01",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-01-slides-decomposition-and-self-discover",
+      "source_object": "meeting-01-slides",
+      "source_unit": "meeting-01-slides-decomposition-and-self-discover",
+      "source_location": "Lectures/meeting-01-slides.pages.txt#physical-pages=29-37",
+      "kind": "mechanism",
+      "title": "Problem decomposition and Self-Discover",
+      "primary_sources": [
+        "meeting-01-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-01",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-01-slides-outline-before-self-consistency",
+      "source_object": "meeting-01-slides",
+      "source_unit": "meeting-01-slides-outline-before-self-consistency",
+      "source_location": "Lectures/meeting-01-slides.pages.txt#physical-pages=38-38",
+      "kind": "administrative",
+      "title": "Lecture outline before self-consistency",
+      "primary_sources": [
+        "meeting-01-slides"
+      ],
+      "disposition": "excluded",
+      "reason": "repeated lecture outline",
+      "evidence": "The page is a navigation divider."
+    },
+    {
+      "id": "coverage-meeting-01-slides-self-consistency-sampling",
+      "source_object": "meeting-01-slides",
+      "source_unit": "meeting-01-slides-self-consistency-sampling",
+      "source_location": "Lectures/meeting-01-slides.pages.txt#physical-pages=39-44",
+      "kind": "mechanism",
+      "title": "Self-consistency and sampling",
+      "primary_sources": [
+        "meeting-01-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-01",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-01-slides-code-selection-and-verifiers",
+      "source_object": "meeting-01-slides",
+      "source_unit": "meeting-01-slides-code-selection-and-verifiers",
+      "source_location": "Lectures/meeting-01-slides.pages.txt#physical-pages=45-53",
+      "kind": "mechanism",
+      "title": "Code-based selection and external verifiers",
+      "primary_sources": [
+        "meeting-01-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-01",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-01-slides-tree-of-thoughts-search",
+      "source_object": "meeting-01-slides",
+      "source_unit": "meeting-01-slides-tree-of-thoughts-search",
+      "source_location": "Lectures/meeting-01-slides.pages.txt#physical-pages=54-58",
+      "kind": "mechanism",
+      "title": "Tree of Thoughts search",
+      "primary_sources": [
+        "meeting-01-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-01",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-01-slides-outline-before-reflection",
+      "source_object": "meeting-01-slides",
+      "source_unit": "meeting-01-slides-outline-before-reflection",
+      "source_location": "Lectures/meeting-01-slides.pages.txt#physical-pages=59-59",
+      "kind": "administrative",
+      "title": "Lecture outline before reflection",
+      "primary_sources": [
+        "meeting-01-slides"
+      ],
+      "disposition": "excluded",
+      "reason": "repeated lecture outline",
+      "evidence": "The page is a navigation divider."
+    },
+    {
+      "id": "coverage-meeting-01-slides-reflection-and-self-debugging",
+      "source_object": "meeting-01-slides",
+      "source_unit": "meeting-01-slides-reflection-and-self-debugging",
+      "source_location": "Lectures/meeting-01-slides.pages.txt#physical-pages=60-65",
+      "kind": "mechanism",
+      "title": "Reflection and self-debugging",
+      "primary_sources": [
+        "meeting-01-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-01",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-01-slides-self-correction-failure-modes",
+      "source_object": "meeting-01-slides",
+      "source_unit": "meeting-01-slides-self-correction-failure-modes",
+      "source_location": "Lectures/meeting-01-slides.pages.txt#physical-pages=66-69",
+      "kind": "failure-mode",
+      "title": "Self-correction failure modes and debate",
+      "primary_sources": [
+        "meeting-01-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-01",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-01-slides-compute-capability-bitter-lesson",
+      "source_object": "meeting-01-slides",
+      "source_unit": "meeting-01-slides-compute-capability-bitter-lesson",
+      "source_location": "Lectures/meeting-01-slides.pages.txt#physical-pages=70-73",
+      "kind": "section",
+      "title": "Compute, model capability, and the bitter lesson",
+      "primary_sources": [
+        "meeting-01-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-01",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-01-slides-meeting-01-closing",
+      "source_object": "meeting-01-slides",
+      "source_unit": "meeting-01-slides-meeting-01-closing",
+      "source_location": "Lectures/meeting-01-slides.pages.txt#physical-pages=74-74",
+      "kind": "administrative",
+      "title": "Closing slide",
+      "primary_sources": [
+        "meeting-01-slides"
+      ],
+      "disposition": "excluded",
+      "reason": "closing slide only",
+      "evidence": "The page adds no independent technical content."
+    },
+    {
+      "id": "coverage-meeting-01-reading-01-catalogue-record",
+      "source_object": "meeting-01-reading-01",
+      "source_unit": "meeting-01-reading-01-catalogue-record",
+      "source_location": "Readings/meeting-01-reading-01.md#metadata",
+      "kind": "section",
+      "title": "Large Language Models as Optimizers",
+      "primary_sources": [
+        "meeting-01-reading-01"
+      ],
+      "secondary_sources": [
+        "meeting-01-intro",
+        "meeting-01-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-01",
+      "reason": "Primary reading is catalogued individually; the official deck remains a secondary explanation."
+    },
+    {
+      "id": "coverage-meeting-01-reading-02-catalogue-record",
+      "source_object": "meeting-01-reading-02",
+      "source_unit": "meeting-01-reading-02-catalogue-record",
+      "source_location": "Readings/meeting-01-reading-02.md#metadata",
+      "kind": "section",
+      "title": "Large Language Models Cannot Self-Correct Reasoning Yet",
+      "primary_sources": [
+        "meeting-01-reading-02"
+      ],
+      "secondary_sources": [
+        "meeting-01-intro",
+        "meeting-01-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-01",
+      "reason": "Primary reading is catalogued individually; the official deck remains a secondary explanation."
+    },
+    {
+      "id": "coverage-meeting-01-reading-03-catalogue-record",
+      "source_object": "meeting-01-reading-03",
+      "source_unit": "meeting-01-reading-03-catalogue-record",
+      "source_location": "Readings/meeting-01-reading-03.md#metadata",
+      "kind": "section",
+      "title": "Teaching Large Language Models to Self-Debug",
+      "primary_sources": [
+        "meeting-01-reading-03"
+      ],
+      "secondary_sources": [
+        "meeting-01-intro",
+        "meeting-01-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-01",
+      "reason": "Primary reading is catalogued individually; the official deck remains a secondary explanation."
+    },
+    {
+      "id": "coverage-meeting-02-recording-full-session",
+      "source_object": "meeting-02-recording",
+      "source_unit": "meeting-02-recording-full-session",
+      "source_location": "https://www.youtube.com/watch?v=_MNlLhU33H0#t=0s",
+      "kind": "segment",
+      "title": "Full official recording: Learning to reason with LLMs",
+      "primary_sources": [
+        "meeting-02-recording"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-02",
+      "reason": "Official recording metadata is pinned for the source baseline; no media body is mirrored."
+    },
+    {
+      "id": "coverage-meeting-02-slides-learning-to-reason-framing",
+      "source_object": "meeting-02-slides",
+      "source_unit": "meeting-02-slides-learning-to-reason-framing",
+      "source_location": "Lectures/meeting-02-slides.pages.txt#physical-pages=1-3",
+      "kind": "section",
+      "title": "Learning-to-reason framing",
+      "primary_sources": [
+        "meeting-02-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-02",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-02-slides-reasoning-training-foundations",
+      "source_object": "meeting-02-slides",
+      "source_unit": "meeting-02-slides-reasoning-training-foundations",
+      "source_location": "Lectures/meeting-02-slides.pages.txt#physical-pages=4-21",
+      "kind": "section",
+      "title": "Historical foundations of reasoning training",
+      "primary_sources": [
+        "meeting-02-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-02",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-02-slides-posttraining-and-prompting",
+      "source_object": "meeting-02-slides",
+      "source_unit": "meeting-02-slides-posttraining-and-prompting",
+      "source_location": "Lectures/meeting-02-slides.pages.txt#physical-pages=22-31",
+      "kind": "mechanism",
+      "title": "Post-training and prompting recipes",
+      "primary_sources": [
+        "meeting-02-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-02",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-02-slides-system-one-to-system-two",
+      "source_object": "meeting-02-slides",
+      "source_unit": "meeting-02-slides-system-one-to-system-two",
+      "source_location": "Lectures/meeting-02-slides.pages.txt#physical-pages=32-39",
+      "kind": "failure-mode",
+      "title": "System-one failure cases and system-two motivation",
+      "primary_sources": [
+        "meeting-02-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-02",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-02-slides-self-rewarding-setup",
+      "source_object": "meeting-02-slides",
+      "source_unit": "meeting-02-slides-self-rewarding-setup",
+      "source_location": "Lectures/meeting-02-slides.pages.txt#physical-pages=40-52",
+      "kind": "mechanism",
+      "title": "Self-rewarding language-model setup",
+      "primary_sources": [
+        "meeting-02-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-02",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-02-slides-self-rewarding-results",
+      "source_object": "meeting-02-slides",
+      "source_unit": "meeting-02-slides-self-rewarding-results",
+      "source_location": "Lectures/meeting-02-slides.pages.txt#physical-pages=53-73",
+      "kind": "experiment",
+      "title": "Self-rewarding experiments and results",
+      "primary_sources": [
+        "meeting-02-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-02",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-02-slides-irpo",
+      "source_object": "meeting-02-slides",
+      "source_unit": "meeting-02-slides-irpo",
+      "source_location": "Lectures/meeting-02-slides.pages.txt#physical-pages=74-78",
+      "kind": "mechanism",
+      "title": "Iterative reasoning preference optimization",
+      "primary_sources": [
+        "meeting-02-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-02",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-02-slides-o1-deepseek-transition",
+      "source_object": "meeting-02-slides",
+      "source_unit": "meeting-02-slides-o1-deepseek-transition",
+      "source_location": "Lectures/meeting-02-slides.pages.txt#physical-pages=79-82",
+      "kind": "section",
+      "title": "Transition from o1 to DeepSeek reasoning models",
+      "primary_sources": [
+        "meeting-02-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-02",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-02-slides-thinking-language-models",
+      "source_object": "meeting-02-slides",
+      "source_unit": "meeting-02-slides-thinking-language-models",
+      "source_location": "Lectures/meeting-02-slides.pages.txt#physical-pages=83-87",
+      "kind": "mechanism",
+      "title": "Thinking language models",
+      "primary_sources": [
+        "meeting-02-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-02",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-02-slides-meta-rewarding",
+      "source_object": "meeting-02-slides",
+      "source_unit": "meeting-02-slides-meta-rewarding",
+      "source_location": "Lectures/meeting-02-slides.pages.txt#physical-pages=88-94",
+      "kind": "mechanism",
+      "title": "Meta-rewarding language models",
+      "primary_sources": [
+        "meeting-02-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-02",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-02-slides-evalplanner",
+      "source_object": "meeting-02-slides",
+      "source_unit": "meeting-02-slides-evalplanner",
+      "source_location": "Lectures/meeting-02-slides.pages.txt#physical-pages=95-102",
+      "kind": "mechanism",
+      "title": "EvalPlanner planning with feedback",
+      "primary_sources": [
+        "meeting-02-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-02",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-02-slides-learning-to-reason-synthesis",
+      "source_object": "meeting-02-slides",
+      "source_unit": "meeting-02-slides-learning-to-reason-synthesis",
+      "source_location": "Lectures/meeting-02-slides.pages.txt#physical-pages=103-105",
+      "kind": "section",
+      "title": "Learning-to-reason synthesis and research directions",
+      "primary_sources": [
+        "meeting-02-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-02",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-02-slides-meeting-02-closing",
+      "source_object": "meeting-02-slides",
+      "source_unit": "meeting-02-slides-meeting-02-closing",
+      "source_location": "Lectures/meeting-02-slides.pages.txt#physical-pages=106-106",
+      "kind": "administrative",
+      "title": "Thanks slide",
+      "primary_sources": [
+        "meeting-02-slides"
+      ],
+      "disposition": "excluded",
+      "reason": "closing slide only",
+      "evidence": "The page adds no independent technical content."
+    },
+    {
+      "id": "coverage-meeting-02-reading-01-catalogue-record",
+      "source_object": "meeting-02-reading-01",
+      "source_unit": "meeting-02-reading-01-catalogue-record",
+      "source_location": "Readings/meeting-02-reading-01.md#metadata",
+      "kind": "section",
+      "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+      "primary_sources": [
+        "meeting-02-reading-01"
+      ],
+      "secondary_sources": [
+        "meeting-02-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-02",
+      "reason": "Primary reading is catalogued individually; the official deck remains a secondary explanation."
+    },
+    {
+      "id": "coverage-meeting-02-reading-02-catalogue-record",
+      "source_object": "meeting-02-reading-02",
+      "source_unit": "meeting-02-reading-02-catalogue-record",
+      "source_location": "Readings/meeting-02-reading-02.md#metadata",
+      "kind": "section",
+      "title": "Iterative Reasoning Preference Optimization",
+      "primary_sources": [
+        "meeting-02-reading-02"
+      ],
+      "secondary_sources": [
+        "meeting-02-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-02",
+      "reason": "Primary reading is catalogued individually; the official deck remains a secondary explanation."
+    },
+    {
+      "id": "coverage-meeting-02-reading-03-catalogue-record",
+      "source_object": "meeting-02-reading-03",
+      "source_unit": "meeting-02-reading-03-catalogue-record",
+      "source_location": "Readings/meeting-02-reading-03.md#metadata",
+      "kind": "section",
+      "title": "Chain-of-Verification Reduces Hallucination in Large Language Models",
+      "primary_sources": [
+        "meeting-02-reading-03"
+      ],
+      "secondary_sources": [
+        "meeting-02-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-02",
+      "reason": "Primary reading is catalogued individually; the official deck remains a secondary explanation."
+    },
+    {
+      "id": "coverage-meeting-03-recording-full-session",
+      "source_object": "meeting-03-recording",
+      "source_unit": "meeting-03-recording-full-session",
+      "source_location": "https://www.youtube.com/watch?v=zvI4UN2_i-w#t=0s",
+      "kind": "segment",
+      "title": "Full official recording: On Reasoning, Memory, and Planning of Language Agents",
+      "primary_sources": [
+        "meeting-03-recording"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-03",
+      "reason": "Official recording metadata is pinned for the source baseline; no media body is mirrored."
+    },
+    {
+      "id": "coverage-meeting-03-slides-memory-planning-orientation",
+      "source_object": "meeting-03-slides",
+      "source_unit": "meeting-03-slides-memory-planning-orientation",
+      "source_location": "Lectures/meeting-03-slides.pages.txt#physical-pages=1-4",
+      "kind": "section",
+      "title": "Memory and planning orientation",
+      "primary_sources": [
+        "meeting-03-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-03",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-03-slides-yu-su-agent-first-vs-llm-first",
+      "source_object": "meeting-03-slides",
+      "source_unit": "meeting-03-slides-yu-su-agent-first-vs-llm-first",
+      "source_location": "Lectures/meeting-03-slides.pages.txt#physical-pages=5-15",
+      "kind": "visual-sequence",
+      "title": "Agent-first versus LLM-first system design",
+      "primary_sources": [
+        "meeting-03-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-03",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-03-slides-meeting-03-outline-a",
+      "source_object": "meeting-03-slides",
+      "source_unit": "meeting-03-slides-meeting-03-outline-a",
+      "source_location": "Lectures/meeting-03-slides.pages.txt#physical-pages=16-17",
+      "kind": "administrative",
+      "title": "Memory and planning outline",
+      "primary_sources": [
+        "meeting-03-slides"
+      ],
+      "disposition": "excluded",
+      "reason": "lecture outline",
+      "evidence": "Pages are navigation dividers."
+    },
+    {
+      "id": "coverage-meeting-03-slides-long-term-memory-rag-problem",
+      "source_object": "meeting-03-slides",
+      "source_unit": "meeting-03-slides-long-term-memory-rag-problem",
+      "source_location": "Lectures/meeting-03-slides.pages.txt#physical-pages=18-24",
+      "kind": "failure-mode",
+      "title": "Long-term memory and RAG limitations",
+      "primary_sources": [
+        "meeting-03-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-03",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-03-slides-yu-su-hipporag-memory-sequence",
+      "source_object": "meeting-03-slides",
+      "source_unit": "meeting-03-slides-yu-su-hipporag-memory-sequence",
+      "source_location": "Lectures/meeting-03-slides.pages.txt#physical-pages=25-34",
+      "kind": "visual-sequence",
+      "title": "HippoRAG associative memory",
+      "primary_sources": [
+        "meeting-03-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-03",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-03-slides-memory-takeaway",
+      "source_object": "meeting-03-slides",
+      "source_unit": "meeting-03-slides-memory-takeaway",
+      "source_location": "Lectures/meeting-03-slides.pages.txt#physical-pages=35-35",
+      "kind": "section",
+      "title": "Memory takeaway",
+      "primary_sources": [
+        "meeting-03-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-03",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-03-slides-meeting-03-outline-b",
+      "source_object": "meeting-03-slides",
+      "source_unit": "meeting-03-slides-meeting-03-outline-b",
+      "source_location": "Lectures/meeting-03-slides.pages.txt#physical-pages=36-36",
+      "kind": "administrative",
+      "title": "Planning outline divider",
+      "primary_sources": [
+        "meeting-03-slides"
+      ],
+      "disposition": "excluded",
+      "reason": "lecture outline",
+      "evidence": "The page is a navigation divider."
+    },
+    {
+      "id": "coverage-meeting-03-slides-grokking-planning",
+      "source_object": "meeting-03-slides",
+      "source_unit": "meeting-03-slides-grokking-planning",
+      "source_location": "Lectures/meeting-03-slides.pages.txt#physical-pages=37-52",
+      "kind": "mechanism",
+      "title": "Grokking planning and search",
+      "primary_sources": [
+        "meeting-03-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-03",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-03-slides-meeting-03-outline-c",
+      "source_object": "meeting-03-slides",
+      "source_unit": "meeting-03-slides-meeting-03-outline-c",
+      "source_location": "Lectures/meeting-03-slides.pages.txt#physical-pages=53-53",
+      "kind": "administrative",
+      "title": "World-model outline divider",
+      "primary_sources": [
+        "meeting-03-slides"
+      ],
+      "disposition": "excluded",
+      "reason": "lecture outline",
+      "evidence": "The page is a navigation divider."
+    },
+    {
+      "id": "coverage-meeting-03-slides-planning-paradigms",
+      "source_object": "meeting-03-slides",
+      "source_unit": "meeting-03-slides-planning-paradigms",
+      "source_location": "Lectures/meeting-03-slides.pages.txt#physical-pages=54-62",
+      "kind": "mechanism",
+      "title": "Planning paradigms for language agents",
+      "primary_sources": [
+        "meeting-03-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-03",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-03-slides-yu-su-world-model-planning-sequence",
+      "source_object": "meeting-03-slides",
+      "source_unit": "meeting-03-slides-yu-su-world-model-planning-sequence",
+      "source_location": "Lectures/meeting-03-slides.pages.txt#physical-pages=63-71",
+      "kind": "visual-sequence",
+      "title": "World models for language-agent planning",
+      "primary_sources": [
+        "meeting-03-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-03",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-03-slides-planning-takeaways",
+      "source_object": "meeting-03-slides",
+      "source_unit": "meeting-03-slides-planning-takeaways",
+      "source_location": "Lectures/meeting-03-slides.pages.txt#physical-pages=72-75",
+      "kind": "section",
+      "title": "Planning takeaways and open directions",
+      "primary_sources": [
+        "meeting-03-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-03",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-03-slides-meeting-03-closing",
+      "source_object": "meeting-03-slides",
+      "source_unit": "meeting-03-slides-meeting-03-closing",
+      "source_location": "Lectures/meeting-03-slides.pages.txt#physical-pages=76-78",
+      "kind": "administrative",
+      "title": "Closing and blank pages",
+      "primary_sources": [
+        "meeting-03-slides"
+      ],
+      "disposition": "excluded",
+      "reason": "closing and intentionally blank pages",
+      "evidence": "The pages add no independent technical content."
+    },
+    {
+      "id": "coverage-meeting-03-slides-parametric-memory-appendix",
+      "source_object": "meeting-03-slides",
+      "source_unit": "meeting-03-slides-parametric-memory-appendix",
+      "source_location": "Lectures/meeting-03-slides.pages.txt#physical-pages=79-80",
+      "kind": "section",
+      "title": "Appendix: parametric memory",
+      "primary_sources": [
+        "meeting-03-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-03",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-03-reading-01-catalogue-record",
+      "source_object": "meeting-03-reading-01",
+      "source_unit": "meeting-03-reading-01-catalogue-record",
+      "source_location": "Readings/meeting-03-reading-01.md#metadata",
+      "kind": "section",
+      "title": "Grokked Transformers are Implicit Reasoners: A Mechanistic Journey to the Edge of Generalization",
+      "primary_sources": [
+        "meeting-03-reading-01"
+      ],
+      "secondary_sources": [
+        "meeting-03-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-03",
+      "reason": "Primary reading is catalogued individually; the official deck remains a secondary explanation."
+    },
+    {
+      "id": "coverage-meeting-03-reading-02-catalogue-record",
+      "source_object": "meeting-03-reading-02",
+      "source_unit": "meeting-03-reading-02-catalogue-record",
+      "source_location": "Readings/meeting-03-reading-02.md#metadata",
+      "kind": "section",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "primary_sources": [
+        "meeting-03-reading-02"
+      ],
+      "secondary_sources": [
+        "meeting-03-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-03",
+      "reason": "Primary reading is catalogued individually; the official deck remains a secondary explanation."
+    },
+    {
+      "id": "coverage-meeting-03-reading-03-catalogue-record",
+      "source_object": "meeting-03-reading-03",
+      "source_unit": "meeting-03-reading-03-catalogue-record",
+      "source_location": "Readings/meeting-03-reading-03.md#metadata",
+      "kind": "section",
+      "title": "Is Your LLM Secretly a World Model of the Internet? Model-Based Planning for Web Agents",
+      "primary_sources": [
+        "meeting-03-reading-03"
+      ],
+      "secondary_sources": [
+        "meeting-03-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-03",
+      "reason": "Primary reading is catalogued individually; the official deck remains a secondary explanation."
+    },
+    {
+      "id": "coverage-meeting-04-recording-full-session",
+      "source_object": "meeting-04-recording",
+      "source_unit": "meeting-04-recording-full-session",
+      "source_location": "https://www.youtube.com/watch?v=cMiu3A7YBks#t=0s",
+      "kind": "segment",
+      "title": "Full official recording: Open Training Recipes for Reasoning in Language Models",
+      "primary_sources": [
+        "meeting-04-recording"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-04",
+      "reason": "Official recording metadata is pinned for the source baseline; no media body is mirrored."
+    },
+    {
+      "id": "coverage-meeting-04-slides-open-posttraining-overview",
+      "source_object": "meeting-04-slides",
+      "source_unit": "meeting-04-slides-open-posttraining-overview",
+      "source_location": "Lectures/meeting-04-slides.pages.txt#physical-pages=1-14",
+      "kind": "section",
+      "title": "Open post-training ecosystem overview",
+      "primary_sources": [
+        "meeting-04-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-04",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-04-slides-tulu-recipe",
+      "source_object": "meeting-04-slides",
+      "source_unit": "meeting-04-slides-tulu-recipe",
+      "source_location": "Lectures/meeting-04-slides.pages.txt#physical-pages=15-29",
+      "kind": "mechanism",
+      "title": "Tülu post-training recipe",
+      "primary_sources": [
+        "meeting-04-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-04",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-04-slides-sft-data-construction",
+      "source_object": "meeting-04-slides",
+      "source_unit": "meeting-04-slides-sft-data-construction",
+      "source_location": "Lectures/meeting-04-slides.pages.txt#physical-pages=30-41",
+      "kind": "mechanism",
+      "title": "Supervised fine-tuning data construction",
+      "primary_sources": [
+        "meeting-04-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-04",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-04-slides-cot-persona-data-mix",
+      "source_object": "meeting-04-slides",
+      "source_unit": "meeting-04-slides-cot-persona-data-mix",
+      "source_location": "Lectures/meeting-04-slides.pages.txt#physical-pages=42-59",
+      "kind": "mechanism",
+      "title": "Chain-of-thought, personas, and data mixtures",
+      "primary_sources": [
+        "meeting-04-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-04",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-04-slides-preference-optimization",
+      "source_object": "meeting-04-slides",
+      "source_unit": "meeting-04-slides-preference-optimization",
+      "source_location": "Lectures/meeting-04-slides.pages.txt#physical-pages=60-85",
+      "kind": "mechanism",
+      "title": "Preference optimization from DPO to PPO",
+      "primary_sources": [
+        "meeting-04-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-04",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-04-slides-tulu3-preference-recipe",
+      "source_object": "meeting-04-slides",
+      "source_unit": "meeting-04-slides-tulu3-preference-recipe",
+      "source_location": "Lectures/meeting-04-slides.pages.txt#physical-pages=86-89",
+      "kind": "mechanism",
+      "title": "Tülu 3 preference recipe",
+      "primary_sources": [
+        "meeting-04-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-04",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-04-slides-rlvr-method",
+      "source_object": "meeting-04-slides",
+      "source_unit": "meeting-04-slides-rlvr-method",
+      "source_location": "Lectures/meeting-04-slides.pages.txt#physical-pages=90-103",
+      "kind": "mechanism",
+      "title": "Reinforcement learning with verifiable rewards",
+      "primary_sources": [
+        "meeting-04-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-04",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-04-slides-rlvr-results",
+      "source_object": "meeting-04-slides",
+      "source_unit": "meeting-04-slides-rlvr-results",
+      "source_location": "Lectures/meeting-04-slides.pages.txt#physical-pages=104-120",
+      "kind": "experiment",
+      "title": "RLVR experiments and scaling results",
+      "primary_sources": [
+        "meeting-04-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-04",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-04-slides-minimal-posttraining-recipe",
+      "source_object": "meeting-04-slides",
+      "source_unit": "meeting-04-slides-minimal-posttraining-recipe",
+      "source_location": "Lectures/meeting-04-slides.pages.txt#physical-pages=121-125",
+      "kind": "mechanism",
+      "title": "Minimal post-training recipe",
+      "primary_sources": [
+        "meeting-04-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-04",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-04-slides-s1k-data",
+      "source_object": "meeting-04-slides",
+      "source_unit": "meeting-04-slides-s1k-data",
+      "source_location": "Lectures/meeting-04-slides.pages.txt#physical-pages=126-132",
+      "kind": "mechanism",
+      "title": "S1K reasoning-data construction",
+      "primary_sources": [
+        "meeting-04-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-04",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-04-slides-test-time-scaling",
+      "source_object": "meeting-04-slides",
+      "source_unit": "meeting-04-slides-test-time-scaling",
+      "source_location": "Lectures/meeting-04-slides.pages.txt#physical-pages=133-142",
+      "kind": "mechanism",
+      "title": "Test-time scaling",
+      "primary_sources": [
+        "meeting-04-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-04",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-04-slides-olmo-pretraining",
+      "source_object": "meeting-04-slides",
+      "source_unit": "meeting-04-slides-olmo-pretraining",
+      "source_location": "Lectures/meeting-04-slides.pages.txt#physical-pages=143-152",
+      "kind": "section",
+      "title": "OLMo pretraining and openness",
+      "primary_sources": [
+        "meeting-04-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-04",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-04-slides-open-recipe-synthesis",
+      "source_object": "meeting-04-slides",
+      "source_unit": "meeting-04-slides-open-recipe-synthesis",
+      "source_location": "Lectures/meeting-04-slides.pages.txt#physical-pages=153-153",
+      "kind": "section",
+      "title": "Open-recipe research synthesis",
+      "primary_sources": [
+        "meeting-04-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-04",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-04-slides-meeting-04-closing",
+      "source_object": "meeting-04-slides",
+      "source_unit": "meeting-04-slides-meeting-04-closing",
+      "source_location": "Lectures/meeting-04-slides.pages.txt#physical-pages=154-154",
+      "kind": "administrative",
+      "title": "Thanks slide",
+      "primary_sources": [
+        "meeting-04-slides"
+      ],
+      "disposition": "excluded",
+      "reason": "closing slide only",
+      "evidence": "The page adds no independent technical content."
+    },
+    {
+      "id": "coverage-meeting-04-slides-open-recipe-appendix",
+      "source_object": "meeting-04-slides",
+      "source_unit": "meeting-04-slides-open-recipe-appendix",
+      "source_location": "Lectures/meeting-04-slides.pages.txt#physical-pages=155-155",
+      "kind": "section",
+      "title": "Appendix reference",
+      "primary_sources": [
+        "meeting-04-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-04",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-04-reading-01-catalogue-record",
+      "source_object": "meeting-04-reading-01",
+      "source_unit": "meeting-04-reading-01-catalogue-record",
+      "source_location": "Readings/meeting-04-reading-01.md#metadata",
+      "kind": "section",
+      "title": "Tulu 3: Pushing Frontiers in Open Language Model Post-Training",
+      "primary_sources": [
+        "meeting-04-reading-01"
+      ],
+      "secondary_sources": [
+        "meeting-04-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-04",
+      "reason": "Primary reading is catalogued individually; the official deck remains a secondary explanation."
+    },
+    {
+      "id": "coverage-meeting-04-reading-02-catalogue-record",
+      "source_object": "meeting-04-reading-02",
+      "source_unit": "meeting-04-reading-02-catalogue-record",
+      "source_location": "Readings/meeting-04-reading-02.md#metadata",
+      "kind": "section",
+      "title": "Unpacking DPO and PPO: Disentangling Best Practices for Learning from Preference Feedback",
+      "primary_sources": [
+        "meeting-04-reading-02"
+      ],
+      "secondary_sources": [
+        "meeting-04-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-04",
+      "reason": "Primary reading is catalogued individually; the official deck remains a secondary explanation."
+    },
+    {
+      "id": "coverage-meeting-04-reading-03-catalogue-record",
+      "source_object": "meeting-04-reading-03",
+      "source_unit": "meeting-04-reading-03-catalogue-record",
+      "source_location": "Readings/meeting-04-reading-03.md#metadata",
+      "kind": "section",
+      "title": "OpenScholar: Synthesizing Scientific Literature with Retrieval-augmented LMs",
+      "primary_sources": [
+        "meeting-04-reading-03"
+      ],
+      "secondary_sources": [
+        "meeting-04-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-04",
+      "reason": "Primary reading is catalogued individually; the official deck remains a secondary explanation."
+    },
+    {
+      "id": "coverage-meeting-05-recording-full-session",
+      "source_object": "meeting-05-recording",
+      "source_unit": "meeting-05-recording-full-session",
+      "source_location": "https://www.youtube.com/watch?v=JCk6qJtaCSU#t=0s",
+      "kind": "segment",
+      "title": "Full official recording: Coding Agents and AI for Vulnerability Detection",
+      "primary_sources": [
+        "meeting-05-recording"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-05",
+      "reason": "Official recording metadata is pinned for the source baseline; no media body is mirrored."
+    },
+    {
+      "id": "coverage-meeting-05-slides-coding-agent-orientation",
+      "source_object": "meeting-05-slides",
+      "source_unit": "meeting-05-slides-coding-agent-orientation",
+      "source_location": "Lectures/meeting-05-slides.pages.txt#physical-pages=1-4",
+      "kind": "section",
+      "title": "Coding-agent orientation",
+      "primary_sources": [
+        "meeting-05-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-05",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-05-slides-coding-agent-evaluation",
+      "source_object": "meeting-05-slides",
+      "source_unit": "meeting-05-slides-coding-agent-evaluation",
+      "source_location": "Lectures/meeting-05-slides.pages.txt#physical-pages=5-14",
+      "kind": "experiment",
+      "title": "Coding-agent evaluation",
+      "primary_sources": [
+        "meeting-05-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-05",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-05-slides-swe-agent-loop",
+      "source_object": "meeting-05-slides",
+      "source_unit": "meeting-05-slides-swe-agent-loop",
+      "source_location": "Lectures/meeting-05-slides.pages.txt#physical-pages=15-21",
+      "kind": "mechanism",
+      "title": "SWE-agent interaction loop",
+      "primary_sources": [
+        "meeting-05-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-05",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-05-slides-coding-agent-design-comparisons",
+      "source_object": "meeting-05-slides",
+      "source_unit": "meeting-05-slides-coding-agent-design-comparisons",
+      "source_location": "Lectures/meeting-05-slides.pages.txt#physical-pages=22-34",
+      "kind": "mechanism",
+      "title": "Coding-agent design comparisons",
+      "primary_sources": [
+        "meeting-05-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-05",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-05-slides-ctf-agents",
+      "source_object": "meeting-05-slides",
+      "source_unit": "meeting-05-slides-ctf-agents",
+      "source_location": "Lectures/meeting-05-slides.pages.txt#physical-pages=35-40",
+      "kind": "worked-example",
+      "title": "Capture-the-flag agents",
+      "primary_sources": [
+        "meeting-05-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-05",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-05-slides-vulnerability-discovery-problem",
+      "source_object": "meeting-05-slides",
+      "source_unit": "meeting-05-slides-vulnerability-discovery-problem",
+      "source_location": "Lectures/meeting-05-slides.pages.txt#physical-pages=41-45",
+      "kind": "section",
+      "title": "Vulnerability discovery problem and traditional workflow",
+      "primary_sources": [
+        "meeting-05-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-05",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-05-slides-charles-sutton-vulnerability-discovery-loop",
+      "source_object": "meeting-05-slides",
+      "source_unit": "meeting-05-slides-charles-sutton-vulnerability-discovery-loop",
+      "source_location": "Lectures/meeting-05-slides.pages.txt#physical-pages=46-53",
+      "kind": "visual-sequence",
+      "title": "LLM-agent vulnerability-discovery loop",
+      "primary_sources": [
+        "meeting-05-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-05",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-05-slides-coding-agent-conclusions",
+      "source_object": "meeting-05-slides",
+      "source_unit": "meeting-05-slides-coding-agent-conclusions",
+      "source_location": "Lectures/meeting-05-slides.pages.txt#physical-pages=54-55",
+      "kind": "section",
+      "title": "Coding-agent conclusions",
+      "primary_sources": [
+        "meeting-05-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-05",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-05-reading-01-catalogue-record",
+      "source_object": "meeting-05-reading-01",
+      "source_unit": "meeting-05-reading-01-catalogue-record",
+      "source_location": "Readings/meeting-05-reading-01.md#metadata",
+      "kind": "section",
+      "title": "EnIGMA: Interactive Tools Substantially Assist LM Agents in Finding Security Vulnerabilities",
+      "primary_sources": [
+        "meeting-05-reading-01"
+      ],
+      "secondary_sources": [
+        "meeting-05-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-05",
+      "reason": "Primary reading is catalogued individually; the official deck remains a secondary explanation."
+    },
+    {
+      "id": "coverage-meeting-05-reading-02-catalogue-record",
+      "source_object": "meeting-05-reading-02",
+      "source_unit": "meeting-05-reading-02-catalogue-record",
+      "source_location": "Readings/meeting-05-reading-02.md#metadata",
+      "kind": "section",
+      "title": "From Naptime to Big Sleep: Using Large Language Models To Catch Vulnerabilities In Real-World Code",
+      "primary_sources": [
+        "meeting-05-reading-02"
+      ],
+      "secondary_sources": [
+        "meeting-05-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-05",
+      "reason": "Primary reading is catalogued individually; the official deck remains a secondary explanation."
+    },
+    {
+      "id": "coverage-meeting-06-recording-full-session",
+      "source_object": "meeting-06-recording",
+      "source_unit": "meeting-06-recording-full-session",
+      "source_location": "https://www.youtube.com/watch?v=RPINOYM12RU#t=0s",
+      "kind": "segment",
+      "title": "Full official recording: Multimodal Autonomous AI Agents",
+      "primary_sources": [
+        "meeting-06-recording"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-06",
+      "reason": "Official recording metadata is pinned for the source baseline; no media body is mirrored."
+    },
+    {
+      "id": "coverage-meeting-06-slides-web-agent-overview",
+      "source_object": "meeting-06-slides",
+      "source_unit": "meeting-06-slides-web-agent-overview",
+      "source_location": "Lectures/meeting-06-slides.pages.txt#physical-pages=1-13",
+      "kind": "section",
+      "title": "Web-agent overview and demonstrations",
+      "primary_sources": [
+        "meeting-06-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-06",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-06-slides-visualwebarena",
+      "source_object": "meeting-06-slides",
+      "source_unit": "meeting-06-slides-visualwebarena",
+      "source_location": "Lectures/meeting-06-slides.pages.txt#physical-pages=14-28",
+      "kind": "experiment",
+      "title": "VisualWebArena benchmark",
+      "primary_sources": [
+        "meeting-06-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-06",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-06-slides-vision-language-web-agents",
+      "source_object": "meeting-06-slides",
+      "source_unit": "meeting-06-slides-vision-language-web-agents",
+      "source_location": "Lectures/meeting-06-slides.pages.txt#physical-pages=29-40",
+      "kind": "mechanism",
+      "title": "Vision-language web agents",
+      "primary_sources": [
+        "meeting-06-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-06",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-06-slides-search-agent-motivation",
+      "source_object": "meeting-06-slides",
+      "source_unit": "meeting-06-slides-search-agent-motivation",
+      "source_location": "Lectures/meeting-06-slides.pages.txt#physical-pages=41-49",
+      "kind": "section",
+      "title": "Search-agent motivation",
+      "primary_sources": [
+        "meeting-06-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-06",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-06-slides-web-agent-tree-search",
+      "source_object": "meeting-06-slides",
+      "source_unit": "meeting-06-slides-web-agent-tree-search",
+      "source_location": "Lectures/meeting-06-slides.pages.txt#physical-pages=50-69",
+      "kind": "mechanism",
+      "title": "Tree-search agents for web tasks",
+      "primary_sources": [
+        "meeting-06-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-06",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-06-slides-web-agent-tree-search-results",
+      "source_object": "meeting-06-slides",
+      "source_unit": "meeting-06-slides-web-agent-tree-search-results",
+      "source_location": "Lectures/meeting-06-slides.pages.txt#physical-pages=70-77",
+      "kind": "experiment",
+      "title": "Tree-search agent results",
+      "primary_sources": [
+        "meeting-06-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-06",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-06-slides-insta-setup",
+      "source_object": "meeting-06-slides",
+      "source_unit": "meeting-06-slides-insta-setup",
+      "source_location": "Lectures/meeting-06-slides.pages.txt#physical-pages=78-89",
+      "kind": "mechanism",
+      "title": "Inference-time self-training agent setup",
+      "primary_sources": [
+        "meeting-06-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-06",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-06-slides-insta-verification-scaling",
+      "source_object": "meeting-06-slides",
+      "source_unit": "meeting-06-slides-insta-verification-scaling",
+      "source_location": "Lectures/meeting-06-slides.pages.txt#physical-pages=90-106",
+      "kind": "experiment",
+      "title": "Verification and inference-time scaling",
+      "primary_sources": [
+        "meeting-06-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-06",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-06-slides-plan-sequence-learn",
+      "source_object": "meeting-06-slides",
+      "source_unit": "meeting-06-slides-plan-sequence-learn",
+      "source_location": "Lectures/meeting-06-slides.pages.txt#physical-pages=107-116",
+      "kind": "mechanism",
+      "title": "Plan, sequence, and learn workflow",
+      "primary_sources": [
+        "meeting-06-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-06",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-06-slides-nvidia-confidential-page",
+      "source_object": "meeting-06-slides",
+      "source_unit": "meeting-06-slides-nvidia-confidential-page",
+      "source_location": "Lectures/meeting-06-slides.pages.txt#physical-pages=117-117",
+      "kind": "administrative",
+      "title": "Source-marked confidential page",
+      "primary_sources": [
+        "meeting-06-slides"
+      ],
+      "disposition": "excluded",
+      "reason": "do-not-reuse: source-marked confidential",
+      "evidence": "The unchanged official PDF page visibly states 'NVIDIA CONFIDENTIAL. DO NOT DISTRIBUTE.' This page-specific restriction overrides the general course permission record."
+    },
+    {
+      "id": "coverage-meeting-06-slides-proprietary-adjacent-demo",
+      "source_object": "meeting-06-slides",
+      "source_unit": "meeting-06-slides-proprietary-adjacent-demo",
+      "source_location": "Lectures/meeting-06-slides.pages.txt#physical-pages=118-121",
+      "kind": "worked-example",
+      "title": "Proprietary-adjacent agent demonstration",
+      "primary_sources": [
+        "meeting-06-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-06",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-06-slides-web-agent-synthesis",
+      "source_object": "meeting-06-slides",
+      "source_unit": "meeting-06-slides-web-agent-synthesis",
+      "source_location": "Lectures/meeting-06-slides.pages.txt#physical-pages=122-123",
+      "kind": "section",
+      "title": "Web-agent synthesis",
+      "primary_sources": [
+        "meeting-06-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-06",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-06-slides-web-agent-adversarial-appendix",
+      "source_object": "meeting-06-slides",
+      "source_unit": "meeting-06-slides-web-agent-adversarial-appendix",
+      "source_location": "Lectures/meeting-06-slides.pages.txt#physical-pages=124-125",
+      "kind": "failure-mode",
+      "title": "Adversarial appendix",
+      "primary_sources": [
+        "meeting-06-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-06",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-06-slides-meeting-06-closing",
+      "source_object": "meeting-06-slides",
+      "source_unit": "meeting-06-slides-meeting-06-closing",
+      "source_location": "Lectures/meeting-06-slides.pages.txt#physical-pages=126-126",
+      "kind": "administrative",
+      "title": "Closing slide",
+      "primary_sources": [
+        "meeting-06-slides"
+      ],
+      "disposition": "excluded",
+      "reason": "closing slide only",
+      "evidence": "The page adds no independent technical content."
+    },
+    {
+      "id": "coverage-meeting-06-reading-01-catalogue-record",
+      "source_object": "meeting-06-reading-01",
+      "source_unit": "meeting-06-reading-01-catalogue-record",
+      "source_location": "Readings/meeting-06-reading-01.md#metadata",
+      "kind": "section",
+      "title": "Mind2Web: Towards a Generalist Agent for the Web",
+      "primary_sources": [
+        "meeting-06-reading-01"
+      ],
+      "secondary_sources": [
+        "meeting-06-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-06",
+      "reason": "Primary reading is catalogued individually; the official deck remains a secondary explanation."
+    },
+    {
+      "id": "coverage-meeting-06-reading-02-catalogue-record",
+      "source_object": "meeting-06-reading-02",
+      "source_unit": "meeting-06-reading-02-catalogue-record",
+      "source_location": "Readings/meeting-06-reading-02.md#metadata",
+      "kind": "section",
+      "title": "WebArena: A Realistic Web Environment for Building Autonomous Agents",
+      "primary_sources": [
+        "meeting-06-reading-02"
+      ],
+      "secondary_sources": [
+        "meeting-06-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-06",
+      "reason": "Primary reading is catalogued individually; the official deck remains a secondary explanation."
+    },
+    {
+      "id": "coverage-meeting-06-reading-03-catalogue-record",
+      "source_object": "meeting-06-reading-03",
+      "source_unit": "meeting-06-reading-03-catalogue-record",
+      "source_location": "Readings/meeting-06-reading-03.md#metadata",
+      "kind": "section",
+      "title": "VisualWebArena: Evaluating Multimodal Agents on Realistic Visual Web Tasks",
+      "primary_sources": [
+        "meeting-06-reading-03"
+      ],
+      "secondary_sources": [
+        "meeting-06-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-06",
+      "reason": "Primary reading is catalogued individually; the official deck remains a secondary explanation."
+    },
+    {
+      "id": "coverage-meeting-06-reading-04-catalogue-record",
+      "source_object": "meeting-06-reading-04",
+      "source_unit": "meeting-06-reading-04-catalogue-record",
+      "source_location": "Readings/meeting-06-reading-04.md#metadata",
+      "kind": "section",
+      "title": "Tree Search for Language Model Agents",
+      "primary_sources": [
+        "meeting-06-reading-04"
+      ],
+      "secondary_sources": [
+        "meeting-06-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-06",
+      "reason": "Primary reading is catalogued individually; the official deck remains a secondary explanation."
+    },
+    {
+      "id": "coverage-meeting-07-recording-full-session",
+      "source_object": "meeting-07-recording",
+      "source_unit": "meeting-07-recording-full-session",
+      "source_location": "https://www.youtube.com/watch?v=n__Tim8K2IY#t=0s",
+      "kind": "segment",
+      "title": "Full official recording: Multimodal Agents – From Perception to Action",
+      "primary_sources": [
+        "meeting-07-recording"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-07",
+      "reason": "Official recording metadata is pinned for the source baseline; no media body is mirrored."
+    },
+    {
+      "id": "coverage-meeting-07-slides-gui-agent-landscape",
+      "source_object": "meeting-07-slides",
+      "source_unit": "meeting-07-slides-gui-agent-landscape",
+      "source_location": "Lectures/meeting-07-slides.pages.txt#physical-pages=1-8",
+      "kind": "section",
+      "title": "GUI-agent landscape",
+      "primary_sources": [
+        "meeting-07-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-07",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-07-slides-osworld",
+      "source_object": "meeting-07-slides",
+      "source_unit": "meeting-07-slides-osworld",
+      "source_location": "Lectures/meeting-07-slides.pages.txt#physical-pages=9-31",
+      "kind": "experiment",
+      "title": "OSWorld environment and evaluation",
+      "primary_sources": [
+        "meeting-07-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-07",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-07-slides-meeting-07-outline-a",
+      "source_object": "meeting-07-slides",
+      "source_unit": "meeting-07-slides-meeting-07-outline-a",
+      "source_location": "Lectures/meeting-07-slides.pages.txt#physical-pages=32-32",
+      "kind": "administrative",
+      "title": "GUI-agent outline divider",
+      "primary_sources": [
+        "meeting-07-slides"
+      ],
+      "disposition": "excluded",
+      "reason": "lecture outline",
+      "evidence": "The page is a navigation divider."
+    },
+    {
+      "id": "coverage-meeting-07-slides-agenttrek",
+      "source_object": "meeting-07-slides",
+      "source_unit": "meeting-07-slides-agenttrek",
+      "source_location": "Lectures/meeting-07-slides.pages.txt#physical-pages=33-45",
+      "kind": "mechanism",
+      "title": "AgentTrek trajectory construction",
+      "primary_sources": [
+        "meeting-07-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-07",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-07-slides-taco",
+      "source_object": "meeting-07-slides",
+      "source_unit": "meeting-07-slides-taco",
+      "source_location": "Lectures/meeting-07-slides.pages.txt#physical-pages=46-61",
+      "kind": "mechanism",
+      "title": "TACO action and cognition",
+      "primary_sources": [
+        "meeting-07-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-07",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-07-slides-meeting-07-outline-b",
+      "source_object": "meeting-07-slides",
+      "source_unit": "meeting-07-slides-meeting-07-outline-b",
+      "source_location": "Lectures/meeting-07-slides.pages.txt#physical-pages=62-62",
+      "kind": "administrative",
+      "title": "Generalist-agent outline divider",
+      "primary_sources": [
+        "meeting-07-slides"
+      ],
+      "disposition": "excluded",
+      "reason": "lecture outline",
+      "evidence": "The page is a navigation divider."
+    },
+    {
+      "id": "coverage-meeting-07-slides-aguvis",
+      "source_object": "meeting-07-slides",
+      "source_unit": "meeting-07-slides-aguvis",
+      "source_location": "Lectures/meeting-07-slides.pages.txt#physical-pages=63-83",
+      "kind": "mechanism",
+      "title": "Aguvis unified pure-vision agents",
+      "primary_sources": [
+        "meeting-07-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-07",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-07-slides-xgen-video",
+      "source_object": "meeting-07-slides",
+      "source_unit": "meeting-07-slides-xgen-video",
+      "source_location": "Lectures/meeting-07-slides.pages.txt#physical-pages=84-98",
+      "kind": "mechanism",
+      "title": "xGen video understanding",
+      "primary_sources": [
+        "meeting-07-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-07",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-07-slides-gens",
+      "source_object": "meeting-07-slides",
+      "source_unit": "meeting-07-slides-gens",
+      "source_location": "Lectures/meeting-07-slides.pages.txt#physical-pages=99-105",
+      "kind": "mechanism",
+      "title": "GenS generalist foundation agents",
+      "primary_sources": [
+        "meeting-07-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-07",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-07-slides-gui-agent-summary",
+      "source_object": "meeting-07-slides",
+      "source_unit": "meeting-07-slides-gui-agent-summary",
+      "source_location": "Lectures/meeting-07-slides.pages.txt#physical-pages=106-106",
+      "kind": "section",
+      "title": "GUI-agent summary",
+      "primary_sources": [
+        "meeting-07-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-07",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-07-reading-01-catalogue-record",
+      "source_object": "meeting-07-reading-01",
+      "source_unit": "meeting-07-reading-01-catalogue-record",
+      "source_location": "Readings/meeting-07-reading-01.md#metadata",
+      "kind": "section",
+      "title": "OSWorld: Benchmarking Multimodal Agents for Open-Ended Tasks in Real Computer Environments",
+      "primary_sources": [
+        "meeting-07-reading-01"
+      ],
+      "secondary_sources": [
+        "meeting-07-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-07",
+      "reason": "Primary reading is catalogued individually; the official deck remains a secondary explanation."
+    },
+    {
+      "id": "coverage-meeting-07-reading-02-catalogue-record",
+      "source_object": "meeting-07-reading-02",
+      "source_unit": "meeting-07-reading-02-catalogue-record",
+      "source_location": "Readings/meeting-07-reading-02.md#metadata",
+      "kind": "section",
+      "title": "Aguvis: Unified Pure Vision Agents for Autonomous GUI Interaction",
+      "primary_sources": [
+        "meeting-07-reading-02"
+      ],
+      "secondary_sources": [
+        "meeting-07-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-07",
+      "reason": "Primary reading is catalogued individually; the official deck remains a secondary explanation."
+    },
+    {
+      "id": "coverage-meeting-08-recording-full-session",
+      "source_object": "meeting-08-recording",
+      "source_unit": "meeting-08-recording-full-session",
+      "source_location": "https://www.youtube.com/watch?v=3gaEMscOMAU#t=0s",
+      "kind": "segment",
+      "title": "Full official recording: AlphaProof: when reinforcement learning meets formal mathematics",
+      "primary_sources": [
+        "meeting-08-recording"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-08",
+      "reason": "Official recording metadata is pinned for the source baseline; no media body is mirrored."
+    },
+    {
+      "id": "coverage-meeting-08-slides-alphaproof-orientation",
+      "source_object": "meeting-08-slides",
+      "source_unit": "meeting-08-slides-alphaproof-orientation",
+      "source_location": "Lectures/meeting-08-slides.pages.txt#physical-pages=1-4",
+      "kind": "section",
+      "title": "AlphaProof orientation",
+      "primary_sources": [
+        "meeting-08-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-08",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-08-slides-formal-proving-setup",
+      "source_object": "meeting-08-slides",
+      "source_unit": "meeting-08-slides-formal-proving-setup",
+      "source_location": "Lectures/meeting-08-slides.pages.txt#physical-pages=5-13",
+      "kind": "section",
+      "title": "Formal theorem-proving problem setup",
+      "primary_sources": [
+        "meeting-08-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-08",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-08-slides-lean-proof-demo",
+      "source_object": "meeting-08-slides",
+      "source_unit": "meeting-08-slides-lean-proof-demo",
+      "source_location": "Lectures/meeting-08-slides.pages.txt#physical-pages=14-22",
+      "kind": "worked-example",
+      "title": "Lean proof demonstration",
+      "primary_sources": [
+        "meeting-08-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-08",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-08-slides-rl-and-alphazero",
+      "source_object": "meeting-08-slides",
+      "source_unit": "meeting-08-slides-rl-and-alphazero",
+      "source_location": "Lectures/meeting-08-slides.pages.txt#physical-pages=23-34",
+      "kind": "mechanism",
+      "title": "Reinforcement learning and AlphaZero",
+      "primary_sources": [
+        "meeting-08-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-08",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-08-slides-alphaproof-premise",
+      "source_object": "meeting-08-slides",
+      "source_unit": "meeting-08-slides-alphaproof-premise",
+      "source_location": "Lectures/meeting-08-slides.pages.txt#physical-pages=35-42",
+      "kind": "mechanism",
+      "title": "AlphaProof premise",
+      "primary_sources": [
+        "meeting-08-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-08",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-08-slides-imo-setting",
+      "source_object": "meeting-08-slides",
+      "source_unit": "meeting-08-slides-imo-setting",
+      "source_location": "Lectures/meeting-08-slides.pages.txt#physical-pages=43-53",
+      "kind": "section",
+      "title": "International Mathematical Olympiad problem setting",
+      "primary_sources": [
+        "meeting-08-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-08",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-08-slides-alphaproof-imo-results",
+      "source_object": "meeting-08-slides",
+      "source_unit": "meeting-08-slides-alphaproof-imo-results",
+      "source_location": "Lectures/meeting-08-slides.pages.txt#physical-pages=54-76",
+      "kind": "experiment",
+      "title": "AlphaProof at the IMO",
+      "primary_sources": [
+        "meeting-08-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-08",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-08-slides-alphaproof-methods",
+      "source_object": "meeting-08-slides",
+      "source_unit": "meeting-08-slides-alphaproof-methods",
+      "source_location": "Lectures/meeting-08-slides.pages.txt#physical-pages=77-85",
+      "kind": "mechanism",
+      "title": "AlphaProof methods",
+      "primary_sources": [
+        "meeting-08-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-08",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-08-slides-test-time-rl",
+      "source_object": "meeting-08-slides",
+      "source_unit": "meeting-08-slides-test-time-rl",
+      "source_location": "Lectures/meeting-08-slides.pages.txt#physical-pages=86-92",
+      "kind": "mechanism",
+      "title": "Test-time reinforcement learning",
+      "primary_sources": [
+        "meeting-08-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-08",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-08-slides-meeting-08-demo-divider",
+      "source_object": "meeting-08-slides",
+      "source_unit": "meeting-08-slides-meeting-08-demo-divider",
+      "source_location": "Lectures/meeting-08-slides.pages.txt#physical-pages=93-93",
+      "kind": "administrative",
+      "title": "Demonstration divider",
+      "primary_sources": [
+        "meeting-08-slides"
+      ],
+      "disposition": "excluded",
+      "reason": "demonstration divider",
+      "evidence": "The page is a navigation divider."
+    },
+    {
+      "id": "coverage-meeting-08-slides-riemann-zeta-demo",
+      "source_object": "meeting-08-slides",
+      "source_unit": "meeting-08-slides-riemann-zeta-demo",
+      "source_location": "Lectures/meeting-08-slides.pages.txt#physical-pages=94-107",
+      "kind": "worked-example",
+      "title": "Riemann zeta formalization demonstration",
+      "primary_sources": [
+        "meeting-08-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-08",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-08-slides-formal-reasoning-future",
+      "source_object": "meeting-08-slides",
+      "source_unit": "meeting-08-slides-formal-reasoning-future",
+      "source_location": "Lectures/meeting-08-slides.pages.txt#physical-pages=108-110",
+      "kind": "section",
+      "title": "Future of formal mathematical reasoning",
+      "primary_sources": [
+        "meeting-08-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-08",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-08-slides-meeting-08-closing",
+      "source_object": "meeting-08-slides",
+      "source_unit": "meeting-08-slides-meeting-08-closing",
+      "source_location": "Lectures/meeting-08-slides.pages.txt#physical-pages=111-112",
+      "kind": "administrative",
+      "title": "Thanks and closing",
+      "primary_sources": [
+        "meeting-08-slides"
+      ],
+      "disposition": "excluded",
+      "reason": "closing slides only",
+      "evidence": "The pages add no independent technical content."
+    },
+    {
+      "id": "coverage-meeting-08-reading-01-catalogue-record",
+      "source_object": "meeting-08-reading-01",
+      "source_unit": "meeting-08-reading-01-catalogue-record",
+      "source_location": "Readings/meeting-08-reading-01.md#metadata",
+      "kind": "section",
+      "title": "AI achieves silver-medal standard solving International Mathematical Olympiad problems",
+      "primary_sources": [
+        "meeting-08-reading-01"
+      ],
+      "secondary_sources": [
+        "meeting-08-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-08",
+      "reason": "Primary reading is catalogued individually; the official deck remains a secondary explanation."
+    },
+    {
+      "id": "coverage-meeting-08-reading-02-catalogue-record",
+      "source_object": "meeting-08-reading-02",
+      "source_unit": "meeting-08-reading-02-catalogue-record",
+      "source_location": "Readings/meeting-08-reading-02.md#metadata",
+      "kind": "section",
+      "title": "Mastering Chess and Shogi by Self-Play with a General Reinforcement Learning Algorithm",
+      "primary_sources": [
+        "meeting-08-reading-02"
+      ],
+      "secondary_sources": [
+        "meeting-08-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-08",
+      "reason": "Primary reading is catalogued individually; the official deck remains a secondary explanation."
+    },
+    {
+      "id": "coverage-meeting-08-reading-03-catalogue-record",
+      "source_object": "meeting-08-reading-03",
+      "source_unit": "meeting-08-reading-03-catalogue-record",
+      "source_location": "Readings/meeting-08-reading-03.md#metadata",
+      "kind": "section",
+      "title": "The Future of Mathematics?",
+      "primary_sources": [
+        "meeting-08-reading-03"
+      ],
+      "secondary_sources": [
+        "meeting-08-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-08",
+      "reason": "Primary reading is catalogued individually; the official deck remains a secondary explanation."
+    },
+    {
+      "id": "coverage-meeting-08-reading-04-catalogue-record",
+      "source_object": "meeting-08-reading-04",
+      "source_unit": "meeting-08-reading-04-catalogue-record",
+      "source_location": "Readings/meeting-08-reading-04.md#metadata",
+      "kind": "section",
+      "title": "Building the Mathematical Library of the Future",
+      "primary_sources": [
+        "meeting-08-reading-04"
+      ],
+      "secondary_sources": [
+        "meeting-08-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-08",
+      "reason": "Primary reading is catalogued individually; the official deck remains a secondary explanation."
+    },
+    {
+      "id": "coverage-meeting-09-recording-full-session",
+      "source_object": "meeting-09-recording",
+      "source_unit": "meeting-09-recording-full-session",
+      "source_location": "https://www.youtube.com/watch?v=cLhWEyMQ4mQ#t=0s",
+      "kind": "segment",
+      "title": "Full official recording: Language models for autoformalization and theorem proving",
+      "primary_sources": [
+        "meeting-09-recording"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-09",
+      "reason": "Official recording metadata is pinned for the source baseline; no media body is mirrored."
+    },
+    {
+      "id": "coverage-meeting-09-slides-autoformalization-capability-race",
+      "source_object": "meeting-09-slides",
+      "source_unit": "meeting-09-slides-autoformalization-capability-race",
+      "source_location": "Lectures/meeting-09-slides.pages.txt#physical-pages=1-6",
+      "kind": "section",
+      "title": "Autoformalization capability race",
+      "primary_sources": [
+        "meeting-09-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-09",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-09-slides-autoformalization-sft-rlvr",
+      "source_object": "meeting-09-slides",
+      "source_unit": "meeting-09-slides-autoformalization-sft-rlvr",
+      "source_location": "Lectures/meeting-09-slides.pages.txt#physical-pages=7-24",
+      "kind": "mechanism",
+      "title": "Supervised fine-tuning and verifiable-reward learning",
+      "primary_sources": [
+        "meeting-09-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-09",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-09-slides-informal-formal-gaps",
+      "source_object": "meeting-09-slides",
+      "source_unit": "meeting-09-slides-informal-formal-gaps",
+      "source_location": "Lectures/meeting-09-slides.pages.txt#physical-pages=25-31",
+      "kind": "failure-mode",
+      "title": "Informal-to-formal gaps",
+      "primary_sources": [
+        "meeting-09-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-09",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-09-slides-lean-foundations",
+      "source_object": "meeting-09-slides",
+      "source_unit": "meeting-09-slides-lean-foundations",
+      "source_location": "Lectures/meeting-09-slides.pages.txt#physical-pages=32-42",
+      "kind": "section",
+      "title": "Lean foundations",
+      "primary_sources": [
+        "meeting-09-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-09",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-09-slides-kaiyu-yang-lean-theorem-proving-pipeline",
+      "source_object": "meeting-09-slides",
+      "source_unit": "meeting-09-slides-kaiyu-yang-lean-theorem-proving-pipeline",
+      "source_location": "Lectures/meeting-09-slides.pages.txt#physical-pages=43-55",
+      "kind": "visual-sequence",
+      "title": "Lean theorem-proving pipeline",
+      "primary_sources": [
+        "meeting-09-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-09",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-09-slides-formalizing-inequalities",
+      "source_object": "meeting-09-slides",
+      "source_unit": "meeting-09-slides-formalizing-inequalities",
+      "source_location": "Lectures/meeting-09-slides.pages.txt#physical-pages=56-66",
+      "kind": "worked-example",
+      "title": "Formalizing inequalities",
+      "primary_sources": [
+        "meeting-09-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-09",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-09-slides-autoformalization-challenges",
+      "source_object": "meeting-09-slides",
+      "source_unit": "meeting-09-slides-autoformalization-challenges",
+      "source_location": "Lectures/meeting-09-slides.pages.txt#physical-pages=67-79",
+      "kind": "failure-mode",
+      "title": "Autoformalization challenges",
+      "primary_sources": [
+        "meeting-09-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-09",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-09-slides-leaneuclid",
+      "source_object": "meeting-09-slides",
+      "source_unit": "meeting-09-slides-leaneuclid",
+      "source_location": "Lectures/meeting-09-slides.pages.txt#physical-pages=80-84",
+      "kind": "mechanism",
+      "title": "LeanEuclid representation",
+      "primary_sources": [
+        "meeting-09-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-09",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-09-slides-euclid-logical-gap",
+      "source_object": "meeting-09-slides",
+      "source_unit": "meeting-09-slides-euclid-logical-gap",
+      "source_location": "Lectures/meeting-09-slides.pages.txt#physical-pages=85-97",
+      "kind": "worked-example",
+      "title": "Euclidean geometry logical-gap case study",
+      "primary_sources": [
+        "meeting-09-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-09",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-09-slides-equivalence-and-diagrams",
+      "source_object": "meeting-09-slides",
+      "source_unit": "meeting-09-slides-equivalence-and-diagrams",
+      "source_location": "Lectures/meeting-09-slides.pages.txt#physical-pages=98-105",
+      "kind": "mechanism",
+      "title": "Equivalence and diagram understanding",
+      "primary_sources": [
+        "meeting-09-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-09",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-09-slides-end-to-end-autoformalization",
+      "source_object": "meeting-09-slides",
+      "source_unit": "meeting-09-slides-end-to-end-autoformalization",
+      "source_location": "Lectures/meeting-09-slides.pages.txt#physical-pages=106-112",
+      "kind": "mechanism",
+      "title": "End-to-end autoformalization",
+      "primary_sources": [
+        "meeting-09-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-09",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-09-slides-autoformalization-takeaway",
+      "source_object": "meeting-09-slides",
+      "source_unit": "meeting-09-slides-autoformalization-takeaway",
+      "source_location": "Lectures/meeting-09-slides.pages.txt#physical-pages=113-114",
+      "kind": "section",
+      "title": "Autoformalization takeaway",
+      "primary_sources": [
+        "meeting-09-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-09",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-09-reading-01-catalogue-record",
+      "source_object": "meeting-09-reading-01",
+      "source_unit": "meeting-09-reading-01-catalogue-record",
+      "source_location": "Readings/meeting-09-reading-01.md#metadata",
+      "kind": "section",
+      "title": "LeanDojo: Theorem Proving with Retrieval-Augmented Language Models",
+      "primary_sources": [
+        "meeting-09-reading-01"
+      ],
+      "secondary_sources": [
+        "meeting-09-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-09",
+      "reason": "Primary reading is catalogued individually; the official deck remains a secondary explanation."
+    },
+    {
+      "id": "coverage-meeting-09-reading-02-catalogue-record",
+      "source_object": "meeting-09-reading-02",
+      "source_unit": "meeting-09-reading-02-catalogue-record",
+      "source_location": "Readings/meeting-09-reading-02.md#metadata",
+      "kind": "section",
+      "title": "Autoformalization with Large Language Models",
+      "primary_sources": [
+        "meeting-09-reading-02"
+      ],
+      "secondary_sources": [
+        "meeting-09-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-09",
+      "reason": "Primary reading is catalogued individually; the official deck remains a secondary explanation."
+    },
+    {
+      "id": "coverage-meeting-09-reading-03-catalogue-record",
+      "source_object": "meeting-09-reading-03",
+      "source_unit": "meeting-09-reading-03-catalogue-record",
+      "source_location": "Readings/meeting-09-reading-03.md#metadata",
+      "kind": "section",
+      "title": "Autoformalizing Euclidean Geometry",
+      "primary_sources": [
+        "meeting-09-reading-03"
+      ],
+      "secondary_sources": [
+        "meeting-09-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-09",
+      "reason": "Primary reading is catalogued individually; the official deck remains a secondary explanation."
+    },
+    {
+      "id": "coverage-meeting-10-recording-full-session",
+      "source_object": "meeting-10-recording",
+      "source_unit": "meeting-10-recording-full-session",
+      "source_location": "https://www.youtube.com/watch?v=Gy5Nm17l9oo#t=0s",
+      "kind": "segment",
+      "title": "Full official recording: Advanced topics in theorem proving",
+      "primary_sources": [
+        "meeting-10-recording"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-10",
+      "reason": "Official recording metadata is pinned for the source baseline; no media body is mirrored."
+    },
+    {
+      "id": "coverage-meeting-10-slides-advanced-proving-frame",
+      "source_object": "meeting-10-slides",
+      "source_unit": "meeting-10-slides-advanced-proving-frame",
+      "source_location": "Lectures/meeting-10-slides.pages.txt#physical-pages=1-3",
+      "kind": "section",
+      "title": "Advanced theorem-proving expert frame",
+      "primary_sources": [
+        "meeting-10-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-10",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-10-slides-informal-and-formal-math",
+      "source_object": "meeting-10-slides",
+      "source_unit": "meeting-10-slides-informal-and-formal-math",
+      "source_location": "Lectures/meeting-10-slides.pages.txt#physical-pages=4-21",
+      "kind": "section",
+      "title": "Informal and formal mathematics",
+      "primary_sources": [
+        "meeting-10-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-10",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-10-slides-proving-gap-and-agenda",
+      "source_object": "meeting-10-slides",
+      "source_unit": "meeting-10-slides-proving-gap-and-agenda",
+      "source_location": "Lectures/meeting-10-slides.pages.txt#physical-pages=22-27",
+      "kind": "failure-mode",
+      "title": "Theorem-proving capability gap and agenda",
+      "primary_sources": [
+        "meeting-10-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-10",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-10-slides-meeting-10-methods-divider",
+      "source_object": "meeting-10-slides",
+      "source_unit": "meeting-10-slides-meeting-10-methods-divider",
+      "source_location": "Lectures/meeting-10-slides.pages.txt#physical-pages=28-28",
+      "kind": "administrative",
+      "title": "Methods divider",
+      "primary_sources": [
+        "meeting-10-slides"
+      ],
+      "disposition": "excluded",
+      "reason": "section divider",
+      "evidence": "The page is a navigation divider."
+    },
+    {
+      "id": "coverage-meeting-10-slides-lean-star",
+      "source_object": "meeting-10-slides",
+      "source_unit": "meeting-10-slides-lean-star",
+      "source_location": "Lectures/meeting-10-slides.pages.txt#physical-pages=29-52",
+      "kind": "mechanism",
+      "title": "Lean-STaR self-training",
+      "primary_sources": [
+        "meeting-10-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-10",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-10-slides-meeting-10-outline",
+      "source_object": "meeting-10-slides",
+      "source_unit": "meeting-10-slides-meeting-10-outline",
+      "source_location": "Lectures/meeting-10-slides.pages.txt#physical-pages=53-53",
+      "kind": "administrative",
+      "title": "Prover outline divider",
+      "primary_sources": [
+        "meeting-10-slides"
+      ],
+      "disposition": "excluded",
+      "reason": "lecture outline",
+      "evidence": "The page is a navigation divider."
+    },
+    {
+      "id": "coverage-meeting-10-slides-modular-prover-motivation",
+      "source_object": "meeting-10-slides",
+      "source_unit": "meeting-10-slides-modular-prover-motivation",
+      "source_location": "Lectures/meeting-10-slides.pages.txt#physical-pages=54-60",
+      "kind": "section",
+      "title": "Motivation for modular provers",
+      "primary_sources": [
+        "meeting-10-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-10",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-10-slides-draft-sketch-prove",
+      "source_object": "meeting-10-slides",
+      "source_unit": "meeting-10-slides-draft-sketch-prove",
+      "source_location": "Lectures/meeting-10-slides.pages.txt#physical-pages=61-69",
+      "kind": "mechanism",
+      "title": "Draft, Sketch, and Prove",
+      "primary_sources": [
+        "meeting-10-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-10",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-10-slides-leanhammer",
+      "source_object": "meeting-10-slides",
+      "source_unit": "meeting-10-slides-leanhammer",
+      "source_location": "Lectures/meeting-10-slides.pages.txt#physical-pages=70-89",
+      "kind": "mechanism",
+      "title": "LeanHammer premise selection and proof search",
+      "primary_sources": [
+        "meeting-10-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-10",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-10-slides-advanced-prover-recap",
+      "source_object": "meeting-10-slides",
+      "source_unit": "meeting-10-slides-advanced-prover-recap",
+      "source_location": "Lectures/meeting-10-slides.pages.txt#physical-pages=90-94",
+      "kind": "section",
+      "title": "Advanced prover recap",
+      "primary_sources": [
+        "meeting-10-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-10",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-10-slides-meeting-10-research-divider",
+      "source_object": "meeting-10-slides",
+      "source_unit": "meeting-10-slides-meeting-10-research-divider",
+      "source_location": "Lectures/meeting-10-slides.pages.txt#physical-pages=95-95",
+      "kind": "administrative",
+      "title": "Research-workflow divider",
+      "primary_sources": [
+        "meeting-10-slides"
+      ],
+      "disposition": "excluded",
+      "reason": "section divider",
+      "evidence": "The page is a navigation divider."
+    },
+    {
+      "id": "coverage-meeting-10-slides-proving-research-workflow",
+      "source_object": "meeting-10-slides",
+      "source_unit": "meeting-10-slides-proving-research-workflow",
+      "source_location": "Lectures/meeting-10-slides.pages.txt#physical-pages=96-105",
+      "kind": "mechanism",
+      "title": "Theorem-proving research workflow",
+      "primary_sources": [
+        "meeting-10-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-10",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-10-slides-minictx",
+      "source_object": "meeting-10-slides",
+      "source_unit": "meeting-10-slides-minictx",
+      "source_location": "Lectures/meeting-10-slides.pages.txt#physical-pages=106-115",
+      "kind": "experiment",
+      "title": "miniCTX contextual theorem proving",
+      "primary_sources": [
+        "meeting-10-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-10",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-10-slides-meeting-10-closing",
+      "source_object": "meeting-10-slides",
+      "source_unit": "meeting-10-slides-meeting-10-closing",
+      "source_location": "Lectures/meeting-10-slides.pages.txt#physical-pages=116-118",
+      "kind": "administrative",
+      "title": "Research recap and thanks",
+      "primary_sources": [
+        "meeting-10-slides"
+      ],
+      "disposition": "excluded",
+      "reason": "recap title and closing slides",
+      "evidence": "These pages contain section recap/thanks without an additional technical mechanism."
+    },
+    {
+      "id": "coverage-meeting-10-reading-01-catalogue-record",
+      "source_object": "meeting-10-reading-01",
+      "source_unit": "meeting-10-reading-01-catalogue-record",
+      "source_location": "Readings/meeting-10-reading-01.md#metadata",
+      "kind": "section",
+      "title": "Draft, Sketch, and Prove: Guiding Formal Theorem Provers with Informal Proofs",
+      "primary_sources": [
+        "meeting-10-reading-01"
+      ],
+      "secondary_sources": [
+        "meeting-10-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-10",
+      "reason": "Primary reading is catalogued individually; the official deck remains a secondary explanation."
+    },
+    {
+      "id": "coverage-meeting-10-reading-02-catalogue-record",
+      "source_object": "meeting-10-reading-02",
+      "source_unit": "meeting-10-reading-02-catalogue-record",
+      "source_location": "Readings/meeting-10-reading-02.md#metadata",
+      "kind": "section",
+      "title": "miniCTX: Neural Theorem Proving with (Long-)Contexts",
+      "primary_sources": [
+        "meeting-10-reading-02"
+      ],
+      "secondary_sources": [
+        "meeting-10-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-10",
+      "reason": "Primary reading is catalogued individually; the official deck remains a secondary explanation."
+    },
+    {
+      "id": "coverage-meeting-10-reading-03-catalogue-record",
+      "source_object": "meeting-10-reading-03",
+      "source_unit": "meeting-10-reading-03-catalogue-record",
+      "source_location": "Readings/meeting-10-reading-03.md#metadata",
+      "kind": "section",
+      "title": "Lean-STaR: Learning to Interleave Thinking and Proving",
+      "primary_sources": [
+        "meeting-10-reading-03"
+      ],
+      "secondary_sources": [
+        "meeting-10-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-10",
+      "reason": "Primary reading is catalogued individually; the official deck remains a secondary explanation."
+    },
+    {
+      "id": "coverage-meeting-10-reading-04-catalogue-record",
+      "source_object": "meeting-10-reading-04",
+      "source_unit": "meeting-10-reading-04-catalogue-record",
+      "source_location": "Readings/meeting-10-reading-04.md#metadata",
+      "kind": "section",
+      "title": "ImProver: Agent-Based Automated Proof Optimization",
+      "primary_sources": [
+        "meeting-10-reading-04"
+      ],
+      "secondary_sources": [
+        "meeting-10-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-10",
+      "reason": "Primary reading is catalogued individually; the official deck remains a secondary explanation."
+    },
+    {
+      "id": "coverage-meeting-11-recording-full-session",
+      "source_object": "meeting-11-recording",
+      "source_unit": "meeting-11-recording-full-session",
+      "source_location": "https://www.youtube.com/watch?v=IHc0TEMrEdY#t=0s",
+      "kind": "segment",
+      "title": "Full official recording: Abstraction and Discovery with Large Language Model Agents",
+      "primary_sources": [
+        "meeting-11-recording"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-11",
+      "reason": "Official recording metadata is pinned for the source baseline; no media body is mirrored."
+    },
+    {
+      "id": "coverage-meeting-11-slides-abstraction-discovery-frame",
+      "source_object": "meeting-11-slides",
+      "source_unit": "meeting-11-slides-abstraction-discovery-frame",
+      "source_location": "Lectures/meeting-11-slides.pages.txt#physical-pages=1-5",
+      "kind": "section",
+      "title": "Abstraction and discovery frame",
+      "primary_sources": [
+        "meeting-11-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-11",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-11-slides-neural-and-formal-systems",
+      "source_object": "meeting-11-slides",
+      "source_unit": "meeting-11-slides-neural-and-formal-systems",
+      "source_location": "Lectures/meeting-11-slides.pages.txt#physical-pages=6-13",
+      "kind": "section",
+      "title": "Neural and formal reasoning systems",
+      "primary_sources": [
+        "meeting-11-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-11",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-11-slides-copra",
+      "source_object": "meeting-11-slides",
+      "source_unit": "meeting-11-slides-copra",
+      "source_location": "Lectures/meeting-11-slides.pages.txt#physical-pages=14-24",
+      "kind": "mechanism",
+      "title": "COPRA in-context theorem proving",
+      "primary_sources": [
+        "meeting-11-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-11",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-11-slides-compiler-verification",
+      "source_object": "meeting-11-slides",
+      "source_unit": "meeting-11-slides-compiler-verification",
+      "source_location": "Lectures/meeting-11-slides.pages.txt#physical-pages=25-39",
+      "kind": "worked-example",
+      "title": "Compiler verification with language models",
+      "primary_sources": [
+        "meeting-11-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-11",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-11-slides-formal-reasoning-summary",
+      "source_object": "meeting-11-slides",
+      "source_unit": "meeting-11-slides-formal-reasoning-summary",
+      "source_location": "Lectures/meeting-11-slides.pages.txt#physical-pages=40-44",
+      "kind": "section",
+      "title": "Formal-reasoning summary and open directions",
+      "primary_sources": [
+        "meeting-11-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-11",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-11-slides-meeting-11-divider",
+      "source_object": "meeting-11-slides",
+      "source_unit": "meeting-11-slides-meeting-11-divider",
+      "source_location": "Lectures/meeting-11-slides.pages.txt#physical-pages=45-45",
+      "kind": "administrative",
+      "title": "Discovery section divider",
+      "primary_sources": [
+        "meeting-11-slides"
+      ],
+      "disposition": "excluded",
+      "reason": "section divider",
+      "evidence": "The page is a navigation divider."
+    },
+    {
+      "id": "coverage-meeting-11-slides-scientific-process-symbolic-regression",
+      "source_object": "meeting-11-slides",
+      "source_unit": "meeting-11-slides-scientific-process-symbolic-regression",
+      "source_location": "Lectures/meeting-11-slides.pages.txt#physical-pages=46-55",
+      "kind": "section",
+      "title": "Scientific process and symbolic regression",
+      "primary_sources": [
+        "meeting-11-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-11",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-11-slides-swarat-chaudhuri-lasr-concept-library-sequence",
+      "source_object": "meeting-11-slides",
+      "source_unit": "meeting-11-slides-swarat-chaudhuri-lasr-concept-library-sequence",
+      "source_location": "Lectures/meeting-11-slides.pages.txt#physical-pages=56-73",
+      "kind": "visual-sequence",
+      "title": "LaSR concept-library discovery loop",
+      "primary_sources": [
+        "meeting-11-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-11",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-11-slides-lasr-examples-and-scaling",
+      "source_object": "meeting-11-slides",
+      "source_unit": "meeting-11-slides-lasr-examples-and-scaling",
+      "source_location": "Lectures/meeting-11-slides.pages.txt#physical-pages=74-81",
+      "kind": "experiment",
+      "title": "LaSR examples and scaling",
+      "primary_sources": [
+        "meeting-11-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-11",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-11-slides-visual-concept-discovery",
+      "source_object": "meeting-11-slides",
+      "source_unit": "meeting-11-slides-visual-concept-discovery",
+      "source_location": "Lectures/meeting-11-slides.pages.txt#physical-pages=82-88",
+      "kind": "experiment",
+      "title": "Learning visual concepts",
+      "primary_sources": [
+        "meeting-11-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-11",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-11-slides-abstraction-discovery-synthesis",
+      "source_object": "meeting-11-slides",
+      "source_unit": "meeting-11-slides-abstraction-discovery-synthesis",
+      "source_location": "Lectures/meeting-11-slides.pages.txt#physical-pages=89-92",
+      "kind": "section",
+      "title": "Abstraction and discovery synthesis",
+      "primary_sources": [
+        "meeting-11-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-11",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-11-slides-meeting-11-closing",
+      "source_object": "meeting-11-slides",
+      "source_unit": "meeting-11-slides-meeting-11-closing",
+      "source_location": "Lectures/meeting-11-slides.pages.txt#physical-pages=93-93",
+      "kind": "administrative",
+      "title": "Collaborators slide",
+      "primary_sources": [
+        "meeting-11-slides"
+      ],
+      "disposition": "excluded",
+      "reason": "credits slide only",
+      "evidence": "The page is preserved for attribution but adds no independent technical content."
+    },
+    {
+      "id": "coverage-meeting-11-reading-01-catalogue-record",
+      "source_object": "meeting-11-reading-01",
+      "source_unit": "meeting-11-reading-01-catalogue-record",
+      "source_location": "Readings/meeting-11-reading-01.md#metadata",
+      "kind": "section",
+      "title": "An In-Context Learning Agent for Formal Theorem-Proving",
+      "primary_sources": [
+        "meeting-11-reading-01"
+      ],
+      "secondary_sources": [
+        "meeting-11-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-11",
+      "reason": "Primary reading is catalogued individually; the official deck remains a secondary explanation."
+    },
+    {
+      "id": "coverage-meeting-11-reading-02-catalogue-record",
+      "source_object": "meeting-11-reading-02",
+      "source_unit": "meeting-11-reading-02-catalogue-record",
+      "source_location": "Readings/meeting-11-reading-02.md#metadata",
+      "kind": "section",
+      "title": "Symbolic Regression with a Learned Concept Library",
+      "primary_sources": [
+        "meeting-11-reading-02"
+      ],
+      "secondary_sources": [
+        "meeting-11-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-11",
+      "reason": "Primary reading is catalogued individually; the official deck remains a secondary explanation."
+    },
+    {
+      "id": "coverage-meeting-12-recording-full-session",
+      "source_object": "meeting-12-recording",
+      "source_unit": "meeting-12-recording-full-session",
+      "source_location": "https://www.youtube.com/watch?v=ti6yPE2VPZc#t=0s",
+      "kind": "segment",
+      "title": "Full official recording: Towards building safe and secure agentic AI",
+      "primary_sources": [
+        "meeting-12-recording"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-12",
+      "reason": "Official recording metadata is pinned for the source baseline; no media body is mirrored."
+    },
+    {
+      "id": "coverage-meeting-12-slides-agent-security-frame",
+      "source_object": "meeting-12-slides",
+      "source_unit": "meeting-12-slides-agent-security-frame",
+      "source_location": "Lectures/meeting-12-slides.pages.txt#physical-pages=1-9",
+      "kind": "section",
+      "title": "Agent-security frame",
+      "primary_sources": [
+        "meeting-12-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-12",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-12-slides-hybrid-agent-attack-surface",
+      "source_object": "meeting-12-slides",
+      "source_unit": "meeting-12-slides-hybrid-agent-attack-surface",
+      "source_location": "Lectures/meeting-12-slides.pages.txt#physical-pages=10-18",
+      "kind": "failure-mode",
+      "title": "Hybrid agent-system attack surface",
+      "primary_sources": [
+        "meeting-12-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-12",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-12-slides-meeting-12-outline-a",
+      "source_object": "meeting-12-slides",
+      "source_unit": "meeting-12-slides-meeting-12-outline-a",
+      "source_location": "Lectures/meeting-12-slides.pages.txt#physical-pages=19-19",
+      "kind": "administrative",
+      "title": "Threat-model outline divider",
+      "primary_sources": [
+        "meeting-12-slides"
+      ],
+      "disposition": "excluded",
+      "reason": "lecture outline",
+      "evidence": "The page is a navigation divider."
+    },
+    {
+      "id": "coverage-meeting-12-slides-dawn-song-agentic-threat-model-sequence",
+      "source_object": "meeting-12-slides",
+      "source_unit": "meeting-12-slides-dawn-song-agentic-threat-model-sequence",
+      "source_location": "Lectures/meeting-12-slides.pages.txt#physical-pages=20-29",
+      "kind": "visual-sequence",
+      "title": "Agentic threat model",
+      "primary_sources": [
+        "meeting-12-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-12",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-12-slides-agent-sql-rce-cases",
+      "source_object": "meeting-12-slides",
+      "source_unit": "meeting-12-slides-agent-sql-rce-cases",
+      "source_location": "Lectures/meeting-12-slides.pages.txt#physical-pages=30-38",
+      "kind": "worked-example",
+      "title": "SQL injection and remote-code-execution cases",
+      "primary_sources": [
+        "meeting-12-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-12",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-12-slides-prompt-injection-agentpoison",
+      "source_object": "meeting-12-slides",
+      "source_unit": "meeting-12-slides-prompt-injection-agentpoison",
+      "source_location": "Lectures/meeting-12-slides.pages.txt#physical-pages=39-50",
+      "kind": "failure-mode",
+      "title": "Prompt injection and AgentPoison",
+      "primary_sources": [
+        "meeting-12-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-12",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-12-slides-meeting-12-outline-b",
+      "source_object": "meeting-12-slides",
+      "source_unit": "meeting-12-slides-meeting-12-outline-b",
+      "source_location": "Lectures/meeting-12-slides.pages.txt#physical-pages=51-51",
+      "kind": "administrative",
+      "title": "Evaluation outline divider",
+      "primary_sources": [
+        "meeting-12-slides"
+      ],
+      "disposition": "excluded",
+      "reason": "lecture outline",
+      "evidence": "The page is a navigation divider."
+    },
+    {
+      "id": "coverage-meeting-12-slides-agent-safety-evaluation",
+      "source_object": "meeting-12-slides",
+      "source_unit": "meeting-12-slides-agent-safety-evaluation",
+      "source_location": "Lectures/meeting-12-slides.pages.txt#physical-pages=52-62",
+      "kind": "experiment",
+      "title": "Agent-safety evaluation and red teaming",
+      "primary_sources": [
+        "meeting-12-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-12",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-12-slides-meeting-12-outline-c",
+      "source_object": "meeting-12-slides",
+      "source_unit": "meeting-12-slides-meeting-12-outline-c",
+      "source_location": "Lectures/meeting-12-slides.pages.txt#physical-pages=63-63",
+      "kind": "administrative",
+      "title": "Defense outline divider",
+      "primary_sources": [
+        "meeting-12-slides"
+      ],
+      "disposition": "excluded",
+      "reason": "lecture outline",
+      "evidence": "The page is a navigation divider."
+    },
+    {
+      "id": "coverage-meeting-12-slides-agent-defense-mechanisms",
+      "source_object": "meeting-12-slides",
+      "source_unit": "meeting-12-slides-agent-defense-mechanisms",
+      "source_location": "Lectures/meeting-12-slides.pages.txt#physical-pages=64-75",
+      "kind": "mechanism",
+      "title": "Agent-defense mechanisms",
+      "primary_sources": [
+        "meeting-12-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-12",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-12-slides-dawn-song-privilege-control-sequence",
+      "source_object": "meeting-12-slides",
+      "source_unit": "meeting-12-slides-dawn-song-privilege-control-sequence",
+      "source_location": "Lectures/meeting-12-slides.pages.txt#physical-pages=76-90",
+      "kind": "visual-sequence",
+      "title": "Privilege control for agentic systems",
+      "primary_sources": [
+        "meeting-12-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-12",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-12-slides-agent-monitoring-and-verification",
+      "source_object": "meeting-12-slides",
+      "source_unit": "meeting-12-slides-agent-monitoring-and-verification",
+      "source_location": "Lectures/meeting-12-slides.pages.txt#physical-pages=91-97",
+      "kind": "mechanism",
+      "title": "Monitoring, DataSentinel, and formal verification",
+      "primary_sources": [
+        "meeting-12-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-12",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-12-slides-agent-safety-conclusion",
+      "source_object": "meeting-12-slides",
+      "source_unit": "meeting-12-slides-agent-safety-conclusion",
+      "source_location": "Lectures/meeting-12-slides.pages.txt#physical-pages=98-98",
+      "kind": "section",
+      "title": "Agent-safety conclusion",
+      "primary_sources": [
+        "meeting-12-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-12",
+      "reason": "Reviewed semantic unit is preserved at exact physical-page scope; editorial integration is pending."
+    },
+    {
+      "id": "coverage-meeting-12-slides-meeting-12-closing",
+      "source_object": "meeting-12-slides",
+      "source_unit": "meeting-12-slides-meeting-12-closing",
+      "source_location": "Lectures/meeting-12-slides.pages.txt#physical-pages=99-99",
+      "kind": "administrative",
+      "title": "Promotional closing slide",
+      "primary_sources": [
+        "meeting-12-slides"
+      ],
+      "disposition": "excluded",
+      "reason": "promotional closing slide",
+      "evidence": "The page advertises an external event and adds no course technical content."
+    },
+    {
+      "id": "coverage-meeting-12-reading-01-catalogue-record",
+      "source_object": "meeting-12-reading-01",
+      "source_unit": "meeting-12-reading-01-catalogue-record",
+      "source_location": "Readings/meeting-12-reading-01.md#metadata",
+      "kind": "section",
+      "title": "Privtrans: Automatically Partitioning Programs for Privilege Separation",
+      "primary_sources": [
+        "meeting-12-reading-01"
+      ],
+      "secondary_sources": [
+        "meeting-12-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-12",
+      "reason": "Primary reading is catalogued individually; the official deck remains a secondary explanation."
+    },
+    {
+      "id": "coverage-meeting-12-reading-02-catalogue-record",
+      "source_object": "meeting-12-reading-02",
+      "source_unit": "meeting-12-reading-02-catalogue-record",
+      "source_location": "Readings/meeting-12-reading-02.md#metadata",
+      "kind": "section",
+      "title": "DataSentinel: A Game-Theoretic Detection of Prompt Injection Attacks",
+      "primary_sources": [
+        "meeting-12-reading-02"
+      ],
+      "secondary_sources": [
+        "meeting-12-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-12",
+      "reason": "Primary reading is catalogued individually; the official deck remains a secondary explanation."
+    },
+    {
+      "id": "coverage-meeting-12-reading-03-catalogue-record",
+      "source_object": "meeting-12-reading-03",
+      "source_unit": "meeting-12-reading-03-catalogue-record",
+      "source_location": "Readings/meeting-12-reading-03.md#metadata",
+      "kind": "section",
+      "title": "AgentPoison: Red-teaming LLM Agents via Poisoning Memory or Knowledge Bases",
+      "primary_sources": [
+        "meeting-12-reading-03"
+      ],
+      "secondary_sources": [
+        "meeting-12-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-12",
+      "reason": "Primary reading is catalogued individually; the official deck remains a secondary explanation."
+    },
+    {
+      "id": "coverage-meeting-12-reading-04-catalogue-record",
+      "source_object": "meeting-12-reading-04",
+      "source_unit": "meeting-12-reading-04-catalogue-record",
+      "source_location": "Readings/meeting-12-reading-04.md#metadata",
+      "kind": "section",
+      "title": "Progent: Programmable Privilege Control for LLM Agents",
+      "primary_sources": [
+        "meeting-12-reading-04"
+      ],
+      "secondary_sources": [
+        "meeting-12-slides"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "destination_anchor": "meeting-12",
+      "reason": "Primary reading is catalogued individually; the official deck remains a secondary explanation."
+    },
+    {
+      "id": "coverage-practice-precioux-discovery-link",
+      "source_object": "practice-precioux-discovery",
+      "source_unit": "practice-precioux-discovery-link",
+      "source_location": "https://github.com/Precioux/Advanced-Large-Language-Model-Agents/tree/16f7b26346ec4b8978199e6d35bcee96b128bd0a#discovery-only",
+      "kind": "section",
+      "title": "Third-party practice discovery lead",
+      "primary_sources": [
+        "practice-precioux-discovery"
+      ],
+      "disposition": "excluded",
+      "reason": "discovery lead only",
+      "evidence": "A student-maintained third-party mirror cannot substantiate an official lab contract."
+    }
+  ]
+}

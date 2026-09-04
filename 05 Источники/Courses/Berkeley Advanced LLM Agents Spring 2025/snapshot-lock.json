@@ -1,0 +1,394 @@
+{
+  "schema_version": 1,
+  "course": "Berkeley Advanced LLM Agents",
+  "offering": "Spring 2025",
+  "retrieved_at": "2026-09-04",
+  "integration_base_commit": "fad4d91373fcd94c18906bfaf209125188eb20cf",
+  "upstream": {
+    "syllabus_url": "https://rdi.berkeley.edu/adv-llm-agents/sp25",
+    "syllabus_sha256": "08f5db3d153d5229fc846fc1043450804bf67785ae1c85019878b2e04ab46c91",
+    "official_pdf_count": 13,
+    "official_pdf_pages": 1254
+  },
+  "generated_audit": {
+    "semantic_review_sha256": "e0177f68e0975df7ed69c36913316e3fdde28cdaf9c95b8c68d242156b2b7615",
+    "importer_sha256": "fa4d4cd56c292fa25db1f0bcfc2f07b60d7007ed08392ca2cea94e39a2cf6459",
+    "extractor_revision": "berkeley-advanced-llm-agents-semantic-audit-v1",
+    "page_index_tool": "pdftotext -layout (Poppler 26.04.0)",
+    "ledgers": {
+      "source-manifest.yml": {
+        "sha256": "23814288480bb94bb5b84547af20b89e2608a85a82f3cbf3365cadf8688fb9da",
+        "records": 64
+      },
+      "source-units.yml": {
+        "sha256": "fa2620d19e8034c7a3754e48319441605f86d231be50f42fd3fba34bfe5ed3de",
+        "records": 212
+      },
+      "coverage.yml": {
+        "sha256": "3c947e8422c1631f4f415b0f3f56e3dfa510fa28ab38279702ad110a42fa5b34",
+        "records": 212
+      },
+      "visuals.yml": {
+        "sha256": "cc3602701f19e64f66f327825894e8d2a2585475883401a19b366af3220ce3da",
+        "records": 161
+      }
+    }
+  },
+  "source_files": [
+    {
+      "path": "Metadata/syllabus.html",
+      "bytes": 19966,
+      "sha256": "08f5db3d153d5229fc846fc1043450804bf67785ae1c85019878b2e04ab46c91"
+    },
+    {
+      "path": "semantic-review.json",
+      "bytes": 34804,
+      "sha256": "e0177f68e0975df7ed69c36913316e3fdde28cdaf9c95b8c68d242156b2b7615"
+    },
+    {
+      "path": "publishing/tools/import_berkeley_agents.py",
+      "bytes": 80583,
+      "sha256": "fa4d4cd56c292fa25db1f0bcfc2f07b60d7007ed08392ca2cea94e39a2cf6459"
+    },
+    {
+      "path": "Lectures/meeting-01-intro.pdf",
+      "bytes": 1730219,
+      "sha256": "23e4671905c456b879bd92b6ca98fcd5b836f9d875aa3b0c6813f5e909a85f47"
+    },
+    {
+      "path": "Lectures/meeting-01-intro.pages.txt",
+      "bytes": 5738,
+      "sha256": "11b9feb609baf9e9c6c45efbd6d771f03a8e70780916a44fc01f5fbf2f0efa6b"
+    },
+    {
+      "path": "Lectures/meeting-01-slides.pdf",
+      "bytes": 12364433,
+      "sha256": "7c17e9d9baf8a3759a016872c17b1f5cce2e4d7691698b2799f6e7a2bd7ff576"
+    },
+    {
+      "path": "Lectures/meeting-01-slides.pages.txt",
+      "bytes": 40640,
+      "sha256": "7abd6186ace49da982b9dfcf924b984cba7e631fb07295bdf1f53f383b58fb61"
+    },
+    {
+      "path": "Lectures/meeting-02-slides.pdf",
+      "bytes": 20453927,
+      "sha256": "84b5901763f7fc08d5622c824784d3ca8d304ceaf613a8d4b2ef8529b0ee0be3"
+    },
+    {
+      "path": "Lectures/meeting-02-slides.pages.txt",
+      "bytes": 31741,
+      "sha256": "0acd91f91173d98d1ad292a42e3c8f647f6d128ff184422908db00cc38f8156e"
+    },
+    {
+      "path": "Lectures/meeting-03-slides.pdf",
+      "bytes": 10016389,
+      "sha256": "748182d9be6e05589bf0664b4e8c08f55671c8d70e1a64ab031ebcf02fc3fd07"
+    },
+    {
+      "path": "Lectures/meeting-03-slides.pages.txt",
+      "bytes": 45424,
+      "sha256": "0dc926bd444785060128c7badfb825d4e4e00dba5a0f53ace73d1ec8000e2fbb"
+    },
+    {
+      "path": "Lectures/meeting-04-slides.pdf",
+      "bytes": 22415095,
+      "sha256": "6a4df80ff062cc6014b3c86d2d08d4256e059b5a9bf12a4926eda89327d37bf7"
+    },
+    {
+      "path": "Lectures/meeting-04-slides.pages.txt",
+      "bytes": 51913,
+      "sha256": "f09fb05b622017982ac53224c7cf278f3133591a10d4dfd2b4886f6892baee23"
+    },
+    {
+      "path": "Lectures/meeting-05-slides.pdf",
+      "bytes": 3503777,
+      "sha256": "c242e0298f5c46adf38af284637209a0986db7fca2b63c626dd29218b5dd809e"
+    },
+    {
+      "path": "Lectures/meeting-05-slides.pages.txt",
+      "bytes": 25642,
+      "sha256": "455a6a7810993b56d11b4fd8e81b724bd4e84c6fcaac83f26a836626b4a45121"
+    },
+    {
+      "path": "Lectures/meeting-06-slides.pdf",
+      "bytes": 11619905,
+      "sha256": "62ee4ac4383854062ef2e04242337ccbc34d52aef87f16c3b88b1c797a7220a0"
+    },
+    {
+      "path": "Lectures/meeting-06-slides.pages.txt",
+      "bytes": 74656,
+      "sha256": "f33fbfecc2142daebde14c4cc663b66015eb351670704a6fa1b1e1aaa5cfa910"
+    },
+    {
+      "path": "Lectures/meeting-07-slides.pdf",
+      "bytes": 21268799,
+      "sha256": "3f12ea7b44c64d43d3c3804596700feacda59a26290ba188935fdd5cdde3847d"
+    },
+    {
+      "path": "Lectures/meeting-07-slides.pages.txt",
+      "bytes": 33663,
+      "sha256": "fe5bc639c931a3b4b3705715d1e50509956687bd9f46da88ac68b0f3df00024a"
+    },
+    {
+      "path": "Lectures/meeting-08-slides.pdf",
+      "bytes": 10975911,
+      "sha256": "94bd68c2fdb534d57459a8b96f2a80ada96fd14a58b36626016d4a9f601866ab"
+    },
+    {
+      "path": "Lectures/meeting-08-slides.pages.txt",
+      "bytes": 29157,
+      "sha256": "328246290e4af46a7dcaf0327c1ceea3593c8d09da16c803e49ebc21bef822eb"
+    },
+    {
+      "path": "Lectures/meeting-09-slides.pdf",
+      "bytes": 3112537,
+      "sha256": "2117a841c12dfc6850290f85c87dd9d15cc8d0327d3740fffa5d3277dfb01001"
+    },
+    {
+      "path": "Lectures/meeting-09-slides.pages.txt",
+      "bytes": 137941,
+      "sha256": "09d194834ea69fe78690c12b19dd50ef33736301252203291e7caaec22865e82"
+    },
+    {
+      "path": "Lectures/meeting-10-slides.pdf",
+      "bytes": 18176794,
+      "sha256": "1c91d93b766b12ae1ddaaf3dc5575e8b8011b06505f3f7a9404ec13520fec78d"
+    },
+    {
+      "path": "Lectures/meeting-10-slides.pages.txt",
+      "bytes": 36226,
+      "sha256": "2596d801bb6d417995fa02f1d36a462db918a7c76c1952cf5def91d832369886"
+    },
+    {
+      "path": "Lectures/meeting-11-slides.pdf",
+      "bytes": 3920144,
+      "sha256": "ff4ecc5cacafe5d9fd3253ca28c968e8034466770c1e9d67481a7d51a7f70cc4"
+    },
+    {
+      "path": "Lectures/meeting-11-slides.pages.txt",
+      "bytes": 46361,
+      "sha256": "ec8cdf11e2b803d4d5c6aa3c3603334fb145b50c2eda27633bb790b32b8b399b"
+    },
+    {
+      "path": "Lectures/meeting-12-slides.pdf",
+      "bytes": 6920712,
+      "sha256": "395a0add9ee6328bc4206a042b90dbc70063fc6a8aa0420ad4483ffe0d2cab6b"
+    },
+    {
+      "path": "Lectures/meeting-12-slides.pages.txt",
+      "bytes": 45460,
+      "sha256": "cd08aa74fc36997a511e51493fe477419f56454d804ca1954bb376f7cbb254df"
+    },
+    {
+      "path": "Readings/meeting-01-reading-01.md",
+      "bytes": 614,
+      "sha256": "173fe637a3567e54ee6f7bf15c4c9a807df95e42b01c76034f5a712e2ddfc46c"
+    },
+    {
+      "path": "Readings/meeting-01-reading-02.md",
+      "bytes": 647,
+      "sha256": "7089ae1b418577c0fe3e9a7b63600d2fdf75889e1d00cf1705d0103d82027e52"
+    },
+    {
+      "path": "Readings/meeting-01-reading-03.md",
+      "bytes": 592,
+      "sha256": "50b259178b610fc1a26d4aa7e78668fe525ae0f670abee833ea41e0859a5438f"
+    },
+    {
+      "path": "Readings/meeting-02-reading-01.md",
+      "bytes": 653,
+      "sha256": "5bb104490049d9a7141a0ba4aeb4c33dbc494e606f7689115d2306cf8c2f56ef"
+    },
+    {
+      "path": "Readings/meeting-02-reading-02.md",
+      "bytes": 611,
+      "sha256": "f2cd27b517c4ce2991ea2ec1a881954adf33e98be98f372cead7a36e76c33def"
+    },
+    {
+      "path": "Readings/meeting-02-reading-03.md",
+      "bytes": 649,
+      "sha256": "589ba83d9e160ec3afae6e96d24f7e4499a73e2194ac6fbff6c397c51cbfbfcc"
+    },
+    {
+      "path": "Readings/meeting-03-reading-01.md",
+      "bytes": 636,
+      "sha256": "62444ecd2acb0925f37b5b5cf204de1fb3e71ebb65d5d2256f2c26df8c177281"
+    },
+    {
+      "path": "Readings/meeting-03-reading-02.md",
+      "bytes": 653,
+      "sha256": "661b18fd0313a676944f90a6560d42f1f95a7f7650bab98848d82e9cecac984f"
+    },
+    {
+      "path": "Readings/meeting-03-reading-03.md",
+      "bytes": 724,
+      "sha256": "5890a9e834b258c0f6e09eac85ef8068bf194a926f69321d4966ec32fccbcd88"
+    },
+    {
+      "path": "Readings/meeting-04-reading-01.md",
+      "bytes": 918,
+      "sha256": "f8314c8cb87546d19e8d3525535bb9a38ab2b57339a5f9cc14c88c272a6b16f6"
+    },
+    {
+      "path": "Readings/meeting-04-reading-02.md",
+      "bytes": 726,
+      "sha256": "4d8997f97a8cad4339dacd3f105b60f30e1f8655ba690deaecb048ca44e836f7"
+    },
+    {
+      "path": "Readings/meeting-04-reading-03.md",
+      "bytes": 917,
+      "sha256": "1a02e1158a124e59bf1ac1e93fee60e4a144b9f0a7633deaca528423f218645d"
+    },
+    {
+      "path": "Readings/meeting-05-reading-01.md",
+      "bytes": 853,
+      "sha256": "01cac231765cbcb71d02e8edffbb49699a4dd5a14c834a68d53e2b632f490f16"
+    },
+    {
+      "path": "Readings/meeting-05-reading-02.md",
+      "bytes": 698,
+      "sha256": "49e9f246ec87f5a4eaa60eb069fbb3b2c3b748f99f1f5a1aa2172ba51b96063b"
+    },
+    {
+      "path": "Readings/meeting-06-reading-01.md",
+      "bytes": 617,
+      "sha256": "1874a07a1da842a5801d5aa42ebee94cbd69761cb5ee7aff329a8de2babca152"
+    },
+    {
+      "path": "Readings/meeting-06-reading-02.md",
+      "bytes": 700,
+      "sha256": "22de06612c722addbc44753c98f52786f89167ddd4580d24e5ad41865f7f08e5"
+    },
+    {
+      "path": "Readings/meeting-06-reading-03.md",
+      "bytes": 665,
+      "sha256": "87f11d363130c3628550bf29e99c5eed6f525c78f2ee3e93e60662c85fbc34c8"
+    },
+    {
+      "path": "Readings/meeting-06-reading-04.md",
+      "bytes": 596,
+      "sha256": "fcde7c3f63a72666e625c623015ae4998300c3dc1bd14e21216231db73b9056a"
+    },
+    {
+      "path": "Readings/meeting-07-reading-01.md",
+      "bytes": 811,
+      "sha256": "d542f961ea5bd0d47f3d0854d2e648763e6cec60040d3113f7cf8d340069e271"
+    },
+    {
+      "path": "Readings/meeting-07-reading-02.md",
+      "bytes": 667,
+      "sha256": "78e513a3a98b7962fd820201c89c1d00abba5078be9b89d2b97471a3da6502cc"
+    },
+    {
+      "path": "Readings/meeting-08-reading-01.md",
+      "bytes": 728,
+      "sha256": "c2323c1486540059f763b65eaafd1846456447b1c9931a2eece9a15eb19dfc88"
+    },
+    {
+      "path": "Readings/meeting-08-reading-02.md",
+      "bytes": 807,
+      "sha256": "3bf486f7ff9929d4508dde02f9a834e8bbeaa0c67f844d6825620085e2390b5e"
+    },
+    {
+      "path": "Readings/meeting-08-reading-03.md",
+      "bytes": 583,
+      "sha256": "c9dff1e37307e9d3d17e468ac55ffae00617861598b32c14169bd2a3e58c73dd"
+    },
+    {
+      "path": "Readings/meeting-08-reading-04.md",
+      "bytes": 670,
+      "sha256": "963f7485bd8488bf2c75db60f572c076f2426397ce10522b0acd13cb4cdda1c7"
+    },
+    {
+      "path": "Readings/meeting-09-reading-01.md",
+      "bytes": 694,
+      "sha256": "07a66f2a1f50d2dcfbd34dc9c229d56e40c321c2a2a099e781d1e4e50ad5b317"
+    },
+    {
+      "path": "Readings/meeting-09-reading-02.md",
+      "bytes": 652,
+      "sha256": "738942aacdada5a602dfe4432f0814942d3e777d7d341c7fc738dcdc37443e93"
+    },
+    {
+      "path": "Readings/meeting-09-reading-03.md",
+      "bytes": 617,
+      "sha256": "dc1869571fa38c3232907f0333e4def14275877f7e6c5e20ef6492267e71d2bd"
+    },
+    {
+      "path": "Readings/meeting-10-reading-01.md",
+      "bytes": 692,
+      "sha256": "d9c7f569bb12df4886fe4e97fc0d2c067842d5139c8307256018dd9c5cb6c94b"
+    },
+    {
+      "path": "Readings/meeting-10-reading-02.md",
+      "bytes": 575,
+      "sha256": "9cd0da7154843a52f235ddec65415bece43275393622dac8425e0632176f40ff"
+    },
+    {
+      "path": "Readings/meeting-10-reading-03.md",
+      "bytes": 588,
+      "sha256": "ebffb60a66c3d930a920db64f882919b503421ad71ac652dd6b13c4aaaecf2cf"
+    },
+    {
+      "path": "Readings/meeting-10-reading-04.md",
+      "bytes": 589,
+      "sha256": "b612ffcb290e4d585d9e7e0a3404f718d9b75791ed567711f4d62896d1ceed42"
+    },
+    {
+      "path": "Readings/meeting-11-reading-01.md",
+      "bytes": 638,
+      "sha256": "c79f3d51c2b73c29f28ed50c015a33314f690e9b4ed890d10e6da10a3ea84c59"
+    },
+    {
+      "path": "Readings/meeting-11-reading-02.md",
+      "bytes": 640,
+      "sha256": "99fe3b479e6809122a6640931c975687dd1f64511490d123bef61e41e359f5ab"
+    },
+    {
+      "path": "Readings/meeting-12-reading-01.md",
+      "bytes": 595,
+      "sha256": "dd157d7b01b5c9de4a96bfb0e17cdf4dead6d54467f57af831aabcbb2c6de2e3"
+    },
+    {
+      "path": "Readings/meeting-12-reading-02.md",
+      "bytes": 625,
+      "sha256": "d8deb8c50393bdd6ae3f5677460f5a5b9d4afd8dd92e71e997649de38787a68f"
+    },
+    {
+      "path": "Readings/meeting-12-reading-03.md",
+      "bytes": 624,
+      "sha256": "b53760ce6b79c74a6153bab4e3dae750021d6943a791d89010df7860f96af4f0"
+    },
+    {
+      "path": "Readings/meeting-12-reading-04.md",
+      "bytes": 630,
+      "sha256": "a83c1a8a055536fd5c87ba385e983bd329b4efa71fbdfda8f17bc64573625850"
+    }
+  ],
+  "invariants": {
+    "meeting_bundles": 12,
+    "official_pdfs": 13,
+    "physical_pdf_pages": 1254,
+    "recordings": 12,
+    "individual_readings": 37,
+    "reading_distribution": [
+      3,
+      3,
+      3,
+      3,
+      2,
+      4,
+      2,
+      4,
+      3,
+      4,
+      2,
+      4
+    ],
+    "baseline_dispositions": [
+      "source-only",
+      "excluded"
+    ]
+  }
+}

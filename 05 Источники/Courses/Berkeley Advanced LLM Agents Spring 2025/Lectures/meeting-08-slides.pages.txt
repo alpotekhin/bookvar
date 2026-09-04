@@ -1,0 +1,1483 @@
+=== PHYSICAL PAGE 1 OF 112 ===
+          AlphaProof
+When RL meets Formal Maths
+                  Thomas HUBERT, March 2025
+
+=== PHYSICAL PAGE 2 OF 112 ===
+Mathematics
+ AlphaProof
+
+=== PHYSICAL PAGE 3 OF 112 ===
+We have used maths to
+both describe, predict
+and shape the natural
+world
+
+
+
+                         3
+
+=== PHYSICAL PAGE 4 OF 112 ===
+Mathematics, a root node to intelligence?
+
+
+          Reasoning &              Generalisation &
+           Planning
+                                      Abstraction
+
+         Knowledge &                 Open ended &
+           Creativity            Unbounded complexity
+
+
+              Even requires an eye for beauty...
+
+
+                                                        4
+
+=== PHYSICAL PAGE 5 OF 112 ===
+A Brief History of Formalisation in Mathematics
+
+
+ Proofs & Axiomatisation
+ Importance of proofs discovered by the
+ ancient Greeks
+
+ Since then, what constitutes a
+ mathematical proof has evolved.
+
+
+
+
+                                                  5
+
+=== PHYSICAL PAGE 6 OF 112 ===
+A Brief History of Formalisation in Mathematics
+
+
+ Proofs & Axiomatisation                  From words to symbols
+ Importance of proofs discovered by the   A square and ten times its root are equal to thirty-nine.
+ ancient Greeks
+                                          Take the coefficient of the root, divide it into two parts,
+ Since then, what constitutes a           and multiply one of them by itself.
+ mathematical proof has evolved.          Add this to thirty-nine
+                                          Take the square root of sixty-four which is eight
+                                          Subtract from this one of the halves of the coefficient of
+                                          the root.
+                                          The result is the value of the root which is three.
+
+
+
+
+                                                                                                        6
+
+=== PHYSICAL PAGE 7 OF 112 ===
+A Brief History of Formalisation in Mathematics
+
+
+ Proofs & Axiomatisation                  From words to symbols
+ Importance of proofs discovered by the   A square and ten times its root are equal to thirty-nine.
+ ancient Greeks
+                                          Take the coefficient of the root, divide it into two parts,
+ Since then, what constitutes a           and multiply one of them by itself.
+ mathematical proof has evolved.          Add this to thirty-nine
+                                          Take the square root of sixty-four which is eight
+                                          Subtract from this one of the halves of the coefficient of
+                                          the root.
+                                          The result is the value of the root which is three.
+
+
+
+
+                                                                                                        7
+
+=== PHYSICAL PAGE 8 OF 112 ===
+A Brief History of Formalisation in Mathematics
+
+
+
+ 1.   Rigor and clarity
+ 2.   Efficiency and Communication
+ 3.   Abstraction and Generalisation
+ 4.   Unification
+ 5.   Created new fields
+
+
+
+
+                                                  8
+
+=== PHYSICAL PAGE 9 OF 112 ===
+Computer Formalisation
+   of Mathematics
+
+ Mathematics in code
+
+
+
+
+                         9
+
+=== PHYSICAL PAGE 10 OF 112 ===
+Lean
+
+Lean is a programming language,
+theorem prover, and interactive proof
+assistant.
+
+It has a vibrant open source community
+of mathematicians.
+
+Lean has been used to formalize fields
+medal mathematics.
+A huge quest the community is on it to
+build the math library of the future.
+
+
+                                         10
+
+=== PHYSICAL PAGE 11 OF 112 ===
+                                                                     Analysis
+
+Mathlib
+                                            Category Theory
+
+
+Built open source on own free time
+of mathematicians!
+                                     Combinatorics
+                                                                                               Algebra
+
+It aims to be General & Unified.
+
+Covers ~ 80% undergrad curriculum
+
+Most of the library is above    Group Theory
+
+undergraduate but has irregular       Field Theory
+coverage with big holes.                                                                      Topology
+
+                                              Linear Algebra
+
+
+                                               Measure Theory
+                                                                                Ring Theory
+                                                     Number Theory
+                                                                                                11
+
+=== PHYSICAL PAGE 12 OF 112 ===
+Computer Formalisation unlocks enormous synergies
+
+Perfect Verification + Software Stack
+
+Instant Wins
+ -   Correctness concerns disappear
+ -   Giant Proofs can be trusted
+ -   Proof checking can be delegated entirely to the
+     computer
+
+Game Changer
+ -   Transforms mathematics into a video game 🎉!
+ -   For Education
+ -   All the tools of Software Engineering for Maths
+ -   Unlocks Massive Collaboration
+                                                       12
+
+=== PHYSICAL PAGE 13 OF 112 ===
+Challenges for Computer Formalisation
+
+Only 0.1%-1% of mathematicians have adopted Lean.
+
+Not yet a good tool for mainstream research
+ - Steep Learning Curve
+ - Significant Time Investment
+ - Tooling and Library maturity (though rapidly growing)
+ - Perceived lack of necessity for research.
+
+
+
+
+                                                           13
+
+=== PHYSICAL PAGE 14 OF 112 ===
+Demo - Infinitude of Primes
+
+
+
+
+                              14
+
+=== PHYSICAL PAGE 15 OF 112 ===
+Demo - Infinitude of Primes
+
+
+
+ Theorem Statement
+
+
+
+
+                              15
+
+=== PHYSICAL PAGE 16 OF 112 ===
+Demo - Infinitude of Primes
+
+
+
+
+                              Proof
+
+
+
+
+                                      16
+
+=== PHYSICAL PAGE 17 OF 112 ===
+Demo - Infinitude of Primes
+
+
+ Language-based, high-level syntax, mirroring normal mathematics
+
+
+
+
+                                                                   17
+
+=== PHYSICAL PAGE 18 OF 112 ===
+Demo - Infinitude of Primes
+
+
+
+
+                              18
+
+=== PHYSICAL PAGE 19 OF 112 ===
+Demo - Infinitude of Primes
+
+
+
+
+                              19
+
+=== PHYSICAL PAGE 20 OF 112 ===
+Demo - Infinitude of Primes
+
+
+
+
+                              20
+
+=== PHYSICAL PAGE 21 OF 112 ===
+Demo - Infinitude of Primes
+
+
+
+                              ��
+
+
+
+
+                                   21
+
+=== PHYSICAL PAGE 22 OF 112 ===
+Computer Formalisation
+
+Huge enthusiasm from a vibrant community
+
+Building the library of the future
+
+Unlocks enormous synergies
+
+Still has some way to go
+
+
+
+Belief this will inevitably play an integral role in the future of
+Mathematics
+                                                                     22
+
+=== PHYSICAL PAGE 23 OF 112 ===
+                  Action
+
+
+
+
+Reinforcement
+   Learning
+                Reward and
+                Observation
+
+
+
+
+                              23
+
+=== PHYSICAL PAGE 24 OF 112 ===
+What's RL
+
+RL is trial and error learning.
+
+
+An agent learns by interacting with an
+environment to maximize reward.
+
+
+
+
+                                         24
+
+=== PHYSICAL PAGE 25 OF 112 ===
+SuperScale RL: A Proven Recipe to Superintelligence
+
+
+
+
+  Atari DQN   AlphaGo    AlphaGoZero   AlphaZero     AlphaStar
+
+
+
+
+                                                                 25
+  MuZero      Stratego   AlphaDev      AlphaTensor   Fusion
+
+=== PHYSICAL PAGE 26 OF 112 ===
+The Zero Series
+
+
+
+
+  AlphaGo   AlphaGoZero   AlphaZero   MuZero   AlphaTensor
+
+
+
+
+                                                             26
+
+=== PHYSICAL PAGE 27 OF 112 ===
+The Zero Philosophy
+
+If an agent can learn to master an environment tabula rasa,
+then you demonstrably have a system that is discovering and
+learning new knowledge by itself.
+
+It also means that this algorithm is general and should apply
+to other domains.
+
+
+This is particularly important to advance science.
+
+
+
+
+                                                                27
+
+=== PHYSICAL PAGE 28 OF 112 ===
+AlphaGoZero & AlphaZero
+
+Learned simply by playing games against itself,
+starting from completely random play.
+
+Rediscovered human patterns, accumulating
+thousands of years of human knowledge in a
+matter of days.
+
+Ultimately discarded some in preference of new
+discoveries that humans don't even know
+about.
+
+
+                                                  28
+
+=== PHYSICAL PAGE 29 OF 112 ===
+AlphaTensor
+
+Not only board games!
+
+AlphaTensor discovered novel,
+efficient, and provably correct
+algorithms for fundamental tasks
+such as matrix multiplication.
+
+Bonus: Can tackle huge action
+spaces O(1030)
+
+
+
+
+                                   29
+
+=== PHYSICAL PAGE 30 OF 112 ===
+What made those systems Superhuman?
+
+  Scaled up trial and error
+
+  Grounded feedback signal
+
+  Search
+
+  Curriculum
+
+
+
+
+                                      30
+
+=== PHYSICAL PAGE 31 OF 112 ===
+What made those systems Superhuman?
+
+✅ Scaled up trial and error
+
+
+  Grounded feedback signal
+
+  Search
+
+  Curriculum
+
+
+
+
+                                      31
+
+=== PHYSICAL PAGE 32 OF 112 ===
+What made those systems Superhuman?
+
+✅ Scaled up trial and error
+
+
+✅ Grounded feedback signal
+
+
+  Search
+
+  Curriculum
+
+
+
+
+                                      32
+
+=== PHYSICAL PAGE 33 OF 112 ===
+What made those systems Superhuman?
+
+✅ Scaled up trial and error
+
+
+✅ Grounded feedback signal
+
+
+✅ Search
+
+
+  Curriculum
+
+
+
+
+                                      33
+
+=== PHYSICAL PAGE 34 OF 112 ===
+What made those systems Superhuman?
+
+✅ Scaled up trial and error
+
+
+✅ Grounded feedback signal
+
+
+✅ Search
+
+
+⁉Curriculum
+
+
+
+
+                                      34
+
+=== PHYSICAL PAGE 35 OF 112 ===
+    AlphaZero for
+    Mathematics
+
+When RL meets Formal
+       Maths
+
+
+                       35
+
+=== PHYSICAL PAGE 36 OF 112 ===
+AlphaProof: Master Plan
+
+1. Lean gives us a way to scale up trial and error with
+    a. An environment to explore mathematics completely in silico
+    b. A perfect feedback signal for proving
+
+
+2. We can therefore reach superhuman intelligence and discover new
+   truths, just like in Go/chess/Tensor decomposition… provided:
+    ● We can generate high enough quality + quantity problems
+    ● RL works
+
+                                                                     36
+
+=== PHYSICAL PAGE 37 OF 112 ===
+AlphaProof: Master Plan
+
+1. Lean gives us a way to scale up trial and error with
+    a. An environment to explore mathematics completely in silico
+    b. A perfect feedback signal for proving
+
+
+2. We can therefore reach superhuman intelligence and discover new
+   truths, just like in Go/chess/Tensor decomposition… provided:
+    ⁉
+    ● We can generate high enough quality + quantity problems
+    ✅ RL works
+    ●
+
+                                                                     37
+
+=== PHYSICAL PAGE 38 OF 112 ===
+Where do the problems come from?
+
+Humans deﬁne the problems
+ - We want to help human
+   mathematics
+ - There are already a lot of
+   problems!
+
+
+
+
+                                   38
+
+=== PHYSICAL PAGE 39 OF 112 ===
+Where do the problems come from?
+
+Humans deﬁne the problems       AlphaProof deﬁnes the problems
+ - We want to help human         - Around human mathematics
+   mathematics                      - Auto-formalisation
+ - There are already a lot of       - Test-time RL
+   problems!                     - Augment human mathematics
+
+
+
+
+                                                               39
+
+=== PHYSICAL PAGE 40 OF 112 ===
+Let's take a step back...
+
+
+              Informal                Formal
+             mathematics            mathematics
+
+
+
+           Large amount of data   Small amount of data
+
+
+              Not verifiable           Verifiable
+
+
+
+
+                                                         40
+
+=== PHYSICAL PAGE 41 OF 112 ===
+AlphaProof: Foundational Bet
+
+Perfect verification will in the long run be the most important property
+for mathematics.
+
+                      Informal                 Formal
+                     mathematics             mathematics
+
+
+
+                   Large amount of data    Small amount of data
+
+
+                      Not verifiable            Verifiable
+
+
+
+
+                                                                           41
+
+=== PHYSICAL PAGE 42 OF 112 ===
+RL meets Formal Math
+
+ - We have a proven recipe to build agent that can discover
+   knowledge by themselves and reach superhuman intelligence in
+   certain domains
+ - Key ingredients are scaled up trial and error and grounded
+   feedback
+ - Formal Maths provides us with those key ingredients
+
+
+
+
+                                                                  42
+
+=== PHYSICAL PAGE 43 OF 112 ===
+IMO 2024
+
+
+           International Mathematics Olympiad
+
+
+
+                                                43
+
+=== PHYSICAL PAGE 44 OF 112 ===
+What's the IMO
+
+The world-championship level event in
+mathematics that brings together the
+best young minds from around the
+world.
+
+
+
+
+                                        International Mathematics Olympiad
+
+
+
+                                                                       44
+
+=== PHYSICAL PAGE 45 OF 112 ===
+USA team selection
+
+
+
+
+                     ~17,000,000
+                     High school students
+
+
+
+
+                                            45
+
+=== PHYSICAL PAGE 46 OF 112 ===
+USA team selection
+
+
+
+
+                     ~60,000
+                     AMC10 & AMC12
+
+
+
+
+                     ~17,000,000
+                     High school students
+
+
+
+
+                                            46
+
+=== PHYSICAL PAGE 47 OF 112 ===
+USA team selection
+
+
+
+                     ~3,000
+                     AIME
+
+
+
+
+                     ~60,000
+                     AMC10 & AMC12
+
+
+
+
+                     ~17,000,000
+                     High school students
+
+
+
+
+                                            47
+
+=== PHYSICAL PAGE 48 OF 112 ===
+USA team selection
+
+
+
+                     ~3,000
+                     AIME
+                                            MATH
+                                            benchmark
+
+                     ~60,000
+                     AMC10 & AMC12
+
+
+
+
+                     ~17,000,000
+                     High school students
+
+
+
+
+                                                        48
+
+=== PHYSICAL PAGE 49 OF 112 ===
+USA team selection
+
+                     ~250
+                     USAMO
+
+
+                     ~3,000
+                     AIME
+
+
+
+
+                     ~60,000
+                     AMC10 & AMC12
+
+
+
+
+                     ~17,000,000
+                     High school students
+
+
+
+
+                                            49
+
+=== PHYSICAL PAGE 50 OF 112 ===
+20
+USA IMO camp
+
+~250
+USAMO
+
+
+~3,000
+AIME
+
+
+
+
+~60,000
+AMC10 & AMC12
+
+
+
+
+~17,000,000
+High school students
+
+
+
+
+                       50
+
+=== PHYSICAL PAGE 51 OF 112 ===
+6
+IMO
+20
+USA IMO camp
+
+~250
+USAMO
+
+
+~3,000
+AIME
+
+
+
+
+~60,000
+AMC10 & AMC12
+
+
+
+
+~17,000,000
+High school students
+
+
+
+
+                       51
+
+=== PHYSICAL PAGE 52 OF 112 ===
+     The IMO Problems
+
+These are hard problems!
+ -    (Easy, Medium, Hard)
+ -    Test of reasoning, not knowledge
+ -    Take hours even for specialists
+ -    Not leaked
+
+Half of the participants, solve 2 or
+less problems.
+
+
+
+
+                                         52
+
+=== PHYSICAL PAGE 53 OF 112 ===
+IMO2024
+65TH INTERNATIONAL
+MATHEMATICAL OLYMPIAD
+
+16-17TH JULY 2024
+                        53
+
+=== PHYSICAL PAGE 54 OF 112 ===
+Our IMO Participation - Apollo program
+
+Can we reach the moon?
+
+Can our system solve the 2024 IMO problems
+at all, given
+ - the compute available to us.
+ - and enough time.
+
+
+
+
+                                             54
+
+=== PHYSICAL PAGE 55 OF 112 ===
+January 2024
+
+We are 7 months away, we need to make a decision about Geometry:
+ - Mathlib is very sparse in 2D euclidean geometry
+ - Should we fill it ourselves?
+
+=== PHYSICAL PAGE 56 OF 112 ===
+January 2024
+
+We are 7 months away, we need to make a decision about Geometry:
+ - Mathlib is very sparse in 2D euclidean geometry
+ - Should we fill it ourselves?
+
+
+Miraculously, another group within Google DeepMind has been working
+on IMO Geometry problem and the system is already very strong!
+
+We decide to join forces for July:
+ - AlphaGeometry will tackle geometry
+ - AlphaProof will tackle algebra, number theory, combinatorics
+
+=== PHYSICAL PAGE 57 OF 112 ===
+March 2024
+
+We have been training AlphaProof on proving theorems but not all
+questions are of the form "Prove that". Some require an answer to be
+determined, e.g. “Find all X such that …”
+
+We debate what we should do:
+Easy mode: Correct answer is given by an oracle; AI proves it is correct
+Hard mode: AI determines the answer and proves it is correct
+
+=== PHYSICAL PAGE 58 OF 112 ===
+March 2024
+
+We have been training AlphaProof on proving theorems but not all
+questions are of the form "Prove that". Some require an answer to be
+determined, e.g. “Find all X such that …”
+
+We debate what we should do:
+Easy mode: Correct answer is given by an oracle; AI proves it is correct
+Hard mode: AI determines the answer and proves it is correct
+
+
+AlphaProof will operate in hard mode:
+ - Generates candidate answers using Gemini
+ - Attempts to prove/disprove all candidates
+
+=== PHYSICAL PAGE 59 OF 112 ===
+Formalised Problems in Input
+
+We have a final debate around if the system should receive as input
+ - The natural language description of the problem or
+ - A manually formalised description of the problem
+
+
+
+
+                                                                      59
+
+=== PHYSICAL PAGE 60 OF 112 ===
+Formalised Problems in Input
+
+We have a final debate around if the system should receive as input
+ - The natural language description of the problem or
+ - A manually formalised description of the problem
+
+After concertation with our judges, we decided to give the formalised
+problems as input to the system.
+ - The ability we cared about was mathematical reasoning and problem
+    solving.
+ - We asked our lean experts to manually formalise the problems for
+    the system.
+
+
+                                                                        60
+
+=== PHYSICAL PAGE 61 OF 112 ===
+Our Protocol
+
+After officially receiving the problems at 1PM,
+
+1.   Lean experts manually formalize problems
+2.   Generate O(100) answer candidates with Gemini
+3.   Filter the easily disprovable ones
+4.   Run test-time RL
+
+=== PHYSICAL PAGE 62 OF 112 ===
+16th July, Day 1, Tuesday
+
+1PM
+P1*: Algebra
+P2*: Number Theory
+P3: Combinatorics
+
+
+
+
+* require an answer to be determined
+
+=== PHYSICAL PAGE 63 OF 112 ===
+16th July, Day 1, Tuesday
+
+1PM
+P1*: Algebra                           Disproves 99% of guesses
+P2*: Number Theory                     Disproves 98% of guesses
+P3: Combinatorics
+
+
+
+
+* require an answer to be determined
+
+=== PHYSICAL PAGE 64 OF 112 ===
+17th July, Day 2, Wednesday
+
+1PM
+P4: Geometry
+P5*: Combinatorics
+P6*: Algebra
+
+
+
+
+* require an answer to be determined
+
+=== PHYSICAL PAGE 65 OF 112 ===
+17th July, Day 2, Wednesday
+
+1PM
+P4: Geometry                           Solved in secs by AlphaGeometry
+P5*: Combinatorics                     Failed to formalise on the day
+P6*: Algebra                           Disproves 7% of guesses
+
+
+
+
+* require an answer to be determined
+
+=== PHYSICAL PAGE 66 OF 112 ===
+18th July, Day 3, Thursday
+
+We had a way to track progress and we observe:
+
+ - P1: AlphaProof solved half of the problem 3/7 points
+ - P2: AlphaProof arguably solved the whole problem 6/7 points
+ - P3: AlphaProof makes no progress
+
+
+
+
+Day1: 9/21 points
+
+=== PHYSICAL PAGE 67 OF 112 ===
+18th July, Day 3, Thursday
+
+We had a way to track progress and we observe:
+
+ - P1: AlphaProof solved half of the problem 3/7 points
+ - P2: AlphaProof arguably solved the whole problem 6/7 points
+ - P3: AlphaProof makes no progress
+
+ - P4: AlphaGeometry solved in seconds 7/7 points
+ - P5: AlphaProof makes no progress
+ - P6: AlphaProof proves a case 2/7 points
+
+Day1: 9/21 points, Day2: 9/21 points, Total 18/42 points
+
+=== PHYSICAL PAGE 68 OF 112 ===
+19th July, Day 4, Friday
+
+=== PHYSICAL PAGE 69 OF 112 ===
+19th July, Day 4, Friday
+
+=== PHYSICAL PAGE 70 OF 112 ===
+19th July, Day 4, Friday
+
+=== PHYSICAL PAGE 71 OF 112 ===
+19th July, Day 4, Friday
+
+=== PHYSICAL PAGE 72 OF 112 ===
+19th July, Day 4, Friday
+
+=== PHYSICAL PAGE 73 OF 112 ===
+Final Results
+
+P1, P2, P6 fully solved by AlphaProof
+P4 fully solved by AlphaGeometry
+
+
+We keep running over the weekend in
+the hope of getting one point on P3.
+The agent made some progress but
+not enough for a partial point.
+
+=== PHYSICAL PAGE 74 OF 112 ===
+Final Results
+
+P1, P2, P6 fully solved by AlphaProof
+P4 fully solved by AlphaGeometry
+
+
+We reached the score of a Silver
+medallist and missed the Gold
+threshold by one point (with more
+time and more compute!).
+
+=== PHYSICAL PAGE 75 OF 112 ===
+P6
+ P6 was arguably one of the hardest problems in
+ the last 10 years at the IMO. Only 5 / 609 solved
+ the problem fully.
+
+
+ "I spent a couple of hours on this problem
+ and did not solve it. [...] I find the fact that the
+ program can come up with a somewhat
+ complicated construction like this very
+ impressive"
+ Prof Sir Timothy Gowers, Fields medalist and IMO
+ gold medalist
+
+                                                        75
+
+=== PHYSICAL PAGE 76 OF 112 ===
+Challenges
+
+Gaps in Mathlib:
+ - Geometry, even P1
+
+Combinatorics problems were difficult:
+ - P5 was extremely hard to formalise
+ - Did not make progress on P3 & P5.
+
+Used many orders of magnitude more compute than human
+contestants:
+ - Successfully landed on the moon
+ - And will want to be more efficient for the next trip!
+                                                           76
+
+=== PHYSICAL PAGE 77 OF 112 ===
+AlphaProof
+
+ Methods
+
+
+
+
+             77
+
+=== PHYSICAL PAGE 78 OF 112 ===
+Formaliser Model
+
+
+Input: a problem/theorem
+described in natural
+language
+
+
+
+
+                           Output: a Lean
+                           formalisation
+
+
+                                            78
+
+=== PHYSICAL PAGE 79 OF 112 ===
+Prover Model
+
+
+
+
+    Input a lean state                 Sample N tactics
+
+             state                                tactic
+
+                                                      tactic
+                                        let p := minFac (n ! + 1)
+              n : ℕ
+     ⊢ ∃ p, n ≤ p ∧ Prime p
+                                           by contradiction
+                              Prover
+                              Model
+
+
+
+
+                                                                    79
+
+=== PHYSICAL PAGE 80 OF 112 ===
+Prover Model + AlphaZero Search
+
+Search over actions = Lean tactic
+
+
+Compute new Lean state after every
+action / tactic application
+
+
+Exploit high prior and high value paths
+Explore low visited paths
+
+
+
+                                          80
+
+=== PHYSICAL PAGE 81 OF 112 ===
+Step 1: Auto formalisation
+
+ 1: Train a formalisation model and auto-formalise human created problems
+
+
+
+
+                                Human Problem
+
+
+                            Auto-Formalised version of
+                            the Problem
+
+
+                                                                            81
+
+=== PHYSICAL PAGE 82 OF 112 ===
+Step 1: Auto formalisation
+
+ 1: Train a statement formalisation model and auto-formalise human created
+ problems
+
+
+
+
+                  O(1M)   Formaliser   O(100M)   Prover
+                            Model                Model
+
+
+
+
+                                                                         82
+
+=== PHYSICAL PAGE 83 OF 112 ===
+Step 2: Build on top of Mathlib
+
+ 2: Train the prover model supervised on Mathlib
+
+  - 100k definitions
+  - 200k theorems                         State part of a human
+                                          written proof
+                                                                             Train towards human Tactic
+
+  - 300k lines of proofs                           state
+
+                                                    n : ℕ
+                                                                                        tactic
+                                                                              let p := minFac (n ! + 1)
+                                           ⊢ ∃ p, n ≤ p ∧ Prime p
+
+                                                                    Prover
+                                                                    Model
+
+
+
+
+ Learn a good prior of actions to take.
+
+
+
+
+                                                                                                          83
+
+=== PHYSICAL PAGE 84 OF 112 ===
+Step 3: AlphaZero Reinforcement Learning
+
+3: Train the prover model by RL
+
+For each formal problem
+ - Generate experience of (dis)proving by searching over Lean steps.
+ - Use Lean to verify proofs
+ - Reinforce the prover network with each success
+
+
+
+
+                   O(1M)   Formaliser   O(100M)   Prover
+                             Model                Model
+                                                                       84
+
+=== PHYSICAL PAGE 85 OF 112 ===
+Final Step: Test-Time RL
+
+ 4: Train the prover model on specific problems by RL
+
+ For each problem:
+  - Generate variants of the problem
+  - Run RL exactly as previous step
+
+
+
+
+                                         Prover
+                                         Model
+
+
+                                                        85
+
+=== PHYSICAL PAGE 86 OF 112 ===
+  Final Step: Test-Time RL
+                                   Very hard problem
+
+
+
+
+Bubble of problems
+the agent can solve
+easily
+
+
+
+
+                      Generalist
+                      Checkpoint
+                                                       86
+
+=== PHYSICAL PAGE 87 OF 112 ===
+   Test-Time RL
+                                    Very hard problem
+
+
+
+
+Interesting variants
+of the "Very hard
+problem"
+
+
+
+
+ Bubble of problems
+ the agent can solve
+ easily
+
+
+
+
+                       Generalist
+                       Checkpoint
+
+=== PHYSICAL PAGE 88 OF 112 ===
+   Test-Time RL
+                                    Very hard problem
+
+
+
+
+Interesting variants
+of the "Very hard
+problem"
+
+
+
+
+ Bubble of problems
+ the agent can solve
+ easily
+
+
+
+
+                       Specialist
+                       Checkpoint
+
+=== PHYSICAL PAGE 89 OF 112 ===
+   Test-Time RL
+                                    Very hard problem
+
+
+
+
+Interesting variants
+of the "Very hard
+problem"
+
+
+
+
+ Bubble of problems
+ the agent can solve
+ easily
+
+
+
+
+                       Specialist
+                       Checkpoint
+
+=== PHYSICAL PAGE 90 OF 112 ===
+   Test-Time RL
+                                    Very hard problem
+
+
+
+
+Interesting variants
+of the "Very hard
+problem"
+
+
+
+
+ Bubble of problems
+ the agent can solve
+ easily
+
+
+
+
+                       Specialist
+                       Checkpoint
+
+=== PHYSICAL PAGE 91 OF 112 ===
+   Test-Time RL
+                                    Very hard problem
+
+
+
+
+Interesting variants
+of the "Very hard
+problem"
+
+
+
+
+ Bubble of problems
+ the agent can solve
+ easily
+
+
+
+
+                       Specialist
+                       Checkpoint
+
+=== PHYSICAL PAGE 92 OF 112 ===
+Challenges for AlphaProof
+
+Inherited challenges from Formal Mathematics
+ - Most of human data in natural language
+ - Cannot easily learn and work on areas not supported by Mathlib.
+
+
+Generally,
+- Creative building of new objects and theories, interestingness
+   and beauty in mathematics
+
+
+                                                               92
+
+=== PHYSICAL PAGE 93 OF 112 ===
+
+=== PHYSICAL PAGE 94 OF 112 ===
+Warm up: back to the infinitude of primes
+
+=== PHYSICAL PAGE 95 OF 112 ===
+AIME 2020 ii p10
+
+=== PHYSICAL PAGE 96 OF 112 ===
+Warm up: back to the infinitude of primes
+
+=== PHYSICAL PAGE 97 OF 112 ===
+Demo: Link between the Riemann Zeta and the primes
+
+=== PHYSICAL PAGE 98 OF 112 ===
+Link between the Riemann Zeta
+
+=== PHYSICAL PAGE 99 OF 112 ===
+
+=== PHYSICAL PAGE 100 OF 112 ===
+
+=== PHYSICAL PAGE 101 OF 112 ===
+
+=== PHYSICAL PAGE 102 OF 112 ===
+
+=== PHYSICAL PAGE 103 OF 112 ===
+The Riemann zeta function
+
+=== PHYSICAL PAGE 104 OF 112 ===
+Let's prove the finite case
+
+=== PHYSICAL PAGE 105 OF 112 ===
+Final Link with the root of the zeta function
+
+=== PHYSICAL PAGE 106 OF 112 ===
+Final Link with the root of the zeta function
+
+=== PHYSICAL PAGE 107 OF 112 ===
+Final Link with the root of the zeta function
+
+=== PHYSICAL PAGE 108 OF 112 ===
+What’s next
+
+=== PHYSICAL PAGE 109 OF 112 ===
+What's Next for AlphaProof?
+Broaden to the entire Mathematical landscape
+
+
+Contribute to the Frontiers of Research Math
+
+
+AlphaProof as a useful tool for every thinker
+
+=== PHYSICAL PAGE 110 OF 112 ===
+Individually, this was
+almost impossible
+
+Together, it felt
+impossible to fail
+
+=== PHYSICAL PAGE 111 OF 112 ===
+
+=== PHYSICAL PAGE 112 OF 112 ===
+Thank you for
+    Listening
+
+  Questions?

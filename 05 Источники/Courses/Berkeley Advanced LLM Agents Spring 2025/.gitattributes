@@ -1,0 +1,3 @@
+# Byte-preserved official artifacts; authored indexes and ledgers stay diffable.
+Lectures/*.pdf binary
+Metadata/syllabus.html -text

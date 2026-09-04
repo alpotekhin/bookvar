@@ -1,0 +1,1195 @@
+=== PHYSICAL PAGE 1 OF 80 ===
+On Memory, Reasoning, and Planning of
+         Language Agents
+                    Yu Su
+            The Ohio State University
+
+=== PHYSICAL PAGE 2 OF 80 ===
+                          The rise, and the divide
+
+Bill
+Gatesare bringing about the biggest revolution
+Agents                                                     Current agents are just thin
+in computing since we went from typing                      wrappers around LLMs.
+commands to tapping on icons.
+
+
+                                                    Autoregressive LLMs can
+Andrew                                               never reason or plan.
+INg
+ think AI agentic workflows will drive massive AI
+progress this year.
+                                                      Auto-GPT's limitations in … reveal
+                                                      that it is far from being a practical
+Sam                                                                   solution.
+Altman
+2025 is when agents will work.
+
+
+
+
+                                                                                              2
+
+=== PHYSICAL PAGE 3 OF 80 ===
+Why agents again?
+
+
+
+        “An agent is anything that can be viewed as
+        perceiving its environment through sensors and
+        acting upon that environment through
+        actuators”
+
+             –– Russel & Norvig, AI: A Modern Approach
+
+
+
+
+                                                         3
+
+=== PHYSICAL PAGE 4 OF 80 ===
+‘Modern’ agent = LLM + external environment?
+
+    Text Input                      Text Output
+
+                 Language Models           What about self-reflection?
+                                            Multi-agent simulation?
+                                                     ……
+
+
+
+
+                    Perception
+
+                      Action
+                 LLM-based Agents
+                                                                         4
+
+=== PHYSICAL PAGE 5 OF 80 ===
+                      Two competing views
+
+ LLM-first view   We make an LLM into an agent!
+
+● Implications: scaffold on top of LLMs, prompting-focused, heavy on engineering
+
+
+
+ Agent-first view We integrate LLMs into AI agents so they can use language for
+reasoning and communication!
+
+● Implications: All the same challenges faced by previous AI agents (e.g.,
+  perception, reasoning, world models, planning) still remain, but we need to re-
+  examine them through the new lens of LLMs and tackle new ones (e.g.,
+  synthetic data, self-reflection, internalized search)
+
+                                                                                    5
+
+=== PHYSICAL PAGE 6 OF 80 ===
+             What’s fundamentally different now?
+Contemporary AI agents, with integrated LLM(s), can use language as a vehicle for
+reasoning and communication
+   Instruction following, in-context learning, output customization
+   Reasoning (for better acting): state inferences, self-reflection, replanning, etc.
+
+
+
+
+    https://www.demandsage.com/chatgpt-statistics/
+                                                                                                                            6
+                                                     https://www.reddit.com/r/ChatGPT/comments/16jvl4x/wait_actually_yes/
+
+=== PHYSICAL PAGE 7 OF 80 ===
+Schematic illustration of language agents
+
+                     • Reasoning by generating tokens is a new type
+                       of action (vs. actions in external environments)
+                     • Internal environment, where reasoning takes
+                       place in an inner monologue fashion
+         Reasoning
+                     • Self-reflection is a ‘meta’ reasoning action (i.e.,
+   Inner               reasoning over the reasoning process), akin to
+ Monologue             metacognitive functions
+                     • Reasoning is for better acting, by inferring
+                       environmental states, retrospection, etc.
+                     • Percept and external action spaces are
+                       substantially expanded, thanks to using
+                       language for communication and multimodal
+                       perception
+
+                                                                             7
+
+=== PHYSICAL PAGE 8 OF 80 ===
+             A generalized notion of ‘reasoning’
+Unlike humans, LLMs (mostly) only have one mechanism (token generation) for perception, intuitive
+        inferences, and symbolic reasoning; everything is effortful and takes a forward pass
+
+
+
+
+                                                                                                8
+
+=== PHYSICAL PAGE 9 OF 80 ===
+             A generalized notion of ‘reasoning’
+Unlike humans, LLMs (mostly) only have one mechanism (token generation) for perception, intuitive
+        inferences, and symbolic reasoning; everything is effortful and takes a forward pass
+
+
+
+
+                                                                                                9
+
+=== PHYSICAL PAGE 10 OF 80 ===
+             A generalized notion of ‘reasoning’
+Unlike humans, LLMs (mostly) only have one mechanism (token generation) for perception, intuitive
+        inferences, and symbolic reasoning; everything is effortful and takes a forward pass
+
+
+
+
+                                                                                               10
+
+=== PHYSICAL PAGE 11 OF 80 ===
+               A generalized notion of ‘reasoning’
+Unlike humans, LLMs (mostly) only have one mechanism (token generation) for perception, intuitive
+        inferences, and symbolic reasoning; everything is effortful and takes a forward pass
+
+
+
+
+One may alternatively call this ‘thought’ to avoid the over-loaded term of ‘reasoning,’ at the risk of further
+anthropomorphizing machines
+                                                                                                                 11
+
+=== PHYSICAL PAGE 12 OF 80 ===
+             Let’s call them language agents
+• These contemporary AI agents capable of using language for reasoning
+  and communication are best called “language agents,” for language
+  being their most salient trait.
+
+
+• What about multimodal agents?
+   • While there’s perception of other modalities, language is still doing the heavy lifting
+     (reasoning and communication)
+
+• What about LLM agents?
+   • The key is using language for reasoning and communication, but that doesn’t have
+     to come from an LLM; that may turn out to be a means to an end
+   • Maybe in a few years, we will move beyond LLMs, but the need for universal
+     language understanding and production in agents will remain
+                                                                                               12
+
+=== PHYSICAL PAGE 13 OF 80 ===
+A new evolutionary stage of machine intelligence
+       Increasing Expressiveness, Reasoning Ability & Adaptivity
+
+
+
+
+ Logical Agent             Neural Agent              Language Agent
+                                                “It looks like we are on the Amazon
+                                                homepage. I’ll search for ‘foldable
+                                                    strollers’ as requested.”
+
+                                                        Multimodal LLM
+
+
+
+
+                                                                                      13
+
+=== PHYSICAL PAGE 14 OF 80 ===
+                                                 Evolution of AI agents
+                                                                                                                                   Reasoning
+
+                                                                                                                             Inner
+                                                                                                                           Monologue
+
+
+
+
+                                   Logical Agent                                    Neural Agent                        Language Agent
+                                               Low                                       Medium                                    High
+  Expressiveness                                                                                                 almost anything, esp. verbalizable parts
+                               bounded by the logical language            anything a (small-ish) NN can encode
+                                                                                                                               of the world
+
+                                     Logical inferences                         Parametric inferences              Language-based inferences
+      Reasoning
+                                      sound, explicit, rigid                      stochastic, implicit, rigid          fuzzy, semi-explicit, flexible
+
+
+      Adaptivity                               Low                                       Medium                                    High
+                                bounded by knowledge curation               data-driven but sample inefficient   strong prior from LLMs + language use
+
+
+
+Image sources: https://www.scaler.com/topics/artificial-intelligence-tutorial/knowledge-based-agent/,
+Mnih et al., “Human-level control through deep reinforcement learning.” Nature (2015)
+                                                                                                                                                        14
+
+=== PHYSICAL PAGE 15 OF 80 ===
+A conceptual framework for language agents
+
+
+
+
+                                             15
+
+=== PHYSICAL PAGE 16 OF 80 ===
+                               Outline
+●   On long-term memory
+    ○   HippoRAG
+
+
+●   On reasoning
+    ○   Grokked Transformers
+
+
+●   On world models and planning
+    ○   WebDreamer
+
+
+
+
+                                         16
+
+=== PHYSICAL PAGE 17 OF 80 ===
+                               Outline
+                                                 Core Competencies
+●   On long-term memory
+    ○   HippoRAG                               Multi-agent/        Continual
+                                              Theory of Mind       Learning
+
+
+●   On reasoning                         Grounding      Planning        Tool Use
+
+    ○   Grokked Transformers
+                                                                   World
+                                                Reasoning
+                                                                   Models
+
+●   On world models and planning         Multimodal
+                                                        Memory         Embodiment
+    ○   WebDreamer                       Perception
+
+
+
+
+                                                                                    17
+
+=== PHYSICAL PAGE 18 OF 80 ===
+                                               NeurIPS 2024
+
+
+
+
+    HippoRAG: Neurobiologically Inspired
+Long-Term Memory for Large Language Models
+       Bernal Jiménez Gutiérrez, Yiheng Shu,
+         Yu Gu, Michihiro Yasunaga, Yu Su
+
+=== PHYSICAL PAGE 19 OF 80 ===
+   Humans (and most animals) are 24/7 learners
+
+“Memory is everything. Without it we are nothing.”                                        Catastrophic forgetting, ripple effects
+                                                                                                  → Transient learning
+
+
+
+
+                                                                                     Qin et al., “Why Does New Knowledge Create Messy Ripple Effects in LLMs?” 2024.
+
+ Eric Kandel, “In Search of Memory: The Emergence of a New Science of Mind,” 2006.
+
+
+                                                                                                                                                                       19
+
+=== PHYSICAL PAGE 20 OF 80 ===
+                  Non-parametric memory for LLMs
+    “We find that LLMs can be highly receptive to external evidence even when that conflicts
+    with their parametric memory, given that the external evidence is coherent and convincing.”
+
+
+
+
+Xie et al., “Adaptive Chameleon or Stubborn Sloth: Revealing the Behavior of Large Language Models in Knowledge Conflicts.” ICLR (2024 Spotlight)
+
+
+                                                                                                                                                    20
+
+=== PHYSICAL PAGE 21 OF 80 ===
+RAG is the de facto solution
+
+            ChatGPT
+
+
+
+
+                               21
+
+=== PHYSICAL PAGE 22 OF 80 ===
+          Current RAG does not always work
+    Passages                                                         Thomas
+
+
+                                                                         👨🏻🏫
+                       Which Stanford professor works on the
+  👩🏽💼 👨🏾🏫
+        👨🏻💼    👨🏽🔬         neuroscience of Alzheimer’s?        Answer:
+👨🏻🏫 👩🏻💻 👩🏻🏫    👨🏻🏫
+
+
+
+
+                                                                              22
+
+=== PHYSICAL PAGE 23 OF 80 ===
+             Current RAG does not always work
+    Passages                                                            Thomas
+
+
+                                                                            👨🏻🏫
+                          Which Stanford professor works on the
+  👩🏽💼 👨🏾🏫
+        👨🏻💼    👨🏽🔬            neuroscience of Alzheimer’s?        Answer:
+👨🏻🏫 👩🏻💻 👩🏻🏫    👨🏻🏫
+                                                   👨🏻🏫 👨🏾🏫 👩🏽💼
+   Current
+                                                 👨🏻    👩🏻💻 👩🏻🏫
+    RAG
+                                                 💼
+
+
+
+
+                                                                                 23
+
+=== PHYSICAL PAGE 24 OF 80 ===
+             Current RAG does not always work
+    Passages                                                            Thomas
+
+
+                                                                            👨🏻🏫
+                          Which Stanford professor works on the
+  👩🏽💼 👨🏾🏫
+        👨🏻💼    👨🏽🔬            neuroscience of Alzheimer’s?        Answer:
+👨🏻🏫 👩🏻💻 👩🏻🏫    👨🏻🏫
+                                                   👨🏻🏫 👨🏾🏫 👩🏽💼
+   Current
+                                                 👨🏻    👩🏻💻 👩🏻🏫
+    RAG
+                                                 💼
+                                                        👨🏻🏫
+                                                                        👨🏻🏫
+   Human
+   Memory
+
+
+
+
+                                                                                 24
+
+=== PHYSICAL PAGE 25 OF 80 ===
+           Long-term memory in humans
+
+• One well-established theory of human
+  long-term memory is the hippocampal
+  indexing theory (Teyler et al. 1986).
+  • The hippocampus (blue) is a store for
+    indices (which point to memories stored in
+    neocortex) and associations between them.
+  • Memories can be anything (i.e., people,
+    events, places, etc.)
+
+
+
+                                                 25
+
+=== PHYSICAL PAGE 26 OF 80 ===
+           Long-term memory in humans
+
+• Indexing procedure enables two
+  fundamental faculties of human memory:
+
+  • Pattern separation: process for differentiating
+    memories (neocortex and parahippocampus)
+  • Pattern completion: process for recovering
+    complete memories from relevant associations
+    (mostly hippocampus, specifically CA3)
+
+
+
+                                                      26
+
+=== PHYSICAL PAGE 27 OF 80 ===
+                      HippoRAG:
+         Neurobiologically-inspired LTM for LLMs
+    Passages                                                               Thomas
+
+
+                                                                           👨🏻🏫
+                         Which Stanford professor works on the
+  👩🏽💼 👨🏾🏫
+        👨🏻💼    👨🏽🔬           neuroscience of Alzheimer’s?        Answer:
+
+👨🏻🏫 👩🏻💻 👩🏻🏫    👨🏻🏫
+                                                  👨🏻🏫 👨🏾🏫 👩🏽💼
+   Current
+                                                👨🏻    👩🏻💻 👩🏻🏫
+    RAG
+                                                💼
+                                                       👨🏻🏫
+                                                                           👨🏻🏫
+   Human
+   Memory
+
+
+
+
+                                                                                    27
+
+=== PHYSICAL PAGE 28 OF 80 ===
+                      HippoRAG:
+         Neurobiologically-inspired LTM for LLMs
+    Passages                                                                     Thomas
+
+
+                                                                                 👨🏻🏫
+                               Which Stanford professor works on the
+  👩🏽💼 👨🏾🏫
+        👨🏻💼    👨🏽🔬                 neuroscience of Alzheimer’s?        Answer:
+
+👨🏻🏫 👩🏻💻 👩🏻🏫    👨🏻🏫
+                                                        👨🏻🏫 👨🏾🏫 👩🏽💼
+   Current
+                                                      👨🏻    👩🏻💻 👩🏻🏫
+    RAG
+                                                      💼
+                                                             👨🏻🏫
+                                                                                 👨🏻🏫
+   Human
+   Memory
+
+
+
+
+                                                                                 👨🏻🏫
+ HippoRAG
+                     👩🏻
+                          👩🏻
+                 👩🏽💼🏫
+                       👨🏻🏫💻                                        👨🏻🏫
+                    👨🏾                                                                    28
+                       👨🏽🔬
+
+=== PHYSICAL PAGE 29 OF 80 ===
+HippoRAG & the three components of LTM
+
+
+
+        Neocortex            Parahippocampus          Hippocampus
+    Perception, linguistic   Bridge between areas;    Indexing & auto-
+    abilities & reasoning       working memory       associative memory
+
+
+
+
+                                                                          29
+
+=== PHYSICAL PAGE 30 OF 80 ===
+HippoRAG & the three components of LTM
+
+
+
+
+                                         30
+
+=== PHYSICAL PAGE 31 OF 80 ===
+HippoRAG & the three components of LTM
+
+
+
+
+                                         31
+
+=== PHYSICAL PAGE 32 OF 80 ===
+HippoRAG is a SoTA memory retriever
+
+
+                         +8.2
+
+            +7.3
+
+
+
+
+                                      32
+
+=== PHYSICAL PAGE 33 OF 80 ===
+Case study: path-finding questions
+
+
+
+
+                                     33
+
+=== PHYSICAL PAGE 34 OF 80 ===
+HippoRAG v2 is coming soon!
+
+
+
+
+                              34
+
+=== PHYSICAL PAGE 35 OF 80 ===
+                             Memory: takeaways
+●   Memory is central to human learning. Our sophisticated memory mechanisms
+    allow us to recognize patterns, create associations, and dynamically recall
+    memory relevant to the current context beyond superficial similarity
+
+●   Long-term memory through parametric continual learning is hard for LLMs, but
+    non-parametric memory (e.g., RAG) could be a promising solution
+
+●   Recent trend in RAG is to add more structures to embeddings (e.g., HippoRAG,
+    GraphRAG) to enhance
+    ●   Sensemaking, the ability to interpret larger, more complex, or uncertain contexts
+    ●   Associativity, the capacity to draw multi-hop connections between disparate pieces of info
+
+                                                                                                     35
+
+=== PHYSICAL PAGE 36 OF 80 ===
+                               Outline
+                                                 Core Competencies
+●   On long-term memory
+    ○   HippoRAG                               Multi-agent/        Continual
+                                              Theory of Mind       Learning
+
+
+●   On reasoning                         Grounding      Planning        Tool Use
+
+    ○   Grokked Transformers
+                                                                   World
+                                                Reasoning
+                                                                   Models
+
+●   On world models and planning         Multimodal
+                                                        Memory         Embodiment
+                                         Perception
+    ○   WebDreamer
+
+
+
+
+                                                                                    36
+
+=== PHYSICAL PAGE 37 OF 80 ===
+                                                   NeurIPS 2024
+
+
+
+
+   Grokking of Implicit Relations in Transformers:
+A Mechanistic Journey to the Edge of Generalization
+          Boshi Wang, Xiang Yue, Yu Su, Huan Sun
+
+=== PHYSICAL PAGE 38 OF 80 ===
+         Implicit reasoning
+Directly predict the answer; no verbalized chain of thought
+
+
+
+
+                                                              38
+
+=== PHYSICAL PAGE 39 OF 80 ===
+CoT is all the rage. Why does implicit reasoning matter?
+
+• The default mode of large-scale (pre-)training; no CoT at training time
+
+• Fundamentally determines how well LLMs acquire structured
+  representations of facts and rules from data
+
+• How did o1/R1-style long CoT emerge? A hypothesis
+  • A capable base model (e.g., DeepSeek v3) has already learned various basic
+    ‘constructs’ or strategies for reasoning
+  • Reinforcement learning incentivizes the model to learn to use the right
+    combination of strategies (not learning new ones through RL) and keep trying
+
+                                                                                   39
+
+=== PHYSICAL PAGE 40 OF 80 ===
+           LLMs were shown to struggle at implicit reasoning
+
+    • Composition
+          • LLMs only show substantial evidence in first-
+            hop reasoning (Yang et al. 2024)
+          • “Compositionality gap” does not decrease with
+            scale (Press et al. 2023)
+
+
+    • Comparison
+          • GPT-4 struggles at implicitly comparing entity
+            attributes despite knowing them perfectly (Zhu
+            et al. 2023)
+
+
+
+Grokked Transformers are Implicit Reasoners: A Mechanistic Journey to the Edge of Generalization. NeurIPS’24.
+
+=== PHYSICAL PAGE 41 OF 80 ===
+                                           Research questions
+    • Can Transformers learn to reason implicitly, or are there fundamental
+      limitations that prohibit robust acquisition of this skill?
+
+    • What factors (e.g., data scale, distribution, model architecture) control
+      the acquisition of implicit reasoning?
+
+
+
+
+Grokked Transformers are Implicit Reasoners: A Mechanistic Journey to the Edge of Generalization. NeurIPS’24.
+
+=== PHYSICAL PAGE 42 OF 80 ===
+                              Setup: model and optimization
+    • Standard decoder-only transformer as in GPT-2
+          • 8 layers, 768 hidden dimensions, and 12 attention heads
+          • Results are robust to different model scales
+
+
+    • AdamW with learning rate 1e-4, batch size 512, weight decay 0.1, and
+      2000 warm-up steps
+
+
+
+
+Grokked Transformers are Implicit Reasoners: A Mechanistic Journey to the Edge of Generalization. NeurIPS’24.
+
+=== PHYSICAL PAGE 43 OF 80 ===
+                 Setup: data for compositional reasoning
+    • Atomic facts
+         • Random KG consisting of ℰ entities and
+            ℛ = 200 relations
+         • Randomly split into ID & OOD atomic
+           facts
+
+
+    • Inferred facts: two-hop compositions
+
+
+
+
+Grokked Transformers are Implicit Reasoners: A Mechanistic Journey to the Edge of Generalization. NeurIPS’24.
+
+=== PHYSICAL PAGE 44 OF 80 ===
+             Setup: inductive learning of deduction rules
+    • Induce latent rules from a mixture of
+      atomic facts and inferred facts                                                  Atomic                    Atomic
+      (deduced via latent rules)                                                        (ID)                     (OOD)
+
+    • Deduce novel facts by applying the
+      acquired rules                                                                              Latent Rules
+          • Test (ID): unseen inferred facts deduced from
+            the same set of atomic facts underlying the
+            observed inferred facts
+                                                                                    Train Test                    Test
+          • Test (OOD)/Systematic Generalization: unseen                             (ID) (ID)                   (OOD)
+            inferred facts derived from a different set of
+            atomic facts
+
+
+Grokked Transformers are Implicit Reasoners: A Mechanistic Journey to the Edge of Generalization. NeurIPS’24.
+
+=== PHYSICAL PAGE 45 OF 80 ===
+Takeaway #1: Transformers can learn to reason implicitly,
+              but only through ‘grokking’
+
+=== PHYSICAL PAGE 46 OF 80 ===
+Takeaway #2: Systematicity varies by reasoning type
+
+=== PHYSICAL PAGE 47 OF 80 ===
+Takeaway #3: Critical data distribution, not size
+
+
+
+
+    ℰ : # of entities (proportional to total data size). 𝜙: ratio of inferred/atomic
+
+=== PHYSICAL PAGE 48 OF 80 ===
+                                  Important questions remain
+    • Why does grokking happen?
+
+    • What happens during grokking?
+
+    • Why does the level of systematicity in generalization vary?
+
+    These require a deeper look inside the model
+
+
+
+
+Grokked Transformers are Implicit Reasoners: A Mechanistic Journey to the Edge of Generalization. NeurIPS’24.
+
+=== PHYSICAL PAGE 49 OF 80 ===
+                   Analyzing the changes during grokking
+
+    • Logit lens
+
+    • Causal tracing
+
+
+
+
+Grokked Transformers are Implicit Reasoners: A Mechanistic Journey to the Edge of Generalization. NeurIPS’24.
+
+=== PHYSICAL PAGE 50 OF 80 ===
+Generalizing circuit configuration determines
+      systematicity of generalization
+
+      A “staged” circuit     A “parallel” circuit
+
+=== PHYSICAL PAGE 51 OF 80 ===
+         Improving systematic generalization via cross-layer
+                        parameter sharing
+
+
+
+
+Grokked Transformers are Implicit Reasoners: A Mechanistic Journey to the Edge of Generalization. NeurIPS’24.
+
+=== PHYSICAL PAGE 52 OF 80 ===
+       Grokking is the phase transition from rote learning to
+                generalization (the ‘aha moment’)
+
+• Grokking is when the
+  generalizing circuit forms
+  and outcompetes the
+  memorizing circuit
+
+• Explanation via circuit
+  efficiency and regularization
+   • # of facts need to be stored by
+     memorizing vs. generalizing
+     circuits
+
+=== PHYSICAL PAGE 53 OF 80 ===
+                               Outline
+                                                 Core Competencies
+●   On long-term memory
+    ○   HippoRAG                               Multi-agent/        Continual
+                                              Theory of Mind       Learning
+
+
+●   On reasoning                         Grounding      Planning        Tool Use
+
+    ○   Grokked Transformers
+                                                                   World
+                                                Reasoning
+                                                                   Models
+
+●   On world models and planning         Multimodal
+                                                        Memory         Embodiment
+                                         Perception
+    ○   WebDreamer
+
+
+
+
+                                                                                    53
+
+=== PHYSICAL PAGE 54 OF 80 ===
+               Planning: simplified definition
+
+
+
+General trends in planning settings for language agents
+●   Increasing expressiveness in goal specification, e.g., in natural
+    language as opposed to formal language
+●   Substantially expanded or open-ended action space
+●   Increasing difficulty in automated goal test
+
+
+                                                                        54
+
+=== PHYSICAL PAGE 55 OF 80 ===
+LLM+P
+When domain and problem can be (fully or partially) described
+formally, e.g., in PDDL (Planning Domain Definition Language)
+
+
+
+
+   Liu et al., “LLM+P: Empowering Large Language Models with Optimal Planning Proficiency.” arXiv preprint 2304.11477 (2023)          55
+   See also Kambhampati et al., “LLMs Can't Plan, But Can Help Planning in LLM-Modulo Frameworks.” arXiv preprint 2402.01817 (2024)
+
+=== PHYSICAL PAGE 56 OF 80 ===
+Language agent planning: web agents
+
+
+
+
+   Deng et al., “Mind2Web: Towards a Generalist Agent for the Web.” NeurIPS (2023 Spotlight)   56
+
+=== PHYSICAL PAGE 57 OF 80 ===
+Language agent planning: travel planning
+
+
+
+
+  Xie et al., “TravelPlanner: A Benchmark for Real-World Planning with Language Agents.” ICML (2024 Spotlight)   57
+
+=== PHYSICAL PAGE 58 OF 80 ===
+                                                https://arxiv.org/abs/2411.06559
+
+
+
+
+Is Your LLM Secretly a World Model of the Internet?
+       Model-based Planning for Web Agents
+       Yu Gu*, Boyuan Zheng*, Boyu Gou, Kai Zhang,
+     Cheng Chang, Sanjari Srivastava, Yanan Xie, Peng Qi,
+                     Huan Sun, Yu Su
+
+
+
+                                                                            58
+
+=== PHYSICAL PAGE 59 OF 80 ===
+      Evolution of web (or computer use) agents
+
+
+                                                                                                       Agentic search
+                                                                                                      Continual learning
+                                                                                                            Safety
+
+Mind2Web [NeurIPS’23]                                        UGround [ICLR’25]
+                             First generalist web agent
+                                with visual perception                              Model-based planning
+First LLM-based web agent                                 Pure vision-based agent
+   Ecologically valid eval     SeeAct [ICML’24]           Human-like embodiment         WebDreamer
+
+=== PHYSICAL PAGE 60 OF 80 ===
+                    Planning paradigms for language agents
+(a) reactive                             (b) tree search with real interactions
+
+
+
+
+               fast, easy to implement              systematic exploration
+
+                                                    irreversible actions,
+               greedy, short-sighted
+                                                    unsafe, slow                  60
+
+=== PHYSICAL PAGE 61 OF 80 ===
+    Challenges with search in real-world environments
+• Many actions are state-changing and irreversible → backtracking ❌
+• Safety/privacy risks
+• Inference-time exploration could be slow and costly
+
+=== PHYSICAL PAGE 62 OF 80 ===
+                    Planning paradigms for language agents
+(a) reactive                             (b) tree search with real interactions   (c) model-based planning
+
+
+
+
+                                                                                            faster, safer,
+               fast, easy to implement              systematic exploration
+                                                                                            systematic exploration
+                                                    irreversible actions,
+               greedy, short-sighted                                                        how to get a world model?
+                                                    unsafe, slow                                                    62
+
+=== PHYSICAL PAGE 63 OF 80 ===
+           What’s … a world model?
+
+
+ A computational model of environment transition dynamics
+
+                         ෠ 𝒮×𝒜 →𝒮
+                         𝑇:
+
+If I do this (𝑎𝑡 ) right now (𝑠𝑡 ), what would happen next (𝑠𝑡+1 )?
+
+
+
+
+                                                                      63
+
+=== PHYSICAL PAGE 64 OF 80 ===
+Why hasn’t it been done already?
+
+
+
+
+            And billions of other websites on the Internet!
+                                                          64
+
+=== PHYSICAL PAGE 65 OF 80 ===
+LLMs can predict state transitions
+
+
+                  The page will navigate to a detailed product page for the "Mens
+                  Flowers Casual Aloha Hawaiian Shirt Summer Short Sleeve Beach
+                  T-Shirt Regular Fit Button Down Dress Shirts." This new page will
+                  likely contain additional information about the product including
+                  more detailed specifications, customer reviews, larger images,
+                  sizing options, and possibly a larger "Add to Cart" button. Other
+                  elements from the current category view like the grid of
+                  products will be replaced with the detailed view of this specific
+                  product.
+
+
+
+
+                                                                                65
+
+=== PHYSICAL PAGE 66 OF 80 ===
+WebDreamer: model-based planner for web agents
+  Please navigate to the 'Data Storage' category and purchase
+  the least expensive disk with 512GB of storage.
+
+
+
+                                      Type ‘Disk’
+
+
+
+
+                                      Click ‘Office Products’
+
+                     Click ‘Electronics’
+
+
+
+
+                                                                66
+
+=== PHYSICAL PAGE 67 OF 80 ===
+WebDreamer: model-based planner for web agents
+                                                                Stage I: Simulation
+  Please navigate to the 'Data Storage' category and purchase
+  the least expensive disk with 512GB of storage.                            The 'Office Products' category will
+                                                                             display three sub-categories: 'Office
+                                                                             Electronics', 'Office & School Supplies',
+                                                                             and 'Office Furniture & Lighting'.
+                                      Type ‘Disk’
+
+
+
+
+                                      Click ‘Office Products’
+
+                     Click ‘Electronics’
+
+
+
+
+                                                                                                                         67
+
+=== PHYSICAL PAGE 68 OF 80 ===
+WebDreamer: model-based planner for web agents
+                                                                Stage I: Simulation
+  Please navigate to the 'Data Storage' category and purchase
+  the least expensive disk with 512GB of storage.                            The 'Office Products' category will         Click ’Office   The webpage will display 'Office
+                                                                             display three sub-categories: 'Office       Electronics’    Electronics' sub-category results
+                                                                             Electronics', 'Office & School Supplies',                   with products, and the sub-menu
+                                                                             and 'Office Furniture & Lighting'.                          will show 'Printers&Accessories' and
+                                                                                                                                         other categories.
+                                      Type ‘Disk’
+
+
+
+
+                                      Click ‘Office Products’
+
+                     Click ‘Electronics’
+
+
+
+
+                                                                                                                                                                                68
+
+=== PHYSICAL PAGE 69 OF 80 ===
+WebDreamer: model-based planner for web agents
+                                                                Stage I: Simulation
+  Please navigate to the 'Data Storage' category and purchase
+  the least expensive disk with 512GB of storage.                            The 'Office Products' category will         Click ’Office   The webpage will display 'Office
+                                                                             display three sub-categories: 'Office       Electronics’    Electronics' sub-category results
+                                                                             Electronics', 'Office & School Supplies',                   with products, and the sub-menu        v = 0.4
+                                                                             and 'Office Furniture & Lighting'.                          will show 'Printers&Accessories' and
+                                                                                                                                         other categories.
+                                      Type ‘Disk’
+
+
+
+
+                                      Click ‘Office Products’
+
+                     Click ‘Electronics’
+
+
+
+
+                                                                                                                                                                                          69
+
+=== PHYSICAL PAGE 70 OF 80 ===
+WebDreamer: model-based planner for web agents
+                                                                Stage I: Simulation
+  Please navigate to the 'Data Storage' category and purchase
+  the least expensive disk with 512GB of storage.                             The 'Office Products' category will         Click ’Office         The webpage will display 'Office
+                                                                              display three sub-categories: 'Office       Electronics’          Electronics' sub-category results
+                                                                              Electronics', 'Office & School Supplies',                         with products, and the sub-menu           v = 0.4
+                                                                              and 'Office Furniture & Lighting'.                                will show 'Printers&Accessories' and
+                                                                                                                                                other categories.
+                                      Type ‘Disk’
+
+
+
+
+                                      Click ‘Office Products’                 The 'Electronics' category will display     Click ’Computer       The webpage will display 'Computer
+                                                                              three sub-categories: 'Computers &          & Accessories’        Accessories' sub-category results,
+                     Click ‘Electronics’
+                                                                              Accessories', 'Accessories & Supplies',                           including 'Data Storage', 'Tablet         v = 0.8
+                                                                              and 'Car & Vehicle Electronics'.                                  Accessories', and others.
+
+
+
+
+                                                                              The webpage will display search                                   The 'Electronics' category will display
+                                                                                                                          Click ’Electronics’
+                                                                              results, including a list of products,                            three sub-categories: 'Computers &
+                                                                              each of which includes the product                                                                          v = 0.1
+                                                                                                                                                Accessories', 'Accessories & Supplies',
+                                                                              title, price, and an 'Add to Cart'                                and 'Car & Vehicle Electronics'.
+                                                                              button.
+
+
+                                                                Stage II: Execution
+
+
+
+
+                                                                                                                                                                                                    70
+
+=== PHYSICAL PAGE 71 OF 80 ===
+                    Results on VisualWebArena
+Model-based planning is more accurate than reactive planning and more efficient than tree search
+
+
+
+
+                                                                   Baselines are from Koh et al., (2024)
+
+                                                                                                     71
+
+=== PHYSICAL PAGE 72 OF 80 ===
+                                Planning: takeaways
+●   Language agents are expanding into new planning scenarios
+        ○    Characterized by expressive but fuzzy goal specifications, open-ended action spaces,
+             more difficult and sometimes non-binary goal tests
+●   Language for reasoning also enables new planning abilities
+        ○    Generalist world models and model-based planning
+    ○        Hierarchical planning and dynamic replanning
+●   The best planning strategy is dependent on the LLM; stronger LLMs may require
+    less scaffolding (i.e., more ‘reactive’)
+●   How to improve planning in LLMs is still largely an open question
+    ●       Can the recipe for o1/R1-style reasoning work for planning?
+
+
+
+                                                                                                    72
+
+=== PHYSICAL PAGE 73 OF 80 ===
+We are just standing at the dawn of a long journey
+                                     Cross-cutting Issues
+       Safety        Evaluation        Synthetic Data       Efficiency   Applications
+
+
+                  Core Competencies
+
+                 Multi-agent/         Continual
+                Theory of Mind        Learning
+
+
+        Grounding         Planning            Tool Use
+
+
+                                     World
+                  Reasoning
+                                     Models
+
+        Multimodal
+                          Memory         Embodiment
+        Perception
+
+=== PHYSICAL PAGE 74 OF 80 ===
+  Some future directions for language agents
+• Memory, personalization, and continual learning
+  • How can an agent continually learn from use and exploration?
+• Reasoning
+  • O1/R1-style reasoning? How to get reliable rewards? How to integrate
+    external actions and environmental states?
+• Planning
+  • How to build better world models? How to balance reactive and model-
+    based planning? How to sustain a long horizon without losing focus?
+• Safety
+  • Endogenous risks vs. exogenous risks
+• Applications
+  • Agentic search (deep research), workflow automation, science agents
+
+=== PHYSICAL PAGE 75 OF 80 ===
+                                                           EMNLP 2024 Tutorial
+
+
+
+
+Language Agents: Foundations, Prospects, and Risks
+
+          Yu Su, Diyi Yang, Shunyu Yao, Tao Yu
+
+              https://language-agent-tutorial.github.io/
+
+=== PHYSICAL PAGE 76 OF 80 ===
+Acknowledgements
+
+=== PHYSICAL PAGE 77 OF 80 ===
+Thanks &
+
+=== PHYSICAL PAGE 78 OF 80 ===
+78
+
+=== PHYSICAL PAGE 79 OF 80 ===
+  Reasoning task with a Large Search Space
+   Large search space
+      Each query entity connects to ~50 facts
+      Each bridge entity (in ground truth proof) connects to >900 facts
+
+
+
+
+   No surface form clues to exploit & bias the proof search
+        Unlike most conventional QA benchmarks where the proof steps are transparent
+
+
+
+
+Grokked Transformers are Implicit Reasoners: A Mechanistic Journey to the Edge of Generalization. NeurIPS’24.
+
+=== PHYSICAL PAGE 80 OF 80 ===
+  The Power of Parametric Memory for Complex Reasoning
+
+   SoTA LLMs with non-parametric memory fail badly
+      Current LLMs still cannot reason deeply with non-parametric knowledge representations
+      Also no major improvement from o1-preview or o3-mini (high)
+
+
+
+
+   Grokked transformer achieves near-perfect accuracy by integrating and
+    compressing the facts to the extreme
+
+
+
+
+Grokked Transformers are Implicit Reasoners: A Mechanistic Journey to the Edge of Generalization. NeurIPS’24.
