@@ -197,8 +197,63 @@ const COURSE_PUBLICATIONS = [
     routeRoot: 'sources/courses/berkeley-advanced-llm-agents-spring-2025'
   }
 ] as const;
+type CoursePublication = (typeof COURSE_PUBLICATIONS)[number];
+interface LinkedCourseArtifact extends Asset {
+  course: CoursePublication;
+}
+
 const LINKED_SOURCE_ARTIFACT = /\.(?:pdf|py|json|ya?ml|txt|md)$/i;
 const MARKDOWN_LINK = /(?<!!)\[([^\]\n]+)\]\(([^)\n]+)\)/g;
+const BERKELEY_READING_ROOT =
+  '05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Readings';
+const AUDITED_BERKELEY_READING_SOURCES = new Set([
+  'meeting-01-reading-01.md',
+  'meeting-01-reading-02.md',
+  'meeting-01-reading-03.md',
+  'meeting-02-reading-01.md',
+  'meeting-02-reading-02.md',
+  'meeting-02-reading-03.md',
+  'meeting-03-reading-01.md',
+  'meeting-03-reading-02.md',
+  'meeting-03-reading-03.md',
+  'meeting-04-reading-01.md',
+  'meeting-04-reading-02.md',
+  'meeting-04-reading-03.md',
+  'meeting-05-reading-01.md',
+  'meeting-05-reading-02.md',
+  'meeting-06-reading-01.md',
+  'meeting-06-reading-02.md',
+  'meeting-06-reading-03.md',
+  'meeting-06-reading-04.md',
+  'meeting-07-reading-01.md',
+  'meeting-07-reading-02.md',
+  'meeting-08-reading-01.md',
+  'meeting-08-reading-02.md',
+  'meeting-08-reading-03.md',
+  'meeting-08-reading-04.md',
+  'meeting-09-reading-01.md',
+  'meeting-09-reading-02.md',
+  'meeting-09-reading-03.md',
+  'meeting-10-reading-01.md',
+  'meeting-10-reading-02.md',
+  'meeting-10-reading-03.md',
+  'meeting-10-reading-04.md',
+  'meeting-11-reading-01.md',
+  'meeting-11-reading-02.md',
+  'meeting-12-reading-01.md',
+  'meeting-12-reading-02.md',
+  'meeting-12-reading-03.md',
+  'meeting-12-reading-04.md'
+].map((filename) => `${BERKELEY_READING_ROOT}/${filename}`));
+const BERKELEY_READING_PATTERN =
+  /^05 Источники\/Courses\/Berkeley Advanced LLM Agents Spring 2025\/Readings\/meeting-\d{2}-reading-\d{2}\.md$/;
+const APPROVED_RAW_MARKDOWN_ARTIFACTS = new Set([
+  '05 Источники/Courses/Stanford CS336 Spring 2026/Assignments/assignment1-basics/README.md',
+  '05 Источники/Courses/Stanford CS336 Spring 2026/Assignments/assignment2-systems/README.md',
+  '05 Источники/Courses/Stanford CS336 Spring 2026/Assignments/assignment3-scaling/README.md',
+  '05 Источники/Courses/Stanford CS336 Spring 2026/Assignments/assignment4-data/README.md',
+  '05 Источники/Courses/Stanford CS336 Spring 2026/Assignments/assignment5-alignment/README.md'
+]);
 
 function prepareLinkedCourseArtifacts(
   rootDir: string,
@@ -206,11 +261,11 @@ function prepareLinkedCourseArtifacts(
   route: string,
   markdown: string,
   routeBySource: ReadonlyMap<string, string>
-): { markdown: string; artifacts: Asset[] } {
+): { markdown: string; artifacts: LinkedCourseArtifact[] } {
   const course = COURSE_PUBLICATIONS.find(({ routeRoot }) =>
     route === `${routeRoot}/index` || route.startsWith(`${routeRoot}/`)
   );
-  const artifacts: Asset[] = [];
+  const artifacts: LinkedCourseArtifact[] = [];
   const converted = markdown.replace(MARKDOWN_LINK, (match, label: string, rawTarget: string) => {
     const target = rawTarget.trim();
     if (
@@ -240,6 +295,11 @@ function prepareLinkedCourseArtifacts(
       return `[${label}](${publicationHref(targetRoute)}${suffix})`;
     }
     if (!course || !LINKED_SOURCE_ARTIFACT.test(decodedPath)) return match;
+    if (/\.md$/i.test(decodedPath) && !APPROVED_RAW_MARKDOWN_ARTIFACTS.has(normalizedSource)) {
+      throw new Error(
+        `Linked source artifact is not an approved raw Markdown course artifact: ${normalizedSource}`
+      );
+    }
 
     const courseRoot = resolve(rootDir, course.sourceRoot);
     const sourceOffset = relative(courseRoot, targetPath);
@@ -253,7 +313,7 @@ function prepareLinkedCourseArtifacts(
     }
     const publicPath = join(course.routeRoot, sourceOffset).split(sep).join('/');
     contained(rootDir, publicPath, 'Linked source artifact destination');
-    artifacts.push({ source: targetPath, publicPath });
+    artifacts.push({ source: targetPath, publicPath, course });
     const href = publicPath.split('/').map(encodeURIComponent).join('/');
     return `[${label}](${publicationBasePath()}/${href}${suffix})`;
   });
@@ -293,11 +353,11 @@ function prepareAssets(rootDir: string, markdown: string): { markdown: string; a
   return { markdown: converted, assets };
 }
 
-const SOURCE_NATIVE_BERKELEY_READING =
-  /^05 Источники\/Courses\/Berkeley Advanced LLM Agents Spring 2025\/Readings\/meeting-\d{2}-reading-\d{2}\.md$/;
-
 function readPublicationPage(sourcePath: string, raw: string): ReturnType<typeof readPage> {
-  if (!SOURCE_NATIVE_BERKELEY_READING.test(sourcePath)) return readPage(sourcePath, raw);
+  if (!BERKELEY_READING_PATTERN.test(sourcePath)) return readPage(sourcePath, raw);
+  if (!AUDITED_BERKELEY_READING_SOURCES.has(sourcePath)) {
+    throw new Error(`Source-native reading is not in the audited Berkeley reading set: ${sourcePath}`);
+  }
   const title = raw.match(/^#\s+(.+?)\s*$/m)?.[1];
   if (!title) {
     throw new Error(`Source-native Berkeley reading is missing its title heading: ${sourcePath}`);
@@ -416,7 +476,7 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
   });
 
   const assetsByPublicPath = new Map<string, Asset>();
-  const linkedArtifactsByPublicPath = new Map<string, Asset>();
+  const linkedArtifactsByPublicPath = new Map<string, LinkedCourseArtifact>();
   const localizedPages = parsed.flatMap(({ entry, page, pageEn }) => [
     { entry, page, source: entry.source, locale: undefined },
     ...(pageEn && entry.sourceEn
@@ -458,14 +518,16 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
     }
   }
 
-  const realRoot = await realpath(rootDir);
   for (const artifact of linkedArtifactsByPublicPath.values()) {
     try {
       await access(artifact.source);
-      const realSource = await realpath(artifact.source);
-      const sourceOffset = relative(realRoot, realSource);
+      const [realCourseRoot, realSource] = await Promise.all([
+        realpath(contained(rootDir, artifact.course.sourceRoot, 'Course source root')),
+        realpath(artifact.source)
+      ]);
+      const sourceOffset = relative(realCourseRoot, realSource);
       if (sourceOffset === '..' || sourceOffset.startsWith(`..${sep}`) || isAbsolute(sourceOffset)) {
-        throw new Error(`Linked source artifact path escapes rootDir: ${relative(rootDir, artifact.source)}`);
+        throw new Error(`Linked source artifact path escapes course root: ${relative(rootDir, artifact.source)}`);
       }
     } catch (error) {
       if (error instanceof Error && error.message.startsWith('Linked source artifact path escapes')) throw error;
@@ -486,12 +548,7 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
   await rm(assetDir, { recursive: true, force: true });
   await mkdir(assetDir, { recursive: true });
   const publicDir = contained(rootDir, 'site/public', 'Public');
-  const publishedCourseRoots = new Set(entries.flatMap((entry) =>
-    COURSE_PUBLICATIONS
-      .filter(({ routeRoot }) => entry.route === `${routeRoot}/index` || entry.route.startsWith(`${routeRoot}/`))
-      .map(({ routeRoot }) => routeRoot)
-  ));
-  for (const routeRoot of publishedCourseRoots) {
+  for (const { routeRoot } of COURSE_PUBLICATIONS) {
     await rm(contained(publicDir, routeRoot, 'Linked source artifact root'), { recursive: true, force: true });
   }
 

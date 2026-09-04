@@ -1,4 +1,4 @@
-import { mkdtempSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, readFileSync, symlinkSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import matter from 'gray-matter';
@@ -761,8 +761,7 @@ describe('buildPublication', () => {
       ['Lectures/lecture.py', 'python'],
       ['audit.json', 'json'],
       ['coverage.yml', 'yaml'],
-      ['page-index.txt', 'text'],
-      ['Assignments/assignment/README.md', 'markdown']
+      ['page-index.txt', 'text']
     ] as const;
     write(hub, [
       '---',
@@ -835,6 +834,159 @@ describe('buildPublication', () => {
 
     await expect(buildPublication(options)).rejects.toThrow(/Linked source artifact path escapes rootDir/);
     expect(readFileSync(stale, 'utf8')).toBe('must survive failed preflight');
+  });
+
+  it.each([
+    [
+      '05 Источники/Courses/Stanford CS336 Spring 2026',
+      'sources/courses/stanford-cs336-spring-2026'
+    ],
+    [
+      '05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025',
+      'sources/courses/berkeley-advanced-llm-agents-spring-2025'
+    ]
+  ])(
+    'rejects a %s artifact symlink that resolves outside its exact course root before cleanup',
+    async (courseSource, courseRoute) => {
+      const options = fixture('unused');
+      const hub = join(options.rootDir, courseSource, '_index.md');
+      const secret = join(options.rootDir, 'private', 'secret.pdf');
+      const leak = join(options.rootDir, courseSource, 'Lectures', 'leak.pdf');
+      write(secret, 'PRIVATE_VAULT_CONTENT');
+      mkdirSync(dirname(leak), { recursive: true });
+      symlinkSync(secret, leak);
+      write(hub, [
+        '---',
+        'title: Course hub',
+        'type: source-note',
+        'status: verified',
+        '---',
+        '[Leak](Lectures/leak.pdf)'
+      ].join('\n'));
+      write(options.manifestPath, [
+        'site_title: Fixture',
+        'sections:',
+        '  - id: sources',
+        '    title: Sources',
+        '    pages:',
+        `      - source: ${courseSource}/_index.md`,
+        `        route: ${courseRoute}/index`
+      ].join('\n'));
+      const staleOutput = join(options.outputDir, 'stale.md');
+      const staleArtifact = join(options.rootDir, 'site', 'public', courseRoute, 'stale.pdf');
+      write(staleOutput, 'must survive failed preflight');
+      write(staleArtifact, 'must survive failed preflight');
+
+      await expect(buildPublication(options)).rejects.toThrow(/escapes course root/);
+      expect(readFileSync(staleOutput, 'utf8')).toBe('must survive failed preflight');
+      expect(readFileSync(staleArtifact, 'utf8')).toBe('must survive failed preflight');
+    }
+  );
+
+  it.each([
+    [
+      '05 Источники/Courses/Stanford CS336 Spring 2026',
+      'sources/courses/stanford-cs336-spring-2026'
+    ],
+    [
+      '05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025',
+      'sources/courses/berkeley-advanced-llm-agents-spring-2025'
+    ]
+  ])('removes stale %s artifacts when a later manifest fully unpublishes the course', async (courseSource, courseRoute) => {
+    const options = fixture('unused');
+    const hub = join(options.rootDir, courseSource, '_index.md');
+    const artifact = join(options.rootDir, courseSource, 'Lectures', 'deck.pdf');
+    write(hub, [
+      '---',
+      'title: Course hub',
+      'type: source-note',
+      'status: verified',
+      '---',
+      '[Deck](Lectures/deck.pdf)'
+    ].join('\n'));
+    write(artifact, 'published once');
+    write(options.manifestPath, [
+      'site_title: Fixture',
+      'sections:',
+      '  - id: sources',
+      '    title: Sources',
+      '    pages:',
+      `      - source: ${courseSource}/_index.md`,
+      `        route: ${courseRoute}/index`
+    ].join('\n'));
+
+    await buildPublication(options);
+    const published = join(options.rootDir, 'site', 'public', courseRoute, 'Lectures', 'deck.pdf');
+    expect(readFileSync(published, 'utf8')).toBe('published once');
+
+    write(options.sourcePath, [
+      '---',
+      'title: Page A',
+      'type: concept',
+      'status: stable',
+      '---',
+      'Textbook only.'
+    ].join('\n'));
+    write(options.manifestPath, [
+      'site_title: Fixture',
+      'sections:',
+      '  - id: textbook',
+      '    title: Textbook',
+      '    pages:',
+      '      - source: Notes/Page A.md',
+      '        route: page-a'
+    ].join('\n'));
+
+    await buildPublication(options);
+
+    expect(() => readFileSync(published, 'utf8')).toThrow();
+  });
+
+  it('rejects a pattern-shaped Berkeley reading outside the exact audited set', async () => {
+    const options = fixture('unused');
+    const courseSource = '05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025';
+    const courseRoute = 'sources/courses/berkeley-advanced-llm-agents-spring-2025';
+    const readingSource = `${courseSource}/Readings/meeting-99-reading-99.md`;
+    write(join(options.rootDir, readingSource), '# Unaudited reading\n\nBody.');
+    write(options.manifestPath, [
+      'site_title: Fixture',
+      'sections:',
+      '  - id: sources',
+      '    title: Sources',
+      '    pages:',
+      `      - source: ${readingSource}`,
+      `        route: ${courseRoute}/readings/meeting-99-reading-99`
+    ].join('\n'));
+
+    await expect(buildPublication(options)).rejects.toThrow(/not in the audited Berkeley reading set/);
+  });
+
+  it('rejects an unapproved raw Markdown artifact below a course root', async () => {
+    const options = fixture('unused');
+    const courseSource = '05 Источники/Courses/Stanford CS336 Spring 2026';
+    const courseRoute = 'sources/courses/stanford-cs336-spring-2026';
+    const hub = join(options.rootDir, courseSource, '_index.md');
+    const rawReadme = 'Assignments/unreviewed/README.md';
+    write(hub, [
+      '---',
+      'title: Course hub',
+      'type: source-note',
+      'status: verified',
+      '---',
+      `[Unreviewed](${rawReadme})`
+    ].join('\n'));
+    write(join(options.rootDir, courseSource, rawReadme), 'unreviewed');
+    write(options.manifestPath, [
+      'site_title: Fixture',
+      'sections:',
+      '  - id: sources',
+      '    title: Sources',
+      '    pages:',
+      `      - source: ${courseSource}/_index.md`,
+      `        route: ${courseRoute}/index`
+    ].join('\n'));
+
+    await expect(buildPublication(options)).rejects.toThrow(/not an approved raw Markdown course artifact/);
   });
 
   it('refuses to clean rootDir itself as the generated output directory', async () => {
