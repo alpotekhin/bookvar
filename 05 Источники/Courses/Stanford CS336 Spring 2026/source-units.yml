@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "review_method": "Per-source review of every executable lecture edtrace and source file, every PDF lecture page outline with representative raster inspection, and every assignment handout, adapter, and test tree. Page and pdfimages detections are evidence only; they never create units or visuals on their own.",
-  "semantic_review_sha256": "0fce3469ba594da49fe3dc72cf5deeb041db5777d9d8cf46c2ce886b7c237565",
+  "review_method": "Per-source review of every executable lecture edtrace and source file, every PDF lecture page, and every assignment handout, adapter, and test tree. Every reviewed PDF page is closed by a semantic unit or an evidence-backed administrative exclusion; page and pdfimages detections are evidence only, never standalone teaching visuals.",
+  "semantic_review_sha256": "c059b5dfe112bb6f434008ded2401020fbd58b58df6a9116ddded700608c7a49",
   "units": [
     {
       "id": "lecture-01-section-4-cs336-language-models-from-scratch-spring-2026",
@@ -1382,9 +1382,22 @@
       "asset_url": "https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/deep-network.png"
     },
     {
-      "id": "lecture-03-architecture-framing",
+      "id": "lecture-03-title-slide",
       "source_object": "lecture-03",
       "order": 1,
+      "source_location": "Lectures/repository/lecture_03.pdf#page=1:semantic=title-slide",
+      "kind": "administrative",
+      "title": "Lecture 3 title and attribution",
+      "semantic_id": "title-slide",
+      "evidence_text": "Lecture 3",
+      "page": 1,
+      "exclusion_reason": "Title and attribution are preserved but contain no teaching claim.",
+      "exclusion_evidence": "Lecture 3"
+    },
+    {
+      "id": "lecture-03-architecture-framing",
+      "source_object": "lecture-03",
+      "order": 2,
       "source_location": "Lectures/repository/lecture_03.pdf#pages=2-9:semantic=architecture-framing",
       "kind": "section",
       "title": "Transformer baseline and architecture comparison",
@@ -1396,7 +1409,7 @@
     {
       "id": "lecture-03-normalization-stability",
       "source_object": "lecture-03",
-      "order": 2,
+      "order": 3,
       "source_location": "Lectures/repository/lecture_03.pdf#pages=10-19:semantic=normalization-stability",
       "kind": "derivation",
       "title": "Pre-norm, post-norm, RMSNorm, and gradient stability",
@@ -1408,7 +1421,7 @@
     {
       "id": "lecture-03-rmsnorm-validation",
       "source_object": "lecture-03",
-      "order": 3,
+      "order": 4,
       "source_location": "Lectures/repository/lecture_03.pdf#pages=15-17:semantic=rmsnorm-validation",
       "kind": "experiment",
       "title": "RMSNorm runtime and performance validation",
@@ -1420,7 +1433,7 @@
     {
       "id": "lecture-03-gated-activations",
       "source_object": "lecture-03",
-      "order": 4,
+      "order": 5,
       "source_location": "Lectures/repository/lecture_03.pdf#pages=20-29:semantic=gated-activations",
       "kind": "mechanism",
       "title": "Gated activation variants and parallel feed-forward layers",
@@ -1432,7 +1445,7 @@
     {
       "id": "lecture-03-rope-derivation",
       "source_object": "lecture-03",
-      "order": 5,
+      "order": 6,
       "source_location": "Lectures/repository/lecture_03.pdf#pages=30-35:semantic=rope-derivation",
       "kind": "derivation",
       "title": "RoPE relative-position invariance derivation",
@@ -1444,7 +1457,7 @@
     {
       "id": "lecture-03-hyperparameter-evidence",
       "source_object": "lecture-03",
-      "order": 6,
+      "order": 7,
       "source_location": "Lectures/repository/lecture_03.pdf#pages=36-51:semantic=hyperparameter-evidence",
       "kind": "experiment",
       "title": "Feed-forward, head, aspect-ratio, vocabulary, and regularization evidence",
@@ -1456,7 +1469,7 @@
     {
       "id": "lecture-03-softmax-stability-failures",
       "source_object": "lecture-03",
-      "order": 7,
+      "order": 8,
       "source_location": "Lectures/repository/lecture_03.pdf#pages=52-56:semantic=softmax-stability-failures",
       "kind": "failure-mode",
       "title": "Softmax instability, z-loss, QK norm, and logit soft-capping",
@@ -1468,7 +1481,7 @@
     {
       "id": "lecture-03-kv-cache-attention",
       "source_object": "lecture-03",
-      "order": 8,
+      "order": 9,
       "source_location": "Lectures/repository/lecture_03.pdf#pages=57-63:semantic=kv-cache-attention",
       "kind": "mechanism",
       "title": "GQA and MQA KV-cache cost reduction",
@@ -1480,7 +1493,7 @@
     {
       "id": "lecture-03-sparse-attention",
       "source_object": "lecture-03",
-      "order": 9,
+      "order": 10,
       "source_location": "Lectures/repository/lecture_03.pdf#pages=64-66:semantic=sparse-attention",
       "kind": "mechanism",
       "title": "Sparse and interleaved long-range attention",
@@ -1492,7 +1505,7 @@
     {
       "id": "lecture-03-recap",
       "source_object": "lecture-03",
-      "order": 10,
+      "order": 11,
       "source_location": "Lectures/repository/lecture_03.pdf#page=67:semantic=recap",
       "kind": "section",
       "title": "Architecture and hyperparameter recap",
@@ -1501,9 +1514,22 @@
       "page": 67
     },
     {
-      "id": "lecture-04-attention-alternatives",
+      "id": "lecture-04-title-slide",
       "source_object": "lecture-04",
       "order": 1,
+      "source_location": "Lectures/repository/lecture_04.pdf#page=1:semantic=title-slide",
+      "kind": "administrative",
+      "title": "Lecture 4 title and attribution",
+      "semantic_id": "title-slide",
+      "evidence_text": "Lecture 4",
+      "page": 1,
+      "exclusion_reason": "Title and attribution are preserved but contain no teaching claim.",
+      "exclusion_evidence": "Lecture 4"
+    },
+    {
+      "id": "lecture-04-attention-alternatives",
+      "source_object": "lecture-04",
+      "order": 2,
       "source_location": "Lectures/repository/lecture_04.pdf#pages=2-13:semantic=attention-alternatives",
       "kind": "section",
       "title": "Attention alternatives and hybrid sequence models",
@@ -1515,7 +1541,7 @@
     {
       "id": "lecture-04-linear-attention-recurrence",
       "source_object": "lecture-04",
-      "order": 2,
+      "order": 3,
       "source_location": "Lectures/repository/lecture_04.pdf#pages=4-10:semantic=linear-attention-recurrence",
       "kind": "derivation",
       "title": "Linear-attention recurrent form and gated state updates",
@@ -1527,7 +1553,7 @@
     {
       "id": "lecture-04-moe-motivation",
       "source_object": "lecture-04",
-      "order": 3,
+      "order": 4,
       "source_location": "Lectures/repository/lecture_04.pdf#pages=14-24:semantic=moe-motivation",
       "kind": "section",
       "title": "Mixture-of-experts motivation and scaling evidence",
@@ -1539,7 +1565,7 @@
     {
       "id": "lecture-04-moe-routing",
       "source_object": "lecture-04",
-      "order": 4,
+      "order": 5,
       "source_location": "Lectures/repository/lecture_04.pdf#pages=25-35:semantic=moe-routing",
       "kind": "mechanism",
       "title": "Top-k expert routing and architecture variants",
@@ -1551,7 +1577,7 @@
     {
       "id": "lecture-04-routing-ablations",
       "source_object": "lecture-04",
-      "order": 5,
+      "order": 6,
       "source_location": "Lectures/repository/lecture_04.pdf#pages=33-49:semantic=routing-ablations",
       "kind": "experiment",
       "title": "Expert granularity, sharing, and balancing ablations",
@@ -1563,7 +1589,7 @@
     {
       "id": "lecture-04-moe-training-failures",
       "source_object": "lecture-04",
-      "order": 6,
+      "order": 7,
       "source_location": "Lectures/repository/lecture_04.pdf#pages=36-50:semantic=moe-training-failures",
       "kind": "failure-mode",
       "title": "Discrete routing, load balance, stability, and fine-tuning failures",
@@ -1575,7 +1601,7 @@
     {
       "id": "lecture-04-moe-upcycling",
       "source_object": "lecture-04",
-      "order": 7,
+      "order": 8,
       "source_location": "Lectures/repository/lecture_04.pdf#pages=51-53:semantic=moe-upcycling",
       "kind": "worked-example",
       "title": "MiniCPM and Qwen MoE upcycling examples",
@@ -1587,7 +1613,7 @@
     {
       "id": "lecture-04-deepseek-moe-case",
       "source_object": "lecture-04",
-      "order": 8,
+      "order": 9,
       "source_location": "Lectures/repository/lecture_04.pdf#pages=54-59:semantic=deepseek-moe-case",
       "kind": "worked-example",
       "title": "DeepSeek MoE v1-v3, MLA, and MTP case study",
@@ -1599,7 +1625,7 @@
     {
       "id": "lecture-04-recap",
       "source_object": "lecture-04",
-      "order": 9,
+      "order": 10,
       "source_location": "Lectures/repository/lecture_04.pdf#page=60:semantic=recap",
       "kind": "section",
       "title": "Attention alternatives and MoE recap",
@@ -1608,9 +1634,22 @@
       "page": 60
     },
     {
-      "id": "lecture-05-gpu-anatomy",
+      "id": "lecture-05-title-slide",
       "source_object": "lecture-05",
       "order": 1,
+      "source_location": "Lectures/repository/lecture_05.pdf#page=1:semantic=title-slide",
+      "kind": "administrative",
+      "title": "Lecture 5 title and attribution",
+      "semantic_id": "title-slide",
+      "evidence_text": "Lecture 5",
+      "page": 1,
+      "exclusion_reason": "Title and attribution are preserved but contain no teaching claim.",
+      "exclusion_evidence": "Lecture 5"
+    },
+    {
+      "id": "lecture-05-gpu-anatomy",
+      "source_object": "lecture-05",
+      "order": 2,
       "source_location": "Lectures/repository/lecture_05.pdf#pages=2-19:semantic=gpu-anatomy",
       "kind": "section",
       "title": "GPU execution and memory anatomy",
@@ -1622,7 +1661,7 @@
     {
       "id": "lecture-05-roofline-performance",
       "source_object": "lecture-05",
-      "order": 2,
+      "order": 3,
       "source_location": "Lectures/repository/lecture_05.pdf#pages=20-23:semantic=roofline-performance",
       "kind": "mechanism",
       "title": "Roofline model and GPU performance constraints",
@@ -1634,7 +1673,7 @@
     {
       "id": "lecture-05-coalescing-failures",
       "source_object": "lecture-05",
-      "order": 3,
+      "order": 4,
       "source_location": "Lectures/repository/lecture_05.pdf#pages=23-39:semantic=coalescing-failures",
       "kind": "failure-mode",
       "title": "Control divergence and uncoalesced DRAM access failures",
@@ -1646,7 +1685,7 @@
     {
       "id": "lecture-05-low-precision-intensity",
       "source_object": "lecture-05",
-      "order": 4,
+      "order": 5,
       "source_location": "Lectures/repository/lecture_05.pdf#pages=24-29:semantic=low-precision-intensity",
       "kind": "derivation",
       "title": "Low-precision arithmetic-intensity derivation",
@@ -1658,7 +1697,7 @@
     {
       "id": "lecture-05-operator-fusion",
       "source_object": "lecture-05",
-      "order": 5,
+      "order": 6,
       "source_location": "Lectures/repository/lecture_05.pdf#pages=30-33:semantic=operator-fusion",
       "kind": "worked-example",
       "title": "Operator fusion for sin-squared plus cos-squared",
@@ -1670,7 +1709,7 @@
     {
       "id": "lecture-05-activation-recomputation",
       "source_object": "lecture-05",
-      "order": 6,
+      "order": 7,
       "source_location": "Lectures/repository/lecture_05.pdf#pages=34-36:semantic=activation-recomputation",
       "kind": "worked-example",
       "title": "Activation recomputation memory-traffic example",
@@ -1682,7 +1721,7 @@
     {
       "id": "lecture-05-tiling-derivation",
       "source_object": "lecture-05",
-      "order": 7,
+      "order": 8,
       "source_location": "Lectures/repository/lecture_05.pdf#pages=40-44:semantic=tiling-derivation",
       "kind": "derivation",
       "title": "Matrix tiling and shared-memory reuse derivation",
@@ -1694,7 +1733,7 @@
     {
       "id": "lecture-05-matrix-mystery",
       "source_object": "lecture-05",
-      "order": 8,
+      "order": 9,
       "source_location": "Lectures/repository/lecture_05.pdf#pages=45-48:semantic=matrix-mystery",
       "kind": "experiment",
       "title": "Matrix-size performance mystery and wave quantization",
@@ -1704,9 +1743,20 @@
       "page_end": 48
     },
     {
+      "id": "lecture-05-performance-recap-transition",
+      "source_object": "lecture-05",
+      "order": 10,
+      "source_location": "Lectures/repository/lecture_05.pdf#page=49:semantic=performance-recap-transition",
+      "kind": "section",
+      "title": "Memory-optimization recap and FlashAttention transition",
+      "semantic_id": "performance-recap-transition",
+      "evidence_text": "Recap of part 2: making ML workloads go fast",
+      "page": 49
+    },
+    {
       "id": "lecture-05-flashattention-derivation",
       "source_object": "lecture-05",
-      "order": 9,
+      "order": 11,
       "source_location": "Lectures/repository/lecture_05.pdf#pages=50-54:semantic=flashattention-derivation",
       "kind": "derivation",
       "title": "FlashAttention tiled online-softmax derivation",
@@ -1718,7 +1768,7 @@
     {
       "id": "lecture-05-recap",
       "source_object": "lecture-05",
-      "order": 10,
+      "order": 12,
       "source_location": "Lectures/repository/lecture_05.pdf#page=55:semantic=recap",
       "kind": "section",
       "title": "GPU performance recap",
@@ -2502,9 +2552,22 @@
       "source_line_end": 66
     },
     {
-      "id": "lecture-08-networking-collectives",
+      "id": "lecture-08-title-slide",
       "source_object": "lecture-08",
       "order": 1,
+      "source_location": "Lectures/repository/lecture_08.pdf#page=1:semantic=title-slide",
+      "kind": "administrative",
+      "title": "Lecture 8 title and attribution",
+      "semantic_id": "title-slide",
+      "evidence_text": "Lecture 8",
+      "page": 1,
+      "exclusion_reason": "Title and attribution are preserved but contain no teaching claim.",
+      "exclusion_evidence": "Lecture 8"
+    },
+    {
+      "id": "lecture-08-networking-collectives",
+      "source_object": "lecture-08",
+      "order": 2,
       "source_location": "Lectures/repository/lecture_08.pdf#pages=2-13:semantic=networking-collectives",
       "kind": "section",
       "title": "Networking topologies and collective communication",
@@ -2516,7 +2579,7 @@
     {
       "id": "lecture-08-zero-sharding",
       "source_object": "lecture-08",
-      "order": 2,
+      "order": 3,
       "source_location": "Lectures/repository/lecture_08.pdf#pages=14-30:semantic=zero-sharding",
       "kind": "mechanism",
       "title": "Data parallelism and ZeRO stages 1-3",
@@ -2528,7 +2591,7 @@
     {
       "id": "lecture-08-zero-memory-accounting",
       "source_object": "lecture-08",
-      "order": 3,
+      "order": 4,
       "source_location": "Lectures/repository/lecture_08.pdf#pages=16-28:semantic=zero-memory-accounting",
       "kind": "derivation",
       "title": "ZeRO communication and memory accounting",
@@ -2540,7 +2603,7 @@
     {
       "id": "lecture-08-pipeline-parallelism",
       "source_object": "lecture-08",
-      "order": 4,
+      "order": 5,
       "source_location": "Lectures/repository/lecture_08.pdf#pages=31-38:semantic=pipeline-parallelism",
       "kind": "mechanism",
       "title": "Pipeline parallelism and microbatch scheduling",
@@ -2552,7 +2615,7 @@
     {
       "id": "lecture-08-pipeline-bubble-failure",
       "source_object": "lecture-08",
-      "order": 5,
+      "order": 6,
       "source_location": "Lectures/repository/lecture_08.pdf#pages=33-38:semantic=pipeline-bubble-failure",
       "kind": "failure-mode",
       "title": "Pipeline bubble and batch-size utilization failure",
@@ -2564,7 +2627,7 @@
     {
       "id": "lecture-08-width-parallelism",
       "source_object": "lecture-08",
-      "order": 6,
+      "order": 7,
       "source_location": "Lectures/repository/lecture_08.pdf#pages=39-54:semantic=width-parallelism",
       "kind": "mechanism",
       "title": "Tensor, sequence, expert, and context parallelism",
@@ -2576,7 +2639,7 @@
     {
       "id": "lecture-08-activation-memory",
       "source_object": "lecture-08",
-      "order": 7,
+      "order": 8,
       "source_location": "Lectures/repository/lecture_08.pdf#pages=44-49:semantic=activation-memory",
       "kind": "derivation",
       "title": "Activation-memory scaling under tensor and sequence parallelism",
@@ -2588,7 +2651,7 @@
     {
       "id": "lecture-08-parallelism-comparison",
       "source_object": "lecture-08",
-      "order": 8,
+      "order": 9,
       "source_location": "Lectures/repository/lecture_08.pdf#pages=55-62:semantic=parallelism-comparison",
       "kind": "table",
       "title": "Parallelism trade-off and 3D composition tables",
@@ -2600,7 +2663,7 @@
     {
       "id": "lecture-08-model-strategy-cases",
       "source_object": "lecture-08",
-      "order": 9,
+      "order": 10,
       "source_location": "Lectures/repository/lecture_08.pdf#pages=63-72:semantic=model-strategy-cases",
       "kind": "worked-example",
       "title": "DeepSeek, Llama, Gemma, Mixtral, Nemotron, and Qwen strategies",
@@ -2612,7 +2675,7 @@
     {
       "id": "lecture-08-recap",
       "source_object": "lecture-08",
-      "order": 10,
+      "order": 11,
       "source_location": "Lectures/repository/lecture_08.pdf#page=73:semantic=recap",
       "kind": "section",
       "title": "LLM parallelism recap",
@@ -2621,9 +2684,22 @@
       "page": 73
     },
     {
-      "id": "lecture-09-scaling-history",
+      "id": "lecture-09-title-slide",
       "source_object": "lecture-09",
       "order": 1,
+      "source_location": "Lectures/repository/lecture_09.pdf#page=1:semantic=title-slide",
+      "kind": "administrative",
+      "title": "Lecture 9 title and attribution",
+      "semantic_id": "title-slide",
+      "evidence_text": "Lecture 9",
+      "page": 1,
+      "exclusion_reason": "Title and attribution are preserved but contain no teaching claim.",
+      "exclusion_evidence": "Lecture 9"
+    },
+    {
+      "id": "lecture-09-scaling-history",
+      "source_object": "lecture-09",
+      "order": 2,
       "source_location": "Lectures/repository/lecture_09.pdf#pages=2-12:semantic=scaling-history",
       "kind": "section",
       "title": "History and motivation of empirical scaling laws",
@@ -2635,7 +2711,7 @@
     {
       "id": "lecture-09-data-scaling",
       "source_object": "lecture-09",
-      "order": 2,
+      "order": 3,
       "source_location": "Lectures/repository/lecture_09.pdf#pages=13-27:semantic=data-scaling",
       "kind": "mechanism",
       "title": "Power-law data scaling",
@@ -2647,7 +2723,7 @@
     {
       "id": "lecture-09-mean-estimation-derivation",
       "source_object": "lecture-09",
-      "order": 3,
+      "order": 4,
       "source_location": "Lectures/repository/lecture_09.pdf#pages=16-20:semantic=mean-estimation-derivation",
       "kind": "derivation",
       "title": "Mean-estimation and intrinsic-dimension scaling derivations",
@@ -2659,7 +2735,7 @@
     {
       "id": "lecture-09-data-scaling-failures",
       "source_object": "lecture-09",
-      "order": 4,
+      "order": 5,
       "source_location": "Lectures/repository/lecture_09.pdf#pages=21-26:semantic=data-scaling-failures",
       "kind": "failure-mode",
       "title": "Distribution shift, repetition, finiteness, and blind extrapolation failures",
@@ -2671,7 +2747,7 @@
     {
       "id": "lecture-09-engineering-scaling",
       "source_object": "lecture-09",
-      "order": 5,
+      "order": 6,
       "source_location": "Lectures/repository/lecture_09.pdf#pages=28-42:semantic=engineering-scaling",
       "kind": "experiment",
       "title": "Architecture, optimizer, depth, batch, and learning-rate scaling evidence",
@@ -2683,7 +2759,7 @@
     {
       "id": "lecture-09-joint-model-data-scaling",
       "source_object": "lecture-09",
-      "order": 6,
+      "order": 7,
       "source_location": "Lectures/repository/lecture_09.pdf#pages=43-56:semantic=joint-model-data-scaling",
       "kind": "derivation",
       "title": "Joint model-data-compute scaling and Chinchilla methods",
@@ -2695,7 +2771,7 @@
     {
       "id": "lecture-09-isoflops-experiment",
       "source_object": "lecture-09",
-      "order": 7,
+      "order": 8,
       "source_location": "Lectures/repository/lecture_09.pdf#pages=46-53:semantic=isoflops-experiment",
       "kind": "experiment",
       "title": "Chinchilla minimum-run, IsoFLOPs, and joint-fit experiments",
@@ -2707,7 +2783,7 @@
     {
       "id": "lecture-09-train-inference-tradeoff",
       "source_object": "lecture-09",
-      "order": 8,
+      "order": 9,
       "source_location": "Lectures/repository/lecture_09.pdf#page=54:semantic=train-inference-tradeoff",
       "kind": "failure-mode",
       "title": "Train-optimal versus inference-aware compute allocation",
@@ -2718,7 +2794,7 @@
     {
       "id": "lecture-09-recap",
       "source_object": "lecture-09",
-      "order": 9,
+      "order": 10,
       "source_location": "Lectures/repository/lecture_09.pdf#page=57:semantic=recap",
       "kind": "section",
       "title": "Scaling-law recap",
@@ -3379,9 +3455,22 @@
       "source_line_end": 55
     },
     {
-      "id": "lecture-11-minicpm-scaling",
+      "id": "lecture-11-title-slide",
       "source_object": "lecture-11",
       "order": 1,
+      "source_location": "Lectures/repository/lecture_11.pdf#page=1:semantic=title-slide",
+      "kind": "administrative",
+      "title": "Lecture 11 title and attribution",
+      "semantic_id": "title-slide",
+      "evidence_text": "Lecture 11",
+      "page": 1,
+      "exclusion_reason": "Title and attribution are preserved but contain no teaching claim.",
+      "exclusion_evidence": "Lecture 11"
+    },
+    {
+      "id": "lecture-11-minicpm-scaling",
+      "source_object": "lecture-11",
+      "order": 2,
       "source_location": "Lectures/repository/lecture_11.pdf#pages=2-18:semantic=minicpm-scaling",
       "kind": "worked-example",
       "title": "MiniCPM muP, WSD, and Chinchilla scaling recipe",
@@ -3393,7 +3482,7 @@
     {
       "id": "lecture-11-deepseek-scaling",
       "source_object": "lecture-11",
-      "order": 2,
+      "order": 3,
       "source_location": "Lectures/repository/lecture_11.pdf#pages=19-30:semantic=deepseek-scaling",
       "kind": "worked-example",
       "title": "DeepSeek and recent-model scaling recipes",
@@ -3405,7 +3494,7 @@
     {
       "id": "lecture-11-optimizer-scaling",
       "source_object": "lecture-11",
-      "order": 3,
+      "order": 4,
       "source_location": "Lectures/repository/lecture_11.pdf#pages=31-43:semantic=optimizer-scaling",
       "kind": "experiment",
       "title": "Learning-rate, batch, optimizer, and Muon scaling experiments",
@@ -3417,7 +3506,7 @@
     {
       "id": "lecture-11-mup-derivation",
       "source_object": "lecture-11",
-      "order": 4,
+      "order": 5,
       "source_location": "Lectures/repository/lecture_11.pdf#pages=44-50:semantic=mup-derivation",
       "kind": "derivation",
       "title": "Maximum-update parametrization derivation",
@@ -3429,7 +3518,7 @@
     {
       "id": "lecture-11-mup-robustness",
       "source_object": "lecture-11",
-      "order": 5,
+      "order": 6,
       "source_location": "Lectures/repository/lecture_11.pdf#pages=51-57:semantic=mup-robustness",
       "kind": "experiment",
       "title": "muP replication and robustness experiments",
@@ -3441,7 +3530,7 @@
     {
       "id": "lecture-11-mup-failure-modes",
       "source_object": "lecture-11",
-      "order": 6,
+      "order": 7,
       "source_location": "Lectures/repository/lecture_11.pdf#pages=53-56:semantic=mup-failure-modes",
       "kind": "failure-mode",
       "title": "RMSNorm gain, exotic optimizer, and weight-decay failures for muP",
@@ -3453,7 +3542,7 @@
     {
       "id": "lecture-11-recap",
       "source_object": "lecture-11",
-      "order": 7,
+      "order": 8,
       "source_location": "Lectures/repository/lecture_11.pdf#page=58:semantic=recap",
       "kind": "section",
       "title": "Scaling in the wild recap",
@@ -5617,9 +5706,22 @@
       ]
     },
     {
-      "id": "lecture-15-posttraining-framing",
+      "id": "lecture-15-title-slide",
       "source_object": "lecture-15",
       "order": 1,
+      "source_location": "Lectures/repository/lecture_15.pdf#page=1:semantic=title-slide",
+      "kind": "administrative",
+      "title": "Lecture 15 title and attribution",
+      "semantic_id": "title-slide",
+      "evidence_text": "Lecture 15",
+      "page": 1,
+      "exclusion_reason": "Title and attribution are preserved but contain no teaching claim.",
+      "exclusion_evidence": "Lecture 15"
+    },
+    {
+      "id": "lecture-15-posttraining-framing",
+      "source_object": "lecture-15",
+      "order": 2,
       "source_location": "Lectures/repository/lecture_15.pdf#pages=2-6:semantic=posttraining-framing",
       "kind": "section",
       "title": "From pretraining to controllable instruction following",
@@ -5631,7 +5733,7 @@
     {
       "id": "lecture-15-sft-data",
       "source_object": "lecture-15",
-      "order": 2,
+      "order": 3,
       "source_location": "Lectures/repository/lecture_15.pdf#pages=7-27:semantic=sft-data",
       "kind": "worked-example",
       "title": "Instruction-tuning data progression, style, knowledge, and safety",
@@ -5643,7 +5745,7 @@
     {
       "id": "lecture-15-midtraining",
       "source_object": "lecture-15",
-      "order": 3,
+      "order": 4,
       "source_location": "Lectures/repository/lecture_15.pdf#pages=28-30:semantic=midtraining",
       "kind": "mechanism",
       "title": "Midtraining and two-phase training",
@@ -5655,7 +5757,7 @@
     {
       "id": "lecture-15-preference-data",
       "source_object": "lecture-15",
-      "order": 4,
+      "order": 5,
       "source_location": "Lectures/repository/lecture_15.pdf#pages=31-48:semantic=preference-data",
       "kind": "section",
       "title": "RLHF preference-data collection and annotator effects",
@@ -5667,7 +5769,7 @@
     {
       "id": "lecture-15-ppo-dpo",
       "source_object": "lecture-15",
-      "order": 5,
+      "order": 6,
       "source_location": "Lectures/repository/lecture_15.pdf#pages=49-61:semantic=ppo-dpo",
       "kind": "mechanism",
       "title": "PPO and DPO optimization for preferences",
@@ -5679,7 +5781,7 @@
     {
       "id": "lecture-15-dpo-derivation",
       "source_object": "lecture-15",
-      "order": 6,
+      "order": 7,
       "source_location": "Lectures/repository/lecture_15.pdf#pages=56-58:semantic=dpo-derivation",
       "kind": "derivation",
       "title": "DPO derivation from the KL-regularized RLHF objective",
@@ -5691,7 +5793,7 @@
     {
       "id": "lecture-15-rlhf-failure-modes",
       "source_object": "lecture-15",
-      "order": 7,
+      "order": 8,
       "source_location": "Lectures/repository/lecture_15.pdf#pages=62-64:semantic=rlhf-failure-modes",
       "kind": "failure-mode",
       "title": "Reward overoptimization and mode-collapse failures",
@@ -5703,7 +5805,7 @@
     {
       "id": "lecture-15-recap",
       "source_object": "lecture-15",
-      "order": 8,
+      "order": 9,
       "source_location": "Lectures/repository/lecture_15.pdf#page=65:semantic=recap",
       "kind": "section",
       "title": "SFT and RLHF recap",
@@ -5712,9 +5814,22 @@
       "page": 65
     },
     {
-      "id": "lecture-16-ppo",
+      "id": "lecture-16-title-slide",
       "source_object": "lecture-16",
       "order": 1,
+      "source_location": "Lectures/repository/lecture_16.pdf#page=1:semantic=title-slide",
+      "kind": "administrative",
+      "title": "Lecture 16 title and attribution",
+      "semantic_id": "title-slide",
+      "evidence_text": "Lecture 16",
+      "page": 1,
+      "exclusion_reason": "Title and attribution are preserved but contain no teaching claim.",
+      "exclusion_evidence": "Lecture 16"
+    },
+    {
+      "id": "lecture-16-ppo",
+      "source_object": "lecture-16",
+      "order": 2,
       "source_location": "Lectures/repository/lecture_16.pdf#pages=2-17:semantic=ppo",
       "kind": "mechanism",
       "title": "PPO objectives, rollout loop, reward shaping, and GAE",
@@ -5726,7 +5841,7 @@
     {
       "id": "lecture-16-grpo",
       "source_object": "lecture-16",
-      "order": 2,
+      "order": 3,
       "source_location": "Lectures/repository/lecture_16.pdf#pages=18-24:semantic=grpo",
       "kind": "derivation",
       "title": "GRPO objective and group-relative advantage derivation",
@@ -5738,7 +5853,7 @@
     {
       "id": "lecture-16-grpo-bias-failures",
       "source_object": "lecture-16",
-      "order": 3,
+      "order": 4,
       "source_location": "Lectures/repository/lecture_16.pdf#pages=22-24:semantic=grpo-bias-failures",
       "kind": "failure-mode",
       "title": "GRPO invalid baseline and length-bias failures",
@@ -5750,7 +5865,7 @@
     {
       "id": "lecture-16-r1-case",
       "source_object": "lecture-16",
-      "order": 4,
+      "order": 5,
       "source_location": "Lectures/repository/lecture_16.pdf#pages=25-38:semantic=r1-case",
       "kind": "worked-example",
       "title": "DeepSeek R1 and R1-Zero training case study",
@@ -5762,7 +5877,7 @@
     {
       "id": "lecture-16-rlvr-experiments",
       "source_object": "lecture-16",
-      "order": 5,
+      "order": 6,
       "source_location": "Lectures/repository/lecture_16.pdf#pages=28-48:semantic=rlvr-experiments",
       "kind": "experiment",
       "title": "RLVR scaling, ablation, and expert-iteration comparisons",
@@ -5774,7 +5889,7 @@
     {
       "id": "lecture-16-kimi-case",
       "source_object": "lecture-16",
-      "order": 6,
+      "order": 7,
       "source_location": "Lectures/repository/lecture_16.pdf#pages=39-48:semantic=kimi-case",
       "kind": "worked-example",
       "title": "Kimi K1.5 data, RL, length control, and infrastructure case study",
@@ -5786,7 +5901,7 @@
     {
       "id": "lecture-16-qwen-case",
       "source_object": "lecture-16",
-      "order": 7,
+      "order": 8,
       "source_location": "Lectures/repository/lecture_16.pdf#pages=49-60:semantic=qwen-case",
       "kind": "worked-example",
       "title": "Qwen3 reasoning, agentic RL, and expert-model case study",
@@ -5798,7 +5913,7 @@
     {
       "id": "lecture-16-recap",
       "source_object": "lecture-16",
-      "order": 8,
+      "order": 9,
       "source_location": "Lectures/repository/lecture_16.pdf#page=61:semantic=recap",
       "kind": "section",
       "title": "RLVR recap",
@@ -6315,6 +6430,7 @@
       "title": "Understanding Unicode (1 point)",
       "semantic_id": "task-unicode1",
       "task_id": "unicode1",
+      "evidence_text": "Problem (unicode1):",
       "page": 3
     },
     {
@@ -6357,12 +6473,14 @@
       "id": "assignment-01-task-unicode2",
       "source_object": "assignment-01",
       "order": 6,
-      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=4:problem=unicode2",
+      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#pages=4-8:problem=unicode2",
       "kind": "task",
       "title": "Unicode Encodings (3 points)",
       "semantic_id": "task-unicode2",
       "task_id": "unicode2",
-      "page": 4
+      "evidence_text": "Problem (unicode2):",
+      "page_start": 4,
+      "page_end": 8
     },
     {
       "id": "assignment-01-deliverable-unicode2-004",
@@ -6409,6 +6527,7 @@
       "title": "BPE Tokenizer Training (15 points)",
       "semantic_id": "task-train_bpe",
       "task_id": "train_bpe",
+      "evidence_text": "Problem (train_bpe):",
       "page": 9
     },
     {
@@ -6432,6 +6551,7 @@
       "title": "BPE Training on TinyStories (2 points)",
       "semantic_id": "task-train_bpe_tinystories",
       "task_id": "train_bpe_tinystories",
+      "evidence_text": "Problem (train_bpe_tinystories):",
       "page": 9
     },
     {
@@ -6479,6 +6599,7 @@
       "title": "BPE Training on OpenWebText (2 points)",
       "semantic_id": "task-train_bpe_expts_owt",
       "task_id": "train_bpe_expts_owt",
+      "evidence_text": "Problem (train_bpe_expts_owt):",
       "page": 10
     },
     {
@@ -6514,6 +6635,7 @@
       "title": "Implementing the tokenizer (15 points)",
       "semantic_id": "task-tokenizer",
       "task_id": "tokenizer",
+      "evidence_text": "Problem (tokenizer):",
       "page": 11
     },
     {
@@ -6532,12 +6654,14 @@
       "id": "assignment-01-task-tokenizer-experiments",
       "source_object": "assignment-01",
       "order": 21,
-      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=12:problem=tokenizer_experiments",
+      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#pages=12-17:problem=tokenizer_experiments",
       "kind": "task",
       "title": "Experiments with tokenizers (4 points)",
       "semantic_id": "task-tokenizer_experiments",
       "task_id": "tokenizer_experiments",
-      "page": 12
+      "evidence_text": "Problem (tokenizer_experiments):",
+      "page_start": 12,
+      "page_end": 17
     },
     {
       "id": "assignment-01-deliverable-tokenizer-experiments-013",
@@ -6608,6 +6732,7 @@
       "title": "Implementing the linear module (1 point)",
       "semantic_id": "task-linear",
       "task_id": "linear",
+      "evidence_text": "Problem (linear):",
       "page": 18
     },
     {
@@ -6626,12 +6751,14 @@
       "id": "assignment-01-task-embedding",
       "source_object": "assignment-01",
       "order": 29,
-      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=18:problem=embedding",
+      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#pages=18-19:problem=embedding",
       "kind": "task",
       "title": "Implement the embedding module (1 point)",
       "semantic_id": "task-embedding",
       "task_id": "embedding",
-      "page": 18
+      "evidence_text": "Problem (embedding):",
+      "page_start": 18,
+      "page_end": 19
     },
     {
       "id": "assignment-01-deliverable-embedding-018",
@@ -6649,12 +6776,14 @@
       "id": "assignment-01-task-rmsnorm",
       "source_object": "assignment-01",
       "order": 31,
-      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=20:problem=rmsnorm",
+      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#pages=20-21:problem=rmsnorm",
       "kind": "task",
       "title": "Root Mean Square Layer Normalization (1 point)",
       "semantic_id": "task-rmsnorm",
       "task_id": "rmsnorm",
-      "page": 20
+      "evidence_text": "Problem (rmsnorm):",
+      "page_start": 20,
+      "page_end": 21
     },
     {
       "id": "assignment-01-deliverable-rmsnorm-019",
@@ -6677,6 +6806,7 @@
       "title": "Implement the position-wise feed-forward network (2",
       "semantic_id": "task-positionwise_feedforward",
       "task_id": "positionwise_feedforward",
+      "evidence_text": "Problem (positionwise_feedforward):",
       "page": 22
     },
     {
@@ -6700,6 +6830,7 @@
       "title": "Implement RoPE (2 points)",
       "semantic_id": "task-rope",
       "task_id": "rope",
+      "evidence_text": "Problem (rope):",
       "page": 23
     },
     {
@@ -6723,6 +6854,7 @@
       "title": "Implement softmax (1 point)",
       "semantic_id": "task-softmax",
       "task_id": "softmax",
+      "evidence_text": "Problem (softmax):",
       "page": 24
     },
     {
@@ -6746,6 +6878,7 @@
       "title": "Implement scaled dot-product attention (5",
       "semantic_id": "task-scaled_dot_product_attention",
       "task_id": "scaled_dot_product_attention",
+      "evidence_text": "Problem (scaled_dot_product_attention):",
       "page": 24
     },
     {
@@ -6769,6 +6902,7 @@
       "title": "Implement causal multi-head self-attention (5 points)",
       "semantic_id": "task-multihead_self_attention",
       "task_id": "multihead_self_attention",
+      "evidence_text": "Problem (multihead_self_attention):",
       "page": 25
     },
     {
@@ -6792,6 +6926,7 @@
       "title": "Implement the Transformer block (3 points)",
       "semantic_id": "task-transformer_block",
       "task_id": "transformer_block",
+      "evidence_text": "Problem (transformer_block):",
       "page": 26
     },
     {
@@ -6815,6 +6950,7 @@
       "title": "Implementing the Transformer LM (3 points)",
       "semantic_id": "task-transformer_lm",
       "task_id": "transformer_lm",
+      "evidence_text": "Problem (transformer_lm):",
       "page": 26
     },
     {
@@ -6833,12 +6969,14 @@
       "id": "assignment-01-task-transformer-accounting",
       "source_object": "assignment-01",
       "order": 47,
-      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=27:problem=transformer_accounting",
+      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#pages=27-28:problem=transformer_accounting",
       "kind": "task",
       "title": "Transformer LM resource accounting (5 points)",
       "semantic_id": "task-transformer_accounting",
       "task_id": "transformer_accounting",
-      "page": 27
+      "evidence_text": "Problem (transformer_accounting):",
+      "page_start": 27,
+      "page_end": 28
     },
     {
       "id": "assignment-01-deliverable-transformer-accounting-027",
@@ -6904,12 +7042,14 @@
       "id": "assignment-01-task-cross-entropy",
       "source_object": "assignment-01",
       "order": 53,
-      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=29:problem=cross_entropy",
+      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#pages=29-30:problem=cross_entropy",
       "kind": "task",
       "title": "Implement cross-entropy (1 point)",
       "semantic_id": "task-cross_entropy",
       "task_id": "cross_entropy",
-      "page": 29
+      "evidence_text": "Problem (cross_entropy):",
+      "page_start": 29,
+      "page_end": 30
     },
     {
       "id": "assignment-01-deliverable-cross-entropy-032",
@@ -6932,6 +7072,7 @@
       "title": "Tuning the learning rate (1 point)",
       "semantic_id": "task-learning_rate_tuning",
       "task_id": "learning_rate_tuning",
+      "evidence_text": "Problem (learning_rate_tuning):",
       "page": 31
     },
     {
@@ -6955,6 +7096,7 @@
       "title": "Implement AdamW (2 points)",
       "semantic_id": "task-adamw",
       "task_id": "adamw",
+      "evidence_text": "Problem (adamw):",
       "page": 32
     },
     {
@@ -6978,6 +7120,7 @@
       "title": "Resource accounting for training with AdamW (2 points)",
       "semantic_id": "task-adamw_accounting",
       "task_id": "adamw_accounting",
+      "evidence_text": "Problem (adamw_accounting):",
       "page": 32
     },
     {
@@ -7037,6 +7180,7 @@
       "title": "Implement cosine learning rate schedule with warmup",
       "semantic_id": "task-learning_rate_schedule",
       "task_id": "learning_rate_schedule",
+      "evidence_text": "Problem (learning_rate_schedule):",
       "page": 33
     },
     {
@@ -7048,18 +7192,21 @@
       "title": "Implement gradient clipping (1 point)",
       "semantic_id": "task-gradient_clipping",
       "task_id": "gradient_clipping",
+      "evidence_text": "Problem (gradient_clipping):",
       "page": 34
     },
     {
       "id": "assignment-01-task-data-loading",
       "source_object": "assignment-01",
       "order": 66,
-      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=34:problem=data_loading",
+      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#pages=34-35:problem=data_loading",
       "kind": "task",
       "title": "Implement data loading (2 points)",
       "semantic_id": "task-data_loading",
       "task_id": "data_loading",
-      "page": 34
+      "evidence_text": "Problem (data_loading):",
+      "page_start": 34,
+      "page_end": 35
     },
     {
       "id": "assignment-01-deliverable-data-loading-039",
@@ -7082,18 +7229,21 @@
       "title": "Implement model checkpointing (1 point)",
       "semantic_id": "task-checkpointing",
       "task_id": "checkpointing",
+      "evidence_text": "Problem (checkpointing):",
       "page": 36
     },
     {
       "id": "assignment-01-task-training-together",
       "source_object": "assignment-01",
       "order": 69,
-      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=36:problem=training_together",
+      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#pages=36-37:problem=training_together",
       "kind": "task",
       "title": "Put it together (4 points)",
       "semantic_id": "task-training_together",
       "task_id": "training_together",
-      "page": 36
+      "evidence_text": "Problem (training_together):",
+      "page_start": 36,
+      "page_end": 37
     },
     {
       "id": "assignment-01-deliverable-training-together-040",
@@ -7116,6 +7266,7 @@
       "title": "Decoding (3 points)",
       "semantic_id": "task-decoding",
       "task_id": "decoding",
+      "evidence_text": "Problem (decoding):",
       "page": 38
     },
     {
@@ -7134,12 +7285,14 @@
       "id": "assignment-01-task-experiment-log",
       "source_object": "assignment-01",
       "order": 73,
-      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=38:problem=experiment_log",
+      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#pages=38-39:problem=experiment_log",
       "kind": "task",
       "title": "Experiment logging (3 points)",
       "semantic_id": "task-experiment_log",
       "task_id": "experiment_log",
-      "page": 38
+      "evidence_text": "Problem (experiment_log):",
+      "page_start": 38,
+      "page_end": 39
     },
     {
       "id": "assignment-01-deliverable-experiment-log-042",
@@ -7174,6 +7327,7 @@
       "title": "Tune the learning rate (2 B200 hrs) (3 points)",
       "semantic_id": "task-learning_rate",
       "task_id": "learning_rate",
+      "evidence_text": "Problem (learning_rate):",
       "page": 40
     },
     {
@@ -7221,6 +7375,7 @@
       "title": "Batch size variations (1 B200 hr) (1 point)",
       "semantic_id": "task-batch_size_experiment",
       "task_id": "batch_size_experiment",
+      "evidence_text": "Problem (batch_size_experiment):",
       "page": 41
     },
     {
@@ -7256,6 +7411,7 @@
       "title": "Generate text (1 point)",
       "semantic_id": "task-generate",
       "task_id": "generate",
+      "evidence_text": "Problem (generate):",
       "page": 42
     },
     {
@@ -7279,6 +7435,7 @@
       "title": "Remove RMSNorm and train (0.5 B200 hrs) (1 point)",
       "semantic_id": "task-layer_norm_ablation",
       "task_id": "layer_norm_ablation",
+      "evidence_text": "Problem (layer_norm_ablation):",
       "page": 42
     },
     {
@@ -7314,6 +7471,7 @@
       "title": "Implement post-norm and train (0.5 B200 hrs) (1 point)",
       "semantic_id": "task-pre_norm_ablation",
       "task_id": "pre_norm_ablation",
+      "evidence_text": "Problem (pre_norm_ablation):",
       "page": 43
     },
     {
@@ -7337,6 +7495,7 @@
       "title": "Implement NoPE (0.5 B200 hrs) (1 point)",
       "semantic_id": "task-no_pos_emb",
       "task_id": "no_pos_emb",
+      "evidence_text": "Problem (no_pos_emb):",
       "page": 43
     },
     {
@@ -7355,12 +7514,14 @@
       "id": "assignment-01-task-swiglu-ablation",
       "source_object": "assignment-01",
       "order": 92,
-      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=43:problem=swiglu_ablation",
+      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#pages=43-44:problem=swiglu_ablation",
       "kind": "task",
       "title": "SwiGLU vs. SiLU (0.5 B200 hrs) (1 point)",
       "semantic_id": "task-swiglu_ablation",
       "task_id": "swiglu_ablation",
-      "page": 43
+      "evidence_text": "Problem (swiglu_ablation):",
+      "page_start": 43,
+      "page_end": 44
     },
     {
       "id": "assignment-01-deliverable-swiglu-ablation-053",
@@ -7395,6 +7556,7 @@
       "title": "Experiment on OWT (2 B200 hrs) (2 points)",
       "semantic_id": "task-main_experiment",
       "task_id": "main_experiment",
+      "evidence_text": "Problem (main_experiment):",
       "page": 45
     },
     {
@@ -7425,17 +7587,33 @@
       "id": "assignment-01-task-leaderboard",
       "source_object": "assignment-01",
       "order": 98,
-      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=45:problem=leaderboard",
+      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#pages=45-46:problem=leaderboard",
       "kind": "task",
       "title": "Leaderboard (10 B200 hrs) (6 points)",
       "semantic_id": "task-leaderboard",
       "task_id": "leaderboard",
-      "page": 45
+      "evidence_text": "Problem (leaderboard):",
+      "page_start": 45,
+      "page_end": 46
+    },
+    {
+      "id": "assignment-01-bibliography",
+      "source_object": "assignment-01",
+      "order": 99,
+      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#pages=46-47:semantic=bibliography",
+      "kind": "administrative",
+      "title": "Assignment bibliography",
+      "semantic_id": "bibliography",
+      "exclusion_reason": "Reference citations are preserved as provenance but excluded from teaching-content coverage.",
+      "exclusion_evidence": "Bibliography",
+      "evidence_text": "Bibliography",
+      "page_start": 46,
+      "page_end": 47
     },
     {
       "id": "assignment-01-leaderboard-budget",
       "source_object": "assignment-01",
-      "order": 99,
+      "order": 100,
       "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=46:semantic=leaderboard-budget",
       "kind": "evaluation-requirement",
       "title": "Leaderboard model minimizes validation loss within 0.75 B200-hours",
@@ -7447,7 +7625,7 @@
     {
       "id": "assignment-01-deliverable-leaderboard-057",
       "source_object": "assignment-01",
-      "order": 100,
+      "order": 101,
       "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=46:deliverable=57",
       "kind": "deliverable",
       "title": "The final validation loss that was recorded, an associated learning curve that clearly",
@@ -7459,7 +7637,7 @@
     {
       "id": "assignment-01-test-tests-test-train-bpe-py-8-test-train-bpe-speed",
       "source_object": "assignment-01",
-      "order": 101,
+      "order": 102,
       "source_location": "Assignments/assignment1-basics/tests/test_train_bpe.py#L8",
       "kind": "test-interface",
       "title": "Test contract: test train bpe speed",
@@ -7470,7 +7648,7 @@
     {
       "id": "assignment-01-test-tests-test-nn-utils-py-9-test-softmax-matches-pytorch",
       "source_object": "assignment-01",
-      "order": 102,
+      "order": 103,
       "source_location": "Assignments/assignment1-basics/tests/test_nn_utils.py#L9",
       "kind": "test-interface",
       "title": "Test contract: test softmax matches pytorch",
@@ -7481,7 +7659,7 @@
     {
       "id": "assignment-01-test-tests-test-data-py-10-test-get-batch",
       "source_object": "assignment-01",
-      "order": 103,
+      "order": 104,
       "source_location": "Assignments/assignment1-basics/tests/test_data.py#L10",
       "kind": "test-interface",
       "title": "Test contract: test get batch",
@@ -7492,7 +7670,7 @@
     {
       "id": "assignment-01-test-tests-test-model-py-21-test-linear",
       "source_object": "assignment-01",
-      "order": 104,
+      "order": 105,
       "source_location": "Assignments/assignment1-basics/tests/test_model.py#L21",
       "kind": "test-interface",
       "title": "Test contract: test linear",
@@ -7503,7 +7681,7 @@
     {
       "id": "assignment-01-test-tests-test-nn-utils-py-27-test-cross-entropy",
       "source_object": "assignment-01",
-      "order": 105,
+      "order": 106,
       "source_location": "Assignments/assignment1-basics/tests/test_nn_utils.py#L27",
       "kind": "test-interface",
       "title": "Test contract: test cross entropy",
@@ -7514,7 +7692,7 @@
     {
       "id": "assignment-01-test-tests-test-train-bpe-py-27-test-train-bpe",
       "source_object": "assignment-01",
-      "order": 106,
+      "order": 107,
       "source_location": "Assignments/assignment1-basics/tests/test_train_bpe.py#L27",
       "kind": "test-interface",
       "title": "Test contract: test train bpe",
@@ -7525,7 +7703,7 @@
     {
       "id": "assignment-01-test-tests-test-optimizer-py-29-test-adamw",
       "source_object": "assignment-01",
-      "order": 107,
+      "order": 108,
       "source_location": "Assignments/assignment1-basics/tests/test_optimizer.py#L29",
       "kind": "test-interface",
       "title": "Test contract: test adamw",
@@ -7536,7 +7714,7 @@
     {
       "id": "assignment-01-test-tests-test-model-py-32-test-embedding",
       "source_object": "assignment-01",
-      "order": 108,
+      "order": 109,
       "source_location": "Assignments/assignment1-basics/tests/test_model.py#L32",
       "kind": "test-interface",
       "title": "Test contract: test embedding",
@@ -7547,7 +7725,7 @@
     {
       "id": "assignment-01-test-tests-test-model-py-43-test-swiglu",
       "source_object": "assignment-01",
-      "order": 109,
+      "order": 110,
       "source_location": "Assignments/assignment1-basics/tests/test_model.py#L43",
       "kind": "test-interface",
       "title": "Test contract: test swiglu",
@@ -7558,7 +7736,7 @@
     {
       "id": "assignment-01-test-tests-test-optimizer-py-52-test-get-lr-cosine-schedule",
       "source_object": "assignment-01",
-      "order": 110,
+      "order": 111,
       "source_location": "Assignments/assignment1-basics/tests/test_optimizer.py#L52",
       "kind": "test-interface",
       "title": "Test contract: test get lr cosine schedule",
@@ -7569,7 +7747,7 @@
     {
       "id": "assignment-01-test-tests-test-model-py-57-test-scaled-dot-product-attention",
       "source_object": "assignment-01",
-      "order": 111,
+      "order": 112,
       "source_location": "Assignments/assignment1-basics/tests/test_model.py#L57",
       "kind": "test-interface",
       "title": "Test contract: test scaled dot product attention",
@@ -7580,7 +7758,7 @@
     {
       "id": "assignment-01-test-tests-test-serialization-py-57-test-checkpointing",
       "source_object": "assignment-01",
-      "order": 112,
+      "order": 113,
       "source_location": "Assignments/assignment1-basics/tests/test_serialization.py#L57",
       "kind": "test-interface",
       "title": "Test contract: test checkpointing",
@@ -7591,7 +7769,7 @@
     {
       "id": "assignment-01-test-tests-test-nn-utils-py-62-test-gradient-clipping",
       "source_object": "assignment-01",
-      "order": 113,
+      "order": 114,
       "source_location": "Assignments/assignment1-basics/tests/test_nn_utils.py#L62",
       "kind": "test-interface",
       "title": "Test contract: test gradient clipping",
@@ -7602,7 +7780,7 @@
     {
       "id": "assignment-01-test-tests-test-model-py-65-test-4d-scaled-dot-product-attention",
       "source_object": "assignment-01",
-      "order": 114,
+      "order": 115,
       "source_location": "Assignments/assignment1-basics/tests/test_model.py#L65",
       "kind": "test-interface",
       "title": "Test contract: test 4d scaled dot product attention",
@@ -7613,7 +7791,7 @@
     {
       "id": "assignment-01-test-tests-test-train-bpe-py-65-test-train-bpe-special-tokens",
       "source_object": "assignment-01",
-      "order": 115,
+      "order": 116,
       "source_location": "Assignments/assignment1-basics/tests/test_train_bpe.py#L65",
       "kind": "test-interface",
       "title": "Test contract: test train bpe special tokens",
@@ -7624,7 +7802,7 @@
     {
       "id": "assignment-01-test-tests-test-model-py-77-test-multihead-self-attention",
       "source_object": "assignment-01",
-      "order": 116,
+      "order": 117,
       "source_location": "Assignments/assignment1-basics/tests/test_model.py#L77",
       "kind": "test-interface",
       "title": "Test contract: test multihead self attention",
@@ -7635,7 +7813,7 @@
     {
       "id": "assignment-01-test-tests-test-tokenizer-py-77-test-roundtrip-empty",
       "source_object": "assignment-01",
-      "order": 117,
+      "order": 118,
       "source_location": "Assignments/assignment1-basics/tests/test_tokenizer.py#L77",
       "kind": "test-interface",
       "title": "Test contract: test roundtrip empty",
@@ -7646,7 +7824,7 @@
     {
       "id": "assignment-01-test-tests-test-tokenizer-py-88-test-empty-matches-tiktoken",
       "source_object": "assignment-01",
-      "order": 118,
+      "order": 119,
       "source_location": "Assignments/assignment1-basics/tests/test_tokenizer.py#L88",
       "kind": "test-interface",
       "title": "Test contract: test empty matches tiktoken",
@@ -7657,7 +7835,7 @@
     {
       "id": "assignment-01-test-tests-test-model-py-94-test-multihead-self-attention-with-rope",
       "source_object": "assignment-01",
-      "order": 119,
+      "order": 120,
       "source_location": "Assignments/assignment1-basics/tests/test_model.py#L94",
       "kind": "test-interface",
       "title": "Test contract: test multihead self attention with rope",
@@ -7668,7 +7846,7 @@
     {
       "id": "assignment-01-test-tests-test-tokenizer-py-107-test-roundtrip-single-character",
       "source_object": "assignment-01",
-      "order": 120,
+      "order": 121,
       "source_location": "Assignments/assignment1-basics/tests/test_tokenizer.py#L107",
       "kind": "test-interface",
       "title": "Test contract: test roundtrip single character",
@@ -7679,7 +7857,7 @@
     {
       "id": "assignment-01-test-tests-test-model-py-117-test-transformer-lm",
       "source_object": "assignment-01",
-      "order": 121,
+      "order": 122,
       "source_location": "Assignments/assignment1-basics/tests/test_model.py#L117",
       "kind": "test-interface",
       "title": "Test contract: test transformer lm",
@@ -7690,7 +7868,7 @@
     {
       "id": "assignment-01-test-tests-test-tokenizer-py-118-test-single-character-matches-tiktoken",
       "source_object": "assignment-01",
-      "order": 122,
+      "order": 123,
       "source_location": "Assignments/assignment1-basics/tests/test_tokenizer.py#L118",
       "kind": "test-interface",
       "title": "Test contract: test single character matches tiktoken",
@@ -7701,7 +7879,7 @@
     {
       "id": "assignment-01-test-tests-test-model-py-136-test-transformer-lm-truncated-input",
       "source_object": "assignment-01",
-      "order": 123,
+      "order": 124,
       "source_location": "Assignments/assignment1-basics/tests/test_model.py#L136",
       "kind": "test-interface",
       "title": "Test contract: test transformer lm truncated input",
@@ -7712,7 +7890,7 @@
     {
       "id": "assignment-01-test-tests-test-tokenizer-py-137-test-roundtrip-single-unicode-character",
       "source_object": "assignment-01",
-      "order": 124,
+      "order": 125,
       "source_location": "Assignments/assignment1-basics/tests/test_tokenizer.py#L137",
       "kind": "test-interface",
       "title": "Test contract: test roundtrip single unicode character",
@@ -7723,7 +7901,7 @@
     {
       "id": "assignment-01-test-tests-test-tokenizer-py-148-test-single-unicode-character-matches-tiktoken",
       "source_object": "assignment-01",
-      "order": 125,
+      "order": 126,
       "source_location": "Assignments/assignment1-basics/tests/test_tokenizer.py#L148",
       "kind": "test-interface",
       "title": "Test contract: test single unicode character matches tiktoken",
@@ -7734,7 +7912,7 @@
     {
       "id": "assignment-01-test-tests-test-model-py-158-test-transformer-block",
       "source_object": "assignment-01",
-      "order": 126,
+      "order": 127,
       "source_location": "Assignments/assignment1-basics/tests/test_model.py#L158",
       "kind": "test-interface",
       "title": "Test contract: test transformer block",
@@ -7745,7 +7923,7 @@
     {
       "id": "assignment-01-test-tests-test-tokenizer-py-164-test-roundtrip-ascii-string",
       "source_object": "assignment-01",
-      "order": 127,
+      "order": 128,
       "source_location": "Assignments/assignment1-basics/tests/test_tokenizer.py#L164",
       "kind": "test-interface",
       "title": "Test contract: test roundtrip ascii string",
@@ -7756,7 +7934,7 @@
     {
       "id": "assignment-01-test-tests-test-tokenizer-py-175-test-ascii-string-matches-tiktoken",
       "source_object": "assignment-01",
-      "order": 128,
+      "order": 129,
       "source_location": "Assignments/assignment1-basics/tests/test_tokenizer.py#L175",
       "kind": "test-interface",
       "title": "Test contract: test ascii string matches tiktoken",
@@ -7767,7 +7945,7 @@
     {
       "id": "assignment-01-test-tests-test-model-py-176-test-rmsnorm",
       "source_object": "assignment-01",
-      "order": 129,
+      "order": 130,
       "source_location": "Assignments/assignment1-basics/tests/test_model.py#L176",
       "kind": "test-interface",
       "title": "Test contract: test rmsnorm",
@@ -7778,7 +7956,7 @@
     {
       "id": "assignment-01-test-tests-test-model-py-186-test-rope",
       "source_object": "assignment-01",
-      "order": 130,
+      "order": 131,
       "source_location": "Assignments/assignment1-basics/tests/test_model.py#L186",
       "kind": "test-interface",
       "title": "Test contract: test rope",
@@ -7789,7 +7967,7 @@
     {
       "id": "assignment-01-test-tests-test-model-py-193-test-silu-matches-pytorch",
       "source_object": "assignment-01",
-      "order": 131,
+      "order": 132,
       "source_location": "Assignments/assignment1-basics/tests/test_model.py#L193",
       "kind": "test-interface",
       "title": "Test contract: test silu matches pytorch",
@@ -7800,7 +7978,7 @@
     {
       "id": "assignment-01-test-tests-test-tokenizer-py-193-test-roundtrip-unicode-string",
       "source_object": "assignment-01",
-      "order": 132,
+      "order": 133,
       "source_location": "Assignments/assignment1-basics/tests/test_tokenizer.py#L193",
       "kind": "test-interface",
       "title": "Test contract: test roundtrip unicode string",
@@ -7811,7 +7989,7 @@
     {
       "id": "assignment-01-test-tests-test-tokenizer-py-204-test-unicode-string-matches-tiktoken",
       "source_object": "assignment-01",
-      "order": 133,
+      "order": 134,
       "source_location": "Assignments/assignment1-basics/tests/test_tokenizer.py#L204",
       "kind": "test-interface",
       "title": "Test contract: test unicode string matches tiktoken",
@@ -7822,7 +8000,7 @@
     {
       "id": "assignment-01-test-tests-test-tokenizer-py-219-test-roundtrip-unicode-string-with-special-tokens",
       "source_object": "assignment-01",
-      "order": 134,
+      "order": 135,
       "source_location": "Assignments/assignment1-basics/tests/test_tokenizer.py#L219",
       "kind": "test-interface",
       "title": "Test contract: test roundtrip unicode string with special tokens",
@@ -7833,7 +8011,7 @@
     {
       "id": "assignment-01-test-tests-test-tokenizer-py-233-test-unicode-string-with-special-tokens-matches-tiktoken",
       "source_object": "assignment-01",
-      "order": 135,
+      "order": 136,
       "source_location": "Assignments/assignment1-basics/tests/test_tokenizer.py#L233",
       "kind": "test-interface",
       "title": "Test contract: test unicode string with special tokens matches tiktoken",
@@ -7844,7 +8022,7 @@
     {
       "id": "assignment-01-test-tests-test-tokenizer-py-248-test-overlapping-special-tokens",
       "source_object": "assignment-01",
-      "order": 136,
+      "order": 137,
       "source_location": "Assignments/assignment1-basics/tests/test_tokenizer.py#L248",
       "kind": "test-interface",
       "title": "Test contract: test overlapping special tokens",
@@ -7855,7 +8033,7 @@
     {
       "id": "assignment-01-test-tests-test-tokenizer-py-265-test-address-roundtrip",
       "source_object": "assignment-01",
-      "order": 137,
+      "order": 138,
       "source_location": "Assignments/assignment1-basics/tests/test_tokenizer.py#L265",
       "kind": "test-interface",
       "title": "Test contract: test address roundtrip",
@@ -7866,7 +8044,7 @@
     {
       "id": "assignment-01-test-tests-test-tokenizer-py-277-test-address-matches-tiktoken",
       "source_object": "assignment-01",
-      "order": 138,
+      "order": 139,
       "source_location": "Assignments/assignment1-basics/tests/test_tokenizer.py#L277",
       "kind": "test-interface",
       "title": "Test contract: test address matches tiktoken",
@@ -7877,7 +8055,7 @@
     {
       "id": "assignment-01-test-tests-test-tokenizer-py-294-test-german-roundtrip",
       "source_object": "assignment-01",
-      "order": 139,
+      "order": 140,
       "source_location": "Assignments/assignment1-basics/tests/test_tokenizer.py#L294",
       "kind": "test-interface",
       "title": "Test contract: test german roundtrip",
@@ -7888,7 +8066,7 @@
     {
       "id": "assignment-01-test-tests-test-tokenizer-py-306-test-german-matches-tiktoken",
       "source_object": "assignment-01",
-      "order": 140,
+      "order": 141,
       "source_location": "Assignments/assignment1-basics/tests/test_tokenizer.py#L306",
       "kind": "test-interface",
       "title": "Test contract: test german matches tiktoken",
@@ -7899,7 +8077,7 @@
     {
       "id": "assignment-01-test-tests-test-tokenizer-py-323-test-tinystories-sample-roundtrip",
       "source_object": "assignment-01",
-      "order": 141,
+      "order": 142,
       "source_location": "Assignments/assignment1-basics/tests/test_tokenizer.py#L323",
       "kind": "test-interface",
       "title": "Test contract: test tinystories sample roundtrip",
@@ -7910,7 +8088,7 @@
     {
       "id": "assignment-01-test-tests-test-tokenizer-py-335-test-tinystories-matches-tiktoken",
       "source_object": "assignment-01",
-      "order": 142,
+      "order": 143,
       "source_location": "Assignments/assignment1-basics/tests/test_tokenizer.py#L335",
       "kind": "test-interface",
       "title": "Test contract: test tinystories matches tiktoken",
@@ -7921,7 +8099,7 @@
     {
       "id": "assignment-01-test-tests-test-tokenizer-py-351-test-encode-special-token-trailing-newlines",
       "source_object": "assignment-01",
-      "order": 143,
+      "order": 144,
       "source_location": "Assignments/assignment1-basics/tests/test_tokenizer.py#L351",
       "kind": "test-interface",
       "title": "Test contract: test encode special token trailing newlines",
@@ -7932,7 +8110,7 @@
     {
       "id": "assignment-01-test-tests-test-tokenizer-py-367-test-encode-special-token-double-newline-non-whitespace",
       "source_object": "assignment-01",
-      "order": 144,
+      "order": 145,
       "source_location": "Assignments/assignment1-basics/tests/test_tokenizer.py#L367",
       "kind": "test-interface",
       "title": "Test contract: test encode special token double newline non whitespace",
@@ -7943,7 +8121,7 @@
     {
       "id": "assignment-01-test-tests-test-tokenizer-py-383-test-encode-iterable-tinystories-sample-roundtrip",
       "source_object": "assignment-01",
-      "order": 145,
+      "order": 146,
       "source_location": "Assignments/assignment1-basics/tests/test_tokenizer.py#L383",
       "kind": "test-interface",
       "title": "Test contract: test encode iterable tinystories sample roundtrip",
@@ -7954,7 +8132,7 @@
     {
       "id": "assignment-01-test-tests-test-tokenizer-py-397-test-encode-iterable-tinystories-matches-tiktoken",
       "source_object": "assignment-01",
-      "order": 146,
+      "order": 147,
       "source_location": "Assignments/assignment1-basics/tests/test_tokenizer.py#L397",
       "kind": "test-interface",
       "title": "Test contract: test encode iterable tinystories matches tiktoken",
@@ -7965,7 +8143,7 @@
     {
       "id": "assignment-01-test-tests-test-tokenizer-py-420-test-encode-iterable-memory-usage",
       "source_object": "assignment-01",
-      "order": 147,
+      "order": 148,
       "source_location": "Assignments/assignment1-basics/tests/test_tokenizer.py#L420",
       "kind": "test-interface",
       "title": "Test contract: test encode iterable memory usage",
@@ -7976,7 +8154,7 @@
     {
       "id": "assignment-01-test-tests-test-tokenizer-py-436-test-encode-memory-usage",
       "source_object": "assignment-01",
-      "order": 148,
+      "order": 149,
       "source_location": "Assignments/assignment1-basics/tests/test_tokenizer.py#L436",
       "kind": "test-interface",
       "title": "Test contract: test encode memory usage",
@@ -8002,12 +8180,14 @@
       "id": "assignment-02-task-benchmarking-script",
       "source_object": "assignment-02",
       "order": 2,
-      "source_location": "Assignments/assignment2-systems/cs336_assignment2_systems.pdf#page=3:problem=benchmarking_script",
+      "source_location": "Assignments/assignment2-systems/cs336_assignment2_systems.pdf#pages=3-5:problem=benchmarking_script",
       "kind": "task",
       "title": "Benchmarking Script (4 points)",
       "semantic_id": "task-benchmarking_script",
       "task_id": "benchmarking_script",
-      "page": 3
+      "evidence_text": "Problem (benchmarking_script):",
+      "page_start": 3,
+      "page_end": 5
     },
     {
       "id": "assignment-02-benchmark-synchronization",
@@ -8077,6 +8257,7 @@
       "title": "Nsight Systems Profiling (5 points)",
       "semantic_id": "task-nsys_profile",
       "task_id": "nsys_profile",
+      "evidence_text": "Problem (nsys_profile):",
       "page": 6
     },
     {
@@ -8148,6 +8329,7 @@
       "title": "Mixed-Precision Accumulation (1 point)",
       "semantic_id": "task-mixed_precision_accumulation",
       "task_id": "mixed_precision_accumulation",
+      "evidence_text": "Problem (mixed_precision_accumulation):",
       "page": 7
     },
     {
@@ -8171,6 +8353,7 @@
       "title": "Benchmarking Mixed Precision (2 points)",
       "semantic_id": "task-benchmarking_mixed_precision",
       "task_id": "benchmarking_mixed_precision",
+      "evidence_text": "Problem (benchmarking_mixed_precision):",
       "page": 8
     },
     {
@@ -8213,12 +8396,14 @@
       "id": "assignment-02-task-memory-profiling",
       "source_object": "assignment-02",
       "order": 20,
-      "source_location": "Assignments/assignment2-systems/cs336_assignment2_systems.pdf#page=9:problem=memory_profiling",
+      "source_location": "Assignments/assignment2-systems/cs336_assignment2_systems.pdf#pages=9-14:problem=memory_profiling",
       "kind": "task",
       "title": "Memory Profiling (4 points)",
       "semantic_id": "task-memory_profiling",
       "task_id": "memory_profiling",
-      "page": 9
+      "evidence_text": "Problem (memory_profiling):",
+      "page_start": 9,
+      "page_end": 14
     },
     {
       "id": "assignment-02-deliverable-memory-profiling-013",
@@ -8301,6 +8486,7 @@
       "title": "Memory-Optimal Gradient Checkpointing (4 points)",
       "semantic_id": "task-gradient_checkpointing",
       "task_id": "gradient_checkpointing",
+      "evidence_text": "Problem (gradient_checkpointing):",
       "page": 15
     },
     {
@@ -8336,6 +8522,7 @@
       "title": "PyTorch Attention Benchmarking (2 points)",
       "semantic_id": "task-pytorch_attention",
       "task_id": "pytorch_attention",
+      "evidence_text": "Problem (pytorch_attention):",
       "page": 16
     },
     {
@@ -8354,12 +8541,14 @@
       "id": "assignment-02-task-torch-compile",
       "source_object": "assignment-02",
       "order": 32,
-      "source_location": "Assignments/assignment2-systems/cs336_assignment2_systems.pdf#page=16:problem=torch_compile",
+      "source_location": "Assignments/assignment2-systems/cs336_assignment2_systems.pdf#pages=16-25:problem=torch_compile",
       "kind": "task",
       "title": "Torch Compile (2 points)",
       "semantic_id": "task-torch_compile",
       "task_id": "torch_compile",
-      "page": 16
+      "evidence_text": "Problem (torch_compile):",
+      "page_start": 16,
+      "page_end": 25
     },
     {
       "id": "assignment-02-deliverable-torch-compile-022",
@@ -8401,12 +8590,14 @@
       "id": "assignment-02-task-flash-forward",
       "source_object": "assignment-02",
       "order": 36,
-      "source_location": "Assignments/assignment2-systems/cs336_assignment2_systems.pdf#page=26:problem=flash_forward",
+      "source_location": "Assignments/assignment2-systems/cs336_assignment2_systems.pdf#pages=26-27:problem=flash_forward",
       "kind": "task",
       "title": "FlashAttention-2 Forward Pass (15 points)",
       "semantic_id": "task-flash_forward",
       "task_id": "flash_forward",
-      "page": 26
+      "evidence_text": "Problem (flash_forward):",
+      "page_start": 26,
+      "page_end": 27
     },
     {
       "id": "assignment-02-deliverable-flash-forward-024",
@@ -8465,6 +8656,7 @@
       "title": "FlashAttention-2 Backward Pass (5 points)",
       "semantic_id": "task-flash_backward",
       "task_id": "flash_backward",
+      "evidence_text": "Problem (flash_backward):",
       "page": 28
     },
     {
@@ -8483,12 +8675,14 @@
       "id": "assignment-02-task-flash-benchmarking",
       "source_object": "assignment-02",
       "order": 43,
-      "source_location": "Assignments/assignment2-systems/cs336_assignment2_systems.pdf#page=28:problem=flash_benchmarking",
+      "source_location": "Assignments/assignment2-systems/cs336_assignment2_systems.pdf#pages=28-31:problem=flash_benchmarking",
       "kind": "task",
       "title": "FlashAttention-2 Benchmarking (5 points)",
       "semantic_id": "task-flash_benchmarking",
       "task_id": "flash_benchmarking",
-      "page": 28
+      "evidence_text": "Problem (flash_benchmarking):",
+      "page_start": 28,
+      "page_end": 31
     },
     {
       "id": "assignment-02-deliverable-flash-benchmarking-028",
@@ -8534,6 +8728,7 @@
       "title": "Distributed Communication (Single",
       "semantic_id": "task-distributed_communication_single_node",
       "task_id": "distributed_communication_single_node",
+      "evidence_text": "Problem (distributed_communication_single_node):",
       "page": 32
     },
     {
@@ -8557,6 +8752,7 @@
       "title": "Naïve DDP (5 points)",
       "semantic_id": "task-naive_ddp",
       "task_id": "naive_ddp",
+      "evidence_text": "Problem (naive_ddp):",
       "page": 33
     },
     {
@@ -8580,6 +8776,7 @@
       "title": "Naïve DDP Benchmarking (3 points)",
       "semantic_id": "task-naive_ddp_benchmarking",
       "task_id": "naive_ddp_benchmarking",
+      "evidence_text": "Problem (naive_ddp_benchmarking):",
       "page": 33
     },
     {
@@ -8603,6 +8800,7 @@
       "title": "Minimal DDP with Flat Gradients",
       "semantic_id": "task-minimal_ddp_flat_benchmarking",
       "task_id": "minimal_ddp_flat_benchmarking",
+      "evidence_text": "Problem (minimal_ddp_flat_benchmarking):",
       "page": 34
     },
     {
@@ -8626,6 +8824,7 @@
       "title": "DDP with Overlapping Individual",
       "semantic_id": "task-ddp_overlap_individual_parameters",
       "task_id": "ddp_overlap_individual_parameters",
+      "evidence_text": "Problem (ddp_overlap_individual_parameters):",
       "page": 35
     },
     {
@@ -8649,6 +8848,7 @@
       "title": "DDP Overlapping Individual",
       "semantic_id": "task-ddp_overlap_individual_parameters_benchmarking",
       "task_id": "ddp_overlap_individual_parameters_benchmarking",
+      "evidence_text": "Problem (ddp_overlap_individual_parameters_benchmarking):",
       "page": 36
     },
     {
@@ -8684,6 +8884,7 @@
       "title": "Optimizer State Sharding (15 points)",
       "semantic_id": "task-optimizer_state_sharding",
       "task_id": "optimizer_state_sharding",
+      "evidence_text": "Problem (optimizer_state_sharding):",
       "page": 37
     },
     {
@@ -8707,6 +8908,7 @@
       "title": "Optimizer State Sharding Accounting (5",
       "semantic_id": "task-optimizer_state_sharding_accounting",
       "task_id": "optimizer_state_sharding_accounting",
+      "evidence_text": "Problem (optimizer_state_sharding_accounting):",
       "page": 38
     },
     {
@@ -8754,6 +8956,7 @@
       "title": "Fully-Sharded Data Parallel (15 points)",
       "semantic_id": "task-fsdp",
       "task_id": "fsdp",
+      "evidence_text": "Problem (fsdp):",
       "page": 38
     },
     {
@@ -8772,12 +8975,14 @@
       "id": "assignment-02-task-fsdp-accounting",
       "source_object": "assignment-02",
       "order": 68,
-      "source_location": "Assignments/assignment2-systems/cs336_assignment2_systems.pdf#page=39:problem=fsdp_accounting",
+      "source_location": "Assignments/assignment2-systems/cs336_assignment2_systems.pdf#pages=39-40:problem=fsdp_accounting",
       "kind": "task",
       "title": "FSDP Accounting (5 points)",
       "semantic_id": "task-fsdp_accounting",
       "task_id": "fsdp_accounting",
-      "page": 39
+      "evidence_text": "Problem (fsdp_accounting):",
+      "page_start": 39,
+      "page_end": 40
     },
     {
       "id": "assignment-02-deliverable-fsdp-accounting-041",
@@ -8812,6 +9017,7 @@
       "title": "Alternate ring all-reduce (1 point)",
       "semantic_id": "task-alternate_ring_all_reduce",
       "task_id": "alternate_ring_all_reduce",
+      "evidence_text": "Problem (alternate_ring_all_reduce):",
       "page": 41
     },
     {
@@ -8835,6 +9041,7 @@
       "title": "Data parallel calculations (3 points)",
       "semantic_id": "task-data_parallel_calcs",
       "task_id": "data_parallel_calcs",
+      "evidence_text": "Problem (data_parallel_calcs):",
       "page": 42
     },
     {
@@ -8882,6 +9089,7 @@
       "title": "Fully sharded data parallel calculations (3 points)",
       "semantic_id": "task-fsdp_calcs",
       "task_id": "fsdp_calcs",
+      "evidence_text": "Problem (fsdp_calcs):",
       "page": 43
     },
     {
@@ -8924,12 +9132,14 @@
       "id": "assignment-02-task-tp-calcs",
       "source_object": "assignment-02",
       "order": 81,
-      "source_location": "Assignments/assignment2-systems/cs336_assignment2_systems.pdf#page=44:problem=tp_calcs",
+      "source_location": "Assignments/assignment2-systems/cs336_assignment2_systems.pdf#pages=44-45:problem=tp_calcs",
       "kind": "task",
       "title": "Tensor parallel calculations (4 points)",
       "semantic_id": "task-tp_calcs",
       "task_id": "tp_calcs",
-      "page": 44
+      "evidence_text": "Problem (tp_calcs):",
+      "page_start": 44,
+      "page_end": 45
     },
     {
       "id": "assignment-02-deliverable-tp-calcs-050",
@@ -8983,12 +9193,14 @@
       "id": "assignment-02-task-fsdp-tp-calcs",
       "source_object": "assignment-02",
       "order": 86,
-      "source_location": "Assignments/assignment2-systems/cs336_assignment2_systems.pdf#page=46:problem=fsdp_tp_calcs",
+      "source_location": "Assignments/assignment2-systems/cs336_assignment2_systems.pdf#pages=46-47:problem=fsdp_tp_calcs",
       "kind": "task",
       "title": "2D parallelism calculations (6 points)",
       "semantic_id": "task-fsdp_tp_calcs",
       "task_id": "fsdp_tp_calcs",
-      "page": 46
+      "evidence_text": "Problem (fsdp_tp_calcs):",
+      "page_start": 46,
+      "page_end": 47
     },
     {
       "id": "assignment-02-deliverable-fsdp-tp-calcs-054",
@@ -9059,6 +9271,7 @@
       "title": "Leaderboard: fastest training step (10 points)",
       "semantic_id": "task-leaderboard",
       "task_id": "leaderboard",
+      "evidence_text": "Problem (leaderboard):",
       "page": 48
     },
     {
@@ -9191,12 +9404,14 @@
       "id": "assignment-03-task-chinchilla-isoflops",
       "source_object": "assignment-03",
       "order": 3,
-      "source_location": "Assignments/assignment3-scaling/cs336_assignment3_scaling.pdf#page=2:problem=chinchilla_isoflops",
+      "source_location": "Assignments/assignment3-scaling/cs336_assignment3_scaling.pdf#pages=2-6:problem=chinchilla_isoflops",
       "kind": "task",
       "title": "IsoFLOPs scaling laws (5 points)",
       "semantic_id": "task-chinchilla_isoflops",
       "task_id": "chinchilla_isoflops",
-      "page": 2
+      "evidence_text": "Problem (chinchilla_isoflops):",
+      "page_start": 2,
+      "page_end": 6
     },
     {
       "id": "assignment-03-isoflops-reproduction",
@@ -9238,12 +9453,14 @@
       "id": "assignment-03-task-scaling-laws",
       "source_object": "assignment-03",
       "order": 7,
-      "source_location": "Assignments/assignment3-scaling/cs336_assignment3_scaling.pdf#page=7:problem=scaling_laws",
+      "source_location": "Assignments/assignment3-scaling/cs336_assignment3_scaling.pdf#pages=7-8:problem=scaling_laws",
       "kind": "task",
       "title": "Constructing scaling laws leaderboard (50 points)",
       "semantic_id": "task-scaling_laws",
       "task_id": "scaling_laws",
-      "page": 7
+      "evidence_text": "Problem (scaling_laws):",
+      "page_start": 7,
+      "page_end": 8
     },
     {
       "id": "assignment-03-leaderboard-budget",
@@ -9369,6 +9586,7 @@
       "title": "Looking at Common Crawl (4 points)",
       "semantic_id": "task-look_at_cc",
       "task_id": "look_at_cc",
+      "evidence_text": "Problem (look_at_cc):",
       "page": 3
     },
     {
@@ -9428,6 +9646,7 @@
       "title": "HTML to text conversion (3 points)",
       "semantic_id": "task-extract_text",
       "task_id": "extract_text",
+      "evidence_text": "Problem (extract_text):",
       "page": 4
     },
     {
@@ -9463,6 +9682,7 @@
       "title": "Language identification (6 points)",
       "semantic_id": "task-language_identification",
       "task_id": "language_identification",
+      "evidence_text": "Problem (language_identification):",
       "page": 5
     },
     {
@@ -9505,12 +9725,14 @@
       "id": "assignment-04-task-mask-pii",
       "source_object": "assignment-04",
       "order": 14,
-      "source_location": "Assignments/assignment4-data/cs336_assignment4_data.pdf#page=5:problem=mask_pii",
+      "source_location": "Assignments/assignment4-data/cs336_assignment4_data.pdf#pages=5-6:problem=mask_pii",
       "kind": "task",
       "title": "Personally identifiable information (3 points)",
       "semantic_id": "task-mask_pii",
       "task_id": "mask_pii",
-      "page": 5
+      "evidence_text": "Problem (mask_pii):",
+      "page_start": 5,
+      "page_end": 6
     },
     {
       "id": "assignment-04-deliverable-mask-pii-010",
@@ -9581,6 +9803,7 @@
       "title": "Harmful content (6 points)",
       "semantic_id": "task-harmful_content",
       "task_id": "harmful_content",
+      "evidence_text": "Problem (harmful_content):",
       "page": 7
     },
     {
@@ -9640,6 +9863,7 @@
       "title": "Gopher quality filters (3 points)",
       "semantic_id": "task-gopher_quality_filters",
       "task_id": "gopher_quality_filters",
+      "evidence_text": "Problem (gopher_quality_filters):",
       "page": 8
     },
     {
@@ -9687,6 +9911,7 @@
       "title": "Quality classifier (15 points)",
       "semantic_id": "task-quality_classifier",
       "task_id": "quality_classifier",
+      "evidence_text": "Problem (quality_classifier):",
       "page": 9
     },
     {
@@ -9734,6 +9959,7 @@
       "title": "Exact line deduplication (3 points)",
       "semantic_id": "task-exact_deduplication",
       "task_id": "exact_deduplication",
+      "evidence_text": "Problem (exact_deduplication):",
       "page": 10
     },
     {
@@ -9752,12 +9978,14 @@
       "id": "assignment-04-task-minhash-deduplication",
       "source_object": "assignment-04",
       "order": 35,
-      "source_location": "Assignments/assignment4-data/cs336_assignment4_data.pdf#page=11:problem=minhash_deduplication",
+      "source_location": "Assignments/assignment4-data/cs336_assignment4_data.pdf#pages=11-12:problem=minhash_deduplication",
       "kind": "task",
       "title": "MinHash + LSH document deduplication (8 points)",
       "semantic_id": "task-minhash_deduplication",
       "task_id": "minhash_deduplication",
-      "page": 11
+      "evidence_text": "Problem (minhash_deduplication):",
+      "page_start": 11,
+      "page_end": 12
     },
     {
       "id": "assignment-04-deliverable-minhash-deduplication-024",
@@ -9780,6 +10008,7 @@
       "title": "Filter data for language modeling (6 points)",
       "semantic_id": "task-filter_data",
       "task_id": "filter_data",
+      "evidence_text": "Problem (filter_data):",
       "page": 13
     },
     {
@@ -9827,6 +10056,7 @@
       "title": "Inspect filtered data (4 points)",
       "semantic_id": "task-inspect_filtered_data",
       "task_id": "inspect_filtered_data",
+      "evidence_text": "Problem (inspect_filtered_data):",
       "page": 14
     },
     {
@@ -9874,6 +10104,7 @@
       "title": "Tokenize data (2 points)",
       "semantic_id": "task-tokenize_data",
       "task_id": "tokenize_data",
+      "evidence_text": "Problem (tokenize_data):",
       "page": 15
     },
     {
@@ -9909,6 +10140,7 @@
       "title": "Train model (8 points)",
       "semantic_id": "task-train_model",
       "task_id": "train_model",
+      "evidence_text": "Problem (train_model):",
       "page": 16
     },
     {
@@ -10169,9 +10401,33 @@
       "page_end": 2
     },
     {
-      "id": "assignment-05-prompting-baselines",
+      "id": "assignment-05-reasoning-rl-setting-and-notation",
       "source_object": "assignment-05",
       "order": 2,
+      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#pages=3-4:semantic=reasoning-rl-setting-and-notation",
+      "kind": "section",
+      "title": "Reasoning-RL model, task setting, and notation",
+      "semantic_id": "reasoning-rl-setting-and-notation",
+      "evidence_text": "A note on model and dataset choice",
+      "page_start": 3,
+      "page_end": 4
+    },
+    {
+      "id": "assignment-05-prompting-and-grading",
+      "source_object": "assignment-05",
+      "order": 3,
+      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#pages=4-6:semantic=prompting-and-grading",
+      "kind": "mechanism",
+      "title": "vLLM prompting baselines and answer grading",
+      "semantic_id": "prompting-and-grading",
+      "evidence_text": "3 Prompting",
+      "page_start": 4,
+      "page_end": 6
+    },
+    {
+      "id": "assignment-05-prompting-baselines",
+      "source_object": "assignment-05",
+      "order": 4,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=7:semantic=prompting-baselines",
       "kind": "evaluation-requirement",
       "title": "Zero-shot, few-shot, and chain-of-thought GSM8K baselines report metrics and examples",
@@ -10183,18 +10439,20 @@
     {
       "id": "assignment-05-task-prompting-baselines",
       "source_object": "assignment-05",
-      "order": 3,
-      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=7:problem=prompting_baselines",
+      "order": 5,
+      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#pages=7-9:problem=prompting_baselines",
       "kind": "task",
       "title": "Run OLMo-2-0425-1B on GSM8K (5 points)",
       "semantic_id": "task-prompting_baselines",
       "task_id": "prompting_baselines",
-      "page": 7
+      "evidence_text": "Problem (prompting_baselines):",
+      "page_start": 7,
+      "page_end": 9
     },
     {
       "id": "assignment-05-deliverable-prompting-baselines-001",
       "source_object": "assignment-05",
-      "order": 4,
+      "order": 6,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=7:deliverable=1",
       "kind": "deliverable",
       "title": "A few sentences of commentary, the evaluation metrics, and a few examples of",
@@ -10206,7 +10464,7 @@
     {
       "id": "assignment-05-deliverable-prompting-baselines-002",
       "source_object": "assignment-05",
-      "order": 5,
+      "order": 7,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=7:deliverable=2",
       "kind": "deliverable",
       "title": "A few sentences of commentary with supporting examples.",
@@ -10218,7 +10476,7 @@
     {
       "id": "assignment-05-on-policy-grpo-derivation",
       "source_object": "assignment-05",
-      "order": 6,
+      "order": 8,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#pages=8-13:semantic=on-policy-grpo-derivation",
       "kind": "derivation",
       "title": "Policy-gradient to on-policy GRPO derivation",
@@ -10230,18 +10488,20 @@
     {
       "id": "assignment-05-task-baseline-calcs",
       "source_object": "assignment-05",
-      "order": 7,
-      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=10:problem=baseline_calcs",
+      "order": 9,
+      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#pages=10-13:problem=baseline_calcs",
       "kind": "task",
       "title": "Compute the variance of the policy gradient estimator (5",
       "semantic_id": "task-baseline_calcs",
       "task_id": "baseline_calcs",
-      "page": 10
+      "evidence_text": "Problem (baseline_calcs):",
+      "page_start": 10,
+      "page_end": 13
     },
     {
       "id": "assignment-05-deliverable-baseline-calcs-003",
       "source_object": "assignment-05",
-      "order": 8,
+      "order": 10,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=11:deliverable=3",
       "kind": "deliverable",
       "title": "An expression in terms of 𝑛 and 𝑝, accompanied by a derivation.",
@@ -10253,7 +10513,7 @@
     {
       "id": "assignment-05-deliverable-baseline-calcs-004",
       "source_object": "assignment-05",
-      "order": 9,
+      "order": 11,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=11:deliverable=4",
       "kind": "deliverable",
       "title": "An expression in terms of 𝑛, 𝑏, and 𝑝, accompanied by a derivation and some",
@@ -10265,18 +10525,19 @@
     {
       "id": "assignment-05-task-tokenize-prompt-and-output",
       "source_object": "assignment-05",
-      "order": 10,
+      "order": 12,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=14:problem=tokenize_prompt_and_output",
       "kind": "task",
       "title": "Prompt and output tokenization (1 point)",
       "semantic_id": "task-tokenize_prompt_and_output",
       "task_id": "tokenize_prompt_and_output",
+      "evidence_text": "Problem (tokenize_prompt_and_output):",
       "page": 14
     },
     {
       "id": "assignment-05-deliverable-tokenize-prompt-and-output-005",
       "source_object": "assignment-05",
-      "order": 11,
+      "order": 13,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=14:deliverable=5",
       "kind": "deliverable",
       "title": "Implement a method tokenize_prompt_and_output that tokenizes the prompt and",
@@ -10288,18 +10549,19 @@
     {
       "id": "assignment-05-task-get-response-log-probs",
       "source_object": "assignment-05",
-      "order": 12,
+      "order": 14,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=15:problem=get_response_log_probs",
       "kind": "task",
       "title": "Response log-probs (and entropy) (1 point)",
       "semantic_id": "task-get_response_log_probs",
       "task_id": "get_response_log_probs",
+      "evidence_text": "Problem (get_response_log_probs):",
       "page": 15
     },
     {
       "id": "assignment-05-deliverable-get-response-log-probs-006",
       "source_object": "assignment-05",
-      "order": 13,
+      "order": 15,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=15:deliverable=6",
       "kind": "deliverable",
       "title": "Implement a method get_response_log_probs that gets per-token conditional log",
@@ -10311,18 +10573,19 @@
     {
       "id": "assignment-05-task-compute-rollout-rewards",
       "source_object": "assignment-05",
-      "order": 14,
+      "order": 16,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=16:problem=compute_rollout_rewards",
       "kind": "task",
       "title": "Computing the rewards of rollouts (1 point)",
       "semantic_id": "task-compute_rollout_rewards",
       "task_id": "compute_rollout_rewards",
+      "evidence_text": "Problem (compute_rollout_rewards):",
       "page": 16
     },
     {
       "id": "assignment-05-deliverable-compute-rollout-rewards-007",
       "source_object": "assignment-05",
-      "order": 15,
+      "order": 17,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=17:deliverable=7",
       "kind": "deliverable",
       "title": "Implement a method compute_rollout_rewards that calculates raw rewards for each",
@@ -10334,18 +10597,20 @@
     {
       "id": "assignment-05-task-compute-group-normalized-rewards-grpo",
       "source_object": "assignment-05",
-      "order": 16,
-      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=17:problem=compute_group_normalized_rewards_grpo",
+      "order": 18,
+      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#pages=17-18:problem=compute_group_normalized_rewards_grpo",
       "kind": "task",
       "title": "Group normalization (1 point)",
       "semantic_id": "task-compute_group_normalized_rewards_grpo",
       "task_id": "compute_group_normalized_rewards_grpo",
-      "page": 17
+      "evidence_text": "Problem (compute_group_normalized_rewards_grpo):",
+      "page_start": 17,
+      "page_end": 18
     },
     {
       "id": "assignment-05-deliverable-compute-group-normalized-rewards-grpo-008",
       "source_object": "assignment-05",
-      "order": 17,
+      "order": 19,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=17:deliverable=8",
       "kind": "deliverable",
       "title": "Implement a method compute_group_normalized_rewards that normalizes raw",
@@ -10357,18 +10622,19 @@
     {
       "id": "assignment-05-task-compute-policy-gradient-loss-on-policy",
       "source_object": "assignment-05",
-      "order": 18,
+      "order": 20,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=19:problem=compute_policy_gradient_loss_on_policy",
       "kind": "task",
       "title": "On-policy policy gradient (1 point)",
       "semantic_id": "task-compute_policy_gradient_loss_on_policy",
       "task_id": "compute_policy_gradient_loss_on_policy",
+      "evidence_text": "Problem (compute_policy_gradient_loss_on_policy):",
       "page": 19
     },
     {
       "id": "assignment-05-deliverable-compute-policy-gradient-loss-on-policy-009",
       "source_object": "assignment-05",
-      "order": 19,
+      "order": 21,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=19:deliverable=9",
       "kind": "deliverable",
       "title": "Implement a method compute_policy_gradient_loss that computes the per-token",
@@ -10380,18 +10646,20 @@
     {
       "id": "assignment-05-task-aggregate-loss-across-microbatch-sequence",
       "source_object": "assignment-05",
-      "order": 20,
-      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=20:problem=aggregate_loss_across_microbatch_sequence",
+      "order": 22,
+      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#pages=20-21:problem=aggregate_loss_across_microbatch_sequence",
       "kind": "task",
       "title": "Aggregate loss across tokens and",
       "semantic_id": "task-aggregate_loss_across_microbatch_sequence",
       "task_id": "aggregate_loss_across_microbatch_sequence",
-      "page": 20
+      "evidence_text": "Problem (aggregate_loss_across_microbatch_sequence):",
+      "page_start": 20,
+      "page_end": 21
     },
     {
       "id": "assignment-05-deliverable-aggregate-loss-across-microbatch-sequence-010",
       "source_object": "assignment-05",
-      "order": 21,
+      "order": 23,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=20:deliverable=10",
       "kind": "deliverable",
       "title": "Implement a method aggregate_loss_across_microbatch that takes in the per",
@@ -10403,18 +10671,20 @@
     {
       "id": "assignment-05-task-grpo-train-step-standard-on-policy",
       "source_object": "assignment-05",
-      "order": 22,
-      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=22:problem=grpo_train_step_standard_on_policy",
+      "order": 24,
+      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#pages=22-24:problem=grpo_train_step_standard_on_policy",
       "kind": "task",
       "title": "GRPO train step (5 points)",
       "semantic_id": "task-grpo_train_step_standard_on_policy",
       "task_id": "grpo_train_step_standard_on_policy",
-      "page": 22
+      "evidence_text": "Problem (grpo_train_step_standard_on_policy):",
+      "page_start": 22,
+      "page_end": 24
     },
     {
       "id": "assignment-05-deliverable-grpo-train-step-standard-on-policy-011",
       "source_object": "assignment-05",
-      "order": 23,
+      "order": 25,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=22:deliverable=11",
       "kind": "deliverable",
       "title": "Implement a single batch update for policy gradients, given the model, tokenizer,",
@@ -10426,7 +10696,7 @@
     {
       "id": "assignment-05-grpo-correctness",
       "source_object": "assignment-05",
-      "order": 24,
+      "order": 26,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=25:semantic=grpo-correctness",
       "kind": "evaluation-requirement",
       "title": "GRPO implementation supplies correctness evidence and reaches at least 25 percent validation accuracy",
@@ -10438,18 +10708,19 @@
     {
       "id": "assignment-05-task-grpo-experiments-standard-on-policy",
       "source_object": "assignment-05",
-      "order": 25,
+      "order": 27,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=25:problem=grpo_experiments_standard_on_policy",
       "kind": "task",
       "title": "Use GRPO to improve OLMo-2-0425-1B",
       "semantic_id": "task-grpo_experiments_standard_on_policy",
       "task_id": "grpo_experiments_standard_on_policy",
+      "evidence_text": "Problem (grpo_experiments_standard_on_policy):",
       "page": 25
     },
     {
       "id": "assignment-05-deliverable-grpo-experiments-standard-on-policy-012",
       "source_object": "assignment-05",
-      "order": 26,
+      "order": 28,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=25:deliverable=12",
       "kind": "deliverable",
       "title": "A script to run GRPO (standard, on-policy) on task GSM8K and model",
@@ -10461,7 +10732,7 @@
     {
       "id": "assignment-05-deliverable-grpo-experiments-standard-on-policy-013",
       "source_object": "assignment-05",
-      "order": 27,
+      "order": 29,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=25:deliverable=13",
       "kind": "deliverable",
       "title": "Evidence that convinced you that your script is correct (e.g. validation rewards",
@@ -10473,7 +10744,7 @@
     {
       "id": "assignment-05-deliverable-grpo-experiments-standard-on-policy-014",
       "source_object": "assignment-05",
-      "order": 28,
+      "order": 30,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=25:deliverable=14",
       "kind": "deliverable",
       "title": "A few sentences of commentary and a plot for each metric, describing how it",
@@ -10485,7 +10756,7 @@
     {
       "id": "assignment-05-deliverable-grpo-experiments-standard-on-policy-015",
       "source_object": "assignment-05",
-      "order": 29,
+      "order": 31,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=25:deliverable=15",
       "kind": "deliverable",
       "title": "A few examples of the model rollouts before and after training.",
@@ -10497,7 +10768,7 @@
     {
       "id": "assignment-05-deliverable-grpo-experiments-standard-on-policy-016",
       "source_object": "assignment-05",
-      "order": 30,
+      "order": 32,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=25:deliverable=16",
       "kind": "deliverable",
       "title": "A procedure that achieves a final validation accuracy of at least 25%, averaged",
@@ -10509,7 +10780,7 @@
     {
       "id": "assignment-05-learning-rate-sweep",
       "source_object": "assignment-05",
-      "order": 31,
+      "order": 33,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=26:semantic=learning-rate-sweep",
       "kind": "evaluation-requirement",
       "title": "Learning-rate sweep includes values below and above the default",
@@ -10521,18 +10792,19 @@
     {
       "id": "assignment-05-task-grpo-learning-rate",
       "source_object": "assignment-05",
-      "order": 32,
+      "order": 34,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=26:problem=grpo_learning_rate",
       "kind": "task",
       "title": "Tune the learning rate (4 B200 hrs) (3 points)",
       "semantic_id": "task-grpo_learning_rate",
       "task_id": "grpo_learning_rate",
+      "evidence_text": "Problem (grpo_learning_rate):",
       "page": 26
     },
     {
       "id": "assignment-05-deliverable-grpo-learning-rate-017",
       "source_object": "assignment-05",
-      "order": 33,
+      "order": 35,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=26:deliverable=17",
       "kind": "deliverable",
       "title": "A plot of final validation reward versus learning rate, with a few sentences of",
@@ -10544,18 +10816,19 @@
     {
       "id": "assignment-05-task-grpo-prompt-ablation",
       "source_object": "assignment-05",
-      "order": 34,
+      "order": 36,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=26:problem=grpo_prompt_ablation",
       "kind": "task",
       "title": "Prompt ablation (4 B200 hrs) (3 points)",
       "semantic_id": "task-grpo_prompt_ablation",
       "task_id": "grpo_prompt_ablation",
+      "evidence_text": "Problem (grpo_prompt_ablation):",
       "page": 26
     },
     {
       "id": "assignment-05-deliverable-grpo-prompt-ablation-018",
       "source_object": "assignment-05",
-      "order": 35,
+      "order": 37,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=26:deliverable=18",
       "kind": "deliverable",
       "title": "Commentary, supported by plots for referenced metrics.",
@@ -10567,18 +10840,19 @@
     {
       "id": "assignment-05-task-think-about-length-normalization",
       "source_object": "assignment-05",
-      "order": 36,
+      "order": 38,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=27:problem=think_about_length_normalization",
       "kind": "task",
       "title": "Think about length normalization (1 point)",
       "semantic_id": "task-think_about_length_normalization",
       "task_id": "think_about_length_normalization",
+      "evidence_text": "Problem (think_about_length_normalization):",
       "page": 27
     },
     {
       "id": "assignment-05-deliverable-think-about-length-normalization-019",
       "source_object": "assignment-05",
-      "order": 37,
+      "order": 39,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=27:deliverable=19",
       "kind": "deliverable",
       "title": "A few sentences of discussion.",
@@ -10590,18 +10864,19 @@
     {
       "id": "assignment-05-task-compute-group-normalized-rewards-drgrpo",
       "source_object": "assignment-05",
-      "order": 38,
+      "order": 40,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=27:problem=compute_group_normalized_rewards_drgrpo",
       "kind": "task",
       "title": "Dr. GRPO Group normalization (0.5",
       "semantic_id": "task-compute_group_normalized_rewards_drgrpo",
       "task_id": "compute_group_normalized_rewards_drgrpo",
+      "evidence_text": "Problem (compute_group_normalized_rewards_drgrpo):",
       "page": 27
     },
     {
       "id": "assignment-05-deliverable-compute-group-normalized-rewards-drgrpo-020",
       "source_object": "assignment-05",
-      "order": 39,
+      "order": 41,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=27:deliverable=20",
       "kind": "deliverable",
       "title": "Update your method compute_group_normalized_rewards to support",
@@ -10613,18 +10888,19 @@
     {
       "id": "assignment-05-task-aggregate-loss-across-microbatch-constant",
       "source_object": "assignment-05",
-      "order": 40,
+      "order": 42,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=27:problem=aggregate_loss_across_microbatch_constant",
       "kind": "task",
       "title": "Dr. GRPO loss aggregation (0.5",
       "semantic_id": "task-aggregate_loss_across_microbatch_constant",
       "task_id": "aggregate_loss_across_microbatch_constant",
+      "evidence_text": "Problem (aggregate_loss_across_microbatch_constant):",
       "page": 27
     },
     {
       "id": "assignment-05-deliverable-aggregate-loss-across-microbatch-constant-021",
       "source_object": "assignment-05",
-      "order": 41,
+      "order": 43,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=27:deliverable=21",
       "kind": "deliverable",
       "title": "Update your method aggregate_loss_across_microbatch to support",
@@ -10636,18 +10912,19 @@
     {
       "id": "assignment-05-task-think-about-rft",
       "source_object": "assignment-05",
-      "order": 42,
+      "order": 44,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=28:problem=think_about_rft",
       "kind": "task",
       "title": "Think about RFT (2 points)",
       "semantic_id": "task-think_about_rft",
       "task_id": "think_about_rft",
+      "evidence_text": "Problem (think_about_rft):",
       "page": 28
     },
     {
       "id": "assignment-05-deliverable-think-about-rft-022",
       "source_object": "assignment-05",
-      "order": 43,
+      "order": 45,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=28:deliverable=22",
       "kind": "deliverable",
       "title": "A few sentences of discussion.",
@@ -10659,18 +10936,19 @@
     {
       "id": "assignment-05-task-derive-difficulty-reweightings",
       "source_object": "assignment-05",
-      "order": 44,
+      "order": 46,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=29:problem=derive_difficulty_reweightings",
       "kind": "task",
       "title": "Derive difficulty reweightings induced by",
       "semantic_id": "task-derive_difficulty_reweightings",
       "task_id": "derive_difficulty_reweightings",
+      "evidence_text": "Problem (derive_difficulty_reweightings):",
       "page": 29
     },
     {
       "id": "assignment-05-deliverable-derive-difficulty-reweightings-023",
       "source_object": "assignment-05",
-      "order": 45,
+      "order": 47,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=29:deliverable=23",
       "kind": "deliverable",
       "title": "An expression in terms of a subset of the problem parameters, with a few",
@@ -10682,7 +10960,7 @@
     {
       "id": "assignment-05-deliverable-derive-difficulty-reweightings-024",
       "source_object": "assignment-05",
-      "order": 46,
+      "order": 48,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=29:deliverable=24",
       "kind": "deliverable",
       "title": "An expression in terms of a subset of the problem parameters, with a few",
@@ -10694,7 +10972,7 @@
     {
       "id": "assignment-05-deliverable-derive-difficulty-reweightings-025",
       "source_object": "assignment-05",
-      "order": 47,
+      "order": 49,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=29:deliverable=25",
       "kind": "deliverable",
       "title": "An expression in terms of a subset of the problem parameters, with a few",
@@ -10706,18 +10984,19 @@
     {
       "id": "assignment-05-task-think-about-advantage-normalization",
       "source_object": "assignment-05",
-      "order": 48,
+      "order": 50,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=29:problem=think_about_advantage_normalization",
       "kind": "task",
       "title": "Think about advantage normalization (2",
       "semantic_id": "task-think_about_advantage_normalization",
       "task_id": "think_about_advantage_normalization",
+      "evidence_text": "Problem (think_about_advantage_normalization):",
       "page": 29
     },
     {
       "id": "assignment-05-deliverable-think-about-advantage-normalization-026",
       "source_object": "assignment-05",
-      "order": 49,
+      "order": 51,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=30:deliverable=26",
       "kind": "deliverable",
       "title": "A few sentences of discussion.",
@@ -10729,18 +11008,19 @@
     {
       "id": "assignment-05-task-compute-group-normalized-rewards-maxrl",
       "source_object": "assignment-05",
-      "order": 50,
+      "order": 52,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=30:problem=compute_group_normalized_rewards_maxrl",
       "kind": "task",
       "title": "MaxRL Group normalization (0.5",
       "semantic_id": "task-compute_group_normalized_rewards_maxrl",
       "task_id": "compute_group_normalized_rewards_maxrl",
+      "evidence_text": "Problem (compute_group_normalized_rewards_maxrl):",
       "page": 30
     },
     {
       "id": "assignment-05-deliverable-compute-group-normalized-rewards-maxrl-027",
       "source_object": "assignment-05",
-      "order": 51,
+      "order": 53,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=30:deliverable=27",
       "kind": "deliverable",
       "title": "Update your method compute_group_normalized_rewards to support",
@@ -10752,18 +11032,19 @@
     {
       "id": "assignment-05-task-grpo-train-step-variants-on-policy",
       "source_object": "assignment-05",
-      "order": 52,
+      "order": 54,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=30:problem=grpo_train_step_variants_on_policy",
       "kind": "task",
       "title": "GRPO train step variants (2.5 points)",
       "semantic_id": "task-grpo_train_step_variants_on_policy",
       "task_id": "grpo_train_step_variants_on_policy",
+      "evidence_text": "Problem (grpo_train_step_variants_on_policy):",
       "page": 30
     },
     {
       "id": "assignment-05-deliverable-grpo-train-step-variants-on-policy-028",
       "source_object": "assignment-05",
-      "order": 53,
+      "order": 55,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=31:deliverable=28",
       "kind": "deliverable",
       "title": "Update your grpo_train_step method to support the full range of on-policy",
@@ -10775,18 +11056,20 @@
     {
       "id": "assignment-05-task-grpo-experiments-variants-on-policy",
       "source_object": "assignment-05",
-      "order": 54,
-      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=31:problem=grpo_experiments_variants_on_policy",
+      "order": 56,
+      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#pages=31-33:problem=grpo_experiments_variants_on_policy",
       "kind": "task",
       "title": "Compare the performance of different RL",
       "semantic_id": "task-grpo_experiments_variants_on_policy",
       "task_id": "grpo_experiments_variants_on_policy",
-      "page": 31
+      "evidence_text": "Problem (grpo_experiments_variants_on_policy):",
+      "page_start": 31,
+      "page_end": 33
     },
     {
       "id": "assignment-05-deliverable-grpo-experiments-variants-on-policy-029",
       "source_object": "assignment-05",
-      "order": 55,
+      "order": 57,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=32:deliverable=29",
       "kind": "deliverable",
       "title": "Commentary, supported by plots for referenced metrics.",
@@ -10798,18 +11081,19 @@
     {
       "id": "assignment-05-task-derive-surrogate-objectives",
       "source_object": "assignment-05",
-      "order": 56,
+      "order": 58,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=34:problem=derive_surrogate_objectives",
       "kind": "task",
       "title": "Derive surrogate objectives for importance",
       "semantic_id": "task-derive_surrogate_objectives",
       "task_id": "derive_surrogate_objectives",
+      "evidence_text": "Problem (derive_surrogate_objectives):",
       "page": 34
     },
     {
       "id": "assignment-05-deliverable-derive-surrogate-objectives-030",
       "source_object": "assignment-05",
-      "order": 57,
+      "order": 59,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=34:deliverable=30",
       "kind": "deliverable",
       "title": "An expression in terms of a subset of the problem parameters, accompanied by a",
@@ -10821,18 +11105,19 @@
     {
       "id": "assignment-05-task-compute-policy-gradient-loss-off-policy",
       "source_object": "assignment-05",
-      "order": 58,
+      "order": 60,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=35:problem=compute_policy_gradient_loss_off_policy",
       "kind": "task",
       "title": "Off-policy policy gradient with token",
       "semantic_id": "task-compute_policy_gradient_loss_off_policy",
       "task_id": "compute_policy_gradient_loss_off_policy",
+      "evidence_text": "Problem (compute_policy_gradient_loss_off_policy):",
       "page": 35
     },
     {
       "id": "assignment-05-deliverable-compute-policy-gradient-loss-off-policy-031",
       "source_object": "assignment-05",
-      "order": 59,
+      "order": 61,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=35:deliverable=31",
       "kind": "deliverable",
       "title": "Update your method compute_policy_gradient_loss to support",
@@ -10844,18 +11129,19 @@
     {
       "id": "assignment-05-task-think-about-importance-reweighting",
       "source_object": "assignment-05",
-      "order": 60,
+      "order": 62,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=36:problem=think_about_importance_reweighting",
       "kind": "task",
       "title": "Think about importance reweighting (2",
       "semantic_id": "task-think_about_importance_reweighting",
       "task_id": "think_about_importance_reweighting",
+      "evidence_text": "Problem (think_about_importance_reweighting):",
       "page": 36
     },
     {
       "id": "assignment-05-deliverable-think-about-importance-reweighting-032",
       "source_object": "assignment-05",
-      "order": 61,
+      "order": 63,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=36:deliverable=32",
       "kind": "deliverable",
       "title": "A few sentences of commentary.",
@@ -10867,18 +11153,19 @@
     {
       "id": "assignment-05-task-compute-policy-gradient-loss-off-policy-gspo",
       "source_object": "assignment-05",
-      "order": 62,
+      "order": 64,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=37:problem=compute_policy_gradient_loss_off_policy_gspo",
       "kind": "task",
       "title": "Off-policy policy gradient with",
       "semantic_id": "task-compute_policy_gradient_loss_off_policy_gspo",
       "task_id": "compute_policy_gradient_loss_off_policy_gspo",
+      "evidence_text": "Problem (compute_policy_gradient_loss_off_policy_gspo):",
       "page": 37
     },
     {
       "id": "assignment-05-deliverable-compute-policy-gradient-loss-off-policy-gspo-033",
       "source_object": "assignment-05",
-      "order": 63,
+      "order": 65,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=37:deliverable=33",
       "kind": "deliverable",
       "title": "Update your method compute_policy_gradient_loss to support",
@@ -10890,18 +11177,19 @@
     {
       "id": "assignment-05-task-grpo-train-step-off-policy",
       "source_object": "assignment-05",
-      "order": 64,
+      "order": 66,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=37:problem=grpo_train_step_off_policy",
       "kind": "task",
       "title": "Off-policy GRPO train step (2.5 points)",
       "semantic_id": "task-grpo_train_step_off_policy",
       "task_id": "grpo_train_step_off_policy",
+      "evidence_text": "Problem (grpo_train_step_off_policy):",
       "page": 37
     },
     {
       "id": "assignment-05-deliverable-grpo-train-step-off-policy-034",
       "source_object": "assignment-05",
-      "order": 65,
+      "order": 67,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=37:deliverable=34",
       "kind": "deliverable",
       "title": "Update your grpo_train_step method to support the off-policy arguments",
@@ -10913,7 +11201,7 @@
     {
       "id": "assignment-05-on-off-policy-comparison",
       "source_object": "assignment-05",
-      "order": 66,
+      "order": 68,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=38:semantic=on-off-policy-comparison",
       "kind": "evaluation-requirement",
       "title": "On-policy variants and off-policy estimators are compared with fixed hyperparameters and plots",
@@ -10925,18 +11213,19 @@
     {
       "id": "assignment-05-task-grpo-experiments-off-policy",
       "source_object": "assignment-05",
-      "order": 67,
+      "order": 69,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=38:problem=grpo_experiments_off_policy",
       "kind": "task",
       "title": "Compare the performance of different off-policy",
       "semantic_id": "task-grpo_experiments_off_policy",
       "task_id": "grpo_experiments_off_policy",
+      "evidence_text": "Problem (grpo_experiments_off_policy):",
       "page": 38
     },
     {
       "id": "assignment-05-deliverable-grpo-experiments-off-policy-035",
       "source_object": "assignment-05",
-      "order": 68,
+      "order": 70,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=38:deliverable=35",
       "kind": "deliverable",
       "title": "Commentary, supported by plots for referenced metrics.",
@@ -10948,18 +11237,19 @@
     {
       "id": "assignment-05-task-try-your-own",
       "source_object": "assignment-05",
-      "order": 69,
+      "order": 71,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=38:problem=try_your_own",
       "kind": "task",
       "title": "Try your own policy gradient estimator (10 points)",
       "semantic_id": "task-try_your_own",
       "task_id": "try_your_own",
+      "evidence_text": "Problem (try_your_own):",
       "page": 38
     },
     {
       "id": "assignment-05-deliverable-try-your-own-036",
       "source_object": "assignment-05",
-      "order": 70,
+      "order": 72,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=38:deliverable=36",
       "kind": "deliverable",
       "title": "Commentary, supported by plots for referenced metrics, and optionally",
@@ -10969,9 +11259,22 @@
       "page": 38
     },
     {
+      "id": "assignment-05-bibliography",
+      "source_object": "assignment-05",
+      "order": 73,
+      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=39:semantic=bibliography",
+      "kind": "administrative",
+      "title": "Assignment bibliography",
+      "semantic_id": "bibliography",
+      "exclusion_reason": "Reference citations are preserved as provenance but excluded from teaching-content coverage.",
+      "exclusion_evidence": "Bibliography",
+      "evidence_text": "Bibliography",
+      "page": 39
+    },
+    {
       "id": "assignment-05-test-tests-test-grpo-py-33-test-tokenize-prompt-and-output",
       "source_object": "assignment-05",
-      "order": 71,
+      "order": 74,
       "source_location": "Assignments/assignment5-alignment/tests/test_grpo.py#L33",
       "kind": "test-interface",
       "title": "Test contract: test tokenize prompt and output",
@@ -10982,7 +11285,7 @@
     {
       "id": "assignment-05-test-tests-test-grpo-py-42-test-get-response-log-probs",
       "source_object": "assignment-05",
-      "order": 72,
+      "order": 75,
       "source_location": "Assignments/assignment5-alignment/tests/test_grpo.py#L42",
       "kind": "test-interface",
       "title": "Test contract: test get response log probs",
@@ -10993,7 +11296,7 @@
     {
       "id": "assignment-05-test-tests-test-grpo-py-52-test-compute-rollout-rewards",
       "source_object": "assignment-05",
-      "order": 73,
+      "order": 76,
       "source_location": "Assignments/assignment5-alignment/tests/test_grpo.py#L52",
       "kind": "test-interface",
       "title": "Test contract: test compute rollout rewards",
@@ -11004,7 +11307,7 @@
     {
       "id": "assignment-05-test-tests-test-grpo-py-62-test-compute-group-normalized-rewards-grpo",
       "source_object": "assignment-05",
-      "order": 74,
+      "order": 77,
       "source_location": "Assignments/assignment5-alignment/tests/test_grpo.py#L62",
       "kind": "test-interface",
       "title": "Test contract: test compute group normalized rewards grpo",
@@ -11015,7 +11318,7 @@
     {
       "id": "assignment-05-test-tests-test-grpo-py-79-test-compute-group-normalized-rewards-drgrpo",
       "source_object": "assignment-05",
-      "order": 75,
+      "order": 78,
       "source_location": "Assignments/assignment5-alignment/tests/test_grpo.py#L79",
       "kind": "test-interface",
       "title": "Test contract: test compute group normalized rewards drgrpo",
@@ -11026,7 +11329,7 @@
     {
       "id": "assignment-05-test-tests-test-grpo-py-101-test-compute-group-normalized-rewards-maxrl",
       "source_object": "assignment-05",
-      "order": 76,
+      "order": 79,
       "source_location": "Assignments/assignment5-alignment/tests/test_grpo.py#L101",
       "kind": "test-interface",
       "title": "Test contract: test compute group normalized rewards maxrl",
@@ -11037,7 +11340,7 @@
     {
       "id": "assignment-05-test-tests-test-grpo-py-112-test-compute-policy-gradient-loss-on-policy",
       "source_object": "assignment-05",
-      "order": 77,
+      "order": 80,
       "source_location": "Assignments/assignment5-alignment/tests/test_grpo.py#L112",
       "kind": "test-interface",
       "title": "Test contract: test compute policy gradient loss on policy",
@@ -11048,7 +11351,7 @@
     {
       "id": "assignment-05-test-tests-test-grpo-py-122-test-compute-policy-gradient-loss-off-policy",
       "source_object": "assignment-05",
-      "order": 78,
+      "order": 81,
       "source_location": "Assignments/assignment5-alignment/tests/test_grpo.py#L122",
       "kind": "test-interface",
       "title": "Test contract: test compute policy gradient loss off policy",
@@ -11059,7 +11362,7 @@
     {
       "id": "assignment-05-test-tests-test-grpo-py-151-test-compute-policy-gradient-loss-off-policy-gspo",
       "source_object": "assignment-05",
-      "order": 79,
+      "order": 82,
       "source_location": "Assignments/assignment5-alignment/tests/test_grpo.py#L151",
       "kind": "test-interface",
       "title": "Test contract: test compute policy gradient loss off policy gspo",
@@ -11070,7 +11373,7 @@
     {
       "id": "assignment-05-test-tests-test-grpo-py-170-test-aggregate-loss-across-microbatch-sequence",
       "source_object": "assignment-05",
-      "order": 80,
+      "order": 83,
       "source_location": "Assignments/assignment5-alignment/tests/test_grpo.py#L170",
       "kind": "test-interface",
       "title": "Test contract: test aggregate loss across microbatch sequence",
@@ -11081,7 +11384,7 @@
     {
       "id": "assignment-05-test-tests-test-grpo-py-180-test-aggregate-loss-across-microbatch-constant",
       "source_object": "assignment-05",
-      "order": 81,
+      "order": 84,
       "source_location": "Assignments/assignment5-alignment/tests/test_grpo.py#L180",
       "kind": "test-interface",
       "title": "Test contract: test aggregate loss across microbatch constant",
@@ -11092,7 +11395,7 @@
     {
       "id": "assignment-05-test-tests-test-grpo-py-221-test-grpo-train-step-standard-on-policy",
       "source_object": "assignment-05",
-      "order": 82,
+      "order": 85,
       "source_location": "Assignments/assignment5-alignment/tests/test_grpo.py#L221",
       "kind": "test-interface",
       "title": "Test contract: test grpo train step standard on policy",
@@ -11103,7 +11406,7 @@
     {
       "id": "assignment-05-test-tests-test-grpo-py-289-test-grpo-train-step-variants-on-policy",
       "source_object": "assignment-05",
-      "order": 83,
+      "order": 86,
       "source_location": "Assignments/assignment5-alignment/tests/test_grpo.py#L289",
       "kind": "test-interface",
       "title": "Test contract: test grpo train step variants on policy",
@@ -11114,7 +11417,7 @@
     {
       "id": "assignment-05-test-tests-test-grpo-py-325-test-grpo-train-step-off-policy",
       "source_object": "assignment-05",
-      "order": 84,
+      "order": 87,
       "source_location": "Assignments/assignment5-alignment/tests/test_grpo.py#L325",
       "kind": "test-interface",
       "title": "Test contract: test grpo train step off policy",
@@ -11137,9 +11440,20 @@
       "page_end": 2
     },
     {
-      "id": "assignment-05-safety-supplement-mmlu-metric",
+      "id": "assignment-05-safety-supplement-safety-prompt-and-mmlu-setup",
       "source_object": "assignment-05-safety-supplement",
       "order": 2,
+      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=3:semantic=safety-prompt-and-mmlu-setup",
+      "kind": "mechanism",
+      "title": "Safety system prompt and zero-shot MMLU protocol",
+      "semantic_id": "safety-prompt-and-mmlu-setup",
+      "evidence_text": "Zero-Shot MMLU Baseline",
+      "page": 3
+    },
+    {
+      "id": "assignment-05-safety-supplement-mmlu-metric",
+      "source_object": "assignment-05-safety-supplement",
+      "order": 3,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=4:semantic=mmlu-metric",
       "kind": "evaluation-requirement",
       "title": "MMLU parses answer letters and reports accuracy, throughput, failures, and error analysis",
@@ -11151,18 +11465,19 @@
     {
       "id": "assignment-05-safety-supplement-task-mmlu-baseline",
       "source_object": "assignment-05-safety-supplement",
-      "order": 3,
+      "order": 4,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=4:problem=mmlu_baseline",
       "kind": "task",
       "title": "Zero-shot MMLU baseline (4 points)",
       "semantic_id": "task-mmlu_baseline",
       "task_id": "mmlu_baseline",
+      "evidence_text": "Problem (mmlu_baseline):",
       "page": 4
     },
     {
       "id": "assignment-05-safety-supplement-deliverable-mmlu-baseline-001",
       "source_object": "assignment-05-safety-supplement",
-      "order": 4,
+      "order": 5,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=4:deliverable=1",
       "kind": "deliverable",
       "title": "A function to parse MMLU predictions into the corresponding answer option.",
@@ -11174,7 +11489,7 @@
     {
       "id": "assignment-05-safety-supplement-deliverable-mmlu-baseline-002",
       "source_object": "assignment-05-safety-supplement",
-      "order": 5,
+      "order": 6,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=4:deliverable=2",
       "kind": "deliverable",
       "title": "A script to evaluate baseline zero-shot MMLU performance.",
@@ -11186,7 +11501,7 @@
     {
       "id": "assignment-05-safety-supplement-deliverable-mmlu-baseline-003",
       "source_object": "assignment-05-safety-supplement",
-      "order": 6,
+      "order": 7,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=4:deliverable=3",
       "kind": "deliverable",
       "title": "Number of failed parses and a few examples if applicable.",
@@ -11198,7 +11513,7 @@
     {
       "id": "assignment-05-safety-supplement-deliverable-mmlu-baseline-004",
       "source_object": "assignment-05-safety-supplement",
-      "order": 7,
+      "order": 8,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=4:deliverable=4",
       "kind": "deliverable",
       "title": "Estimate of MMLU examples/second throughput.",
@@ -11210,7 +11525,7 @@
     {
       "id": "assignment-05-safety-supplement-deliverable-mmlu-baseline-005",
       "source_object": "assignment-05-safety-supplement",
-      "order": 8,
+      "order": 9,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=4:deliverable=5",
       "kind": "deliverable",
       "title": "1-2 sentences with evaluation metrics.",
@@ -11222,7 +11537,7 @@
     {
       "id": "assignment-05-safety-supplement-deliverable-mmlu-baseline-006",
       "source_object": "assignment-05-safety-supplement",
-      "order": 9,
+      "order": 10,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=4:deliverable=6",
       "kind": "deliverable",
       "title": "A 2-4 sentence error analysis, with examples or model responses as necessary.",
@@ -11234,7 +11549,7 @@
     {
       "id": "assignment-05-safety-supplement-gsm8k-metric",
       "source_object": "assignment-05-safety-supplement",
-      "order": 10,
+      "order": 11,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=5:semantic=gsm8k-metric",
       "kind": "evaluation-requirement",
       "title": "GSM8K parses final numbers and reports accuracy, throughput, failures, and error analysis",
@@ -11246,18 +11561,19 @@
     {
       "id": "assignment-05-safety-supplement-task-gsm8k-baseline",
       "source_object": "assignment-05-safety-supplement",
-      "order": 11,
+      "order": 12,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=5:problem=gsm8k_baseline",
       "kind": "task",
       "title": "Zero-shot GSM8K baseline (4 points)",
       "semantic_id": "task-gsm8k_baseline",
       "task_id": "gsm8k_baseline",
+      "evidence_text": "Problem (gsm8k_baseline):",
       "page": 5
     },
     {
       "id": "assignment-05-safety-supplement-deliverable-gsm8k-baseline-007",
       "source_object": "assignment-05-safety-supplement",
-      "order": 12,
+      "order": 13,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=5:deliverable=7",
       "kind": "deliverable",
       "title": "A function to parse GSM8K predictions into a single numeric answer.",
@@ -11269,7 +11585,7 @@
     {
       "id": "assignment-05-safety-supplement-deliverable-gsm8k-baseline-008",
       "source_object": "assignment-05-safety-supplement",
-      "order": 13,
+      "order": 14,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=5:deliverable=8",
       "kind": "deliverable",
       "title": "A script to evaluate baseline zero-shot GSM8K performance.",
@@ -11281,7 +11597,7 @@
     {
       "id": "assignment-05-safety-supplement-deliverable-gsm8k-baseline-009",
       "source_object": "assignment-05-safety-supplement",
-      "order": 14,
+      "order": 15,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=5:deliverable=9",
       "kind": "deliverable",
       "title": "Number of failed parses and a few examples if applicable.",
@@ -11293,7 +11609,7 @@
     {
       "id": "assignment-05-safety-supplement-deliverable-gsm8k-baseline-010",
       "source_object": "assignment-05-safety-supplement",
-      "order": 15,
+      "order": 16,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=5:deliverable=10",
       "kind": "deliverable",
       "title": "Estimate of GSM8K examples/second throughput.",
@@ -11305,7 +11621,7 @@
     {
       "id": "assignment-05-safety-supplement-deliverable-gsm8k-baseline-011",
       "source_object": "assignment-05-safety-supplement",
-      "order": 16,
+      "order": 17,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=5:deliverable=11",
       "kind": "deliverable",
       "title": "1-2 sentences with evaluation metrics.",
@@ -11317,7 +11633,7 @@
     {
       "id": "assignment-05-safety-supplement-deliverable-gsm8k-baseline-012",
       "source_object": "assignment-05-safety-supplement",
-      "order": 17,
+      "order": 18,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=5:deliverable=12",
       "kind": "deliverable",
       "title": "A 2-4 sentence error analysis, with examples or model responses as necessary.",
@@ -11329,7 +11645,7 @@
     {
       "id": "assignment-05-safety-supplement-alpacaeval-metric",
       "source_object": "assignment-05-safety-supplement",
-      "order": 18,
+      "order": 19,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=6:semantic=alpacaeval-metric",
       "kind": "evaluation-requirement",
       "title": "AlpacaEval reports win rate, length-controlled win rate, throughput, and errors",
@@ -11341,18 +11657,19 @@
     {
       "id": "assignment-05-safety-supplement-task-alpaca-eval-baseline",
       "source_object": "assignment-05-safety-supplement",
-      "order": 19,
+      "order": 20,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=6:problem=alpaca_eval_baseline",
       "kind": "task",
       "title": "Zero-shot AlpacaEval baseline (4 points)",
       "semantic_id": "task-alpaca_eval_baseline",
       "task_id": "alpaca_eval_baseline",
+      "evidence_text": "Problem (alpaca_eval_baseline):",
       "page": 6
     },
     {
       "id": "assignment-05-safety-supplement-deliverable-alpaca-eval-baseline-013",
       "source_object": "assignment-05-safety-supplement",
-      "order": 20,
+      "order": 21,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=6:deliverable=13",
       "kind": "deliverable",
       "title": "A script to generate zero-shot outputs on AlpacaEval.",
@@ -11364,7 +11681,7 @@
     {
       "id": "assignment-05-safety-supplement-deliverable-alpaca-eval-baseline-014",
       "source_object": "assignment-05-safety-supplement",
-      "order": 21,
+      "order": 22,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=6:deliverable=14",
       "kind": "deliverable",
       "title": "Estimate of AlpacaEval examples/second throughput.",
@@ -11376,7 +11693,7 @@
     {
       "id": "assignment-05-safety-supplement-deliverable-alpaca-eval-baseline-015",
       "source_object": "assignment-05-safety-supplement",
-      "order": 22,
+      "order": 23,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=6:deliverable=15",
       "kind": "deliverable",
       "title": "1-2 sentences with winrate and length-controlled winrate.",
@@ -11388,7 +11705,7 @@
     {
       "id": "assignment-05-safety-supplement-deliverable-alpaca-eval-baseline-016",
       "source_object": "assignment-05-safety-supplement",
-      "order": 23,
+      "order": 24,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=7:deliverable=16",
       "kind": "deliverable",
       "title": "A 2-4 sentence error analysis, with examples or model responses as necessary.",
@@ -11400,18 +11717,19 @@
     {
       "id": "assignment-05-safety-supplement-task-sst-baseline",
       "source_object": "assignment-05-safety-supplement",
-      "order": 24,
+      "order": 25,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=7:problem=sst_baseline",
       "kind": "task",
       "title": "Zero-shot SimpleSafetyTests baseline (4 points)",
       "semantic_id": "task-sst_baseline",
       "task_id": "sst_baseline",
+      "evidence_text": "Problem (sst_baseline):",
       "page": 7
     },
     {
       "id": "assignment-05-safety-supplement-deliverable-sst-baseline-017",
       "source_object": "assignment-05-safety-supplement",
-      "order": 25,
+      "order": 26,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=7:deliverable=17",
       "kind": "deliverable",
       "title": "A script to generate zero-shot outputs on SimpleSafetyTests.",
@@ -11423,7 +11741,7 @@
     {
       "id": "assignment-05-safety-supplement-deliverable-sst-baseline-018",
       "source_object": "assignment-05-safety-supplement",
-      "order": 26,
+      "order": 27,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=7:deliverable=18",
       "kind": "deliverable",
       "title": "Estimate of SimpleSafetyTests examples/second throughput.",
@@ -11435,7 +11753,7 @@
     {
       "id": "assignment-05-safety-supplement-safety-metric",
       "source_object": "assignment-05-safety-supplement",
-      "order": 27,
+      "order": 28,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=8:semantic=safety-metric",
       "kind": "evaluation-requirement",
       "title": "SimpleSafetyTests reports safe-output proportion and qualitative errors",
@@ -11447,7 +11765,7 @@
     {
       "id": "assignment-05-safety-supplement-deliverable-sst-baseline-019",
       "source_object": "assignment-05-safety-supplement",
-      "order": 28,
+      "order": 29,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=8:deliverable=19",
       "kind": "deliverable",
       "title": "1-2 sentences with the safe-output proportion.",
@@ -11459,7 +11777,7 @@
     {
       "id": "assignment-05-safety-supplement-deliverable-sst-baseline-020",
       "source_object": "assignment-05-safety-supplement",
-      "order": 29,
+      "order": 30,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=8:deliverable=20",
       "kind": "deliverable",
       "title": "A 2-4 sentence error analysis, with examples or model responses as necessary.",
@@ -11471,18 +11789,19 @@
     {
       "id": "assignment-05-safety-supplement-task-look-at-sft",
       "source_object": "assignment-05-safety-supplement",
-      "order": 30,
+      "order": 31,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=8:problem=look_at_sft",
       "kind": "task",
       "title": "Inspect instruction tuning data (4 points)",
       "semantic_id": "task-look_at_sft",
       "task_id": "look_at_sft",
+      "evidence_text": "Problem (look_at_sft):",
       "page": 8
     },
     {
       "id": "assignment-05-safety-supplement-deliverable-look-at-sft-021",
       "source_object": "assignment-05-safety-supplement",
-      "order": 31,
+      "order": 32,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=8:deliverable=21",
       "kind": "deliverable",
       "title": "2-4 sentences describing the implicit tasks and data quality, using concrete",
@@ -11494,18 +11813,20 @@
     {
       "id": "assignment-05-safety-supplement-task-data-loading",
       "source_object": "assignment-05-safety-supplement",
-      "order": 32,
-      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=9:problem=data_loading",
+      "order": 33,
+      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#pages=9-10:problem=data_loading",
       "kind": "task",
       "title": "Implement data loading (3 points)",
       "semantic_id": "task-data_loading",
       "task_id": "data_loading",
-      "page": 9
+      "evidence_text": "Problem (data_loading):",
+      "page_start": 9,
+      "page_end": 10
     },
     {
       "id": "assignment-05-safety-supplement-deliverable-data-loading-022",
       "source_object": "assignment-05-safety-supplement",
-      "order": 33,
+      "order": 34,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=9:deliverable=22",
       "kind": "deliverable",
       "title": "A packed instruction-tuning Dataset.",
@@ -11517,7 +11838,7 @@
     {
       "id": "assignment-05-safety-supplement-deliverable-data-loading-023",
       "source_object": "assignment-05-safety-supplement",
-      "order": 34,
+      "order": 35,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=10:deliverable=23",
       "kind": "deliverable",
       "title": "A batching function for the packed SFT dataset.",
@@ -11529,18 +11850,19 @@
     {
       "id": "assignment-05-safety-supplement-task-sft-script",
       "source_object": "assignment-05-safety-supplement",
-      "order": 35,
+      "order": 36,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=11:problem=sft_script",
       "kind": "task",
       "title": "Training script: instruction tuning (4 points)",
       "semantic_id": "task-sft_script",
       "task_id": "sft_script",
+      "evidence_text": "Problem (sft_script):",
       "page": 11
     },
     {
       "id": "assignment-05-safety-supplement-deliverable-sft-script-024",
       "source_object": "assignment-05-safety-supplement",
-      "order": 36,
+      "order": 37,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=11:deliverable=24",
       "kind": "deliverable",
       "title": "A script that runs supervised fine-tuning on instruction tuning data.",
@@ -11552,18 +11874,19 @@
     {
       "id": "assignment-05-safety-supplement-task-sft",
       "source_object": "assignment-05-safety-supplement",
-      "order": 37,
+      "order": 38,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=11:problem=sft",
       "kind": "task",
       "title": "Instruction tuning (3 B200 hrs) (6 points)",
       "semantic_id": "task-sft",
       "task_id": "sft",
+      "evidence_text": "Problem (sft):",
       "page": 11
     },
     {
       "id": "assignment-05-safety-supplement-deliverable-sft-025",
       "source_object": "assignment-05-safety-supplement",
-      "order": 38,
+      "order": 39,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=11:deliverable=25",
       "kind": "deliverable",
       "title": "A description of your training setup, the final validation loss, a learning curve, and",
@@ -11575,18 +11898,19 @@
     {
       "id": "assignment-05-safety-supplement-task-mmlu-sft",
       "source_object": "assignment-05-safety-supplement",
-      "order": 39,
+      "order": 40,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=12:problem=mmlu_sft",
       "kind": "task",
       "title": "Evaluate SFT on MMLU (4 points)",
       "semantic_id": "task-mmlu_sft",
       "task_id": "mmlu_sft",
+      "evidence_text": "Problem (mmlu_sft):",
       "page": 12
     },
     {
       "id": "assignment-05-safety-supplement-deliverable-mmlu-sft-026",
       "source_object": "assignment-05-safety-supplement",
-      "order": 40,
+      "order": 41,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=12:deliverable=26",
       "kind": "deliverable",
       "title": "1-2 sentences with throughput and comparison to the zero-shot baseline.",
@@ -11598,7 +11922,7 @@
     {
       "id": "assignment-05-safety-supplement-deliverable-mmlu-sft-027",
       "source_object": "assignment-05-safety-supplement",
-      "order": 41,
+      "order": 42,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=12:deliverable=27",
       "kind": "deliverable",
       "title": "1-2 sentences with metrics and comparison.",
@@ -11610,7 +11934,7 @@
     {
       "id": "assignment-05-safety-supplement-deliverable-mmlu-sft-028",
       "source_object": "assignment-05-safety-supplement",
-      "order": 42,
+      "order": 43,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=12:deliverable=28",
       "kind": "deliverable",
       "title": "A 2-4 sentence error analysis, with examples or model responses as necessary.",
@@ -11622,18 +11946,19 @@
     {
       "id": "assignment-05-safety-supplement-task-gsm8k-sft",
       "source_object": "assignment-05-safety-supplement",
-      "order": 43,
+      "order": 44,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=12:problem=gsm8k_sft",
       "kind": "task",
       "title": "Evaluate SFT on GSM8K (4 points)",
       "semantic_id": "task-gsm8k_sft",
       "task_id": "gsm8k_sft",
+      "evidence_text": "Problem (gsm8k_sft):",
       "page": 12
     },
     {
       "id": "assignment-05-safety-supplement-deliverable-gsm8k-sft-029",
       "source_object": "assignment-05-safety-supplement",
-      "order": 44,
+      "order": 45,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=12:deliverable=29",
       "kind": "deliverable",
       "title": "1-2 sentences with throughput and comparison.",
@@ -11645,7 +11970,7 @@
     {
       "id": "assignment-05-safety-supplement-deliverable-gsm8k-sft-030",
       "source_object": "assignment-05-safety-supplement",
-      "order": 45,
+      "order": 46,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=12:deliverable=30",
       "kind": "deliverable",
       "title": "1-2 sentences with metrics and comparison.",
@@ -11657,7 +11982,7 @@
     {
       "id": "assignment-05-safety-supplement-deliverable-gsm8k-sft-031",
       "source_object": "assignment-05-safety-supplement",
-      "order": 46,
+      "order": 47,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=13:deliverable=31",
       "kind": "deliverable",
       "title": "A 2-4 sentence error analysis, with examples or model responses as necessary.",
@@ -11669,18 +11994,19 @@
     {
       "id": "assignment-05-safety-supplement-task-alpaca-eval-sft",
       "source_object": "assignment-05-safety-supplement",
-      "order": 47,
+      "order": 48,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=13:problem=alpaca_eval_sft",
       "kind": "task",
       "title": "Evaluate SFT on AlpacaEval (4 points)",
       "semantic_id": "task-alpaca_eval_sft",
       "task_id": "alpaca_eval_sft",
+      "evidence_text": "Problem (alpaca_eval_sft):",
       "page": 13
     },
     {
       "id": "assignment-05-safety-supplement-deliverable-alpaca-eval-sft-032",
       "source_object": "assignment-05-safety-supplement",
-      "order": 48,
+      "order": 49,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=13:deliverable=32",
       "kind": "deliverable",
       "title": "1-2 sentences with throughput and comparison.",
@@ -11692,7 +12018,7 @@
     {
       "id": "assignment-05-safety-supplement-deliverable-alpaca-eval-sft-033",
       "source_object": "assignment-05-safety-supplement",
-      "order": 49,
+      "order": 50,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=13:deliverable=33",
       "kind": "deliverable",
       "title": "1-3 sentences with winrates and comparison.",
@@ -11704,7 +12030,7 @@
     {
       "id": "assignment-05-safety-supplement-deliverable-alpaca-eval-sft-034",
       "source_object": "assignment-05-safety-supplement",
-      "order": 50,
+      "order": 51,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=13:deliverable=34",
       "kind": "deliverable",
       "title": "A 2-4 sentence error analysis.",
@@ -11716,18 +12042,19 @@
     {
       "id": "assignment-05-safety-supplement-task-sst-sft",
       "source_object": "assignment-05-safety-supplement",
-      "order": 51,
+      "order": 52,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=13:problem=sst_sft",
       "kind": "task",
       "title": "Evaluate SFT on SimpleSafetyTests (4 points)",
       "semantic_id": "task-sst_sft",
       "task_id": "sst_sft",
+      "evidence_text": "Problem (sst_sft):",
       "page": 13
     },
     {
       "id": "assignment-05-safety-supplement-deliverable-sst-sft-035",
       "source_object": "assignment-05-safety-supplement",
-      "order": 52,
+      "order": 53,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=13:deliverable=35",
       "kind": "deliverable",
       "title": "1-2 sentences with throughput and comparison.",
@@ -11739,7 +12066,7 @@
     {
       "id": "assignment-05-safety-supplement-sft-comparison",
       "source_object": "assignment-05-safety-supplement",
-      "order": 53,
+      "order": 54,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=14:semantic=sft-comparison",
       "kind": "evaluation-requirement",
       "title": "SFT evaluation compares MMLU, GSM8K, AlpacaEval, and safety against baselines",
@@ -11751,7 +12078,7 @@
     {
       "id": "assignment-05-safety-supplement-deliverable-sst-sft-036",
       "source_object": "assignment-05-safety-supplement",
-      "order": 54,
+      "order": 55,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=14:deliverable=36",
       "kind": "deliverable",
       "title": "1-2 sentences with the safe-output proportion and comparison.",
@@ -11763,7 +12090,7 @@
     {
       "id": "assignment-05-safety-supplement-deliverable-sst-sft-037",
       "source_object": "assignment-05-safety-supplement",
-      "order": 55,
+      "order": 56,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=14:deliverable=37",
       "kind": "deliverable",
       "title": "A 2-4 sentence error analysis.",
@@ -11775,18 +12102,20 @@
     {
       "id": "assignment-05-safety-supplement-task-red-teaming",
       "source_object": "assignment-05-safety-supplement",
-      "order": 56,
-      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=14:problem=red_teaming",
+      "order": 57,
+      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#pages=14-15:problem=red_teaming",
       "kind": "task",
       "title": "Red-team the instruction-tuned model (4 points)",
       "semantic_id": "task-red_teaming",
       "task_id": "red_teaming",
-      "page": 14
+      "evidence_text": "Problem (red_teaming):",
+      "page_start": 14,
+      "page_end": 15
     },
     {
       "id": "assignment-05-safety-supplement-deliverable-red-teaming-038",
       "source_object": "assignment-05-safety-supplement",
-      "order": 57,
+      "order": 58,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=14:deliverable=38",
       "kind": "deliverable",
       "title": "1-3 sentences with three examples of potential misuse beyond those presented",
@@ -11798,7 +12127,7 @@
     {
       "id": "assignment-05-safety-supplement-deliverable-red-teaming-039",
       "source_object": "assignment-05-safety-supplement",
-      "order": 58,
+      "order": 59,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=14:deliverable=39",
       "kind": "deliverable",
       "title": "For three different malicious applications, provide a 2-4 sentence description of",
@@ -11810,7 +12139,7 @@
     {
       "id": "assignment-05-safety-supplement-dpo-objective-and-training",
       "source_object": "assignment-05-safety-supplement",
-      "order": 59,
+      "order": 60,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#pages=15-18:semantic=dpo-objective-and-training",
       "kind": "derivation",
       "title": "DPO objective, preference data, loss, and training sequence",
@@ -11822,18 +12151,19 @@
     {
       "id": "assignment-05-safety-supplement-task-look-at-hh",
       "source_object": "assignment-05-safety-supplement",
-      "order": 60,
+      "order": 61,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=16:problem=look_at_hh",
       "kind": "task",
       "title": "Inspect HH preference data (2 points)",
       "semantic_id": "task-look_at_hh",
       "task_id": "look_at_hh",
+      "evidence_text": "Problem (look_at_hh):",
       "page": 16
     },
     {
       "id": "assignment-05-safety-supplement-deliverable-look-at-hh-040",
       "source_object": "assignment-05-safety-supplement",
-      "order": 61,
+      "order": 62,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=16:deliverable=40",
       "kind": "deliverable",
       "title": "A Python function that loads HH into a convenient data structure for DPO",
@@ -11845,7 +12175,7 @@
     {
       "id": "assignment-05-safety-supplement-deliverable-look-at-hh-041",
       "source_object": "assignment-05-safety-supplement",
-      "order": 62,
+      "order": 63,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=16:deliverable=41",
       "kind": "deliverable",
       "title": "2-4 sentences discussing examples and whether you agree with the labels.",
@@ -11857,18 +12187,19 @@
     {
       "id": "assignment-05-safety-supplement-task-dpo-loss",
       "source_object": "assignment-05-safety-supplement",
-      "order": 63,
+      "order": 64,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=17:problem=dpo_loss",
       "kind": "task",
       "title": "DPO loss (2 points)",
       "semantic_id": "task-dpo_loss",
       "task_id": "dpo_loss",
+      "evidence_text": "Problem (dpo_loss):",
       "page": 17
     },
     {
       "id": "assignment-05-safety-supplement-deliverable-dpo-loss-042",
       "source_object": "assignment-05-safety-supplement",
-      "order": 64,
+      "order": 65,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=17:deliverable=42",
       "kind": "deliverable",
       "title": "A function that computes the per-instance DPO loss.",
@@ -11880,18 +12211,20 @@
     {
       "id": "assignment-05-safety-supplement-task-dpo-training",
       "source_object": "assignment-05-safety-supplement",
-      "order": 65,
-      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=17:problem=dpo_training",
+      "order": 66,
+      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#pages=17-18:problem=dpo_training",
       "kind": "task",
       "title": "DPO training (1 B200 hr) (4 points)",
       "semantic_id": "task-dpo_training",
       "task_id": "dpo_training",
-      "page": 17
+      "evidence_text": "Problem (dpo_training):",
+      "page_start": 17,
+      "page_end": 18
     },
     {
       "id": "assignment-05-safety-supplement-deliverable-dpo-training-043",
       "source_object": "assignment-05-safety-supplement",
-      "order": 66,
+      "order": 67,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=17:deliverable=43",
       "kind": "deliverable",
       "title": "A script to train your instruction-tuned model with DPO on HH, and a",
@@ -11903,7 +12236,7 @@
     {
       "id": "assignment-05-safety-supplement-dpo-comparison",
       "source_object": "assignment-05-safety-supplement",
-      "order": 67,
+      "order": 68,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=18:semantic=dpo-comparison",
       "kind": "evaluation-requirement",
       "title": "DPO evaluation compares AlpacaEval, safety, GSM8K, and MMLU against SFT",
@@ -11915,7 +12248,7 @@
     {
       "id": "assignment-05-safety-supplement-deliverable-dpo-training-044",
       "source_object": "assignment-05-safety-supplement",
-      "order": 68,
+      "order": 69,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=18:deliverable=44",
       "kind": "deliverable",
       "title": "1-2 sentences with AlpacaEval winrates and comparison.",
@@ -11927,7 +12260,7 @@
     {
       "id": "assignment-05-safety-supplement-deliverable-dpo-training-045",
       "source_object": "assignment-05-safety-supplement",
-      "order": 69,
+      "order": 70,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=18:deliverable=45",
       "kind": "deliverable",
       "title": "1-2 sentences with your SimpleSafetyTests evaluation.",
@@ -11939,7 +12272,7 @@
     {
       "id": "assignment-05-safety-supplement-deliverable-dpo-training-046",
       "source_object": "assignment-05-safety-supplement",
-      "order": 70,
+      "order": 71,
       "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=18:deliverable=46",
       "kind": "deliverable",
       "title": "2-3 sentences with GSM8K and MMLU evaluations.",
@@ -11951,7 +12284,7 @@
     {
       "id": "assignment-05-safety-supplement-test-tests-test-metrics-py-8-test-parse-mmlu-response",
       "source_object": "assignment-05-safety-supplement",
-      "order": 71,
+      "order": 72,
       "source_location": "Assignments/assignment5-alignment/tests/test_metrics.py#L8",
       "kind": "test-interface",
       "title": "Test contract: test parse mmlu response",
@@ -11962,7 +12295,7 @@
     {
       "id": "assignment-05-safety-supplement-test-tests-test-data-py-14-test-packed-sft-dataset",
       "source_object": "assignment-05-safety-supplement",
-      "order": 72,
+      "order": 73,
       "source_location": "Assignments/assignment5-alignment/tests/test_data.py#L14",
       "kind": "test-interface",
       "title": "Test contract: test packed sft dataset",
@@ -11973,7 +12306,7 @@
     {
       "id": "assignment-05-safety-supplement-test-tests-test-metrics-py-25-test-parse-mmlu-response-unknown",
       "source_object": "assignment-05-safety-supplement",
-      "order": 73,
+      "order": 74,
       "source_location": "Assignments/assignment5-alignment/tests/test_metrics.py#L25",
       "kind": "test-interface",
       "title": "Test contract: test parse mmlu response unknown",
@@ -11984,7 +12317,7 @@
     {
       "id": "assignment-05-safety-supplement-test-tests-test-metrics-py-39-test-parse-gsm8k-response",
       "source_object": "assignment-05-safety-supplement",
-      "order": 74,
+      "order": 75,
       "source_location": "Assignments/assignment5-alignment/tests/test_metrics.py#L39",
       "kind": "test-interface",
       "title": "Test contract: test parse gsm8k response",
@@ -11995,7 +12328,7 @@
     {
       "id": "assignment-05-safety-supplement-test-tests-test-dpo-py-44-test-per-instance-dpo-loss",
       "source_object": "assignment-05-safety-supplement",
-      "order": 75,
+      "order": 76,
       "source_location": "Assignments/assignment5-alignment/tests/test_dpo.py#L44",
       "kind": "test-interface",
       "title": "Test contract: test per instance dpo loss",
@@ -12006,7 +12339,7 @@
     {
       "id": "assignment-05-safety-supplement-test-tests-test-metrics-py-48-test-parse-gsm8k-response-unknown",
       "source_object": "assignment-05-safety-supplement",
-      "order": 76,
+      "order": 77,
       "source_location": "Assignments/assignment5-alignment/tests/test_metrics.py#L48",
       "kind": "test-interface",
       "title": "Test contract: test parse gsm8k response unknown",
@@ -12017,7 +12350,7 @@
     {
       "id": "assignment-05-safety-supplement-test-tests-test-data-py-55-test-iterate-batches",
       "source_object": "assignment-05-safety-supplement",
-      "order": 77,
+      "order": 78,
       "source_location": "Assignments/assignment5-alignment/tests/test_data.py#L55",
       "kind": "test-interface",
       "title": "Test contract: test iterate batches",

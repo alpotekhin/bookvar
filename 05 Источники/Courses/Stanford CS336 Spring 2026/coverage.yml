@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "semantic_review_sha256": "0fce3469ba594da49fe3dc72cf5deeb041db5777d9d8cf46c2ce886b7c237565",
+  "semantic_review_sha256": "c059b5dfe112bb6f434008ded2401020fbd58b58df6a9116ddded700608c7a49",
   "rows": [
     {
       "id": "coverage-lecture-01-section-4-cs336-language-models-from-scratch-spring-2026",
@@ -1162,6 +1162,20 @@
       "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
     },
     {
+      "id": "coverage-lecture-03-title-slide",
+      "source_object": "lecture-03",
+      "source_unit": "lecture-03-title-slide",
+      "source_location": "Lectures/repository/lecture_03.pdf#page=1:semantic=title-slide",
+      "kind": "administrative",
+      "title": "Lecture 3 title and attribution",
+      "primary_sources": [
+        "lecture-03"
+      ],
+      "disposition": "excluded",
+      "reason": "Title and attribution are preserved but contain no teaching claim.",
+      "evidence": "Lecture 3"
+    },
+    {
       "id": "coverage-lecture-03-architecture-framing",
       "source_object": "lecture-03",
       "source_unit": "lecture-03-architecture-framing",
@@ -1312,6 +1326,20 @@
       "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
     },
     {
+      "id": "coverage-lecture-04-title-slide",
+      "source_object": "lecture-04",
+      "source_unit": "lecture-04-title-slide",
+      "source_location": "Lectures/repository/lecture_04.pdf#page=1:semantic=title-slide",
+      "kind": "administrative",
+      "title": "Lecture 4 title and attribution",
+      "primary_sources": [
+        "lecture-04"
+      ],
+      "disposition": "excluded",
+      "reason": "Title and attribution are preserved but contain no teaching claim.",
+      "evidence": "Lecture 4"
+    },
+    {
       "id": "coverage-lecture-04-attention-alternatives",
       "source_object": "lecture-04",
       "source_unit": "lecture-04-attention-alternatives",
@@ -1447,6 +1475,20 @@
       "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
     },
     {
+      "id": "coverage-lecture-05-title-slide",
+      "source_object": "lecture-05",
+      "source_unit": "lecture-05-title-slide",
+      "source_location": "Lectures/repository/lecture_05.pdf#page=1:semantic=title-slide",
+      "kind": "administrative",
+      "title": "Lecture 5 title and attribution",
+      "primary_sources": [
+        "lecture-05"
+      ],
+      "disposition": "excluded",
+      "reason": "Title and attribution are preserved but contain no teaching claim.",
+      "evidence": "Lecture 5"
+    },
+    {
       "id": "coverage-lecture-05-gpu-anatomy",
       "source_object": "lecture-05",
       "source_unit": "lecture-05-gpu-anatomy",
@@ -1558,6 +1600,21 @@
       "source_location": "Lectures/repository/lecture_05.pdf#pages=45-48:semantic=matrix-mystery",
       "kind": "experiment",
       "title": "Matrix-size performance mystery and wave quantization",
+      "primary_sources": [
+        "lecture-05"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
+      "destination_anchor": "lecture-05",
+      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+    },
+    {
+      "id": "coverage-lecture-05-performance-recap-transition",
+      "source_object": "lecture-05",
+      "source_unit": "lecture-05-performance-recap-transition",
+      "source_location": "Lectures/repository/lecture_05.pdf#page=49:semantic=performance-recap-transition",
+      "kind": "section",
+      "title": "Memory-optimization recap and FlashAttention transition",
       "primary_sources": [
         "lecture-05"
       ],
@@ -2092,6 +2149,20 @@
       "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
     },
     {
+      "id": "coverage-lecture-08-title-slide",
+      "source_object": "lecture-08",
+      "source_unit": "lecture-08-title-slide",
+      "source_location": "Lectures/repository/lecture_08.pdf#page=1:semantic=title-slide",
+      "kind": "administrative",
+      "title": "Lecture 8 title and attribution",
+      "primary_sources": [
+        "lecture-08"
+      ],
+      "disposition": "excluded",
+      "reason": "Title and attribution are preserved but contain no teaching claim.",
+      "evidence": "Lecture 8"
+    },
+    {
       "id": "coverage-lecture-08-networking-collectives",
       "source_object": "lecture-08",
       "source_unit": "lecture-08-networking-collectives",
@@ -2240,6 +2311,20 @@
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-08",
       "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+    },
+    {
+      "id": "coverage-lecture-09-title-slide",
+      "source_object": "lecture-09",
+      "source_unit": "lecture-09-title-slide",
+      "source_location": "Lectures/repository/lecture_09.pdf#page=1:semantic=title-slide",
+      "kind": "administrative",
+      "title": "Lecture 9 title and attribution",
+      "primary_sources": [
+        "lecture-09"
+      ],
+      "disposition": "excluded",
+      "reason": "Title and attribution are preserved but contain no teaching claim.",
+      "evidence": "Lecture 9"
     },
     {
       "id": "coverage-lecture-09-scaling-history",
@@ -2825,6 +2910,20 @@
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-10",
       "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+    },
+    {
+      "id": "coverage-lecture-11-title-slide",
+      "source_object": "lecture-11",
+      "source_unit": "lecture-11-title-slide",
+      "source_location": "Lectures/repository/lecture_11.pdf#page=1:semantic=title-slide",
+      "kind": "administrative",
+      "title": "Lecture 11 title and attribution",
+      "primary_sources": [
+        "lecture-11"
+      ],
+      "disposition": "excluded",
+      "reason": "Title and attribution are preserved but contain no teaching claim.",
+      "evidence": "Lecture 11"
     },
     {
       "id": "coverage-lecture-11-minicpm-scaling",
@@ -3937,6 +4036,20 @@
       "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
     },
     {
+      "id": "coverage-lecture-15-title-slide",
+      "source_object": "lecture-15",
+      "source_unit": "lecture-15-title-slide",
+      "source_location": "Lectures/repository/lecture_15.pdf#page=1:semantic=title-slide",
+      "kind": "administrative",
+      "title": "Lecture 15 title and attribution",
+      "primary_sources": [
+        "lecture-15"
+      ],
+      "disposition": "excluded",
+      "reason": "Title and attribution are preserved but contain no teaching claim.",
+      "evidence": "Lecture 15"
+    },
+    {
       "id": "coverage-lecture-15-posttraining-framing",
       "source_object": "lecture-15",
       "source_unit": "lecture-15-posttraining-framing",
@@ -4055,6 +4168,20 @@
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-15",
       "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+    },
+    {
+      "id": "coverage-lecture-16-title-slide",
+      "source_object": "lecture-16",
+      "source_unit": "lecture-16-title-slide",
+      "source_location": "Lectures/repository/lecture_16.pdf#page=1:semantic=title-slide",
+      "kind": "administrative",
+      "title": "Lecture 16 title and attribution",
+      "primary_sources": [
+        "lecture-16"
+      ],
+      "disposition": "excluded",
+      "reason": "Title and attribution are preserved but contain no teaching claim.",
+      "evidence": "Lecture 16"
     },
     {
       "id": "coverage-lecture-16-ppo",
@@ -4404,7 +4531,7 @@
       "id": "coverage-assignment-01-task-unicode2",
       "source_object": "assignment-01",
       "source_unit": "assignment-01-task-unicode2",
-      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=4:problem=unicode2",
+      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#pages=4-8:problem=unicode2",
       "kind": "task",
       "title": "Unicode Encodings (3 points)",
       "primary_sources": [
@@ -4629,7 +4756,7 @@
       "id": "coverage-assignment-01-task-tokenizer-experiments",
       "source_object": "assignment-01",
       "source_unit": "assignment-01-task-tokenizer-experiments",
-      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=12:problem=tokenizer_experiments",
+      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#pages=12-17:problem=tokenizer_experiments",
       "kind": "task",
       "title": "Experiments with tokenizers (4 points)",
       "primary_sources": [
@@ -4749,7 +4876,7 @@
       "id": "coverage-assignment-01-task-embedding",
       "source_object": "assignment-01",
       "source_unit": "assignment-01-task-embedding",
-      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=18:problem=embedding",
+      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#pages=18-19:problem=embedding",
       "kind": "task",
       "title": "Implement the embedding module (1 point)",
       "primary_sources": [
@@ -4779,7 +4906,7 @@
       "id": "coverage-assignment-01-task-rmsnorm",
       "source_object": "assignment-01",
       "source_unit": "assignment-01-task-rmsnorm",
-      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=20:problem=rmsnorm",
+      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#pages=20-21:problem=rmsnorm",
       "kind": "task",
       "title": "Root Mean Square Layer Normalization (1 point)",
       "primary_sources": [
@@ -5019,7 +5146,7 @@
       "id": "coverage-assignment-01-task-transformer-accounting",
       "source_object": "assignment-01",
       "source_unit": "assignment-01-task-transformer-accounting",
-      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=27:problem=transformer_accounting",
+      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#pages=27-28:problem=transformer_accounting",
       "kind": "task",
       "title": "Transformer LM resource accounting (5 points)",
       "primary_sources": [
@@ -5109,7 +5236,7 @@
       "id": "coverage-assignment-01-task-cross-entropy",
       "source_object": "assignment-01",
       "source_unit": "assignment-01-task-cross-entropy",
-      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=29:problem=cross_entropy",
+      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#pages=29-30:problem=cross_entropy",
       "kind": "task",
       "title": "Implement cross-entropy (1 point)",
       "primary_sources": [
@@ -5304,7 +5431,7 @@
       "id": "coverage-assignment-01-task-data-loading",
       "source_object": "assignment-01",
       "source_unit": "assignment-01-task-data-loading",
-      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=34:problem=data_loading",
+      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#pages=34-35:problem=data_loading",
       "kind": "task",
       "title": "Implement data loading (2 points)",
       "primary_sources": [
@@ -5349,7 +5476,7 @@
       "id": "coverage-assignment-01-task-training-together",
       "source_object": "assignment-01",
       "source_unit": "assignment-01-task-training-together",
-      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=36:problem=training_together",
+      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#pages=36-37:problem=training_together",
       "kind": "task",
       "title": "Put it together (4 points)",
       "primary_sources": [
@@ -5409,7 +5536,7 @@
       "id": "coverage-assignment-01-task-experiment-log",
       "source_object": "assignment-01",
       "source_unit": "assignment-01-task-experiment-log",
-      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=38:problem=experiment_log",
+      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#pages=38-39:problem=experiment_log",
       "kind": "task",
       "title": "Experiment logging (3 points)",
       "primary_sources": [
@@ -5694,7 +5821,7 @@
       "id": "coverage-assignment-01-task-swiglu-ablation",
       "source_object": "assignment-01",
       "source_unit": "assignment-01-task-swiglu-ablation",
-      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=43:problem=swiglu_ablation",
+      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#pages=43-44:problem=swiglu_ablation",
       "kind": "task",
       "title": "SwiGLU vs. SiLU (0.5 B200 hrs) (1 point)",
       "primary_sources": [
@@ -5784,7 +5911,7 @@
       "id": "coverage-assignment-01-task-leaderboard",
       "source_object": "assignment-01",
       "source_unit": "assignment-01-task-leaderboard",
-      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=45:problem=leaderboard",
+      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#pages=45-46:problem=leaderboard",
       "kind": "task",
       "title": "Leaderboard (10 B200 hrs) (6 points)",
       "primary_sources": [
@@ -5794,6 +5921,20 @@
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
       "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+    },
+    {
+      "id": "coverage-assignment-01-bibliography",
+      "source_object": "assignment-01",
+      "source_unit": "assignment-01-bibliography",
+      "source_location": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#pages=46-47:semantic=bibliography",
+      "kind": "administrative",
+      "title": "Assignment bibliography",
+      "primary_sources": [
+        "assignment-01"
+      ],
+      "disposition": "excluded",
+      "reason": "Reference citations are preserved as provenance but excluded from teaching-content coverage.",
+      "evidence": "Bibliography"
     },
     {
       "id": "coverage-assignment-01-leaderboard-budget",
@@ -6563,7 +6704,7 @@
       "id": "coverage-assignment-02-task-benchmarking-script",
       "source_object": "assignment-02",
       "source_unit": "assignment-02-task-benchmarking-script",
-      "source_location": "Assignments/assignment2-systems/cs336_assignment2_systems.pdf#page=3:problem=benchmarking_script",
+      "source_location": "Assignments/assignment2-systems/cs336_assignment2_systems.pdf#pages=3-5:problem=benchmarking_script",
       "kind": "task",
       "title": "Benchmarking Script (4 points)",
       "primary_sources": [
@@ -6833,7 +6974,7 @@
       "id": "coverage-assignment-02-task-memory-profiling",
       "source_object": "assignment-02",
       "source_unit": "assignment-02-task-memory-profiling",
-      "source_location": "Assignments/assignment2-systems/cs336_assignment2_systems.pdf#page=9:problem=memory_profiling",
+      "source_location": "Assignments/assignment2-systems/cs336_assignment2_systems.pdf#pages=9-14:problem=memory_profiling",
       "kind": "task",
       "title": "Memory Profiling (4 points)",
       "primary_sources": [
@@ -7013,7 +7154,7 @@
       "id": "coverage-assignment-02-task-torch-compile",
       "source_object": "assignment-02",
       "source_unit": "assignment-02-task-torch-compile",
-      "source_location": "Assignments/assignment2-systems/cs336_assignment2_systems.pdf#page=16:problem=torch_compile",
+      "source_location": "Assignments/assignment2-systems/cs336_assignment2_systems.pdf#pages=16-25:problem=torch_compile",
       "kind": "task",
       "title": "Torch Compile (2 points)",
       "primary_sources": [
@@ -7073,7 +7214,7 @@
       "id": "coverage-assignment-02-task-flash-forward",
       "source_object": "assignment-02",
       "source_unit": "assignment-02-task-flash-forward",
-      "source_location": "Assignments/assignment2-systems/cs336_assignment2_systems.pdf#page=26:problem=flash_forward",
+      "source_location": "Assignments/assignment2-systems/cs336_assignment2_systems.pdf#pages=26-27:problem=flash_forward",
       "kind": "task",
       "title": "FlashAttention-2 Forward Pass (15 points)",
       "primary_sources": [
@@ -7178,7 +7319,7 @@
       "id": "coverage-assignment-02-task-flash-benchmarking",
       "source_object": "assignment-02",
       "source_unit": "assignment-02-task-flash-benchmarking",
-      "source_location": "Assignments/assignment2-systems/cs336_assignment2_systems.pdf#page=28:problem=flash_benchmarking",
+      "source_location": "Assignments/assignment2-systems/cs336_assignment2_systems.pdf#pages=28-31:problem=flash_benchmarking",
       "kind": "task",
       "title": "FlashAttention-2 Benchmarking (5 points)",
       "primary_sources": [
@@ -7553,7 +7694,7 @@
       "id": "coverage-assignment-02-task-fsdp-accounting",
       "source_object": "assignment-02",
       "source_unit": "assignment-02-task-fsdp-accounting",
-      "source_location": "Assignments/assignment2-systems/cs336_assignment2_systems.pdf#page=39:problem=fsdp_accounting",
+      "source_location": "Assignments/assignment2-systems/cs336_assignment2_systems.pdf#pages=39-40:problem=fsdp_accounting",
       "kind": "task",
       "title": "FSDP Accounting (5 points)",
       "primary_sources": [
@@ -7748,7 +7889,7 @@
       "id": "coverage-assignment-02-task-tp-calcs",
       "source_object": "assignment-02",
       "source_unit": "assignment-02-task-tp-calcs",
-      "source_location": "Assignments/assignment2-systems/cs336_assignment2_systems.pdf#page=44:problem=tp_calcs",
+      "source_location": "Assignments/assignment2-systems/cs336_assignment2_systems.pdf#pages=44-45:problem=tp_calcs",
       "kind": "task",
       "title": "Tensor parallel calculations (4 points)",
       "primary_sources": [
@@ -7823,7 +7964,7 @@
       "id": "coverage-assignment-02-task-fsdp-tp-calcs",
       "source_object": "assignment-02",
       "source_unit": "assignment-02-task-fsdp-tp-calcs",
-      "source_location": "Assignments/assignment2-systems/cs336_assignment2_systems.pdf#page=46:problem=fsdp_tp_calcs",
+      "source_location": "Assignments/assignment2-systems/cs336_assignment2_systems.pdf#pages=46-47:problem=fsdp_tp_calcs",
       "kind": "task",
       "title": "2D parallelism calculations (6 points)",
       "primary_sources": [
@@ -8092,7 +8233,7 @@
       "id": "coverage-assignment-03-task-chinchilla-isoflops",
       "source_object": "assignment-03",
       "source_unit": "assignment-03-task-chinchilla-isoflops",
-      "source_location": "Assignments/assignment3-scaling/cs336_assignment3_scaling.pdf#page=2:problem=chinchilla_isoflops",
+      "source_location": "Assignments/assignment3-scaling/cs336_assignment3_scaling.pdf#pages=2-6:problem=chinchilla_isoflops",
       "kind": "task",
       "title": "IsoFLOPs scaling laws (5 points)",
       "primary_sources": [
@@ -8152,7 +8293,7 @@
       "id": "coverage-assignment-03-task-scaling-laws",
       "source_object": "assignment-03",
       "source_unit": "assignment-03-task-scaling-laws",
-      "source_location": "Assignments/assignment3-scaling/cs336_assignment3_scaling.pdf#page=7:problem=scaling_laws",
+      "source_location": "Assignments/assignment3-scaling/cs336_assignment3_scaling.pdf#pages=7-8:problem=scaling_laws",
       "kind": "task",
       "title": "Constructing scaling laws leaderboard (50 points)",
       "primary_sources": [
@@ -8496,7 +8637,7 @@
       "id": "coverage-assignment-04-task-mask-pii",
       "source_object": "assignment-04",
       "source_unit": "assignment-04-task-mask-pii",
-      "source_location": "Assignments/assignment4-data/cs336_assignment4_data.pdf#page=5:problem=mask_pii",
+      "source_location": "Assignments/assignment4-data/cs336_assignment4_data.pdf#pages=5-6:problem=mask_pii",
       "kind": "task",
       "title": "Personally identifiable information (3 points)",
       "primary_sources": [
@@ -8811,7 +8952,7 @@
       "id": "coverage-assignment-04-task-minhash-deduplication",
       "source_object": "assignment-04",
       "source_unit": "assignment-04-task-minhash-deduplication",
-      "source_location": "Assignments/assignment4-data/cs336_assignment4_data.pdf#page=11:problem=minhash_deduplication",
+      "source_location": "Assignments/assignment4-data/cs336_assignment4_data.pdf#pages=11-12:problem=minhash_deduplication",
       "kind": "task",
       "title": "MinHash + LSH document deduplication (8 points)",
       "primary_sources": [
@@ -9362,6 +9503,36 @@
       "evidence": "writeup.pdf"
     },
     {
+      "id": "coverage-assignment-05-reasoning-rl-setting-and-notation",
+      "source_object": "assignment-05",
+      "source_unit": "assignment-05-reasoning-rl-setting-and-notation",
+      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#pages=3-4:semantic=reasoning-rl-setting-and-notation",
+      "kind": "section",
+      "title": "Reasoning-RL model, task setting, and notation",
+      "primary_sources": [
+        "assignment-05"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
+      "destination_anchor": "assignment-05",
+      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+    },
+    {
+      "id": "coverage-assignment-05-prompting-and-grading",
+      "source_object": "assignment-05",
+      "source_unit": "assignment-05-prompting-and-grading",
+      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#pages=4-6:semantic=prompting-and-grading",
+      "kind": "mechanism",
+      "title": "vLLM prompting baselines and answer grading",
+      "primary_sources": [
+        "assignment-05"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
+      "destination_anchor": "assignment-05",
+      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+    },
+    {
       "id": "coverage-assignment-05-prompting-baselines",
       "source_object": "assignment-05",
       "source_unit": "assignment-05-prompting-baselines",
@@ -9380,7 +9551,7 @@
       "id": "coverage-assignment-05-task-prompting-baselines",
       "source_object": "assignment-05",
       "source_unit": "assignment-05-task-prompting-baselines",
-      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=7:problem=prompting_baselines",
+      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#pages=7-9:problem=prompting_baselines",
       "kind": "task",
       "title": "Run OLMo-2-0425-1B on GSM8K (5 points)",
       "primary_sources": [
@@ -9440,7 +9611,7 @@
       "id": "coverage-assignment-05-task-baseline-calcs",
       "source_object": "assignment-05",
       "source_unit": "assignment-05-task-baseline-calcs",
-      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=10:problem=baseline_calcs",
+      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#pages=10-13:problem=baseline_calcs",
       "kind": "task",
       "title": "Compute the variance of the policy gradient estimator (5",
       "primary_sources": [
@@ -9575,7 +9746,7 @@
       "id": "coverage-assignment-05-task-compute-group-normalized-rewards-grpo",
       "source_object": "assignment-05",
       "source_unit": "assignment-05-task-compute-group-normalized-rewards-grpo",
-      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=17:problem=compute_group_normalized_rewards_grpo",
+      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#pages=17-18:problem=compute_group_normalized_rewards_grpo",
       "kind": "task",
       "title": "Group normalization (1 point)",
       "primary_sources": [
@@ -9635,7 +9806,7 @@
       "id": "coverage-assignment-05-task-aggregate-loss-across-microbatch-sequence",
       "source_object": "assignment-05",
       "source_unit": "assignment-05-task-aggregate-loss-across-microbatch-sequence",
-      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=20:problem=aggregate_loss_across_microbatch_sequence",
+      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#pages=20-21:problem=aggregate_loss_across_microbatch_sequence",
       "kind": "task",
       "title": "Aggregate loss across tokens and",
       "primary_sources": [
@@ -9665,7 +9836,7 @@
       "id": "coverage-assignment-05-task-grpo-train-step-standard-on-policy",
       "source_object": "assignment-05",
       "source_unit": "assignment-05-task-grpo-train-step-standard-on-policy",
-      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=22:problem=grpo_train_step_standard_on_policy",
+      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#pages=22-24:problem=grpo_train_step_standard_on_policy",
       "kind": "task",
       "title": "GRPO train step (5 points)",
       "primary_sources": [
@@ -10145,7 +10316,7 @@
       "id": "coverage-assignment-05-task-grpo-experiments-variants-on-policy",
       "source_object": "assignment-05",
       "source_unit": "assignment-05-task-grpo-experiments-variants-on-policy",
-      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=31:problem=grpo_experiments_variants_on_policy",
+      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#pages=31-33:problem=grpo_experiments_variants_on_policy",
       "kind": "task",
       "title": "Compare the performance of different RL",
       "primary_sources": [
@@ -10397,6 +10568,20 @@
       "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
     },
     {
+      "id": "coverage-assignment-05-bibliography",
+      "source_object": "assignment-05",
+      "source_unit": "assignment-05-bibliography",
+      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=39:semantic=bibliography",
+      "kind": "administrative",
+      "title": "Assignment bibliography",
+      "primary_sources": [
+        "assignment-05"
+      ],
+      "disposition": "excluded",
+      "reason": "Reference citations are preserved as provenance but excluded from teaching-content coverage.",
+      "evidence": "Bibliography"
+    },
+    {
       "id": "coverage-assignment-05-test-tests-test-grpo-py-33-test-tokenize-prompt-and-output",
       "source_object": "assignment-05",
       "source_unit": "assignment-05-test-tests-test-grpo-py-33-test-tokenize-prompt-and-output",
@@ -10619,6 +10804,21 @@
       "disposition": "excluded",
       "reason": "Environment, volume, and helper-script setup are preserved but excluded from teaching coverage.",
       "evidence": "Models and shared volumes"
+    },
+    {
+      "id": "coverage-assignment-05-safety-supplement-safety-prompt-and-mmlu-setup",
+      "source_object": "assignment-05-safety-supplement",
+      "source_unit": "assignment-05-safety-supplement-safety-prompt-and-mmlu-setup",
+      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=3:semantic=safety-prompt-and-mmlu-setup",
+      "kind": "mechanism",
+      "title": "Safety system prompt and zero-shot MMLU protocol",
+      "primary_sources": [
+        "assignment-05-safety-supplement"
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
+      "destination_anchor": "assignment-05-safety-supplement",
+      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
     },
     {
       "id": "coverage-assignment-05-safety-supplement-mmlu-metric",
@@ -11074,7 +11274,7 @@
       "id": "coverage-assignment-05-safety-supplement-task-data-loading",
       "source_object": "assignment-05-safety-supplement",
       "source_unit": "assignment-05-safety-supplement-task-data-loading",
-      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=9:problem=data_loading",
+      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#pages=9-10:problem=data_loading",
       "kind": "task",
       "title": "Implement data loading (3 points)",
       "primary_sources": [
@@ -11434,7 +11634,7 @@
       "id": "coverage-assignment-05-safety-supplement-task-red-teaming",
       "source_object": "assignment-05-safety-supplement",
       "source_unit": "assignment-05-safety-supplement-task-red-teaming",
-      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=14:problem=red_teaming",
+      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#pages=14-15:problem=red_teaming",
       "kind": "task",
       "title": "Red-team the instruction-tuned model (4 points)",
       "primary_sources": [
@@ -11569,7 +11769,7 @@
       "id": "coverage-assignment-05-safety-supplement-task-dpo-training",
       "source_object": "assignment-05-safety-supplement",
       "source_unit": "assignment-05-safety-supplement-task-dpo-training",
-      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=17:problem=dpo_training",
+      "source_location": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#pages=17-18:problem=dpo_training",
       "kind": "task",
       "title": "DPO training (1 B200 hr) (4 points)",
       "primary_sources": [

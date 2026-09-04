@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "reviewed_at": "2026-09-04",
-  "review_method": "Per-source review of every executable lecture edtrace and source file, every PDF lecture page outline with representative raster inspection, and every assignment handout, adapter, and test tree. Page and pdfimages detections are evidence only; they never create units or visuals on their own.",
+  "review_method": "Per-source review of every executable lecture edtrace and source file, every PDF lecture page, and every assignment handout, adapter, and test tree. Every reviewed PDF page is closed by a semantic unit or an evidence-backed administrative exclusion; page and pdfimages detections are evidence only, never standalone teaching visuals.",
   "executable_lectures": {
     "lecture-01": {
       "administrative_headings": [
@@ -424,6 +424,7 @@
   "pdf_lectures": {
     "lecture-03": {
       "units": [
+        {"semantic_id": "title-slide", "kind": "administrative", "title": "Lecture 3 title and attribution", "pages": [1], "reason": "Title and attribution are preserved but contain no teaching claim.", "evidence_text": "Lecture 3"},
         {"semantic_id": "architecture-framing", "kind": "section", "title": "Transformer baseline and architecture comparison", "pages": [2, 9], "evidence_text": "Outline and goals"},
         {"semantic_id": "normalization-stability", "kind": "derivation", "title": "Pre-norm, post-norm, RMSNorm, and gradient stability", "pages": [10, 19], "evidence_text": "Pre-vs-post norm"},
         {"semantic_id": "rmsnorm-validation", "kind": "experiment", "title": "RMSNorm runtime and performance validation", "pages": [15, 17], "evidence_text": "Why RMSNorm"},
@@ -445,6 +446,7 @@
     },
     "lecture-04": {
       "units": [
+        {"semantic_id": "title-slide", "kind": "administrative", "title": "Lecture 4 title and attribution", "pages": [1], "reason": "Title and attribution are preserved but contain no teaching claim.", "evidence_text": "Lecture 4"},
         {"semantic_id": "attention-alternatives", "kind": "section", "title": "Attention alternatives and hybrid sequence models", "pages": [2, 13], "evidence_text": "Attention alternatives"},
         {"semantic_id": "linear-attention-recurrence", "kind": "derivation", "title": "Linear-attention recurrent form and gated state updates", "pages": [4, 10], "evidence_text": "Linear attention"},
         {"semantic_id": "moe-motivation", "kind": "section", "title": "Mixture-of-experts motivation and scaling evidence", "pages": [14, 24], "evidence_text": "Mixture of experts"},
@@ -465,6 +467,7 @@
     },
     "lecture-05": {
       "units": [
+        {"semantic_id": "title-slide", "kind": "administrative", "title": "Lecture 5 title and attribution", "pages": [1], "reason": "Title and attribution are preserved but contain no teaching claim.", "evidence_text": "Lecture 5"},
         {"semantic_id": "gpu-anatomy", "kind": "section", "title": "GPU execution and memory anatomy", "pages": [2, 19], "evidence_text": "Outline and goals"},
         {"semantic_id": "roofline-performance", "kind": "mechanism", "title": "Roofline model and GPU performance constraints", "pages": [20, 23], "evidence_text": "Making ML workloads fast"},
         {"semantic_id": "low-precision-intensity", "kind": "derivation", "title": "Low-precision arithmetic-intensity derivation", "pages": [24, 29], "evidence_text": "Low precision"},
@@ -473,6 +476,7 @@
         {"semantic_id": "coalescing-failures", "kind": "failure-mode", "title": "Control divergence and uncoalesced DRAM access failures", "pages": [23, 39], "evidence_text": "Control divergence"},
         {"semantic_id": "tiling-derivation", "kind": "derivation", "title": "Matrix tiling and shared-memory reuse derivation", "pages": [40, 44], "evidence_text": "tiling"},
         {"semantic_id": "matrix-mystery", "kind": "experiment", "title": "Matrix-size performance mystery and wave quantization", "pages": [45, 48], "evidence_text": "matrix mystery"},
+        {"semantic_id": "performance-recap-transition", "kind": "section", "title": "Memory-optimization recap and FlashAttention transition", "pages": [49], "evidence_text": "Recap of part 2: making ML workloads go fast"},
         {"semantic_id": "flashattention-derivation", "kind": "derivation", "title": "FlashAttention tiled online-softmax derivation", "pages": [50, 54], "evidence_text": "Flash Attention"},
         {"semantic_id": "recap", "kind": "section", "title": "GPU performance recap", "pages": [55], "evidence_text": "Recap"}
       ],
@@ -484,10 +488,11 @@
         {"semantic_id": "matrix-mystery", "visual_kind": "experiment", "question": "How do alignment and wave quantization explain periodic matrix-multiplication throughput?", "pages": [45, 48]},
         {"semantic_id": "flashattention-derivation", "visual_kind": "derivation", "question": "How do tiled QK products and online softmax eliminate materialization of the full attention matrix?", "pages": [50, 54]}
       ],
-      "sample": "The tiling diagram on page 42 is interpreted with its pages 40-44 derivation; the matrix mystery remains a distinct experiment."
+      "sample": "The tiling diagram on page 42 is interpreted with its pages 40-44 derivation; page 49 explicitly recaps memory optimizations before the FlashAttention derivation."
     },
     "lecture-08": {
       "units": [
+        {"semantic_id": "title-slide", "kind": "administrative", "title": "Lecture 8 title and attribution", "pages": [1], "reason": "Title and attribution are preserved but contain no teaching claim.", "evidence_text": "Lecture 8"},
         {"semantic_id": "networking-collectives", "kind": "section", "title": "Networking topologies and collective communication", "pages": [2, 13], "evidence_text": "Outline and goals"},
         {"semantic_id": "zero-sharding", "kind": "mechanism", "title": "Data parallelism and ZeRO stages 1-3", "pages": [14, 30], "evidence_text": "Standard LLM parallelization"},
         {"semantic_id": "zero-memory-accounting", "kind": "derivation", "title": "ZeRO communication and memory accounting", "pages": [16, 28], "evidence_text": "ZeRO stage 3 (aka FSDP) shard everything"},
@@ -510,6 +515,7 @@
     },
     "lecture-09": {
       "units": [
+        {"semantic_id": "title-slide", "kind": "administrative", "title": "Lecture 9 title and attribution", "pages": [1], "reason": "Title and attribution are preserved but contain no teaching claim.", "evidence_text": "Lecture 9"},
         {"semantic_id": "scaling-history", "kind": "section", "title": "History and motivation of empirical scaling laws", "pages": [2, 12], "evidence_text": "Taking scaling seriously"},
         {"semantic_id": "data-scaling", "kind": "mechanism", "title": "Power-law data scaling", "pages": [13, 27], "evidence_text": "power law"},
         {"semantic_id": "mean-estimation-derivation", "kind": "derivation", "title": "Mean-estimation and intrinsic-dimension scaling derivations", "pages": [16, 20], "evidence_text": "mean estimation"},
@@ -530,6 +536,7 @@
     },
     "lecture-11": {
       "units": [
+        {"semantic_id": "title-slide", "kind": "administrative", "title": "Lecture 11 title and attribution", "pages": [1], "reason": "Title and attribution are preserved but contain no teaching claim.", "evidence_text": "Lecture 11"},
         {"semantic_id": "minicpm-scaling", "kind": "worked-example", "title": "MiniCPM muP, WSD, and Chinchilla scaling recipe", "pages": [2, 18], "evidence_text": "MiniCPM"},
         {"semantic_id": "deepseek-scaling", "kind": "worked-example", "title": "DeepSeek and recent-model scaling recipes", "pages": [19, 30], "evidence_text": "DeepSeek"},
         {"semantic_id": "optimizer-scaling", "kind": "experiment", "title": "Learning-rate, batch, optimizer, and Muon scaling experiments", "pages": [31, 43], "evidence_text": "Optimizer scaling"},
@@ -548,6 +555,7 @@
     },
     "lecture-15": {
       "units": [
+        {"semantic_id": "title-slide", "kind": "administrative", "title": "Lecture 15 title and attribution", "pages": [1], "reason": "Title and attribution are preserved but contain no teaching claim.", "evidence_text": "Lecture 15"},
         {"semantic_id": "posttraining-framing", "kind": "section", "title": "From pretraining to controllable instruction following", "pages": [2, 6], "evidence_text": "class thus far"},
         {"semantic_id": "sft-data", "kind": "worked-example", "title": "Instruction-tuning data progression, style, knowledge, and safety", "pages": [7, 27], "evidence_text": "ingredients in SFT"},
         {"semantic_id": "midtraining", "kind": "mechanism", "title": "Midtraining and two-phase training", "pages": [28, 30], "evidence_text": "Midtraining"},
@@ -567,6 +575,7 @@
     },
     "lecture-16": {
       "units": [
+        {"semantic_id": "title-slide", "kind": "administrative", "title": "Lecture 16 title and attribution", "pages": [1], "reason": "Title and attribution are preserved but contain no teaching claim.", "evidence_text": "Lecture 16"},
         {"semantic_id": "ppo", "kind": "mechanism", "title": "PPO objectives, rollout loop, reward shaping, and GAE", "pages": [2, 17], "evidence_text": "class thus far"},
         {"semantic_id": "grpo", "kind": "derivation", "title": "GRPO objective and group-relative advantage derivation", "pages": [18, 24], "evidence_text": "GRPO"},
         {"semantic_id": "grpo-bias-failures", "kind": "failure-mode", "title": "GRPO invalid baseline and length-bias failures", "pages": [22, 24], "evidence_text": "valid baseline"},
@@ -590,21 +599,26 @@
     "assignment-01": {
       "handout": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf",
       "expected_task_ids": ["unicode1", "unicode2", "train_bpe", "train_bpe_tinystories", "train_bpe_expts_owt", "tokenizer", "tokenizer_experiments", "linear", "embedding", "rmsnorm", "positionwise_feedforward", "rope", "softmax", "scaled_dot_product_attention", "multihead_self_attention", "transformer_block", "transformer_lm", "transformer_accounting", "cross_entropy", "learning_rate_tuning", "adamw", "adamw_accounting", "learning_rate_schedule", "gradient_clipping", "data_loading", "checkpointing", "training_together", "decoding", "experiment_log", "learning_rate", "batch_size_experiment", "generate", "layer_norm_ablation", "pre_norm_ablation", "no_pos_emb", "swiglu_ablation", "main_experiment", "leaderboard"],
+      "final_task_page": 46,
       "expected_deliverables": 57,
       "test_globs": ["tests/test*.py"],
       "expected_test_interfaces": 48,
-      "administrative": [{"semantic_id": "course-policy-and-setup", "title": "Submission, collaboration, AI-tool, and low-resource guidance", "pages": [1, 2], "reason": "Administrative course policy and environment setup are preserved but are not textbook teaching content.", "evidence_text": "AI autocomplete"}],
+      "administrative": [
+        {"semantic_id": "course-policy-and-setup", "title": "Submission, collaboration, AI-tool, and low-resource guidance", "pages": [1, 2], "reason": "Administrative course policy and environment setup are preserved but are not textbook teaching content.", "evidence_text": "AI autocomplete"},
+        {"semantic_id": "bibliography", "title": "Assignment bibliography", "pages": [46, 47], "reason": "Reference citations are preserved as provenance but excluded from teaching-content coverage.", "evidence_text": "Bibliography"}
+      ],
       "evaluation": [
         {"semantic_id": "bpe-runtime", "criterion_id": "bpe-runtime", "title": "BPE training completes under two minutes with multiprocessing", "page": 10, "evidence_text": "under 2 minutes"},
         {"semantic_id": "tinystories-loss", "criterion_id": "tinystories-loss", "title": "TinyStories validation loss is at most 1.45", "page": 40, "evidence_text": "at most 1.45"},
         {"semantic_id": "leaderboard-budget", "criterion_id": "leaderboard-budget", "title": "Leaderboard model minimizes validation loss within 0.75 B200-hours", "page": 46, "evidence_text": "0.75 B200-hours"}
       ],
       "visuals": [{"semantic_id": "transformer-construction-sequence", "kind": "visual-sequence", "visual_kind": "derivation", "title": "Transformer component-to-full-model construction sequence", "question": "How do linear, embedding, RMSNorm, SwiGLU, RoPE, attention, and block contracts compose the full Transformer LM?", "pages": [18, 27], "evidence_text": "Implementing the linear module"}],
-      "sample": "Problems and Deliverable markers define units; the cover and AI policy are excluded rather than mislabeled as tasks."
+      "sample": "Problem markers define reviewed continuation spans through page 46; course policy and bibliography pages have evidence-backed exclusions."
     },
     "assignment-02": {
       "handout": "Assignments/assignment2-systems/cs336_assignment2_systems.pdf",
       "expected_task_ids": ["benchmarking_script", "nsys_profile", "mixed_precision_accumulation", "benchmarking_mixed_precision", "memory_profiling", "gradient_checkpointing", "pytorch_attention", "torch_compile", "flash_forward", "flash_backward", "flash_benchmarking", "distributed_communication_single_node", "naive_ddp", "naive_ddp_benchmarking", "minimal_ddp_flat_benchmarking", "ddp_overlap_individual_parameters", "ddp_overlap_individual_parameters_benchmarking", "optimizer_state_sharding", "optimizer_state_sharding_accounting", "fsdp", "fsdp_accounting", "alternate_ring_all_reduce", "data_parallel_calcs", "fsdp_calcs", "tp_calcs", "fsdp_tp_calcs", "leaderboard"],
+      "final_task_page": 48,
       "expected_deliverables": 58,
       "test_globs": ["tests/test*.py"],
       "expected_test_interfaces": 8,
@@ -625,6 +639,7 @@
     "assignment-03": {
       "handout": "Assignments/assignment3-scaling/cs336_assignment3_scaling.pdf",
       "expected_task_ids": ["chinchilla_isoflops", "scaling_laws"],
+      "final_task_page": 8,
       "expected_deliverables": 3,
       "test_globs": ["tests/test*.py"],
       "expected_test_interfaces": 7,
@@ -639,6 +654,7 @@
     "assignment-04": {
       "handout": "Assignments/assignment4-data/cs336_assignment4_data.pdf",
       "expected_task_ids": ["look_at_cc", "extract_text", "language_identification", "mask_pii", "harmful_content", "gopher_quality_filters", "quality_classifier", "exact_deduplication", "minhash_deduplication", "filter_data", "inspect_filtered_data", "tokenize_data", "train_model"],
+      "final_task_page": 16,
       "expected_deliverables": 31,
       "test_globs": ["tests/test*.py"],
       "expected_test_interfaces": 21,
@@ -654,10 +670,18 @@
     "assignment-05": {
       "handout": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf",
       "expected_task_ids": ["prompting_baselines", "baseline_calcs", "tokenize_prompt_and_output", "get_response_log_probs", "compute_rollout_rewards", "compute_group_normalized_rewards_grpo", "compute_policy_gradient_loss_on_policy", "aggregate_loss_across_microbatch_sequence", "grpo_train_step_standard_on_policy", "grpo_experiments_standard_on_policy", "grpo_learning_rate", "grpo_prompt_ablation", "think_about_length_normalization", "compute_group_normalized_rewards_drgrpo", "aggregate_loss_across_microbatch_constant", "think_about_rft", "derive_difficulty_reweightings", "think_about_advantage_normalization", "compute_group_normalized_rewards_maxrl", "grpo_train_step_variants_on_policy", "grpo_experiments_variants_on_policy", "derive_surrogate_objectives", "compute_policy_gradient_loss_off_policy", "think_about_importance_reweighting", "compute_policy_gradient_loss_off_policy_gspo", "grpo_train_step_off_policy", "grpo_experiments_off_policy", "try_your_own"],
+      "final_task_page": 38,
       "expected_deliverables": 36,
       "test_globs": ["tests/test_grpo.py"],
       "expected_test_interfaces": 14,
-      "administrative": [{"semantic_id": "alignment-submission", "title": "Writeup and code submission instructions", "pages": [1, 2], "reason": "Submission packaging is preserved but excluded from instructional coverage.", "evidence_text": "writeup.pdf"}],
+      "units": [
+        {"semantic_id": "reasoning-rl-setting-and-notation", "kind": "section", "title": "Reasoning-RL model, task setting, and notation", "pages": [3, 4], "evidence_text": "A note on model and dataset choice"},
+        {"semantic_id": "prompting-and-grading", "kind": "mechanism", "title": "vLLM prompting baselines and answer grading", "pages": [4, 6], "evidence_text": "3 Prompting"}
+      ],
+      "administrative": [
+        {"semantic_id": "alignment-submission", "title": "Writeup and code submission instructions", "pages": [1, 2], "reason": "Submission packaging is preserved but excluded from instructional coverage.", "evidence_text": "writeup.pdf"},
+        {"semantic_id": "bibliography", "title": "Assignment bibliography", "pages": [39], "reason": "Reference citations are preserved as provenance but excluded from teaching-content coverage.", "evidence_text": "Bibliography"}
+      ],
       "evaluation": [
         {"semantic_id": "prompting-baselines", "criterion_id": "prompting-baselines", "title": "Zero-shot, few-shot, and chain-of-thought GSM8K baselines report metrics and examples", "page": 7, "evidence_text": "evaluation metrics"},
         {"semantic_id": "grpo-correctness", "criterion_id": "grpo-correctness", "title": "GRPO implementation supplies correctness evidence and reaches at least 25 percent validation accuracy", "page": 25, "evidence_text": "at least 25"},
@@ -665,14 +689,18 @@
         {"semantic_id": "on-off-policy-comparison", "criterion_id": "on-off-policy-comparison", "title": "On-policy variants and off-policy estimators are compared with fixed hyperparameters and plots", "page": 38, "evidence_text": "Keeping hyperparameters fixed"}
       ],
       "visuals": [{"semantic_id": "on-policy-grpo-derivation", "kind": "derivation", "visual_kind": "derivation", "title": "Policy-gradient to on-policy GRPO derivation", "question": "How do trajectories, returns, baselines, normalization, and token aggregation produce the GRPO algorithm?", "pages": [8, 13], "evidence_text": "Language models as policies"}],
-      "sample": "Twenty-eight named problems and fourteen real tests are retained; the GRPO derivation spans pages 8-13."
+      "sample": "Pages 3-6 cover the reasoning-RL setting, prompting, and grading; named problems continue through page 38 and page 39 is bibliography."
     },
     "assignment-05-safety-supplement": {
       "handout": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf",
       "expected_task_ids": ["mmlu_baseline", "gsm8k_baseline", "alpaca_eval_baseline", "sst_baseline", "look_at_sft", "data_loading", "sft_script", "sft", "mmlu_sft", "gsm8k_sft", "alpaca_eval_sft", "sst_sft", "red_teaming", "look_at_hh", "dpo_loss", "dpo_training"],
+      "final_task_page": 18,
       "expected_deliverables": 46,
       "test_globs": ["tests/test_data.py", "tests/test_dpo.py", "tests/test_metrics.py"],
       "expected_test_interfaces": 7,
+      "units": [
+        {"semantic_id": "safety-prompt-and-mmlu-setup", "kind": "mechanism", "title": "Safety system prompt and zero-shot MMLU protocol", "pages": [3], "evidence_text": "Zero-Shot MMLU Baseline"}
+      ],
       "administrative": [{"semantic_id": "safety-setup", "title": "Model volumes, helper scripts, and repository setup", "pages": [1, 2], "reason": "Environment, volume, and helper-script setup are preserved but excluded from teaching coverage.", "evidence_text": "Models and shared volumes"}],
       "evaluation": [
         {"semantic_id": "mmlu-metric", "criterion_id": "mmlu-metric", "title": "MMLU parses answer letters and reports accuracy, throughput, failures, and error analysis", "page": 4, "evidence_text": "Evaluation metric"},

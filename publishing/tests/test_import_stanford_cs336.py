@@ -155,6 +155,83 @@ class StanfordSemanticAuditTest(unittest.TestCase):
         validator(truncated, expected, truncated_lock, failures)
         self.assertTrue(any("deterministic extraction mismatch" in failure for failure in failures))
 
+    def test_pdf_page_closure_rejects_self_consistent_semantic_omission(self) -> None:
+        spec = importlib.util.spec_from_file_location("import_stanford_cs336", IMPORTER_PATH)
+        assert spec and spec.loader
+        importer = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = importer
+        spec.loader.exec_module(importer)
+        closure_validator = getattr(importer, "validate_pdf_page_closure", None)
+        self.assertIsNotNone(
+            closure_validator,
+            "importer must expose reviewed-PDF semantic page-closure validation",
+        )
+        if closure_validator is None:
+            return
+
+        complete_failures: list[str] = []
+        closure_validator(self.units, self.coverage, complete_failures)
+        self.assertEqual(complete_failures, [])
+
+        expected = {
+            "source-manifest.yml": self.manifest,
+            "source-units.yml": self.units,
+            "coverage.yml": self.coverage,
+            "visuals.yml": self.visuals,
+        }
+        omitted = copy.deepcopy(expected)
+        semantic_id = "performance-recap-transition"
+        omitted_units = omitted["source-units.yml"]["units"]
+        removed_units = [
+            unit
+            for unit in omitted_units
+            if unit.get("source_object") == "lecture-05"
+            and unit.get("semantic_id") == semantic_id
+        ]
+        self.assertEqual(len(removed_units), 1)
+        if len(removed_units) != 1:
+            return
+        removed_id = removed_units[0]["id"]
+        omitted["source-units.yml"]["units"] = [
+            unit for unit in omitted_units if unit.get("id") != removed_id
+        ]
+        omitted["coverage.yml"]["rows"] = [
+            row
+            for row in omitted["coverage.yml"]["rows"]
+            if row.get("source_unit") != removed_id
+        ]
+
+        omitted_lock = copy.deepcopy(self.lock)
+        for filename, document in omitted.items():
+            audit = omitted_lock["generated_audit"]["ledgers"][filename]
+            audit["sha256"] = hashlib.sha256(importer.document_bytes(document)).hexdigest()
+            key = "objects" if filename == "source-manifest.yml" else (
+                "units" if filename == "source-units.yml" else "rows"
+            )
+            audit["records"] = len(document[key])
+
+        deterministic_failures: list[str] = []
+        importer.validate_generated_documents(
+            omitted,
+            omitted,
+            omitted_lock,
+            deterministic_failures,
+        )
+        self.assertEqual(deterministic_failures, [])
+
+        closure_failures: list[str] = []
+        closure_validator(
+            omitted["source-units.yml"],
+            omitted["coverage.yml"],
+            closure_failures,
+        )
+        self.assertTrue(
+            any(
+                "lecture-05: semantic page closure missing pages [49]" in failure
+                for failure in closure_failures
+            )
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

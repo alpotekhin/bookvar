@@ -95,7 +95,7 @@ Raw page/raster detections служат evidence и не становятся о
 ### lecture-03: Architectures, hyperparameters
 
 - local path: `Lectures/repository/lecture_03.pdf`;
-- extracted units: 10;
+- extracted units: 11;
 - semantic visual rows: 4;
 - baseline: teaching content is `source-only`; reviewed administration is `excluded`.
 
@@ -103,7 +103,7 @@ Raw page/raster detections служат evidence и не становятся о
 ### lecture-04: Attention alternatives and mixture of experts
 
 - local path: `Lectures/repository/lecture_04.pdf`;
-- extracted units: 9;
+- extracted units: 10;
 - semantic visual rows: 4;
 - baseline: teaching content is `source-only`; reviewed administration is `excluded`.
 
@@ -111,7 +111,7 @@ Raw page/raster detections служат evidence и не становятся о
 ### lecture-05: GPUs, TPUs
 
 - local path: `Lectures/repository/lecture_05.pdf`;
-- extracted units: 10;
+- extracted units: 12;
 - semantic visual rows: 6;
 - baseline: teaching content is `source-only`; reviewed administration is `excluded`.
 
@@ -135,7 +135,7 @@ Raw page/raster detections служат evidence и не становятся о
 ### lecture-08: Parallelism
 
 - local path: `Lectures/repository/lecture_08.pdf`;
-- extracted units: 10;
+- extracted units: 11;
 - semantic visual rows: 5;
 - baseline: teaching content is `source-only`; reviewed administration is `excluded`.
 
@@ -143,7 +143,7 @@ Raw page/raster detections служат evidence и не становятся о
 ### lecture-09: Scaling laws
 
 - local path: `Lectures/repository/lecture_09.pdf`;
-- extracted units: 9;
+- extracted units: 10;
 - semantic visual rows: 4;
 - baseline: teaching content is `source-only`; reviewed administration is `excluded`.
 
@@ -159,7 +159,7 @@ Raw page/raster detections служат evidence и не становятся о
 ### lecture-11: Scaling laws
 
 - local path: `Lectures/repository/lecture_11.pdf`;
-- extracted units: 7;
+- extracted units: 8;
 - semantic visual rows: 4;
 - baseline: teaching content is `source-only`; reviewed administration is `excluded`.
 
@@ -191,7 +191,7 @@ Raw page/raster detections служат evidence и не становятся о
 ### lecture-15: Mid/post-training (SFT/RLHF)
 
 - local path: `Lectures/repository/lecture_15.pdf`;
-- extracted units: 8;
+- extracted units: 9;
 - semantic visual rows: 4;
 - baseline: teaching content is `source-only`; reviewed administration is `excluded`.
 
@@ -199,7 +199,7 @@ Raw page/raster detections служат evidence и не становятся о
 ### lecture-16: Post-training - RLVR
 
 - local path: `Lectures/repository/lecture_16.pdf`;
-- extracted units: 8;
+- extracted units: 9;
 - semantic visual rows: 5;
 - baseline: teaching content is `source-only`; reviewed administration is `excluded`.
 
@@ -215,7 +215,7 @@ Raw page/raster detections служат evidence и не становятся о
 ### assignment-01: Assignment 1: Basics
 
 - local path: `Assignments/assignment1-basics`;
-- extracted units: 148;
+- extracted units: 149;
 - semantic visual rows: 1;
 - baseline: teaching content is `source-only`; reviewed administration is `excluded`.
 
@@ -247,7 +247,7 @@ Raw page/raster detections служат evidence и не становятся о
 ### assignment-05: Assignment 5: Alignment and Reasoning RL
 
 - local path: `Assignments/assignment5-alignment`;
-- extracted units: 84;
+- extracted units: 87;
 - semantic visual rows: 1;
 - baseline: teaching content is `source-only`; reviewed administration is `excluded`.
 
@@ -255,7 +255,7 @@ Raw page/raster detections служат evidence и не становятся о
 ### assignment-05-safety-supplement: Assignment 5 optional supplement: safety, instruction tuning, and RLHF
 
 - local path: `Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf`;
-- extracted units: 77;
+- extracted units: 78;
 - semantic visual rows: 1;
 - baseline: teaching content is `source-only`; reviewed administration is `excluded`.
 

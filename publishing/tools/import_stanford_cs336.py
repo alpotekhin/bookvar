@@ -38,7 +38,7 @@ SEMANTIC_REVIEW_PATH = COURSE_ROOT / "semantic-review.json"
 RETRIEVED_AT = "2026-09-04"
 COURSE_URL = "https://cs336.stanford.edu/"
 GITHUB_ORG = "stanford-cs336"
-EXTRACTOR_REVISION = "stanford-cs336-semantic-audit-v2"
+EXTRACTOR_REVISION = "stanford-cs336-semantic-audit-v3"
 USER_PERMISSION = (
     "User confirmed open educational reuse on 2026-09-04 for local educational "
     "preservation and later attributed textbook reuse; this is a permission "
@@ -653,6 +653,14 @@ def page_fields(pages: list[int]) -> dict[str, int]:
     return {"page_start": pages[0], "page_end": pages[-1]}
 
 
+def assignment_task_location(path: Path, pages: list[int], task_id: str) -> str:
+    if len(pages) == 1:
+        scope = f"page={pages[0]}"
+    else:
+        scope = f"pages={pages[0]}-{pages[-1]}"
+    return f"{relative(path)}#{scope}:problem={task_id}"
+
+
 def semantic_page_location(path: Path, pages: list[int], semantic_id: str) -> str:
     if len(pages) == 1:
         scope = f"page={pages[0]}"
@@ -957,6 +965,17 @@ def pdf_units_and_visuals(
             spec.get("evidence_text"),
             f"{object_id}/{spec['semantic_id']}",
         )
+        fields: dict[str, Any] = {"evidence_text": evidence, **page_fields(pages)}
+        if spec["kind"] == "administrative":
+            reason = spec.get("reason")
+            if not isinstance(reason, str) or not reason.strip():
+                raise RuntimeError(
+                    f"{object_id}/{spec['semantic_id']}: administrative reason is required"
+                )
+            fields.update(
+                exclusion_reason=reason,
+                exclusion_evidence=evidence,
+            )
         units.append(
             make_unit(
                 object_id,
@@ -965,8 +984,7 @@ def pdf_units_and_visuals(
                 semantic_page_location(path, pages, spec["semantic_id"]),
                 spec["title"],
                 (pages[0], 0, spec["semantic_id"]),
-                evidence_text=evidence,
-                **page_fields(pages),
+                **fields,
             )
         )
     units_by_semantic_id = {unit["semantic_id"]: unit for unit in units}
@@ -1042,6 +1060,7 @@ def assignment_units(
     checksum = sha256_file(handout)
     units: list[dict[str, Any]] = []
     visuals: list[dict[str, Any]] = []
+    task_units: list[dict[str, Any]] = []
     task_ids: list[str] = []
     deliverable_count = 0
     current_task: str | None = None
@@ -1061,18 +1080,18 @@ def assignment_units(
                 task_id = match.group(1).strip()
                 current_task = task_id
                 task_ids.append(task_id)
-                units.append(
-                    make_unit(
-                        object_id,
-                        f"task-{task_id}",
-                        "task",
-                        f"{relative(handout)}#page={page_number}:problem={task_id}",
-                        marker_title(page_text, match, 2, task_id.replace("_", " ")),
-                        (page_number, offset, f"task-{task_id}"),
-                        task_id=task_id,
-                        page=page_number,
-                    )
+                task_unit = make_unit(
+                    object_id,
+                    f"task-{task_id}",
+                    "task",
+                    f"{relative(handout)}#page={page_number}:problem={task_id}",
+                    marker_title(page_text, match, 2, task_id.replace("_", " ")),
+                    (page_number, offset, f"task-{task_id}"),
+                    task_id=task_id,
+                    page=page_number,
                 )
+                units.append(task_unit)
+                task_units.append(task_unit)
             else:
                 deliverable_count += 1
                 deliverable_id = (
@@ -1110,6 +1129,32 @@ def assignment_units(
             f"{object_id}: deliverable closure mismatch; "
             f"expected {review.get('expected_deliverables')}, extracted {deliverable_count}"
         )
+    final_task_page = review.get("final_task_page")
+    if (
+        not task_units
+        or type(final_task_page) is not int
+        or final_task_page < task_units[-1]["page"]
+        or final_task_page > len(pages_text)
+    ):
+        raise RuntimeError(
+            f"{object_id}: final_task_page must close the final named problem "
+            f"within the {len(pages_text)}-page handout"
+        )
+    task_start_pages = [unit["page"] for unit in task_units]
+    for index, unit in enumerate(task_units):
+        start = task_start_pages[index]
+        end = (
+            final_task_page
+            if index == len(task_units) - 1
+            else max(start, task_start_pages[index + 1] - 1)
+        )
+        pages = list(range(start, end + 1))
+        unit["source_location"] = assignment_task_location(
+            handout, pages, unit["task_id"]
+        )
+        unit["evidence_text"] = f"Problem ({unit['task_id']}):"
+        unit.pop("page")
+        unit.update(page_fields(pages))
 
     test_paths = sorted(
         {
@@ -1155,6 +1200,23 @@ def assignment_units(
             f"expected {review.get('expected_test_interfaces')}, extracted {test_count}"
         )
 
+    for spec in review.get("units", []):
+        pages = page_span(spec, len(pages_text), f"{object_id}/{spec['semantic_id']}")
+        evidence = require_page_evidence(
+            pages_text, pages, spec.get("evidence_text"), f"{object_id}/{spec['semantic_id']}"
+        )
+        units.append(
+            make_unit(
+                object_id,
+                spec["semantic_id"],
+                spec["kind"],
+                semantic_page_location(handout, pages, spec["semantic_id"]),
+                spec["title"],
+                (pages[0], -1, spec["semantic_id"]),
+                evidence_text=evidence,
+                **page_fields(pages),
+            )
+        )
     for spec in review.get("administrative", []):
         pages = page_span(spec, len(pages_text), f"{object_id}/{spec['semantic_id']}")
         evidence = require_page_evidence(
@@ -1490,6 +1552,129 @@ def validate_generated_documents(
                 failures.append(f"snapshot lock tool version differs for {key}")
 
 
+def reviewed_pdf_sources() -> dict[str, Path]:
+    review = semantic_review()
+    sources = {
+        f"lecture-{number:02d}": LECTURES_ROOT / filename
+        for number, _, _, _, filename in SCHEDULE
+        if filename and filename.endswith(".pdf")
+    }
+    assignment_ids = [
+        *(f"assignment-{number:02d}" for number, _, _, _ in ASSIGNMENT_META),
+        "assignment-05-safety-supplement",
+    ]
+    assignment_review = review.get("assignments")
+    if not isinstance(assignment_review, dict):
+        raise RuntimeError("semantic review assignments must be a mapping")
+    for object_id in assignment_ids:
+        spec = assignment_review.get(object_id)
+        if not isinstance(spec, dict) or not isinstance(spec.get("handout"), str):
+            raise RuntimeError(f"{object_id}: semantic review lacks a handout path")
+        sources[object_id] = COURSE_ROOT / spec["handout"]
+    return dict(sorted(sources.items()))
+
+
+def source_unit_pages(
+    unit: dict[str, Any],
+    page_count: int,
+    label: str,
+    failures: list[str],
+) -> list[int]:
+    has_page = "page" in unit
+    has_start = "page_start" in unit
+    has_end = "page_end" in unit
+    if not has_page and not has_start and not has_end:
+        return []
+    if has_page and (has_start or has_end):
+        failures.append(f"{label}: ambiguous page and page-range fields")
+        return []
+    if has_page:
+        page = unit.get("page")
+        if type(page) is not int or page < 1 or page > page_count:
+            failures.append(f"{label}: invalid page {page!r} for {page_count}-page PDF")
+            return []
+        return [page]
+    start = unit.get("page_start")
+    end = unit.get("page_end")
+    if type(start) is not int or type(end) is not int:
+        failures.append(f"{label}: page range must contain integers")
+        return []
+    if start < 1 or end < start or end > page_count:
+        failures.append(
+            f"{label}: invalid page range {start}-{end} for {page_count}-page PDF"
+        )
+        return []
+    return list(range(start, end + 1))
+
+
+def validate_pdf_page_closure(
+    source_units: dict[str, Any],
+    coverage: dict[str, Any],
+    failures: list[str],
+) -> None:
+    units = source_units.get("units")
+    rows = coverage.get("rows")
+    if not isinstance(units, list) or not isinstance(rows, list):
+        failures.append("PDF page closure requires source-unit and coverage rows")
+        return
+    coverage_by_unit = {
+        row.get("source_unit"): row
+        for row in rows
+        if isinstance(row, dict) and isinstance(row.get("source_unit"), str)
+    }
+    for object_id, path in reviewed_pdf_sources().items():
+        if not path.is_file():
+            failures.append(f"{object_id}: reviewed PDF is missing: {relative(path)}")
+            continue
+        page_count = pdf_page_count(path)
+        expected_location_prefix = f"{relative(path)}#"
+        covered_pages: set[int] = set()
+        for unit in units:
+            if not isinstance(unit, dict) or unit.get("source_object") != object_id:
+                continue
+            unit_id = unit.get("id")
+            label = f"{object_id}/{unit_id or '<missing-id>'}"
+            pages = source_unit_pages(unit, page_count, label, failures)
+            if not pages:
+                continue
+            location = unit.get("source_location")
+            if not isinstance(location, str) or not location.startswith(
+                expected_location_prefix
+            ):
+                failures.append(
+                    f"{label}: page scope does not point to reviewed PDF {relative(path)}"
+                )
+                continue
+            row = coverage_by_unit.get(unit_id)
+            if (
+                not isinstance(row, dict)
+                or row.get("source_object") != object_id
+                or row.get("source_location") != location
+            ):
+                failures.append(f"{label}: page scope lacks matching coverage provenance")
+                continue
+            if unit.get("kind") == "administrative":
+                reason = row.get("reason")
+                evidence = row.get("evidence")
+                if (
+                    row.get("disposition") != "excluded"
+                    or not isinstance(reason, str)
+                    or not reason.strip()
+                    or not isinstance(evidence, str)
+                    or not evidence.strip()
+                ):
+                    failures.append(
+                        f"{label}: administrative page scope lacks exclusion reason/evidence"
+                    )
+                    continue
+            covered_pages.update(pages)
+        missing_pages = sorted(set(range(1, page_count + 1)) - covered_pages)
+        if missing_pages:
+            failures.append(
+                f"{object_id}: semantic page closure missing pages {missing_pages}"
+            )
+
+
 def artifact_inventory() -> dict[str, Any]:
     files: list[dict[str, Any]] = []
     for root in (LECTURES_ROOT, ASSIGNMENTS_ROOT, METADATA_ROOT):
@@ -1611,6 +1796,17 @@ def hub_markdown(lock: dict[str, Any], manifest: dict[str, Any], units: dict[str
 def write_generated_ledgers(lock: dict[str, Any], inventory: dict[str, Any]) -> None:
     documents_tuple = build_ledgers(lock)
     documents = generated_document_map(documents_tuple)
+    closure_failures: list[str] = []
+    validate_pdf_page_closure(
+        documents["source-units.yml"],
+        documents["coverage.yml"],
+        closure_failures,
+    )
+    if closure_failures:
+        raise RuntimeError(
+            "Stanford CS336 reviewed-PDF closure failed:\n- "
+            + "\n- ".join(closure_failures)
+        )
     lock["generated_audit"] = generated_audit(documents, inventory)
     write_json_yaml(LOCK_PATH, lock)
     for filename, document in documents.items():
@@ -1797,6 +1993,7 @@ def check() -> None:
             )
     units = source_units.get("units", [])
     rows = coverage.get("rows", [])
+    validate_pdf_page_closure(source_units, coverage, failures)
     unit_ids = [item.get("id") for item in units if isinstance(item, dict)]
     coverage_ids = [item.get("source_unit") for item in rows if isinstance(item, dict)]
     require(bool(units), "no extraction units were generated", failures)
