@@ -11,6 +11,8 @@ site/dist/
 site/.astro/
 site/src/content/docs/generated/
 site/public/assets/
+site/public/sources/courses/stanford-cs336-spring-2026/
+site/public/sources/courses/berkeley-advanced-llm-agents-spring-2025/
 site/generated-sidebar.mjs
 publishing-report.json
 coverage/
