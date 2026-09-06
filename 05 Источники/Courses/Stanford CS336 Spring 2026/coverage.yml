@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "semantic_review_sha256": "d88ae947a19d4ecc9e81d0dede8042a21a956365bd7f6ead1da120a353766e62",
+  "semantic_review_sha256": "831a84f95b2a72bfc6eb4749092e7d6c0181c8988b46d794072a5deece0de53e",
   "rows": [
     {
       "id": "coverage-lecture-01-section-4-cs336-language-models-from-scratch-spring-2026",
@@ -4036,8 +4036,8 @@
         "lecture-15"
       ],
       "disposition": "excluded",
-      "reason": "Title and attribution are preserved but contain no teaching claim.",
-      "evidence": "Lecture 15"
+      "reason": "Title and attribution are preserved in the pinned lecture; the slide contains no independent teaching claim.",
+      "evidence": "Lectures/repository/lecture_15.pdf#page=1:semantic=title-slide"
     },
     {
       "id": "coverage-lecture-15-posttraining-framing",
@@ -4049,10 +4049,9 @@
       "primary_sources": [
         "lecture-15"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-15",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md",
+      "destination_anchor": "sft-object"
     },
     {
       "id": "coverage-lecture-15-sft-data",
@@ -4064,10 +4063,9 @@
       "primary_sources": [
         "lecture-15"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-15",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md",
+      "destination_anchor": "sft-data"
     },
     {
       "id": "coverage-lecture-15-midtraining",
@@ -4079,10 +4077,9 @@
       "primary_sources": [
         "lecture-15"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-15",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md",
+      "destination_anchor": "sft-midtraining-boundary"
     },
     {
       "id": "coverage-lecture-15-preference-data",
@@ -4094,10 +4091,9 @@
       "primary_sources": [
         "lecture-15"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-15",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/03 Reward modeling.md",
+      "destination_anchor": "annotator-effects"
     },
     {
       "id": "coverage-lecture-15-ppo-dpo",
@@ -4109,10 +4105,9 @@
       "primary_sources": [
         "lecture-15"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-15",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md",
+      "destination_anchor": "ppo-roles"
     },
     {
       "id": "coverage-lecture-15-dpo-derivation",
@@ -4124,10 +4119,9 @@
       "primary_sources": [
         "lecture-15"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-15",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/05 DPO.md",
+      "destination_anchor": "dpo-derivation"
     },
     {
       "id": "coverage-lecture-15-rlhf-failure-modes",
@@ -4139,10 +4133,9 @@
       "primary_sources": [
         "lecture-15"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-15",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/03 Reward modeling.md",
+      "destination_anchor": "reward-overoptimization"
     },
     {
       "id": "coverage-lecture-15-recap",
@@ -4157,7 +4150,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-15",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Preserved in the pinned Stanford CS336 source archive; Task 7 records it as source-only because duplicates integrated units.",
+      "evidence": "Lectures/repository/lecture_15.pdf#page=65:semantic=recap"
     },
     {
       "id": "coverage-lecture-16-title-slide",
@@ -4170,8 +4164,8 @@
         "lecture-16"
       ],
       "disposition": "excluded",
-      "reason": "Title and attribution are preserved but contain no teaching claim.",
-      "evidence": "Lecture 16"
+      "reason": "Title and attribution are preserved in the pinned lecture; the slide contains no independent teaching claim.",
+      "evidence": "Lectures/repository/lecture_16.pdf#page=1:semantic=title-slide"
     },
     {
       "id": "coverage-lecture-16-ppo",
@@ -4183,10 +4177,9 @@
       "primary_sources": [
         "lecture-16"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-16",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md",
+      "destination_anchor": "ppo-reward-shaping"
     },
     {
       "id": "coverage-lecture-16-grpo",
@@ -4198,10 +4191,9 @@
       "primary_sources": [
         "lecture-16"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-16",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+      "destination_anchor": "grpo-estimator"
     },
     {
       "id": "coverage-lecture-16-grpo-bias-failures",
@@ -4213,10 +4205,9 @@
       "primary_sources": [
         "lecture-16"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-16",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+      "destination_anchor": "grpo-normalizations"
     },
     {
       "id": "coverage-lecture-16-r1-case",
@@ -4228,10 +4219,9 @@
       "primary_sources": [
         "lecture-16"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-16",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+      "destination_anchor": "reasoning-case-studies"
     },
     {
       "id": "coverage-lecture-16-rlvr-experiments",
@@ -4243,10 +4233,9 @@
       "primary_sources": [
         "lecture-16"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-16",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+      "destination_anchor": "reasoning-case-studies"
     },
     {
       "id": "coverage-lecture-16-kimi-case",
@@ -4258,10 +4247,9 @@
       "primary_sources": [
         "lecture-16"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-16",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+      "destination_anchor": "reasoning-case-studies"
     },
     {
       "id": "coverage-lecture-16-qwen-case",
@@ -4273,10 +4261,9 @@
       "primary_sources": [
         "lecture-16"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-16",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+      "destination_anchor": "reasoning-case-studies"
     },
     {
       "id": "coverage-lecture-16-recap",
@@ -4291,7 +4278,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-16",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Preserved in the pinned Stanford CS336 source archive; Task 7 records it as source-only because duplicates integrated units.",
+      "evidence": "Lectures/repository/lecture_16.pdf#page=61:semantic=recap"
     },
     {
       "id": "coverage-lecture-17-section-2-lecture-17-multimodal-models",
@@ -9341,8 +9329,8 @@
         "assignment-05"
       ],
       "disposition": "excluded",
-      "reason": "Submission packaging is preserved but excluded from instructional coverage.",
-      "evidence": "writeup.pdf"
+      "reason": "Submission packaging is course administration rather than instructional coverage.",
+      "evidence": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#pages=1-2:semantic=alignment-submission"
     },
     {
       "id": "coverage-assignment-05-reasoning-rl-setting-and-notation",
@@ -9354,10 +9342,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+      "destination_anchor": "rlvr-notation"
     },
     {
       "id": "coverage-assignment-05-prompting-and-grading",
@@ -9369,10 +9356,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md",
+      "destination_anchor": "grader-contract"
     },
     {
       "id": "coverage-assignment-05-prompting-baselines",
@@ -9384,10 +9370,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "prompting-baselines"
     },
     {
       "id": "coverage-assignment-05-task-prompting-baselines",
@@ -9399,10 +9384,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "prompting-baselines"
     },
     {
       "id": "coverage-assignment-05-deliverable-prompting-baselines-001",
@@ -9414,10 +9398,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "prompting-baselines"
     },
     {
       "id": "coverage-assignment-05-deliverable-prompting-baselines-002",
@@ -9429,10 +9412,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "prompting-baselines"
     },
     {
       "id": "coverage-assignment-05-on-policy-grpo-derivation",
@@ -9444,10 +9426,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+      "destination_anchor": "grpo-estimator"
     },
     {
       "id": "coverage-assignment-05-task-baseline-calcs",
@@ -9459,10 +9440,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+      "destination_anchor": "grpo-estimator"
     },
     {
       "id": "coverage-assignment-05-deliverable-baseline-calcs-003",
@@ -9474,10 +9454,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+      "destination_anchor": "grpo-estimator"
     },
     {
       "id": "coverage-assignment-05-deliverable-baseline-calcs-004",
@@ -9489,10 +9468,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+      "destination_anchor": "grpo-estimator"
     },
     {
       "id": "coverage-assignment-05-task-tokenize-prompt-and-output",
@@ -9504,10 +9482,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "response-mask-logprobs"
     },
     {
       "id": "coverage-assignment-05-deliverable-tokenize-prompt-and-output-005",
@@ -9522,7 +9499,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Exact Assignment 5 interface or test remains normative in the pinned A5 contract (A5#response-mask-logprobs); it is intentionally not duplicated as textbook prose.",
+      "evidence": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=14:deliverable=5"
     },
     {
       "id": "coverage-assignment-05-task-get-response-log-probs",
@@ -9534,10 +9512,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "response-mask-logprobs"
     },
     {
       "id": "coverage-assignment-05-deliverable-get-response-log-probs-006",
@@ -9552,7 +9529,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Exact Assignment 5 interface or test remains normative in the pinned A5 contract (A5#response-mask-logprobs); it is intentionally not duplicated as textbook prose.",
+      "evidence": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=15:deliverable=6"
     },
     {
       "id": "coverage-assignment-05-task-compute-rollout-rewards",
@@ -9564,10 +9542,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "verifier-audit"
     },
     {
       "id": "coverage-assignment-05-deliverable-compute-rollout-rewards-007",
@@ -9582,7 +9559,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Exact Assignment 5 interface or test remains normative in the pinned A5 contract (A5#run-compute-rollout-rewards); it is intentionally not duplicated as textbook prose.",
+      "evidence": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=17:deliverable=7"
     },
     {
       "id": "coverage-assignment-05-task-compute-group-normalized-rewards-grpo",
@@ -9594,10 +9572,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+      "destination_anchor": "grpo-normalizations"
     },
     {
       "id": "coverage-assignment-05-deliverable-compute-group-normalized-rewards-grpo-008",
@@ -9612,7 +9589,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Exact Assignment 5 interface or test remains normative in the pinned A5 contract (A5#normalization-interfaces); it is intentionally not duplicated as textbook prose.",
+      "evidence": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=17:deliverable=8"
     },
     {
       "id": "coverage-assignment-05-task-compute-policy-gradient-loss-on-policy",
@@ -9624,10 +9602,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "onpolicy-grpo"
     },
     {
       "id": "coverage-assignment-05-deliverable-compute-policy-gradient-loss-on-policy-009",
@@ -9642,7 +9619,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Exact Assignment 5 interface or test remains normative in the pinned A5 contract (A5#policy-gradient-interface); it is intentionally not duplicated as textbook prose.",
+      "evidence": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=19:deliverable=9"
     },
     {
       "id": "coverage-assignment-05-task-aggregate-loss-across-microbatch-sequence",
@@ -9654,10 +9632,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+      "destination_anchor": "grpo-normalizations"
     },
     {
       "id": "coverage-assignment-05-deliverable-aggregate-loss-across-microbatch-sequence-010",
@@ -9672,7 +9649,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Exact Assignment 5 interface or test remains normative in the pinned A5 contract (A5#normalization-interfaces); it is intentionally not duplicated as textbook prose.",
+      "evidence": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=20:deliverable=10"
     },
     {
       "id": "coverage-assignment-05-task-grpo-train-step-standard-on-policy",
@@ -9684,10 +9662,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "onpolicy-grpo"
     },
     {
       "id": "coverage-assignment-05-deliverable-grpo-train-step-standard-on-policy-011",
@@ -9702,7 +9679,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Exact Assignment 5 interface or test remains normative in the pinned A5 contract (A5#run-grpo-train-step); it is intentionally not duplicated as textbook prose.",
+      "evidence": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=22:deliverable=11"
     },
     {
       "id": "coverage-assignment-05-grpo-correctness",
@@ -9714,10 +9692,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "onpolicy-grpo"
     },
     {
       "id": "coverage-assignment-05-task-grpo-experiments-standard-on-policy",
@@ -9729,10 +9706,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "onpolicy-grpo"
     },
     {
       "id": "coverage-assignment-05-deliverable-grpo-experiments-standard-on-policy-012",
@@ -9744,10 +9720,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "onpolicy-grpo"
     },
     {
       "id": "coverage-assignment-05-deliverable-grpo-experiments-standard-on-policy-013",
@@ -9759,10 +9734,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "onpolicy-grpo"
     },
     {
       "id": "coverage-assignment-05-deliverable-grpo-experiments-standard-on-policy-014",
@@ -9774,10 +9748,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "onpolicy-grpo"
     },
     {
       "id": "coverage-assignment-05-deliverable-grpo-experiments-standard-on-policy-015",
@@ -9789,10 +9762,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "onpolicy-grpo"
     },
     {
       "id": "coverage-assignment-05-deliverable-grpo-experiments-standard-on-policy-016",
@@ -9804,10 +9776,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "onpolicy-grpo"
     },
     {
       "id": "coverage-assignment-05-learning-rate-sweep",
@@ -9819,10 +9790,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "onpolicy-grpo"
     },
     {
       "id": "coverage-assignment-05-task-grpo-learning-rate",
@@ -9834,10 +9804,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "onpolicy-grpo"
     },
     {
       "id": "coverage-assignment-05-deliverable-grpo-learning-rate-017",
@@ -9849,10 +9818,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "onpolicy-grpo"
     },
     {
       "id": "coverage-assignment-05-task-grpo-prompt-ablation",
@@ -9864,10 +9832,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "onpolicy-grpo"
     },
     {
       "id": "coverage-assignment-05-deliverable-grpo-prompt-ablation-018",
@@ -9879,10 +9846,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "onpolicy-grpo"
     },
     {
       "id": "coverage-assignment-05-task-think-about-length-normalization",
@@ -9894,10 +9860,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+      "destination_anchor": "drgrpo-rft-maxrl"
     },
     {
       "id": "coverage-assignment-05-deliverable-think-about-length-normalization-019",
@@ -9909,10 +9874,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+      "destination_anchor": "drgrpo-rft-maxrl"
     },
     {
       "id": "coverage-assignment-05-task-compute-group-normalized-rewards-drgrpo",
@@ -9924,10 +9888,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+      "destination_anchor": "drgrpo-rft-maxrl"
     },
     {
       "id": "coverage-assignment-05-deliverable-compute-group-normalized-rewards-drgrpo-020",
@@ -9942,7 +9905,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Exact Assignment 5 interface or test remains normative in the pinned A5 contract (A5#normalization-interfaces); it is intentionally not duplicated as textbook prose.",
+      "evidence": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=27:deliverable=20"
     },
     {
       "id": "coverage-assignment-05-task-aggregate-loss-across-microbatch-constant",
@@ -9954,10 +9918,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+      "destination_anchor": "drgrpo-rft-maxrl"
     },
     {
       "id": "coverage-assignment-05-deliverable-aggregate-loss-across-microbatch-constant-021",
@@ -9972,7 +9935,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Exact Assignment 5 interface or test remains normative in the pinned A5 contract (A5#normalization-interfaces); it is intentionally not duplicated as textbook prose.",
+      "evidence": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=27:deliverable=21"
     },
     {
       "id": "coverage-assignment-05-task-think-about-rft",
@@ -9984,10 +9948,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+      "destination_anchor": "drgrpo-rft-maxrl"
     },
     {
       "id": "coverage-assignment-05-deliverable-think-about-rft-022",
@@ -9999,10 +9962,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+      "destination_anchor": "drgrpo-rft-maxrl"
     },
     {
       "id": "coverage-assignment-05-task-derive-difficulty-reweightings",
@@ -10014,10 +9976,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+      "destination_anchor": "drgrpo-rft-maxrl"
     },
     {
       "id": "coverage-assignment-05-deliverable-derive-difficulty-reweightings-023",
@@ -10029,10 +9990,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+      "destination_anchor": "drgrpo-rft-maxrl"
     },
     {
       "id": "coverage-assignment-05-deliverable-derive-difficulty-reweightings-024",
@@ -10044,10 +10004,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+      "destination_anchor": "drgrpo-rft-maxrl"
     },
     {
       "id": "coverage-assignment-05-deliverable-derive-difficulty-reweightings-025",
@@ -10059,10 +10018,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+      "destination_anchor": "drgrpo-rft-maxrl"
     },
     {
       "id": "coverage-assignment-05-task-think-about-advantage-normalization",
@@ -10074,10 +10032,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+      "destination_anchor": "drgrpo-rft-maxrl"
     },
     {
       "id": "coverage-assignment-05-deliverable-think-about-advantage-normalization-026",
@@ -10089,10 +10046,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+      "destination_anchor": "drgrpo-rft-maxrl"
     },
     {
       "id": "coverage-assignment-05-task-compute-group-normalized-rewards-maxrl",
@@ -10104,10 +10060,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+      "destination_anchor": "drgrpo-rft-maxrl"
     },
     {
       "id": "coverage-assignment-05-deliverable-compute-group-normalized-rewards-maxrl-027",
@@ -10122,7 +10077,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Exact Assignment 5 interface or test remains normative in the pinned A5 contract (A5#normalization-interfaces); it is intentionally not duplicated as textbook prose.",
+      "evidence": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=30:deliverable=27"
     },
     {
       "id": "coverage-assignment-05-task-grpo-train-step-variants-on-policy",
@@ -10134,10 +10090,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "onpolicy-grpo"
     },
     {
       "id": "coverage-assignment-05-deliverable-grpo-train-step-variants-on-policy-028",
@@ -10152,7 +10107,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Exact Assignment 5 interface or test remains normative in the pinned A5 contract (A5#run-grpo-train-step); it is intentionally not duplicated as textbook prose.",
+      "evidence": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=31:deliverable=28"
     },
     {
       "id": "coverage-assignment-05-task-grpo-experiments-variants-on-policy",
@@ -10164,10 +10120,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "onpolicy-variants"
     },
     {
       "id": "coverage-assignment-05-deliverable-grpo-experiments-variants-on-policy-029",
@@ -10179,10 +10134,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "onpolicy-variants"
     },
     {
       "id": "coverage-assignment-05-task-derive-surrogate-objectives",
@@ -10194,10 +10148,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+      "destination_anchor": "offpolicy-ratios"
     },
     {
       "id": "coverage-assignment-05-deliverable-derive-surrogate-objectives-030",
@@ -10209,10 +10162,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+      "destination_anchor": "offpolicy-ratios"
     },
     {
       "id": "coverage-assignment-05-task-compute-policy-gradient-loss-off-policy",
@@ -10224,10 +10176,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "offpolicy-variants"
     },
     {
       "id": "coverage-assignment-05-deliverable-compute-policy-gradient-loss-off-policy-031",
@@ -10242,7 +10193,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Exact Assignment 5 interface or test remains normative in the pinned A5 contract (A5#policy-gradient-interface); it is intentionally not duplicated as textbook prose.",
+      "evidence": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=35:deliverable=31"
     },
     {
       "id": "coverage-assignment-05-task-think-about-importance-reweighting",
@@ -10254,10 +10206,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+      "destination_anchor": "offpolicy-ratios"
     },
     {
       "id": "coverage-assignment-05-deliverable-think-about-importance-reweighting-032",
@@ -10269,10 +10220,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+      "destination_anchor": "offpolicy-ratios"
     },
     {
       "id": "coverage-assignment-05-task-compute-policy-gradient-loss-off-policy-gspo",
@@ -10284,10 +10234,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "offpolicy-variants"
     },
     {
       "id": "coverage-assignment-05-deliverable-compute-policy-gradient-loss-off-policy-gspo-033",
@@ -10302,7 +10251,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Exact Assignment 5 interface or test remains normative in the pinned A5 contract (A5#policy-gradient-interface); it is intentionally not duplicated as textbook prose.",
+      "evidence": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=37:deliverable=33"
     },
     {
       "id": "coverage-assignment-05-task-grpo-train-step-off-policy",
@@ -10314,10 +10264,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "offpolicy-variants"
     },
     {
       "id": "coverage-assignment-05-deliverable-grpo-train-step-off-policy-034",
@@ -10332,7 +10281,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Exact Assignment 5 interface or test remains normative in the pinned A5 contract (A5#run-grpo-train-step); it is intentionally not duplicated as textbook prose.",
+      "evidence": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=37:deliverable=34"
     },
     {
       "id": "coverage-assignment-05-on-off-policy-comparison",
@@ -10344,10 +10294,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "offpolicy-variants"
     },
     {
       "id": "coverage-assignment-05-task-grpo-experiments-off-policy",
@@ -10359,10 +10308,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "offpolicy-variants"
     },
     {
       "id": "coverage-assignment-05-deliverable-grpo-experiments-off-policy-035",
@@ -10374,10 +10322,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "offpolicy-variants"
     },
     {
       "id": "coverage-assignment-05-task-try-your-own",
@@ -10389,10 +10336,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "offpolicy-variants"
     },
     {
       "id": "coverage-assignment-05-deliverable-try-your-own-036",
@@ -10404,10 +10350,9 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "offpolicy-variants"
     },
     {
       "id": "coverage-assignment-05-bibliography",
@@ -10419,9 +10364,11 @@
       "primary_sources": [
         "assignment-05"
       ],
-      "disposition": "excluded",
-      "reason": "Reference citations are preserved as provenance but excluded from teaching-content coverage.",
-      "evidence": "Bibliography"
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
+      "destination_anchor": "assignment-05",
+      "reason": "Preserved in the pinned Stanford CS336 source archive; Task 7 records it as source-only because bibliography retained in source.",
+      "evidence": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_alignment.pdf#page=39:semantic=bibliography"
     },
     {
       "id": "coverage-assignment-05-test-tests-test-grpo-py-33-test-tokenize-prompt-and-output",
@@ -10436,7 +10383,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Exact Assignment 5 interface or test remains normative in the pinned A5 contract (A5#main-tests); it is intentionally not duplicated as textbook prose.",
+      "evidence": "Assignments/assignment5-alignment/tests/test_grpo.py#L33"
     },
     {
       "id": "coverage-assignment-05-test-tests-test-grpo-py-42-test-get-response-log-probs",
@@ -10451,7 +10399,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Exact Assignment 5 interface or test remains normative in the pinned A5 contract (A5#main-tests); it is intentionally not duplicated as textbook prose.",
+      "evidence": "Assignments/assignment5-alignment/tests/test_grpo.py#L42"
     },
     {
       "id": "coverage-assignment-05-test-tests-test-grpo-py-52-test-compute-rollout-rewards",
@@ -10466,7 +10415,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Exact Assignment 5 interface or test remains normative in the pinned A5 contract (A5#main-tests); it is intentionally not duplicated as textbook prose.",
+      "evidence": "Assignments/assignment5-alignment/tests/test_grpo.py#L52"
     },
     {
       "id": "coverage-assignment-05-test-tests-test-grpo-py-62-test-compute-group-normalized-rewards-grpo",
@@ -10481,7 +10431,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Exact Assignment 5 interface or test remains normative in the pinned A5 contract (A5#main-tests); it is intentionally not duplicated as textbook prose.",
+      "evidence": "Assignments/assignment5-alignment/tests/test_grpo.py#L62"
     },
     {
       "id": "coverage-assignment-05-test-tests-test-grpo-py-79-test-compute-group-normalized-rewards-drgrpo",
@@ -10496,7 +10447,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Exact Assignment 5 interface or test remains normative in the pinned A5 contract (A5#main-tests); it is intentionally not duplicated as textbook prose.",
+      "evidence": "Assignments/assignment5-alignment/tests/test_grpo.py#L79"
     },
     {
       "id": "coverage-assignment-05-test-tests-test-grpo-py-101-test-compute-group-normalized-rewards-maxrl",
@@ -10511,7 +10463,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Exact Assignment 5 interface or test remains normative in the pinned A5 contract (A5#main-tests); it is intentionally not duplicated as textbook prose.",
+      "evidence": "Assignments/assignment5-alignment/tests/test_grpo.py#L101"
     },
     {
       "id": "coverage-assignment-05-test-tests-test-grpo-py-112-test-compute-policy-gradient-loss-on-policy",
@@ -10526,7 +10479,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Exact Assignment 5 interface or test remains normative in the pinned A5 contract (A5#main-tests); it is intentionally not duplicated as textbook prose.",
+      "evidence": "Assignments/assignment5-alignment/tests/test_grpo.py#L112"
     },
     {
       "id": "coverage-assignment-05-test-tests-test-grpo-py-122-test-compute-policy-gradient-loss-off-policy",
@@ -10541,7 +10495,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Exact Assignment 5 interface or test remains normative in the pinned A5 contract (A5#main-tests); it is intentionally not duplicated as textbook prose.",
+      "evidence": "Assignments/assignment5-alignment/tests/test_grpo.py#L122"
     },
     {
       "id": "coverage-assignment-05-test-tests-test-grpo-py-151-test-compute-policy-gradient-loss-off-policy-gspo",
@@ -10556,7 +10511,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Exact Assignment 5 interface or test remains normative in the pinned A5 contract (A5#main-tests); it is intentionally not duplicated as textbook prose.",
+      "evidence": "Assignments/assignment5-alignment/tests/test_grpo.py#L151"
     },
     {
       "id": "coverage-assignment-05-test-tests-test-grpo-py-170-test-aggregate-loss-across-microbatch-sequence",
@@ -10571,7 +10527,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Exact Assignment 5 interface or test remains normative in the pinned A5 contract (A5#main-tests); it is intentionally not duplicated as textbook prose.",
+      "evidence": "Assignments/assignment5-alignment/tests/test_grpo.py#L170"
     },
     {
       "id": "coverage-assignment-05-test-tests-test-grpo-py-180-test-aggregate-loss-across-microbatch-constant",
@@ -10586,7 +10543,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Exact Assignment 5 interface or test remains normative in the pinned A5 contract (A5#main-tests); it is intentionally not duplicated as textbook prose.",
+      "evidence": "Assignments/assignment5-alignment/tests/test_grpo.py#L180"
     },
     {
       "id": "coverage-assignment-05-test-tests-test-grpo-py-221-test-grpo-train-step-standard-on-policy",
@@ -10601,7 +10559,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Exact Assignment 5 interface or test remains normative in the pinned A5 contract (A5#main-tests); it is intentionally not duplicated as textbook prose.",
+      "evidence": "Assignments/assignment5-alignment/tests/test_grpo.py#L221"
     },
     {
       "id": "coverage-assignment-05-test-tests-test-grpo-py-289-test-grpo-train-step-variants-on-policy",
@@ -10616,7 +10575,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Exact Assignment 5 interface or test remains normative in the pinned A5 contract (A5#main-tests); it is intentionally not duplicated as textbook prose.",
+      "evidence": "Assignments/assignment5-alignment/tests/test_grpo.py#L289"
     },
     {
       "id": "coverage-assignment-05-test-tests-test-grpo-py-325-test-grpo-train-step-off-policy",
@@ -10631,7 +10591,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Exact Assignment 5 interface or test remains normative in the pinned A5 contract (A5#main-tests); it is intentionally not duplicated as textbook prose.",
+      "evidence": "Assignments/assignment5-alignment/tests/test_grpo.py#L325"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-safety-setup",
@@ -10644,8 +10605,8 @@
         "assignment-05-safety-supplement"
       ],
       "disposition": "excluded",
-      "reason": "Environment, volume, and helper-script setup are preserved but excluded from teaching coverage.",
-      "evidence": "Models and shared volumes"
+      "reason": "Model-volume and helper-script setup is preserved in the optional handout but is not part of the portable learning contract.",
+      "evidence": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#pages=1-2:semantic=safety-setup"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-safety-prompt-and-mmlu-setup",
@@ -10657,10 +10618,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-baselines"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-mmlu-metric",
@@ -10672,10 +10632,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-baselines"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-task-mmlu-baseline",
@@ -10687,10 +10646,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-baselines"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-mmlu-baseline-001",
@@ -10702,10 +10660,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-baselines"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-mmlu-baseline-002",
@@ -10717,10 +10674,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-baselines"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-mmlu-baseline-003",
@@ -10732,10 +10688,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-baselines"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-mmlu-baseline-004",
@@ -10747,10 +10702,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-baselines"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-mmlu-baseline-005",
@@ -10762,10 +10716,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-baselines"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-mmlu-baseline-006",
@@ -10777,10 +10730,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-baselines"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-gsm8k-metric",
@@ -10792,10 +10744,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-baselines"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-task-gsm8k-baseline",
@@ -10807,10 +10758,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-baselines"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-gsm8k-baseline-007",
@@ -10822,10 +10772,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-baselines"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-gsm8k-baseline-008",
@@ -10837,10 +10786,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-baselines"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-gsm8k-baseline-009",
@@ -10852,10 +10800,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-baselines"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-gsm8k-baseline-010",
@@ -10867,10 +10814,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-baselines"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-gsm8k-baseline-011",
@@ -10882,10 +10828,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-baselines"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-gsm8k-baseline-012",
@@ -10897,10 +10842,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-baselines"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-alpacaeval-metric",
@@ -10912,10 +10856,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-baselines"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-task-alpaca-eval-baseline",
@@ -10927,10 +10870,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-baselines"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-alpaca-eval-baseline-013",
@@ -10942,10 +10884,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-baselines"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-alpaca-eval-baseline-014",
@@ -10957,10 +10898,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-baselines"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-alpaca-eval-baseline-015",
@@ -10972,10 +10912,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-baselines"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-alpaca-eval-baseline-016",
@@ -10987,10 +10926,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-baselines"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-task-sst-baseline",
@@ -11002,10 +10940,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-baselines"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-sst-baseline-017",
@@ -11017,10 +10954,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-baselines"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-sst-baseline-018",
@@ -11032,10 +10968,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-baselines"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-safety-metric",
@@ -11047,10 +10982,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-baselines"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-sst-baseline-019",
@@ -11062,10 +10996,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-baselines"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-sst-baseline-020",
@@ -11077,10 +11010,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-baselines"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-task-look-at-sft",
@@ -11092,10 +11024,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md",
+      "destination_anchor": "sft-data"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-look-at-sft-021",
@@ -11107,10 +11038,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-branch"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-task-data-loading",
@@ -11122,10 +11052,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-branch"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-data-loading-022",
@@ -11140,7 +11069,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Exact Assignment 5 interface or test remains normative in the pinned A5 contract (A5#optional-sft-interfaces); it is intentionally not duplicated as textbook prose.",
+      "evidence": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=9:deliverable=22"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-data-loading-023",
@@ -11155,7 +11085,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Exact Assignment 5 interface or test remains normative in the pinned A5 contract (A5#optional-sft-interfaces); it is intentionally not duplicated as textbook prose.",
+      "evidence": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=10:deliverable=23"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-task-sft-script",
@@ -11167,10 +11098,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-branch"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-sft-script-024",
@@ -11185,7 +11115,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Exact Assignment 5 interface or test remains normative in the pinned A5 contract (A5#optional-sft-interfaces); it is intentionally not duplicated as textbook prose.",
+      "evidence": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=11:deliverable=24"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-task-sft",
@@ -11197,10 +11128,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-branch"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-sft-025",
@@ -11212,10 +11142,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-branch"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-task-mmlu-sft",
@@ -11227,10 +11156,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-branch"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-mmlu-sft-026",
@@ -11242,10 +11170,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-branch"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-mmlu-sft-027",
@@ -11257,10 +11184,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-branch"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-mmlu-sft-028",
@@ -11272,10 +11198,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-branch"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-task-gsm8k-sft",
@@ -11287,10 +11212,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-branch"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-gsm8k-sft-029",
@@ -11302,10 +11226,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-branch"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-gsm8k-sft-030",
@@ -11317,10 +11240,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-branch"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-gsm8k-sft-031",
@@ -11332,10 +11254,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-branch"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-task-alpaca-eval-sft",
@@ -11347,10 +11268,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-branch"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-alpaca-eval-sft-032",
@@ -11362,10 +11282,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-branch"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-alpaca-eval-sft-033",
@@ -11377,10 +11296,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-branch"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-alpaca-eval-sft-034",
@@ -11392,10 +11310,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-branch"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-task-sst-sft",
@@ -11407,10 +11324,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-branch"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-sst-sft-035",
@@ -11422,10 +11338,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-branch"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-sft-comparison",
@@ -11437,10 +11352,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-branch"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-sst-sft-036",
@@ -11452,10 +11366,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-branch"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-sst-sft-037",
@@ -11467,10 +11380,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-branch"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-task-red-teaming",
@@ -11482,10 +11394,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-branch"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-red-teaming-038",
@@ -11497,10 +11408,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-branch"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-red-teaming-039",
@@ -11512,10 +11422,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-branch"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-dpo-objective-and-training",
@@ -11527,10 +11436,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/05 DPO.md",
+      "destination_anchor": "dpo-derivation"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-task-look-at-hh",
@@ -11542,10 +11450,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/12 Post-training и Alignment/05 DPO.md",
+      "destination_anchor": "dpo-dataflow"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-look-at-hh-040",
@@ -11557,10 +11464,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-branch"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-look-at-hh-041",
@@ -11572,10 +11478,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-branch"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-task-dpo-loss",
@@ -11587,10 +11492,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-branch"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-dpo-loss-042",
@@ -11605,7 +11509,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Exact Assignment 5 interface or test remains normative in the pinned A5 contract (A5#run-compute-per-instance-dpo-loss); it is intentionally not duplicated as textbook prose.",
+      "evidence": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#page=17:deliverable=42"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-task-dpo-training",
@@ -11617,10 +11522,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-branch"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-dpo-training-043",
@@ -11632,10 +11536,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-branch"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-dpo-comparison",
@@ -11647,10 +11550,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-branch"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-dpo-training-044",
@@ -11662,10 +11564,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-branch"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-dpo-training-045",
@@ -11677,10 +11578,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-branch"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-deliverable-dpo-training-046",
@@ -11692,10 +11592,9 @@
       "primary_sources": [
         "assignment-05-safety-supplement"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "destination_anchor": "dpo-safety-branch"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-test-tests-test-metrics-py-8-test-parse-mmlu-response",
@@ -11710,7 +11609,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Exact Assignment 5 interface or test remains normative in the pinned A5 contract (A5#optional-tests); it is intentionally not duplicated as textbook prose.",
+      "evidence": "Assignments/assignment5-alignment/tests/test_metrics.py#L8"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-test-tests-test-data-py-14-test-packed-sft-dataset",
@@ -11725,7 +11625,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Exact Assignment 5 interface or test remains normative in the pinned A5 contract (A5#optional-tests); it is intentionally not duplicated as textbook prose.",
+      "evidence": "Assignments/assignment5-alignment/tests/test_data.py#L14"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-test-tests-test-metrics-py-25-test-parse-mmlu-response-unknown",
@@ -11740,7 +11641,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Exact Assignment 5 interface or test remains normative in the pinned A5 contract (A5#optional-tests); it is intentionally not duplicated as textbook prose.",
+      "evidence": "Assignments/assignment5-alignment/tests/test_metrics.py#L25"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-test-tests-test-metrics-py-39-test-parse-gsm8k-response",
@@ -11755,7 +11657,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Exact Assignment 5 interface or test remains normative in the pinned A5 contract (A5#optional-tests); it is intentionally not duplicated as textbook prose.",
+      "evidence": "Assignments/assignment5-alignment/tests/test_metrics.py#L39"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-test-tests-test-dpo-py-44-test-per-instance-dpo-loss",
@@ -11770,7 +11673,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Exact Assignment 5 interface or test remains normative in the pinned A5 contract (A5#optional-tests); it is intentionally not duplicated as textbook prose.",
+      "evidence": "Assignments/assignment5-alignment/tests/test_dpo.py#L44"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-test-tests-test-metrics-py-48-test-parse-gsm8k-response-unknown",
@@ -11785,7 +11689,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Exact Assignment 5 interface or test remains normative in the pinned A5 contract (A5#optional-tests); it is intentionally not duplicated as textbook prose.",
+      "evidence": "Assignments/assignment5-alignment/tests/test_metrics.py#L48"
     },
     {
       "id": "coverage-assignment-05-safety-supplement-test-tests-test-data-py-55-test-iterate-batches",
@@ -11800,8 +11705,9 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-05-safety-supplement",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Exact Assignment 5 interface or test remains normative in the pinned A5 contract (A5#optional-tests); it is intentionally not duplicated as textbook prose.",
+      "evidence": "Assignments/assignment5-alignment/tests/test_data.py#L55"
     }
   ],
-  "editorial_overlay_sha256": "6406dfe0552849015d4762acce10d806fb5609438bca7dadd4c44120d9476180"
+  "editorial_overlay_sha256": "d33064c5d070beada33542cc8f7474ff6b86f9dd15fa3c1eadec033be83ba8f0"
 }

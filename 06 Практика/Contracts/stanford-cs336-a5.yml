@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "id": "stanford-cs336-spring-2026-assignment-5-alignment-reasoning-rl",
+  "source": {
+    "repository": "stanford-cs336/assignment5-alignment",
+    "commit": "c2734a26308710949fe13226960a1e8cece94b7e",
+    "canonical_url": "https://github.com/stanford-cs336/assignment5-alignment/tree/c2734a26308710949fe13226960a1e8cece94b7e",
+    "rights_status": "permission-recorded; preserved repository license files remain authoritative",
+    "handout": {"path": "cs336_spring2026_assignment5_alignment.pdf", "sha256": "c93d503a69aef4aa7519b7fc664abebbf2ebf5e5e88379a7ed92f4c209a2d26a"},
+    "optional_safety_handout": {"path": "cs336_spring2026_assignment5_supplement_safety_rlhf.pdf", "sha256": "30a2de73c2b95b9302bf31640f5f6016ef884d611cba94c9a0fdb1e505ad07e3"},
+    "adapters": {"path": "tests/adapters.py", "sha256": "836f3022a7df974b35428cf619c2cc97fe928563ce842eb1e8099b49e03a8b59"},
+    "tests": {"root": "tests", "tree_hash_algorithm": "sha256(sorted repository-relative path + NUL + bytes + NUL)", "tree_sha256": "a914c30275ae4e3dfc37eada657fb7703efb00e5984ddfe4f88bc9c4d0a29253"}
+  },
+  "profiles": {
+    "smoke_cpu": {"required": true, "hardware": "CPU", "network_after_setup": false, "deterministic": true, "input": "versioned local prompt/response/reward fixtures and tiny frozen policy/reference models"},
+    "onpolicy_small_gpu": {"required": false, "minimum_seeds": 3, "variants": ["sft_fixed_demo", "standard_grpo", "grpo_constant", "dr_grpo", "rft", "maxrl_course_constant"]},
+    "offpolicy_small_gpu": {"required": false, "minimum_seeds": 3, "rollout_batch_size": 256, "train_batch_size": 8, "updates_per_rollout_batch": 32, "variants": ["none", "noclip", "grpo_clip", "gspo_clip"]},
+    "optional_dpo_safety": {"required": false, "separate_pass_gate": true, "stages": ["baseline", "packed_sft", "hh_dpo", "matched_evaluation"]},
+    "course_full_reference": {"required": false, "reference_only": true, "model": "allenai/OLMo-2-0425-1B", "task": "GSM8K", "hardware": "Stanford reports experiment-specific B200-hour budgets", "train_examples": 6400, "validation_examples": 1024, "rollout_batch_size_responses": 256, "group_size": 8, "rollout_steps": 200, "learning_rate": 0.00001, "temperature": 1.0, "top_p": 1.0, "max_generation_tokens": 512, "max_grad_norm": 1.0, "optimizer": "AdamW betas=(0.9,0.95), weight_decay=0", "seeds": 4, "reported_target": "at least 25 percent mean validation accuracy", "portable_pass_threshold": false}
+  },
+  "adapters": [
+    "run_tokenize_prompt_and_output(prompt_strs, output_strs, tokenizer)",
+    "run_get_response_log_probs(model, input_ids, labels, return_token_entropy)",
+    "run_compute_rollout_rewards(reward_fn, rollout_responses, repeated_ground_truths)",
+    "run_compute_group_normalized_rewards(raw_rewards, group_size, baseline='mean', advantage_eps=1e-6, advantage_normalizer='std')",
+    "run_compute_policy_gradient_loss(raw_rewards_or_advantages, policy_log_probs, importance_reweighting_method='none', old_log_probs=None, cliprange=None, response_mask=None)",
+    "run_aggregate_loss_across_microbatch(per_token_policy_gradient_loss, mask, loss_normalization='sequence', normalization_constant=None)",
+    "run_grpo_train_step(model, tokenizer, optimizer, gradient_accumulation_steps, max_grad_norm, reward_fn, repeated_prompts, rollout_responses, repeated_ground_truths, group_size, baseline='mean', advantage_eps=1e-6, advantage_normalizer='std', importance_reweighting_method='none', old_log_probs=None, cliprange=None, loss_normalization='sequence', normalization_constant=None)"
+  ],
+  "optional_adapters": [
+    "get_packed_sft_dataset(tokenizer, dataset_path, seq_length, shuffle)",
+    "run_iterate_batches(dataset, batch_size, shuffle)",
+    "run_parse_mmlu_response(mmlu_example, model_output)",
+    "run_parse_gsm8k_response(model_output)",
+    "run_compute_per_instance_dpo_loss(lm, lm_ref, tokenizer, beta, prompt, response_chosen, response_rejected)"
+  ],
+  "expected_tests": [
+    "tests/test_grpo.py::test_tokenize_prompt_and_output",
+    "tests/test_grpo.py::test_get_response_log_probs",
+    "tests/test_grpo.py::test_compute_rollout_rewards",
+    "tests/test_grpo.py::test_compute_group_normalized_rewards_grpo",
+    "tests/test_grpo.py::test_compute_group_normalized_rewards_drgrpo",
+    "tests/test_grpo.py::test_compute_group_normalized_rewards_maxrl",
+    "tests/test_grpo.py::test_compute_policy_gradient_loss_on_policy",
+    "tests/test_grpo.py::test_compute_policy_gradient_loss_off_policy",
+    "tests/test_grpo.py::test_compute_policy_gradient_loss_off_policy_gspo",
+    "tests/test_grpo.py::test_aggregate_loss_across_microbatch_sequence",
+    "tests/test_grpo.py::test_aggregate_loss_across_microbatch_constant",
+    "tests/test_grpo.py::test_grpo_train_step_standard_on_policy",
+    "tests/test_grpo.py::test_grpo_train_step_variants_on_policy",
+    "tests/test_grpo.py::test_grpo_train_step_off_policy"
+  ],
+  "optional_expected_tests": [
+    "tests/test_metrics.py::test_parse_mmlu_response",
+    "tests/test_data.py::test_packed_sft_dataset",
+    "tests/test_metrics.py::test_parse_mmlu_response_unknown",
+    "tests/test_metrics.py::test_parse_gsm8k_response",
+    "tests/test_dpo.py::test_per_instance_dpo_loss",
+    "tests/test_metrics.py::test_parse_gsm8k_response_unknown",
+    "tests/test_data.py::test_iterate_batches"
+  ],
+  "algorithm_matrix": {
+    "sft_fixed_demo": {"data": "immutable training-split demonstrations with provenance", "loss": "assistant-response cross entropy", "online_generation": false},
+    "standard_grpo": {"baseline": "mean", "advantage_normalizer": "std", "loss_normalization": "sequence", "importance_reweighting": "none"},
+    "grpo_constant": {"baseline": "mean", "advantage_normalizer": "std", "loss_normalization": "constant", "importance_reweighting": "none"},
+    "dr_grpo": {"baseline": "mean", "advantage_normalizer": "none", "loss_normalization": "constant", "importance_reweighting": "none"},
+    "rft": {"baseline": "none", "advantage_normalizer": "none", "loss_normalization": "constant", "importance_reweighting": "none"},
+    "maxrl_course_constant": {"baseline": "mean", "advantage_normalizer": "mean", "loss_normalization": "constant", "importance_reweighting": "none", "caveat": "original MaxRL uses actual batch token count; this reproduces the assignment ablation"},
+    "offpolicy_grpo_clip": {"importance_reweighting": "grpo", "cliprange": 0.2},
+    "offpolicy_gspo_clip": {"importance_reweighting": "gspo", "cliprange": 0.0003, "ratio_scope": "geometric mean over response_mask tokens"}
+  },
+  "invariants": {
+    "response_mask_aligned_to_shifted_labels": true,
+    "prompt_and_padding_excluded_from_loss": true,
+    "answer_and_format_rewards_logged_separately": true,
+    "required_training_reward": "answer correctness; no partial format credit",
+    "old_log_probs_saved_with_behavior_policy_revision": true,
+    "reference_policy_not_conflated_with_behavior_policy": true,
+    "all_equal_reward_groups_must_remain_finite": true,
+    "normalization_constant": "batch_prompts * group_size * max_generation_length",
+    "matched_comparisons_hold_constant": ["prompts", "verifier", "sampling", "initialization", "generated_token_budget", "update_budget", "evaluation", "model_revision"]
+  },
+  "outputs": {"root": "evidence", "required": ["environment.json", "source_manifest.json", "prompt_and_grader_manifest.json", "prompting_baselines.jsonl", "parser_audit.csv", "response_mask_fixture.json", "algorithm_matrix.yml", "rollout_manifest.jsonl", "reward_components.jsonl", "train_metrics.csv", "validation_metrics.csv", "ratio_and_clip_metrics.csv", "seed_summary.csv", "rollout_examples_before_after.md", "artifact_hashes.json", "report.md"], "optional": ["optional_dpo_metrics.json"], "all_files_require_sha256": true},
+  "pass_fail": [
+    "all pinned upstream tests pass unchanged",
+    "two smoke runs produce identical artifact hashes",
+    "response mask fixture proves exact shifted-label alignment",
+    "parser audit includes false accepts and false rejects",
+    "all-equal reward groups remain finite",
+    "matched variants preserve every declared control",
+    "every non-smoke comparison reports individual seeds and dispersion",
+    "stale-policy age and old-log-probability provenance are logged",
+    "GSPO geometric mean uses response tokens only",
+    "independent evaluation does not rely solely on the training verifier",
+    "every required evidence artifact exists and is hashed"
+  ],
+  "source_unit_groups": {
+    "main_test_interfaces": [
+      "assignment-05-test-tests-test-grpo-py-33-test-tokenize-prompt-and-output", "assignment-05-test-tests-test-grpo-py-42-test-get-response-log-probs", "assignment-05-test-tests-test-grpo-py-52-test-compute-rollout-rewards", "assignment-05-test-tests-test-grpo-py-62-test-compute-group-normalized-rewards-grpo", "assignment-05-test-tests-test-grpo-py-79-test-compute-group-normalized-rewards-drgrpo", "assignment-05-test-tests-test-grpo-py-101-test-compute-group-normalized-rewards-maxrl", "assignment-05-test-tests-test-grpo-py-112-test-compute-policy-gradient-loss-on-policy", "assignment-05-test-tests-test-grpo-py-122-test-compute-policy-gradient-loss-off-policy", "assignment-05-test-tests-test-grpo-py-151-test-compute-policy-gradient-loss-off-policy-gspo", "assignment-05-test-tests-test-grpo-py-170-test-aggregate-loss-across-microbatch-sequence", "assignment-05-test-tests-test-grpo-py-180-test-aggregate-loss-across-microbatch-constant", "assignment-05-test-tests-test-grpo-py-221-test-grpo-train-step-standard-on-policy", "assignment-05-test-tests-test-grpo-py-289-test-grpo-train-step-variants-on-policy", "assignment-05-test-tests-test-grpo-py-325-test-grpo-train-step-off-policy"
+    ],
+    "optional_test_interfaces": [
+      "assignment-05-safety-supplement-test-tests-test-metrics-py-8-test-parse-mmlu-response", "assignment-05-safety-supplement-test-tests-test-data-py-14-test-packed-sft-dataset", "assignment-05-safety-supplement-test-tests-test-metrics-py-25-test-parse-mmlu-response-unknown", "assignment-05-safety-supplement-test-tests-test-metrics-py-39-test-parse-gsm8k-response", "assignment-05-safety-supplement-test-tests-test-dpo-py-44-test-per-instance-dpo-loss", "assignment-05-safety-supplement-test-tests-test-metrics-py-48-test-parse-gsm8k-response-unknown", "assignment-05-safety-supplement-test-tests-test-data-py-55-test-iterate-batches"
+    ]
+  }
+}

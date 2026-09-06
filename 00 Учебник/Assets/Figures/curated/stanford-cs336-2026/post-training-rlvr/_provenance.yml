@@ -1,0 +1,18 @@
+schema_version: 1
+assets:
+  - id: stanford-cs336-l15-p30-two-phase-training
+    local_path: l15-p30-two-phase-training.png
+    source_object: lecture-15
+    source_unit_id: lecture-15-midtraining
+    creator: Stanford CS336 course staff / Tatsunori Hashimoto
+    source_title: "Mid/post-training (SFT/RLHF), slide 30"
+    canonical_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_15.pdf#page=30
+    source_revision: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_pdf_sha256: 42a4bc02408a96e0b414f789f32780ae1d8461000f872d93aa38c94fe369e862
+    source_page_1_based: 30
+    transform: "Poppler pdftoppm 180 DPI; exact pixel crop x=130 y=260 w=760 h=620 from the unmodified full-page render; stable-stage plot only"
+    local_sha256: 053805d68e3ee018b39d538503fe21c29a1dedd126799f9084905822bf9be1cd
+    rights_status: permission-recorded
+    rights_note: "Project permission record covers attributed educational preservation; the slide is course-authored synthesis. It is evidence of course framing, not a universal empirical recipe."
+    used_in:
+      - "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md#sft-midtraining-boundary"

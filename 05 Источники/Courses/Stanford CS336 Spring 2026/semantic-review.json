@@ -606,6 +606,7 @@
         {"semantic_id": "recap", "kind": "section", "title": "SFT and RLHF recap", "pages": [65], "evidence_text": "Recap"}
       ],
       "visuals": [
+        {"semantic_id": "midtraining", "visual_kind": "figure", "question": "How does the data mixture change between stable pretraining and the learning-rate decay stage?", "pages": [30]},
         {"semantic_id": "sft-data", "visual_kind": "figure", "question": "How do instruction datasets change in style, source, factuality, and safety coverage from FLAN to modern mixtures?", "pages": [9, 27]},
         {"semantic_id": "preference-data", "visual_kind": "figure", "question": "How do collection protocol, compensation, demographics, and synthetic feedback shape preference data?", "pages": [35, 48]},
         {"semantic_id": "dpo-derivation", "visual_kind": "derivation", "question": "How does solving the KL-regularized optimum for implied reward yield the DPO pairwise loss?", "pages": [56, 58]},

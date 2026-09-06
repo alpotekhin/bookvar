@@ -8097,3 +8097,21 @@ assets:
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
     derivation: source-raster-copy
+
+  - id: curated-stanford-cs336-post-training-two-phase-training-053805d68e3e
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/post-training-rlvr/l15-p30-two-phase-training.png
+    author: "Stanford CS336 course staff / Tatsunori Hashimoto; mixture data adapted from the MiniCPM report"
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_15.pdf#page=30
+    upstream_source_url: https://openreview.net/pdf?id=3X2L2TFr0f
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_page: 30
+    source_parent_sha256: 42a4bc02408a96e0b414f789f32780ae1d8461000f872d93aa38c94fe369e862
+    sha256: 053805d68e3ee018b39d538503fe21c29a1dedd126799f9084905822bf9be1cd
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "Poppler pdftoppm 180 DPI; exact pixel crop x=130 y=260 w=760 h=620 from the unmodified full-page render; stable-stage chart only"
+    used_in:
+      - 00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-crop

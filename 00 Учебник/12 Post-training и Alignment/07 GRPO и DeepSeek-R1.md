@@ -2,7 +2,7 @@
 title: GRPO и DeepSeek-R1
 type: textbook-chapter
 status: canonical
-last_updated: 2026-07-20
+last_updated: 2026-09-07
 aliases:
   - Group Relative Policy Optimization
   - R1-Zero и DeepSeek-R1
@@ -13,9 +13,48 @@ next:
 primary_sources:
   - https://arxiv.org/abs/2402.03300
   - https://arxiv.org/abs/2501.12948
+  - https://arxiv.org/abs/2503.20783
+  - https://arxiv.org/abs/2602.02710
+  - https://arxiv.org/abs/2507.18071
+  - https://arxiv.org/abs/2501.12599
+  - https://arxiv.org/abs/2505.09388
+source_unit_id:
+  - assignment-05-reasoning-rl-setting-and-notation
+  - assignment-05-deliverable-baseline-calcs-003
+  - assignment-05-deliverable-baseline-calcs-004
+  - assignment-05-deliverable-derive-difficulty-reweightings-023
+  - assignment-05-deliverable-derive-difficulty-reweightings-024
+  - assignment-05-deliverable-derive-difficulty-reweightings-025
+  - assignment-05-deliverable-derive-surrogate-objectives-030
+  - assignment-05-deliverable-think-about-advantage-normalization-026
+  - assignment-05-deliverable-think-about-importance-reweighting-032
+  - assignment-05-deliverable-think-about-length-normalization-019
+  - assignment-05-deliverable-think-about-rft-022
+  - assignment-05-on-policy-grpo-derivation
+  - assignment-05-task-aggregate-loss-across-microbatch-constant
+  - assignment-05-task-aggregate-loss-across-microbatch-sequence
+  - assignment-05-task-baseline-calcs
+  - assignment-05-task-compute-group-normalized-rewards-grpo
+  - assignment-05-task-compute-group-normalized-rewards-drgrpo
+  - assignment-05-task-compute-group-normalized-rewards-maxrl
+  - assignment-05-task-derive-difficulty-reweightings
+  - assignment-05-task-derive-surrogate-objectives
+  - assignment-05-task-think-about-advantage-normalization
+  - assignment-05-task-think-about-importance-reweighting
+  - assignment-05-task-think-about-length-normalization
+  - assignment-05-task-think-about-rft
+  - lecture-16-grpo
+  - lecture-16-grpo-bias-failures
+  - lecture-16-kimi-case
+  - lecture-16-qwen-case
+  - lecture-16-r1-case
+  - lecture-16-rlvr-experiments
 ---
 
 # GRPO и DeepSeek-R1
+
+<a id="rlvr-notation"></a>
+<!-- source_unit_id: assignment-05-reasoning-rl-setting-and-notation -->
 
 > [!abstract] После главы
 > Вы сможете вручную вычислить относительные преимущества внутри группы и
@@ -72,6 +111,13 @@ $$
 относительного обучающего сигнала.
 
 ## От награды за ответ к обновлению отдельных токенов
+
+<a id="grpo-estimator"></a>
+<!-- source_unit_id: assignment-05-task-baseline-calcs -->
+<!-- source_unit_id: assignment-05-deliverable-baseline-calcs-003 -->
+<!-- source_unit_id: assignment-05-deliverable-baseline-calcs-004 -->
+<!-- source_unit_id: lecture-16-grpo -->
+<!-- source_unit_id: assignment-05-on-policy-grpo-derivation -->
 
 Ответы породила сохранённая копия модели $\pi_{old}$. Для каждого токена ответа
 
@@ -176,6 +222,11 @@ Nathan Lambert,
 
 ## Почему нормировка по стандартному отклонению спорна
 
+<a id="grpo-normalizations"></a>
+<!-- source_unit_id: lecture-16-grpo-bias-failures -->
+<!-- source_unit_id: assignment-05-task-compute-group-normalized-rewards-grpo -->
+<!-- source_unit_id: assignment-05-task-aggregate-loss-across-microbatch-sequence -->
+
 Деление на стандартное отклонение внутри группы делает масштабы разных запросов
 похожими, но усиливает случайные различия в почти однородной группе. Кроме того,
 возникает смещение, связанное со сложностью задачи.
@@ -195,6 +246,126 @@ Nathan Lambert,
 оценки одной целевой величины. Оригинальный DeepSeekMath и современные
 реализации используют не всегда одинаковые правила; документация TRL отдельно
 обсуждает отказ от исходной нормировки из-за смещения на уровне длины ответа.
+
+<a id="drgrpo-rft-maxrl"></a>
+<!-- source_unit_id: assignment-05-deliverable-think-about-length-normalization-019 -->
+<!-- source_unit_id: assignment-05-deliverable-think-about-rft-022 -->
+<!-- source_unit_id: assignment-05-deliverable-derive-difficulty-reweightings-023 -->
+<!-- source_unit_id: assignment-05-deliverable-derive-difficulty-reweightings-024 -->
+<!-- source_unit_id: assignment-05-deliverable-derive-difficulty-reweightings-025 -->
+<!-- source_unit_id: assignment-05-deliverable-think-about-advantage-normalization-026 -->
+<!-- source_unit_id: assignment-05-task-think-about-length-normalization -->
+<!-- source_unit_id: assignment-05-task-compute-group-normalized-rewards-drgrpo -->
+<!-- source_unit_id: assignment-05-task-aggregate-loss-across-microbatch-constant -->
+<!-- source_unit_id: assignment-05-task-think-about-rft -->
+<!-- source_unit_id: assignment-05-task-derive-difficulty-reweightings -->
+<!-- source_unit_id: assignment-05-task-think-about-advantage-normalization -->
+<!-- source_unit_id: assignment-05-task-compute-group-normalized-rewards-maxrl -->
+
+## GRPO, Dr. GRPO, RFT и MaxRL: четыре разных взвешивания данных
+
+Пусть пакет содержит $B$ запросов, для каждого сгенерировано $G$ ответов, а
+$L_{ij}$ — число токенов ответа. В бинарной задаче $r_{ij}\in\{0,1\}$,
+
+$$\mu_i=\frac1G\sum_{j=1}^{G}r_{ij},\qquad
+\sigma_i=\sqrt{\frac1G\sum_j(r_{ij}-\mu_i)^2}.$$
+
+У standard GRPO одновременно присутствуют **две нормировки**:
+
+$$
+\hat g_{GRPO}=\frac1{BG}\sum_{i,j}\frac1{L_{ij}}
+\sum_{t=1}^{L_{ij}}
+\frac{r_{ij}-\mu_i}{\sigma_i+\epsilon}
+\nabla_\theta\log\pi_\theta(y_{ijt}\mid x_i,y_{ij,<t}).
+$$
+
+Деление на $\sigma_i$ меняет вес запроса: почти решённая или почти нерешаемая
+задача может получить большой множитель из-за малого разброса. Деление на
+$L_{ij}$ меняет вес токена: каждый ответ получает одинаковую массу независимо
+от длины, поэтому токен короткого ответа весит больше токена длинного. Эти
+эффекты нельзя обсуждать как одну «стабилизацию».
+
+Есть и более тонкая деталь. Среднее группы $\mu_i$ вычислено с участием того же
+ответа, градиент которого оно центрирует. Поэтому среднее группы не является
+независимой от действия базовой оценкой. Если ответы сэмплированы независимо и
+одинаково распределены, математическое ожидание оценки сохраняет направление
+истинного градиента, но уменьшает его масштаб в $(G-1)/G$ раза. Базовая оценка,
+посчитанная по всем остальным ответам группы (*leave-one-out*), устраняет этот
+эффект конечного размера группы.
+
+### Dr. GRPO
+
+Dr. GRPO не делит преимущество на стандартное отклонение наград и заменяет
+нормировку каждого ответа по его длине одним постоянным знаменателем:
+
+$$
+\hat g_{Dr}=\frac1Z\sum_{i,j}\sum_{t=1}^{L_{ij}}
+(r_{ij}-\mu_i)\nabla_\theta\log\pi_\theta(y_{ijt}\mid x_i,y_{ij,<t}),
+\qquad Z=BGL_{max}.
+$$
+
+Именно $Z=BGL_{max}$ использует Assignment 5 ($L_{max}=512$ в полном
+референсном запуске). Это не оценка фактического числа токенов пакета, а
+фиксированный масштаб, благодаря которому длина сгенерированных ответов не
+меняет знаменатель от шага к шагу.
+
+### Rejection fine-tuning, или обучение на отобранных решениях
+
+RFT сохраняет только успешные сгенерированные решения и делает на них обычный
+шаг SFT:
+
+$$
+\hat g_{RFT}=\frac1Z\sum_{i,j}\mathbf1[r_{ij}=1]
+\sum_t\nabla_\theta\log\pi_\theta(y_{ijt}\mid x_i,y_{ij,<t}).
+$$
+
+В коде это соответствует `baseline="none"`,
+`advantage_normalizer="none"`, `loss_normalization="constant"`. Неверные
+ответы имеют нулевой вес и могут быть исключены ещё до прямого прохода. RFT
+проще и часто дешевле, но после отбора сводится к обучению по сохранённым
+траекториям: метод не понижает вероятность конкретных неверных ответов явным
+отрицательным членом и наследует ошибки фильтра.
+
+### MaxRL
+
+MaxRL делит центрированную награду на среднюю успешность группы:
+
+$$
+\hat g_{MaxRL}=\frac1Z\sum_{i,j,t}
+\frac{r_{ij}-\mu_i}{\mu_i+\epsilon}
+\nabla_\theta\log\pi_\theta(y_{ijt}\mid x_i,y_{ij,<t}).
+$$
+
+Приближённо это повышает вес запросов, которые текущая модель решает редко. При
+малой, но ненулевой $\mu_i$ множитель становится большим, поэтому в отчёте
+нужны квантили весов и нормы градиента, а $\epsilon$ является частью
+спецификации. Если вся группа получила ноль, числитель также равен нулю и
+обучающего сигнала нет: $\epsilon$ предотвращает деление на ноль, но не создаёт
+информацию. В статье
+В статье о MaxRL функция потерь нормируется фактическим числом токенов пакета.
+В задании 5 намеренно оставлен постоянный $Z$, чтобы в абляции менялся только
+способ нормировки преимущества;
+результат такого варианта нельзя подписывать просто «MaxRL» без оговорки.
+
+### Что сравнивает честная абляция
+
+Stanford фиксирует запросы, бюджет генерации, проверяющую программу,
+инициализацию, число обновлений и процедуру оценивания, а затем сравнивает:
+
+| вариант | базовая оценка | нормировка преимущества | нормировка функции потерь |
+|---|---|---|---|
+| `GRPO_constant` | mean | std | constant |
+| `Dr_GRPO` | mean | none | constant |
+| `RFT` | none | none | constant |
+| `MaxRL_course` | mean | mean | constant |
+
+Темп обучения предварительно настраивается для базового варианта. Поэтому победа
+нового метода при этих настройках является содержательным результатом, а
+проигрыш не доказывает его принципиальную слабость: выбранный темп обучения мог
+оказаться для него неподходящим. Полный опыт курса требует четыре запуска с
+разными начальными значениями генератора случайных чисел;
+сокращённый опыт обязан показывать каждый запуск и разброс, а не одну лучшую
+кривую.
 
 ## Штраф по KL не определяется одним названием GRPO
 
@@ -256,7 +427,82 @@ $$y\sim\pi_{inference},\qquad \nabla\log\pi_{train}(y)R(y).$$
 и процесс обучения размещают на разных ускорителях; при совместном размещении
 память делят параметры модели, кеш ключей и значений и состояние оптимизатора.
 
+<a id="offpolicy-ratios"></a>
+<!-- source_unit_id: assignment-05-deliverable-derive-surrogate-objectives-030 -->
+<!-- source_unit_id: assignment-05-deliverable-think-about-importance-reweighting-032 -->
+<!-- source_unit_id: assignment-05-task-derive-surrogate-objectives -->
+<!-- source_unit_id: assignment-05-task-think-about-importance-reweighting -->
+
+## Когда один пакет генераций используют несколько раз
+
+On-policy означает, что ответы сэмплированы той же policy, для которой
+оценивается градиент. Если после генерации разбить 256 ответов на minibatches по
+8 и сделать 32 последовательных обновления, то только первое обновление видит
+текущие данные. Для остальных стратегия, породившая ответы, $\pi_0$, уже
+устарела.
+
+Точное importance correction для целого ответа равно
+
+$$
+w(y)=\frac{\pi_\theta(y\mid x)}{\pi_0(y\mid x)}
+=\prod_{t=1}^{L}\frac{\pi_\theta(y_t\mid x,y_{<t})}
+{\pi_0(y_t\mid x,y_{<t})}.
+$$
+
+Произведение корректирует всё распределение последовательности, но его
+дисперсия может стремительно расти с длиной. Token-level GRPO заменяет его
+$w_t=\pi_\theta(y_t\mid s_t)/\pi_0(y_t\mid s_t)$ и применяет PPO clipping к
+каждому токену. Это уменьшает variance, но меняет objective: в слагаемом для
+позиции $t$ prefix и suffix всё ещё распределены как $\pi_0$, а не
+$\pi_\theta$. Смещение растёт вместе с policy lag.
+
+Для $A\ge0$ clipping прекращает усиливать действие после $w_t>1+\epsilon$; для
+$A<0$ — прекращает ослаблять его после $w_t<1-\epsilon$. Поэтому логируют не
+только средний ratio, но и долю clipped positive/negative токенов, хвосты ratio,
+возраст стратегии и effective sample size. Без этих данных фраза «32× off-policy
+быстрее» смешивает экономию генерации с потерей полезного градиента.
+
+<a id="gspo"></a>
+
+## GSPO: одно отношение вероятностей на весь ответ
+
+GSPO использует геометрическое среднее отношений вероятностей токенов:
+
+$$
+s(y)=\exp\left[\frac1L\sum_{t=1}^{L}
+\bigl(\log\pi_\theta(y_t\mid s_t)-\log\pi_0(y_t\mid s_t)\bigr)\right].
+$$
+
+Один $s(y)$ затем входит в clipped surrogate для всего ответа:
+
+$$
+J_{GSPO}=\frac1{BG}\sum_{i,j}
+\min\left(A_{ij}s_{ij},
+A_{ij}\operatorname{clip}(s_{ij},1-\epsilon,1+\epsilon)\right).
+$$
+
+Вычислять произведение вероятностей напрямую нельзя: log-ratios суммируют в
+log-space, причём `response_mask` исключает prompt и padding как из суммы, так
+и из $L$. Геометрическое среднее не восстанавливает точный sequence importance
+ratio — корень степени $1/L$ намеренно добавляет bias ради меньшей variance.
+Кроме того, его градиент естественно содержит $1/L$; чтобы совместить GSPO с
+constant-normalized Dr. GRPO, степень и нормировку пришлось бы определить
+заново. Assignment 5 проверяет стандартный sequence-normalized вариант.
+
+Практический вывод не сводится к рейтингу методов. Без перевзвешивания
+дисперсия мала, но смещение быстро растёт по мере устаревания данных; точное
+отношение вероятностей последовательности формально корректно, но часто имеет
+неприемлемую дисперсию. Token clipping и GSPO занимают разные промежуточные
+точки. Выбор подтверждают опытом с одинаковыми seed, числом сгенерированных
+токенов и обновлений.
+
 ## R1-Zero и R1 — два разных эксперимента
+
+<a id="reasoning-case-studies"></a>
+<!-- source_unit_id: lecture-16-r1-case -->
+<!-- source_unit_id: lecture-16-rlvr-experiments -->
+<!-- source_unit_id: lecture-16-kimi-case -->
+<!-- source_unit_id: lecture-16-qwen-case -->
 
 ### DeepSeek-R1-Zero
 
@@ -293,6 +539,40 @@ R1-Zero начинает обучение с **DeepSeek-V3-Base**, не пров
 
 Следовательно, формула «R1 = GRPO» игнорирует цикл пополнения данных и два этапа
 SFT, то есть значительную часть практической схемы обучения.
+
+### Kimi k1.5: RL требует не только objective, но и производственного контура
+
+Kimi k1.5 дополняет картину R1 деталями, которые легко потерять при чтении одной
+формулы. Для математики авторы строят проверяемую награду, для программирования
+генерируют тесты, а для математических ответов обучают модель проверки
+эквивалентности. Генерации
+длинны и неодинаковы, поэтому производительность определяется не только
+backward pass. Организация генерации, переключение между inference- и
+training-системами, балансировка длин и передача новых весов определяют, можно
+ли вообще выполнить выбранный алгоритм с приемлемой загрузкой ускорителей.
+
+Отдельный механизм управляет длиной reasoning. Если вознаграждать только
+правильность, более длинный поиск иногда получает преимущество просто потому,
+что у него больше попыток. Kimi сначала развивает long-CoT policy, затем
+применяет length control и short-CoT стадии. Это не опровержение RLVR, а смена
+целевой функции: качество рассматривается вместе с вычислительной ценой ответа.
+Числа из отчёта относятся к конкретным моделям и инфраструктуре; переносимым
+является разделение correctness reward, length objective и rollout system.
+
+### Qwen3: несколько стадий вместо одной кнопки «reasoning»
+
+В Qwen3 способность к рассуждению также строится последовательностью стадий:
+cold-start/long-CoT data, reasoning RL, объединение thinking и non-thinking
+режимов, затем общий post-training. Agentic и general RL следуют за узкой
+математической стадией. Поэтому результат нельзя приписывать одному GRPO loss
+или объёму одного SFT-набора.
+
+Эти примеры нужны не как каталог семейств. Они показывают повторяющуюся
+структуру: начальная стратегия определяет доступные траектории; проверяющая
+программа задаёт границу достижимого сигнала; online RL исследует; отбор и
+дистилляция закрепляют найденное; заключительный alignment возвращает общие способности.
+Каждый переход меняет распределение данных, поэтому после него повторяют
+evaluation на reasoning, general capabilities, style и safety.
 
 ## Что означает наблюдаемый момент самокоррекции
 
@@ -339,6 +619,9 @@ pass@1 и pass@$k$ на отложенных задачах, долю неодн
 
 ## Практика и первоисточники
 
+Полное сопоставление standard GRPO, Dr. GRPO, RFT, учебного MaxRL и GSPO
+вынесено в [[02 Areas/ML & DL/06 Практика/24 Post-training и RLVR для математического reasoning]].
+
 ### Задания
 
 1. Воспроизведите ручной пример с помощью тензорных операций и получите преимущества с точностью
@@ -368,6 +651,15 @@ pass@1 и pass@$k$ на отложенных задачах, долю неодн
   исходная публикация GRPO.
 - DeepSeek-AI, 2025 — [DeepSeek-R1](https://arxiv.org/abs/2501.12948):
   R1-Zero, multi-stage R1, результаты и distillation.
+- Liu et al., 2025 — [Understanding R1-Zero-Like Training](https://arxiv.org/abs/2503.20783):
+  Dr. GRPO, анализ standard-deviation и length normalization.
+- Tajwar et al., 2026 — [Maximum Likelihood Reinforcement Learning](https://arxiv.org/abs/2602.02710):
+  исходная постановка MaxRL; её normalizer отличается от учебной абляции A5.
+- Zheng et al., 2025 — [Group Sequence Policy Optimization](https://arxiv.org/abs/2507.18071):
+  sequence-level geometric-mean importance ratio.
+- Kimi Team, 2025 — [Kimi k1.5](https://arxiv.org/abs/2501.12599), и Yang et
+  al., 2025 — [Qwen3 Technical Report](https://arxiv.org/abs/2505.09388):
+  многостадийные reasoning recipes и связь RL с inference cost.
 - Ahmadian et al., 2024 — [Back to Basics: REINFORCE Style Optimization for Learning from Human Feedback](https://arxiv.org/abs/2402.14740):
   полезный контекст о critic-free estimators.
 
