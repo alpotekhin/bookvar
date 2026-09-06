@@ -83,7 +83,12 @@ describe('publication workflow policy', () => {
     ];
 
     for (const source of legacySources) {
-      expect(readFileSync(resolve(root, source), 'utf8'), source).toContain('status: legacy');
+      const content = readFileSync(resolve(root, source), 'utf8');
+      expect(content, source).toContain('status: legacy');
+      expect(content, source).toContain('source_only: true');
+      expect(content, source).toContain('robots: noindex');
+      expect(content, source).toContain('search_exclude: true');
+      expect(content, source).toContain('canonical_target:');
       expect(publishedSources.has(source), source).toBe(false);
     }
   });
