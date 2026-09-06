@@ -109,7 +109,7 @@ source_unit_id:
 primary_sources:
   - https://github.com/stanford-cs336/assignment2-systems/tree/ca8bc81a59b70516f7ebb2da4808daade877c736
   - https://github.com/stanford-cs336/lectures/tree/8b59b50730766695c2ffedd1a79c50cd09b9eb91
-contract: "[[02 Areas/ML & DL/06 Практика/Contracts/stanford-cs336-a2.yml]]"
+contract: "[[06 Практика/Contracts/stanford-cs336-a2.yml]]"
 ---
 
 <a id="cs336-a2-capstone"></a>
@@ -121,7 +121,7 @@ contract: "[[02 Areas/ML & DL/06 Практика/Contracts/stanford-cs336-a2.ym
 один механизм и подтвердить результат тестом, trace и измерением. За основу взят
 [Stanford CS336 Spring 2026 Assignment 2: Systems](https://github.com/stanford-cs336/assignment2-systems/tree/ca8bc81a59b70516f7ebb2da4808daade877c736).
 Готового solution code здесь нет; точные adapters, тесты и режимы закреплены в
-[[02 Areas/ML & DL/06 Практика/Contracts/stanford-cs336-a2.yml|контракте Assignment 2]].
+машиночитаемом контракте `06 Практика/Contracts/stanford-cs336-a2.yml`.
 
 ## Что должно быть известно заранее
 

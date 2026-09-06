@@ -3570,10 +3570,9 @@
       "primary_sources": [
         "lecture-13"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-13",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md",
+      "destination_anchor": "corpus-as-decision-system"
     },
     {
       "id": "coverage-lecture-13-figure-step-12-rendering-1",
@@ -3585,10 +3584,9 @@
       "primary_sources": [
         "lecture-13"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-13",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md",
+      "destination_anchor": "stages-and-data-regimes"
     },
     {
       "id": "coverage-lecture-13-figure-step-33-rendering-1",
@@ -3600,10 +3598,9 @@
       "primary_sources": [
         "lecture-13"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-13",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md",
+      "destination_anchor": "stages-and-data-regimes"
     },
     {
       "id": "coverage-lecture-13-figure-step-35-rendering-1",
@@ -3615,10 +3612,9 @@
       "primary_sources": [
         "lecture-13"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-13",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md",
+      "destination_anchor": "stages-and-data-regimes"
     },
     {
       "id": "coverage-lecture-13-figure-step-37-rendering-1",
@@ -3630,10 +3626,9 @@
       "primary_sources": [
         "lecture-13"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-13",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md",
+      "destination_anchor": "stages-and-data-regimes"
     },
     {
       "id": "coverage-lecture-13-copyright-consent-failure-modes",
@@ -3645,10 +3640,9 @@
       "primary_sources": [
         "lecture-13"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-13",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md",
+      "destination_anchor": "sources-rights-provenance"
     },
     {
       "id": "coverage-lecture-13-figure-step-71-rendering-1",
@@ -3660,10 +3654,9 @@
       "primary_sources": [
         "lecture-13"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-13",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md",
+      "destination_anchor": "sources-rights-provenance"
     },
     {
       "id": "coverage-lecture-13-figure-step-73-rendering-1",
@@ -3678,7 +3671,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-13",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The social-media crawling anecdote is preserved in the pinned lecture but is not durable evidence for the textbook route.",
+      "evidence": "Lectures/repository/var/traces/lecture_13.json#step=73:rendering=1"
     },
     {
       "id": "coverage-lecture-13-section-92-intellectual-property-law",
@@ -3690,10 +3684,9 @@
       "primary_sources": [
         "lecture-13"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-13",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md",
+      "destination_anchor": "sources-rights-provenance"
     },
     {
       "id": "coverage-lecture-13-section-111-licenses",
@@ -3705,10 +3698,9 @@
       "primary_sources": [
         "lecture-13"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-13",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md",
+      "destination_anchor": "sources-rights-provenance"
     },
     {
       "id": "coverage-lecture-13-section-143-lawsuits",
@@ -3723,7 +3715,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-13",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The dated lawsuit sequence is preserved as time-sensitive source material; the textbook keeps only narrow, dated legal boundaries rather than presenting legal advice.",
+      "evidence": "Lectures/repository/var/traces/lecture_13.json#steps=143-419:semantic=section-143-lawsuits"
     },
     {
       "id": "coverage-lecture-13-common-crawl-data-pipeline",
@@ -3735,10 +3728,9 @@
       "primary_sources": [
         "lecture-13"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-13",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+      "destination_anchor": "crawl-to-record"
     },
     {
       "id": "coverage-lecture-13-dataset-composition-examples",
@@ -3750,10 +3742,9 @@
       "primary_sources": [
         "lecture-13"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-13",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+      "destination_anchor": "dataset-lineage"
     },
     {
       "id": "coverage-lecture-13-dataset-lineage-case-studies",
@@ -3765,10 +3756,9 @@
       "primary_sources": [
         "lecture-13"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-13",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+      "destination_anchor": "dataset-lineage"
     },
     {
       "id": "coverage-lecture-13-section-420-model-based-filtering",
@@ -3780,10 +3770,9 @@
       "primary_sources": [
         "lecture-13"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-13",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+      "destination_anchor": "quality-filtering"
     },
     {
       "id": "coverage-lecture-13-section-484-summary",
@@ -3798,7 +3787,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-13",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The recap duplicates mechanisms integrated at their exact textbook anchors and remains available in the pinned lecture.",
+      "evidence": "Lectures/repository/var/traces/lecture_13.json#steps=484-489:semantic=section-484-summary"
     },
     {
       "id": "coverage-lecture-14-section-2-lecture-14-data-ii",
@@ -3810,10 +3800,9 @@
       "primary_sources": [
         "lecture-14"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-14",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+      "destination_anchor": "extraction"
     },
     {
       "id": "coverage-lecture-14-figure-step-19-rendering-1",
@@ -3825,10 +3814,9 @@
       "primary_sources": [
         "lecture-14"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-14",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+      "destination_anchor": "extraction"
     },
     {
       "id": "coverage-lecture-14-figure-step-21-rendering-1",
@@ -3840,10 +3828,9 @@
       "primary_sources": [
         "lecture-14"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-14",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+      "destination_anchor": "extraction"
     },
     {
       "id": "coverage-lecture-14-quality-filter-experiment",
@@ -3855,10 +3842,9 @@
       "primary_sources": [
         "lecture-14"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-14",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+      "destination_anchor": "quality-filtering"
     },
     {
       "id": "coverage-lecture-14-figure-step-32-rendering-1",
@@ -3870,10 +3856,9 @@
       "primary_sources": [
         "lecture-14"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-14",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+      "destination_anchor": "quality-filtering"
     },
     {
       "id": "coverage-lecture-14-figure-step-93-rendering-1",
@@ -3885,10 +3870,9 @@
       "primary_sources": [
         "lecture-14"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-14",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+      "destination_anchor": "quality-filtering"
     },
     {
       "id": "coverage-lecture-14-deduplication-collision-failure-modes",
@@ -3900,10 +3884,9 @@
       "primary_sources": [
         "lecture-14"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-14",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md",
+      "destination_anchor": "exact-dedup"
     },
     {
       "id": "coverage-lecture-14-minhash-lsh-derivation",
@@ -3915,10 +3898,9 @@
       "primary_sources": [
         "lecture-14"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-14",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md",
+      "destination_anchor": "minhash-lsh"
     },
     {
       "id": "coverage-lecture-14-section-153-jaccard-similarity",
@@ -3930,10 +3912,9 @@
       "primary_sources": [
         "lecture-14"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-14",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md",
+      "destination_anchor": "minhash-lsh"
     },
     {
       "id": "coverage-lecture-14-section-166-minhash",
@@ -3945,10 +3926,9 @@
       "primary_sources": [
         "lecture-14"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-14",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md",
+      "destination_anchor": "minhash-lsh"
     },
     {
       "id": "coverage-lecture-14-figure-step-289-rendering-1",
@@ -3963,7 +3943,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-14",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The full Marin token-viewer screenshot is preserved in the course archive because its labels are illegible at textbook width.",
+      "evidence": "Lectures/repository/var/traces/lecture_14.json#step=289:rendering=1"
     },
     {
       "id": "coverage-lecture-14-figure-step-291-rendering-1",
@@ -3978,7 +3959,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-14",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "This repeated source-composition table is already represented by the Lecture 13 lineage sequence and is not duplicated.",
+      "evidence": "Lectures/repository/var/traces/lecture_14.json#step=291:rendering=1"
     },
     {
       "id": "coverage-lecture-14-figure-step-320-rendering-1",
@@ -3990,10 +3972,9 @@
       "primary_sources": [
         "lecture-14"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-14",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+      "destination_anchor": "mixtures"
     },
     {
       "id": "coverage-lecture-14-figure-step-325-rendering-1",
@@ -4005,10 +3986,9 @@
       "primary_sources": [
         "lecture-14"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-14",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+      "destination_anchor": "mixtures"
     },
     {
       "id": "coverage-lecture-14-post-training-data-pipelines",
@@ -4020,10 +4000,9 @@
       "primary_sources": [
         "lecture-14"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-14",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md",
+      "destination_anchor": "teacher-data"
     },
     {
       "id": "coverage-lecture-15-title-slide",
@@ -4291,10 +4270,9 @@
       "primary_sources": [
         "lecture-17"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-17",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md",
+      "destination_anchor": "две-задачи-понять-чужую-модальность-и-породить-её"
     },
     {
       "id": "coverage-lecture-17-figure-step-6-rendering-1",
@@ -4306,10 +4284,9 @@
       "primary_sources": [
         "lecture-17"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-17",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "excluded",
+      "reason": "The modality-icon collage is decorative and contains no mechanism; the textbook route map provides the useful distinction.",
+      "evidence": "Lectures/repository/var/traces/lecture_17.json#step=6:rendering=1"
     },
     {
       "id": "coverage-lecture-17-contrastive-vision-language-training",
@@ -4321,10 +4298,9 @@
       "primary_sources": [
         "lecture-17"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-17",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md",
+      "destination_anchor": "clip-и-siglip-две-формы-контрастивного-обучения"
     },
     {
       "id": "coverage-lecture-17-clip-siglip-training-sequence",
@@ -4336,10 +4312,9 @@
       "primary_sources": [
         "lecture-17"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-17",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md",
+      "destination_anchor": "clip-и-siglip-две-формы-контрастивного-обучения"
     },
     {
       "id": "coverage-lecture-17-llava-onevision-progression",
@@ -4351,10 +4326,9 @@
       "primary_sources": [
         "lecture-17"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-17",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/16 Multimodal Models/64a Connectors и fusion.md",
+      "destination_anchor": "от-llava-к-llava-onevision-что-изменилось-кроме-projector"
     },
     {
       "id": "coverage-lecture-17-multimodal-tokenization-failure-modes",
@@ -4366,10 +4340,9 @@
       "primary_sources": [
         "lecture-17"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-17",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md",
+      "destination_anchor": "где-теряется-информация-crop-tiling-merge-и-фиксированный-budget"
     },
     {
       "id": "coverage-lecture-17-qwen-vl-training-stages",
@@ -4381,10 +4354,9 @@
       "primary_sources": [
         "lecture-17"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-17",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "02 Атлас моделей/Семейства/Мультимодальные семейства.md",
+      "destination_anchor": "qwen-vl-lineage"
     },
     {
       "id": "coverage-lecture-17-figure-step-210-rendering-1",
@@ -4396,10 +4368,9 @@
       "primary_sources": [
         "lecture-17"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-17",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md",
+      "destination_anchor": "4-одна-авторегрессионная-последовательность"
     },
     {
       "id": "coverage-lecture-17-figure-step-211-rendering-1",
@@ -4411,10 +4382,9 @@
       "primary_sources": [
         "lecture-17"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-17",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md",
+      "destination_anchor": "8-что-даёт-единый-словарь-а-чего-он-не-гарантирует"
     },
     {
       "id": "coverage-lecture-17-figure-step-216-rendering-1",
@@ -4426,10 +4396,9 @@
       "primary_sources": [
         "lecture-17"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-17",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md",
+      "destination_anchor": "3-как-изображение-становится-дискретными-кодами"
     },
     {
       "id": "coverage-assignment-01-course-policy-and-setup",
@@ -8280,8 +8249,8 @@
         "assignment-04"
       ],
       "disposition": "excluded",
-      "reason": "Environment and shared-data path setup are operational administration, not textbook units.",
-      "evidence": "Filtering Common Crawl"
+      "reason": "Shared cluster paths, accounts, and submission setup are course administration rather than a portable learning objective.",
+      "evidence": "Assignments/assignment4-data/cs336_assignment4_data.pdf#pages=1-2:semantic=data-assignment-setup"
     },
     {
       "id": "coverage-assignment-04-task-look-at-cc",
@@ -8293,10 +8262,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "raw-inspection"
     },
     {
       "id": "coverage-assignment-04-deliverable-look-at-cc-001",
@@ -8308,10 +8276,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "raw-inspection"
     },
     {
       "id": "coverage-assignment-04-deliverable-look-at-cc-002",
@@ -8323,10 +8290,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "raw-inspection"
     },
     {
       "id": "coverage-assignment-04-deliverable-look-at-cc-003",
@@ -8338,10 +8304,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "raw-inspection"
     },
     {
       "id": "coverage-assignment-04-deliverable-look-at-cc-004",
@@ -8353,10 +8318,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "raw-inspection"
     },
     {
       "id": "coverage-assignment-04-task-extract-text",
@@ -8368,10 +8332,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+      "destination_anchor": "extraction"
     },
     {
       "id": "coverage-assignment-04-deliverable-extract-text-005",
@@ -8383,10 +8346,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "adapters"
     },
     {
       "id": "coverage-assignment-04-deliverable-extract-text-006",
@@ -8398,10 +8360,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "adapters"
     },
     {
       "id": "coverage-assignment-04-task-language-identification",
@@ -8413,10 +8374,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+      "destination_anchor": "language-id"
     },
     {
       "id": "coverage-assignment-04-deliverable-language-identification-007",
@@ -8428,10 +8388,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "manual-audit"
     },
     {
       "id": "coverage-assignment-04-deliverable-language-identification-008",
@@ -8443,10 +8402,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "manual-audit"
     },
     {
       "id": "coverage-assignment-04-deliverable-language-identification-009",
@@ -8458,10 +8416,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "manual-audit"
     },
     {
       "id": "coverage-assignment-04-task-mask-pii",
@@ -8473,10 +8430,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md",
+      "destination_anchor": "pii"
     },
     {
       "id": "coverage-assignment-04-deliverable-mask-pii-010",
@@ -8488,10 +8444,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "manual-audit"
     },
     {
       "id": "coverage-assignment-04-deliverable-mask-pii-011",
@@ -8503,10 +8458,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "manual-audit"
     },
     {
       "id": "coverage-assignment-04-deliverable-mask-pii-012",
@@ -8518,10 +8472,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "manual-audit"
     },
     {
       "id": "coverage-assignment-04-deliverable-mask-pii-013",
@@ -8533,10 +8486,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "manual-audit"
     },
     {
       "id": "coverage-assignment-04-deliverable-mask-pii-014",
@@ -8548,10 +8500,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "manual-audit"
     },
     {
       "id": "coverage-assignment-04-task-harmful-content",
@@ -8563,10 +8514,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md",
+      "destination_anchor": "harm-policy"
     },
     {
       "id": "coverage-assignment-04-deliverable-harmful-content-015",
@@ -8578,10 +8528,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "manual-audit"
     },
     {
       "id": "coverage-assignment-04-deliverable-harmful-content-016",
@@ -8593,10 +8542,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "manual-audit"
     },
     {
       "id": "coverage-assignment-04-deliverable-harmful-content-017",
@@ -8608,10 +8556,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "manual-audit"
     },
     {
       "id": "coverage-assignment-04-deliverable-harmful-content-018",
@@ -8623,10 +8570,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "manual-audit"
     },
     {
       "id": "coverage-assignment-04-task-gopher-quality-filters",
@@ -8638,10 +8584,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+      "destination_anchor": "quality-filtering"
     },
     {
       "id": "coverage-assignment-04-deliverable-gopher-quality-filters-019",
@@ -8653,10 +8598,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "filter-ledger"
     },
     {
       "id": "coverage-assignment-04-deliverable-gopher-quality-filters-020",
@@ -8668,10 +8612,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "filter-ledger"
     },
     {
       "id": "coverage-assignment-04-classifier-evaluation",
@@ -8683,10 +8626,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "manual-audit"
     },
     {
       "id": "coverage-assignment-04-task-quality-classifier",
@@ -8698,10 +8640,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+      "destination_anchor": "quality-filtering"
     },
     {
       "id": "coverage-assignment-04-deliverable-quality-classifier-021",
@@ -8713,10 +8654,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "filter-ledger"
     },
     {
       "id": "coverage-assignment-04-deliverable-quality-classifier-022",
@@ -8728,10 +8668,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "filter-ledger"
     },
     {
       "id": "coverage-assignment-04-minhash-lsh-deduplication",
@@ -8743,10 +8682,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md",
+      "destination_anchor": "minhash-lsh"
     },
     {
       "id": "coverage-assignment-04-task-exact-deduplication",
@@ -8758,10 +8696,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md",
+      "destination_anchor": "exact-dedup"
     },
     {
       "id": "coverage-assignment-04-deliverable-exact-deduplication-023",
@@ -8773,10 +8710,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "dedup"
     },
     {
       "id": "coverage-assignment-04-task-minhash-deduplication",
@@ -8788,10 +8724,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md",
+      "destination_anchor": "minhash-lsh"
     },
     {
       "id": "coverage-assignment-04-deliverable-minhash-deduplication-024",
@@ -8803,10 +8738,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "dedup"
     },
     {
       "id": "coverage-assignment-04-task-filter-data",
@@ -8818,10 +8752,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "filter-ledger"
     },
     {
       "id": "coverage-assignment-04-pipeline-runtime",
@@ -8833,10 +8766,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "filter-ledger"
     },
     {
       "id": "coverage-assignment-04-deliverable-filter-data-025",
@@ -8848,10 +8780,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "filter-ledger"
     },
     {
       "id": "coverage-assignment-04-deliverable-filter-data-026",
@@ -8863,10 +8794,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "filter-ledger"
     },
     {
       "id": "coverage-assignment-04-task-inspect-filtered-data",
@@ -8878,10 +8808,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "manual-audit"
     },
     {
       "id": "coverage-assignment-04-deliverable-inspect-filtered-data-027",
@@ -8893,10 +8822,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "manual-audit"
     },
     {
       "id": "coverage-assignment-04-deliverable-inspect-filtered-data-028",
@@ -8908,10 +8836,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "manual-audit"
     },
     {
       "id": "coverage-assignment-04-deliverable-inspect-filtered-data-029",
@@ -8923,10 +8850,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "manual-audit"
     },
     {
       "id": "coverage-assignment-04-task-tokenize-data",
@@ -8938,10 +8864,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "tokenize"
     },
     {
       "id": "coverage-assignment-04-deliverable-tokenize-data-030",
@@ -8953,10 +8878,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "tokenize"
     },
     {
       "id": "coverage-assignment-04-model-validation",
@@ -8968,10 +8892,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "fixed-budget"
     },
     {
       "id": "coverage-assignment-04-task-train-model",
@@ -8983,10 +8906,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "fixed-budget"
     },
     {
       "id": "coverage-assignment-04-deliverable-train-model-031",
@@ -8998,10 +8920,9 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "fixed-budget"
     },
     {
       "id": "coverage-assignment-04-test-tests-test-pii-py-8-test-mask-emails-single",
@@ -9013,10 +8934,10 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "contract-only",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "adapters",
+      "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
     },
     {
       "id": "coverage-assignment-04-test-tests-test-toxicity-py-8-test-classify-nsfw",
@@ -9028,10 +8949,10 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "contract-only",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "adapters",
+      "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
     },
     {
       "id": "coverage-assignment-04-test-tests-test-extract-py-9-test-extract-text-from-html-bytes",
@@ -9043,10 +8964,10 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "contract-only",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "adapters",
+      "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
     },
     {
       "id": "coverage-assignment-04-test-tests-test-langid-py-9-test-identify-language-english",
@@ -9058,10 +8979,10 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "contract-only",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "adapters",
+      "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
     },
     {
       "id": "coverage-assignment-04-test-tests-test-quality-py-9-test-classify-quality",
@@ -9073,10 +8994,10 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "contract-only",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "adapters",
+      "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
     },
     {
       "id": "coverage-assignment-04-test-tests-test-deduplication-py-11-test-exact-line-deduplication",
@@ -9088,10 +9009,10 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "contract-only",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "adapters",
+      "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
     },
     {
       "id": "coverage-assignment-04-test-tests-test-pii-py-18-test-mask-emails-multiple",
@@ -9103,10 +9024,10 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "contract-only",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "adapters",
+      "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
     },
     {
       "id": "coverage-assignment-04-test-tests-test-langid-py-21-test-identify-language-chinese-simplified",
@@ -9118,10 +9039,10 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "contract-only",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "adapters",
+      "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
     },
     {
       "id": "coverage-assignment-04-test-tests-test-pii-py-28-test-mask-emails-existing-string",
@@ -9133,10 +9054,10 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "contract-only",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "adapters",
+      "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
     },
     {
       "id": "coverage-assignment-04-test-tests-test-quality-py-31-test-gopher-valid-input",
@@ -9148,10 +9069,10 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "contract-only",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "adapters",
+      "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
     },
     {
       "id": "coverage-assignment-04-test-tests-test-toxicity-py-33-test-classify-toxic-speech",
@@ -9163,10 +9084,10 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "contract-only",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "adapters",
+      "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
     },
     {
       "id": "coverage-assignment-04-test-tests-test-quality-py-39-test-gopher-less-than-50-non-symbol-words",
@@ -9178,10 +9099,10 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "contract-only",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "adapters",
+      "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
     },
     {
       "id": "coverage-assignment-04-test-tests-test-pii-py-42-test-mask-phones-single",
@@ -9193,10 +9114,10 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "contract-only",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "adapters",
+      "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
     },
     {
       "id": "coverage-assignment-04-test-tests-test-deduplication-py-43-test-minhash-deduplication-exact-duplicates",
@@ -9208,10 +9129,10 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "contract-only",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "adapters",
+      "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
     },
     {
       "id": "coverage-assignment-04-test-tests-test-quality-py-47-test-gopher-more-than-100000-non-symbol-words",
@@ -9223,10 +9144,10 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "contract-only",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "adapters",
+      "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
     },
     {
       "id": "coverage-assignment-04-test-tests-test-pii-py-54-test-mask-ips",
@@ -9238,10 +9159,10 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "contract-only",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "adapters",
+      "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
     },
     {
       "id": "coverage-assignment-04-test-tests-test-quality-py-55-test-gopher-average-word-length-less-than-3",
@@ -9253,10 +9174,10 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "contract-only",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "adapters",
+      "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
     },
     {
       "id": "coverage-assignment-04-test-tests-test-quality-py-63-test-gopher-average-word-length-greater-than-10",
@@ -9268,10 +9189,10 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "contract-only",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "adapters",
+      "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
     },
     {
       "id": "coverage-assignment-04-test-tests-test-quality-py-73-test-gopher-more-than-30-percent-lines-ending-with-ellipsis",
@@ -9283,10 +9204,10 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "contract-only",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "adapters",
+      "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
     },
     {
       "id": "coverage-assignment-04-test-tests-test-deduplication-py-83-test-minhash-deduplication-fuzzy-duplicates",
@@ -9298,10 +9219,10 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "contract-only",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "adapters",
+      "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
     },
     {
       "id": "coverage-assignment-04-test-tests-test-quality-py-90-test-gopher-less-than-80-percent-words-with-alphabetic-character",
@@ -9313,10 +9234,10 @@
       "primary_sources": [
         "assignment-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "contract-only",
+      "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "destination_anchor": "adapters",
+      "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
     },
     {
       "id": "coverage-assignment-05-alignment-submission",
@@ -11709,5 +11630,5 @@
       "evidence": "Assignments/assignment5-alignment/tests/test_data.py#L55"
     }
   ],
-  "editorial_overlay_sha256": "d33064c5d070beada33542cc8f7474ff6b86f9dd15fa3c1eadec033be83ba8f0"
+  "editorial_overlay_sha256": "499fdf66de3a57327a9496ded75bc93b0b00b5a21504e1d47f70d7a6f0c315d6"
 }

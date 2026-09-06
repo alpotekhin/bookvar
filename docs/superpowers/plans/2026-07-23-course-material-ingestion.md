@@ -713,7 +713,7 @@ git commit -m "Publish source-language course material with attribution"
 
 ---
 
-### Task 10: Editorial and deployment gate
+### Task 10: Editorial gate and publication approval
 
 **Files:**
 - Modify: `05 Источники/Source maps/ML systems — Bookvar gap matrix.md`
@@ -721,7 +721,8 @@ git commit -m "Publish source-language course material with attribution"
 
 **Interfaces:**
 - Consumes: all integrated rows and built pages.
-- Produces: a verified dev deployment and a closed gap matrix.
+- Produces: a fully verified local build, a closed gap matrix, and a review
+  handoff awaiting explicit user approval for any push or deployment.
 
 - [ ] **Step 1: Reconcile the matrix**
 
@@ -754,19 +755,22 @@ npm run build
 
 Expected: all commands exit 0; no broken routes/assets/fragments.
 
-- [ ] **Step 5: Commit and push only `dev`**
+- [ ] **Step 5: Commit locally and prepare the review handoff**
 
 ```bash
 git add .
 git commit -m "Complete the ML systems course ingestion"
-git push origin dev
 ```
 
-Do not merge or push `main`.
+Do not push any branch, open a pull request, trigger a deployment, merge, or
+modify `main`. Report the local branch name, commit, test results, changed-page
+inventory, and local preview URL to the user. Stop and wait for explicit user
+approval.
 
-- [ ] **Step 6: Verify GitHub Pages**
+- [ ] **Step 6: Publish only after explicit approval**
 
-Wait for the dev deployment workflow, open the deployed home page, one
-foundation chapter, one distributed-training chapter, one inference chapter,
-one practice page, and one lifecycle page. Record the deployment commit and
-URLs in the handoff.
+After the user explicitly approves publishing, push only the specifically
+approved branch or commit. Then wait for the approved deployment workflow and
+open the deployed home page, one foundation chapter, one distributed-training
+chapter, one inference chapter, one practice page, and one lifecycle page.
+Record the deployment commit and URLs in the handoff.

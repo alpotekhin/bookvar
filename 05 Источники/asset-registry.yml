@@ -2308,6 +2308,28 @@ assets:
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/slp3/lm-jan25-slide-45.png
+  - id: curated-cs336-isoflops-000000000021
+    asset: 00 Учебник/Assets/Figures/curated/training-systems-courses/43-cs336-isoflops.png
+    author: Tatsu Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/main/lecture_09.pdf
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://cs336.stanford.edu/
+    modifications: slide 48 rendered to PNG without content changes; retained as a source reference and not currently embedded
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/cs336/lecture-09-slide-48.png
+  - id: curated-cs336-train-inference-optimum-000000000022
+    asset: 00 Учебник/Assets/Figures/curated/training-systems-courses/43-cs336-train-vs-inference-optimum.png
+    author: Tatsu Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/main/lecture_09.pdf
+    license: open-course-material; reuse confirmed by repository owner
+    license_url: https://cs336.stanford.edu/
+    modifications: slide 54 rendered to PNG without content changes; retained as a source reference and not currently embedded
+    used_in: []
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    source_asset: raw/papers/external/cs336/lecture-09-slide-54.png
   - id: curated-cs336-dp-memory-000000000023
     asset: 00 Учебник/Assets/Figures/curated/training-systems-courses/44-cs336-dp-memory.png
     author: Percy Liang, Tatsu Hashimoto, and Stanford CS336 course staff
@@ -4843,42 +4865,57 @@ assets:
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/inference-serving/triton/matmul-performance-fp8.png
-  - id: curated-vlm2026-vit-figure1-4cce6f5005a5
+  - id: curated-vlm2026-vit-figure1-6152e780c256
     asset: 00 Учебник/Assets/Figures/curated/vlm-2026/vit-figure1-patch-sequence.png
     author: Alexey Dosovitskiy et al.
-    source_url: https://arxiv.org/pdf/2010.11929
-    license: open paper material; reuse confirmed by repository owner
-    license_url: https://arxiv.org/pdf/2010.11929
-    modifications: Figure 1 rendered from the official paper; caption and surrounding page text removed, complete architecture diagram preserved
-    used_in: ["00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md"]
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/vit.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 6152e780c2565e4dedce89ce7d8fbd473ef051b65be11d6ae3a2d6807d5c4702
+    sha256: 6152e780c2565e4dedce89ce7d8fbd473ef051b65be11d6ae3a2d6807d5c4702
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy of the pinned course asset; replaces the lower-resolution rendering at the same canonical path
+    used_in:
+      - 00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md
+      - en/00 Textbook/16 Multimodal Models/64 Multimodal models.md
     metadata_status: verified
-    provenance_confirmation: user-confirmed-open-materials
-    source_asset: raw/papers/external/vlm-2026/2010.11929.pdf
-    derivation: pdf-page-render-crop
-  - id: curated-vlm2026-clip-figure1-e415b6061173
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+    upstream_source_url: https://arxiv.org/abs/2010.11929
+  - id: curated-vlm2026-clip-figure1-ac050e1cf247
     asset: 00 Учебник/Assets/Figures/curated/vlm-2026/clip-figure1-training-and-zero-shot.png
     author: Alec Radford et al.
-    source_url: https://arxiv.org/pdf/2103.00020
-    license: open paper material; reuse confirmed by repository owner
-    license_url: https://arxiv.org/pdf/2103.00020
-    modifications: Figure 1 rendered from official paper and cropped without content changes
-    used_in: ["00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md"]
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/clip.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: ac050e1cf247f6ba792ebcd7cb9253d3e4ff284a164f21a02a7da9f767a95e4f
+    sha256: ac050e1cf247f6ba792ebcd7cb9253d3e4ff284a164f21a02a7da9f767a95e4f
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy of the pinned course asset; replaces the lower-resolution rendering at the same canonical path
+    used_in:
+      - 00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md
+      - en/00 Textbook/16 Multimodal Models/64 Multimodal models.md
     metadata_status: verified
-    provenance_confirmation: user-confirmed-open-materials
-    source_asset: raw/papers/external/vlm-2026/2103.00020.pdf
-    derivation: pdf-page-render-crop
-  - id: curated-vlm2026-llava-figure1-e01755d29e01
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+    upstream_source_url: https://arxiv.org/abs/2103.00020
+  - id: curated-vlm2026-llava-figure1-27391332e106
     asset: 00 Учебник/Assets/Figures/curated/vlm-2026/llava-figure1-projector.png
     author: Haotian Liu et al.
-    source_url: https://arxiv.org/pdf/2304.08485
-    license: open paper material; reuse confirmed by repository owner
-    license_url: https://arxiv.org/pdf/2304.08485
-    modifications: Figure 1 rendered from official paper and cropped without content changes
-    used_in: ["00 Учебник/16 Multimodal Models/64a Connectors и fusion.md"]
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/llava-architecture.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 27391332e106b70d8514236163de5ddce842e293b5aa1177787a53f3f89ab35a
+    sha256: 27391332e106b70d8514236163de5ddce842e293b5aa1177787a53f3f89ab35a
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy of the pinned course asset; replaces the lower-resolution rendering at the same canonical path
+    used_in:
+      - 00 Учебник/16 Multimodal Models/64a Connectors и fusion.md
+      - en/00 Textbook/16 Multimodal Models/64a Connectors and fusion.md
     metadata_status: verified
-    provenance_confirmation: user-confirmed-open-materials
-    source_asset: raw/papers/external/vlm-2026/2304.08485.pdf
-    derivation: pdf-page-render-crop
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+    upstream_source_url: https://arxiv.org/abs/2304.08485
   - id: curated-vlm2026-blip2-figure2-45912bff8b05
     asset: 00 Учебник/Assets/Figures/curated/vlm-2026/blip2-figure2-qformer-objectives.png
     author: Junnan Li et al.
@@ -4927,18 +4964,23 @@ assets:
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/vlm-2026/2412.05271.pdf
     derivation: pdf-page-render-crop
-  - id: curated-vlm2026-qwen2vl-figure3-0d8de4d9d399
+  - id: curated-vlm2026-qwen2vl-figure3-c5a855f115aa
     asset: 00 Учебник/Assets/Figures/curated/vlm-2026/qwen2vl-figure3-mrope.png
     author: Peng Wang et al.
-    source_url: https://arxiv.org/pdf/2409.12191
-    license: open paper material; reuse confirmed by repository owner
-    license_url: https://arxiv.org/pdf/2409.12191
-    modifications: Figure 3 rendered from official paper and cropped without content changes
-    used_in: ["00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md"]
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/qwen2-vl-mrope.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: c5a855f115aa24df543e1bcc9a368d83bf39139e0bf8fc65453bfbde529aae9f
+    sha256: c5a855f115aa24df543e1bcc9a368d83bf39139e0bf8fc65453bfbde529aae9f
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy of the pinned course asset; replaces the lower-resolution rendering at the same canonical path
+    used_in:
+      - 00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md
+      - en/00 Textbook/16 Multimodal Models/64b Resolution, tiling, and spatial positions.md
     metadata_status: verified
-    provenance_confirmation: user-confirmed-open-materials
-    source_asset: raw/papers/external/vlm-2026/2409.12191.pdf
-    derivation: pdf-page-render-crop
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+    upstream_source_url: https://arxiv.org/abs/2409.12191
   - id: curated-vlm2026-internvl-figure4-55849a69a962
     asset: 00 Учебник/Assets/Figures/curated/vlm-2026/internvl25-figure4-training-pipeline.png
     author: Weiyun Wang et al.
@@ -8115,3 +8157,611 @@ assets:
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
     derivation: source-raster-crop
+  - id: curated-stanford-cs336-data-corpus-llama3-data-d4e3a87d9d62
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/llama3-data.png
+    author: Meta, The Llama 3 Herd of Models, arXiv:2407.21783
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/llama3-data.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: d4e3a87d9d623a1b6223dda09bd7d57a77517befe1819b05f37d2962d75ae495
+    sha256: d4e3a87d9d623a1b6223dda09bd7d57a77517befe1819b05f37d2962d75ae495
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+    upstream_source_url: https://arxiv.org/abs/2407.21783
+  - id: curated-stanford-cs336-data-corpus-olmo2-pretraining-98e2c35b12c4
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/olmo2-pretraining.png
+    author: Allen Institute for AI, OLMo 2, arXiv:2501.00656
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/olmo2-pretraining.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 98e2c35b12c4871ecb7872c23d305c7828527a7ced6bdcd2af2bb1bd16fc76e6
+    sha256: 98e2c35b12c4871ecb7872c23d305c7828527a7ced6bdcd2af2bb1bd16fc76e6
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+    upstream_source_url: https://arxiv.org/abs/2501.00656
+  - id: curated-stanford-cs336-data-corpus-tulu-accae3789c17
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/tulu.png
+    author: Allen Institute for AI, Tulu 3, arXiv:2411.15124
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/tulu.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: accae3789c1722b18c035c8b1021216a2ed6328c95a276d6d2072a33961a78dd
+    sha256: accae3789c1722b18c035c8b1021216a2ed6328c95a276d6d2072a33961a78dd
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+    upstream_source_url: https://arxiv.org/abs/2411.15124
+  - id: curated-stanford-cs336-data-corpus-decline-consent-554f5e9dca1f
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/decline-consent.png
+    author: Longpre et al., Consent in Crisis, arXiv:2407.14933
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/decline-consent.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 554f5e9dca1fff8b290298c116834d86f970407f9c0a3209fd056e6d9afcb728
+    sha256: 554f5e9dca1fff8b290298c116834d86f970407f9c0a3209fd056e6d9afcb728
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+    upstream_source_url: https://arxiv.org/abs/2407.14933
+  - id: curated-stanford-cs336-data-corpus-dclm-wet-c6766b4ca72b
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/dclm-wet.png
+    author: Li et al., DCLM, arXiv:2406.11794
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/dclm-wet.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: c6766b4ca72b57e43ecc8480b4ef5d3095d662c4415d9bde2d770a9a4f5d5343
+    sha256: c6766b4ca72b57e43ecc8480b4ef5d3095d662c4415d9bde2d770a9a4f5d5343
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+    upstream_source_url: https://arxiv.org/abs/2406.11794
+  - id: curated-stanford-cs336-data-corpus-finepdf-layout-364ffa690f8b
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/finepdf-layout.webp
+    author: Hugging Face FinePDFs technical article
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/var/files/image-e9e730a30cd647ff18f24f33cae588c0-https_huggingfacefw-finepdfsblog_hf_space__astro_pdf-description_Cb49jXc6_Z17eX4E_webp
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 364ffa690f8b8544f644f1f4cc3ffbddd2c52a87a8d6d340f96d169efb621033
+    sha256: 364ffa690f8b8544f644f1f4cc3ffbddd2c52a87a8d6d340f96d169efb621033
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+    upstream_source_url: https://huggingface.co/spaces/HuggingFaceFW/blogpost-finepdfs
+  - id: curated-stanford-cs336-data-corpus-raw-target-schema-694a9a9d4d35
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/raw-target-schema.png
+    author: Stanford CS336 Lecture 14
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/raw-target-schema.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 694a9a9d4d35b7c9ea1f9ba7ec59c540c3ecd886782aabd0806fb44cb04a5ec4
+    sha256: 694a9a9d4d35b7c9ea1f9ba7ec59c540c3ecd886782aabd0806fb44cb04a5ec4
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+  - id: curated-stanford-cs336-data-corpus-data-filtering-scale-f6e252458818
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/data-filtering-scale.png
+    author: Stanford CS336 Lecture 14 course experiment; 157M model, N=100 WARC files
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/data-filtering-scale.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: f6e252458818348c098c51a78f995f9a0e2c77ec379d692a2d820ef993a93d9f
+    sha256: f6e252458818348c098c51a78f995f9a0e2c77ec379d692a2d820ef993a93d9f
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+  - id: curated-stanford-cs336-data-corpus-dclm-filter-862ffe516afc
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/dclm-filter.png
+    author: Li et al., DCLM, arXiv:2406.11794
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/dclm-filter.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 862ffe516afcda5d8e9782712426c9af39e2882d7085a7be26007bc838f5ad5f
+    sha256: 862ffe516afcda5d8e9782712426c9af39e2882d7085a7be26007bc838f5ad5f
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+    upstream_source_url: https://arxiv.org/abs/2406.11794
+  - id: curated-stanford-cs336-data-corpus-dclm-quality-cdc38e38d3b0
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/dclm-quality.png
+    author: Li et al., DCLM, arXiv:2406.11794
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/dclm-quality.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: cdc38e38d3b0293daa1dbf9ca47b7e3b3707418d7d18516408d3355845abdf8f
+    sha256: cdc38e38d3b0293daa1dbf9ca47b7e3b3707418d7d18516408d3355845abdf8f
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+    upstream_source_url: https://arxiv.org/abs/2406.11794
+  - id: curated-stanford-cs336-data-corpus-c4-domains-bb52cc10c7f2
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/c4-domains.png
+    author: Dodge et al., Documenting Large Webtext Corpora, arXiv:2104.08758
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/var/files/image-f87c9ce7952b82131119b325714a5508-https_stanford-cs324_github_io_winter2022_lectures_images_c4-domains_png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: bb52cc10c7f299d1cbc471ac2679b49eb56918d530c9f49f1562cbee3eb17fe2
+    sha256: bb52cc10c7f299d1cbc471ac2679b49eb56918d530c9f49f1562cbee3eb17fe2
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+    upstream_source_url: https://arxiv.org/abs/2104.08758
+  - id: curated-stanford-cs336-data-corpus-the-pile-composition-4c4bc9c0b390
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/the-pile-composition.png
+    author: Gao et al., The Pile, arXiv:2101.00027
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/var/files/image-4eb29ee713b99ea34eb86b995bd32bfd-https_stanford-cs324_github_io_winter2022_lectures_images_the-pile_png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 4c4bc9c0b3901401e72eab305c7e0dc074396ad2bd425b46c54c745130cb379f
+    sha256: 4c4bc9c0b3901401e72eab305c7e0dc074396ad2bd425b46c54c745130cb379f
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+    upstream_source_url: https://arxiv.org/abs/2101.00027
+  - id: curated-stanford-cs336-data-corpus-dolma-composition-0f222185057a
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/dolma-composition.png
+    author: Soldaini et al., Dolma, arXiv:2402.00159
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/var/files/image-47601eaf24df2c497082e9c528606b87-https_miro_medium_com_v2_resize_fit_1400_1_-0Qqhvu7JD6Y9JgsfKJdxw_png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 0f222185057a422bff83ede3367752571925101db388edfae6d0de41fc67a8fd
+    sha256: 0f222185057a422bff83ede3367752571925101db388edfae6d0de41fc67a8fd
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+    upstream_source_url: https://arxiv.org/abs/2402.00159
+  - id: curated-stanford-cs336-data-corpus-regmix-cd3ef67b56a5
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/regmix.png
+    author: Liu et al., RegMix, arXiv:2407.01492
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/regmix.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: cd3ef67b56a5bc4b1099444371712f69581b1295ff5ee62120068ae6880ab08a
+    sha256: cd3ef67b56a5bc4b1099444371712f69581b1295ff5ee62120068ae6880ab08a
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+    upstream_source_url: https://arxiv.org/abs/2407.01492
+  - id: curated-stanford-cs336-data-corpus-data-mixing-methods-975fc5a56b06
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/data-mixing-methods.png
+    author: Comparative work linked in Lecture 14, arXiv:2602.12237
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/data-mixing-methods.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 975fc5a56b068b6a9bdbd92e4d3f5d4a190d4169fff3316013eff4871b747902
+    sha256: 975fc5a56b068b6a9bdbd92e4d3f5d4a190d4169fff3316013eff4871b747902
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+    upstream_source_url: https://arxiv.org/abs/2602.12237
+  - id: curated-stanford-cs336-data-corpus-minhash-characteristic-matrix-trace-2e29a239c87f
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/minhash-characteristic-matrix-trace.png
+    author: Stanford CS336 Lecture 14 pinned implementation; MinHash derivation
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_14.py#L145-L323
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 08f5e49a794a94e20423eb4edf7908f3b0b8969c3d0c31fa7d3c6b176aa0bddb
+    sha256: 2e29a239c87f951ccc25df81cefbd4fe00395f11ba86b351f2355e23f71f554f
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: exact edtrace rendering captured at 1600px; source-preserving crop to the MinHash body
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-code-trace-render-crop
+    source_step: 176
+  - id: curated-stanford-cs336-data-corpus-minhash-agreement-trace-53a4a552f51a
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/minhash-agreement-trace.png
+    author: Stanford CS336 Lecture 14 pinned implementation; 100-seed MinHash check
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_14.py#L145-L323
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 08f5e49a794a94e20423eb4edf7908f3b0b8969c3d0c31fa7d3c6b176aa0bddb
+    sha256: 53a4a552f51a071a4ac294dd00e653c55ee8ab8e271f58e3ee7b4873bdffcded
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: exact edtrace rendering captured at 1600px; no content modification
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-code-trace-render-crop
+    source_step: 184
+  - id: curated-stanford-cs336-data-corpus-lsh-banding-probability-trace-32004880d4f4
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/lsh-banding-probability-trace.png
+    author: Stanford CS336 Lecture 14 pinned implementation; LSH OR-of-ANDs derivation
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_14.py#L145-L323
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 08f5e49a794a94e20423eb4edf7908f3b0b8969c3d0c31fa7d3c6b176aa0bddb
+    sha256: 32004880d4f420f126be430f4af02f388169daee007b5ff46ec885edeb336b57
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: exact edtrace rendering captured at 1600px; source-preserving top crop before the external curve
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-code-trace-render-crop
+    source_step: 213
+  - id: curated-stanford-cs336-data-corpus-nemotron-results-cda560aec728
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/nemotron-results.png
+    author: Su et al., Nemotron-CC, arXiv:2412.02595
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/nemotron-results.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: cda560aec728df65eae4873cd888753c49ee798ca2bc0540f01a455cb00a8c25
+    sha256: cda560aec728df65eae4873cd888753c49ee798ca2bc0540f01a455cb00a8c25
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+    upstream_source_url: https://arxiv.org/abs/2412.02595
+  - id: curated-stanford-cs336-data-corpus-openthoughts-pipeline-47494fa7b6fd
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/openthoughts-pipeline.png
+    author: OpenThoughts, arXiv:2506.04178
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/openthoughts-pipeline.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 47494fa7b6fda06eb8527ed8efd4612a8fc85b27f8ce0ae1da33b9829b9610b4
+    sha256: 47494fa7b6fda06eb8527ed8efd4612a8fc85b27f8ce0ae1da33b9829b9610b4
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+    upstream_source_url: https://arxiv.org/abs/2506.04178
+  - id: curated-stanford-cs336-data-corpus-swe-smith-66870908b318
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/swe-smith.png
+    author: SWE-Smith, arXiv:2504.21798
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/swe-smith.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 66870908b3187debd1a8102abeb8cfe4f5b2973e9f5decb3625f348fab3d4c22
+    sha256: 66870908b3187debd1a8102abeb8cfe4f5b2973e9f5decb3625f348fab3d4c22
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+    upstream_source_url: https://arxiv.org/abs/2504.21798
+  - id: curated-stanford-cs336-data-corpus-swezero-noexec-a1ed5f5e1d93
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/swezero-noexec.png
+    author: SWE-Zero, arXiv:2604.01496
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/swezero-noexec.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: a1ed5f5e1d938299d9fd92dc0c5258098eaf233dd301f7dc7126ecd082acc43b
+    sha256: a1ed5f5e1d938299d9fd92dc0c5258098eaf233dd301f7dc7126ecd082acc43b
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+    upstream_source_url: https://arxiv.org/abs/2604.01496
+  - id: curated-stanford-cs336-data-corpus-swe-rebench-e37b64b85903
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/swe-rebench.png
+    author: SWE-Rebench, arXiv:2505.20411
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/swe-rebench.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: e37b64b85903b47508bc23868d4868fad4760de4638c35aa8fc064acd360af28
+    sha256: e37b64b85903b47508bc23868d4868fad4760de4638c35aa8fc064acd360af28
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+    upstream_source_url: https://arxiv.org/abs/2505.20411
+  - id: curated-stanford-cs336-multimodal-siglip-parallelism-21fbe73a2d33
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/siglip-parallelism.png
+    author: Stanford CS336 staff; SigLIP mechanism from Zhai et al.
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/siglip-parallelism.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 21fbe73a2d339804e9edd8c11600d117bf79923215588a64e4f19d170bcf4f04
+    sha256: 21fbe73a2d339804e9edd8c11600d117bf79923215588a64e4f19d170bcf4f04
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging
+    used_in:
+      - 00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+    upstream_source_url: https://arxiv.org/abs/2303.15343
+  - id: curated-stanford-cs336-multimodal-llava-gen-a1461613af17
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/llava-gen.png
+    author: Haotian Liu et al.; preserved by Stanford CS336
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/llava-gen.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: a1461613af1750239c01e8534dd0da7106669a96e97c25f1161d63ff619f51d8
+    sha256: a1461613af1750239c01e8534dd0da7106669a96e97c25f1161d63ff619f51d8
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging
+    used_in:
+      - 00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+    upstream_source_url: https://arxiv.org/abs/2304.08485
+  - id: curated-stanford-cs336-multimodal-llava-onevision-322a5f1095bc
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/llava-onevision.png
+    author: Bo Li et al.; preserved by Stanford CS336
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/llava-onevision.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 322a5f1095bc1b1bb493fe587615014c0c7c7944ed5a61a8fb12bbe4fb1d67fe
+    sha256: 322a5f1095bc1b1bb493fe587615014c0c7c7944ed5a61a8fb12bbe4fb1d67fe
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging
+    used_in:
+      - 00 Учебник/16 Multimodal Models/64a Connectors и fusion.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+    upstream_source_url: https://arxiv.org/abs/2408.03326
+  - id: curated-stanford-cs336-multimodal-llava-anyres-ba1d449afcd3
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/llava-onevision-anyres.png
+    author: Bo Li et al.; preserved by Stanford CS336
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/llava-onevision-anyres.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: ba1d449afcd3ac0c6bb045e81b600a5d512626ae3949a875eefe752351b2e100
+    sha256: ba1d449afcd3ac0c6bb045e81b600a5d512626ae3949a875eefe752351b2e100
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging
+    used_in:
+      - 00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+    upstream_source_url: https://arxiv.org/abs/2408.03326
+  - id: curated-stanford-cs336-multimodal-llava-modalities-87febe02a26d
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/llava-onevision-modalities.png
+    author: Bo Li et al.; preserved by Stanford CS336
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/llava-onevision-modalities.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 87febe02a26dcffa8e9539860c67094870ee2189227b17500570d7cccbfd7fe5
+    sha256: 87febe02a26dcffa8e9539860c67094870ee2189227b17500570d7cccbfd7fe5
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging
+    used_in:
+      - 00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+    upstream_source_url: https://arxiv.org/abs/2408.03326
+  - id: curated-stanford-cs336-multimodal-llava-training-25cf92d784e0
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/llava-onevision-training.png
+    author: Bo Li et al.; preserved by Stanford CS336
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/llava-onevision-training.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 25cf92d784e0b96473a8590a371953dc0d40361c99a7d253a2ca9cb4b1b81625
+    sha256: 25cf92d784e0b96473a8590a371953dc0d40361c99a7d253a2ca9cb4b1b81625
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging
+    used_in:
+      - 00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+    upstream_source_url: https://arxiv.org/abs/2408.03326
+  - id: curated-stanford-cs336-multimodal-llava-transfer-s1-b3cd8724bd8d
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/llava-onevision-transfer-s1.png
+    author: Bo Li et al.; preserved by Stanford CS336
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/llava-onevision-transfer-s1.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: b3cd8724bd8d0a5f25c82f2a9e6eaed36e0ba066a9281863fa31ed91a1ce5e10
+    sha256: b3cd8724bd8d0a5f25c82f2a9e6eaed36e0ba066a9281863fa31ed91a1ce5e10
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging
+    used_in:
+      - 00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+    upstream_source_url: https://arxiv.org/abs/2408.03326
+  - id: curated-stanford-cs336-multimodal-llava-transfer-s2-7f18d9724407
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/llava-onevision-transfer-s2.png
+    author: Bo Li et al.; preserved by Stanford CS336
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/llava-onevision-transfer-s2.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 7f18d9724407f00821319c265997eeece1ec1658705f811f737749d296d0ce65
+    sha256: 7f18d9724407f00821319c265997eeece1ec1658705f811f737749d296d0ce65
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging
+    used_in:
+      - 00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+    upstream_source_url: https://arxiv.org/abs/2408.03326
+  - id: curated-stanford-cs336-multimodal-qwen-vl-stages-94190fa540ce
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/qwen-vl-stages.png
+    author: Jinze Bai et al.; preserved by Stanford CS336
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/qwen-vl-stages.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 94190fa540ce9226115bd566ad291188a78be92f078f8bef4c9c275cde6fab40
+    sha256: 94190fa540ce9226115bd566ad291188a78be92f078f8bef4c9c275cde6fab40
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging
+    used_in:
+      - 00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+    upstream_source_url: https://arxiv.org/abs/2308.12966
+  - id: curated-stanford-cs336-multimodal-qwen2-vl-architecture-fad77a8289cf
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/qwen2-vl-architecture.png
+    author: Peng Wang et al.; preserved by Stanford CS336
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/qwen2-vl-architecture.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: fad77a8289cf45f49876afee9b02bc43c24f5d8aac29912463e13598ed3b932e
+    sha256: fad77a8289cf45f49876afee9b02bc43c24f5d8aac29912463e13598ed3b932e
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging
+    used_in:
+      - 00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+    upstream_source_url: https://arxiv.org/abs/2409.12191
+  - id: curated-stanford-cs336-multimodal-qwen3-vl-c264d3c2c017
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/qwen3-vl.png
+    author: Qwen Team; preserved by Stanford CS336
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/qwen3-vl.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: c264d3c2c017e683baeb11ea54e0e71241a01c84109caede28e10c791ee6c325
+    sha256: c264d3c2c017e683baeb11ea54e0e71241a01c84109caede28e10c791ee6c325
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging
+    used_in:
+      - 00 Учебник/16 Multimodal Models/64a Connectors и fusion.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+    upstream_source_url: https://arxiv.org/abs/2511.21631
+  - id: curated-stanford-cs336-multimodal-qwen3-pretraining-4aaf8c828963
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/qwen3-vl-pretraining.png
+    author: Qwen Team; preserved by Stanford CS336
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/qwen3-vl-pretraining.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 4aaf8c8289638d4d406148b6abb6a5684a13f6f6a9d0ca81668ee0a2974088ca
+    sha256: 4aaf8c8289638d4d406148b6abb6a5684a13f6f6a9d0ca81668ee0a2974088ca
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging
+    used_in:
+      - 00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+    upstream_source_url: https://arxiv.org/abs/2511.21631
+  - id: curated-stanford-cs336-multimodal-chameleon-afbfd3fbc6aa
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/chameleon.png
+    author: Chameleon Team; preserved by Stanford CS336
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/chameleon.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: afbfd3fbc6aa9e7d2a4cc024a504d8db6b1c059db533ea92138e99e36b48dc43
+    sha256: afbfd3fbc6aa9e7d2a4cc024a504d8db6b1c059db533ea92138e99e36b48dc43
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging
+    used_in:
+      - 00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+    upstream_source_url: https://arxiv.org/abs/2405.09818
+    upstream_license: CC BY 4.0 as stated by arXiv HTML
+  - id: curated-stanford-cs336-multimodal-chameleon-example-031d7041406f
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/chameleon-example.png
+    author: Chameleon Team; preserved by Stanford CS336
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/chameleon-example.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 031d7041406f6d32913980132859415788e625622d333ca8ce701f6aed27f077
+    sha256: 031d7041406f6d32913980132859415788e625622d333ca8ce701f6aed27f077
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging
+    used_in:
+      - 00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+    upstream_source_url: https://arxiv.org/abs/2405.09818
+    upstream_license: CC BY 4.0 as stated by arXiv HTML
+  - id: curated-stanford-cs336-multimodal-vq-vae-a1e0068e8271
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/vq-vae.png
+    author: Stanford CS336 staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/vq-vae.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: a1e0068e82718d64b42cf0e0a0d6f9317e569bb0ed72852482e40f8062e0e769
+    sha256: a1e0068e82718d64b42cf0e0a0d6f9317e569bb0ed72852482e40f8062e0e769
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging; not asserted to be a primary-paper figure
+    used_in:
+      - 00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+    upstream_source_url: https://arxiv.org/abs/1711.00937

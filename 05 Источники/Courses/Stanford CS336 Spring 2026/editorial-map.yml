@@ -19,9 +19,539 @@
     "lecture-15",
     "lecture-16",
     "assignment-05",
-    "assignment-05-safety-supplement"
+    "assignment-05-safety-supplement",
+    "lecture-13",
+    "lecture-14",
+    "assignment-04",
+    "lecture-17"
   ],
   "coverage": {
+    "lecture-13-section-2-lecture-13-data-i": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md",
+        "destination_anchor": "corpus-as-decision-system"
+    },
+    "lecture-13-figure-step-12-rendering-1": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md",
+        "destination_anchor": "stages-and-data-regimes"
+    },
+    "lecture-13-figure-step-33-rendering-1": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md",
+        "destination_anchor": "stages-and-data-regimes"
+    },
+    "lecture-13-figure-step-35-rendering-1": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md",
+        "destination_anchor": "stages-and-data-regimes"
+    },
+    "lecture-13-figure-step-37-rendering-1": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md",
+        "destination_anchor": "stages-and-data-regimes"
+    },
+    "lecture-13-copyright-consent-failure-modes": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md",
+        "destination_anchor": "sources-rights-provenance"
+    },
+    "lecture-13-figure-step-71-rendering-1": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md",
+        "destination_anchor": "sources-rights-provenance"
+    },
+    "lecture-13-section-92-intellectual-property-law": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md",
+        "destination_anchor": "sources-rights-provenance"
+    },
+    "lecture-13-section-111-licenses": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md",
+        "destination_anchor": "sources-rights-provenance"
+    },
+    "lecture-13-figure-step-73-rendering-1": {
+        "disposition": "source-only",
+        "reason": "The social-media crawling anecdote is preserved in the pinned lecture but is not durable evidence for the textbook route.",
+        "evidence": "Lectures/repository/var/traces/lecture_13.json#step=73:rendering=1"
+    },
+    "lecture-13-section-143-lawsuits": {
+        "disposition": "source-only",
+        "reason": "The dated lawsuit sequence is preserved as time-sensitive source material; the textbook keeps only narrow, dated legal boundaries rather than presenting legal advice.",
+        "evidence": "Lectures/repository/var/traces/lecture_13.json#steps=143-419:semantic=section-143-lawsuits"
+    },
+    "lecture-13-common-crawl-data-pipeline": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+        "destination_anchor": "crawl-to-record"
+    },
+    "lecture-13-dataset-composition-examples": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+        "destination_anchor": "dataset-lineage"
+    },
+    "lecture-13-dataset-lineage-case-studies": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+        "destination_anchor": "dataset-lineage"
+    },
+    "lecture-13-section-420-model-based-filtering": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+        "destination_anchor": "quality-filtering"
+    },
+    "lecture-13-section-484-summary": {
+        "disposition": "source-only",
+        "reason": "The recap duplicates mechanisms integrated at their exact textbook anchors and remains available in the pinned lecture.",
+        "evidence": "Lectures/repository/var/traces/lecture_13.json#steps=484-489:semantic=section-484-summary"
+    },
+    "lecture-14-section-2-lecture-14-data-ii": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+        "destination_anchor": "extraction"
+    },
+    "lecture-14-figure-step-19-rendering-1": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+        "destination_anchor": "extraction"
+    },
+    "lecture-14-figure-step-21-rendering-1": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+        "destination_anchor": "extraction"
+    },
+    "lecture-14-quality-filter-experiment": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+        "destination_anchor": "quality-filtering"
+    },
+    "lecture-14-figure-step-32-rendering-1": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+        "destination_anchor": "quality-filtering"
+    },
+    "lecture-14-figure-step-93-rendering-1": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+        "destination_anchor": "quality-filtering"
+    },
+    "lecture-14-deduplication-collision-failure-modes": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md",
+        "destination_anchor": "exact-dedup"
+    },
+    "lecture-14-minhash-lsh-derivation": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md",
+        "destination_anchor": "minhash-lsh"
+    },
+    "lecture-14-section-153-jaccard-similarity": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md",
+        "destination_anchor": "minhash-lsh"
+    },
+    "lecture-14-section-166-minhash": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md",
+        "destination_anchor": "minhash-lsh"
+    },
+    "lecture-14-figure-step-289-rendering-1": {
+        "disposition": "source-only",
+        "reason": "The full Marin token-viewer screenshot is preserved in the course archive because its labels are illegible at textbook width.",
+        "evidence": "Lectures/repository/var/traces/lecture_14.json#step=289:rendering=1"
+    },
+    "lecture-14-figure-step-291-rendering-1": {
+        "disposition": "source-only",
+        "reason": "This repeated source-composition table is already represented by the Lecture 13 lineage sequence and is not duplicated.",
+        "evidence": "Lectures/repository/var/traces/lecture_14.json#step=291:rendering=1"
+    },
+    "lecture-14-figure-step-320-rendering-1": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+        "destination_anchor": "mixtures"
+    },
+    "lecture-14-figure-step-325-rendering-1": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+        "destination_anchor": "mixtures"
+    },
+    "lecture-14-post-training-data-pipelines": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md",
+        "destination_anchor": "teacher-data"
+    },
+    "assignment-04-data-assignment-setup": {
+        "disposition": "excluded",
+        "reason": "Shared cluster paths, accounts, and submission setup are course administration rather than a portable learning objective.",
+        "evidence": "Assignments/assignment4-data/cs336_assignment4_data.pdf#pages=1-2:semantic=data-assignment-setup"
+    },
+    "assignment-04-task-look-at-cc": {
+        "disposition": "integrated",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "raw-inspection"
+    },
+    "assignment-04-task-extract-text": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+        "destination_anchor": "extraction"
+    },
+    "assignment-04-task-language-identification": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+        "destination_anchor": "language-id"
+    },
+    "assignment-04-task-mask-pii": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md",
+        "destination_anchor": "pii"
+    },
+    "assignment-04-task-harmful-content": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md",
+        "destination_anchor": "harm-policy"
+    },
+    "assignment-04-task-gopher-quality-filters": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+        "destination_anchor": "quality-filtering"
+    },
+    "assignment-04-classifier-evaluation": {
+        "disposition": "integrated",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "manual-audit"
+    },
+    "assignment-04-task-quality-classifier": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+        "destination_anchor": "quality-filtering"
+    },
+    "assignment-04-minhash-lsh-deduplication": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md",
+        "destination_anchor": "minhash-lsh"
+    },
+    "assignment-04-task-exact-deduplication": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md",
+        "destination_anchor": "exact-dedup"
+    },
+    "assignment-04-task-minhash-deduplication": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md",
+        "destination_anchor": "minhash-lsh"
+    },
+    "assignment-04-task-filter-data": {
+        "disposition": "integrated",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "filter-ledger"
+    },
+    "assignment-04-pipeline-runtime": {
+        "disposition": "integrated",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "filter-ledger"
+    },
+    "assignment-04-task-inspect-filtered-data": {
+        "disposition": "integrated",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "manual-audit"
+    },
+    "assignment-04-task-tokenize-data": {
+        "disposition": "integrated",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "tokenize"
+    },
+    "assignment-04-model-validation": {
+        "disposition": "integrated",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "fixed-budget"
+    },
+    "assignment-04-task-train-model": {
+        "disposition": "integrated",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "fixed-budget"
+    },
+    "assignment-04-deliverable-look-at-cc-001": {
+        "disposition": "integrated",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "raw-inspection"
+    },
+    "assignment-04-deliverable-look-at-cc-002": {
+        "disposition": "integrated",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "raw-inspection"
+    },
+    "assignment-04-deliverable-look-at-cc-003": {
+        "disposition": "integrated",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "raw-inspection"
+    },
+    "assignment-04-deliverable-look-at-cc-004": {
+        "disposition": "integrated",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "raw-inspection"
+    },
+    "assignment-04-deliverable-extract-text-005": {
+        "disposition": "integrated",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "adapters"
+    },
+    "assignment-04-deliverable-extract-text-006": {
+        "disposition": "integrated",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "adapters"
+    },
+    "assignment-04-deliverable-language-identification-007": {
+        "disposition": "integrated",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "manual-audit"
+    },
+    "assignment-04-deliverable-language-identification-008": {
+        "disposition": "integrated",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "manual-audit"
+    },
+    "assignment-04-deliverable-language-identification-009": {
+        "disposition": "integrated",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "manual-audit"
+    },
+    "assignment-04-deliverable-mask-pii-010": {
+        "disposition": "integrated",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "manual-audit"
+    },
+    "assignment-04-deliverable-mask-pii-011": {
+        "disposition": "integrated",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "manual-audit"
+    },
+    "assignment-04-deliverable-mask-pii-012": {
+        "disposition": "integrated",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "manual-audit"
+    },
+    "assignment-04-deliverable-mask-pii-013": {
+        "disposition": "integrated",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "manual-audit"
+    },
+    "assignment-04-deliverable-mask-pii-014": {
+        "disposition": "integrated",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "manual-audit"
+    },
+    "assignment-04-deliverable-harmful-content-015": {
+        "disposition": "integrated",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "manual-audit"
+    },
+    "assignment-04-deliverable-harmful-content-016": {
+        "disposition": "integrated",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "manual-audit"
+    },
+    "assignment-04-deliverable-harmful-content-017": {
+        "disposition": "integrated",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "manual-audit"
+    },
+    "assignment-04-deliverable-harmful-content-018": {
+        "disposition": "integrated",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "manual-audit"
+    },
+    "assignment-04-deliverable-gopher-quality-filters-019": {
+        "disposition": "integrated",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "filter-ledger"
+    },
+    "assignment-04-deliverable-gopher-quality-filters-020": {
+        "disposition": "integrated",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "filter-ledger"
+    },
+    "assignment-04-deliverable-quality-classifier-021": {
+        "disposition": "integrated",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "filter-ledger"
+    },
+    "assignment-04-deliverable-quality-classifier-022": {
+        "disposition": "integrated",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "filter-ledger"
+    },
+    "assignment-04-deliverable-exact-deduplication-023": {
+        "disposition": "integrated",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "dedup"
+    },
+    "assignment-04-deliverable-minhash-deduplication-024": {
+        "disposition": "integrated",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "dedup"
+    },
+    "assignment-04-deliverable-filter-data-025": {
+        "disposition": "integrated",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "filter-ledger"
+    },
+    "assignment-04-deliverable-filter-data-026": {
+        "disposition": "integrated",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "filter-ledger"
+    },
+    "assignment-04-deliverable-inspect-filtered-data-027": {
+        "disposition": "integrated",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "manual-audit"
+    },
+    "assignment-04-deliverable-inspect-filtered-data-028": {
+        "disposition": "integrated",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "manual-audit"
+    },
+    "assignment-04-deliverable-inspect-filtered-data-029": {
+        "disposition": "integrated",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "manual-audit"
+    },
+    "assignment-04-deliverable-tokenize-data-030": {
+        "disposition": "integrated",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "tokenize"
+    },
+    "assignment-04-deliverable-train-model-031": {
+        "disposition": "integrated",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "fixed-budget"
+    },
+    "assignment-04-test-tests-test-pii-py-8-test-mask-emails-single": {
+        "disposition": "contract-only",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "adapters",
+        "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
+    },
+    "assignment-04-test-tests-test-toxicity-py-8-test-classify-nsfw": {
+        "disposition": "contract-only",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "adapters",
+        "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
+    },
+    "assignment-04-test-tests-test-extract-py-9-test-extract-text-from-html-bytes": {
+        "disposition": "contract-only",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "adapters",
+        "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
+    },
+    "assignment-04-test-tests-test-langid-py-9-test-identify-language-english": {
+        "disposition": "contract-only",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "adapters",
+        "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
+    },
+    "assignment-04-test-tests-test-quality-py-9-test-classify-quality": {
+        "disposition": "contract-only",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "adapters",
+        "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
+    },
+    "assignment-04-test-tests-test-deduplication-py-11-test-exact-line-deduplication": {
+        "disposition": "contract-only",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "adapters",
+        "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
+    },
+    "assignment-04-test-tests-test-pii-py-18-test-mask-emails-multiple": {
+        "disposition": "contract-only",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "adapters",
+        "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
+    },
+    "assignment-04-test-tests-test-langid-py-21-test-identify-language-chinese-simplified": {
+        "disposition": "contract-only",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "adapters",
+        "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
+    },
+    "assignment-04-test-tests-test-pii-py-28-test-mask-emails-existing-string": {
+        "disposition": "contract-only",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "adapters",
+        "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
+    },
+    "assignment-04-test-tests-test-quality-py-31-test-gopher-valid-input": {
+        "disposition": "contract-only",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "adapters",
+        "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
+    },
+    "assignment-04-test-tests-test-toxicity-py-33-test-classify-toxic-speech": {
+        "disposition": "contract-only",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "adapters",
+        "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
+    },
+    "assignment-04-test-tests-test-quality-py-39-test-gopher-less-than-50-non-symbol-words": {
+        "disposition": "contract-only",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "adapters",
+        "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
+    },
+    "assignment-04-test-tests-test-pii-py-42-test-mask-phones-single": {
+        "disposition": "contract-only",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "adapters",
+        "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
+    },
+    "assignment-04-test-tests-test-deduplication-py-43-test-minhash-deduplication-exact-duplicates": {
+        "disposition": "contract-only",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "adapters",
+        "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
+    },
+    "assignment-04-test-tests-test-quality-py-47-test-gopher-more-than-100000-non-symbol-words": {
+        "disposition": "contract-only",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "adapters",
+        "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
+    },
+    "assignment-04-test-tests-test-pii-py-54-test-mask-ips": {
+        "disposition": "contract-only",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "adapters",
+        "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
+    },
+    "assignment-04-test-tests-test-quality-py-55-test-gopher-average-word-length-less-than-3": {
+        "disposition": "contract-only",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "adapters",
+        "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
+    },
+    "assignment-04-test-tests-test-quality-py-63-test-gopher-average-word-length-greater-than-10": {
+        "disposition": "contract-only",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "adapters",
+        "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
+    },
+    "assignment-04-test-tests-test-quality-py-73-test-gopher-more-than-30-percent-lines-ending-with-ellipsis": {
+        "disposition": "contract-only",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "adapters",
+        "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
+    },
+    "assignment-04-test-tests-test-deduplication-py-83-test-minhash-deduplication-fuzzy-duplicates": {
+        "disposition": "contract-only",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "adapters",
+        "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
+    },
+    "assignment-04-test-tests-test-quality-py-90-test-gopher-less-than-80-percent-words-with-alphabetic-character": {
+        "disposition": "contract-only",
+        "destination": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+        "destination_anchor": "adapters",
+        "evidence": "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests"
+    },
     "lecture-15-title-slide": {
       "disposition": "excluded",
       "reason": "Title and attribution are preserved in the pinned lecture; the slide contains no independent teaching claim.",
@@ -3399,9 +3929,274 @@
     "disposition": "excluded",
     "reason": "NanoGPT speedrun screenshot illustrates optimization progress but does not identify the evaluated construct; the distinction is explained in prose.",
     "evidence": "Lectures/repository/var/traces/lecture_12.json#step=305:rendering=1"
+  },
+  "lecture-17-section-2-lecture-17-multimodal-models": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md",
+    "destination_anchor": "две-задачи-понять-чужую-модальность-и-породить-её"
+  },
+  "lecture-17-figure-step-6-rendering-1": {
+    "disposition": "excluded",
+    "reason": "The modality-icon collage is decorative and contains no mechanism; the textbook route map provides the useful distinction.",
+    "evidence": "Lectures/repository/var/traces/lecture_17.json#step=6:rendering=1"
+  },
+  "lecture-17-contrastive-vision-language-training": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md",
+    "destination_anchor": "clip-и-siglip-две-формы-контрастивного-обучения"
+  },
+  "lecture-17-clip-siglip-training-sequence": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md",
+    "destination_anchor": "clip-и-siglip-две-формы-контрастивного-обучения"
+  },
+  "lecture-17-llava-onevision-progression": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/16 Multimodal Models/64a Connectors и fusion.md",
+    "destination_anchor": "от-llava-к-llava-onevision-что-изменилось-кроме-projector"
+  },
+  "lecture-17-multimodal-tokenization-failure-modes": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md",
+    "destination_anchor": "где-теряется-информация-crop-tiling-merge-и-фиксированный-budget"
+  },
+  "lecture-17-qwen-vl-training-stages": {
+    "disposition": "integrated",
+    "destination": "02 Атлас моделей/Семейства/Мультимодальные семейства.md",
+    "destination_anchor": "qwen-vl-lineage"
+  },
+  "lecture-17-figure-step-210-rendering-1": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md",
+    "destination_anchor": "4-одна-авторегрессионная-последовательность"
+  },
+  "lecture-17-figure-step-211-rendering-1": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md",
+    "destination_anchor": "8-что-даёт-единый-словарь-а-чего-он-не-гарантирует"
+  },
+  "lecture-17-figure-step-216-rendering-1": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md",
+    "destination_anchor": "3-как-изображение-становится-дискретными-кодами"
   }
   },
   "visuals": {
+    "lecture-13-visual-common-crawl-data-pipeline": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+        "destination_anchor": "crawl-to-record",
+        "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/dclm-wet.png",
+        "transformation": "A byte-for-byte pinned course raster represents the extraction consequence within the larger source sequence.",
+        "caption": "Follow the transition from archived web response to extracted text, then compare what the extractor preserved and discarded.",
+        "rendered_route": "/textbook/pretraining/data-collection-cleaning-mixtures/",
+        "desktop_evidence": "The source visual and its surrounding explanation were inspected at desktop width; the labels and causal role remain legible.",
+        "narrow_evidence": "At narrow width the visual remains inside the article column; the full-size source is available through the image link and the adjacent caption states the intended reading.",
+        "reviewer": "Codex Task 6 pretraining-data integration",
+        "checked_at": "2026-09-07"
+    },
+    "lecture-13-visual-dataset-lineage-case-studies": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+        "destination_anchor": "dataset-lineage",
+        "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/c4-domains.png",
+        "transformation": "The lineage sequence is preserved through multiple pinned source rasters; this row points to its first canonical frame.",
+        "caption": "Read corpus names as recipes with measurable source composition, mixture weights, filtering stages, and versioned lineage.",
+        "rendered_route": "/textbook/pretraining/data-collection-cleaning-mixtures/",
+        "desktop_evidence": "The source visual and its surrounding explanation were inspected at desktop width; the labels and causal role remain legible.",
+        "narrow_evidence": "At narrow width the visual remains inside the article column; the full-size source is available through the image link and the adjacent caption states the intended reading.",
+        "reviewer": "Codex Task 6 pretraining-data integration",
+        "checked_at": "2026-09-07"
+    },
+    "lecture-13-visual-figure-step-12-rendering-1": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md",
+        "destination_anchor": "stages-and-data-regimes",
+        "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/llama3-data.png",
+        "transformation": "Byte-for-byte copy of the pinned course raster; no crop or redraw.",
+        "caption": "Compare the detail disclosed for model architecture with the much coarser description of training data.",
+        "rendered_route": "/textbook/pretraining/data-and-pretraining/",
+        "desktop_evidence": "The source visual and its surrounding explanation were inspected at desktop width; the labels and causal role remain legible.",
+        "narrow_evidence": "At narrow width the visual remains inside the article column; the full-size source is available through the image link and the adjacent caption states the intended reading.",
+        "reviewer": "Codex Task 6 pretraining-data integration",
+        "checked_at": "2026-09-07"
+    },
+    "lecture-13-visual-figure-step-33-rendering-1": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md",
+        "destination_anchor": "stages-and-data-regimes",
+        "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/olmo2-pretraining.png",
+        "transformation": "Byte-for-byte copy of the pinned course raster; no crop or redraw.",
+        "caption": "Use the OLMo 2 schedule to separate large-scale pretraining from the later data regimes.",
+        "rendered_route": "/textbook/pretraining/data-and-pretraining/",
+        "desktop_evidence": "The source visual and its surrounding explanation were inspected at desktop width; the labels and causal role remain legible.",
+        "narrow_evidence": "At narrow width the visual remains inside the article column; the full-size source is available through the image link and the adjacent caption states the intended reading.",
+        "reviewer": "Codex Task 6 pretraining-data integration",
+        "checked_at": "2026-09-07"
+    },
+    "lecture-13-visual-figure-step-37-rendering-1": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md",
+        "destination_anchor": "stages-and-data-regimes",
+        "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/tulu.png",
+        "transformation": "Byte-for-byte copy of the pinned course raster; no crop or redraw.",
+        "caption": "Read post-training as a change in data purpose and supervision, not merely a smaller continuation of pretraining.",
+        "rendered_route": "/textbook/pretraining/data-and-pretraining/",
+        "desktop_evidence": "The source visual and its surrounding explanation were inspected at desktop width; the labels and causal role remain legible.",
+        "narrow_evidence": "At narrow width the visual remains inside the article column; the full-size source is available through the image link and the adjacent caption states the intended reading.",
+        "reviewer": "Codex Task 6 pretraining-data integration",
+        "checked_at": "2026-09-07"
+    },
+    "lecture-13-visual-figure-step-71-rendering-1": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md",
+        "destination_anchor": "sources-rights-provenance",
+        "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/decline-consent.png",
+        "transformation": "Byte-for-byte copy of the pinned course raster; no crop or redraw.",
+        "caption": "Treat robots and consent signals as dated, source-specific observations that must be recorded in provenance.",
+        "rendered_route": "/textbook/pretraining/data-and-pretraining/",
+        "desktop_evidence": "The source visual and its surrounding explanation were inspected at desktop width; the labels and causal role remain legible.",
+        "narrow_evidence": "At narrow width the visual remains inside the article column; the full-size source is available through the image link and the adjacent caption states the intended reading.",
+        "reviewer": "Codex Task 6 pretraining-data integration",
+        "checked_at": "2026-09-07"
+    },
+    "lecture-14-visual-minhash-lsh-derivation": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md",
+        "destination_anchor": "minhash-lsh",
+        "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/minhash-characteristic-matrix-trace.png",
+        "transformation": "Three exact Stanford edtrace states were captured at 1600 px; this row points to the first state and the chapter preserves the complete sequence.",
+        "caption": "Trace shingles into a characteristic matrix, then MinHash agreement, then the probability that LSH emits a candidate pair.",
+        "rendered_route": "/textbook/pretraining/dedup-pii-corpus-quality/",
+        "desktop_evidence": "The source visual and its surrounding explanation were inspected at desktop width; the labels and causal role remain legible.",
+        "narrow_evidence": "At narrow width the visual remains inside the article column; the full-size source is available through the image link and the adjacent caption states the intended reading.",
+        "reviewer": "Codex Task 6 pretraining-data integration",
+        "checked_at": "2026-09-07"
+    },
+    "lecture-14-visual-post-training-data-pipelines": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md",
+        "destination_anchor": "teacher-data",
+        "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/openthoughts-pipeline.png",
+        "transformation": "The chapter preserves four pinned source rasters from the reviewed sequence; this row points to the first pipeline.",
+        "caption": "Compare where generation, filtering, executable verification, and replay enter post-training data construction.",
+        "rendered_route": "/textbook/pretraining/synthetic-data-and-curricula/",
+        "desktop_evidence": "The source visual and its surrounding explanation were inspected at desktop width; the labels and causal role remain legible.",
+        "narrow_evidence": "At narrow width the visual remains inside the article column; the full-size source is available through the image link and the adjacent caption states the intended reading.",
+        "reviewer": "Codex Task 6 pretraining-data integration",
+        "checked_at": "2026-09-07"
+    },
+    "lecture-14-visual-figure-step-19-rendering-1": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+        "destination_anchor": "extraction",
+        "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/dclm-wet.png",
+        "transformation": "Byte-for-byte copy of the pinned course raster; imported once although the course reuses it.",
+        "caption": "Compare WET extraction with higher-quality HTML extraction through the downstream score, not through file size alone.",
+        "rendered_route": "/textbook/pretraining/data-collection-cleaning-mixtures/",
+        "desktop_evidence": "The source visual and its surrounding explanation were inspected at desktop width; the labels and causal role remain legible.",
+        "narrow_evidence": "At narrow width the visual remains inside the article column; the full-size source is available through the image link and the adjacent caption states the intended reading.",
+        "reviewer": "Codex Task 6 pretraining-data integration",
+        "checked_at": "2026-09-07"
+    },
+    "lecture-14-visual-figure-step-21-rendering-1": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+        "destination_anchor": "extraction",
+        "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/finepdf-layout.webp",
+        "transformation": "Byte-for-byte copy of the pinned archived FinePDFs technical diagram; no redraw.",
+        "caption": "Identify which layout relations, tables, captions, and reading order can disappear when a PDF is linearized.",
+        "rendered_route": "/textbook/pretraining/data-collection-cleaning-mixtures/",
+        "desktop_evidence": "The source visual and its surrounding explanation were inspected at desktop width; the labels and causal role remain legible.",
+        "narrow_evidence": "At narrow width the visual remains inside the article column; the full-size source is available through the image link and the adjacent caption states the intended reading.",
+        "reviewer": "Codex Task 6 pretraining-data integration",
+        "checked_at": "2026-09-07"
+    },
+    "lecture-14-visual-figure-step-32-rendering-1": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+        "destination_anchor": "quality-filtering",
+        "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/raw-target-schema.png",
+        "transformation": "Byte-for-byte copy of the Stanford-authored source raster; no crop or redraw.",
+        "caption": "Separate the raw distribution, the target reference distribution, and the subset accepted by a learned score.",
+        "rendered_route": "/textbook/pretraining/data-collection-cleaning-mixtures/",
+        "desktop_evidence": "The source visual and its surrounding explanation were inspected at desktop width; the labels and causal role remain legible.",
+        "narrow_evidence": "At narrow width the visual remains inside the article column; the full-size source is available through the image link and the adjacent caption states the intended reading.",
+        "reviewer": "Codex Task 6 pretraining-data integration",
+        "checked_at": "2026-09-07"
+    },
+    "lecture-14-visual-figure-step-93-rendering-1": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+        "destination_anchor": "quality-filtering",
+        "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/data-filtering-scale.png",
+        "transformation": "Byte-for-byte copy of the pinned course experiment raster; no crop or redraw.",
+        "caption": "Observe that the best filtering threshold can move with the training-token budget; do not treat one threshold as universal.",
+        "rendered_route": "/textbook/pretraining/data-collection-cleaning-mixtures/",
+        "desktop_evidence": "The source visual and its surrounding explanation were inspected at desktop width; the labels and causal role remain legible.",
+        "narrow_evidence": "At narrow width the visual remains inside the article column; the full-size source is available through the image link and the adjacent caption states the intended reading.",
+        "reviewer": "Codex Task 6 pretraining-data integration",
+        "checked_at": "2026-09-07"
+    },
+    "lecture-14-visual-figure-step-320-rendering-1": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+        "destination_anchor": "mixtures",
+        "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/regmix.png",
+        "transformation": "Byte-for-byte copy of the pinned course raster; no crop or redraw.",
+        "caption": "Follow RegMix from small proxy mixtures through response-surface fitting to a selected large-run mixture.",
+        "rendered_route": "/textbook/pretraining/data-collection-cleaning-mixtures/",
+        "desktop_evidence": "The source visual and its surrounding explanation were inspected at desktop width; the labels and causal role remain legible.",
+        "narrow_evidence": "At narrow width the visual remains inside the article column; the full-size source is available through the image link and the adjacent caption states the intended reading.",
+        "reviewer": "Codex Task 6 pretraining-data integration",
+        "checked_at": "2026-09-07"
+    },
+    "lecture-14-visual-figure-step-325-rendering-1": {
+        "disposition": "integrated",
+        "destination": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+        "destination_anchor": "mixtures",
+        "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/data-mixing-methods.png",
+        "transformation": "Byte-for-byte copy of the pinned course comparison raster; no crop or redraw.",
+        "caption": "Compare mixture methods by the assumptions they make about source exhaustion, proxy transfer, and optimization budget.",
+        "rendered_route": "/textbook/pretraining/data-collection-cleaning-mixtures/",
+        "desktop_evidence": "The source visual and its surrounding explanation were inspected at desktop width; the labels and causal role remain legible.",
+        "narrow_evidence": "At narrow width the visual remains inside the article column; the full-size source is available through the image link and the adjacent caption states the intended reading.",
+        "reviewer": "Codex Task 6 pretraining-data integration",
+        "checked_at": "2026-09-07"
+    },
+    "lecture-13-visual-figure-step-35-rendering-1": {
+        "disposition": "covered-existing",
+        "destination": "00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md",
+        "destination_anchor": "stages-and-data-regimes",
+        "local_file": "00 Учебник/Assets/Figures/curated/topics-53-59-source-first/olmo2-dolmino.png",
+        "transformation": "Existing canonical source-preserving OLMo 2/Dolmino visual reused without another physical copy.",
+        "caption": "Place mid-training between broad pretraining and task-oriented post-training; note the change in mixture rather than only the token count.",
+        "rendered_route": "/textbook/pretraining/data-and-pretraining/",
+        "desktop_evidence": "The source visual and its surrounding explanation were inspected at desktop width; the labels and causal role remain legible.",
+        "narrow_evidence": "At narrow width the visual remains inside the article column; the full-size source is available through the image link and the adjacent caption states the intended reading.",
+        "reviewer": "Codex Task 6 pretraining-data integration",
+        "checked_at": "2026-09-07"
+    },
+    "lecture-13-visual-figure-step-73-rendering-1": {
+        "disposition": "source-only",
+        "reason": "The social-media screenshot is preserved as course context but is not durable technical or legal evidence.",
+        "evidence": "Lectures/repository/var/traces/lecture_13.json#step=73:rendering=1"
+    },
+    "lecture-14-visual-figure-step-289-rendering-1": {
+        "disposition": "source-only",
+        "reason": "The full Marin token-viewer screenshot is too dense at article width and remains source-only until a source-preserving crop is justified.",
+        "evidence": "Lectures/repository/var/traces/lecture_14.json#step=289:rendering=1"
+    },
+    "lecture-14-visual-figure-step-291-rendering-1": {
+        "disposition": "source-only",
+        "reason": "The Pile composition table duplicates the canonical Lecture 13 lineage frame and is not imported twice.",
+        "evidence": "Lectures/repository/var/traces/lecture_14.json#step=291:rendering=1"
+    },
+    "assignment-04-visual-minhash-lsh-deduplication": {
+        "disposition": "excluded",
+        "reason": "The handout derivation is represented as native math, worked arrays, and the pinned A4 contract; full-page PDF rasters would reduce legibility without adding evidence.",
+        "evidence": "Assignments/assignment4-data/cs336_assignment4_data.pdf#pages=10-12:semantic=minhash-lsh-deduplication"
+    },
     "lecture-15-visual-midtraining": {
         "disposition": "integrated",
         "destination": "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md",
@@ -4555,6 +5350,89 @@
     "disposition": "excluded",
     "reason": "NanoGPT speedrun screenshot shows optimization progress but does not identify the evaluated construct.",
     "evidence": "Lectures/repository/var/traces/lecture_12.json#step=305:rendering=1"
+  },
+  "lecture-17-visual-clip-siglip-training-sequence": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md",
+    "destination_anchor": "clip-и-siglip-две-формы-контрастивного-обучения",
+    "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/siglip-parallelism.png",
+    "transformation": "The sequence uses the existing canonical CLIP figure and an unmodified pinned SigLIP course asset; this row points to the latter representative frame.",
+    "caption": "Compare the globally normalized CLIP similarity matrix with SigLIP's independently scored image-text pairs, then identify which distributed communication remains an implementation choice.",
+    "rendered_route": "/textbook/multimodal/models/",
+    "desktop_evidence": "The source figures and their textbook placement were inspected at desktop width; formulas, labels, and the CLIP-to-SigLIP comparison remain legible without clipping.",
+    "narrow_evidence": "At narrow width the images remain contained in the article column and open at native resolution for dense labels.",
+    "reviewer": "Codex Task 8 multimodal integration",
+    "checked_at": "2026-09-07"
+  },
+  "lecture-17-visual-llava-onevision-progression": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/16 Multimodal Models/64a Connectors и fusion.md",
+    "destination_anchor": "от-llava-к-llava-onevision-что-изменилось-кроме-projector",
+    "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/llava-onevision.png",
+    "transformation": "Seven unmodified pinned course assets preserve the architecture, AnyRes, modality-budget, training, and transfer sequence; this row points to the architecture overview.",
+    "caption": "Separate the SigLIP encoder, MLP projector, and Qwen2 language model, then follow how AnyRes, staged training, and cross-scenario transfer extend the original LLaVA contract.",
+    "rendered_route": "/textbook/multimodal/connectors-fusion/",
+    "desktop_evidence": "All sequence members were inspected at native resolution and in their canonical chapters; each retains complete labels and legends without fixed-height cropping.",
+    "narrow_evidence": "Tall and dense transfer figures remain within the article column and can be opened at native resolution.",
+    "reviewer": "Codex Task 8 multimodal integration",
+    "checked_at": "2026-09-07"
+  },
+  "lecture-17-visual-qwen-vl-training-stages": {
+    "disposition": "integrated",
+    "destination": "02 Атлас моделей/Семейства/Мультимодальные семейства.md",
+    "destination_anchor": "qwen-vl-lineage",
+    "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/qwen-vl-stages.png",
+    "transformation": "Four new unmodified course assets plus the canonical high-resolution MRoPE replacement support the Qwen-VL through Qwen3-VL sequence; this row points to the Qwen-VL stage overview while the textbook retains the mechanism figures.",
+    "caption": "Compare connector architecture, resolution and position handling, trainable modules, and context-length curriculum across the Qwen-VL generations.",
+    "rendered_route": "/models/families/multimodal/",
+    "desktop_evidence": "The stage, architecture, position, and pretraining figures were inspected at native resolution; the atlas links to canonical mechanism explanations instead of duplicating them.",
+    "narrow_evidence": "Wide figures remain contained and open at native resolution; the lineage table remains horizontally scrollable on narrow screens.",
+    "reviewer": "Codex Task 8 multimodal integration",
+    "checked_at": "2026-09-07"
+  },
+  "lecture-17-visual-figure-step-6-rendering-1": {
+    "disposition": "excluded",
+    "reason": "The modality-icon collage is decorative and does not support a distinct explanatory operation.",
+    "evidence": "Lectures/repository/var/traces/lecture_17.json#step=6:rendering=1"
+  },
+  "lecture-17-visual-figure-step-210-rendering-1": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md",
+    "destination_anchor": "4-одна-авторегрессионная-последовательность",
+    "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/chameleon.png",
+    "transformation": "Byte-for-byte copy of the pinned Stanford course asset reproducing the Chameleon architecture figure.",
+    "caption": "Trace alternating text tokens and image-code tokens through one causal Transformer and back through the image decoder.",
+    "rendered_route": "/textbook/multimodal/unified-sequence-chameleon/",
+    "desktop_evidence": "The architecture labels and mixed-token path were inspected at native resolution and remain complete in the desktop article column.",
+    "narrow_evidence": "The figure remains contained on narrow screens and opens at its native resolution.",
+    "reviewer": "Codex Task 8 multimodal integration",
+    "checked_at": "2026-09-07"
+  },
+  "lecture-17-visual-figure-step-211-rendering-1": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md",
+    "destination_anchor": "8-что-даёт-единый-словарь-а-чего-он-не-гарантирует",
+    "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/chameleon-example.png",
+    "transformation": "Byte-for-byte copy of the pinned Stanford course qualitative sample; no crop or redraw.",
+    "caption": "Inspect entity and reference continuity across alternating generated text and image blocks without treating one qualitative sample as a benchmark.",
+    "rendered_route": "/textbook/multimodal/unified-sequence-chameleon/",
+    "desktop_evidence": "The complete qualitative sample was inspected at native resolution and is presented without cropping.",
+    "narrow_evidence": "The figure stays within the article column and opens at native resolution so its text can be read.",
+    "reviewer": "Codex Task 8 multimodal integration",
+    "checked_at": "2026-09-07"
+  },
+  "lecture-17-visual-figure-step-216-rendering-1": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md",
+    "destination_anchor": "3-как-изображение-становится-дискретными-кодами",
+    "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/vq-vae.png",
+    "transformation": "Byte-for-byte copy of the pinned Stanford CS336 Lecture 17 course diagram; it is not represented as a primary-paper figure.",
+    "caption": "Follow a continuous latent vector through nearest-code selection and then through the decoder back to pixels.",
+    "rendered_route": "/textbook/multimodal/unified-sequence-chameleon/",
+    "desktop_evidence": "The encoder, codebook lookup, and decoder path were inspected at native resolution and remain legible without clipping.",
+    "narrow_evidence": "The figure remains contained in the article column and opens at native resolution for its smaller labels.",
+    "reviewer": "Codex Task 8 multimodal integration",
+    "checked_at": "2026-09-07"
   }
   }
 }

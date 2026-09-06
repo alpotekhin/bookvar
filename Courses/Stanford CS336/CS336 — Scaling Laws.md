@@ -27,7 +27,7 @@ batch size, подгонка с остатками и неопределённо
 
 **Данные для кампании:** [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training|Данные и предобучение]].
 
-**Практика:** [[02 Areas/ML & DL/06 Практика/22 Воспроизвести scaling campaign|воспроизводимая scaling campaign]].
+**Практика:** [[02 Areas/ML & DL/06 Практика/22 Провести scaling-law campaign|воспроизводимая scaling campaign]].
 
 **Архив курса и Assignment 3:** [[02 Areas/ML & DL/05 Источники/Courses/Stanford CS336 Spring 2026/_index|Stanford CS336 Spring 2026]].
 

@@ -22,7 +22,7 @@ primary_sources:
   - https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_11.pdf
   - https://arxiv.org/abs/2203.15556
   - https://arxiv.org/abs/2406.19146
-contract: "[[02 Areas/ML & DL/06 Практика/Contracts/stanford-cs336-a3.yml]]"
+contract: "[[06 Практика/Contracts/stanford-cs336-a3.yml]]"
 ---
 
 # 22. Провести scaling-law campaign
@@ -386,4 +386,4 @@ artifacts/scaling-campaign/
 исходных точек и единицы измерения.
 
 Полная схема полей и границ находится в
-[[02 Areas/ML & DL/06 Практика/Contracts/stanford-cs336-a3.yml]].
+`06 Практика/Contracts/stanford-cs336-a3.yml`.

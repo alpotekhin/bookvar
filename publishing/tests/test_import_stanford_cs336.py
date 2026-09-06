@@ -178,7 +178,7 @@ class StanfordSemanticAuditTest(unittest.TestCase):
         cls.visuals = read_document("visuals.yml")
         cls.lock = read_document("snapshot-lock.json")
 
-    def test_units_are_semantic_and_administration_is_explicitly_excluded(self) -> None:
+    def test_units_are_semantic_and_administration_is_explicitly_disposed(self) -> None:
         units = self.units["units"]
         forbidden_proxy_kinds = {"page", "rendered-text", "rendered-link"}
         self.assertTrue(forbidden_proxy_kinds.isdisjoint({unit["kind"] for unit in units}))
@@ -189,7 +189,7 @@ class StanfordSemanticAuditTest(unittest.TestCase):
         self.assertGreaterEqual(len(administrative), 6)
         for unit in administrative:
             row = coverage_by_unit[unit["id"]]
-            self.assertEqual(row["disposition"], "excluded")
+            self.assertIn(row["disposition"], {"excluded", "source-only"})
             self.assertTrue(row.get("reason"))
             self.assertTrue(row.get("evidence"))
 
@@ -223,6 +223,26 @@ class StanfordSemanticAuditTest(unittest.TestCase):
         ]
         self.assertTrue(multi_event)
         self.assertTrue(multi_page)
+
+    def test_assignment_04_test_interfaces_are_first_class_contract_only_rows(self) -> None:
+        test_units = [
+            unit for unit in self.units["units"]
+            if unit["source_object"] == "assignment-04" and unit["kind"] == "test-interface"
+        ]
+        self.assertEqual(len(test_units), 21)
+        coverage_by_unit = {row["source_unit"]: row for row in self.coverage["rows"]}
+        for unit in test_units:
+            row = coverage_by_unit[unit["id"]]
+            self.assertEqual(row["disposition"], "contract-only")
+            self.assertEqual(
+                row["destination"],
+                "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+            )
+            self.assertEqual(row["destination_anchor"], "adapters")
+            self.assertEqual(
+                row["evidence"],
+                "06 Практика/Contracts/stanford-cs336-a4.yml#expected_tests",
+            )
 
     def test_lecture_10_uses_reviewed_disjoint_ranges_and_pruning_context(self) -> None:
         units_by_id = {unit["id"]: unit for unit in self.units["units"]}

@@ -2,7 +2,7 @@
 title: "64.6. Оценивание, режимы отказа и serving VLM"
 type: textbook-chapter
 status: canonical
-last_updated: 2026-07-31
+last_updated: 2026-09-07
 primary_sources:
   - https://cs231n.stanford.edu/slides/2025/lecture_16.pdf
   - https://arxiv.org/abs/2204.03162
@@ -179,6 +179,8 @@ $$
 
 Надёжный ответ показывает evidence: crop и координаты для документа, timestamp для видео, segment для audio. При отсутствии evidence, конфликте распознавания или превышении допустимой неопределённости система должна отказаться или запросить проверку. Уверенная формулировка не компенсирует отсутствие визуального основания.
 
+Сквозной пример, где эти требования превращаются в проверяемый serving-контракт, разобран в [[02 Areas/ML & DL/06 Практика/19 Найти автомобильный номер в видеопотоке|практике по поиску автомобильного номера в видеопотоке]]: detector, tracker и OCR сравниваются с прямым вызовом VLM, а качество рассматривается вместе с частотой кадров и задержкой.
+
 ## Источники и продолжение
 
 - Stanford CS231n, [Multimodal Foundation Models](https://cs231n.stanford.edu/slides/2025/lecture_16.pdf).
@@ -186,4 +188,4 @@ $$
 - Li et al., [Evaluating Object Hallucination in LVLMs (POPE)](https://arxiv.org/abs/2305.10355).
 - Deitke et al., [Molmo and PixMo](https://arxiv.org/abs/2409.17146).
 - Связано: [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline|физика inference]] и [[02 Areas/ML & DL/00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация|оценивание и контаминация]].
-- Назад: [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели|64.5]]. Далее: [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию|65. Tool use]].
+- Назад: [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели|64.5]]. Далее: [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений|64.7. Diffusion и flow matching]].

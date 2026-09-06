@@ -166,6 +166,7 @@ source_units:
       kind: test-interface
       order: 3
       interface_name: pytest
+      test_file: tests/test_fixture.py
       title: Test command
     - id: assignment-01-evaluation
       source_object: assignment-01
@@ -321,9 +322,10 @@ coverage:
       source_location: Assignments/assignment-01.md#tests
       kind: test-interface
       title: Test command
-      disposition: excluded
-      reason: Schema fixture only.
-      evidence: https://example.edu/course-scope
+      disposition: contract-only
+      destination: textbook/contract.md
+      destination_anchor: adapters
+      evidence: contracts/a.yml#expected_tests
       primary_sources: [assignment-01]
     - id: coverage-assignment-evaluation
       source_object: assignment-01
@@ -430,6 +432,8 @@ files:
   - courses/fixture/Videos/lecture-01.mp4
   - textbook/foundations.md
   - textbook/existing.md
+  - textbook/contract.md
+  - contracts/a.yml
   - courses/fixture/_index.md
   - 00 Учебник/Assets/Figures/fixture/visual-01.png
 pages:
@@ -445,6 +449,15 @@ pages:
     source_unit_id: lecture-01-example
     ---
     # Existing example
+  textbook/contract.md: |
+    ---
+    source_unit_id: assignment-01-test
+    ---
+    <a id="adapters"></a>
+    # Contract adapter
+  contracts/a.yml: |
+    expected_tests:
+      - tests/test_fixture.py::pytest
   courses/fixture/_index.md: |
     # Fixture source hub
 

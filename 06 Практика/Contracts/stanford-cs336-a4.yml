@@ -1,0 +1,225 @@
+{
+  "schema_version": 1,
+  "id": "stanford-cs336-spring-2026-assignment-4-data-corpus",
+  "source": {
+    "repository": "stanford-cs336/assignment4-data",
+    "commit": "0555bea66369872d912652debf10b115ca0688c8",
+    "canonical_url": "https://github.com/stanford-cs336/assignment4-data/tree/0555bea66369872d912652debf10b115ca0688c8",
+    "license": "MIT",
+    "handout": {
+      "path": "cs336_assignment4_data.pdf",
+      "sha256": "2b0660d0d1e96366c4688f9606c707c668a1fa76396c563b21a6fc75863fb59e"
+    },
+    "adapters": {
+      "path": "tests/adapters.py",
+      "sha256": "7c201ebed491e85af05fcbcaac9608f8b69b1e0943925950da3b8d488ddc38b7"
+    },
+    "tests": {
+      "root": "tests",
+      "tree_hash_algorithm": "sha256(sorted tests-root-relative path + NUL + bytes + NUL)",
+      "tree_sha256": "1efa1f5507f431695233bcbe257d43fa01e9e8d3fc312b66aafdb1bf86e3a7fc"
+    }
+  },
+  "profiles": {
+    "smoke_local": {
+      "required": true,
+      "hardware": "CPU",
+      "network_after_setup": false,
+      "input": "redistributable versioned HTML/WET-like fixture with immutable document IDs",
+      "deterministic": true,
+      "purpose": "exercise every adapter and produce a complete evidence bundle without Stanford shared paths or Modal"
+    },
+    "full_corpus": {
+      "required": false,
+      "input": "pinned Common Crawl crawl, segment, and object-path manifest",
+      "parallelism": "local multiprocessing or learner-owned distributed workers",
+      "stanford_shared_paths_required": false,
+      "modal_required": false,
+      "classifier_artifacts_must_be_hashed": true
+    }
+  },
+  "adapters": [
+    "run_extract_text_from_html_bytes(html_bytes: bytes) -> str | None",
+    "run_identify_language(text: str) -> tuple[Any, float]",
+    "run_mask_emails(text: str) -> tuple[str, int]",
+    "run_mask_phone_numbers(text: str) -> tuple[str, int]",
+    "run_mask_ips(text: str) -> tuple[str, int]",
+    "run_classify_nsfw(text: str) -> tuple[Any, float]",
+    "run_classify_toxic_speech(text: str) -> tuple[Any, float]",
+    "run_classify_quality(text: str) -> tuple[Any, float]",
+    "run_gopher_quality_filter(text: str) -> bool",
+    "run_exact_line_deduplication(input_files, output_directory)",
+    "run_minhash_deduplication(input_files, num_hashes, num_bands, ngrams, jaccard_threshold, output_directory)"
+  ],
+  "expected_tests": [
+    "tests/test_extract.py::test_extract_text_from_html_bytes",
+    "tests/test_langid.py::test_identify_language_english",
+    "tests/test_langid.py::test_identify_language_chinese_simplified",
+    "tests/test_pii.py::test_mask_emails_single",
+    "tests/test_pii.py::test_mask_emails_multiple",
+    "tests/test_pii.py::test_mask_emails_existing_string",
+    "tests/test_pii.py::test_mask_phones_single",
+    "tests/test_pii.py::test_mask_ips",
+    "tests/test_toxicity.py::test_classify_nsfw",
+    "tests/test_toxicity.py::test_classify_toxic_speech",
+    "tests/test_quality.py::test_classify_quality",
+    "tests/test_quality.py::test_gopher_valid_input",
+    "tests/test_quality.py::test_gopher_less_than_50_non_symbol_words",
+    "tests/test_quality.py::test_gopher_more_than_100000_non_symbol_words",
+    "tests/test_quality.py::test_gopher_average_word_length_less_than_3",
+    "tests/test_quality.py::test_gopher_average_word_length_greater_than_10",
+    "tests/test_quality.py::test_gopher_more_than_30_percent_lines_ending_with_ellipsis",
+    "tests/test_quality.py::test_gopher_less_than_80_percent_words_with_alphabetic_character",
+    "tests/test_deduplication.py::test_exact_line_deduplication",
+    "tests/test_deduplication.py::test_minhash_deduplication_exact_duplicates",
+    "tests/test_deduplication.py::test_minhash_deduplication_fuzzy_duplicates"
+  ],
+  "commands": {
+    "setup": "uv sync --frozen",
+    "upstream_tests": "uv run pytest",
+    "smoke_pipeline": "uv run python -m bookvar_data.pipeline --config configs/smoke-baseline.yml && uv run python -m bookvar_data.pipeline --config configs/smoke-candidate.yml",
+    "tokenize": "uv run python -m bookvar_data.tokenize --config configs/tokenize.yml",
+    "train_compare": "uv run python -m bookvar_data.train_compare --config configs/fixed-budget.yml",
+    "validate_evidence": "uv run python -m bookvar_data.validate_evidence evidence",
+    "reproducibility": "uv run python -m bookvar_data.reproduce --config configs/smoke-baseline.yml --compare-hashes evidence/artifact_hashes.json",
+    "cleanup": "uv run python -m bookvar_data.cleanup --config configs/smoke-baseline.yml"
+  },
+  "pipeline_invariants": {
+    "raw_inputs_immutable": true,
+    "each_stage_writes_new_outputs": true,
+    "terminal_states": ["retained", "modified", "dropped", "quarantined"],
+    "every_input_has_exactly_one_terminal_state": true,
+    "all_rules_and_models_versioned": true,
+    "random_seeds_recorded": true,
+    "dedup_representative_rule": "minimum immutable document ID per connected component",
+    "validation_content_may_be_used_as_train": false
+  },
+  "deduplication": {
+    "exact": {
+      "normalization_version_required": true,
+      "collision_confirmation_required": true,
+      "frequency_and_origin_log_required": true
+    },
+    "fuzzy": {
+      "word_ngram_length_required": true,
+      "num_hashes_required": true,
+      "num_bands_required": true,
+      "hash_seeds_required": true,
+      "candidate_formula": "P_candidate(s) = 1 - (1 - s^r)^b",
+      "exact_jaccard_verification_required": true,
+      "connected_components_required": true,
+      "precision_recall_audit_required": true
+    }
+  },
+  "manual_audit": {
+    "path": "evidence/manual_audit.csv",
+    "stratify_by": ["stage", "action", "language", "domain", "document_length_bucket"],
+    "required_actions": ["retained", "modified", "dropped"],
+    "required_columns": [
+      "doc_id", "stage", "action", "source_excerpt", "prediction", "score",
+      "threshold", "human_label", "error_type", "reason", "reviewer"
+    ],
+    "error_types": ["true_positive", "true_negative", "false_positive", "false_negative", "uncertain"]
+  },
+  "decision_log": {
+    "path": "evidence/decision_log.jsonl",
+    "required_columns": [
+      "doc_id", "immutable_source_reference", "stage", "action",
+      "score_or_rule", "rule_or_classifier_revision", "reason",
+      "input_sha256", "output_sha256"
+    ]
+  },
+  "dedup_cluster_log": {
+    "path": "evidence/dedup_clusters.jsonl",
+    "required_columns": [
+      "candidate_method", "exact_jaccard", "component_id",
+      "representative_rule", "retained_document_id"
+    ]
+  },
+  "fixed_budget_comparison": {
+    "variants": ["baseline", "candidate"],
+    "must_hold_constant": [
+      "raw_source_manifest", "tokenizer", "packing_policy", "model_shape",
+      "initialization_seed", "optimizer", "learning_rate_schedule",
+      "context_length", "batch_size", "sampled_training_tokens",
+      "validation_corpus", "evaluation_cadence"
+    ],
+    "required_metrics": [
+      "learning_curve", "best_validation_loss", "final_validation_loss",
+      "validation_loss_by_domain", "retained_documents", "retained_unique_tokens",
+      "actual_source_exposures", "wall_time_seconds", "throughput"
+    ],
+    "absolute_loss_threshold": null,
+    "negative_result_is_allowed": true
+  },
+  "course_reference_configuration": {
+    "reference_only": true,
+    "model": "GPT-2-small-shaped approximately 430M parameters",
+    "hardware": "8 B200 GPUs",
+    "context_length": 512,
+    "optimization_steps": 16384,
+    "batch_size_per_device": 128,
+    "sampled_training_tokens": "approximately 2^33 = 8.6B",
+    "reported_wall_time": "approximately 2 hours",
+    "portable_default": false
+  },
+  "outputs": {
+    "root": "evidence",
+    "required": [
+      "environment.json",
+      "source_manifest.jsonl",
+      "pipeline_config.yml",
+      "stage_counts.json",
+      "decision_log.jsonl",
+      "manual_audit.csv",
+      "dedup_clusters.jsonl",
+      "mixture_manifest.json",
+      "tokenizer_manifest.json",
+      "runtime.json",
+      "learning_curve.csv",
+      "validation.json",
+      "artifact_hashes.json",
+      "report.md"
+    ],
+    "all_files_require_sha256": true
+  },
+  "pass_fail": [
+    "all pinned upstream tests pass unchanged",
+    "two smoke runs produce identical artifact hashes",
+    "document and byte/token stage balances reconcile",
+    "every document has one logged terminal state",
+    "validation records and exact validation spans are absent from training",
+    "exact and fuzzy duplicate fixtures retain deterministic representatives",
+    "PII counts are type-specific and repeat masking is idempotent",
+    "manual audit includes accepted and rejected or modified strata",
+    "fixed-budget comparison holds all declared controls constant",
+    "runtime and declared full-volume extrapolation are reported",
+    "every required evidence artifact exists and is hashed"
+  ],
+  "source_unit_groups": {
+    "handout_and_deliverables": "assignment-04 units 1-49 in source-units.yml; map individually to Practice 23 anchors",
+    "test_interfaces": [
+      "assignment-04-test-tests-test-pii-py-8-test-mask-emails-single",
+      "assignment-04-test-tests-test-toxicity-py-8-test-classify-nsfw",
+      "assignment-04-test-tests-test-extract-py-9-test-extract-text-from-html-bytes",
+      "assignment-04-test-tests-test-langid-py-9-test-identify-language-english",
+      "assignment-04-test-tests-test-quality-py-9-test-classify-quality",
+      "assignment-04-test-tests-test-deduplication-py-11-test-exact-line-deduplication",
+      "assignment-04-test-tests-test-pii-py-18-test-mask-emails-multiple",
+      "assignment-04-test-tests-test-langid-py-21-test-identify-language-chinese-simplified",
+      "assignment-04-test-tests-test-pii-py-28-test-mask-emails-existing-string",
+      "assignment-04-test-tests-test-quality-py-31-test-gopher-valid-input",
+      "assignment-04-test-tests-test-toxicity-py-33-test-classify-toxic-speech",
+      "assignment-04-test-tests-test-quality-py-39-test-gopher-less-than-50-non-symbol-words",
+      "assignment-04-test-tests-test-pii-py-42-test-mask-phones-single",
+      "assignment-04-test-tests-test-deduplication-py-43-test-minhash-deduplication-exact-duplicates",
+      "assignment-04-test-tests-test-quality-py-47-test-gopher-more-than-100000-non-symbol-words",
+      "assignment-04-test-tests-test-pii-py-54-test-mask-ips",
+      "assignment-04-test-tests-test-quality-py-55-test-gopher-average-word-length-less-than-3",
+      "assignment-04-test-tests-test-quality-py-63-test-gopher-average-word-length-greater-than-10",
+      "assignment-04-test-tests-test-quality-py-73-test-gopher-more-than-30-percent-lines-ending-with-ellipsis",
+      "assignment-04-test-tests-test-deduplication-py-83-test-minhash-deduplication-fuzzy-duplicates",
+      "assignment-04-test-tests-test-quality-py-90-test-gopher-less-than-80-percent-words-with-alphabetic-character"
+    ]
+  }
+}

@@ -1,0 +1,53 @@
+schema_version: 1
+scope: cs336-high-resolution-replacements-only
+source_revision: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+rights_status: permission-recorded
+rights_note: "Project permission record covers attributed educational preservation. This file records only the four Stanford CS336 high-resolution replacements, not every asset in vlm-2026."
+assets:
+  - local_path: vit-figure1-patch-sequence.png
+    source_path: Lectures/repository/images/vit.png
+    canonical_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/vit.png
+    local_sha256: 6152e780c2565e4dedce89ce7d8fbd473ef051b65be11d6ae3a2d6807d5c4702
+    native_size: 1558x895
+    transform: "unmodified course asset; replaces the lower-resolution 1120x600 PDF capture at the same canonical path"
+    primary_url: https://arxiv.org/abs/2010.11929
+    primary_attribution: "Vision Transformer Figure 1"
+    used_in:
+      - "00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md#1-изображение-как-тензор"
+      - "en/00 Textbook/16 Multimodal Models/64 Multimodal models.md"
+
+  - local_path: clip-figure1-training-and-zero-shot.png
+    source_path: Lectures/repository/images/clip.png
+    canonical_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/clip.png
+    local_sha256: ac050e1cf247f6ba792ebcd7cb9253d3e4ff284a164f21a02a7da9f767a95e4f
+    native_size: 2073x760
+    transform: "unmodified course asset; replaces the lower-resolution 1120x600 PDF-page capture at the same canonical path"
+    primary_url: https://arxiv.org/abs/2103.00020
+    primary_attribution: "CLIP Figure 1"
+    used_in:
+      - "00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md#3-от-классификации-к-общему-пространству-изображения-и-текста"
+      - "en/00 Textbook/16 Multimodal Models/64 Multimodal models.md"
+
+  - local_path: llava-figure1-projector.png
+    source_path: Lectures/repository/images/llava-architecture.png
+    canonical_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/llava-architecture.png
+    local_sha256: 27391332e106b70d8514236163de5ddce842e293b5aa1177787a53f3f89ab35a
+    native_size: 1722x585
+    transform: "unmodified course asset; replaces the lower-resolution 1100x285 capture at the same canonical path"
+    primary_url: https://arxiv.org/abs/2304.08485
+    primary_attribution: "LLaVA Figure 1"
+    used_in:
+      - "00 Учебник/16 Multimodal Models/64a Connectors и fusion.md#2-llava-линейная-проекция-и-единая-последовательность"
+      - "en/00 Textbook/16 Multimodal Models/64a Connectors and fusion.md"
+
+  - local_path: qwen2vl-figure3-mrope.png
+    source_path: Lectures/repository/images/qwen2-vl-mrope.png
+    canonical_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/qwen2-vl-mrope.png
+    local_sha256: c5a855f115aa24df543e1bcc9a368d83bf39139e0bf8fc65453bfbde529aae9f
+    native_size: 2061x504
+    transform: "unmodified course asset; replaces the lower-resolution 1412x318 capture at the same canonical path"
+    primary_url: https://arxiv.org/abs/2409.12191
+    primary_attribution: "Qwen2-VL Figure 3"
+    used_in:
+      - "00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md#6-почему-одной-позиции-в-последовательности-недостаточно"
+      - "en/00 Textbook/16 Multimodal Models/64b Resolution, tiling, and spatial positions.md"

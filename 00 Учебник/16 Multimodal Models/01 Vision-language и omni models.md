@@ -2,7 +2,7 @@
 title: "Vision-language и omni models — карта переноса"
 type: textbook-chapter
 status: redirected
-last_updated: 2026-07-23
+last_updated: 2026-09-07
 ---
 
 # Материал перенесён в последовательный модуль
@@ -15,4 +15,6 @@ last_updated: 2026-07-23
 4. [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные|обучение и данные]];
 5. [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding|документы и grounding]];
 6. [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели|video, audio и omni]];
-7. [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM|оценивание и serving]].
+7. [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM|оценивание и serving]];
+8. [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений|diffusion, latent diffusion и flow matching]];
+9. [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon|единая мультимодальная последовательность и Chameleon]].

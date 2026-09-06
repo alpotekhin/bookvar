@@ -155,8 +155,14 @@ sections:
         route: textbook/ml-systems/data-pipeline-padding-packing
       - source: 00 Учебник/10 ML Systems/07 Profiling ML-нагрузки.md
         route: textbook/ml-systems/profiling
+      - source: 00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md
+        route: textbook/ml-systems/gpu-kernels-triton
+      - source: 00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md
+        route: textbook/pretraining/data-and-pretraining
       - source: 00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md
         route: textbook/pretraining/data-pipeline
+      - source: 00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md
+        route: textbook/pretraining/dedup-pii-corpus-quality
       - source: 00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md
         route: textbook/pretraining/next-token-objective
       - source: 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
@@ -279,6 +285,10 @@ sections:
       - source: 00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM.md
         source_en: en/00 Textbook/16 Multimodal Models/64f Evaluation, failure modes, and VLM serving.md
         route: textbook/multimodal/evaluation-serving
+      - source: 00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений.md
+        route: textbook/multimodal/diffusion-flow-images
+      - source: 00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md
+        route: textbook/multimodal/unified-sequence-chameleon
       - source: 00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md
         route: textbook/agents/tool-use
       - source: 00 Учебник/17 Tools и Agents/66 Agent harness и context engineering.md
@@ -454,11 +464,17 @@ sections:
             route: textbook/ml-systems/data-pipeline-padding-packing
           - label: S7. Profiling ML-нагрузки
             route: textbook/ml-systems/profiling
+          - label: S8. GPU kernels и Triton — от программы к измерению
+            route: textbook/ml-systems/gpu-kernels-triton
       - label: IX. Обучение LLM
         label_en: IX. Training language models
         items:
+          - label: Введение. Данные и предобучение
+            route: textbook/pretraining/data-and-pretraining
           - label: 41. Сбор, очистка и смеси данных
             route: textbook/pretraining/data-pipeline
+          - label: 41.1 Дедупликация, PII и контроль качества корпуса
+            route: textbook/pretraining/dedup-pii-corpus-quality
           - label: 42. Next-token prediction
             route: textbook/pretraining/next-token-objective
           - label: 43. Scaling laws
@@ -594,6 +610,10 @@ sections:
           - label: 64.6 Оценивание, отказы и serving VLM
             label_en: 64.6 Evaluation, failure modes, and VLM serving
             route: textbook/multimodal/evaluation-serving
+          - label: 64.7 Diffusion, latent diffusion и flow matching
+            route: textbook/multimodal/diffusion-flow-images
+          - label: 64.8 Единая мультимодальная последовательность и Chameleon
+            route: textbook/multimodal/unified-sequence-chameleon
       - label: XIV. Инструменты и агенты
         label_en: XIV. Tools and agents
         items:
@@ -661,6 +681,8 @@ sections:
         route: models/sravneniya/karta-arhitekturnyh-liniy
       - source: 02 Атлас моделей/Сравнения/Сравнение семейств.md
         route: models/sravneniya/sravnenie-semeystv
+      - source: 02 Атлас моделей/Сравнения/Перенос vision encoder между VLM.md
+        route: models/sravneniya/perenos-vision-encoder-mezhdu-vlm
       - source: 02 Атлас моделей/Timeline.md
         route: models/timeline
   - id: sources
@@ -2251,6 +2273,8 @@ sections:
         route: questions/voprosy-po-retrieval-i-rag
       - source: 04 Вопросы/Вопросы по агентам.md
         route: questions/agents
+      - source: 04 Вопросы/Вопросы по мультимодальным моделям.md
+        route: questions/multimodal-models
   - id: practice
     title: Практика
     title_en: Practice
@@ -2295,5 +2319,15 @@ sections:
         route: practice/17-razvernut-nablyudaemyy-ml-servis
       - source: 06 Практика/18 Harvard ML Systems — интерактивные design labs.md
         route: practice/18-harvard-ml-systems-interactive-design-labs
+      - source: 06 Практика/19 Найти автомобильный номер в видеопотоке.md
+        route: practice/19-nayti-avtomobilnyy-nomer-v-videopotoke
       - source: 06 Практика/20 Собрать языковую модель с нуля.md
         route: practice/20-sobrat-yazykovuyu-model-s-nulya
+      - source: 06 Практика/21 Профилировать и ускорить Transformer kernel.md
+        route: practice/21-profilirovat-i-uskorit-transformer-kernel
+      - source: 06 Практика/22 Провести scaling-law campaign.md
+        route: practice/22-provesti-scaling-law-campaign
+      - source: 06 Практика/23 Собрать воспроизводимый pretraining corpus.md
+        route: practice/23-sobrat-vosproizvodimyy-pretraining-corpus
+      - source: 06 Практика/24 Post-training и RLVR для математического reasoning.md
+        route: practice/24-post-training-rlvr-mathematical-reasoning

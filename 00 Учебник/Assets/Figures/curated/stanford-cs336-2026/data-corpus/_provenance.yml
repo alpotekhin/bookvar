@@ -1,0 +1,50 @@
+schema_version: 1
+source_course: Stanford CS336 Spring 2026
+lecture_commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+note: Exact source copies and source-preserving trace captures from the pinned course archive. Global asset-registry integration is intentionally deferred to the ledger phase.
+defaults:
+  transformation: none; byte-for-byte copy from source
+  parent_sha256: equal to the per-asset local sha256 below
+  caption: stored immediately after the image embed in used_in
+assets:
+  - {file: llama3-data.png, sha256: d4e3a87d9d623a1b6223dda09bd7d57a77517befe1819b05f37d2962d75ae495, source: Lectures/repository/images/llama3-data.png, used_in: 00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md, upstream: "Meta, The Llama 3 Herd of Models, arXiv:2407.21783"}
+  - {file: olmo2-pretraining.png, sha256: 98e2c35b12c4871ecb7872c23d305c7828527a7ced6bdcd2af2bb1bd16fc76e6, source: Lectures/repository/images/olmo2-pretraining.png, used_in: 00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md, upstream: "Allen Institute for AI, OLMo 2, arXiv:2501.00656"}
+  - {file: tulu.png, sha256: accae3789c1722b18c035c8b1021216a2ed6328c95a276d6d2072a33961a78dd, source: Lectures/repository/images/tulu.png, used_in: 00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md, upstream: "Allen Institute for AI, Tulu 3, arXiv:2411.15124"}
+  - {file: decline-consent.png, sha256: 554f5e9dca1fff8b290298c116834d86f970407f9c0a3209fd056e6d9afcb728, source: Lectures/repository/images/decline-consent.png, used_in: 00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md, upstream: "Longpre et al., Consent in Crisis, arXiv:2407.14933"}
+  - {file: dclm-wet.png, sha256: c6766b4ca72b57e43ecc8480b4ef5d3095d662c4415d9bde2d770a9a4f5d5343, source: Lectures/repository/images/dclm-wet.png, used_in: "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md", upstream: "Li et al., DCLM, arXiv:2406.11794"}
+  - {file: finepdf-layout.webp, sha256: 364ffa690f8b8544f644f1f4cc3ffbddd2c52a87a8d6d340f96d169efb621033, source: Lectures/repository/var/files/image-e9e730a30cd647ff18f24f33cae588c0-https_huggingfacefw-finepdfsblog_hf_space__astro_pdf-description_Cb49jXc6_Z17eX4E_webp, used_in: "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md", upstream: "Hugging Face FinePDFs technical article"}
+  - {file: raw-target-schema.png, sha256: 694a9a9d4d35b7c9ea1f9ba7ec59c540c3ecd886782aabd0806fb44cb04a5ec4, source: Lectures/repository/images/raw-target-schema.png, used_in: "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md", upstream: "Stanford CS336 Lecture 14"}
+  - {file: data-filtering-scale.png, sha256: f6e252458818348c098c51a78f995f9a0e2c77ec379d692a2d820ef993a93d9f, source: Lectures/repository/images/data-filtering-scale.png, used_in: "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md", upstream: "Stanford CS336 Lecture 14 course experiment; 157M model, N=100 WARC files"}
+  - {file: dclm-filter.png, sha256: 862ffe516afcda5d8e9782712426c9af39e2882d7085a7be26007bc838f5ad5f, source: Lectures/repository/images/dclm-filter.png, used_in: "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md", upstream: "Li et al., DCLM, arXiv:2406.11794"}
+  - {file: dclm-quality.png, sha256: cdc38e38d3b0293daa1dbf9ca47b7e3b3707418d7d18516408d3355845abdf8f, source: Lectures/repository/images/dclm-quality.png, used_in: "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md", upstream: "Li et al., DCLM, arXiv:2406.11794"}
+  - {file: c4-domains.png, sha256: bb52cc10c7f299d1cbc471ac2679b49eb56918d530c9f49f1562cbee3eb17fe2, source: Lectures/repository/var/files/image-f87c9ce7952b82131119b325714a5508-https_stanford-cs324_github_io_winter2022_lectures_images_c4-domains_png, used_in: "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md", upstream: "Dodge et al., Documenting Large Webtext Corpora, arXiv:2104.08758"}
+  - {file: the-pile-composition.png, sha256: 4c4bc9c0b3901401e72eab305c7e0dc074396ad2bd425b46c54c745130cb379f, source: Lectures/repository/var/files/image-4eb29ee713b99ea34eb86b995bd32bfd-https_stanford-cs324_github_io_winter2022_lectures_images_the-pile_png, used_in: "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md", upstream: "Gao et al., The Pile, arXiv:2101.00027"}
+  - {file: dolma-composition.png, sha256: 0f222185057a422bff83ede3367752571925101db388edfae6d0de41fc67a8fd, source: Lectures/repository/var/files/image-47601eaf24df2c497082e9c528606b87-https_miro_medium_com_v2_resize_fit_1400_1_-0Qqhvu7JD6Y9JgsfKJdxw_png, used_in: "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md", upstream: "Soldaini et al., Dolma, arXiv:2402.00159"}
+  - {file: regmix.png, sha256: cd3ef67b56a5bc4b1099444371712f69581b1295ff5ee62120068ae6880ab08a, source: Lectures/repository/images/regmix.png, used_in: "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md", upstream: "Liu et al., RegMix, arXiv:2407.01492"}
+  - {file: data-mixing-methods.png, sha256: 975fc5a56b068b6a9bdbd92e4d3f5d4a190d4169fff3316013eff4871b747902, source: Lectures/repository/images/data-mixing-methods.png, used_in: "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md", upstream: "Comparative work linked in Lecture 14, arXiv:2602.12237"}
+  - file: minhash-characteristic-matrix-trace.png
+    sha256: 2e29a239c87f951ccc25df81cefbd4fe00395f11ba86b351f2355e23f71f554f
+    parent_sha256: 08f5e49a794a94e20423eb4edf7908f3b0b8969c3d0c31fa7d3c6b176aa0bddb
+    source: Lectures/repository/var/traces/lecture_14.json#step=176
+    transformation: exact edtrace rendering captured at 1600px; source-preserving crop to the MinHash body
+    used_in: 00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md
+    upstream: "Stanford CS336 Lecture 14 pinned implementation; MinHash derivation"
+  - file: minhash-agreement-trace.png
+    sha256: 53a4a552f51a071a4ac294dd00e653c55ee8ab8e271f58e3ee7b4873bdffcded
+    parent_sha256: 08f5e49a794a94e20423eb4edf7908f3b0b8969c3d0c31fa7d3c6b176aa0bddb
+    source: Lectures/repository/var/traces/lecture_14.json#step=184
+    transformation: exact edtrace rendering captured at 1600px; no content modification
+    used_in: 00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md
+    upstream: "Stanford CS336 Lecture 14 pinned implementation; 100-seed MinHash check"
+  - file: lsh-banding-probability-trace.png
+    sha256: 32004880d4f420f126be430f4af02f388169daee007b5ff46ec885edeb336b57
+    parent_sha256: 08f5e49a794a94e20423eb4edf7908f3b0b8969c3d0c31fa7d3c6b176aa0bddb
+    source: Lectures/repository/var/traces/lecture_14.json#step=213
+    transformation: exact edtrace rendering captured at 1600px; source-preserving top crop before the external curve
+    used_in: 00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md
+    upstream: "Stanford CS336 Lecture 14 pinned implementation; LSH OR-of-ANDs derivation"
+  - {file: nemotron-results.png, sha256: cda560aec728df65eae4873cd888753c49ee798ca2bc0540f01a455cb00a8c25, source: Lectures/repository/images/nemotron-results.png, used_in: 00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md, upstream: "Su et al., Nemotron-CC, arXiv:2412.02595"}
+  - {file: openthoughts-pipeline.png, sha256: 47494fa7b6fda06eb8527ed8efd4612a8fc85b27f8ce0ae1da33b9829b9610b4, source: Lectures/repository/images/openthoughts-pipeline.png, used_in: 00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md, upstream: "OpenThoughts, arXiv:2506.04178"}
+  - {file: swe-smith.png, sha256: 66870908b3187debd1a8102abeb8cfe4f5b2973e9f5decb3625f348fab3d4c22, source: Lectures/repository/images/swe-smith.png, used_in: 00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md, upstream: "SWE-Smith, arXiv:2504.21798"}
+  - {file: swezero-noexec.png, sha256: a1ed5f5e1d938299d9fd92dc0c5258098eaf233dd301f7dc7126ecd082acc43b, source: Lectures/repository/images/swezero-noexec.png, used_in: 00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md, upstream: "SWE-Zero, arXiv:2604.01496"}
+  - {file: swe-rebench.png, sha256: e37b64b85903b47508bc23868d4868fad4760de4638c35aa8fc064acd360af28, source: Lectures/repository/images/swe-rebench.png, used_in: 00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md, upstream: "SWE-Rebench, arXiv:2505.20411"}

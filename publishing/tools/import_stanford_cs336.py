@@ -1557,7 +1557,19 @@ def document_bytes(value: dict[str, Any]) -> bytes:
     return (json.dumps(value, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
 
 
-EDITORIAL_DISPOSITIONS = {"integrated", "covered-existing", "source-only", "excluded"}
+COVERAGE_EDITORIAL_DISPOSITIONS = {
+    "integrated",
+    "covered-existing",
+    "contract-only",
+    "source-only",
+    "excluded",
+}
+VISUAL_EDITORIAL_DISPOSITIONS = {
+    "integrated",
+    "covered-existing",
+    "source-only",
+    "excluded",
+}
 EDITORIAL_TOP_LEVEL_FIELDS = {"schema_version", "reviewed_objects", "coverage", "visuals"}
 COVERAGE_EDITORIAL_FIELDS = {
     "disposition",
@@ -1684,6 +1696,41 @@ def validate_destination(
         )
 
 
+def validate_contract_only(
+    repository_root: Path,
+    unit_id: str,
+    unit: dict[str, Any],
+    decision: dict[str, Any],
+) -> None:
+    if unit.get("kind") != "test-interface":
+        raise ValueError(f"{unit_id}: contract-only is restricted to test-interface units")
+    evidence = decision.get("evidence")
+    if not isinstance(evidence, str) or not evidence.strip():
+        raise ValueError(f"{unit_id}: contract-only decision lacks evidence")
+    contract_path, separator, fragment = evidence.partition("#")
+    if separator != "#" or fragment != "expected_tests":
+        raise ValueError(
+            f"{unit_id}: contract-only evidence must point to #expected_tests"
+        )
+    contract_file = resolve_repository_file(
+        repository_root,
+        contract_path,
+        f"{unit_id}: contract evidence",
+    )
+    try:
+        contract = json.loads(contract_file.read_text("utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        raise ValueError(f"{unit_id}: invalid contract evidence: {error}") from error
+    expected_tests = contract.get("expected_tests") if isinstance(contract, dict) else None
+    test_file = unit.get("test_file")
+    interface_name = unit.get("interface_name")
+    expected_test = f"{test_file}::{interface_name}"
+    if not isinstance(expected_tests, list) or expected_test not in expected_tests:
+        raise ValueError(
+            f"{unit_id}: contract evidence does not list {expected_test}"
+        )
+
+
 def apply_editorial_overlay(
     manifest: dict[str, Any],
     source_units: dict[str, Any],
@@ -1776,8 +1823,13 @@ def apply_editorial_overlay(
         unit = units_by_id[unit_id]
         if unit.get("source_object") not in reviewed:
             raise ValueError(f"coverage decision belongs to an undeclared reviewed object: {unit_id}")
-        if unit.get("kind") == "administrative":
-            raise ValueError(f"administrative source semantics cannot be overlaid: {unit_id}")
+        if (
+            unit.get("kind") == "administrative"
+            and coverage_overlay[unit_id].get("disposition") not in {"source-only", "excluded"}
+        ):
+            raise ValueError(
+                f"administrative source semantics may only be source-only or excluded: {unit_id}"
+            )
     for visual_id in visual_overlay:
         visual = visuals_by_id[visual_id]
         if visual.get("source_object") not in reviewed:
@@ -1791,11 +1843,12 @@ def apply_editorial_overlay(
     for unit_id, decision in coverage_overlay.items():
         if not isinstance(decision, dict):
             raise ValueError(f"coverage decision must be a mapping: {unit_id}")
+        unit = units_by_id[unit_id]
         unknown = sorted(set(decision) - COVERAGE_EDITORIAL_FIELDS)
         if unknown:
             raise ValueError(f"unsupported coverage editorial field: {unknown[0]}")
         disposition = decision.get("disposition")
-        if disposition not in EDITORIAL_DISPOSITIONS:
+        if disposition not in COVERAGE_EDITORIAL_DISPOSITIONS:
             raise ValueError(f"{unit_id}: invalid disposition: {disposition!r}")
         row = output_coverage_by_id[unit_id]
         row.pop("reason", None)
@@ -1811,6 +1864,8 @@ def apply_editorial_overlay(
                     raise ValueError(f"{unit_id}: {disposition} decision lacks {field}")
         else:
             validate_destination(repository_root, unit_id, row, {unit_id})
+            if disposition == "contract-only":
+                validate_contract_only(repository_root, unit_id, unit, row)
 
     for visual_id, decision in visual_overlay.items():
         if not isinstance(decision, dict):
@@ -1819,7 +1874,7 @@ def apply_editorial_overlay(
         if unknown:
             raise ValueError(f"unsupported visual editorial field: {unknown[0]}")
         disposition = decision.get("disposition")
-        if disposition not in EDITORIAL_DISPOSITIONS:
+        if disposition not in VISUAL_EDITORIAL_DISPOSITIONS:
             raise ValueError(f"{visual_id}: invalid disposition: {disposition!r}")
         row = output_visuals_by_id[visual_id]
         row.pop("reason", None)
@@ -2063,14 +2118,14 @@ def validate_pdf_page_closure(
                 reason = row.get("reason")
                 evidence = row.get("evidence")
                 if (
-                    row.get("disposition") != "excluded"
+                    row.get("disposition") not in {"excluded", "source-only"}
                     or not isinstance(reason, str)
                     or not reason.strip()
                     or not isinstance(evidence, str)
                     or not evidence.strip()
                 ):
                     failures.append(
-                        f"{label}: administrative page scope lacks exclusion reason/evidence"
+                        f"{label}: administrative page scope lacks explicit source-only/excluded reason/evidence"
                     )
                     continue
             covered_pages.update(pages)
@@ -2449,12 +2504,12 @@ def check() -> None:
             coverage_row_value = coverage_by_unit.get(unit_id)
             require(
                 isinstance(coverage_row_value, dict)
-                and coverage_row_value.get("disposition") == "excluded"
+                and coverage_row_value.get("disposition") in {"excluded", "source-only"}
                 and isinstance(coverage_row_value.get("reason"), str)
                 and bool(coverage_row_value.get("reason", "").strip())
                 and isinstance(coverage_row_value.get("evidence"), str)
                 and bool(coverage_row_value.get("evidence", "").strip()),
-                f"administrative unit lacks excluded coverage reason/evidence: {unit_id}",
+                f"administrative unit lacks source-only/excluded coverage reason/evidence: {unit_id}",
                 failures,
             )
     units_by_object: dict[str, int] = {}

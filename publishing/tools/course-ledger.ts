@@ -21,6 +21,8 @@ type SourceUnit = {
   sourceLocation: string;
   kind: string;
   title: string;
+  testFile?: string;
+  interfaceName?: string;
 };
 
 export type CourseLedgerOptions = {
@@ -28,7 +30,8 @@ export type CourseLedgerOptions = {
   assetRegistryPath?: string;
 };
 
-const dispositions = new Set(['integrated', 'covered-existing', 'source-only', 'excluded']);
+const coverageDispositions = new Set(['integrated', 'covered-existing', 'contract-only', 'source-only', 'excluded']);
+const visualDispositions = new Set(['integrated', 'covered-existing', 'source-only', 'excluded']);
 const authorities = new Set(['official-course', 'official-author', 'primary-paper', 'third-party-mirror', 'bookvar-original']);
 const rights = new Set(['licensed', 'permission-recorded', 'link-only', 'unknown']);
 const sourceObjectKinds = new Set(['executable-lecture', 'pdf', 'assignment', 'video']);
@@ -188,6 +191,22 @@ function hasSourceUnit(page: string, sourceUnit: string): boolean {
 function integratedDestination(entry: Row, repositoryRoot: string, sourceUnit: string, label: string): void {
   const page = destinationPage(entry, repositoryRoot, label);
   if (!hasSourceUnit(page, sourceUnit)) fail(`${label}.destination must carry reciprocal source_unit_id: ${sourceUnit}`);
+}
+
+function contractOnlyDestination(entry: Row, repositoryRoot: string, unit: SourceUnit, label: string): void {
+  integratedDestination(entry, repositoryRoot, unit.id, label);
+  if (unit.kind !== 'test-interface' || unit.testFile === undefined || unit.interfaceName === undefined) {
+    fail(`${label}.contract-only is restricted to test-interface units`);
+  }
+  const evidence = field(entry, 'evidence', label);
+  const marker = '#expected_tests';
+  if (!evidence.endsWith(marker)) fail(`${label}.evidence must point to #expected_tests`);
+  const contractPath = under(repositoryRoot, evidence.slice(0, -marker.length), `${label}.evidence`);
+  const contract = yaml(contractPath);
+  const expectedTests = list(contract.expected_tests, `${label}.evidence.expected_tests`)
+    .map((value, index) => text(value, `${label}.evidence.expected_tests[${index}]`));
+  const expectedTest = `${unit.testFile}::${unit.interfaceName}`;
+  if (!expectedTests.includes(expectedTest)) fail(`${label}.evidence does not list ${expectedTest}`);
 }
 
 function sourceHubDestination(entry: Row, repositoryRoot: string, courseRoot: string, label: string): void {
@@ -399,7 +418,11 @@ function sourceUnits(document: Row, objects: ReadonlyMap<string, SourceObject>):
       sourceObject: objectId,
       sourceLocation: field(unit, 'source_location', label),
       kind,
-      title: field(unit, 'title', label)
+      title: field(unit, 'title', label),
+      testFile: kind === 'test-interface' && typeof unit.test_file === 'string'
+        ? text(unit.test_file, `${label}.test_file`)
+        : undefined,
+      interfaceName: kind === 'test-interface' ? field(unit, 'interface_name', label) : undefined
     });
   }
   return result;
@@ -434,7 +457,7 @@ function coverage(
     matchingCoverageField(entry, 'source_location', unit.sourceLocation, label);
     matchingCoverageField(entry, 'kind', unit.kind, label);
     matchingCoverageField(entry, 'title', unit.title, label);
-    const disposition = enumField(entry, 'disposition', dispositions, label);
+    const disposition = enumField(entry, 'disposition', coverageDispositions, label);
     const sources = list(entry.primary_sources, `${label}.primary_sources`);
     if (sources.length === 0) fail(`${label}.primary_sources must not be empty`);
     for (const source of sources) {
@@ -443,6 +466,8 @@ function coverage(
     }
     if (disposition === 'integrated' || disposition === 'covered-existing') {
       integratedDestination(entry, repositoryRoot, unitId, label);
+    } else if (disposition === 'contract-only') {
+      contractOnlyDestination(entry, repositoryRoot, unit, label);
     } else if (disposition === 'source-only') {
       sourceHubDestination(entry, repositoryRoot, courseRoot, label);
     } else {
@@ -529,7 +554,7 @@ function visuals(
       field(members[index], 'source_location', `${label}.sequence_members[${index}]`);
     }
     const rightsStatus = visualRights(entry, label);
-    const disposition = enumField(entry, 'disposition', dispositions, label);
+    const disposition = enumField(entry, 'disposition', visualDispositions, label);
     if (disposition === 'integrated' || disposition === 'covered-existing') {
       if (rightsStatus === 'link-only' || rightsStatus === 'unknown') fail(`${label} cannot reuse a ${rightsStatus} visual`);
       const localFile = field(entry, 'local_file', label);

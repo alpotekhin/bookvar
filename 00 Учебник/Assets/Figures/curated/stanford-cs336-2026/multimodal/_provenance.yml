@@ -1,0 +1,189 @@
+schema_version: 1
+course:
+  title: Stanford CS336 Language Modeling from Scratch, Spring 2026
+  lecture: 17
+  source_revision: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+  rights_status: permission-recorded
+  rights_note: "Project permission record covers attributed educational preservation. This record does not claim an SPDX or Creative Commons license for the course repository. Primary-paper licenses remain those stated by their publishers."
+assets:
+  - id: cs336-l17-siglip-parallelism
+    local_path: siglip-parallelism.png
+    source_path: Lectures/repository/images/siglip-parallelism.png
+    canonical_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/siglip-parallelism.png
+    local_sha256: 21fbe73a2d339804e9edd8c11600d117bf79923215588a64e4f19d170bcf4f04
+    native_size: 2124x693
+    transform: unmodified-course-asset
+    primary_url: https://arxiv.org/abs/2303.15343
+    primary_attribution: "SigLIP objective and distributed-computation discussion; exact primary figure number not asserted"
+    used_in: "00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md#clip-и-siglip-две-формы-контрастивного-обучения"
+    caption_intent: "Compare the blockwise pair computation permitted by sigmoid loss with the global row/column normalization used by CLIP."
+
+  - id: cs336-l17-llava-instruction-data
+    local_path: llava-gen.png
+    source_path: Lectures/repository/images/llava-gen.png
+    canonical_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/llava-gen.png
+    local_sha256: a1461613af1750239c01e8534dd0da7106669a96e97c25f1161d63ff619f51d8
+    native_size: 1710x1070
+    transform: unmodified-course-asset
+    primary_url: https://arxiv.org/abs/2304.08485
+    primary_attribution: "LLaVA visual-instruction data construction"
+    used_in: "00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные.md#5-какие-данные-создают-какие-способности"
+    caption_intent: "Identify which symbolic inputs GPT-4 sees and why synthetic dialogue cannot add missing visual evidence."
+
+  - id: cs336-l17-llava-onevision-architecture
+    local_path: llava-onevision.png
+    source_path: Lectures/repository/images/llava-onevision.png
+    canonical_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/llava-onevision.png
+    local_sha256: 322a5f1095bc1b1bb493fe587615014c0c7c7944ed5a61a8fb12bbe4fb1d67fe
+    native_size: 1383x628
+    transform: unmodified-course-asset
+    primary_url: https://arxiv.org/abs/2408.03326
+    primary_attribution: "LLaVA-OneVision architecture overview"
+    used_in: "00 Учебник/16 Multimodal Models/64a Connectors и fusion.md#от-llava-к-llava-onevision-что-изменилось-кроме-projector"
+    caption_intent: "Separate the roles of SigLIP, the MLP projector and Qwen2 instead of attributing the system to a better projector alone."
+
+  - id: cs336-l17-llava-onevision-anyres
+    local_path: llava-onevision-anyres.png
+    source_path: Lectures/repository/images/llava-onevision-anyres.png
+    canonical_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/llava-onevision-anyres.png
+    local_sha256: ba1d449afcd3ac0c6bb045e81b600a5d512626ae3949a875eefe752351b2e100
+    native_size: 2424x748
+    transform: unmodified-course-asset
+    primary_url: https://arxiv.org/abs/2408.03326
+    primary_attribution: "LLaVA-OneVision AnyRes preprocessing"
+    used_in: "00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md#anyres-глобальный-кадр-и-локальные-плитки"
+    caption_intent: "Trace resize, grid selection, global view, local tiles and the later compression point."
+
+  - id: cs336-l17-llava-onevision-modalities
+    local_path: llava-onevision-modalities.png
+    source_path: Lectures/repository/images/llava-onevision-modalities.png
+    canonical_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/llava-onevision-modalities.png
+    local_sha256: 87febe02a26dcffa8e9539860c67094870ee2189227b17500570d7cccbfd7fe5
+    native_size: 2011x754
+    transform: unmodified-course-asset
+    primary_url: https://arxiv.org/abs/2408.03326
+    primary_attribution: "LLaVA-OneVision image, multi-image and video token budgets"
+    used_in: "00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md#один-интерфейс-для-изображения-набора-изображений-и-видео"
+    caption_intent: "Compare per-item resolution as the number of visual items grows under a bounded total context."
+
+  - id: cs336-l17-llava-onevision-training
+    local_path: llava-onevision-training.png
+    source_path: Lectures/repository/images/llava-onevision-training.png
+    canonical_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/llava-onevision-training.png
+    local_sha256: 25cf92d784e0b96473a8590a371953dc0d40361c99a7d253a2ca9cb4b1b81625
+    native_size: 2153x1088
+    transform: unmodified-course-asset
+    primary_url: https://arxiv.org/abs/2408.03326
+    primary_attribution: "LLaVA-OneVision training stages"
+    used_in: "00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные.md#llava-и-onevision-как-два-конкретных-curriculum"
+    caption_intent: "Read each stage as a linked change in data, trainable components and intended capability."
+
+  - id: cs336-l17-llava-onevision-transfer-s1
+    local_path: llava-onevision-transfer-s1.png
+    source_path: Lectures/repository/images/llava-onevision-transfer-s1.png
+    canonical_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/llava-onevision-transfer-s1.png
+    local_sha256: b3cd8724bd8d0a5f25c82f2a9e6eaed36e0ba066a9281863fa31ed91a1ce5e10
+    native_size: 1823x916
+    transform: unmodified-course-asset
+    primary_url: https://arxiv.org/abs/2408.03326
+    primary_attribution: "LLaVA-OneVision cross-scenario transfer example"
+    used_in: "00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные.md#какие-способности-переносятся-между-сценариями"
+    caption_intent: "Decompose chart understanding from the additional multi-image selection and comparison operation."
+
+  - id: cs336-l17-llava-onevision-transfer-s2
+    local_path: llava-onevision-transfer-s2.png
+    source_path: Lectures/repository/images/llava-onevision-transfer-s2.png
+    canonical_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/llava-onevision-transfer-s2.png
+    local_sha256: 7f18d9724407f00821319c265997eeece1ec1658705f811f737749d296d0ce65
+    native_size: 1485x1357
+    transform: unmodified-course-asset
+    primary_url: https://arxiv.org/abs/2408.03326
+    primary_attribution: "LLaVA-OneVision cross-scenario transfer example"
+    used_in: "00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные.md#какие-способности-переносятся-между-сценариями"
+    caption_intent: "Separate OCR from reasoning about which GUI state contains the relevant control."
+
+  - id: cs336-l17-qwen-vl-stages
+    local_path: qwen-vl-stages.png
+    source_path: Lectures/repository/images/qwen-vl-stages.png
+    canonical_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/qwen-vl-stages.png
+    local_sha256: 94190fa540ce9226115bd566ad291188a78be92f078f8bef4c9c275cde6fab40
+    native_size: 2367x936
+    transform: unmodified-course-asset
+    primary_url: https://arxiv.org/abs/2308.12966
+    primary_attribution: "Qwen-VL Figure 2 training pipeline"
+    used_in: "00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные.md#qwen-vl-почему-меняются-и-данные-и-замороженные-модули"
+    caption_intent: "Compare data quality, resolution and trainable modules across the three stages."
+
+  - id: cs336-l17-qwen2-vl-architecture
+    local_path: qwen2-vl-architecture.png
+    source_path: Lectures/repository/images/qwen2-vl-architecture.png
+    canonical_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/qwen2-vl-architecture.png
+    local_sha256: fad77a8289cf45f49876afee9b02bc43c24f5d8aac29912463e13598ed3b932e
+    native_size: 2179x1375
+    transform: unmodified-course-asset
+    primary_url: https://arxiv.org/abs/2409.12191
+    primary_attribution: "Qwen2-VL Figure 1 architecture"
+    used_in: "00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md#qwen2-vl-native-resolution-merger-и-mrope"
+    caption_intent: "Trace patchification and spatial merge, then reconcile the diagram with the 256-to-64 token calculation."
+
+  - id: cs336-l17-qwen3-vl-architecture
+    local_path: qwen3-vl.png
+    source_path: Lectures/repository/images/qwen3-vl.png
+    canonical_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/qwen3-vl.png
+    local_sha256: c264d3c2c017e683baeb11ea54e0e71241a01c84109caede28e10c791ee6c325
+    native_size: 1958x1133
+    transform: unmodified-course-asset
+    primary_url: https://arxiv.org/abs/2511.21631
+    primary_attribution: "Qwen3-VL architecture and DeepStack"
+    used_in: "00 Учебник/16 Multimodal Models/64a Connectors и fusion.md#6-early-fusion-и-deep-fusion"
+    caption_intent: "Follow both the main merger path and the multi-layer DeepStack injections."
+
+  - id: cs336-l17-qwen3-vl-pretraining
+    local_path: qwen3-vl-pretraining.png
+    source_path: Lectures/repository/images/qwen3-vl-pretraining.png
+    canonical_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/qwen3-vl-pretraining.png
+    local_sha256: 4aaf8c8289638d4d406148b6abb6a5684a13f6f6a9d0ca81668ee0a2974088ca
+    native_size: 1814x325
+    transform: unmodified-course-asset
+    primary_url: https://arxiv.org/abs/2511.21631
+    primary_attribution: "Qwen3-VL staged pretraining"
+    used_in: "00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные.md#qwen3-vl-четыре-длины-pre-training-и-post-training"
+    caption_intent: "Read context-length growth together with the corresponding expansion of multimodal data types."
+
+  - id: cs336-l17-chameleon-architecture
+    local_path: chameleon.png
+    source_path: Lectures/repository/images/chameleon.png
+    canonical_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/chameleon.png
+    local_sha256: afbfd3fbc6aa9e7d2a4cc024a504d8db6b1c059db533ea92138e99e36b48dc43
+    native_size: 963x541
+    transform: unmodified-course-asset
+    primary_url: https://arxiv.org/abs/2405.09818
+    primary_attribution: "Chameleon Figure 1"
+    primary_rights: CC-BY-4.0-as-stated-by-arxiv-html
+    used_in: "00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md#4-одна-авторегрессионная-последовательность"
+    caption_intent: "Trace alternating text and image-code tokens through one causal Transformer."
+
+  - id: cs336-l17-chameleon-example
+    local_path: chameleon-example.png
+    source_path: Lectures/repository/images/chameleon-example.png
+    canonical_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/chameleon-example.png
+    local_sha256: 031d7041406f6d32913980132859415788e625622d333ca8ce701f6aed27f077
+    native_size: 1110x995
+    transform: unmodified-course-asset
+    primary_url: https://arxiv.org/abs/2405.09818
+    primary_attribution: "Chameleon mixed-modal qualitative sample"
+    primary_rights: CC-BY-4.0-as-stated-by-arxiv-html
+    used_in: "00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md#8-что-даёт-единый-словарь-а-чего-он-не-гарантирует"
+    caption_intent: "Inspect entity and reference continuity across alternating generated text and image blocks without treating one sample as a benchmark."
+
+  - id: cs336-l17-vq-vae-course-diagram
+    local_path: vq-vae.png
+    source_path: Lectures/repository/images/vq-vae.png
+    canonical_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/vq-vae.png
+    local_sha256: a1e0068e82718d64b42cf0e0a0d6f9317e569bb0ed72852482e40f8062e0e769
+    native_size: 1693x929
+    transform: unmodified-course-asset
+    primary_url: https://arxiv.org/abs/1711.00937
+    primary_attribution: "Stanford CS336 Lecture 17 course asset explaining vector quantization; not asserted to be a primary-paper figure"
+    used_in: "00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md#3-как-изображение-становится-дискретными-кодами"
+    caption_intent: "Follow a continuous latent vector through nearest-code selection and back through the decoder."

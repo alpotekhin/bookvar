@@ -2,7 +2,7 @@
 title: Практика
 type: practice
 status: active
-last_updated: 2026-07-18
+last_updated: 2026-08-19
 ---
 
 # Практика
@@ -32,10 +32,18 @@ last_updated: 2026-07-18
 | [[02 Areas/ML & DL/06 Практика/16 Проверить speculative decoding и rollback KV|Speculative decoding]] | Sampling, KV-cache | 4–6 часов | Корректный acceptance и rollback cache |
 | [[02 Areas/ML & DL/06 Практика/17 Развернуть наблюдаемый ML сервис|Наблюдаемый ML-сервис]] | HTTP, Docker, metrics | 4–8 часов | Контейнер, dashboard и load-test |
 | [[02 Areas/ML & DL/06 Практика/18 Harvard ML Systems — интерактивные design labs|Harvard ML Systems design labs]] | Вычислительные основы и системное мышление | 1–3 часа на лабораторию | Prediction, sweep, artifact и design ledger |
+| [[02 Areas/ML & DL/06 Практика/19 Найти автомобильный номер в видеопотоке|Найти автомобильный номер в видеопотоке]] | Detection, tracking, OCR | 4–8 часов | Track-level ALPR pipeline с evidence и end-to-end метриками |
+| [[02 Areas/ML & DL/06 Практика/20 Собрать языковую модель с нуля|Собрать языковую модель с нуля]] | BPE, Transformer, оптимизация | 8–16 часов | Проверяемая модель от tokenizer до генерации |
+| [[02 Areas/ML & DL/06 Практика/21 Профилировать и ускорить Transformer kernel|Профилировать и ускорить Transformer kernel]] | PyTorch profiler, Triton | 4–8 часов | Корректный kernel и измеренный speedup |
+| [[02 Areas/ML & DL/06 Практика/22 Провести scaling-law campaign|Провести scaling-law campaign]] | IsoFLOP, fitting, uncertainty | 6–12 часов | Данные запусков, fit и честный прогноз |
+| [[02 Areas/ML & DL/06 Практика/23 Собрать воспроизводимый pretraining corpus|Собрать pretraining corpus]] | WARC/WET, filtering, MinHash | 8–16 часов | Версионированный корпус и fixed-budget сравнение |
+| [[02 Areas/ML & DL/06 Практика/24 Post-training и RLVR для математического reasoning|Post-training и RLVR для reasoning]] | SFT, DPO, GRPO, verifier | 8–16 часов | Сравнимые policy runs и evidence bundle |
 
 Первая интерактивная лаборатория уже доступна на сайте. Работы 06–17 используют
 полностью импортированные оригинальные лекции, notebooks и homework EDLS: ссылки
 внутри каждой работы ведут не на краткий пересказ, а на исходный учебный
 материал. Работа 18 связывает 34 оригинальные Harvard Marimo labs с каноническими
-главами и единым форматом design ledger. По мере развития сайта измерительные
+главами и единым форматом design ledger. Работы 20–24 продолжают Stanford CS336:
+от byte-level BPE и Transformer block через Triton и scaling campaign к
+воспроизводимому корпусу и RLVR. По мере развития сайта измерительные
 стенды можно переносить в интерактивные демо, не меняя постановку эксперимента.

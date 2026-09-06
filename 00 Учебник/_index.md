@@ -2,7 +2,7 @@
 title: Учебник по NLP и LLM
 type: textbook-chapter
 status: active
-last_updated: 2026-07-31
+last_updated: 2026-09-07
 ---
 
 # Учебник по NLP и LLM
@@ -129,10 +129,14 @@ S4. [[02 Areas/ML & DL/00 Учебник/10 ML Systems/04 Арифметика T
 S5. [[02 Areas/ML & DL/00 Учебник/10 ML Systems/05 Численные форматы и mixed precision]]
 S6. [[02 Areas/ML & DL/00 Учебник/10 ML Systems/06 Data pipeline, padding и packing]]
 S7. [[02 Areas/ML & DL/00 Учебник/10 ML Systems/07 Profiling ML-нагрузки]]
+S8. [[02 Areas/ML & DL/00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению]]
 
 ### VIII. Обучение LLM
 
+Введение. [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training|Данные и предобучение]]
+
 41. [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных]]
+    - 41.1. [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса|Дедупликация, PII и контроль качества корпуса]]
 42. [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/42 Next-token prediction]]
 43. [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/43 Scaling laws]]
 44. [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision]]
@@ -193,6 +197,8 @@ S7. [[02 Areas/ML & DL/00 Учебник/10 ML Systems/07 Profiling ML-нагр�
     - 64.4. [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding|Документы, OCR и visual grounding]]
     - 64.5. [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели|Видео, аудио и omni-модели]]
     - 64.6. [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM|Оценивание, отказы и serving VLM]]
+    - 64.7. [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений|Diffusion, latent diffusion и flow matching]]
+    - 64.8. [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon|Единая мультимодальная последовательность и Chameleon]]
 65. [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию]]
 66. [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/66 Agent harness и context engineering]]
 67. [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов]]

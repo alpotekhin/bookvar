@@ -209,6 +209,11 @@ describe('course ingestion ledger', () => {
       /destination_anchor.*does not exist/i
     ],
     [
+      'contract-only rows whose evidence does not list the exact test interface',
+      (bundle) => { bundle.pages!['contracts/a.yml'] = 'expected_tests: []\n'; },
+      /evidence does not list tests\/test_fixture\.py::pytest/i
+    ],
+    [
       'exclusions without reasons and evidence',
       (bundle) => {
         const row = coverageRow(bundle, 'coverage-excluded');
