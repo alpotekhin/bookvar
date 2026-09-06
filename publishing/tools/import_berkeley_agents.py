@@ -18,6 +18,7 @@ Network access exists only in ``--refresh`` and ``--check-upstream-drift``.
 from __future__ import annotations
 
 import argparse
+import copy
 import hashlib
 import json
 import os
@@ -29,6 +30,7 @@ import tempfile
 import urllib.error
 import urllib.parse
 import urllib.request
+from collections import Counter
 from dataclasses import dataclass
 from html.parser import HTMLParser
 from pathlib import Path
@@ -43,6 +45,7 @@ READINGS_ROOT = COURSE_ROOT / "Readings"
 METADATA_ROOT = COURSE_ROOT / "Metadata"
 SEMANTIC_REVIEW_PATH = COURSE_ROOT / "semantic-review.json"
 AUDIT_CONTRACT_PATH = COURSE_ROOT / "audit-contract.json"
+EDITORIAL_MAP_PATH = COURSE_ROOT / "editorial-map.yml"
 AUDIT_CONTRACT_SHA256 = "71fc60d9c4717b85fa2b664876af02adf0098f340bee4a13eb55d13ae7812fb5"
 SYLLABUS_URL = "https://rdi.berkeley.edu/adv-llm-agents/sp25"
 SYLLABUS_PATH = METADATA_ROOT / "syllabus.html"
@@ -1222,12 +1225,399 @@ def build_visuals(review: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+COVERAGE_EDITORIAL_DISPOSITIONS = {
+    "integrated",
+    "covered-existing",
+    "source-only",
+    "excluded",
+}
+VISUAL_EDITORIAL_DISPOSITIONS = COVERAGE_EDITORIAL_DISPOSITIONS
+EDITORIAL_TOP_LEVEL_FIELDS = {"schema_version", "reviewed_objects", "coverage", "visuals"}
+COVERAGE_EDITORIAL_FIELDS = {
+    "disposition",
+    "destination",
+    "destination_anchor",
+    "reason",
+    "evidence",
+}
+VISUAL_EDITORIAL_FIELDS = COVERAGE_EDITORIAL_FIELDS | {
+    "local_file",
+    "transformation",
+    "caption",
+    "rendered_route",
+    "desktop_evidence",
+    "narrow_evidence",
+    "reviewer",
+    "checked_at",
+}
+RESTRICTED_UNIT = "meeting-06-slides-nvidia-confidential-page"
+RESTRICTED_VISUAL = "meeting-06-slides-visual-nvidia-confidential-page"
+RIGHTS_REVIEW_UNIT = "meeting-06-slides-proprietary-adjacent-demo"
+RIGHTS_REVIEW_VISUAL = "meeting-06-slides-visual-proprietary-adjacent-demo"
+
+
+def _reject_duplicate_json_keys(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    result: dict[str, Any] = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError(f"duplicate JSON key: {key}")
+        result[key] = value
+    return result
+
+
+def load_editorial_overlay(path: Path = EDITORIAL_MAP_PATH) -> dict[str, Any]:
+    try:
+        label = path.relative_to(REPOSITORY_ROOT)
+    except ValueError:
+        label = path
+    try:
+        value = json.loads(path.read_text("utf-8"), object_pairs_hook=_reject_duplicate_json_keys)
+    except (OSError, json.JSONDecodeError, ValueError) as error:
+        raise RuntimeError(f"{label}: {error}") from error
+    if not isinstance(value, dict):
+        raise RuntimeError(f"{label}: expected mapping")
+    return value
+
+
+def editorial_overlay_sha256(overlay: dict[str, Any]) -> str:
+    return sha256_bytes(document_bytes(overlay))
+
+
+def editorial_disposition_counts(overlay: dict[str, Any]) -> dict[str, dict[str, int]]:
+    return {
+        section: dict(sorted(Counter(
+            decision["disposition"] for decision in overlay[section].values()
+        ).items()))
+        for section in ("coverage", "visuals")
+    }
+
+
+def markdown_anchor(text: str) -> str:
+    value = text.casefold().strip()
+    value = re.sub(r"[^\w\- ]", "", value, flags=re.UNICODE)
+    return re.sub(r"[ _]+", "-", value).strip("-")
+
+
+def destination_source_unit_ids(text: str) -> set[str]:
+    if not text.startswith("---\n"):
+        return set()
+    end = text.find("\n---", 4)
+    if end == -1:
+        return set()
+    frontmatter = text[4:end]
+    lines = frontmatter.splitlines()
+    values: set[str] = set()
+    for index, line in enumerate(lines):
+        match = re.fullmatch(r"source_unit_id:\s*(.*)", line)
+        if match is None:
+            continue
+        inline = match.group(1).strip()
+        if inline:
+            if inline.startswith("[") and inline.endswith("]"):
+                inline = inline[1:-1]
+            values.update(
+                item.strip().strip("'\"")
+                for item in inline.split(",")
+                if item.strip()
+            )
+            continue
+        for following in lines[index + 1 :]:
+            item = re.fullmatch(r"\s+-\s+(.+?)\s*", following)
+            if item is not None:
+                values.add(item.group(1).strip().strip("'\""))
+                continue
+            if following.startswith((" ", "\t")) or not following.strip():
+                continue
+            break
+    return values
+
+
+def destination_has_anchor(text: str, anchor: str) -> bool:
+    quoted = re.escape(anchor)
+    if re.search(rf"<(?:a|span)\b[^>]*(?:id|name)=[\"']{quoted}[\"']", text):
+        return True
+    for heading in re.findall(r"^#{1,6}\s+(.+?)\s*$", text, flags=re.MULTILINE):
+        if markdown_anchor(re.sub(r"\s+#+\s*$", "", heading)) == anchor:
+            return True
+    return False
+
+
+def resolve_repository_file(repository_root: Path, relative_path: str, label: str) -> Path:
+    if not isinstance(relative_path, str) or not relative_path.strip():
+        raise ValueError(f"{label} must be a non-empty repository-relative path")
+    root = repository_root.resolve()
+    destination = (root / relative_path).resolve()
+    if not destination.is_relative_to(root):
+        raise ValueError(f"{label} escapes repository root: {relative_path}")
+    if not destination.is_file():
+        raise ValueError(f"{label} does not exist: {relative_path}")
+    return destination
+
+
+def validate_destination(
+    repository_root: Path,
+    decision_id: str,
+    decision: dict[str, Any],
+    reciprocal_ids: set[str],
+) -> None:
+    destination_value = decision.get("destination")
+    anchor = decision.get("destination_anchor")
+    if not isinstance(destination_value, str) or not destination_value.strip():
+        raise ValueError(f"{decision_id}: integrated decision lacks destination")
+    if not isinstance(anchor, str) or not anchor.strip():
+        raise ValueError(f"{decision_id}: integrated decision lacks destination_anchor")
+    destination = resolve_repository_file(
+        repository_root,
+        destination_value,
+        f"{decision_id}: destination",
+    )
+    text = destination.read_text("utf-8")
+    if not destination_has_anchor(text, anchor):
+        raise ValueError(
+            f"{decision_id}: destination anchor does not exist: {destination_value}#{anchor}"
+        )
+    actual_source_ids = destination_source_unit_ids(text)
+    missing = sorted(reciprocal_ids - actual_source_ids)
+    if missing:
+        raise ValueError(
+            f"{decision_id}: destination lacks reciprocal source_unit_id values: {missing}"
+        )
+
+
+def _validate_restricted_decisions(
+    coverage_overlay: dict[str, Any],
+    visual_overlay: dict[str, Any],
+) -> None:
+    restricted_unit = coverage_overlay.get(RESTRICTED_UNIT, {})
+    restricted_visual = visual_overlay.get(RESTRICTED_VISUAL, {})
+    for decision_id, decision in (
+        (RESTRICTED_UNIT, restricted_unit),
+        (RESTRICTED_VISUAL, restricted_visual),
+    ):
+        if decision.get("disposition") != "excluded":
+            raise ValueError(f"{decision_id}: source-marked confidential page must remain excluded")
+        evidence = f"{decision.get('reason', '')} {decision.get('evidence', '')}".casefold()
+        if "do-not-reuse" not in evidence or "confidential" not in evidence:
+            raise ValueError(f"{decision_id}: exclusion must retain confidential do-not-reuse evidence")
+
+    for decision_id, decision in (
+        (RIGHTS_REVIEW_UNIT, coverage_overlay.get(RIGHTS_REVIEW_UNIT, {})),
+        (RIGHTS_REVIEW_VISUAL, visual_overlay.get(RIGHTS_REVIEW_VISUAL, {})),
+    ):
+        if decision.get("disposition") != "source-only":
+            raise ValueError(f"{decision_id}: pages 118-121 require a changed rights record before integration")
+        evidence = f"{decision.get('reason', '')} {decision.get('evidence', '')}".casefold()
+        if "rights review" not in evidence:
+            raise ValueError(f"{decision_id}: source-only decision must retain the pending rights review")
+
+
+def apply_editorial_overlay(
+    manifest: dict[str, Any],
+    source_units: dict[str, Any],
+    baseline_coverage: dict[str, Any],
+    baseline_visuals: dict[str, Any],
+    overlay: dict[str, Any],
+    *,
+    repository_root: Path = REPOSITORY_ROOT,
+    validate_destinations: bool = True,
+) -> tuple[dict[str, Any], dict[str, Any], str]:
+    unknown_top = sorted(set(overlay) - EDITORIAL_TOP_LEVEL_FIELDS)
+    if unknown_top:
+        raise ValueError(f"unsupported editorial overlay field: {unknown_top[0]}")
+    if overlay.get("schema_version") != 1:
+        raise ValueError("editorial overlay schema_version must be 1")
+
+    object_ids = {
+        item.get("id")
+        for item in manifest.get("objects", [])
+        if isinstance(item, dict) and isinstance(item.get("id"), str)
+    }
+    reviewed_objects = overlay.get("reviewed_objects")
+    if not isinstance(reviewed_objects, list) or not all(isinstance(item, str) for item in reviewed_objects):
+        raise ValueError("editorial overlay reviewed_objects must be a list of ids")
+    if len(reviewed_objects) != len(set(reviewed_objects)):
+        raise ValueError("editorial overlay reviewed_objects contains duplicates")
+    if set(reviewed_objects) != object_ids:
+        missing = sorted(object_ids - set(reviewed_objects))
+        unknown = sorted(set(reviewed_objects) - object_ids)
+        detail = f"missing={missing[:1]}, unknown={unknown[:1]}"
+        raise ValueError(f"editorial overlay must review every source object: {detail}")
+
+    unit_rows = source_units.get("units")
+    coverage_rows = baseline_coverage.get("rows")
+    visual_rows = baseline_visuals.get("rows")
+    if not isinstance(unit_rows, list) or not isinstance(coverage_rows, list):
+        raise ValueError("source units and baseline coverage must contain row lists")
+    if not isinstance(visual_rows, list):
+        raise ValueError("baseline visuals must contain a row list")
+    units_by_id = {row["id"]: row for row in unit_rows}
+    visuals_by_id = {row["id"]: row for row in visual_rows}
+    coverage_overlay = overlay.get("coverage")
+    visual_overlay = overlay.get("visuals")
+    if not isinstance(coverage_overlay, dict):
+        raise ValueError("editorial overlay coverage must be a mapping keyed by source unit id")
+    if not isinstance(visual_overlay, dict):
+        raise ValueError("editorial overlay visuals must be a mapping keyed by visual id")
+    if set(coverage_overlay) != set(units_by_id):
+        missing = sorted(set(units_by_id) - set(coverage_overlay))
+        unknown = sorted(set(coverage_overlay) - set(units_by_id))
+        raise ValueError(f"editorial overlay must decide every source unit exactly once: missing={missing[:1]}, unknown={unknown[:1]}")
+    if set(visual_overlay) != set(visuals_by_id):
+        missing = sorted(set(visuals_by_id) - set(visual_overlay))
+        unknown = sorted(set(visual_overlay) - set(visuals_by_id))
+        raise ValueError(f"editorial overlay must decide every visual exactly once: missing={missing[:1]}, unknown={unknown[:1]}")
+    _validate_restricted_decisions(coverage_overlay, visual_overlay)
+
+    coverage = copy.deepcopy(baseline_coverage)
+    visuals = copy.deepcopy(baseline_visuals)
+    output_coverage = {row["source_unit"]: row for row in coverage["rows"]}
+    output_visuals = {row["id"]: row for row in visuals["rows"]}
+
+    for unit_id, decision in coverage_overlay.items():
+        if not isinstance(decision, dict):
+            raise ValueError(f"coverage decision must be a mapping: {unit_id}")
+        unknown = sorted(set(decision) - COVERAGE_EDITORIAL_FIELDS)
+        if unknown:
+            raise ValueError(f"unsupported coverage editorial field: {unknown[0]}")
+        disposition = decision.get("disposition")
+        if disposition not in COVERAGE_EDITORIAL_DISPOSITIONS:
+            raise ValueError(f"{unit_id}: invalid disposition: {disposition!r}")
+        if units_by_id[unit_id].get("kind") == "administrative" and disposition not in {"source-only", "excluded"}:
+            raise ValueError(f"administrative source semantics may only be source-only or excluded: {unit_id}")
+        row = output_coverage[unit_id]
+        row.pop("reason", None)
+        row.pop("evidence", None)
+        if disposition == "excluded":
+            if "destination" in decision or "destination_anchor" in decision:
+                raise ValueError(f"{unit_id}: excluded decision cannot claim a destination")
+            row.pop("destination", None)
+            row.pop("destination_anchor", None)
+        row.update(decision)
+        if disposition in {"source-only", "excluded"}:
+            for field in ("reason", "evidence"):
+                value = row.get(field)
+                if not isinstance(value, str) or not value.strip():
+                    raise ValueError(f"{unit_id}: {disposition} decision lacks {field}")
+            if disposition == "source-only" and row.get("destination") != COURSE_HUB:
+                raise ValueError(f"{unit_id}: source-only decision must remain routed to the course hub")
+        else:
+            if validate_destinations:
+                validate_destination(repository_root, unit_id, row, {unit_id})
+            else:
+                for field in ("destination", "destination_anchor"):
+                    value = row.get(field)
+                    if not isinstance(value, str) or not value.strip():
+                        raise ValueError(f"{unit_id}: integrated decision lacks {field}")
+
+    for visual_id, decision in visual_overlay.items():
+        if not isinstance(decision, dict):
+            raise ValueError(f"visual decision must be a mapping: {visual_id}")
+        unknown = sorted(set(decision) - VISUAL_EDITORIAL_FIELDS)
+        if unknown:
+            raise ValueError(f"unsupported visual editorial field: {unknown[0]}")
+        disposition = decision.get("disposition")
+        if disposition not in VISUAL_EDITORIAL_DISPOSITIONS:
+            raise ValueError(f"{visual_id}: invalid disposition: {disposition!r}")
+        row = output_visuals[visual_id]
+        row.pop("reason", None)
+        row.pop("evidence", None)
+        if disposition == "excluded":
+            if "destination" in decision or "destination_anchor" in decision:
+                raise ValueError(f"{visual_id}: excluded decision cannot claim a destination")
+            row.pop("destination", None)
+            row.pop("destination_anchor", None)
+        row.update(decision)
+        if disposition in {"source-only", "excluded"}:
+            for field in ("reason", "evidence"):
+                value = row.get(field)
+                if not isinstance(value, str) or not value.strip():
+                    raise ValueError(f"{visual_id}: {disposition} decision lacks {field}")
+            if disposition == "source-only" and row.get("destination") != COURSE_HUB:
+                raise ValueError(f"{visual_id}: source-only decision must remain routed to the course hub")
+        else:
+            reciprocal = {item for item in row.get("source_units", []) if isinstance(item, str)}
+            linked_decisions = [coverage_overlay[unit_id] for unit_id in sorted(reciprocal)]
+            if not linked_decisions or any(
+                item.get("disposition") not in {"integrated", "covered-existing"}
+                for item in linked_decisions
+            ):
+                raise ValueError(f"{visual_id}: integrated visual must link integrated source units")
+            destinations = {
+                (item.get("destination"), item.get("destination_anchor"))
+                for item in linked_decisions
+            }
+            if destinations != {(row.get("destination"), row.get("destination_anchor"))}:
+                raise ValueError(f"{visual_id}: visual and source-unit destinations disagree")
+            required_fields = (
+                "local_file",
+                "transformation",
+                "caption",
+                "rendered_route",
+                "desktop_evidence",
+                "narrow_evidence",
+                "reviewer",
+                "checked_at",
+            )
+            for field in required_fields:
+                value = row.get(field)
+                if not isinstance(value, str) or not value.strip():
+                    raise ValueError(f"{visual_id}: integrated visual lacks {field}")
+            if validate_destinations:
+                for field in ("transformation", "rendered_route", "desktop_evidence", "narrow_evidence", "reviewer", "checked_at"):
+                    if "pending" in row[field].casefold() or "planned" in row[field].casefold():
+                        raise ValueError(f"{visual_id}: final visual evidence is still pending in {field}")
+                if not row["rendered_route"].startswith("/"):
+                    raise ValueError(f"{visual_id}: rendered_route must be an absolute site route")
+                if re.fullmatch(r"\d{4}-\d{2}-\d{2}", row["checked_at"]) is None:
+                    raise ValueError(f"{visual_id}: checked_at must be an ISO date")
+                validate_destination(repository_root, visual_id, row, reciprocal)
+                resolve_repository_file(repository_root, row["local_file"], f"{visual_id}: local_file")
+
+    integrated_local_files = [
+        row["local_file"]
+        for row in output_visuals.values()
+        if row.get("disposition") in {"integrated", "covered-existing"}
+    ]
+    if len(integrated_local_files) != len(set(integrated_local_files)):
+        raise ValueError("integrated visuals must not share a local_file")
+
+    overlay_sha = editorial_overlay_sha256(overlay)
+    coverage["editorial_overlay_sha256"] = overlay_sha
+    visuals["editorial_overlay_sha256"] = overlay_sha
+    return coverage, visuals, overlay_sha
+
+
 def build_documents() -> dict[str, dict[str, Any]]:
     review = semantic_review()
     manifest = build_manifest()
     units = build_units(review)
-    coverage = build_coverage(manifest, units, review)
-    visuals = build_visuals(review)
+    baseline_coverage = build_coverage(manifest, units, review)
+    baseline_visuals = build_visuals(review)
+
+    closure_failures: list[str] = []
+    validate_pdf_page_closure(manifest, units, baseline_coverage, closure_failures)
+    validate_visual_page_closure(manifest, units, baseline_visuals, closure_failures)
+    if closure_failures:
+        raise RuntimeError(
+            "Berkeley source-semantic closure failed before editorial overlay:\n- "
+            + "\n- ".join(closure_failures)
+        )
+
+    # Task 10 activation gate: the final audit overlay is already checked for exact
+    # unit/visual closure, but its destinations and extracted assets are being
+    # landed in later batches. Keep generated ledgers at the truthful baseline
+    # until those files exist. Final activation replaces the two assignments
+    # below with the validated overlay result and removes validate_destinations=False.
+    apply_editorial_overlay(
+        manifest,
+        units,
+        baseline_coverage,
+        baseline_visuals,
+        load_editorial_overlay(),
+        validate_destinations=False,
+    )
+    coverage = baseline_coverage
+    visuals = baseline_visuals
     return {
         "source-manifest.yml": manifest,
         "source-units.yml": units,
@@ -1432,6 +1822,7 @@ def build_snapshot_lock(documents: dict[str, dict[str, Any]]) -> dict[str, Any]:
         "generated_audit": {
             "semantic_review_sha256": sha256_file(SEMANTIC_REVIEW_PATH),
             "audit_contract_sha256": sha256_file(AUDIT_CONTRACT_PATH),
+            "staged_editorial_overlay_sha256": editorial_overlay_sha256(load_editorial_overlay()),
             "importer_sha256": sha256_file(Path(__file__).resolve()),
             "extractor_revision": EXTRACTOR_REVISION,
             "page_index_tool": PAGE_INDEX_TOOL,
@@ -1452,6 +1843,8 @@ def build_snapshot_lock(documents: dict[str, dict[str, Any]]) -> dict[str, Any]:
             "individual_readings": 37,
             "reading_distribution": EXPECTED_READING_DISTRIBUTION,
             "baseline_dispositions": ["source-only", "excluded"],
+            "editorial_overlay_status": "staged-pending-destination-validation",
+            "staged_editorial_counts": editorial_disposition_counts(load_editorial_overlay()),
         },
     }
 
@@ -1466,7 +1859,7 @@ def build_artifact_inventory(documents: dict[str, dict[str, Any]]) -> dict[str, 
         "schema_version": 1,
         "course": COURSE_NAME,
         "offering": OFFERING,
-        "status": "inventory complete; editorial integration pending",
+        "status": "inventory complete; editorial overlay staged",
         "audit_contract": {
             "local_path": "audit-contract.json",
             "sha256": AUDIT_CONTRACT_SHA256,
@@ -1483,8 +1876,15 @@ def build_artifact_inventory(documents: dict[str, dict[str, Any]]) -> dict[str, 
             "semantic_units": len(units["units"]),
             "coverage_rows": len(coverage["rows"]),
             "visual_rows": len(visuals["rows"]),
+            "coverage_by_disposition": dict(sorted(
+                Counter(row["disposition"] for row in coverage["rows"]).items()
+            )),
+            "visuals_by_disposition": dict(sorted(
+                Counter(row["disposition"] for row in visuals["rows"]).items()
+            )),
         },
         "reading_distribution": [len(bundle["readings"]) for bundle in manifest["meeting_bundles"]],
+        "staged_editorial_counts": editorial_disposition_counts(load_editorial_overlay()),
         "decks": [
             {
                 "id": deck.object_id,
@@ -1528,6 +1928,10 @@ def validate_generated_documents(
             failures.append(f"{name}: generated lock SHA mismatch")
         if audit.get("records") != ledger_record_count(name, actual_document):
             failures.append(f"{name}: generated lock record-count mismatch")
+    expected_overlay_sha = editorial_overlay_sha256(load_editorial_overlay())
+    locked_overlay_sha = snapshot_lock.get("generated_audit", {}).get("staged_editorial_overlay_sha256")
+    if locked_overlay_sha != expected_overlay_sha:
+        failures.append("snapshot lock staged editorial overlay SHA differs from the reviewed overlay")
 
 
 def validate_local_artifacts(manifest: dict[str, Any], failures: list[str]) -> None:
@@ -1632,6 +2036,8 @@ def check_upstream_drift() -> list[str]:
 
 def check() -> list[str]:
     failures: list[str] = []
+    if not EDITORIAL_MAP_PATH.exists():
+        failures.append("missing non-generated editorial overlay: editorial-map.yml")
     try:
         review = semantic_review()
     except (OSError, ValueError, json.JSONDecodeError) as error:

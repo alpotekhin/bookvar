@@ -2,19 +2,38 @@
 title: Berkeley Advanced LLM Agents — Spring 2025
 type: source-note
 status: verified
-last_verified: 2026-09-04
+last_verified: 2026-09-07
 ---
 
 # Berkeley Advanced LLM Agents — Spring 2025
 
 [Официальная страница курса](https://rdi.berkeley.edu/adv-llm-agents/sp25) ·
-`semantic-review.json` · `audit-contract.json` · `source-manifest.yml` · `source-units.yml` · `coverage.yml` · `visuals.yml` ·
+`semantic-review.json` · `audit-contract.json` · `editorial-map.yml` · `source-manifest.yml` · `source-units.yml` · `coverage.yml` · `visuals.yml` ·
 `snapshot-lock.json`
 
-Статус source layer: **inventory complete; editorial integration pending**.
-Это baseline-аудит источников, а не новая глава учебника: все 212 source units
-имеют только `source-only` или `excluded`, и ни один материал курса пока не
-помечен как интегрированный в Bookvar.
+Статус исходного слоя: **архив проверен, редакционная карта подготовлена**.
+Реестры `coverage.yml` и `visuals.yml` пока описывают только исходный архив: их
+строки остаются `source-only` или `excluded`, пока в учебнике не появятся все
+запланированные абзацы, якоря и изображения. В `editorial-map.yml` уже записано
+окончательное решение для каждого смыслового фрагмента и каждой иллюстрации.
+Импортёр не позволит преждевременно объявить материал перенесённым: при
+активации карты он должен найти страницу, точный якорь, обратную ссылку через
+`source_unit_id` и локальный файл выбранной иллюстрации.
+
+### Редакционная карта
+
+В `editorial-map.yml` нет решения «по умолчанию». Все **212 смысловых
+фрагментов** получили ровно один статус: 137 `integrated`, 6
+`covered-existing`, 41 `source-only` и 28 `excluded`. Для **161
+иллюстрации** также записано ровно одно решение:
+42 `integrated`, 92 `source-only` и 27 `excluded`.
+
+Карта уже проверяется при каждой пересборке, но пока только на структурную
+полноту. После переноса текста и изображений тот же валидатор дополнительно
+проверит все страницы и якоря, обратные ссылки на источники и файлы
+иллюстраций. Промежуточная сборка поэтому остаётся рабочей, а незакрытый перенос
+остаётся заметным: состояние карты и её SHA-256 закреплены в
+`snapshot-lock.json`.
 
 ## Что закреплено
 

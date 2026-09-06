@@ -9,6 +9,7 @@ import shutil
 import sys
 import tempfile
 import unittest
+from collections import Counter
 from pathlib import Path
 
 
@@ -30,6 +31,8 @@ class BerkeleyAgentsSourceAuditTest(unittest.TestCase):
         cls.coverage = read_document("coverage.yml")
         cls.visuals = read_document("visuals.yml")
         cls.lock = read_document("snapshot-lock.json")
+        cls.inventory = read_document("artifact-inventory.json")
+        cls.editorial = read_document("editorial-map.yml")
 
     def test_exact_meeting_deck_and_reading_inventory(self) -> None:
         bundles = self.manifest["meeting_bundles"]
@@ -343,6 +346,273 @@ class BerkeleyAgentsSourceAuditTest(unittest.TestCase):
         for row in self.visuals["rows"]:
             if row["rights_status"] == "permission-recorded":
                 self.assertEqual(row["license_identifier"], "User permission record (not a license)")
+
+    def test_staged_editorial_overlay_decides_every_unit_visual_and_object(self) -> None:
+        object_ids = {row["id"] for row in self.manifest["objects"]}
+        unit_ids = {row["id"] for row in self.units["units"]}
+        visual_ids = {row["id"] for row in self.visuals["rows"]}
+
+        self.assertEqual(self.editorial["schema_version"], 1)
+        self.assertEqual(len(self.editorial["reviewed_objects"]), len(set(self.editorial["reviewed_objects"])))
+        self.assertEqual(set(self.editorial["reviewed_objects"]), object_ids)
+        self.assertEqual(set(self.editorial["coverage"]), unit_ids)
+        self.assertEqual(set(self.editorial["visuals"]), visual_ids)
+        self.assertEqual(
+            Counter(row["disposition"] for row in self.editorial["coverage"].values()),
+            Counter({"integrated": 137, "covered-existing": 6, "source-only": 41, "excluded": 28}),
+        )
+        self.assertEqual(
+            Counter(row["disposition"] for row in self.editorial["visuals"].values()),
+            Counter({"integrated": 42, "source-only": 92, "excluded": 27}),
+        )
+
+    def test_staged_overlay_hash_and_counts_are_locked_without_relabelling_baseline(self) -> None:
+        importer = self._load_importer()
+        expected_hash = importer.editorial_overlay_sha256(self.editorial)
+        expected_counts = importer.editorial_disposition_counts(self.editorial)
+        self.assertEqual(
+            self.lock["generated_audit"]["staged_editorial_overlay_sha256"],
+            expected_hash,
+        )
+        self.assertEqual(self.lock["invariants"]["staged_editorial_counts"], expected_counts)
+        self.assertEqual(self.inventory["staged_editorial_counts"], expected_counts)
+        self.assertEqual(
+            self.lock["invariants"]["editorial_overlay_status"],
+            "staged-pending-destination-validation",
+        )
+        self.assertNotIn("editorial_overlay_sha256", self.coverage)
+        self.assertNotIn("editorial_overlay_sha256", self.visuals)
+
+    def test_staged_visual_selection_matches_the_full_audit_exactly(self) -> None:
+        expected = {
+            "meeting-01-slides-visual-self-consistency-sampling",
+            "meeting-01-slides-visual-tree-of-thoughts-search",
+            "meeting-01-slides-visual-reflection-and-self-debugging",
+            "meeting-01-slides-visual-self-correction-failure-modes",
+            "meeting-02-slides-visual-self-rewarding-setup",
+            "meeting-02-slides-visual-irpo",
+            "meeting-02-slides-visual-meta-rewarding",
+            "meeting-02-slides-visual-evalplanner",
+            "meeting-03-slides-visual-yu-su-hipporag-memory-sequence",
+            "meeting-03-slides-visual-yu-su-world-model-planning-sequence",
+            "meeting-04-slides-visual-sft-data-construction",
+            "meeting-04-slides-visual-rlvr-method",
+            "meeting-04-slides-visual-rlvr-results",
+            "meeting-04-slides-visual-s1k-data",
+            "meeting-04-slides-visual-test-time-scaling",
+            "meeting-05-slides-visual-swe-agent-loop",
+            "meeting-05-slides-visual-coding-agent-design-comparisons",
+            "meeting-06-slides-visual-visualwebarena",
+            "meeting-06-slides-visual-vision-language-web-agents",
+            "meeting-06-slides-visual-web-agent-tree-search",
+            "meeting-06-slides-visual-web-agent-tree-search-results",
+            "meeting-06-slides-visual-insta-setup",
+            "meeting-06-slides-visual-insta-verification-scaling",
+            "meeting-07-slides-visual-osworld",
+            "meeting-07-slides-visual-aguvis",
+            "meeting-08-slides-visual-rl-and-alphazero",
+            "meeting-08-slides-visual-alphaproof-methods",
+            "meeting-08-slides-visual-test-time-rl",
+            "meeting-09-slides-visual-kaiyu-yang-lean-theorem-proving-pipeline",
+            "meeting-09-slides-visual-leaneuclid",
+            "meeting-09-slides-visual-euclid-logical-gap",
+            "meeting-10-slides-visual-lean-star",
+            "meeting-10-slides-visual-draft-sketch-prove",
+            "meeting-10-slides-visual-leanhammer",
+            "meeting-10-slides-visual-minictx",
+            "meeting-11-slides-visual-copra",
+            "meeting-11-slides-visual-compiler-verification",
+            "meeting-11-slides-visual-swarat-chaudhuri-lasr-concept-library-sequence",
+            "meeting-12-slides-visual-dawn-song-agentic-threat-model-sequence",
+            "meeting-12-slides-visual-prompt-injection-agentpoison",
+            "meeting-12-slides-visual-dawn-song-privilege-control-sequence",
+            "meeting-12-slides-visual-agent-monitoring-and-verification",
+        }
+        actual = {
+            visual_id
+            for visual_id, decision in self.editorial["visuals"].items()
+            if decision["disposition"] == "integrated"
+        }
+        self.assertEqual(actual, expected)
+
+    def test_staged_unit_deferrals_and_exclusions_match_the_full_audit_exactly(self) -> None:
+        expected_covered = {
+            "meeting-01-slides-self-consistency-sampling",
+            "meeting-01-slides-tree-of-thoughts-search",
+            "meeting-03-slides-memory-takeaway",
+            "meeting-04-slides-preference-optimization",
+            "meeting-04-slides-rlvr-method",
+            "meeting-10-slides-advanced-prover-recap",
+        }
+        expected_source_only = {
+            "official-syllabus-coursework-and-schedule",
+            *(f"meeting-{number:02d}-recording-full-session" for number in range(1, 13)),
+            "meeting-01-intro-course-identity-and-staff",
+            "meeting-01-intro-prior-course-and-agent-frame",
+            "meeting-01-intro-course-topic-map",
+            "meeting-01-intro-official-coursework-contract",
+            "meeting-01-slides-inference-time-reasoning-orientation",
+            "meeting-02-slides-learning-to-reason-framing",
+            "meeting-02-slides-reasoning-training-foundations",
+            "meeting-02-slides-learning-to-reason-synthesis",
+            "meeting-03-slides-memory-planning-orientation",
+            "meeting-04-slides-open-posttraining-overview",
+            "meeting-04-slides-olmo-pretraining",
+            "meeting-04-slides-open-recipe-synthesis",
+            "meeting-06-slides-web-agent-overview",
+            "meeting-06-slides-plan-sequence-learn",
+            "meeting-06-slides-proprietary-adjacent-demo",
+            "meeting-07-slides-gui-agent-landscape",
+            "meeting-07-slides-xgen-video",
+            "meeting-07-slides-gens",
+            "meeting-07-slides-gui-agent-summary",
+            "meeting-08-slides-alphaproof-orientation",
+            "meeting-08-slides-riemann-zeta-demo",
+            "meeting-08-slides-formal-reasoning-future",
+            "meeting-08-reading-03-catalogue-record",
+            "meeting-08-reading-04-catalogue-record",
+            "meeting-09-slides-autoformalization-capability-race",
+            "meeting-10-slides-advanced-proving-frame",
+            "meeting-11-slides-abstraction-discovery-frame",
+            "meeting-11-slides-visual-concept-discovery",
+        }
+        expected_excluded = {
+            "practice-precioux-discovery-link",
+            "meeting-01-intro-course-website-pointer",
+            "meeting-01-slides-outline-before-prompting",
+            "meeting-01-slides-outline-before-self-consistency",
+            "meeting-01-slides-outline-before-reflection",
+            "meeting-01-slides-meeting-01-closing",
+            "meeting-02-slides-meeting-02-closing",
+            "meeting-03-slides-meeting-03-outline-a",
+            "meeting-03-slides-meeting-03-outline-b",
+            "meeting-03-slides-meeting-03-outline-c",
+            "meeting-03-slides-meeting-03-closing",
+            "meeting-04-slides-meeting-04-closing",
+            "meeting-06-slides-nvidia-confidential-page",
+            "meeting-06-slides-meeting-06-closing",
+            "meeting-07-slides-meeting-07-outline-a",
+            "meeting-07-slides-meeting-07-outline-b",
+            "meeting-08-slides-meeting-08-demo-divider",
+            "meeting-08-slides-meeting-08-closing",
+            "meeting-10-slides-meeting-10-methods-divider",
+            "meeting-10-slides-meeting-10-outline",
+            "meeting-10-slides-meeting-10-research-divider",
+            "meeting-10-slides-meeting-10-closing",
+            "meeting-11-slides-meeting-11-divider",
+            "meeting-11-slides-meeting-11-closing",
+            "meeting-12-slides-meeting-12-outline-a",
+            "meeting-12-slides-meeting-12-outline-b",
+            "meeting-12-slides-meeting-12-outline-c",
+            "meeting-12-slides-meeting-12-closing",
+        }
+        decisions = self.editorial["coverage"]
+        for disposition, expected in (
+            ("covered-existing", expected_covered),
+            ("source-only", expected_source_only),
+            ("excluded", expected_excluded),
+        ):
+            actual = {
+                unit_id for unit_id, decision in decisions.items()
+                if decision["disposition"] == disposition
+            }
+            self.assertEqual(actual, expected, disposition)
+
+    def test_staged_overlay_is_structurally_applied_without_claiming_destination_completion(self) -> None:
+        importer = self._load_importer()
+        review = importer.semantic_review()
+        manifest = importer.build_manifest()
+        units = importer.build_units(review)
+        baseline_coverage = importer.build_coverage(manifest, units, review)
+        baseline_visuals = importer.build_visuals(review)
+        coverage, visuals, overlay_sha = importer.apply_editorial_overlay(
+            manifest,
+            units,
+            baseline_coverage,
+            baseline_visuals,
+            self.editorial,
+            validate_destinations=False,
+        )
+        self.assertRegex(overlay_sha, r"^[a-f0-9]{64}$")
+        self.assertEqual(Counter(row["disposition"] for row in coverage["rows"]), Counter({
+            "integrated": 137,
+            "covered-existing": 6,
+            "source-only": 41,
+            "excluded": 28,
+        }))
+        self.assertEqual(Counter(row["disposition"] for row in visuals["rows"]), Counter({
+            "integrated": 42,
+            "source-only": 92,
+            "excluded": 27,
+        }))
+        generated = importer.build_documents()
+        self.assertNotIn("editorial_overlay_sha256", generated["coverage.yml"])
+        self.assertTrue(all(
+            row["disposition"] in {"source-only", "excluded"}
+            for row in generated["coverage.yml"]["rows"]
+        ))
+
+    def test_editorial_overlay_fails_closed_on_missing_or_unknown_decisions(self) -> None:
+        importer = self._load_importer()
+        review = importer.semantic_review()
+        manifest = importer.build_manifest()
+        units = importer.build_units(review)
+        baseline_coverage = importer.build_coverage(manifest, units, review)
+        baseline_visuals = importer.build_visuals(review)
+
+        missing = copy.deepcopy(self.editorial)
+        missing["coverage"].pop("meeting-01-slides-analogical-reasoning")
+        with self.assertRaisesRegex(ValueError, "decide every source unit exactly once"):
+            importer.apply_editorial_overlay(
+                manifest, units, baseline_coverage, baseline_visuals, missing,
+                validate_destinations=False,
+            )
+
+        unknown = copy.deepcopy(self.editorial)
+        unknown["visuals"]["unknown-visual"] = {
+            "disposition": "source-only", "reason": "test", "evidence": "test",
+        }
+        with self.assertRaisesRegex(ValueError, "decide every visual exactly once"):
+            importer.apply_editorial_overlay(
+                manifest, units, baseline_coverage, baseline_visuals, unknown,
+                validate_destinations=False,
+            )
+
+    def test_editorial_overlay_rejects_duplicate_json_keys(self) -> None:
+        importer = self._load_importer()
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "editorial-map.yml"
+            path.write_text('{"schema_version": 1, "coverage": {"x": {}, "x": {}}, "visuals": {}}', "utf-8")
+            with self.assertRaisesRegex(RuntimeError, "duplicate JSON key: x"):
+                importer.load_editorial_overlay(path)
+
+    def test_confidential_and_proprietary_adjacent_pages_fail_closed(self) -> None:
+        importer = self._load_importer()
+        review = importer.semantic_review()
+        manifest = importer.build_manifest()
+        units = importer.build_units(review)
+        baseline_coverage = importer.build_coverage(manifest, units, review)
+        baseline_visuals = importer.build_visuals(review)
+
+        confidential = copy.deepcopy(self.editorial)
+        confidential["visuals"][importer.RESTRICTED_VISUAL]["disposition"] = "source-only"
+        with self.assertRaisesRegex(ValueError, "confidential page must remain excluded"):
+            importer.apply_editorial_overlay(
+                manifest, units, baseline_coverage, baseline_visuals, confidential,
+                validate_destinations=False,
+            )
+
+        adjacent = copy.deepcopy(self.editorial)
+        adjacent["coverage"][importer.RIGHTS_REVIEW_UNIT] = {
+            "disposition": "integrated",
+            "destination": "future.md",
+            "destination_anchor": "future",
+        }
+        with self.assertRaisesRegex(ValueError, "changed rights record"):
+            importer.apply_editorial_overlay(
+                manifest, units, baseline_coverage, baseline_visuals, adjacent,
+                validate_destinations=False,
+            )
 
     def test_deterministic_validator_rejects_self_consistent_truncation(self) -> None:
         importer = self._load_importer()

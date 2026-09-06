@@ -2,7 +2,7 @@
   "schema_version": 1,
   "course": "Berkeley Advanced LLM Agents",
   "offering": "Spring 2025",
-  "status": "inventory complete; editorial integration pending",
+  "status": "inventory complete; editorial overlay staged",
   "audit_contract": {
     "local_path": "audit-contract.json",
     "sha256": "71fc60d9c4717b85fa2b664876af02adf0098f340bee4a13eb55d13ae7812fb5",
@@ -18,7 +18,15 @@
     "source_objects": 64,
     "semantic_units": 212,
     "coverage_rows": 212,
-    "visual_rows": 161
+    "visual_rows": 161,
+    "coverage_by_disposition": {
+      "excluded": 28,
+      "source-only": 184
+    },
+    "visuals_by_disposition": {
+      "excluded": 27,
+      "source-only": 134
+    }
   },
   "reading_distribution": [
     3,
@@ -34,6 +42,19 @@
     2,
     4
   ],
+  "staged_editorial_counts": {
+    "coverage": {
+      "covered-existing": 6,
+      "excluded": 28,
+      "integrated": 137,
+      "source-only": 41
+    },
+    "visuals": {
+      "excluded": 27,
+      "integrated": 42,
+      "source-only": 92
+    }
+  },
   "decks": [
     {
       "id": "meeting-01-intro",

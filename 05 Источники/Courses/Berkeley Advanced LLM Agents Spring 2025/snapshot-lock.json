@@ -13,7 +13,8 @@
   "generated_audit": {
     "semantic_review_sha256": "0dd492f1aa69d11aa3815aab7ce503f93341ac9ddb55689cbcc63dde3843a5b3",
     "audit_contract_sha256": "71fc60d9c4717b85fa2b664876af02adf0098f340bee4a13eb55d13ae7812fb5",
-    "importer_sha256": "337438e9072c55724c421c4399623aff5b5e9984bfbe6c2f50ac6c6436dc4cbb",
+    "staged_editorial_overlay_sha256": "798b07838707b4a623ecd702072f1d5759e7ddf2a9ac315da89ab9f5e261ca10",
+    "importer_sha256": "673142406b96ed1d1f12f7ce2114dd05e93300be4cf61dfcf20174f0621bac22",
     "extractor_revision": "berkeley-advanced-llm-agents-semantic-audit-v2",
     "page_index_tool": "pdftotext -layout (Poppler 26.04.0)",
     "ledgers": {
@@ -53,8 +54,8 @@
     },
     {
       "path": "publishing/tools/import_berkeley_agents.py",
-      "bytes": 88722,
-      "sha256": "337438e9072c55724c421c4399623aff5b5e9984bfbe6c2f50ac6c6436dc4cbb"
+      "bytes": 107759,
+      "sha256": "673142406b96ed1d1f12f7ce2114dd05e93300be4cf61dfcf20174f0621bac22"
     },
     {
       "path": "Lectures/meeting-01-intro.pdf",
@@ -395,6 +396,20 @@
     "baseline_dispositions": [
       "source-only",
       "excluded"
-    ]
+    ],
+    "editorial_overlay_status": "staged-pending-destination-validation",
+    "staged_editorial_counts": {
+      "coverage": {
+        "covered-existing": 6,
+        "excluded": 28,
+        "integrated": 137,
+        "source-only": 41
+      },
+      "visuals": {
+        "excluded": 27,
+        "integrated": 42,
+        "source-only": 92
+      }
+    }
   }
 }
