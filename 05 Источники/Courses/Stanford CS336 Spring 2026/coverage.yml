@@ -15,7 +15,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#steps=4-14:semantic=section-4-cs336-language-models-from-scratch-spring-2026; reviewed title: CS336: Language Models From Scratch (Spring 2026)"
     },
     {
       "id": "coverage-lecture-01-figure-step-5-rendering-1",
@@ -27,10 +28,9 @@
       "primary_sources": [
         "lecture-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "excluded",
+      "reason": "Decorative or third-party frame adds no mechanism required by the foundations narrative; it is not reused without an adequate teaching and rights basis.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=5:rendering=1; reviewed title: course staff"
     },
     {
       "id": "coverage-lecture-01-section-15-why-did-we-make-this-course",
@@ -45,7 +45,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#steps=15-25:semantic=section-15-why-did-we-make-this-course; reviewed title: Why did we make this course?"
     },
     {
       "id": "coverage-lecture-01-section-26-the-industrialization-of-language-models",
@@ -60,7 +61,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#steps=26-39:semantic=section-26-the-industrialization-of-language-models; reviewed title: The industrialization of language models"
     },
     {
       "id": "coverage-lecture-01-figure-step-27-rendering-1",
@@ -72,10 +74,9 @@
       "primary_sources": [
         "lecture-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "excluded",
+      "reason": "Decorative or third-party frame adds no mechanism required by the foundations narrative; it is not reused without an adequate teaching and rights basis.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=27:rendering=1; reviewed title: image dda46aa409183107fcd9201cd89dac21 https upload wikimedia org wikipedia commons c cc Industrialisation jpg"
     },
     {
       "id": "coverage-lecture-01-figure-step-33-rendering-1",
@@ -87,10 +88,9 @@
       "primary_sources": [
         "lecture-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "excluded",
+      "reason": "Decorative or third-party frame adds no mechanism required by the foundations narrative; it is not reused without an adequate teaching and rights basis.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=33:rendering=1; reviewed title: gpt4 no details"
     },
     {
       "id": "coverage-lecture-01-figure-step-37-rendering-1",
@@ -105,7 +105,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=37:rendering=1; reviewed title: roller flops"
     },
     {
       "id": "coverage-lecture-01-figure-step-39-rendering-1",
@@ -120,7 +121,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=39:rendering=1; reviewed title: wei emergence plot"
     },
     {
       "id": "coverage-lecture-01-section-40-what-can-we-learn-in-this-class-that-transfers-to-frontier-models",
@@ -135,7 +137,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#steps=40-46:semantic=section-40-what-can-we-learn-in-this-class-that-transfers-to-frontier-models; reviewed title: What can we learn in this class that transfers to frontier models?"
     },
     {
       "id": "coverage-lecture-01-section-47-intuitions",
@@ -150,7 +153,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#steps=47-50:semantic=section-47-intuitions; reviewed title: Intuitions? 🤷"
     },
     {
       "id": "coverage-lecture-01-figure-step-50-rendering-1",
@@ -162,10 +166,9 @@
       "primary_sources": [
         "lecture-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "excluded",
+      "reason": "Decorative or third-party frame adds no mechanism required by the foundations narrative; it is not reused without an adequate teaching and rights basis.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=50:rendering=1; reviewed title: divine benevolence"
     },
     {
       "id": "coverage-lecture-01-section-51-the-bitter-lesson",
@@ -180,7 +183,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#steps=51-53:semantic=section-51-the-bitter-lesson; reviewed title: The bitter lesson"
     },
     {
       "id": "coverage-lecture-01-section-54-accuracy-efficiency-x-resources",
@@ -195,7 +199,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#steps=54-61:semantic=section-54-accuracy-efficiency-x-resources; reviewed title: accuracy = efficiency x resources"
     },
     {
       "id": "coverage-lecture-01-section-62-pre-neural-before-2010s",
@@ -210,7 +215,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#steps=62-64:semantic=section-62-pre-neural-before-2010s; reviewed title: Pre-neural (before 2010s)"
     },
     {
       "id": "coverage-lecture-01-section-65-neural-ingredients-2010s",
@@ -225,7 +231,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#steps=65-73:semantic=section-65-neural-ingredients-2010s; reviewed title: Neural ingredients (2010s)"
     },
     {
       "id": "coverage-lecture-01-section-74-early-foundation-models-late-2010s",
@@ -240,7 +247,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#steps=74-77:semantic=section-74-early-foundation-models-late-2010s; reviewed title: Early foundation models (late 2010s)"
     },
     {
       "id": "coverage-lecture-01-section-78-embracing-scaling",
@@ -255,7 +263,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#steps=78-83:semantic=section-78-embracing-scaling; reviewed title: Embracing scaling"
     },
     {
       "id": "coverage-lecture-01-section-84-open-models",
@@ -270,7 +279,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#steps=84-133:semantic=section-84-open-models; reviewed title: Open models"
     },
     {
       "id": "coverage-lecture-01-administrative-why-you-should-take-this-course",
@@ -366,10 +376,9 @@
       "primary_sources": [
         "lecture-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "destination_anchor": "tokenizer-contract"
     },
     {
       "id": "coverage-lecture-01-figure-step-167-rendering-1",
@@ -381,10 +390,9 @@
       "primary_sources": [
         "lecture-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "destination_anchor": "tokenizer-contract"
     },
     {
       "id": "coverage-lecture-01-section-175-model-architecture",
@@ -396,10 +404,9 @@
       "primary_sources": [
         "lecture-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md",
+      "destination_anchor": "architecture-lineage"
     },
     {
       "id": "coverage-lecture-01-figure-step-177-rendering-1",
@@ -411,10 +418,9 @@
       "primary_sources": [
         "lecture-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "a1-construction"
     },
     {
       "id": "coverage-lecture-01-section-186-training",
@@ -426,10 +432,9 @@
       "primary_sources": [
         "lecture-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md",
+      "destination_anchor": "adamw"
     },
     {
       "id": "coverage-lecture-01-administrative-assignment-1-basics",
@@ -455,10 +460,9 @@
       "primary_sources": [
         "lecture-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "scope"
     },
     {
       "id": "coverage-lecture-01-figure-step-214-rendering-1",
@@ -470,10 +474,9 @@
       "primary_sources": [
         "lecture-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "memory-accounting"
     },
     {
       "id": "coverage-lecture-01-figure-step-220-rendering-1",
@@ -488,7 +491,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=220:rendering=1; reviewed title: image d41d89a3b5f61b2597e9a608032479f0 https docs nvidia com dgx dgxb200 user guide images dgx b200 system topology png"
     },
     {
       "id": "coverage-lecture-01-section-221-kernels",
@@ -503,7 +507,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#steps=221-230:semantic=section-221-kernels; reviewed title: Kernels"
     },
     {
       "id": "coverage-lecture-01-section-231-parallelism",
@@ -518,7 +523,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#steps=231-236:semantic=section-231-parallelism; reviewed title: Parallelism"
     },
     {
       "id": "coverage-lecture-01-section-237-inference",
@@ -533,7 +539,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#steps=237-247:semantic=section-237-inference; reviewed title: Inference"
     },
     {
       "id": "coverage-lecture-01-figure-step-241-rendering-1",
@@ -548,7 +555,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=241:rendering=1; reviewed title: prefill decode"
     },
     {
       "id": "coverage-lecture-01-administrative-assignment-2-systems",
@@ -577,7 +585,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=276:rendering=1; reviewed title: chinchilla isoflop"
     },
     {
       "id": "coverage-lecture-01-figure-step-280-rendering-1",
@@ -589,10 +598,9 @@
       "primary_sources": [
         "lecture-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "excluded",
+      "reason": "Decorative or third-party frame adds no mechanism required by the foundations narrative; it is not reused without an adequate teaching and rights basis.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=280:rendering=1; reviewed title: image 49c56e974c417eacabafcd41ab0a90f0 https pbs twimg com media HDuErvvbsAAQ5Yt format jpg name 4096x4096"
     },
     {
       "id": "coverage-lecture-01-administrative-assignment-3-scaling-laws",
@@ -621,7 +629,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#steps=294-301:semantic=section-294-evaluation; reviewed title: Evaluation"
     },
     {
       "id": "coverage-lecture-01-section-302-data-curation",
@@ -636,7 +645,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#steps=302-308:semantic=section-302-data-curation; reviewed title: Data curation"
     },
     {
       "id": "coverage-lecture-01-figure-step-305-rendering-1",
@@ -651,7 +661,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=305:rendering=1; reviewed title: image b3aebfa83a900cd491e70acf27806db3 https ar5iv labs arxiv org html 2101 00027 assets pile chart2 png"
     },
     {
       "id": "coverage-lecture-01-section-309-data-processing",
@@ -666,7 +677,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#steps=309-318:semantic=section-309-data-processing; reviewed title: Data processing"
     },
     {
       "id": "coverage-lecture-01-administrative-assignment-4-data",
@@ -706,10 +718,9 @@
       "primary_sources": [
         "lecture-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "destination_anchor": "tokenizer-contract"
     },
     {
       "id": "coverage-lecture-01-section-375-observations",
@@ -721,10 +732,9 @@
       "primary_sources": [
         "lecture-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "destination_anchor": "tokenizer-evidence"
     },
     {
       "id": "coverage-lecture-01-tokenizer-boundary-failure-modes",
@@ -736,10 +746,9 @@
       "primary_sources": [
         "lecture-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "destination_anchor": "tokenizer-evidence"
     },
     {
       "id": "coverage-lecture-01-section-462-byte-pair-encoding-bpe",
@@ -751,10 +760,9 @@
       "primary_sources": [
         "lecture-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "destination_anchor": "bpe-merge-trace"
     },
     {
       "id": "coverage-lecture-01-bpe-merge-code-trace",
@@ -766,10 +774,9 @@
       "primary_sources": [
         "lecture-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "destination_anchor": "bpe-merge-trace"
     },
     {
       "id": "coverage-lecture-01-section-470-training-the-tokenizer",
@@ -781,10 +788,9 @@
       "primary_sources": [
         "lecture-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "destination_anchor": "bpe-merge-trace"
     },
     {
       "id": "coverage-lecture-01-section-510-using-the-tokenizer",
@@ -796,10 +802,9 @@
       "primary_sources": [
         "lecture-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "destination_anchor": "tokenizer-evidence"
     },
     {
       "id": "coverage-lecture-02-figure-step-8-rendering-1",
@@ -811,10 +816,9 @@
       "primary_sources": [
         "lecture-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "excluded",
+      "reason": "Third-party or social-media frame is not needed to teach the derived resource argument and is not copied merely because it appears in the lecture.",
+      "evidence": "Lectures/repository/var/traces/lecture_02.json#step=8:rendering=1; reviewed title: image 75df5937a21eff96383d1c7c2ff05132 https pbs twimg com media HE1P1HmaUAAjLXF format jpg name medium"
     },
     {
       "id": "coverage-lecture-02-tensor-memory-accounting",
@@ -826,10 +830,9 @@
       "primary_sources": [
         "lecture-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "memory-accounting"
     },
     {
       "id": "coverage-lecture-02-floating-point-format-comparison",
@@ -841,10 +844,9 @@
       "primary_sources": [
         "lecture-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md",
+      "destination_anchor": "training-stability"
     },
     {
       "id": "coverage-lecture-02-section-58-fp32",
@@ -856,10 +858,9 @@
       "primary_sources": [
         "lecture-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md",
+      "destination_anchor": "training-stability"
     },
     {
       "id": "coverage-lecture-02-section-76-fp16",
@@ -871,10 +872,9 @@
       "primary_sources": [
         "lecture-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md",
+      "destination_anchor": "training-stability"
     },
     {
       "id": "coverage-lecture-02-section-86-bf16",
@@ -886,10 +886,9 @@
       "primary_sources": [
         "lecture-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md",
+      "destination_anchor": "training-stability"
     },
     {
       "id": "coverage-lecture-02-section-94-mixed-precision",
@@ -901,10 +900,9 @@
       "primary_sources": [
         "lecture-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md",
+      "destination_anchor": "training-stability"
     },
     {
       "id": "coverage-lecture-02-section-106-fp8",
@@ -916,10 +914,9 @@
       "primary_sources": [
         "lecture-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md",
+      "destination_anchor": "training-stability"
     },
     {
       "id": "coverage-lecture-02-section-111-fp4",
@@ -934,7 +931,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Reviewed and preserved at exact trace scope; this low-precision or evolving deep-network sequence belongs to a later systems treatment and is not flattened into Task 1.",
+      "evidence": "Lectures/repository/var/traces/lecture_02.json#steps=111-188:semantic=section-111-fp4; reviewed title: fp4"
     },
     {
       "id": "coverage-lecture-02-figure-step-125-rendering-1",
@@ -949,7 +947,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Reviewed and preserved at exact trace scope; this low-precision or evolving deep-network sequence belongs to a later systems treatment and is not flattened into Task 1.",
+      "evidence": "Lectures/repository/var/traces/lecture_02.json#step=125:rendering=1; reviewed title: cpu gpu"
     },
     {
       "id": "coverage-lecture-02-section-189-intuitions",
@@ -961,10 +960,9 @@
       "primary_sources": [
         "lecture-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "arithmetic-intensity"
     },
     {
       "id": "coverage-lecture-02-section-196-linear-model",
@@ -976,10 +974,9 @@
       "primary_sources": [
         "lecture-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "arithmetic-intensity"
     },
     {
       "id": "coverage-lecture-02-section-251-model-flops-utilization-mfu",
@@ -991,10 +988,9 @@
       "primary_sources": [
         "lecture-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "evidence-boundary"
     },
     {
       "id": "coverage-lecture-02-arithmetic-intensity-derivation",
@@ -1006,10 +1002,9 @@
       "primary_sources": [
         "lecture-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "arithmetic-intensity"
     },
     {
       "id": "coverage-lecture-02-figure-step-358-rendering-1",
@@ -1021,10 +1016,9 @@
       "primary_sources": [
         "lecture-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "excluded",
+      "reason": "Third-party or social-media frame is not needed to teach the derived resource argument and is not copied merely because it appears in the lecture.",
+      "evidence": "Lectures/repository/var/traces/lecture_02.json#step=358:rendering=1; reviewed title: image 42d32b9c87939fe9a4b0a268d6d02ea7 https jax ml github io scaling book assets img roofline improved 1400 webp"
     },
     {
       "id": "coverage-lecture-02-figure-step-369-rendering-1",
@@ -1039,7 +1033,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Reviewed and preserved at exact trace scope; this low-precision or evolving deep-network sequence belongs to a later systems treatment and is not flattened into Task 1.",
+      "evidence": "Lectures/repository/var/traces/lecture_02.json#step=369:rendering=1; reviewed title: deep network"
     },
     {
       "id": "coverage-lecture-02-figure-step-427-rendering-1",
@@ -1054,7 +1049,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Reviewed and preserved at exact trace scope; this low-precision or evolving deep-network sequence belongs to a later systems treatment and is not flattened into Task 1.",
+      "evidence": "Lectures/repository/var/traces/lecture_02.json#step=427:rendering=1; reviewed title: deep network"
     },
     {
       "id": "coverage-lecture-02-section-440-zoom-in-on-one-layer",
@@ -1066,10 +1062,9 @@
       "primary_sources": [
         "lecture-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "compute-accounting"
     },
     {
       "id": "coverage-lecture-02-section-454-consider-all-layers",
@@ -1081,10 +1076,9 @@
       "primary_sources": [
         "lecture-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "compute-accounting"
     },
     {
       "id": "coverage-lecture-02-section-515-memory",
@@ -1096,10 +1090,9 @@
       "primary_sources": [
         "lecture-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "memory-accounting"
     },
     {
       "id": "coverage-lecture-02-section-526-compute-for-one-training-step",
@@ -1111,10 +1104,9 @@
       "primary_sources": [
         "lecture-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "compute-accounting"
     },
     {
       "id": "coverage-lecture-02-section-529-transformers",
@@ -1126,10 +1118,9 @@
       "primary_sources": [
         "lecture-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "parameter-accounting"
     },
     {
       "id": "coverage-lecture-02-gradient-accumulation-example",
@@ -1141,10 +1132,9 @@
       "primary_sources": [
         "lecture-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "memory-accounting"
     },
     {
       "id": "coverage-lecture-02-figure-step-926-rendering-1",
@@ -1159,7 +1149,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Reviewed and preserved at exact trace scope; this low-precision or evolving deep-network sequence belongs to a later systems treatment and is not flattened into Task 1.",
+      "evidence": "Lectures/repository/var/traces/lecture_02.json#step=926:rendering=1; reviewed title: deep network"
     },
     {
       "id": "coverage-lecture-03-title-slide",
@@ -1185,10 +1176,9 @@
       "primary_sources": [
         "lecture-03"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-03",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md",
+      "destination_anchor": "architecture-lineage"
     },
     {
       "id": "coverage-lecture-03-normalization-stability",
@@ -1200,10 +1190,9 @@
       "primary_sources": [
         "lecture-03"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-03",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual.md",
+      "destination_anchor": "normalization-stability"
     },
     {
       "id": "coverage-lecture-03-rmsnorm-validation",
@@ -1215,10 +1204,9 @@
       "primary_sources": [
         "lecture-03"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-03",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual.md",
+      "destination_anchor": "rmsnorm-validation"
     },
     {
       "id": "coverage-lecture-03-gated-activations",
@@ -1230,10 +1218,9 @@
       "primary_sources": [
         "lecture-03"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-03",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual.md",
+      "destination_anchor": "ffn-variants"
     },
     {
       "id": "coverage-lecture-03-rope-derivation",
@@ -1245,10 +1232,9 @@
       "primary_sources": [
         "lecture-03"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-03",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/05 Attention и Transformer/04 Позиционная информация.md",
+      "destination_anchor": "rope-relative-position-derivation"
     },
     {
       "id": "coverage-lecture-03-hyperparameter-evidence",
@@ -1260,10 +1246,9 @@
       "primary_sources": [
         "lecture-03"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-03",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/02 Современный decoder block.md",
+      "destination_anchor": "decoder-hyperparameter-evidence"
     },
     {
       "id": "coverage-lecture-03-softmax-stability-failures",
@@ -1275,10 +1260,9 @@
       "primary_sources": [
         "lecture-03"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-03",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual.md",
+      "destination_anchor": "stability-controls"
     },
     {
       "id": "coverage-lecture-03-kv-cache-attention",
@@ -1290,10 +1274,9 @@
       "primary_sources": [
         "lecture-03"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-03",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/02 Современный decoder block.md",
+      "destination_anchor": "efficient-attention-boundary"
     },
     {
       "id": "coverage-lecture-03-sparse-attention",
@@ -1305,10 +1288,9 @@
       "primary_sources": [
         "lecture-03"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-03",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/02 Современный decoder block.md",
+      "destination_anchor": "efficient-attention-boundary"
     },
     {
       "id": "coverage-lecture-03-recap",
@@ -1320,10 +1302,9 @@
       "primary_sources": [
         "lecture-03"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-03",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md",
+      "destination_anchor": "architecture-evidence-boundary"
     },
     {
       "id": "coverage-lecture-04-title-slide",
@@ -4477,10 +4458,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "destination_anchor": "tokenizer-contract"
     },
     {
       "id": "coverage-assignment-01-deliverable-unicode1-001",
@@ -4495,7 +4475,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=3:deliverable=1; reviewed title: A one-sentence response."
     },
     {
       "id": "coverage-assignment-01-deliverable-unicode1-002",
@@ -4510,7 +4491,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=3:deliverable=2; reviewed title: A one-sentence response."
     },
     {
       "id": "coverage-assignment-01-deliverable-unicode1-003",
@@ -4525,7 +4507,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=4:deliverable=3; reviewed title: A one-sentence response."
     },
     {
       "id": "coverage-assignment-01-task-unicode2",
@@ -4537,10 +4520,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "destination_anchor": "tokenizer-contract"
     },
     {
       "id": "coverage-assignment-01-deliverable-unicode2-004",
@@ -4555,7 +4537,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=4:deliverable=4; reviewed title: A one-to-two sentence response."
     },
     {
       "id": "coverage-assignment-01-deliverable-unicode2-005",
@@ -4570,7 +4553,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=5:deliverable=5; reviewed title: An example input byte string for which decode_utf8_bytes_to_str_wrong"
     },
     {
       "id": "coverage-assignment-01-deliverable-unicode2-006",
@@ -4585,7 +4569,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=5:deliverable=6; reviewed title: An example, with a one-sentence explanation."
     },
     {
       "id": "coverage-assignment-01-task-train-bpe",
@@ -4597,10 +4582,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "destination_anchor": "tokenizer-contract"
     },
     {
       "id": "coverage-assignment-01-deliverable-train-bpe-007",
@@ -4615,7 +4599,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=9:deliverable=7; reviewed title: Write a function that, given a path to an input text file, trains a (byte-level) BPE"
     },
     {
       "id": "coverage-assignment-01-task-train-bpe-tinystories",
@@ -4627,10 +4612,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "destination_anchor": "tokenizer-contract"
     },
     {
       "id": "coverage-assignment-01-bpe-runtime",
@@ -4642,10 +4626,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "destination_anchor": "tokenizer-evidence"
     },
     {
       "id": "coverage-assignment-01-deliverable-train-bpe-tinystories-008",
@@ -4660,7 +4643,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=10:deliverable=8; reviewed title: A one-to-two sentence response."
     },
     {
       "id": "coverage-assignment-01-deliverable-train-bpe-tinystories-009",
@@ -4675,7 +4659,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=10:deliverable=9; reviewed title: A one-to-two sentence response."
     },
     {
       "id": "coverage-assignment-01-task-train-bpe-expts-owt",
@@ -4687,10 +4672,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "destination_anchor": "tokenizer-contract"
     },
     {
       "id": "coverage-assignment-01-deliverable-train-bpe-expts-owt-010",
@@ -4705,7 +4689,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=10:deliverable=10; reviewed title: A one-to-two sentence response."
     },
     {
       "id": "coverage-assignment-01-deliverable-train-bpe-expts-owt-011",
@@ -4720,7 +4705,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=10:deliverable=11; reviewed title: A one-to-two sentence response."
     },
     {
       "id": "coverage-assignment-01-task-tokenizer",
@@ -4732,10 +4718,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "destination_anchor": "tokenizer-contract"
     },
     {
       "id": "coverage-assignment-01-deliverable-tokenizer-012",
@@ -4750,7 +4735,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=11:deliverable=12; reviewed title: Implement a Tokenizer class that, given a vocabulary and a list of merges, encodes"
     },
     {
       "id": "coverage-assignment-01-task-tokenizer-experiments",
@@ -4762,10 +4748,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "destination_anchor": "tokenizer-contract"
     },
     {
       "id": "coverage-assignment-01-deliverable-tokenizer-experiments-013",
@@ -4780,7 +4765,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=12:deliverable=13; reviewed title: A one-to-two sentence response."
     },
     {
       "id": "coverage-assignment-01-deliverable-tokenizer-experiments-014",
@@ -4795,7 +4781,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=12:deliverable=14; reviewed title: A one-to-two sentence response."
     },
     {
       "id": "coverage-assignment-01-deliverable-tokenizer-experiments-015",
@@ -4810,7 +4797,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=12:deliverable=15; reviewed title: A one-to-two sentence response."
     },
     {
       "id": "coverage-assignment-01-deliverable-tokenizer-experiments-016",
@@ -4825,7 +4813,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=13:deliverable=16; reviewed title: A one-to-two sentence response."
     },
     {
       "id": "coverage-assignment-01-transformer-construction-sequence",
@@ -4837,10 +4826,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "a1-construction"
     },
     {
       "id": "coverage-assignment-01-task-linear",
@@ -4852,10 +4840,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "a1-construction"
     },
     {
       "id": "coverage-assignment-01-deliverable-linear-017",
@@ -4870,7 +4857,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=18:deliverable=17; reviewed title: Implement a Linear class that inherits from torch.nn.Module and performs a linear"
     },
     {
       "id": "coverage-assignment-01-task-embedding",
@@ -4882,10 +4870,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "a1-construction"
     },
     {
       "id": "coverage-assignment-01-deliverable-embedding-018",
@@ -4900,7 +4887,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=18:deliverable=18; reviewed title: Implement the Embedding class that inherits from torch.nn.Module and performs an"
     },
     {
       "id": "coverage-assignment-01-task-rmsnorm",
@@ -4912,10 +4900,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual.md",
+      "destination_anchor": "rmsnorm-validation"
     },
     {
       "id": "coverage-assignment-01-deliverable-rmsnorm-019",
@@ -4930,7 +4917,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=20:deliverable=19; reviewed title: Implement RMSNorm as a torch.nn.Module. We recommend the following interface"
     },
     {
       "id": "coverage-assignment-01-task-positionwise-feedforward",
@@ -4942,10 +4930,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual.md",
+      "destination_anchor": "ffn-variants"
     },
     {
       "id": "coverage-assignment-01-deliverable-positionwise-feedforward-020",
@@ -4960,7 +4947,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=22:deliverable=20; reviewed title: Implement the SwiGLU feed-forward network, composed of a SiLU activation"
     },
     {
       "id": "coverage-assignment-01-task-rope",
@@ -4972,10 +4960,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "a1-construction"
     },
     {
       "id": "coverage-assignment-01-deliverable-rope-021",
@@ -4990,7 +4977,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=23:deliverable=21; reviewed title: Implement a class RotaryPositionalEmbedding that applies RoPE to the input"
     },
     {
       "id": "coverage-assignment-01-task-softmax",
@@ -5002,10 +4990,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction.md",
+      "destination_anchor": "stable-cross-entropy"
     },
     {
       "id": "coverage-assignment-01-deliverable-softmax-022",
@@ -5020,7 +5007,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=24:deliverable=22; reviewed title: Write a function to apply the softmax operation on a tensor. Your function should"
     },
     {
       "id": "coverage-assignment-01-task-scaled-dot-product-attention",
@@ -5032,10 +5020,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров.md",
+      "destination_anchor": "named-attention-shapes"
     },
     {
       "id": "coverage-assignment-01-deliverable-scaled-dot-product-attention-023",
@@ -5050,7 +5037,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=24:deliverable=23; reviewed title: Implement the scaled dot-product attention function. Your implementation should"
     },
     {
       "id": "coverage-assignment-01-task-multihead-self-attention",
@@ -5062,10 +5050,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров.md",
+      "destination_anchor": "named-attention-shapes"
     },
     {
       "id": "coverage-assignment-01-deliverable-multihead-self-attention-024",
@@ -5080,7 +5067,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=26:deliverable=24; reviewed title: Implement causal multi-head self-attention as a torch.nn.Module. Your"
     },
     {
       "id": "coverage-assignment-01-task-transformer-block",
@@ -5092,10 +5080,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md",
+      "destination_anchor": "architecture-lineage"
     },
     {
       "id": "coverage-assignment-01-deliverable-transformer-block-025",
@@ -5110,7 +5097,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=26:deliverable=25; reviewed title: Transformer block code that passes the provided tests."
     },
     {
       "id": "coverage-assignment-01-task-transformer-lm",
@@ -5122,10 +5110,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md",
+      "destination_anchor": "architecture-lineage"
     },
     {
       "id": "coverage-assignment-01-deliverable-transformer-lm-026",
@@ -5140,7 +5127,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=27:deliverable=26; reviewed title: A Transformer LM module that passes the above tests."
     },
     {
       "id": "coverage-assignment-01-task-transformer-accounting",
@@ -5152,10 +5140,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "parameter-accounting"
     },
     {
       "id": "coverage-assignment-01-deliverable-transformer-accounting-027",
@@ -5170,7 +5157,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=27:deliverable=27; reviewed title: A one-to-two sentence response."
     },
     {
       "id": "coverage-assignment-01-deliverable-transformer-accounting-028",
@@ -5185,7 +5173,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=28:deliverable=28; reviewed title: A list of matrix multiplies (with descriptions), and the total number of FLOPs"
     },
     {
       "id": "coverage-assignment-01-deliverable-transformer-accounting-029",
@@ -5200,7 +5189,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=28:deliverable=29; reviewed title: A one-to-two sentence response."
     },
     {
       "id": "coverage-assignment-01-deliverable-transformer-accounting-030",
@@ -5215,7 +5205,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=28:deliverable=30; reviewed title: For each model, provide a breakdown of model components and its associated"
     },
     {
       "id": "coverage-assignment-01-deliverable-transformer-accounting-031",
@@ -5230,7 +5221,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=28:deliverable=31; reviewed title: A one-to-two sentence response."
     },
     {
       "id": "coverage-assignment-01-task-cross-entropy",
@@ -5242,10 +5234,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction.md",
+      "destination_anchor": "stable-cross-entropy"
     },
     {
       "id": "coverage-assignment-01-deliverable-cross-entropy-032",
@@ -5260,7 +5251,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=29:deliverable=32; reviewed title: Write a function to compute the cross-entropy loss, which takes in predicted logits"
     },
     {
       "id": "coverage-assignment-01-task-learning-rate-tuning",
@@ -5272,10 +5264,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md",
+      "destination_anchor": "schedule-boundary"
     },
     {
       "id": "coverage-assignment-01-deliverable-learning-rate-tuning-033",
@@ -5290,7 +5281,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=31:deliverable=33; reviewed title: A one-to-two sentence response with the behaviors you observed."
     },
     {
       "id": "coverage-assignment-01-task-adamw",
@@ -5302,10 +5294,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md",
+      "destination_anchor": "adamw"
     },
     {
       "id": "coverage-assignment-01-deliverable-adamw-034",
@@ -5320,7 +5311,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=32:deliverable=34; reviewed title: Implement the AdamW optimizer as a subclass of torch.optim.Optimizer. Your"
     },
     {
       "id": "coverage-assignment-01-task-adamw-accounting",
@@ -5332,10 +5324,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "parameter-accounting"
     },
     {
       "id": "coverage-assignment-01-deliverable-adamw-accounting-035",
@@ -5350,7 +5341,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=33:deliverable=35; reviewed title: An algebraic expression for each of parameters, activations, gradients, and"
     },
     {
       "id": "coverage-assignment-01-deliverable-adamw-accounting-036",
@@ -5365,7 +5357,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=33:deliverable=36; reviewed title: An expression that looks like 𝑎 ⋅ batch_size + 𝑏 for numerical values 𝑎, 𝑏, and a"
     },
     {
       "id": "coverage-assignment-01-deliverable-adamw-accounting-037",
@@ -5380,7 +5373,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=33:deliverable=37; reviewed title: An algebraic expression, with a brief justification."
     },
     {
       "id": "coverage-assignment-01-deliverable-adamw-accounting-038",
@@ -5395,7 +5389,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=33:deliverable=38; reviewed title: The number of hours training would take, with a brief justification."
     },
     {
       "id": "coverage-assignment-01-task-learning-rate-schedule",
@@ -5407,10 +5402,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md",
+      "destination_anchor": "schedule-boundary"
     },
     {
       "id": "coverage-assignment-01-task-gradient-clipping",
@@ -5422,10 +5416,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md",
+      "destination_anchor": "training-stability"
     },
     {
       "id": "coverage-assignment-01-task-data-loading",
@@ -5437,10 +5430,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "training-contract"
     },
     {
       "id": "coverage-assignment-01-deliverable-data-loading-039",
@@ -5455,7 +5447,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=34:deliverable=39; reviewed title: Write a function that takes a numpy array 𝑥 (integer array with token IDs), a"
     },
     {
       "id": "coverage-assignment-01-task-checkpointing",
@@ -5467,10 +5460,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "training-contract"
     },
     {
       "id": "coverage-assignment-01-task-training-together",
@@ -5482,10 +5474,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "training-contract"
     },
     {
       "id": "coverage-assignment-01-deliverable-training-together-040",
@@ -5500,7 +5491,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=36:deliverable=40; reviewed title: Write a script that runs a training loop to train your model on user-provided input."
     },
     {
       "id": "coverage-assignment-01-task-decoding",
@@ -5512,10 +5504,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "training-contract"
     },
     {
       "id": "coverage-assignment-01-deliverable-decoding-041",
@@ -5530,7 +5521,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=38:deliverable=41; reviewed title: Implement a function to decode from your language model. We recommend that"
     },
     {
       "id": "coverage-assignment-01-task-experiment-log",
@@ -5542,10 +5534,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "training-contract"
     },
     {
       "id": "coverage-assignment-01-deliverable-experiment-log-042",
@@ -5560,7 +5551,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=39:deliverable=42; reviewed title: Logging infrastructure code for your experiments and an experiment log (a"
     },
     {
       "id": "coverage-assignment-01-tinystories-loss",
@@ -5572,10 +5564,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "acceptance"
     },
     {
       "id": "coverage-assignment-01-task-learning-rate",
@@ -5587,10 +5578,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "experiment-contract"
     },
     {
       "id": "coverage-assignment-01-deliverable-learning-rate-043",
@@ -5605,7 +5595,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=40:deliverable=43; reviewed title: Learning curves associated with multiple learning rates. Explain your"
     },
     {
       "id": "coverage-assignment-01-deliverable-learning-rate-044",
@@ -5620,7 +5611,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=40:deliverable=44; reviewed title: A model with validation loss (per-token) on TinyStories of at most 1.45"
     },
     {
       "id": "coverage-assignment-01-deliverable-learning-rate-045",
@@ -5635,7 +5627,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=41:deliverable=45; reviewed title: Learning curves of increasing learning rate which include at least one divergent"
     },
     {
       "id": "coverage-assignment-01-task-batch-size-experiment",
@@ -5647,10 +5640,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "experiment-contract"
     },
     {
       "id": "coverage-assignment-01-deliverable-batch-size-experiment-046",
@@ -5665,7 +5657,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=41:deliverable=46; reviewed title: Learning curves for runs with different batch sizes. The learning rates should be"
     },
     {
       "id": "coverage-assignment-01-deliverable-batch-size-experiment-047",
@@ -5680,7 +5673,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=41:deliverable=47; reviewed title: A few sentences discussing your findings on batch sizes and their impacts on"
     },
     {
       "id": "coverage-assignment-01-task-generate",
@@ -5692,10 +5686,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "experiment-contract"
     },
     {
       "id": "coverage-assignment-01-deliverable-generate-048",
@@ -5710,7 +5703,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=42:deliverable=48; reviewed title: Text dump of at least 256 tokens of text (or until the first <|endoftext|> token),"
     },
     {
       "id": "coverage-assignment-01-task-layer-norm-ablation",
@@ -5722,10 +5716,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "experiment-contract"
     },
     {
       "id": "coverage-assignment-01-deliverable-layer-norm-ablation-049",
@@ -5740,7 +5733,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=42:deliverable=49; reviewed title: A learning curve for when you remove RMSNorms and train, as well as a learning"
     },
     {
       "id": "coverage-assignment-01-deliverable-layer-norm-ablation-050",
@@ -5755,7 +5749,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=42:deliverable=50; reviewed title: A few sentences of commentary on the impact of RMSNorm."
     },
     {
       "id": "coverage-assignment-01-task-pre-norm-ablation",
@@ -5767,10 +5762,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "experiment-contract"
     },
     {
       "id": "coverage-assignment-01-deliverable-pre-norm-ablation-051",
@@ -5785,7 +5779,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=43:deliverable=51; reviewed title: A learning curve for a post-norm Transformer, compared to the pre-norm one."
     },
     {
       "id": "coverage-assignment-01-task-no-pos-emb",
@@ -5797,10 +5792,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "experiment-contract"
     },
     {
       "id": "coverage-assignment-01-deliverable-no-pos-emb-052",
@@ -5815,7 +5809,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=43:deliverable=52; reviewed title: A learning curve comparing the performance of RoPE and NoPE."
     },
     {
       "id": "coverage-assignment-01-task-swiglu-ablation",
@@ -5827,10 +5822,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "experiment-contract"
     },
     {
       "id": "coverage-assignment-01-deliverable-swiglu-ablation-053",
@@ -5845,7 +5839,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=44:deliverable=53; reviewed title: A learning curve comparing the performance of SwiGLU and SiLU feed-forward"
     },
     {
       "id": "coverage-assignment-01-deliverable-swiglu-ablation-054",
@@ -5860,7 +5855,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=44:deliverable=54; reviewed title: A few sentences discussing your findings."
     },
     {
       "id": "coverage-assignment-01-task-main-experiment",
@@ -5872,10 +5868,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "experiment-contract"
     },
     {
       "id": "coverage-assignment-01-deliverable-main-experiment-055",
@@ -5890,7 +5885,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=45:deliverable=55; reviewed title: A learning curve of your language model on OpenWebText. Describe the difference"
     },
     {
       "id": "coverage-assignment-01-deliverable-main-experiment-056",
@@ -5905,7 +5901,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=45:deliverable=56; reviewed title: Generated text from OpenWebText LM, in the same format as the TinyStories"
     },
     {
       "id": "coverage-assignment-01-task-leaderboard",
@@ -5917,10 +5914,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "experiment-contract"
     },
     {
       "id": "coverage-assignment-01-bibliography",
@@ -5946,10 +5942,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "acceptance"
     },
     {
       "id": "coverage-assignment-01-deliverable-leaderboard-057",
@@ -5964,7 +5959,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=46:deliverable=57; reviewed title: The final validation loss that was recorded, an associated learning curve that clearly"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-train-bpe-py-8-test-train-bpe-speed",
@@ -5976,10 +5972,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-nn-utils-py-9-test-softmax-matches-pytorch",
@@ -5991,10 +5986,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-data-py-10-test-get-batch",
@@ -6006,10 +6000,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-model-py-21-test-linear",
@@ -6021,10 +6014,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-nn-utils-py-27-test-cross-entropy",
@@ -6036,10 +6028,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-train-bpe-py-27-test-train-bpe",
@@ -6051,10 +6042,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-optimizer-py-29-test-adamw",
@@ -6066,10 +6056,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-model-py-32-test-embedding",
@@ -6081,10 +6070,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-model-py-43-test-swiglu",
@@ -6096,10 +6084,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-optimizer-py-52-test-get-lr-cosine-schedule",
@@ -6111,10 +6098,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-model-py-57-test-scaled-dot-product-attention",
@@ -6126,10 +6112,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-serialization-py-57-test-checkpointing",
@@ -6141,10 +6126,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-nn-utils-py-62-test-gradient-clipping",
@@ -6156,10 +6140,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-model-py-65-test-4d-scaled-dot-product-attention",
@@ -6171,10 +6154,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-train-bpe-py-65-test-train-bpe-special-tokens",
@@ -6186,10 +6168,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-model-py-77-test-multihead-self-attention",
@@ -6201,10 +6182,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-tokenizer-py-77-test-roundtrip-empty",
@@ -6216,10 +6196,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-tokenizer-py-88-test-empty-matches-tiktoken",
@@ -6231,10 +6210,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-model-py-94-test-multihead-self-attention-with-rope",
@@ -6246,10 +6224,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-tokenizer-py-107-test-roundtrip-single-character",
@@ -6261,10 +6238,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-model-py-117-test-transformer-lm",
@@ -6276,10 +6252,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-tokenizer-py-118-test-single-character-matches-tiktoken",
@@ -6291,10 +6266,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-model-py-136-test-transformer-lm-truncated-input",
@@ -6306,10 +6280,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-tokenizer-py-137-test-roundtrip-single-unicode-character",
@@ -6321,10 +6294,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-tokenizer-py-148-test-single-unicode-character-matches-tiktoken",
@@ -6336,10 +6308,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-model-py-158-test-transformer-block",
@@ -6351,10 +6322,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-tokenizer-py-164-test-roundtrip-ascii-string",
@@ -6366,10 +6336,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-tokenizer-py-175-test-ascii-string-matches-tiktoken",
@@ -6381,10 +6350,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-model-py-176-test-rmsnorm",
@@ -6396,10 +6364,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-model-py-186-test-rope",
@@ -6411,10 +6378,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-model-py-193-test-silu-matches-pytorch",
@@ -6426,10 +6392,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-tokenizer-py-193-test-roundtrip-unicode-string",
@@ -6441,10 +6406,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-tokenizer-py-204-test-unicode-string-matches-tiktoken",
@@ -6456,10 +6420,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-tokenizer-py-219-test-roundtrip-unicode-string-with-special-tokens",
@@ -6471,10 +6434,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-tokenizer-py-233-test-unicode-string-with-special-tokens-matches-tiktoken",
@@ -6486,10 +6448,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-tokenizer-py-248-test-overlapping-special-tokens",
@@ -6501,10 +6462,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-tokenizer-py-265-test-address-roundtrip",
@@ -6516,10 +6476,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-tokenizer-py-277-test-address-matches-tiktoken",
@@ -6531,10 +6490,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-tokenizer-py-294-test-german-roundtrip",
@@ -6546,10 +6504,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-tokenizer-py-306-test-german-matches-tiktoken",
@@ -6561,10 +6518,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-tokenizer-py-323-test-tinystories-sample-roundtrip",
@@ -6576,10 +6532,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-tokenizer-py-335-test-tinystories-matches-tiktoken",
@@ -6591,10 +6546,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-tokenizer-py-351-test-encode-special-token-trailing-newlines",
@@ -6606,10 +6560,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-tokenizer-py-367-test-encode-special-token-double-newline-non-whitespace",
@@ -6621,10 +6574,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-tokenizer-py-383-test-encode-iterable-tinystories-sample-roundtrip",
@@ -6636,10 +6588,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-tokenizer-py-397-test-encode-iterable-tinystories-matches-tiktoken",
@@ -6651,10 +6602,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-tokenizer-py-420-test-encode-iterable-memory-usage",
@@ -6666,10 +6616,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-01-test-tests-test-tokenizer-py-436-test-encode-memory-usage",
@@ -6681,10 +6630,9 @@
       "primary_sources": [
         "assignment-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-01",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
     },
     {
       "id": "coverage-assignment-02-systems-setup",
@@ -11960,5 +11908,6 @@
       "destination_anchor": "assignment-05-safety-supplement",
       "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
     }
-  ]
+  ],
+  "editorial_overlay_sha256": "f94beffae756013fafcb1d0534bd0239fdf0f030bd540b4e20908fca98d82aef"
 }

@@ -1,0 +1,252 @@
+{
+  "schema_version": 1,
+  "id": "stanford-cs336-spring-2026-assignment-1",
+  "source": {
+    "repository": "stanford-cs336/assignment1-basics",
+    "commit": "a158843b20107949f1a8d7df1b05cd33b9166712",
+    "canonical_url": "https://github.com/stanford-cs336/assignment1-basics/tree/a158843b20107949f1a8d7df1b05cd33b9166712",
+    "handout": {
+      "path": "cs336_assignment1_basics.pdf",
+      "sha256": "cf402d1c6d3c66da035bdf33b3e2c1bbc4bb92a78b006ee36577e925a265e328"
+    },
+    "adapters": {
+      "path": "tests/adapters.py",
+      "sha256": "ac6f33517008ff0fde6f7a0925da8062c466d49c12ad94fe6a92c90c24dcf0bb"
+    },
+    "tests": {
+      "root": "tests",
+      "tree_hash_algorithm": "sha256(sorted relative path + NUL + bytes + NUL)",
+      "tree_includes": "all regular files under tests/** recursively",
+      "tree_excludes": [
+        "**/__pycache__/**",
+        "**/.pytest_cache/**",
+        "**/*.pyc",
+        "**/.DS_Store"
+      ],
+      "tree_sha256": "3196848f59f254eb6b03ac65384b959f4f3150e931f5d4f5fdffdd30fd97fee6"
+    }
+  },
+  "official_interfaces": {
+    "adapters": [
+      "run_linear",
+      "run_embedding",
+      "run_swiglu",
+      "run_scaled_dot_product_attention",
+      "run_multihead_self_attention",
+      "run_multihead_self_attention_with_rope",
+      "run_rope",
+      "run_transformer_block",
+      "run_transformer_lm",
+      "run_rmsnorm",
+      "run_silu",
+      "run_get_batch",
+      "run_softmax",
+      "run_cross_entropy",
+      "run_gradient_clipping",
+      "get_adamw_cls",
+      "run_get_lr_cosine_schedule",
+      "run_save_checkpoint",
+      "run_load_checkpoint",
+      "get_tokenizer",
+      "run_train_bpe"
+    ],
+    "tests": [
+      {
+        "file": "test_data.py",
+        "names": [
+          "test_get_batch"
+        ]
+      },
+      {
+        "file": "test_model.py",
+        "names": [
+          "test_linear",
+          "test_embedding",
+          "test_swiglu",
+          "test_scaled_dot_product_attention",
+          "test_4d_scaled_dot_product_attention",
+          "test_multihead_self_attention",
+          "test_multihead_self_attention_with_rope",
+          "test_transformer_lm",
+          "test_transformer_lm_truncated_input",
+          "test_transformer_block",
+          "test_rmsnorm",
+          "test_rope",
+          "test_silu_matches_pytorch"
+        ]
+      },
+      {
+        "file": "test_nn_utils.py",
+        "names": [
+          "test_softmax_matches_pytorch",
+          "test_cross_entropy",
+          "test_gradient_clipping"
+        ]
+      },
+      {
+        "file": "test_optimizer.py",
+        "names": [
+          "test_adamw",
+          "test_get_lr_cosine_schedule"
+        ]
+      },
+      {
+        "file": "test_serialization.py",
+        "names": [
+          "test_checkpointing"
+        ]
+      },
+      {
+        "file": "test_tokenizer.py",
+        "names": [
+          "test_roundtrip_empty",
+          "test_empty_matches_tiktoken",
+          "test_roundtrip_single_character",
+          "test_single_character_matches_tiktoken",
+          "test_roundtrip_single_unicode_character",
+          "test_single_unicode_character_matches_tiktoken",
+          "test_roundtrip_ascii_string",
+          "test_ascii_string_matches_tiktoken",
+          "test_roundtrip_unicode_string",
+          "test_unicode_string_matches_tiktoken",
+          "test_roundtrip_unicode_string_with_special_tokens",
+          "test_unicode_string_with_special_tokens_matches_tiktoken",
+          "test_overlapping_special_tokens",
+          "test_address_roundtrip",
+          "test_address_matches_tiktoken",
+          "test_german_roundtrip",
+          "test_german_matches_tiktoken",
+          "test_tinystories_sample_roundtrip",
+          "test_tinystories_matches_tiktoken",
+          "test_encode_special_token_trailing_newlines",
+          "test_encode_special_token_double_newline_non_whitespace",
+          "test_encode_iterable_tinystories_sample_roundtrip",
+          "test_encode_iterable_tinystories_matches_tiktoken",
+          "test_encode_iterable_memory_usage",
+          "test_encode_memory_usage"
+        ]
+      },
+      {
+        "file": "test_train_bpe.py",
+        "names": [
+          "test_train_bpe_speed",
+          "test_train_bpe",
+          "test_train_bpe_special_tokens"
+        ]
+      }
+    ]
+  },
+  "profiles": {
+    "cpu_local": {
+      "purpose": "correctness, one-batch overfit, checkpoint-resume, and reduced TinyStories evidence",
+      "device": "cpu",
+      "required_commands": [
+        "uv sync",
+        "uv run pytest"
+      ],
+      "targeted_commands": [
+        "uv run pytest tests/test_train_bpe.py",
+        "uv run pytest tests/test_tokenizer.py",
+        "uv run pytest tests/test_model.py tests/test_nn_utils.py tests/test_optimizer.py tests/test_data.py tests/test_serialization.py"
+      ],
+      "training_command": "learner-defined; record the exact invocation because Assignment 1 specifies no official training CLI",
+      "reduced_total_tokens": 40960000,
+      "course_reference_hardware": "Apple M4 Max, 36 GB RAM",
+      "course_reference_runtime": {
+        "cpu": "1h22m",
+        "mps": "36m"
+      },
+      "course_reference_only": true
+    },
+    "gpu_full": {
+      "purpose": "full TinyStories baseline under the official Assignment 1 architecture and token budget",
+      "device": "single GPU; course reference is one B200",
+      "required_commands": [
+        "uv sync",
+        "uv run pytest"
+      ],
+      "training_command": "learner-defined; record the exact invocation because Assignment 1 specifies no official training CLI",
+      "dataset": "TinyStories",
+      "vocab_size": 10000,
+      "context_length": 256,
+      "d_model": 512,
+      "d_ff": 1344,
+      "num_layers": 4,
+      "num_heads": 16,
+      "total_tokens": 327680000,
+      "course_reference_runtime": "20-30 minutes on one B200 for staff implementation",
+      "course_reference_only": true
+    }
+  },
+  "evidence": {
+    "format": "JSONL, one event per line",
+    "event_types": [
+      "environment",
+      "test_run",
+      "training_run",
+      "checkpoint",
+      "evaluation",
+      "generation"
+    ],
+    "required_fields": [
+      "source_commit",
+      "student_commit",
+      "git_state",
+      "hardware",
+      "software_versions",
+      "command",
+      "config",
+      "dataset_checksum",
+      "dataset_split",
+      "tokenizer_checksum",
+      "seed",
+      "dtype",
+      "shapes",
+      "gradient_accumulation",
+      "total_tokens",
+      "test_summary",
+      "loss_curve",
+      "tokens_per_second",
+      "wall_time_seconds",
+      "peak_memory_bytes",
+      "checkpoint_checksum",
+      "resume_result",
+      "generation_sample",
+      "sampling_parameters"
+    ]
+  },
+  "acceptance": {
+    "cpu_local": {
+      "test_policy": "48 required tests pass; no skip or xfail",
+      "unicode_and_special_token_roundtrip": true,
+      "one_batch_overfit": "loss decreases from its initial value",
+      "checkpoint_resume": "model, optimizer, and iteration restore; controlled continuation matches",
+      "validation_loss_max": 2.0,
+      "validation_loss_scope": "optional reduced 40,960,000-token TinyStories run; not equivalent to gpu_full",
+      "evidence_complete": true
+    },
+    "gpu_full": {
+      "test_policy": "48 required tests pass; no skip or xfail",
+      "dataset": "TinyStories validation split",
+      "total_tokens_exact": 327680000,
+      "validation_loss_max": 1.45,
+      "validation_loss_unit": "per token",
+      "evidence_complete": true
+    }
+  },
+  "fail_if": [
+    "official tests or adapters are modified",
+    "source commit differs from the pinned commit",
+    "NaN or Inf occurs",
+    "train/validation leakage is detected",
+    "dataset or tokenizer identity is missing",
+    "loss is claimed without a raw curve and checkpoint",
+    "runtime is claimed without hardware and exact command"
+  ],
+  "boundaries": {
+    "solution_code": "not included",
+    "official_training_cli": "not specified by Assignment 1",
+    "runtime_numbers": "course observations, not portable guarantees",
+    "leaderboard": "optional extension; does not replace the TinyStories baseline"
+  }
+}

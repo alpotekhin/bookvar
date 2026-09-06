@@ -2,10 +2,30 @@
 title: BPE, WordPiece и Unigram
 type: textbook-chapter
 status: canonical
-last_updated: 2026-07-18
+last_updated: 2026-09-04
+source_unit_id:
+  - lecture-01-section-164-tokenization
+  - lecture-01-figure-step-167-rendering-1
+  - lecture-01-tokenizer-granularity-examples
+  - lecture-01-section-375-observations
+  - lecture-01-tokenizer-boundary-failure-modes
+  - lecture-01-section-462-byte-pair-encoding-bpe
+  - lecture-01-bpe-merge-code-trace
+  - lecture-01-section-470-training-the-tokenizer
+  - lecture-01-section-510-using-the-tokenizer
+  - assignment-01-task-unicode1
+  - assignment-01-task-unicode2
+  - assignment-01-task-train-bpe
+  - assignment-01-task-train-bpe-tinystories
+  - assignment-01-bpe-runtime
+  - assignment-01-task-train-bpe-expts-owt
+  - assignment-01-task-tokenizer
+  - assignment-01-task-tokenizer-experiments
 primary_sources:
   - https://arxiv.org/abs/1508.07909
   - https://arxiv.org/abs/1808.06226
+  - https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_01.py
+  - https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf
 previous: "[[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings]]"
 next: "[[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT]]"
 ---
@@ -26,6 +46,13 @@ next: "[[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BP
 фрагменты получают отдельные токены, а редкие слова собираются из более мелких
 частей. Различие BPE, WordPiece и Unigram состоит не в цели, а в том, как они
 строят словарь и выбирают разбиение строки.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/tokenized-example.png]]
+
+*Сначала проследите round-trip: строка превращается в IDs и цветные byte-level
+фрагменты, а затем восстанавливается без потерь. Числа — внутренний интерфейс
+конкретного словаря, не свойства текста. Оригинальный кадр Stanford CS336
+Lecture 1 из зафиксированной версии `8b59b50730766695c2ffedd1a79c50cd09b9eb91`.*
 
 ## 1. У текста нет единственного правильного разбиения
 
@@ -48,6 +75,8 @@ next: "[[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BP
 
 Подсловная токенизация ищет компромисс: частые фрагменты сохраняются целиком, а
 редкие слова собираются из меньших частей.
+
+<a id="tokenizer-contract"></a>
 
 ## 2. Токенизатор — часть модели
 
@@ -127,6 +156,43 @@ def merge(ids, pair, new_id):
 
 Именно из этих операций вырастает
 [minBPE](https://github.com/karpathy/minbpe).
+
+
+<a id="bpe-merge-trace"></a>
+
+### Одна последовательность BPE: состояние меняется, правило остаётся
+
+В официальном edtrace Stanford CS336 тот же механизм выполняется на строке
+`the cat in the hat` с тремя merges. Английские кадры оставлены в исходном виде:
+здесь важно увидеть не перевод терминов, а изменение `indices`, `pair`, `merges`
+и проверку round-trip.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/bpe-trace-01-bytes.png]]
+
+*1/4. UTF-8 bytes образуют начальный фиксированный словарь. Сверьте исходную
+строку и последовательность `indices` до первого объединения.*
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/bpe-trace-02-first-merge.png]]
+
+*2/4. Самая частая соседняя пара получает ID 256; новый vocab entry равен
+конкатенации двух byte strings, а не новой Unicode-букве.*
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/bpe-trace-03-third-merge.png]]
+
+*3/4. Третье правило применяется после первых двух. Поэтому merges —
+упорядоченная программа кодирования, а не неупорядоченное множество пар.*
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/bpe-trace-04-roundtrip.png]]
+
+*4/4. Выученные правила применены к новой строке `the quick brown fox`, после
+чего `decode(encode(text)) == text`. Это проверяет обратимость, но ещё не
+скорость, special tokens или качество pre-tokenization.*
+
+Последовательность намеренно показывает учебную реализацию. В Assignment 1
+условия строже: нужно избегать полного прохода по неактуальным объединениям,
+сохранять служебные токены, применять предварительное разбиение в стиле GPT-2 и
+проверять пиковую память. Эти требования не следуют из четырёх строк базового
+алгоритма — они превращают идею в полноценный токенизатор.
 
 ## 4. Почему современные варианты BPE начинаются с байтов
 
@@ -326,6 +392,23 @@ Findings of NAACL 2024. Изображение восстановлено из �
 
 Одного среднего числа по английской Википедии недостаточно.
 
+<a id="tokenizer-evidence"></a>
+
+## Что считать доказательством корректности
+
+Цель обучения BPE не гарантирует, что получившиеся фрагменты лингвистически
+осмысленны. Снижение числа токенов на обучающем корпусе — свойство этого корпуса,
+версии словаря и предварительного разбиения; перенос на другой язык надо измерять
+отдельно. Поэтому минимальный набор подтверждений включает версии `vocab` и
+`merges`, контрольную сумму корпуса, правило разрешения равных частот,
+примеры round-trip для Unicode и служебных токенов, bytes-per-token по языковым
+срезам, время работы и пиковую RAM.
+
+Сначала проверьте маленький пример вручную, затем официальные тесты и лишь
+после этого сравнивайте скорость. Полный интерфейс продолжает
+[[02 Areas/ML & DL/06 Практика/20 Собрать языковую модель с нуля#Этап 1. Байты, BPE и токенизатор|Capstone 1]]:
+там точные функции-переходники Stanford отделены от вашей реализации.
+
 ## Практика по Карпати
 
 1. Реализовать `get_stats` и `merge`.
@@ -352,7 +435,8 @@ Findings of NAACL 2024. Изображение восстановлено из �
 - [[05 Источники/Courses/Harvard ML Systems/tinytorch/10_tokenization|TinyTorch 10 — Tokenization]] — реализация character tokenizer и BPE, включая построение словаря и согласованные `encode`/`decode`.
 - [Andrej Karpathy — Let’s build the GPT Tokenizer](https://www.youtube.com/watch?v=zduSFxRajkE)
 - [karpathy/minbpe](https://github.com/karpathy/minbpe)
-- [Stanford CS336 — Tokenization](https://stanford-cs336.github.io/spring2025/)
+- [Stanford CS336 Spring 2026 — Lecture 1, pinned source](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_01.py)
+- [Stanford CS336 Spring 2026 — Assignment 1, pinned handout](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf)
 - [Sennrich et al. — Neural Machine Translation of Rare Words with Subword Units](https://arxiv.org/abs/1508.07909)
 - [Kudo — Subword Regularization](https://arxiv.org/abs/1804.10959)
 - [Kudo & Richardson — SentencePiece](https://arxiv.org/abs/1808.06226)

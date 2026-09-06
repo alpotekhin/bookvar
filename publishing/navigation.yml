@@ -75,6 +75,8 @@ sections:
         route: textbook/text-representation/numerical-representation
       - source: 00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель.md
         route: textbook/language-modeling/ngram
+      - source: 00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction.md
+        route: textbook/language-modeling/next-token-probability
       - source: 00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings.md
         route: textbook/text-representation/word2vec-glove
       - source: 00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md
@@ -125,6 +127,8 @@ sections:
         route: textbook/modern-llm/norm-gating-residual
       - source: 00 Учебник/07 Анатомия современной LLM/04 RoPE.md
         route: textbook/modern-llm/rope
+      - source: 00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md
+        route: textbook/modern-llm/transformer-shapes-resources
       - source: 00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md
         route: textbook/modern-llm/mha-mqa-gqa
       - source: 00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md
@@ -371,6 +375,8 @@ sections:
             route: textbook/text-representation/numerical-representation
           - label: 16. N-граммная языковая модель
             route: textbook/language-modeling/ngram
+          - label: 16.1 Вероятность текста и next-token prediction
+            route: textbook/language-modeling/next-token-probability
           - label: 17. Word2Vec, GloVe и распределительные представления
             route: textbook/text-representation/word2vec-glove
           - label: 18. BPE, WordPiece и Unigram
@@ -417,6 +423,8 @@ sections:
             route: textbook/modern-llm/norm-gating-residual
           - label: 34. RoPE
             route: textbook/modern-llm/rope
+          - label: 34.1 Transformer с нуля — формы, параметры и стоимость
+            route: textbook/modern-llm/transformer-shapes-resources
           - label: 35. MHA, MQA и GQA
             route: textbook/modern-llm/mha-mqa-gqa
           - label: 36. MLA и сжатие KV-cache
@@ -2287,3 +2295,5 @@ sections:
         route: practice/17-razvernut-nablyudaemyy-ml-servis
       - source: 06 Практика/18 Harvard ML Systems — интерактивные design labs.md
         route: practice/18-harvard-ml-systems-interactive-design-labs
+      - source: 06 Практика/20 Собрать языковую модель с нуля.md
+        route: practice/20-sobrat-yazykovuyu-model-s-nulya

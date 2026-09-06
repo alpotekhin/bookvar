@@ -2,7 +2,10 @@
 title: Masking, multi-head и формы тензоров
 type: textbook-chapter
 status: canonical
-last_updated: 2026-07-20
+last_updated: 2026-09-04
+source_unit_id:
+  - assignment-01-task-scaled-dot-product-attention
+  - assignment-01-task-multihead-self-attention
 previous: "[[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V]]"
 next: "[[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/04 Позиционная информация]]"
 primary_sources:
@@ -10,6 +13,8 @@ primary_sources:
   - https://lena-voita.github.io/nlp_course/seq2seq_and_attention.html
   - https://jalammar.github.io/illustrated-transformer/
   - https://d2l.ai/chapter_attention-mechanisms-and-transformers/multihead-attention.html
+  - https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_02.py
+  - https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf
 ---
 
 # Маски, несколько голов и формы тензоров
@@ -118,7 +123,20 @@ $D_{model}$. В классическом Transformer общая ширина д�
 $H D_h=D_{model}$, а $W^O$ смешивает признаки разных голов и возвращает их в
 остаточный поток.
 
+<a id="named-attention-shapes"></a>
+
 ## Split и merge: одна операция, две записи
+
+До первой операции назовём оси словами: `batch`, `sequence`, `heads`,
+`head_dim`. Тогда преобразование означает не «переставить 1 и 2», а «вынести
+heads перед sequence, чтобы последние оси стали матричными». Именно так
+Lecture 2 CS336 использует именованные шаблоны `rearrange` и `einsum`: смысл
+размерности остаётся рядом с операцией, и правильный размер труднее спутать с
+правильным порядком данных.
+
+Условия $D_{model}=H D_h$ и равенства соответствующих осей проверяются до
+матричного умножения. Broadcasting не создаёт новую семантику: ось размера 1
+можно повторить, но нельзя молча решить, является ли она batch, head или query.
 
 В учебной формуле у каждой головы свои $W_r^Q,W_r^K,W_r^V$. В библиотечной
 реализации эти матрицы обычно склеены. Одно умножение даёт
@@ -236,6 +254,8 @@ weights = scores.softmax(dim=-1)
 - **Неверный масштаб.** Делить нужно на $\sqrt{D_h}$, а не на
   $\sqrt{D_{model}}$.
 
+<a id="shape-evidence"></a>
+
 ## Минимальная проверка реализации
 
 ```python
@@ -254,13 +274,22 @@ future = torch.ones(T, T, dtype=torch.bool).triu(diagonal=1)
 assert torch.count_nonzero(weights[..., future]) == 0
 ```
 
-Эти проверки связывают формулу с фактическими осями. После них полный
-Transformer уже можно собирать из attention, feed-forward слоя, residual
-connections и нормализации, не оставляя маски и головы неявной «магией
-библиотеки».
+Эти проверки связывают формулу с фактическими осями. Они ещё не доказывают
+численное совпадение: следующий уровень — сравнить выход и градиенты с
+эталонной функцией на фиксированном seed, включая полностью замаскированные
+строки и $T_q \ne T_k$. Официальные тесты A1 отдельно проверяют обычный и
+четырёхмерный scaled dot-product attention, MHA и MHA с RoPE.
+
+После проверки форм полный Transformer уже можно собирать из attention,
+feed-forward слоя, residual connections и нормализации. Связь этих форм с
+параметрами, FLOPs и памятью продолжена в
+[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость#Сначала имена осей, затем операции|главе о стоимости Transformer]],
+а реализация — в [[02 Areas/ML & DL/06 Практика/20 Собрать языковую модель с нуля#Этап 2. Модель от базовых операций к логитам|Capstone 1]].
 
 ## Источники и визуальные продолжения
 
+- [Stanford CS336 Spring 2026, Lecture 2 — зафиксированный исходник](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_02.py) — именованные оси, `einsum` и связь форм с подсчётом ресурсов.
+- [Stanford CS336 Spring 2026, Assignment 1 — зафиксированное задание](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf) — проверяемые интерфейсы attention и Transformer.
 - Vaswani et al., [Attention Is All You Need](https://arxiv.org/abs/1706.03762),
   разделы 3.2.2–3.2.3 — исходные определения multi-head и masked attention.
 - Lena Voita, [Seq2seq and Attention](https://lena-voita.github.io/nlp_course/seq2seq_and_attention.html) — наиболее ясная учебная анимация маски и независимых голов.

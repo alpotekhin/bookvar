@@ -19,6 +19,156 @@ def read_document(name: str) -> dict:
     return json.loads((COURSE_ROOT / name).read_text("utf-8"))
 
 
+def load_importer():
+    spec = importlib.util.spec_from_file_location("import_stanford_cs336", IMPORTER_PATH)
+    assert spec and spec.loader
+    importer = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = importer
+    spec.loader.exec_module(importer)
+    return importer
+
+
+def overlay_fixture_documents() -> tuple[dict, dict, dict, dict]:
+    manifest = {
+        "schema_version": 1,
+        "objects": [
+            {
+                "id": "lecture-reviewed",
+                "kind": "lecture",
+                "title": "Reviewed lecture",
+                "source": "source.md",
+            },
+            {
+                "id": "lecture-future",
+                "kind": "lecture",
+                "title": "Future lecture",
+                "source": "future.md",
+            },
+        ],
+    }
+    units = {
+        "schema_version": 1,
+        "units": [
+            {
+                "id": "lecture-reviewed-unit-foundation",
+                "source_object": "lecture-reviewed",
+                "kind": "section",
+                "title": "Foundation",
+                "source_location": "source.md#L1-L8",
+            },
+            {
+                "id": "lecture-reviewed-unit-caveat",
+                "source_object": "lecture-reviewed",
+                "kind": "failure-mode",
+                "title": "Caveat",
+                "source_location": "source.md#L9-L12",
+            },
+            {
+                "id": "lecture-future-unit-pending",
+                "source_object": "lecture-future",
+                "kind": "section",
+                "title": "Pending",
+                "source_location": "future.md#L1-L4",
+            },
+        ],
+    }
+    coverage = {
+        "schema_version": 1,
+        "rows": [
+            {
+                "source_unit": "lecture-reviewed-unit-foundation",
+                "source_object": "lecture-reviewed",
+                "title": "Foundation",
+                "kind": "section",
+                "source_location": "source.md#L1-L8",
+                "disposition": "source-only",
+                "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
+                "destination_anchor": "lecture-reviewed",
+                "reason": "Editorial integration is pending.",
+                "evidence": "Semantic source unit extracted from the pinned snapshot.",
+            },
+            {
+                "source_unit": "lecture-reviewed-unit-caveat",
+                "source_object": "lecture-reviewed",
+                "title": "Caveat",
+                "kind": "failure-mode",
+                "source_location": "source.md#L9-L12",
+                "disposition": "source-only",
+                "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
+                "destination_anchor": "lecture-reviewed",
+                "reason": "Editorial integration is pending.",
+                "evidence": "Semantic source unit extracted from the pinned snapshot.",
+            },
+            {
+                "source_unit": "lecture-future-unit-pending",
+                "source_object": "lecture-future",
+                "title": "Pending",
+                "kind": "section",
+                "source_location": "future.md#L1-L4",
+                "disposition": "source-only",
+                "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
+                "destination_anchor": "lecture-future",
+                "reason": "Editorial integration is pending.",
+                "evidence": "Semantic source unit extracted from the pinned snapshot.",
+            },
+        ],
+    }
+    visuals = {
+        "schema_version": 1,
+        "rows": [
+            {
+                "id": "lecture-reviewed-visual-foundation",
+                "source_object": "lecture-reviewed",
+                "source_units": ["lecture-reviewed-unit-foundation"],
+                "source_location": "source.pdf#pages=1-2",
+                "disposition": "source-only",
+                "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
+                "destination_anchor": "lecture-reviewed",
+                "reason": "Editorial integration is pending.",
+                "evidence": "Meaningful visual extracted from the pinned snapshot.",
+            },
+            {
+                "id": "lecture-future-visual-pending",
+                "source_object": "lecture-future",
+                "source_units": ["lecture-future-unit-pending"],
+                "source_location": "future.pdf#page=1",
+                "disposition": "source-only",
+                "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
+                "destination_anchor": "lecture-future",
+                "reason": "Editorial integration is pending.",
+                "evidence": "Meaningful visual extracted from the pinned snapshot.",
+            },
+        ],
+    }
+    return manifest, units, coverage, visuals
+
+
+def complete_overlay() -> dict:
+    return {
+        "schema_version": 1,
+        "reviewed_objects": ["lecture-reviewed"],
+        "coverage": {
+            "lecture-reviewed-unit-foundation": {
+                "disposition": "integrated",
+                "destination": "publishing/tests/fixtures/overlay-destination.md",
+                "destination_anchor": "foundations",
+            },
+            "lecture-reviewed-unit-caveat": {
+                "disposition": "source-only",
+                "reason": "The caveat is retained in the source hub for a later systems chapter.",
+                "evidence": "Editorial review 2026-09-04; source.md#L9-L12.",
+            },
+        },
+        "visuals": {
+            "lecture-reviewed-visual-foundation": {
+                "disposition": "source-only",
+                "reason": "The source figure adds no teaching value beyond the integrated prose.",
+                "evidence": "Editorial review 2026-09-04; source.pdf#pages=1-2.",
+            }
+        },
+    }
+
+
 class StanfordSemanticAuditTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
@@ -121,11 +271,7 @@ class StanfordSemanticAuditTest(unittest.TestCase):
             self.assertRegex(row["extractor_sha256"], r"^[a-f0-9]{64}$")
 
     def test_deterministic_validator_rejects_self_consistent_truncation(self) -> None:
-        spec = importlib.util.spec_from_file_location("import_stanford_cs336", IMPORTER_PATH)
-        assert spec and spec.loader
-        importer = importlib.util.module_from_spec(spec)
-        sys.modules[spec.name] = importer
-        spec.loader.exec_module(importer)
+        importer = load_importer()
         validator = getattr(importer, "validate_generated_documents", None)
         self.assertIsNotNone(validator, "importer must expose deterministic generated-document validation")
         if validator is None:
@@ -156,11 +302,7 @@ class StanfordSemanticAuditTest(unittest.TestCase):
         self.assertTrue(any("deterministic extraction mismatch" in failure for failure in failures))
 
     def test_pdf_page_closure_rejects_self_consistent_semantic_omission(self) -> None:
-        spec = importlib.util.spec_from_file_location("import_stanford_cs336", IMPORTER_PATH)
-        assert spec and spec.loader
-        importer = importlib.util.module_from_spec(spec)
-        sys.modules[spec.name] = importer
-        spec.loader.exec_module(importer)
+        importer = load_importer()
         closure_validator = getattr(importer, "validate_pdf_page_closure", None)
         self.assertIsNotNone(
             closure_validator,
@@ -231,6 +373,73 @@ class StanfordSemanticAuditTest(unittest.TestCase):
                 for failure in closure_failures
             )
         )
+
+
+class StanfordEditorialOverlayTest(unittest.TestCase):
+    def setUp(self) -> None:
+        self.importer = load_importer()
+        self.manifest, self.units, self.coverage, self.visuals = overlay_fixture_documents()
+
+    def apply(self, overlay: dict) -> tuple[dict, dict, str]:
+        return self.importer.apply_editorial_overlay(
+            self.manifest,
+            self.units,
+            self.coverage,
+            self.visuals,
+            overlay,
+            repository_root=REPOSITORY_ROOT,
+        )
+
+    def test_unknown_source_id_is_rejected(self) -> None:
+        overlay = complete_overlay()
+        overlay["coverage"]["lecture-reviewed-unit-unknown"] = {
+            "disposition": "source-only",
+            "reason": "Reviewed and deliberately deferred.",
+            "evidence": "Editorial review 2026-09-04.",
+        }
+        with self.assertRaisesRegex(ValueError, "unknown coverage source unit"):
+            self.apply(overlay)
+
+    def test_semantic_source_field_override_is_rejected(self) -> None:
+        overlay = complete_overlay()
+        overlay["coverage"]["lecture-reviewed-unit-foundation"]["title"] = "Rewritten title"
+        with self.assertRaisesRegex(ValueError, "unsupported coverage editorial field: title"):
+            self.apply(overlay)
+
+    def test_missing_decision_in_reviewed_object_is_rejected(self) -> None:
+        overlay = complete_overlay()
+        del overlay["coverage"]["lecture-reviewed-unit-caveat"]
+        with self.assertRaisesRegex(ValueError, "missing coverage decision.*lecture-reviewed-unit-caveat"):
+            self.apply(overlay)
+
+    def test_invalid_destination_is_rejected_before_regeneration(self) -> None:
+        overlay = complete_overlay()
+        overlay["coverage"]["lecture-reviewed-unit-foundation"]["destination_anchor"] = "absent"
+        with self.assertRaisesRegex(ValueError, "destination anchor does not exist"):
+            self.apply(overlay)
+
+    def test_regeneration_preserves_future_baseline_and_records_overlay_sha(self) -> None:
+        overlay = complete_overlay()
+        first_coverage, first_visuals, first_sha = self.apply(overlay)
+        second_coverage, second_visuals, second_sha = self.apply(copy.deepcopy(overlay))
+
+        self.assertEqual(first_coverage, second_coverage)
+        self.assertEqual(first_visuals, second_visuals)
+        self.assertEqual(first_sha, second_sha)
+        self.assertRegex(first_sha, r"^[a-f0-9]{64}$")
+        self.assertEqual(first_coverage["editorial_overlay_sha256"], first_sha)
+        self.assertEqual(first_visuals["editorial_overlay_sha256"], first_sha)
+
+        future_coverage = next(
+            row for row in first_coverage["rows"]
+            if row["source_unit"] == "lecture-future-unit-pending"
+        )
+        future_visual = next(
+            row for row in first_visuals["rows"]
+            if row["id"] == "lecture-future-visual-pending"
+        )
+        self.assertEqual(future_coverage, self.coverage["rows"][2])
+        self.assertEqual(future_visual, self.visuals["rows"][1])
 
 
 if __name__ == "__main__":

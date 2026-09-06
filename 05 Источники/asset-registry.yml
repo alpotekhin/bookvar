@@ -1,5 +1,5 @@
 schema_version: 1
-reviewed_at: 2026-07-17
+reviewed_at: 2026-09-04
 notes:
   - null means the exact value has not yet been verified; it must not be inferred from the filename.
   - needs-confirmation entries are inventory records, not redistribution clearance.
@@ -6007,3 +6007,371 @@ assets:
       - 00 Учебник/14 Inference и оптимизация/57a KV-cache compression и offload.md
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
+  - id: curated-stanford-cs336-foundations-tokenized-example-eab56f353bb1
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/tokenized-example.png
+    author: Stanford CS336 staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/tokenized-example.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: eab56f353bb19780f0fad44077bbb9ebe2460327e783e4b37786a8ad564392f8
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy of images/tokenized-example.png from the pinned lecture repository; image content unchanged
+    used_in:
+    - 00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: byte-for-byte-copy
+  - id: curated-stanford-cs336-foundations-transformer-architecture-4b0d6566bc62
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/transformer-architecture.png
+    author: Stanford CS336 staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/transformer-architecture.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: 4b0d6566bc625057d41c3e5522db7e3a029b6ffc1a942a727c964c122655bdcc
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy of images/transformer-architecture.png from the pinned lecture repository; image content unchanged
+    used_in:
+    - 00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: byte-for-byte-copy
+  - id: curated-stanford-cs336-foundations-compute-memory-3292cbab86dd
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/compute-memory.png
+    author: Stanford CS336 staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/compute-memory.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: 3292cbab86dd8504d7dec4e37b6cb08e79e8426216e71b233da0f1e8ddceeb4d
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy of images/compute-memory.png from the pinned lecture repository; image content unchanged
+    used_in:
+    - 00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: byte-for-byte-copy
+  - id: curated-stanford-cs336-foundations-fp8-format-comparison-975d48f49f46
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/fp8-format-comparison.png
+    author: NVIDIA, archived and taught by Stanford CS336 staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/var/files/image-df6d7649a3bdb77cfdc38092d8387a99-https_docs_nvidia_com_deeplearning_transformer-engine_user-guide__images_fp8_formats_png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: 975d48f49f46ee22524541e4cfa9857d7c2b949a8787662bda5d5e73223b3443
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: byte-for-byte copy of the upstream raster preserved in the pinned Stanford Lecture 2 archive; image content unchanged
+    used_in:
+    - 00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: byte-for-byte-copy
+  - id: curated-stanford-cs336-architecture-ffn-ratio-evidence-9c052672b332
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architecture/ffn-ratio-evidence-slide.png
+    author: Stanford CS336 staff; plot attributed on slide to Kaplan et al. 2020
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_03.pdf#page=40
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: 9c052672b33292012bc0624311ac280e3a1c7aed48c752ec67b9d401f178dd05
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page 40 rendered at 180 DPI with Poppler; no crop or redraw
+    used_in:
+    - 00 Учебник/07 Анатомия современной LLM/02 Современный decoder block.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+  - id: curated-stanford-cs336-architecture-aspect-ratio-evidence-b557a010fe8f
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architecture/aspect-ratio-evidence-slide.png
+    author: Stanford CS336 staff; plots attributed on slide to Kaplan et al. 2020 and Tay et al. 2021
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_03.pdf#page=46
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: b557a010fe8f8cede89e65ed4dc4a47d744a05cc001aeee436e3621805ee6a25
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page 46 rendered at 180 DPI with Poppler; no crop or redraw
+    used_in:
+    - 00 Учебник/07 Анатомия современной LLM/02 Современный decoder block.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+  - id: curated-stanford-cs336-architecture-weight-decay-evidence-80c64f9f6975
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architecture/weight-decay-evidence-slide.png
+    author: Stanford CS336 staff; plots attributed on slide to Andriushchenko et al. 2023
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_03.pdf#page=50
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: 80c64f9f6975f98d20dafebf57aad8091667e5b9c00eac30301bf7fc9240e33b
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page 50 rendered at 180 DPI with Poppler; no crop or redraw
+    used_in:
+    - 00 Учебник/07 Анатомия современной LLM/02 Современный decoder block.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+  - id: curated-stanford-cs336-foundations-bpe-trace-01-bytes-80c0fb85a934
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/bpe-trace-01-bytes.png
+    author: Stanford CS336 staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_01.py#L698-L753
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: 80c0fb85a934605644c29c28dd2e6a44e6e4e9c5df95f45fa4d6ee5674816216
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: rendered from pinned lecture source with edtrace 0.1.15 in a 1440x1000 browser viewport; exact screenshot cropped to the 617x100 state panel at x=20 y=20;
+      trace entry 475 selected for initial UTF-8 byte sequence from complete steps 462-606
+    used_in:
+    - 00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-code-trace-render-crop
+  - id: curated-stanford-cs336-foundations-bpe-trace-02-first-merge-e206fd5a2286
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/bpe-trace-02-first-merge.png
+    author: Stanford CS336 staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_01.py#L698-L753
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: e206fd5a22868414760beaccb9583821a2d3db4a47cd2e5d577ed65b0d0e422f
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: rendered from pinned lecture source with edtrace 0.1.15 in a 1440x1000 browser viewport; exact screenshot cropped to the informative 556x480 top of the state panel at x=20 y=20;
+      trace entry 486 selected for first selected BPE merge from complete steps 462-606
+    used_in:
+    - 00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-code-trace-render-crop
+  - id: curated-stanford-cs336-foundations-bpe-trace-03-third-merge-d66a487d4230
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/bpe-trace-03-third-merge.png
+    author: Stanford CS336 staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_01.py#L698-L753
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: d66a487d4230d998f05fe61bfffc987a8fab7f84046f3aa2578c5ed79e58bd05
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: rendered from pinned lecture source with edtrace 0.1.15 in a 1440x1000 browser viewport; exact screenshot cropped to the informative 500x480 top of the state panel at x=20 y=20;
+      trace entry 500 selected for third selected BPE merge from complete steps 462-606
+    used_in:
+    - 00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-code-trace-render-crop
+  - id: curated-stanford-cs336-foundations-bpe-trace-04-roundtrip-99a1ae88a322
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/bpe-trace-04-roundtrip.png
+    author: Stanford CS336 staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_01.py#L698-L753
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: 99a1ae88a322b97a442e5200efc13f10decc9dee9d4f299b122031fe4f46ff1b
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: rendered from pinned lecture source with edtrace 0.1.15 in a 1440x1000 browser viewport; exact screenshot cropped to the 658x103 round-trip state panel at x=20 y=20;
+      trace entry 600 selected for encode/decode round-trip from complete steps 462-606
+    used_in:
+    - 00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-code-trace-render-crop
+  - id: curated-stanford-cs336-foundations-arithmetic-intensity-01-relu-02cdac19f1a2
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/arithmetic-intensity-01-relu.png
+    author: Stanford CS336 staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_02.py#L338-L470
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: 02cdac19f1a2ae941ce3acb55b876a2af52ae7b35952088715f5309bbc22accb
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: rendered from pinned lecture source with edtrace 0.1.15 and Chrome 137.0.7151.41 headless at viewport 1440x1000, deviceScaleFactor 2; cropped x=95 y=80 w=1250 h=840;
+      trace entry 290 selected for ReLU bytes-per-FLOP derivation from complete steps 260-353
+    used_in:
+    - 00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-code-trace-render-crop
+  - id: curated-stanford-cs336-foundations-arithmetic-intensity-02-matvec-948abd793c0e
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/arithmetic-intensity-02-matvec.png
+    author: Stanford CS336 staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_02.py#L338-L470
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: 948abd793c0eaaafae6c55916db4638d7e1317170bed8817e7883a25371d0899
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: rendered from pinned lecture source with edtrace 0.1.15 and Chrome 137.0.7151.41 headless at viewport 1440x1000, deviceScaleFactor 2; cropped x=95 y=80 w=1250 h=840;
+      trace entry 320 selected for matrix-vector bytes-per-FLOP derivation from complete steps 260-353
+    used_in:
+    - 00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-code-trace-render-crop
+  - id: curated-stanford-cs336-foundations-arithmetic-intensity-03-square-matvec-4aba759321bb
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/arithmetic-intensity-03-square-matvec.png
+    author: Stanford CS336 staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_02.py#L338-L470
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: 4aba759321bbc259d55fd062cc923a6f3127248c313f399c47a17546154ea78b
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: rendered from pinned lecture source with edtrace 0.1.15 and Chrome 137.0.7151.41 headless at viewport 1440x1000, deviceScaleFactor 2; cropped x=95 y=80 w=1250 h=840;
+      trace entry 333 selected for square matrix-vector limiting case from complete steps 260-353
+    used_in:
+    - 00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-code-trace-render-crop
+  - id: curated-stanford-cs336-foundations-arithmetic-intensity-04-matmul-859e5a812626
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/arithmetic-intensity-04-matmul.png
+    author: Stanford CS336 staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_02.py#L338-L470
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: 859e5a812626c847714812f166538507174242c6ac1e398ad8342c7dec0a708a
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: rendered from pinned lecture source with edtrace 0.1.15 and Chrome 137.0.7151.41 headless at viewport 1440x1000, deviceScaleFactor 2; cropped x=95 y=80 w=1250 h=840;
+      trace entry 346 selected for matrix-multiplication arithmetic-intensity conclusion from complete steps 260-353
+    used_in:
+    - 00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-code-trace-render-crop
+  - id: curated-stanford-cs336-foundations-a1-sequence-01-linear-embedding-2f35c32de08c
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/a1-sequence-01-linear-embedding.png
+    author: Stanford CS336 staff
+    source_url: https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=18
+    commit: a158843b20107949f1a8d7df1b05cd33b9166712
+    sha256: 2f35c32de08c1a7ca3c8f7518826bca46c095f51638c8244bee480a51bc3abfd
+    license: MIT
+    license_url: https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/LICENSE
+    modifications: page 18 of the pinned assignment handout rendered with Poppler pdftoppm 26.04.0 at 144 dpi and cropped with Pillow 12.1.1 using pixel box (132,120,1092,1404); diagram
+      and text content unchanged
+    used_in:
+    - 00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render-crop
+  - id: curated-stanford-cs336-foundations-a1-sequence-02-embedding-rmsnorm-c52c3d168968
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/a1-sequence-02-embedding-rmsnorm.png
+    author: Stanford CS336 staff
+    source_url: https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=19
+    commit: a158843b20107949f1a8d7df1b05cd33b9166712
+    sha256: c52c3d16896840344f6fb277e6adb06ffbeb6e56207bd276e1275799355f5a71
+    license: MIT
+    license_url: https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/LICENSE
+    modifications: page 19 of the pinned assignment handout rendered with Poppler pdftoppm 26.04.0 at 144 dpi and cropped with Pillow 12.1.1 using pixel box (132,72,1092,1392); diagram
+      and text content unchanged
+    used_in:
+    - 00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render-crop
+  - id: curated-stanford-cs336-foundations-a1-sequence-03-rmsnorm-44fe19fbed5f
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/a1-sequence-03-rmsnorm.png
+    author: Stanford CS336 staff
+    source_url: https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=20
+    commit: a158843b20107949f1a8d7df1b05cd33b9166712
+    sha256: 44fe19fbed5fb8426912523e44d40f5efa8a54f223034c6ce5317b4a13068f65
+    license: MIT
+    license_url: https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/LICENSE
+    modifications: page 20 of the pinned assignment handout rendered with Poppler pdftoppm 26.04.0 at 144 dpi and cropped with Pillow 12.1.1 using pixel box (132,24,1092,996); diagram
+      and text content unchanged
+    used_in:
+    - 00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render-crop
+  - id: curated-stanford-cs336-foundations-a1-sequence-04-silu-2850d70c6ac3
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/a1-sequence-04-silu.png
+    author: Stanford CS336 staff
+    source_url: https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=21
+    commit: a158843b20107949f1a8d7df1b05cd33b9166712
+    sha256: 2850d70c6ac3be9fcce0603e22235413eb1d5a54f7621c05e289eff86a38cfef
+    license: MIT
+    license_url: https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/LICENSE
+    modifications: page 21 of the pinned assignment handout rendered with Poppler pdftoppm 26.04.0 at 144 dpi and cropped with Pillow 12.1.1 using pixel box (132,24,1092,1248); diagram
+      and text content unchanged
+    used_in:
+    - 00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render-crop
+  - id: curated-stanford-cs336-foundations-a1-sequence-05-swiglu-88c418ad8685
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/a1-sequence-05-swiglu.png
+    author: Stanford CS336 staff
+    source_url: https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=22
+    commit: a158843b20107949f1a8d7df1b05cd33b9166712
+    sha256: 88c418ad8685c40bcd1d1a0c1331b98b2649ed653a3fa2394ef49b59d8acd067
+    license: MIT
+    license_url: https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/LICENSE
+    modifications: page 22 of the pinned assignment handout rendered with Poppler pdftoppm 26.04.0 at 144 dpi and cropped with Pillow 12.1.1 using pixel box (132,24,1092,1260); diagram
+      and text content unchanged
+    used_in:
+    - 00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render-crop
+  - id: curated-stanford-cs336-foundations-a1-sequence-06-rope-f4c0607dd8c6
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/a1-sequence-06-rope.png
+    author: Stanford CS336 staff
+    source_url: https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=23
+    commit: a158843b20107949f1a8d7df1b05cd33b9166712
+    sha256: f4c0607dd8c677a3c554dfccd519472f020c021b76ce261f1393005884396212
+    license: MIT
+    license_url: https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/LICENSE
+    modifications: page 23 of the pinned assignment handout rendered with Poppler pdftoppm 26.04.0 at 144 dpi and cropped with Pillow 12.1.1 using pixel box (132,24,1092,1212); diagram
+      and text content unchanged
+    used_in:
+    - 00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render-crop
+  - id: curated-stanford-cs336-foundations-a1-sequence-07-softmax-attention-28b1862f5f38
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/a1-sequence-07-softmax-attention.png
+    author: Stanford CS336 staff
+    source_url: https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=24
+    commit: a158843b20107949f1a8d7df1b05cd33b9166712
+    sha256: 28b1862f5f3824bce915802a5cb58b2ff25c6944d5085771e5ae1ce502b0da78
+    license: MIT
+    license_url: https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/LICENSE
+    modifications: page 24 of the pinned assignment handout rendered with Poppler pdftoppm 26.04.0 at 144 dpi and cropped with Pillow 12.1.1 using pixel box (132,24,1092,1428); diagram
+      and text content unchanged
+    used_in:
+    - 00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render-crop
+  - id: curated-stanford-cs336-foundations-a1-sequence-08-multihead-attention-863786a9da14
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/a1-sequence-08-multihead-attention.png
+    author: Stanford CS336 staff
+    source_url: https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=25
+    commit: a158843b20107949f1a8d7df1b05cd33b9166712
+    sha256: 863786a9da14f85ed05569b72ca927a430385a109630a6c7abf30e3876d61f60
+    license: MIT
+    license_url: https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/LICENSE
+    modifications: page 25 of the pinned assignment handout rendered with Poppler pdftoppm 26.04.0 at 144 dpi and cropped with Pillow 12.1.1 using pixel box (132,24,1092,1512); diagram
+      and text content unchanged
+    used_in:
+    - 00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render-crop
+  - id: curated-stanford-cs336-foundations-a1-sequence-09-block-lm-e9947ab0f94a
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/a1-sequence-09-block-lm.png
+    author: Stanford CS336 staff
+    source_url: https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=26
+    commit: a158843b20107949f1a8d7df1b05cd33b9166712
+    sha256: e9947ab0f94a7f7fd4494ee91598722be87adfda386b34b262355d735aef4ba2
+    license: MIT
+    license_url: https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/LICENSE
+    modifications: page 26 of the pinned assignment handout rendered with Poppler pdftoppm 26.04.0 at 144 dpi and cropped with Pillow 12.1.1 using pixel box (132,24,1092,1440); diagram
+      and text content unchanged
+    used_in:
+    - 00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render-crop
+  - id: curated-stanford-cs336-foundations-a1-sequence-10-resource-accounting-b17f8c522250
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/a1-sequence-10-resource-accounting.png
+    author: Stanford CS336 staff
+    source_url: https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=27
+    commit: a158843b20107949f1a8d7df1b05cd33b9166712
+    sha256: b17f8c5222507650e364f1ed89f9eab182eaa051cfed913c4ae65ab6d90dbd86
+    license: MIT
+    license_url: https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/LICENSE
+    modifications: page 27 of the pinned assignment handout rendered with Poppler pdftoppm 26.04.0 at 144 dpi and cropped with Pillow 12.1.1 using pixel box (132,24,1092,1344); diagram
+      and text content unchanged
+    used_in:
+    - 00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render-crop

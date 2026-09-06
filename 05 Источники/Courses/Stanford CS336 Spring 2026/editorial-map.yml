@@ -1,0 +1,1337 @@
+{
+  "schema_version": 1,
+  "reviewed_objects": [
+    "lecture-01",
+    "lecture-02",
+    "lecture-03",
+    "assignment-01"
+  ],
+  "coverage": {
+    "lecture-01-section-4-cs336-language-models-from-scratch-spring-2026": {
+      "disposition": "source-only",
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#steps=4-14:semantic=section-4-cs336-language-models-from-scratch-spring-2026; reviewed title: CS336: Language Models From Scratch (Spring 2026)"
+    },
+    "lecture-01-figure-step-5-rendering-1": {
+      "disposition": "excluded",
+      "reason": "Decorative or third-party frame adds no mechanism required by the foundations narrative; it is not reused without an adequate teaching and rights basis.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=5:rendering=1; reviewed title: course staff"
+    },
+    "lecture-01-section-15-why-did-we-make-this-course": {
+      "disposition": "source-only",
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#steps=15-25:semantic=section-15-why-did-we-make-this-course; reviewed title: Why did we make this course?"
+    },
+    "lecture-01-section-26-the-industrialization-of-language-models": {
+      "disposition": "source-only",
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#steps=26-39:semantic=section-26-the-industrialization-of-language-models; reviewed title: The industrialization of language models"
+    },
+    "lecture-01-figure-step-27-rendering-1": {
+      "disposition": "excluded",
+      "reason": "Decorative or third-party frame adds no mechanism required by the foundations narrative; it is not reused without an adequate teaching and rights basis.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=27:rendering=1; reviewed title: image dda46aa409183107fcd9201cd89dac21 https upload wikimedia org wikipedia commons c cc Industrialisation jpg"
+    },
+    "lecture-01-figure-step-33-rendering-1": {
+      "disposition": "excluded",
+      "reason": "Decorative or third-party frame adds no mechanism required by the foundations narrative; it is not reused without an adequate teaching and rights basis.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=33:rendering=1; reviewed title: gpt4 no details"
+    },
+    "lecture-01-figure-step-37-rendering-1": {
+      "disposition": "source-only",
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=37:rendering=1; reviewed title: roller flops"
+    },
+    "lecture-01-figure-step-39-rendering-1": {
+      "disposition": "source-only",
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=39:rendering=1; reviewed title: wei emergence plot"
+    },
+    "lecture-01-section-40-what-can-we-learn-in-this-class-that-transfers-to-frontier-models": {
+      "disposition": "source-only",
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#steps=40-46:semantic=section-40-what-can-we-learn-in-this-class-that-transfers-to-frontier-models; reviewed title: What can we learn in this class that transfers to frontier models?"
+    },
+    "lecture-01-section-47-intuitions": {
+      "disposition": "source-only",
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#steps=47-50:semantic=section-47-intuitions; reviewed title: Intuitions? 🤷"
+    },
+    "lecture-01-figure-step-50-rendering-1": {
+      "disposition": "excluded",
+      "reason": "Decorative or third-party frame adds no mechanism required by the foundations narrative; it is not reused without an adequate teaching and rights basis.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=50:rendering=1; reviewed title: divine benevolence"
+    },
+    "lecture-01-section-51-the-bitter-lesson": {
+      "disposition": "source-only",
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#steps=51-53:semantic=section-51-the-bitter-lesson; reviewed title: The bitter lesson"
+    },
+    "lecture-01-section-54-accuracy-efficiency-x-resources": {
+      "disposition": "source-only",
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#steps=54-61:semantic=section-54-accuracy-efficiency-x-resources; reviewed title: accuracy = efficiency x resources"
+    },
+    "lecture-01-section-62-pre-neural-before-2010s": {
+      "disposition": "source-only",
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#steps=62-64:semantic=section-62-pre-neural-before-2010s; reviewed title: Pre-neural (before 2010s)"
+    },
+    "lecture-01-section-65-neural-ingredients-2010s": {
+      "disposition": "source-only",
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#steps=65-73:semantic=section-65-neural-ingredients-2010s; reviewed title: Neural ingredients (2010s)"
+    },
+    "lecture-01-section-74-early-foundation-models-late-2010s": {
+      "disposition": "source-only",
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#steps=74-77:semantic=section-74-early-foundation-models-late-2010s; reviewed title: Early foundation models (late 2010s)"
+    },
+    "lecture-01-section-78-embracing-scaling": {
+      "disposition": "source-only",
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#steps=78-83:semantic=section-78-embracing-scaling; reviewed title: Embracing scaling"
+    },
+    "lecture-01-section-84-open-models": {
+      "disposition": "source-only",
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#steps=84-133:semantic=section-84-open-models; reviewed title: Open models"
+    },
+    "lecture-01-section-164-tokenization": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "destination_anchor": "tokenizer-contract"
+    },
+    "lecture-01-figure-step-167-rendering-1": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "destination_anchor": "tokenizer-contract"
+    },
+    "lecture-01-section-175-model-architecture": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md",
+      "destination_anchor": "architecture-lineage"
+    },
+    "lecture-01-figure-step-177-rendering-1": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "a1-construction"
+    },
+    "lecture-01-section-186-training": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md",
+      "destination_anchor": "adamw"
+    },
+    "lecture-01-section-211-basics": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "scope"
+    },
+    "lecture-01-figure-step-214-rendering-1": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "memory-accounting"
+    },
+    "lecture-01-figure-step-220-rendering-1": {
+      "disposition": "source-only",
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=220:rendering=1; reviewed title: image d41d89a3b5f61b2597e9a608032479f0 https docs nvidia com dgx dgxb200 user guide images dgx b200 system topology png"
+    },
+    "lecture-01-section-221-kernels": {
+      "disposition": "source-only",
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#steps=221-230:semantic=section-221-kernels; reviewed title: Kernels"
+    },
+    "lecture-01-section-231-parallelism": {
+      "disposition": "source-only",
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#steps=231-236:semantic=section-231-parallelism; reviewed title: Parallelism"
+    },
+    "lecture-01-section-237-inference": {
+      "disposition": "source-only",
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#steps=237-247:semantic=section-237-inference; reviewed title: Inference"
+    },
+    "lecture-01-figure-step-241-rendering-1": {
+      "disposition": "source-only",
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=241:rendering=1; reviewed title: prefill decode"
+    },
+    "lecture-01-figure-step-276-rendering-1": {
+      "disposition": "source-only",
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=276:rendering=1; reviewed title: chinchilla isoflop"
+    },
+    "lecture-01-figure-step-280-rendering-1": {
+      "disposition": "excluded",
+      "reason": "Decorative or third-party frame adds no mechanism required by the foundations narrative; it is not reused without an adequate teaching and rights basis.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=280:rendering=1; reviewed title: image 49c56e974c417eacabafcd41ab0a90f0 https pbs twimg com media HDuErvvbsAAQ5Yt format jpg name 4096x4096"
+    },
+    "lecture-01-section-294-evaluation": {
+      "disposition": "source-only",
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#steps=294-301:semantic=section-294-evaluation; reviewed title: Evaluation"
+    },
+    "lecture-01-section-302-data-curation": {
+      "disposition": "source-only",
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#steps=302-308:semantic=section-302-data-curation; reviewed title: Data curation"
+    },
+    "lecture-01-figure-step-305-rendering-1": {
+      "disposition": "source-only",
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=305:rendering=1; reviewed title: image b3aebfa83a900cd491e70acf27806db3 https ar5iv labs arxiv org html 2101 00027 assets pile chart2 png"
+    },
+    "lecture-01-section-309-data-processing": {
+      "disposition": "source-only",
+      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#steps=309-318:semantic=section-309-data-processing; reviewed title: Data processing"
+    },
+    "lecture-01-tokenizer-granularity-examples": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "destination_anchor": "tokenizer-contract"
+    },
+    "lecture-01-section-375-observations": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "destination_anchor": "tokenizer-evidence"
+    },
+    "lecture-01-tokenizer-boundary-failure-modes": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "destination_anchor": "tokenizer-evidence"
+    },
+    "lecture-01-section-462-byte-pair-encoding-bpe": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "destination_anchor": "bpe-merge-trace"
+    },
+    "lecture-01-bpe-merge-code-trace": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "destination_anchor": "bpe-merge-trace"
+    },
+    "lecture-01-section-470-training-the-tokenizer": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "destination_anchor": "bpe-merge-trace"
+    },
+    "lecture-01-section-510-using-the-tokenizer": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "destination_anchor": "tokenizer-evidence"
+    },
+    "lecture-02-figure-step-8-rendering-1": {
+      "disposition": "excluded",
+      "reason": "Third-party or social-media frame is not needed to teach the derived resource argument and is not copied merely because it appears in the lecture.",
+      "evidence": "Lectures/repository/var/traces/lecture_02.json#step=8:rendering=1; reviewed title: image 75df5937a21eff96383d1c7c2ff05132 https pbs twimg com media HE1P1HmaUAAjLXF format jpg name medium"
+    },
+    "lecture-02-tensor-memory-accounting": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "memory-accounting"
+    },
+    "lecture-02-floating-point-format-comparison": {
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md",
+      "destination_anchor": "training-stability"
+    },
+    "lecture-02-section-58-fp32": {
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md",
+      "destination_anchor": "training-stability"
+    },
+    "lecture-02-section-76-fp16": {
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md",
+      "destination_anchor": "training-stability"
+    },
+    "lecture-02-section-86-bf16": {
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md",
+      "destination_anchor": "training-stability"
+    },
+    "lecture-02-section-94-mixed-precision": {
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md",
+      "destination_anchor": "training-stability"
+    },
+    "lecture-02-section-106-fp8": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md",
+      "destination_anchor": "training-stability"
+    },
+    "lecture-02-section-111-fp4": {
+      "disposition": "source-only",
+      "reason": "Reviewed and preserved at exact trace scope; this low-precision or evolving deep-network sequence belongs to a later systems treatment and is not flattened into Task 1.",
+      "evidence": "Lectures/repository/var/traces/lecture_02.json#steps=111-188:semantic=section-111-fp4; reviewed title: fp4"
+    },
+    "lecture-02-figure-step-125-rendering-1": {
+      "disposition": "source-only",
+      "reason": "Reviewed and preserved at exact trace scope; this low-precision or evolving deep-network sequence belongs to a later systems treatment and is not flattened into Task 1.",
+      "evidence": "Lectures/repository/var/traces/lecture_02.json#step=125:rendering=1; reviewed title: cpu gpu"
+    },
+    "lecture-02-section-189-intuitions": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "arithmetic-intensity"
+    },
+    "lecture-02-section-196-linear-model": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "arithmetic-intensity"
+    },
+    "lecture-02-section-251-model-flops-utilization-mfu": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "evidence-boundary"
+    },
+    "lecture-02-arithmetic-intensity-derivation": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "arithmetic-intensity"
+    },
+    "lecture-02-figure-step-358-rendering-1": {
+      "disposition": "excluded",
+      "reason": "Third-party or social-media frame is not needed to teach the derived resource argument and is not copied merely because it appears in the lecture.",
+      "evidence": "Lectures/repository/var/traces/lecture_02.json#step=358:rendering=1; reviewed title: image 42d32b9c87939fe9a4b0a268d6d02ea7 https jax ml github io scaling book assets img roofline improved 1400 webp"
+    },
+    "lecture-02-figure-step-369-rendering-1": {
+      "disposition": "source-only",
+      "reason": "Reviewed and preserved at exact trace scope; this low-precision or evolving deep-network sequence belongs to a later systems treatment and is not flattened into Task 1.",
+      "evidence": "Lectures/repository/var/traces/lecture_02.json#step=369:rendering=1; reviewed title: deep network"
+    },
+    "lecture-02-figure-step-427-rendering-1": {
+      "disposition": "source-only",
+      "reason": "Reviewed and preserved at exact trace scope; this low-precision or evolving deep-network sequence belongs to a later systems treatment and is not flattened into Task 1.",
+      "evidence": "Lectures/repository/var/traces/lecture_02.json#step=427:rendering=1; reviewed title: deep network"
+    },
+    "lecture-02-section-440-zoom-in-on-one-layer": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "compute-accounting"
+    },
+    "lecture-02-section-454-consider-all-layers": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "compute-accounting"
+    },
+    "lecture-02-section-515-memory": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "memory-accounting"
+    },
+    "lecture-02-section-526-compute-for-one-training-step": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "compute-accounting"
+    },
+    "lecture-02-section-529-transformers": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "parameter-accounting"
+    },
+    "lecture-02-gradient-accumulation-example": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "memory-accounting"
+    },
+    "lecture-02-figure-step-926-rendering-1": {
+      "disposition": "source-only",
+      "reason": "Reviewed and preserved at exact trace scope; this low-precision or evolving deep-network sequence belongs to a later systems treatment and is not flattened into Task 1.",
+      "evidence": "Lectures/repository/var/traces/lecture_02.json#step=926:rendering=1; reviewed title: deep network"
+    },
+    "lecture-03-architecture-framing": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md",
+      "destination_anchor": "architecture-lineage"
+    },
+    "lecture-03-normalization-stability": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual.md",
+      "destination_anchor": "normalization-stability"
+    },
+    "lecture-03-rmsnorm-validation": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual.md",
+      "destination_anchor": "rmsnorm-validation"
+    },
+    "lecture-03-gated-activations": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual.md",
+      "destination_anchor": "ffn-variants"
+    },
+    "lecture-03-rope-derivation": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/05 Attention и Transformer/04 Позиционная информация.md",
+      "destination_anchor": "rope-relative-position-derivation"
+    },
+    "lecture-03-hyperparameter-evidence": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/02 Современный decoder block.md",
+      "destination_anchor": "decoder-hyperparameter-evidence"
+    },
+    "lecture-03-softmax-stability-failures": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual.md",
+      "destination_anchor": "stability-controls"
+    },
+    "lecture-03-kv-cache-attention": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/02 Современный decoder block.md",
+      "destination_anchor": "efficient-attention-boundary"
+    },
+    "lecture-03-sparse-attention": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/02 Современный decoder block.md",
+      "destination_anchor": "efficient-attention-boundary"
+    },
+    "lecture-03-recap": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md",
+      "destination_anchor": "architecture-evidence-boundary"
+    },
+    "assignment-01-task-unicode1": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "destination_anchor": "tokenizer-contract"
+    },
+    "assignment-01-deliverable-unicode1-001": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=3:deliverable=1; reviewed title: A one-sentence response."
+    },
+    "assignment-01-deliverable-unicode1-002": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=3:deliverable=2; reviewed title: A one-sentence response."
+    },
+    "assignment-01-deliverable-unicode1-003": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=4:deliverable=3; reviewed title: A one-sentence response."
+    },
+    "assignment-01-task-unicode2": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "destination_anchor": "tokenizer-contract"
+    },
+    "assignment-01-deliverable-unicode2-004": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=4:deliverable=4; reviewed title: A one-to-two sentence response."
+    },
+    "assignment-01-deliverable-unicode2-005": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=5:deliverable=5; reviewed title: An example input byte string for which decode_utf8_bytes_to_str_wrong"
+    },
+    "assignment-01-deliverable-unicode2-006": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=5:deliverable=6; reviewed title: An example, with a one-sentence explanation."
+    },
+    "assignment-01-task-train-bpe": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "destination_anchor": "tokenizer-contract"
+    },
+    "assignment-01-deliverable-train-bpe-007": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=9:deliverable=7; reviewed title: Write a function that, given a path to an input text file, trains a (byte-level) BPE"
+    },
+    "assignment-01-task-train-bpe-tinystories": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "destination_anchor": "tokenizer-contract"
+    },
+    "assignment-01-bpe-runtime": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "destination_anchor": "tokenizer-evidence"
+    },
+    "assignment-01-deliverable-train-bpe-tinystories-008": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=10:deliverable=8; reviewed title: A one-to-two sentence response."
+    },
+    "assignment-01-deliverable-train-bpe-tinystories-009": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=10:deliverable=9; reviewed title: A one-to-two sentence response."
+    },
+    "assignment-01-task-train-bpe-expts-owt": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "destination_anchor": "tokenizer-contract"
+    },
+    "assignment-01-deliverable-train-bpe-expts-owt-010": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=10:deliverable=10; reviewed title: A one-to-two sentence response."
+    },
+    "assignment-01-deliverable-train-bpe-expts-owt-011": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=10:deliverable=11; reviewed title: A one-to-two sentence response."
+    },
+    "assignment-01-task-tokenizer": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "destination_anchor": "tokenizer-contract"
+    },
+    "assignment-01-deliverable-tokenizer-012": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=11:deliverable=12; reviewed title: Implement a Tokenizer class that, given a vocabulary and a list of merges, encodes"
+    },
+    "assignment-01-task-tokenizer-experiments": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "destination_anchor": "tokenizer-contract"
+    },
+    "assignment-01-deliverable-tokenizer-experiments-013": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=12:deliverable=13; reviewed title: A one-to-two sentence response."
+    },
+    "assignment-01-deliverable-tokenizer-experiments-014": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=12:deliverable=14; reviewed title: A one-to-two sentence response."
+    },
+    "assignment-01-deliverable-tokenizer-experiments-015": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=12:deliverable=15; reviewed title: A one-to-two sentence response."
+    },
+    "assignment-01-deliverable-tokenizer-experiments-016": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=13:deliverable=16; reviewed title: A one-to-two sentence response."
+    },
+    "assignment-01-transformer-construction-sequence": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "a1-construction"
+    },
+    "assignment-01-task-linear": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "a1-construction"
+    },
+    "assignment-01-deliverable-linear-017": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=18:deliverable=17; reviewed title: Implement a Linear class that inherits from torch.nn.Module and performs a linear"
+    },
+    "assignment-01-task-embedding": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "a1-construction"
+    },
+    "assignment-01-deliverable-embedding-018": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=18:deliverable=18; reviewed title: Implement the Embedding class that inherits from torch.nn.Module and performs an"
+    },
+    "assignment-01-task-rmsnorm": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual.md",
+      "destination_anchor": "rmsnorm-validation"
+    },
+    "assignment-01-deliverable-rmsnorm-019": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=20:deliverable=19; reviewed title: Implement RMSNorm as a torch.nn.Module. We recommend the following interface"
+    },
+    "assignment-01-task-positionwise-feedforward": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual.md",
+      "destination_anchor": "ffn-variants"
+    },
+    "assignment-01-deliverable-positionwise-feedforward-020": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=22:deliverable=20; reviewed title: Implement the SwiGLU feed-forward network, composed of a SiLU activation"
+    },
+    "assignment-01-task-rope": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "a1-construction"
+    },
+    "assignment-01-deliverable-rope-021": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=23:deliverable=21; reviewed title: Implement a class RotaryPositionalEmbedding that applies RoPE to the input"
+    },
+    "assignment-01-task-softmax": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction.md",
+      "destination_anchor": "stable-cross-entropy"
+    },
+    "assignment-01-deliverable-softmax-022": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=24:deliverable=22; reviewed title: Write a function to apply the softmax operation on a tensor. Your function should"
+    },
+    "assignment-01-task-scaled-dot-product-attention": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров.md",
+      "destination_anchor": "named-attention-shapes"
+    },
+    "assignment-01-deliverable-scaled-dot-product-attention-023": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=24:deliverable=23; reviewed title: Implement the scaled dot-product attention function. Your implementation should"
+    },
+    "assignment-01-task-multihead-self-attention": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров.md",
+      "destination_anchor": "named-attention-shapes"
+    },
+    "assignment-01-deliverable-multihead-self-attention-024": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=26:deliverable=24; reviewed title: Implement causal multi-head self-attention as a torch.nn.Module. Your"
+    },
+    "assignment-01-task-transformer-block": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md",
+      "destination_anchor": "architecture-lineage"
+    },
+    "assignment-01-deliverable-transformer-block-025": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=26:deliverable=25; reviewed title: Transformer block code that passes the provided tests."
+    },
+    "assignment-01-task-transformer-lm": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md",
+      "destination_anchor": "architecture-lineage"
+    },
+    "assignment-01-deliverable-transformer-lm-026": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=27:deliverable=26; reviewed title: A Transformer LM module that passes the above tests."
+    },
+    "assignment-01-task-transformer-accounting": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "parameter-accounting"
+    },
+    "assignment-01-deliverable-transformer-accounting-027": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=27:deliverable=27; reviewed title: A one-to-two sentence response."
+    },
+    "assignment-01-deliverable-transformer-accounting-028": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=28:deliverable=28; reviewed title: A list of matrix multiplies (with descriptions), and the total number of FLOPs"
+    },
+    "assignment-01-deliverable-transformer-accounting-029": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=28:deliverable=29; reviewed title: A one-to-two sentence response."
+    },
+    "assignment-01-deliverable-transformer-accounting-030": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=28:deliverable=30; reviewed title: For each model, provide a breakdown of model components and its associated"
+    },
+    "assignment-01-deliverable-transformer-accounting-031": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=28:deliverable=31; reviewed title: A one-to-two sentence response."
+    },
+    "assignment-01-task-cross-entropy": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction.md",
+      "destination_anchor": "stable-cross-entropy"
+    },
+    "assignment-01-deliverable-cross-entropy-032": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=29:deliverable=32; reviewed title: Write a function to compute the cross-entropy loss, which takes in predicted logits"
+    },
+    "assignment-01-task-learning-rate-tuning": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md",
+      "destination_anchor": "schedule-boundary"
+    },
+    "assignment-01-deliverable-learning-rate-tuning-033": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=31:deliverable=33; reviewed title: A one-to-two sentence response with the behaviors you observed."
+    },
+    "assignment-01-task-adamw": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md",
+      "destination_anchor": "adamw"
+    },
+    "assignment-01-deliverable-adamw-034": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=32:deliverable=34; reviewed title: Implement the AdamW optimizer as a subclass of torch.optim.Optimizer. Your"
+    },
+    "assignment-01-task-adamw-accounting": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "parameter-accounting"
+    },
+    "assignment-01-deliverable-adamw-accounting-035": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=33:deliverable=35; reviewed title: An algebraic expression for each of parameters, activations, gradients, and"
+    },
+    "assignment-01-deliverable-adamw-accounting-036": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=33:deliverable=36; reviewed title: An expression that looks like 𝑎 ⋅ batch_size + 𝑏 for numerical values 𝑎, 𝑏, and a"
+    },
+    "assignment-01-deliverable-adamw-accounting-037": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=33:deliverable=37; reviewed title: An algebraic expression, with a brief justification."
+    },
+    "assignment-01-deliverable-adamw-accounting-038": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=33:deliverable=38; reviewed title: The number of hours training would take, with a brief justification."
+    },
+    "assignment-01-task-learning-rate-schedule": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md",
+      "destination_anchor": "schedule-boundary"
+    },
+    "assignment-01-task-gradient-clipping": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md",
+      "destination_anchor": "training-stability"
+    },
+    "assignment-01-task-data-loading": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "training-contract"
+    },
+    "assignment-01-deliverable-data-loading-039": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=34:deliverable=39; reviewed title: Write a function that takes a numpy array 𝑥 (integer array with token IDs), a"
+    },
+    "assignment-01-task-checkpointing": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "training-contract"
+    },
+    "assignment-01-task-training-together": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "training-contract"
+    },
+    "assignment-01-deliverable-training-together-040": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=36:deliverable=40; reviewed title: Write a script that runs a training loop to train your model on user-provided input."
+    },
+    "assignment-01-task-decoding": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "training-contract"
+    },
+    "assignment-01-deliverable-decoding-041": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=38:deliverable=41; reviewed title: Implement a function to decode from your language model. We recommend that"
+    },
+    "assignment-01-task-experiment-log": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "training-contract"
+    },
+    "assignment-01-deliverable-experiment-log-042": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=39:deliverable=42; reviewed title: Logging infrastructure code for your experiments and an experiment log (a"
+    },
+    "assignment-01-tinystories-loss": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "acceptance"
+    },
+    "assignment-01-task-learning-rate": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "experiment-contract"
+    },
+    "assignment-01-deliverable-learning-rate-043": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=40:deliverable=43; reviewed title: Learning curves associated with multiple learning rates. Explain your"
+    },
+    "assignment-01-deliverable-learning-rate-044": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=40:deliverable=44; reviewed title: A model with validation loss (per-token) on TinyStories of at most 1.45"
+    },
+    "assignment-01-deliverable-learning-rate-045": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=41:deliverable=45; reviewed title: Learning curves of increasing learning rate which include at least one divergent"
+    },
+    "assignment-01-task-batch-size-experiment": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "experiment-contract"
+    },
+    "assignment-01-deliverable-batch-size-experiment-046": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=41:deliverable=46; reviewed title: Learning curves for runs with different batch sizes. The learning rates should be"
+    },
+    "assignment-01-deliverable-batch-size-experiment-047": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=41:deliverable=47; reviewed title: A few sentences discussing your findings on batch sizes and their impacts on"
+    },
+    "assignment-01-task-generate": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "experiment-contract"
+    },
+    "assignment-01-deliverable-generate-048": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=42:deliverable=48; reviewed title: Text dump of at least 256 tokens of text (or until the first <|endoftext|> token),"
+    },
+    "assignment-01-task-layer-norm-ablation": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "experiment-contract"
+    },
+    "assignment-01-deliverable-layer-norm-ablation-049": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=42:deliverable=49; reviewed title: A learning curve for when you remove RMSNorms and train, as well as a learning"
+    },
+    "assignment-01-deliverable-layer-norm-ablation-050": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=42:deliverable=50; reviewed title: A few sentences of commentary on the impact of RMSNorm."
+    },
+    "assignment-01-task-pre-norm-ablation": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "experiment-contract"
+    },
+    "assignment-01-deliverable-pre-norm-ablation-051": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=43:deliverable=51; reviewed title: A learning curve for a post-norm Transformer, compared to the pre-norm one."
+    },
+    "assignment-01-task-no-pos-emb": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "experiment-contract"
+    },
+    "assignment-01-deliverable-no-pos-emb-052": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=43:deliverable=52; reviewed title: A learning curve comparing the performance of RoPE and NoPE."
+    },
+    "assignment-01-task-swiglu-ablation": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "experiment-contract"
+    },
+    "assignment-01-deliverable-swiglu-ablation-053": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=44:deliverable=53; reviewed title: A learning curve comparing the performance of SwiGLU and SiLU feed-forward"
+    },
+    "assignment-01-deliverable-swiglu-ablation-054": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=44:deliverable=54; reviewed title: A few sentences discussing your findings."
+    },
+    "assignment-01-task-main-experiment": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "experiment-contract"
+    },
+    "assignment-01-deliverable-main-experiment-055": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=45:deliverable=55; reviewed title: A learning curve of your language model on OpenWebText. Describe the difference"
+    },
+    "assignment-01-deliverable-main-experiment-056": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=45:deliverable=56; reviewed title: Generated text from OpenWebText LM, in the same format as the TinyStories"
+    },
+    "assignment-01-task-leaderboard": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "experiment-contract"
+    },
+    "assignment-01-leaderboard-budget": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "acceptance"
+    },
+    "assignment-01-deliverable-leaderboard-057": {
+      "disposition": "source-only",
+      "reason": "The exact response or code deliverable remains normative in the pinned handout; Bookvar integrates the mechanism and validation path without duplicating submission wording.",
+      "evidence": "Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=46:deliverable=57; reviewed title: The final validation loss that was recorded, an associated learning curve that clearly"
+    },
+    "assignment-01-test-tests-test-train-bpe-py-8-test-train-bpe-speed": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-nn-utils-py-9-test-softmax-matches-pytorch": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-data-py-10-test-get-batch": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-model-py-21-test-linear": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-nn-utils-py-27-test-cross-entropy": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-train-bpe-py-27-test-train-bpe": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-optimizer-py-29-test-adamw": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-model-py-32-test-embedding": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-model-py-43-test-swiglu": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-optimizer-py-52-test-get-lr-cosine-schedule": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-model-py-57-test-scaled-dot-product-attention": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-serialization-py-57-test-checkpointing": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-nn-utils-py-62-test-gradient-clipping": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-model-py-65-test-4d-scaled-dot-product-attention": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-train-bpe-py-65-test-train-bpe-special-tokens": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-model-py-77-test-multihead-self-attention": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-tokenizer-py-77-test-roundtrip-empty": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-tokenizer-py-88-test-empty-matches-tiktoken": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-model-py-94-test-multihead-self-attention-with-rope": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-tokenizer-py-107-test-roundtrip-single-character": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-model-py-117-test-transformer-lm": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-tokenizer-py-118-test-single-character-matches-tiktoken": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-model-py-136-test-transformer-lm-truncated-input": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-tokenizer-py-137-test-roundtrip-single-unicode-character": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-tokenizer-py-148-test-single-unicode-character-matches-tiktoken": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-model-py-158-test-transformer-block": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-tokenizer-py-164-test-roundtrip-ascii-string": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-tokenizer-py-175-test-ascii-string-matches-tiktoken": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-model-py-176-test-rmsnorm": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-model-py-186-test-rope": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-model-py-193-test-silu-matches-pytorch": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-tokenizer-py-193-test-roundtrip-unicode-string": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-tokenizer-py-204-test-unicode-string-matches-tiktoken": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-tokenizer-py-219-test-roundtrip-unicode-string-with-special-tokens": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-tokenizer-py-233-test-unicode-string-with-special-tokens-matches-tiktoken": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-tokenizer-py-248-test-overlapping-special-tokens": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-tokenizer-py-265-test-address-roundtrip": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-tokenizer-py-277-test-address-matches-tiktoken": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-tokenizer-py-294-test-german-roundtrip": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-tokenizer-py-306-test-german-matches-tiktoken": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-tokenizer-py-323-test-tinystories-sample-roundtrip": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-tokenizer-py-335-test-tinystories-matches-tiktoken": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-tokenizer-py-351-test-encode-special-token-trailing-newlines": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-tokenizer-py-367-test-encode-special-token-double-newline-non-whitespace": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-tokenizer-py-383-test-encode-iterable-tinystories-sample-roundtrip": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-tokenizer-py-397-test-encode-iterable-tinystories-matches-tiktoken": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-tokenizer-py-420-test-encode-iterable-memory-usage": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    },
+    "assignment-01-test-tests-test-tokenizer-py-436-test-encode-memory-usage": {
+      "disposition": "integrated",
+      "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "destination_anchor": "official-contract"
+    }
+  },
+  "visuals": {
+    "lecture-01-visual-bpe-merge-code-trace": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "destination_anchor": "bpe-merge-trace",
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/bpe-trace-01-bytes.png",
+      "transformation": "Pinned edtrace 0.1.15 rendered in a 1440x1000 browser viewport; exact screenshots were tightly cropped to the state panels at trace entries 475 (617x100), 486 (556x480), 500 (500x480), and 600 (658x103) from the complete steps 462-606 sequence.",
+      "caption": "Four preserved states show bytes, the first merge, the third merge, and encode/decode round-trip; inspect changing indices, pair, and ordered merges.",
+      "rendered_route": "/textbook/text-representation/tokenization/",
+      "desktop_evidence": "Full route inspected at 1440x1000, then the final tight BPE crops were rebuilt and rechecked at 1280x720: all four state panels remain inside the article column with no clipping or broken assets.",
+      "narrow_evidence": "Inspected at 390x844 after the final rebuild: document scrollWidth equals clientWidth (390), all four images load, rendered sizes are 358x58, 358x309, 358x344, and 358x56, and click-to-zoom exposes the dense merge states at full resolution.",
+      "reviewer": "Codex Task 1 editorial integration",
+      "checked_at": "2026-09-06"
+    },
+    "lecture-01-visual-figure-step-5-rendering-1": {
+      "disposition": "excluded",
+      "reason": "Decorative, vendor, social-media, or third-party frame is unnecessary for the selected teaching argument and is not reused without stronger teaching and rights justification.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=5:rendering=1; question reviewed: How does course staff support the lecture section “CS336: Language Models From Scratch (Spring 2026)”?"
+    },
+    "lecture-01-visual-figure-step-27-rendering-1": {
+      "disposition": "excluded",
+      "reason": "Decorative, vendor, social-media, or third-party frame is unnecessary for the selected teaching argument and is not reused without stronger teaching and rights justification.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=27:rendering=1; question reviewed: How does image dda46aa409183107fcd9201cd89dac21 https upload wikimedia org wikipedia commons c cc Industrialisation jpg support the lecture section “The industrialization of language models”?"
+    },
+    "lecture-01-visual-figure-step-33-rendering-1": {
+      "disposition": "excluded",
+      "reason": "Decorative, vendor, social-media, or third-party frame is unnecessary for the selected teaching argument and is not reused without stronger teaching and rights justification.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=33:rendering=1; question reviewed: How does gpt4 no details support the lecture section “The industrialization of language models”?"
+    },
+    "lecture-01-visual-figure-step-37-rendering-1": {
+      "disposition": "source-only",
+      "reason": "Preserved as an exact source sequence for a later systems, scaling, inference, or architecture treatment; Task 1 uses prose or primary evidence instead of flattening this visual.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=37:rendering=1; question reviewed: How does roller flops support the lecture section “The industrialization of language models”?"
+    },
+    "lecture-01-visual-figure-step-39-rendering-1": {
+      "disposition": "source-only",
+      "reason": "Preserved as an exact source sequence for a later systems, scaling, inference, or architecture treatment; Task 1 uses prose or primary evidence instead of flattening this visual.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=39:rendering=1; question reviewed: How does wei emergence plot support the lecture section “The industrialization of language models”?"
+    },
+    "lecture-01-visual-figure-step-50-rendering-1": {
+      "disposition": "excluded",
+      "reason": "Decorative, vendor, social-media, or third-party frame is unnecessary for the selected teaching argument and is not reused without stronger teaching and rights justification.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=50:rendering=1; question reviewed: How does divine benevolence support the lecture section “Intuitions? 🤷”?"
+    },
+    "lecture-01-visual-figure-step-167-rendering-1": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "destination_anchor": "tokenizer-contract",
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/tokenized-example.png",
+      "transformation": "Byte-for-byte copy of images/tokenized-example.png from lectures commit 8b59b50730766695c2ffedd1a79c50cd09b9eb91; SHA-256 eab56f353bb19780f0fad44077bbb9ebe2460327e783e4b37786a8ad564392f8.",
+      "caption": "Follow text to token IDs and back; the IDs belong to one fixed vocabulary rather than to the text itself.",
+      "rendered_route": "/textbook/text-representation/tokenization/",
+      "desktop_evidence": "Inspected on the complete tokenization route at 1440x1000: labels, token IDs, and the round-trip path remain visible and the image does not escape the article column.",
+      "narrow_evidence": "Inspected at 390x844: the 2395x983 source renders at 358x147 with zero page-wide horizontal overflow and remains available through click-to-zoom.",
+      "reviewer": "Codex Task 1 editorial integration",
+      "checked_at": "2026-09-06"
+    },
+    "lecture-01-visual-figure-step-177-rendering-1": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "a1-construction",
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/transformer-architecture.png",
+      "transformation": "Byte-for-byte copy of images/transformer-architecture.png from lectures commit 8b59b50730766695c2ffedd1a79c50cd09b9eb91; SHA-256 4b0d6566bc625057d41c3e5522db7e3a029b6ffc1a942a727c964c122655bdcc.",
+      "caption": "Trace the invariant B,T,D block boundary before following residual branches and the path from token IDs to logits.",
+      "rendered_route": "/textbook/modern-llm/transformer-shapes-resources/",
+      "desktop_evidence": "Inspected on the complete transformer resource-accounting route at 1440x1000: the architecture labels and B,T,D shape path are visible without crop or broken assets.",
+      "narrow_evidence": "Inspected at 390x844: the figure scales inside the article column, the document has no page-wide overflow, and full resolution remains reachable through click-to-zoom.",
+      "reviewer": "Codex Task 1 editorial integration",
+      "checked_at": "2026-09-06"
+    },
+    "lecture-01-visual-figure-step-214-rendering-1": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "memory-accounting",
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/compute-memory.png",
+      "transformation": "Byte-for-byte copy of images/compute-memory.png from lectures commit 8b59b50730766695c2ffedd1a79c50cd09b9eb91; SHA-256 3292cbab86dd8504d7dec4e37b6cb08e79e8426216e71b233da0f1e8ddceeb4d.",
+      "caption": "Inspect the narrow data path between memory and compute: arithmetic units may idle while bytes move.",
+      "rendered_route": "/textbook/modern-llm/transformer-shapes-resources/",
+      "desktop_evidence": "Inspected on the complete transformer resource-accounting route at 1440x1000: the memory-to-compute bottleneck diagram stays within the content column with all labels visible.",
+      "narrow_evidence": "Inspected at 390x844: the original diagram scales without page-wide overflow or asset failure and can be enlarged through the site lightbox.",
+      "reviewer": "Codex Task 1 editorial integration",
+      "checked_at": "2026-09-06"
+    },
+    "lecture-01-visual-figure-step-220-rendering-1": {
+      "disposition": "excluded",
+      "reason": "Decorative, vendor, social-media, or third-party frame is unnecessary for the selected teaching argument and is not reused without stronger teaching and rights justification.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=220:rendering=1; question reviewed: How does image d41d89a3b5f61b2597e9a608032479f0 https docs nvidia com dgx dgxb200 user guide images dgx b200 system topology png support the lecture section “Basics”?"
+    },
+    "lecture-01-visual-figure-step-241-rendering-1": {
+      "disposition": "source-only",
+      "reason": "Preserved as an exact source sequence for a later systems, scaling, inference, or architecture treatment; Task 1 uses prose or primary evidence instead of flattening this visual.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=241:rendering=1; question reviewed: How does prefill decode support the lecture section “Inference”?"
+    },
+    "lecture-01-visual-figure-step-276-rendering-1": {
+      "disposition": "source-only",
+      "reason": "Preserved as an exact source sequence for a later systems, scaling, inference, or architecture treatment; Task 1 uses prose or primary evidence instead of flattening this visual.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=276:rendering=1; question reviewed: How does chinchilla isoflop support the lecture section “Assignment 2 (systems)”?"
+    },
+    "lecture-01-visual-figure-step-280-rendering-1": {
+      "disposition": "excluded",
+      "reason": "Decorative, vendor, social-media, or third-party frame is unnecessary for the selected teaching argument and is not reused without stronger teaching and rights justification.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=280:rendering=1; question reviewed: How does image 49c56e974c417eacabafcd41ab0a90f0 https pbs twimg com media HDuErvvbsAAQ5Yt format jpg name 4096x4096 support the lecture section “Assignment 2 (systems)”?"
+    },
+    "lecture-01-visual-figure-step-305-rendering-1": {
+      "disposition": "source-only",
+      "reason": "Preserved as an exact source sequence for a later systems, scaling, inference, or architecture treatment; Task 1 uses prose or primary evidence instead of flattening this visual.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=305:rendering=1; question reviewed: How does image b3aebfa83a900cd491e70acf27806db3 https ar5iv labs arxiv org html 2101 00027 assets pile chart2 png support the lecture section “Data curation”?"
+    },
+    "lecture-02-visual-floating-point-format-comparison": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md",
+      "destination_anchor": "training-stability",
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/fp8-format-comparison.png",
+      "transformation": "Exact archived NVIDIA FP8 primer raster reused from pinned Stanford Lecture 2 trace; no crop or redraw.",
+      "caption": "The same value encoded as FP16, BF16, FP8 E4M3, and FP8 E5M2 exposes the exponent-versus-mantissa trade-off.",
+      "rendered_route": "/textbook/neural-networks/optimizers-schedules/",
+      "desktop_evidence": "The complete FP8 comparison was inspected on the full route at 1440x1000; labels and bit-field diagrams render without clipping or missing assets.",
+      "narrow_evidence": "At 390x844 the figure stays within the article column with scrollWidth equal to clientWidth; click-to-zoom exposes the native 1280x720 source image.",
+      "reviewer": "Codex Task 1 review remediation",
+      "checked_at": "2026-09-06"
+    },
+    "lecture-02-visual-arithmetic-intensity-derivation": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "arithmetic-intensity",
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/arithmetic-intensity-01-relu.png",
+      "transformation": "Pinned edtrace 0.1.15; Chrome 137.0.7151.41 headless, viewport 1440x1000, deviceScaleFactor 2, crop x=95 y=80 w=1250 h=840; four semantic states selected at trace entries 290, 320, 333, and 346 from the complete steps 260-353 sequence.",
+      "caption": "The four-frame sequence derives bytes/FLOP for ReLU, matrix-vector, square matrix-vector, and matrix multiplication before drawing a roofline conclusion.",
+      "rendered_route": "/textbook/modern-llm/transformer-shapes-resources/",
+      "desktop_evidence": "All four derivation frames were inspected in sequence on the full route at 1440x1000; equations, highlighted lines, and captions render without clipping or missing assets.",
+      "narrow_evidence": "All four frames were inspected at 390x844: the document width remains 390, each frame stays inside the article column, and dense notation is available at full resolution through click-to-zoom.",
+      "reviewer": "Codex Task 1 editorial integration",
+      "checked_at": "2026-09-06"
+    },
+    "lecture-02-visual-figure-step-8-rendering-1": {
+      "disposition": "excluded",
+      "reason": "Decorative, vendor, social-media, or third-party frame is unnecessary for the selected teaching argument and is not reused without stronger teaching and rights justification.",
+      "evidence": "Lectures/repository/var/traces/lecture_02.json#step=8:rendering=1; question reviewed: How does image 75df5937a21eff96383d1c7c2ff05132 https pbs twimg com media HE1P1HmaUAAjLXF format jpg name medium support the lecture section “lecture-02”?"
+    },
+    "lecture-02-visual-figure-step-125-rendering-1": {
+      "disposition": "source-only",
+      "reason": "Preserved as an exact source sequence for a later systems, scaling, inference, or architecture treatment; Task 1 uses prose or primary evidence instead of flattening this visual.",
+      "evidence": "Lectures/repository/var/traces/lecture_02.json#step=125:rendering=1; question reviewed: How does cpu gpu support the lecture section “fp4”?"
+    },
+    "lecture-02-visual-figure-step-358-rendering-1": {
+      "disposition": "excluded",
+      "reason": "Decorative, vendor, social-media, or third-party frame is unnecessary for the selected teaching argument and is not reused without stronger teaching and rights justification.",
+      "evidence": "Lectures/repository/var/traces/lecture_02.json#step=358:rendering=1; question reviewed: How does image 42d32b9c87939fe9a4b0a268d6d02ea7 https jax ml github io scaling book assets img roofline improved 1400 webp support the lecture section “Model FLOPs utilization (MFU)”?"
+    },
+    "lecture-02-visual-figure-step-369-rendering-1": {
+      "disposition": "source-only",
+      "reason": "Preserved as an exact source sequence for a later systems, scaling, inference, or architecture treatment; Task 1 uses prose or primary evidence instead of flattening this visual.",
+      "evidence": "Lectures/repository/var/traces/lecture_02.json#step=369:rendering=1; question reviewed: How does deep network support the lecture section “Model FLOPs utilization (MFU)”?"
+    },
+    "lecture-02-visual-figure-step-427-rendering-1": {
+      "disposition": "source-only",
+      "reason": "Preserved as an exact source sequence for a later systems, scaling, inference, or architecture treatment; Task 1 uses prose or primary evidence instead of flattening this visual.",
+      "evidence": "Lectures/repository/var/traces/lecture_02.json#step=427:rendering=1; question reviewed: How does deep network support the lecture section “Model FLOPs utilization (MFU)”?"
+    },
+    "lecture-02-visual-figure-step-926-rendering-1": {
+      "disposition": "source-only",
+      "reason": "Preserved as an exact source sequence for a later systems, scaling, inference, or architecture treatment; Task 1 uses prose or primary evidence instead of flattening this visual.",
+      "evidence": "Lectures/repository/var/traces/lecture_02.json#step=926:rendering=1; question reviewed: How does deep network support the lecture section “Transformers”?"
+    },
+    "lecture-03-visual-rope-derivation": {
+      "disposition": "source-only",
+      "reason": "Preserved as an exact source sequence for a later systems, scaling, inference, or architecture treatment; Task 1 uses prose or primary evidence instead of flattening this visual.",
+      "evidence": "Lectures/repository/lecture_03.pdf#pages=31-35:semantic=rope-derivation; question reviewed: How do rotations make query-key inner products depend on relative rather than absolute position?"
+    },
+    "lecture-03-visual-hyperparameter-evidence": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/02 Современный decoder block.md",
+      "destination_anchor": "decoder-hyperparameter-evidence",
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architecture/ffn-ratio-evidence-slide.png",
+      "transformation": "Three complete Stanford CS336 Lecture 3 slides rendered from pinned PDF pages 40, 46, and 50 at 180 DPI; no semantic crop or redraw.",
+      "caption": "Source slides preserve the empirical evidence for feed-forward ratio, depth-width aspect ratio, and weight-decay interactions.",
+      "rendered_route": "/textbook/modern-llm/decoder-block/",
+      "desktop_evidence": "All three complete evidence slides were inspected in sequence on the full route at 1440x1000; charts, legends, and captions render without clipping or missing assets.",
+      "narrow_evidence": "At 390x844 all three slides stay within the article column with scrollWidth equal to clientWidth; click-to-zoom exposes each native 1800x1014 slide.",
+      "reviewer": "Codex Task 1 review remediation",
+      "checked_at": "2026-09-06"
+    },
+    "lecture-03-visual-softmax-stability-failures": {
+      "disposition": "source-only",
+      "reason": "Preserved as an exact source sequence for a later systems, scaling, inference, or architecture treatment; Task 1 uses prose or primary evidence instead of flattening this visual.",
+      "evidence": "Lectures/repository/lecture_03.pdf#pages=53-56:semantic=softmax-stability-failures; question reviewed: Where do exponential logits become unstable and how do z-loss, QK norm, and soft-capping intervene?"
+    },
+    "lecture-03-visual-kv-cache-attention": {
+      "disposition": "source-only",
+      "reason": "Preserved as an exact source sequence for a later systems, scaling, inference, or architecture treatment; Task 1 uses prose or primary evidence instead of flattening this visual.",
+      "evidence": "Lectures/repository/lecture_03.pdf#pages=58-63:semantic=kv-cache-attention; question reviewed: How do MQA and GQA change incremental attention arithmetic intensity and KV-cache movement?"
+    },
+    "assignment-01-visual-transformer-construction-sequence": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "a1-construction",
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/a1-sequence-01-linear-embedding.png",
+      "transformation": "Pages 18-27 of pinned handout SHA-256 cf402d1c6d3c66da035bdf33b3e2c1bbc4bb92a78b006ee36577e925a265e328 rendered with Poppler pdftoppm 26.04.0 at 144 dpi and cropped with Pillow 12.1.1 using page boxes p18=(132,120,1092,1404), p19=(132,72,1092,1392), p20=(132,24,1092,996), p21=(132,24,1092,1248), p22=(132,24,1092,1260), p23=(132,24,1092,1212), p24=(132,24,1092,1428), p25=(132,24,1092,1512), p26=(132,24,1092,1440), p27=(132,24,1092,1344).",
+      "caption": "Ten original handout frames preserve the dependency chain from linear and embedding through RMSNorm, SwiGLU, RoPE, attention, the full LM, and resource accounting.",
+      "rendered_route": "/textbook/modern-llm/transformer-shapes-resources/",
+      "desktop_evidence": "All ten handout frames were inspected in order on the complete route at 1440x1000; no frame is clipped, broken, or detached from its explanatory caption.",
+      "narrow_evidence": "All ten frames were inspected at 390x844: the page has no horizontal overflow, figures stay within the article column, and the lightbox preserves full-resolution inspection.",
+      "reviewer": "Codex Task 1 editorial integration",
+      "checked_at": "2026-09-06"
+    }
+  }
+}

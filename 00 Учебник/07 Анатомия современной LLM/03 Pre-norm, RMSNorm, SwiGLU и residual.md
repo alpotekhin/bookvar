@@ -2,12 +2,20 @@
 title: Pre-norm, RMSNorm, SwiGLU и residual stream
 type: textbook-chapter
 status: reviewed
-last_updated: 2026-07-20
+last_updated: 2026-09-04
+source_unit_id:
+  - lecture-03-normalization-stability
+  - lecture-03-rmsnorm-validation
+  - lecture-03-gated-activations
+  - lecture-03-softmax-stability-failures
+  - assignment-01-task-rmsnorm
+  - assignment-01-task-positionwise-feedforward
 primary_sources:
   - https://arxiv.org/abs/2002.04745
   - https://arxiv.org/abs/1910.07467
   - https://arxiv.org/abs/2002.05202
-  - https://github.com/stanford-cs336/assignment1-basics/blob/main/cs336_assignment1_basics.pdf
+  - https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf
+  - https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_03.pdf
 ---
 
 # Pre-norm, RMSNorm, SwiGLU и residual stream
@@ -41,6 +49,8 @@ $$\frac{\partial y}{\partial x}=I+\frac{\partial F}{\partial x}.$$
 которой слои прибавляют свои результаты. Attention записывает туда контекстную
 поправку, FFN — позиционную нелинейную поправку. Все головы и внутренние нейроны
 в конце обязаны вернуться к той же ширине, иначе сложение невозможно.
+
+<a id="normalization-stability"></a>
 
 ## Почему место нормализации меняет обучение
 
@@ -82,6 +92,8 @@ $$
 глубоких моделях применяют дополнительные приёмы — масштабирование residual,
 DeepNorm, sandwich-нормализацию, QK-norm, — но это уже отдельные архитектурные
 решения.
+
+<a id="rmsnorm-validation"></a>
 
 ## От LayerNorm к RMSNorm
 
@@ -152,6 +164,8 @@ def rms_norm(x, weight, eps=1e-5):
 смешиваются. `eps` находится под корнем; перенос его наружу слегка меняет
 функцию. Вес `weight` имеет форму `[d]` и распространяется по первым осям.
 
+<a id="ffn-variants"></a>
+
 ## От обычного FFN к SwiGLU
 
 Классический Transformer применяет к каждому токену двухслойную сеть:
@@ -179,7 +193,7 @@ $$\operatorname{SiLU}(z)=z\sigma(z).$$
 
 *SiLU, ReLU и тождественная функция. Источник: Stanford CS336, Assignment 1:
 Basics, Figure 3,
-[с. 21](https://github.com/stanford-cs336/assignment1-basics/blob/main/cs336_assignment1_basics.pdf#page=21),
+[с. 21](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=21),
 Percy Liang, Tatsunori Hashimoto и команда курса. Схема вырезана из страницы;
 репозиторий курса имеет лицензию MIT.*
 
@@ -226,6 +240,35 @@ Residual отвечает за путь сложения; pre-norm — за по
 SwiGLU — за функцию внутри FFN. Один механизм нельзя вывести из другого, и
 замена любого из них требует отдельной проверки.
 
+<a id="stability-controls"></a>
+
+## Когда проблема находится не в residual stream
+
+Даже правильно собранный pre-norm-блок может стать численно неустойчивым в
+attention. Если нормы $Q$ и $K$ растут, скалярные произведения и логиты softmax
+становятся очень большими; распределение насыщается, а вычисления пониженной
+точности теряют запас. [Лекция 3 CS336, с.
+52–56](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_03.pdf#page=52)
+разводит три вмешательства, которые нельзя считать синонимами:
+
+- **QK normalization** ограничивает масштаб запросов и ключей до скалярного
+  произведения;
+- **z-loss** добавляет штраф за большой логарифм нормировочной суммы
+  $\log\sum_j e^{z_j}$ и тем самым действует на общий сдвиг логитов;
+- **logit soft-capping** заменяет большой логит $z$ на
+  $c\tanh(z/c)$ перед softmax.
+
+RMSNorm residual stream отвечает на другой вопрос — как нормировать вход
+подслоя. Поэтому добавление QK-нормировки не «усиливает RMSNorm», а меняет
+оценки attention; z-loss меняет целевую функцию; soft-capping — вычисление
+логитов. Ни один приём не следует включать только потому, что он встречается в
+крупной модели. Подтверждением служат раздельные кривые нормы $Q/K$, максимума
+логитов, функции потерь и числа нечисловых значений при неизменных остальных
+условиях. Стабильный прогон одной конфигурации показывает её работоспособность,
+но не доказывает универсальное превосходство.
+
+<a id="normalization-evidence"></a>
+
 ## Ошибки и границы применимости
 
 - **Дважды вычислять нормализацию для ветвей SwiGLU.** При детерминированной
@@ -245,9 +288,12 @@ SwiGLU — за функцию внутри FFN. Один механизм не�
 
 ## Источники и альтернативные объяснения
 
-- [Stanford CS336, Assignment 1, §3.4](https://github.com/stanford-cs336/assignment1-basics/blob/main/cs336_assignment1_basics.pdf#page=19) лучше других соединяет порядок pre-norm-блока, формулы, формы тензоров и реализационные задания.
+- [Stanford CS336, Lecture 3, с. 10–29 и 52–56](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_03.pdf) — вывод pre-/post-norm, измерения RMSNorm, gated FFN и раздельные способы ограничить softmax-нестабильность.
+- [Stanford CS336, Assignment 1, §3.4](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=19) лучше других соединяет порядок pre-norm-блока, формулы, формы тензоров и реализационные задания.
 - [Xiong et al., On Layer Normalization in the Transformer Architecture](https://arxiv.org/abs/2002.04745) — анализ градиентов pre-norm и post-norm около инициализации.
 - [Zhang & Sennrich, RMSNorm](https://arxiv.org/abs/1910.07467) — определение, инвариантность к масштабированию и исходные эксперименты.
 - [Shazeer, GLU Variants Improve Transformer](https://arxiv.org/abs/2002.05202) — единая запись GLU-вариантов и абляции при сопоставимом бюджете параметров.
 - [Jurafsky & Martin, гл. 8](https://web.stanford.edu/~jurafsky/slp3/8.pdf) подробнее всего вводят LayerNorm и FFN классического Transformer. [D2L, Residual Networks](https://d2l.ai/chapter_convolutional-modern/resnet.html) даёт более наглядную исходную мотивацию residual connections, но не объясняет современную LLM-сборку.
-- [Karpathy, nanoGPT `Block`](https://github.com/karpathy/nanoGPT/blob/master/model.py) — компактная реализация pre-norm GPT-2; для RMSNorm и SwiGLU она сознательно не служит reference, поскольку использует LayerNorm и GELU-MLP.
+- [Karpathy, nanoGPT `Block`](https://github.com/karpathy/nanoGPT/blob/master/model.py) — компактная реализация pre-norm GPT-2; для RMSNorm и SwiGLU она сознательно не служит эталоном, поскольку использует LayerNorm и GELU-MLP.
+
+**Переход:** после разделения этих механизмов их можно проверить по отдельности в [[02 Areas/ML & DL/06 Практика/20 Собрать языковую модель с нуля|Capstone 1]], а общую память и стоимость блока вывести из форм в [[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость|следующей главе]].

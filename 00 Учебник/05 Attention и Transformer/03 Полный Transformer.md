@@ -2,13 +2,21 @@
 title: Собираем Transformer — от блока к BERT, GPT и LLaMA
 type: textbook-chapter
 status: canonical
-last_updated: 2026-07-18
+last_updated: 2026-09-04
+source_unit_id:
+  - lecture-01-section-175-model-architecture
+  - lecture-03-architecture-framing
+  - lecture-03-recap
+  - assignment-01-task-transformer-block
+  - assignment-01-task-transformer-lm
 previous: "[[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/04 Позиционная информация]]"
 next: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна]]"
 primary_sources:
   - https://arxiv.org/abs/1706.03762
   - https://arxiv.org/abs/1810.04805
   - https://arxiv.org/abs/2302.13971
+  - https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_03.pdf
+  - https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf
 ---
 
 # Собираем Transformer: от блока к BERT, GPT и LLaMA
@@ -25,6 +33,8 @@ primary_sources:
 нормализацию, позиционный механизм и FFN. Поэтому архитектура 2017 года служит
 исходной точкой, а BERT, GPT и LLaMA определяются через конкретные изменения её
 блоков и связей.
+
+<a id="architecture-lineage"></a>
 
 ## 1. Главная декомпозиция
 
@@ -245,7 +255,24 @@ GQA всему семейству или самой первой версии.
 Эта таблица иллюстрирует правильный способ описывать новые модели: не повторять
 весь Transformer, а фиксировать, что сохранено и что изменено.
 
-## 10. Почему Transformer вытеснил рекуррентную основу
+<a id="architecture-evidence-boundary"></a>
+
+## 10. Архитектурное решение и эмпирический рецепт — не одно и то же
+
+Из формул следует, где стоит norm, какие позиции разрешены маской и как меняются
+формы. Из них не следует, что RMSNorm всегда лучше LayerNorm, SwiGLU всегда
+лучше GELU или конкретное отношение $d_{ff}/d_{model}$ оптимально при любом
+масштабе. Lecture 3 CS336 отделяет устойчивые механические различия от таблиц
+конкретных model families: последние зависят от данных, compute budget и
+процедуры обучения.
+
+Поэтому архитектурный diff сопровождается разным подтверждением. Расположение
+операций проверяется кодом и unit-тестами; стабильность pre-norm — градиентами и
+кривыми обучения; выбор ширины, norm и positional scheme — контролируемой
+ablation при одинаковом token budget. Название модели или один leaderboard не
+заменяют эту границу.
+
+## 11. Почему Transformer вытеснил рекуррентную основу
 
 В сравнении оригинальной статьи:
 
@@ -265,7 +292,7 @@ FlashAttention, sparse/sliding-window attention, linear attention и SSM.
 > слое, а не к генерации неизвестных будущих токенов. И self-attention не всегда
 > дешевле рекуррентной сети: соотношение зависит от $T$, $d$, оборудования и реализации.
 
-## 11. Минимальный современный causal block
+## 12. Минимальный современный causal block
 
 ```python
 class Block(nn.Module):
@@ -286,7 +313,7 @@ class Block(nn.Module):
 нужно добавить энкодер, cross-attention, LayerNorm после остаточного сложения, ReLU FFN и
 синусоидальные позиции.
 
-## 12. Как читать реальный код
+## 13. Как читать реальный код
 
 Три уровня сложности:
 
@@ -300,7 +327,7 @@ class Block(nn.Module):
 `nanoGPT` полезен как компактная историческая реализация, но сам автор теперь
 направляет к более современному `nanochat`.
 
-## 13. Проверка форм тензоров
+## 14. Проверка форм тензоров
 
 Для causal LLM:
 
@@ -319,6 +346,14 @@ vocabulary logits         [B, T, |Vocab|]
 Если форма неожиданно меняется вдоль остаточного потока, это почти всегда означает
 пропущенную проекцию или ошибочную конкатенацию голов.
 
+
+Следующий вопрос уже системный: сколько параметров скрыто за каждой стрелкой,
+какие матричные произведения доминируют и что останется в памяти до backward.
+Он разобран в
+[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость|главе о формах, параметрах и стоимости]],
+после чего ту же последовательность можно реализовать в
+[[02 Areas/ML & DL/06 Практика/20 Собрать языковую модель с нуля|Capstone 1]].
+
 ## Краткие итоги
 
 - Оригинальный Transformer — encoder-decoder, а не GPT-подобная башня.
@@ -334,6 +369,8 @@ vocabulary logits         [B, T, |Vocab|]
 
 ### Первичные
 
+- [Stanford CS336 Spring 2026, Lecture 3 — pinned source](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_03.pdf)
+- [Stanford CS336 Spring 2026, Assignment 1 — pinned handout](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf)
 - [Vaswani et al. — Attention Is All You Need](https://arxiv.org/abs/1706.03762)
 - [Radford et al. — Improving Language Understanding by Generative Pre-Training](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf)
 - [Devlin et al. — BERT](https://arxiv.org/abs/1810.04805)

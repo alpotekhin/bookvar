@@ -11,14 +11,15 @@ last_verified: 2026-09-04
 Последовательное изучение идёт по каноническим главам учебника; здесь сохранены
 оригинальные англоязычные материалы, их dependency closure и аудит границ.
 
-Статус: **inventory complete; editorial integration pending**. Учебные units
-пока имеют disposition `source-only`; административные units явно исключены
-с причиной и evidence. Конкретные textbook destinations ещё не подтверждены.
+Статус: **inventory complete; editorial integration active**. Semantic extraction
+остаётся воспроизводимой из immutable archive; редакционные решения наложены
+отдельным проверяемым overlay и не переписывают source semantics.
 
 ## Реестры аудита
 
 - [source-manifest.yml](source-manifest.yml) — объекты и pinned revisions;
 - [semantic-review.json](semantic-review.json) — reviewed per-source semantic boundaries;
+- [editorial-map.yml](editorial-map.yml) — persistent reviewed destinations and explicit deferrals;
 - [source-units.yml](source-units.yml) — semantic extraction index;
 - [coverage.yml](coverage.yml) — одна строка покрытия на каждый source unit;
 - [visuals.yml](visuals.yml) — semantic figure/table/code-trace/derivation sequences;
@@ -81,7 +82,7 @@ Raw page/raster detections служат evidence и не становятся о
 - local path: `Lectures/repository/lecture_01.py`;
 - extracted units: 54;
 - semantic visual rows: 15;
-- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
+- disposition is recorded per unit/visual in the generated coverage ledgers.
 
 <a id="lecture-02"></a>
 ### lecture-02: PyTorch (einops), resource accounting (FLOPs, memory, arithmetic intensity)
@@ -89,7 +90,7 @@ Raw page/raster detections служат evidence и не становятся о
 - local path: `Lectures/repository/lecture_02.py`;
 - extracted units: 24;
 - semantic visual rows: 8;
-- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
+- disposition is recorded per unit/visual in the generated coverage ledgers.
 
 <a id="lecture-03"></a>
 ### lecture-03: Architectures, hyperparameters
@@ -97,7 +98,7 @@ Raw page/raster detections служат evidence и не становятся о
 - local path: `Lectures/repository/lecture_03.pdf`;
 - extracted units: 11;
 - semantic visual rows: 4;
-- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
+- disposition is recorded per unit/visual in the generated coverage ledgers.
 
 <a id="lecture-04"></a>
 ### lecture-04: Attention alternatives and mixture of experts
@@ -105,7 +106,7 @@ Raw page/raster detections служат evidence и не становятся о
 - local path: `Lectures/repository/lecture_04.pdf`;
 - extracted units: 10;
 - semantic visual rows: 4;
-- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
+- disposition is recorded per unit/visual in the generated coverage ledgers.
 
 <a id="lecture-05"></a>
 ### lecture-05: GPUs, TPUs
@@ -113,7 +114,7 @@ Raw page/raster detections служат evidence и не становятся о
 - local path: `Lectures/repository/lecture_05.pdf`;
 - extracted units: 12;
 - semantic visual rows: 6;
-- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
+- disposition is recorded per unit/visual in the generated coverage ledgers.
 
 <a id="lecture-06"></a>
 ### lecture-06: Kernels, Triton
@@ -121,7 +122,7 @@ Raw page/raster detections служат evidence и не становятся о
 - local path: `Lectures/repository/lecture_06.py`;
 - extracted units: 21;
 - semantic visual rows: 9;
-- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
+- disposition is recorded per unit/visual in the generated coverage ledgers.
 
 <a id="lecture-07"></a>
 ### lecture-07: Parallelism
@@ -129,7 +130,7 @@ Raw page/raster detections служат evidence и не становятся о
 - local path: `Lectures/repository/lecture_07.py`;
 - extracted units: 12;
 - semantic visual rows: 5;
-- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
+- disposition is recorded per unit/visual in the generated coverage ledgers.
 
 <a id="lecture-08"></a>
 ### lecture-08: Parallelism
@@ -137,7 +138,7 @@ Raw page/raster detections служат evidence и не становятся о
 - local path: `Lectures/repository/lecture_08.pdf`;
 - extracted units: 11;
 - semantic visual rows: 5;
-- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
+- disposition is recorded per unit/visual in the generated coverage ledgers.
 
 <a id="lecture-09"></a>
 ### lecture-09: Scaling laws
@@ -145,7 +146,7 @@ Raw page/raster detections служат evidence и не становятся о
 - local path: `Lectures/repository/lecture_09.pdf`;
 - extracted units: 10;
 - semantic visual rows: 4;
-- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
+- disposition is recorded per unit/visual in the generated coverage ledgers.
 
 <a id="lecture-10"></a>
 ### lecture-10: Inference
@@ -153,7 +154,7 @@ Raw page/raster detections служат evidence и не становятся о
 - local path: `Lectures/repository/lecture_10.py`;
 - extracted units: 30;
 - semantic visual rows: 14;
-- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
+- disposition is recorded per unit/visual in the generated coverage ledgers.
 
 <a id="lecture-11"></a>
 ### lecture-11: Scaling laws
@@ -161,7 +162,7 @@ Raw page/raster detections служат evidence и не становятся о
 - local path: `Lectures/repository/lecture_11.pdf`;
 - extracted units: 8;
 - semantic visual rows: 4;
-- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
+- disposition is recorded per unit/visual in the generated coverage ledgers.
 
 <a id="lecture-12"></a>
 ### lecture-12: Evaluation
@@ -169,7 +170,7 @@ Raw page/raster detections служат evidence и не становятся о
 - local path: `Lectures/repository/lecture_12.py`;
 - extracted units: 36;
 - semantic visual rows: 29;
-- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
+- disposition is recorded per unit/visual in the generated coverage ledgers.
 
 <a id="lecture-13"></a>
 ### lecture-13: Data (sources, datasets)
@@ -177,7 +178,7 @@ Raw page/raster detections служат evidence и не становятся о
 - local path: `Lectures/repository/lecture_13.py`;
 - extracted units: 16;
 - semantic visual rows: 8;
-- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
+- disposition is recorded per unit/visual in the generated coverage ledgers.
 
 <a id="lecture-14"></a>
 ### lecture-14: Data (filtering, deduplication, mixing, synthetic data)
@@ -185,7 +186,7 @@ Raw page/raster detections служат evidence и не становятся о
 - local path: `Lectures/repository/lecture_14.py`;
 - extracted units: 15;
 - semantic visual rows: 10;
-- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
+- disposition is recorded per unit/visual in the generated coverage ledgers.
 
 <a id="lecture-15"></a>
 ### lecture-15: Mid/post-training (SFT/RLHF)
@@ -193,7 +194,7 @@ Raw page/raster detections служат evidence и не становятся о
 - local path: `Lectures/repository/lecture_15.pdf`;
 - extracted units: 9;
 - semantic visual rows: 4;
-- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
+- disposition is recorded per unit/visual in the generated coverage ledgers.
 
 <a id="lecture-16"></a>
 ### lecture-16: Post-training - RLVR
@@ -201,7 +202,7 @@ Raw page/raster detections служат evidence и не становятся о
 - local path: `Lectures/repository/lecture_16.pdf`;
 - extracted units: 9;
 - semantic visual rows: 5;
-- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
+- disposition is recorded per unit/visual in the generated coverage ledgers.
 
 <a id="lecture-17"></a>
 ### lecture-17: Alignment - multimodality
@@ -209,7 +210,7 @@ Raw page/raster detections служат evidence и не становятся о
 - local path: `Lectures/repository/lecture_17.py`;
 - extracted units: 10;
 - semantic visual rows: 7;
-- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
+- disposition is recorded per unit/visual in the generated coverage ledgers.
 
 <a id="assignment-01"></a>
 ### assignment-01: Assignment 1: Basics
@@ -217,7 +218,7 @@ Raw page/raster detections служат evidence и не становятся о
 - local path: `Assignments/assignment1-basics`;
 - extracted units: 149;
 - semantic visual rows: 1;
-- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
+- disposition is recorded per unit/visual in the generated coverage ledgers.
 
 <a id="assignment-02"></a>
 ### assignment-02: Assignment 2: Systems
@@ -225,7 +226,7 @@ Raw page/raster detections служат evidence и не становятся о
 - local path: `Assignments/assignment2-systems`;
 - extracted units: 101;
 - semantic visual rows: 3;
-- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
+- disposition is recorded per unit/visual in the generated coverage ledgers.
 
 <a id="assignment-03"></a>
 ### assignment-03: Assignment 3: Scaling
@@ -233,7 +234,7 @@ Raw page/raster detections служат evidence и не становятся о
 - local path: `Assignments/assignment3-scaling`;
 - extracted units: 16;
 - semantic visual rows: 1;
-- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
+- disposition is recorded per unit/visual in the generated coverage ledgers.
 
 <a id="assignment-04"></a>
 ### assignment-04: Assignment 4: Data
@@ -241,7 +242,7 @@ Raw page/raster detections служат evidence и не становятся о
 - local path: `Assignments/assignment4-data`;
 - extracted units: 70;
 - semantic visual rows: 1;
-- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
+- disposition is recorded per unit/visual in the generated coverage ledgers.
 
 <a id="assignment-05"></a>
 ### assignment-05: Assignment 5: Alignment and Reasoning RL
@@ -249,7 +250,7 @@ Raw page/raster detections служат evidence и не становятся о
 - local path: `Assignments/assignment5-alignment`;
 - extracted units: 87;
 - semantic visual rows: 1;
-- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
+- disposition is recorded per unit/visual in the generated coverage ledgers.
 
 <a id="assignment-05-safety-supplement"></a>
 ### assignment-05-safety-supplement: Assignment 5 optional supplement: safety, instruction tuning, and RLHF
@@ -257,7 +258,7 @@ Raw page/raster detections служат evidence и не становятся о
 - local path: `Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf`;
 - extracted units: 78;
 - semantic visual rows: 1;
-- baseline: teaching content is `source-only`; reviewed administration is `excluded`.
+- disposition is recorded per unit/visual in the generated coverage ledgers.
 
 ## Права и атрибуция
 
