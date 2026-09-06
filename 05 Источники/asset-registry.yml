@@ -7363,3 +7363,565 @@ assets:
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
     derivation: pdf-page-render
+  - id: curated-stanford-cs336-systems-a2-nsight-trace-7dd8944a6c6e
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/a2-nsight-trace.png
+    author: "Stanford CS336 course staff"
+    source_url: https://github.com/stanford-cs336/assignment2-systems/blob/ca8bc81a59b70516f7ebb2da4808daade877c736/cs336_assignment2_systems.pdf#page=5
+    commit: ca8bc81a59b70516f7ebb2da4808daade877c736
+    source_parent_sha256: f5667e3b6fac23c3a6d4ad4a999445b96aab3fb2246904d13ec86b79320b1a84
+    sha256: 7dd8944a6c6e123547e92fbf38ab2cbc88a826b657b1c9f693955981ca092f6f
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "lossless explanatory body or figure crop from Assignment 2 PDF page 5, exported at 3278×1986; page chrome removed; no redraw"
+    used_in:
+      - 00 Учебник/10 ML Systems/07 Profiling ML-нагрузки.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-crop
+
+  - id: curated-stanford-cs336-systems-a2-p23-attention-equations-763b6af5dcae
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/a2-p23-attention-equations.png
+    author: "Stanford CS336 course staff"
+    source_url: https://github.com/stanford-cs336/assignment2-systems/blob/ca8bc81a59b70516f7ebb2da4808daade877c736/cs336_assignment2_systems.pdf#page=23
+    commit: ca8bc81a59b70516f7ebb2da4808daade877c736
+    source_parent_sha256: f5667e3b6fac23c3a6d4ad4a999445b96aab3fb2246904d13ec86b79320b1a84
+    sha256: 763b6af5dcae1a5edd5cb0442c26b0f926fbbf348968089a8865afe859123e86
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "lossless explanatory body or figure crop from Assignment 2 PDF page 23, exported at 1560×1100; page chrome removed; no redraw"
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/56 FlashAttention.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-crop
+
+  - id: curated-stanford-cs336-systems-a2-p24-backward-recompute-d5a8bfbdd848
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/a2-p24-backward-recompute.png
+    author: "Stanford CS336 course staff"
+    source_url: https://github.com/stanford-cs336/assignment2-systems/blob/ca8bc81a59b70516f7ebb2da4808daade877c736/cs336_assignment2_systems.pdf#page=24
+    commit: ca8bc81a59b70516f7ebb2da4808daade877c736
+    source_parent_sha256: f5667e3b6fac23c3a6d4ad4a999445b96aab3fb2246904d13ec86b79320b1a84
+    sha256: d5a8bfbdd8489c5709c253008149cf19c87e605edb9d7ffa5e8176003f9009d6
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "lossless explanatory body or figure crop from Assignment 2 PDF page 24, exported at 1560×1450; page chrome removed; no redraw"
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/56 FlashAttention.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-crop
+
+  - id: curated-stanford-cs336-systems-a2-p25-flash-forward-b8a77095ea45
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/a2-p25-flash-forward.png
+    author: "Stanford CS336 course staff"
+    source_url: https://github.com/stanford-cs336/assignment2-systems/blob/ca8bc81a59b70516f7ebb2da4808daade877c736/cs336_assignment2_systems.pdf#page=25
+    commit: ca8bc81a59b70516f7ebb2da4808daade877c736
+    source_parent_sha256: f5667e3b6fac23c3a6d4ad4a999445b96aab3fb2246904d13ec86b79320b1a84
+    sha256: b8a77095ea458310a534aa8884972c05e6d70ffa174f388fcc86ea4e7b2f1485
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "lossless explanatory body or figure crop from Assignment 2 PDF page 25, exported at 1500×1300; page chrome removed; no redraw"
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/56 FlashAttention.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-crop
+
+  - id: curated-stanford-cs336-systems-a2-p29-flash-backward-00d75c34b3c5
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/a2-p29-flash-backward.png
+    author: "Stanford CS336 course staff"
+    source_url: https://github.com/stanford-cs336/assignment2-systems/blob/ca8bc81a59b70516f7ebb2da4808daade877c736/cs336_assignment2_systems.pdf#page=29
+    commit: ca8bc81a59b70516f7ebb2da4808daade877c736
+    source_parent_sha256: f5667e3b6fac23c3a6d4ad4a999445b96aab3fb2246904d13ec86b79320b1a84
+    sha256: 00d75c34b3c563e7221a45a1dc2ef92b68b72c12f53baf9a93fd9b3392832a9c
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "lossless explanatory body or figure crop from Assignment 2 PDF page 29, exported at 1600×1870; page chrome removed; no redraw"
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/56 FlashAttention.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-crop
+
+  - id: curated-stanford-cs336-systems-a2-rank-topology-e56416b6c99e
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/a2-rank-topology.png
+    author: "Stanford CS336 course staff"
+    source_url: https://github.com/stanford-cs336/assignment2-systems/blob/ca8bc81a59b70516f7ebb2da4808daade877c736/cs336_assignment2_systems.pdf#page=32
+    commit: ca8bc81a59b70516f7ebb2da4808daade877c736
+    source_parent_sha256: f5667e3b6fac23c3a6d4ad4a999445b96aab3fb2246904d13ec86b79320b1a84
+    sha256: e56416b6c99eb69de2737a7e2b667fcefbe6fd320d8c447ab993d0d0152d7975
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "lossless explanatory body or figure crop from Assignment 2 PDF page 32, exported at 1920×642; page chrome removed; no redraw"
+    used_in:
+      - 00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-crop
+
+  - id: curated-stanford-cs336-systems-cuda-grid-cta-3aebbb52b47d
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/cuda-grid-cta.png
+    author: "NVIDIA; preserved by Stanford CS336 course staff"
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/cuda-grid-cta.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 3aebbb52b47d4cef0c67785ffb9781032e06924320289283a4f2aa59a91d28ea
+    sha256: 3aebbb52b47d4cef0c67785ffb9781032e06924320289283a4f2aa59a91d28ea
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "byte-for-byte copy of the exact pinned course raster; path changed for publication packaging"
+    used_in:
+      - 00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+
+  - id: curated-stanford-cs336-systems-gelu-profile-builtin-215892c4302b
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/gelu-profile-builtin.png
+    author: "Percy Liang and Stanford CS336 course staff"
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_06.py#L287-L301
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 1a47b087ca2db4a85bf9ed828b78c5ef882a1b72d7f5ed48ecc9c2a5e30d9570
+    sha256: 215892c4302b27bd4baed0630bb5398679af5f92562b8189806f052760dd2ff4
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "source-faithful table rendering of pinned lecture trace step 248 for input dim=16384; event labels and values unchanged; exported at 2000×610"
+    used_in:
+      - 00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md
+      - 00 Учебник/10 ML Systems/07 Profiling ML-нагрузки.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-trace-table-render
+
+  - id: curated-stanford-cs336-systems-gelu-profile-compiled-bf6a29090004
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/gelu-profile-compiled.png
+    author: "Percy Liang and Stanford CS336 course staff"
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_06.py#L287-L301
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 1a47b087ca2db4a85bf9ed828b78c5ef882a1b72d7f5ed48ecc9c2a5e30d9570
+    sha256: bf6a2909000468700305b2646e1a2dc058014720e39fae2dc5a0d23b0d915cda
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "source-faithful table rendering of pinned lecture trace step 251 for input dim=16384; event labels and values unchanged; exported at 2000×610"
+    used_in:
+      - 00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md
+      - 00 Учебник/10 ML Systems/07 Profiling ML-нагрузки.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-trace-table-render
+
+  - id: curated-stanford-cs336-systems-gelu-profile-naive-5ad161efb250
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/gelu-profile-naive.png
+    author: "Percy Liang and Stanford CS336 course staff"
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_06.py#L287-L301
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 1a47b087ca2db4a85bf9ed828b78c5ef882a1b72d7f5ed48ecc9c2a5e30d9570
+    sha256: 5ad161efb250d81e7bf1d93f1804934bb3a04c61f096f5a9ec591d97aba8eaa2
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "source-faithful table rendering of pinned lecture trace step 245 for input dim=16384; event labels and values unchanged; exported at 2000×890"
+    used_in:
+      - 00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md
+      - 00 Учебник/10 ML Systems/07 Profiling ML-нагрузки.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-trace-table-render
+
+  - id: curated-stanford-cs336-systems-gpu-hardware-edd5c4c20e79
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/gpu-hardware.png
+    author: "Percy Liang and Stanford CS336 course staff"
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/gpu-hardware.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: edd5c4c20e79c8733830670bc16082c51a0b2162326ab2a70e68c7460a838975
+    sha256: edd5c4c20e79c8733830670bc16082c51a0b2162326ab2a70e68c7460a838975
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "byte-for-byte copy of the exact pinned course raster; path changed for publication packaging"
+    used_in:
+      - 00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+
+  - id: curated-stanford-cs336-systems-l05-p20-bbe7ed38ea01
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l05-p20.png
+    author: "Tatsunori Hashimoto and Stanford CS336 course staff"
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_05.pdf#page=20
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: a2d5664a3b5a1f246df2fe58b43189215f29931ec05bde4d8a6af4664f55cafe
+    sha256: bbe7ed38ea0160e589b4b215674d7d0102bd1ec55ff79449b9d53b7e56332ec8
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "complete PDF page 20 rendered at 2200×1239; no redraw or semantic alteration"
+    used_in:
+      - 00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-systems-l05-p31-833a051a43fb
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l05-p31.png
+    author: "Tatsunori Hashimoto and Stanford CS336 course staff"
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_05.pdf#page=31
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: a2d5664a3b5a1f246df2fe58b43189215f29931ec05bde4d8a6af4664f55cafe
+    sha256: 833a051a43fb1fe1d28fe06d64abaeb04e2a493665527878c8af5ccccf633896
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "complete PDF page 31 rendered at 2200×1239; no redraw or semantic alteration"
+    used_in:
+      - 00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-systems-l05-p32-4d62ec1bbd4e
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l05-p32.png
+    author: "Tatsunori Hashimoto and Stanford CS336 course staff"
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_05.pdf#page=32
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: a2d5664a3b5a1f246df2fe58b43189215f29931ec05bde4d8a6af4664f55cafe
+    sha256: 4d62ec1bbd4e536529657ee273bf9ef1372f50a8360640d1ece75d0c5d97400d
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "complete PDF page 32 rendered at 2200×1239; no crop, redraw, or semantic alteration"
+    used_in:
+      - 00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-systems-l05-p33-34159b142eda
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l05-p33.png
+    author: "Tatsunori Hashimoto and Stanford CS336 course staff"
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_05.pdf#page=33
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: a2d5664a3b5a1f246df2fe58b43189215f29931ec05bde4d8a6af4664f55cafe
+    sha256: 34159b142edadad9a8d6e956aa7b79226087f65bdc93a7bf94e6ba6b62905d01
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "complete PDF page 33 rendered at 2200×1239; no redraw or semantic alteration"
+    used_in:
+      - 00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-systems-l05-p35-5825b9d9ff7a
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l05-p35.png
+    author: "Tatsunori Hashimoto and Stanford CS336 course staff"
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_05.pdf#page=35
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: a2d5664a3b5a1f246df2fe58b43189215f29931ec05bde4d8a6af4664f55cafe
+    sha256: 5825b9d9ff7a3f6a129f375abbefa9ede253f92188caf9a9ba9b5bc1fca62275
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "complete PDF page 35 rendered at 2200×1239; no redraw or semantic alteration"
+    used_in:
+      - 00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-systems-l05-p36-fe65cf3116e8
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l05-p36.png
+    author: "Tatsunori Hashimoto and Stanford CS336 course staff"
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_05.pdf#page=36
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: a2d5664a3b5a1f246df2fe58b43189215f29931ec05bde4d8a6af4664f55cafe
+    sha256: fe65cf3116e8ae6f96cbaf4cbeb7891428a4c3f656624384ef84deef42924e74
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "complete PDF page 36 rendered at 2200×1239; no redraw or semantic alteration"
+    used_in:
+      - 00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-systems-l05-p42-9cecd29bae0b
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l05-p42.png
+    author: "Tatsunori Hashimoto and Stanford CS336 course staff"
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_05.pdf#page=42
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: a2d5664a3b5a1f246df2fe58b43189215f29931ec05bde4d8a6af4664f55cafe
+    sha256: 9cecd29bae0bba9bfc05db6e585c3b5eb590a1470c9ba573a13acb17e44d90f5
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "complete PDF page 42 rendered at 2200×1239; no redraw or semantic alteration"
+    used_in:
+      - 00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-systems-l05-p43-5a3c882c0824
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l05-p43.png
+    author: "Tatsunori Hashimoto and Stanford CS336 course staff"
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_05.pdf#page=43
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: a2d5664a3b5a1f246df2fe58b43189215f29931ec05bde4d8a6af4664f55cafe
+    sha256: 5a3c882c0824b74b32b240ae18d30f38fa2ec6275a476614b0ebbfd959ef3c95
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "complete PDF page 43 rendered at 2200×1239; no redraw or semantic alteration"
+    used_in:
+      - 00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-systems-l05-p47-7951d45a8742
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l05-p47.png
+    author: "Tatsunori Hashimoto and Stanford CS336 course staff"
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_05.pdf#page=47
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: a2d5664a3b5a1f246df2fe58b43189215f29931ec05bde4d8a6af4664f55cafe
+    sha256: 7951d45a874224c8e7a10be0bb05c6b8e4f8d8543824d3579df22152585e6ac2
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "complete PDF page 47 rendered at 2200×1239; no redraw or semantic alteration"
+    used_in:
+      - 00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-systems-l05-p48-abdd722e5a34
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l05-p48.png
+    author: "Tatsunori Hashimoto and Stanford CS336 course staff"
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_05.pdf#page=48
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: a2d5664a3b5a1f246df2fe58b43189215f29931ec05bde4d8a6af4664f55cafe
+    sha256: abdd722e5a34bfb0d254e5a2129264b1ada3a88c049967e902d0ae426d01a7a1
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "complete PDF page 48 rendered at 2200×1239; no redraw or semantic alteration"
+    used_in:
+      - 00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-systems-l05-p52-97c70c11566d
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l05-p52.png
+    author: "Tatsunori Hashimoto and Stanford CS336 course staff"
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_05.pdf#page=52
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: a2d5664a3b5a1f246df2fe58b43189215f29931ec05bde4d8a6af4664f55cafe
+    sha256: 97c70c11566ddd6862841eee67189da3848df13d49ce32d7b15d7eaa3de977dc
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "complete PDF page 52 rendered at 2200×1239; no redraw or semantic alteration"
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/56 FlashAttention.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-systems-l05-p53-e17673f90826
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l05-p53.png
+    author: "Tatsunori Hashimoto and Stanford CS336 course staff"
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_05.pdf#page=53
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: a2d5664a3b5a1f246df2fe58b43189215f29931ec05bde4d8a6af4664f55cafe
+    sha256: e17673f9082623c7ba1dc55443f93079fe0257c3cf6b6c2d493f01b4ac1b0b65
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "complete PDF page 53 rendered at 2200×1239; no redraw or semantic alteration"
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/56 FlashAttention.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-systems-l05-p54-2b8bff32f1b2
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l05-p54.png
+    author: "Tatsunori Hashimoto and Stanford CS336 course staff"
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_05.pdf#page=54
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: a2d5664a3b5a1f246df2fe58b43189215f29931ec05bde4d8a6af4664f55cafe
+    sha256: 2b8bff32f1b26537167dd21b8ee0c3ae89eb4fa90cfe8bbd481b6c852e21433a
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "complete PDF page 54 rendered at 2200×1239; no redraw or semantic alteration"
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/56 FlashAttention.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-systems-l08-p17-19b28f4694a2
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l08-p17.png
+    author: "Tatsunori Hashimoto and Stanford CS336 course staff"
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_08.pdf#page=17
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 4c4d7674b333693f20f328935d84dd8a073362c9725c5e05302b6650751ad4d1
+    sha256: 19b28f4694a29e1a4480d81b96a1f954917259c311993e56584e64d24a29a337
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "same-source body crop from PDF page 17 at 2200 px, crop box [0, 205, 2200, 1215]; unclipped heading retained; no redraw"
+    used_in:
+      - 00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-crop
+
+  - id: curated-stanford-cs336-systems-l08-p22-b8900d567816
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l08-p22.png
+    author: "Tatsunori Hashimoto and Stanford CS336 course staff"
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_08.pdf#page=22
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 4c4d7674b333693f20f328935d84dd8a073362c9725c5e05302b6650751ad4d1
+    sha256: b8900d56781680439cc4460ecc3399ff169ca9296d7fc9311b6332490dd22547
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "complete PDF page 22 rendered at 2200×1239; no redraw or semantic alteration"
+    used_in:
+      - 00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-systems-l08-p25-ba0dbba21cbb
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l08-p25.png
+    author: "Tatsunori Hashimoto and Stanford CS336 course staff"
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_08.pdf#page=25
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 4c4d7674b333693f20f328935d84dd8a073362c9725c5e05302b6650751ad4d1
+    sha256: ba0dbba21cbb286dec42439abe5f2f86b380d4b66b2ac3a51de99253aac7c85b
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "same-source body crop from PDF page 25 at 2200 px, crop box [0, 205, 2200, 1140]; unclipped heading retained; no redraw"
+    used_in:
+      - 00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-crop
+
+  - id: curated-stanford-cs336-systems-l08-p33-de419d0baacf
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l08-p33.png
+    author: "Tatsunori Hashimoto and Stanford CS336 course staff"
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_08.pdf#page=33
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 4c4d7674b333693f20f328935d84dd8a073362c9725c5e05302b6650751ad4d1
+    sha256: de419d0baacf2a15b1cd5b26b538bf45caf9155d54fd101b9847ba58ecdbb42e
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "complete PDF page 33 rendered at 2200×1239; no redraw or semantic alteration"
+    used_in:
+      - 00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-systems-l08-p37-03908172fa61
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l08-p37.png
+    author: "Tatsunori Hashimoto and Stanford CS336 course staff"
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_08.pdf#page=37
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 4c4d7674b333693f20f328935d84dd8a073362c9725c5e05302b6650751ad4d1
+    sha256: 03908172fa6161debd395793ffd794ea10f5df87ab26256687a6eb5e78bfc6aa
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "complete PDF page 37 rendered at 2200×1239; no redraw or semantic alteration"
+    used_in:
+      - 00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-systems-l08-p47-061dd6bbfcb6
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l08-p47.png
+    author: "Tatsunori Hashimoto and Stanford CS336 course staff"
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_08.pdf#page=47
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 4c4d7674b333693f20f328935d84dd8a073362c9725c5e05302b6650751ad4d1
+    sha256: 061dd6bbfcb62d4ffb4e8eb42cc2f6e512c75f2058154ba10e0369fa4ca0a7bd
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "complete PDF page 47 rendered at 2200×1239; no redraw or semantic alteration"
+    used_in:
+      - 00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-systems-l08-p55-3c166c3d0ec5
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l08-p55.png
+    author: "Tatsunori Hashimoto and Stanford CS336 course staff"
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_08.pdf#page=55
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 4c4d7674b333693f20f328935d84dd8a073362c9725c5e05302b6650751ad4d1
+    sha256: 3c166c3d0ec54d7647ffbdd343ec6724f7c9b932ca51579a9df996a2d98223b2
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "complete PDF page 55 rendered at 2200×1239; no redraw or semantic alteration"
+    used_in:
+      - 00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-systems-l08-p6-6b119b0fdf08
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l08-p6.png
+    author: "Tatsunori Hashimoto and Stanford CS336 course staff"
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_08.pdf#page=6
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 4c4d7674b333693f20f328935d84dd8a073362c9725c5e05302b6650751ad4d1
+    sha256: 6b119b0fdf08f1bc72692841b03fc7c25fbfbce6209f96dfd3981b2f9bd8db2d
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "complete PDF page 6 rendered at 2200×1239; no redraw or semantic alteration"
+    used_in:
+      - 00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-systems-l08-p66-b3c0a7419e7c
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l08-p66.png
+    author: "Tatsunori Hashimoto and Stanford CS336 course staff"
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_08.pdf#page=66
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 4c4d7674b333693f20f328935d84dd8a073362c9725c5e05302b6650751ad4d1
+    sha256: b3c0a7419e7c02a7e746b09437370eb45478c34234bda1df6b9a81bd7993678f
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "complete PDF page 66 rendered at 2200×1239; no redraw or semantic alteration"
+    used_in:
+      - 00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-systems-triton-row-sum-9b740c23085e
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/triton-row-sum.png
+    author: "Percy Liang and Stanford CS336 course staff"
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/triton-row-sum.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 9b740c23085e87866441ea7300e47d9ad9c4fbdd14a11028c862132544bc015e
+    sha256: 9b740c23085e87866441ea7300e47d9ad9c4fbdd14a11028c862132544bc015e
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "byte-for-byte copy of the exact pinned course raster; path changed for publication packaging"
+    used_in:
+      - 00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+
+  - id: curated-stanford-cs336-systems-triton-softmax-bda5a5ccb764
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/triton-softmax.png
+    author: "Percy Liang and Stanford CS336 course staff"
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/triton-softmax.png
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: bda5a5ccb764a3c47d48290336a620c646a1ab2367234646368d4de4c4712df8
+    sha256: bda5a5ccb764a3c47d48290336a620c646a1ab2367234646368d4de4c4712df8
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "byte-for-byte copy of the exact pinned course raster; path changed for publication packaging"
+    used_in:
+      - 00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy

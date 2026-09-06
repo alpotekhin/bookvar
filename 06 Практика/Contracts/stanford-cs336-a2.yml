@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "id": "stanford-cs336-spring-2026-assignment-2",
+  "source": {
+    "repository": "stanford-cs336/assignment2-systems",
+    "commit": "ca8bc81a59b70516f7ebb2da4808daade877c736",
+    "canonical_url": "https://github.com/stanford-cs336/assignment2-systems/tree/ca8bc81a59b70516f7ebb2da4808daade877c736",
+    "license": "MIT",
+    "handout": {
+      "path": "cs336_assignment2_systems.pdf",
+      "sha256": "f5667e3b6fac23c3a6d4ad4a999445b96aab3fb2246904d13ec86b79320b1a84"
+    },
+    "adapters": {
+      "path": "tests/adapters.py",
+      "sha256": "d9e8e1eda4adf2c00e7e51107160d354aff9d482252ce121c85e304df965b190"
+    },
+    "tests": {
+      "root": "tests",
+      "tree_hash_algorithm": "sha256(sorted relative path + NUL + bytes + NUL)",
+      "tree_includes": "all regular files under tests/** recursively",
+      "tree_excludes": [
+        "**/__pycache__/**",
+        "**/.pytest_cache/**",
+        "**/*.pyc",
+        "**/.DS_Store"
+      ],
+      "tree_sha256": "c3f027cb6044960fdb4d045d58b692db09bbc40e745cd05e95d8657bd2b55725"
+    }
+  },
+  "official_interfaces": {
+    "adapters": [
+      "get_flashattention_autograd_function_pytorch",
+      "get_flashattention_autograd_function_triton",
+      "get_ddp",
+      "ddp_on_after_backward",
+      "get_fsdp",
+      "fsdp_on_after_backward",
+      "fsdp_gather_full_params",
+      "get_sharded_optimizer"
+    ],
+    "tests": [
+      {"file": "test_sharded_optimizer.py", "name": "test_sharded_optimizer", "parametrized": true},
+      {"file": "test_ddp.py", "name": "test_DistributedDataParallel", "parametrized": true},
+      {"file": "test_attention.py", "name": "test_flash_forward_pass_pytorch", "parametrized": false},
+      {"file": "test_attention.py", "name": "test_flash_forward_pass_triton", "parametrized": true, "parameters": {"is_causal": [false, true]}},
+      {"file": "test_attention.py", "name": "test_flash_backward_pytorch", "parametrized": false},
+      {"file": "test_attention.py", "name": "test_flash_backward_triton", "parametrized": true, "parameters": {"is_causal": [false, true]}},
+      {"file": "test_fsdp.py", "name": "test_fsdp_correctness", "parametrized": true, "parameters": {"compute_dtype": ["fp32", "fp16"]}},
+      {"file": "test_fsdp.py", "name": "test_fsdp_gradient_sync", "parametrized": true, "parameters": {"compute_dtype": ["fp32", "fp16"]}}
+    ]
+  },
+  "commands": {
+    "setup": "uv sync",
+    "authoritative_full_test_gate": "uv run pytest -v ./tests",
+    "upstream_submission_script": "./test_and_make_submission.sh",
+    "submission_script_caveat": "The pinned script appends `|| true` to pytest; its successful exit is not proof that tests passed. Inspect pytest/JUnit results or run the authoritative full gate directly."
+  },
+  "profiles": {
+    "cpu_local": {
+      "purpose": "imports, adapter presence, PyTorch FlashAttention reference, CPU/Gloo DDP and other non-CUDA correctness supported by upstream tests",
+      "required_command": "uv run pytest -v ./tests",
+      "policy": "CUDA-only tests may be skipped only by upstream skip markers; every other collected parametrized case must pass"
+    },
+    "single_gpu": {
+      "purpose": "synchronization-safe benchmarks, mixed precision, memory snapshots, authored Triton kernel and FlashAttention forward/backward",
+      "required_command": "uv run pytest -v ./tests/test_attention.py",
+      "policy": "all PyTorch and both causal/non-causal Triton forward/backward cases pass before timing"
+    },
+    "multi_gpu": {
+      "purpose": "collective sweep, DDP progression, optimizer-state sharding and FSDP",
+      "required_command": "uv run pytest -v ./tests/test_ddp.py ./tests/test_sharded_optimizer.py ./tests/test_fsdp.py",
+      "minimum_world_size": 2,
+      "policy": "all parametrized CPU/Gloo official tests pass; GPU/NCCL performance runs additionally record topology and launcher"
+    },
+    "full": {
+      "purpose": "complete forward-and-backward training-step optimization and optional leaderboard",
+      "required_command": "uv run pytest -v ./tests",
+      "policy": "ranking is optional and never replaces correctness or evidence completeness"
+    }
+  },
+  "evidence": {
+    "format": "JSONL events plus trace/snapshot artifacts",
+    "event_types": [
+      "environment",
+      "correctness_test",
+      "benchmark_run",
+      "memory_snapshot",
+      "profiler_trace",
+      "distributed_run",
+      "optimization_change"
+    ],
+    "required_fields": [
+      "source_commit",
+      "student_commit",
+      "git_state",
+      "hardware",
+      "topology",
+      "software_versions",
+      "command",
+      "seed",
+      "dtype_policy",
+      "shapes",
+      "warmup_iterations",
+      "measured_iterations",
+      "synchronization_policy",
+      "raw_time_samples",
+      "summary_statistic",
+      "reference_implementation",
+      "tolerances",
+      "test_summary",
+      "peak_allocated_bytes",
+      "peak_reserved_bytes",
+      "trace_path",
+      "trace_observation",
+      "backend",
+      "rank_mapping",
+      "world_size"
+    ]
+  },
+  "acceptance": {
+    "correctness_before_timing": true,
+    "all_parametrized_cases_preserved": true,
+    "official_test_gate_passes": true,
+    "no_nan_or_inf": true,
+    "benchmark_has_raw_samples": true,
+    "memory_has_snapshot_and_interpretation": true,
+    "profiler_trace_supports_a_named_observation": true,
+    "distributed_result_records_launcher_backend_ranks_and_topology": true,
+    "cross_shape_regression_passes": true,
+    "evidence_complete": true
+  },
+  "fail_if": [
+    "official tests, adapters or fixtures are modified",
+    "source commit differs from the pinned commit",
+    "the submission script exit code is treated as a passing test result without inspecting pytest results",
+    "a parametrized family is reduced to one happy-path case",
+    "timing starts before the corresponding correctness gate passes",
+    "GPU timing omits explicit synchronization",
+    "NaN or Inf occurs",
+    "runtime is claimed without raw samples, hardware, shapes, dtype and exact command",
+    "a profiler trace is supplied without stating the observation it supports",
+    "leaderboard placement is used as a substitute for correctness"
+  ],
+  "boundaries": {
+    "solution_code": "not included",
+    "course_runtime_numbers": "reference observations, not portable guarantees",
+    "cpu_local": "does not establish Triton or GPU performance",
+    "single_gpu": "does not establish distributed scaling",
+    "multi_gpu": "official correctness uses CPU/Gloo where encoded; NCCL runs are separate performance evidence",
+    "leaderboard": "optional stretch goal"
+  }
+}

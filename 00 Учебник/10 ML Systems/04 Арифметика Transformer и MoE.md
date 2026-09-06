@@ -2,9 +2,16 @@
 title: Арифметика Transformer и MoE
 type: textbook-chapter
 status: draft
-last_verified: 2026-07-23
+last_verified: 2026-09-06
 source_language: mixed
+source_unit_id:
+  - lecture-08-zero-memory-accounting
+  - assignment-02-task-data-parallel-calcs
+  - assignment-02-task-fsdp-calcs
+  - assignment-02-task-tp-calcs
 ---
+
+<a id="cs336-systems-arithmetic"></a>
 
 # Арифметика Transformer и MoE
 
@@ -64,10 +71,13 @@ P_\ell=4\cdot4096^2+3\cdot4096\cdot11008
 \approx202{,}4\text{ M},
 $$
 
-то есть $\approx6{,}48$ B параметров блоков. Tied embedding
-$32000\cdot4096\approx131$ M и нормы доводят порядок до заявленных 7B. Такой
-расчёт служит sanity check: ошибка в коэффициенте SwiGLU на один projection
-сразу даёт сотни миллионов параметров.
+то есть $\approx6{,}48$ B параметров блоков. В исходной LLaMA матрица входных
+эмбеддингов и выходная проекция имеют разные веса: каждая добавляет
+$32000\cdot4096\approx131$ M параметров. Вместе с нормализациями получается
+примерно $6{,}74$ B — значение, которое в названии модели округлено до 7B.
+Такой расчёт служит проверкой порядка величины: потерянная проекция SwiGLU или
+ошибочно предполагаемый weight tying меняют результат на сотни миллионов
+параметров.
 
 ## FLOP: projection, attention и backward
 
@@ -205,9 +215,33 @@ register/shared memory. Если три elementwise стадии читают и
 конкретное ядро зависит от версии библиотеки, формы тензоров и типов данных;
 это проверяют по трассировке и тестам, а не предполагают заранее.
 
+## Какую величину делит каждая ось
+
+Прежде чем делить итоговый memory ledger на число GPU, нужно назвать объект
+шардинга. Один и тот же world size может означать принципиально разные
+передачи:
+
+| Ось | Что разделено | Что остаётся реплицировано | Характерный обмен |
+|---|---|---|---|
+| DP/DDP | примеры batch | параметры, gradients после синхронизации, optimizer state | gradient AllReduce |
+| ZeRO-1 | optimizer state | параметры и gradients | update/ownership optimizer shards |
+| ZeRO-2 | optimizer state и gradients | параметры | ReduceScatter gradients и согласование обновления |
+| ZeRO-3/FSDP | параметры, gradients, optimizer state | только временно собранный FSDP unit | AllGather weights, ReduceScatter gradients |
+| TP | hidden/intermediate dimensions и соответствующие weights | некоторые activation dimensions | layer-local AllReduce/AllGather/ReduceScatter |
+| SP/CP | sequence/context activations | зависит от attention layout | redistribution или обмен KV-blocks |
+| PP | последовательные слои | state внутри каждой stage | activation/gradient между соседними stages |
+| EP | experts | dense часть и router по выбранной схеме | token dispatch/combine AllToAll |
+
+Такой разбор предотвращает двойной учёт. Запись `FSDP=8 × TP=4` не даёт
+автоматического деления всех величин на 32: model states, layer-local buffers и
+activations подчиняются разным placements. В Stanford CS336 Assignment 2,
+pp. 40–47, это проверяется символическими задачами для DP, FSDP, TP и
+двумерной FSDP×TP-сетки. В учебнике приведён метод составления ledger; сами
+ответы остаются частью практики.
+
 ## Расчёт для плотных моделей 7B и 70B
 
-При расчёте памяти для моделей от 100M до Llama 70B и Qwen 235B-A32B важно
+При расчёте памяти для моделей от 100M до Llama 70B и Qwen3-235B-A22B важно
 различать четыре категории:
 
 1. persistent weights/optimizer states;
@@ -264,13 +298,22 @@ Load imbalance, padding до capacity и stragglers уменьшают utilizati
 CC BY-NC-SA 4.0; файл не изменён. Dispatch и combine
 показаны как две отдельные All-to-All фазы вокруг локального expert compute.*
 
-### Qwen 235B-A32B: почему FSDP становится дорогим
+### Qwen3-235B-A22B: почему FSDP становится дорогим
 
-В использованном в курсе расчёте для Qwen 3 235B один слой занимает около
-5 GB в BF16. Разреженные вычисления используют лишь $k$ экспертов, но обычный
-FSDP AllGather перемещает веса всех экспертов. При 200 GB/s перенос 5 GB имеет
-нижнюю границу 25 ms ещё до учёта накладных расходов протокола и топологии. EP
-размещает экспертов постоянно и вместо весов пересылает представления токенов.
+Официальный Qwen3 Technical Report называет модель **Qwen3-235B-A22B**: 235B
+параметров всего, около 22B активируются на токен; у MoE-блока 128 routed
+experts, из которых выбираются 8. В учебных слайдах встречается несовместимое
+обозначение `225B-A22B`, поэтому имя и expert counts здесь взяты из первичного
+отчёта, а не из таблицы курса.
+
+В использованной в Stanford CS336 оценке полный BF16 payload одного слоя имеет
+порядок 5 GB. Это грубая оценка при заданном разбиении параметров: она не
+включает embeddings, shared components, communication buffers, GEMM workspace
+и allocator fragmentation. Разреженные вычисления используют лишь выбранные
+experts, но обычный FSDP AllGather перемещает weights всего FSDP unit. При
+200 GB/s перенос 5 GB имеет нижнюю границу 25 ms ещё до протокола и topology.
+EP оставляет expert weights у владельцев и вместо них пересылает token
+representations; это меняет вид трафика, но не делает его бесплатным.
 
 ### DeepSeek-V3 671B
 
@@ -407,6 +450,8 @@ bandwidth.
   связь MAC/GEMM и системного bottleneck.
 - [Harvard CS249r, Model Training, “Memory Architecture”](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/training/training.qmd) —
   optimizer-state ledger и зарегистрированный рисунок.
+- [Stanford CS336 Assignment 2, pinned `ca8bc81`, pp. 40–47](https://github.com/stanford-cs336/assignment2-systems/blob/ca8bc81a59b70516f7ebb2da4808daade877c736/cs336_assignment2_systems.pdf) — symbolic DP/FSDP/TP/2D resource accounting.
+- [Qwen3 Technical Report](https://arxiv.org/abs/2505.09388) — official `Qwen3-235B-A22B` naming and MoE configuration.
 
 ← [[02 Areas/ML & DL/00 Учебник/10 ML Systems/03 Измерение производительности и roofline|Измерение производительности и roofline]] ·
 [[02 Areas/ML & DL/00 Учебник/10 ML Systems/05 Численные форматы и mixed precision|Численные форматы и mixed precision]] →

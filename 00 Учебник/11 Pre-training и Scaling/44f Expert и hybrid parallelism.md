@@ -2,8 +2,13 @@
 title: Expert и hybrid parallelism
 type: textbook-chapter
 status: canonical
-last_updated: 2026-07-24
+last_updated: 2026-09-06
+source_unit_id:
+  - lecture-08-width-parallelism
+  - lecture-08-model-strategy-cases
 ---
+
+<a id="cs336-distributed-expert-hybrid"></a>
 
 # 44f. Expert и hybrid parallelism
 
@@ -92,6 +97,29 @@ Backward повторяет коммуникационный граф в обр�
 
 Порядок физического размещения следует частоте обменов: TP — внутри NVLink node, EP — внутри полной-bandwidth rail group, PP — между соседними topology domains, EDP — по оставшейся оси.
 
+## Две реальные конфигурации — не два универсальных рецепта
+
+**DeepSeek-V3.** Технический отчёт описывает обучение без tensor parallelism:
+pipeline parallelism делит модель на 16 стадий, expert parallelism имеет degree
+64 и охватывает восемь узлов, а ZeRO-1 делит optimizer state по data-parallel
+replicas. Такое решение связано с DualPipe, fine-grained experts, ограничением
+communication и конкретной топологией кластера. Оно показывает, что EP и PP
+могут быть главными axes MoE-модели; оно не доказывает, что `TP=1` оптимален для
+другой архитектуры или сети.
+
+**Llama 3 405B.** В отчёте Meta topology записана в порядке `[TP, CP, PP, DP]`.
+Context parallelism делит длинную sequence, TP остаётся локальной width-axis, PP
+распределяет слои, DP реплицирует составную model shard. Этот порядок —
+описание размещения Llama 3 на её training cluster, а не правило выбора осей.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l08-p66.png]]
+
+*Строки таблицы раскладывают три этапа обучения Llama 3 405B по уже введённым
+осям TP/CP/PP/DP. Источник визуального кадра: Stanford CS336 Spring 2026,
+Lecture 8, PDF p. 66, pinned commit [`8b59b507`](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_08.pdf).
+Конфигурация проверена по [The Llama 3 Herd of Models](https://arxiv.org/html/2407.21783);
+это case study, а не рекомендация.*
+
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/parallelism-decision-tree.svg]]
 
 *Источник: Harvard Edge ML Systems Book, [Distributed Training, figure `fig-parallelism-decision-tree`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/distributed_training.qmd), CC BY-NC-SA 4.0.*
@@ -110,5 +138,8 @@ EDLS даёт ресурсный ledger, а Harvard — системный ко�
 - EDLS, pinned commit `e632aa89…`, [`week06_dl_arithmetic/lecture.pdf`, slides/PDF pp. 117–120 MoE/GroupedGEMM, pp. 127–136 TP versus EP and communication arithmetic, pp. 137–144 PP/1F1B/ZeroBubble/DualPipeV](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week06_dl_arithmetic/lecture.pdf); earlier architectural context: [`week04_large_models/lecture.pdf`, PDF pp. 72–76 Expert Parallelism/Switch Transformer](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week04_large_models/lecture.pdf).
 - Harvard Edge ML Systems Book, commit `45ecc8d…`, [Distributed Training, `sec-distributed-training-systems-systems-expert-parallelism-b896` and `sec-distributed-training-systems-systems-hybrid-parallelism-5674`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/distributed_training.qmd).
 - NVIDIA Megatron Core, [Parallelism strategies, “Expert Parallelism (EP)” compatibility note](https://docs.nvidia.com/megatron-core/developer-guide/latest/user-guide/parallelism-guide.html).
+- DeepSeek-AI, [DeepSeek-V3 Technical Report](https://arxiv.org/html/2412.19437), training framework and parallelism strategy.
+- Dubey et al., [The Llama 3 Herd of Models](https://arxiv.org/html/2407.21783), 405B training infrastructure and `[TP, CP, PP, DP]` topology.
+- Stanford CS336 Spring 2026, [Lecture 8](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_08.pdf), PDF pp. 63–71; p. 72 deliberately excluded because its table contains unresolved entries.
 
 ← [[44e ZeRO, FSDP2, DeviceMesh и DTensor]] · Далее: [[44g Network, storage и distributed checkpoints]]

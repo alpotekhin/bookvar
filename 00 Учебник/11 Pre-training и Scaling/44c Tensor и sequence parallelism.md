@@ -2,8 +2,16 @@
 title: Tensor, sequence и context parallelism
 type: textbook-chapter
 status: canonical
-last_updated: 2026-07-24
+last_updated: 2026-09-06
+source_unit_id:
+  - lecture-07-parallelism-strategy-comparison
+  - lecture-08-width-parallelism
+  - lecture-08-activation-memory
+  - assignment-02-task-tp-calcs
+  - assignment-02-task-fsdp-tp-calcs
 ---
+
+<a id="cs336-distributed-tp-sp-cp"></a>
 
 # 44c. Tensor, sequence и context parallelism
 
@@ -31,7 +39,32 @@ $$X\in\mathbb R^{T\times D},\quad A\in\mathbb R^{D\times H},\quad B\in\mathbb R^
 
 *Источник: Harvard Edge ML Systems Book, commit `45ecc8d…`, [Distributed Training, `sec-distributed-training-systems-systems-tensor-parallelism-d76e`, figure `fig-tensor-parallel-split`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/distributed_training.qmd), CC BY-NC-SA 4.0.*
 
-Backward выполняет обратные transitions: gradient replicated output проходит локальный $B_r^\top$, shards hidden-gradient объединяются, а weight-gradients остаются при соответствующих weight shards.
+Backward проходит границы в обратном порядке: градиент реплицированного выхода умножается на локальный $B_r^\top$ и даёт принадлежащий rank тензор $dU_r:[T,H/p]$; объединять его не нужно. Затем каждый rank вычисляет свой вклад $dX_r=dU_rA_r^\top:[T,D]$, и уже эти вклады суммируются между rank. Градиенты весов остаются рядом с соответствующими shards параметров.
+
+### Shape ledger для SwiGLU
+
+Для SwiGLU удобнее сразу записать обе входные проекции:
+
+$$U=XW_u,\quad G=XW_g,\quad H=\operatorname{SiLU}(G)\odot U,
+\quad Y=HW_o,$$
+
+где $X:[T,D]$, $W_u,W_g:[D,F]$, $W_o:[F,D]$. При column-sharding на
+$p$ rank каждый держит $W_{u,r},W_{g,r}:[D,F/p]$ и получает
+$U_r,G_r,H_r:[T,F/p]$. Row-sharded $W_{o,r}:[F/p,D]$ даёт partial
+$Y_r:[T,D]$, после чего нужен AllReduce либо ReduceScatter.
+
+Backward сохраняет тот же ownership: из `dY:[T,D]` каждый rank получает
+`dH_r:[T,F/p]`; локально вычисляет `dU_r`, `dG_r`, `dW_{u,r}`, `dW_{g,r}` и
+`dW_{o,r}`; contributions `dX_r:[T,D]` суммируются. Эта ведомость форм полезнее
+слов «разрезать MLP»: по ней видны границы обмена и тензоры, которые остаются
+реплицированными.
+
+Из неё следуют bottleneck inequalities. TP полезен по памяти, лишь если
+уменьшение sharded weights/activations больше transient collective buffers; по
+времени — если локальные GEMM и выигрыш памяти перекрывают exposed collective
+time. Assignment 2 предлагает вывести эти неравенства символически для forward
+и backward, а затем проверить profiler trace; одно фиксированное значение
+`TP=8` из чужого измерения ответом не является.
 
 Для activation $T\times D$ ring AllReduce передаёт на rank $2(p-1)TD/p$ элементов. При $T=8192,D=8192,p=8$ исходный BF16 tensor содержит $8192^2\cdot2=134\,217\,728$ B = 128 MiB. Ring factor $2(8-1)/8=1.75$ даёт 224 MiB на rank на одну редукцию. Это именно переданный объём, а не размер локального tensor; повторение в каждом блоке объясняет, почему TP обычно остаётся внутри NVLink-domain.
 
@@ -62,6 +95,28 @@ Shard[B,S/p,D] --AllGather(sequence)--> Replicate[B,S,D]
 
 Для $B=2,S=32768,D=8192$ BF16 full activation — 1 GiB, SP при $p=8$ — 128 MiB persistent на rank. Но AllGather materializes logical 1 GiB input; current shard, gathered buffer и output могут перекрыться, поэтому peak измеряют timeline.
 
+В обозначениях следующего слайда $s=S$, $b=B_{micro}$, $h=D$, $t$ — TP
+degree, $a$ — число attention heads. Для принятой в лекции политики сохранения
+активаций оценка одного слоя записана как
+
+$$M_{act}=sbh\left(10+\frac{24}{t}+\frac{5as}{ht}\right).$$
+
+Слагаемые с $1/t$ уменьшаются при TP; постоянное `10` соответствует
+реплицированным LayerNorm/dropout и входам attention/MLP. Коэффициенты относятся
+к конкретному saved-tensor ledger лекции, а не ко всякой реализации: fused
+kernels, FlashAttention и checkpointing меняют их. Формула полезна именно тем,
+что показывает, почему один TP не устраняет replicated activation term и зачем
+к нему добавляют SP.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l08-p47.png]]
+
+*Подчёркнутое слагаемое остаётся replicated без sequence parallelism, тогда как
+остальные уменьшаются с ростом TP degree. Источник: Stanford
+CS336 Spring 2026, Lecture 8, PDF p. 47, pinned commit
+[`8b59b507`](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_08.pdf).
+Все символы и границы применимости формулы определены непосредственно перед
+рисунком.*
+
 ## Context parallelism: Ulysses
 
 Context parallelism сохраняет sequence shards и распределяет **attention**, которому нужны связи между всеми positions. Ulysses начинает с
@@ -76,7 +131,13 @@ AllToAll переставляет его в
 [B, S, h/p, d_h]
 ```
 
-то есть каждый rank получает полный контекст, но только часть heads. После local attention обратный AllToAll возвращает `[B,S/p,h,d_h]`. Logical send volume одного QKV transition порядка $3BShd_h(p-1)/p$ элементов на rank. Ограничение: $h$ должен делиться на Ulysses degree или нужен uneven/replicated head layout.
+то есть каждый rank получает полный контекст, но только часть heads. После local attention обратный AllToAll возвращает `[B,S/p,h,d_h]`. До обмена на одном rank находится $3BShd_h/p$ элементов QKV; доля $(p-1)/p$ уходит другим участникам. Поэтому объём отправки одного QKV-перехода на rank равен
+
+$$
+3BShd_h\frac{p-1}{p^2},
+$$
+
+а сумма по всей группе — $3BShd_h(p-1)/p$. Ограничение: $h$ должен делиться на Ulysses degree или нужен uneven/replicated head layout.
 
 ## Context parallelism: Ring Attention
 
@@ -99,21 +160,30 @@ output = finalize(state)
 
 ## Полная конфигурация
 
-Модель: $D=8192,H=28672,h=64,d_h=128$, $B_\mu=2,S=32768$, восемь NVLink GPU.
+Модель: $D=8192,H=28672,h=64,d_h=128$, $B_\mu=2,S=32768$.
+На восьми NVLink GPU можно сравнить две конфигурации, но нельзя приписать одной
+и той же группе оба выигрыша одновременно:
 
-- `TP=8`: MLP shard $A_r:[8192,3584]$, attention по 8 query heads/rank.
-- `SP=8`: LayerNorm/dropout/residual activation `[2,4096,8192]` = 128 MiB BF16/rank.
-- Если памяти attention всё ещё мало, выбрать **отдельную** CP-group: Ulysses degree 8 допустим, потому что 64 heads делятся на 8.
-- Не следует одновременно считать TP и CP одной осью без явного 2D mesh: иначе один и тот же rank-count дважды «экономит» память на бумаге.
+- **TP/SP-вариант:** `TP=8` даёт MLP shard $A_r:[8192,3584]$ и 8 query
+  heads/rank; `SP=8` оставляет LayerNorm/dropout/residual activation
+  `[2,4096,8192]`, то есть 128 MiB BF16/rank.
+- **CP-вариант на тех же восьми GPU:** взять `TP=1, CP=8`; Ulysses degree 8
+  допустим, потому что 64 heads делятся на 8.
+- **Совместный `TP=8, CP=8`:** это две независимые оси 2D mesh и потому 64
+  ranks до учёта DP/PP. Восемь физических ranks не следует повторно считать
+  сразу по обеим осям.
 
-Пошаговый layer:
+Пошаговый слой TP/SP-варианта:
 
 1. SP shard проходит local LayerNorm.
 2. AllGather sequence формирует input column-parallel QKV/MLP.
 3. TP attention/MLP вычисляет hidden shards.
 4. Row-parallel partial output проходит ReduceScatter sequence.
 5. Local residual/dropout возвращает SP shard.
-6. При CP вместо полного attention применяют Ulysses/Ring transitions внутри CP group.
+
+В совместной 2D-конфигурации attention дополнительно выполняет Ulysses/Ring
+transitions внутри ортогональной CP-group; принадлежность каждого rank обеим
+группам должна быть задана явно.
 
 ## Trade-offs и проверка
 
@@ -142,5 +212,7 @@ TP делит weights и крупную GEMM, но вызывает collectives 
 - Korthikanti et al., [Reducing Activation Recomputation in Large Transformer Models](https://arxiv.org/abs/2205.05198), §4 sequence parallelism, 2022.
 - Jacobs et al., [DeepSpeed Ulysses](https://arxiv.org/abs/2309.14509), §3, 2023.
 - Liu et al., [Ring Attention](https://arxiv.org/abs/2310.01889), Algorithm 1, 2023.
+- Stanford CS336 Spring 2026, [Lecture 8](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_08.pdf), PDF pp. 39–54; p. 47 activation accounting.
+- Stanford CS336 Spring 2026, [Assignment 2](https://github.com/stanford-cs336/assignment2-systems/tree/ca8bc81a59b70516f7ebb2da4808daade877c736), TP and 2D FSDP×TP arithmetic tasks.
 
 ← [[44b Gradient checkpointing и offload]] · Далее: [[44d Pipeline parallelism]]

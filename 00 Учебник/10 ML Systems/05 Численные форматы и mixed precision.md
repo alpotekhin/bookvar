@@ -2,9 +2,15 @@
 title: Численные форматы и mixed precision
 type: textbook-chapter
 status: draft
-last_verified: 2026-07-23
+last_verified: 2026-09-06
 source_language: mixed
+source_unit_id:
+  - lecture-05-low-precision-intensity
+  - assignment-02-task-mixed-precision-accumulation
+  - assignment-02-task-benchmarking-mixed-precision
 ---
+
+<a id="cs336-systems-precision"></a>
 
 # Численные форматы и mixed precision
 
@@ -77,6 +83,36 @@ scaler.update()
 вызывают только на границе логического batch. GEMM partial sums, reductions,
 softmax statistics и optimizer update обычно сохраняют в более широком типе.
 
+### Два dtype у одной матричной операции
+
+Запись «GEMM выполняется в BF16» неполна. Нужно отдельно назвать тип operands,
+тип накопителя и тип результата. Tensor Cores могут умножать BF16 inputs,
+накапливать partial sums в FP32, а затем записать BF16 output. Если принудительно
+оставить accumulator в узком формате, каждое сложение округляется раньше и
+ошибка растёт с длиной редукции.
+
+Assignment 2 предлагает наблюдать это на матричном умножении, меняя только
+accumulation policy. Содержательный результат эксперимента — не «BF16 плох», а
+траектория ошибки при росте внутренней размерности K. Небольшая ошибка отдельного
+произведения становится систематической, когда тысячи rounded partial sums
+складываются в один элемент.
+
+Для отчёта tracing проходит через весь шаг:
+
+| Компонент | Что зафиксировать |
+|---|---|
+| параметры и activation inputs | storage dtype |
+| GEMM operands | dtype после autocast |
+| GEMM accumulator | фактическая accumulation policy/backend |
+| softmax и norm statistics | reduction dtype |
+| loss и loss scale | dtype до/после scaling |
+| gradients | storage dtype и dtype редукции между ranks |
+| optimizer moments/master weights | persistent dtype |
+
+Таблица важнее одного глобального слова `mixed`: два запуска с одинаковыми
+BF16 weights могут отличаться accumulators, reduction kernels и обновлением
+optimizer state.
+
 ### Loss scaling
 
 Малые FP16 gradients могут округлиться в ноль. Умножаем loss на $s$:
@@ -114,6 +150,11 @@ block. Результаты H100/Transformer Engine нельзя объявля�
 реагирует, delayed scaling дешевле, но отстаёт от смены распределения. Нужны
 отдельные scales для weights, activations и gradients, а также saturation,
 zero-rate, amax history и loss telemetry.
+
+Эта формула — схема quantize/dequantize, а не точное описание любой FP8
+реализации. Реальный контракт должен указать granularity scale, формат E4M3 или
+E5M2, saturation rule, stochastic/deterministic rounding, accumulation dtype и
+то, когда обновляется `amax` history.
 
 В MXFP8 маленький block (типичный размер в microscaling-спецификациях — 32
 значения; поддержка platform-specific) делит общий power-of-two scale. Outlier
@@ -177,6 +218,7 @@ checkpointing HFU может быть выше MFU. Сравнивать чис�
 - [EDLS week 2 lecture](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week02_fast_pipelines/lecture.pdf) — “Floating point numbers”, “Tensor Cores”, “Mixed precision training”, “Memory savings of AMP”, “FP8 training”; title locators used because incremental slides repeat in the PDF.
 - [FP8 Formats for Deep Learning](https://arxiv.org/abs/2209.05433)
 - [PyTorch AMP](https://pytorch.org/docs/stable/amp.html)
+- [Stanford CS336 Assignment 2, pinned `ca8bc81`, pp. 6–9](https://github.com/stanford-cs336/assignment2-systems/blob/ca8bc81a59b70516f7ebb2da4808daade877c736/cs336_assignment2_systems.pdf) — accumulation experiment, component dtype trace and mixed-precision benchmark.
 
 ← [[02 Areas/ML & DL/00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE|Арифметика Transformer и MoE]] ·
 [[02 Areas/ML & DL/00 Учебник/10 ML Systems/06 Data pipeline, padding и packing|Data pipeline, padding и packing]] →

@@ -1570,10 +1570,9 @@
       "primary_sources": [
         "lecture-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+      "destination_anchor": "cs336-systems-gpu"
     },
     {
       "id": "coverage-lecture-05-roofline-performance",
@@ -1585,10 +1584,9 @@
       "primary_sources": [
         "lecture-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md",
+      "destination_anchor": "cs336-systems-roofline"
     },
     {
       "id": "coverage-lecture-05-coalescing-failures",
@@ -1600,10 +1598,9 @@
       "primary_sources": [
         "lecture-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+      "destination_anchor": "cs336-systems-gpu"
     },
     {
       "id": "coverage-lecture-05-low-precision-intensity",
@@ -1615,10 +1612,9 @@
       "primary_sources": [
         "lecture-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md",
+      "destination_anchor": "cs336-systems-precision"
     },
     {
       "id": "coverage-lecture-05-operator-fusion",
@@ -1630,10 +1626,9 @@
       "primary_sources": [
         "lecture-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md",
+      "destination_anchor": "cs336-systems-triton"
     },
     {
       "id": "coverage-lecture-05-activation-recomputation",
@@ -1645,10 +1640,9 @@
       "primary_sources": [
         "lecture-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload.md",
+      "destination_anchor": "cs336-distributed-checkpointing"
     },
     {
       "id": "coverage-lecture-05-tiling-derivation",
@@ -1660,10 +1654,9 @@
       "primary_sources": [
         "lecture-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md",
+      "destination_anchor": "cs336-systems-triton"
     },
     {
       "id": "coverage-lecture-05-matrix-mystery",
@@ -1675,10 +1668,9 @@
       "primary_sources": [
         "lecture-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md",
+      "destination_anchor": "cs336-systems-roofline"
     },
     {
       "id": "coverage-lecture-05-performance-recap-transition",
@@ -1690,10 +1682,9 @@
       "primary_sources": [
         "lecture-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md",
+      "destination_anchor": "cs336-systems-triton"
     },
     {
       "id": "coverage-lecture-05-flashattention-derivation",
@@ -1705,10 +1696,9 @@
       "primary_sources": [
         "lecture-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/14 Inference и оптимизация/56 FlashAttention.md",
+      "destination_anchor": "cs336-flashattention"
     },
     {
       "id": "coverage-lecture-05-recap",
@@ -1720,10 +1710,9 @@
       "primary_sources": [
         "lecture-05"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-05",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/14 Inference и оптимизация/56 FlashAttention.md",
+      "destination_anchor": "cs336-flashattention"
     },
     {
       "id": "coverage-lecture-06-section-6-hardware",
@@ -1735,10 +1724,9 @@
       "primary_sources": [
         "lecture-06"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-06",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+      "destination_anchor": "cs336-systems-gpu"
     },
     {
       "id": "coverage-lecture-06-figure-step-7-rendering-1",
@@ -1750,10 +1738,9 @@
       "primary_sources": [
         "lecture-06"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-06",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+      "destination_anchor": "cs336-systems-gpu"
     },
     {
       "id": "coverage-lecture-06-accelerator-memory-hierarchy-table",
@@ -1765,10 +1752,9 @@
       "primary_sources": [
         "lecture-06"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-06",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+      "destination_anchor": "cs336-systems-gpu"
     },
     {
       "id": "coverage-lecture-06-section-22-programming-model",
@@ -1780,10 +1766,9 @@
       "primary_sources": [
         "lecture-06"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-06",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+      "destination_anchor": "cs336-systems-gpu"
     },
     {
       "id": "coverage-lecture-06-figure-step-23-rendering-1",
@@ -1795,10 +1780,9 @@
       "primary_sources": [
         "lecture-06"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-06",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+      "destination_anchor": "cs336-systems-gpu"
     },
     {
       "id": "coverage-lecture-06-section-36-interaction-between-programming-model-and-hardware",
@@ -1810,10 +1794,9 @@
       "primary_sources": [
         "lecture-06"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-06",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+      "destination_anchor": "cs336-systems-gpu"
     },
     {
       "id": "coverage-lecture-06-figure-step-82-rendering-1",
@@ -1828,7 +1811,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-06",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The small external wave-tail raster is weaker than the integrated Lecture 5 pages 47–48, which present the same effect quantitatively and legibly.",
+      "evidence": "Lectures/repository/var/traces/lecture_06.json#step=82:rendering=1"
     },
     {
       "id": "coverage-lecture-06-benchmark-profile-experiment",
@@ -1840,10 +1824,9 @@
       "primary_sources": [
         "lecture-06"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-06",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md",
+      "destination_anchor": "cs336-systems-roofline"
     },
     {
       "id": "coverage-lecture-06-section-169-add-dim-2048",
@@ -1855,10 +1838,9 @@
       "primary_sources": [
         "lecture-06"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-06",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/10 ML Systems/07 Profiling ML-нагрузки.md",
+      "destination_anchor": "cs336-systems-profiling"
     },
     {
       "id": "coverage-lecture-06-section-199-matmul-dim-2048",
@@ -1870,10 +1852,9 @@
       "primary_sources": [
         "lecture-06"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-06",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md",
+      "destination_anchor": "cs336-systems-roofline"
     },
     {
       "id": "coverage-lecture-06-section-202-matmul-dim-128",
@@ -1885,10 +1866,9 @@
       "primary_sources": [
         "lecture-06"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-06",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md",
+      "destination_anchor": "cs336-systems-roofline"
     },
     {
       "id": "coverage-lecture-06-kernel-fusion-failure-mode",
@@ -1900,10 +1880,9 @@
       "primary_sources": [
         "lecture-06"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-06",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md",
+      "destination_anchor": "cs336-systems-triton"
     },
     {
       "id": "coverage-lecture-06-section-244-naive-gelu",
@@ -1915,10 +1894,9 @@
       "primary_sources": [
         "lecture-06"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-06",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md",
+      "destination_anchor": "cs336-systems-triton"
     },
     {
       "id": "coverage-lecture-06-gelu-profiler-comparison",
@@ -1930,10 +1908,9 @@
       "primary_sources": [
         "lecture-06"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-06",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/07 Profiling ML-нагрузки.md",
+      "destination_anchor": "cs336-systems-profiling"
     },
     {
       "id": "coverage-lecture-06-section-247-builtin-gelu",
@@ -1945,10 +1922,9 @@
       "primary_sources": [
         "lecture-06"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-06",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md",
+      "destination_anchor": "cs336-systems-triton"
     },
     {
       "id": "coverage-lecture-06-section-250-compiled-gelu",
@@ -1960,10 +1936,9 @@
       "primary_sources": [
         "lecture-06"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-06",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md",
+      "destination_anchor": "cs336-systems-triton"
     },
     {
       "id": "coverage-lecture-06-figure-step-260-rendering-1",
@@ -1975,10 +1950,9 @@
       "primary_sources": [
         "lecture-06"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-06",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "excluded",
+      "reason": "Exact duplicate of the CUDA grid/CTA figure already integrated from step 23.",
+      "evidence": "Lectures/repository/var/traces/lecture_06.json#step=260:rendering=1"
     },
     {
       "id": "coverage-lecture-06-triton-softmax-worked-example",
@@ -1990,10 +1964,9 @@
       "primary_sources": [
         "lecture-06"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-06",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md",
+      "destination_anchor": "cs336-systems-triton"
     },
     {
       "id": "coverage-lecture-06-figure-step-321-rendering-1",
@@ -2005,10 +1978,9 @@
       "primary_sources": [
         "lecture-06"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-06",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md",
+      "destination_anchor": "cs336-systems-triton"
     },
     {
       "id": "coverage-lecture-06-figure-step-353-rendering-1",
@@ -2020,10 +1992,9 @@
       "primary_sources": [
         "lecture-06"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-06",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md",
+      "destination_anchor": "cs336-systems-triton"
     },
     {
       "id": "coverage-lecture-06-matmul-tiling-derivation",
@@ -2035,10 +2006,9 @@
       "primary_sources": [
         "lecture-06"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-06",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md",
+      "destination_anchor": "cs336-systems-triton"
     },
     {
       "id": "coverage-lecture-07-section-2-lecture-7-parallelism",
@@ -2050,10 +2020,9 @@
       "primary_sources": [
         "lecture-07"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-07",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md",
+      "destination_anchor": "cs336-distributed-overview"
     },
     {
       "id": "coverage-lecture-07-figure-step-5-rendering-1",
@@ -2068,7 +2037,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-07",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The source image contains a captured Google Docs fullscreen overlay; the canonical chapter uses the cleaner Lecture 8 topology figure instead.",
+      "evidence": "Lectures/repository/var/traces/lecture_07.json#step=5:rendering=1"
     },
     {
       "id": "coverage-lecture-07-section-19-part-1-building-blocks-of-distributed-communication-computation",
@@ -2080,10 +2050,9 @@
       "primary_sources": [
         "lecture-07"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-07",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md",
+      "destination_anchor": "cs336-distributed-ddp"
     },
     {
       "id": "coverage-lecture-07-collective-communication-mechanisms",
@@ -2095,10 +2064,9 @@
       "primary_sources": [
         "lecture-07"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-07",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md",
+      "destination_anchor": "cs336-distributed-ddp"
     },
     {
       "id": "coverage-lecture-07-collective-operation-code-trace",
@@ -2110,10 +2078,9 @@
       "primary_sources": [
         "lecture-07"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-07",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md",
+      "destination_anchor": "cs336-distributed-ddp"
     },
     {
       "id": "coverage-lecture-07-figure-step-114-rendering-1",
@@ -2125,10 +2092,9 @@
       "primary_sources": [
         "lecture-07"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-07",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "excluded",
+      "reason": "Low-resolution external topology diagram contains the visible typo “Ethenet”; it is not suitable for the canonical chapter.",
+      "evidence": "Lectures/repository/var/traces/lecture_07.json#step=114:rendering=1"
     },
     {
       "id": "coverage-lecture-07-figure-step-118-rendering-1",
@@ -2143,7 +2109,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-07",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "This repeats the same obstructed gpu-node-overview image from step 5; the cleaner Lecture 8 topology figure is used instead.",
+      "evidence": "Lectures/repository/var/traces/lecture_07.json#step=118:rendering=1"
     },
     {
       "id": "coverage-lecture-07-section-130-nvidia-collective-communication-library-nccl",
@@ -2155,10 +2122,9 @@
       "primary_sources": [
         "lecture-07"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-07",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md",
+      "destination_anchor": "cs336-distributed-ddp"
     },
     {
       "id": "coverage-lecture-07-distributed-benchmark-experiment",
@@ -2170,10 +2136,9 @@
       "primary_sources": [
         "lecture-07"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-07",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md",
+      "destination_anchor": "cs336-distributed-ddp"
     },
     {
       "id": "coverage-lecture-07-section-382-part-2-distributed-training",
@@ -2185,10 +2150,9 @@
       "primary_sources": [
         "lecture-07"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-07",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md",
+      "destination_anchor": "cs336-distributed-overview"
     },
     {
       "id": "coverage-lecture-07-parallelism-strategy-comparison",
@@ -2200,10 +2164,9 @@
       "primary_sources": [
         "lecture-07"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-07",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md",
+      "destination_anchor": "cs336-distributed-overview"
     },
     {
       "id": "coverage-lecture-07-section-627-summary",
@@ -2215,10 +2178,9 @@
       "primary_sources": [
         "lecture-07"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-07",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md",
+      "destination_anchor": "cs336-distributed-overview"
     },
     {
       "id": "coverage-lecture-08-title-slide",
@@ -2244,10 +2206,9 @@
       "primary_sources": [
         "lecture-08"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-08",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md",
+      "destination_anchor": "cs336-distributed-ddp"
     },
     {
       "id": "coverage-lecture-08-zero-sharding",
@@ -2259,10 +2220,9 @@
       "primary_sources": [
         "lecture-08"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-08",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor.md",
+      "destination_anchor": "cs336-distributed-fsdp"
     },
     {
       "id": "coverage-lecture-08-zero-memory-accounting",
@@ -2274,10 +2234,9 @@
       "primary_sources": [
         "lecture-08"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-08",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor.md",
+      "destination_anchor": "cs336-distributed-fsdp"
     },
     {
       "id": "coverage-lecture-08-pipeline-parallelism",
@@ -2289,10 +2248,9 @@
       "primary_sources": [
         "lecture-08"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-08",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism.md",
+      "destination_anchor": "cs336-distributed-pipeline"
     },
     {
       "id": "coverage-lecture-08-pipeline-bubble-failure",
@@ -2304,10 +2262,9 @@
       "primary_sources": [
         "lecture-08"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-08",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism.md",
+      "destination_anchor": "cs336-distributed-pipeline"
     },
     {
       "id": "coverage-lecture-08-width-parallelism",
@@ -2319,10 +2276,9 @@
       "primary_sources": [
         "lecture-08"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-08",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism.md",
+      "destination_anchor": "cs336-distributed-tp-sp-cp"
     },
     {
       "id": "coverage-lecture-08-activation-memory",
@@ -2334,10 +2290,9 @@
       "primary_sources": [
         "lecture-08"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-08",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism.md",
+      "destination_anchor": "cs336-distributed-tp-sp-cp"
     },
     {
       "id": "coverage-lecture-08-parallelism-comparison",
@@ -2349,10 +2304,9 @@
       "primary_sources": [
         "lecture-08"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-08",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md",
+      "destination_anchor": "cs336-distributed-overview"
     },
     {
       "id": "coverage-lecture-08-model-strategy-cases",
@@ -2364,10 +2318,9 @@
       "primary_sources": [
         "lecture-08"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-08",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism.md",
+      "destination_anchor": "cs336-distributed-expert-hybrid"
     },
     {
       "id": "coverage-lecture-08-recap",
@@ -2379,10 +2332,9 @@
       "primary_sources": [
         "lecture-08"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-08",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md",
+      "destination_anchor": "cs336-distributed-overview"
     },
     {
       "id": "coverage-lecture-09-title-slide",
@@ -6733,10 +6685,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md",
+      "destination_anchor": "cs336-systems-roofline"
     },
     {
       "id": "coverage-assignment-02-benchmark-synchronization",
@@ -6748,10 +6699,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md",
+      "destination_anchor": "cs336-systems-roofline"
     },
     {
       "id": "coverage-assignment-02-deliverable-benchmarking-script-001",
@@ -6763,10 +6713,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-deliverable-benchmarking-script-002",
@@ -6778,10 +6727,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-deliverable-benchmarking-script-003",
@@ -6793,10 +6741,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-nsight-systems-trace",
@@ -6808,10 +6755,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/07 Profiling ML-нагрузки.md",
+      "destination_anchor": "cs336-systems-profiling"
     },
     {
       "id": "coverage-assignment-02-task-nsys-profile",
@@ -6823,10 +6769,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/07 Profiling ML-нагрузки.md",
+      "destination_anchor": "cs336-systems-profiling"
     },
     {
       "id": "coverage-assignment-02-deliverable-nsys-profile-004",
@@ -6838,10 +6783,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-deliverable-nsys-profile-005",
@@ -6853,10 +6797,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-deliverable-nsys-profile-006",
@@ -6868,10 +6811,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-deliverable-nsys-profile-007",
@@ -6883,10 +6825,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-deliverable-nsys-profile-008",
@@ -6898,10 +6839,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-task-mixed-precision-accumulation",
@@ -6913,10 +6853,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md",
+      "destination_anchor": "cs336-systems-precision"
     },
     {
       "id": "coverage-assignment-02-deliverable-mixed-precision-accumulation-009",
@@ -6928,10 +6867,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-task-benchmarking-mixed-precision",
@@ -6943,10 +6881,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md",
+      "destination_anchor": "cs336-systems-precision"
     },
     {
       "id": "coverage-assignment-02-deliverable-benchmarking-mixed-precision-010",
@@ -6958,10 +6895,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-deliverable-benchmarking-mixed-precision-011",
@@ -6973,10 +6909,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-deliverable-benchmarking-mixed-precision-012",
@@ -6988,10 +6923,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-task-memory-profiling",
@@ -7003,10 +6937,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/07 Profiling ML-нагрузки.md",
+      "destination_anchor": "cs336-systems-profiling"
     },
     {
       "id": "coverage-assignment-02-deliverable-memory-profiling-013",
@@ -7018,10 +6951,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-deliverable-memory-profiling-014",
@@ -7033,10 +6965,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-deliverable-memory-profiling-015",
@@ -7048,10 +6979,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-deliverable-memory-profiling-016",
@@ -7063,10 +6993,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-deliverable-memory-profiling-017",
@@ -7078,10 +7007,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-deliverable-memory-profiling-018",
@@ -7093,10 +7021,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-task-gradient-checkpointing",
@@ -7108,10 +7035,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload.md",
+      "destination_anchor": "cs336-distributed-checkpointing"
     },
     {
       "id": "coverage-assignment-02-deliverable-gradient-checkpointing-019",
@@ -7123,10 +7049,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-deliverable-gradient-checkpointing-020",
@@ -7138,10 +7063,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-task-pytorch-attention",
@@ -7153,10 +7077,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/14 Inference и оптимизация/56 FlashAttention.md",
+      "destination_anchor": "cs336-flashattention"
     },
     {
       "id": "coverage-assignment-02-deliverable-pytorch-attention-021",
@@ -7168,10 +7091,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-task-torch-compile",
@@ -7183,10 +7105,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md",
+      "destination_anchor": "cs336-systems-triton"
     },
     {
       "id": "coverage-assignment-02-deliverable-torch-compile-022",
@@ -7198,10 +7119,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-deliverable-torch-compile-023",
@@ -7213,10 +7133,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-flashattention-online-softmax",
@@ -7228,10 +7147,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/14 Inference и оптимизация/56 FlashAttention.md",
+      "destination_anchor": "cs336-flashattention"
     },
     {
       "id": "coverage-assignment-02-task-flash-forward",
@@ -7243,10 +7161,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/14 Inference и оптимизация/56 FlashAttention.md",
+      "destination_anchor": "cs336-flashattention"
     },
     {
       "id": "coverage-assignment-02-deliverable-flash-forward-024",
@@ -7258,10 +7175,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-deliverable-flash-forward-025",
@@ -7273,10 +7189,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-deliverable-flash-forward-026",
@@ -7288,10 +7203,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-flashattention-tests",
@@ -7303,10 +7217,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/14 Inference и оптимизация/56 FlashAttention.md",
+      "destination_anchor": "cs336-flashattention"
     },
     {
       "id": "coverage-assignment-02-task-flash-backward",
@@ -7318,10 +7231,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/14 Inference и оптимизация/56 FlashAttention.md",
+      "destination_anchor": "cs336-flashattention"
     },
     {
       "id": "coverage-assignment-02-deliverable-flash-backward-027",
@@ -7333,10 +7245,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-task-flash-benchmarking",
@@ -7348,10 +7259,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-deliverable-flash-benchmarking-028",
@@ -7363,10 +7273,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-distributed-benchmark-controls",
@@ -7378,10 +7287,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md",
+      "destination_anchor": "cs336-distributed-ddp"
     },
     {
       "id": "coverage-assignment-02-distributed-rank-topology",
@@ -7393,10 +7301,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md",
+      "destination_anchor": "cs336-distributed-ddp"
     },
     {
       "id": "coverage-assignment-02-task-distributed-communication-single-node",
@@ -7408,10 +7315,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md",
+      "destination_anchor": "cs336-distributed-ddp"
     },
     {
       "id": "coverage-assignment-02-deliverable-distributed-communication-single-node-029",
@@ -7423,10 +7329,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-task-naive-ddp",
@@ -7438,10 +7343,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md",
+      "destination_anchor": "cs336-distributed-ddp"
     },
     {
       "id": "coverage-assignment-02-deliverable-naive-ddp-030",
@@ -7453,10 +7357,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-task-naive-ddp-benchmarking",
@@ -7468,10 +7371,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md",
+      "destination_anchor": "cs336-distributed-ddp"
     },
     {
       "id": "coverage-assignment-02-deliverable-naive-ddp-benchmarking-031",
@@ -7483,10 +7385,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-task-minimal-ddp-flat-benchmarking",
@@ -7498,10 +7399,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md",
+      "destination_anchor": "cs336-distributed-ddp"
     },
     {
       "id": "coverage-assignment-02-deliverable-minimal-ddp-flat-benchmarking-032",
@@ -7513,10 +7413,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-task-ddp-overlap-individual-parameters",
@@ -7528,10 +7427,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md",
+      "destination_anchor": "cs336-distributed-ddp"
     },
     {
       "id": "coverage-assignment-02-deliverable-ddp-overlap-individual-parameters-033",
@@ -7543,10 +7441,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-task-ddp-overlap-individual-parameters-benchmarking",
@@ -7558,10 +7455,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md",
+      "destination_anchor": "cs336-distributed-ddp"
     },
     {
       "id": "coverage-assignment-02-deliverable-ddp-overlap-individual-parameters-benchmarking-034",
@@ -7573,10 +7469,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-deliverable-ddp-overlap-individual-parameters-benchmarking-035",
@@ -7588,10 +7483,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-task-optimizer-state-sharding",
@@ -7603,10 +7497,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor.md",
+      "destination_anchor": "cs336-distributed-fsdp"
     },
     {
       "id": "coverage-assignment-02-deliverable-optimizer-state-sharding-036",
@@ -7618,10 +7511,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-task-optimizer-state-sharding-accounting",
@@ -7633,10 +7525,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor.md",
+      "destination_anchor": "cs336-distributed-fsdp"
     },
     {
       "id": "coverage-assignment-02-deliverable-optimizer-state-sharding-accounting-037",
@@ -7648,10 +7539,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-deliverable-optimizer-state-sharding-accounting-038",
@@ -7663,10 +7553,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-deliverable-optimizer-state-sharding-accounting-039",
@@ -7678,10 +7567,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-task-fsdp",
@@ -7693,10 +7581,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor.md",
+      "destination_anchor": "cs336-distributed-fsdp"
     },
     {
       "id": "coverage-assignment-02-deliverable-fsdp-040",
@@ -7708,10 +7595,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-task-fsdp-accounting",
@@ -7723,10 +7609,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor.md",
+      "destination_anchor": "cs336-distributed-fsdp"
     },
     {
       "id": "coverage-assignment-02-deliverable-fsdp-accounting-041",
@@ -7738,10 +7623,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-deliverable-fsdp-accounting-042",
@@ -7753,10 +7637,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-task-alternate-ring-all-reduce",
@@ -7768,10 +7651,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md",
+      "destination_anchor": "cs336-distributed-ddp"
     },
     {
       "id": "coverage-assignment-02-deliverable-alternate-ring-all-reduce-043",
@@ -7783,10 +7665,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-task-data-parallel-calcs",
@@ -7798,10 +7679,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md",
+      "destination_anchor": "cs336-distributed-ddp"
     },
     {
       "id": "coverage-assignment-02-deliverable-data-parallel-calcs-044",
@@ -7813,10 +7693,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-deliverable-data-parallel-calcs-045",
@@ -7828,10 +7707,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-deliverable-data-parallel-calcs-046",
@@ -7843,10 +7721,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-task-fsdp-calcs",
@@ -7858,10 +7735,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor.md",
+      "destination_anchor": "cs336-distributed-fsdp"
     },
     {
       "id": "coverage-assignment-02-deliverable-fsdp-calcs-047",
@@ -7873,10 +7749,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-deliverable-fsdp-calcs-048",
@@ -7888,10 +7763,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-deliverable-fsdp-calcs-049",
@@ -7903,10 +7777,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-task-tp-calcs",
@@ -7918,10 +7791,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism.md",
+      "destination_anchor": "cs336-distributed-tp-sp-cp"
     },
     {
       "id": "coverage-assignment-02-deliverable-tp-calcs-050",
@@ -7933,10 +7805,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-deliverable-tp-calcs-051",
@@ -7948,10 +7819,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-deliverable-tp-calcs-052",
@@ -7963,10 +7833,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-deliverable-tp-calcs-053",
@@ -7978,10 +7847,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-task-fsdp-tp-calcs",
@@ -7993,10 +7861,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md",
+      "destination_anchor": "cs336-distributed-overview"
     },
     {
       "id": "coverage-assignment-02-deliverable-fsdp-tp-calcs-054",
@@ -8008,10 +7875,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-deliverable-fsdp-tp-calcs-055",
@@ -8023,10 +7889,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-deliverable-fsdp-tp-calcs-056",
@@ -8038,10 +7903,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-deliverable-fsdp-tp-calcs-057",
@@ -8053,10 +7917,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-leaderboard-timing",
@@ -8068,10 +7931,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-task-leaderboard",
@@ -8083,10 +7945,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-deliverable-leaderboard-058",
@@ -8098,10 +7959,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-test-tests-test-sharded-optimizer-py-19-test-sharded-optimizer",
@@ -8113,10 +7973,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-test-tests-test-ddp-py-28-test-distributeddataparallel",
@@ -8128,10 +7987,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-test-tests-test-attention-py-62-test-flash-forward-pass-pytorch",
@@ -8143,10 +8001,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-test-tests-test-attention-py-71-test-flash-forward-pass-triton",
@@ -8158,10 +8015,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-test-tests-test-attention-py-81-test-flash-backward-pytorch",
@@ -8173,10 +8029,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-test-tests-test-attention-py-97-test-flash-backward-triton",
@@ -8188,10 +8043,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-test-tests-test-fsdp-py-107-test-fsdp-correctness",
@@ -8203,10 +8057,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-02-test-tests-test-fsdp-py-192-test-fsdp-gradient-sync",
@@ -8218,10 +8071,9 @@
       "primary_sources": [
         "assignment-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "destination_anchor": "cs336-a2-capstone"
     },
     {
       "id": "coverage-assignment-03-scaling-policy",
@@ -11969,5 +11821,5 @@
       "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
     }
   ],
-  "editorial_overlay_sha256": "6f5b6e4ce6c3cfd95d78188f2aa2f11313c4a3b214457392c162d6f6d6db4dc3"
+  "editorial_overlay_sha256": "525ec9356c1cf6b77a5a7a89f698379d46d6e50a857c4b703a190eeae66ff2ed"
 }

@@ -2,9 +2,21 @@
 title: Измерение производительности и roofline
 type: textbook-chapter
 status: draft
-last_verified: 2026-07-31
+last_verified: 2026-09-06
 source_language: mixed
+source_unit_id:
+  - lecture-05-roofline-performance
+  - lecture-05-matrix-mystery
+  - lecture-05-performance-recap-transition
+  - lecture-06-benchmark-profile-experiment
+  - lecture-06-section-169-add-dim-2048
+  - lecture-06-section-199-matmul-dim-2048
+  - lecture-06-section-202-matmul-dim-128
+  - assignment-02-task-benchmarking-script
+  - assignment-02-benchmark-synchronization
 ---
+
+<a id="cs336-systems-roofline"></a>
 
 # Измерение производительности и roofline
 
@@ -18,6 +30,22 @@ GPU выполнит работу. Даже честно полученное с
 фиксируют границу измеряемого пути и рабочую нагрузку, затем собирают
 распределение повторных измерений и только после этого объясняют результат через
 объём вычислений, движение данных и модель roofline.
+
+## Нулевой результат: сначала доказать корректность
+
+Быстрый kernel, вычисляющий другую функцию, не является оптимизацией. До первого
+таймера сравнивают output с понятной reference-реализацией, а для обучаемого
+оператора — ещё и gradients. Проверяют не одну удобную форму, а минимум:
+
+- обычный размер и размер с неполным последним tile;
+- несколько batch и sequence lengths;
+- causal и non-causal режимы, если оба поддерживаются;
+- dtype, для которого заявляется ускорение;
+- конечность результата и численный допуск, соответствующий порядку редукции.
+
+Именно такой порядок задаёт Stanford CS336 Assignment 2: reference PyTorch
+implementation и тесты предшествуют benchmarking. Допуск не выбирают после
+того, как увидели ошибку; его фиксируют вместе с контрактом операции.
 
 ## Спецификация эксперимента и измерительный стенд
 
@@ -136,6 +164,43 @@ $F\approx137.4$ GFLOP, $Q_{\min}\approx100.7$ MB и
 $I\approx1365$ FLOP/B. Это algorithmic lower bound; profiler traffic включает
 повторные reads, write allocation и intermediates.
 
+## Почему соседние размеры дают разное время
+
+Roofline задаёт верхнюю границу, но не обещает гладкую зависимость скорости от
+размера матрицы. Один kernel разбивает output на tiles, а scheduler запускает
+blocks волнами по конечному числу SM. Если новая строка или колонка создаёт ещё
+один tile, последний wave может оказаться почти пустым. FLOP добавилось мало, но
+число scheduling waves выросло на единицу.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l05-p20.png]]
+
+*Измеренный shape sweep в [Stanford CS336 Lecture 5, p. 20](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_05.pdf).
+Зубцы повторяются при росте размера, хотя число операций растёт плавно. Это
+наблюдение относится к показанным kernel и accelerator, а не к GEMM как
+математической операции.*
+
+Курс разбирает загадку в два шага. Сначала сравнивает размеры, согласованные и
+не согласованные с внутренними tiles, затем показывает границу, на которой
+добавление единственного элемента создаёт новый неполный wave.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l05-p47.png]]
+
+*Stanford CS336 Lecture 5, p. 47: периодичность измерения сопоставляется с
+aligned/unaligned shapes. Сравнивать нужно одинаковые dtype, backend и режим
+прогрева.*
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l05-p48.png]]
+
+*Stanford CS336 Lecture 5, p. 48: переход 1792→1793 используется как конкретный
+пример wave quantization. Число 1792 не является универсальным оптимальным
+размером: tile shape и число resident blocks зависят от выбранного kernel и GPU.*
+
+Практический вывод — запускать shape sweep вокруг рабочих размеров, включая
+`n-1`, `n` и `n+1` у предполагаемой границы tile. Если зубцы сохраняются,
+профиль должен подтвердить изменение grid, tail tiles или occupancy. Если нет,
+нужно искать другой механизм: recompilation, cache transition, алгоритм
+библиотеки или изменение Tensor Core eligibility.
+
 ## Защита от benchmark gaming
 
 - не менять precision, accuracy или workload только у победителя;
@@ -155,6 +220,9 @@ $I\approx1365$ FLOP/B. Это algorithmic lower bound; profiler traffic вклю
 - [EDLS Week 1 lecture, pinned e632aa8](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week01_intro/lecture.pdf) — PDF pp. 13–20
 - [Harvard CS249r Vol. I, Benchmarking, pinned 45ecc8d](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/benchmarking/benchmarking.qmd)
 - [Harvard CS249r Vol. II, Performance Engineering, pinned 45ecc8d](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/performance_engineering.qmd)
+- [Stanford CS336 Lecture 5, pinned `8b59b507`, pp. 20–23 and 40–48](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_05.pdf) — roofline, tiling и matrix-size mystery.
+- [Stanford CS336 Lecture 6, pinned `8b59b507`, benchmark/profile experiment](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_06.py) — измерения elementwise и matmul kernels на разных shapes.
+- [Stanford CS336 Assignment 2, pinned `ca8bc81`, pp. 3–5](https://github.com/stanford-cs336/assignment2-systems/blob/ca8bc81a59b70516f7ebb2da4808daade877c736/cs336_assignment2_systems.pdf) — synchronization-safe benchmark contract.
 
 ← [[02 Areas/ML & DL/00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти|GPU, CUDA и иерархия памяти]] ·
 [[02 Areas/ML & DL/00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE|Арифметика Transformer и MoE]] →

@@ -3221,7 +3221,6 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-05",
-      "reason": "Reviewed semantic visual is preserved at exact event/page scope; canonical textbook placement remains pending.",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -3317,7 +3316,9 @@
           "width": 677,
           "height": 208
         }
-      ]
+      ],
+      "reason": "Lecture 5 page 8 is a generic CPU/GPU schematic; the canonical hardware chapter instead uses Lecture 6's direct GPU hierarchy and CUDA grid figures.",
+      "evidence": "Lectures/repository/lecture_05.pdf#pages=8-14:semantic=gpu-anatomy"
     },
     {
       "id": "lecture-05-visual-operator-fusion",
@@ -3353,10 +3354,9 @@
           "source_location": "Lectures/repository/lecture_05.pdf#page=33:semantic=operator-fusion"
         }
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-05",
-      "reason": "Reviewed semantic visual is preserved at exact event/page scope; canonical textbook placement remains pending.",
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md",
+      "destination_anchor": "cs336-systems-triton",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -3368,11 +3368,11 @@
       "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
       "extractor_revision": "stanford-cs336-semantic-audit-v3",
       "extraction_tool": "Poppler pdftotext 26.04.0 semantic page review; pdfimages 26.04.0 raster evidence",
-      "rendered_route": "/sources/courses/stanford-cs336-spring-2026/",
-      "desktop_evidence": "pending editorial integration; source archive inspected",
-      "narrow_evidence": "pending editorial integration; source archive inspected",
-      "reviewer": "Codex source audit",
-      "checked_at": "2026-09-04",
+      "rendered_route": "/textbook/ml-systems/gpu-kernels-triton/",
+      "desktop_evidence": "The exact source figure was inspected at native resolution and in the complete article column; labels, formulas, and sequence order remain visible without clipping.",
+      "narrow_evidence": "The source image remains inside the article column and is paired with nearby prose/caption plus click-to-zoom for dense labels.",
+      "reviewer": "Codex Task 3 systems integration",
+      "checked_at": "2026-09-06",
       "raster_evidence": [
         {
           "page": 30,
@@ -3410,7 +3410,10 @@
           "width": 928,
           "height": 712
         }
-      ]
+      ],
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l05-p31.png",
+      "transformation": "Complete 220-dpi renders of pinned Lecture 5 pages 31–33, preserved as one explanatory sequence without redraw or semantic alteration.",
+      "caption": "Count HBM reads and writes across the unfused pointwise chain, then compare it with the fused kernel on the following frames."
     },
     {
       "id": "lecture-05-visual-activation-recomputation",
@@ -3441,10 +3444,9 @@
           "source_location": "Lectures/repository/lecture_05.pdf#page=36:semantic=activation-recomputation"
         }
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-05",
-      "reason": "Reviewed semantic visual is preserved at exact event/page scope; canonical textbook placement remains pending.",
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload.md",
+      "destination_anchor": "cs336-distributed-checkpointing",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -3456,11 +3458,11 @@
       "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
       "extractor_revision": "stanford-cs336-semantic-audit-v3",
       "extraction_tool": "Poppler pdftotext 26.04.0 semantic page review; pdfimages 26.04.0 raster evidence",
-      "rendered_route": "/sources/courses/stanford-cs336-spring-2026/",
-      "desktop_evidence": "pending editorial integration; source archive inspected",
-      "narrow_evidence": "pending editorial integration; source archive inspected",
-      "reviewer": "Codex source audit",
-      "checked_at": "2026-09-04",
+      "rendered_route": "/textbook/pretraining/gradient-checkpointing-offload/",
+      "desktop_evidence": "The exact source figure was inspected at native resolution and in the complete article column; labels, formulas, and sequence order remain visible without clipping.",
+      "narrow_evidence": "The source image remains inside the article column and is paired with nearby prose/caption plus click-to-zoom for dense labels.",
+      "reviewer": "Codex Task 3 systems integration",
+      "checked_at": "2026-09-06",
       "raster_evidence": [
         {
           "page": 34,
@@ -3480,7 +3482,10 @@
           "width": 815,
           "height": 717
         }
-      ]
+      ],
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l05-p35.png",
+      "transformation": "Lossless body crops of pinned Lecture 5 pages 35–36, preserved as an ordered two-frame sequence.",
+      "caption": "The first frame stores intermediates; the second recomputes them. Compare saved activation traffic with added arithmetic."
     },
     {
       "id": "lecture-05-visual-tiling-derivation",
@@ -3521,10 +3526,9 @@
           "source_location": "Lectures/repository/lecture_05.pdf#page=44:semantic=tiling-derivation"
         }
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-05",
-      "reason": "Reviewed semantic visual is preserved at exact event/page scope; canonical textbook placement remains pending.",
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md",
+      "destination_anchor": "cs336-systems-triton",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -3536,11 +3540,11 @@
       "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
       "extractor_revision": "stanford-cs336-semantic-audit-v3",
       "extraction_tool": "Poppler pdftotext 26.04.0 semantic page review; pdfimages 26.04.0 raster evidence",
-      "rendered_route": "/sources/courses/stanford-cs336-spring-2026/",
-      "desktop_evidence": "pending editorial integration; source archive inspected",
-      "narrow_evidence": "pending editorial integration; source archive inspected",
-      "reviewer": "Codex source audit",
-      "checked_at": "2026-09-04",
+      "rendered_route": "/textbook/ml-systems/gpu-kernels-triton/",
+      "desktop_evidence": "The exact source figure was inspected at native resolution and in the complete article column; labels, formulas, and sequence order remain visible without clipping.",
+      "narrow_evidence": "The source image remains inside the article column and is paired with nearby prose/caption plus click-to-zoom for dense labels.",
+      "reviewer": "Codex Task 3 systems integration",
+      "checked_at": "2026-09-06",
       "raster_evidence": [
         {
           "page": 40,
@@ -3584,7 +3588,10 @@
           "width": 660,
           "height": 95
         }
-      ]
+      ],
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l05-p42.png",
+      "transformation": "Lossless body crops of pinned Lecture 5 pages 42–43, preserved as an ordered two-frame derivation.",
+      "caption": "Trace one output tile: each loaded A/B value is reused inside the tile, while edge tiles explain tails."
     },
     {
       "id": "lecture-05-visual-matrix-mystery",
@@ -3620,10 +3627,9 @@
           "source_location": "Lectures/repository/lecture_05.pdf#page=48:semantic=matrix-mystery"
         }
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-05",
-      "reason": "Reviewed semantic visual is preserved at exact event/page scope; canonical textbook placement remains pending.",
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md",
+      "destination_anchor": "cs336-systems-roofline",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -3635,11 +3641,11 @@
       "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
       "extractor_revision": "stanford-cs336-semantic-audit-v3",
       "extraction_tool": "Poppler pdftotext 26.04.0 semantic page review; pdfimages 26.04.0 raster evidence",
-      "rendered_route": "/sources/courses/stanford-cs336-spring-2026/",
-      "desktop_evidence": "pending editorial integration; source archive inspected",
-      "narrow_evidence": "pending editorial integration; source archive inspected",
-      "reviewer": "Codex source audit",
-      "checked_at": "2026-09-04",
+      "rendered_route": "/textbook/ml-systems/performance-roofline/",
+      "desktop_evidence": "The exact source figure was inspected at native resolution and in the complete article column; labels, formulas, and sequence order remain visible without clipping.",
+      "narrow_evidence": "The source image remains inside the article column and is paired with nearby prose/caption plus click-to-zoom for dense labels.",
+      "reviewer": "Codex Task 3 systems integration",
+      "checked_at": "2026-09-06",
       "raster_evidence": [
         {
           "page": 45,
@@ -3671,7 +3677,10 @@
           "width": 362,
           "height": 638
         }
-      ]
+      ],
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l05-p47.png",
+      "transformation": "Lossless body crops of pinned Lecture 5 pages 47–48, preserved as an ordered two-frame measurement.",
+      "caption": "Compare 1792 and 1793 shapes to see wave quantization and alignment effects; the number is hardware- and kernel-specific, not a universal threshold."
     },
     {
       "id": "lecture-05-visual-flashattention-derivation",
@@ -3712,10 +3721,9 @@
           "source_location": "Lectures/repository/lecture_05.pdf#page=54:semantic=flashattention-derivation"
         }
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-05",
-      "reason": "Reviewed semantic visual is preserved at exact event/page scope; canonical textbook placement remains pending.",
+      "disposition": "integrated",
+      "destination": "00 Учебник/14 Inference и оптимизация/56 FlashAttention.md",
+      "destination_anchor": "cs336-flashattention",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -3727,11 +3735,11 @@
       "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
       "extractor_revision": "stanford-cs336-semantic-audit-v3",
       "extraction_tool": "Poppler pdftotext 26.04.0 semantic page review; pdfimages 26.04.0 raster evidence",
-      "rendered_route": "/sources/courses/stanford-cs336-spring-2026/",
-      "desktop_evidence": "pending editorial integration; source archive inspected",
-      "narrow_evidence": "pending editorial integration; source archive inspected",
-      "reviewer": "Codex source audit",
-      "checked_at": "2026-09-04",
+      "rendered_route": "/textbook/inference/flashattention/",
+      "desktop_evidence": "The exact source figure was inspected at native resolution and in the complete article column; labels, formulas, and sequence order remain visible without clipping.",
+      "narrow_evidence": "The source image remains inside the article column and is paired with nearby prose/caption plus click-to-zoom for dense labels.",
+      "reviewer": "Codex Task 3 systems integration",
+      "checked_at": "2026-09-06",
       "raster_evidence": [
         {
           "page": 50,
@@ -3781,7 +3789,10 @@
           "width": 1294,
           "height": 646
         }
-      ]
+      ],
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l05-p52.png",
+      "transformation": "Lossless body crops of pinned Lecture 5 pages 52–54, preserved before the Assignment 2 algorithm sequence.",
+      "caption": "The course sequence moves from the attention IO bottleneck to tiled scores and online normalization without materializing the full score matrix."
     },
     {
       "id": "lecture-06-visual-accelerator-memory-hierarchy-table",
@@ -3865,7 +3876,6 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-06",
-      "reason": "Reviewed semantic visual is preserved at exact event/page scope; canonical textbook placement remains pending.",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -3886,7 +3896,9 @@
       "source_lines": [
         42,
         54
-      ]
+      ],
+      "reason": "The exact A100/H100/B200 values are integrated as an accessible Markdown table rather than an image, so they remain searchable and legible at narrow width.",
+      "evidence": "Lectures/repository/var/traces/lecture_06.json#steps=8-20:lines=42-54:semantic=accelerator-memory-hierarchy-table"
     },
     {
       "id": "lecture-06-visual-gelu-profiler-comparison",
@@ -4083,10 +4095,9 @@
           "source_location": "Lectures/repository/var/traces/lecture_06.json#step=255:rendering=1"
         }
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-06",
-      "reason": "Reviewed semantic visual is preserved at exact event/page scope; canonical textbook placement remains pending.",
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/07 Profiling ML-нагрузки.md",
+      "destination_anchor": "cs336-systems-profiling",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -4098,16 +4109,19 @@
       "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
       "extractor_revision": "stanford-cs336-semantic-audit-v3",
       "extraction_tool": "edtrace 0.1.15 archived JSON rendering stream",
-      "rendered_route": "/sources/courses/stanford-cs336-spring-2026/",
-      "desktop_evidence": "pending editorial integration; source archive inspected",
-      "narrow_evidence": "pending editorial integration; source archive inspected",
-      "reviewer": "Codex source audit",
-      "checked_at": "2026-09-04",
+      "rendered_route": "/textbook/ml-systems/profiling/",
+      "desktop_evidence": "The exact source figure was inspected at native resolution and in the complete article column; labels, formulas, and sequence order remain visible without clipping.",
+      "narrow_evidence": "The source image remains inside the article column and is paired with nearby prose/caption plus click-to-zoom for dense labels.",
+      "reviewer": "Codex Task 3 systems integration",
+      "checked_at": "2026-09-06",
       "source_parent_sha256": "d21a54725f5bf70a2eb7e9df24773308ea63561a2ded09e4aff0d208aa2445f8",
       "source_lines": [
         287,
         301
-      ]
+      ],
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/gelu-profile-naive.png",
+      "transformation": "Exact pinned lecture_06.py trace states for naive, builtin, and compiled GeLU rendered as three aligned table images with unchanged event labels and input dim=16384.",
+      "caption": "Follow the same GeLU input through naive, builtin, and compiled traces; fewer launches and intermediate transfers reveal fusion."
     },
     {
       "id": "lecture-06-visual-matmul-tiling-derivation",
@@ -4268,10 +4282,9 @@
           "source_location": "Lectures/repository/var/traces/lecture_06.json#step=400:rendering=1"
         }
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-06",
-      "reason": "Reviewed semantic visual is preserved at exact event/page scope; canonical textbook placement remains pending.",
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md",
+      "destination_anchor": "cs336-systems-triton",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -4283,16 +4296,19 @@
       "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
       "extractor_revision": "stanford-cs336-semantic-audit-v3",
       "extraction_tool": "edtrace 0.1.15 archived JSON rendering stream",
-      "rendered_route": "/sources/courses/stanford-cs336-spring-2026/",
-      "desktop_evidence": "pending editorial integration; source archive inspected",
-      "narrow_evidence": "pending editorial integration; source archive inspected",
-      "reviewer": "Codex source audit",
-      "checked_at": "2026-09-04",
+      "rendered_route": "/textbook/ml-systems/gpu-kernels-triton/",
+      "desktop_evidence": "The exact Lecture 5 source sequence and Lecture 6-derived formulas were checked together in the full article.",
+      "narrow_evidence": "The derivation is complete in text and formulas, with the exact source sequence available through zoom.",
+      "reviewer": "Codex Task 3 systems integration",
+      "checked_at": "2026-09-06",
       "source_parent_sha256": "d21a54725f5bf70a2eb7e9df24773308ea63561a2ded09e4aff0d208aa2445f8",
       "source_lines": [
         546,
         580
-      ]
+      ],
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l05-p42.png",
+      "transformation": "The exact Lecture 6 derivation is retained in prose and formulas; the adjacent source-faithful visual is the clearer pinned Lecture 5 pages 42–43 sequence of the same tiling argument.",
+      "caption": "The visual and formulas explain why shared-memory tiling reuses A/B values and raises arithmetic intensity."
     },
     {
       "id": "lecture-06-visual-figure-step-7-rendering-1",
@@ -4313,10 +4329,9 @@
           "source_location": "Lectures/repository/var/traces/lecture_06.json#step=7:rendering=1"
         }
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-06",
-      "reason": "Reviewed semantic visual is preserved at exact event/page scope; canonical textbook placement remains pending.",
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+      "destination_anchor": "cs336-systems-gpu",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -4328,13 +4343,16 @@
       "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
       "extractor_revision": "stanford-cs336-semantic-audit-v3",
       "extraction_tool": "edtrace 0.1.15 archived image rendering",
-      "rendered_route": "/sources/courses/stanford-cs336-spring-2026/",
-      "desktop_evidence": "pending editorial integration; source archive inspected",
-      "narrow_evidence": "pending editorial integration; source archive inspected",
-      "reviewer": "Codex source audit",
-      "checked_at": "2026-09-04",
+      "rendered_route": "/textbook/ml-systems/gpu-cuda-memory/",
+      "desktop_evidence": "The exact source figure was inspected at native resolution and in the complete article column; labels, formulas, and sequence order remain visible without clipping.",
+      "narrow_evidence": "The source image remains inside the article column and is paired with nearby prose/caption plus click-to-zoom for dense labels.",
+      "reviewer": "Codex Task 3 systems integration",
+      "checked_at": "2026-09-06",
       "source_parent_sha256": "d21a54725f5bf70a2eb7e9df24773308ea63561a2ded09e4aff0d208aa2445f8",
-      "asset_url": "https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/gpu-hardware.png"
+      "asset_url": "https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/gpu-hardware.png",
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/gpu-hardware.png",
+      "transformation": "Byte-for-byte copy of the pinned course raster images/gpu-hardware.png.",
+      "caption": "Use the schematic to locate SMs, registers, shared memory, L2, and HBM; sizes and proportions are not to scale."
     },
     {
       "id": "lecture-06-visual-figure-step-23-rendering-1",
@@ -4355,10 +4373,9 @@
           "source_location": "Lectures/repository/var/traces/lecture_06.json#step=23:rendering=1"
         }
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-06",
-      "reason": "Reviewed semantic visual is preserved at exact event/page scope; canonical textbook placement remains pending.",
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+      "destination_anchor": "cs336-systems-gpu",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -4370,13 +4387,16 @@
       "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
       "extractor_revision": "stanford-cs336-semantic-audit-v3",
       "extraction_tool": "edtrace 0.1.15 archived image rendering",
-      "rendered_route": "/sources/courses/stanford-cs336-spring-2026/",
-      "desktop_evidence": "pending editorial integration; source archive inspected",
-      "narrow_evidence": "pending editorial integration; source archive inspected",
-      "reviewer": "Codex source audit",
-      "checked_at": "2026-09-04",
+      "rendered_route": "/textbook/ml-systems/gpu-cuda-memory/",
+      "desktop_evidence": "The exact source figure was inspected at native resolution and in the complete article column; labels, formulas, and sequence order remain visible without clipping.",
+      "narrow_evidence": "The source image remains inside the article column and is paired with nearby prose/caption plus click-to-zoom for dense labels.",
+      "reviewer": "Codex Task 3 systems integration",
+      "checked_at": "2026-09-06",
       "source_parent_sha256": "d21a54725f5bf70a2eb7e9df24773308ea63561a2ded09e4aff0d208aa2445f8",
-      "asset_url": "https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/var/files/image-1390e250b108c0d04b315ac7995eccd0-https_docs_nvidia_com_cuda_parallel-thread-execution__images_grid-with-CTAs_png"
+      "asset_url": "https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/var/files/image-1390e250b108c0d04b315ac7995eccd0-https_docs_nvidia_com_cuda_parallel-thread-execution__images_grid-with-CTAs_png",
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/cuda-grid-cta.png",
+      "transformation": "Byte-for-byte copy of the pinned course rendering, retaining the underlying NVIDIA PTX documentation attribution.",
+      "caption": "Map a CUDA grid to CTAs/thread blocks and then to the threads scheduled on SMs."
     },
     {
       "id": "lecture-06-visual-figure-step-82-rendering-1",
@@ -4397,10 +4417,7 @@
           "source_location": "Lectures/repository/var/traces/lecture_06.json#step=82:rendering=1"
         }
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-06",
-      "reason": "Reviewed semantic visual is preserved at exact event/page scope; canonical textbook placement remains pending.",
+      "disposition": "excluded",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -4418,7 +4435,9 @@
       "reviewer": "Codex source audit",
       "checked_at": "2026-09-04",
       "source_parent_sha256": "d21a54725f5bf70a2eb7e9df24773308ea63561a2ded09e4aff0d208aa2445f8",
-      "asset_url": "https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/var/files/image-f256f44a88048865b9ad6afcedde912b-https_developer-blogs_nvidia_com_wp-content_uploads_2019_06_pasted-image-0_png"
+      "asset_url": "https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/var/files/image-f256f44a88048865b9ad6afcedde912b-https_developer-blogs_nvidia_com_wp-content_uploads_2019_06_pasted-image-0_png",
+      "reason": "Small external wave-tail raster is superseded by the quantitative, legible Lecture 5 pages 47–48 sequence.",
+      "evidence": "Lectures/repository/var/traces/lecture_06.json#step=82:rendering=1"
     },
     {
       "id": "lecture-06-visual-figure-step-260-rendering-1",
@@ -4439,10 +4458,7 @@
           "source_location": "Lectures/repository/var/traces/lecture_06.json#step=260:rendering=1"
         }
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-06",
-      "reason": "Reviewed semantic visual is preserved at exact event/page scope; canonical textbook placement remains pending.",
+      "disposition": "excluded",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -4460,7 +4476,9 @@
       "reviewer": "Codex source audit",
       "checked_at": "2026-09-04",
       "source_parent_sha256": "d21a54725f5bf70a2eb7e9df24773308ea63561a2ded09e4aff0d208aa2445f8",
-      "asset_url": "https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/var/files/image-1390e250b108c0d04b315ac7995eccd0-https_docs_nvidia_com_cuda_parallel-thread-execution__images_grid-with-CTAs_png"
+      "asset_url": "https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/var/files/image-1390e250b108c0d04b315ac7995eccd0-https_docs_nvidia_com_cuda_parallel-thread-execution__images_grid-with-CTAs_png",
+      "reason": "Exact duplicate of the CUDA grid/CTA image already integrated from step 23.",
+      "evidence": "Lectures/repository/var/traces/lecture_06.json#step=260:rendering=1"
     },
     {
       "id": "lecture-06-visual-figure-step-321-rendering-1",
@@ -4481,10 +4499,9 @@
           "source_location": "Lectures/repository/var/traces/lecture_06.json#step=321:rendering=1"
         }
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-06",
-      "reason": "Reviewed semantic visual is preserved at exact event/page scope; canonical textbook placement remains pending.",
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md",
+      "destination_anchor": "cs336-systems-triton",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -4496,13 +4513,16 @@
       "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
       "extractor_revision": "stanford-cs336-semantic-audit-v3",
       "extraction_tool": "edtrace 0.1.15 archived image rendering",
-      "rendered_route": "/sources/courses/stanford-cs336-spring-2026/",
-      "desktop_evidence": "pending editorial integration; source archive inspected",
-      "narrow_evidence": "pending editorial integration; source archive inspected",
-      "reviewer": "Codex source audit",
-      "checked_at": "2026-09-04",
+      "rendered_route": "/textbook/ml-systems/gpu-kernels-triton/",
+      "desktop_evidence": "The exact source figure was inspected at native resolution and in the complete article column; labels, formulas, and sequence order remain visible without clipping.",
+      "narrow_evidence": "The source image remains inside the article column and is paired with nearby prose/caption plus click-to-zoom for dense labels.",
+      "reviewer": "Codex Task 3 systems integration",
+      "checked_at": "2026-09-06",
       "source_parent_sha256": "d21a54725f5bf70a2eb7e9df24773308ea63561a2ded09e4aff0d208aa2445f8",
-      "asset_url": "https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/triton-softmax.png"
+      "asset_url": "https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/triton-softmax.png",
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/triton-softmax.png",
+      "transformation": "Byte-for-byte copy of the exact pinned course asset images/triton-softmax.png.",
+      "caption": "One Triton program owns one row, pads to BLOCK_SIZE, masks the tail, and performs the normalized row operation on chip."
     },
     {
       "id": "lecture-06-visual-figure-step-353-rendering-1",
@@ -4523,10 +4543,9 @@
           "source_location": "Lectures/repository/var/traces/lecture_06.json#step=353:rendering=1"
         }
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-06",
-      "reason": "Reviewed semantic visual is preserved at exact event/page scope; canonical textbook placement remains pending.",
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md",
+      "destination_anchor": "cs336-systems-triton",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -4538,13 +4557,16 @@
       "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
       "extractor_revision": "stanford-cs336-semantic-audit-v3",
       "extraction_tool": "edtrace 0.1.15 archived image rendering",
-      "rendered_route": "/sources/courses/stanford-cs336-spring-2026/",
-      "desktop_evidence": "pending editorial integration; source archive inspected",
-      "narrow_evidence": "pending editorial integration; source archive inspected",
-      "reviewer": "Codex source audit",
-      "checked_at": "2026-09-04",
+      "rendered_route": "/textbook/ml-systems/gpu-kernels-triton/",
+      "desktop_evidence": "The exact source figure was inspected at native resolution and in the complete article column; labels, formulas, and sequence order remain visible without clipping.",
+      "narrow_evidence": "The source image remains inside the article column and is paired with nearby prose/caption plus click-to-zoom for dense labels.",
+      "reviewer": "Codex Task 3 systems integration",
+      "checked_at": "2026-09-06",
       "source_parent_sha256": "d21a54725f5bf70a2eb7e9df24773308ea63561a2ded09e4aff0d208aa2445f8",
-      "asset_url": "https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/triton-row-sum.png"
+      "asset_url": "https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/triton-row-sum.png",
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/triton-row-sum.png",
+      "transformation": "Byte-for-byte copy of the exact pinned course asset images/triton-row-sum.png.",
+      "caption": "When a row spans several tiles, the program loops over blocks and accumulates the reduction explicitly."
     },
     {
       "id": "lecture-07-visual-collective-operation-code-trace",
@@ -4747,7 +4769,6 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-07",
-      "reason": "Reviewed semantic visual is preserved at exact event/page scope; canonical textbook placement remains pending.",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -4768,7 +4789,9 @@
       "source_lines": [
         75,
         208
-      ]
+      ],
+      "reason": "The canonical DDP chapter integrates the exact collective constructions as searchable code/prose; no screenshot is needed to preserve the mechanism.",
+      "evidence": "Lectures/repository/var/traces/lecture_07.json#steps=22-109:lines=75-208:semantic=collective-operation-code-trace"
     },
     {
       "id": "lecture-07-visual-parallelism-strategy-comparison",
@@ -4842,7 +4865,6 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-07",
-      "reason": "Reviewed semantic visual is preserved at exact event/page scope; canonical textbook placement remains pending.",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -4863,7 +4885,9 @@
       "source_lines": [
         375,
         492
-      ]
+      ],
+      "reason": "The canonical overview uses the clearer Lecture 8 comparison table and preserves Lecture 7's data/tensor/pipeline distinctions in prose.",
+      "evidence": "Lectures/repository/var/traces/lecture_07.json#steps=387-536:lines=375-492:semantic=parallelism-strategy-comparison"
     },
     {
       "id": "lecture-07-visual-figure-step-5-rendering-1",
@@ -4884,10 +4908,7 @@
           "source_location": "Lectures/repository/var/traces/lecture_07.json#step=5:rendering=1"
         }
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-07",
-      "reason": "Reviewed semantic visual is preserved at exact event/page scope; canonical textbook placement remains pending.",
+      "disposition": "excluded",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -4905,7 +4926,9 @@
       "reviewer": "Codex source audit",
       "checked_at": "2026-09-04",
       "source_parent_sha256": "7cdec6c6e2b78afd667c98e2826efea637bb076cd926c45b4f404b0528c42e60",
-      "asset_url": "https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/gpu-node-overview.png"
+      "asset_url": "https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/gpu-node-overview.png",
+      "reason": "The source raster contains a captured Google Docs fullscreen overlay; the cleaner Lecture 8 page 6 topology is used.",
+      "evidence": "Lectures/repository/var/traces/lecture_07.json#step=5:rendering=1"
     },
     {
       "id": "lecture-07-visual-figure-step-114-rendering-1",
@@ -4926,10 +4949,7 @@
           "source_location": "Lectures/repository/var/traces/lecture_07.json#step=114:rendering=1"
         }
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-07",
-      "reason": "Reviewed semantic visual is preserved at exact event/page scope; canonical textbook placement remains pending.",
+      "disposition": "excluded",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -4947,7 +4967,9 @@
       "reviewer": "Codex source audit",
       "checked_at": "2026-09-04",
       "source_parent_sha256": "7cdec6c6e2b78afd667c98e2826efea637bb076cd926c45b4f404b0528c42e60",
-      "asset_url": "https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/var/files/image-b0641f11a73711b3078acbd257b0c805-https_media_springernature_com_lw685_springer-static_image_art_3A10_1186_2Fs42774-021-00098-3_MediaObjects_42774_2021_98_Fig1_HTML_png_as_webp"
+      "asset_url": "https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/var/files/image-b0641f11a73711b3078acbd257b0c805-https_media_springernature_com_lw685_springer-static_image_art_3A10_1186_2Fs42774-021-00098-3_MediaObjects_42774_2021_98_Fig1_HTML_png_as_webp",
+      "reason": "Low-resolution external topology diagram contains the visible typo “Ethenet”.",
+      "evidence": "Lectures/repository/var/traces/lecture_07.json#step=114:rendering=1"
     },
     {
       "id": "lecture-07-visual-figure-step-118-rendering-1",
@@ -4968,10 +4990,7 @@
           "source_location": "Lectures/repository/var/traces/lecture_07.json#step=118:rendering=1"
         }
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-07",
-      "reason": "Reviewed semantic visual is preserved at exact event/page scope; canonical textbook placement remains pending.",
+      "disposition": "excluded",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -4989,7 +5008,9 @@
       "reviewer": "Codex source audit",
       "checked_at": "2026-09-04",
       "source_parent_sha256": "7cdec6c6e2b78afd667c98e2826efea637bb076cd926c45b4f404b0528c42e60",
-      "asset_url": "https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/gpu-node-overview.png"
+      "asset_url": "https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/gpu-node-overview.png",
+      "reason": "Duplicate of the obstructed step-5 gpu-node overview.",
+      "evidence": "Lectures/repository/var/traces/lecture_07.json#step=118:rendering=1"
     },
     {
       "id": "lecture-08-visual-networking-collectives",
@@ -5045,10 +5066,9 @@
           "source_location": "Lectures/repository/lecture_08.pdf#page=13:semantic=networking-collectives"
         }
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-08",
-      "reason": "Reviewed semantic visual is preserved at exact event/page scope; canonical textbook placement remains pending.",
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md",
+      "destination_anchor": "cs336-distributed-ddp",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -5060,11 +5080,11 @@
       "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
       "extractor_revision": "stanford-cs336-semantic-audit-v3",
       "extraction_tool": "Poppler pdftotext 26.04.0 semantic page review; pdfimages 26.04.0 raster evidence",
-      "rendered_route": "/sources/courses/stanford-cs336-spring-2026/",
-      "desktop_evidence": "pending editorial integration; source archive inspected",
-      "narrow_evidence": "pending editorial integration; source archive inspected",
-      "reviewer": "Codex source audit",
-      "checked_at": "2026-09-04",
+      "rendered_route": "/textbook/pretraining/processes-collectives-ddp/",
+      "desktop_evidence": "The exact source figure was inspected at native resolution and in the complete article column; labels, formulas, and sequence order remain visible without clipping.",
+      "narrow_evidence": "The source image remains inside the article column and is paired with nearby prose/caption plus click-to-zoom for dense labels.",
+      "reviewer": "Codex Task 3 systems integration",
+      "checked_at": "2026-09-06",
       "raster_evidence": [
         {
           "page": 6,
@@ -5150,7 +5170,10 @@
           "width": 677,
           "height": 328
         }
-      ]
+      ],
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l08-p6.png",
+      "transformation": "Lossless body crop of pinned Lecture 8 page 6.",
+      "caption": "The topology separates fast intra-node GPU links from slower inter-node paths, explaining why collective placement matters."
     },
     {
       "id": "lecture-08-visual-zero-sharding",
@@ -5236,10 +5259,9 @@
           "source_location": "Lectures/repository/lecture_08.pdf#page=28:semantic=zero-sharding"
         }
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-08",
-      "reason": "Reviewed semantic visual is preserved at exact event/page scope; canonical textbook placement remains pending.",
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor.md",
+      "destination_anchor": "cs336-distributed-fsdp",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -5251,11 +5273,11 @@
       "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
       "extractor_revision": "stanford-cs336-semantic-audit-v3",
       "extraction_tool": "Poppler pdftotext 26.04.0 semantic page review; pdfimages 26.04.0 raster evidence",
-      "rendered_route": "/sources/courses/stanford-cs336-spring-2026/",
-      "desktop_evidence": "pending editorial integration; source archive inspected",
-      "narrow_evidence": "pending editorial integration; source archive inspected",
-      "reviewer": "Codex source audit",
-      "checked_at": "2026-09-04",
+      "rendered_route": "/textbook/pretraining/zero-fsdp-devicemesh/",
+      "desktop_evidence": "The exact source figure was inspected at native resolution and in the complete article column; labels, formulas, and sequence order remain visible without clipping.",
+      "narrow_evidence": "The source image remains inside the article column and is paired with nearby prose/caption plus click-to-zoom for dense labels.",
+      "reviewer": "Codex Task 3 systems integration",
+      "checked_at": "2026-09-06",
       "raster_evidence": [
         {
           "page": 15,
@@ -5341,7 +5363,10 @@
           "width": 894,
           "height": 200
         }
-      ]
+      ],
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l08-p17.png",
+      "transformation": "Lossless body crops of pinned Lecture 8 pages 17, 22, and 25; pages 17 and 25 were re-rendered with unclipped left headings.",
+      "caption": "Under the stated mixed-precision assumptions, follow optimizer state, gradients, and parameters as ZeRO stages shard progressively more state."
     },
     {
       "id": "lecture-08-visual-pipeline-parallelism",
@@ -5397,10 +5422,9 @@
           "source_location": "Lectures/repository/lecture_08.pdf#page=38:semantic=pipeline-parallelism"
         }
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-08",
-      "reason": "Reviewed semantic visual is preserved at exact event/page scope; canonical textbook placement remains pending.",
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism.md",
+      "destination_anchor": "cs336-distributed-pipeline",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -5412,11 +5436,11 @@
       "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
       "extractor_revision": "stanford-cs336-semantic-audit-v3",
       "extraction_tool": "Poppler pdftotext 26.04.0 semantic page review; pdfimages 26.04.0 raster evidence",
-      "rendered_route": "/sources/courses/stanford-cs336-spring-2026/",
-      "desktop_evidence": "pending editorial integration; source archive inspected",
-      "narrow_evidence": "pending editorial integration; source archive inspected",
-      "reviewer": "Codex source audit",
-      "checked_at": "2026-09-04",
+      "rendered_route": "/textbook/pretraining/pipeline-parallelism/",
+      "desktop_evidence": "The exact source figure was inspected at native resolution and in the complete article column; labels, formulas, and sequence order remain visible without clipping.",
+      "narrow_evidence": "The source image remains inside the article column and is paired with nearby prose/caption plus click-to-zoom for dense labels.",
+      "reviewer": "Codex Task 3 systems integration",
+      "checked_at": "2026-09-06",
       "raster_evidence": [
         {
           "page": 31,
@@ -5478,7 +5502,10 @@
           "width": 1248,
           "height": 836
         }
-      ]
+      ],
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l08-p33.png",
+      "transformation": "Lossless body crops of pinned Lecture 8 pages 33 and 37, preserved as a two-frame orientation.",
+      "caption": "Compare the naive pipeline bubble with the improved microbatch schedule before the chapter derives utilization."
     },
     {
       "id": "lecture-08-visual-width-parallelism",
@@ -5574,10 +5601,9 @@
           "source_location": "Lectures/repository/lecture_08.pdf#page=54:semantic=width-parallelism"
         }
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-08",
-      "reason": "Reviewed semantic visual is preserved at exact event/page scope; canonical textbook placement remains pending.",
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism.md",
+      "destination_anchor": "cs336-distributed-tp-sp-cp",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -5589,11 +5615,11 @@
       "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
       "extractor_revision": "stanford-cs336-semantic-audit-v3",
       "extraction_tool": "Poppler pdftotext 26.04.0 semantic page review; pdfimages 26.04.0 raster evidence",
-      "rendered_route": "/sources/courses/stanford-cs336-spring-2026/",
-      "desktop_evidence": "pending editorial integration; source archive inspected",
-      "narrow_evidence": "pending editorial integration; source archive inspected",
-      "reviewer": "Codex source audit",
-      "checked_at": "2026-09-04",
+      "rendered_route": "/textbook/pretraining/tensor-sequence-parallelism/",
+      "desktop_evidence": "The exact source figure was inspected at native resolution and in the complete article column; labels, formulas, and sequence order remain visible without clipping.",
+      "narrow_evidence": "The source image remains inside the article column and is paired with nearby prose/caption plus click-to-zoom for dense labels.",
+      "reviewer": "Codex Task 3 systems integration",
+      "checked_at": "2026-09-06",
       "raster_evidence": [
         {
           "page": 39,
@@ -5709,7 +5735,10 @@
           "width": 1550,
           "height": 754
         }
-      ]
+      ],
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l08-p47.png",
+      "transformation": "Lossless body crop of pinned Lecture 8 page 47, retaining the activation-memory formula and legend.",
+      "caption": "Inspect which activation terms tensor parallelism reduces and which require sequence/context partitioning; surrounding text defines every symbol."
     },
     {
       "id": "lecture-08-visual-parallelism-comparison",
@@ -5765,10 +5794,9 @@
           "source_location": "Lectures/repository/lecture_08.pdf#page=62:semantic=parallelism-comparison"
         }
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-08",
-      "reason": "Reviewed semantic visual is preserved at exact event/page scope; canonical textbook placement remains pending.",
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md",
+      "destination_anchor": "cs336-distributed-overview",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -5780,11 +5808,11 @@
       "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
       "extractor_revision": "stanford-cs336-semantic-audit-v3",
       "extraction_tool": "Poppler pdftotext 26.04.0 semantic page review; pdfimages 26.04.0 raster evidence",
-      "rendered_route": "/sources/courses/stanford-cs336-spring-2026/",
-      "desktop_evidence": "pending editorial integration; source archive inspected",
-      "narrow_evidence": "pending editorial integration; source archive inspected",
-      "reviewer": "Codex source audit",
-      "checked_at": "2026-09-04",
+      "rendered_route": "/textbook/pretraining/distributed-training/",
+      "desktop_evidence": "The exact source figure was inspected at native resolution and in the complete article column; labels, formulas, and sequence order remain visible without clipping.",
+      "narrow_evidence": "The source image remains inside the article column and is paired with nearby prose/caption plus click-to-zoom for dense labels.",
+      "reviewer": "Codex Task 3 systems integration",
+      "checked_at": "2026-09-06",
       "raster_evidence": [
         {
           "page": 56,
@@ -5846,7 +5874,10 @@
           "width": 958,
           "height": 426
         }
-      ]
+      ],
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l08-p55.png",
+      "transformation": "Lossless body crop of pinned Lecture 8 page 55.",
+      "caption": "Use the table only as a coarse comparison of memory, communication, batch scaling, and implementation cost; later sections qualify each row."
     },
     {
       "id": "lecture-09-visual-data-scaling",
@@ -15906,10 +15937,9 @@
           "source_location": "Assignments/assignment2-systems/cs336_assignment2_systems.pdf#page=5:semantic=nsight-systems-trace"
         }
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Reviewed semantic visual is preserved at exact event/page scope; canonical textbook placement remains pending.",
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/07 Profiling ML-нагрузки.md",
+      "destination_anchor": "cs336-systems-profiling",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -15921,11 +15951,11 @@
       "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
       "extractor_revision": "stanford-cs336-semantic-audit-v3",
       "extraction_tool": "Poppler pdftotext 26.04.0 semantic handout review; pdfimages 26.04.0 raster evidence",
-      "rendered_route": "/sources/courses/stanford-cs336-spring-2026/",
-      "desktop_evidence": "pending editorial integration; source archive inspected",
-      "narrow_evidence": "pending editorial integration; source archive inspected",
-      "reviewer": "Codex source audit",
-      "checked_at": "2026-09-04",
+      "rendered_route": "/textbook/ml-systems/profiling/",
+      "desktop_evidence": "The exact source figure was inspected at native resolution and in the complete article column; labels, formulas, and sequence order remain visible without clipping.",
+      "narrow_evidence": "The source image remains inside the article column and is paired with nearby prose/caption plus click-to-zoom for dense labels.",
+      "reviewer": "Codex Task 3 systems integration",
+      "checked_at": "2026-09-06",
       "raster_evidence": [
         {
           "page": 5,
@@ -15933,7 +15963,10 @@
           "width": 3278,
           "height": 1986
         }
-      ]
+      ],
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/a2-nsight-trace.png",
+      "transformation": "Lossless crop of Figure 1 from pinned Assignment 2 page 5.",
+      "caption": "Distinguish NVTX ranges, CUDA API activity, and GPU kernels before attributing attention time."
     },
     {
       "id": "assignment-02-visual-flashattention-online-softmax",
@@ -15984,10 +16017,9 @@
           "source_location": "Assignments/assignment2-systems/cs336_assignment2_systems.pdf#page=29:semantic=flashattention-online-softmax"
         }
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Reviewed semantic visual is preserved at exact event/page scope; canonical textbook placement remains pending.",
+      "disposition": "integrated",
+      "destination": "00 Учебник/14 Inference и оптимизация/56 FlashAttention.md",
+      "destination_anchor": "cs336-flashattention",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -15999,12 +16031,15 @@
       "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
       "extractor_revision": "stanford-cs336-semantic-audit-v3",
       "extraction_tool": "Poppler pdftotext 26.04.0 semantic handout review; pdfimages 26.04.0 raster evidence",
-      "rendered_route": "/sources/courses/stanford-cs336-spring-2026/",
-      "desktop_evidence": "pending editorial integration; source archive inspected",
-      "narrow_evidence": "pending editorial integration; source archive inspected",
-      "reviewer": "Codex source audit",
-      "checked_at": "2026-09-04",
-      "raster_evidence": []
+      "rendered_route": "/textbook/inference/flashattention/",
+      "desktop_evidence": "The exact source figure was inspected at native resolution and in the complete article column; labels, formulas, and sequence order remain visible without clipping.",
+      "narrow_evidence": "The source image remains inside the article column and is paired with nearby prose/caption plus click-to-zoom for dense labels.",
+      "reviewer": "Codex Task 3 systems integration",
+      "checked_at": "2026-09-06",
+      "raster_evidence": [],
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/a2-p23-attention-equations.png",
+      "transformation": "Lossless body crops of pinned Assignment 2 pages 23–25 and 29, preserved in algorithmic order.",
+      "caption": "The sequence states attention equations, online-softmax state, tiled forward, and backward recomputation used by FlashAttention-2."
     },
     {
       "id": "assignment-02-visual-distributed-rank-topology",
@@ -16025,10 +16060,9 @@
           "source_location": "Assignments/assignment2-systems/cs336_assignment2_systems.pdf#page=32:semantic=distributed-rank-topology"
         }
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-02",
-      "reason": "Reviewed semantic visual is preserved at exact event/page scope; canonical textbook placement remains pending.",
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md",
+      "destination_anchor": "cs336-distributed-ddp",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -16040,11 +16074,11 @@
       "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
       "extractor_revision": "stanford-cs336-semantic-audit-v3",
       "extraction_tool": "Poppler pdftotext 26.04.0 semantic handout review; pdfimages 26.04.0 raster evidence",
-      "rendered_route": "/sources/courses/stanford-cs336-spring-2026/",
-      "desktop_evidence": "pending editorial integration; source archive inspected",
-      "narrow_evidence": "pending editorial integration; source archive inspected",
-      "reviewer": "Codex source audit",
-      "checked_at": "2026-09-04",
+      "rendered_route": "/textbook/pretraining/processes-collectives-ddp/",
+      "desktop_evidence": "The exact source figure was inspected at native resolution and in the complete article column; labels, formulas, and sequence order remain visible without clipping.",
+      "narrow_evidence": "The source image remains inside the article column and is paired with nearby prose/caption plus click-to-zoom for dense labels.",
+      "reviewer": "Codex Task 3 systems integration",
+      "checked_at": "2026-09-06",
       "raster_evidence": [
         {
           "page": 32,
@@ -16052,7 +16086,10 @@
           "width": 1920,
           "height": 642
         }
-      ]
+      ],
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/a2-rank-topology.png",
+      "transformation": "Lossless crop of Figure 3 from pinned Assignment 2 page 32; underlying Lightning Fabric attribution retained.",
+      "caption": "Across two nodes, distinguish global rank, local rank, and node rank before initializing collectives."
     },
     {
       "id": "assignment-03-visual-isoflops-fit-workflow",
@@ -16275,5 +16312,5 @@
       "raster_evidence": []
     }
   ],
-  "editorial_overlay_sha256": "6f5b6e4ce6c3cfd95d78188f2aa2f11313c4a3b214457392c162d6f6d6db4dc3"
+  "editorial_overlay_sha256": "525ec9356c1cf6b77a5a7a89f698379d46d6e50a857c4b703a190eeae66ff2ed"
 }

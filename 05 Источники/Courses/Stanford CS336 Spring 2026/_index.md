@@ -145,7 +145,7 @@ Raw page/raster detections служат evidence и не становятся о
 
 - local path: `Lectures/repository/lecture_09.pdf`;
 - extracted units: 10;
-- semantic visual rows: 4;
+- semantic visual rows: 5;
 - disposition is recorded per unit/visual in the generated coverage ledgers.
 
 <a id="lecture-10"></a>
@@ -161,7 +161,7 @@ Raw page/raster detections служат evidence и не становятся о
 
 - local path: `Lectures/repository/lecture_11.pdf`;
 - extracted units: 8;
-- semantic visual rows: 4;
+- semantic visual rows: 5;
 - disposition is recorded per unit/visual in the generated coverage ledgers.
 
 <a id="lecture-12"></a>

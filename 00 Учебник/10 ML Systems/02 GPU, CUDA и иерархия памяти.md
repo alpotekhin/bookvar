@@ -2,9 +2,20 @@
 title: GPU, CUDA и иерархия памяти
 type: textbook-chapter
 status: draft
-last_verified: 2026-07-24
+last_verified: 2026-09-06
 source_language: mixed
+source_unit_id:
+  - lecture-05-gpu-anatomy
+  - lecture-05-coalescing-failures
+  - lecture-06-section-6-hardware
+  - lecture-06-figure-step-7-rendering-1
+  - lecture-06-accelerator-memory-hierarchy-table
+  - lecture-06-section-22-programming-model
+  - lecture-06-figure-step-23-rendering-1
+  - lecture-06-section-36-interaction-between-programming-model-and-hardware
 ---
+
+<a id="cs336-systems-gpu"></a>
 
 # GPU, CUDA и иерархия памяти
 
@@ -32,7 +43,23 @@ SIMT исполняет одну инструкцию для активных la
 проходит пути с масками последовательно. Tail tiles и число blocks, не кратное
 числу SM, создают tile/wave quantization.
 
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/cuda-grid-cta.png]]
+
+*CUDA grid состоит из Cooperative Thread Arrays (в CUDA API — thread blocks),
+а каждый CTA — из threads. Оригинальный рисунок NVIDIA PTX ISA, встроенный в
+[Stanford CS336 Lecture 6, step 23](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_06.py);
+изображение перенесено без перерисовки. Эта схема задаёт программную иерархию;
+она не утверждает, что один CTA навсегда закреплён за отдельным физическим
+вычислительным блоком.*
+
 ## Где исполняется работа и где находятся данные
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/gpu-hardware.png]]
+
+*Иерархия GPU в [Stanford CS336 Lecture 6, step 7](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_06.py):
+несколько SM разделяют L2 и HBM, а внутри SM находятся scheduler, cores,
+register file и shared memory. Рисунок — схема уровней, а не масштабная карта
+конкретного кристалла.*
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/gpu-memory-hierarchy.svg]]
 
@@ -63,10 +90,35 @@ shared memory — thread block, L2 и HBM разделяются большим 
 
 Warp читает 32 FP32 = 128 B. При выровненном contiguous access полезные 128 B
 укладываются в минимальное число секторов. При stride 32 elements lanes
-затрагивают 32 разнесённые области: payload тот же, но transferred bytes могут
-вырасти примерно до $32\times128=4096$ B, то есть полезность линии около 3%.
-Точное число зависит от архитектуры и cache state; важно считать transactions,
-а не только payload.
+затрагивают 32 разнесённые области. В иллюстративной модели, где каждый запрос
+lane вынуждает получить отдельную 128-байтовую cache line, transferred bytes
+могут вырасти до $32\times128=4096$ B при payload 128 B. Это не универсальное
+число: современные GPU обслуживают доступ секторами, а итог зависит от
+архитектуры, ширины операции, выравнивания, cache policy и состояния кэша.
+Поэтому в профиле проверяют число и размер фактических transactions, а не
+переносят коэффициент 32 на любое устройство.
+
+## GPU и TPU: одинаковая задача, разные уровни управления
+
+GPU и TPU оба ускоряют плотную линейную алгебру, но давать им одну и ту же
+мысленную модель опасно. В GPU программист или компилятор распределяет множество
+небольших программ по SM, а latency скрывается готовыми warps. Локальность
+выражается через registers, shared memory, L2 и HBM. TPU строится вокруг более
+крупных матричных блоков и явно управляемого обмена между accelerator memory и
+матричным вычислителем; распределённая программа сильнее зависит от формы
+mesh и коллективных операций.
+
+Из этого не следует, что один тип ускорителя «быстрее вообще». Для обоих нужно
+ответить на одни и те же вопросы: какой tensor layout получает матричный блок,
+сколько байтов пересекает каждый уровень памяти, достаточно ли параллельной
+работы и где проходит межчиповый обмен. Паспортные FLOP/s — потолок для
+конкретного dtype и набора инструкций; training throughput устанавливает только
+измерение полной программы.
+
+Stanford CS336 Lecture 5, pp. 2–19, использует это сравнение как вход в
+проектирование kernels. Дальше учебник следует GPU-маршруту, потому что именно
+его программная модель понадобится для Triton и FlashAttention; TPU возвращается
+в распределённой главе только там, где различие topology меняет коллективы.
 
 ## Tiling и Tensor Cores
 
@@ -127,6 +179,10 @@ $i+1$ перекрывается с compute batch $i$. Проверять overla
 5. Используется ли Tensor Core path?
 6. Видны ли overlap и зависимости streams/events в trace?
 
+Следующая глава превращает эти вопросы в измерительный контракт, а
+[[02 Areas/ML & DL/00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению|глава о Triton]]
+показывает полный цикл от PyTorch reference до собственного tiled kernel.
+
 ## Практика и первоисточники
 
 - [[05 Источники/Courses/Harvard ML Systems/tinytorch/17_acceleration|TinyTorch 17 — Acceleration]] — исполняемое сравнение базовых, векторизованных и fused operations.
@@ -142,6 +198,8 @@ $i+1$ перекрывается с compute batch $i$. Проверять overla
   “Memory hierarchy”
   (`sec-hardware-acceleration-memory-hierarchy-1839`) и “Hardware Mapping”
   (`sec-hardware-acceleration-hardware-mapping-fundamentals-neural-networks-f9a9`)
+- [Stanford CS336 Lecture 5, pinned `8b59b507`, pp. 2–19](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_05.pdf) — GPU/TPU, execution units и memory hierarchy.
+- [Stanford CS336 Lecture 6, pinned `8b59b507`, steps 6–92](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_06.py) — hardware, CUDA programming model и его отображение на GPU.
 
 ← [[02 Areas/ML & DL/00 Учебник/10 ML Systems/01 Модель как часть системы|Модель как часть системы]] ·
 [[02 Areas/ML & DL/00 Учебник/10 ML Systems/03 Измерение производительности и roofline|Измерение производительности и roofline]] →

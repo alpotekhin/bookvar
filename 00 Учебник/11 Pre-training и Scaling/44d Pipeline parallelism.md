@@ -2,8 +2,14 @@
 title: Pipeline parallelism
 type: textbook-chapter
 status: canonical
-last_updated: 2026-07-24
+last_updated: 2026-09-06
+source_unit_id:
+  - lecture-07-parallelism-strategy-comparison
+  - lecture-08-pipeline-parallelism
+  - lecture-08-pipeline-bubble-failure
 ---
+
+<a id="cs336-distributed-pipeline"></a>
 
 # 44d. Pipeline parallelism
 
@@ -23,6 +29,22 @@ accumulation и point-to-point `send/recv`, введённые в
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/pipeline-parallelism.svg]]
 
 *Источник: Harvard Edge ML Systems Book, commit `45ecc8d…`, [Distributed Training, `sec-distributed-training-systems-systems-pipeline-parallelism-8748`, figure `fig-pipeline-parallelism`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/distributed_training.qmd), CC BY-NC-SA 4.0.*
+
+Два кадра CS336 дают правильный вопрос перед формулами расписания. В первом
+каждая стадия ждёт activation или gradient и значительная часть сетки пуста. Во
+втором microbatches заполняют pipeline, а forward и backward располагаются
+ближе друг к другу. Это не отдельный алгоритм поверх GPipe/1F1B, а визуальная
+ориентация для расписаний, которые разбираются ниже.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l08-p33.png]]
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l08-p37.png]]
+
+*Верхняя сетка оставляет большую bubble; нижняя заполняет часть пустых slots
+microbatches. Источник: Stanford CS336 Spring 2026, Lecture 8, PDF pp. 33 and
+37, pinned commit [`8b59b507`](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_08.pdf).
+Точные bubble и memory cost зависят от расписания; ниже они выводятся для явно
+заданных GPipe и 1F1B.*
 
 ## Состояние и формы на границе
 
@@ -169,5 +191,6 @@ $$M_{\mathrm{act},i}=n_{\mathrm{live},i}\cdot M_{\mathrm{saved\ per\ microbatch}
 - Huang et al., [GPipe](https://arxiv.org/abs/1811.06965), Algorithm 1 and pipeline partitioning, 2019.
 - Narayanan et al., [Efficient Large-Scale Language Model Training](https://arxiv.org/abs/2104.04473), §3.2, PipeDream-Flush/1F1B, 2021.
 - Harvard Edge ML Systems Book, commit `45ecc8d…`, [Distributed Training, `sec-distributed-training-systems-systems-pipeline-parallelism-8748` and `sec-distributed-training-systems-systems-model-parallelism-tradeoffs`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/distributed_training.qmd).
+- Stanford CS336 Spring 2026, [Lecture 8](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_08.pdf), PDF pp. 31–38.
 
 ← [[44c Tensor и sequence parallelism]] · Далее: [[44e ZeRO, FSDP2, DeviceMesh и DTensor]]

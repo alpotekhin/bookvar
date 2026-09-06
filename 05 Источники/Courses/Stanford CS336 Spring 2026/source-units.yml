@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "review_method": "Per-source review of every executable lecture edtrace and source file, every PDF lecture page, and every assignment handout, adapter, and test tree. Every reviewed PDF page is closed by a semantic unit or an evidence-backed administrative exclusion; page and pdfimages detections are evidence only, never standalone teaching visuals.",
-  "semantic_review_sha256": "f1d0b8640da31acffac709f832db78dfc79facc2eb003ca8bb3136bf16cef134",
+  "semantic_review_sha256": "e2341ca3ee4e1facfc504274709cd48b76cb144336026986ffde36cbbe213b9f",
   "units": [
     {
       "id": "lecture-01-section-4-cs336-language-models-from-scratch-spring-2026",

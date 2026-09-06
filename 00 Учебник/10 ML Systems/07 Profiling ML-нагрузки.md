@@ -2,9 +2,19 @@
 title: Profiling ML-нагрузки
 type: textbook-chapter
 status: draft
-last_verified: 2026-07-23
+last_verified: 2026-09-06
 source_language: mixed
+source_unit_id:
+  - lecture-06-benchmark-profile-experiment
+  - lecture-06-section-169-add-dim-2048
+  - lecture-06-section-244-naive-gelu
+  - lecture-06-gelu-profiler-comparison
+  - assignment-02-nsight-systems-trace
+  - assignment-02-task-nsys-profile
+  - assignment-02-task-memory-profiling
 ---
+
+<a id="cs336-systems-profiling"></a>
 
 # Profiling ML-нагрузки
 
@@ -105,6 +115,71 @@ collectives. Типовые паттерны:
 
 Nsight Compute нужен после Systems, когда выбран конкретный kernel: occupancy,
 memory throughput, Tensor Core instructions, stalls и roofline position.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/a2-nsight-trace.png]]
+
+*Оригинальный trace из [Stanford CS336 Assignment 2, Figure 1, p. 5](https://github.com/stanford-cs336/assignment2-systems/blob/ca8bc81a59b70516f7ebb2da4808daade877c736/cs336_assignment2_systems.pdf),
+commit `ca8bc81`. Верхние дорожки показывают GPU activity, ниже расположены
+CUDA kernels и вложенные NVTX/PyTorch ranges. Вертикальное сопоставление дорожек
+связывает участок Python/модуля с kernels, которые он действительно запустил.*
+
+### NVTX как связь между моделью и timeline
+
+Profiler не знает, что для автора программы означает «один Transformer block»
+или «attention forward». Эти границы добавляют NVTX ranges, а Nsight Systems
+сохраняет их вместе с CUDA API и device timeline:
+
+```python
+torch.cuda.nvtx.range_push("attention.forward")
+try:
+    y = attention(q, k, v)
+finally:
+    torch.cuda.nvtx.range_pop()
+```
+
+```bash
+nsys profile \
+  --trace=cuda,nvtx,osrt \
+  --capture-range=cudaProfilerApi \
+  --output=artifacts/transformer-step \
+  python benchmark.py
+```
+
+Capture начинают после warmup: иначе timeline занят initialization и compile.
+NVTX range должен охватывать ровно тот Python interval, который требуется
+объяснить, но его длительность на CPU нельзя выдавать за device time. CUDA
+launch асинхронен; причинную связь устанавливают по вложенности range, CUDA API
+и зависимостям streams.
+
+### Три GeLU как учебный профиль
+
+Lecture 6 выполняет один и тот же tanh-approximate GeLU тремя способами:
+
+1. **naive PyTorch expression** раскладывается на умножения, сложения, `tanh`
+   и несколько промежуточных tensors;
+2. **builtin `torch.nn.functional.gelu`** вызывает библиотечный путь;
+3. **`torch.compile(naive_gelu)`** получает граф целиком и может породить
+   fused kernel.
+
+Перед сравнением курс проверяет equality с исходной функцией, затем отдельно
+измеряет и профилирует варианты. В trace нужно искать не только меньшее число
+kernels, но и исчезнувшие HBM round trips, launch gaps, graph breaks и новый
+register/occupancy режим. Компиляция иногда проигрывает на первой итерации или
+новой shape из-за compile cost; builtin может уже быть оптимальным. Поэтому
+финальный вывод даёт повторный benchmark без profiler overhead.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/gelu-profile-naive.png]]
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/gelu-profile-builtin.png]]
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/gelu-profile-compiled.png]]
+
+*Три таблицы построены непосредственно по выводу профилировщика из Stanford
+CS336 Lecture 6, шаги трассы 245, 248 и 251, для одного и того же входа
+`dim=16384`. В eager-варианте видно девять запусков, тогда как библиотечный
+GeLU и скомпилированный граф исполняют вычисление одним kernel. Конкретные
+времена относятся к машине курса; переносимый вывод здесь — структура запуска,
+а не отношение микросекунд. [Закреплённая версия исходного кода](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_06.py#L265-L302).*
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/profiling-hierarchy.svg]]
 
@@ -282,6 +357,8 @@ custom kernels и всю семантику динамической модел�
 - [PyTorch Memory Snapshot](https://pytorch.org/docs/stable/torch_cuda_memory.html)
 - [Nsight Systems](https://docs.nvidia.com/nsight-systems/)
 - [Harvard CS249r, Frameworks](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/frameworks/frameworks.qmd)
+- [Stanford CS336 Lecture 6, pinned `8b59b507`, steps 93–296](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_06.py) — benchmark/profile loop and naive/builtin/compiled GeLU.
+- [Stanford CS336 Assignment 2, pinned `ca8bc81`, pp. 3–14](https://github.com/stanford-cs336/assignment2-systems/blob/ca8bc81a59b70516f7ebb2da4808daade877c736/cs336_assignment2_systems.pdf) — Nsight/NVTX and memory-profiling evidence contract.
 
 ← [[02 Areas/ML & DL/00 Учебник/10 ML Systems/06 Data pipeline, padding и packing|Data pipeline, padding и packing]] ·
-[[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных|Сбор, очистка и смеси данных]] →
+[[02 Areas/ML & DL/00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению|GPU kernels и Triton]] →

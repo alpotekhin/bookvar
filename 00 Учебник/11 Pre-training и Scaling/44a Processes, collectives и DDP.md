@@ -2,12 +2,59 @@
 title: Processes, collectives и DDP
 type: textbook-chapter
 status: canonical
-last_updated: 2026-07-24
+last_updated: 2026-09-06
+source_unit_id:
+  - lecture-07-figure-step-5-rendering-1
+  - lecture-07-section-19-part-1-building-blocks-of-distributed-communication-computation
+  - lecture-07-collective-communication-mechanisms
+  - lecture-07-collective-operation-code-trace
+  - lecture-07-section-130-nvidia-collective-communication-library-nccl
+  - lecture-07-distributed-benchmark-experiment
+  - lecture-07-parallelism-strategy-comparison
+  - lecture-08-networking-collectives
+  - assignment-02-distributed-benchmark-controls
+  - assignment-02-distributed-rank-topology
+  - assignment-02-task-distributed-communication-single-node
+  - assignment-02-task-naive-ddp
+  - assignment-02-task-naive-ddp-benchmarking
+  - assignment-02-task-minimal-ddp-flat-benchmarking
+  - assignment-02-task-ddp-overlap-individual-parameters
+  - assignment-02-task-ddp-overlap-individual-parameters-benchmarking
+  - assignment-02-task-alternate-ring-all-reduce
+  - assignment-02-task-data-parallel-calcs
 ---
+
+<a id="cs336-distributed-ddp"></a>
 
 # 44a. Processes, collectives и DDP
 
-Один процесс обслуживает одно устройство. Его `rank` — номер в группе, `world_size=N` — число участников; группы позволяют выполнять разные collectives на разных осях параллелизма. Point-to-point `send/recv` задают обмен явно, collective выражает общий шаблон и позволяет библиотеке выбрать алгоритм.
+Один процесс обычно обслуживает одно устройство. `global_rank` нумерует процесс
+во всём job, `local_rank` — внутри узла, а `node_rank` — сам узел. Например, при
+двух узлах по четыре GPU процесс с `global_rank=6` имеет `node_rank=1` и
+`local_rank=2`. `world_size=N` — число процессов в выбранной process group, а не
+обязательно во всём job: отдельные группы позволяют выполнять разные collectives
+по осям data, tensor или expert parallelism.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/a2-rank-topology.png]]
+
+*Для любого процесса схема позволяет восстановить global, node и local rank до
+запуска distributed-кода. Источник: Stanford CS336 Spring 2026, Assignment 2,
+Figure 3, PDF p. 32; схема адаптирована авторами задания из Lightning Fabric.
+[Pinned assignment](https://github.com/stanford-cs336/assignment2-systems/tree/ca8bc81a59b70516f7ebb2da4808daade877c736).*
+
+Point-to-point `send/recv` задаёт обмен явно, collective выражает общий шаблон и
+позволяет библиотеке выбрать алгоритм. NCCL выполняет GPU collectives поверх
+доступных interconnects. Межузловой путь может использовать InfiniBand либо
+RoCE — RDMA поверх Ethernet; поэтому противопоставлять «Ethernet» и «RDMA» как
+взаимоисключающие технологии некорректно.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l08-p6.png]]
+
+*Один collective пересекает два разных участка: быстрые GPU links внутри узла
+и более дорогую межузловую сеть. Источник: Stanford CS336 Spring 2026, Lecture
+8, PDF p. 6, pinned commit [`8b59b507`](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_08.pdf).
+Значения bandwidth относятся к показанной конфигурации и не являются
+характеристикой любого кластера.*
 
 Работу DDP определяют изменения формы и состояния данных в коллективных
 операциях, стоимость передачи и порядок вычислений одного шага. Сумма времени
@@ -30,7 +77,7 @@ $$T\approx \alpha n_{\mathrm{rounds}}+\beta V,\qquad \beta=1/BW_{\mathrm{effecti
 
 $$V_{\mathrm{ring}}=2\frac{N-1}{N}M,$$
 
-а время примерно $2(N-1)\alpha+2\frac{N-1}{N}M\beta$. При $N=8$, $M=1$ GiB это $1.75$ GiB на rank. На эффективных 25 GB/s bandwidth-член равен примерно 70 ms; при $\alpha=5\,\mu s$ startup добавляет лишь 70 μs. Для 4 KiB всё наоборот: latency доминирует.
+а время примерно $2(N-1)\alpha+2\frac{N-1}{N}M\beta$. При $N=8$, $M=1$ GiB это $1.75$ GiB на rank. На эффективных 25 GB/s bandwidth-член равен примерно 75 ms; при $\alpha=5\,\mu s$ startup добавляет лишь 70 μs. Для 4 KiB всё наоборот: latency доминирует.
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/ring-allreduce.svg]]
 
@@ -62,6 +109,36 @@ for local_batch in distributed_sampler():
 
 Gradient переходит из состояния `local partial` в `globally averaged replica`, не меняя shape. При accumulation collective либо подавляют до последнего microbatch, либо его стоимость умножается на число microbatches.
 
+## От корректного DDP к перекрытию communication
+
+В Assignment 2 одна и та же семантика строится в три приёма. Эта
+последовательность полезна тем, что оптимизирует ровно одну причину за раз.
+
+1. **Наивная версия.** После `backward` каждый parameter gradient проходит
+   синхронный all-reduce. Её легко сверить с непараллельной моделью, но множество
+   малых collectives платит startup latency, а communication не перекрывается с
+   вычислением.
+2. **Flat или bucketed gradients.** Градиенты складывают в непрерывный buffer и
+   редуцируют более крупными сообщениями. Запусков становится меньше, но
+   collective всё ещё начинается только после готовности всего buffer.
+3. **Overlapped DDP.** Autograd hook помечает готовый parameter или bucket и
+   запускает асинхронный all-reduce, пока backward вычисляет предыдущие слои.
+   Перед `optimizer.step()` wrapper обязан дождаться всех work handles и вернуть
+   градиенты к согласованной нормировке.
+
+```text
+late layers:   backward ── ready(bucket 0) ──────────────────────
+network:                    all-reduce(0) ────────────┐
+early layers:                      backward ─ ready(bucket 1)
+optimizer:                                             wait ─ step
+```
+
+Flat buffer уменьшает число запусков, overlap уменьшает **открытую** часть
+communication. Это разные эффекты: крупный bucket может улучшить bandwidth и
+одновременно начать обмен настолько поздно, что перекрытия станет меньше.
+Следовательно, размер bucket выбирают по trace критического пути, а не по сумме
+времени NCCL-kernels.
+
 ### Полезность масштабирования
 
 Пусть backward занимает 180 ms, а 1-GiB ring — 70 ms. Если 55 ms скрыты вычислением, шаг платит 15 ms. Добавление GPU, уменьшившее compute до 100 ms, может открыть уже 40 ms communication: speedup становится сублинейным. Измерять нужно exposed collective time, а не сумму длительностей NCCL kernels.
@@ -78,7 +155,19 @@ $$u_t=g_t+e_t,\quad q_t=C(u_t),\quad e_{t+1}=u_t-q_t.$$
 
 ## Проверка
 
-На двух rank с одинаковым seed сравнивают один DDP-step с single-process global batch: loss до update, усреднённые gradients и параметры после update. Затем искусственно задерживают один rank: ожидаемый результат не меняется, а step time показывает straggler amplification.
+На двух rank с одинаковым seed сравнивают один DDP-step с **unwrapped** моделью
+на том же global batch: начальные параметры, loss до update, усреднённые
+gradients и параметры после update. Сверка должна включать обе архитектуры из
+параметризованного официального теста Assignment 2, а не один удобный MLP.
+Затем искусственно задерживают один rank: результат не меняется, а step time
+показывает straggler amplification.
+
+Распределённый benchmark фиксирует ещё четыре условия: одинаковый payload на
+всех rank, warmup до измерения, `barrier` на границе серии и синхронизацию GPU
+перед остановкой таймера. Нужно записать world size, backend, local/global-rank
+mapping и одно- или межузловой характер запуска. Если приводится «effective
+bandwidth», рядом должна стоять формула нормировки: raw `M/t` и bus bandwidth
+ring all-reduce `2(N-1)M/(Nt)` отвечают на разные вопросы.
 
 ## Практика и первоисточники
 
@@ -94,5 +183,8 @@ $$u_t=g_t+e_t,\quad q_t=C(u_t),\quad e_{t+1}=u_t-q_t.$$
 - Harvard Edge ML Systems Book, [Collective Communication](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/collective_communication/collective_communication.qmd), sections `sec-collective-communication-primitives`, `sec-collective-communication-allreduce`.
 - Harvard Edge ML Systems Book, commit `45ecc8d…`, [Distributed Training, `sec-distributed-training-systems-systems-data-parallelism-0c8f`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/distributed_training.qmd).
 - Vogels et al., [PowerSGD](https://arxiv.org/abs/1905.13727), 2019.
+- Stanford CS336 Spring 2026, [Lecture 7](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_07.py), rank/process-group, NCCL and distributed-benchmark sections.
+- Stanford CS336 Spring 2026, [Lecture 8](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_08.pdf), PDF pp. 2–13.
+- Stanford CS336 Spring 2026, [Assignment 2](https://github.com/stanford-cs336/assignment2-systems/tree/ca8bc81a59b70516f7ebb2da4808daade877c736), PDF pp. 31–39 and official DDP tests.
 
 ← [[44 Distributed training и mixed precision]] · Далее: [[44b Gradient checkpointing и offload]]

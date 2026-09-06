@@ -2,8 +2,15 @@
 title: Gradient checkpointing и offload
 type: textbook-chapter
 status: canonical
-last_updated: 2026-07-24
+last_updated: 2026-09-06
+source_unit_id:
+  - lecture-05-activation-recomputation
+  - lecture-08-activation-memory
+  - assignment-02-task-memory-profiling
+  - assignment-02-task-gradient-checkpointing
 ---
+
+<a id="cs336-distributed-checkpointing"></a>
 
 # 44b. Gradient checkpointing и offload
 
@@ -23,15 +30,26 @@ Backward требует промежуточные значения forward. Е�
 | активации | $\sim LBSD$ с коэффициентами операторов | forward → backward слоя |
 | temporaries | зависят от kernel | один operator |
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/training-systems-courses/44-cs336-dp-memory.png]]
-
-*Источник: Percy Liang, Tatsu Hashimoto и команда Stanford, CS336, лекция 8, слайд 17: [PDF](https://github.com/stanford-cs336/lectures/blob/main/lecture_08.pdf). Рисунок отделяет постоянные состояния обучения от активаций, которыми управляет checkpointing.*
-
 Пример: 48 блоков сохраняют по 256 MiB активаций — 12 GiB. Разбиение на восемь сегментов сохраняет около восьми границ, 2 GiB, но повторно вычисляет внутренние блоки. Это верхнеуровневая оценка: FlashAttention, dropout masks и fused kernels меняют ledger.
 
 ## Полное и выборочное сохранение
 
-Равномерное checkpointing минимизирует число живых границ примерно при сегментах порядка $\sqrt L$, но одинаково обращается с дешёвой нормировкой и дорогой attention. Selective checkpointing сохраняет выход дорогих или недетерминированных операторов, а дешёвые elementwise-операции пересчитывает. Решение принимают по паре «saved bytes / recompute FLOPs», а не по имени слоя.
+Для **линейной цепочки из $L$ одинаковых слоёв**, равных по памяти и стоимости,
+классический schedule с равномерными checkpoint boundaries даёт компромисс
+порядка $\sqrt L$ сохранённых границ и участков recompute. Это не универсальный
+оптимум Transformer-графа: attention и MLP сохраняют разные tensors, а selective
+checkpointing может проводить границу внутри блока. Решение принимают по паре
+«saved bytes / recompute FLOPs», а не по имени слоя.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l05-p35.png]]
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l05-p36.png]]
+
+*В первом кадре промежуточные значения записываются в HBM; во втором часть
+этих записей заменена повторным вычислением. Источник: Stanford CS336 Spring
+2026, Lecture 5, PDF pp. 35–36, pinned commit
+[`8b59b507`](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_05.pdf).
+Второй кадр без первого скрывает исходную цену памяти.*
 
 Повторный forward должен воспроизвести RNG. Иначе dropout mask меняется и gradient уже не соответствует исходному forward. In-place mutation и stateful layers тоже нарушают контракт.
 
@@ -45,6 +63,26 @@ Naive attention материализует score/probability tensors поряд�
 | MLP | input | first GEMM + activation | много saved bytes, но дорогой recompute |
 | dropout | RNG state/counter | mask | воспроизводимость без хранения mask |
 
+## Как увидеть saved tensors, а не угадывать их
+
+`torch.autograd.graph.saved_tensors_hooks` позволяет перехватить pack/unpack
+тензоров, которые autograd сохраняет для backward. Для каждого тензора полезно
+записать producer, shape, dtype, bytes и время освобождения. Memory snapshot
+затем показывает allocator blocks и transient buffers, которые список saved
+tensors не видит. Эти наблюдения дополняют друг друга: hooks описывают смысл
+сохранённого состояния, snapshot — фактический пик allocator.
+
+В упражнении Assignment 2 этот ledger строится для XL Transformer-блока с fused
+RMSNorm и для разных sequence lengths. Число вроде «3.6 GiB на слой» имеет смысл
+только рядом с конкретными `batch`, `sequence length`, `d_model`, `d_ff`, числом
+heads, dtype, attention backend и набором tensors, сохранённых выбранной
+реализацией. Переносить его на другую модель без повторного trace нельзя.
+
+Checkpointing также не гарантирует, что peak равен сумме boundary tensors. Во
+время повторного forward одновременно могут жить boundary, восстановленные
+активации участка и temporaries его самого тяжёлого operator. Поэтому сравнивают
+полный timeline baseline и recompute, а не только сумму перехваченных tensors.
+
 ```text
 for segment in transformer_segments:
     boundary = checkpoint(segment_forward, boundary,
@@ -52,6 +90,14 @@ for segment in transformer_segments:
 loss = head(boundary)
 backward(loss)  # runtime повторяет forward сегмента перед его backward
 ```
+
+Две распространённые схемы различаются местом границ. **Segment checkpointing**
+оборачивает последовательности целых блоков: проще предсказать lifetime, но
+повторяется и дорогой attention. **Nested/selective placement** ставит внешний
+checkpoint на блок и внутреннюю политику на отдельные operators: например,
+сохраняет дорогой результат, но повторяет RMSNorm и elementwise activation.
+Сравнивать их нужно при одном memory budget — иначе вариант с большим пиком
+получает нечестное преимущество по времени.
 
 ## Offload — другая граница
 
@@ -88,5 +134,7 @@ Async prefetch запускает H2D следующего состояния д
 - PyTorch, [activation checkpointing documentation](https://pytorch.org/docs/stable/checkpoint.html).
 - PyTorch, [Selective Activation Checkpointing, sections “Selective Activation Checkpoint” and “Memory Budget API”](https://pytorch.org/blog/activation-checkpointing-techniques/).
 - Dao et al., [FlashAttention](https://arxiv.org/abs/2205.14135), §3.2–3.3 and Algorithm 1.
+- Stanford CS336 Spring 2026, [Lecture 5](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_05.pdf), PDF pp. 34–36.
+- Stanford CS336 Spring 2026, [Assignment 2](https://github.com/stanford-cs336/assignment2-systems/tree/ca8bc81a59b70516f7ebb2da4808daade877c736), memory-profiling and gradient-checkpointing tasks.
 
 ← [[44a Processes, collectives и DDP]] · Далее: [[44c Tensor и sequence parallelism]]

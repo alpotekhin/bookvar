@@ -2,13 +2,24 @@
 title: "FlashAttention: точное внимание с меньшим обменом памятью"
 type: textbook-chapter
 status: canonical
-last_updated: 2026-07-20
+last_updated: 2026-09-06
+source_unit_id:
+  - lecture-05-performance-recap-transition
+  - lecture-05-flashattention-derivation
+  - lecture-05-recap
+  - assignment-02-task-pytorch-attention
+  - assignment-02-flashattention-online-softmax
+  - assignment-02-task-flash-forward
+  - assignment-02-flashattention-tests
+  - assignment-02-task-flash-backward
 primary_sources:
   - https://arxiv.org/abs/2205.14135
   - https://crfm.stanford.edu/2023/07/17/flash2.html
   - https://github.com/Dao-AILab/flash-attention
   - https://pytorch.org/docs/stable/generated/torch.nn.functional.scaled_dot_product_attention.html
 ---
+
+<a id="cs336-flashattention"></a>
 
 # FlashAttention: точное внимание с меньшим обменом памятью
 
@@ -23,8 +34,9 @@ $V$. На GPU такая последовательность заставляе
 $S$ и $P$ в основную память устройства и вскоре прочитать их обратно. Для
 длинного контекста время тратится не только на арифметику, но и на перенос этих
 промежуточных данных. FlashAttention сохраняет ту же математическую операцию,
-но меняет порядок вычисления так, чтобы квадратная матрица не покидала быструю
-локальную память небольшими блоками.
+но меняет порядок вычисления: полные $S$ и $P$ вообще не материализуются.
+На-chip storage содержит только временную плитку и компактное состояние
+online-softmax, после чего плитка заменяется следующей.
 
 ## Вычислительная сложность не объясняет время работы
 
@@ -59,6 +71,31 @@ FlashAttention не делает внимание разреженным и не
 избегает записи полной $S$ и $P$ в HBM.
 
 ## Блочный проход через SRAM
+
+Переход от обычного attention к FlashAttention удобнее видеть в двух кадрах.
+Первый фиксирует проблему: отдельные operators записывают attention matrix в
+HBM. Второй вводит состояние online softmax, которое позволяет завершать output
+по tiles.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l05-p52.png]]
+
+*Stanford CS336 Lecture 5, p. 52, по материалам FlashAttention: обычный путь
+между HBM и SRAM материализует крупные промежуточные matrices. [Pinned PDF](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_05.pdf).
+Рисунок задаёт IO-проблему; он не означает, что HBM — единственный возможный
+bottleneck.*
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l05-p53.png]]
+
+*Stanford CS336 Lecture 5, p. 53: online softmax переносит между key tiles
+running maximum, denominator и накопленный числитель. Эти состояния заменяют
+полную probability matrix, но не устраняют попарные Q–K вычисления.*
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l05-p54.png]]
+
+*Stanford CS336 Lecture 5, p. 54: последовательность замыкается полным
+tile-wise forward — score tile, локальная fusion и online-softmax state. Задача
+кадра — связать две предыдущие идеи до перехода к точному алгоритму Assignment
+2. [Pinned PDF](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_05.pdf).*
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/gpu-memory-hierarchy.svg]]
 
@@ -115,18 +152,127 @@ $$
 ассоциативный порядок операций. Из-за конечной точности результат может
 отличаться последними битами, как отличаются две допустимые редукции на GPU.
 
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/a2-p25-flash-forward.png]]
+
+*Полный forward schedule из [Stanford CS336 Assignment 2, Algorithm 1, p. 25](https://github.com/stanford-cs336/assignment2-systems/blob/ca8bc81a59b70516f7ebb2da4808daade877c736/cs336_assignment2_systems.pdf),
+commit `ca8bc81`. Внешний цикл фиксирует query tile, внутренний перебирает key/value
+tiles; строки 10–13 обновляют running maximum, denominator и ненормированный
+output. Crop сохраняет исходный алгоритм без перерисовки.*
+
+Финальный forward записывает $O_i$ и log-sum-exp
+
+$$L_i=m_i+\log \ell_i.$$
+
+$L$ понадобится backward: по нему любая вероятность восстанавливается из
+локально пересчитанного score без сохранения всей строки softmax.
+
 ## Почему память становится линейной
 
 Квадратичная **арифметика** остаётся: каждая строка $Q$ по-прежнему
 взаимодействует с каждой строкой $K$. Но квадратная матрица scores не хранится в
-HBM. Сохраняются входы, выходы и построчные статистики, то есть дополнительная
-память растёт как $O(N)$, а не $O(N^2)$.
+HBM. Для batch $B$, heads $H$, sequence $N$ и head dimension $d$ входы
+$Q,K,V$ и output $O$ занимают $O(BHNd)$ элементов, а статистики softmax —
+$O(BHN)$. При фиксированных $B,H,d$ это линейно по $N$, но полная запись
+важна: фраза “$O(N)$ памяти” не означает, что head dimension или batch исчезли.
 
 В обратном проходе стандартная реализация могла бы сохранить $P$ с forward.
 FlashAttention вместо этого сохраняет компактные нормировочные статистики и
 повторно вычисляет локальные плитки. FLOPs становится немного больше, зато
 исчезает дорогое чтение сохранённой квадратной матрицы. На GPU дополнительная
 арифметика может быть дешевле дополнительного трафика HBM.
+
+## Backward: что требуется пересчитать
+
+Сначала полезно выписать обычный backward. Пусть $dO$ пришёл из следующей части
+графа. Тогда
+
+$$
+dV=P^\top dO,
+\qquad dP=dOV^\top,
+$$
+
+$$
+dS_i=P_i\odot\left(dP_i-\sum_j P_{ij}dP_{ij}\right),
+$$
+
+$$
+dQ=\frac{dSK}{\sqrt d},
+\qquad dK=\frac{dS^\top Q}{\sqrt d}.
+$$
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/a2-p23-attention-equations.png]]
+
+*Stanford CS336 Assignment 2, p. 23, equations 4–11: обычный forward/backward
+явно требует $P$; эта dependency и заставляет стандартную реализацию сохранять
+квадратный tensor.*
+
+FlashAttention заменяет row-wise сумму в Jacobian softmax на компактную
+статистику
+
+$$
+D_i=\sum_k O_{ik}\,dO_{ik}
+=\sum_j P_{ij}\,dP_{ij}.
+$$
+
+Равенство следует из $O=PV$ и $dP=dOV^\top$. Теперь для каждой плитки можно
+пересчитать
+
+$$
+S_{ij}=\frac{Q_iK_j^\top}{\sqrt d},
+\qquad P_{ij}=\exp(S_{ij}-L_i),
+$$
+
+а затем локально получить
+
+$$
+dV_j\mathrel{+}=P_{ij}^\top dO_i,
+\qquad dP_{ij}=dO_iV_j^\top,
+$$
+
+$$
+dS_{ij}=P_{ij}\odot(dP_{ij}-D_i),
+$$
+
+$$
+dK_j\mathrel{+}=\frac{dS_{ij}^\top Q_i}{\sqrt d},
+\qquad
+dQ_i\mathrel{+}=\frac{dS_{ij}K_j}{\sqrt d}.
+$$
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/a2-p24-backward-recompute.png]]
+
+*Stanford CS336 Assignment 2, p. 24, equations 13–19: $L$ восстанавливает
+probability tile, а $D=\operatorname{rowsum}(O\odot dO)$ устраняет повторную
+полную softmax reduction. Важно читать этот кадр после обычного backward выше.*
+
+### Почему в алгоритме два tiled прохода
+
+$dK_j$ и $dV_j$ получают вклады от всех query tiles. Поэтому первый проход
+фиксирует key/value tile $j$, проходит все $i$ и накапливает его gradients до
+одной записи. $dQ_i$, напротив, получает вклады от всех key tiles; второй
+проход фиксирует query tile и накапливает $dQ_i$. Такая перестановка циклов
+уменьшает число глобальных записей и избегает atomics для основных
+accumulators, но повторяет score/probability tiles.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/a2-p29-flash-backward.png]]
+
+*Stanford CS336 Assignment 2, Algorithm 2, p. 29: первый nested loop собирает
+$dK,dV$, второй — $dQ$. Показан исходный алгоритм целиком; это спецификация
+dependencies, а не готовое решение задания.*
+
+### Causal mask в неполной плитке
+
+Для query position $q$ значения с key position $k>q$ должны давать нулевую
+вероятность. В forward соответствующие scores заменяют на $-\infty$ до
+online-softmax. В backward та же block/element mask применяется до
+восстановления $P_{ij}$; иначе запрещённые позиции получают gradient. Полностью
+будущие key tiles можно пропустить, диагональные tiles требуют elementwise
+mask, а tail по реальной длине — отдельной bounds mask.
+
+Сравнение с reference должно охватывать causal/non-causal режимы, не кратные
+tile sizes lengths, разные head dimensions и forward/backward по всем входам.
+Отдельно измеряют forward и backward: одинаковая скорость forward не доказывает
+эффективность recomputation schedule.
 
 ## Что изменил FlashAttention-2
 
@@ -219,6 +365,12 @@ RoPE, cross-entropy, RMSNorm и SwiGLU. Компилятор может объе
 - [[02 Areas/ML & DL/Papers/Flash Attention 2|Карточка FlashAttention-2]].
 
 - Dao et al., [FlashAttention](https://arxiv.org/abs/2205.14135) — IO-aware постановка, алгоритм и доказательство точности.
+- Dao, [FlashAttention-2](https://arxiv.org/abs/2307.08691) — work partitioning and parallelism improvements.
 - Tri Dao, [FlashAttention-2 at Stanford CRFM](https://crfm.stanford.edu/2023/07/17/flash2.html) — наиболее наглядные схемы tiling и разбиения warp.
 - [Dao-AILab/flash-attention](https://github.com/Dao-AILab/flash-attention) — reference implementation, ограничения и тесты численной корректности.
 - PyTorch, [Scaled Dot Product Attention](https://pytorch.org/docs/stable/generated/torch.nn.functional.scaled_dot_product_attention.html) — выбор backend в практическом API.
+- [Stanford CS336 Lecture 5, pinned `8b59b507`, pp. 50–54](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_05.pdf) — IO transition and online-softmax visual sequence.
+- [Stanford CS336 Assignment 2, pinned `ca8bc81`, pp. 23–31](https://github.com/stanford-cs336/assignment2-systems/blob/ca8bc81a59b70516f7ebb2da4808daade877c736/cs336_assignment2_systems.pdf) — forward/backward equations, Algorithms 1–2, official tests and benchmark contract.
+
+← [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/55c Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer|Serving engines]] ·
+[[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей|Квантизация языковых моделей]] →

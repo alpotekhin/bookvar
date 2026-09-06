@@ -2,8 +2,18 @@
 title: Распределённое обучение и смешанная точность
 type: textbook-chapter
 status: canonical
-last_updated: 2026-07-31
+last_updated: 2026-09-06
+source_unit_id:
+  - lecture-07-section-2-lecture-7-parallelism
+  - lecture-07-section-382-part-2-distributed-training
+  - lecture-07-parallelism-strategy-comparison
+  - lecture-07-section-627-summary
+  - lecture-08-parallelism-comparison
+  - lecture-08-recap
+  - assignment-02-task-fsdp-tp-calcs
 ---
+
+<a id="cs336-distributed-overview"></a>
 
 # 44. Распределённое обучение и смешанная точность
 
@@ -66,10 +76,6 @@ $A$ backward-проходов. Loss либо делят на $A$ заранее,
 шардов и allocator fragmentation. Память активаций зависит уже не только от
 $P$, но и от $B$, $S$, $d$ и $L$; особенно быстро она растёт при увеличении
 длины контекста.
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/training-systems-courses/44-cs336-dp-memory.png]]
-
-*Источник: Stanford CS336, лекция 8, слайд 17: [оригинальный PDF](https://github.com/stanford-cs336/lectures/blob/main/lecture_08.pdf). Слайд отделяет параметры, градиенты, состояния оптимизатора и активации — именно эти категории нужно считать независимо.*
 
 Для 7B-модели на восьми GPU обычный data parallelism не решает проблему:
 каждый GPU всё ещё хранит собственные 112–126 GB model state. Если же
@@ -140,6 +146,28 @@ $B_{effective}$ — достижимая, не паспортная пропус
 сообщения ограничены latency; большие — bandwidth. Топология тоже важна:
 обмен внутри NVLink-домена и тот же обмен через межузловую сеть имеют разную
 цену.
+
+## Карта осей: сначала назвать разделяемый ресурс
+
+Все методы ниже отвечают на разные вопросы. Их удобно сравнивать не по названию
+библиотеки, а по объекту, который перестаёт быть полной репликой:
+
+| Метод | Главный разделяемый объект | Что экономится | Какой обмен появляется |
+|---|---|---|---|
+| DP/DDP | batch/examples | compute на rank, но не model state | gradient AllReduce |
+| ZeRO-1 | optimizer state | moments/master state | shard ownership/update traffic |
+| ZeRO-2 | optimizer state + gradients | persistent model state | ReduceScatter/AllGather-style synchronization |
+| ZeRO-3/FSDP | parameters + gradients + optimizer state | почти весь persistent model state | parameter AllGather, gradient ReduceScatter |
+| TP | hidden/intermediate width и weights | layer weights и часть activations | collectives внутри каждого layer |
+| SP | sequence-local activations | replicated non-attention activations | AllGather/ReduceScatter вместе с TP |
+| CP | context/attention sequence | attention activations/state | attention-specific exchange или KV ring |
+| PP | layers/depth | parameters per stage | boundary activations и gradients, bubble |
+| EP | experts | expert parameters/state | token dispatch и combine AllToAll |
+
+Методы складываются только при совместимых layouts. Если world size равен
+`DP×TP×PP×EP`, это не означает, что каждый tensor автоматически делится на
+произведение всех четырёх чисел. Для каждого tensor фиксируют global shape,
+placement по каждой mesh-axis и collective на границе.
 
 ## Когда реплика модели не помещается: ZeRO и FSDP
 
@@ -261,9 +289,11 @@ $$
 реплики одной и той же части модели. FSDP может заменить обычную DP-репликацию
 внутри этой же оси.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/training-systems-courses/44-cs336-parallelism-table.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l08-p55.png]]
 
-*Источник: Stanford CS336, лекция 8, слайд 55: [оригинальный PDF](https://github.com/stanford-cs336/lectures/blob/main/lecture_08.pdf). Таблица сопоставляет объект разбиения, экономию памяти и характер communication для основных осей.*
+*Источник: [Stanford CS336 Lecture 8, p. 55, pinned `8b59b507`](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_08.pdf).
+Это обзорная таблица курса: она помогает выбрать detail chapter, но не заменяет
+точный bytes/latency ledger и не задаёт универсальную «лучшую» конфигурацию.*
 
 Sequence parallelism делит по ranks те активации, которые не обязаны быть
 полностью реплицированы при TP. Context parallelism распределяет позиции
@@ -417,7 +447,8 @@ batch и сравнивают его с непрерывным control run.
 
 ## Практика и первоисточники
 
-- Stanford CS336, [Lecture 8: Parallelism](https://github.com/stanford-cs336/lectures/blob/main/lecture_08.pdf) — memory accounting, data/tensor/pipeline parallelism и композиция осей.
+- Stanford CS336, [Lecture 7: Parallelism, pinned `8b59b507`](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_07.py) — executable collectives, benchmarks and distributed-training transition.
+- Stanford CS336, [Lecture 8: Parallelism, pinned `8b59b507`](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_08.pdf) — memory accounting, ZeRO, data/tensor/pipeline/expert parallelism and composition.
 - Efficient Deep Learning Systems, [week 2: Fast Pipelines and Mixed Precision](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week02_fast_pipelines/lecture.pdf), [week 3: Data Parallel Training](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week03_data_parallel/lecture.pdf), [week 4: Model Parallelism](https://github.com/mryab/efficient-dl-systems/tree/e632aa89ca9e6638d52e1b686095e7442faffbb0/week04_model_parallel) и [week 5: FSDP](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week05_fsdp/lecture.pdf).
 - Harvard Edge ML Systems Book, [Distributed Training](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/distributed_training.qmd) и [Collective Communication](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/collective_communication/collective_communication.qmd), CC BY-NC-SA 4.0.
 - Micikevicius et al., [Mixed Precision Training](https://arxiv.org/abs/1710.03740), 2018.
