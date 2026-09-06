@@ -4,6 +4,7 @@
     "lecture-01",
     "lecture-02",
     "lecture-03",
+    "lecture-04",
     "assignment-01"
   ],
   "coverage": {
@@ -1126,6 +1127,86 @@
       "disposition": "integrated",
       "destination": "06 Практика/20 Собрать языковую модель с нуля.md",
       "destination_anchor": "official-contract"
+    },
+    "lecture-04-attention-alternatives-overview": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md",
+      "destination_anchor": "attention-alternatives-overview"
+    },
+    "lecture-04-linear-attention-recurrence": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md",
+      "destination_anchor": "linear-attention-recurrent-state"
+    },
+    "lecture-04-hybrid-sequence-models": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md",
+      "destination_anchor": "hybrid-sequence-models"
+    },
+    "lecture-04-deepseek-sparse-attention": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md",
+      "destination_anchor": "dsa-content-adaptive-selection"
+    },
+    "lecture-04-moe-motivation": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+      "destination_anchor": "moe-capacity-evidence"
+    },
+    "lecture-04-moe-routing": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+      "destination_anchor": "moe-routing-mechanisms"
+    },
+    "lecture-04-moe-expert-design-ablations": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+      "destination_anchor": "moe-routing-evidence"
+    },
+    "lecture-04-moe-discrete-routing-training": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+      "destination_anchor": "moe-training-failures"
+    },
+    "lecture-04-moe-load-balancing": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+      "destination_anchor": "moe-load-balancing"
+    },
+    "lecture-04-moe-systems-capacity": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+      "destination_anchor": "moe-systems-capacity"
+    },
+    "lecture-04-moe-stability-finetuning": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+      "destination_anchor": "moe-stability-finetuning"
+    },
+    "lecture-04-moe-upcycling": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+      "destination_anchor": "moe-upcycling"
+    },
+    "lecture-04-deepseek-moe": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+      "destination_anchor": "deepseek-moe-evolution"
+    },
+    "lecture-04-deepseek-mla": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md",
+      "destination_anchor": "deepseek-mla-cache-compression"
+    },
+    "lecture-04-deepseek-mtp": {
+      "disposition": "source-only",
+      "reason": "The exact one-page MTP mechanism is preserved for the later training-objectives integration; Task 2 keeps it distinct from MoE and MLA instead of forcing it into either architecture chapter.",
+      "evidence": "Lectures/repository/lecture_04.pdf#page=59:semantic=deepseek-mtp; reviewed title: DeepSeek multi-token prediction auxiliary objective"
+    },
+    "lecture-04-recap": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+      "destination_anchor": "moe-recap"
     }
   },
   "visuals": {
@@ -1332,6 +1413,125 @@
       "narrow_evidence": "All ten frames were inspected at 390x844: the page has no horizontal overflow, figures stay within the article column, and the lightbox preserves full-resolution inspection.",
       "reviewer": "Codex Task 1 editorial integration",
       "checked_at": "2026-09-06"
+    },
+    "lecture-04-visual-linear-attention-recurrence": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md",
+      "destination_anchor": "linear-attention-recurrent-state",
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/linear-attention-associativity-slide.png",
+      "transformation": "Complete pinned Lecture 4 pages 4, 5, 7, and 9 rendered with Poppler at 180 DPI; original p11 comparison raster also extracted without redraw.",
+      "caption": "The preserved sequence derives the associative rearrangement, its recurrent state, and the gated Mamba-2 and Gated DeltaNet updates.",
+      "rendered_route": "/textbook/modern-llm/sequence-model-alternatives/",
+      "desktop_evidence": "Source rasters were inspected at original resolution and all referenced files resolve; full-route desktop QA remains pending because the shared build is blocked by unresolved Task 3/4 links outside this integration.",
+      "narrow_evidence": "Not yet claimed: narrow route QA must run after the shared Task 3/4 links permit a complete site build.",
+      "reviewer": "Codex Task 2 architecture integration",
+      "checked_at": "2026-09-06"
+    },
+    "lecture-04-visual-hybrid-sequence-models": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md",
+      "destination_anchor": "hybrid-sequence-models",
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/minimax-hybrid-architecture.png",
+      "transformation": "Complete pinned Lecture 4 pages 6 and 10 rendered with Poppler at 180 DPI; exact p8 and p11 evidence rasters extracted without redraw.",
+      "caption": "MiniMax, Nemotron, and Qwen examples expose distinct recurrent-to-attention ratios, followed by the course's controlled long-context ratio evidence.",
+      "rendered_route": "/textbook/modern-llm/sequence-model-alternatives/",
+      "desktop_evidence": "Source rasters were inspected at original resolution and all referenced files resolve; full-route desktop QA remains pending because the shared build is blocked by unresolved Task 3/4 links outside this integration.",
+      "narrow_evidence": "Not yet claimed: narrow route QA must run after the shared Task 3/4 links permit a complete site build.",
+      "reviewer": "Codex Task 2 architecture integration",
+      "checked_at": "2026-09-06"
+    },
+    "lecture-04-visual-deepseek-sparse-attention": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md",
+      "destination_anchor": "dsa-content-adaptive-selection",
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/dsa-lightning-indexer.png",
+      "transformation": "Exact embedded raster extracted from pinned Lecture 4 page 12; no redraw or semantic crop beyond the source image boundary.",
+      "caption": "The two-stage figure separates the lightweight all-position indexer from exact attention over the selected top-k KV entries.",
+      "rendered_route": "/textbook/modern-llm/long-context/",
+      "desktop_evidence": "The exact 1104x635 DSA raster was inspected at original resolution and the chapter reference resolves; full-route desktop QA remains pending because the shared build is blocked by unresolved Task 3/4 links.",
+      "narrow_evidence": "Not yet claimed: narrow route QA must run after the shared Task 3/4 links permit a complete site build.",
+      "reviewer": "Codex Task 2 architecture integration",
+      "checked_at": "2026-09-06"
+    },
+    "lecture-04-visual-moe-routing": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+      "destination_anchor": "moe-routing-mechanisms",
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/moe-routing-families.png",
+      "transformation": "Exact embedded rasters from pinned Lecture 4 pages 27, 31, and 32 extracted without redraw; the routing family diagram is the representative file.",
+      "caption": "The sequence contrasts token-, expert-, and globally chosen assignments before deriving top-k gates and fine-grained shared-expert routing.",
+      "rendered_route": "/textbook/moe/mixture-of-experts/",
+      "desktop_evidence": "Source rasters were inspected at original resolution and all referenced files resolve; full-route desktop QA remains pending because the shared build is blocked by unresolved Task 3/4 links outside this integration.",
+      "narrow_evidence": "Not yet claimed: narrow route QA must run after the shared Task 3/4 links permit a complete site build.",
+      "reviewer": "Codex Task 2 architecture integration",
+      "checked_at": "2026-09-06"
+    },
+    "lecture-04-visual-moe-discrete-routing-training": {
+      "disposition": "source-only",
+      "reason": "The exact REINFORCE and stochastic-gating sequence remains in the pinned pages 36-39; the chapter integrates its conclusions in prose without duplicating lower-value screenshots.",
+      "evidence": "Lectures/repository/lecture_04.pdf#pages=36-39:semantic=moe-discrete-routing-training; question reviewed: How do REINFORCE, noisy gates, and multiplicative jitter approximate gradients or make discrete routes less brittle?"
+    },
+    "lecture-04-visual-moe-load-balancing": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+      "destination_anchor": "moe-load-balancing",
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/switch-load-balance-loss.png",
+      "transformation": "Exact embedded rasters from pinned Lecture 4 pages 40, 42, and 43 extracted without redraw; the Switch balance derivation is the representative file.",
+      "caption": "The sequence connects the Switch auxiliary objective, DeepSeek-V3 selection bias, and OLMoE's no-balance-loss ablation.",
+      "rendered_route": "/textbook/moe/mixture-of-experts/",
+      "desktop_evidence": "Source rasters were inspected at original resolution and all referenced files resolve; full-route desktop QA remains pending because the shared build is blocked by unresolved Task 3/4 links outside this integration.",
+      "narrow_evidence": "Not yet claimed: narrow route QA must run after the shared Task 3/4 links permit a complete site build.",
+      "reviewer": "Codex Task 2 architecture integration",
+      "checked_at": "2026-09-06"
+    },
+    "lecture-04-visual-moe-systems-capacity": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+      "destination_anchor": "moe-systems-capacity",
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/latentmoe-communication-compression.png",
+      "transformation": "Exact embedded rasters from pinned Lecture 4 pages 46 and 47 extracted without redraw; the LatentMoE architecture is the representative file.",
+      "caption": "The paired systems evidence separates communication compression from fixed-capacity permutation and batch-dependent token dropping.",
+      "rendered_route": "/textbook/moe/mixture-of-experts/",
+      "desktop_evidence": "Source rasters were inspected at original resolution and all referenced files resolve; full-route desktop QA remains pending because the shared build is blocked by unresolved Task 3/4 links outside this integration.",
+      "narrow_evidence": "Not yet claimed: narrow route QA must run after the shared Task 3/4 links permit a complete site build.",
+      "reviewer": "Codex Task 2 architecture integration",
+      "checked_at": "2026-09-06"
+    },
+    "lecture-04-visual-moe-stability-finetuning": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+      "destination_anchor": "moe-stability-finetuning",
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/router-zloss-ablation.png",
+      "transformation": "Exact embedded rasters from pinned Lecture 4 pages 49 and 50 extracted without redraw; the z-loss ablation is the representative file and the sequence explicitly includes the page-50 fine-tuning parameter ablation.",
+      "caption": "The two figures distinguish numerical router stabilization from the separate choice of which dense or sparse parameters to update during fine-tuning.",
+      "rendered_route": "/textbook/moe/mixture-of-experts/",
+      "desktop_evidence": "Source rasters were inspected at original resolution and all referenced files resolve; full-route desktop QA remains pending because the shared build is blocked by unresolved Task 3/4 links outside this integration.",
+      "narrow_evidence": "Not yet claimed: narrow route QA must run after the shared Task 3/4 links permit a complete site build.",
+      "reviewer": "Codex Task 2 architecture integration",
+      "checked_at": "2026-09-06"
+    },
+    "lecture-04-visual-deepseek-moe": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+      "destination_anchor": "deepseek-moe-evolution",
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/deepseek-v1-moe-slide.png",
+      "transformation": "Complete pinned Lecture 4 pages 54 and 55 rendered with Poppler at 180 DPI. Page 56 is deliberately not published because its V2 title and 258-expert wording conflict with the primary DeepSeek-V3 report.",
+      "caption": "The first two slides preserve the move from fine-grained shared experts to topology-aware routing; V3 counts and balancing are corrected from the primary report in prose.",
+      "rendered_route": "/textbook/moe/mixture-of-experts/",
+      "desktop_evidence": "Both 1800x1014 source slides were inspected at original resolution and their chapter references resolve; full-route desktop QA remains pending because the shared build is blocked by unresolved Task 3/4 links.",
+      "narrow_evidence": "Not yet claimed: narrow route QA must run after the shared Task 3/4 links permit a complete site build.",
+      "reviewer": "Codex Task 2 architecture integration",
+      "checked_at": "2026-09-06"
+    },
+    "lecture-04-visual-deepseek-mla": {
+      "disposition": "source-only",
+      "reason": "The Lecture 4 pages 57-58 derivation is preserved in the pinned PDF; the canonical MLA chapter already uses higher-resolution primary-paper diagrams for the same absorption and decoupled-RoPE mechanism.",
+      "evidence": "Lectures/repository/lecture_04.pdf#pages=57-58:semantic=deepseek-mla; question reviewed: Which projections can be absorbed so that the latent activation becomes persistent KV-cache state?"
+    },
+    "lecture-04-visual-deepseek-mtp": {
+      "disposition": "source-only",
+      "reason": "The exact page is preserved for a later training-objective integration; reproducing it in the MoE chapter would incorrectly present MTP as part of expert routing.",
+      "evidence": "Lectures/repository/lecture_04.pdf#page=59:semantic=deepseek-mtp; question reviewed: Where does the auxiliary next-next-token prediction module attach during DeepSeek-V3 training?"
     }
   }
 }

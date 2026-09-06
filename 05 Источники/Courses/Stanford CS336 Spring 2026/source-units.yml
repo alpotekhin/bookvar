@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "review_method": "Per-source review of every executable lecture edtrace and source file, every PDF lecture page, and every assignment handout, adapter, and test tree. Every reviewed PDF page is closed by a semantic unit or an evidence-backed administrative exclusion; page and pdfimages detections are evidence only, never standalone teaching visuals.",
-  "semantic_review_sha256": "c059b5dfe112bb6f434008ded2401020fbd58b58df6a9116ddded700608c7a49",
+  "semantic_review_sha256": "f1d0b8640da31acffac709f832db78dfc79facc2eb003ca8bb3136bf16cef134",
   "units": [
     {
       "id": "lecture-01-section-4-cs336-language-models-from-scratch-spring-2026",
@@ -1527,16 +1527,16 @@
       "exclusion_evidence": "Lecture 4"
     },
     {
-      "id": "lecture-04-attention-alternatives",
+      "id": "lecture-04-attention-alternatives-overview",
       "source_object": "lecture-04",
       "order": 2,
-      "source_location": "Lectures/repository/lecture_04.pdf#pages=2-13:semantic=attention-alternatives",
+      "source_location": "Lectures/repository/lecture_04.pdf#pages=2-3:semantic=attention-alternatives-overview",
       "kind": "section",
-      "title": "Attention alternatives and hybrid sequence models",
-      "semantic_id": "attention-alternatives",
+      "title": "Attention-alternative design space",
+      "semantic_id": "attention-alternatives-overview",
       "evidence_text": "Attention alternatives",
       "page_start": 2,
-      "page_end": 13
+      "page_end": 3
     },
     {
       "id": "lecture-04-linear-attention-recurrence",
@@ -1551,9 +1551,33 @@
       "page_end": 10
     },
     {
-      "id": "lecture-04-moe-motivation",
+      "id": "lecture-04-hybrid-sequence-models",
       "source_object": "lecture-04",
       "order": 4,
+      "source_location": "Lectures/repository/lecture_04.pdf#pages=6-11:semantic=hybrid-sequence-models",
+      "kind": "worked-example",
+      "title": "Mamba-2, Gated DeltaNet, and hybrid sequence-model architectures",
+      "semantic_id": "hybrid-sequence-models",
+      "evidence_text": "Hybrid performance",
+      "page_start": 6,
+      "page_end": 11
+    },
+    {
+      "id": "lecture-04-deepseek-sparse-attention",
+      "source_object": "lecture-04",
+      "order": 5,
+      "source_location": "Lectures/repository/lecture_04.pdf#pages=12-13:semantic=deepseek-sparse-attention",
+      "kind": "mechanism",
+      "title": "DeepSeek Sparse Attention and content-adaptive token selection",
+      "semantic_id": "deepseek-sparse-attention",
+      "evidence_text": "sparse attention (DSA)",
+      "page_start": 12,
+      "page_end": 13
+    },
+    {
+      "id": "lecture-04-moe-motivation",
+      "source_object": "lecture-04",
+      "order": 6,
       "source_location": "Lectures/repository/lecture_04.pdf#pages=14-24:semantic=moe-motivation",
       "kind": "section",
       "title": "Mixture-of-experts motivation and scaling evidence",
@@ -1565,7 +1589,7 @@
     {
       "id": "lecture-04-moe-routing",
       "source_object": "lecture-04",
-      "order": 5,
+      "order": 7,
       "source_location": "Lectures/repository/lecture_04.pdf#pages=25-35:semantic=moe-routing",
       "kind": "mechanism",
       "title": "Top-k expert routing and architecture variants",
@@ -1575,33 +1599,69 @@
       "page_end": 35
     },
     {
-      "id": "lecture-04-routing-ablations",
+      "id": "lecture-04-moe-expert-design-ablations",
       "source_object": "lecture-04",
-      "order": 6,
-      "source_location": "Lectures/repository/lecture_04.pdf#pages=33-49:semantic=routing-ablations",
+      "order": 8,
+      "source_location": "Lectures/repository/lecture_04.pdf#pages=33-34:semantic=moe-expert-design-ablations",
       "kind": "experiment",
-      "title": "Expert granularity, sharing, and balancing ablations",
-      "semantic_id": "routing-ablations",
+      "title": "Fine-grained and shared-expert ablations",
+      "semantic_id": "moe-expert-design-ablations",
       "evidence_text": "Various ablations",
       "page_start": 33,
-      "page_end": 49
+      "page_end": 34
     },
     {
-      "id": "lecture-04-moe-training-failures",
+      "id": "lecture-04-moe-discrete-routing-training",
       "source_object": "lecture-04",
-      "order": 7,
-      "source_location": "Lectures/repository/lecture_04.pdf#pages=36-50:semantic=moe-training-failures",
+      "order": 9,
+      "source_location": "Lectures/repository/lecture_04.pdf#pages=36-39:semantic=moe-discrete-routing-training",
       "kind": "failure-mode",
-      "title": "Discrete routing, load balance, stability, and fine-tuning failures",
-      "semantic_id": "moe-training-failures",
+      "title": "Discrete routing gradients, REINFORCE, and stochastic approximations",
+      "semantic_id": "moe-discrete-routing-training",
       "evidence_text": "How do we train MoEs",
       "page_start": 36,
+      "page_end": 39
+    },
+    {
+      "id": "lecture-04-moe-load-balancing",
+      "source_object": "lecture-04",
+      "order": 10,
+      "source_location": "Lectures/repository/lecture_04.pdf#pages=40-43:semantic=moe-load-balancing",
+      "kind": "mechanism",
+      "title": "Expert and device load-balancing objectives and bias updates",
+      "semantic_id": "moe-load-balancing",
+      "evidence_text": "Heuristic balancing losses",
+      "page_start": 40,
+      "page_end": 43
+    },
+    {
+      "id": "lecture-04-moe-systems-capacity",
+      "source_object": "lecture-04",
+      "order": 11,
+      "source_location": "Lectures/repository/lecture_04.pdf#pages=44-47:semantic=moe-systems-capacity",
+      "kind": "failure-mode",
+      "title": "Expert-parallel communication, latent projections, and batch-dependent capacity",
+      "semantic_id": "moe-systems-capacity",
+      "evidence_text": "Training MoEs – the systems side",
+      "page_start": 44,
+      "page_end": 47
+    },
+    {
+      "id": "lecture-04-moe-stability-finetuning",
+      "source_object": "lecture-04",
+      "order": 12,
+      "source_location": "Lectures/repository/lecture_04.pdf#pages=48-50:semantic=moe-stability-finetuning",
+      "kind": "failure-mode",
+      "title": "Router numerical stability and sparse fine-tuning failures",
+      "semantic_id": "moe-stability-finetuning",
+      "evidence_text": "Issues with MoEs - stability",
+      "page_start": 48,
       "page_end": 50
     },
     {
       "id": "lecture-04-moe-upcycling",
       "source_object": "lecture-04",
-      "order": 8,
+      "order": 13,
       "source_location": "Lectures/repository/lecture_04.pdf#pages=51-53:semantic=moe-upcycling",
       "kind": "worked-example",
       "title": "MiniCPM and Qwen MoE upcycling examples",
@@ -1611,21 +1671,44 @@
       "page_end": 53
     },
     {
-      "id": "lecture-04-deepseek-moe-case",
+      "id": "lecture-04-deepseek-moe",
       "source_object": "lecture-04",
-      "order": 9,
-      "source_location": "Lectures/repository/lecture_04.pdf#pages=54-59:semantic=deepseek-moe-case",
+      "order": 14,
+      "source_location": "Lectures/repository/lecture_04.pdf#pages=54-56:semantic=deepseek-moe",
       "kind": "worked-example",
-      "title": "DeepSeek MoE v1-v3, MLA, and MTP case study",
-      "semantic_id": "deepseek-moe-case",
-      "evidence_text": "DeepSeek MoE",
+      "title": "DeepSeek MoE v1-v3 architecture evolution",
+      "semantic_id": "deepseek-moe",
+      "evidence_text": "DeepSeek MoE v1-v2-v3",
       "page_start": 54,
-      "page_end": 59
+      "page_end": 56
+    },
+    {
+      "id": "lecture-04-deepseek-mla",
+      "source_object": "lecture-04",
+      "order": 15,
+      "source_location": "Lectures/repository/lecture_04.pdf#pages=57-58:semantic=deepseek-mla",
+      "kind": "mechanism",
+      "title": "DeepSeek Multi-head Latent Attention and KV-cache compression",
+      "semantic_id": "deepseek-mla",
+      "evidence_text": "MLA : Multihead, latent attention",
+      "page_start": 57,
+      "page_end": 58
+    },
+    {
+      "id": "lecture-04-deepseek-mtp",
+      "source_object": "lecture-04",
+      "order": 16,
+      "source_location": "Lectures/repository/lecture_04.pdf#page=59:semantic=deepseek-mtp",
+      "kind": "mechanism",
+      "title": "DeepSeek multi-token prediction auxiliary objective",
+      "semantic_id": "deepseek-mtp",
+      "evidence_text": "MTP: Have small, lightweight models",
+      "page": 59
     },
     {
       "id": "lecture-04-recap",
       "source_object": "lecture-04",
-      "order": 10,
+      "order": 17,
       "source_location": "Lectures/repository/lecture_04.pdf#page=60:semantic=recap",
       "kind": "section",
       "title": "Attention alternatives and MoE recap",

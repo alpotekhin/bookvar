@@ -447,21 +447,35 @@
     "lecture-04": {
       "units": [
         {"semantic_id": "title-slide", "kind": "administrative", "title": "Lecture 4 title and attribution", "pages": [1], "reason": "Title and attribution are preserved but contain no teaching claim.", "evidence_text": "Lecture 4"},
-        {"semantic_id": "attention-alternatives", "kind": "section", "title": "Attention alternatives and hybrid sequence models", "pages": [2, 13], "evidence_text": "Attention alternatives"},
+        {"semantic_id": "attention-alternatives-overview", "kind": "section", "title": "Attention-alternative design space", "pages": [2, 3], "evidence_text": "Attention alternatives"},
         {"semantic_id": "linear-attention-recurrence", "kind": "derivation", "title": "Linear-attention recurrent form and gated state updates", "pages": [4, 10], "evidence_text": "Linear attention"},
+        {"semantic_id": "hybrid-sequence-models", "kind": "worked-example", "title": "Mamba-2, Gated DeltaNet, and hybrid sequence-model architectures", "pages": [6, 11], "evidence_text": "Hybrid performance"},
+        {"semantic_id": "deepseek-sparse-attention", "kind": "mechanism", "title": "DeepSeek Sparse Attention and content-adaptive token selection", "pages": [12, 13], "evidence_text": "sparse attention (DSA)"},
         {"semantic_id": "moe-motivation", "kind": "section", "title": "Mixture-of-experts motivation and scaling evidence", "pages": [14, 24], "evidence_text": "Mixture of experts"},
         {"semantic_id": "moe-routing", "kind": "mechanism", "title": "Top-k expert routing and architecture variants", "pages": [25, 35], "evidence_text": "What MoEs generally look like"},
-        {"semantic_id": "moe-training-failures", "kind": "failure-mode", "title": "Discrete routing, load balance, stability, and fine-tuning failures", "pages": [36, 50], "evidence_text": "How do we train MoEs"},
-        {"semantic_id": "routing-ablations", "kind": "experiment", "title": "Expert granularity, sharing, and balancing ablations", "pages": [33, 49], "evidence_text": "Various ablations"},
+        {"semantic_id": "moe-expert-design-ablations", "kind": "experiment", "title": "Fine-grained and shared-expert ablations", "pages": [33, 34], "evidence_text": "Various ablations"},
+        {"semantic_id": "moe-discrete-routing-training", "kind": "failure-mode", "title": "Discrete routing gradients, REINFORCE, and stochastic approximations", "pages": [36, 39], "evidence_text": "How do we train MoEs"},
+        {"semantic_id": "moe-load-balancing", "kind": "mechanism", "title": "Expert and device load-balancing objectives and bias updates", "pages": [40, 43], "evidence_text": "Heuristic balancing losses"},
+        {"semantic_id": "moe-systems-capacity", "kind": "failure-mode", "title": "Expert-parallel communication, latent projections, and batch-dependent capacity", "pages": [44, 47], "evidence_text": "Training MoEs – the systems side"},
+        {"semantic_id": "moe-stability-finetuning", "kind": "failure-mode", "title": "Router numerical stability and sparse fine-tuning failures", "pages": [48, 50], "evidence_text": "Issues with MoEs - stability"},
         {"semantic_id": "moe-upcycling", "kind": "worked-example", "title": "MiniCPM and Qwen MoE upcycling examples", "pages": [51, 53], "evidence_text": "upcycling"},
-        {"semantic_id": "deepseek-moe-case", "kind": "worked-example", "title": "DeepSeek MoE v1-v3, MLA, and MTP case study", "pages": [54, 59], "evidence_text": "DeepSeek MoE"},
+        {"semantic_id": "deepseek-moe", "kind": "worked-example", "title": "DeepSeek MoE v1-v3 architecture evolution", "pages": [54, 56], "evidence_text": "DeepSeek MoE v1-v2-v3"},
+        {"semantic_id": "deepseek-mla", "kind": "mechanism", "title": "DeepSeek Multi-head Latent Attention and KV-cache compression", "pages": [57, 58], "evidence_text": "MLA : Multihead, latent attention"},
+        {"semantic_id": "deepseek-mtp", "kind": "mechanism", "title": "DeepSeek multi-token prediction auxiliary objective", "pages": [59], "evidence_text": "MTP: Have small, lightweight models"},
         {"semantic_id": "recap", "kind": "section", "title": "Attention alternatives and MoE recap", "pages": [60], "evidence_text": "MoE summary"}
       ],
       "visuals": [
         {"semantic_id": "linear-attention-recurrence", "visual_kind": "derivation", "question": "How does associativity turn quadratic attention into a recurrent state update, and how do gates alter that state?", "pages": [4, 10]},
+        {"semantic_id": "hybrid-sequence-models", "visual_kind": "figure", "question": "How do MiniMax, Nemotron, and Qwen interleave recurrent mixers with exact attention, and what do controlled ratio ablations establish?", "pages": [6, 11]},
+        {"semantic_id": "deepseek-sparse-attention", "visual_kind": "derivation", "question": "How does the lightning indexer score all prior positions and select a content-dependent top-k subset for exact sparse attention?", "pages": [12, 13]},
         {"semantic_id": "moe-routing", "visual_kind": "derivation", "question": "How do token-choice top-k scores, shared experts, and fine-grained experts determine sparse computation?", "pages": [27, 35]},
-        {"semantic_id": "moe-training-failures", "visual_kind": "figure", "question": "How do stochastic routing, auxiliary losses, and router bias address imbalance and instability?", "pages": [36, 49]},
-        {"semantic_id": "deepseek-moe-case", "visual_kind": "figure", "question": "Which architectural changes accumulate from DeepSeek MoE v1 through v3, MLA, and MTP?", "pages": [54, 59]}
+        {"semantic_id": "moe-discrete-routing-training", "visual_kind": "figure", "question": "How do REINFORCE, noisy gates, and multiplicative jitter approximate gradients or make discrete routes less brittle?", "pages": [36, 39]},
+        {"semantic_id": "moe-load-balancing", "visual_kind": "derivation", "question": "How do expert-level auxiliary losses, device aggregation, and DeepSeek-V3 bias updates change routing load?", "pages": [40, 43]},
+        {"semantic_id": "moe-systems-capacity", "visual_kind": "figure", "question": "Where do expert-parallel communication, latent down-projection, fixed capacity, and batch-dependent token dropping enter the MoE data path?", "pages": [44, 47]},
+        {"semantic_id": "moe-stability-finetuning", "visual_kind": "experiment", "question": "What do router precision, z-loss, and parameter-freezing experiments establish about stability and fine-tuning?", "pages": [48, 50]},
+        {"semantic_id": "deepseek-moe", "visual_kind": "figure", "question": "Which routing, expert-granularity, device-selection, and balancing changes accumulate from DeepSeek MoE v1 through v3?", "pages": [54, 56]},
+        {"semantic_id": "deepseek-mla", "visual_kind": "derivation", "question": "Which query, key, and value projections can be absorbed so that the latent activation becomes the persistent KV-cache state?", "pages": [57, 58]},
+        {"semantic_id": "deepseek-mtp", "visual_kind": "figure", "question": "Where does the auxiliary next-next-token prediction module attach during DeepSeek-V3 training?", "pages": [59]}
       ],
       "sample": "The top-k routing equation on page 31 belongs to a pages 27-35 routing sequence; balancing failures are separate."
     },

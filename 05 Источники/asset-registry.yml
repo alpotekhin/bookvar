@@ -6375,3 +6375,423 @@ assets:
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
     derivation: pdf-page-render-crop
+
+  - id: curated-stanford-cs336-architectures-linear-attention-associativity-slide-8f626e9577cc
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/linear-attention-associativity-slide.png
+    author: Stanford CS336 staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=4
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: 8f626e9577ccab8e46d492ebf97716f3c8c46c283a7da85a956d3564ba5faf67
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page 4 rendered at 180 DPI with Poppler; no crop or redraw
+    used_in:
+    - 00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-architectures-linear-attention-recurrent-slide-e0d5f9b66934
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/linear-attention-recurrent-slide.png
+    author: Stanford CS336 staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=5
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: e0d5f9b669341908c2a06e2dcf774f0b35028446591ba1dcc437d8df0d162c5e
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page 5 rendered at 180 DPI with Poppler; no crop or redraw
+    used_in:
+    - 00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-architectures-minimax-hybrid-architecture-2cdbae96705a
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/minimax-hybrid-architecture.png
+    author: Stanford CS336 staff; architecture attributed on slide to MiniMax et al. 2025
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=6
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: 2cdbae96705a2ba50ef78418a089668fcd0b884f89b17ffd4a757244ea2aaf08
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page 6 rendered at 180 DPI with Poppler; no crop or redraw
+    used_in:
+    - 00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-architectures-mamba2-state-update-slide-37ea871f29aa
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/mamba2-state-update-slide.png
+    author: Stanford CS336 staff; equations attributed on slide to Dao and Gu 2024
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=7
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: 37ea871f29aa6f1768e0358f08b2e86493030fb945812fc7eb82c373ec6b29a1
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page 7 rendered at 180 DPI with Poppler; no crop or redraw
+    used_in:
+    - 00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-architectures-nemotron-hybrid-evidence-04f795e5bdde
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/nemotron-hybrid-evidence.png
+    author: Stanford CS336 staff; model results attributed on slide to NVIDIA
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=8
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: 04f795e5bdde3a1510dca6e8bab47c5a34b10728c4bc11a71dcfd13a679b5e9d
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: exact embedded raster extracted from PDF page 8; no redraw or semantic crop beyond the source image boundary
+    used_in:
+    - 00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-embedded-raster-extraction
+
+  - id: curated-stanford-cs336-architectures-gated-deltanet-state-update-slide-332d96df37d8
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/gated-deltanet-state-update-slide.png
+    author: Stanford CS336 staff; equations attributed on slide to Yang et al. 2024
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=9
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: 332d96df37d8471ca54acc5ec5e1ca395155d1dd3e057946db557cf8853e797e
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page 9 rendered at 180 DPI with Poppler; no crop or redraw
+    used_in:
+    - 00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-architectures-qwen-next-hybrid-architecture-3c277992cb46
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/qwen-next-hybrid-architecture.jpg
+    author: Stanford CS336 staff; architecture attributed on slide to the Qwen team
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=10
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: 3c277992cb4615d4a55ac55ffb328af633e4d597e51f90019103ce670cb122ad
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page 10 rendered at 180 DPI with Poppler and encoded as high-quality JPEG; no semantic crop or redraw
+    used_in:
+    - 00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-architectures-recurrent-update-rule-comparison-08593308f807
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/recurrent-update-rule-comparison.png
+    author: Stanford CS336 staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=11
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: 08593308f807ce57aeb5c0ae6a8f4b7fd4a6625622317a550ffcd9addb678a37
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: exact embedded raster extracted from PDF page 11; no redraw or semantic crop beyond the source image boundary
+    used_in:
+    - 00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-embedded-raster-extraction
+
+  - id: curated-stanford-cs336-architectures-hybrid-ratio-ruler-ablation-dc3590003148
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/hybrid-ratio-ruler-ablation.jpg
+    author: Stanford CS336 staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=11
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: dc359000314823de0f39b63647d464e736c34f293dc1aa37ff58820ff900aacb
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: exact embedded raster extracted from PDF page 11; no redraw or semantic crop beyond the source image boundary
+    used_in:
+    - 00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-embedded-raster-extraction
+
+  - id: curated-stanford-cs336-architectures-dsa-lightning-indexer-c43a5f723611
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/dsa-lightning-indexer.png
+    author: Stanford CS336 staff; source figure attributed to the DeepSeek team
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=12
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: c43a5f723611b0e0b05b5afde5044c6c3f6da85061d5cf0075e3a1b8ace93659
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: exact embedded raster extracted from PDF page 12; no redraw or semantic crop beyond the source image boundary
+    used_in:
+    - 00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-embedded-raster-extraction
+
+  - id: curated-stanford-cs336-architectures-moe-same-compute-scaling-ee4ac94e7270
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/moe-same-compute-scaling.png
+    author: Stanford CS336 staff; plots attributed on slide to Fedus, Zoph, and Shazeer
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=16
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: ee4ac94e727066bd37d79a81e81611d4890ff4a086434da52c18bb84667281cb
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: exact embedded raster extracted from PDF page 16; no redraw or semantic crop beyond the source image boundary
+    used_in:
+    - 00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-embedded-raster-extraction
+
+  - id: curated-stanford-cs336-architectures-moe-routing-families-f76303a240fc
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/moe-routing-families.png
+    author: Stanford CS336 staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=27
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: f76303a240fcc000a39c5f011181df4ac498933e964390f11398c53b1e900de7
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: exact embedded raster extracted from PDF page 27; no redraw or semantic crop beyond the source image boundary
+    used_in:
+    - 00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-embedded-raster-extraction
+
+  - id: curated-stanford-cs336-architectures-moe-topk-gating-equations-f11c0c2de91b
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/moe-topk-gating-equations.png
+    author: Stanford CS336 staff; equations attributed on slide to Dai et al. 2024
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=31
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: f11c0c2de91b8a7d8a44979d588fdfe925a3387627a7e385af675575fd31d897
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: exact embedded raster extracted from PDF page 31; no redraw or semantic crop beyond the source image boundary
+    used_in:
+    - 00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-embedded-raster-extraction
+
+  - id: curated-stanford-cs336-architectures-deepseekmoe-fine-grained-shared-020f5e690d81
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/deepseekmoe-fine-grained-shared.png
+    author: Stanford CS336 staff; source figure attributed to the DeepSeekMoE authors
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=32
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: 020f5e690d81b985f3683f79f101faaa12e510817df54850652f9b436bc17dd9
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: exact embedded raster extracted from PDF page 32; no redraw or semantic crop beyond the source image boundary
+    used_in:
+    - 00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-embedded-raster-extraction
+
+  - id: curated-stanford-cs336-architectures-deepseekmoe-routing-ablation-2a1c1063b63f
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/deepseekmoe-routing-ablation.png
+    author: Stanford CS336 staff; source plot attributed to the DeepSeekMoE authors
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=33
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: 2a1c1063b63f515a6aed3a4a568ba33745c042091f6dd54fc8ee0f7a10fdfa88
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: exact embedded raster extracted from PDF page 33; no redraw or semantic crop beyond the source image boundary
+    used_in:
+    - 00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-embedded-raster-extraction
+
+  - id: curated-stanford-cs336-architectures-olmoe-shared-expert-ablation-cf6e33a103c4
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/olmoe-shared-expert-ablation.png
+    author: Stanford CS336 staff; source plot attributed to the OLMoE authors
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=34
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: cf6e33a103c465a648940fa237803169400a07b7c4639e1f600f6e0c33d5aa92
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: exact embedded raster extracted from PDF page 34; no redraw or semantic crop beyond the source image boundary
+    used_in:
+    - 00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-embedded-raster-extraction
+
+  - id: curated-stanford-cs336-architectures-olmoe-expert-count-ablation-fdf6502c6b92
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/olmoe-expert-count-ablation.png
+    author: Stanford CS336 staff; source plot attributed to the OLMoE authors
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=34
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: fdf6502c6b92dbbe32342057c97f998f7a7dbe03436a30382eef7d5a7cbcff08
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: exact embedded raster extracted from PDF page 34; no redraw or semantic crop beyond the source image boundary
+    used_in:
+    - 00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-embedded-raster-extraction
+
+  - id: curated-stanford-cs336-architectures-switch-load-balance-loss-451e7d7f8b11
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/switch-load-balance-loss.png
+    author: Stanford CS336 staff; equations attributed on slide to Fedus et al. 2022
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=40
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: 451e7d7f8b11438ff3d4ae69a1d8842a9ec6b695d94af1ba22f20cb7dc924963
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: exact embedded raster extracted from PDF page 40; no redraw or semantic crop beyond the source image boundary
+    used_in:
+    - 00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-embedded-raster-extraction
+
+  - id: curated-stanford-cs336-architectures-deepseek-v3-bias-routing-e4d83972304a
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/deepseek-v3-bias-routing.png
+    author: Stanford CS336 staff; equation attributed on slide to the DeepSeek-V3 authors
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=42
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: e4d83972304a8e91bc598988263429f8f38b7cb0fa62e3829b2d49b86d94c3a4
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: exact embedded raster extracted from PDF page 42; no redraw or semantic crop beyond the source image boundary
+    used_in:
+    - 00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-embedded-raster-extraction
+
+  - id: curated-stanford-cs336-architectures-olmoe-load-balance-ablation-e3a2055f2f45
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/olmoe-load-balance-ablation.png
+    author: Stanford CS336 staff; source plot attributed to the OLMoE authors
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=43
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: e3a2055f2f459866e2d2305f341fc329663a0736de912b71424b8e17135d09db
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: exact embedded raster extracted from PDF page 43; no redraw or semantic crop beyond the source image boundary
+    used_in:
+    - 00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-embedded-raster-extraction
+
+  - id: curated-stanford-cs336-architectures-latentmoe-communication-compression-11eef3b3f8fd
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/latentmoe-communication-compression.png
+    author: Stanford CS336 staff; source figure attributed to the LatentMoE authors
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=46
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: 11eef3b3f8fd49a3d42da19b79a456b20178ddd3c28b55b3403e0b9cb3a2b759
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: exact embedded raster extracted from PDF page 46; no redraw or semantic crop beyond the source image boundary
+    used_in:
+    - 00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-embedded-raster-extraction
+
+  - id: curated-stanford-cs336-architectures-moe-capacity-token-dropping-3ced1421ac76
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/moe-capacity-token-dropping.png
+    author: Stanford CS336 staff; source figure attributed to the Switch Transformer authors
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=47
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: 3ced1421ac7697e3f294921a62a3d826c69ca48b8be2a93df53635a1921a4ef1
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: exact embedded raster extracted from PDF page 47; no redraw or semantic crop beyond the source image boundary
+    used_in:
+    - 00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-embedded-raster-extraction
+
+  - id: curated-stanford-cs336-architectures-router-zloss-ablation-57d5564fea81
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/router-zloss-ablation.png
+    author: Stanford CS336 staff; source plot attributed to the OLMoE authors
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=49
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: 57d5564fea81bed0303c8d9e74410a2ffca7b76cb7fa4fdc02a6f79d3b3fa8a9
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: exact embedded raster extracted from PDF page 49; no redraw or semantic crop beyond the source image boundary
+    used_in:
+    - 00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-embedded-raster-extraction
+
+  - id: curated-stanford-cs336-architectures-moe-finetuning-parameter-ablation-2e3b3f814421
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/moe-finetuning-parameter-ablation.png
+    author: Stanford CS336 staff; source plot attributed to Zoph et al. 2022
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=50
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: 2e3b3f814421679f3cc6c0ba0c7f046cdb3a5fc0a21087f2705c3602b7cae23e
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: exact embedded raster extracted from PDF page 50; no redraw or semantic crop beyond the source image boundary
+    used_in:
+    - 00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-embedded-raster-extraction
+
+  - id: curated-stanford-cs336-architectures-sparse-upcycling-procedure-e903cd41e967
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/sparse-upcycling-procedure.png
+    author: Stanford CS336 staff; source figure attributed to the Sparse Upcycling authors
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=51
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: e903cd41e967ad3ca9836f538ac00a885402ce5b1fe25e614a26146271e722a4
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: exact embedded raster extracted from PDF page 51; no redraw or semantic crop beyond the source image boundary
+    used_in:
+    - 00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-embedded-raster-extraction
+
+  - id: curated-stanford-cs336-architectures-minicpm-moe-upcycling-results-fd551ea6358f
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/minicpm-moe-upcycling-results.png
+    author: Stanford CS336 staff; source table attributed to the MiniCPM authors
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=52
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: fd551ea6358ffbef1895c07f4d79c7b756c52ef4b2fddc1faa65831502319a2b
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: exact embedded raster extracted from PDF page 52; no redraw or semantic crop beyond the source image boundary
+    used_in:
+    - 00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-embedded-raster-extraction
+
+  - id: curated-stanford-cs336-architectures-deepseek-v1-moe-slide-c6c2ea23ea6d
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/deepseek-v1-moe-slide.png
+    author: Stanford CS336 staff; architecture attributed on slide to the DeepSeekMoE authors
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=54
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: c6c2ea23ea6d003011a06b8ee5b085f30c6eba6f5d3564f9fe86b8832529e3fa
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page 54 rendered at 180 DPI with Poppler; no crop or redraw
+    used_in:
+    - 00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-architectures-deepseek-v2-moe-slide-3f6c7b88d3a1
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/deepseek-v2-moe-slide.png
+    author: Stanford CS336 staff; architecture attributed on slide to the DeepSeek-V2 authors
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=55
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    sha256: 3f6c7b88d3a11b9b0a78894034d90847f05d25fac7a89342dac34aa616ad0a09
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page 55 rendered at 180 DPI with Poppler; no crop or redraw
+    used_in:
+    - 00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render

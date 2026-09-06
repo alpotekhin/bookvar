@@ -8,7 +8,7 @@
     "pdfimages": "26.04.0",
     "extractor_revision": "stanford-cs336-semantic-audit-v3",
     "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
-    "semantic_review_sha256": "c059b5dfe112bb6f434008ded2401020fbd58b58df6a9116ddded700608c7a49"
+    "semantic_review_sha256": "f1d0b8640da31acffac709f832db78dfc79facc2eb003ca8bb3136bf16cef134"
   },
   "raster_evidence_summary": [
     {
@@ -2111,10 +2111,9 @@
           "source_location": "Lectures/repository/lecture_04.pdf#page=10:semantic=linear-attention-recurrence"
         }
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-04",
-      "reason": "Reviewed semantic visual is preserved at exact event/page scope; canonical textbook placement remains pending.",
+      "disposition": "integrated",
+      "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md",
+      "destination_anchor": "linear-attention-recurrent-state",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -2126,11 +2125,11 @@
       "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
       "extractor_revision": "stanford-cs336-semantic-audit-v3",
       "extraction_tool": "Poppler pdftotext 26.04.0 semantic page review; pdfimages 26.04.0 raster evidence",
-      "rendered_route": "/sources/courses/stanford-cs336-spring-2026/",
-      "desktop_evidence": "pending editorial integration; source archive inspected",
-      "narrow_evidence": "pending editorial integration; source archive inspected",
-      "reviewer": "Codex source audit",
-      "checked_at": "2026-09-04",
+      "rendered_route": "/textbook/modern-llm/sequence-model-alternatives/",
+      "desktop_evidence": "Source rasters were inspected at original resolution and all referenced files resolve; full-route desktop QA remains pending because the shared build is blocked by unresolved Task 3/4 links outside this integration.",
+      "narrow_evidence": "Not yet claimed: narrow route QA must run after the shared Task 3/4 links permit a complete site build.",
+      "reviewer": "Codex Task 2 architecture integration",
+      "checked_at": "2026-09-06",
       "raster_evidence": [
         {
           "page": 6,
@@ -2180,7 +2179,230 @@
           "width": 740,
           "height": 444
         }
-      ]
+      ],
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/linear-attention-associativity-slide.png",
+      "transformation": "Complete pinned Lecture 4 pages 4, 5, 7, and 9 rendered with Poppler at 180 DPI; original p11 comparison raster also extracted without redraw.",
+      "caption": "The preserved sequence derives the associative rearrangement, its recurrent state, and the gated Mamba-2 and Gated DeltaNet updates."
+    },
+    {
+      "id": "lecture-04-visual-hybrid-sequence-models",
+      "semantic_id": "hybrid-sequence-models",
+      "visual_kind": "figure",
+      "source_object": "lecture-04",
+      "source_units": [
+        "lecture-04-hybrid-sequence-models"
+      ],
+      "source_location": "Lectures/repository/lecture_04.pdf#pages=6-11:semantic=hybrid-sequence-models",
+      "source_pages": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "question": "How do MiniMax, Nemotron, and Qwen interleave recurrent mixers with exact attention, and what do controlled ratio ablations establish?",
+      "sequence_members": [
+        {
+          "order": 1,
+          "source_location": "Lectures/repository/lecture_04.pdf#page=6:semantic=hybrid-sequence-models"
+        },
+        {
+          "order": 2,
+          "source_location": "Lectures/repository/lecture_04.pdf#page=7:semantic=hybrid-sequence-models"
+        },
+        {
+          "order": 3,
+          "source_location": "Lectures/repository/lecture_04.pdf#page=8:semantic=hybrid-sequence-models"
+        },
+        {
+          "order": 4,
+          "source_location": "Lectures/repository/lecture_04.pdf#page=9:semantic=hybrid-sequence-models"
+        },
+        {
+          "order": 5,
+          "source_location": "Lectures/repository/lecture_04.pdf#page=10:semantic=hybrid-sequence-models"
+        },
+        {
+          "order": 6,
+          "source_location": "Lectures/repository/lecture_04.pdf#page=11:semantic=hybrid-sequence-models"
+        }
+      ],
+      "disposition": "integrated",
+      "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md",
+      "destination_anchor": "hybrid-sequence-models",
+      "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
+      "rights_status": "permission-recorded",
+      "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
+      "rights_scope": "Local educational preservation and later attributed textbook reuse",
+      "license_identifier": "User permission record (not a license)",
+      "license_url": "https://cs336.stanford.edu/",
+      "rights_evidence": "User confirmed open educational reuse on 2026-09-04 for local educational preservation and later attributed textbook reuse; this is a permission record, not a named license. Explicit repository license files are preserved.",
+      "parent_sha256": "922da01cee70ed9dc9eef13d8116f1d6f45d663c12e632b3e80954c783bd3ce5",
+      "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
+      "extractor_revision": "stanford-cs336-semantic-audit-v3",
+      "extraction_tool": "Poppler pdftotext 26.04.0 semantic page review; pdfimages 26.04.0 raster evidence",
+      "rendered_route": "/textbook/modern-llm/sequence-model-alternatives/",
+      "desktop_evidence": "Source rasters were inspected at original resolution and all referenced files resolve; full-route desktop QA remains pending because the shared build is blocked by unresolved Task 3/4 links outside this integration.",
+      "narrow_evidence": "Not yet claimed: narrow route QA must run after the shared Task 3/4 links permit a complete site build.",
+      "reviewer": "Codex Task 2 architecture integration",
+      "checked_at": "2026-09-06",
+      "raster_evidence": [
+        {
+          "page": 6,
+          "number": 7,
+          "width": 1260,
+          "height": 457
+        },
+        {
+          "page": 6,
+          "number": 8,
+          "width": 541,
+          "height": 631
+        },
+        {
+          "page": 6,
+          "number": 9,
+          "width": 986,
+          "height": 109
+        },
+        {
+          "page": 7,
+          "number": 10,
+          "width": 676,
+          "height": 346
+        },
+        {
+          "page": 8,
+          "number": 12,
+          "width": 904,
+          "height": 760
+        },
+        {
+          "page": 10,
+          "number": 13,
+          "width": 535,
+          "height": 570
+        },
+        {
+          "page": 10,
+          "number": 14,
+          "width": 764,
+          "height": 430
+        },
+        {
+          "page": 10,
+          "number": 15,
+          "width": 740,
+          "height": 444
+        },
+        {
+          "page": 11,
+          "number": 16,
+          "width": 825,
+          "height": 299
+        },
+        {
+          "page": 11,
+          "number": 17,
+          "width": 766,
+          "height": 388
+        },
+        {
+          "page": 11,
+          "number": 18,
+          "width": 785,
+          "height": 485
+        },
+        {
+          "page": 11,
+          "number": 19,
+          "width": 482,
+          "height": 439
+        }
+      ],
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/minimax-hybrid-architecture.png",
+      "transformation": "Complete pinned Lecture 4 pages 6 and 10 rendered with Poppler at 180 DPI; exact p8 and p11 evidence rasters extracted without redraw.",
+      "caption": "MiniMax, Nemotron, and Qwen examples expose distinct recurrent-to-attention ratios, followed by the course's controlled long-context ratio evidence."
+    },
+    {
+      "id": "lecture-04-visual-deepseek-sparse-attention",
+      "semantic_id": "deepseek-sparse-attention",
+      "visual_kind": "derivation",
+      "source_object": "lecture-04",
+      "source_units": [
+        "lecture-04-deepseek-sparse-attention"
+      ],
+      "source_location": "Lectures/repository/lecture_04.pdf#pages=12-13:semantic=deepseek-sparse-attention",
+      "source_pages": [
+        12,
+        13
+      ],
+      "question": "How does the lightning indexer score all prior positions and select a content-dependent top-k subset for exact sparse attention?",
+      "sequence_members": [
+        {
+          "order": 1,
+          "source_location": "Lectures/repository/lecture_04.pdf#page=12:semantic=deepseek-sparse-attention"
+        },
+        {
+          "order": 2,
+          "source_location": "Lectures/repository/lecture_04.pdf#page=13:semantic=deepseek-sparse-attention"
+        }
+      ],
+      "disposition": "integrated",
+      "destination": "00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md",
+      "destination_anchor": "dsa-content-adaptive-selection",
+      "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
+      "rights_status": "permission-recorded",
+      "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
+      "rights_scope": "Local educational preservation and later attributed textbook reuse",
+      "license_identifier": "User permission record (not a license)",
+      "license_url": "https://cs336.stanford.edu/",
+      "rights_evidence": "User confirmed open educational reuse on 2026-09-04 for local educational preservation and later attributed textbook reuse; this is a permission record, not a named license. Explicit repository license files are preserved.",
+      "parent_sha256": "922da01cee70ed9dc9eef13d8116f1d6f45d663c12e632b3e80954c783bd3ce5",
+      "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
+      "extractor_revision": "stanford-cs336-semantic-audit-v3",
+      "extraction_tool": "Poppler pdftotext 26.04.0 semantic page review; pdfimages 26.04.0 raster evidence",
+      "rendered_route": "/textbook/modern-llm/long-context/",
+      "desktop_evidence": "The exact 1104x635 DSA raster was inspected at original resolution and the chapter reference resolves; full-route desktop QA remains pending because the shared build is blocked by unresolved Task 3/4 links.",
+      "narrow_evidence": "Not yet claimed: narrow route QA must run after the shared Task 3/4 links permit a complete site build.",
+      "reviewer": "Codex Task 2 architecture integration",
+      "checked_at": "2026-09-06",
+      "raster_evidence": [
+        {
+          "page": 12,
+          "number": 20,
+          "width": 1104,
+          "height": 635
+        },
+        {
+          "page": 13,
+          "number": 21,
+          "width": 859,
+          "height": 476
+        },
+        {
+          "page": 13,
+          "number": 22,
+          "width": 1049,
+          "height": 424
+        },
+        {
+          "page": 13,
+          "number": 23,
+          "width": 1030,
+          "height": 576
+        },
+        {
+          "page": 13,
+          "number": 24,
+          "width": 954,
+          "height": 212
+        }
+      ],
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/dsa-lightning-indexer.png",
+      "transformation": "Exact embedded raster extracted from pinned Lecture 4 page 12; no redraw or semantic crop beyond the source image boundary.",
+      "caption": "The two-stage figure separates the lightweight all-position indexer from exact attention over the selected top-k KV entries."
     },
     {
       "id": "lecture-04-visual-moe-routing",
@@ -2241,10 +2463,9 @@
           "source_location": "Lectures/repository/lecture_04.pdf#page=35:semantic=moe-routing"
         }
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-04",
-      "reason": "Reviewed semantic visual is preserved at exact event/page scope; canonical textbook placement remains pending.",
+      "disposition": "integrated",
+      "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+      "destination_anchor": "moe-routing-mechanisms",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -2256,11 +2477,11 @@
       "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
       "extractor_revision": "stanford-cs336-semantic-audit-v3",
       "extraction_tool": "Poppler pdftotext 26.04.0 semantic page review; pdfimages 26.04.0 raster evidence",
-      "rendered_route": "/sources/courses/stanford-cs336-spring-2026/",
-      "desktop_evidence": "pending editorial integration; source archive inspected",
-      "narrow_evidence": "pending editorial integration; source archive inspected",
-      "reviewer": "Codex source audit",
-      "checked_at": "2026-09-04",
+      "rendered_route": "/textbook/moe/mixture-of-experts/",
+      "desktop_evidence": "Source rasters were inspected at original resolution and all referenced files resolve; full-route desktop QA remains pending because the shared build is blocked by unresolved Task 3/4 links outside this integration.",
+      "narrow_evidence": "Not yet claimed: narrow route QA must run after the shared Task 3/4 links permit a complete site build.",
+      "reviewer": "Codex Task 2 architecture integration",
+      "checked_at": "2026-09-06",
       "raster_evidence": [
         {
           "page": 27,
@@ -2328,96 +2549,48 @@
           "width": 963,
           "height": 253
         }
-      ]
+      ],
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/moe-routing-families.png",
+      "transformation": "Exact embedded rasters from pinned Lecture 4 pages 27, 31, and 32 extracted without redraw; the routing family diagram is the representative file.",
+      "caption": "The sequence contrasts token-, expert-, and globally chosen assignments before deriving top-k gates and fine-grained shared-expert routing."
     },
     {
-      "id": "lecture-04-visual-moe-training-failures",
-      "semantic_id": "moe-training-failures",
+      "id": "lecture-04-visual-moe-discrete-routing-training",
+      "semantic_id": "moe-discrete-routing-training",
       "visual_kind": "figure",
       "source_object": "lecture-04",
       "source_units": [
-        "lecture-04-moe-training-failures"
+        "lecture-04-moe-discrete-routing-training"
       ],
-      "source_location": "Lectures/repository/lecture_04.pdf#pages=36-49:semantic=moe-training-failures",
+      "source_location": "Lectures/repository/lecture_04.pdf#pages=36-39:semantic=moe-discrete-routing-training",
       "source_pages": [
         36,
         37,
         38,
-        39,
-        40,
-        41,
-        42,
-        43,
-        44,
-        45,
-        46,
-        47,
-        48,
-        49
+        39
       ],
-      "question": "How do stochastic routing, auxiliary losses, and router bias address imbalance and instability?",
+      "question": "How do REINFORCE, noisy gates, and multiplicative jitter approximate gradients or make discrete routes less brittle?",
       "sequence_members": [
         {
           "order": 1,
-          "source_location": "Lectures/repository/lecture_04.pdf#page=36:semantic=moe-training-failures"
+          "source_location": "Lectures/repository/lecture_04.pdf#page=36:semantic=moe-discrete-routing-training"
         },
         {
           "order": 2,
-          "source_location": "Lectures/repository/lecture_04.pdf#page=37:semantic=moe-training-failures"
+          "source_location": "Lectures/repository/lecture_04.pdf#page=37:semantic=moe-discrete-routing-training"
         },
         {
           "order": 3,
-          "source_location": "Lectures/repository/lecture_04.pdf#page=38:semantic=moe-training-failures"
+          "source_location": "Lectures/repository/lecture_04.pdf#page=38:semantic=moe-discrete-routing-training"
         },
         {
           "order": 4,
-          "source_location": "Lectures/repository/lecture_04.pdf#page=39:semantic=moe-training-failures"
-        },
-        {
-          "order": 5,
-          "source_location": "Lectures/repository/lecture_04.pdf#page=40:semantic=moe-training-failures"
-        },
-        {
-          "order": 6,
-          "source_location": "Lectures/repository/lecture_04.pdf#page=41:semantic=moe-training-failures"
-        },
-        {
-          "order": 7,
-          "source_location": "Lectures/repository/lecture_04.pdf#page=42:semantic=moe-training-failures"
-        },
-        {
-          "order": 8,
-          "source_location": "Lectures/repository/lecture_04.pdf#page=43:semantic=moe-training-failures"
-        },
-        {
-          "order": 9,
-          "source_location": "Lectures/repository/lecture_04.pdf#page=44:semantic=moe-training-failures"
-        },
-        {
-          "order": 10,
-          "source_location": "Lectures/repository/lecture_04.pdf#page=45:semantic=moe-training-failures"
-        },
-        {
-          "order": 11,
-          "source_location": "Lectures/repository/lecture_04.pdf#page=46:semantic=moe-training-failures"
-        },
-        {
-          "order": 12,
-          "source_location": "Lectures/repository/lecture_04.pdf#page=47:semantic=moe-training-failures"
-        },
-        {
-          "order": 13,
-          "source_location": "Lectures/repository/lecture_04.pdf#page=48:semantic=moe-training-failures"
-        },
-        {
-          "order": 14,
-          "source_location": "Lectures/repository/lecture_04.pdf#page=49:semantic=moe-training-failures"
+          "source_location": "Lectures/repository/lecture_04.pdf#page=39:semantic=moe-discrete-routing-training"
         }
       ],
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-04",
-      "reason": "Reviewed semantic visual is preserved at exact event/page scope; canonical textbook placement remains pending.",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -2458,7 +2631,65 @@
           "number": 63,
           "width": 583,
           "height": 155
+        }
+      ],
+      "reason": "The exact REINFORCE and stochastic-gating sequence remains in the pinned pages 36-39; the chapter integrates its conclusions in prose without duplicating lower-value screenshots.",
+      "evidence": "Lectures/repository/lecture_04.pdf#pages=36-39:semantic=moe-discrete-routing-training; question reviewed: How do REINFORCE, noisy gates, and multiplicative jitter approximate gradients or make discrete routes less brittle?"
+    },
+    {
+      "id": "lecture-04-visual-moe-load-balancing",
+      "semantic_id": "moe-load-balancing",
+      "visual_kind": "derivation",
+      "source_object": "lecture-04",
+      "source_units": [
+        "lecture-04-moe-load-balancing"
+      ],
+      "source_location": "Lectures/repository/lecture_04.pdf#pages=40-43:semantic=moe-load-balancing",
+      "source_pages": [
+        40,
+        41,
+        42,
+        43
+      ],
+      "question": "How do expert-level auxiliary losses, device aggregation, and DeepSeek-V3 bias updates change routing load?",
+      "sequence_members": [
+        {
+          "order": 1,
+          "source_location": "Lectures/repository/lecture_04.pdf#page=40:semantic=moe-load-balancing"
         },
+        {
+          "order": 2,
+          "source_location": "Lectures/repository/lecture_04.pdf#page=41:semantic=moe-load-balancing"
+        },
+        {
+          "order": 3,
+          "source_location": "Lectures/repository/lecture_04.pdf#page=42:semantic=moe-load-balancing"
+        },
+        {
+          "order": 4,
+          "source_location": "Lectures/repository/lecture_04.pdf#page=43:semantic=moe-load-balancing"
+        }
+      ],
+      "disposition": "integrated",
+      "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+      "destination_anchor": "moe-load-balancing",
+      "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
+      "rights_status": "permission-recorded",
+      "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
+      "rights_scope": "Local educational preservation and later attributed textbook reuse",
+      "license_identifier": "User permission record (not a license)",
+      "license_url": "https://cs336.stanford.edu/",
+      "rights_evidence": "User confirmed open educational reuse on 2026-09-04 for local educational preservation and later attributed textbook reuse; this is a permission record, not a named license. Explicit repository license files are preserved.",
+      "parent_sha256": "922da01cee70ed9dc9eef13d8116f1d6f45d663c12e632b3e80954c783bd3ce5",
+      "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
+      "extractor_revision": "stanford-cs336-semantic-audit-v3",
+      "extraction_tool": "Poppler pdftotext 26.04.0 semantic page review; pdfimages 26.04.0 raster evidence",
+      "rendered_route": "/textbook/moe/mixture-of-experts/",
+      "desktop_evidence": "Source rasters were inspected at original resolution and all referenced files resolve; full-route desktop QA remains pending because the shared build is blocked by unresolved Task 3/4 links outside this integration.",
+      "narrow_evidence": "Not yet claimed: narrow route QA must run after the shared Task 3/4 links permit a complete site build.",
+      "reviewer": "Codex Task 2 architecture integration",
+      "checked_at": "2026-09-06",
+      "raster_evidence": [
         {
           "page": 40,
           "number": 64,
@@ -2494,7 +2725,66 @@
           "number": 69,
           "width": 963,
           "height": 754
+        }
+      ],
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/switch-load-balance-loss.png",
+      "transformation": "Exact embedded rasters from pinned Lecture 4 pages 40, 42, and 43 extracted without redraw; the Switch balance derivation is the representative file.",
+      "caption": "The sequence connects the Switch auxiliary objective, DeepSeek-V3 selection bias, and OLMoE's no-balance-loss ablation."
+    },
+    {
+      "id": "lecture-04-visual-moe-systems-capacity",
+      "semantic_id": "moe-systems-capacity",
+      "visual_kind": "figure",
+      "source_object": "lecture-04",
+      "source_units": [
+        "lecture-04-moe-systems-capacity"
+      ],
+      "source_location": "Lectures/repository/lecture_04.pdf#pages=44-47:semantic=moe-systems-capacity",
+      "source_pages": [
+        44,
+        45,
+        46,
+        47
+      ],
+      "question": "Where do expert-parallel communication, latent down-projection, fixed capacity, and batch-dependent token dropping enter the MoE data path?",
+      "sequence_members": [
+        {
+          "order": 1,
+          "source_location": "Lectures/repository/lecture_04.pdf#page=44:semantic=moe-systems-capacity"
         },
+        {
+          "order": 2,
+          "source_location": "Lectures/repository/lecture_04.pdf#page=45:semantic=moe-systems-capacity"
+        },
+        {
+          "order": 3,
+          "source_location": "Lectures/repository/lecture_04.pdf#page=46:semantic=moe-systems-capacity"
+        },
+        {
+          "order": 4,
+          "source_location": "Lectures/repository/lecture_04.pdf#page=47:semantic=moe-systems-capacity"
+        }
+      ],
+      "disposition": "integrated",
+      "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+      "destination_anchor": "moe-systems-capacity",
+      "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
+      "rights_status": "permission-recorded",
+      "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
+      "rights_scope": "Local educational preservation and later attributed textbook reuse",
+      "license_identifier": "User permission record (not a license)",
+      "license_url": "https://cs336.stanford.edu/",
+      "rights_evidence": "User confirmed open educational reuse on 2026-09-04 for local educational preservation and later attributed textbook reuse; this is a permission record, not a named license. Explicit repository license files are preserved.",
+      "parent_sha256": "922da01cee70ed9dc9eef13d8116f1d6f45d663c12e632b3e80954c783bd3ce5",
+      "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
+      "extractor_revision": "stanford-cs336-semantic-audit-v3",
+      "extraction_tool": "Poppler pdftotext 26.04.0 semantic page review; pdfimages 26.04.0 raster evidence",
+      "rendered_route": "/textbook/moe/mixture-of-experts/",
+      "desktop_evidence": "Source rasters were inspected at original resolution and all referenced files resolve; full-route desktop QA remains pending because the shared build is blocked by unresolved Task 3/4 links outside this integration.",
+      "narrow_evidence": "Not yet claimed: narrow route QA must run after the shared Task 3/4 links permit a complete site build.",
+      "reviewer": "Codex Task 2 architecture integration",
+      "checked_at": "2026-09-06",
+      "raster_evidence": [
         {
           "page": 44,
           "number": 70,
@@ -2524,7 +2814,61 @@
           "number": 74,
           "width": 1560,
           "height": 499
+        }
+      ],
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/latentmoe-communication-compression.png",
+      "transformation": "Exact embedded rasters from pinned Lecture 4 pages 46 and 47 extracted without redraw; the LatentMoE architecture is the representative file.",
+      "caption": "The paired systems evidence separates communication compression from fixed-capacity permutation and batch-dependent token dropping."
+    },
+    {
+      "id": "lecture-04-visual-moe-stability-finetuning",
+      "semantic_id": "moe-stability-finetuning",
+      "visual_kind": "experiment",
+      "source_object": "lecture-04",
+      "source_units": [
+        "lecture-04-moe-stability-finetuning"
+      ],
+      "source_location": "Lectures/repository/lecture_04.pdf#pages=48-50:semantic=moe-stability-finetuning",
+      "source_pages": [
+        48,
+        49,
+        50
+      ],
+      "question": "What do router precision, z-loss, and parameter-freezing experiments establish about stability and fine-tuning?",
+      "sequence_members": [
+        {
+          "order": 1,
+          "source_location": "Lectures/repository/lecture_04.pdf#page=48:semantic=moe-stability-finetuning"
         },
+        {
+          "order": 2,
+          "source_location": "Lectures/repository/lecture_04.pdf#page=49:semantic=moe-stability-finetuning"
+        },
+        {
+          "order": 3,
+          "source_location": "Lectures/repository/lecture_04.pdf#page=50:semantic=moe-stability-finetuning"
+        }
+      ],
+      "disposition": "integrated",
+      "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+      "destination_anchor": "moe-stability-finetuning",
+      "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
+      "rights_status": "permission-recorded",
+      "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
+      "rights_scope": "Local educational preservation and later attributed textbook reuse",
+      "license_identifier": "User permission record (not a license)",
+      "license_url": "https://cs336.stanford.edu/",
+      "rights_evidence": "User confirmed open educational reuse on 2026-09-04 for local educational preservation and later attributed textbook reuse; this is a permission record, not a named license. Explicit repository license files are preserved.",
+      "parent_sha256": "922da01cee70ed9dc9eef13d8116f1d6f45d663c12e632b3e80954c783bd3ce5",
+      "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
+      "extractor_revision": "stanford-cs336-semantic-audit-v3",
+      "extraction_tool": "Poppler pdftotext 26.04.0 semantic page review; pdfimages 26.04.0 raster evidence",
+      "rendered_route": "/textbook/moe/mixture-of-experts/",
+      "desktop_evidence": "Source rasters were inspected at original resolution and all referenced files resolve; full-route desktop QA remains pending because the shared build is blocked by unresolved Task 3/4 links outside this integration.",
+      "narrow_evidence": "Not yet claimed: narrow route QA must run after the shared Task 3/4 links permit a complete site build.",
+      "reviewer": "Codex Task 2 architecture integration",
+      "checked_at": "2026-09-06",
+      "raster_evidence": [
         {
           "page": 48,
           "number": 75,
@@ -2548,57 +2892,62 @@
           "number": 78,
           "width": 963,
           "height": 353
+        },
+        {
+          "page": 50,
+          "number": 79,
+          "width": 507,
+          "height": 385
+        },
+        {
+          "page": 50,
+          "number": 80,
+          "width": 438,
+          "height": 368
+        },
+        {
+          "page": 50,
+          "number": 81,
+          "width": 1121,
+          "height": 174
         }
-      ]
+      ],
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/router-zloss-ablation.png",
+      "transformation": "Exact embedded rasters from pinned Lecture 4 pages 49 and 50 extracted without redraw; the z-loss ablation is the representative file and the sequence explicitly includes the page-50 fine-tuning parameter ablation.",
+      "caption": "The two figures distinguish numerical router stabilization from the separate choice of which dense or sparse parameters to update during fine-tuning."
     },
     {
-      "id": "lecture-04-visual-deepseek-moe-case",
-      "semantic_id": "deepseek-moe-case",
+      "id": "lecture-04-visual-deepseek-moe",
+      "semantic_id": "deepseek-moe",
       "visual_kind": "figure",
       "source_object": "lecture-04",
       "source_units": [
-        "lecture-04-deepseek-moe-case"
+        "lecture-04-deepseek-moe"
       ],
-      "source_location": "Lectures/repository/lecture_04.pdf#pages=54-59:semantic=deepseek-moe-case",
+      "source_location": "Lectures/repository/lecture_04.pdf#pages=54-56:semantic=deepseek-moe",
       "source_pages": [
         54,
         55,
-        56,
-        57,
-        58,
-        59
+        56
       ],
-      "question": "Which architectural changes accumulate from DeepSeek MoE v1 through v3, MLA, and MTP?",
+      "question": "Which routing, expert-granularity, device-selection, and balancing changes accumulate from DeepSeek MoE v1 through v3?",
       "sequence_members": [
         {
           "order": 1,
-          "source_location": "Lectures/repository/lecture_04.pdf#page=54:semantic=deepseek-moe-case"
+          "source_location": "Lectures/repository/lecture_04.pdf#page=54:semantic=deepseek-moe"
         },
         {
           "order": 2,
-          "source_location": "Lectures/repository/lecture_04.pdf#page=55:semantic=deepseek-moe-case"
+          "source_location": "Lectures/repository/lecture_04.pdf#page=55:semantic=deepseek-moe"
         },
         {
           "order": 3,
-          "source_location": "Lectures/repository/lecture_04.pdf#page=56:semantic=deepseek-moe-case"
-        },
-        {
-          "order": 4,
-          "source_location": "Lectures/repository/lecture_04.pdf#page=57:semantic=deepseek-moe-case"
-        },
-        {
-          "order": 5,
-          "source_location": "Lectures/repository/lecture_04.pdf#page=58:semantic=deepseek-moe-case"
-        },
-        {
-          "order": 6,
-          "source_location": "Lectures/repository/lecture_04.pdf#page=59:semantic=deepseek-moe-case"
+          "source_location": "Lectures/repository/lecture_04.pdf#page=56:semantic=deepseek-moe"
         }
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-04",
-      "reason": "Reviewed semantic visual is preserved at exact event/page scope; canonical textbook placement remains pending.",
+      "disposition": "integrated",
+      "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+      "destination_anchor": "deepseek-moe-evolution",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -2610,11 +2959,11 @@
       "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
       "extractor_revision": "stanford-cs336-semantic-audit-v3",
       "extraction_tool": "Poppler pdftotext 26.04.0 semantic page review; pdfimages 26.04.0 raster evidence",
-      "rendered_route": "/sources/courses/stanford-cs336-spring-2026/",
-      "desktop_evidence": "pending editorial integration; source archive inspected",
-      "narrow_evidence": "pending editorial integration; source archive inspected",
-      "reviewer": "Codex source audit",
-      "checked_at": "2026-09-04",
+      "rendered_route": "/textbook/moe/mixture-of-experts/",
+      "desktop_evidence": "Both 1800x1014 source slides were inspected at original resolution and their chapter references resolve; full-route desktop QA remains pending because the shared build is blocked by unresolved Task 3/4 links.",
+      "narrow_evidence": "Not yet claimed: narrow route QA must run after the shared Task 3/4 links permit a complete site build.",
+      "reviewer": "Codex Task 2 architecture integration",
+      "checked_at": "2026-09-06",
       "raster_evidence": [
         {
           "page": 54,
@@ -2669,7 +3018,56 @@
           "number": 95,
           "width": 601,
           "height": 92
+        }
+      ],
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/deepseek-v1-moe-slide.png",
+      "transformation": "Complete pinned Lecture 4 pages 54 and 55 rendered with Poppler at 180 DPI. Page 56 is deliberately not published because its V2 title and 258-expert wording conflict with the primary DeepSeek-V3 report.",
+      "caption": "The first two slides preserve the move from fine-grained shared experts to topology-aware routing; V3 counts and balancing are corrected from the primary report in prose."
+    },
+    {
+      "id": "lecture-04-visual-deepseek-mla",
+      "semantic_id": "deepseek-mla",
+      "visual_kind": "derivation",
+      "source_object": "lecture-04",
+      "source_units": [
+        "lecture-04-deepseek-mla"
+      ],
+      "source_location": "Lectures/repository/lecture_04.pdf#pages=57-58:semantic=deepseek-mla",
+      "source_pages": [
+        57,
+        58
+      ],
+      "question": "Which query, key, and value projections can be absorbed so that the latent activation becomes the persistent KV-cache state?",
+      "sequence_members": [
+        {
+          "order": 1,
+          "source_location": "Lectures/repository/lecture_04.pdf#page=57:semantic=deepseek-mla"
         },
+        {
+          "order": 2,
+          "source_location": "Lectures/repository/lecture_04.pdf#page=58:semantic=deepseek-mla"
+        }
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
+      "destination_anchor": "lecture-04",
+      "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
+      "rights_status": "permission-recorded",
+      "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
+      "rights_scope": "Local educational preservation and later attributed textbook reuse",
+      "license_identifier": "User permission record (not a license)",
+      "license_url": "https://cs336.stanford.edu/",
+      "rights_evidence": "User confirmed open educational reuse on 2026-09-04 for local educational preservation and later attributed textbook reuse; this is a permission record, not a named license. Explicit repository license files are preserved.",
+      "parent_sha256": "922da01cee70ed9dc9eef13d8116f1d6f45d663c12e632b3e80954c783bd3ce5",
+      "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
+      "extractor_revision": "stanford-cs336-semantic-audit-v3",
+      "extraction_tool": "Poppler pdftotext 26.04.0 semantic page review; pdfimages 26.04.0 raster evidence",
+      "rendered_route": "/sources/courses/stanford-cs336-spring-2026/",
+      "desktop_evidence": "pending editorial integration; source archive inspected",
+      "narrow_evidence": "pending editorial integration; source archive inspected",
+      "reviewer": "Codex source audit",
+      "checked_at": "2026-09-04",
+      "raster_evidence": [
         {
           "page": 57,
           "number": 96,
@@ -2693,7 +3091,50 @@
           "number": 99,
           "width": 177,
           "height": 109
-        },
+        }
+      ],
+      "reason": "The Lecture 4 pages 57-58 derivation is preserved in the pinned PDF; the canonical MLA chapter already uses higher-resolution primary-paper diagrams for the same absorption and decoupled-RoPE mechanism.",
+      "evidence": "Lectures/repository/lecture_04.pdf#pages=57-58:semantic=deepseek-mla; question reviewed: Which projections can be absorbed so that the latent activation becomes persistent KV-cache state?"
+    },
+    {
+      "id": "lecture-04-visual-deepseek-mtp",
+      "semantic_id": "deepseek-mtp",
+      "visual_kind": "figure",
+      "source_object": "lecture-04",
+      "source_units": [
+        "lecture-04-deepseek-mtp"
+      ],
+      "source_location": "Lectures/repository/lecture_04.pdf#page=59:semantic=deepseek-mtp",
+      "source_pages": [
+        59
+      ],
+      "question": "Where does the auxiliary next-next-token prediction module attach during DeepSeek-V3 training?",
+      "sequence_members": [
+        {
+          "order": 1,
+          "source_location": "Lectures/repository/lecture_04.pdf#page=59:semantic=deepseek-mtp"
+        }
+      ],
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
+      "destination_anchor": "lecture-04",
+      "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
+      "rights_status": "permission-recorded",
+      "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
+      "rights_scope": "Local educational preservation and later attributed textbook reuse",
+      "license_identifier": "User permission record (not a license)",
+      "license_url": "https://cs336.stanford.edu/",
+      "rights_evidence": "User confirmed open educational reuse on 2026-09-04 for local educational preservation and later attributed textbook reuse; this is a permission record, not a named license. Explicit repository license files are preserved.",
+      "parent_sha256": "922da01cee70ed9dc9eef13d8116f1d6f45d663c12e632b3e80954c783bd3ce5",
+      "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
+      "extractor_revision": "stanford-cs336-semantic-audit-v3",
+      "extraction_tool": "Poppler pdftotext 26.04.0 semantic page review; pdfimages 26.04.0 raster evidence",
+      "rendered_route": "/sources/courses/stanford-cs336-spring-2026/",
+      "desktop_evidence": "pending editorial integration; source archive inspected",
+      "narrow_evidence": "pending editorial integration; source archive inspected",
+      "reviewer": "Codex source audit",
+      "checked_at": "2026-09-04",
+      "raster_evidence": [
         {
           "page": 59,
           "number": 100,
@@ -2724,7 +3165,9 @@
           "width": 596,
           "height": 50
         }
-      ]
+      ],
+      "reason": "The exact page is preserved for a later training-objective integration; reproducing it in the MoE chapter would incorrectly present MTP as part of expert routing.",
+      "evidence": "Lectures/repository/lecture_04.pdf#page=59:semantic=deepseek-mtp; question reviewed: Where does the auxiliary next-next-token prediction module attach during DeepSeek-V3 training?"
     },
     {
       "id": "lecture-05-visual-gpu-anatomy",
@@ -15542,5 +15985,5 @@
       "raster_evidence": []
     }
   ],
-  "editorial_overlay_sha256": "f94beffae756013fafcb1d0534bd0239fdf0f030bd540b4e20908fca98d82aef"
+  "editorial_overlay_sha256": "0244577603f9d2c17aa4361ff58e307b9b80e88111821d518403cab728b5f936"
 }

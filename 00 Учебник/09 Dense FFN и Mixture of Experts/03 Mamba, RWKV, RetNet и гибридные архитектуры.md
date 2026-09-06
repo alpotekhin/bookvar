@@ -2,14 +2,24 @@
 title: Mamba, RWKV, RetNet и гибридные архитектуры
 type: textbook-chapter
 status: canonical
-last_updated: 2026-07-20
+last_updated: 2026-09-06
+source_unit_id:
+  - lecture-04-attention-alternatives-overview
+  - lecture-04-linear-attention-recurrence
+  - lecture-04-hybrid-sequence-models
 primary_sources:
   - https://arxiv.org/abs/2312.00752
+  - https://arxiv.org/abs/2405.21060
+  - https://arxiv.org/abs/2412.06464
   - https://arxiv.org/abs/2305.13048
   - https://arxiv.org/abs/2307.08621
   - https://arxiv.org/abs/2403.19887
+  - https://arxiv.org/abs/2501.08313
+  - https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Instruct
+  - https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-FP8
 ---
 
+<a id="attention-alternatives-overview"></a>
 # Mamba, RWKV, RetNet и гибриды: последовательность без полного attention
 
 Transformer обучает все позиции параллельно, но dense attention строит
@@ -17,6 +27,65 @@ $T\times T$ взаимодействий и хранит растущий KV-cac
 фиксированным состоянием, но наивная recurrence последовательна и плохо обучается
 на длинных зависимостях. Mamba, RWKV и RetNet ищут разные точки между этими
 полюсами: **параллельное обучение, рекуррентный вывод и линейный рост по длине**.
+
+<a id="linear-attention-recurrent-state"></a>
+## Linear attention: когда матрицу истории можно свернуть в состояние
+
+В полном внимании сначала строится матрица попарных оценок $QK^\top$, а затем ею
+смешиваются значения $V$. Если убрать softmax и другие нелинейные преобразования
+оценок, скобки можно переставить:
+
+$$
+(QK^\top)V=Q(K^\top V).
+$$
+
+Левая запись требует сначала получить матрицу размера $T\times T$; правая
+сначала сводит всю последовательность в матрицу $K^\top V$ размера
+$d_k\times d_v$. При фиксированных $d_k$ и $d_v$ число операций и объём
+промежуточной памяти растут линейно с длиной последовательности. Это и есть
+алгебраический переход, из которого начинается linear attention.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/linear-attention-associativity-slide.png]]
+
+*Перестановка скобок устраняет матрицу $T\times T$, только когда преобразование
+между $QK^\top$ и $V$ допускает такую ассоциативность. Полный слайд без
+перерисовки: Tatsunori Hashimoto, Stanford CS336 Spring 2026,
+[Lecture 4, p. 4](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=4).*
+
+Для причинной модели правая запись превращается в накопление состояния:
+
+$$
+S_t=S_{t-1}+k_tv_t^\top,
+\qquad
+y_t=q_t^\top S_t.
+$$
+
+На обучении все позиции можно вычислять блочно или параллельным сканированием;
+при генерации достаточно обновить $S_t$ одним внешним произведением. Размер
+состояния не зависит от числа уже прочитанных токенов. Однако прошлое теперь
+нельзя адресовать как список отдельных позиций: вся история сжата в одну
+матрицу, и разные записи способны мешать друг другу.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/linear-attention-recurrent-slide.png]]
+
+*Один и тот же линейный оператор можно записать как параллельное матричное
+вычисление или как рекуррентное обновление состояния. Полный слайд без
+перерисовки: Stanford CS336 Spring 2026,
+[Lecture 4, p. 5](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=5).*
+
+Эта тождественность **не превращает обычное softmax attention в линейное**:
+$\operatorname{softmax}(QK^\top)$ нельзя перенести внутрь $K^\top V$. В
+kernelized linear attention softmax заменяют выражением через отображение
+признаков $\phi$ и обычно ведут ещё одно состояние-нормализатор:
+
+$$
+y_t=
+\frac{\phi(q_t)^\top\sum_{s\le t}\phi(k_s)v_s^\top}
+     {\phi(q_t)^\top\sum_{s\le t}\phi(k_s)}.
+$$
+
+Линейная стоимость достигается ценой другого оператора внимания, а не более
+быстрого точного вычисления прежнего softmax.
 
 ## State space model: динамика скрытого состояния
 
@@ -73,6 +142,78 @@ HBM. «Линейная сложность» сама по себе не гар�
 буфер локальной свёртки; кэш не растёт с $T$. Но состояние — это сжатое и
 необратимое описание прошлого: прямой
 адресации к токену 50 тысяч шагов назад нет.
+
+### Mamba-2 и Structured State Space Duality
+
+Mamba-2 связывает рекуррентные модели и attention через **structured state
+space duality (SSD)**. В упрощённой записи одного канала переход имеет вид
+
+$$
+S_t=\gamma_tS_{t-1}+k_tv_t^\top,
+\qquad
+y_t=q_t^\top S_t+D\odot v_t.
+$$
+
+Коэффициент $\gamma_t$, вычисляемый из текущего входа, решает, сколько старого
+состояния перенести дальше; внешнее произведение $k_tv_t^\top$ записывает новую
+информацию; $D\odot v_t$ создаёт короткий путь от входа к выходу. Особая
+скалярная структура перехода делает матрицу взаимодействий полусепарабельной.
+Поэтому один и тот же слой допускает рекуррентное вычисление по одному токену и
+эффективный блочный алгоритм для обучения.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/mamba2-state-update-slide.png]]
+
+*Слайд помещает Mamba-2 на ту же ось, что и linear attention: различие находится
+в управляемом входом затухании состояния и прямой ветви $D$. Полный слайд без
+перерисовки: Stanford CS336 Spring 2026,
+[Lecture 4, p. 7](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=7). Первичный источник:
+[Transformers are SSMs](https://arxiv.org/abs/2405.21060).*
+
+Практический результат SSD не сводится к асимптотике. Параметризация Mamba-2
+лучше раскладывается на крупные матричные операции и по осям тензорного
+параллелизма; в статье сообщается ускорение ядра Mamba-2 относительно Mamba-1 в
+2–8 раз для исследованных конфигураций. Это результат конкретной реализации, а
+не обещание такого же ускорения всей языковой модели.
+
+### Gated DeltaNet: забыть старое и стереть конфликтующее
+
+Простое затухание умножает всё состояние на один коэффициент. Оно умеет быстро
+забывать, но не умеет заменить запись, связанную с конкретным ключом. Delta rule
+сначала вычитает из состояния компоненту в направлении текущего ключа, а затем
+записывает новое значение:
+
+$$
+S_t=\gamma_t(I-\beta_tk_tk_t^\top)S_{t-1}
+    +\beta_tk_tv_t^\top,
+\qquad
+y_t=q_t^\top S_t.
+$$
+
+$\gamma_t$ отвечает за общее затухание памяти. $\beta_t$ управляет точечной
+правкой: при $\beta_t=0$ запись не меняется, а при большем значении прежнее
+содержимое по направлению $k_t$ сильнее стирается и заменяется новым. Тем самым
+Gated DeltaNet объединяет два независимых действия — забывание всей истории и
+исправление конкретной ассоциации.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/gated-deltanet-state-update-slide.png]]
+
+*На слайде строка Mamba-2 и строка Gated DeltaNet различаются именно оператором
+точечного стирания $(I-\beta_tk_tk_t^\top)$. Полный слайд без перерисовки:
+Stanford CS336 Spring 2026,
+[Lecture 4, p. 9](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=9). Первичный источник:
+[Gated Delta Networks](https://arxiv.org/abs/2412.06464).*
+
+Состояние по-прежнему имеет фиксированный размер: метод не выбирает прошлые
+токены из KV-кэша и не является разреженным поиском. Это различие важно при
+длинном контексте. Gated DeltaNet может обновить ассоциацию в сжатой памяти, но
+не может позже обратиться к произвольной исходной позиции с точностью полного
+attention.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/recurrent-update-rule-comparison.png]]
+
+*Сравнение правил обновления показывает общую матричную память linear attention,
+Mamba-2, RetNet и семейства delta rule. Источник изображения: Stanford CS336
+Spring 2026, [Lecture 4, p. 11](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=11); в слайде сохранена таблица из обзора гибридных линейных моделей.*
 
 ## RWKV: attention-подобное смешивание как recurrence
 
@@ -137,6 +278,7 @@ $$
 семантика совмещается с параллельным обучением. Однако не всякая нелинейная RNN допускает удобный
 ассоциативный оператор.
 
+<a id="hybrid-sequence-models"></a>
 ## Почему гибриды возвращают attention
 
 Слои с пространством состояний хорошо переносят локальное и накопленное
@@ -156,6 +298,64 @@ Figure 1. Официальный repo [ai21labs/Jamba](https://github.com/ai21la
 растущего KV-кэша только для слоёв attention. Если attention стоит раз в $r$ слоёв,
 KV-cache приблизительно уменьшается в $r$ раз относительно fully-attentional
 модели той же глубины, но не исчезает.
+
+### Три современных варианта чередования слоёв
+
+Гибриды различаются не только названием рекуррентного блока, но и тем, как часто
+модель возвращается к точной адресации прошлого.
+
+**MiniMax-Text-01 и MiniMax-M1.** В каждой группе из восьми слоёв семь используют
+Lightning Attention, а восьмой — полное softmax attention. Поэтому растущий
+KV-кэш нужен лишь для одной восьмой слоёв внимания; рекуррентные слои несут
+основную последовательностную работу. Такая пропорция 7:1 — свойство конкретной
+архитектуры, а не общая рекомендация.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/minimax-hybrid-architecture.png]]
+
+*Схема MiniMax-01 показывает чередование Lightning Attention и полного
+attention. Источник изображения: Stanford CS336 Spring 2026,
+[Lecture 4, p. 6](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=6), по материалам
+[MiniMax-01](https://arxiv.org/abs/2501.08313).*
+
+**Nemotron 3 Nano.** Официальная карточка перечисляет 52 слоя: 23 слоя Mamba-2,
+23 MoE-слоя и 6 слоёв GQA. Если сравнивать только способы смешивания токенов, это
+23 рекуррентных слоя на 6 слоёв полного внимания, то есть примерно 4:1. MoE здесь
+отвечает за условное вычисление полносвязной ветви и не должен попадать в
+знаменатель этого отношения.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/nemotron-hybrid-evidence.png]]
+
+*Слайд курса сопоставляет качество Nemotron с моделями близкого масштаба; это
+сравнение готовых систем, а не контролируемая абляция доли Mamba-2. Источник:
+Stanford CS336 Spring 2026,
+[Lecture 4, p. 8](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=8). Точный состав слоёв:
+[официальная карточка NVIDIA Nemotron 3 Nano](https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-FP8).*
+
+**Qwen3-Next.** Здесь цикл из четырёх слоёв повторяется двенадцать раз: три слоя
+Gated DeltaNet, затем один слой gated attention. В итоге 36 из 48 слоёв сжимают
+историю в рекуррентное состояние, а 12 сохраняют KV-кэш. «Gated» у полного
+attention означает дополнительный выходной вентиль; оно не превращает этот слой
+в линейный по длине.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/qwen-next-hybrid-architecture.jpg]]
+
+*Схема Qwen3-Next из лекции показывает чередование Gated DeltaNet и полного
+attention. Источник изображения: Stanford CS336 Spring 2026,
+[Lecture 4, p. 10](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=10). Точная раскладка 12 × (3 GDN + 1 attention):
+[официальная карточка Qwen3-Next](https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Instruct).*
+
+Числа 7:1, 23:6 и 3:1 нельзя сравнивать как результат одного эксперимента.
+Модели различаются данными, числом параметров, устройством полносвязной ветви,
+длиной обучения и качеством ядер. Даже внутри одной работы оптимальная доля
+полного attention зависит от задачи: точное извлечение нескольких ключей и
+обычное языковое моделирование реагируют на сжатие истории по-разному.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/hybrid-ratio-ruler-ablation.jpg]]
+
+*Абляция на подзадачах RULER показывает, что увеличение доли линейных слоёв
+влияет на задачи неодинаково, а полностью линейный вариант часто теряет качество
+точного извлечения. Источник изображения: Stanford CS336 Spring 2026,
+[Lecture 4, p. 11](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=11). Пунктир — результат Transformer в той же постановке.*
 
 ## Сравнение без маркетинговых сокращений
 
@@ -191,16 +391,22 @@ KV-cache приблизительно уменьшается в $r$ раз от�
 
 ## После главы нужно уметь
 
-- вывести recurrent и convolution/scan view SSM;
-- объяснить selectivity Mamba и fixed-state decode;
-- различить механизм RWKV и retention RetNet;
-- показать ассоциативность affine scan;
-- обосновать, зачем гибрид сохраняет редкие attention layers.
+- вывести переход от $(QK^\top)V$ к причинному рекуррентному состоянию и
+  объяснить, почему он не сохраняет обычный softmax;
+- различить общее затухание Mamba-2 и направленное стирание Gated DeltaNet;
+- вывести рекуррентную и свёрточную формы модели пространства состояний;
+- объяснить избирательность Mamba и постоянный размер состояния при
+  декодировании;
+- различить механизм RWKV и retention в RetNet;
+- показать ассоциативность аффинного сканирования;
+- по составу MiniMax, Nemotron и Qwen3-Next вычислить, какая доля слоёв хранит
+  растущий KV-кэш, и не принять сравнение готовых моделей за абляцию.
 
 ## Источники
 
 - [Stanford CS336](https://cs336.stanford.edu/) — attention alternatives,
-  associative scan и hardware efficiency; [CS25](https://web.stanford.edu/class/cs25/)
+  recurrent duality, Mamba-2, Gated DeltaNet и гибридные модели;
+  [CS25](https://web.stanford.edu/class/cs25/)
   — seminar perspective на SSM/recurrent architectures.
 - [Hugging Face Mamba docs](https://huggingface.co/docs/transformers/model_doc/mamba)
   и [Jamba docs](https://huggingface.co/docs/transformers/model_doc/jamba) — cache
@@ -211,5 +417,10 @@ KV-cache приблизительно уменьшается в $r$ раз от�
   [Chip Huyen](https://huyenchip.com/2023/04/11/llm-engineering.html) — проверка
   end-to-end latency, memory и deployment constraints.
 - Papers/repos: [Mamba](https://arxiv.org/abs/2312.00752),
+  [Mamba-2 / SSD](https://arxiv.org/abs/2405.21060),
+  [Gated DeltaNet](https://arxiv.org/abs/2412.06464),
   [RWKV](https://arxiv.org/abs/2305.13048), [RetNet](https://arxiv.org/abs/2307.08621),
-  [Jamba](https://arxiv.org/abs/2403.19887).
+  [Jamba](https://arxiv.org/abs/2403.19887),
+  [MiniMax-01](https://arxiv.org/abs/2501.08313),
+  [Qwen3-Next](https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Instruct),
+  [NVIDIA Nemotron 3 Nano](https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-FP8).

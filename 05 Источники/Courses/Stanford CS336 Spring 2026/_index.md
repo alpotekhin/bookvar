@@ -104,8 +104,8 @@ Raw page/raster detections служат evidence и не становятся о
 ### lecture-04: Attention alternatives and mixture of experts
 
 - local path: `Lectures/repository/lecture_04.pdf`;
-- extracted units: 10;
-- semantic visual rows: 4;
+- extracted units: 17;
+- semantic visual rows: 11;
 - disposition is recorded per unit/visual in the generated coverage ledgers.
 
 <a id="lecture-05"></a>

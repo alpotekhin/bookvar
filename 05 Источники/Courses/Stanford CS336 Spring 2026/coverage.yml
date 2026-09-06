@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "semantic_review_sha256": "c059b5dfe112bb6f434008ded2401020fbd58b58df6a9116ddded700608c7a49",
+  "semantic_review_sha256": "f1d0b8640da31acffac709f832db78dfc79facc2eb003ca8bb3136bf16cef134",
   "rows": [
     {
       "id": "coverage-lecture-01-section-4-cs336-language-models-from-scratch-spring-2026",
@@ -1321,19 +1321,18 @@
       "evidence": "Lecture 4"
     },
     {
-      "id": "coverage-lecture-04-attention-alternatives",
+      "id": "coverage-lecture-04-attention-alternatives-overview",
       "source_object": "lecture-04",
-      "source_unit": "lecture-04-attention-alternatives",
-      "source_location": "Lectures/repository/lecture_04.pdf#pages=2-13:semantic=attention-alternatives",
+      "source_unit": "lecture-04-attention-alternatives-overview",
+      "source_location": "Lectures/repository/lecture_04.pdf#pages=2-3:semantic=attention-alternatives-overview",
       "kind": "section",
-      "title": "Attention alternatives and hybrid sequence models",
+      "title": "Attention-alternative design space",
       "primary_sources": [
         "lecture-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md",
+      "destination_anchor": "attention-alternatives-overview"
     },
     {
       "id": "coverage-lecture-04-linear-attention-recurrence",
@@ -1345,10 +1344,37 @@
       "primary_sources": [
         "lecture-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md",
+      "destination_anchor": "linear-attention-recurrent-state"
+    },
+    {
+      "id": "coverage-lecture-04-hybrid-sequence-models",
+      "source_object": "lecture-04",
+      "source_unit": "lecture-04-hybrid-sequence-models",
+      "source_location": "Lectures/repository/lecture_04.pdf#pages=6-11:semantic=hybrid-sequence-models",
+      "kind": "worked-example",
+      "title": "Mamba-2, Gated DeltaNet, and hybrid sequence-model architectures",
+      "primary_sources": [
+        "lecture-04"
+      ],
+      "disposition": "integrated",
+      "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md",
+      "destination_anchor": "hybrid-sequence-models"
+    },
+    {
+      "id": "coverage-lecture-04-deepseek-sparse-attention",
+      "source_object": "lecture-04",
+      "source_unit": "lecture-04-deepseek-sparse-attention",
+      "source_location": "Lectures/repository/lecture_04.pdf#pages=12-13:semantic=deepseek-sparse-attention",
+      "kind": "mechanism",
+      "title": "DeepSeek Sparse Attention and content-adaptive token selection",
+      "primary_sources": [
+        "lecture-04"
+      ],
+      "disposition": "integrated",
+      "destination": "00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md",
+      "destination_anchor": "dsa-content-adaptive-selection"
     },
     {
       "id": "coverage-lecture-04-moe-motivation",
@@ -1360,10 +1386,9 @@
       "primary_sources": [
         "lecture-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+      "destination_anchor": "moe-capacity-evidence"
     },
     {
       "id": "coverage-lecture-04-moe-routing",
@@ -1375,40 +1400,79 @@
       "primary_sources": [
         "lecture-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+      "destination_anchor": "moe-routing-mechanisms"
     },
     {
-      "id": "coverage-lecture-04-routing-ablations",
+      "id": "coverage-lecture-04-moe-expert-design-ablations",
       "source_object": "lecture-04",
-      "source_unit": "lecture-04-routing-ablations",
-      "source_location": "Lectures/repository/lecture_04.pdf#pages=33-49:semantic=routing-ablations",
+      "source_unit": "lecture-04-moe-expert-design-ablations",
+      "source_location": "Lectures/repository/lecture_04.pdf#pages=33-34:semantic=moe-expert-design-ablations",
       "kind": "experiment",
-      "title": "Expert granularity, sharing, and balancing ablations",
+      "title": "Fine-grained and shared-expert ablations",
       "primary_sources": [
         "lecture-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+      "destination_anchor": "moe-routing-evidence"
     },
     {
-      "id": "coverage-lecture-04-moe-training-failures",
+      "id": "coverage-lecture-04-moe-discrete-routing-training",
       "source_object": "lecture-04",
-      "source_unit": "lecture-04-moe-training-failures",
-      "source_location": "Lectures/repository/lecture_04.pdf#pages=36-50:semantic=moe-training-failures",
+      "source_unit": "lecture-04-moe-discrete-routing-training",
+      "source_location": "Lectures/repository/lecture_04.pdf#pages=36-39:semantic=moe-discrete-routing-training",
       "kind": "failure-mode",
-      "title": "Discrete routing, load balance, stability, and fine-tuning failures",
+      "title": "Discrete routing gradients, REINFORCE, and stochastic approximations",
       "primary_sources": [
         "lecture-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+      "destination_anchor": "moe-training-failures"
+    },
+    {
+      "id": "coverage-lecture-04-moe-load-balancing",
+      "source_object": "lecture-04",
+      "source_unit": "lecture-04-moe-load-balancing",
+      "source_location": "Lectures/repository/lecture_04.pdf#pages=40-43:semantic=moe-load-balancing",
+      "kind": "mechanism",
+      "title": "Expert and device load-balancing objectives and bias updates",
+      "primary_sources": [
+        "lecture-04"
+      ],
+      "disposition": "integrated",
+      "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+      "destination_anchor": "moe-load-balancing"
+    },
+    {
+      "id": "coverage-lecture-04-moe-systems-capacity",
+      "source_object": "lecture-04",
+      "source_unit": "lecture-04-moe-systems-capacity",
+      "source_location": "Lectures/repository/lecture_04.pdf#pages=44-47:semantic=moe-systems-capacity",
+      "kind": "failure-mode",
+      "title": "Expert-parallel communication, latent projections, and batch-dependent capacity",
+      "primary_sources": [
+        "lecture-04"
+      ],
+      "disposition": "integrated",
+      "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+      "destination_anchor": "moe-systems-capacity"
+    },
+    {
+      "id": "coverage-lecture-04-moe-stability-finetuning",
+      "source_object": "lecture-04",
+      "source_unit": "lecture-04-moe-stability-finetuning",
+      "source_location": "Lectures/repository/lecture_04.pdf#pages=48-50:semantic=moe-stability-finetuning",
+      "kind": "failure-mode",
+      "title": "Router numerical stability and sparse fine-tuning failures",
+      "primary_sources": [
+        "lecture-04"
+      ],
+      "disposition": "integrated",
+      "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+      "destination_anchor": "moe-stability-finetuning"
     },
     {
       "id": "coverage-lecture-04-moe-upcycling",
@@ -1420,25 +1484,53 @@
       "primary_sources": [
         "lecture-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+      "destination_anchor": "moe-upcycling"
     },
     {
-      "id": "coverage-lecture-04-deepseek-moe-case",
+      "id": "coverage-lecture-04-deepseek-moe",
       "source_object": "lecture-04",
-      "source_unit": "lecture-04-deepseek-moe-case",
-      "source_location": "Lectures/repository/lecture_04.pdf#pages=54-59:semantic=deepseek-moe-case",
+      "source_unit": "lecture-04-deepseek-moe",
+      "source_location": "Lectures/repository/lecture_04.pdf#pages=54-56:semantic=deepseek-moe",
       "kind": "worked-example",
-      "title": "DeepSeek MoE v1-v3, MLA, and MTP case study",
+      "title": "DeepSeek MoE v1-v3 architecture evolution",
+      "primary_sources": [
+        "lecture-04"
+      ],
+      "disposition": "integrated",
+      "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+      "destination_anchor": "deepseek-moe-evolution"
+    },
+    {
+      "id": "coverage-lecture-04-deepseek-mla",
+      "source_object": "lecture-04",
+      "source_unit": "lecture-04-deepseek-mla",
+      "source_location": "Lectures/repository/lecture_04.pdf#pages=57-58:semantic=deepseek-mla",
+      "kind": "mechanism",
+      "title": "DeepSeek Multi-head Latent Attention and KV-cache compression",
+      "primary_sources": [
+        "lecture-04"
+      ],
+      "disposition": "integrated",
+      "destination": "00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md",
+      "destination_anchor": "deepseek-mla-cache-compression"
+    },
+    {
+      "id": "coverage-lecture-04-deepseek-mtp",
+      "source_object": "lecture-04",
+      "source_unit": "lecture-04-deepseek-mtp",
+      "source_location": "Lectures/repository/lecture_04.pdf#page=59:semantic=deepseek-mtp",
+      "kind": "mechanism",
+      "title": "DeepSeek multi-token prediction auxiliary objective",
       "primary_sources": [
         "lecture-04"
       ],
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The exact one-page MTP mechanism is preserved for the later training-objectives integration; Task 2 keeps it distinct from MoE and MLA instead of forcing it into either architecture chapter.",
+      "evidence": "Lectures/repository/lecture_04.pdf#page=59:semantic=deepseek-mtp; reviewed title: DeepSeek multi-token prediction auxiliary objective"
     },
     {
       "id": "coverage-lecture-04-recap",
@@ -1450,10 +1542,9 @@
       "primary_sources": [
         "lecture-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-04",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+      "destination_anchor": "moe-recap"
     },
     {
       "id": "coverage-lecture-05-title-slide",
@@ -11909,5 +12000,5 @@
       "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
     }
   ],
-  "editorial_overlay_sha256": "f94beffae756013fafcb1d0534bd0239fdf0f030bd540b4e20908fca98d82aef"
+  "editorial_overlay_sha256": "0244577603f9d2c17aa4361ff58e307b9b80e88111821d518403cab728b5f936"
 }
