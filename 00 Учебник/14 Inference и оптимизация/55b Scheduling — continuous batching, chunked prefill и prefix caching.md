@@ -2,9 +2,14 @@
 title: "Scheduling: continuous batching, chunked prefill и prefix caching"
 type: textbook-chapter
 status: canonical
-last_updated: 2026-07-22
-last_verified: 2026-07-22
+last_updated: 2026-09-06
+last_verified: 2026-09-06
+source_unit_id:
+  - lecture-10-section-381-handling-dynamic-workloads
+  - lecture-10-dynamic-workload-failure-mode
+  - lecture-10-figure-step-392-rendering-1
 primary_sources:
+  - https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py
   - https://www.usenix.org/system/files/osdi22-yu.pdf
   - https://arxiv.org/abs/2308.16369
   - https://arxiv.org/abs/2403.02310
@@ -49,6 +54,16 @@ primary_sources:
 увеличивают TTFT следующего запроса. Значит, граница пакета должна проходить не
 по полному запросу, а по минимальной единице авторегрессионной работы.
 
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/anyscale-static-batching.png]]
+
+*При static batching запросы $S_1,\ldots,S_4$ занимают строки пакета до конца
+фиксированной группы: после `END` в строке остаются пустые итерации, хотя в
+очереди уже может быть новая работа. Схема позволяет увидеть потерю прямо как
+белые ячейки справа от завершившихся последовательностей. [Исходный
+файл](https://images.ctfassets.net/xjan103pcp94/1LJioEsEdQQpDCxYNWirU6/82b9fbfc5b78b10c1d4508b60e72fdcf/cb_02_diagram-static-batching.png),
+архивирован в [Stanford CS336 Spring 2026, Lecture 10, step 392, source line
+559](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py#L559).*
+
 ## Orca: планирование на уровне итерации
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/inference/continuous-batching.svg]]
@@ -81,6 +96,23 @@ forward pass. Автор: Aleksa Gordić; лицензия на странице
 определяется семантикой операции, а не желанием любой ценой получить
 прямоугольный тензор.
 
+Точное правило легче увидеть на формах. Пусть активные последовательности имеют
+длины $S_1,\ldots,S_B$. Token-wise операции — нормализация, линейные проекции и
+MLP — не смешивают позиции, поэтому их входы можно собрать в одну матрицу
+
+$$
+X_{packed}\in\mathbb{R}^{(\sum_i S_i)\times d}.
+$$
+
+Attention обязан сохранить границы последовательностей, причинные маски и
+адреса их KV-блоков. Orca логически обрабатывал такие части отдельно, а
+современный runtime может передать их одному ragged/packed kernel вместе с
+метаданными длин. Поэтому фраза «attention выполняется отдельно» описывает
+семантическое ограничение, но не требует отдельного kernel launch для каждого
+запроса. Этот вывод в Stanford CS336 Spring 2026 расположен в Lecture 10,
+source lines 553–575; первичная системная работа —
+[Orca](https://www.usenix.org/system/files/osdi22-yu.pdf).
+
 Непрерывное пакетирование улучшает throughput по двум причинам. Освободившийся
 слот быстро получает новый запрос, а чтение весов модели амортизируется между
 активными последовательностями. Однако число одновременных запросов нельзя
@@ -101,7 +133,7 @@ requests.
 1. Планировщик обновляет состояния: удаляет завершившиеся запросы и учитывает
    освобождённые блоки.
 2. Из очереди ожидания и множества активных запросов он выбирает токены в рамках
-   вычислительного и памятьного бюджета.
+   вычислительного бюджета и бюджета памяти.
 3. Менеджер KV-cache находит уже вычисленные блоки и выделяет новые слоты.
 4. Model runner собирает packed inputs и выполняет один forward pass.
 5. После sampling новые токены возвращаются клиентам, а запросы переходят в
@@ -281,6 +313,7 @@ continuous batching. SARATHI остаётся источником анализ�
 - [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week08_inference_software/homework/homework_week8.ipynb|Задание по inference engine]].
 - [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/inference|Harvard CS249r — Inference]].
 
+- Stanford CS336 Spring 2026, [Lecture 10: Inference](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py), source lines 553–605 — dynamic workloads, selective batching и PagedAttention; pinned commit `8b59b507`.
 - Yu et al., [Orca: A Distributed Serving System for Transformer-Based Generative Models](https://www.usenix.org/system/files/osdi22-yu.pdf) — iteration-level scheduling и selective batching.
 - Agrawal et al., [SARATHI](https://arxiv.org/abs/2308.16369) — chunked prefill и decode-maximal batching.
 - Agrawal et al., [Sarathi-Serve](https://arxiv.org/abs/2403.02310) — stall-free scheduling и throughput–latency trade-off.

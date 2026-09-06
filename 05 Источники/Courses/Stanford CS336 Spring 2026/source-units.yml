@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "review_method": "Per-source review of every executable lecture edtrace and source file, every PDF lecture page, and every assignment handout, adapter, and test tree. Every reviewed PDF page is closed by a semantic unit or an evidence-backed administrative exclusion; page and pdfimages detections are evidence only, never standalone teaching visuals.",
-  "semantic_review_sha256": "e2341ca3ee4e1facfc504274709cd48b76cb144336026986ffde36cbbe213b9f",
+  "semantic_review_sha256": "d88ae947a19d4ecc9e81d0dede8042a21a956365bd7f6ead1da120a353766e62",
   "units": [
     {
       "id": "lecture-01-section-4-cs336-language-models-from-scratch-spring-2026",
@@ -3087,29 +3087,49 @@
       "id": "lecture-10-section-133-attention-layers-focusing-on-the-matrix-multiplications-with-flashattention",
       "source_object": "lecture-10",
       "order": 8,
-      "source_location": "Lectures/repository/var/traces/lecture_10.json#steps=133-222:semantic=section-133-attention-layers-focusing-on-the-matrix-multiplications-with-flashattention",
+      "source_location": "Lectures/repository/var/traces/lecture_10.json#steps=133-222:lines=219-260,287-369:semantic=section-133-attention-layers-focusing-on-the-matrix-multiplications-with-flashattention",
       "kind": "section",
       "title": "Attention layers (focusing on the matrix multiplications with FlashAttention)",
       "semantic_id": "section-133-attention-layers-focusing-on-the-matrix-multiplications-with-flashattention",
       "event_start": 133,
       "event_end": 222,
       "heading_level": 3,
-      "source_line_start": 219,
-      "source_line_end": 26
+      "source_line_ranges": [
+        [
+          219,
+          260
+        ],
+        [
+          287,
+          369
+        ]
+      ]
     },
     {
       "id": "lecture-10-section-223-taking-shortcuts-lossy",
       "source_object": "lecture-10",
       "order": 9,
-      "source_location": "Lectures/repository/var/traces/lecture_10.json#steps=223-228:semantic=section-223-taking-shortcuts-lossy",
+      "source_location": "Lectures/repository/var/traces/lecture_10.json#steps=223-228:lines=27-32,371-487,490-502:semantic=section-223-taking-shortcuts-lossy",
       "kind": "section",
       "title": "Taking shortcuts (lossy)",
       "semantic_id": "section-223-taking-shortcuts-lossy",
       "event_start": 223,
       "event_end": 228,
       "heading_level": 3,
-      "source_line_start": 27,
-      "source_line_end": 375
+      "source_line_ranges": [
+        [
+          27,
+          32
+        ],
+        [
+          371,
+          487
+        ],
+        [
+          490,
+          502
+        ]
+      ]
     },
     {
       "id": "lecture-10-kv-cache-attention-alternatives",
@@ -3278,15 +3298,19 @@
       "id": "lecture-10-section-311-activation-aware-quantization-awq",
       "source_object": "lecture-10",
       "order": 17,
-      "source_location": "Lectures/repository/var/traces/lecture_10.json#steps=311-340:semantic=section-311-activation-aware-quantization-awq",
+      "source_location": "Lectures/repository/var/traces/lecture_10.json#steps=311-340:lines=480-487:semantic=section-311-activation-aware-quantization-awq",
       "kind": "section",
       "title": "Activation-aware quantization (AWQ)",
       "semantic_id": "section-311-activation-aware-quantization-awq",
       "event_start": 311,
       "event_end": 340,
       "heading_level": 3,
-      "source_line_start": 480,
-      "source_line_end": 42
+      "source_line_ranges": [
+        [
+          480,
+          487
+        ]
+      ]
     },
     {
       "id": "lecture-10-figure-step-318-rendering-1",
@@ -3303,9 +3327,35 @@
       "asset_url": "https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/awq-schema.png"
     },
     {
-      "id": "lecture-10-figure-step-325-rendering-1",
+      "id": "lecture-10-model-pruning-distillation",
       "source_object": "lecture-10",
       "order": 19,
+      "source_location": "Lectures/repository/var/traces/lecture_10.json#steps=322-331:lines=490-502:semantic=model-pruning-distillation",
+      "kind": "worked-example",
+      "title": "Structured pruning and knowledge-distillation campaign",
+      "semantic_id": "model-pruning-distillation",
+      "event_start": 322,
+      "event_end": 331,
+      "source_line_start": 490,
+      "source_line_end": 502,
+      "evidence_locations": [
+        "Lectures/repository/var/traces/lecture_10.json#step=322:rendering=1",
+        "Lectures/repository/var/traces/lecture_10.json#step=323:rendering=1",
+        "Lectures/repository/var/traces/lecture_10.json#step=324:rendering=1",
+        "Lectures/repository/var/traces/lecture_10.json#step=324:rendering=2",
+        "Lectures/repository/var/traces/lecture_10.json#step=325:rendering=1",
+        "Lectures/repository/var/traces/lecture_10.json#step=326:rendering=1",
+        "Lectures/repository/var/traces/lecture_10.json#step=327:rendering=1",
+        "Lectures/repository/var/traces/lecture_10.json#step=328:rendering=1",
+        "Lectures/repository/var/traces/lecture_10.json#step=329:rendering=1",
+        "Lectures/repository/var/traces/lecture_10.json#step=330:rendering=1",
+        "Lectures/repository/var/traces/lecture_10.json#step=331:rendering=1"
+      ]
+    },
+    {
+      "id": "lecture-10-figure-step-325-rendering-1",
+      "source_object": "lecture-10",
+      "order": 20,
       "source_location": "Lectures/repository/var/traces/lecture_10.json#step=325:rendering=1",
       "kind": "figure",
       "title": "pruning kd loop",
@@ -3319,7 +3369,7 @@
     {
       "id": "lecture-10-figure-step-331-rendering-1",
       "source_object": "lecture-10",
-      "order": 20,
+      "order": 21,
       "source_location": "Lectures/repository/var/traces/lecture_10.json#step=331:rendering=1",
       "kind": "figure",
       "title": "pruning kd",
@@ -3333,21 +3383,29 @@
     {
       "id": "lecture-10-section-341-use-shortcuts-but-double-check-lossless",
       "source_object": "lecture-10",
-      "order": 21,
-      "source_location": "Lectures/repository/var/traces/lecture_10.json#steps=341-380:semantic=section-341-use-shortcuts-but-double-check-lossless",
+      "order": 22,
+      "source_location": "Lectures/repository/var/traces/lecture_10.json#steps=341-380:lines=43-45,507-550:semantic=section-341-use-shortcuts-but-double-check-lossless",
       "kind": "section",
       "title": "Use shortcuts but double check (lossless)",
       "semantic_id": "section-341-use-shortcuts-but-double-check-lossless",
       "event_start": 341,
       "event_end": 380,
       "heading_level": 3,
-      "source_line_start": 43,
-      "source_line_end": 45
+      "source_line_ranges": [
+        [
+          43,
+          45
+        ],
+        [
+          507,
+          550
+        ]
+      ]
     },
     {
       "id": "lecture-10-figure-step-353-rendering-1",
       "source_object": "lecture-10",
-      "order": 22,
+      "order": 23,
       "source_location": "Lectures/repository/var/traces/lecture_10.json#step=353:rendering=1",
       "kind": "figure",
       "title": "speculative sampling algorithm",
@@ -3361,7 +3419,7 @@
     {
       "id": "lecture-10-figure-step-366-rendering-1",
       "source_object": "lecture-10",
-      "order": 23,
+      "order": 24,
       "source_location": "Lectures/repository/var/traces/lecture_10.json#step=366:rendering=1",
       "kind": "figure",
       "title": "speculative sampling results",
@@ -3375,7 +3433,7 @@
     {
       "id": "lecture-10-figure-step-367-rendering-1",
       "source_object": "lecture-10",
-      "order": 24,
+      "order": 25,
       "source_location": "Lectures/repository/var/traces/lecture_10.json#step=367:rendering=1",
       "kind": "figure",
       "title": "speculative sampling stats",
@@ -3389,7 +3447,7 @@
     {
       "id": "lecture-10-figure-step-375-rendering-1",
       "source_object": "lecture-10",
-      "order": 25,
+      "order": 26,
       "source_location": "Lectures/repository/var/traces/lecture_10.json#step=375:rendering=1",
       "kind": "figure",
       "title": "medusa eagle",
@@ -3403,21 +3461,29 @@
     {
       "id": "lecture-10-section-381-handling-dynamic-workloads",
       "source_object": "lecture-10",
-      "order": 26,
-      "source_location": "Lectures/repository/var/traces/lecture_10.json#steps=381-431:semantic=section-381-handling-dynamic-workloads",
+      "order": 27,
+      "source_location": "Lectures/repository/var/traces/lecture_10.json#steps=381-431:lines=46-54,553-607:semantic=section-381-handling-dynamic-workloads",
       "kind": "section",
       "title": "Handling dynamic workloads",
       "semantic_id": "section-381-handling-dynamic-workloads",
       "event_start": 381,
       "event_end": 431,
       "heading_level": 3,
-      "source_line_start": 46,
-      "source_line_end": 54
+      "source_line_ranges": [
+        [
+          46,
+          54
+        ],
+        [
+          553,
+          607
+        ]
+      ]
     },
     {
       "id": "lecture-10-dynamic-workload-failure-mode",
       "source_object": "lecture-10",
-      "order": 27,
+      "order": 28,
       "source_location": "Lectures/repository/var/traces/lecture_10.json#steps=388-429:lines=553-605:semantic=dynamic-workload-failure-mode",
       "kind": "failure-mode",
       "title": "Static batching fragmentation and dynamic workload failure modes",
@@ -3473,7 +3539,7 @@
     {
       "id": "lecture-10-figure-step-392-rendering-1",
       "source_object": "lecture-10",
-      "order": 28,
+      "order": 29,
       "source_location": "Lectures/repository/var/traces/lecture_10.json#step=392:rendering=1",
       "kind": "figure",
       "title": "image 1d1ec88764cc9f6eee8cc00bfce35f75 https images ctfassets net xjan103pcp94 1LJioEsEdQQpDCxYNWirU6 82b9fbfc5b78b10c1d4508b60e72fdcf cb 02 diagram static batching png",
@@ -3487,7 +3553,7 @@
     {
       "id": "lecture-10-paged-attention-memory-sequence",
       "source_object": "lecture-10",
-      "order": 29,
+      "order": 30,
       "source_location": "Lectures/repository/var/traces/lecture_10.json#steps=407-429:lines=576-605:semantic=paged-attention-memory-sequence",
       "kind": "visual-sequence",
       "title": "PagedAttention fragmentation, block mapping, sharing, and parallelism",
@@ -3526,7 +3592,7 @@
     {
       "id": "lecture-10-section-432-summary",
       "source_object": "lecture-10",
-      "order": 30,
+      "order": 31,
       "source_location": "Lectures/repository/var/traces/lecture_10.json#steps=432-437:semantic=section-432-summary",
       "kind": "section",
       "title": "Summary",

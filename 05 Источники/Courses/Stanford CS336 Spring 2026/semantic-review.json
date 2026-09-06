@@ -192,6 +192,23 @@
     },
     "lecture-10": {
       "administrative_headings": [],
+      "section_source_ranges": {
+        "section-133-attention-layers-focusing-on-the-matrix-multiplications-with-flashattention": [[219, 260], [287, 369]],
+        "section-223-taking-shortcuts-lossy": [[27, 32], [371, 487], [490, 502]],
+        "section-311-activation-aware-quantization-awq": [[480, 487]],
+        "section-341-use-shortcuts-but-double-check-lossless": [[43, 45], [507, 550]],
+        "section-381-handling-dynamic-workloads": [[46, 54], [553, 607]]
+      },
+      "figure_contexts": {
+        "325": {
+          "parent_semantic_id": "model-pruning-distillation",
+          "section_title": "Structured pruning and knowledge distillation"
+        },
+        "331": {
+          "parent_semantic_id": "model-pruning-distillation",
+          "section_title": "Structured pruning and knowledge distillation"
+        }
+      },
       "constructs": [
         {
           "semantic_id": "inference-arithmetic-intensity",
@@ -206,6 +223,13 @@
           "title": "Static batching fragmentation and dynamic workload failure modes",
           "line_start": 553,
           "line_end": 605
+        },
+        {
+          "semantic_id": "model-pruning-distillation",
+          "kind": "worked-example",
+          "title": "Structured pruning and knowledge-distillation campaign",
+          "line_start": 490,
+          "line_end": 502
         }
       ],
       "visual_sequences": [

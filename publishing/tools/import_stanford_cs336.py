@@ -761,6 +761,12 @@ def executable_units(
     matched_administrative: set[str] = set()
     units: list[dict[str, Any]] = []
     visuals: list[dict[str, Any]] = []
+    section_source_ranges = review.get("section_source_ranges", {})
+    if not isinstance(section_source_ranges, dict):
+        raise RuntimeError(f"{object_id}: section_source_ranges must be an object")
+    figure_contexts = review.get("figure_contexts", {})
+    if not isinstance(figure_contexts, dict):
+        raise RuntimeError(f"{object_id}: figure_contexts must be an object")
 
     for index, event in enumerate(headings):
         start = event["step"]
@@ -775,17 +781,56 @@ def executable_units(
             if is_administrative
             else f"section-{start}-{slug(event['title'])}"
         )
-        location = f"{relative(trace)}#steps={start}-{end}:semantic={semantic_id}"
+        reviewed_ranges = section_source_ranges.get(semantic_id)
+        if reviewed_ranges is not None:
+            if (
+                not isinstance(reviewed_ranges, list)
+                or not reviewed_ranges
+                or any(
+                    not isinstance(span, list)
+                    or len(span) != 2
+                    or any(type(line) is not int or line < 1 for line in span)
+                    or span[0] > span[1]
+                    for span in reviewed_ranges
+                )
+            ):
+                raise RuntimeError(
+                    f"{object_id}/{semantic_id}: section_source_ranges must contain "
+                    "positive [start, end] pairs"
+                )
+            if any(
+                reviewed_ranges[index][0] <= reviewed_ranges[index - 1][1]
+                for index in range(1, len(reviewed_ranges))
+            ):
+                raise RuntimeError(
+                    f"{object_id}/{semantic_id}: section_source_ranges must be ordered "
+                    "and non-overlapping"
+                )
+            lines_fragment = ",".join(
+                f"{line_start}-{line_end}"
+                for line_start, line_end in reviewed_ranges
+            )
+            location = (
+                f"{relative(trace)}#steps={start}-{end}:"
+                f"lines={lines_fragment}:semantic={semantic_id}"
+            )
+        else:
+            location = f"{relative(trace)}#steps={start}-{end}:semantic={semantic_id}"
         fields: dict[str, Any] = {
             "event_start": start,
             "event_end": end,
             "heading_level": event["heading_level"],
-            "source_line_start": event.get("source_line"),
-            "source_line_end": headings[index + 1].get("source_line") - 1
-            if index + 1 < len(headings)
-            and isinstance(headings[index + 1].get("source_line"), int)
-            else event.get("source_line"),
         }
+        if reviewed_ranges is not None:
+            fields["source_line_ranges"] = reviewed_ranges
+        else:
+            fields.update(
+                source_line_start=event.get("source_line"),
+                source_line_end=headings[index + 1].get("source_line") - 1
+                if index + 1 < len(headings)
+                and isinstance(headings[index + 1].get("source_line"), int)
+                else event.get("source_line"),
+            )
         if is_administrative:
             fields.update(
                 {
@@ -810,6 +855,14 @@ def executable_units(
     unmatched = administrative_titles - matched_administrative
     if unmatched:
         raise RuntimeError(f"{object_id}: unmatched administrative headings: {sorted(unmatched)}")
+    unmatched_ranges = set(section_source_ranges) - {
+        unit["semantic_id"] for unit in units
+    }
+    if unmatched_ranges:
+        raise RuntimeError(
+            f"{object_id}: section_source_ranges reference unknown headings: "
+            f"{sorted(unmatched_ranges)}"
+        )
 
     for spec in review.get("constructs", []):
         line_start = spec["line_start"]
@@ -910,6 +963,31 @@ def executable_units(
             (heading["title"] for heading in reversed(headings) if heading["step"] <= event["step"]),
             object_id,
         )
+        figure_context = figure_contexts.get(str(event["step"]))
+        parent_unit_id: str | None = None
+        if figure_context is not None:
+            if not isinstance(figure_context, dict):
+                raise RuntimeError(
+                    f"{object_id}/step-{event['step']}: figure context must be an object"
+                )
+            parent_semantic_id = figure_context.get("parent_semantic_id")
+            section_title = figure_context.get("section_title")
+            if not isinstance(parent_semantic_id, str) or not isinstance(section_title, str):
+                raise RuntimeError(
+                    f"{object_id}/step-{event['step']}: figure context requires "
+                    "parent_semantic_id and section_title"
+                )
+            parent_unit = next(
+                (unit for unit in units if unit["semantic_id"] == parent_semantic_id),
+                None,
+            )
+            if parent_unit is None:
+                raise RuntimeError(
+                    f"{object_id}/step-{event['step']}: unknown figure parent "
+                    f"{parent_semantic_id}"
+                )
+            parent_unit_id = parent_unit["id"]
+            nearest_heading = section_title
         title = clean_title(
             Path(event.get("asset", "figure")).stem.replace("_", " ").replace("-", " "),
             f"Figure in {nearest_heading}",
@@ -938,13 +1016,23 @@ def executable_units(
                 [event["step"]],
                 f"How does {title} support the lecture section “{nearest_heading}”?",
                 [event["source_location"]],
-                [unit["id"]],
+                [unit["id"], *([parent_unit_id] if parent_unit_id else [])],
                 sha256_file(trace),
                 f"edtrace {provenance['edtrace']} archived image rendering",
                 provenance,
                 source_parent_sha256=sha256_file(source),
                 asset_url=event["asset_url"],
             )
+        )
+    unmatched_figure_contexts = set(figure_contexts) - {
+        str(event["step"])
+        for event in events
+        if event["kind"] == "rendered-image" and event["source_location"] not in claimed_images
+    }
+    if unmatched_figure_contexts:
+        raise RuntimeError(
+            f"{object_id}: figure_contexts reference missing or claimed images: "
+            f"{sorted(unmatched_figure_contexts)}"
         )
     return finalize_units(units, object_id), visuals
 

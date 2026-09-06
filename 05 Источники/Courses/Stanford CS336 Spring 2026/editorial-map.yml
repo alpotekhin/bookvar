@@ -13,7 +13,9 @@
     "lecture-06",
     "lecture-07",
     "lecture-08",
-    "assignment-02"
+    "assignment-02",
+    "lecture-10",
+    "lecture-12"
   ],
   "coverage": {
     "lecture-01-section-4-cs336-language-models-from-scratch-spring-2026": {
@@ -2140,6 +2142,342 @@
     "disposition": "integrated",
     "destination": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
     "destination_anchor": "cs336-a2-capstone"
+  },
+
+  "lecture-10-section-2-lecture-10-inference": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/14 Inference и оптимизация/55c Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer.md",
+    "destination_anchor": "пять-уровней-одной-системы"
+  },
+  "lecture-10-figure-step-3-rendering-1": {
+    "disposition": "excluded",
+    "reason": "Decorative inference-schema title frame adds no mechanism beyond the integrated five-layer serving explanation.",
+    "evidence": "Lectures/repository/var/traces/lecture_10.json#step=3:rendering=1"
+  },
+  "lecture-10-section-4-understanding-the-inference-workload": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md",
+    "destination_anchor": "авторегрессионный-запрос-распадается-на-две-фазы"
+  },
+  "lecture-10-figure-step-45-rendering-1": {
+    "disposition": "excluded",
+    "reason": "Generic Transformer diagram is redundant with the textbook architecture chapters and does not advance the inference argument.",
+    "evidence": "Lectures/repository/var/traces/lecture_10.json#step=45:rendering=1"
+  },
+  "lecture-10-inference-arithmetic-intensity": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md",
+    "destination_anchor": "обозначения-и-стоимость-одного-матричного-умножения"
+  },
+  "lecture-10-naive-versus-cached-inference": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md",
+    "destination_anchor": "авторегрессионный-запрос-распадается-на-две-фазы"
+  },
+  "lecture-10-section-103-mlp-layers-only-looking-at-the-matrix-multiplications": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md",
+    "destination_anchor": "сколько-операций-выполняет-слой"
+  },
+  "lecture-10-section-133-attention-layers-focusing-on-the-matrix-multiplications-with-flashattention": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md",
+    "destination_anchor": "сколько-операций-выполняет-слой"
+  },
+  "lecture-10-section-223-taking-shortcuts-lossy": {
+    "disposition": "source-only",
+    "reason": "This dispatcher-level umbrella is retained in the source archive; its concrete mechanisms are routed separately to GQA/MLA, quantization, and Minitron chapters.",
+    "evidence": "Lectures/repository/var/traces/lecture_10.json#steps=223-228:semantic=section-223-taking-shortcuts-lossy"
+  },
+  "lecture-10-kv-cache-attention-alternatives": {
+    "disposition": "covered-existing",
+    "destination": "00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md",
+    "destination_anchor": "три-способа-организовать-головы"
+  },
+  "lecture-10-section-229-grouped-query-attention-gqa": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md",
+    "destination_anchor": "gqa-один-комплект-kv-на-группу-запросов"
+  },
+  "lecture-10-section-250-multi-head-latent-attention-mla": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md",
+    "destination_anchor": "deepseek-mla-cache-compression"
+  },
+  "lecture-10-section-262-cross-layer-attention-cla": {
+    "disposition": "source-only",
+    "reason": "Retained for a future long-context attention expansion; the present Task 5 route does not flatten CLA into GQA or MLA.",
+    "evidence": "Lectures/repository/var/traces/lecture_10.json#steps=262-266:semantic=section-262-cross-layer-attention-cla"
+  },
+  "lecture-10-section-267-local-sliding-window-attention": {
+    "disposition": "source-only",
+    "reason": "Retained for the dedicated long-context attention expansion; local attention requires its own receptive-field and global-token treatment.",
+    "evidence": "Lectures/repository/var/traces/lecture_10.json#steps=267-273:semantic=section-267-local-sliding-window-attention"
+  },
+  "lecture-10-section-274-deepseek-v4-attention": {
+    "disposition": "source-only",
+    "reason": "Retained as a time-sensitive architecture note until the dedicated DeepSeek lineage chapter verifies the released model and primary technical report.",
+    "evidence": "Lectures/repository/var/traces/lecture_10.json#steps=274-310:semantic=section-274-deepseek-v4-attention"
+  },
+  "lecture-10-figure-step-296-rendering-1": {
+    "disposition": "excluded",
+    "reason": "Social-media screenshot is volatile and adds no stable mechanism or reproducible evidence.",
+    "evidence": "Lectures/repository/var/traces/lecture_10.json#step=296:rendering=1"
+  },
+  "lecture-10-section-311-activation-aware-quantization-awq": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md",
+    "destination_anchor": "awq"
+  },
+  "lecture-10-figure-step-318-rendering-1": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md",
+    "destination_anchor": "awq"
+  },
+  "lecture-10-model-pruning-distillation": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/14 Inference и оптимизация/57b Сжатие моделей — pruning, distillation и low-rank.md",
+    "destination_anchor": "minitron-структурное-pruning-как-измеряемая-кампания"
+  },
+  "lecture-10-figure-step-325-rendering-1": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/14 Inference и оптимизация/57b Сжатие моделей — pruning, distillation и low-rank.md",
+    "destination_anchor": "minitron-структурное-pruning-как-измеряемая-кампания"
+  },
+  "lecture-10-figure-step-331-rendering-1": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/14 Inference и оптимизация/57b Сжатие моделей — pruning, distillation и low-rank.md",
+    "destination_anchor": "minitron-структурное-pruning-как-измеряемая-кампания"
+  },
+  "lecture-10-section-341-use-shortcuts-but-double-check-lossless": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md",
+    "destination_anchor": "полный-алгоритм-на-исходном-слайде"
+  },
+  "lecture-10-figure-step-353-rendering-1": {
+    "disposition": "covered-existing",
+    "destination": "00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md",
+    "destination_anchor": "полный-алгоритм-на-исходном-слайде"
+  },
+  "lecture-10-figure-step-366-rendering-1": {
+    "disposition": "covered-existing",
+    "destination": "00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md",
+    "destination_anchor": "процент-принятия-связывает-качество-и-скорость"
+  },
+  "lecture-10-figure-step-367-rendering-1": {
+    "disposition": "covered-existing",
+    "destination": "00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md",
+    "destination_anchor": "почему-больше-draft-токенов-не-всегда-лучше"
+  },
+  "lecture-10-figure-step-375-rendering-1": {
+    "disposition": "source-only",
+    "reason": "The compact Medusa/EAGLE comparison is retained in the source archive because the textbook already uses a clearer primary EAGLE pipeline figure.",
+    "evidence": "Lectures/repository/var/traces/lecture_10.json#step=375:rendering=1"
+  },
+  "lecture-10-section-381-handling-dynamic-workloads": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md",
+    "destination_anchor": "почему-статический-пакет-теряет-вместимость"
+  },
+  "lecture-10-dynamic-workload-failure-mode": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md",
+    "destination_anchor": "почему-статический-пакет-теряет-вместимость"
+  },
+  "lecture-10-figure-step-392-rendering-1": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md",
+    "destination_anchor": "почему-статический-пакет-теряет-вместимость"
+  },
+  "lecture-10-paged-attention-memory-sequence": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md",
+    "destination_anchor": "pagedattention-логическая-последовательность-физические-блоки"
+  },
+  "lecture-10-section-432-summary": {
+    "disposition": "covered-existing",
+    "destination": "00 Учебник/14 Inference и оптимизация/55c Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer.md",
+    "destination_anchor": "что-остаётся-стабильным-а-что-нужно-перепроверять"
+  },
+  "lecture-12-section-2-lecture-12-evaluation": {
+    "disposition": "covered-existing",
+    "destination": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+    "destination_anchor": "от-цели-к-наблюдаемой-величине"
+  },
+  "lecture-12-figure-step-19-rendering-1": {
+    "disposition": "excluded",
+    "reason": "Volatile leaderboard, cost, or introductory screenshot is not durable evidence for a textbook mechanism.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=19:rendering=1"
+  },
+  "lecture-12-figure-step-21-rendering-1": {
+    "disposition": "excluded",
+    "reason": "Volatile leaderboard, cost, or introductory screenshot is not durable evidence for a textbook mechanism.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=21:rendering=1"
+  },
+  "lecture-12-figure-step-24-rendering-1": {
+    "disposition": "excluded",
+    "reason": "Volatile leaderboard, cost, or introductory screenshot is not durable evidence for a textbook mechanism.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=24:rendering=1"
+  },
+  "lecture-12-figure-step-27-rendering-1": {
+    "disposition": "excluded",
+    "reason": "Volatile leaderboard, cost, or introductory screenshot is not durable evidence for a textbook mechanism.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=27:rendering=1"
+  },
+  "lecture-12-figure-step-45-rendering-1": {
+    "disposition": "source-only",
+    "reason": "Perplexity example is retained as optional course evidence; the chapter explains the metric or task without duplicating every benchmark screenshot.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=45:rendering=1"
+  },
+  "lecture-12-figure-step-58-rendering-1": {
+    "disposition": "source-only",
+    "reason": "LAMBADA example is retained as optional course evidence; the chapter explains the metric or task without duplicating every benchmark screenshot.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=58:rendering=1"
+  },
+  "lecture-12-figure-step-60-rendering-1": {
+    "disposition": "source-only",
+    "reason": "HellaSwag example is retained as optional course evidence; the chapter explains the metric or task without duplicating every benchmark screenshot.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=60:rendering=1"
+  },
+  "lecture-12-benchmark-design-worked-examples": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+    "destination_anchor": "хороший-набор-испытаний-начинается-с-хорошей-задачи"
+  },
+  "lecture-12-figure-step-79-rendering-1": {
+    "disposition": "source-only",
+    "reason": "MMLU screenshot is retained as historical course evidence; the chapter uses the broader benchmark-design argument.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=79:rendering=1"
+  },
+  "lecture-12-figure-step-87-rendering-1": {
+    "disposition": "source-only",
+    "reason": "MMLU-Pro screenshot is retained as optional evidence; it is not needed to establish construct validity.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=87:rendering=1"
+  },
+  "lecture-12-figure-step-92-rendering-1": {
+    "disposition": "covered-existing",
+    "destination": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+    "destination_anchor": "хороший-набор-испытаний-начинается-с-хорошей-задачи"
+  },
+  "lecture-12-figure-step-100-rendering-1": {
+    "disposition": "excluded",
+    "reason": "Dense HLE example collage is redundant once the task-construction pipeline is preserved.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=100:rendering=1"
+  },
+  "lecture-12-figure-step-103-rendering-1": {
+    "disposition": "covered-existing",
+    "destination": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+    "destination_anchor": "хороший-набор-испытаний-начинается-с-хорошей-задачи"
+  },
+  "lecture-12-figure-step-104-rendering-1": {
+    "disposition": "excluded",
+    "reason": "Volatile benchmark results are not preserved as timeless textbook evidence.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=104:rendering=1"
+  },
+  "lecture-12-figure-step-124-rendering-1": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+    "destination_anchor": "pairwise-preference-protocol"
+  },
+  "lecture-12-figure-step-129-rendering-1": {
+    "disposition": "excluded",
+    "reason": "Live leaderboard screenshot is volatile and does not explain the pairwise protocol.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=129:rendering=1"
+  },
+  "lecture-12-figure-step-144-rendering-1": {
+    "disposition": "source-only",
+    "reason": "AlpacaEval correlation plot is retained as optional judge-validity evidence but is not required for the canonical causal chain.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=144:rendering=1"
+  },
+  "lecture-12-figure-step-145-rendering-1": {
+    "disposition": "excluded",
+    "reason": "Volatile leaderboard screenshot is excluded; leaderboard rank is not a stable teaching artifact.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=145:rendering=1"
+  },
+  "lecture-12-figure-step-150-rendering-1": {
+    "disposition": "source-only",
+    "reason": "WildBench screenshot is retained for comparative benchmark study; the canonical chapter focuses on protocol and validity.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=150:rendering=1"
+  },
+  "lecture-12-agentic-benchmark-evidence-chain": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+    "destination_anchor": "агентный-benchmark-проверяет-замкнутый-контур"
+  },
+  "lecture-12-figure-step-208-rendering-1": {
+    "disposition": "source-only",
+    "reason": "ARC task grids are retained for a future reasoning-benchmark case study.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=208:rendering=1"
+  },
+  "lecture-12-figure-step-210-rendering-1": {
+    "disposition": "source-only",
+    "reason": "ARC-AGI-2 unsolved example is retained for a future reasoning-benchmark case study.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=210:rendering=1"
+  },
+  "lecture-12-figure-step-211-rendering-1": {
+    "disposition": "excluded",
+    "reason": "ARC results screenshot is volatile and does not establish the benchmark contract.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=211:rendering=1"
+  },
+  "lecture-12-figure-step-215-rendering-1": {
+    "disposition": "source-only",
+    "reason": "ARC-AGI-3 preview is retained for a future interactive-benchmark case study.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=215:rendering=1"
+  },
+  "lecture-12-figure-step-216-rendering-1": {
+    "disposition": "excluded",
+    "reason": "ARC-AGI-3 results screenshot is volatile and not needed for the evaluation methodology.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=216:rendering=1"
+  },
+  "lecture-12-figure-step-224-rendering-1": {
+    "disposition": "excluded",
+    "reason": "Automobile crash-test photograph is an analogy, not evidence about model evaluation.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=224:rendering=1"
+  },
+  "lecture-12-figure-step-233-rendering-1": {
+    "disposition": "source-only",
+    "reason": "AIR-Bench overview is retained for a future safety-evaluation taxonomy; the present chapter keeps the general validity chain.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=233:rendering=1"
+  },
+  "lecture-12-figure-step-239-rendering-1": {
+    "disposition": "source-only",
+    "reason": "GCG examples are retained for a future adversarial-evaluation chapter.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=239:rendering=1"
+  },
+  "lecture-12-evaluation-validity-failure-modes": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+    "destination_anchor": "более-устойчивые-способы-оценки"
+  },
+  "lecture-12-benchmark-validity-sequence": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+    "destination_anchor": "что-такое-контаминация"
+  },
+  "lecture-12-section-268-train-test-overlap": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+    "destination_anchor": "что-такое-контаминация"
+  },
+  "lecture-12-section-284-dataset-quality": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+    "destination_anchor": "хороший-набор-испытаний-начинается-с-хорошей-задачи"
+  },
+  "lecture-12-section-294-what-s-the-point-of-evaluation": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+    "destination_anchor": "от-цели-к-наблюдаемой-величине"
+  },
+  "lecture-12-section-300-what-are-we-evaluating": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+    "destination_anchor": "что-именно-оценивается"
+  },
+  "lecture-12-figure-step-305-rendering-1": {
+    "disposition": "excluded",
+    "reason": "NanoGPT speedrun screenshot illustrates optimization progress but does not identify the evaluated construct; the distinction is explained in prose.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=305:rendering=1"
   }
   },
   "visuals": {
@@ -2892,6 +3230,342 @@
     "narrow_evidence": "The source image remains inside the article column and is paired with nearby prose/caption plus click-to-zoom for dense labels.",
     "reviewer": "Codex Task 3 systems integration",
     "checked_at": "2026-09-06"
+  },
+
+  "lecture-10-visual-naive-versus-cached-inference": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md",
+    "destination_anchor": "авторегрессионный-запрос-распадается-на-две-фазы",
+    "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/inference-evaluation/naive-inference.webp",
+    "transformation": "Byte-for-byte copies of the pinned Stanford lecture's naive-inference and cached-inference source rasters, preserved as a two-frame before/after sequence.",
+    "caption": "First identify the repeated prefix computation in naive decoding, then see which key/value states the cache retains.",
+    "rendered_route": "/textbook/inference/llm-inference-physics/",
+    "desktop_evidence": "The exact source visual and its surrounding textbook explanation were inspected at desktop width; labels remain legible and the causal sequence is complete.",
+    "narrow_evidence": "At narrow width the image stays inside the article column; dense source labels remain available through click-to-zoom and the adjacent caption states the intended inference.",
+    "reviewer": "Codex Task 5 inference and evaluation integration",
+    "checked_at": "2026-09-06"
+  },
+  "lecture-10-visual-kv-cache-attention-alternatives": {
+    "disposition": "covered-existing",
+    "destination": "00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md",
+    "destination_anchor": "три-способа-организовать-головы",
+    "local_file": "00 Учебник/Assets/Figures/curated/source-first-35-36/gqa-groups-speed.png",
+    "transformation": "The canonical chapter already preserves the course-derived MHA/GQA/MQA comparison and primary GQA evidence; no duplicate copy was added for every variant in the lecture sequence.",
+    "caption": "Follow the reduction in KV heads from MHA through GQA to MQA, then treat MLA and other variants as distinct compression mechanisms.",
+    "rendered_route": "/textbook/attention/mha-mqa-gqa/",
+    "desktop_evidence": "The exact source visual and its surrounding textbook explanation were inspected at desktop width; labels remain legible and the causal sequence is complete.",
+    "narrow_evidence": "At narrow width the image stays inside the article column; dense source labels remain available through click-to-zoom and the adjacent caption states the intended inference.",
+    "reviewer": "Codex Task 5 inference and evaluation integration",
+    "checked_at": "2026-09-06"
+  },
+  "lecture-10-visual-paged-attention-memory-sequence": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md",
+    "destination_anchor": "pagedattention-логическая-последовательность-физические-блоки",
+    "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/inference-evaluation/paged-attention-sharing.png",
+    "transformation": "Five-frame source sequence preserved across three existing canonical PagedAttention images plus byte-for-byte copies of the pinned sharing and copy-on-write rasters.",
+    "caption": "Trace the argument from fragmentation to logical blocks, physical placement, prefix sharing, and block-level copy-on-write.",
+    "rendered_route": "/textbook/inference/kv-cache-batching-pagedattention/",
+    "desktop_evidence": "The exact source visual and its surrounding textbook explanation were inspected at desktop width; labels remain legible and the causal sequence is complete.",
+    "narrow_evidence": "At narrow width the image stays inside the article column; dense source labels remain available through click-to-zoom and the adjacent caption states the intended inference.",
+    "reviewer": "Codex Task 5 inference and evaluation integration",
+    "checked_at": "2026-09-06"
+  },
+  "lecture-10-visual-figure-step-3-rendering-1": {
+    "disposition": "excluded",
+    "reason": "Decorative inference-schema title frame adds no mechanism beyond the integrated serving-stack explanation.",
+    "evidence": "Lectures/repository/var/traces/lecture_10.json#step=3:rendering=1"
+  },
+  "lecture-10-visual-figure-step-45-rendering-1": {
+    "disposition": "excluded",
+    "reason": "Generic Transformer diagram is redundant with the architecture chapters and does not explain inference-specific costs.",
+    "evidence": "Lectures/repository/var/traces/lecture_10.json#step=45:rendering=1"
+  },
+  "lecture-10-visual-figure-step-296-rendering-1": {
+    "disposition": "excluded",
+    "reason": "Social-media screenshot is volatile and is not stable technical evidence.",
+    "evidence": "Lectures/repository/var/traces/lecture_10.json#step=296:rendering=1"
+  },
+  "lecture-10-visual-figure-step-318-rendering-1": {
+    "disposition": "covered-existing",
+    "destination": "00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md",
+    "destination_anchor": "awq",
+    "local_file": "00 Учебник/Assets/Figures/curated/topics-53-59-source-first/awq-schema.png",
+    "transformation": "Existing canonical byte-equivalent course visual reused without another copy.",
+    "caption": "Relate activation outliers to the small set of salient weight channels that AWQ protects.",
+    "rendered_route": "/textbook/inference/quantization/",
+    "desktop_evidence": "The exact source visual and its surrounding textbook explanation were inspected at desktop width; labels remain legible and the causal sequence is complete.",
+    "narrow_evidence": "At narrow width the image stays inside the article column; dense source labels remain available through click-to-zoom and the adjacent caption states the intended inference.",
+    "reviewer": "Codex Task 5 inference and evaluation integration",
+    "checked_at": "2026-09-06"
+  },
+  "lecture-10-visual-figure-step-325-rendering-1": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/14 Inference и оптимизация/57b Сжатие моделей — pruning, distillation и low-rank.md",
+    "destination_anchor": "minitron-структурное-pruning-как-измеряемая-кампания",
+    "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/inference-evaluation/minitron-pruning-distillation-loop.png",
+    "transformation": "Byte-for-byte copy of the pinned Stanford course raster for Minitron Figure 2; no redraw or crop.",
+    "caption": "Read the loop as an experiment: estimate importance, prune structural units, then recover quality by distillation.",
+    "rendered_route": "/textbook/inference/model-compression-pruning-distillation-low-rank/",
+    "desktop_evidence": "The exact source visual and its surrounding textbook explanation were inspected at desktop width; labels remain legible and the causal sequence is complete.",
+    "narrow_evidence": "At narrow width the image stays inside the article column; dense source labels remain available through click-to-zoom and the adjacent caption states the intended inference.",
+    "reviewer": "Codex Task 5 inference and evaluation integration",
+    "checked_at": "2026-09-06"
+  },
+  "lecture-10-visual-figure-step-331-rendering-1": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/14 Inference и оптимизация/57b Сжатие моделей — pruning, distillation и low-rank.md",
+    "destination_anchor": "minitron-структурное-pruning-как-измеряемая-кампания",
+    "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/inference-evaluation/minitron-training-cost-quality.png",
+    "transformation": "Byte-for-byte copy of the pinned Stanford course raster for Minitron Figure 1; no redraw or crop.",
+    "caption": "Compare training-token cost and measured quality only within the named Minitron baselines; do not infer a universal pruning ratio.",
+    "rendered_route": "/textbook/inference/model-compression-pruning-distillation-low-rank/",
+    "desktop_evidence": "The exact source visual and its surrounding textbook explanation were inspected at desktop width; labels remain legible and the causal sequence is complete.",
+    "narrow_evidence": "At narrow width the image stays inside the article column; dense source labels remain available through click-to-zoom and the adjacent caption states the intended inference.",
+    "reviewer": "Codex Task 5 inference and evaluation integration",
+    "checked_at": "2026-09-06"
+  },
+  "lecture-10-visual-figure-step-353-rendering-1": {
+    "disposition": "covered-existing",
+    "destination": "00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md",
+    "destination_anchor": "полный-алгоритм-на-исходном-слайде",
+    "local_file": "00 Учебник/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-algorithm.png",
+    "transformation": "Existing canonical copy of the exact Stanford course algorithm slide reused.",
+    "caption": "Track proposal, target verification, rejection correction, and the guaranteed extra target token.",
+    "rendered_route": "/textbook/inference/speculative-decoding/",
+    "desktop_evidence": "The exact source visual and its surrounding textbook explanation were inspected at desktop width; labels remain legible and the causal sequence is complete.",
+    "narrow_evidence": "At narrow width the image stays inside the article column; dense source labels remain available through click-to-zoom and the adjacent caption states the intended inference.",
+    "reviewer": "Codex Task 5 inference and evaluation integration",
+    "checked_at": "2026-09-06"
+  },
+  "lecture-10-visual-figure-step-366-rendering-1": {
+    "disposition": "covered-existing",
+    "destination": "00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md",
+    "destination_anchor": "процент-принятия-связывает-качество-и-скорость",
+    "local_file": "00 Учебник/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-results.png",
+    "transformation": "Existing canonical copy of the exact Stanford course results figure reused.",
+    "caption": "Use the measured acceptance/speed relation as conditional empirical evidence, not a hardware-independent law.",
+    "rendered_route": "/textbook/inference/speculative-decoding/",
+    "desktop_evidence": "The exact source visual and its surrounding textbook explanation were inspected at desktop width; labels remain legible and the causal sequence is complete.",
+    "narrow_evidence": "At narrow width the image stays inside the article column; dense source labels remain available through click-to-zoom and the adjacent caption states the intended inference.",
+    "reviewer": "Codex Task 5 inference and evaluation integration",
+    "checked_at": "2026-09-06"
+  },
+  "lecture-10-visual-figure-step-367-rendering-1": {
+    "disposition": "covered-existing",
+    "destination": "00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md",
+    "destination_anchor": "почему-больше-draft-токенов-не-всегда-лучше",
+    "local_file": "00 Учебник/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-stats.png",
+    "transformation": "Existing canonical copy of the exact Stanford course statistics figure reused.",
+    "caption": "Locate the optimum where longer proposals stop compensating for verification and rollback cost.",
+    "rendered_route": "/textbook/inference/speculative-decoding/",
+    "desktop_evidence": "The exact source visual and its surrounding textbook explanation were inspected at desktop width; labels remain legible and the causal sequence is complete.",
+    "narrow_evidence": "At narrow width the image stays inside the article column; dense source labels remain available through click-to-zoom and the adjacent caption states the intended inference.",
+    "reviewer": "Codex Task 5 inference and evaluation integration",
+    "checked_at": "2026-09-06"
+  },
+  "lecture-10-visual-figure-step-375-rendering-1": {
+    "disposition": "source-only",
+    "reason": "The compact Medusa/EAGLE comparison is retained in the source archive because the canonical chapter already uses a clearer primary EAGLE pipeline visual.",
+    "evidence": "Lectures/repository/var/traces/lecture_10.json#step=375:rendering=1"
+  },
+  "lecture-10-visual-figure-step-392-rendering-1": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md",
+    "destination_anchor": "почему-статический-пакет-теряет-вместимость",
+    "local_file": "00 Учебник/Assets/Figures/curated/topics-53-59-source-first/anyscale-static-batching.png",
+    "transformation": "Existing byte-identical copy of the pinned static-batching source raster reused; the duplicate Task 5 file was removed.",
+    "caption": "Observe idle slots after short requests finish; this is the capacity loss iteration-level scheduling removes.",
+    "rendered_route": "/textbook/inference/scheduling/",
+    "desktop_evidence": "The exact source visual and its surrounding textbook explanation were inspected at desktop width; labels remain legible and the causal sequence is complete.",
+    "narrow_evidence": "At narrow width the image stays inside the article column; dense source labels remain available through click-to-zoom and the adjacent caption states the intended inference.",
+    "reviewer": "Codex Task 5 inference and evaluation integration",
+    "checked_at": "2026-09-06"
+  },
+  "lecture-12-visual-agentic-benchmark-evidence-chain": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+    "destination_anchor": "агентный-benchmark-проверяет-замкнутый-контур",
+    "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/inference-evaluation/terminal-bench-task-harness.png",
+    "transformation": "Representative exact Terminal-Bench frame copied byte-for-byte from the pinned course sequence; adjacent prose preserves the complete task-agent-environment-result chain.",
+    "caption": "Separate task specification, environment interaction, harness observation, and final scoring before interpreting an agent benchmark result.",
+    "rendered_route": "/textbook/evaluation/models-contamination/",
+    "desktop_evidence": "The exact source visual and its surrounding textbook explanation were inspected at desktop width; labels remain legible and the causal sequence is complete.",
+    "narrow_evidence": "At narrow width the image stays inside the article column; dense source labels remain available through click-to-zoom and the adjacent caption states the intended inference.",
+    "reviewer": "Codex Task 5 inference and evaluation integration",
+    "checked_at": "2026-09-06"
+  },
+  "lecture-12-visual-benchmark-validity-sequence": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+    "destination_anchor": "что-такое-контаминация",
+    "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/inference-evaluation/medhelm-evaluation-pipeline.png",
+    "transformation": "Representative exact MedHELM pipeline copied byte-for-byte from the pinned course validity sequence and paired with the course's contamination/exchangeability argument.",
+    "caption": "Trace the chain from intended clinical construct through scenario and metric to an interpretable report; a broken link invalidates the score.",
+    "rendered_route": "/textbook/evaluation/models-contamination/",
+    "desktop_evidence": "The exact source visual and its surrounding textbook explanation were inspected at desktop width; labels remain legible and the causal sequence is complete.",
+    "narrow_evidence": "At narrow width the image stays inside the article column; dense source labels remain available through click-to-zoom and the adjacent caption states the intended inference.",
+    "reviewer": "Codex Task 5 inference and evaluation integration",
+    "checked_at": "2026-09-06"
+  },
+  "lecture-12-visual-figure-step-19-rendering-1": {
+    "disposition": "excluded",
+    "reason": "Volatile leaderboard, cost, or introductory screenshot is not durable evidence for a textbook mechanism.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=19:rendering=1"
+  },
+  "lecture-12-visual-figure-step-21-rendering-1": {
+    "disposition": "excluded",
+    "reason": "Volatile leaderboard, cost, or introductory screenshot is not durable evidence for a textbook mechanism.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=21:rendering=1"
+  },
+  "lecture-12-visual-figure-step-24-rendering-1": {
+    "disposition": "excluded",
+    "reason": "Volatile leaderboard, cost, or introductory screenshot is not durable evidence for a textbook mechanism.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=24:rendering=1"
+  },
+  "lecture-12-visual-figure-step-27-rendering-1": {
+    "disposition": "excluded",
+    "reason": "Volatile leaderboard, cost, or introductory screenshot is not durable evidence for a textbook mechanism.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=27:rendering=1"
+  },
+  "lecture-12-visual-figure-step-45-rendering-1": {
+    "disposition": "source-only",
+    "reason": "Perplexity screenshot is retained as optional course evidence; the canonical chapter explains the metric or protocol without duplicating every example.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=45:rendering=1"
+  },
+  "lecture-12-visual-figure-step-58-rendering-1": {
+    "disposition": "source-only",
+    "reason": "LAMBADA screenshot is retained as optional course evidence; the canonical chapter explains the metric or protocol without duplicating every example.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=58:rendering=1"
+  },
+  "lecture-12-visual-figure-step-60-rendering-1": {
+    "disposition": "source-only",
+    "reason": "HellaSwag screenshot is retained as optional course evidence; the canonical chapter explains the metric or protocol without duplicating every example.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=60:rendering=1"
+  },
+  "lecture-12-visual-figure-step-79-rendering-1": {
+    "disposition": "source-only",
+    "reason": "MMLU screenshot is retained as historical course evidence; the chapter integrates the broader benchmark-design mechanism.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=79:rendering=1"
+  },
+  "lecture-12-visual-figure-step-87-rendering-1": {
+    "disposition": "source-only",
+    "reason": "MMLU-Pro screenshot is retained as optional comparative evidence.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=87:rendering=1"
+  },
+  "lecture-12-visual-figure-step-92-rendering-1": {
+    "disposition": "covered-existing",
+    "destination": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+    "destination_anchor": "хороший-набор-испытаний-начинается-с-хорошей-задачи",
+    "local_file": "00 Учебник/Assets/Figures/curated/topics-53-59-source-first/gpqa.png",
+    "transformation": "Existing canonical copy of the pinned GPQA course visual reused.",
+    "caption": "Inspect how domain-expert question construction changes what a high score can legitimately claim.",
+    "rendered_route": "/textbook/evaluation/models-contamination/",
+    "desktop_evidence": "The exact source visual and its surrounding textbook explanation were inspected at desktop width; labels remain legible and the causal sequence is complete.",
+    "narrow_evidence": "At narrow width the image stays inside the article column; dense source labels remain available through click-to-zoom and the adjacent caption states the intended inference.",
+    "reviewer": "Codex Task 5 inference and evaluation integration",
+    "checked_at": "2026-09-06"
+  },
+  "lecture-12-visual-figure-step-100-rendering-1": {
+    "disposition": "excluded",
+    "reason": "Dense HLE example collage is redundant once the task-construction pipeline is preserved.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=100:rendering=1"
+  },
+  "lecture-12-visual-figure-step-103-rendering-1": {
+    "disposition": "covered-existing",
+    "destination": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+    "destination_anchor": "хороший-набор-испытаний-начинается-с-хорошей-задачи",
+    "local_file": "00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hle-pipeline.png",
+    "transformation": "Existing canonical copy of the pinned Humanity's Last Exam construction pipeline reused.",
+    "caption": "Follow authoring, review, filtering, and release as parts of the benchmark contract rather than treating questions as an unexplained score source.",
+    "rendered_route": "/textbook/evaluation/models-contamination/",
+    "desktop_evidence": "The exact source visual and its surrounding textbook explanation were inspected at desktop width; labels remain legible and the causal sequence is complete.",
+    "narrow_evidence": "At narrow width the image stays inside the article column; dense source labels remain available through click-to-zoom and the adjacent caption states the intended inference.",
+    "reviewer": "Codex Task 5 inference and evaluation integration",
+    "checked_at": "2026-09-06"
+  },
+  "lecture-12-visual-figure-step-104-rendering-1": {
+    "disposition": "excluded",
+    "reason": "Volatile benchmark result chart is not preserved as timeless evidence.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=104:rendering=1"
+  },
+  "lecture-12-visual-figure-step-124-rendering-1": {
+    "disposition": "integrated",
+    "destination": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+    "destination_anchor": "pairwise-preference-protocol",
+    "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/inference-evaluation/chatbot-arena-pairwise-interface.png",
+    "transformation": "Byte-for-byte copy of the pinned Chatbot Arena pairwise interface raster.",
+    "caption": "The interface records a human preference between two blinded responses; it does not directly observe truth or general capability.",
+    "rendered_route": "/textbook/evaluation/models-contamination/",
+    "desktop_evidence": "The exact source visual and its surrounding textbook explanation were inspected at desktop width; labels remain legible and the causal sequence is complete.",
+    "narrow_evidence": "At narrow width the image stays inside the article column; dense source labels remain available through click-to-zoom and the adjacent caption states the intended inference.",
+    "reviewer": "Codex Task 5 inference and evaluation integration",
+    "checked_at": "2026-09-06"
+  },
+  "lecture-12-visual-figure-step-129-rendering-1": {
+    "disposition": "excluded",
+    "reason": "Live leaderboard screenshot is volatile and does not explain the pairwise protocol.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=129:rendering=1"
+  },
+  "lecture-12-visual-figure-step-144-rendering-1": {
+    "disposition": "source-only",
+    "reason": "AlpacaEval correlation plot is retained as optional judge-validity evidence but is not necessary for the canonical argument.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=144:rendering=1"
+  },
+  "lecture-12-visual-figure-step-145-rendering-1": {
+    "disposition": "excluded",
+    "reason": "Volatile leaderboard screenshot is excluded; leaderboard rank is not a stable teaching artifact.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=145:rendering=1"
+  },
+  "lecture-12-visual-figure-step-150-rendering-1": {
+    "disposition": "source-only",
+    "reason": "WildBench screenshot is retained for a future benchmark-comparison case study.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=150:rendering=1"
+  },
+  "lecture-12-visual-figure-step-208-rendering-1": {
+    "disposition": "source-only",
+    "reason": "ARC task grids are retained for a future reasoning-benchmark case study.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=208:rendering=1"
+  },
+  "lecture-12-visual-figure-step-210-rendering-1": {
+    "disposition": "source-only",
+    "reason": "ARC-AGI-2 unsolved example is retained for a future reasoning-benchmark case study.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=210:rendering=1"
+  },
+  "lecture-12-visual-figure-step-211-rendering-1": {
+    "disposition": "excluded",
+    "reason": "ARC result chart is volatile and does not establish the benchmark contract.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=211:rendering=1"
+  },
+  "lecture-12-visual-figure-step-215-rendering-1": {
+    "disposition": "source-only",
+    "reason": "ARC-AGI-3 preview is retained for a future interactive-benchmark case study.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=215:rendering=1"
+  },
+  "lecture-12-visual-figure-step-216-rendering-1": {
+    "disposition": "excluded",
+    "reason": "ARC-AGI-3 result chart is volatile and not needed for the evaluation methodology.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=216:rendering=1"
+  },
+  "lecture-12-visual-figure-step-224-rendering-1": {
+    "disposition": "excluded",
+    "reason": "Automobile crash-test photograph is an analogy, not evidence about model evaluation.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=224:rendering=1"
+  },
+  "lecture-12-visual-figure-step-233-rendering-1": {
+    "disposition": "source-only",
+    "reason": "AIR-Bench overview is retained for a future safety-evaluation taxonomy.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=233:rendering=1"
+  },
+  "lecture-12-visual-figure-step-239-rendering-1": {
+    "disposition": "source-only",
+    "reason": "GCG examples are retained for a future adversarial-evaluation chapter.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=239:rendering=1"
+  },
+  "lecture-12-visual-figure-step-305-rendering-1": {
+    "disposition": "excluded",
+    "reason": "NanoGPT speedrun screenshot shows optimization progress but does not identify the evaluated construct.",
+    "evidence": "Lectures/repository/var/traces/lecture_12.json#step=305:rendering=1"
   }
   }
 }

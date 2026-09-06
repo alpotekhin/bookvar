@@ -2694,6 +2694,7 @@ assets:
     modifications: copied or extracted without visual modification for publication
     used_in:
       - 00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md
+      - 00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md
       - 01 Справочник/Inference/PagedAttention.md
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
@@ -7922,6 +7923,177 @@ assets:
     modifications: "byte-for-byte copy of the exact pinned course raster; path changed for publication packaging"
     used_in:
       - 00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+
+  - id: curated-stanford-cs336-inference-evaluation-cached-inference-6120ead0f47a
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/inference-evaluation/cached-inference.webp
+    author: "JAX Scaling Book authors; Stanford CS336 course staff"
+    source_url: "https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/var/files/image-1a4873c436f3fbe1d863837d3b38a114-https_jax-ml_github_io_scaling-book_assets_img_cached-inference-1400_webp"
+    upstream_source_url: https://jax-ml.github.io/scaling-book/assets/img/cached-inference-1400.webp
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_line: 171
+    source_step: 95
+    source_parent_sha256: 6120ead0f47aab9f3bac18d9368e113780da6a966f8e82691fd82cf729b65c19
+    sha256: 6120ead0f47aab9f3bac18d9368e113780da6a966f8e82691fd82cf729b65c19
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "byte-for-byte copy of the exact pinned course raster; path changed for publication packaging"
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+
+  - id: curated-stanford-cs336-inference-evaluation-chatbot-arena-17e47b27c883
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/inference-evaluation/chatbot-arena-pairwise-interface.png
+    author: "LMSYS Chatbot Arena authors; Stanford CS336 course staff"
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/arena-beets.png
+    upstream_source_url: https://arxiv.org/abs/2403.04132
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_line: 170
+    source_step: 124
+    source_parent_sha256: 17e47b27c88307ece26941406214836cd4bbdd7a772e5e3afaac45e15f26748a
+    sha256: 17e47b27c88307ece26941406214836cd4bbdd7a772e5e3afaac45e15f26748a
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "byte-for-byte copy of the exact pinned course raster; path changed for publication packaging"
+    used_in:
+      - 00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+
+  - id: curated-stanford-cs336-inference-evaluation-medhelm-eac29843bf5c
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/inference-evaluation/medhelm-evaluation-pipeline.png
+    author: "Stanford CRFM MedHELM authors; Stanford CS336 course staff"
+    source_url: "https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/var/files/image-93ff2615b50418e8fd4dd6f6435bdff1-https_crfm_stanford_edu_helm_assets_medhelm-overview-CND0EIsy_png"
+    upstream_source_url: https://arxiv.org/abs/2505.23802
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_line: 327
+    source_step: 257
+    source_parent_sha256: eac29843bf5c374efe714b27b7e24fb1da15c14056bb92b139a1d649dc237600
+    sha256: eac29843bf5c374efe714b27b7e24fb1da15c14056bb92b139a1d649dc237600
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "byte-for-byte copy of the exact pinned course raster; path changed for publication packaging"
+    used_in:
+      - 00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+
+  - id: curated-stanford-cs336-inference-evaluation-minitron-loop-97a9db5232c4
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/inference-evaluation/minitron-pruning-distillation-loop.png
+    author: "NVIDIA Minitron authors; Stanford CS336 course staff"
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/pruning-kd-loop.png
+    upstream_source_url: https://arxiv.org/abs/2407.14679
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_line: 495
+    source_step: 325
+    source_parent_sha256: 97a9db5232c47b1a7e2eba1da51065ca2ca8173a28eccd636716ef2afc37536b
+    sha256: 97a9db5232c47b1a7e2eba1da51065ca2ca8173a28eccd636716ef2afc37536b
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "byte-for-byte copy of the exact pinned course raster; path changed for publication packaging"
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/57b Сжатие моделей — pruning, distillation и low-rank.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+
+  - id: curated-stanford-cs336-inference-evaluation-minitron-cost-aa770e5e1e35
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/inference-evaluation/minitron-training-cost-quality.png
+    author: "NVIDIA Minitron authors; Stanford CS336 course staff"
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/pruning-kd.png
+    upstream_source_url: https://arxiv.org/abs/2407.14679
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_line: 502
+    source_step: 331
+    source_parent_sha256: aa770e5e1e356d0d91d55f18521993471133a482bd1fb3fdeca99e1962332633
+    sha256: aa770e5e1e356d0d91d55f18521993471133a482bd1fb3fdeca99e1962332633
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "byte-for-byte copy of the exact pinned course raster; path changed for publication packaging"
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/57b Сжатие моделей — pruning, distillation и low-rank.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+
+  - id: curated-stanford-cs336-inference-evaluation-naive-inference-717dbf0c5302
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/inference-evaluation/naive-inference.webp
+    author: "JAX Scaling Book authors; Stanford CS336 course staff"
+    source_url: "https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/var/files/image-7ba69ac6feff08da76241c8e1dcf334c-https_jax-ml_github_io_scaling-book_assets_img_naive-inference-1400_webp"
+    upstream_source_url: https://jax-ml.github.io/scaling-book/assets/img/naive-inference-1400.webp
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_line: 165
+    source_step: 90
+    source_parent_sha256: 717dbf0c530250aea5f1474dfbc6a480db9769949b7ac01b73ed0922992ee954
+    sha256: 717dbf0c530250aea5f1474dfbc6a480db9769949b7ac01b73ed0922992ee954
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "byte-for-byte copy of the exact pinned course raster; path changed for publication packaging"
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+
+  - id: curated-stanford-cs336-inference-evaluation-paged-cow-38f03b9e6ce4
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/inference-evaluation/paged-attention-copy-on-write.png
+    author: "Woosuk Kwon et al.; Stanford CS336 course staff"
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/paged-attention-parallel.png
+    upstream_source_url: https://arxiv.org/abs/2309.06180
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_line: 600
+    source_step: 425
+    source_parent_sha256: 38f03b9e6ce4a587b950d2fc260ff19faa896af4089483a048d055b734dfd4e8
+    sha256: 38f03b9e6ce4a587b950d2fc260ff19faa896af4089483a048d055b734dfd4e8
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "byte-for-byte copy of the exact pinned course raster; renamed to state the copy-on-write role shown in the figure"
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+
+  - id: curated-stanford-cs336-inference-evaluation-paged-sharing-2a600d666147
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/inference-evaluation/paged-attention-sharing.png
+    author: "Woosuk Kwon et al.; Stanford CS336 course staff"
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/paged-attention-sharing.png
+    upstream_source_url: https://arxiv.org/abs/2309.06180
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_line: 595
+    source_step: 421
+    source_parent_sha256: 2a600d666147a345d730186eab6406fda63d62a40c9ae8616806ca7645283068
+    sha256: 2a600d666147a345d730186eab6406fda63d62a40c9ae8616806ca7645283068
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "byte-for-byte copy of the exact pinned course raster; path changed for publication packaging"
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-raster-copy
+
+  - id: curated-stanford-cs336-inference-evaluation-terminal-bench-da14f16484c4
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/inference-evaluation/terminal-bench-task-harness.png
+    author: "Terminal-Bench authors; Stanford CS336 course staff"
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/terminal-bench.png
+    upstream_source_url: https://www.tbench.ai/
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_line: 224
+    source_step: 170
+    source_parent_sha256: da14f16484c491430fe9b006228d0c3ced70edec4a8244a197193527babef43a
+    sha256: da14f16484c491430fe9b006228d0c3ced70edec4a8244a197193527babef43a
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: "byte-for-byte copy of the exact pinned course raster; path changed for publication packaging"
+    used_in:
+      - 00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
     derivation: source-raster-copy

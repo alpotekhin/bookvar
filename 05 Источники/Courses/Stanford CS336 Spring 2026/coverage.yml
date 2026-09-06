@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "semantic_review_sha256": "e2341ca3ee4e1facfc504274709cd48b76cb144336026986ffde36cbbe213b9f",
+  "semantic_review_sha256": "d88ae947a19d4ecc9e81d0dede8042a21a956365bd7f6ead1da120a353766e62",
   "rows": [
     {
       "id": "coverage-lecture-01-section-4-cs336-language-models-from-scratch-spring-2026",
@@ -2486,10 +2486,9 @@
       "primary_sources": [
         "lecture-10"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-10",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/14 Inference и оптимизация/55c Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer.md",
+      "destination_anchor": "пять-уровней-одной-системы"
     },
     {
       "id": "coverage-lecture-10-figure-step-3-rendering-1",
@@ -2501,10 +2500,9 @@
       "primary_sources": [
         "lecture-10"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-10",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "excluded",
+      "reason": "Decorative inference-schema title frame adds no mechanism beyond the integrated five-layer serving explanation.",
+      "evidence": "Lectures/repository/var/traces/lecture_10.json#step=3:rendering=1"
     },
     {
       "id": "coverage-lecture-10-section-4-understanding-the-inference-workload",
@@ -2516,10 +2514,9 @@
       "primary_sources": [
         "lecture-10"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-10",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md",
+      "destination_anchor": "авторегрессионный-запрос-распадается-на-две-фазы"
     },
     {
       "id": "coverage-lecture-10-figure-step-45-rendering-1",
@@ -2531,10 +2528,9 @@
       "primary_sources": [
         "lecture-10"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-10",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "excluded",
+      "reason": "Generic Transformer diagram is redundant with the textbook architecture chapters and does not advance the inference argument.",
+      "evidence": "Lectures/repository/var/traces/lecture_10.json#step=45:rendering=1"
     },
     {
       "id": "coverage-lecture-10-inference-arithmetic-intensity",
@@ -2546,10 +2542,9 @@
       "primary_sources": [
         "lecture-10"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-10",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md",
+      "destination_anchor": "обозначения-и-стоимость-одного-матричного-умножения"
     },
     {
       "id": "coverage-lecture-10-naive-versus-cached-inference",
@@ -2561,10 +2556,9 @@
       "primary_sources": [
         "lecture-10"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-10",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md",
+      "destination_anchor": "авторегрессионный-запрос-распадается-на-две-фазы"
     },
     {
       "id": "coverage-lecture-10-section-103-mlp-layers-only-looking-at-the-matrix-multiplications",
@@ -2576,31 +2570,29 @@
       "primary_sources": [
         "lecture-10"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-10",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md",
+      "destination_anchor": "сколько-операций-выполняет-слой"
     },
     {
       "id": "coverage-lecture-10-section-133-attention-layers-focusing-on-the-matrix-multiplications-with-flashattention",
       "source_object": "lecture-10",
       "source_unit": "lecture-10-section-133-attention-layers-focusing-on-the-matrix-multiplications-with-flashattention",
-      "source_location": "Lectures/repository/var/traces/lecture_10.json#steps=133-222:semantic=section-133-attention-layers-focusing-on-the-matrix-multiplications-with-flashattention",
+      "source_location": "Lectures/repository/var/traces/lecture_10.json#steps=133-222:lines=219-260,287-369:semantic=section-133-attention-layers-focusing-on-the-matrix-multiplications-with-flashattention",
       "kind": "section",
       "title": "Attention layers (focusing on the matrix multiplications with FlashAttention)",
       "primary_sources": [
         "lecture-10"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-10",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md",
+      "destination_anchor": "сколько-операций-выполняет-слой"
     },
     {
       "id": "coverage-lecture-10-section-223-taking-shortcuts-lossy",
       "source_object": "lecture-10",
       "source_unit": "lecture-10-section-223-taking-shortcuts-lossy",
-      "source_location": "Lectures/repository/var/traces/lecture_10.json#steps=223-228:semantic=section-223-taking-shortcuts-lossy",
+      "source_location": "Lectures/repository/var/traces/lecture_10.json#steps=223-228:lines=27-32,371-487,490-502:semantic=section-223-taking-shortcuts-lossy",
       "kind": "section",
       "title": "Taking shortcuts (lossy)",
       "primary_sources": [
@@ -2609,7 +2601,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-10",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "This dispatcher-level umbrella is retained in the source archive; its concrete mechanisms are routed separately to GQA/MLA, quantization, and Minitron chapters.",
+      "evidence": "Lectures/repository/var/traces/lecture_10.json#steps=223-228:semantic=section-223-taking-shortcuts-lossy"
     },
     {
       "id": "coverage-lecture-10-kv-cache-attention-alternatives",
@@ -2621,10 +2614,9 @@
       "primary_sources": [
         "lecture-10"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-10",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md",
+      "destination_anchor": "три-способа-организовать-головы"
     },
     {
       "id": "coverage-lecture-10-section-229-grouped-query-attention-gqa",
@@ -2636,10 +2628,9 @@
       "primary_sources": [
         "lecture-10"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-10",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md",
+      "destination_anchor": "gqa-один-комплект-kv-на-группу-запросов"
     },
     {
       "id": "coverage-lecture-10-section-250-multi-head-latent-attention-mla",
@@ -2651,10 +2642,9 @@
       "primary_sources": [
         "lecture-10"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-10",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md",
+      "destination_anchor": "deepseek-mla-cache-compression"
     },
     {
       "id": "coverage-lecture-10-section-262-cross-layer-attention-cla",
@@ -2669,7 +2659,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-10",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Retained for a future long-context attention expansion; the present Task 5 route does not flatten CLA into GQA or MLA.",
+      "evidence": "Lectures/repository/var/traces/lecture_10.json#steps=262-266:semantic=section-262-cross-layer-attention-cla"
     },
     {
       "id": "coverage-lecture-10-section-267-local-sliding-window-attention",
@@ -2684,7 +2675,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-10",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Retained for the dedicated long-context attention expansion; local attention requires its own receptive-field and global-token treatment.",
+      "evidence": "Lectures/repository/var/traces/lecture_10.json#steps=267-273:semantic=section-267-local-sliding-window-attention"
     },
     {
       "id": "coverage-lecture-10-section-274-deepseek-v4-attention",
@@ -2699,7 +2691,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-10",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Retained as a time-sensitive architecture note until the dedicated DeepSeek lineage chapter verifies the released model and primary technical report.",
+      "evidence": "Lectures/repository/var/traces/lecture_10.json#steps=274-310:semantic=section-274-deepseek-v4-attention"
     },
     {
       "id": "coverage-lecture-10-figure-step-296-rendering-1",
@@ -2711,25 +2704,23 @@
       "primary_sources": [
         "lecture-10"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-10",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "excluded",
+      "reason": "Social-media screenshot is volatile and adds no stable mechanism or reproducible evidence.",
+      "evidence": "Lectures/repository/var/traces/lecture_10.json#step=296:rendering=1"
     },
     {
       "id": "coverage-lecture-10-section-311-activation-aware-quantization-awq",
       "source_object": "lecture-10",
       "source_unit": "lecture-10-section-311-activation-aware-quantization-awq",
-      "source_location": "Lectures/repository/var/traces/lecture_10.json#steps=311-340:semantic=section-311-activation-aware-quantization-awq",
+      "source_location": "Lectures/repository/var/traces/lecture_10.json#steps=311-340:lines=480-487:semantic=section-311-activation-aware-quantization-awq",
       "kind": "section",
       "title": "Activation-aware quantization (AWQ)",
       "primary_sources": [
         "lecture-10"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-10",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md",
+      "destination_anchor": "awq"
     },
     {
       "id": "coverage-lecture-10-figure-step-318-rendering-1",
@@ -2741,10 +2732,23 @@
       "primary_sources": [
         "lecture-10"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-10",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md",
+      "destination_anchor": "awq"
+    },
+    {
+      "id": "coverage-lecture-10-model-pruning-distillation",
+      "source_object": "lecture-10",
+      "source_unit": "lecture-10-model-pruning-distillation",
+      "source_location": "Lectures/repository/var/traces/lecture_10.json#steps=322-331:lines=490-502:semantic=model-pruning-distillation",
+      "kind": "worked-example",
+      "title": "Structured pruning and knowledge-distillation campaign",
+      "primary_sources": [
+        "lecture-10"
+      ],
+      "disposition": "integrated",
+      "destination": "00 Учебник/14 Inference и оптимизация/57b Сжатие моделей — pruning, distillation и low-rank.md",
+      "destination_anchor": "minitron-структурное-pruning-как-измеряемая-кампания"
     },
     {
       "id": "coverage-lecture-10-figure-step-325-rendering-1",
@@ -2756,10 +2760,9 @@
       "primary_sources": [
         "lecture-10"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-10",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/14 Inference и оптимизация/57b Сжатие моделей — pruning, distillation и low-rank.md",
+      "destination_anchor": "minitron-структурное-pruning-как-измеряемая-кампания"
     },
     {
       "id": "coverage-lecture-10-figure-step-331-rendering-1",
@@ -2771,25 +2774,23 @@
       "primary_sources": [
         "lecture-10"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-10",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/14 Inference и оптимизация/57b Сжатие моделей — pruning, distillation и low-rank.md",
+      "destination_anchor": "minitron-структурное-pruning-как-измеряемая-кампания"
     },
     {
       "id": "coverage-lecture-10-section-341-use-shortcuts-but-double-check-lossless",
       "source_object": "lecture-10",
       "source_unit": "lecture-10-section-341-use-shortcuts-but-double-check-lossless",
-      "source_location": "Lectures/repository/var/traces/lecture_10.json#steps=341-380:semantic=section-341-use-shortcuts-but-double-check-lossless",
+      "source_location": "Lectures/repository/var/traces/lecture_10.json#steps=341-380:lines=43-45,507-550:semantic=section-341-use-shortcuts-but-double-check-lossless",
       "kind": "section",
       "title": "Use shortcuts but double check (lossless)",
       "primary_sources": [
         "lecture-10"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-10",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md",
+      "destination_anchor": "полный-алгоритм-на-исходном-слайде"
     },
     {
       "id": "coverage-lecture-10-figure-step-353-rendering-1",
@@ -2801,10 +2802,9 @@
       "primary_sources": [
         "lecture-10"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-10",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md",
+      "destination_anchor": "полный-алгоритм-на-исходном-слайде"
     },
     {
       "id": "coverage-lecture-10-figure-step-366-rendering-1",
@@ -2816,10 +2816,9 @@
       "primary_sources": [
         "lecture-10"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-10",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md",
+      "destination_anchor": "процент-принятия-связывает-качество-и-скорость"
     },
     {
       "id": "coverage-lecture-10-figure-step-367-rendering-1",
@@ -2831,10 +2830,9 @@
       "primary_sources": [
         "lecture-10"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-10",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md",
+      "destination_anchor": "почему-больше-draft-токенов-не-всегда-лучше"
     },
     {
       "id": "coverage-lecture-10-figure-step-375-rendering-1",
@@ -2849,22 +2847,22 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-10",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "The compact Medusa/EAGLE comparison is retained in the source archive because the textbook already uses a clearer primary EAGLE pipeline figure.",
+      "evidence": "Lectures/repository/var/traces/lecture_10.json#step=375:rendering=1"
     },
     {
       "id": "coverage-lecture-10-section-381-handling-dynamic-workloads",
       "source_object": "lecture-10",
       "source_unit": "lecture-10-section-381-handling-dynamic-workloads",
-      "source_location": "Lectures/repository/var/traces/lecture_10.json#steps=381-431:semantic=section-381-handling-dynamic-workloads",
+      "source_location": "Lectures/repository/var/traces/lecture_10.json#steps=381-431:lines=46-54,553-607:semantic=section-381-handling-dynamic-workloads",
       "kind": "section",
       "title": "Handling dynamic workloads",
       "primary_sources": [
         "lecture-10"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-10",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md",
+      "destination_anchor": "почему-статический-пакет-теряет-вместимость"
     },
     {
       "id": "coverage-lecture-10-dynamic-workload-failure-mode",
@@ -2876,10 +2874,9 @@
       "primary_sources": [
         "lecture-10"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-10",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md",
+      "destination_anchor": "почему-статический-пакет-теряет-вместимость"
     },
     {
       "id": "coverage-lecture-10-figure-step-392-rendering-1",
@@ -2891,10 +2888,9 @@
       "primary_sources": [
         "lecture-10"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-10",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md",
+      "destination_anchor": "почему-статический-пакет-теряет-вместимость"
     },
     {
       "id": "coverage-lecture-10-paged-attention-memory-sequence",
@@ -2906,10 +2902,9 @@
       "primary_sources": [
         "lecture-10"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-10",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md",
+      "destination_anchor": "pagedattention-логическая-последовательность-физические-блоки"
     },
     {
       "id": "coverage-lecture-10-section-432-summary",
@@ -2921,10 +2916,9 @@
       "primary_sources": [
         "lecture-10"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-10",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/14 Inference и оптимизация/55c Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer.md",
+      "destination_anchor": "что-остаётся-стабильным-а-что-нужно-перепроверять"
     },
     {
       "id": "coverage-lecture-11-title-slide",
@@ -3048,10 +3042,9 @@
       "primary_sources": [
         "lecture-12"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-12",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+      "destination_anchor": "от-цели-к-наблюдаемой-величине"
     },
     {
       "id": "coverage-lecture-12-figure-step-19-rendering-1",
@@ -3063,10 +3056,9 @@
       "primary_sources": [
         "lecture-12"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-12",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "excluded",
+      "reason": "Volatile leaderboard, cost, or introductory screenshot is not durable evidence for a textbook mechanism.",
+      "evidence": "Lectures/repository/var/traces/lecture_12.json#step=19:rendering=1"
     },
     {
       "id": "coverage-lecture-12-figure-step-21-rendering-1",
@@ -3078,10 +3070,9 @@
       "primary_sources": [
         "lecture-12"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-12",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "excluded",
+      "reason": "Volatile leaderboard, cost, or introductory screenshot is not durable evidence for a textbook mechanism.",
+      "evidence": "Lectures/repository/var/traces/lecture_12.json#step=21:rendering=1"
     },
     {
       "id": "coverage-lecture-12-figure-step-24-rendering-1",
@@ -3093,10 +3084,9 @@
       "primary_sources": [
         "lecture-12"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-12",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "excluded",
+      "reason": "Volatile leaderboard, cost, or introductory screenshot is not durable evidence for a textbook mechanism.",
+      "evidence": "Lectures/repository/var/traces/lecture_12.json#step=24:rendering=1"
     },
     {
       "id": "coverage-lecture-12-figure-step-27-rendering-1",
@@ -3108,10 +3098,9 @@
       "primary_sources": [
         "lecture-12"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-12",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "excluded",
+      "reason": "Volatile leaderboard, cost, or introductory screenshot is not durable evidence for a textbook mechanism.",
+      "evidence": "Lectures/repository/var/traces/lecture_12.json#step=27:rendering=1"
     },
     {
       "id": "coverage-lecture-12-figure-step-45-rendering-1",
@@ -3126,7 +3115,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-12",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "Perplexity example is retained as optional course evidence; the chapter explains the metric or task without duplicating every benchmark screenshot.",
+      "evidence": "Lectures/repository/var/traces/lecture_12.json#step=45:rendering=1"
     },
     {
       "id": "coverage-lecture-12-figure-step-58-rendering-1",
@@ -3141,7 +3131,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-12",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "LAMBADA example is retained as optional course evidence; the chapter explains the metric or task without duplicating every benchmark screenshot.",
+      "evidence": "Lectures/repository/var/traces/lecture_12.json#step=58:rendering=1"
     },
     {
       "id": "coverage-lecture-12-figure-step-60-rendering-1",
@@ -3156,7 +3147,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-12",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "HellaSwag example is retained as optional course evidence; the chapter explains the metric or task without duplicating every benchmark screenshot.",
+      "evidence": "Lectures/repository/var/traces/lecture_12.json#step=60:rendering=1"
     },
     {
       "id": "coverage-lecture-12-benchmark-design-worked-examples",
@@ -3168,10 +3160,9 @@
       "primary_sources": [
         "lecture-12"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-12",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+      "destination_anchor": "хороший-набор-испытаний-начинается-с-хорошей-задачи"
     },
     {
       "id": "coverage-lecture-12-figure-step-79-rendering-1",
@@ -3186,7 +3177,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-12",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "MMLU screenshot is retained as historical course evidence; the chapter uses the broader benchmark-design argument.",
+      "evidence": "Lectures/repository/var/traces/lecture_12.json#step=79:rendering=1"
     },
     {
       "id": "coverage-lecture-12-figure-step-87-rendering-1",
@@ -3201,7 +3193,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-12",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "MMLU-Pro screenshot is retained as optional evidence; it is not needed to establish construct validity.",
+      "evidence": "Lectures/repository/var/traces/lecture_12.json#step=87:rendering=1"
     },
     {
       "id": "coverage-lecture-12-figure-step-92-rendering-1",
@@ -3213,10 +3206,9 @@
       "primary_sources": [
         "lecture-12"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-12",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+      "destination_anchor": "хороший-набор-испытаний-начинается-с-хорошей-задачи"
     },
     {
       "id": "coverage-lecture-12-figure-step-100-rendering-1",
@@ -3228,10 +3220,9 @@
       "primary_sources": [
         "lecture-12"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-12",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "excluded",
+      "reason": "Dense HLE example collage is redundant once the task-construction pipeline is preserved.",
+      "evidence": "Lectures/repository/var/traces/lecture_12.json#step=100:rendering=1"
     },
     {
       "id": "coverage-lecture-12-figure-step-103-rendering-1",
@@ -3243,10 +3234,9 @@
       "primary_sources": [
         "lecture-12"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-12",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+      "destination_anchor": "хороший-набор-испытаний-начинается-с-хорошей-задачи"
     },
     {
       "id": "coverage-lecture-12-figure-step-104-rendering-1",
@@ -3258,10 +3248,9 @@
       "primary_sources": [
         "lecture-12"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-12",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "excluded",
+      "reason": "Volatile benchmark results are not preserved as timeless textbook evidence.",
+      "evidence": "Lectures/repository/var/traces/lecture_12.json#step=104:rendering=1"
     },
     {
       "id": "coverage-lecture-12-figure-step-124-rendering-1",
@@ -3273,10 +3262,9 @@
       "primary_sources": [
         "lecture-12"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-12",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+      "destination_anchor": "pairwise-preference-protocol"
     },
     {
       "id": "coverage-lecture-12-figure-step-129-rendering-1",
@@ -3288,10 +3276,9 @@
       "primary_sources": [
         "lecture-12"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-12",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "excluded",
+      "reason": "Live leaderboard screenshot is volatile and does not explain the pairwise protocol.",
+      "evidence": "Lectures/repository/var/traces/lecture_12.json#step=129:rendering=1"
     },
     {
       "id": "coverage-lecture-12-figure-step-144-rendering-1",
@@ -3306,7 +3293,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-12",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "AlpacaEval correlation plot is retained as optional judge-validity evidence but is not required for the canonical causal chain.",
+      "evidence": "Lectures/repository/var/traces/lecture_12.json#step=144:rendering=1"
     },
     {
       "id": "coverage-lecture-12-figure-step-145-rendering-1",
@@ -3318,10 +3306,9 @@
       "primary_sources": [
         "lecture-12"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-12",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "excluded",
+      "reason": "Volatile leaderboard screenshot is excluded; leaderboard rank is not a stable teaching artifact.",
+      "evidence": "Lectures/repository/var/traces/lecture_12.json#step=145:rendering=1"
     },
     {
       "id": "coverage-lecture-12-figure-step-150-rendering-1",
@@ -3336,7 +3323,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-12",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "WildBench screenshot is retained for comparative benchmark study; the canonical chapter focuses on protocol and validity.",
+      "evidence": "Lectures/repository/var/traces/lecture_12.json#step=150:rendering=1"
     },
     {
       "id": "coverage-lecture-12-agentic-benchmark-evidence-chain",
@@ -3348,10 +3336,9 @@
       "primary_sources": [
         "lecture-12"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-12",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+      "destination_anchor": "агентный-benchmark-проверяет-замкнутый-контур"
     },
     {
       "id": "coverage-lecture-12-figure-step-208-rendering-1",
@@ -3366,7 +3353,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-12",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "ARC task grids are retained for a future reasoning-benchmark case study.",
+      "evidence": "Lectures/repository/var/traces/lecture_12.json#step=208:rendering=1"
     },
     {
       "id": "coverage-lecture-12-figure-step-210-rendering-1",
@@ -3381,7 +3369,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-12",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "ARC-AGI-2 unsolved example is retained for a future reasoning-benchmark case study.",
+      "evidence": "Lectures/repository/var/traces/lecture_12.json#step=210:rendering=1"
     },
     {
       "id": "coverage-lecture-12-figure-step-211-rendering-1",
@@ -3393,10 +3382,9 @@
       "primary_sources": [
         "lecture-12"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-12",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "excluded",
+      "reason": "ARC results screenshot is volatile and does not establish the benchmark contract.",
+      "evidence": "Lectures/repository/var/traces/lecture_12.json#step=211:rendering=1"
     },
     {
       "id": "coverage-lecture-12-figure-step-215-rendering-1",
@@ -3411,7 +3399,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-12",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "ARC-AGI-3 preview is retained for a future interactive-benchmark case study.",
+      "evidence": "Lectures/repository/var/traces/lecture_12.json#step=215:rendering=1"
     },
     {
       "id": "coverage-lecture-12-figure-step-216-rendering-1",
@@ -3423,10 +3412,9 @@
       "primary_sources": [
         "lecture-12"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-12",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "excluded",
+      "reason": "ARC-AGI-3 results screenshot is volatile and not needed for the evaluation methodology.",
+      "evidence": "Lectures/repository/var/traces/lecture_12.json#step=216:rendering=1"
     },
     {
       "id": "coverage-lecture-12-figure-step-224-rendering-1",
@@ -3438,10 +3426,9 @@
       "primary_sources": [
         "lecture-12"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-12",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "excluded",
+      "reason": "Automobile crash-test photograph is an analogy, not evidence about model evaluation.",
+      "evidence": "Lectures/repository/var/traces/lecture_12.json#step=224:rendering=1"
     },
     {
       "id": "coverage-lecture-12-figure-step-233-rendering-1",
@@ -3456,7 +3443,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-12",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "AIR-Bench overview is retained for a future safety-evaluation taxonomy; the present chapter keeps the general validity chain.",
+      "evidence": "Lectures/repository/var/traces/lecture_12.json#step=233:rendering=1"
     },
     {
       "id": "coverage-lecture-12-figure-step-239-rendering-1",
@@ -3471,7 +3459,8 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-12",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "reason": "GCG examples are retained for a future adversarial-evaluation chapter.",
+      "evidence": "Lectures/repository/var/traces/lecture_12.json#step=239:rendering=1"
     },
     {
       "id": "coverage-lecture-12-evaluation-validity-failure-modes",
@@ -3483,10 +3472,9 @@
       "primary_sources": [
         "lecture-12"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-12",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+      "destination_anchor": "более-устойчивые-способы-оценки"
     },
     {
       "id": "coverage-lecture-12-benchmark-validity-sequence",
@@ -3498,10 +3486,9 @@
       "primary_sources": [
         "lecture-12"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-12",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+      "destination_anchor": "что-такое-контаминация"
     },
     {
       "id": "coverage-lecture-12-section-268-train-test-overlap",
@@ -3513,10 +3500,9 @@
       "primary_sources": [
         "lecture-12"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-12",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+      "destination_anchor": "что-такое-контаминация"
     },
     {
       "id": "coverage-lecture-12-section-284-dataset-quality",
@@ -3528,10 +3514,9 @@
       "primary_sources": [
         "lecture-12"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-12",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+      "destination_anchor": "хороший-набор-испытаний-начинается-с-хорошей-задачи"
     },
     {
       "id": "coverage-lecture-12-section-294-what-s-the-point-of-evaluation",
@@ -3543,10 +3528,9 @@
       "primary_sources": [
         "lecture-12"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-12",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+      "destination_anchor": "от-цели-к-наблюдаемой-величине"
     },
     {
       "id": "coverage-lecture-12-section-300-what-are-we-evaluating",
@@ -3558,10 +3542,9 @@
       "primary_sources": [
         "lecture-12"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-12",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+      "destination_anchor": "что-именно-оценивается"
     },
     {
       "id": "coverage-lecture-12-figure-step-305-rendering-1",
@@ -3573,10 +3556,9 @@
       "primary_sources": [
         "lecture-12"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-12",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "excluded",
+      "reason": "NanoGPT speedrun screenshot illustrates optimization progress but does not identify the evaluated construct; the distinction is explained in prose.",
+      "evidence": "Lectures/repository/var/traces/lecture_12.json#step=305:rendering=1"
     },
     {
       "id": "coverage-lecture-13-section-2-lecture-13-data-i",
@@ -11821,5 +11803,5 @@
       "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
     }
   ],
-  "editorial_overlay_sha256": "525ec9356c1cf6b77a5a7a89f698379d46d6e50a857c4b703a190eeae66ff2ed"
+  "editorial_overlay_sha256": "6406dfe0552849015d4762acce10d806fb5609438bca7dadd4c44120d9476180"
 }

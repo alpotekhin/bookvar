@@ -2,13 +2,16 @@
 title: MHA, MQA и GQA
 type: textbook-chapter
 status: canonical
-last_updated: 2026-07-20
+last_updated: 2026-09-06
+source_unit_id:
+  - lecture-10-kv-cache-attention-alternatives
+  - lecture-10-section-229-grouped-query-attention-gqa
 previous: "[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/04 RoPE]]"
 next: "[[02 Areas/ML & DL/00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache]]"
 primary_sources:
   - https://arxiv.org/abs/1911.02150
   - https://aclanthology.org/2023.emnlp-main.298/
-  - https://github.com/stanford-cs336/spring2025-lectures/blob/main/lecture_10.py
+  - https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py
   - https://arxiv.org/abs/2307.09288
 ---
 
@@ -25,7 +28,7 @@ primary_sources:
 *Префилл обрабатывает исходную последовательность параллельно, а декодирование
 добавляет по одному токену и на каждом шаге обращается к накопленному KV-кэшу.
 Источник: Stanford CS336, [Lecture 1: Language Modeling from
-Scratch](https://github.com/stanford-cs336/spring2025-lectures/blob/main/lecture_01.py),
+Scratch](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_01.py),
 рисунок `prefill-decode.png`.*
 
 Экономия вычислений оборачивается расходом памяти. Каждый запрос имеет собственный
@@ -47,19 +50,37 @@ $$
 
 В режиме префилла длины запросов и ключей велики, поэтому крупные матричные
 умножения хорошо загружают ускоритель. При декодировании длина запроса равна
-единице, но все $S$ ключей и значений всё равно приходится читать из HBM. В
-выводе Stanford CS336 вычислительная интенсивность слоя внимания без учёта
-второстепенных операций равна
+единице, но все $S$ ключей и значений всё равно приходится читать из HBM.
+
+Сначала рассмотрим именно MHA. Пусть $T$ — число новых query-позиций,
+$d=n_qd_h$, а каждый элемент занимает $b$ байтов. Для двух произведений
+$QK^\top$ и $AV$ требуется примерно $4BSTD$ FLOP, где $D=d$. При идеальном
+однократном чтении Q, K, V и записи результата трафик равен
+$2bBd(S+T)$, поэтому
 
 $$
-I=\frac{ST}{S+T},
+I_{MHA}=\frac{2ST}{b(S+T)}.
 $$
 
-где $T$ — число одновременно обрабатываемых новых позиций. Для префилла $T=S$ и
-$I=S/2$; для одного шага декодирования $T=1$ и $I=S/(S+1)<1$. Увеличение пакета
-не устраняет этот предел: у каждой последовательности свой KV-кэш. Поэтому
-сокращение кэша уменьшает не только занятую память, но и объём данных, который
-нужно переносить на каждом шаге.
+Для BF16 ($b=2$) это выражение превращается в $ST/(S+T)$. При префилле
+$T=S$ и $I=S/2$; при одном MHA decode-шаге $T=1$ и
+$I=S/(S+1)<1$.
+
+Для GQA этот предел другой. Ширина Q и результата остаётся $d=n_qd_h$, но
+хранимые K/V имеют ширину $n_{kv}d_h$. При тех же допущениях
+
+$$
+I_{GQA}=\frac{2STd}
+{b\left(Td+Sn_{kv}d_h\right)}.
+$$
+
+При BF16 decode и большом $S$ интенсивность стремится к
+$n_q/n_{kv}$. Следовательно, формула $S/(S+1)<1$ описывает упрощённое ядро MHA,
+а не GQA вообще. Batch $B$ сокращается в этой идеальной оценке чтения KV, но в
+реальном запуске пакет всё равно меняет переиспользование весов, occupancy,
+число kernel launches и расписание. Надёжный вывод уже: сокращение числа
+KV-голов уменьшает и занятую память, и обязательный трафик истории на каждом
+шаге.
 
 ## Размер KV-кэша выводится из форм тензоров
 
@@ -268,7 +289,7 @@ FlashAttention. FlashAttention меняет порядок вычислений 
 
 ## Источники и продолжение
 
-- [Stanford CS336, Lecture 10: Inference](https://github.com/stanford-cs336/spring2025-lectures/blob/main/lecture_10.py)
+- [Stanford CS336 Spring 2026, Lecture 10: Inference](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py)
   — последовательность «арифметическая интенсивность → KV-кэш → GQA → MLA» и
   численный анализ памяти.
 - [Noam Shazeer — Fast Transformer Decoding: One Write-Head is All You

@@ -224,6 +224,34 @@ class StanfordSemanticAuditTest(unittest.TestCase):
         self.assertTrue(multi_event)
         self.assertTrue(multi_page)
 
+    def test_lecture_10_uses_reviewed_disjoint_ranges_and_pruning_context(self) -> None:
+        units_by_id = {unit["id"]: unit for unit in self.units["units"]}
+        expected_ranges = {
+            "lecture-10-section-133-attention-layers-focusing-on-the-matrix-multiplications-with-flashattention": [[219, 260], [287, 369]],
+            "lecture-10-section-223-taking-shortcuts-lossy": [[27, 32], [371, 487], [490, 502]],
+            "lecture-10-section-311-activation-aware-quantization-awq": [[480, 487]],
+            "lecture-10-section-341-use-shortcuts-but-double-check-lossless": [[43, 45], [507, 550]],
+            "lecture-10-section-381-handling-dynamic-workloads": [[46, 54], [553, 607]],
+        }
+        for unit_id, ranges in expected_ranges.items():
+            unit = units_by_id[unit_id]
+            self.assertEqual(unit["source_line_ranges"], ranges)
+            self.assertNotIn("source_line_start", unit)
+            self.assertNotIn("source_line_end", unit)
+
+        pruning = units_by_id["lecture-10-model-pruning-distillation"]
+        self.assertEqual(pruning["source_line_start"], 490)
+        self.assertEqual(pruning["source_line_end"], 502)
+
+        visuals_by_id = {row["id"]: row for row in self.visuals["rows"]}
+        for step in (325, 331):
+            visual = visuals_by_id[
+                f"lecture-10-visual-figure-step-{step}-rendering-1"
+            ]
+            self.assertIn("lecture-10-model-pruning-distillation", visual["source_units"])
+            self.assertIn("Structured pruning", visual["question"])
+            self.assertNotIn("Activation-aware quantization", visual["question"])
+
     def test_lecture_6_accelerator_table_is_one_progressive_sequence(self) -> None:
         matches = [
             row for row in self.visuals["rows"]

@@ -1,9 +1,14 @@
 ---
 title: Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer
 type: textbook-chapter
-status: active
-last_updated: 2026-07-22
-last_verified: 2026-07-22
+status: canonical
+last_updated: 2026-09-06
+last_verified: 2026-09-06
+source_unit_id:
+  - lecture-10-section-2-lecture-10-inference
+  - lecture-10-section-432-summary
+primary_sources:
+  - https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py
 ---
 
 # Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer
@@ -216,6 +221,24 @@ Inference Server — другой продукт, не совпадающий с
 маршрут от memory traffic до tiled matmul находится в справочной главе
 [[02 Areas/ML & DL/01 Справочник/Inference/Triton и GPU kernels|Triton и GPU kernels]].
 
+## llama.cpp: полезный контраст CPU-first runtime
+
+[llama.cpp](https://github.com/ggml-org/llama.cpp) находится ближе к
+самодостаточному runtime, но оптимизирует другой тип развёртывания: локальный
+запуск, CPU и неоднородные CPU/GPU-конфигурации, компактные GGUF-артефакты и
+широкий набор weight quantization. Его присутствие рядом с GPU-серверами в
+Stanford CS336 полезно не как ещё одна строка рейтинга, а как проверка
+критериев. Если главные ограничения — RAM, переносимость и один локальный
+пользователь, то решение будет другим, чем для сотен конкурентных запросов на
+H100.
+
+GGUF — формат хранения и metadata, а не доказательство конкретной скорости;
+offload слоёв на GPU — стратегия размещения, а не tensor parallelism; поддержка
+квантизованного файла не гарантирует одинаковую точность и kernel path на всех
+устройствах. Версию llama.cpp, commit модели, число offloaded layers, CPU ISA,
+GPU backend и размер контекста нужно фиксировать так же, как версии vLLM или
+TensorRT-LLM.
+
 ## Как выбирать runtime
 
 Выбор начинается с workload, а не с названия проекта.
@@ -263,7 +286,7 @@ runtime выдержит производственный SLO.
 - [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/model_serving|Harvard CS249r — Model Serving]].
 - [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/inference|Harvard CS249r — Inference]].
 
-- Stanford CS336, [Lecture 10: Inference](https://cs336.stanford.edu/).
+- Stanford CS336 Spring 2026, [Lecture 10: Inference](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py), pinned commit `8b59b507`.
 - Aleksa Gordić, [Inside vLLM: Anatomy of a High-Throughput LLM Inference System](https://www.aleksagordic.com/blog/vllm).
 - Kwon et al., [Efficient Memory Management for Large Language Model Serving with PagedAttention](https://arxiv.org/abs/2309.06180).
 - Zheng et al., [SGLang: Efficient Execution of Structured Language Model Programs](https://arxiv.org/abs/2312.07104).

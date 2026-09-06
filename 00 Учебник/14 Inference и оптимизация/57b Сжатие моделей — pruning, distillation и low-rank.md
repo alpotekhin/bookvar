@@ -2,8 +2,16 @@
 title: Сжатие моделей — pruning, distillation и low-rank
 type: textbook-chapter
 status: canonical
-last_verified: 2026-08-06
+last_updated: 2026-09-06
+last_verified: 2026-09-06
 source_language: mixed
+source_unit_id:
+  - lecture-10-model-pruning-distillation
+  - lecture-10-figure-step-325-rendering-1
+  - lecture-10-figure-step-331-rendering-1
+primary_sources:
+  - https://arxiv.org/abs/2407.14679
+  - https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py
 ---
 
 # Сжатие моделей: pruning, distillation и low-rank
@@ -91,6 +99,58 @@ CC BY-NC-SA 4.0.*
 фактические shapes/число операций и end-to-end latency. Отчёт «90% weights are
 zero» без последних двух измерений ничего не говорит о serving.
 
+### Minitron: структурное pruning как измеряемая кампания
+
+Работа [Compact Language Models via Pruning and Knowledge
+Distillation](https://arxiv.org/abs/2407.14679) показывает полный цикл, которого
+не видно из одного определения pruning. Сначала уже обученную модель прогоняют
+на небольшом calibration set без backpropagation и оценивают важность
+структурных единиц: embedding/hidden channels, attention heads, MLP channels и
+целых слоёв. В экспериментах Minitron для такой forward-only calibration
+использовались 1024 samples. Затем единицы ранжируют, архитектуру физически
+обрезают и восстанавливают качество продолжением обучения и distillation.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/inference-evaluation/minitron-pruning-distillation-loop.png]]
+
+*Figure 2 из Minitron: trained LLM → estimate importance → rank → trim →
+distillation; цикл можно повторять для семейства меньших моделей. Источник:
+Minitron, [arXiv:2407.14679](https://arxiv.org/abs/2407.14679), CC BY 4.0;
+изображение воспроизведено в Stanford CS336 Spring 2026, Lecture 10, trace step
+325, source line 495, pinned commit
+[`8b59b50`](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py#L490-L502).*
+
+Эта схема важна двумя границами. Во-первых, importance score не является
+свойством слоя «вообще»: он зависит от calibration distribution и выбранной
+единицы удаления. Во-вторых, distillation не делает pruning безошибочным, а
+обучает уже изменённую архитектуру приближать teacher. Воспроизводимый отчёт
+должен назвать исходный checkpoint, calibration data, ось pruning, целевую
+форму каждого слоя, retraining tokens и состав loss.
+
+В Minitron student обучается сочетанием causal language-model objective,
+согласования logits teacher/student и, в некоторых вариантах, промежуточных
+представлений. Нельзя заменить это словом «distill» без коэффициентов, teacher
+temperature и данных: разные сигналы сохраняют разные части поведения.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/inference-evaluation/minitron-training-cost-quality.png]]
+
+*Figure 1 из Minitron сопоставляет MMLU score и число training tokens для
+полученных моделей и нескольких базовых checkpoints. Красная надпись «40×
+cheaper, 9% better» сравнивает Minitron 8B именно с Nemotron-3 8B; зелёная
+пунктирная линия отдельно показывает путь pruning от Nemotron-4 15B. Эти
+отношения не являются общим законом pruning. Источник: Minitron,
+[arXiv:2407.14679](https://arxiv.org/abs/2407.14679),
+CC BY 4.0; Stanford CS336 Spring 2026, Lecture 10, trace step 331, source line
+502, pinned commit [`8b59b50`](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py#L490-L502).*
+
+Числа из этой работы нужно читать как точки одного эксперимента. Авторы сообщают
+до 40× меньше **обучающих токенов для одной производной модели** и до 16%
+лучший результат; это максимумы для исследованного семейства. Отдельная оценка
+обучения всего семейства 15B, 8B и 4B даёт 1,8-кратную экономию compute, а не
+40-кратную. Вывод о преимуществе width pruning над depth pruning авторы
+ограничивают моделями до 15B. Для deployment остаётся измерить реальный runtime:
+удаление целых каналов или слоёв изменяет dense shapes и обычно переносится в
+GEMM, тогда как нули внутри матрицы требуют sparse kernel.
+
 ## Low-rank factorization: заменить одну матрицу двумя
 
 Для $W\in\mathbb R^{m\times n}$ сингулярное разложение даёт
@@ -135,7 +195,7 @@ $$
 \alpha\,\mathcal L_{\text{labels}}+
 (1-\alpha)\tau^2
 D_{KL}\!\left(
-\operatorname{softmax}(z_T/\tau),|,
+\operatorname{softmax}(z_T/\tau),
 \operatorname{softmax}(z_S/\tau)
 \right).
 $$
@@ -189,6 +249,8 @@ bytes, peak memory, latency distribution, throughput, energy и метрики �
 
 - [[05 Источники/Courses/Harvard ML Systems/vol1/model_compression|Harvard ML Systems — полная оригинальная глава Model Compression]];
 - [[05 Источники/Courses/Harvard ML Systems/tinytorch/16_compression|TinyTorch Module 16]] — исходные упражнения по magnitude/structured pruning, distillation и SVD;
+- [Muralidharan et al., Compact Language Models via Pruning and Knowledge Distillation](https://arxiv.org/abs/2407.14679) — Minitron: forward-only importance estimation, structured pruning и distillation, CC BY 4.0;
+- [Stanford CS336 Spring 2026, Lecture 10: Inference](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py#L490-L502) — объясняющая последовательность Minitron и исходные figures 1–2, pinned commit `8b59b507`;
 - [Han et al., Deep Compression](https://arxiv.org/abs/1510.00149);
 - [Hinton, Vinyals, Dean — Distilling the Knowledge in a Neural Network](https://arxiv.org/abs/1503.02531);
 - [Blalock et al. — What is the State of Neural Network Pruning?](https://proceedings.mlsys.org/paper/2020/hash/6c44dc73014d66ba49b28d483a8f8b0d-Abstract.html).

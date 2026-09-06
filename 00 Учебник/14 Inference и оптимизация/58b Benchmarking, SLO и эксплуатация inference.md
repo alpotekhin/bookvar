@@ -2,10 +2,13 @@
 title: "Benchmarking, SLO и эксплуатация LLM inference"
 type: textbook-chapter
 status: canonical
-last_updated: 2026-07-22
-last_verified: 2026-07-22
+last_updated: 2026-09-06
+last_verified: 2026-09-06
+source_unit_id:
+  - lecture-10-section-4-understanding-the-inference-workload
+  - lecture-10-dynamic-workload-failure-mode
 primary_sources:
-  - https://cs336.stanford.edu/spring2025/
+  - https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py
   - https://www.usenix.org/conference/osdi24/presentation/zhong-yinmin
   - https://docs.vllm.ai/en/latest/cli/bench/serve.html
 ---
@@ -214,6 +217,23 @@ graphs, заполняют allocator. Прогрев не включают в st
 измениться; в учебнике важен протокол, а точную команду следует брать из docs той
 версии, которой получен результат.
 
+### Производительность и качество образуют один контракт
+
+Квантизация, pruning и speculative decoding называются оптимизациями лишь после
+двух совместимых проверок. Первая показывает, что целевая функция модели или
+распределение sampler сохранены в заранее объявленных пределах. Вторая измеряет
+serving на той же модели, workload и версии runtime. Если качество проверили на
+коротких exam prompts, а скорость — на другой смеси длин и sampling parameters,
+утверждение «ускорили без потери качества» не воспроизводится.
+
+Для каждого сравнения фиксируют checkpoint и tokenizer, prompt set, decoder и
+stop rules, runtime/kernel commit, hardware, precision, concurrency, warm-up и
+полный набор quality и serving metrics. Общая методология construct validity и
+статистической неопределённости разобрана в
+[[02 Areas/ML & DL/00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация|главе об оценивании моделей]].
+Здесь объектом измерения остаётся serving-система: model + runtime + scheduler +
+kernels + hardware + workload.
+
 ## Поиск рабочей ёмкости
 
 Один запуск при «максимальном» request rate не даёт capacity. Нужна нагрузочная
@@ -295,7 +315,7 @@ throughput и goodput, ошибки/отмены, стоимость в GPU-hour
 - [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/model_serving|Harvard CS249r — Model Serving]].
 - [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week08_inference_software/homework/homework_week8.ipynb|Практическое задание Efficient DL Systems по benchmark inference]].
 
-- Stanford CS336, [Lecture 10: Inference](https://cs336.stanford.edu/spring2025/) — latency/throughput и вычислительный профиль inference.
+- Stanford CS336 Spring 2026, [Lecture 10: Inference](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py) — latency/throughput и вычислительный профиль inference; pinned commit `8b59b507`.
 - Zhong et al., [DistServe](https://www.usenix.org/conference/osdi24/presentation/zhong-yinmin), OSDI 2024 — TTFT/TPOT SLO, attainment и per-GPU goodput.
 - vLLM, [`vllm bench serve`](https://docs.vllm.ai/en/latest/cli/bench/serve.html) — официальный интерфейс измерения serving workload и определения доступных метрик.
 - vLLM, [Benchmarking Dashboard](https://docs.vllm.ai/en/latest/benchmarking/dashboard.html) — публикуемый подход к сравнению throughput и latency; конкретные результаты зависят от версии.

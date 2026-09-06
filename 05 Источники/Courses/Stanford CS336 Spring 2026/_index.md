@@ -152,7 +152,7 @@ Raw page/raster detections служат evidence и не становятся о
 ### lecture-10: Inference
 
 - local path: `Lectures/repository/lecture_10.py`;
-- extracted units: 30;
+- extracted units: 31;
 - semantic visual rows: 14;
 - disposition is recorded per unit/visual in the generated coverage ledgers.
 

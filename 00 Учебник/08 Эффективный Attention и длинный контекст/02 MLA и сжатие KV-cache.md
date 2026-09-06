@@ -5,12 +5,14 @@ status: canonical
 last_updated: 2026-09-06
 source_unit_id:
   - lecture-04-deepseek-mla
+  - lecture-10-kv-cache-attention-alternatives
+  - lecture-10-section-250-multi-head-latent-attention-mla
 previous: "[[02 Areas/ML & DL/00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA]]"
 next: "[[02 Areas/ML & DL/00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание]]"
 primary_sources:
   - https://arxiv.org/abs/2405.04434
   - https://github.com/deepseek-ai/DeepSeek-V3/blob/main/inference/model.py
-  - https://github.com/stanford-cs336/spring2025-lectures/blob/main/lecture_10.py
+  - https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py
   - https://docs.vllm.ai/en/latest/design/attention_backends/
 ---
 
@@ -27,9 +29,17 @@ DeepSeek-V2, использует другую идею. Все ключи и з
 *MHA, GQA и MQA сокращают число явно хранимых комплектов K/V; MLA хранит общий
 низкоразмерный источник, из которого определяются K/V разных голов. Источник:
 Stanford CS336, [Lecture 10:
-Inference](https://github.com/stanford-cs336/spring2025-lectures/blob/main/lecture_10.py),
+Inference](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py),
 рисунок `mla-schema.png`, адаптирующий Figure 3 отчёта
 [DeepSeek-V2](https://arxiv.org/abs/2405.04434).*
+
+Связь с физикой decode можно увидеть прямо из форм тензоров. В GQA обязательный
+объём истории на токен пропорционален $2H_{kv}d_hb$: сжимаются уже готовые
+ключи и значения за счёт уменьшения числа их голов. MLA меняет объект хранения.
+Вместо всех K/V-голов она сохраняет общий латентный вектор и отдельную
+позиционную часть; нужные проекции восстанавливаются или поглощаются в матрицы
+запроса и выхода. Поэтому сравнивать MLA с GQA только по числу голов нельзя —
+нужно выписать фактический layout кэша и путь его чтения в kernel.
 
 Наивная реализация могла бы на каждом шаге восстановить из латентного вектора все
 головы K/V. Она действительно уменьшила бы объём кэша, но добавила бы крупные
@@ -348,7 +358,7 @@ MLA меняет формы кэша и вычисления ядра внима
 - [DeepSeek-AI — DeepSeek-V2](https://arxiv.org/abs/2405.04434), §§2.1 и
   Appendix C/D — исходный вывод MLA, сравнение размеров кэша и абляции.
 - [Stanford CS336 — Lecture 10:
-  Inference](https://github.com/stanford-cs336/spring2025-lectures/blob/main/lecture_10.py)
+  Inference](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py)
   — объясняющая последовательность от ограничения памяти к GQA и MLA.
 - [Stanford CS336 Spring 2026 — Lecture 4](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=57)
   — различие между сжатием запросов для обучения и сохраняемым латентом K/V.

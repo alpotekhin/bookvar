@@ -2,9 +2,14 @@
 title: "KV-cache, пакетирование и PagedAttention"
 type: textbook-chapter
 status: canonical
-last_updated: 2026-07-20
+last_updated: 2026-09-06
+last_verified: 2026-09-06
+source_unit_id:
+  - lecture-10-naive-versus-cached-inference
+  - lecture-10-dynamic-workload-failure-mode
+  - lecture-10-paged-attention-memory-sequence
 primary_sources:
-  - https://cs336.stanford.edu/
+  - https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py
   - https://arxiv.org/abs/2309.06180
   - https://docs.vllm.ai/en/latest/design/paged_attention/
   - https://www.anyscale.com/blog/continuous-batching-llm-inference
@@ -34,7 +39,7 @@ KV-cache, непрерывное пакетирование и PagedAttention р
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/prefill-decode.png]]
 
 *Две фазы авторегрессионного инференса на слайде Stanford CS336,
-[Lecture 10: Inference](https://cs336.stanford.edu/). Prefill строит KV-cache
+[Lecture 10: Inference](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py). Prefill строит KV-cache
 сразу для входа; каждый decode-шаг читает накопленный кеш и добавляет новую
 пару ключ–значение.*
 
@@ -104,15 +109,10 @@ $$
 ## Почему статический пакет простаивает
 
 При статическом пакетировании запросы запускаются вместе, а следующий пакет
-ждёт, пока закончит самый длинный ответ. На схеме жёлтые клетки — обработка
-входа, синие — генерация, красные — EOS; пустое место после EOS уже не занято
-полезной работой.
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/anyscale-static-batching.png]]
-
-*Запросы разной длины внутри фиксированного пакета. Схема Anyscale из материала
-[Continuous Batching for LLM Inference](https://www.anyscale.com/blog/continuous-batching-llm-inference),
-также использованная в Stanford CS336.*
+ждёт, пока закончит самый длинный ответ. После EOS вычислительный слот уже не
+занят полезной работой, но его нельзя передать новому запросу до завершения всей
+группы. Подробно это ограничение и переход к планированию на уровне отдельных
+итераций разобраны в [[55b Scheduling — continuous batching, chunked prefill и prefix caching]].
 
 **Непрерывное пакетирование** (*continuous batching*) меняет состав пакета между
 decode-итерациями. Завершившаяся последовательность сразу освобождает слот, в
@@ -159,7 +159,7 @@ PagedAttention переносит идею страничной виртуаль
 *Запрос внимания читает три физически разнесённых блока, сохраняя логический
 порядок токенов. Рисунок из статьи
 [PagedAttention](https://arxiv.org/abs/2309.06180), переиспользованный в
-[Stanford CS336](https://cs336.stanford.edu/).*
+[Stanford CS336 Spring 2026](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py).*
 
 При росте ответа менеджер выделяет ещё один свободный блок. Внутренний остаток
 возможен только в последнем блоке последовательности, а внешняя фрагментация
@@ -184,6 +184,30 @@ PagedAttention переносит идею страничной виртуаль
 search и повторяющихся системных prompts. Пока блок только читается, копия не
 нужна. При расхождении продолжений новые токены записываются в отдельные блоки;
 для частично общего последнего блока применяется copy-on-write.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/inference-evaluation/paged-attention-sharing.png]]
+
+*Два запроса имеют одинаковый few-shot-префикс, но разные task inputs и
+продолжения. Они могут ссылаться на одни физические KV-блоки общей части.
+Источник: Stanford CS336 Spring 2026, Lecture 10, trace step 420, source line
+595, `paged-attention-sharing.png`, pinned commit
+[`8b59b50`](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py#L594-L600);
+по материалам Kwon et al., [PagedAttention](https://arxiv.org/abs/2309.06180).*
+
+Если два продолжения разделяют последний блок, первая запись в расходящуюся
+ветвь не должна изменить данные соседа. Менеджер увеличивает счётчик ссылок для
+общего блока, а при записи создаёт физическую копию только этого блока. На
+схеме `fathers` и `mothers` сначала делят три токена `years ago our`, после
+чего одна ветвь получает новый block mapping.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/inference-evaluation/paged-attention-copy-on-write.png]]
+
+*Copy-on-write сохраняет общий KV-префикс и копирует блок лишь в момент
+расхождения. Источник: Stanford CS336 Spring 2026, Lecture 10, trace step 424,
+source line 600, `paged-attention-parallel.png`, pinned commit
+[`8b59b50`](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py#L599-L600);
+оригинальный механизм — Kwon et al.,
+[PagedAttention](https://arxiv.org/abs/2309.06180).*
 
 Prefix caching и PagedAttention — связанные, но разные механизмы. Первый решает,
 можно ли переиспользовать уже вычисленную историю для совпавшего префикса;
@@ -238,7 +262,7 @@ continuous batching, фрагментацию и планировщик.
 - [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/inference|Harvard CS249r — Inference]].
 - [[02 Areas/ML & DL/06 Практика/14 Собрать минимальный inference engine|Собрать минимальный inference engine]].
 
-- Stanford CS336, [Lecture 10: Inference](https://cs336.stanford.edu/) — связное объяснение prefill/decode, арифметической интенсивности, batching и paging.
+- Stanford CS336 Spring 2026, [Lecture 10: Inference](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py) — связное объяснение prefill/decode, batching и пятикадровая последовательность paging; pinned commit `8b59b507`.
 - Kwon et al., [Efficient Memory Management for Large Language Model Serving with PagedAttention](https://arxiv.org/abs/2309.06180) — исходный алгоритм и анализ фрагментации.
 - vLLM, [PagedAttention design](https://docs.vllm.ai/en/latest/design/paged_attention/) — соответствие блоков структурам реализации.
 - Anyscale, [Continuous Batching for LLM Inference](https://www.anyscale.com/blog/continuous-batching-llm-inference) — наглядное сравнение статического и непрерывного пакетирования.

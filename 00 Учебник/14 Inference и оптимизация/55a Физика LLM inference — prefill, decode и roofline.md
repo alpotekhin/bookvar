@@ -2,10 +2,16 @@
 title: "Физика LLM inference: prefill, decode и roofline"
 type: textbook-chapter
 status: canonical
-last_updated: 2026-07-22
-last_verified: 2026-07-22
+last_updated: 2026-09-06
+last_verified: 2026-09-06
+source_unit_id:
+  - lecture-10-section-4-understanding-the-inference-workload
+  - lecture-10-inference-arithmetic-intensity
+  - lecture-10-naive-versus-cached-inference
+  - lecture-10-section-103-mlp-layers-only-looking-at-the-matrix-multiplications
+  - lecture-10-section-133-attention-layers-focusing-on-the-matrix-multiplications-with-flashattention
 primary_sources:
-  - https://github.com/stanford-cs336/spring2025-lectures/blob/main/lecture_10.py
+  - https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py
   - https://arxiv.org/abs/2309.06180
   - https://www.aleksagordic.com/blog/vllm
   - https://arxiv.org/abs/2205.14135
@@ -28,7 +34,7 @@ primary_sources:
 Конкретные движки меняют планировщики и программные интерфейсы, однако
 авторегрессионная зависимость, движение данных между уровнями памяти и пределы
 пропускной способности остаются теми же. Вычислительная модель и обозначения
-ниже согласованы с лекцией [Stanford CS336: Inference](https://github.com/stanford-cs336/spring2025-lectures/blob/main/lecture_10.py);
+ниже согласованы с лекцией [Stanford CS336: Inference](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py);
 управление памятью сверено с работой
 [PagedAttention](https://arxiv.org/abs/2309.06180), а границы реального
 серверного цикла — с разбором
@@ -65,6 +71,31 @@ $$
 оно лишь сокращает время отдельного шага или позволяет обслуживать больше
 запросов одновременно.
 
+Без KV-cache на каждом шаге пришлось бы снова пропускать через Transformer весь
+уже сгенерированный префикс. На первой схеме видна эта повторная работа: после
+выбора каждого токена история удлиняется и целиком поступает на следующий
+forward pass.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/inference-evaluation/naive-inference.webp]]
+
+*Наивная авторегрессионная генерация повторно обрабатывает весь префикс.
+Источник: JAX Scaling Book, [Inference](https://jax-ml.github.io/scaling-book/inference/),
+рисунок `naive-inference-1400.webp`; кадр воспроизведён в Stanford CS336 Spring
+2026, Lecture 10, trace steps 89–166, source lines 162–286, pinned commit
+[`8b59b50`](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py#L162-L286).*
+
+KV-cache отделяет единственный prefill от последовательности коротких
+decode-шагов. На каждом из них вычисляются K/V только для новой позиции, а
+предыдущие K/V читаются из памяти.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/inference-evaluation/cached-inference.webp]]
+
+*Та же генерация с KV-cache: красная рамка — prefill, синие — decode. Источник:
+JAX Scaling Book, [Inference](https://jax-ml.github.io/scaling-book/inference/),
+рисунок `cached-inference-1400.webp`; Stanford CS336 Spring 2026, Lecture 10,
+trace steps 89–166, source lines 162–286, pinned commit
+[`8b59b50`](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py#L162-L286).*
+
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-latency_diagram.png]]
 
 *Из каких интервалов складывается задержка запроса: очередь, prefill и
@@ -72,7 +103,42 @@ $$
 [Inside vLLM: Anatomy of a High-Throughput LLM Inference System](https://www.aleksagordic.com/blog/vllm),
 раздел Performance. Автор: Aleksa Gordić; лицензия на странице явно не указана.*
 
-## Сколько операций выполняет модель
+## Обозначения и стоимость одного матричного умножения
+
+Чтобы различать свойства модели и свойства конкретного kernel, зафиксируем
+обозначения: $B$ — число последовательностей; $S$ — уже доступные токены
+контекста; $T$ — позиции, обрабатываемые текущим проходом; $d$ — ширина модели;
+$d_{ff}$ — ширина MLP; $H_q$ и $H_{kv}$ — число query- и KV-голов; $d_h$ —
+размер головы; $L$ — число слоёв; $b$ — байт на хранимый скаляр. Тогда
+$d=H_qd_h$. В prefill обычно $T=S$, а в одном decode-шаге $T=1$.
+
+Начнём с $X\in\mathbb{R}^{B\times d}$ и
+$W\in\mathbb{R}^{d\times d_{ff}}$. Одно произведение $Y=XW$ требует
+
+$$
+F=2Bd d_{ff}
+$$
+
+FLOP. Если BF16-тензоры ровно по одному разу читаются из HBM и результат ровно
+один раз туда записывается, трафик равен
+
+$$
+M=2Bd+2d d_{ff}+2B d_{ff}\quad\text{байт},
+$$
+
+а интенсивность
+
+$$
+I=\frac{Bd d_{ff}}{Bd+d d_{ff}+B d_{ff}}.
+$$
+
+Лишь при $d,d_{ff}\gg B$ это выражение приближается к $B$. Так возникает
+важная для decode связь: несколько строк используют одну загруженную матрицу
+весов. Однако это идеальная модель одного GEMM. Она не учитывает нормализацию,
+нелинейность, residual-трафик, запуски ядер, tensor-parallel collectives и
+повторное использование данных в кэшах ускорителя.
+
+## Сколько операций выполняет слой
 
 Для первого приближения удобно считать, что один forward pass через плотные
 параметры требует около двух операций с плавающей точкой на параметр и токен:
@@ -115,6 +181,65 @@ $$
 модели, а для внимания — растущий KV-cache. Именно объём перемещаемых данных, а
 не только число FLOPs, определяет время шага.
 
+Для gated MLP с двумя повышающими и одной понижающей проекцией лекция CS336
+получает более точную оценку матричной части:
+
+$$
+F_{MLP}=6BTd d_{ff},
+$$
+
+$$
+M_{MLP}=4BTd+4BTd_{ff}+6d d_{ff}\quad\text{байт}
+$$
+
+для BF16 и идеального однократного чтения/записи. Отсюда
+
+$$
+I_{MLP}=\frac{3BTd d_{ff}}
+{2BTd+2BTd_{ff}+3d d_{ff}}.
+$$
+
+Предел $I_{MLP}\approx BT$ возникает только в режиме, где весовые матрицы
+доминируют над трафиком активаций. Поэтому длинный prefill естественно образует
+крупные GEMM, а decode с $T=1$ нуждается в batching, чтобы переиспользовать
+веса.
+
+Для ядра внимания с полным MHA-кэшем два произведения $QK^\top$ и $AV$ дают
+
+$$
+F_{attn}=4BSTd.
+$$
+
+Поскольку $d=H_qd_h$, эта запись учитывает все query-головы. Если один раз
+прочитать Q, K, V и записать результат, то при $b$ байтах на элемент
+
+$$
+M_{attn,MHA}=2bBd(S+T),\qquad
+I_{attn,MHA}=\frac{2ST}{b(S+T)}.
+$$
+
+Для BF16 это $ST/(S+T)$: при $T=S$ получается $S/2$, а при $T=1$ —
+$S/(S+1)<1$. Последнее число относится только к **MHA attention core**. Оно не
+включает проекции, softmax, запись нового KV, output projection и обмен между
+GPU и не должно переноситься на GQA как универсальный предел.
+
+В GQA ширина Q и результата остаётся $d=H_qd_h$, но ширина хранимых K/V равна
+$H_{kv}d_h$. При тех же допущениях
+
+$$
+M_{attn,GQA}=2bB\left(Td+SH_{kv}d_h\right),
+$$
+
+$$
+I_{attn,GQA}=\frac{2STd}
+{b\left(Td+SH_{kv}d_h\right)}.
+$$
+
+Для BF16 decode при большом $S$ интенсивность стремится к
+$H_q/H_{kv}$, а не к числу меньше единицы. Batch $B$ сокращается в этой
+идеальной формуле чтения KV на запрос, но в реальном kernel всё равно влияет на
+occupancy, амортизацию запусков, переиспользование весов и расписание.
+
 ## Roofline: вычисления ограничены либо арифметикой, либо памятью
 
 Общая модель roofline введена в [[02 Areas/ML & DL/00 Учебник/10 ML Systems/03 Измерение производительности и roofline|главе об измерении производительности]]. Здесь она применяется к inference. Для Transformer с $P$ параметров dense forward требует примерно $2P$ FLOP на токен. Prefill с $S$ позициями превращает линейные слои в крупные GEMM и повторно использует блоки весов; decode при малом batch снова читает почти $P b_w$ байтов ради одного токена. Его интенсивность порядка $2/b_w$ FLOP/byte до учёта KV и часто лежит слева от roofline knee.
@@ -148,6 +273,13 @@ $$
 пропускной способностью памяти: дополнительные вычислительные блоки будут
 простаивать в ожидании данных. Справа ограничением становится пиковая
 арифметическая производительность.
+
+Lecture 10 подставляет для H100 SXM номинальные $989$ TFLOP/s BF16 Tensor Core
+и $3{,}35$ TB/s HBM bandwidth: $I^*\approx295$ FLOP/byte. Это не универсальная
+граница «для H100». Числитель зависит от precision, sparsity и допустимых Tensor
+Core operations, а знаменатель — от варианта устройства; реальный kernel
+использует лишь часть обоих пиков. Число полезно как проверка порядка величины,
+но operational knee нужно получать из измерений конкретного kernel.
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-roofline.png]]
 
@@ -216,67 +348,46 @@ batch size обычно сначала быстро растёт, затем в�
 добавляя полезной производительности. Именно это плато, а не максимально
 допустимое число запросов, является отправной точкой настройки сервера.
 
+### Worked estimate: Llama 2 13B на одном H100
+
+В Lecture 10 расчёт выполняется для $S=1024$, $d=5120$, $d_{ff}=13824$,
+$H_q=H_{kv}=40$, $d_h=128$, $L=40$, $V=32000$, BF16 и peak bandwidth
+$3{,}35$ TB/s. Принята модель параметров
+
+$$
+P\approx 2Vd+L\left(3dd_{ff}+2dH_qd_h+2dH_{kv}d_h\right),
+$$
+
+которая даёт $13\,015\,449\,600$ параметров и около $26{,}03$ GB весов.
+Полный MHA KV-cache одного запроса занимает $838\,860\,800$ bytes. Если на
+каждом decode-шаге один раз прочитать все веса и весь KV-cache, идеально
+перекрыть compute и communication и отбросить overhead, получаются нижние
+оценки:
+
+| Batch | Читаемые данные за шаг | Нижняя граница шага | Верхняя оценка throughput |
+|---:|---:|---:|---:|
+| 1 | 26,87 GB | 8,02 ms | 124,7 tok/s |
+| 64 | 79,72 GB | 23,8 ms | 2689 tok/s |
+| 256 | 240,8 GB | 71,9 ms | 3562 tok/s |
+
+Последняя конфигурация не помещается в 80 GB HBM, а прирост throughput уже
+насыщается. Это вычислительная модель, не benchmark. При переходе к
+$H_{kv}=8$ одновременно уменьшаются KV-cache и K/V projection parameters:
+для $B=64$ модель оценивает 33,41 GB, 9,97 ms и 6417 tok/s, а для $B=256$ —
+65,63 GB, 19,59 ms и 13 068 tok/s. Поэтому разницу нельзя приписывать только
+аллокатору KV. Проверяемый эксперимент должен отдельно зафиксировать
+архитектуру, kernels, achieved bandwidth и реальные TTFT/TPOT.
+
 ## KV-cache меняет повторные вычисления на память
 
-Для $L$ слоёв, $H_{kv}$ KV-голов, размера головы $D$ и $b$ байтов на элемент кеш одного токена равен $2LH_{kv}Db$ байт, а batch занимает $2BLH_{kv}DSb$. В MHA $H_{kv}=H_q$; GQA и MQA уменьшают именно $H_{kv}$. Для 32 слоёв, 8 KV-голов, $D=128$ и BF16 это 128 KiB/токен, то есть 4 GiB на контекст 32k.
-
-В причинном внимании для новой позиции $t$
-
-$$
-q_t=x_tW_Q,\qquad k_t=x_tW_K,\qquad v_t=x_tW_V,
-$$
-
-$$
-o_t=\operatorname{softmax}\left(
-\frac{q_tK_{1:t}^{\top}}{\sqrt{d_h}}+M
-\right)V_{1:t}.
-$$
-
-Ключи и значения старых позиций после их появления не меняются. KV-cache
-сохраняет $K_{1:t-1}$ и $V_{1:t-1}$ во всех слоях, поэтому следующий шаг
-вычисляет лишь $k_t$ и $v_t$. Без кеша модель на каждом шаге повторно обработала
-бы весь префикс; суммарная стоимость генерации росла бы значительно быстрее.
-
-Экономия вычислений оплачивается памятью. Пусть $L$ — число слоёв, $S$ —
-текущая длина одной последовательности, $H_{kv}$ — число голов ключей и
-значений, $d_h$ — размер головы, а $b$ — байт на элемент. Тогда
-
-$$
-M_{KV,1}=2LSH_{kv}d_hb.
-$$
-
-Множитель 2 соответствует отдельным массивам $K$ и $V$. Для пакета из $B$
-последовательностей с одинаковой длиной
-
-$$
-M_{KV,B}=2BLSH_{kv}d_hb.
-$$
-
-Например, при $L=32$, $H_{kv}=8$, $d_h=128$, $S=8192$ и BF16
-получается примерно 1 GiB на запрос. Восемь таких запросов требуют около 8 GiB
-только для истории внимания — без весов, временных тензоров, CUDA Graphs и
-служебных структур. MQA и GQA уменьшают $H_{kv}$, квантизация кеша уменьшает
-$b$, а MLA меняет само представление истории. Ни один из этих методов не
-отменяет линейный рост по $S$.
-
-Традиционный сервер дополнительно теряет память, если заранее резервирует
-непрерывный буфер под максимальный возможный ответ. Фактические длины неизвестны,
-поэтому часть каждого резерва остаётся пустой, а свободные промежутки между
-буферами трудно использовать.
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/paged-attention-fragmentation.png]]
-
-*Figure 2 из Kwon et al., [Efficient Memory Management for Large Language Model
-Serving with PagedAttention](https://arxiv.org/abs/2309.06180): слева память
-занята фактическими ключами и значениями, справа показаны внутренние резервы и
-внешняя фрагментация. Авторы: Woosuk Kwon et al.; источник изображения —
-[ar5iv HTML](https://ar5iv.labs.arxiv.org/html/2309.06180).* 
-
-PagedAttention решает задачу размещения, разделяя логическую историю на блоки и
-сопоставляя их с произвольными физическими блоками. Это повышает фактическую
-вместимость пакета, но не уменьшает число байтов полезного KV-cache. Различие
-важно: страничность устраняет потери аллокатора, а GQA или низкая точность
-уменьшают сами данные.
+При декодировании ключи и значения уже обработанных токенов не меняются, поэтому
+их сохраняют и не вычисляют заново на каждом шаге. Эта экономия превращает
+повторные вычисления в новый расход памяти: объём истории растёт линейно с
+числом слоёв, длиной контекста, числом KV-голов и размером пакета. Отсюда следует
+важная граница: GQA, MLA и низкая точность уменьшают объём полезных данных, а
+PagedAttention устраняет потери при их размещении. Формулы, численный пример и
+устройство блочного аллокатора приведены в следующей главе —
+[[55 KV-cache, пакетирование и PagedAttention]].
 
 ## Задержку нельзя свести к tokens per second
 
@@ -349,7 +460,7 @@ throughput, но может увеличить TPOT. Маленький блок
 - [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week08_inference_software/lecture.pdf|Efficient DL Systems — inference software]].
 - [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week06_dl_arithmetic/lecture.pdf|Efficient DL Systems — арифметика и обмен памятью]].
 
-- Stanford CS336, [Lecture 10: Inference](https://github.com/stanford-cs336/spring2025-lectures/blob/main/lecture_10.py) — вычислительная модель, roofline, KV-cache и serving-метрики.
+- Stanford CS336 Spring 2026, [Lecture 10: Inference](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py) — вычислительная модель, roofline, KV-cache и serving-метрики; pinned commit `8b59b507`.
 - Kwon et al., [Efficient Memory Management for Large Language Model Serving with PagedAttention](https://arxiv.org/abs/2309.06180) — анализ памяти KV-cache, фрагментация и PagedAttention.
 - Aleksa Gordić, [Inside vLLM: Anatomy of a High-Throughput LLM Inference System](https://www.aleksagordic.com/blog/vllm) — последовательность обработки запроса и наглядные схемы latency/roofline.
 - Dao et al., [FlashAttention](https://arxiv.org/abs/2205.14135) — IO-aware анализ точного внимания.

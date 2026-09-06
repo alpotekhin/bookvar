@@ -81,9 +81,9 @@
   },
   "generated_audit": {
     "extractor_revision": "stanford-cs336-semantic-audit-v3",
-    "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
-    "semantic_review_sha256": "e2341ca3ee4e1facfc504274709cd48b76cb144336026986ffde36cbbe213b9f",
-    "editorial_overlay_sha256": "525ec9356c1cf6b77a5a7a89f698379d46d6e50a857c4b703a190eeae66ff2ed",
+    "extractor_sha256": "db0f426a300fea4dd22bd927cae5cd1a018badd526ade6f10edd3a9f7365eb32",
+    "semantic_review_sha256": "d88ae947a19d4ecc9e81d0dede8042a21a956365bd7f6ead1da120a353766e62",
+    "editorial_overlay_sha256": "6406dfe0552849015d4762acce10d806fb5609438bca7dadd4c44120d9476180",
     "tool_versions": {
       "edtrace": "0.1.15",
       "pdfinfo": "26.04.0",
@@ -100,15 +100,15 @@
         "records": 23
       },
       "source-units.yml": {
-        "sha256": "bf8fe34a5679f0d27c79deeb40c13f2aa04a3111d338748b9ced0fd2aa212010",
-        "records": 806
+        "sha256": "2bbc6caeaba1a278c59317a224ece473cfdfc0e1c2cc90d37d8ac3bd8d7ca5f9",
+        "records": 807
       },
       "coverage.yml": {
-        "sha256": "1b210b7e74c72c132e9933216a0b288cbecfb3956938ad91d1f020eb6d8254bb",
-        "records": 806
+        "sha256": "0efa1b873c1becb1a25daedbfa618eb46f89d7ac2e732598cdaa9f9b9f6f6a71",
+        "records": 807
       },
       "visuals.yml": {
-        "sha256": "e82b42a0ff0a80744bb26650f86d5bdb5fa9432e93df7350b36a3079e711ae6b",
+        "sha256": "5357d9519f52a7fb5bed1ded033e94dd66435231ed94a6ef819ca50b7574443d",
         "records": 158
       }
     }
