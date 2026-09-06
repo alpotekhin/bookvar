@@ -5,7 +5,10 @@
     "lecture-02",
     "lecture-03",
     "lecture-04",
-    "assignment-01"
+    "lecture-09",
+    "lecture-11",
+    "assignment-01",
+    "assignment-03"
   ],
   "coverage": {
     "lecture-01-section-4-cs336-language-models-from-scratch-spring-2026": {
@@ -1207,6 +1210,161 @@
       "disposition": "integrated",
       "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
       "destination_anchor": "moe-recap"
+    },
+    "lecture-09-scaling-history": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "scaling-history"
+    },
+    "lecture-09-data-scaling": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "data-scaling"
+    },
+    "lecture-09-mean-estimation-derivation": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "mean-estimation-derivation"
+    },
+    "lecture-09-data-scaling-failures": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "data-scaling-failures"
+    },
+    "lecture-09-engineering-scaling": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "engineering-scaling"
+    },
+    "lecture-09-joint-model-data-scaling": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "joint-model-data-scaling"
+    },
+    "lecture-09-isoflops-experiment": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "isoflops-experiment"
+    },
+    "lecture-09-train-inference-tradeoff": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "train-inference-tradeoff"
+    },
+    "lecture-09-recap": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "scaling-recap"
+    },
+    "lecture-11-minicpm-scaling": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "minicpm-scaling"
+    },
+    "lecture-11-deepseek-scaling": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "deepseek-scaling"
+    },
+    "lecture-11-optimizer-scaling": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "optimizer-scaling"
+    },
+    "lecture-11-mup-derivation": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "mup-derivation"
+    },
+    "lecture-11-mup-robustness": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "mup-robustness"
+    },
+    "lecture-11-mup-failure-modes": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "mup-failure-modes"
+    },
+    "lecture-11-recap": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "scaling-recap"
+    },
+    "assignment-03-isoflops-fit-workflow": {
+      "disposition": "integrated",
+      "destination": "06 Практика/22 Провести scaling-law campaign.md",
+      "destination_anchor": "grid"
+    },
+    "assignment-03-task-chinchilla-isoflops": {
+      "disposition": "integrated",
+      "destination": "06 Практика/22 Провести scaling-law campaign.md",
+      "destination_anchor": "grid"
+    },
+    "assignment-03-isoflops-reproduction": {
+      "disposition": "integrated",
+      "destination": "06 Практика/22 Провести scaling-law campaign.md",
+      "destination_anchor": "fit"
+    },
+    "assignment-03-deliverable-chinchilla-isoflops-001": {
+      "disposition": "integrated",
+      "destination": "06 Практика/22 Провести scaling-law campaign.md",
+      "destination_anchor": "diagnostics"
+    },
+    "assignment-03-deliverable-chinchilla-isoflops-002": {
+      "disposition": "integrated",
+      "destination": "06 Практика/22 Провести scaling-law campaign.md",
+      "destination_anchor": "diagnostics"
+    },
+    "assignment-03-task-scaling-laws": {
+      "disposition": "integrated",
+      "destination": "06 Практика/22 Провести scaling-law campaign.md",
+      "destination_anchor": "question"
+    },
+    "assignment-03-leaderboard-budget": {
+      "disposition": "integrated",
+      "destination": "06 Практика/22 Провести scaling-law campaign.md",
+      "destination_anchor": "stanford-facts"
+    },
+    "assignment-03-deliverable-scaling-laws-003": {
+      "disposition": "integrated",
+      "destination": "06 Практика/22 Провести scaling-law campaign.md",
+      "destination_anchor": "deliverables"
+    },
+    "assignment-03-test-tests-test-api-py-51-test-budget": {
+      "disposition": "integrated",
+      "destination": "06 Практика/22 Провести scaling-law campaign.md",
+      "destination_anchor": "ledger"
+    },
+    "assignment-03-test-tests-test-api-py-72-test-submit-jobs": {
+      "disposition": "integrated",
+      "destination": "06 Практика/22 Провести scaling-law campaign.md",
+      "destination_anchor": "ledger"
+    },
+    "assignment-03-test-tests-test-api-py-152-test-submit-rejects-duplicate-training-config": {
+      "disposition": "integrated",
+      "destination": "06 Практика/22 Провести scaling-law campaign.md",
+      "destination_anchor": "ledger"
+    },
+    "assignment-03-test-tests-test-api-py-193-test-final-submission-accepts-training-config-and-predicted-loss": {
+      "disposition": "integrated",
+      "destination": "06 Практика/22 Провести scaling-law campaign.md",
+      "destination_anchor": "sealed-prediction"
+    },
+    "assignment-03-test-tests-test-scheduler-py-12-test-select-experiments-for-dispatch-orders-by-running-count-then-queue-time": {
+      "disposition": "excluded",
+      "reason": "Multi-user queue fairness is course-service administration rather than a scaling-law mechanism.",
+      "evidence": "Assignments/assignment3-scaling/tests/test_scheduler.py#L12"
+    },
+    "assignment-03-test-tests-test-api-py-43-test-dashboard-serves-html": {
+      "disposition": "excluded",
+      "reason": "Dashboard availability is a course backend concern and is not learner evidence for the local campaign.",
+      "evidence": "Assignments/assignment3-scaling/tests/test_api.py#L43"
+    },
+    "assignment-03-test-tests-test-scheduler-py-91-test-select-experiments-for-dispatch-counts-running-jobs-without-capacity": {
+      "disposition": "excluded",
+      "reason": "Worker-capacity scheduling belongs to infrastructure and is outside the experiment contract.",
+      "evidence": "Assignments/assignment3-scaling/tests/test_scheduler.py#L91"
     }
   },
   "visuals": {
@@ -1532,6 +1690,141 @@
       "disposition": "source-only",
       "reason": "The exact page is preserved for a later training-objective integration; reproducing it in the MoE chapter would incorrectly present MTP as part of expert routing.",
       "evidence": "Lectures/repository/lecture_04.pdf#page=59:semantic=deepseek-mtp; question reviewed: Where does the auxiliary next-next-token prediction module attach during DeepSeek-V3 training?"
+    },
+    "lecture-09-visual-data-scaling": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "data-scaling",
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/data-power-law.png",
+      "transformation": "Selected pinned Lecture 9 pages 15 and 17 are rendered as complete 1600px course slides; adjacent pages 18 and 20 remain available in the pinned sequence and their caveats are integrated in prose.",
+      "caption": "The selected frames connect empirical log-log linearity to a toy polynomial estimation rate without claiming that the toy exponent determines language-model scaling.",
+      "rendered_route": "/textbook/pretraining/scaling-laws/",
+      "desktop_evidence": "All selected source slides were inspected at native resolution and resolve from the chapter.",
+      "narrow_evidence": "Complete slides scale within the article column; detailed plots remain available through the linked source PDF.",
+      "reviewer": "Codex Task 4 scaling integration",
+      "checked_at": "2026-09-06"
+    },
+    "lecture-09-visual-data-scaling-failures": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "data-scaling-failures",
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/distribution-shift-offset.png",
+      "transformation": "Complete 1600px renders of pinned Lecture 9 pages 22, 24, and 25; no redraw or semantic alteration.",
+      "caption": "The three-frame sequence distinguishes distribution offset, diminishing value of repetitions, and failure outside the fitted compute regime.",
+      "rendered_route": "/textbook/pretraining/scaling-laws/",
+      "desktop_evidence": "The three source slides were inspected at native resolution and placed beside their corresponding mechanisms.",
+      "narrow_evidence": "Slides scale within the article column and retain readable headings; source links provide full-resolution access.",
+      "reviewer": "Codex Task 4 scaling integration",
+      "checked_at": "2026-09-06"
+    },
+    "lecture-09-visual-engineering-scaling": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "engineering-scaling",
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/parameter-count-convention.png",
+      "transformation": "Complete 1600px renders of pinned Lecture 9 pages 35, 38, 39, and 40; no redraw.",
+      "caption": "The selected evidence fixes the parameter convention and then shows why batch and learning-rate choices belong to the scaling regime.",
+      "rendered_route": "/textbook/pretraining/scaling-laws/",
+      "desktop_evidence": "All four slides were inspected at native resolution and matched to adjacent equations and prose.",
+      "narrow_evidence": "Slides use responsive article sizing; their captions state the inference that must remain readable.",
+      "reviewer": "Codex Task 4 scaling integration",
+      "checked_at": "2026-09-06"
+    },
+    "lecture-09-visual-isoflops-experiment": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "isoflops-experiment",
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/chinchilla-three-methods.png",
+      "transformation": "Complete 1600px renders of pinned Lecture 9 pages 46, 47, 48, 49, and 53; selected from the continuous pages 46-53 sequence without redraw.",
+      "caption": "The sequence moves from competing Chinchilla estimators through their curves and joint fit to residual evidence that changes the interpretation of method 3.",
+      "rendered_route": "/textbook/pretraining/scaling-laws/",
+      "desktop_evidence": "All five selected frames were inspected at native resolution and occur in causal order in the chapter.",
+      "narrow_evidence": "Responsive scaling preserves the complete slides; source links expose the original PDF sequence.",
+      "reviewer": "Codex Task 4 scaling integration",
+      "checked_at": "2026-09-06"
+    },
+    "lecture-09-visual-train-inference-tradeoff": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "train-inference-tradeoff",
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/train-vs-inference-ratios.png",
+      "transformation": "Complete pinned Lecture 9 page 54 rendered at 1600px; no crop or redraw.",
+      "caption": "The course's approximate historical ratios motivate the distinction between a training-compute optimum and an inference-aware lifecycle objective.",
+      "rendered_route": "/textbook/pretraining/scaling-laws/",
+      "desktop_evidence": "The complete page was inspected at native resolution; the title and right edge are intact.",
+      "narrow_evidence": "The complete slide scales inside the content column, with the exact values repeated and qualified in prose.",
+      "reviewer": "Codex Task 4 scaling integration",
+      "checked_at": "2026-09-06"
+    },
+    "lecture-11-visual-minicpm-scaling": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "minicpm-scaling",
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/minicpm-cosine-campaign-cost.png",
+      "transformation": "Complete 1600px renders of pinned Lecture 11 pages 13, 14, 15, and 18; no redraw.",
+      "caption": "The selected sequence explains the repeated cost of cosine endpoints, WSD branching, observed decay dynamics, and the resulting joint fit.",
+      "rendered_route": "/textbook/pretraining/scaling-laws/",
+      "desktop_evidence": "All selected MiniCPM frames were inspected at native resolution and placed in sequence.",
+      "narrow_evidence": "Complete slides scale inside the content column; dense source details remain linked at page level.",
+      "reviewer": "Codex Task 4 scaling integration",
+      "checked_at": "2026-09-06"
+    },
+    "lecture-11-visual-deepseek-scaling": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "deepseek-scaling",
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/deepseek-lr-batch-grid.png",
+      "transformation": "Complete 1600px renders of pinned Lecture 11 pages 20, 23, and 24; page 21 was re-rendered directly from the pinned PDF at 1600px to restore its full title.",
+      "caption": "The sequence moves from a direct hyperparameter grid through recipe-specific fits and IsoFLOP curves to held-out large-model loss prediction.",
+      "rendered_route": "/textbook/pretraining/scaling-laws/",
+      "desktop_evidence": "All four selected frames were inspected at native resolution; page 21 no longer has a clipped heading.",
+      "narrow_evidence": "Complete slides scale inside the article column, while formulas and caveats are duplicated in accessible prose.",
+      "reviewer": "Codex Task 4 scaling integration",
+      "checked_at": "2026-09-06"
+    },
+    "lecture-11-visual-optimizer-scaling": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "optimizer-scaling",
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/optimizer-search-surface.png",
+      "transformation": "Complete 1600px renders of pinned Lecture 11 pages 34, 39, and 40; page 41 was re-rendered directly from the pinned PDF at 1600px to restore the full slide boundary.",
+      "caption": "The evidence sequence separates search-surface coverage, optimizer-specific tuning, compute/ratio confounding, and failed held-out extrapolation.",
+      "rendered_route": "/textbook/pretraining/scaling-laws/",
+      "desktop_evidence": "All four optimizer frames were inspected at native resolution; the replacement page 41 has no clipped title.",
+      "narrow_evidence": "Complete slides scale within the content column; the plots' conclusions are stated immediately in prose.",
+      "reviewer": "Codex Task 4 scaling integration",
+      "checked_at": "2026-09-06"
+    },
+    "lecture-11-visual-mup-derivation": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "mup-derivation",
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/mup-invariants.png",
+      "transformation": "Complete 1600px renders of pinned Lecture 11 pages 46, 47, 49, and 50, retaining assumptions and derivation context.",
+      "caption": "The sequence states the activation/update invariants, derives initialization scale, and contrasts SGD with Adam learning-rate scaling.",
+      "rendered_route": "/textbook/pretraining/scaling-laws/",
+      "desktop_evidence": "The derivation frames were inspected at native resolution with assumptions visible.",
+      "narrow_evidence": "The full derivation is repeated in text so the narrow view does not depend on reading slide-sized equations.",
+      "reviewer": "Codex Task 4 scaling integration",
+      "checked_at": "2026-09-06"
+    },
+    "lecture-11-visual-mup-robustness": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "mup-robustness",
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/mup-transformer-rules.png",
+      "transformation": "Complete 1600px renders of pinned Lecture 11 pages 51, 52, 54, 56, and 57; page 55 was re-rendered directly from the pinned PDF at 1600px to restore its complete heading.",
+      "caption": "The sequence starts from exact Transformer parameter groups, demonstrates transfer, and then maps failures from RMSNorm gain, Lion, and strong weight decay.",
+      "rendered_route": "/textbook/pretraining/scaling-laws/",
+      "desktop_evidence": "All six selected frames were inspected at native resolution; the page-55 replacement is complete.",
+      "narrow_evidence": "The chapter states each boundary condition in prose next to the corresponding complete slide.",
+      "reviewer": "Codex Task 4 scaling integration",
+      "checked_at": "2026-09-06"
+    },
+    "assignment-03-visual-isoflops-fit-workflow": {
+      "disposition": "source-only",
+      "reason": "The handout supplies equations and procedure rather than a reusable explanatory raster; the practice preserves the workflow as structured text and requires learner-generated plots from non-answer-bearing data.",
+      "evidence": "Assignments/assignment3-scaling/cs336_assignment3_scaling.pdf#pages=2-3:semantic=isoflops-fit-workflow"
     }
   }
 }

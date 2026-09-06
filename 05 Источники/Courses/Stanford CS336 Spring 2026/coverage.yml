@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "semantic_review_sha256": "f1d0b8640da31acffac709f832db78dfc79facc2eb003ca8bb3136bf16cef134",
+  "semantic_review_sha256": "e2341ca3ee4e1facfc504274709cd48b76cb144336026986ffde36cbbe213b9f",
   "rows": [
     {
       "id": "coverage-lecture-01-section-4-cs336-language-models-from-scratch-spring-2026",
@@ -2408,10 +2408,9 @@
       "primary_sources": [
         "lecture-09"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-09",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "scaling-history"
     },
     {
       "id": "coverage-lecture-09-data-scaling",
@@ -2423,10 +2422,9 @@
       "primary_sources": [
         "lecture-09"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-09",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "data-scaling"
     },
     {
       "id": "coverage-lecture-09-mean-estimation-derivation",
@@ -2438,10 +2436,9 @@
       "primary_sources": [
         "lecture-09"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-09",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "mean-estimation-derivation"
     },
     {
       "id": "coverage-lecture-09-data-scaling-failures",
@@ -2453,10 +2450,9 @@
       "primary_sources": [
         "lecture-09"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-09",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "data-scaling-failures"
     },
     {
       "id": "coverage-lecture-09-engineering-scaling",
@@ -2468,10 +2464,9 @@
       "primary_sources": [
         "lecture-09"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-09",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "engineering-scaling"
     },
     {
       "id": "coverage-lecture-09-joint-model-data-scaling",
@@ -2483,10 +2478,9 @@
       "primary_sources": [
         "lecture-09"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-09",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "joint-model-data-scaling"
     },
     {
       "id": "coverage-lecture-09-isoflops-experiment",
@@ -2498,10 +2492,9 @@
       "primary_sources": [
         "lecture-09"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-09",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "isoflops-experiment"
     },
     {
       "id": "coverage-lecture-09-train-inference-tradeoff",
@@ -2513,10 +2506,9 @@
       "primary_sources": [
         "lecture-09"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-09",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "train-inference-tradeoff"
     },
     {
       "id": "coverage-lecture-09-recap",
@@ -2528,10 +2520,9 @@
       "primary_sources": [
         "lecture-09"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-09",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "scaling-recap"
     },
     {
       "id": "coverage-lecture-10-section-2-lecture-10-inference",
@@ -3007,10 +2998,9 @@
       "primary_sources": [
         "lecture-11"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-11",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "minicpm-scaling"
     },
     {
       "id": "coverage-lecture-11-deepseek-scaling",
@@ -3022,10 +3012,9 @@
       "primary_sources": [
         "lecture-11"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-11",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "deepseek-scaling"
     },
     {
       "id": "coverage-lecture-11-optimizer-scaling",
@@ -3037,10 +3026,9 @@
       "primary_sources": [
         "lecture-11"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-11",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "optimizer-scaling"
     },
     {
       "id": "coverage-lecture-11-mup-derivation",
@@ -3052,10 +3040,9 @@
       "primary_sources": [
         "lecture-11"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-11",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "mup-derivation"
     },
     {
       "id": "coverage-lecture-11-mup-robustness",
@@ -3067,10 +3054,9 @@
       "primary_sources": [
         "lecture-11"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-11",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "mup-robustness"
     },
     {
       "id": "coverage-lecture-11-mup-failure-modes",
@@ -3082,10 +3068,9 @@
       "primary_sources": [
         "lecture-11"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-11",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "mup-failure-modes"
     },
     {
       "id": "coverage-lecture-11-recap",
@@ -3097,10 +3082,9 @@
       "primary_sources": [
         "lecture-11"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-11",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "scaling-recap"
     },
     {
       "id": "coverage-lecture-12-section-2-lecture-12-evaluation",
@@ -8263,10 +8247,9 @@
       "primary_sources": [
         "assignment-03"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-03",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/22 Провести scaling-law campaign.md",
+      "destination_anchor": "grid"
     },
     {
       "id": "coverage-assignment-03-task-chinchilla-isoflops",
@@ -8278,10 +8261,9 @@
       "primary_sources": [
         "assignment-03"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-03",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/22 Провести scaling-law campaign.md",
+      "destination_anchor": "grid"
     },
     {
       "id": "coverage-assignment-03-isoflops-reproduction",
@@ -8293,10 +8275,9 @@
       "primary_sources": [
         "assignment-03"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-03",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/22 Провести scaling-law campaign.md",
+      "destination_anchor": "fit"
     },
     {
       "id": "coverage-assignment-03-deliverable-chinchilla-isoflops-001",
@@ -8308,10 +8289,9 @@
       "primary_sources": [
         "assignment-03"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-03",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/22 Провести scaling-law campaign.md",
+      "destination_anchor": "diagnostics"
     },
     {
       "id": "coverage-assignment-03-deliverable-chinchilla-isoflops-002",
@@ -8323,10 +8303,9 @@
       "primary_sources": [
         "assignment-03"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-03",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/22 Провести scaling-law campaign.md",
+      "destination_anchor": "diagnostics"
     },
     {
       "id": "coverage-assignment-03-task-scaling-laws",
@@ -8338,10 +8317,9 @@
       "primary_sources": [
         "assignment-03"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-03",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/22 Провести scaling-law campaign.md",
+      "destination_anchor": "question"
     },
     {
       "id": "coverage-assignment-03-leaderboard-budget",
@@ -8353,10 +8331,9 @@
       "primary_sources": [
         "assignment-03"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-03",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/22 Провести scaling-law campaign.md",
+      "destination_anchor": "stanford-facts"
     },
     {
       "id": "coverage-assignment-03-deliverable-scaling-laws-003",
@@ -8368,10 +8345,9 @@
       "primary_sources": [
         "assignment-03"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-03",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/22 Провести scaling-law campaign.md",
+      "destination_anchor": "deliverables"
     },
     {
       "id": "coverage-assignment-03-test-tests-test-scheduler-py-12-test-select-experiments-for-dispatch-orders-by-running-count-then-queue-time",
@@ -8383,10 +8359,9 @@
       "primary_sources": [
         "assignment-03"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-03",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "excluded",
+      "reason": "Multi-user queue fairness is course-service administration rather than a scaling-law mechanism.",
+      "evidence": "Assignments/assignment3-scaling/tests/test_scheduler.py#L12"
     },
     {
       "id": "coverage-assignment-03-test-tests-test-api-py-43-test-dashboard-serves-html",
@@ -8398,10 +8373,9 @@
       "primary_sources": [
         "assignment-03"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-03",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "excluded",
+      "reason": "Dashboard availability is a course backend concern and is not learner evidence for the local campaign.",
+      "evidence": "Assignments/assignment3-scaling/tests/test_api.py#L43"
     },
     {
       "id": "coverage-assignment-03-test-tests-test-api-py-51-test-budget",
@@ -8413,10 +8387,9 @@
       "primary_sources": [
         "assignment-03"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-03",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/22 Провести scaling-law campaign.md",
+      "destination_anchor": "ledger"
     },
     {
       "id": "coverage-assignment-03-test-tests-test-api-py-72-test-submit-jobs",
@@ -8428,10 +8401,9 @@
       "primary_sources": [
         "assignment-03"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-03",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/22 Провести scaling-law campaign.md",
+      "destination_anchor": "ledger"
     },
     {
       "id": "coverage-assignment-03-test-tests-test-scheduler-py-91-test-select-experiments-for-dispatch-counts-running-jobs-without-capacity",
@@ -8443,10 +8415,9 @@
       "primary_sources": [
         "assignment-03"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-03",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "excluded",
+      "reason": "Worker-capacity scheduling belongs to infrastructure and is outside the experiment contract.",
+      "evidence": "Assignments/assignment3-scaling/tests/test_scheduler.py#L91"
     },
     {
       "id": "coverage-assignment-03-test-tests-test-api-py-152-test-submit-rejects-duplicate-training-config",
@@ -8458,10 +8429,9 @@
       "primary_sources": [
         "assignment-03"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-03",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/22 Провести scaling-law campaign.md",
+      "destination_anchor": "ledger"
     },
     {
       "id": "coverage-assignment-03-test-tests-test-api-py-193-test-final-submission-accepts-training-config-and-predicted-loss",
@@ -8473,10 +8443,9 @@
       "primary_sources": [
         "assignment-03"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "assignment-03",
-      "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
+      "disposition": "integrated",
+      "destination": "06 Практика/22 Провести scaling-law campaign.md",
+      "destination_anchor": "sealed-prediction"
     },
     {
       "id": "coverage-assignment-04-data-assignment-setup",
@@ -12000,5 +11969,5 @@
       "reason": "Baseline source audit only: this unit is preserved and indexed, but no specific canonical textbook heading with a reciprocal source_unit_id has yet been verified."
     }
   ],
-  "editorial_overlay_sha256": "0244577603f9d2c17aa4361ff58e307b9b80e88111821d518403cab728b5f936"
+  "editorial_overlay_sha256": "6f5b6e4ce6c3cfd95d78188f2aa2f11313c4a3b214457392c162d6f6d6db4dc3"
 }

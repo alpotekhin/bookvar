@@ -8,7 +8,7 @@
     "pdfimages": "26.04.0",
     "extractor_revision": "stanford-cs336-semantic-audit-v3",
     "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
-    "semantic_review_sha256": "f1d0b8640da31acffac709f832db78dfc79facc2eb003ca8bb3136bf16cef134"
+    "semantic_review_sha256": "e2341ca3ee4e1facfc504274709cd48b76cb144336026986ffde36cbbe213b9f"
   },
   "raster_evidence_summary": [
     {
@@ -5902,10 +5902,9 @@
           "source_location": "Lectures/repository/lecture_09.pdf#page=20:semantic=data-scaling"
         }
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-09",
-      "reason": "Reviewed semantic visual is preserved at exact event/page scope; canonical textbook placement remains pending.",
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "data-scaling",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -5917,11 +5916,11 @@
       "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
       "extractor_revision": "stanford-cs336-semantic-audit-v3",
       "extraction_tool": "Poppler pdftotext 26.04.0 semantic page review; pdfimages 26.04.0 raster evidence",
-      "rendered_route": "/sources/courses/stanford-cs336-spring-2026/",
-      "desktop_evidence": "pending editorial integration; source archive inspected",
-      "narrow_evidence": "pending editorial integration; source archive inspected",
-      "reviewer": "Codex source audit",
-      "checked_at": "2026-09-04",
+      "rendered_route": "/textbook/pretraining/scaling-laws/",
+      "desktop_evidence": "All selected source slides were inspected at native resolution and resolve from the chapter.",
+      "narrow_evidence": "Complete slides scale within the article column; detailed plots remain available through the linked source PDF.",
+      "reviewer": "Codex Task 4 scaling integration",
+      "checked_at": "2026-09-06",
       "raster_evidence": [
         {
           "page": 13,
@@ -6007,7 +6006,10 @@
           "width": 726,
           "height": 632
         }
-      ]
+      ],
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/data-power-law.png",
+      "transformation": "Selected pinned Lecture 9 pages 15 and 17 are rendered as complete 1600px course slides; adjacent pages 18 and 20 remain available in the pinned sequence and their caveats are integrated in prose.",
+      "caption": "The selected frames connect empirical log-log linearity to a toy polynomial estimation rate without claiming that the toy exponent determines language-model scaling."
     },
     {
       "id": "lecture-09-visual-data-scaling-failures",
@@ -6053,10 +6055,9 @@
           "source_location": "Lectures/repository/lecture_09.pdf#page=26:semantic=data-scaling-failures"
         }
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-09",
-      "reason": "Reviewed semantic visual is preserved at exact event/page scope; canonical textbook placement remains pending.",
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "data-scaling-failures",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -6068,11 +6069,11 @@
       "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
       "extractor_revision": "stanford-cs336-semantic-audit-v3",
       "extraction_tool": "Poppler pdftotext 26.04.0 semantic page review; pdfimages 26.04.0 raster evidence",
-      "rendered_route": "/sources/courses/stanford-cs336-spring-2026/",
-      "desktop_evidence": "pending editorial integration; source archive inspected",
-      "narrow_evidence": "pending editorial integration; source archive inspected",
-      "reviewer": "Codex source audit",
-      "checked_at": "2026-09-04",
+      "rendered_route": "/textbook/pretraining/scaling-laws/",
+      "desktop_evidence": "The three source slides were inspected at native resolution and placed beside their corresponding mechanisms.",
+      "narrow_evidence": "Slides scale within the article column and retain readable headings; source links provide full-resolution access.",
+      "reviewer": "Codex Task 4 scaling integration",
+      "checked_at": "2026-09-06",
       "raster_evidence": [
         {
           "page": 22,
@@ -6152,7 +6153,10 @@
           "width": 683,
           "height": 195
         }
-      ]
+      ],
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/distribution-shift-offset.png",
+      "transformation": "Complete 1600px renders of pinned Lecture 9 pages 22, 24, and 25; no redraw or semantic alteration.",
+      "caption": "The three-frame sequence distinguishes distribution offset, diminishing value of repetitions, and failure outside the fitted compute regime."
     },
     {
       "id": "lecture-09-visual-engineering-scaling",
@@ -6238,10 +6242,9 @@
           "source_location": "Lectures/repository/lecture_09.pdf#page=42:semantic=engineering-scaling"
         }
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-09",
-      "reason": "Reviewed semantic visual is preserved at exact event/page scope; canonical textbook placement remains pending.",
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "engineering-scaling",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -6253,11 +6256,11 @@
       "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
       "extractor_revision": "stanford-cs336-semantic-audit-v3",
       "extraction_tool": "Poppler pdftotext 26.04.0 semantic page review; pdfimages 26.04.0 raster evidence",
-      "rendered_route": "/sources/courses/stanford-cs336-spring-2026/",
-      "desktop_evidence": "pending editorial integration; source archive inspected",
-      "narrow_evidence": "pending editorial integration; source archive inspected",
-      "reviewer": "Codex source audit",
-      "checked_at": "2026-09-04",
+      "rendered_route": "/textbook/pretraining/scaling-laws/",
+      "desktop_evidence": "All four slides were inspected at native resolution and matched to adjacent equations and prose.",
+      "narrow_evidence": "Slides use responsive article sizing; their captions state the inference that must remain readable.",
+      "reviewer": "Codex Task 4 scaling integration",
+      "checked_at": "2026-09-06",
       "raster_evidence": [
         {
           "page": 30,
@@ -6391,7 +6394,10 @@
           "width": 871,
           "height": 201
         }
-      ]
+      ],
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/parameter-count-convention.png",
+      "transformation": "Complete 1600px renders of pinned Lecture 9 pages 35, 38, 39, and 40; no redraw.",
+      "caption": "The selected evidence fixes the parameter convention and then shows why batch and learning-rate choices belong to the scaling regime."
     },
     {
       "id": "lecture-09-visual-isoflops-experiment",
@@ -6447,10 +6453,9 @@
           "source_location": "Lectures/repository/lecture_09.pdf#page=53:semantic=isoflops-experiment"
         }
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-09",
-      "reason": "Reviewed semantic visual is preserved at exact event/page scope; canonical textbook placement remains pending.",
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "isoflops-experiment",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -6462,11 +6467,11 @@
       "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
       "extractor_revision": "stanford-cs336-semantic-audit-v3",
       "extraction_tool": "Poppler pdftotext 26.04.0 semantic page review; pdfimages 26.04.0 raster evidence",
-      "rendered_route": "/sources/courses/stanford-cs336-spring-2026/",
-      "desktop_evidence": "pending editorial integration; source archive inspected",
-      "narrow_evidence": "pending editorial integration; source archive inspected",
-      "reviewer": "Codex source audit",
-      "checked_at": "2026-09-04",
+      "rendered_route": "/textbook/pretraining/scaling-laws/",
+      "desktop_evidence": "All five selected frames were inspected at native resolution and occur in causal order in the chapter.",
+      "narrow_evidence": "Responsive scaling preserves the complete slides; source links expose the original PDF sequence.",
+      "reviewer": "Codex Task 4 scaling integration",
+      "checked_at": "2026-09-06",
       "raster_evidence": [
         {
           "page": 46,
@@ -6540,7 +6545,53 @@
           "width": 1032,
           "height": 694
         }
-      ]
+      ],
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/chinchilla-three-methods.png",
+      "transformation": "Complete 1600px renders of pinned Lecture 9 pages 46, 47, 48, 49, and 53; selected from the continuous pages 46-53 sequence without redraw.",
+      "caption": "The sequence moves from competing Chinchilla estimators through their curves and joint fit to residual evidence that changes the interpretation of method 3."
+    },
+    {
+      "id": "lecture-09-visual-train-inference-tradeoff",
+      "semantic_id": "train-inference-tradeoff",
+      "visual_kind": "table",
+      "source_object": "lecture-09",
+      "source_units": [
+        "lecture-09-train-inference-tradeoff"
+      ],
+      "source_location": "Lectures/repository/lecture_09.pdf#page=54:semantic=train-inference-tradeoff",
+      "source_pages": [
+        54
+      ],
+      "question": "Why can a training-optimal token-to-parameter ratio differ from a deployment-aware allocation?",
+      "sequence_members": [
+        {
+          "order": 1,
+          "source_location": "Lectures/repository/lecture_09.pdf#page=54:semantic=train-inference-tradeoff"
+        }
+      ],
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "train-inference-tradeoff",
+      "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
+      "rights_status": "permission-recorded",
+      "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
+      "rights_scope": "Local educational preservation and later attributed textbook reuse",
+      "license_identifier": "User permission record (not a license)",
+      "license_url": "https://cs336.stanford.edu/",
+      "rights_evidence": "User confirmed open educational reuse on 2026-09-04 for local educational preservation and later attributed textbook reuse; this is a permission record, not a named license. Explicit repository license files are preserved.",
+      "parent_sha256": "92a5d9e26e65bb0a9d8c79b12ed7ea26d14530bf960dcf44f9ed5fd372f519fa",
+      "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
+      "extractor_revision": "stanford-cs336-semantic-audit-v3",
+      "extraction_tool": "Poppler pdftotext 26.04.0 semantic page review; pdfimages 26.04.0 raster evidence",
+      "rendered_route": "/textbook/pretraining/scaling-laws/",
+      "desktop_evidence": "The complete page was inspected at native resolution; the title and right edge are intact.",
+      "narrow_evidence": "The complete slide scales inside the content column, with the exact values repeated and qualified in prose.",
+      "reviewer": "Codex Task 4 scaling integration",
+      "checked_at": "2026-09-06",
+      "raster_evidence": [],
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/train-vs-inference-ratios.png",
+      "transformation": "Complete pinned Lecture 9 page 54 rendered at 1600px; no crop or redraw.",
+      "caption": "The course's approximate historical ratios motivate the distinction between a training-compute optimum and an inference-aware lifecycle objective."
     },
     {
       "id": "lecture-10-visual-naive-versus-cached-inference",
@@ -7866,10 +7917,9 @@
           "source_location": "Lectures/repository/lecture_11.pdf#page=18:semantic=minicpm-scaling"
         }
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-11",
-      "reason": "Reviewed semantic visual is preserved at exact event/page scope; canonical textbook placement remains pending.",
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "minicpm-scaling",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -7881,11 +7931,11 @@
       "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
       "extractor_revision": "stanford-cs336-semantic-audit-v3",
       "extraction_tool": "Poppler pdftotext 26.04.0 semantic page review; pdfimages 26.04.0 raster evidence",
-      "rendered_route": "/sources/courses/stanford-cs336-spring-2026/",
-      "desktop_evidence": "pending editorial integration; source archive inspected",
-      "narrow_evidence": "pending editorial integration; source archive inspected",
-      "reviewer": "Codex source audit",
-      "checked_at": "2026-09-04",
+      "rendered_route": "/textbook/pretraining/scaling-laws/",
+      "desktop_evidence": "All selected MiniCPM frames were inspected at native resolution and placed in sequence.",
+      "narrow_evidence": "Complete slides scale inside the content column; dense source details remain linked at page level.",
+      "reviewer": "Codex Task 4 scaling integration",
+      "checked_at": "2026-09-06",
       "raster_evidence": [
         {
           "page": 8,
@@ -7959,7 +8009,10 @@
           "width": 944,
           "height": 792
         }
-      ]
+      ],
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/minicpm-cosine-campaign-cost.png",
+      "transformation": "Complete 1600px renders of pinned Lecture 11 pages 13, 14, 15, and 18; no redraw.",
+      "caption": "The selected sequence explains the repeated cost of cosine endpoints, WSD branching, observed decay dynamics, and the resulting joint fit."
     },
     {
       "id": "lecture-11-visual-deepseek-scaling",
@@ -8035,10 +8088,9 @@
           "source_location": "Lectures/repository/lecture_11.pdf#page=30:semantic=deepseek-scaling"
         }
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-11",
-      "reason": "Reviewed semantic visual is preserved at exact event/page scope; canonical textbook placement remains pending.",
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "deepseek-scaling",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -8050,11 +8102,11 @@
       "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
       "extractor_revision": "stanford-cs336-semantic-audit-v3",
       "extraction_tool": "Poppler pdftotext 26.04.0 semantic page review; pdfimages 26.04.0 raster evidence",
-      "rendered_route": "/sources/courses/stanford-cs336-spring-2026/",
-      "desktop_evidence": "pending editorial integration; source archive inspected",
-      "narrow_evidence": "pending editorial integration; source archive inspected",
-      "reviewer": "Codex source audit",
-      "checked_at": "2026-09-04",
+      "rendered_route": "/textbook/pretraining/scaling-laws/",
+      "desktop_evidence": "All four selected frames were inspected at native resolution; page 21 no longer has a clipped heading.",
+      "narrow_evidence": "Complete slides scale inside the article column, while formulas and caveats are duplicated in accessible prose.",
+      "reviewer": "Codex Task 4 scaling integration",
+      "checked_at": "2026-09-06",
       "raster_evidence": [
         {
           "page": 19,
@@ -8140,7 +8192,240 @@
           "width": 2246,
           "height": 936
         }
-      ]
+      ],
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/deepseek-lr-batch-grid.png",
+      "transformation": "Complete 1600px renders of pinned Lecture 11 pages 20, 23, and 24; page 21 was re-rendered directly from the pinned PDF at 1600px to restore its full title.",
+      "caption": "The sequence moves from a direct hyperparameter grid through recipe-specific fits and IsoFLOP curves to held-out large-model loss prediction."
+    },
+    {
+      "id": "lecture-11-visual-optimizer-scaling",
+      "semantic_id": "optimizer-scaling",
+      "visual_kind": "experiment",
+      "source_object": "lecture-11",
+      "source_units": [
+        "lecture-11-optimizer-scaling"
+      ],
+      "source_location": "Lectures/repository/lecture_11.pdf#pages=31-43:semantic=optimizer-scaling",
+      "source_pages": [
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43
+      ],
+      "question": "How can tuning budget, scale, and model/data ratio create an apparent optimizer advantage or a failed extrapolation?",
+      "sequence_members": [
+        {
+          "order": 1,
+          "source_location": "Lectures/repository/lecture_11.pdf#page=31:semantic=optimizer-scaling"
+        },
+        {
+          "order": 2,
+          "source_location": "Lectures/repository/lecture_11.pdf#page=32:semantic=optimizer-scaling"
+        },
+        {
+          "order": 3,
+          "source_location": "Lectures/repository/lecture_11.pdf#page=33:semantic=optimizer-scaling"
+        },
+        {
+          "order": 4,
+          "source_location": "Lectures/repository/lecture_11.pdf#page=34:semantic=optimizer-scaling"
+        },
+        {
+          "order": 5,
+          "source_location": "Lectures/repository/lecture_11.pdf#page=35:semantic=optimizer-scaling"
+        },
+        {
+          "order": 6,
+          "source_location": "Lectures/repository/lecture_11.pdf#page=36:semantic=optimizer-scaling"
+        },
+        {
+          "order": 7,
+          "source_location": "Lectures/repository/lecture_11.pdf#page=37:semantic=optimizer-scaling"
+        },
+        {
+          "order": 8,
+          "source_location": "Lectures/repository/lecture_11.pdf#page=38:semantic=optimizer-scaling"
+        },
+        {
+          "order": 9,
+          "source_location": "Lectures/repository/lecture_11.pdf#page=39:semantic=optimizer-scaling"
+        },
+        {
+          "order": 10,
+          "source_location": "Lectures/repository/lecture_11.pdf#page=40:semantic=optimizer-scaling"
+        },
+        {
+          "order": 11,
+          "source_location": "Lectures/repository/lecture_11.pdf#page=41:semantic=optimizer-scaling"
+        },
+        {
+          "order": 12,
+          "source_location": "Lectures/repository/lecture_11.pdf#page=42:semantic=optimizer-scaling"
+        },
+        {
+          "order": 13,
+          "source_location": "Lectures/repository/lecture_11.pdf#page=43:semantic=optimizer-scaling"
+        }
+      ],
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "optimizer-scaling",
+      "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
+      "rights_status": "permission-recorded",
+      "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
+      "rights_scope": "Local educational preservation and later attributed textbook reuse",
+      "license_identifier": "User permission record (not a license)",
+      "license_url": "https://cs336.stanford.edu/",
+      "rights_evidence": "User confirmed open educational reuse on 2026-09-04 for local educational preservation and later attributed textbook reuse; this is a permission record, not a named license. Explicit repository license files are preserved.",
+      "parent_sha256": "b2148e683b4020f3fa95f5c95f37be55ebf6b2f57382f4c148517e84bf1df890",
+      "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
+      "extractor_revision": "stanford-cs336-semantic-audit-v3",
+      "extraction_tool": "Poppler pdftotext 26.04.0 semantic page review; pdfimages 26.04.0 raster evidence",
+      "rendered_route": "/textbook/pretraining/scaling-laws/",
+      "desktop_evidence": "All four optimizer frames were inspected at native resolution; the replacement page 41 has no clipped title.",
+      "narrow_evidence": "Complete slides scale within the content column; the plots' conclusions are stated immediately in prose.",
+      "reviewer": "Codex Task 4 scaling integration",
+      "checked_at": "2026-09-06",
+      "raster_evidence": [
+        {
+          "page": 31,
+          "number": 41,
+          "width": 1292,
+          "height": 430
+        },
+        {
+          "page": 31,
+          "number": 42,
+          "width": 1576,
+          "height": 375
+        },
+        {
+          "page": 32,
+          "number": 43,
+          "width": 879,
+          "height": 584
+        },
+        {
+          "page": 33,
+          "number": 44,
+          "width": 1668,
+          "height": 409
+        },
+        {
+          "page": 34,
+          "number": 45,
+          "width": 872,
+          "height": 671
+        },
+        {
+          "page": 34,
+          "number": 46,
+          "width": 649,
+          "height": 513
+        },
+        {
+          "page": 35,
+          "number": 47,
+          "width": 1251,
+          "height": 538
+        },
+        {
+          "page": 36,
+          "number": 48,
+          "width": 1251,
+          "height": 455
+        },
+        {
+          "page": 37,
+          "number": 49,
+          "width": 1263,
+          "height": 498
+        },
+        {
+          "page": 37,
+          "number": 50,
+          "width": 1248,
+          "height": 376
+        },
+        {
+          "page": 38,
+          "number": 51,
+          "width": 938,
+          "height": 644
+        },
+        {
+          "page": 38,
+          "number": 52,
+          "width": 951,
+          "height": 659
+        },
+        {
+          "page": 39,
+          "number": 53,
+          "width": 1489,
+          "height": 555
+        },
+        {
+          "page": 39,
+          "number": 54,
+          "width": 476,
+          "height": 222
+        },
+        {
+          "page": 40,
+          "number": 55,
+          "width": 1128,
+          "height": 411
+        },
+        {
+          "page": 41,
+          "number": 56,
+          "width": 706,
+          "height": 380
+        },
+        {
+          "page": 42,
+          "number": 58,
+          "width": 862,
+          "height": 581
+        },
+        {
+          "page": 42,
+          "number": 59,
+          "width": 951,
+          "height": 659
+        },
+        {
+          "page": 43,
+          "number": 60,
+          "width": 744,
+          "height": 515
+        },
+        {
+          "page": 43,
+          "number": 61,
+          "width": 938,
+          "height": 644
+        },
+        {
+          "page": 43,
+          "number": 62,
+          "width": 796,
+          "height": 441
+        }
+      ],
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/optimizer-search-surface.png",
+      "transformation": "Complete 1600px renders of pinned Lecture 11 pages 34, 39, and 40; page 41 was re-rendered directly from the pinned PDF at 1600px to restore the full slide boundary.",
+      "caption": "The evidence sequence separates search-surface coverage, optimizer-specific tuning, compute/ratio confounding, and failed held-out extrapolation."
     },
     {
       "id": "lecture-11-visual-mup-derivation",
@@ -8191,10 +8476,9 @@
           "source_location": "Lectures/repository/lecture_11.pdf#page=50:semantic=mup-derivation"
         }
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-11",
-      "reason": "Reviewed semantic visual is preserved at exact event/page scope; canonical textbook placement remains pending.",
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "mup-derivation",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -8206,11 +8490,11 @@
       "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
       "extractor_revision": "stanford-cs336-semantic-audit-v3",
       "extraction_tool": "Poppler pdftotext 26.04.0 semantic page review; pdfimages 26.04.0 raster evidence",
-      "rendered_route": "/sources/courses/stanford-cs336-spring-2026/",
-      "desktop_evidence": "pending editorial integration; source archive inspected",
-      "narrow_evidence": "pending editorial integration; source archive inspected",
-      "reviewer": "Codex source audit",
-      "checked_at": "2026-09-04",
+      "rendered_route": "/textbook/pretraining/scaling-laws/",
+      "desktop_evidence": "The derivation frames were inspected at native resolution with assumptions visible.",
+      "narrow_evidence": "The full derivation is repeated in text so the narrow view does not depend on reading slide-sized equations.",
+      "reviewer": "Codex Task 4 scaling integration",
+      "checked_at": "2026-09-06",
       "raster_evidence": [
         {
           "page": 44,
@@ -8248,7 +8532,10 @@
           "width": 959,
           "height": 255
         }
-      ]
+      ],
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/mup-invariants.png",
+      "transformation": "Complete 1600px renders of pinned Lecture 11 pages 46, 47, 49, and 50, retaining assumptions and derivation context.",
+      "caption": "The sequence states the activation/update invariants, derives initialization scale, and contrasts SGD with Adam learning-rate scaling."
     },
     {
       "id": "lecture-11-visual-mup-robustness",
@@ -8299,10 +8586,9 @@
           "source_location": "Lectures/repository/lecture_11.pdf#page=57:semantic=mup-robustness"
         }
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-11",
-      "reason": "Reviewed semantic visual is preserved at exact event/page scope; canonical textbook placement remains pending.",
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "mup-robustness",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -8314,11 +8600,11 @@
       "extractor_sha256": "cf1bfb031fbc54e0c5afc410997a22725aac32b341627bdab03a6d33c7412274",
       "extractor_revision": "stanford-cs336-semantic-audit-v3",
       "extraction_tool": "Poppler pdftotext 26.04.0 semantic page review; pdfimages 26.04.0 raster evidence",
-      "rendered_route": "/sources/courses/stanford-cs336-spring-2026/",
-      "desktop_evidence": "pending editorial integration; source archive inspected",
-      "narrow_evidence": "pending editorial integration; source archive inspected",
-      "reviewer": "Codex source audit",
-      "checked_at": "2026-09-04",
+      "rendered_route": "/textbook/pretraining/scaling-laws/",
+      "desktop_evidence": "All six selected frames were inspected at native resolution; the page-55 replacement is complete.",
+      "narrow_evidence": "The chapter states each boundary condition in prose next to the corresponding complete slide.",
+      "reviewer": "Codex Task 4 scaling integration",
+      "checked_at": "2026-09-06",
       "raster_evidence": [
         {
           "page": 51,
@@ -8404,7 +8690,10 @@
           "width": 690,
           "height": 301
         }
-      ]
+      ],
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/mup-transformer-rules.png",
+      "transformation": "Complete 1600px renders of pinned Lecture 11 pages 51, 52, 54, 56, and 57; page 55 was re-rendered directly from the pinned PDF at 1600px to restore its complete heading.",
+      "caption": "The sequence starts from exact Transformer parameter groups, demonstrates transfer, and then maps failures from RMSNorm gain, Lion, and strong weight decay."
     },
     {
       "id": "lecture-12-visual-agentic-benchmark-evidence-chain",
@@ -15792,7 +16081,6 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "assignment-03",
-      "reason": "Reviewed semantic visual is preserved at exact event/page scope; canonical textbook placement remains pending.",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -15809,7 +16097,9 @@
       "narrow_evidence": "pending editorial integration; source archive inspected",
       "reviewer": "Codex source audit",
       "checked_at": "2026-09-04",
-      "raster_evidence": []
+      "raster_evidence": [],
+      "reason": "The handout supplies equations and procedure rather than a reusable explanatory raster; the practice preserves the workflow as structured text and requires learner-generated plots from non-answer-bearing data.",
+      "evidence": "Assignments/assignment3-scaling/cs336_assignment3_scaling.pdf#pages=2-3:semantic=isoflops-fit-workflow"
     },
     {
       "id": "assignment-04-visual-minhash-lsh-deduplication",
@@ -15985,5 +16275,5 @@
       "raster_evidence": []
     }
   ],
-  "editorial_overlay_sha256": "0244577603f9d2c17aa4361ff58e307b9b80e88111821d518403cab728b5f936"
+  "editorial_overlay_sha256": "6f5b6e4ce6c3cfd95d78188f2aa2f11313c4a3b214457392c162d6f6d6db4dc3"
 }

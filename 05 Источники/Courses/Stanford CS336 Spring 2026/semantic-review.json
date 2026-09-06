@@ -544,7 +544,8 @@
         {"semantic_id": "data-scaling", "visual_kind": "figure", "question": "Why does loss become approximately linear in log data size across tasks and models?", "pages": [13, 20]},
         {"semantic_id": "data-scaling-failures", "visual_kind": "figure", "question": "How do distribution shift, repeated examples, and finite data alter effective scaling?", "pages": [21, 26]},
         {"semantic_id": "engineering-scaling", "visual_kind": "experiment", "question": "Which controlled sweeps show scale-sensitive versus stable architecture and optimizer choices?", "pages": [29, 42]},
-        {"semantic_id": "isoflops-experiment", "visual_kind": "experiment", "question": "How do fixed-FLOP loss valleys yield optimal parameter and token power laws?", "pages": [46, 53]}
+        {"semantic_id": "isoflops-experiment", "visual_kind": "experiment", "question": "How do fixed-FLOP loss valleys yield optimal parameter and token power laws?", "pages": [46, 53]},
+        {"semantic_id": "train-inference-tradeoff", "visual_kind": "table", "question": "Why can a training-optimal token-to-parameter ratio differ from a deployment-aware allocation?", "pages": [54]}
       ],
       "sample": "The IsoFLOPs curves on page 48 are one pages 46-53 experimental sequence, distinct from training/inference allocation."
     },
@@ -562,6 +563,7 @@
       "visuals": [
         {"semantic_id": "minicpm-scaling", "visual_kind": "experiment", "question": "How do muP, WSD restarts, and model-data sweeps make MiniCPM scaling economical?", "pages": [8, 18]},
         {"semantic_id": "deepseek-scaling", "visual_kind": "experiment", "question": "How do DeepSeek and later models fit batch, learning rate, and IsoFLOPs trends?", "pages": [19, 30]},
+        {"semantic_id": "optimizer-scaling", "visual_kind": "experiment", "question": "How can tuning budget, scale, and model/data ratio create an apparent optimizer advantage or a failed extrapolation?", "pages": [31, 43]},
         {"semantic_id": "mup-derivation", "visual_kind": "derivation", "question": "Which initialization and update scalings keep activations and feature learning stable as width grows?", "pages": [44, 50]},
         {"semantic_id": "mup-robustness", "visual_kind": "experiment", "question": "Where does muP transfer across architecture changes, and where do gains, optimizers, or weight decay break it?", "pages": [51, 57]}
       ],

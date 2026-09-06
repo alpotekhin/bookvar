@@ -2308,30 +2308,6 @@ assets:
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/slp3/lm-jan25-slide-45.png
-  - id: curated-cs336-isoflops-000000000021
-    asset: 00 Учебник/Assets/Figures/curated/training-systems-courses/43-cs336-isoflops.png
-    author: Tatsu Hashimoto and Stanford CS336 course staff
-    source_url: https://github.com/stanford-cs336/lectures/blob/main/lecture_09.pdf
-    license: open-course-material; reuse confirmed by repository owner
-    license_url: https://cs336.stanford.edu/
-    modifications: slide 48 rendered to PNG without content changes
-    used_in:
-      - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
-    metadata_status: verified
-    provenance_confirmation: user-confirmed-open-materials
-    source_asset: raw/papers/external/cs336/lecture-09-slide-48.png
-  - id: curated-cs336-deploy-optimum-000000000022
-    asset: 00 Учебник/Assets/Figures/curated/training-systems-courses/43-cs336-train-vs-inference-optimum.png
-    author: Tatsu Hashimoto and Stanford CS336 course staff
-    source_url: https://github.com/stanford-cs336/lectures/blob/main/lecture_09.pdf
-    license: open-course-material; reuse confirmed by repository owner
-    license_url: https://cs336.stanford.edu/
-    modifications: slide 54 rendered to PNG without content changes
-    used_in:
-      - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
-    metadata_status: verified
-    provenance_confirmation: user-confirmed-open-materials
-    source_asset: raw/papers/external/cs336/lecture-09-slide-54.png
   - id: curated-cs336-dp-memory-000000000023
     asset: 00 Учебник/Assets/Figures/curated/training-systems-courses/44-cs336-dp-memory.png
     author: Percy Liang, Tatsu Hashimoto, and Stanford CS336 course staff
@@ -6792,6 +6768,598 @@ assets:
     modifications: complete PDF page 55 rendered at 180 DPI with Poppler; no crop or redraw
     used_in:
     - 00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-scaling-chinchilla-isoflops-b837288ec485
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/chinchilla-isoflops.png
+    author: Tatsunori Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_09.pdf#page=48
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 92a5d9e26e65bb0a9d8c79b12ed7ea26d14530bf960dcf44f9ed5fd372f519fa
+    sha256: b837288ec485dde7854af73aa67e919a8531d26a81cca03724786fee50f401ce
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page rendered at 1600 px; no crop or redraw
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-scaling-chinchilla-joint-fit-1efa8ecb52c5
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/chinchilla-joint-fit.png
+    author: Tatsunori Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_09.pdf#page=49
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 92a5d9e26e65bb0a9d8c79b12ed7ea26d14530bf960dcf44f9ed5fd372f519fa
+    sha256: 1efa8ecb52c5e9dc061aa8e9cc26ce3bafae9abb7ac63c583f654f2851299573
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page rendered at 1600 px; no crop or redraw
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-scaling-chinchilla-lower-envelope-8798fef20bca
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/chinchilla-lower-envelope.png
+    author: Tatsunori Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_09.pdf#page=47
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 92a5d9e26e65bb0a9d8c79b12ed7ea26d14530bf960dcf44f9ed5fd372f519fa
+    sha256: 8798fef20bcac347a5f84ce7efd897bf056f7f4624df68430dcd99e93af70a6e
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page rendered at 1600 px; no crop or redraw
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-scaling-chinchilla-residuals-683db68ba571
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/chinchilla-residuals.png
+    author: Tatsunori Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_09.pdf#page=53
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 92a5d9e26e65bb0a9d8c79b12ed7ea26d14530bf960dcf44f9ed5fd372f519fa
+    sha256: 683db68ba57128fce4066c707fde55de3d15d8424b715076d8fc93a794ee4a84
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page rendered at 1600 px; no crop or redraw
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-scaling-chinchilla-three-methods-e0d181a7dc55
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/chinchilla-three-methods.png
+    author: Tatsunori Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_09.pdf#page=46
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 92a5d9e26e65bb0a9d8c79b12ed7ea26d14530bf960dcf44f9ed5fd372f519fa
+    sha256: e0d181a7dc55b26b204861476ba51004c071ef576b88c4cc92d8f8bef720f80f
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page rendered at 1600 px; no crop or redraw
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-scaling-critical-batch-tradeoff-bf670dce8cb7
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/critical-batch-tradeoff.png
+    author: Tatsunori Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_09.pdf#page=38
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 92a5d9e26e65bb0a9d8c79b12ed7ea26d14530bf960dcf44f9ed5fd372f519fa
+    sha256: bf670dce8cb7728142d493ddc25eec5aa44f130629089aef2224d3d6f133b1c1
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page rendered at 1600 px; no crop or redraw
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-scaling-critical-batch-vs-loss-1da75dbae07f
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/critical-batch-vs-loss.png
+    author: Tatsunori Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_09.pdf#page=39
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 92a5d9e26e65bb0a9d8c79b12ed7ea26d14530bf960dcf44f9ed5fd372f519fa
+    sha256: 1da75dbae07f566d5c8c61ae651115500d84f12703dc8c0452ae0dd603885bb4
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page rendered at 1600 px; no crop or redraw
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-scaling-data-power-law-d45156527032
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/data-power-law.png
+    author: Tatsunori Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_09.pdf#page=15
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 92a5d9e26e65bb0a9d8c79b12ed7ea26d14530bf960dcf44f9ed5fd372f519fa
+    sha256: d4515652703275098497e920db7e5e172419e23d6323a4fbccd99cdb0e0bb45a
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page rendered at 1600 px; no crop or redraw
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-scaling-deepseek-hyperparameter-fits-bcd69487081e
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/deepseek-hyperparameter-fits.png
+    author: Tatsunori Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_11.pdf#page=21
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: b2148e683b4020f3fa95f5c95f37be55ebf6b2f57382f4c148517e84bf1df890
+    sha256: bcd69487081eb1c26301854526a8982da361088371ff57828fed1d4f23bad23a
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: clean plot-body crop from the same PDF page at 1600 px (x=160, y=350, width=1230, height=475); slide title and fitted equations are retained in the surrounding textbook text
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-crop
+
+  - id: curated-stanford-cs336-scaling-deepseek-isoflop-curves-8f2ea271d568
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/deepseek-isoflop-curves.png
+    author: Tatsunori Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_11.pdf#page=23
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: b2148e683b4020f3fa95f5c95f37be55ebf6b2f57382f4c148517e84bf1df890
+    sha256: 8f2ea271d568cc614b26e356c6e01e38f0fb4b308464a2103a603aa491d45367
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page rendered at 1600 px; no crop or redraw
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-scaling-deepseek-loss-prediction-ef68934fd2d6
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/deepseek-loss-prediction.png
+    author: Tatsunori Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_11.pdf#page=24
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: b2148e683b4020f3fa95f5c95f37be55ebf6b2f57382f4c148517e84bf1df890
+    sha256: ef68934fd2d66e7acb37ceb937318fea620ec85ad33804684e69431a1f676325
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page rendered at 1600 px; no crop or redraw
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-scaling-deepseek-lr-batch-grid-fa9aca0ea51c
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/deepseek-lr-batch-grid.png
+    author: Tatsunori Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_11.pdf#page=20
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: b2148e683b4020f3fa95f5c95f37be55ebf6b2f57382f4c148517e84bf1df890
+    sha256: fa9aca0ea51c2ae0a757a97b6cf7a55b3ce55e065237fe45604c1ff5f8bcc487
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page rendered at 1600 px; no crop or redraw
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-scaling-distribution-shift-offset-82302094c43a
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/distribution-shift-offset.png
+    author: Tatsunori Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_09.pdf#page=22
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 92a5d9e26e65bb0a9d8c79b12ed7ea26d14530bf960dcf44f9ed5fd372f519fa
+    sha256: 82302094c43ab0c73f5d332d97b23476496218849cc5ed21827bd721cbb9f465
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page rendered at 1600 px; no crop or redraw
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-scaling-finite-data-breakdown-0ba07f9ca8ef
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/finite-data-breakdown.png
+    author: Tatsunori Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_09.pdf#page=25
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 92a5d9e26e65bb0a9d8c79b12ed7ea26d14530bf960dcf44f9ed5fd372f519fa
+    sha256: 0ba07f9ca8ef8b228e08d09d2b71ce38a7f48965e583ec8215ea33856f25ffd1
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page rendered at 1600 px; no crop or redraw
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-scaling-learning-rate-scaling-55a2f945d6b5
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/learning-rate-scaling.png
+    author: Tatsunori Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_09.pdf#page=40
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 92a5d9e26e65bb0a9d8c79b12ed7ea26d14530bf960dcf44f9ed5fd372f519fa
+    sha256: 55a2f945d6b5b038442a872546cfd11f0bf0eeb5b8852d39ec9dbca5041cfe18
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page rendered at 1600 px; no crop or redraw
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-scaling-mean-estimation-rate-6bc1216cb423
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/mean-estimation-rate.png
+    author: Tatsunori Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_09.pdf#page=17
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 92a5d9e26e65bb0a9d8c79b12ed7ea26d14530bf960dcf44f9ed5fd372f519fa
+    sha256: 6bc1216cb423f40b2e92901f0e63026fee4ece99ad8751791d401490bb624668
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page rendered at 1600 px; no crop or redraw
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-scaling-minicpm-cosine-campaign-cost-7129ddfa6d40
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/minicpm-cosine-campaign-cost.png
+    author: Tatsunori Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_11.pdf#page=13
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: b2148e683b4020f3fa95f5c95f37be55ebf6b2f57382f4c148517e84bf1df890
+    sha256: 7129ddfa6d4003ce10901a1f71a97d5ad66ca5efe617c44cd45335d65a457f6e
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page rendered at 1600 px; no crop or redraw
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-scaling-minicpm-joint-scaling-fit-8a7649be35b6
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/minicpm-joint-scaling-fit.png
+    author: Tatsunori Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_11.pdf#page=18
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: b2148e683b4020f3fa95f5c95f37be55ebf6b2f57382f4c148517e84bf1df890
+    sha256: 8a7649be35b64fd1ae27925441f1fb372035d758706fd9a89b01b2853bc330d4
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page rendered at 1600 px; no crop or redraw
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-scaling-minicpm-wsd-branching-e0aa4e72e32d
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/minicpm-wsd-branching.png
+    author: Tatsunori Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_11.pdf#page=14
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: b2148e683b4020f3fa95f5c95f37be55ebf6b2f57382f4c148517e84bf1df890
+    sha256: e0aa4e72e32d82d1acc7e9563d5b6d7b3f8f04eb3c502c815019c5a3799a9886
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page rendered at 1600 px; no crop or redraw
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-scaling-minicpm-wsd-loss-dynamics-3e4dd201c965
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/minicpm-wsd-loss-dynamics.png
+    author: Tatsunori Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_11.pdf#page=15
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: b2148e683b4020f3fa95f5c95f37be55ebf6b2f57382f4c148517e84bf1df890
+    sha256: 3e4dd201c96504811ea7439ba0dd7d2e5265859359d83f7f0dac54b7432cb96b
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page rendered at 1600 px; no crop or redraw
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-scaling-mup-adam-learning-rate-0bf213e14776
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/mup-adam-learning-rate.png
+    author: Tatsunori Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_11.pdf#page=50
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: b2148e683b4020f3fa95f5c95f37be55ebf6b2f57382f4c148517e84bf1df890
+    sha256: 0bf213e147769ac9abf6c4bcb6b7137846c88caab6bc5fda8a537cc5d866fa45
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page rendered at 1600 px; no crop or redraw
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-scaling-mup-initialization-derivation-7295876959ba
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/mup-initialization-derivation.png
+    author: Tatsunori Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_11.pdf#page=47
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: b2148e683b4020f3fa95f5c95f37be55ebf6b2f57382f4c148517e84bf1df890
+    sha256: 7295876959ba7a8ff0f0bf91c689232ead096890cf7cb5d68e41206da91c5165
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page rendered at 1600 px; no crop or redraw
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-scaling-mup-invariants-9240900b86f9
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/mup-invariants.png
+    author: Tatsunori Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_11.pdf#page=46
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: b2148e683b4020f3fa95f5c95f37be55ebf6b2f57382f4c148517e84bf1df890
+    sha256: 9240900b86f9ccc5cb947fa32ee624ac729fc877a48d775fca54727a86b10aef
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page rendered at 1600 px; no crop or redraw
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-scaling-mup-lion-failure-35b63e29f4cc
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/mup-lion-failure.png
+    author: Tatsunori Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_11.pdf#page=55
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: b2148e683b4020f3fa95f5c95f37be55ebf6b2f57382f4c148517e84bf1df890
+    sha256: 35b63e29f4cc0d3994bc5905bc6592661900a273c13b050afcc58d7d30fb72b0
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: clean body crop from the same PDF page at 1600 px (x=165, y=150, width=1260, height=685); slide title is retained in the textbook caption
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-crop
+
+  - id: curated-stanford-cs336-scaling-mup-rmsnorm-gain-failure-df16dfdbd624
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/mup-rmsnorm-gain-failure.png
+    author: Tatsunori Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_11.pdf#page=54
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: b2148e683b4020f3fa95f5c95f37be55ebf6b2f57382f4c148517e84bf1df890
+    sha256: df16dfdbd624de2b714ac2702cb0c6b9baeb3d3b86d745710fce9f3d48882066
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page rendered at 1600 px; no crop or redraw
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-scaling-mup-sgd-learning-rate-46e5fcffb4f6
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/mup-sgd-learning-rate.png
+    author: Tatsunori Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_11.pdf#page=49
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: b2148e683b4020f3fa95f5c95f37be55ebf6b2f57382f4c148517e84bf1df890
+    sha256: 46e5fcffb4f6fb9ba0b034a08ab1cf501636e67970fc6af294438cff1e451754
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page rendered at 1600 px; no crop or redraw
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-scaling-mup-summary-689f51da3cd5
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/mup-summary.png
+    author: Tatsunori Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_11.pdf#page=57
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: b2148e683b4020f3fa95f5c95f37be55ebf6b2f57382f4c148517e84bf1df890
+    sha256: 689f51da3cd582f1b1f1228494c600e29193004edc1b80851eaa4e853e7a8003
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page rendered at 1600 px; no crop or redraw
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-scaling-mup-transfer-result-fa862cb26922
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/mup-transfer-result.png
+    author: Tatsunori Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_11.pdf#page=52
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: b2148e683b4020f3fa95f5c95f37be55ebf6b2f57382f4c148517e84bf1df890
+    sha256: fa862cb26922e11e5baeaf2f41cbd41008d8234ffe2ce26f0b33e55242bf7ddd
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page rendered at 1600 px; no crop or redraw
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-scaling-mup-transformer-rules-e6ce71ed5999
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/mup-transformer-rules.png
+    author: Tatsunori Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_11.pdf#page=51
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: b2148e683b4020f3fa95f5c95f37be55ebf6b2f57382f4c148517e84bf1df890
+    sha256: e6ce71ed59995175f1a4410cbe7d626b3f7bf7da10b7f653d73f51f18efb7b61
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page rendered at 1600 px; no crop or redraw
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-scaling-mup-weight-decay-failure-e42d9f88a7a4
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/mup-weight-decay-failure.png
+    author: Tatsunori Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_11.pdf#page=56
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: b2148e683b4020f3fa95f5c95f37be55ebf6b2f57382f4c148517e84bf1df890
+    sha256: e42d9f88a7a4d5fb9856df64d6203d09fffb698ccc470189e5cdbf934f5784ac
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page rendered at 1600 px; no crop or redraw
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-scaling-optimizer-compute-ratio-confound-b391e6bb500d
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/optimizer-compute-ratio-confound.png
+    author: Tatsunori Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_11.pdf#page=40
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: b2148e683b4020f3fa95f5c95f37be55ebf6b2f57382f4c148517e84bf1df890
+    sha256: b391e6bb500d05a2c83f79d7cf32f4e443060a1a940fb7287857279e16b3deca
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page rendered at 1600 px; no crop or redraw
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-scaling-optimizer-extrapolation-failure-2e831ffa5d05
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/optimizer-extrapolation-failure.png
+    author: Tatsunori Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_11.pdf#page=41
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: b2148e683b4020f3fa95f5c95f37be55ebf6b2f57382f4c148517e84bf1df890
+    sha256: 2e831ffa5d05d077fd951acdac3b8989e71e30e4850991bd29de2691cd5dc572
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: body crop from the same PDF page at 1600 px (x=360, y=230, width=890, height=450); slide title is retained in the textbook caption
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-crop
+
+  - id: curated-stanford-cs336-scaling-optimizer-search-surface-0b0fbaecc546
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/optimizer-search-surface.png
+    author: Tatsunori Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_11.pdf#page=34
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: b2148e683b4020f3fa95f5c95f37be55ebf6b2f57382f4c148517e84bf1df890
+    sha256: 0b0fbaecc546b2534d3b954adbd96b4fbb9fd0a2f4e5e24efb72312ca5f954ce
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page rendered at 1600 px; no crop or redraw
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-scaling-optimizer-unfair-tuning-ff2af57ebf4c
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/optimizer-unfair-tuning.png
+    author: Tatsunori Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_11.pdf#page=39
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: b2148e683b4020f3fa95f5c95f37be55ebf6b2f57382f4c148517e84bf1df890
+    sha256: ff2af57ebf4cc5b0ebbc28733bbf7db65a4b95b703ffb50fb1d3fd402f9f098c
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page rendered at 1600 px; no crop or redraw
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-scaling-parameter-count-convention-c7f34296b102
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/parameter-count-convention.png
+    author: Tatsunori Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_09.pdf#page=35
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 92a5d9e26e65bb0a9d8c79b12ed7ea26d14530bf960dcf44f9ed5fd372f519fa
+    sha256: c7f34296b102311c5ee302f85a5c2fc50496c237af834b126fdaec9443b59046
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page rendered at 1600 px; no crop or redraw
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-scaling-repeated-data-effective-tokens-44ad0bb434b3
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/repeated-data-effective-tokens.png
+    author: Tatsunori Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_09.pdf#page=24
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 92a5d9e26e65bb0a9d8c79b12ed7ea26d14530bf960dcf44f9ed5fd372f519fa
+    sha256: 44ad0bb434b30ab631df757f3713453a6f0c6d1489d1905373f31f70b8267133
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page rendered at 1600 px; no crop or redraw
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: pdf-page-render
+
+  - id: curated-stanford-cs336-scaling-train-vs-inference-ratios-1e33c74cdee4
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/train-vs-inference-ratios.png
+    author: Tatsunori Hashimoto and Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_09.pdf#page=54
+    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
+    source_parent_sha256: 92a5d9e26e65bb0a9d8c79b12ed7ea26d14530bf960dcf44f9ed5fd372f519fa
+    sha256: 1e33c74cdee448640d5e5775f9adc28f272f98a03c22a482bf8cfdeecfa14a7e
+    license: User permission record (not a named license)
+    license_url: https://cs336.stanford.edu/
+    modifications: complete PDF page rendered at 1600 px; no crop or redraw
+    used_in:
+    - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
     derivation: pdf-page-render

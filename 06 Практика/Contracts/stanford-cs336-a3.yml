@@ -1,0 +1,376 @@
+{
+  "schema_version": 1,
+  "id": "stanford-cs336-spring-2026-assignment-3-scaling-campaign",
+  "source": {
+    "repository": "stanford-cs336/assignment3-scaling",
+    "commit": "03e9372992e913061b9e78b5cfcb62ad8a87de35",
+    "canonical_url": "https://github.com/stanford-cs336/assignment3-scaling/tree/03e9372992e913061b9e78b5cfcb62ad8a87de35",
+    "handout": {
+      "path": "cs336_assignment3_scaling.pdf",
+      "sha256": "121e9d15b1ba508cef437acc764eaa83268b559c4898c10bda3fd56bdde50392"
+    },
+    "tests": {
+      "root": "tests",
+      "tree_hash_algorithm": "sha256(sorted repository-relative path + NUL + bytes + NUL)",
+      "tree_includes": "all regular files under tests/** recursively",
+      "tree_excludes": [
+        "**/__pycache__/**",
+        "**/.pytest_cache/**",
+        "**/*.pyc",
+        "**/.DS_Store"
+      ],
+      "tree_sha256": "676dba2c678bc734fa500b49ea624c1ebe9118dd2dedf47134cdb1eb198ff19c"
+    },
+    "lectures": [
+      {
+        "object": "lecture-09",
+        "commit": "8b59b50730766695c2ffedd1a79c50cd09b9eb91",
+        "url": "https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_09.pdf"
+      },
+      {
+        "object": "lecture-11",
+        "commit": "8b59b50730766695c2ffedd1a79c50cd09b9eb91",
+        "url": "https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_11.pdf"
+      }
+    ]
+  },
+  "source_unit_ids": [
+    "assignment-03-isoflops-fit-workflow",
+    "assignment-03-task-chinchilla-isoflops",
+    "assignment-03-isoflops-reproduction",
+    "assignment-03-deliverable-chinchilla-isoflops-001",
+    "assignment-03-deliverable-chinchilla-isoflops-002",
+    "assignment-03-task-scaling-laws",
+    "assignment-03-leaderboard-budget",
+    "assignment-03-deliverable-scaling-laws-003",
+    "assignment-03-test-tests-test-api-py-51-test-budget",
+    "assignment-03-test-tests-test-api-py-72-test-submit-jobs",
+    "assignment-03-test-tests-test-api-py-152-test-submit-rejects-duplicate-training-config",
+    "assignment-03-test-tests-test-api-py-193-test-final-submission-accepts-training-config-and-predicted-loss"
+  ],
+  "profiles": {
+    "offline_local": {
+      "required": true,
+      "purpose": "rehearse a complete finite-budget scaling campaign without Stanford answer-bearing data or course credentials",
+      "input_modes": [
+        "synthetic fixture generated from a preregistered function with fixed seed",
+        "learner-owned runs with complete provenance",
+        "open published runs whose license, schema, and checksum are recorded"
+      ],
+      "forbidden_inputs": [
+        "Assignments/assignment3-scaling/data/isoflops_curves.json",
+        "course leaderboard exports",
+        "other participants' runs",
+        "course API credentials"
+      ],
+      "required_input_manifest_fields": [
+        "input_mode",
+        "source_url_or_generator_spec",
+        "license_or_ownership",
+        "sha256",
+        "generated_at",
+        "generator_seed",
+        "contains_stanford_answer_data"
+      ]
+    },
+    "course_api_observation": {
+      "required": false,
+      "purpose": "record only the learner's authorized interaction with the official course API",
+      "credential_storage": "forbidden",
+      "other_users_data": "forbidden",
+      "course_budget_values_are_portable_defaults": false
+    }
+  },
+  "course_reference_configuration": {
+    "reference_only": true,
+    "target_budget": {
+      "value": 48,
+      "unit": "B200-hours"
+    },
+    "search_budget": {
+      "value": 12,
+      "unit": "B200-hours"
+    },
+    "hardware_per_run": "single B200",
+    "context_length": 512,
+    "vocab_size": 32000,
+    "data": "fixed DCLM token order with no epoching",
+    "dropout": 0,
+    "validation_tokens": 262144,
+    "parameter_proxy": "N_nonembed approximately 12 * n_layer * d_model^2",
+    "optimizer_choices": [
+      "AdamW",
+      "SGD"
+    ],
+    "schedule": "warmup-cosine",
+    "constraints": [
+      "hidden_size equals num_attention_heads times head_dim",
+      "num_key_value_heads equals num_attention_heads in the pinned repository validation",
+      "head_dim is even",
+      "total training tokens are divisible by context_length times batch_size",
+      "total steps are divisible by the number of evaluations",
+      "validation tokens are divisible by context_length times validation batch size",
+      "model_seed changes initialization, not data order"
+    ]
+  },
+  "campaign_plan": {
+    "path": "artifacts/scaling-campaign/campaign-plan.yml",
+    "must_precede_runs": true,
+    "required_fields": [
+      "research_question",
+      "target_metric",
+      "metric_unit",
+      "tokenizer_id",
+      "train_data_id",
+      "validation_data_id",
+      "context_length",
+      "architecture_family",
+      "parameter_count_convention",
+      "unique_and_presented_token_policy",
+      "optimizer",
+      "batch_policy",
+      "learning_rate_policy",
+      "warmup_policy",
+      "decay_policy",
+      "clipping",
+      "dtype",
+      "seed_policy",
+      "cost_metric",
+      "search_budget",
+      "target_budget",
+      "fit_budget_range",
+      "held_out_budget",
+      "candidate_fit_forms",
+      "reveal_policy"
+    ],
+    "universal_pilot_fractions_allowed": false,
+    "universal_model_count_allowed": false
+  },
+  "run_ledger": {
+    "path": "artifacts/scaling-campaign/runs.jsonl",
+    "format": "JSONL, one immutable event or terminal run record per line",
+    "statuses": [
+      "planned",
+      "queued",
+      "running",
+      "completed",
+      "failed",
+      "timed_out"
+    ],
+    "required_fields": [
+      "experiment_id",
+      "config_hash",
+      "status",
+      "source_commit",
+      "code_commit",
+      "git_state",
+      "architecture",
+      "parameter_count_convention",
+      "N_nonembed",
+      "N_total",
+      "N_active",
+      "D_presented",
+      "D_unique",
+      "epochs",
+      "compute_proxy_flops",
+      "compute_actual_or_null",
+      "cost_unit",
+      "cost_planned",
+      "cost_reserved",
+      "cost_actual",
+      "cost_charged",
+      "hardware",
+      "software_versions",
+      "tokenizer_id",
+      "train_data_id",
+      "validation_data_id",
+      "data_order_id",
+      "context_length",
+      "optimizer",
+      "batch_size",
+      "learning_rate",
+      "schedule_id",
+      "seed",
+      "validation_loss_curve",
+      "validation_loss_final",
+      "wall_time_seconds",
+      "mfu_or_null",
+      "failure_reason"
+    ],
+    "nullable_when_not_applicable": [
+      "N_total",
+      "N_active",
+      "compute_actual_or_null",
+      "validation_loss_curve",
+      "validation_loss_final",
+      "mfu_or_null",
+      "failure_reason"
+    ],
+    "duplicate_identity": "sha256 of canonical normalized training configuration including seed",
+    "duplicate_policy": "reject without additional charge",
+    "terminal_loss_policy": "only completed runs may provide validation_loss_final to the fit",
+    "failed_run_policy": "preserve in ledger and diagnostics; never silently drop"
+  },
+  "budget_accounting": {
+    "reference_semantics": "adapted from the pinned Assignment 3 service contract",
+    "queued_and_running": "reserve declared maximum runtime",
+    "completed_and_failed": "charge actual runtime clipped to declared service bounds",
+    "timed_out": "charge declared maximum runtime",
+    "required_in_offline_profile": "planned, reserved, actual, and charged costs remain separate even if local policy differs"
+  },
+  "isoflops": {
+    "compute_proxy": "C_proxy = 6 * N_nonembed * D_presented for a declared dense-transformer approximation",
+    "groups": "multiple distinct compute levels with multiple model/data allocations per level",
+    "minimum_status_values": [
+      "bracketed",
+      "left_open",
+      "right_open",
+      "unusable"
+    ],
+    "bracketed_definition": "the best point has both a smaller-N and larger-N comparable neighbor with worse loss",
+    "boundary_minimum_policy": "must not be used as an observed minimum without expansion or explicit open status",
+    "rounding_policy": "record planned and actual N, D, steps, and compute"
+  },
+  "fit_models": {
+    "required": [
+      {
+        "id": "isoflops_minima_power_law",
+        "outputs": [
+          "k_N",
+          "a",
+          "k_D",
+          "b",
+          "a_plus_b",
+          "minimum_selection_method"
+        ]
+      },
+      {
+        "id": "joint_additive_loss_surface",
+        "formula": "L(N,D) = E + A*N^(-alpha) + B*D^(-beta)",
+        "outputs": [
+          "E",
+          "A",
+          "B",
+          "alpha",
+          "beta",
+          "initializations",
+          "bounds",
+          "point_weights"
+        ]
+      }
+    ],
+    "required_alternative": "at least one of log-linearized, robust-loss, weighted-likelihood, or alternate-residual fit",
+    "comparison_outputs": [
+      "in_sample_error",
+      "held_out_error",
+      "residual_structure",
+      "parameter_uncertainty",
+      "target_prediction",
+      "extrapolation_factor"
+    ],
+    "force_a_plus_b_equal_one": false
+  },
+  "uncertainty": {
+    "required_sources": [
+      "stochastic seed or data-order variation",
+      "fit-point and minimum uncertainty",
+      "fit-form uncertainty"
+    ],
+    "bootstrap_unit": "whole IsoFLOP groups or independent runs consistent with campaign dependence",
+    "neighboring_checkpoints_independent": false,
+    "leave_one_budget_out": true,
+    "target_interval_required": true
+  },
+  "required_outputs": {
+    "root": "artifacts/scaling-campaign",
+    "files": [
+      "campaign-plan.yml",
+      "environment.json",
+      "input-manifest.json",
+      "runs.jsonl",
+      "fits.json",
+      "plots/isoflops.png",
+      "plots/n-optimal.png",
+      "plots/d-optimal.png",
+      "plots/observed-vs-predicted.png",
+      "plots/residuals.png",
+      "plots/leave-one-budget-out.png",
+      "plots/budget-ledger.png",
+      "prediction.json",
+      "prediction.sha256",
+      "reveal.md"
+    ],
+    "plot_requirements": [
+      "axis labels include units and parameter convention",
+      "log axes are explicitly marked",
+      "one compute budget has consistent color across figures",
+      "raw observations and fitted curves are both shown",
+      "failed runs are shown separately rather than omitted",
+      "uncertainty bands are labeled with their construction"
+    ]
+  },
+  "sealed_prediction": {
+    "must_precede_reveal": true,
+    "required_fields": [
+      "target_budget",
+      "cost_unit",
+      "N",
+      "D",
+      "batch_size",
+      "learning_rate",
+      "schedule",
+      "predicted_validation_loss",
+      "uncertainty_interval",
+      "selected_fit_model",
+      "alternative_predictions",
+      "extrapolation_factor",
+      "rounding_rationale",
+      "runs_jsonl_sha256",
+      "source_commit",
+      "created_at"
+    ],
+    "hash_algorithm": "sha256",
+    "mutable_after_reveal": false
+  },
+  "acceptance": {
+    "offline_local": [
+      "campaign plan predates all revealed held-out results",
+      "input checksum and no-Stanford-answer-data declaration are present",
+      "search and target budgets are distinct and no budget is overspent",
+      "all attempted runs, including failed and timed out, remain in the ledger",
+      "duplicate normalized configurations are detected",
+      "every proposed minimum is bracketed or explicitly marked open or unusable",
+      "both required fit models and one alternative are reported",
+      "raw curves, residuals, uncertainty, sensitivity, and budget plots exist",
+      "prediction is sealed before reveal",
+      "reveal report gives out-of-budget error and causal error analysis",
+      "no token-per-parameter value is claimed as universal"
+    ],
+    "course_api_observation": [
+      "all interaction was authorized",
+      "no credential or other participant data is stored",
+      "course quotas are labeled as course-specific wall-time constraints",
+      "official submission is not represented as Bookvar acceptance"
+    ]
+  },
+  "fail_if": [
+    "Stanford data/isoflops_curves.json or any answer-bearing derivative is used in offline_local",
+    "course credentials or another participant's data are committed",
+    "tokenizer, data distribution, architecture family, optimizer, or schedule changes without a new regime identifier",
+    "active and total MoE parameters are mixed",
+    "GPU-hours are labeled as FLOPs without a measured conversion model",
+    "failed or timed-out runs are removed from the evidence ledger",
+    "a boundary point is claimed as a bracketed minimum",
+    "prediction.json changes after held-out reveal",
+    "loss is reported without raw observations and units",
+    "a universal token-per-parameter ratio is asserted"
+  ],
+  "boundaries": {
+    "solution_code": "not included",
+    "official_course_test_suite": "server-internal tests are provenance evidence, not learner acceptance",
+    "scheduler_fairness_and_capacity": "course backend concerns excluded from the learning contract",
+    "dashboard_html": "course backend concern excluded from the learning contract",
+    "wall_time_to_flops": "no conversion is assumed",
+    "published_coefficients": "paper- and recipe-specific evidence, never defaults"
+  }
+}
