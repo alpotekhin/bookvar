@@ -2,7 +2,7 @@
 title: Вероятность текста и предсказание следующего токена
 type: textbook-chapter
 status: canonical
-last_updated: 2026-09-04
+last_updated: 2026-09-15
 source_unit_id:
   - assignment-01-task-softmax
   - assignment-01-task-cross-entropy
@@ -179,19 +179,43 @@ User: вопрос
 Assistant:
 ```
 
-становится диалогом только после последующего обучения на инструкциях и предпочтениях.
-Архитектура может остаться той же; меняется распределение поведения.
+может вызвать диалоговое продолжение и у base LM: такой формат встречается
+в текстах, а поведение может задаваться примерами в контексте. Это не равно
+надёжному выполнению роли помощника. GPT-3 исследует перенос задач через
+контекст без обновления весов ([Brown et al.](https://arxiv.org/abs/2005.14165));
+последующее обучение на инструкциях и предпочтениях целенаправленно формирует
+следование инструкциям и поведение assistant
+([Ouyang et al.](https://arxiv.org/abs/2203.02155)). Архитектура при этом может
+остаться той же; меняются веса и распределение поведения, а не сам факт
+возможности продолжить диалоговый префикс.
 
 ## Минимальная реализация функции потерь
 
 ```python
-logits = model(input_ids)              # [B, T, V]
+import torch.nn.functional as F
+
+# token_ids: [B, T+1]; token_valid marks real positions, including true EOS.
+input_ids = token_ids[:, :-1]
+labels = token_ids[:, 1:].clone()
+target_valid = token_valid[:, 1:].bool()
+labels[~target_valid] = -100
+if not target_valid.any():
+    raise ValueError("batch has no target tokens")
+logits = model(input_ids)              # tensor [B, T, V]; model handles attention masks
 loss = F.cross_entropy(
-    logits.view(-1, logits.size(-1)),
-    labels.view(-1),
-    ignore_index=pad_id,
+    logits.reshape(-1, logits.size(-1)),
+    labels.reshape(-1),
+    ignore_index=-100,
 )
 ```
+
+Здесь маска строится по **позициям**, а не сравнением ID с `pad_id`.
+Например, при общем ID 2 для EOS и padding строка `[BOS, кот, 2, 2]`
+с `token_valid=[1,1,1,0]` даёт labels `[кот,2,-100]`: настоящий EOS
+остаётся целью. Если заменить все ID 2 на `-100`, модель перестанет
+учиться завершению. Маска loss не заменяет маску attention: реальный
+батч с padding должен также передать модели сведения о допустимых
+входных позициях. Контракт вызова модели здесь намеренно абстрактный.
 
 Самая опасная ошибка здесь — неверный shift: модель может получить текущий
 токен вместо следующего и показать искусственно малую потерю.

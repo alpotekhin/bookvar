@@ -952,7 +952,7 @@
           },
           {
             "semantic_id": "gens",
-            "title": "GenS generalist foundation agents",
+            "title": "GenS: Generative Frame Sampler for long video understanding",
             "kind": "mechanism",
             "visual_kind": "system-sequence",
             "page_start": 99,

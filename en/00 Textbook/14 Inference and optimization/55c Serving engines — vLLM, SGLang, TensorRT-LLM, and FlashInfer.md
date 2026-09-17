@@ -12,7 +12,8 @@ last_verified: 2026-07-22
 
 Loading weights and a tokenizer does not yet make a model into a service. A single `generate` call can process a prompt and emit an answer sequentially, but a production system must concurrently accept requests of different lengths, change batch membership after every step, allocate memory for growing KV caches, stream tokens to clients, and release resources when sequences finish. A serving engine is the program that coordinates all these operations with GPU execution.
 
-vLLM, SGLang, TensorRT-LLM, and FlashInfer often appear in the same comparison table even though they occupy different levels of the stack. vLLM and SGLang provide complete runtimes and servers. TensorRT-LLM combines compilation with a highly optimized runtime closely coupled to NVIDIA's stack. FlashInfer is primarily a library of kernels for attention, sampling, and MoE that another runtime may employ. A meaningful comparison begins by separating the layers of an inference system.
+vLLM, SGLang, TensorRT-LLM, and FlashInfer often appear in the same comparison table even though they occupy different levels of the stack. vLLM and SGLang provide complete runtimes and servers. TensorRT-LLM includes a PyTorch execution backend as well as a TensorRT-engine
+path, with optimized operators closely coupled to NVIDIA's stack. FlashInfer is primarily a library of kernels for attention, sampling, and MoE that another runtime may employ. A meaningful comparison begins by separating the layers of an inference system.
 
 ## Five layers of one system
 
@@ -78,11 +79,27 @@ RadixAttention and PagedAttention address different problems. Paging controls ph
 
 ## TensorRT-LLM: graph optimization and runtime as one stack
 
-TensorRT-LLM serves the same ultimate purpose but emphasizes compilation and specialized NVIDIA GPU implementations. Model preparation or engine building selects precision, quantization, parallelism, and optimized plugins. The runtime executes that engine, manages in-flight batching and a paged KV cache, while the executor API organizes requests and distributed execution.
+TensorRT-LLM cannot be described solely as a build-and-run TensorRT engine.
+The official architecture overview, whose footer identifies documentation
+revision `0c9430e` dated 2025-09-15, describes a PyTorch backend. Its `LLM`
+interface reaches `PyExecutor`, which coordinates the scheduler, KV-cache
+manager, `ModelEngine`, and sampler. Optimized operators and CUDA Graphs can
+still be used without requiring a separately built TensorRT engine for every
+model. This specific documentation snapshot was checked on 2026-09-15; it is
+not a claim that all releases have identical defaults.
 
-Consequently, “vLLM versus TensorRT-LLM” cannot be reduced to one tokens/s figure. The outcome depends on optimized-plugin support for the model, acceptable build time, the desired dynamism of the PyTorch ecosystem, available precision and parallelism modes, and the real mix of prompt and output lengths. TensorRT-LLM can exploit a known NVIDIA configuration particularly well; vLLM is often convenient as a rapidly evolving open runtime with a broad model interface. These are engineering profiles, not a universal ranking.
+The TensorRT-engine path is a separate execution option: preparation and
+building select supported shapes, precision, quantization, parallelism, and
+plugins; the runtime executes the resulting engine. Distinguish these paths
+before discussing build costs or deployment artifacts.
 
-TensorRT-LLM documentation changes frequently, so supported plugins, build flags, and server options are not frozen here. Check the current [Architecture Overview](https://nvidia.github.io/TensorRT-LLM/architecture/overview.html) and [Executor](https://nvidia.github.io/TensorRT-LLM/advanced/executor.html) documentation for the deployed version.
+Consequently, “vLLM versus TensorRT-LLM” needs a selected backend, model,
+operator support, hardware, and workload. Neither the project name nor the
+presence of compilation establishes a universal speed ranking. Consult the
+[Architecture Overview](https://nvidia.github.io/TensorRT-LLM/architecture/overview.html),
+[identified source revision](https://github.com/NVIDIA/TensorRT-LLM/tree/0c9430e5a530ba958fc9dca561a3ad865ad9f492),
+and [TensorRT-engine quick start](https://nvidia.github.io/TensorRT-LLM/legacy/tensorrt_quickstart.html)
+for the relevant version.
 
 ## FlashInfer: a kernel library, not another scheduler
 

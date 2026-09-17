@@ -11,27 +11,27 @@
     "official_pdf_pages": 1254
   },
   "generated_audit": {
-    "semantic_review_sha256": "0dd492f1aa69d11aa3815aab7ce503f93341ac9ddb55689cbcc63dde3843a5b3",
-    "audit_contract_sha256": "71fc60d9c4717b85fa2b664876af02adf0098f340bee4a13eb55d13ae7812fb5",
-    "staged_editorial_overlay_sha256": "798b07838707b4a623ecd702072f1d5759e7ddf2a9ac315da89ab9f5e261ca10",
-    "importer_sha256": "673142406b96ed1d1f12f7ce2114dd05e93300be4cf61dfcf20174f0621bac22",
+    "semantic_review_sha256": "4f3cdc494aa011875c2d978aeeba22dcaab4094643dc6fb8494a94d6e7bf7072",
+    "audit_contract_sha256": "8b3a6f5d9e416b90f9681731a80d30fd069bc6e830a5053aa4acc7457fed4ba4",
+    "editorial_overlay_sha256": "50ba337969cbf410d783f5f5c2df538270e604e155b9fed10aee4e2721b416ef",
+    "importer_sha256": "ddb05e2c7582a189f6ae38fa1c975045b3217f604ed17acc21f7af3344a6d2c8",
     "extractor_revision": "berkeley-advanced-llm-agents-semantic-audit-v2",
     "page_index_tool": "pdftotext -layout (Poppler 26.04.0)",
     "ledgers": {
       "source-manifest.yml": {
-        "sha256": "36b6ef5ee1c5efc407b1e13a98a73ca22fb7c95771ce5a8b09b1021a5d186611",
+        "sha256": "c80a5c28c2d92b76bf387963162b6f5a86d085aa56305d0a1d8d3cd511eeabaa",
         "records": 64
       },
       "source-units.yml": {
-        "sha256": "abdfc6e44b6332675eff9c5372cb67cca55f2e6ceb56bff44a62d7469a070d8e",
+        "sha256": "a636f5fda6d7738fa855aa4f4df20bc8c929b3fc5684381c176115f90059c061",
         "records": 212
       },
       "coverage.yml": {
-        "sha256": "47adb0258e8819a92cab0c8ea39de166f91b9e55278d6d7451641e10c3782cdb",
+        "sha256": "ac09a7b2226893f5d55ae1d5ab4316a4bbc85a49db9fcf7d8313b27dc3273c58",
         "records": 212
       },
       "visuals.yml": {
-        "sha256": "c7c296690f253789bb25e46e824172438f852b044d329338c5a8faefd1782155",
+        "sha256": "6db66d68bd3a920fff5ebe88950e5d1bfa96e96e0486af19ac86d533a4487fda",
         "records": 161
       }
     }
@@ -44,18 +44,18 @@
     },
     {
       "path": "semantic-review.json",
-      "bytes": 34883,
-      "sha256": "0dd492f1aa69d11aa3815aab7ce503f93341ac9ddb55689cbcc63dde3843a5b3"
+      "bytes": 34909,
+      "sha256": "4f3cdc494aa011875c2d978aeeba22dcaab4094643dc6fb8494a94d6e7bf7072"
     },
     {
       "path": "audit-contract.json",
-      "bytes": 57947,
-      "sha256": "71fc60d9c4717b85fa2b664876af02adf0098f340bee4a13eb55d13ae7812fb5"
+      "bytes": 57973,
+      "sha256": "8b3a6f5d9e416b90f9681731a80d30fd069bc6e830a5053aa4acc7457fed4ba4"
     },
     {
       "path": "publishing/tools/import_berkeley_agents.py",
-      "bytes": 107759,
-      "sha256": "673142406b96ed1d1f12f7ce2114dd05e93300be4cf61dfcf20174f0621bac22"
+      "bytes": 109460,
+      "sha256": "ddb05e2c7582a189f6ae38fa1c975045b3217f604ed17acc21f7af3344a6d2c8"
     },
     {
       "path": "Lectures/meeting-01-intro.pdf",
@@ -393,22 +393,18 @@
       2,
       4
     ],
-    "baseline_dispositions": [
-      "source-only",
-      "excluded"
-    ],
-    "editorial_overlay_status": "staged-pending-destination-validation",
-    "staged_editorial_counts": {
+    "editorial_overlay_status": "active-destination-validated",
+    "editorial_counts": {
       "coverage": {
         "covered-existing": 6,
         "excluded": 28,
-        "integrated": 137,
-        "source-only": 41
+        "integrated": 140,
+        "source-only": 38
       },
       "visuals": {
         "excluded": 27,
-        "integrated": 42,
-        "source-only": 92
+        "integrated": 47,
+        "source-only": 87
       }
     }
   }

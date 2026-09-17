@@ -45,6 +45,15 @@ afterAll(async () => {
 });
 
 describe('static handbook output', () => {
+  it('links the 404 header to the configured publication root', async () => {
+    const html = await readFile(join(distDir, '404.html'), 'utf8');
+    const titleLink = html.match(/<a\b[^>]*class="[^"]*\bsite-title\b[^"]*"[^>]*>/)?.[0];
+    const href = titleLink?.match(/\bhref="([^"]+)"/)?.[1];
+    const base = (process.env.PUBLICATION_BASE_PATH ?? '').replace(/\/+$/, '');
+    expect(href).toBe(`${base}/`);
+    expect(html).not.toContain('class="sl-link-button');
+  });
+
   it('has no broken emitted internal routes or fragments', async () => {
     await expect(findBrokenBuiltLinks(distDir)).resolves.toEqual([]);
   });
@@ -115,6 +124,23 @@ describe('static handbook output', () => {
       const html = await readFile(join(distDir, outputRoute, 'index.html'), 'utf8');
       expect(html, route).not.toContain('<div class="sl-markdown-content"></div>');
     }
+  });
+
+  it('does not swallow textbook prose into malformed math blocks', async () => {
+    const manifest = YAML.parse(await readFile(join(rootDir, 'publishing', 'navigation.yml'), 'utf8'));
+    const routes: string[] = manifest.sections.flatMap(
+      (section: { pages: Array<{ route: string }> }) =>
+        section.pages.map((page) => page.route).filter((route) => route.startsWith('textbook/'))
+    );
+    const broken: string[] = [];
+    for (const route of routes) {
+      const outputRoute = route.endsWith('/index') ? route.slice(0, -'/index'.length) : route;
+      for (const locale of ['', 'en']) {
+        const html = await readFile(join(distDir, locale, outputRoute, 'index.html'), 'utf8');
+        if (html.includes('class="katex-error"')) broken.push(`${locale}/${outputRoute}`);
+      }
+    }
+    expect(broken).toEqual([]);
   });
 
   it('includes previous and next links on an interior handbook page', async () => {

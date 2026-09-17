@@ -4,6 +4,78 @@ notes:
   - null means the exact value has not yet been verified; it must not be inferred from the filename.
   - needs-confirmation entries are inventory records, not redistribution clearance.
 assets:
+  - id: curated-escher-figure2-f8cc16778fe2
+    asset: 00 Учебник/Assets/Figures/curated/course-follow-through/escher-figure2-original.svg
+    author: Aditya Sehgal et al.
+    source_url: https://arxiv.org/html/2504.00185v1
+    original_url: https://arxiv.org/html/2504.00185v1/cvpr-escher-figure-2-architecture_v3-9.svg
+    source_asset: raw/papers/escher/figure2-original.svg
+    sha256: f8cc16778fe268f6c28a4590943b62ef5e1fe5f072577860d87108395aa68c90
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    license_evidence: https://arxiv.org/html/2504.00185v1
+    modifications: Original Figure 2 SVG copied byte-for-byte without crop, resizing, translation or redraw. Source PDF page 3 and a raster preview are retained separately.
+    used_in:
+      - 00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+  - id: curated-jamba-vector-5ee975e76a73
+    asset: 00 Учебник/Assets/Figures/curated/course-follow-through/jamba-architecture.svg
+    author: Opher Lieber et al. / AI21 Labs
+    source_url: https://arxiv.org/html/2403.19887v2#S2.F1
+    source_asset: raw/papers/jamba/figure1-original.svg
+    sha256: 5ee975e76a73d5a9dd738b353b6eda0ca7a3c8d4f18be5928fc0c5088cb90b88
+    license: CC BY-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-sa/4.0/
+    license_evidence: https://arxiv.org/html/2403.19887v2
+    modifications: Original arXiv SVG replaces the cropped raster; no visual edits, crop or redraw. Terminal text newline normalized on import.
+    used_in:
+      - 02 Атлас моделей/Семейства/Jamba.md
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+  - id: curated-mtp-overview-5fc3a6b36df6
+    asset: 00 Учебник/Assets/Figures/curated/course-follow-through/mtp-overview.png
+    author: Fabian Gloeckle, Badr Youbi Idrissi, Baptiste Rozière, David Lopez-Paz, Gabriel Synnaeve
+    source_url: https://arxiv.org/html/2404.19737v1#S1.F1
+    source_asset: raw/papers/multi-token-prediction/main_fig_col.png
+    sha256: 5fc3a6b36df6afb659b9d88fdc55c41273beb7c4807211c0c5af21305ec804f7
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    license_evidence: https://arxiv.org/abs/2404.19737v1
+    modifications: Original complete Figure 1 PNG downloaded from arXiv HTML; byte-for-byte copy, no crop, resizing or redraw.
+    used_in:
+      - 00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+  - id: curated-cla-diagram-8022330e30c9
+    asset: 00 Учебник/Assets/Figures/curated/course-follow-through/cla-diagram.png
+    author: William Brandon, Mayank Mishra, Aniruddha Nrusimha, Rameswar Panda, Jonathan Ragan-Kelley
+    source_url: https://arxiv.org/html/2405.12981v1#S2.F1
+    source_asset: raw/papers/cross-layer-attention/figure1-course.png
+    course_asset: 05 Источники/Courses/Stanford CS336 Spring 2026/Lectures/repository/images/cla-diagram.png
+    sha256: 8022330e30c9a09c13d2ac3ef25c7cea3a67236641b7614053627f9f3a5632bc
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    license_evidence: https://arxiv.org/abs/2405.12981v1
+    modifications: Original Figure 1 raster as preserved in the pinned CS336 archive; byte-for-byte copy, no new crop, resizing or redraw.
+    used_in:
+      - 00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+  - id: curated-kimi-linear-architecture-132ae021fa46
+    asset: 00 Учебник/Assets/Figures/curated/kimi-linear/arch.jpg
+    author: Moonshot AI / Kimi Linear authors
+    source_url: https://github.com/MoonshotAI/Kimi-Linear/blob/8c1d85eb6b5f8fcefb15758691b0ce50b0827ce3/figures/arch.png
+    commit: 8c1d85eb6b5f8fcefb15758691b0ce50b0827ce3
+    sha256: 132ae021fa4661ed39e7be784d46f05f22b82aabb9afd2bab8dbdc0a5a61cba0
+    license: MIT
+    license_url: https://github.com/MoonshotAI/Kimi-Linear/blob/8c1d85eb6b5f8fcefb15758691b0ce50b0827ce3/LICENSE
+    license_notice: site/public/licenses/kimi-linear-MIT.txt
+    modifications: Original JPEG bytes unchanged; misleading upstream .png extension renamed .jpg locally. No crop, resizing, or redraw.
+    used_in:
+      - 02 Атлас моделей/Семейства/Kimi.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
   - asset: 00 Учебник/Assets/Figures/attention/self-attention-matrix-calculation-2.png
     author: Jay Alammar
     source_url: https://jalammar.github.io/illustrated-transformer/
@@ -2808,39 +2880,39 @@ assets:
     source_asset: raw/papers/external/topics-53-59/awq-schema.png
   - id: curated-spec-alg-000000000047
     asset: 00 Учебник/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-algorithm.png
-    author: Yaniv Leviathan et al.
-    source_url: https://arxiv.org/abs/2211.17192
-    license: open educational material; reuse confirmed by repository owner
-    license_url: https://arxiv.org/abs/2211.17192
+    author: Charlie Chen et al.
+    source_url: https://arxiv.org/abs/2302.01318
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
     modifications: copied or extracted without visual modification for publication
     used_in:
       - 00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md
     metadata_status: verified
-    provenance_confirmation: user-confirmed-open-materials
+    provenance_confirmation: source-license-verified
     source_asset: raw/papers/external/topics-53-59/speculative-sampling-algorithm.png
   - id: curated-spec-results-000000000048
     asset: 00 Учебник/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-results.png
-    author: Yaniv Leviathan et al.
-    source_url: https://arxiv.org/abs/2211.17192
-    license: open educational material; reuse confirmed by repository owner
-    license_url: https://arxiv.org/abs/2211.17192
+    author: Charlie Chen et al.
+    source_url: https://arxiv.org/abs/2302.01318
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
     modifications: copied or extracted without visual modification for publication
     used_in:
       - 00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md
     metadata_status: verified
-    provenance_confirmation: user-confirmed-open-materials
+    provenance_confirmation: source-license-verified
     source_asset: raw/papers/external/topics-53-59/speculative-sampling-results.png
   - id: curated-spec-stats-000000000049
     asset: 00 Учебник/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-stats.png
-    author: Yaniv Leviathan et al.
-    source_url: https://arxiv.org/abs/2211.17192
-    license: open educational material; reuse confirmed by repository owner
-    license_url: https://arxiv.org/abs/2211.17192
+    author: Charlie Chen et al.
+    source_url: https://arxiv.org/abs/2302.01318
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
     modifications: copied or extracted without visual modification for publication
     used_in:
       - 00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md
     metadata_status: verified
-    provenance_confirmation: user-confirmed-open-materials
+    provenance_confirmation: source-license-verified
     source_asset: raw/papers/external/topics-53-59/speculative-sampling-stats.png
   - id: curated-gpqa-00000000004a
     asset: 00 Учебник/Assets/Figures/curated/topics-53-59-source-first/gpqa.png
@@ -8765,3 +8837,1364 @@ assets:
     provenance_confirmation: pinned-upstream-repository
     derivation: source-raster-copy
     upstream_source_url: https://arxiv.org/abs/1711.00937
+
+  - id: curated-berkeley-agents-2025-discovery-m11-p61-png-bc932c9abd32
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/discovery/m11-p61.png
+    author: Swarat Chaudhuri
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/swarat.pdf#page=61
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-11-slides.pdf
+    source_asset_sha256: ff4ecc5cacafe5d9fd3253ca28c968e8034466770c1e9d67481a7d51a7f70cc4
+    source_page: 61
+    sha256: bc932c9abd32fe75525d1da028a7ce398d1ff2f6a31a197be9d5d9cd7689edf2
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-discovery-m11-p63-lasr-hypothesis-evolution-png-a16b176d6c60
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/discovery/m11-p63-lasr-hypothesis-evolution.png
+    author: Swarat Chaudhuri
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/swarat.pdf#page=63
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-11-slides.pdf
+    source_asset_sha256: ff4ecc5cacafe5d9fd3253ca28c968e8034466770c1e9d67481a7d51a7f70cc4
+    source_page: 63
+    sha256: a16b176d6c60805760b51ad8f600c3dbf8fb4b973b11b67e14771cd3412f5358
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-discovery-m11-p67-png-29358a454674
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/discovery/m11-p67.png
+    author: Swarat Chaudhuri
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/swarat.pdf#page=67
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-11-slides.pdf
+    source_asset_sha256: ff4ecc5cacafe5d9fd3253ca28c968e8034466770c1e9d67481a7d51a7f70cc4
+    source_page: 67
+    sha256: 29358a45467455c37b01817ef006b9cd9496e18657d2d4836a4d8b2038b2b78d
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-discovery-m11-p68-png-f29b1938e36a
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/discovery/m11-p68.png
+    author: Swarat Chaudhuri
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/swarat.pdf#page=68
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-11-slides.pdf
+    source_asset_sha256: ff4ecc5cacafe5d9fd3253ca28c968e8034466770c1e9d67481a7d51a7f70cc4
+    source_page: 68
+    sha256: f29b1938e36a6286db56f0025bda62bfca40125e01b12e0753dd67c8b568c830
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-discovery-m11-p75-pysr-coulomb-png-4358c3009e00
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/discovery/m11-p75-pysr-coulomb.png
+    author: Swarat Chaudhuri
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/swarat.pdf#page=75
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-11-slides.pdf
+    source_asset_sha256: ff4ecc5cacafe5d9fd3253ca28c968e8034466770c1e9d67481a7d51a7f70cc4
+    source_page: 75
+    sha256: 4358c3009e00a0642434915f2e8bced629d9e36011e20fa8e6a55d515acccbd1
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-discovery-m11-p76-lasr-coulomb-png-5ff0cc0c5181
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/discovery/m11-p76-lasr-coulomb.png
+    author: Swarat Chaudhuri
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/swarat.pdf#page=76
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-11-slides.pdf
+    source_asset_sha256: ff4ecc5cacafe5d9fd3253ca28c968e8034466770c1e9d67481a7d51a7f70cc4
+    source_page: 76
+    sha256: 5ff0cc0c5181981ce36b02d97906f4d3e883a3b432622312a61ec75ad816215d
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-discovery-m11-p80-scaling-curves-png-3d341d831f15
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/discovery/m11-p80-scaling-curves.png
+    author: Swarat Chaudhuri
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/swarat.pdf#page=80
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-11-slides.pdf
+    source_asset_sha256: ff4ecc5cacafe5d9fd3253ca28c968e8034466770c1e9d67481a7d51a7f70cc4
+    source_page: 80
+    sha256: 3d341d831f1582553101b7db8728b98610c8bb43f84297a3d867b85bf644f381
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-discovery-m11-p81-scaling-traits-png-eae7026a4361
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/discovery/m11-p81-scaling-traits.png
+    author: Swarat Chaudhuri
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/swarat.pdf#page=81
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-11-slides.pdf
+    source_asset_sha256: ff4ecc5cacafe5d9fd3253ca28c968e8034466770c1e9d67481a7d51a7f70cc4
+    source_page: 81
+    sha256: eae7026a436199bd838f547286d275cefb4f7b74580b45ba7188188e0c70faed
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-formal-math-m08-p30-png-4f8d836d7d26
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m08-p30.png
+    author: Thomas Hubert
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/alphaproof.pdf#page=30
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-08-slides.pdf
+    source_asset_sha256: 94bd68c2fdb534d57459a8b96f2a80ada96fd14a58b36626016d4a9f601866ab
+    source_page: 30
+    sha256: 4f8d836d7d268d780041cf55565f5f1f61d49ab53ef143184d5a95a2913c9be1
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-formal-math-m08-p79-png-d7d19209ad57
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m08-p79.png
+    author: Thomas Hubert
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/alphaproof.pdf#page=79
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-08-slides.pdf
+    source_asset_sha256: 94bd68c2fdb534d57459a8b96f2a80ada96fd14a58b36626016d4a9f601866ab
+    source_page: 79
+    sha256: d7d19209ad57f7787d235ca1cb1b3c5f647d190e4f81c778437bb0f9db691ef7
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-formal-math-m08-p84-png-81ca3e832cab
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m08-p84.png
+    author: Thomas Hubert
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/alphaproof.pdf#page=84
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-08-slides.pdf
+    source_asset_sha256: 94bd68c2fdb534d57459a8b96f2a80ada96fd14a58b36626016d4a9f601866ab
+    source_page: 84
+    sha256: 81ca3e832cabd750f79848195328fb0af8be6093ac4c01f98497ca261b0de9cb
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-formal-math-m08-p91-png-f963c8885a50
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m08-p91.png
+    author: Thomas Hubert
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/alphaproof.pdf#page=91
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-08-slides.pdf
+    source_asset_sha256: 94bd68c2fdb534d57459a8b96f2a80ada96fd14a58b36626016d4a9f601866ab
+    source_page: 91
+    sha256: f963c8885a50aef37674c8f1a544b63a73f67b89a78a3d359f29a21bac08d2d7
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-formal-math-m09-p55-png-0cd317c5f7e2
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m09-p55.png
+    author: Kaiyu Yang
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/mathverification.pdf#page=55
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-09-slides.pdf
+    source_asset_sha256: 2117a841c12dfc6850290f85c87dd9d15cc8d0327d3740fffa5d3277dfb01001
+    source_page: 55
+    sha256: 0cd317c5f7e284ccf820c53f585ed1d18245539d9b47e7dc351bf60314653ad7
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-formal-math-m09-p58-png-351383caf9f1
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m09-p58.png
+    author: Kaiyu Yang
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/mathverification.pdf#page=58
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-09-slides.pdf
+    source_asset_sha256: 2117a841c12dfc6850290f85c87dd9d15cc8d0327d3740fffa5d3277dfb01001
+    source_page: 58
+    sha256: 351383caf9f1446fb7849ecc7282f1390b5c046ce42eea0588b90461384e5f9e
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-formal-math-m09-p84-png-5370fbb91efb
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m09-p84.png
+    author: Kaiyu Yang
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/mathverification.pdf#page=84
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-09-slides.pdf
+    source_asset_sha256: 2117a841c12dfc6850290f85c87dd9d15cc8d0327d3740fffa5d3277dfb01001
+    source_page: 84
+    sha256: 5370fbb91efb4d8e79433bfc0a53f54dd2e25e7fc053b2747652d8c6fb81ee37
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-formal-math-m09-p89-png-f84af24c8f4a
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m09-p89.png
+    author: Kaiyu Yang
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/mathverification.pdf#page=89
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-09-slides.pdf
+    source_asset_sha256: 2117a841c12dfc6850290f85c87dd9d15cc8d0327d3740fffa5d3277dfb01001
+    source_page: 89
+    sha256: f84af24c8f4aba7163090b1787c51eb598e6ae4b89f5d8dd16b391e0ce4b4f53
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-formal-math-m09-p97-png-3db4650d3862
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m09-p97.png
+    author: Kaiyu Yang
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/mathverification.pdf#page=97
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-09-slides.pdf
+    source_asset_sha256: 2117a841c12dfc6850290f85c87dd9d15cc8d0327d3740fffa5d3277dfb01001
+    source_page: 97
+    sha256: 3db4650d3862ac2438a04ecfb7cbc4d1cd666b504ff325ce1a006a2b023dc643
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-formal-math-m09-p105-png-1ac2ece70eee
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m09-p105.png
+    author: Kaiyu Yang
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/mathverification.pdf#page=105
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-09-slides.pdf
+    source_asset_sha256: 2117a841c12dfc6850290f85c87dd9d15cc8d0327d3740fffa5d3277dfb01001
+    source_page: 105
+    sha256: 1ac2ece70eee7ff290cf0f0a50e60431a99b756337697e91844f20b53ef33ba7
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-formal-math-m10-p39-png-e79826dea1cc
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m10-p39.png
+    author: Sean Welleck
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/welleck2025_berkeley_bridging.pdf#page=39
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-10-slides.pdf
+    source_asset_sha256: 1c91d93b766b12ae1ddaaf3dc5575e8b8011b06505f3f7a9404ec13520fec78d
+    source_page: 39
+    sha256: e79826dea1cc7e70ed60627e413692eaf70042fbc79e1bd1655a39e3503ebbd0
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-formal-math-m10-p42-png-8ceeadd251eb
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m10-p42.png
+    author: Sean Welleck
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/welleck2025_berkeley_bridging.pdf#page=42
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-10-slides.pdf
+    source_asset_sha256: 1c91d93b766b12ae1ddaaf3dc5575e8b8011b06505f3f7a9404ec13520fec78d
+    source_page: 42
+    sha256: 8ceeadd251ebe9e5b6a0d654886568509ccf28dc7775d6f11484a2c4332ca8ab
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-formal-math-m10-p64-png-890c7ee94f10
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m10-p64.png
+    author: Sean Welleck
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/welleck2025_berkeley_bridging.pdf#page=64
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-10-slides.pdf
+    source_asset_sha256: 1c91d93b766b12ae1ddaaf3dc5575e8b8011b06505f3f7a9404ec13520fec78d
+    source_page: 64
+    sha256: 890c7ee94f10278a2026e761976c5dee0f176402e3c240fd974ebfc149099168
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-formal-math-m10-p66-png-c3e196cfcee8
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m10-p66.png
+    author: Sean Welleck
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/welleck2025_berkeley_bridging.pdf#page=66
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-10-slides.pdf
+    source_asset_sha256: 1c91d93b766b12ae1ddaaf3dc5575e8b8011b06505f3f7a9404ec13520fec78d
+    source_page: 66
+    sha256: c3e196cfcee8be9d76d73a1a039cdd10c91815c6f225d202d359ae6155d2d1d0
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-formal-math-m10-p79-png-394216756fb7
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m10-p79.png
+    author: Sean Welleck
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/welleck2025_berkeley_bridging.pdf#page=79
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-10-slides.pdf
+    source_asset_sha256: 1c91d93b766b12ae1ddaaf3dc5575e8b8011b06505f3f7a9404ec13520fec78d
+    source_page: 79
+    sha256: 394216756fb759d996dd1d691bb7df8408d766f51279d613eb723cbc4208f73f
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-formal-math-m10-p82-png-f05a3481d305
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m10-p82.png
+    author: Sean Welleck
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/welleck2025_berkeley_bridging.pdf#page=82
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-10-slides.pdf
+    source_asset_sha256: 1c91d93b766b12ae1ddaaf3dc5575e8b8011b06505f3f7a9404ec13520fec78d
+    source_page: 82
+    sha256: f05a3481d3055ed5704f774632a1b381023aef6e4bdf3106c5dd36d8314abac4
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-formal-math-m10-p85-png-fdd39edd0985
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m10-p85.png
+    author: Sean Welleck
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/welleck2025_berkeley_bridging.pdf#page=85
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-10-slides.pdf
+    source_asset_sha256: 1c91d93b766b12ae1ddaaf3dc5575e8b8011b06505f3f7a9404ec13520fec78d
+    source_page: 85
+    sha256: fdd39edd0985a62dcb6ef180b0f6aa0e79782bee114f68217bf1d09a5ad887b6
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-formal-math-m10-p109-png-6fb76b51d078
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m10-p109.png
+    author: Sean Welleck
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/welleck2025_berkeley_bridging.pdf#page=109
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-10-slides.pdf
+    source_asset_sha256: 1c91d93b766b12ae1ddaaf3dc5575e8b8011b06505f3f7a9404ec13520fec78d
+    source_page: 109
+    sha256: 6fb76b51d078ef6dd3d1de2da335b85ab8a39bdd0359a169e5b30e4d0e96fd8a
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-formal-math-m10-p110-png-92287781bcc3
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m10-p110.png
+    author: Sean Welleck
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/welleck2025_berkeley_bridging.pdf#page=110
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-10-slides.pdf
+    source_asset_sha256: 1c91d93b766b12ae1ddaaf3dc5575e8b8011b06505f3f7a9404ec13520fec78d
+    source_page: 110
+    sha256: 92287781bcc33d831334373bb534a0346b32ddfc987741236a4a1fede693ac0c
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-formal-math-m10-p111-png-4a29589d13dc
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m10-p111.png
+    author: Sean Welleck
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/welleck2025_berkeley_bridging.pdf#page=111
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-10-slides.pdf
+    source_asset_sha256: 1c91d93b766b12ae1ddaaf3dc5575e8b8011b06505f3f7a9404ec13520fec78d
+    source_page: 111
+    sha256: 4a29589d13dc2e901f61f39c74f4be7847f0d311a10b9cf953e127d07f0b3454
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-formal-math-m10-p112-png-4d4e1af188db
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m10-p112.png
+    author: Sean Welleck
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/welleck2025_berkeley_bridging.pdf#page=112
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-10-slides.pdf
+    source_asset_sha256: 1c91d93b766b12ae1ddaaf3dc5575e8b8011b06505f3f7a9404ec13520fec78d
+    source_page: 112
+    sha256: 4d4e1af188dbdf11d9081137406c27c3959ea97003f504fdc73532ac6ce169ef
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-formal-math-m11-p16-png-fddc9b501b6d
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m11-p16.png
+    author: Swarat Chaudhuri
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/swarat.pdf#page=16
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-11-slides.pdf
+    source_asset_sha256: ff4ecc5cacafe5d9fd3253ca28c968e8034466770c1e9d67481a7d51a7f70cc4
+    source_page: 16
+    sha256: fddc9b501b6d94df841283fb335b0d04cb24fa3d276058e0f161c5d15afbb68e
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-formal-math-m11-p17-png-2ee0d2cbd965
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m11-p17.png
+    author: Swarat Chaudhuri
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/swarat.pdf#page=17
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-11-slides.pdf
+    source_asset_sha256: ff4ecc5cacafe5d9fd3253ca28c968e8034466770c1e9d67481a7d51a7f70cc4
+    source_page: 17
+    sha256: 2ee0d2cbd96500437fd9fc9b4729dd737d392790803aafd206f9388b5c9bd381
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-formal-math-m11-p24-png-1552609329fe
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m11-p24.png
+    author: Swarat Chaudhuri
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/swarat.pdf#page=24
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-11-slides.pdf
+    source_asset_sha256: ff4ecc5cacafe5d9fd3253ca28c968e8034466770c1e9d67481a7d51a7f70cc4
+    source_page: 24
+    sha256: 1552609329fe4fa9a97cdbad9652bedb077b656a628d2652df9f55b6c4f6236d
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-formal-math-m11-p27-png-57096e1b4c8b
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m11-p27.png
+    author: Swarat Chaudhuri
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/swarat.pdf#page=27
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-11-slides.pdf
+    source_asset_sha256: ff4ecc5cacafe5d9fd3253ca28c968e8034466770c1e9d67481a7d51a7f70cc4
+    source_page: 27
+    sha256: 57096e1b4c8b0b2e693d3eb487bb157398f859f07443ec7add5658242ce997e0
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-formal-math-m11-p30-png-66e16ce32f00
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m11-p30.png
+    author: Swarat Chaudhuri
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/swarat.pdf#page=30
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-11-slides.pdf
+    source_asset_sha256: ff4ecc5cacafe5d9fd3253ca28c968e8034466770c1e9d67481a7d51a7f70cc4
+    source_page: 30
+    sha256: 66e16ce32f00ec70b1213c0d05f41290462baff2084bc4a568863c0eb8fdf403
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-formal-math-m11-p32-png-cb9ae23901c0
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m11-p32.png
+    author: Swarat Chaudhuri
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/swarat.pdf#page=32
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-11-slides.pdf
+    source_asset_sha256: ff4ecc5cacafe5d9fd3253ca28c968e8034466770c1e9d67481a7d51a7f70cc4
+    source_page: 32
+    sha256: cb9ae23901c05a416f20cfb51c920182195a068f2958fd138dd161ab0d43f644
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-formal-math-m11-p33-png-339d67f6697a
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m11-p33.png
+    author: Swarat Chaudhuri
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/swarat.pdf#page=33
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-11-slides.pdf
+    source_asset_sha256: ff4ecc5cacafe5d9fd3253ca28c968e8034466770c1e9d67481a7d51a7f70cc4
+    source_page: 33
+    sha256: 339d67f6697acabe461b5ee412c7509045ed5bb13d92c3cdbd9be2b1282f81a3
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-formal-math-m11-p34-png-5a9097d7351b
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m11-p34.png
+    author: Swarat Chaudhuri
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/swarat.pdf#page=34
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-11-slides.pdf
+    source_asset_sha256: ff4ecc5cacafe5d9fd3253ca28c968e8034466770c1e9d67481a7d51a7f70cc4
+    source_page: 34
+    sha256: 5a9097d7351b2fad62e5c2c0a1f80120f62134d70a89ff0ff11d8f26b5f1d278
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-formal-math-m11-p37-png-5559dd8d720d
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m11-p37.png
+    author: Swarat Chaudhuri
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/swarat.pdf#page=37
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-11-slides.pdf
+    source_asset_sha256: ff4ecc5cacafe5d9fd3253ca28c968e8034466770c1e9d67481a7d51a7f70cc4
+    source_page: 37
+    sha256: 5559dd8d720d997b30ed2a57c26f3fb481f70f80d61e5d460ce5a18ad3a65ef6
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-formal-math-m11-p38-png-625fc120354d
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m11-p38.png
+    author: Swarat Chaudhuri
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/swarat.pdf#page=38
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-11-slides.pdf
+    source_asset_sha256: ff4ecc5cacafe5d9fd3253ca28c968e8034466770c1e9d67481a7d51a7f70cc4
+    source_page: 38
+    sha256: 625fc120354d9809d1f099021c4a683343b50cecc062fe9f7920026ef4c45a1a
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-formal-math-m11-p39-png-e5d2a0bf611c
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m11-p39.png
+    author: Swarat Chaudhuri
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/swarat.pdf#page=39
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-11-slides.pdf
+    source_asset_sha256: ff4ecc5cacafe5d9fd3253ca28c968e8034466770c1e9d67481a7d51a7f70cc4
+    source_page: 39
+    sha256: e5d2a0bf611c24cb45f9cdfd4fcae574a10825ff09b0fe3aa895061bd0c817d6
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-reasoning-posttraining-memory-m01-p40-self-consistency-png-83af21d65ae1
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m01-p40-self-consistency.png
+    author: Xinyun Chen
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/inference_time_techniques_lecture_sp25.pdf#page=40
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-01-slides.pdf
+    source_asset_sha256: 7c17e9d9baf8a3759a016872c17b1f5cce2e4d7691698b2799f6e7a2bd7ff576
+    source_page: 40
+    sha256: 83af21d65ae12aff7b3e547e1f05ff91fee23dfcbedd1143ca91f6f2e031a607
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-reasoning-posttraining-memory-m01-p42-sample-scaling-png-db562185eb73
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m01-p42-sample-scaling.png
+    author: Xinyun Chen
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/inference_time_techniques_lecture_sp25.pdf#page=42
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-01-slides.pdf
+    source_asset_sha256: 7c17e9d9baf8a3759a016872c17b1f5cce2e4d7691698b2799f6e7a2bd7ff576
+    source_page: 42
+    sha256: db562185eb7334cf8f89ac8aa616d23f616e9519da60a86fe82ead1c92af97fe
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-reasoning-posttraining-memory-m01-p54-response-selection-vs-search-png-5462523cd97b
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m01-p54-response-selection-vs-search.png
+    author: Xinyun Chen
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/inference_time_techniques_lecture_sp25.pdf#page=54
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-01-slides.pdf
+    source_asset_sha256: 7c17e9d9baf8a3759a016872c17b1f5cce2e4d7691698b2799f6e7a2bd7ff576
+    source_page: 54
+    sha256: 5462523cd97b1c0c95ff3fe1a1f0df5f4ddd4a92d8247a957b808ea790c2b975
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-reasoning-posttraining-memory-m01-p55-game-of-24-png-bc8cb3c6ddbb
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m01-p55-game-of-24.png
+    author: Xinyun Chen
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/inference_time_techniques_lecture_sp25.pdf#page=55
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-01-slides.pdf
+    source_asset_sha256: 7c17e9d9baf8a3759a016872c17b1f5cce2e4d7691698b2799f6e7a2bd7ff576
+    source_page: 55
+    sha256: bc8cb3c6ddbb7c2cf2ef81898d2186cf32ed4a5f6e3d434fbed23b5e75989498
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-reasoning-posttraining-memory-m01-p64-self-debugging-feedback-png-031d815fa031
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m01-p64-self-debugging-feedback.png
+    author: Xinyun Chen
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/inference_time_techniques_lecture_sp25.pdf#page=64
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-01-slides.pdf
+    source_asset_sha256: 7c17e9d9baf8a3759a016872c17b1f5cce2e4d7691698b2799f6e7a2bd7ff576
+    source_page: 64
+    sha256: 031d815fa03193068ec464ec5d7ad9cc26fc973c418d460e65032a955fa2e25a
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-reasoning-posttraining-memory-m01-p67-self-correction-no-oracle-png-eddd2002604d
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m01-p67-self-correction-no-oracle.png
+    author: Xinyun Chen
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/inference_time_techniques_lecture_sp25.pdf#page=67
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-01-slides.pdf
+    source_asset_sha256: 7c17e9d9baf8a3759a016872c17b1f5cce2e4d7691698b2799f6e7a2bd7ff576
+    source_page: 67
+    sha256: eddd2002604d0887ed876e9723231be4684348aa3785bad6b424de97f219da06
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-reasoning-posttraining-memory-m01-p69-debate-vs-self-consistency-png-10173c09b8c6
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m01-p69-debate-vs-self-consistency.png
+    author: Xinyun Chen
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/inference_time_techniques_lecture_sp25.pdf#page=69
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-01-slides.pdf
+    source_asset_sha256: 7c17e9d9baf8a3759a016872c17b1f5cce2e4d7691698b2799f6e7a2bd7ff576
+    source_page: 69
+    sha256: 10173c09b8c69e3382553a12325fd7cf7f8d2c925e8c0db4f7af956545e7098d
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-reasoning-posttraining-memory-m02-p52-self-rewarding-loop-png-6de634afc5d6
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m02-p52-self-rewarding-loop.png
+    author: Jason Weston
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/Jason-Weston-Reasoning-Alignment-Berkeley-Talk.pdf#page=52
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-02-slides.pdf
+    source_asset_sha256: 84b5901763f7fc08d5622c824784d3ca8d304ceaf613a8d4b2ef8529b0ee0be3
+    source_page: 52
+    sha256: 6de634afc5d69fb3988b8788361b852d96964b9793545678a78211e4ca62ed24
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/12 Post-training и Alignment/03 Reward modeling.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-reasoning-posttraining-memory-m02-p74-irpo-loop-png-ea49f00c0fb3
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m02-p74-irpo-loop.png
+    author: Jason Weston
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/Jason-Weston-Reasoning-Alignment-Berkeley-Talk.pdf#page=74
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-02-slides.pdf
+    source_asset_sha256: 84b5901763f7fc08d5622c824784d3ca8d304ceaf613a8d4b2ef8529b0ee0be3
+    source_page: 74
+    sha256: ea49f00c0fb306663bf4589df21713c170928b889a45c869c4052c4745c1cc1a
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/12 Post-training и Alignment/05 DPO.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-reasoning-posttraining-memory-m02-p89-meta-rewarding-loop-png-a71278754379
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m02-p89-meta-rewarding-loop.png
+    author: Jason Weston
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/Jason-Weston-Reasoning-Alignment-Berkeley-Talk.pdf#page=89
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-02-slides.pdf
+    source_asset_sha256: 84b5901763f7fc08d5622c824784d3ca8d304ceaf613a8d4b2ef8529b0ee0be3
+    source_page: 89
+    sha256: a71278754379be356a430531a7a6854905e627cfc41a59c4c9ee7a501497d956
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/12 Post-training и Alignment/03 Reward modeling.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-reasoning-posttraining-memory-m02-p98-evalplanner-loop-png-22f7041d368f
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m02-p98-evalplanner-loop.png
+    author: Jason Weston
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/Jason-Weston-Reasoning-Alignment-Berkeley-Talk.pdf#page=98
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-02-slides.pdf
+    source_asset_sha256: 84b5901763f7fc08d5622c824784d3ca8d304ceaf613a8d4b2ef8529b0ee0be3
+    source_page: 98
+    sha256: 22f7041d368f3537e7a55592c24cf85cffe2ace8d136762ddaa528644c083828
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/12 Post-training и Alignment/03 Reward modeling.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-reasoning-posttraining-memory-m03-p31-hipporag-index-and-retrieval-png-9ccd3c85b743
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m03-p31-hipporag-index-and-retrieval.png
+    author: Yu Su
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/language_agents_YuSu_Berkeley.pdf#page=31
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-03-slides.pdf
+    source_asset_sha256: 748182d9be6e05589bf0664b4e8c08f55671c8d70e1a64ab031ebcf02fc3fd07
+    source_page: 31
+    sha256: 9ccd3c85b743f82431b0338d9a4a423d2a9cee3e95b966ca9538c6165f595f5a
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-reasoning-posttraining-memory-m03-p63-world-model-definition-png-468dcfb71a1f
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m03-p63-world-model-definition.png
+    author: Yu Su
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/language_agents_YuSu_Berkeley.pdf#page=63
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-03-slides.pdf
+    source_asset_sha256: 748182d9be6e05589bf0664b4e8c08f55671c8d70e1a64ab031ebcf02fc3fd07
+    source_page: 63
+    sha256: 468dcfb71a1f02858b487d117dcc51d6fd0a98ac8e491fe13b77e12eae2c47b2
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-reasoning-posttraining-memory-m03-p70-webdreamer-worked-example-png-b794c030bb19
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m03-p70-webdreamer-worked-example.png
+    author: Yu Su
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/language_agents_YuSu_Berkeley.pdf#page=70
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-03-slides.pdf
+    source_asset_sha256: 748182d9be6e05589bf0664b4e8c08f55671c8d70e1a64ab031ebcf02fc3fd07
+    source_page: 70
+    sha256: b794c030bb1923cb6ac6a84911dbe7f2519e66e5f74ad4f6d7b7798efef528a4
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-reasoning-posttraining-memory-m04-p30-training-data-gates-png-2463fbfb7325
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m04-p30-training-data-gates.png
+    author: Hanna Hajishirzi
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/OLMo-Tulu-Reasoning-Hanna.pdf#page=30
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-04-slides.pdf
+    source_asset_sha256: 6a4df80ff062cc6014b3c86d2d08d4256e059b5a9bf12a4926eda89327d37bf7
+    source_page: 30
+    sha256: 2463fbfb732536bb203574a1e0d5018fad3edddf5dc411b173541d076e0de803
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-reasoning-posttraining-memory-m04-p54-voting-filter-png-46f5a169d798
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m04-p54-voting-filter.png
+    author: Hanna Hajishirzi
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/OLMo-Tulu-Reasoning-Hanna.pdf#page=54
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-04-slides.pdf
+    source_asset_sha256: 6a4df80ff062cc6014b3c86d2d08d4256e059b5a9bf12a4926eda89327d37bf7
+    source_page: 54
+    sha256: 46f5a169d798e87dde244d15764264c3eafa0ff08d3affc961b459031f474eb1
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-reasoning-posttraining-memory-m04-p90-tulu-rlvr-stage-png-a49e9ec43623
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m04-p90-tulu-rlvr-stage.png
+    author: Hanna Hajishirzi
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/OLMo-Tulu-Reasoning-Hanna.pdf#page=90
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-04-slides.pdf
+    source_asset_sha256: 6a4df80ff062cc6014b3c86d2d08d4256e059b5a9bf12a4926eda89327d37bf7
+    source_page: 90
+    sha256: a49e9ec4362386e47a7b1c863e6085f2401ad4b2930c98053b41c2fdd15bdaa9
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-reasoning-posttraining-memory-m04-p104-rlvr-experimental-setup-png-6befe65d6c81
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m04-p104-rlvr-experimental-setup.png
+    author: Hanna Hajishirzi
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/OLMo-Tulu-Reasoning-Hanna.pdf#page=104
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-04-slides.pdf
+    source_asset_sha256: 6a4df80ff062cc6014b3c86d2d08d4256e059b5a9bf12a4926eda89327d37bf7
+    source_page: 104
+    sha256: 6befe65d6c81e3566c6c1ebb99f72225a78db877f969acfe32d1590e0e3a78c8
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-reasoning-posttraining-memory-m04-p118-rlvr-scaling-curves-png-e0af42f6698f
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m04-p118-rlvr-scaling-curves.png
+    author: Hanna Hajishirzi
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/OLMo-Tulu-Reasoning-Hanna.pdf#page=118
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-04-slides.pdf
+    source_asset_sha256: 6a4df80ff062cc6014b3c86d2d08d4256e059b5a9bf12a4926eda89327d37bf7
+    source_page: 118
+    sha256: e0af42f6698f59f7c273057d7a77bae57947530cd7b63ffecc0118d7778ee421
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-reasoning-posttraining-memory-m04-p128-s1-data-funnel-png-79d2dd8dd6bf
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m04-p128-s1-data-funnel.png
+    author: Hanna Hajishirzi
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/OLMo-Tulu-Reasoning-Hanna.pdf#page=128
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-04-slides.pdf
+    source_asset_sha256: 6a4df80ff062cc6014b3c86d2d08d4256e059b5a9bf12a4926eda89327d37bf7
+    source_page: 128
+    sha256: 79d2dd8dd6bf87b69caa6433f6b6353baa1ac8650aa83b2b650f7f32ee6301ac
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/12 Post-training и Alignment/08 Reasoning distillation.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-reasoning-posttraining-memory-m04-p134-budget-forcing-png-658fbc205d32
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m04-p134-budget-forcing.png
+    author: Hanna Hajishirzi
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/OLMo-Tulu-Reasoning-Hanna.pdf#page=134
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-04-slides.pdf
+    source_asset_sha256: 6a4df80ff062cc6014b3c86d2d08d4256e059b5a9bf12a4926eda89327d37bf7
+    source_page: 134
+    sha256: 658fbc205d322f30103a4b6db6d4566e47df18502dbd5a4319800dfaa18fef6b
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-12-dawn-song-agentic-threat-model-sequence-png-10ccfbbb91ff
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/12-dawn-song-agentic-threat-model-sequence.png
+    author: Dawn Song
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/dawn-agentic-ai.pdf#page=20
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-12-slides.pdf
+    source_asset_sha256: 395a0add9ee6328bc4206a042b90dbc70063fc6a8aa0420ad4483ffe0d2cab6b
+    source_page: 20
+    sha256: 10ccfbbb91ffb4b017a420e5131b4797b78b0cf89637811695b11be86faa4a96
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-security-m12-p27-png-15f46904fc5f
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/security/m12-p27.png
+    author: Dawn Song
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/dawn-agentic-ai.pdf#page=27
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-12-slides.pdf
+    source_asset_sha256: 395a0add9ee6328bc4206a042b90dbc70063fc6a8aa0420ad4483ffe0d2cab6b
+    source_page: 27
+    sha256: 15f46904fc5f1a8af1f0c6f605ce1a09043990b71a68e1e919ec1667fc7c4d65
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-security-m12-p48-png-c9e5430bf354
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/security/m12-p48.png
+    author: Dawn Song
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/dawn-agentic-ai.pdf#page=48
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-12-slides.pdf
+    source_asset_sha256: 395a0add9ee6328bc4206a042b90dbc70063fc6a8aa0420ad4483ffe0d2cab6b
+    source_page: 48
+    sha256: c9e5430bf354b8693aa7496efb4a67e8e71a4e77ffa95398d00319a732dd9c01
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-12-prompt-injection-agentpoison-png-da1ee53b482c
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/12-prompt-injection-agentpoison.png
+    author: Dawn Song
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/dawn-agentic-ai.pdf#page=50
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-12-slides.pdf
+    source_asset_sha256: 395a0add9ee6328bc4206a042b90dbc70063fc6a8aa0420ad4483ffe0d2cab6b
+    source_page: 50
+    sha256: da1ee53b482c1823067266706e496937ebfd1b4b3027e9c503195087f04274aa
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-security-m12-p65-png-fcf2003a1adb
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/security/m12-p65.png
+    author: Dawn Song
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/dawn-agentic-ai.pdf#page=65
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-12-slides.pdf
+    source_asset_sha256: 395a0add9ee6328bc4206a042b90dbc70063fc6a8aa0420ad4483ffe0d2cab6b
+    source_page: 65
+    sha256: fcf2003a1adb4def7a247e7f17753a975cefb7c8883782a7c9052849b05ad87e
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-12-dawn-song-privilege-control-sequence-png-455d62525cfe
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/12-dawn-song-privilege-control-sequence.png
+    author: Dawn Song
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/dawn-agentic-ai.pdf#page=81
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-12-slides.pdf
+    source_asset_sha256: 395a0add9ee6328bc4206a042b90dbc70063fc6a8aa0420ad4483ffe0d2cab6b
+    source_page: 81
+    sha256: 455d62525cfebf8ea15aa7c6b3d390219e796d5670494cdbf1acdbf7c78816c8
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-security-m12-p90-png-8d829dbd052d
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/security/m12-p90.png
+    author: Dawn Song
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/dawn-agentic-ai.pdf#page=90
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-12-slides.pdf
+    source_asset_sha256: 395a0add9ee6328bc4206a042b90dbc70063fc6a8aa0420ad4483ffe0d2cab6b
+    source_page: 90
+    sha256: 8d829dbd052df042ef489c5e9c3e0ad2120e5caf6f96fec8c841151e20adc6d3
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-12-agent-monitoring-and-verification-png-9d0e41b018ed
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/12-agent-monitoring-and-verification.png
+    author: Dawn Song
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/dawn-agentic-ai.pdf#page=93
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-12-slides.pdf
+    source_asset_sha256: 395a0add9ee6328bc4206a042b90dbc70063fc6a8aa0420ad4483ffe0d2cab6b
+    source_page: 93
+    sha256: 9d0e41b018ed59ff17c74b92658d6d15654bd3b268549e0b15f2076d3de07c66
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-coding-web-computer-use-m05-p17-react-aci-18a2110990ea
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m05-p17-react-aci.png
+    author: Charles Sutton
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/Code%20Agents%20and%20AI%20for%20Vulnerability%20Detection.pdf#page=17
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-05-slides.pdf
+    source_asset_sha256: c242e0298f5c46adf38af284637209a0986db7fca2b63c626dd29218b5dd809e
+    source_page: 17
+    sha256: 18a2110990eafd3ed959102584cfdd8e5500bc74c3a561a3445c0daca2929e34
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-coding-web-computer-use-m05-p22-agentless-control-flow-4db553ddd0b3
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m05-p22-agentless-control-flow.png
+    author: Charles Sutton
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/Code%20Agents%20and%20AI%20for%20Vulnerability%20Detection.pdf#page=22
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-05-slides.pdf
+    source_asset_sha256: c242e0298f5c46adf38af284637209a0986db7fca2b63c626dd29218b5dd809e
+    source_page: 22
+    sha256: 4db553ddd0b3ad66e4f9bcfdf1eb729449e212e4a1e27e6f52c92960aad4f2c1
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-coding-web-computer-use-m05-p28-autocoderover-two-trajectories-521b076c0d85
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m05-p28-autocoderover-two-trajectories.png
+    author: Charles Sutton
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/Code%20Agents%20and%20AI%20for%20Vulnerability%20Detection.pdf#page=28
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-05-slides.pdf
+    source_asset_sha256: c242e0298f5c46adf38af284637209a0986db7fca2b63c626dd29218b5dd809e
+    source_page: 28
+    sha256: 521b076c0d85c89de40d3daa171388219a50e385a066647237a35c52493f2b0b
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-coding-web-computer-use-m05-p48-big-sleep-design-62c3fde6b1c1
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m05-p48-big-sleep-design.png
+    author: Charles Sutton
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/Code%20Agents%20and%20AI%20for%20Vulnerability%20Detection.pdf#page=48
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-05-slides.pdf
+    source_asset_sha256: c242e0298f5c46adf38af284637209a0986db7fca2b63c626dd29218b5dd809e
+    source_page: 48
+    sha256: 62c3fde6b1c144a135472e3a98054530b6480d668d0a24064c318b0abd9045b0
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-coding-web-computer-use-m06-p18-visualwebarena-shopping-d0530625ca90
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m06-p18-visualwebarena-shopping.png
+    author: Ruslan Salakhutdinov
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/ruslan-multimodal.pdf#page=18
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-06-slides.pdf
+    source_asset_sha256: 62ee4ac4383854062ef2e04242337ccbc34d52aef87f16c3b88b1c797a7220a0
+    source_page: 18
+    sha256: d0530625ca904da06517a77f6a68ef9289f8bfd9f8f615093bafa6ff05521ec5
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-coding-web-computer-use-m06-p29-html-vs-som-1cd7fd44272b
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m06-p29-html-vs-som.png
+    author: Ruslan Salakhutdinov
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/ruslan-multimodal.pdf#page=29
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-06-slides.pdf
+    source_asset_sha256: 62ee4ac4383854062ef2e04242337ccbc34d52aef87f16c3b88b1c797a7220a0
+    source_page: 29
+    sha256: 1cd7fd44272b73c7647f14ce67bb3aef4c40cbc291332480687c0a2115a4cd75
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-coding-web-computer-use-m06-p35-som-trajectory-9aa36c4909c7
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m06-p35-som-trajectory.png
+    author: Ruslan Salakhutdinov
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/ruslan-multimodal.pdf#page=35
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-06-slides.pdf
+    source_asset_sha256: 62ee4ac4383854062ef2e04242337ccbc34d52aef87f16c3b88b1c797a7220a0
+    source_page: 35
+    sha256: 9aa36c4909c79ef1204a77af87f854d623699b1fe90c5fcd29cbab03d2df7048
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-coding-web-computer-use-m06-p50-best-first-search-d9e2f0034ff4
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m06-p50-best-first-search.png
+    author: Ruslan Salakhutdinov
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/ruslan-multimodal.pdf#page=50
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-06-slides.pdf
+    source_asset_sha256: 62ee4ac4383854062ef2e04242337ccbc34d52aef87f16c3b88b1c797a7220a0
+    source_page: 50
+    sha256: d9e2f0034ff4b9f1c10afcfd9278022f44b387cb8aacc8cf63a3574c53c9fa95
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-coding-web-computer-use-m06-p60-search-backtracking-05e5cc6e69d3
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m06-p60-search-backtracking.png
+    author: Ruslan Salakhutdinov
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/ruslan-multimodal.pdf#page=60
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-06-slides.pdf
+    source_asset_sha256: 62ee4ac4383854062ef2e04242337ccbc34d52aef87f16c3b88b1c797a7220a0
+    source_page: 60
+    sha256: 05e5cc6e69d3c3e344b1878f15bf3e4e5c5ae9adc7db90a32f35057a29cad457
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-coding-web-computer-use-m06-p70-search-results-5f5b29109498
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m06-p70-search-results.png
+    author: Ruslan Salakhutdinov
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/ruslan-multimodal.pdf#page=70
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-06-slides.pdf
+    source_asset_sha256: 62ee4ac4383854062ef2e04242337ccbc34d52aef87f16c3b88b1c797a7220a0
+    source_page: 70
+    sha256: 5f5b2910949842a6da058e4f2ea52664657f98deb93d5054a0670bb98d01403c
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-coding-web-computer-use-m06-p80-insta-pipeline-70c2bb61efeb
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m06-p80-insta-pipeline.png
+    author: Ruslan Salakhutdinov
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/ruslan-multimodal.pdf#page=80
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-06-slides.pdf
+    source_asset_sha256: 62ee4ac4383854062ef2e04242337ccbc34d52aef87f16c3b88b1c797a7220a0
+    source_page: 80
+    sha256: 70c2bb61efeba6792b9c60e1aceef309031577cfb4b224c1caa94bc1181609a2
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-coding-web-computer-use-m06-p90-automatic-verifier-9fbe01029e02
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m06-p90-automatic-verifier.png
+    author: Ruslan Salakhutdinov
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/ruslan-multimodal.pdf#page=90
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-06-slides.pdf
+    source_asset_sha256: 62ee4ac4383854062ef2e04242337ccbc34d52aef87f16c3b88b1c797a7220a0
+    source_page: 90
+    sha256: 9fbe01029e02420922685f31271fd291b35efa131ec590916a6f505ff3066972
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-coding-web-computer-use-m07-p11-osworld-contract-bc09bab69642
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m07-p11-osworld-contract.png
+    author: Caiming Xiong
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/Multimodal_Agent_caiming.pdf#page=11
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-07-slides.pdf
+    source_asset_sha256: 3f12ea7b44c64d43d3c3804596700feacda59a26290ba188935fdd5cdde3847d
+    source_page: 11
+    sha256: bc09bab696428d94a95a263fc4f07af63ab711a369a7800928e576bb1d0a1637
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-coding-web-computer-use-m07-p69-aguvis-design-goals-7df8fb7faada
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m07-p69-aguvis-design-goals.png
+    author: Caiming Xiong
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/Multimodal_Agent_caiming.pdf#page=69
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-07-slides.pdf
+    source_asset_sha256: 3f12ea7b44c64d43d3c3804596700feacda59a26290ba188935fdd5cdde3847d
+    source_page: 69
+    sha256: 7df8fb7faada77cd27c0e790d3becda1616730814fa7d07f6fc699424f63b3a6
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-coding-web-computer-use-m07-p75-aguvis-data-stages-8cad2a00e450
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m07-p75-aguvis-data-stages.png
+    author: Caiming Xiong
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/Multimodal_Agent_caiming.pdf#page=75
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-07-slides.pdf
+    source_asset_sha256: 3f12ea7b44c64d43d3c3804596700feacda59a26290ba188935fdd5cdde3847d
+    source_page: 75
+    sha256: 8cad2a00e450de71c372ab13505a1d873359128940d7dd2591a8cc0cbe8800cd
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-coding-web-computer-use-m07-p80-aguvis-ablation-c74008213ddf
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m07-p80-aguvis-ablation.png
+    author: Caiming Xiong
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/Multimodal_Agent_caiming.pdf#page=80
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-07-slides.pdf
+    source_asset_sha256: 3f12ea7b44c64d43d3c3804596700feacda59a26290ba188935fdd5cdde3847d
+    source_page: 80
+    sha256: c74008213ddf32c7d15354e5655cd69297b292c98746000eed6b8896cce13627
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render

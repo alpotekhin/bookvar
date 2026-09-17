@@ -1,0 +1,388 @@
+{
+  "date": "2026-09-15",
+  "scope": "38 canonical files changed after their full reading; not 38 complete rewrites",
+  "publication": "no commit, push or deployment",
+  "source_language": "No translations; canonical English originals unchanged",
+  "pages": [
+    {
+      "path": "00 Учебник/_index.md",
+      "owner": "reference-practice",
+      "baseline_sha256": "41e757189602df037d4baf936789fff23e4253dd9c08f2162c12211a4b8c0160",
+      "read_sha256": "41e757189602df037d4baf936789fff23e4253dd9c08f2162c12211a4b8c0160",
+      "current_sha256": "24f3738ede720df103779629f437d4f78040a2cb1a67f54e5de0aae5eb67752d",
+      "revision_status": "targeted-fixes-applied; full-page-acceptance-pending",
+      "recheck": "Changed passages and relevant examples reviewed by the primary agent; source verification is limited to the claims documented in the fixes reports.",
+      "visual_status": "partial-desktop: opening text and fourteen section headings"
+    },
+    {
+      "path": "00 Учебник/00 Как пользоваться учебником.md",
+      "owner": "reference-practice",
+      "baseline_sha256": "02c743dad4e99d9a6a267235f535d88613141ecb8961682bcc2ffe337e14fec9",
+      "read_sha256": "02c743dad4e99d9a6a267235f535d88613141ecb8961682bcc2ffe337e14fec9",
+      "current_sha256": "13b5aa40e01de70b5b5f26bc008abdfd7520dbfc5eb9d7a9a2dd35ecd2674a8d",
+      "revision_status": "targeted-fixes-applied; full-page-acceptance-pending",
+      "recheck": "Changed passages and relevant examples reviewed by the primary agent; source verification is limited to the claims documented in the fixes reports.",
+      "visual_status": "partial-desktop: opening and routes"
+    },
+    {
+      "path": "00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM.md",
+      "owner": "foundations",
+      "baseline_sha256": "b00433a609a57470c0d6fb0c06e6eaaff0c66ec6300e496fbf5c83a3dc07674a",
+      "read_sha256": "b00433a609a57470c0d6fb0c06e6eaaff0c66ec6300e496fbf5c83a3dc07674a",
+      "current_sha256": "ff0615a6f8110c1b798f46ee18b1b46cc0f2c79d9ff14299fa28582307b82334",
+      "revision_status": "targeted-fixes-applied; full-page-acceptance-pending",
+      "recheck": "Changed passages and relevant examples reviewed by the primary agent; source verification is limited to the claims documented in the fixes reports.",
+      "visual_status": "not-inspected"
+    },
+    {
+      "path": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "owner": "foundations",
+      "baseline_sha256": "9a18818c5428cd84be3b5ece14609c57d59ae17116d7d999ad100441178708d9",
+      "read_sha256": "9a18818c5428cd84be3b5ece14609c57d59ae17116d7d999ad100441178708d9",
+      "current_sha256": "f6fe241fe2a1e28ce5e1331bff91a56b2cafdb938b5227da9cc98ba692e75213",
+      "revision_status": "targeted-fixes-applied; full-page-acceptance-pending",
+      "recheck": "Changed passages and relevant examples reviewed by the primary agent; source verification is limited to the claims documented in the fixes reports.",
+      "visual_status": "not-inspected"
+    },
+    {
+      "path": "00 Учебник/02 Рекомендательные системы/03 Ranking и нейронные рекомендательные модели.md",
+      "owner": "foundations",
+      "baseline_sha256": "df278808f710dfaa6389d9be0c97c7f380184130655b112e7408195b6032883f",
+      "read_sha256": "df278808f710dfaa6389d9be0c97c7f380184130655b112e7408195b6032883f",
+      "current_sha256": "fd9632eb3b0f24fcfa094ca6cafe1d473e726abbbbb73c3c8fd449edd6775af6",
+      "revision_status": "targeted-fixes-applied; full-page-acceptance-pending",
+      "recheck": "Changed passages and relevant examples reviewed by the primary agent; source verification is limited to the claims documented in the fixes reports.",
+      "visual_status": "not-inspected"
+    },
+    {
+      "path": "00 Учебник/02 Рекомендательные системы/05 Оценивание и эксплуатация.md",
+      "owner": "foundations",
+      "baseline_sha256": "9559164ee9419d0474fdcceb07277db7983246e6a4799d6c71555f693d51cb9d",
+      "read_sha256": "9559164ee9419d0474fdcceb07277db7983246e6a4799d6c71555f693d51cb9d",
+      "current_sha256": "b3e4fdc4a4e740f643ab75b28e62ec14732903f60318096f2095a6ded1c946a8",
+      "revision_status": "targeted-fixes-applied; full-page-acceptance-pending",
+      "recheck": "Changed passages and relevant examples reviewed by the primary agent; source verification is limited to the claims documented in the fixes reports.",
+      "visual_status": "not-inspected"
+    },
+    {
+      "path": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/02 Encoder-Decoder Transformer.md",
+      "owner": "foundations",
+      "baseline_sha256": "35491537818b5547a2761c4b87add342e3fde1f0722aef7da13f34ef5fbcf103",
+      "read_sha256": "35491537818b5547a2761c4b87add342e3fde1f0722aef7da13f34ef5fbcf103",
+      "current_sha256": "faf71baf44a0d7310c55b15f0621abff8d70647d03d914817079d142715c311d",
+      "revision_status": "targeted-fixes-applied; full-page-acceptance-pending",
+      "recheck": "Changed passages and relevant examples reviewed by the primary agent; source verification is limited to the claims documented in the fixes reports.",
+      "visual_status": "not-inspected"
+    },
+    {
+      "path": "00 Учебник/07 Анатомия современной LLM/04 RoPE.md",
+      "owner": "systems",
+      "baseline_sha256": "21387b3d5e33d3ffb1820acb1b4b57eec626756fb3ee540e58bdfbb5f6d03e74",
+      "read_sha256": "21387b3d5e33d3ffb1820acb1b4b57eec626756fb3ee540e58bdfbb5f6d03e74",
+      "current_sha256": "86fb1f58f6ddaa72f6424c55ee810359d05749cd4f284d67ba4bf0c92e635bbc",
+      "revision_status": "targeted-fixes-applied; full-page-acceptance-pending",
+      "recheck": "Changed passages and relevant examples reviewed by the primary agent; source verification is limited to the claims documented in the fixes reports.",
+      "visual_status": "not-inspected"
+    },
+    {
+      "path": "00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md",
+      "owner": "systems",
+      "baseline_sha256": "f8c00ab66e2eac6daee2a9bc9781d04e69ed99b109a7f4cad5a6cf573d2820bc",
+      "read_sha256": "f8c00ab66e2eac6daee2a9bc9781d04e69ed99b109a7f4cad5a6cf573d2820bc",
+      "current_sha256": "60402496763f3a3c4f1464d6ae354770805dbadb0566830001a1d9a0a6196f53",
+      "revision_status": "targeted-fixes-applied; full-page-acceptance-pending",
+      "recheck": "Changed passages and relevant examples reviewed by the primary agent; source verification is limited to the claims documented in the fixes reports.",
+      "visual_status": "not-inspected"
+    },
+    {
+      "path": "00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating.md",
+      "owner": "systems",
+      "baseline_sha256": "8007224380b5ae387b12aac83dbf9564e7a3ad4be8dd7f602911117dc48ba3e6",
+      "read_sha256": "8007224380b5ae387b12aac83dbf9564e7a3ad4be8dd7f602911117dc48ba3e6",
+      "current_sha256": "943a8beb5b22a2c17df3173e63691af6db3bc1430416d9a58fec471413124795",
+      "revision_status": "targeted-fixes-applied; full-page-acceptance-pending",
+      "recheck": "Changed passages and relevant examples reviewed by the primary agent; source verification is limited to the claims documented in the fixes reports.",
+      "visual_status": "not-inspected"
+    },
+    {
+      "path": "00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism.md",
+      "owner": "systems",
+      "baseline_sha256": "48f6acd65360d7c9955aeab76a1e1c1a42fb2d96aa871722912c5ac7411bb9b5",
+      "read_sha256": "48f6acd65360d7c9955aeab76a1e1c1a42fb2d96aa871722912c5ac7411bb9b5",
+      "current_sha256": "fdca148234b84498d669bfc07e5a561234c501337880f462637215f9b793859e",
+      "revision_status": "targeted-fixes-applied; full-page-acceptance-pending",
+      "recheck": "Changed passages and relevant examples reviewed by the primary agent; source verification is limited to the claims documented in the fixes reports.",
+      "visual_status": "not-inspected"
+    },
+    {
+      "path": "00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md",
+      "owner": "advanced",
+      "baseline_sha256": "0c9b15b72cb70b827aeb2987e94a66234b8a019c32977cca15f5b4dcdfdd2813",
+      "read_sha256": "0c9b15b72cb70b827aeb2987e94a66234b8a019c32977cca15f5b4dcdfdd2813",
+      "current_sha256": "e04ebb11c574e0a0d2be2292ea30e82ff813697126c139c14974eb9f6c626516",
+      "revision_status": "targeted-fixes-applied; full-page-acceptance-pending",
+      "recheck": "Changed passages and relevant examples reviewed by the primary agent; source verification is limited to the claims documented in the fixes reports.",
+      "visual_status": "partial-desktop: opening, RL mapping, repaired KL equation and following figure"
+    },
+    {
+      "path": "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md",
+      "owner": "advanced",
+      "baseline_sha256": "71a2f70fa9171580d9ad6b05244f90e05f7edb34c9b05f25610281cf2afc13b2",
+      "read_sha256": "71a2f70fa9171580d9ad6b05244f90e05f7edb34c9b05f25610281cf2afc13b2",
+      "current_sha256": "9b75b0cb4c95ee0ad38d296d235d2da590637cbeb8fe5847e2eb3eb45d41f094",
+      "revision_status": "targeted-fixes-applied; full-page-acceptance-pending",
+      "recheck": "Changed passages and relevant examples reviewed by the primary agent; source verification is limited to the claims documented in the fixes reports.",
+      "visual_status": "not-inspected"
+    },
+    {
+      "path": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+      "owner": "advanced",
+      "baseline_sha256": "bdfba68306b8d1761dc9725d8a40197a92294fa809bc55ff742ec01eb2cf256b",
+      "read_sha256": "bdfba68306b8d1761dc9725d8a40197a92294fa809bc55ff742ec01eb2cf256b",
+      "current_sha256": "1f58a6299af585bee157dafeef8126fe14f853c1e62a455e6533f21af7ba4880",
+      "revision_status": "targeted-fixes-applied; full-page-acceptance-pending",
+      "recheck": "Changed passages and relevant examples reviewed by the primary agent; source verification is limited to the claims documented in the fixes reports.",
+      "visual_status": "partial-desktop-and-390px: opening, worked example, horizontal formula scrolling"
+    },
+    {
+      "path": "00 Учебник/12 Post-training и Alignment/08 Reasoning distillation.md",
+      "owner": "advanced",
+      "baseline_sha256": "4a68babf763bdb362e0d7564e29c50b01d539875a8ea85dfd19272b271e91ae1",
+      "read_sha256": "4a68babf763bdb362e0d7564e29c50b01d539875a8ea85dfd19272b271e91ae1",
+      "current_sha256": "e14cf6b8b724cf33f7d6ed112b45283134339b32cf0f120dee570d9388602cdc",
+      "revision_status": "targeted-fixes-applied; full-page-acceptance-pending",
+      "recheck": "Changed passages and relevant examples reviewed by the primary agent; source verification is limited to the claims documented in the fixes reports.",
+      "visual_status": "not-inspected"
+    },
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md",
+      "owner": "systems",
+      "baseline_sha256": "170ad643c0731ea0121b2018cd13f3a2375224d55a3fc45da01b6fb04c1210b2",
+      "read_sha256": "170ad643c0731ea0121b2018cd13f3a2375224d55a3fc45da01b6fb04c1210b2",
+      "current_sha256": "a2e0c582adfb539b97aaa701c544c7d0a083791ee580f46df474f388644b27ab",
+      "revision_status": "targeted-fixes-applied; full-page-acceptance-pending",
+      "recheck": "Changed passages and relevant examples reviewed by the primary agent; source verification is limited to the claims documented in the fixes reports.",
+      "visual_status": "not-inspected"
+    },
+    {
+      "path": "00 Учебник/16 Multimodal Models/64a Connectors и fusion.md",
+      "owner": "advanced",
+      "baseline_sha256": "30bf5150dbfbd09e068a0585e4c9d3178330365f019fa9fc834dc3eac0796698",
+      "read_sha256": "30bf5150dbfbd09e068a0585e4c9d3178330365f019fa9fc834dc3eac0796698",
+      "current_sha256": "006b7f02cc4432b430264463760f32f914e35b5fe4e5cab1c815bc4c78a7b6a8",
+      "revision_status": "targeted-fixes-applied; full-page-acceptance-pending",
+      "recheck": "Changed passages and relevant examples reviewed by the primary agent; source verification is limited to the claims documented in the fixes reports.",
+      "visual_status": "not-inspected"
+    },
+    {
+      "path": "00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md",
+      "owner": "advanced",
+      "baseline_sha256": "1697139bc9417065561cb8fed218f193ef74b46561413bcbc73acd4d42964781",
+      "read_sha256": "1697139bc9417065561cb8fed218f193ef74b46561413bcbc73acd4d42964781",
+      "current_sha256": "2972e82d3ec71d1da7f654aec1e9db8d037222fc60b0011a539801da4f0dedf6",
+      "revision_status": "targeted-fixes-applied; full-page-acceptance-pending",
+      "recheck": "Changed passages and relevant examples reviewed by the primary agent; source verification is limited to the claims documented in the fixes reports.",
+      "visual_status": "not-inspected"
+    },
+    {
+      "path": "00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md",
+      "owner": "advanced",
+      "baseline_sha256": "f7b93967b5ffd6fa064ccfef81ca34e81d238f1b2b1efc0161b61213926f1a1d",
+      "read_sha256": "f7b93967b5ffd6fa064ccfef81ca34e81d238f1b2b1efc0161b61213926f1a1d",
+      "current_sha256": "acc7697bcbfaf84738f093a6ab3c165a9c18769979dded4a5c482d5f2145619d",
+      "revision_status": "targeted-fixes-applied; full-page-acceptance-pending",
+      "recheck": "Changed passages and relevant examples reviewed by the primary agent; source verification is limited to the claims documented in the fixes reports.",
+      "visual_status": "not-inspected"
+    },
+    {
+      "path": "00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md",
+      "owner": "advanced",
+      "baseline_sha256": "6ac0555c71efb1defaf1e193b4826f7cb90db1c0de390f59b1a033f39c887d6d",
+      "read_sha256": "6ac0555c71efb1defaf1e193b4826f7cb90db1c0de390f59b1a033f39c887d6d",
+      "current_sha256": "48d49ca9e756fcc8ff0706d211fa81de4ae93ad796d7a2cdf77e63ac768e84f6",
+      "revision_status": "targeted-fixes-applied; full-page-acceptance-pending",
+      "recheck": "Changed passages and relevant examples reviewed by the primary agent; source verification is limited to the claims documented in the fixes reports.",
+      "visual_status": "not-inspected"
+    },
+    {
+      "path": "00 Учебник/Покрытие программы.md",
+      "owner": "reference-practice",
+      "baseline_sha256": "5edc082e505886c847da6b5b511fa75315ae58b43eaf4cef10051d3d34ad9b7b",
+      "read_sha256": "5edc082e505886c847da6b5b511fa75315ae58b43eaf4cef10051d3d34ad9b7b",
+      "current_sha256": "18efb6ddeb569fdc53586fa2b2f5439ae6a8d35e7fa6f6ce6d29389f3adaa03e",
+      "revision_status": "targeted-fixes-applied; full-page-acceptance-pending",
+      "recheck": "Changed passages and relevant examples reviewed by the primary agent; source verification is limited to the claims documented in the fixes reports.",
+      "visual_status": "not-inspected"
+    },
+    {
+      "path": "00 Учебник/Редакционная матрица Bookvar.md",
+      "owner": "reference-practice",
+      "baseline_sha256": "3a6988f83fd252f92bc0bbab6240a8b0a223fcc0b76def0c908821e1feaadae8",
+      "read_sha256": "3a6988f83fd252f92bc0bbab6240a8b0a223fcc0b76def0c908821e1feaadae8",
+      "current_sha256": "7f08bcfbb350ccc268df10fba6258ad215b79b301206d22ac7484b09968cd099",
+      "revision_status": "targeted-fixes-applied; full-page-acceptance-pending",
+      "recheck": "Changed passages and relevant examples reviewed by the primary agent; source verification is limited to the claims documented in the fixes reports.",
+      "visual_status": "not-inspected"
+    },
+    {
+      "path": "01 Справочник/Текст и токенизация/Токенизация.md",
+      "owner": "reference-practice",
+      "baseline_sha256": "a0ecefba9c6db8a21f9e0f6e7e5ab0be6a4d144fa6eca4e1bc78e1adc0b65bc1",
+      "read_sha256": "a0ecefba9c6db8a21f9e0f6e7e5ab0be6a4d144fa6eca4e1bc78e1adc0b65bc1",
+      "current_sha256": "7712cd4481087abf5fecc05e5260eeceee25bfc3e9e1c514179378d69a462fb0",
+      "revision_status": "targeted-fixes-applied; full-page-acceptance-pending",
+      "recheck": "Changed passages and relevant examples reviewed by the primary agent; source verification is limited to the claims documented in the fixes reports.",
+      "visual_status": "not-inspected"
+    },
+    {
+      "path": "01 Справочник/Agents/Agent mechanisms.md",
+      "owner": "reference-practice",
+      "baseline_sha256": "ecdc00135667b67a09023a61ab71f2287a3701518c5986f5b85b0bce654f2d63",
+      "read_sha256": "ecdc00135667b67a09023a61ab71f2287a3701518c5986f5b85b0bce654f2d63",
+      "current_sha256": "9a44b6de22856795f013f4244935461e51e0d9bf8f9671d56a01abe3c7276283",
+      "revision_status": "targeted-fixes-applied; full-page-acceptance-pending",
+      "recheck": "Changed passages and relevant examples reviewed by the primary agent; source verification is limited to the claims documented in the fixes reports.",
+      "visual_status": "not-inspected"
+    },
+    {
+      "path": "01 Справочник/FFN и MoE/Mixture of Experts.md",
+      "owner": "reference-practice",
+      "baseline_sha256": "b9e5d12fec3ef16e46857d9d0eaf680580d135741324758e6dec578bf666fcbd",
+      "read_sha256": "b9e5d12fec3ef16e46857d9d0eaf680580d135741324758e6dec578bf666fcbd",
+      "current_sha256": "55cedd07df755ffe5cd81807640b79c3c0f2ba9e251cf3b7cb965a54a782822d",
+      "revision_status": "targeted-fixes-applied; full-page-acceptance-pending",
+      "recheck": "Changed passages and relevant examples reviewed by the primary agent; source verification is limited to the claims documented in the fixes reports.",
+      "visual_status": "partial-desktop-and-390px: source figure, caption, equation and numerical example"
+    },
+    {
+      "path": "01 Справочник/Inference/SGLang и RadixAttention.md",
+      "owner": "reference-practice",
+      "baseline_sha256": "56ef09e0220146c04b244c1f1f44e96223c25bbf84ff0400bd8082ee18adfe35",
+      "read_sha256": "56ef09e0220146c04b244c1f1f44e96223c25bbf84ff0400bd8082ee18adfe35",
+      "current_sha256": "dfec9043df26a2651676108b651b9bff66d463e9431ec1440235cd3bb3bd2202",
+      "revision_status": "targeted-fixes-applied; full-page-acceptance-pending",
+      "recheck": "Changed passages and relevant examples reviewed by the primary agent; source verification is limited to the claims documented in the fixes reports.",
+      "visual_status": "not-inspected"
+    },
+    {
+      "path": "01 Справочник/Inference/Triton и GPU kernels.md",
+      "owner": "reference-practice",
+      "baseline_sha256": "17a6569f53452c1c17f319a718abbb0f54f97050ced297806f3e96759e65e8f1",
+      "read_sha256": "17a6569f53452c1c17f319a718abbb0f54f97050ced297806f3e96759e65e8f1",
+      "current_sha256": "fbf85ef206d189af477bde13e0807efd5816e6acc3c64a3ae7f7bc76cdd7f0a7",
+      "revision_status": "targeted-fixes-applied; full-page-acceptance-pending",
+      "recheck": "Changed passages and relevant examples reviewed by the primary agent; source verification is limited to the claims documented in the fixes reports.",
+      "visual_status": "not-inspected"
+    },
+    {
+      "path": "01 Справочник/Inference/vLLM — анатомия inference engine.md",
+      "owner": "reference-practice",
+      "baseline_sha256": "8fce40a318f8be9e01d89c1f59a271666e2fc67056b25080014697e713d93bac",
+      "read_sha256": "8fce40a318f8be9e01d89c1f59a271666e2fc67056b25080014697e713d93bac",
+      "current_sha256": "92bdc08a8f2a2e3217fdb3a56d87566a527b157b9b1ed1ca9ae7d9a63babff9e",
+      "revision_status": "targeted-fixes-applied; full-page-acceptance-pending",
+      "recheck": "Changed passages and relevant examples reviewed by the primary agent; source verification is limited to the claims documented in the fixes reports.",
+      "visual_status": "not-inspected"
+    },
+    {
+      "path": "01 Справочник/Security и Robustness/01 Security и privacy.md",
+      "owner": "reference-practice",
+      "baseline_sha256": "7b34c2101255f3dd8f6ac247784a60bc9965ea334daa798d503c4308f5376ba8",
+      "read_sha256": "7b34c2101255f3dd8f6ac247784a60bc9965ea334daa798d503c4308f5376ba8",
+      "current_sha256": "1eb1ff73f497c8f89897e75c8f7bcd6c076e3b5d37571337f83641e690a6f6de",
+      "revision_status": "targeted-fixes-applied; full-page-acceptance-pending",
+      "recheck": "Changed passages and relevant examples reviewed by the primary agent; source verification is limited to the claims documented in the fixes reports.",
+      "visual_status": "not-inspected"
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/Gemma.md",
+      "owner": "reference-practice",
+      "baseline_sha256": "1adcc5d6b2493c0b83a2a685dd8368bf69398d9abe1dded58beeef2c75d60268",
+      "read_sha256": "1adcc5d6b2493c0b83a2a685dd8368bf69398d9abe1dded58beeef2c75d60268",
+      "current_sha256": "8cb650c81c45afb6d433a51a4209792e12aa2b00c03a01beb8ad5a8cb8749e87",
+      "revision_status": "targeted-fixes-applied; full-page-acceptance-pending",
+      "recheck": "Changed passages and relevant examples reviewed by the primary agent; source verification is limited to the claims documented in the fixes reports.",
+      "visual_status": "not-inspected"
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/GLM.md",
+      "owner": "reference-practice",
+      "baseline_sha256": "21ca8ba6b91a31c8b7361f1dff8c6102c26532edc7a8e1c41b3059bab8035fe9",
+      "read_sha256": "21ca8ba6b91a31c8b7361f1dff8c6102c26532edc7a8e1c41b3059bab8035fe9",
+      "current_sha256": "a23f78663a32562944f8c8ef292a42adbb997a7ef965c540f2291b7fd7fbf0db",
+      "revision_status": "targeted-fixes-applied; full-page-acceptance-pending",
+      "recheck": "Changed passages and relevant examples reviewed by the primary agent; source verification is limited to the claims documented in the fixes reports.",
+      "visual_status": "not-inspected"
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/Kimi.md",
+      "owner": "reference-practice",
+      "baseline_sha256": "62858eb6734433bc1830cab7a4099b8e7f5f4003054aa7e253cef9126b4f45c3",
+      "read_sha256": "62858eb6734433bc1830cab7a4099b8e7f5f4003054aa7e253cef9126b4f45c3",
+      "current_sha256": "4cc44f22b81657e203113336f43d7de1322b856d6cc730a0886a61076d461512",
+      "revision_status": "targeted-fixes-applied; full-page-acceptance-pending",
+      "recheck": "Changed passages and relevant examples reviewed by the primary agent; source verification is limited to the claims documented in the fixes reports.",
+      "visual_status": "not-inspected"
+    },
+    {
+      "path": "02 Атлас моделей/Сравнения/Сравнение семейств.md",
+      "owner": "reference-practice",
+      "baseline_sha256": "3160433084cd84ba47178cb943b0920555c29438f2aedaee1b73d4de228b2710",
+      "read_sha256": "3160433084cd84ba47178cb943b0920555c29438f2aedaee1b73d4de228b2710",
+      "current_sha256": "9845eefaa1d458fc8a1b4c3207a8ab9b9be08c7f583c91fd1ae4acbf28e7283c",
+      "revision_status": "targeted-fixes-applied; full-page-acceptance-pending",
+      "recheck": "Changed passages and relevant examples reviewed by the primary agent; source verification is limited to the claims documented in the fixes reports.",
+      "visual_status": "not-inspected"
+    },
+    {
+      "path": "03 Исследовательские линии/Эффективный attention.md",
+      "owner": "reference-practice",
+      "baseline_sha256": "f2ea2c7ed8c78f04f24e330f60f00eae39f7cd1e4e112e26128e04d36a97c941",
+      "read_sha256": "f2ea2c7ed8c78f04f24e330f60f00eae39f7cd1e4e112e26128e04d36a97c941",
+      "current_sha256": "575e2fd86bb07a82384f826b7285c36491c3577d241b431cf3276f2fb1e072f6",
+      "revision_status": "targeted-fixes-applied; full-page-acceptance-pending",
+      "recheck": "Changed passages and relevant examples reviewed by the primary agent; source verification is limited to the claims documented in the fixes reports.",
+      "visual_status": "not-inspected"
+    },
+    {
+      "path": "06 Практика/03 Прочитать современный decoder в LitGPT.md",
+      "owner": "reference-practice",
+      "baseline_sha256": "305d535233c989789fb6d7f6c7af7686cd9c1ed494a9881d73398903ee101ca1",
+      "read_sha256": "305d535233c989789fb6d7f6c7af7686cd9c1ed494a9881d73398903ee101ca1",
+      "current_sha256": "92d2593fd193550672099b629a5a95667ae9487a6e95db1ecaa15b7d2f29973d",
+      "revision_status": "targeted-fixes-applied; full-page-acceptance-pending",
+      "recheck": "Changed passages and relevant examples reviewed by the primary agent; source verification is limited to the claims documented in the fixes reports.",
+      "visual_status": "not-inspected"
+    },
+    {
+      "path": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "owner": "reference-practice",
+      "baseline_sha256": "a7aa0a144fe3db342bfe1b6141aecfa85b86c86302371e6777ae6d0167cef487",
+      "read_sha256": "a7aa0a144fe3db342bfe1b6141aecfa85b86c86302371e6777ae6d0167cef487",
+      "current_sha256": "4ca253061bd1dddfb1df7afef0906688e9697d63e480d750b2d4392bd591328d",
+      "revision_status": "targeted-fixes-applied; full-page-acceptance-pending",
+      "recheck": "Changed passages and relevant examples reviewed by the primary agent; source verification is limited to the claims documented in the fixes reports.",
+      "visual_status": "not-inspected"
+    },
+    {
+      "path": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "owner": "reference-practice",
+      "baseline_sha256": "69366648d4b378c21fe53540afa9dedd1bedeb2affef9c821f227c4ed5d235c9",
+      "read_sha256": "69366648d4b378c21fe53540afa9dedd1bedeb2affef9c821f227c4ed5d235c9",
+      "current_sha256": "6bda85317d76a83e9ee9f77bb8afc5c66f0cde7131dc818169e1bcc6f02f4ee1",
+      "revision_status": "targeted-fixes-applied; full-page-acceptance-pending",
+      "recheck": "Changed passages and relevant examples reviewed by the primary agent; source verification is limited to the claims documented in the fixes reports.",
+      "visual_status": "not-inspected"
+    },
+    {
+      "path": "06 Практика/27 Проверяемый научный поиск на символьной регрессии.md",
+      "owner": "reference-practice",
+      "baseline_sha256": "3c9fc4de9739d8b3a3cf8df5ce7bdb9b028adb74bed7b578b9490f062d32c463",
+      "read_sha256": "3c9fc4de9739d8b3a3cf8df5ce7bdb9b028adb74bed7b578b9490f062d32c463",
+      "current_sha256": "475a542928064ea90a16697a5b9a19ac9ae301aee3f04ee410848d6b343faf07",
+      "revision_status": "targeted-fixes-applied; full-page-acceptance-pending",
+      "recheck": "Changed passages and relevant examples reviewed by the primary agent; source verification is limited to the claims documented in the fixes reports.",
+      "visual_status": "not-inspected"
+    }
+  ]
+}

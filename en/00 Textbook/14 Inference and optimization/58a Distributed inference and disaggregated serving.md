@@ -61,10 +61,11 @@ physical layouts and communication requirements.
 
 ## Collective operations as layout transformations
 
-A collective is called coherently by every rank in a process group. It is not an
-incidental network request after the computation; it is part of the distributed
-algorithm. Until the collective completes, the next layer often does not have a
-mathematically valid input.
+The full derivation appears in the canonical chapters on
+[[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP|processes and collectives]]
+and [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism|tensor/sequence parallelism]].
+Here the original NCCL diagrams serve as a compact reminder before an
+inference-specific latency calculation.
 
 ### AllGather: shards become complete copies
 
@@ -75,12 +76,8 @@ concatenation in rank order. Source: NVIDIA,
 [Collective Operations](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html),
 from the BSD-licensed NCCL documentation.*
 
-If rank $i$ holds $x_i$, every rank holds
-$[x_0,x_1,\ldots,x_{p-1}]$ after AllGather. The local output is $p$ times the
-size of one shard. AllGather is needed when the next operator cannot consume the
-partitioned representation. Sequence parallelism, for example, can keep
-LayerNorm activations split by sequence and restore the layout expected by a
-tensor-parallel linear layer only when necessary.
+AllGather restores a complete tensor from shards when the next operator cannot
+consume the partitioned representation, for example before a linear layer.
 
 ### ReduceScatter: sum and keep the result sharded
 
@@ -89,12 +86,8 @@ tensor-parallel linear layer only when necessary.
 *ReduceScatter reduces corresponding input elements and leaves one result shard
 on each rank. Source: official NCCL documentation.*
 
-Suppose each rank computed a partial output $y_i$ with the same logical shape and
-the complete answer is $y=\sum_i y_i$. If the following operator accepts a
-partitioned $y$, replicating the whole sum is wasteful. ReduceScatter performs
-the reduction while retaining only $1/p$ of the result locally. It reduces
-activation memory and often forms a more efficient pair with a later AllGather
-than an unconditional AllReduce.
+ReduceScatter sums partial outputs and keeps the result partitioned, avoiding
+replication when the following operator can use local shards.
 
 ### AllReduce: the complete reduction on every rank
 
@@ -119,6 +112,20 @@ topology- and size-dependent algorithms, so this is not a performance predictor.
 It does expose the two limiting regimes: small decode activations are sensitive
 to latency, whereas larger prefill messages are more bandwidth-sensitive.
 
+For a hypothetical group with $p=8$, $\alpha=2$ microseconds and
+$\beta=50\cdot10^9$ bytes/s, a BF16 activation message of width 8192 has
+$M=B\cdot8192\cdot2$ bytes, where $B$ counts tokens in this pass.
+
+| Pass | Tokens | Message | Latency term | Bandwidth term | Total |
+|---|---:|---:|---:|---:|---:|
+| One-request decode | 1 | 16 KiB | 28 us | 0.573 us | 28.573 us |
+| Long prefill | 8192 | 128 MiB | 28 us | 4.698 ms | 4.726 ms |
+
+Two reductions per layer across 80 layers would cost about 4.57 ms per decode
+step or 756 ms per prefill if none overlapped computation. These are model
+calculations, not NCCL measurements. Large prefill GEMMs may hide part of the
+exchange; a short decode often has less work available for overlap.
+
 ### AllToAll: a personalized permutation among ranks
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-alltoall.png]]
@@ -127,12 +134,10 @@ to latency, whereas larger prefill messages are more bandwidth-sensitive.
 receives a different fragment from every source. Source: official NCCL
 documentation.*
 
-AllToAll is not a reduction. It changes ownership. In a mixture-of-experts
-layer, the router assigns each token to one or more experts; tokens initially
-held by different ranks must move to the ranks that own those experts. A second
-AllToAll returns the outputs. Expert parallelism therefore stresses bisection
-bandwidth and is more sensitive to token imbalance than dense tensor
-parallelism.
+AllToAll changes ownership rather than reducing values. In MoE it dispatches
+tokens to expert owners and returns the outputs. The most heavily loaded
+expert can delay an entire inference step even when aggregate bandwidth is
+adequate.
 
 Pipeline parallelism, by contrast, mostly uses point-to-point send/receive
 between adjacent stages. A message follows a specific pipeline edge rather than

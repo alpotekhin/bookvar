@@ -37,7 +37,7 @@ top-$k$. Один BF16-элемент занимает $b=2$ bytes.
 До первого GEMM система уже может терять время: CPU читает и готовит batch, пока
 GPU ждёт. Для синхронного шага
 
-$$T_{\text{step}}=T_{\text{load}}+T_{\text{compute}}$$
+$T_{\text{step}}=T_{\text{load}}+T_{\text{compute}}$
 
 после prefetch из отдельного процесса в устойчивом режиме приближается к
 $\max(T_{\text{load}},T_{\text{compute}})$. Если compute занимает 180 ms, а
@@ -49,15 +49,15 @@ host memory — не исчерпываться, а worker seeds — остав�
 
 Для GQA attention четыре проекции дают
 
-$$
+$
 P_{\text{attn}}
 =H(n_hd)+2H(n_{kv}d)+H(n_hd).
-$$
+$
 
 При MHA $n_hd=n_{kv}d=H$, поэтому $P_{\text{attn}}=4H^2$. Для SwiGLU три
 матрицы — gate, up и down:
 
-$$P_{\text{ffn}}=3HI.$$
+$P_{\text{ffn}}=3HI.$
 
 Без малых norm/bias один слой содержит $P_\ell=P_{\text{attn}}+3HI$;
 embeddings добавляют $VH$, если output head tied, и ещё $VH$ иначе.
@@ -66,10 +66,10 @@ embeddings добавляют $VH$, если output head tied, и ещё $VH$ и
 
 Для $H=4096$, $I=11008$, MHA и $L=32$:
 
-$$
+$
 P_\ell=4\cdot4096^2+3\cdot4096\cdot11008
 \approx202{,}4\text{ M},
-$$
+$
 
 то есть $\approx6{,}48$ B параметров блоков. В исходной LLaMA матрица входных
 эмбеддингов и выходная проекция имеют разные веса: каждая добавляет
@@ -83,13 +83,17 @@ $32000\cdot4096\approx131$ M параметров. Вместе с нормал�
 
 GEMM $[N,a]\times[a,b]$ стоит $2Nab$ FLOP. Поэтому
 
-$$F_{\text{proj}}=2NP_{\text{attn}},\qquad
+$F_{\text{proj}}=2NP_{\text{attn}},\qquad
 F_{\text{SwiGLU}}=6NHI.
-$$
+$
 
 Attention scores $QK^\top$ и умножение probabilities на $V$ вместе дают
 
-$$F_{\text{quadratic}}\approx4BS^2(n_hd).$$
+$F_{\text{quadratic}}\approx4BS^2(n_hd).$
+
+Это счёт для полных матричных произведений. Если причинное ядро действительно
+пропускает верхний треугольник, число разрешённых пар равно $S(S+1)/2$,
+и соответствующая арифметика смешивания — $2BS(S+1)n_hd$.
 
 Backward linear-слоя вычисляет градиенты по input и weight и обычно добавляет
 примерно два forward. Поэтому для GEMM-heavy dense LM
@@ -98,7 +102,7 @@ quadratic attention и vocabulary projection не доминируют.
 
 Для Llama 7B при $N=8192$:
 
-$$F_{\ell,\text{linear}}\approx2N\cdot202{,}4\text{ M}=3{,}32\text{ TFLOP}.$$
+$F_{\ell,\text{linear}}\approx2N\cdot202{,}4\text{ M}=3{,}32\text{ TFLOP}.$
 
 На 800 TFLOP/s идеальный прямой проход через слой занял бы 4,15 мс. Это лишь
 нижняя граница: обращения к памяти, поэлементные ядра, паузы между их запусками
@@ -116,7 +120,7 @@ $[B,S,H]$ и занимает $bNH$ bytes. Для $L$ слоёв минимал�
 | Что требуется backward | Форма/порядок на слой | BF16 bytes |
 |---|---:|---:|
 | вход блока/residual | $[B,S,H]$ | $bNH$ |
-| Q | $[B,S,n_h,d]$ | $bNH$ |
+| Q | $[B,S,n_h,d]$ | $bNn_hd$; при $n_hd=H$ это $bNH$ |
 | K,V при GQA | по $[B,S,n_{kv},d]$ | $2bNSn_{kv}d/S=2bNn_{kv}d$ |
 | logits/probabilities обычного attention | $[B,n_h,S,S]$ | $bBn_hS^2$ каждое |
 | MLP gate и up intermediates | два $[N,I]$ | $2bNI$ |
@@ -147,7 +151,8 @@ checkpointing — множитель и recompute time.
 
 ## Состояния модели и FSDP
 
-Типичный Adam mixed-precision ledger:
+Один распространённый вариант Adam со смешанной точностью: BF16 рабочие веса
+и отдельная FP32 master-копия. Для него ledger имеет вид:
 
 | Состояние | bytes/parameter |
 |---|---:|
@@ -156,7 +161,9 @@ checkpointing — множитель и recompute time.
 | gradient | 2 или 4 |
 | FP32 first и second moments | 8 |
 
-Итого 16–18 bytes/parameter до buffers. 7B требует 112–126 GB, 70B —
+Итого 16–18 bytes/parameter до buffers. Это не обязательное устройство AMP:
+при FP32 параметрах и autocast постоянная master-копия не дублируется,
+а FP32 веса, градиенты и два момента Adam дают 16 bytes/parameter. 7B требует 112–126 GB, 70B —
 1,12–1,26 TB.
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/foundation/training_optimizer_memory.svg]]
@@ -251,7 +258,7 @@ pp. 40–47, это проверяется символическими зада
 
 Для Llama 70B ($H=8192,I=28672,L=80$, GQA $n_{kv}=8$) FFN одного слоя:
 
-$$P_{\text{ffn}}=3\cdot8192\cdot28672\approx704{,}6\text{ M},$$
+$P_{\text{ffn}}=3\cdot8192\cdot28672\approx704{,}6\text{ M},$
 
 то есть 1,41 GB в BF16. Даже если
 persistent state разделён на 1024 GPU, один gathered layer всё ещё требует
@@ -263,9 +270,9 @@ $P/p$. При TP=2 матрицы и вычисления делятся поп�
 
 MoE хранит $E$ SwiGLU experts:
 
-$$P_{\text{experts}}=3EHI,\qquad
+$P_{\text{experts}}=3EHI,\qquad
 F_{\text{experts/token}}=6kHI.
-$$
+$
 
 Коэффициент **6** — это все три projections и правило 2 FLOP на MAC. Если
 считается только один expert projection, формула была бы $2kHI$; смешивать эти
@@ -328,18 +335,21 @@ representations; это меняет вид трафика, но не делае
 Пусть $S=8192,E=256,k=8,H=7168,I=2048$.
 Полный объём вычислений SwiGLU для одного пакета токенов:
 
-$$
+$
 F_{\mathrm{SwiGLU}}=6SkHI
 \approx 6\cdot8192\cdot8\cdot7168\cdot2048
 \approx 5.77\,\mathrm{TFLOP}.
-$$
+$
 
-На 800 TFLOP/s идеал — 7,2 ms. Важно не спутать эту оценку с 2,4–2,5 ms для
-**одной проекции GroupedGEMM**:
+Число 5.77 TFLOP относится ко всему пакету и всем выбранным экспертам.
+Если 800 TFLOP/s — эффективная совокупная скорость группы, нижняя оценка равна
+7.2 мс. При равномерном разделении на 8 GPU локальная работа равна 0.721 TFLOP.
+Если 800 TFLOP/s обозначает скорость **одного** GPU, совокупная скорость группы
+равна 6400 TFLOP/s и идеальное время —0.901 мс. Эти два соглашения нельзя смешивать.
 
-$$
-2SkHI\approx1.92\,\mathrm{TFLOP}\Rightarrow2.4\,\mathrm{ms}.
-$$
+Одна из трёх проекций выполняет $2SkHI\approx1.924$ TFLOP на всю группу:
+при 800 TFLOP/s на группу это 2.405 мс, при 800 TFLOP/s на каждый из 8 GPU —0.301 мс.
+Сеть, перестановки и дисбаланс в эти нижние оценки не входят.
 
 TP режет каждую expert matrix и требует collectives вокруг projections; EP
 оставляет experts целыми и делает dispatch/combine All-to-All. Выбор зависит
@@ -358,10 +368,16 @@ GPipe, p=2, m=4
 stage 0: F1 F2 F3 F4 .. .. B4 B3 B2 B1
 stage 1: .. F1 F2 F3 F4 B4 B3 B2 B1 ..
 
-1F1B после warmup
-stage 0: F1 F2 B1 F3 B2 F4 B3 .. B4
-stage 1: .. F1 B1 F2 B2 F3 B3 F4 B4
+1F1B, один F/B занимает один слот; сообщение доступно в следующем слоте
+slot:     01 02 03 04 05 06 07 08 09 10
+stage 0:  F1 F2 .. B1 F3 B2 F4 B3 .. B4
+stage 1:  .. F1 B1 F2 B2 F3 B3 F4 B4 ..
 ```
+
+Например, B1 второй стадии завершается в конце слота 3, поэтому B1 первой
+начинается лишь в слоте 4. Аналогично проверяются границы всех микропакетов.
+Передача в этой дискретной модели включена в границу слота; реальная сеть может
+добавить задержку. Обновление весов выполняется после завершения всех микропакетов.
 
 GPipe держит активации всех $m$ microbatches; 1F1B ограничивает число живых
 microbatches и раньше освобождает память. Грубая bubble fraction

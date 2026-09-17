@@ -15,6 +15,8 @@ primary_sources:
   - https://arxiv.org/abs/2411.15124
 source_unit_id:
   - assignment-05-prompting-and-grading
+  - meeting-04-slides-rlvr-method
+  - meeting-04-slides-rlvr-results
 ---
 
 # RLVR: обучение по проверяемой награде
@@ -29,6 +31,17 @@ source_unit_id:
 > рост обучающей награды ещё не доказывает улучшения способности рассуждать.
 
 ## Главное различие
+
+<!-- source_unit_id: meeting-04-slides-rlvr-method -->
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m04-p90-tulu-rlvr-stage.png]]
+
+*Найдите на схеме место RLVR в полном recipe: policy стартует не с base model,
+а после SFT и preference tuning, затем получает reward от программно
+проверяемого результата. Эта начальная точка необходима для интерпретации
+последующих кривых. Источник: Hanna Hajishirzi, Berkeley Advanced LLM Agents,
+meeting 4,
+[слайд 90](https://rdi.berkeley.edu/adv-llm-agents/slides/OLMo-Tulu-Reasoning-Hanna.pdf#page=90).*
 
 <a id="verifiable-reward"></a>
 
@@ -110,9 +123,13 @@ $$
 
 В ответе $y_2$ правильное число присутствует, но заданный контракт не выполнен:
 программа разбора не может однозначно извлечь результат. Если дать формату вес
-1, ответ $y_4$ получит такую же награду, как верное решение. Тогда модель сможет
-повышать награду, не улучшая математические способности. Вспомогательные
-слагаемые должны облегчать поиск решения, а не подменять правильность.
+1, награды станут $(2,0,2,1)$: неверный ответ $y_4$ всё ещё уступает верным
+$y_1$ и $y_3$, но получает положительную награду только за формат. Переход от
+неформатного неверного ответа к форматному неверному повышает награду с 0 до 1
+без улучшения математической правильности. Это и есть риск вспомогательного
+сигнала в данном примере, а не равенство наград верного и неверного решений.
+Нужно отдельно отслеживать долю правильных ответов и соблюдение формата:
+слагаемые должны облегчать поиск решения, а не подменять его оценку.
 
 ## От записи данных к функции оптимизации
 
@@ -182,14 +199,17 @@ $$
 import re
 from decimal import Decimal, InvalidOperation
 
-FINAL = re.compile(r"(?m)^FINAL:\s*([-+]?\d+(?:\.\d+)?)\s*$")
+FINAL = re.compile(r"FINAL:[ \t]*([-+]?[0-9]+(?:\.[0-9]+)?)[ \t]*")
 
 def parse_final(text: str) -> Decimal | None:
-    matches = FINAL.findall(text)
-    if len(matches) != 1:       # неоднозначный вывод также reject
+    lines = text.splitlines()
+    if not lines or sum(line.startswith("FINAL:") for line in lines) != 1:
+        return None           # отсутствующий или неоднозначный результат
+    match = FINAL.fullmatch(lines[-1])
+    if match is None:          # FINAL допускается только в последней строке
         return None
     try:
-        return Decimal(matches[0])
+        return Decimal(match.group(1))
     except InvalidOperation:
         return None
 
@@ -202,6 +222,33 @@ def numeric_reward(completion: str, answer: Decimal) -> dict[str, float]:
         "format": float(format_ok),
         "total": float(correct) + 0.1 * float(format_ok),
     }
+```
+
+Здесь число записывается ASCII-цифрами с необязательным знаком и дробной частью.
+Один завершающий перевод строки допустим; пустая строка или текст после `FINAL`
+нарушают контракт. Даже нечисловой второй маркер `FINAL:` считается
+неоднозначностью. Минимальные регрессионные проверки:
+
+```python
+assert parse_final("FINAL: 4\nтекст после результата") is None
+assert parse_final("3x = 12\nFINAL: 4") == Decimal("4")
+assert parse_final("FINAL: +4.0\n") == Decimal("4")
+assert parse_final("FINAL: -2.5") == Decimal("-2.5")
+assert parse_final("") is None
+assert parse_final("FINAL: 4\nFINAL: 4") is None
+assert parse_final("FINAL: ошибка\nFINAL: 4") is None
+assert parse_final("FINAL:\n4") is None
+assert parse_final("FINAL: 4\n\n") is None
+assert parse_final("FINAL: NaN") is None
+assert parse_final("FINAL: Infinity") is None
+assert parse_final("FINAL: 4e0") is None
+assert parse_final("FINAL: −4") is None  # Unicode-минус вне контракта
+assert numeric_reward("FINAL: 4", Decimal("4")) == {
+    "correct": 1.0, "format": 1.0, "total": 1.1,
+}
+assert numeric_reward("FINAL: 12", Decimal("4")) == {
+    "correct": 0.0, "format": 1.0, "total": 0.1,
+}
 ```
 
 Это учебный пример проверяющей программы. Реальную версию следует испытать на
@@ -282,8 +329,10 @@ $1-0.01^4-0.99^4\approx0.0394$. То есть около 96% групп почт
 В Assignment 5 ответ должен завершаться размеченным фрагментом вроде
 `<answer>...</answer>`. Из-за этого возникают две независимые величины:
 
-$$r_{answer}=\mathbf 1[\operatorname{verify}(\hat a,a^*)],\qquad
-r_{format}=\mathbf 1[\operatorname{parse}(y)\ \text{успешен}].$$
+$$
+r_{answer}=\mathbf 1[\operatorname{verify}(\hat a,a^*)],\qquad
+r_{format}=\mathbf 1[\operatorname{parse}(y)\ \text{успешен}].
+$$
 
 В обязательном эксперименте суммарная обучающая награда равна
 `r_answer`; `r_format` только логируется. Это принципиальный выбор: если дать
@@ -338,6 +387,66 @@ parser/verifier и обе составляющие reward. Пограничны�
 
 Для честного сравнения pass@1 до и после обучения нужно зафиксировать шаблон
 запроса, температуру, предел длины и версию проверяющей программы.
+
+## Что показывает кривая RLVR, а чего она не доказывает
+
+<!-- source_unit_id: meeting-04-slides-rlvr-results -->
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m04-p104-rlvr-experimental-setup.png]]
+
+*Перед чтением результата зафиксируйте экспериментальный контракт: исходный
+checkpoint, три семейства проверяемых задач, verifier и PPO-обновление. Без этих
+четырёх частей кривая reward не определяет воспроизводимый эксперимент.
+Источник: Hanna Hajishirzi, Berkeley Advanced LLM Agents, meeting 4,
+[слайд 104](https://rdi.berkeley.edu/adv-llm-agents/slides/OLMo-Tulu-Reasoning-Hanna.pdf#page=104).*
+
+В Tülu 3 RLVR был последним этапом после SFT и preference tuning. Для обучения
+составили смесь из 29 946 запросов: 7 473 задачи GSM8K, 7 500 задач MATH и
+14 973 инструкции с ограничениями, которые можно проверить программно. Числовой
+ответ в GSM8K сравнивали точно, для MATH допускали эквивалентные математические
+записи, а в instruction following отдельно проверяли каждое требование —
+например, число пунктов или наличие заданной фразы. Политика обновлялась с PPO;
+за успешный ответ использовалась положительная награда, масштабированная
+коэффициентом $\alpha=10$.
+
+Для интерпретации результата авторы сопоставляли кривые проверяемой награды, KL
+к начальной политике и длины ответа. Затем модель оценивали на отложенной части
+той же целевой задачи и на более широком наборе тестов. Рост первой кривой означает
+лишь, что текущая политика чаще проходит конкретную проверяющую программу на
+обучающих запросах. Сам по себе он не показывает ни переноса на новые задачи, ни
+сохранения общих способностей, ни корректности промежуточного рассуждения.
+
+В отдельных запусках Tülu 3 рост обучающей награды сопровождался ростом качества
+на целевом тесте. Однако средний результат по всем тестам не возрастал
+монотонно: дальнейшее удаление от исходной политики могло уже ухудшать общую
+оценку. Абляция начальной точки выявила ещё одно различие. Модель после
+SFT иногда достигала сопоставимой обучающей награды, но ценой большего KL; старт
+с checkpoint после DPO давал более сильный результат на тесте. Поэтому
+одинаковая высота кривой reward не означает, что были выучены одинаковые
+политики.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m04-p118-rlvr-scaling-curves.png]]
+
+*Сравнивайте панели по трём осям одновременно: проверяемая награда, удаление от
+исходной policy и качество на отложенных задачах. Рисунок показывает траекторию
+конкретного Tülu 3 PPO-запуска; он не доказывает перенос на другой verifier,
+датасет или размер модели. Источник: Hanna Hajishirzi, Berkeley Advanced LLM
+Agents, meeting 4,
+[слайд 118](https://rdi.berkeley.edu/adv-llm-agents/slides/OLMo-Tulu-Reasoning-Hanna.pdf#page=118).*
+
+Масштаб модели также менял картину. В итоговом эксперименте 8B-модель улучшилась
+на всех трёх направлениях, тогда как у 70B-модели прирост на GSM8K почти исчез:
+исходная модель уже была близка к насыщению этого теста. Это результат
+конкретного сочетания базовой модели, данных, PPO и трёх проверяющих программ, а
+не общее обещание, что RLVR неизбежно улучшает любую математическую или
+инструктивную способность.
+
+Эксперимент и его абляции разобраны в
+[Berkeley Advanced LLM Agents, meeting 4, слайды 90–120](https://rdi.berkeley.edu/adv-llm-agents/slides/OLMo-Tulu-Reasoning-Hanna.pdf).
+Точные состав данных, функции награды и кривые приведены в разделах 6 и F
+[статьи Tülu 3](https://arxiv.org/abs/2411.15124). При переносе этого рецепта
+необходимо заново указать пять величин: исходный checkpoint, распределение
+запросов, версию verifier, алгоритм оптимизации и набор отложенных оценок.
 
 ## Открытые реализации
 

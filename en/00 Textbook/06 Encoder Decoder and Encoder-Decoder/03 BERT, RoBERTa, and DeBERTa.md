@@ -2,7 +2,9 @@
 title: BERT, RoBERTa, and DeBERTa
 type: textbook-chapter
 status: canonical
-last_updated: 2026-08-03
+locale: en
+translation_of: "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md"
+last_updated: 2026-09-15
 primary_sources:
   - https://arxiv.org/abs/1810.04805
   - https://arxiv.org/abs/1907.11692
@@ -11,9 +13,7 @@ primary_sources:
 
 # BERT, RoBERTa, and DeBERTa
 
-A word's meaning is often revealed by what comes after it. The same token
-`bank` means something different in `withdrew money from the bank` and `sat on
-the river bank`, and right context helps decide which sense is present. A
+A word's meaning may be clarified by what comes after it. Compare `They reached the bank beside the river.` with `They reached the bank beside the office.` The token `bank` and its left context are identical; only the right continuation changes. A
 causal language model cannot use that context in the current token state: its
 next-token objective permits only left context. That is necessary for
 generation but artificial when labeling known text for classification, entity
@@ -213,7 +213,19 @@ architecturally different.
 DeBERTa does change attention. BERT adds an absolute position vector directly
 to each token embedding. DeBERTa keeps content representations and a table of
 relative offsets separate. For query position $i$ and key position $j$, the
-unnormalized score has three interactions:
+unnormalized score has three interactions. Let $H\in\mathbb R^{T\times d}$ be content states and $P\in\mathbb R^{2k\times d}$ a learned relative-position table. For one head, all five projection matrices below have shape $[d,d_h]$; rows are vectors, not columns:
+
+$$
+Q^c=HW_{q,c},\quad K^c=HW_{k,c},\quad V^c=HW_{v,c},\quad Q^r=PW_{q,r},\quad K^r=PW_{k,r}.
+$$
+
+The table index follows the paper’s signed-distance convention; it is not a token index:
+
+$$
+\delta(i,j)=\operatorname{clip}(i-j+k,0,2k-1).
+$$
+
+Reversing query and key changes the lookup to $\delta(j,i)$. Thus:
 
 $$
 \tilde A_{ij}=Q_i^cK_j^{c\top}
@@ -226,6 +238,8 @@ relative to this query; the third asks where the query is relative to this key.
 The authors omit a pure position-to-position term. With head width $d_h$, the
 score is scaled by $\sqrt{3d_h}$ because it sums three dot products rather than
 one.
+
+For a numerical lookup, choose $k=2$, $i=1$, $j=2$, $d_h=2$. Then $\delta(i,j)=1$, $\delta(j,i)=3$. With already-projected rows $Q_i^c=(1,2)$, $K_j^c=(3,1)$, $K_1^r=(0,1)$, $Q_3^r=(1,-1)$, the terms are $5$, $2$, and $2$. Their scaled sum is $9/\sqrt6\approx3.6742$. This is one **logit**, not an attention probability: softmax still compares it with every allowed key in row $i$. Offsets outside the table range share boundary rows; clipping does not itself mask faraway keys.
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-25-31/deberta-disentangled-attention-equation4.png]]
 

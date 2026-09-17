@@ -1,0 +1,307 @@
+schema_version: 1
+course:
+  title: "UC Berkeley CS294/194-280: Advanced Large Language Model Agents, Spring 2025"
+  course_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+  retrieved: 2026-09-04
+  rights_status: permission-recorded
+  rights_note: "Project permission records attributed educational preservation and textbook reuse. This is not a named open-source or Creative Commons license; third-party figures embedded in the slides retain their original attribution."
+sources:
+  meeting-01:
+    lecturer: Xinyun Chen
+    source_pdf: "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-01-slides.pdf"
+    canonical_url: https://rdi.berkeley.edu/adv-llm-agents/slides/inference_time_techniques_lecture_sp25.pdf
+    source_pdf_sha256: 7c17e9d9baf8a3759a016872c17b1f5cce2e4d7691698b2799f6e7a2bd7ff576
+    source_canvas_pt: "960x540"
+  meeting-02:
+    lecturer: Jason Weston
+    source_pdf: "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-02-slides.pdf"
+    canonical_url: https://rdi.berkeley.edu/adv-llm-agents/slides/Jason-Weston-Reasoning-Alignment-Berkeley-Talk.pdf
+    source_pdf_sha256: 84b5901763f7fc08d5622c824784d3ca8d304ceaf613a8d4b2ef8529b0ee0be3
+    source_canvas_pt: "960x540"
+  meeting-03:
+    lecturer: Yu Su
+    source_pdf: "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-03-slides.pdf"
+    canonical_url: https://rdi.berkeley.edu/adv-llm-agents/slides/language_agents_YuSu_Berkeley.pdf
+    source_pdf_sha256: 748182d9be6e05589bf0664b4e8c08f55671c8d70e1a64ab031ebcf02fc3fd07
+    source_canvas_pt: "960x540"
+  meeting-04:
+    lecturer: Hanna Hajishirzi
+    source_pdf: "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-04-slides.pdf"
+    canonical_url: https://rdi.berkeley.edu/adv-llm-agents/slides/OLMo-Tulu-Reasoning-Hanna.pdf
+    source_pdf_sha256: 6a4df80ff062cc6014b3c86d2d08d4256e059b5a9bf12a4926eda89327d37bf7
+    source_canvas_pt: "720x405"
+assets:
+  - id: berkeley-m01-p40-self-consistency
+    local_path: m01-p40-self-consistency.png
+    source: meeting-01
+    source_page_1_based: 40
+    source_unit_id: meeting-01-slides-self-consistency-sampling
+    source_visual_id: meeting-01-slides-visual-self-consistency-sampling
+    transform: "Poppler pdftoppm 144 DPI (2x page scale); full page; crop box [0,0,960,540] pt"
+    file_dimensions_px: "1920x1080"
+    local_sha256: 83af21d65ae12aff7b3e547e1f05ff91fee23dfcbedd1143ca91f6f2e031a607
+    upstream_sources:
+      - https://arxiv.org/abs/2203.11171
+    used_in: "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md#Self-consistency"
+    caption_intent: "Trace diverse reasoning paths into normalized final-answer voting."
+  - id: berkeley-m01-p42-sample-scaling
+    local_path: m01-p42-sample-scaling.png
+    source: meeting-01
+    source_page_1_based: 42
+    source_unit_id: meeting-01-slides-self-consistency-sampling
+    source_visual_id: meeting-01-slides-visual-self-consistency-sampling
+    transform: "Poppler pdftoppm 144 DPI (2x page scale); full page; crop box [0,0,960,540] pt"
+    file_dimensions_px: "1920x1080"
+    local_sha256: db562185eb7334cf8f89ac8aa616d23f616e9519da60a86fe82ead1c92af97fe
+    upstream_sources:
+      - https://arxiv.org/abs/2203.11171
+    used_in: "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md#Self-consistency"
+    caption_intent: "Compare stochastic path diversity with greedy and likelihood-ranked baselines as sample count grows."
+  - id: berkeley-m01-p54-response-selection-vs-search
+    local_path: m01-p54-response-selection-vs-search.png
+    source: meeting-01
+    source_page_1_based: 54
+    source_unit_id: meeting-01-slides-tree-of-thoughts-search
+    source_visual_id: meeting-01-slides-visual-tree-of-thoughts-search
+    transform: "Poppler pdftoppm 144 DPI (2x page scale); full page; crop box [0,0,960,540] pt"
+    file_dimensions_px: "1920x1080"
+    local_sha256: 5462523cd97b1c0c95ff3fe1a1f0df5f4ddd4a92d8247a957b808ea790c2b975
+    upstream_sources:
+      - https://arxiv.org/abs/2305.10601
+    used_in: "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md#7. Поиск по промежуточным состояниям"
+    caption_intent: "Locate the boundary between selecting complete responses and scoring partial states."
+  - id: berkeley-m01-p55-game-of-24
+    local_path: m01-p55-game-of-24.png
+    source: meeting-01
+    source_page_1_based: 55
+    source_unit_id: meeting-01-slides-tree-of-thoughts-search
+    source_visual_id: meeting-01-slides-visual-tree-of-thoughts-search
+    transform: "Poppler pdftoppm 144 DPI (2x page scale); full page; crop box [0,0,960,540] pt"
+    file_dimensions_px: "1920x1080"
+    local_sha256: bc8cb3c6ddbb7c2cf2ef81898d2186cf32ed4a5f6e3d434fbed23b5e75989498
+    upstream_sources:
+      - https://arxiv.org/abs/2305.10601
+    used_in: "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md#7. Поиск по промежуточным состояниям"
+    caption_intent: "Separate the proposal prompt from the value prompt in the Game of 24 search."
+  - id: berkeley-m01-p64-self-debugging-feedback
+    local_path: m01-p64-self-debugging-feedback.png
+    source: meeting-01
+    source_page_1_based: 64
+    source_unit_id: meeting-01-slides-reflection-and-self-debugging
+    source_visual_id: meeting-01-slides-visual-reflection-and-self-debugging
+    transform: "Poppler pdftoppm 144 DPI (2x page scale); full page; crop box [0,0,960,540] pt"
+    file_dimensions_px: "1920x1080"
+    local_sha256: 031d815fa03193068ec464ec5d7ad9cc26fc973c418d460e65032a955fa2e25a
+    upstream_sources:
+      - https://arxiv.org/abs/2304.05128
+    used_in: "00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md#Рефлексия полезна только через наблюдаемую обратную связь"
+    caption_intent: "Compare how four feedback channels localize a programming error."
+  - id: berkeley-m01-p67-self-correction-no-oracle
+    local_path: m01-p67-self-correction-no-oracle.png
+    source: meeting-01
+    source_page_1_based: 67
+    source_unit_id: meeting-01-slides-self-correction-failure-modes
+    source_visual_id: meeting-01-slides-visual-self-correction-failure-modes
+    transform: "Poppler pdftoppm 144 DPI (2x page scale); full page; crop box [0,0,960,540] pt"
+    file_dimensions_px: "1920x1080"
+    local_sha256: eddd2002604d0887ed876e9723231be4684348aa3785bad6b424de97f219da06
+    upstream_sources:
+      - https://arxiv.org/abs/2310.01798
+    used_in: "00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md#Почему самокритика без внешнего сигнала не является проверкой"
+    caption_intent: "Contrast intrinsic self-correction with otherwise unavailable oracle feedback."
+  - id: berkeley-m01-p69-debate-vs-self-consistency
+    local_path: m01-p69-debate-vs-self-consistency.png
+    source: meeting-01
+    source_page_1_based: 69
+    source_unit_id: meeting-01-slides-self-correction-failure-modes
+    source_visual_id: meeting-01-slides-visual-self-correction-failure-modes
+    transform: "Poppler pdftoppm 144 DPI (2x page scale); full page; crop box [0,0,960,540] pt"
+    file_dimensions_px: "1920x1080"
+    local_sha256: 10173c09b8c69e3382553a12325fd7cf7f8d2c925e8c0db4f7af956545e7098d
+    upstream_sources:
+      - https://arxiv.org/abs/2310.01798
+      - https://arxiv.org/abs/2305.14325
+    used_in: "00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md#Почему самокритика без внешнего сигнала не является проверкой"
+    caption_intent: "Compare debate and independent voting at matched response counts."
+  - id: berkeley-m02-p52-self-rewarding-loop
+    local_path: m02-p52-self-rewarding-loop.png
+    source: meeting-02
+    source_page_1_based: 52
+    source_unit_id: meeting-02-slides-self-rewarding-setup
+    source_visual_id: meeting-02-slides-visual-self-rewarding-setup
+    transform: "Poppler pdftoppm 144 DPI (2x page scale); full page; crop box [0,0,960,540] pt"
+    file_dimensions_px: "1920x1080"
+    local_sha256: 6de634afc5d69fb3988b8788361b852d96964b9793545678a78211e4ca62ed24
+    upstream_sources:
+      - https://arxiv.org/abs/2401.10020
+    used_in: "00 Учебник/12 Post-training и Alignment/03 Reward modeling.md#Одна модель как actor и judge"
+    caption_intent: "Trace generated prompts, responses, self-judgments, preference pairs and DPO into the next iteration."
+  - id: berkeley-m02-p74-irpo-loop
+    local_path: m02-p74-irpo-loop.png
+    source: meeting-02
+    source_page_1_based: 74
+    source_unit_id: meeting-02-slides-irpo
+    source_visual_id: meeting-02-slides-visual-irpo
+    transform: "Poppler pdftoppm 144 DPI (2x page scale); full page; crop box [0,0,960,540] pt"
+    file_dimensions_px: "1920x1080"
+    local_sha256: ea49f00c0fb306663bf4589df21713c170928b889a45c869c4052c4745c1cc1a
+    upstream_sources:
+      - https://arxiv.org/abs/2404.19733
+    used_in: "00 Учебник/12 Post-training и Alignment/05 DPO.md#Iterative Reasoning Preference Optimization"
+    caption_intent: "Follow CoT generation through final-answer verification, pair construction and DPO plus NLL."
+  - id: berkeley-m02-p89-meta-rewarding-loop
+    local_path: m02-p89-meta-rewarding-loop.png
+    source: meeting-02
+    source_page_1_based: 89
+    source_unit_id: meeting-02-slides-meta-rewarding
+    source_visual_id: meeting-02-slides-visual-meta-rewarding
+    transform: "Poppler pdftoppm 144 DPI (2x page scale); full page; crop box [0,0,960,540] pt"
+    file_dimensions_px: "1920x1080"
+    local_sha256: a71278754379be356a430531a7a6854905e627cfc41a59c4c9ee7a501497d956
+    upstream_sources:
+      - https://arxiv.org/abs/2407.19594
+    used_in: "00 Учебник/12 Post-training и Alignment/03 Reward modeling.md#Meta-judge: кто оценивает оценщика"
+    caption_intent: "Distinguish actor data, judge data and the meta-judge ranking used to improve judgments."
+  - id: berkeley-m02-p98-evalplanner-loop
+    local_path: m02-p98-evalplanner-loop.png
+    source: meeting-02
+    source_page_1_based: 98
+    source_unit_id: meeting-02-slides-evalplanner
+    source_visual_id: meeting-02-slides-visual-evalplanner
+    transform: "Poppler pdftoppm 144 DPI (2x page scale); full page; crop box [0,0,960,540] pt"
+    file_dimensions_px: "1920x1080"
+    local_sha256: 22f7041d368f3537e7a55592c24cf85cffe2ace8d136762ddaa528644c083828
+    upstream_sources:
+      - https://arxiv.org/abs/2501.18099
+    used_in: "00 Учебник/12 Post-training и Alignment/03 Reward modeling.md#Планирование проверки перед вердиктом"
+    caption_intent: "Trace synthetic good and bad responses into judge data and iterative preference optimization."
+  - id: berkeley-m03-p31-hipporag-index-and-retrieval
+    local_path: m03-p31-hipporag-index-and-retrieval.png
+    source: meeting-03
+    source_page_1_based: 31
+    source_unit_id: meeting-03-slides-yu-su-hipporag-memory-sequence
+    source_visual_id: meeting-03-slides-visual-yu-su-hipporag-memory-sequence
+    transform: "Poppler pdftoppm 144 DPI (2x page scale); full page; crop box [0,0,960,540] pt"
+    file_dimensions_px: "1920x1080"
+    local_sha256: 9ccd3c85b743f82431b0338d9a4a423d2a9cee3e95b966ca9538c6165f595f5a
+    upstream_sources:
+      - https://arxiv.org/abs/2405.14831
+    used_in: "00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер.md#HippoRAG: ассоциативное извлечение по графу"
+    caption_intent: "Separate offline passage-to-graph construction from online query-seeded personalized retrieval."
+  - id: berkeley-m03-p63-world-model-definition
+    local_path: m03-p63-world-model-definition.png
+    source: meeting-03
+    source_page_1_based: 63
+    source_unit_id: meeting-03-slides-yu-su-world-model-planning-sequence
+    source_visual_id: meeting-03-slides-visual-yu-su-world-model-planning-sequence
+    transform: "Poppler pdftoppm 144 DPI (2x page scale); full page; crop box [0,0,960,540] pt"
+    file_dimensions_px: "1920x1080"
+    local_sha256: 468dcfb71a1f02858b487d117dcc51d6fd0a98ac8e491fe13b77e12eae2c47b2
+    upstream_sources:
+      - https://arxiv.org/abs/2411.06559
+    used_in: "00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md#Реактивный агент, поиск в реальной среде и model-based planning"
+    caption_intent: "Instantiate a world model as a predicted state transition for one current state and candidate action."
+  - id: berkeley-m03-p70-webdreamer-worked-example
+    local_path: m03-p70-webdreamer-worked-example.png
+    source: meeting-03
+    source_page_1_based: 70
+    source_unit_id: meeting-03-slides-yu-su-world-model-planning-sequence
+    source_visual_id: meeting-03-slides-visual-yu-su-world-model-planning-sequence
+    transform: "Poppler pdftoppm 144 DPI (2x page scale); full page; crop box [0,0,960,540] pt"
+    file_dimensions_px: "1920x1080"
+    local_sha256: b794c030bb1923cb6ac6a84911dbe7f2519e66e5f74ad4f6d7b7798efef528a4
+    upstream_sources:
+      - https://arxiv.org/abs/2411.06559
+    used_in: "00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md#WebDreamer: вообразить переход до необратимого действия"
+    caption_intent: "Compare three imagined successor states and their values before the single executed click."
+  - id: berkeley-m04-p30-training-data-gates
+    local_path: m04-p30-training-data-gates.png
+    source: meeting-04
+    source_page_1_based: 30
+    source_unit_id: meeting-04-slides-sft-data-construction
+    source_visual_id: meeting-04-slides-visual-sft-data-construction
+    transform: "Poppler pdftoppm 144 DPI (2x page scale); full page; crop box [0,0,720,405] pt"
+    file_dimensions_px: "1440x810"
+    local_sha256: 2463fbfb732536bb203574a1e0d5018fad3edddf5dc411b173541d076e0de803
+    upstream_sources:
+      - https://arxiv.org/abs/2411.15124
+    used_in: "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md#От capability-eval к обучающей смеси"
+    caption_intent: "Read evaluation target, prompt distribution, license and decontamination as sequential gates."
+  - id: berkeley-m04-p54-voting-filter
+    local_path: m04-p54-voting-filter.png
+    source: meeting-04
+    source_page_1_based: 54
+    source_unit_id: meeting-04-slides-cot-persona-data-mix
+    source_visual_id: meeting-04-slides-visual-sft-data-construction
+    transform: "Poppler pdftoppm 144 DPI (2x page scale); full page; crop box [0,0,720,405] pt"
+    file_dimensions_px: "1440x810"
+    local_sha256: 46f5a169d798e87dde244d15764264c3eafa0ff08d3affc961b459031f474eb1
+    upstream_sources:
+      - https://arxiv.org/abs/2411.15124
+    used_in: "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md#Reasoning traces, personas и фильтрация голосованием"
+    caption_intent: "Follow multiple reasoning traces into majority-answer filtering and identify discarded prompts."
+  - id: berkeley-m04-p90-tulu-rlvr-stage
+    local_path: m04-p90-tulu-rlvr-stage.png
+    source: meeting-04
+    source_page_1_based: 90
+    source_unit_id: meeting-04-slides-rlvr-method
+    source_visual_id: meeting-04-slides-visual-rlvr-method
+    transform: "Poppler pdftoppm 144 DPI (2x page scale); full page; crop box [0,0,720,405] pt"
+    file_dimensions_px: "1440x810"
+    local_sha256: a49e9ec4362386e47a7b1c863e6085f2401ad4b2930c98053b41c2fdd15bdaa9
+    upstream_sources:
+      - https://arxiv.org/abs/2411.15124
+    used_in: "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md#Главное различие"
+    caption_intent: "Place RLVR as the verifier-driven third stage after SFT and preference tuning."
+  - id: berkeley-m04-p104-rlvr-experimental-setup
+    local_path: m04-p104-rlvr-experimental-setup.png
+    source: meeting-04
+    source_page_1_based: 104
+    source_unit_id: meeting-04-slides-rlvr-results
+    source_visual_id: meeting-04-slides-visual-rlvr-results
+    transform: "Poppler pdftoppm 144 DPI (2x page scale); full page; crop box [0,0,720,405] pt"
+    file_dimensions_px: "1440x810"
+    local_sha256: 6befe65d6c81e3566c6c1ebb99f72225a78db877f969acfe32d1590e0e3a78c8
+    upstream_sources:
+      - https://arxiv.org/abs/2411.15124
+    used_in: "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md#Что показывает кривая RLVR, а чего она не доказывает"
+    caption_intent: "Recover the base policy, targeted datasets, paired verifiers and PPO algorithm before reading curves."
+  - id: berkeley-m04-p118-rlvr-scaling-curves
+    local_path: m04-p118-rlvr-scaling-curves.png
+    source: meeting-04
+    source_page_1_based: 118
+    source_unit_id: meeting-04-slides-rlvr-results
+    source_visual_id: meeting-04-slides-visual-rlvr-results
+    transform: "Poppler pdftoppm 144 DPI (2x page scale); full page; crop box [0,0,720,405] pt"
+    file_dimensions_px: "1440x810"
+    local_sha256: e0af42f6698f59f7c273057d7a77bae57947530cd7b63ffecc0118d7778ee421
+    upstream_sources:
+      - https://arxiv.org/abs/2411.15124
+    used_in: "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md#Что показывает кривая RLVR, а чего она не доказывает"
+    caption_intent: "Read scale and training-step trends only together with the preceding experiment contract."
+  - id: berkeley-m04-p128-s1-data-funnel
+    local_path: m04-p128-s1-data-funnel.png
+    source: meeting-04
+    source_page_1_based: 128
+    source_unit_id: meeting-04-slides-s1k-data
+    source_visual_id: meeting-04-slides-visual-s1k-data
+    transform: "Poppler pdftoppm 144 DPI (2x page scale); full page; crop box [0,0,720,405] pt"
+    file_dimensions_px: "1440x810"
+    local_sha256: 79d2dd8dd6bf87b69caa6433f6b6353baa1ac8650aa83b2b650f7f32ee6301ac
+    upstream_sources:
+      - https://arxiv.org/abs/2501.19393
+    used_in: "00 Учебник/12 Post-training и Alignment/08 Reasoning distillation.md#s1: 59 тысяч → 1 тысяча"
+    caption_intent: "Reconstruct the quality, difficulty and diversity filters from 59K prompts to the final 1K."
+  - id: berkeley-m04-p134-budget-forcing
+    local_path: m04-p134-budget-forcing.png
+    source: meeting-04
+    source_page_1_based: 134
+    source_unit_id: meeting-04-slides-test-time-scaling
+    source_visual_id: meeting-04-slides-visual-test-time-scaling
+    transform: "Poppler pdftoppm 144 DPI (2x page scale); full page; crop box [0,0,720,405] pt"
+    file_dimensions_px: "1440x810"
+    local_sha256: 658fbc205d322f30103a4b6db6d4566e47df18502dbd5a4319800dfaa18fef6b
+    upstream_sources:
+      - https://arxiv.org/abs/2501.19393
+    used_in: "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md#Budget forcing: заставить траекторию продолжиться"
+    caption_intent: "Locate the literal Wait intervention and distinguish extra decoding budget from a learned verifier."

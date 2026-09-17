@@ -1,9 +1,9 @@
 ---
 title: Agent Harness и Context Engineering — карта модуля
 type: textbook-chapter
-status: redirect
-last_updated: 2026-07-20
-redirect_to: "[[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию]]"
+status: canonical
+last_updated: 2026-09-07
+next: "[[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию]]"
 ---
 
 # Agent Harness и Context Engineering
@@ -24,12 +24,19 @@ redirect_to: "[[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/65 Tool us
 | [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/66 Agent harness и context engineering|66. Harness и context]] | agent loop и context builder | состав каждого model input, права, ошибки и stopping rule |
 | [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов|67. Память и orchestration]] | persisted state и coordination | границы памяти, маршрутизацию и восстановление workflow |
 | [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/68 Оценивание агентных систем|68. Evaluation]] | task, trajectory и environment | воспроизводимый evaluation harness и failure taxonomy |
+| [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents|69. Coding, web и computer use]] | программная или визуальная среда | чем отличаются свободный loop, ACI, workflow и search по состояниям среды |
+| [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты|70. Формальная математика]] | proof state и kernel verifier | путь от autoformalization и premise retrieval до проверенного доказательства |
+| [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery|71. Scientific discovery]] | гипотеза, измерение и search | как LLM направляет symbolic search, не подменяя экспериментальную проверку |
+| [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/72 Безопасность агентных систем|72. Безопасность]] | данные, полномочия и policy enforcement | threat model, prompt injection, least privilege и системные гарантии |
 
 Порядок существенен. Без главы 65 «планирование» остаётся текстом без
 исполнения. Без главы 66 невозможно указать, кто добавил reminder, сжал историю
 или повторил упавший инструмент. Без главы 67 успешный длинный запуск нельзя
 возобновить. Без главы 68 демонстрация не превращается в инженерное
-утверждение.
+утверждение. Главы 69–71 затем рассматривают три среды, в которых общий цикл
+становится наблюдаемым: репозиторий или интерфейс, proof assistant и
+экспериментальный поиск. Глава 72 завершает маршрут вопросом о том, какие права
+этот цикл вообще должен иметь.
 
 ## Практический корпус
 

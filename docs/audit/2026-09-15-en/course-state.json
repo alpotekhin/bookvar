@@ -1,0 +1,297 @@
+{
+  "schema_version": 1,
+  "audited_at": "2026-09-15",
+  "checkout": {
+    "branch": "editorial-route-alignment",
+    "head": "e77f9a027e66f6719db486d2f31d9c08b3ae1d2f",
+    "scope": "live dirty worktree",
+    "qualification": "Berkeley ledgers and several destinations are modified or untracked; this report does not claim remote or HEAD integration parity."
+  },
+  "definitions": {
+    "integrated": "Validated destination file, exact anchor, and reciprocal source_unit_id; visual rows additionally require embedded local files and review metadata.",
+    "covered_existing": "A source unit is already explained at a validated existing destination.",
+    "contract_only": "A Stanford test-interface contract is preserved without claiming full prose integration.",
+    "source_only": "Reviewed and preserved in the course archive; may be intentional reference material or a deferred topic.",
+    "excluded": "Reviewed and deliberately not reused."
+  },
+  "courses": {
+    "stanford_cs336_spring_2026": {
+      "status": "active-validated",
+      "inventory": {
+        "source_objects": 23,
+        "lectures": 17,
+        "guest_slots_without_official_artifact": 2,
+        "assignment_objects": 6,
+        "archive_artifacts": 902,
+        "physical_lecture_pdf_pages": 496,
+        "physical_assignment_pdf_pages": 176,
+        "executable_lecture_trace_steps": 4526,
+        "semantic_units": 807,
+        "semantic_visual_rows": 159
+      },
+      "coverage": {
+        "integrated": 554,
+        "covered-existing": 24,
+        "contract-only": 21,
+        "source-only": 154,
+        "excluded": 54,
+        "integrated_by_origin": {
+          "lecture_rows": 181,
+          "assignment_rows": 373
+        },
+        "unique_active_destinations": 56
+      },
+      "visuals": {
+        "integrated": 73,
+        "covered-existing": 9,
+        "source-only": 45,
+        "excluded": 32,
+        "unique_active_destinations": 36
+      },
+      "hub": {
+        "path": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
+        "generated": true,
+        "template": "publishing/tools/import_stanford_cs336.py::hub_markdown",
+        "writer": "publishing/tools/import_stanford_cs336.py::write_generated_ledgers",
+        "status_claim": "inventory complete; editorial integration active",
+        "assessment": "consistent with the active validated ledger, though it does not expose aggregate disposition totals"
+      },
+      "shared_catalogue_stale_claim": "05 Источники/Курсы.md still reports the old 785-unit source-only pending baseline.",
+      "useful_deferred_topics": [
+        "multi-token prediction as a distinct training objective",
+        "cross-layer attention",
+        "local and sliding-window attention",
+        "FP4 after stable systems framing",
+        "ARC interactive reasoning evaluation",
+        "GCG and AIR-Bench safety evaluation",
+        "DeepSeek v4 attention after released primary evidence"
+      ]
+    },
+    "berkeley_advanced_llm_agents_spring_2025": {
+      "status": "active-validated-in-current-worktree",
+      "inventory": {
+        "source_objects": 64,
+        "meeting_bundles": 12,
+        "official_pdfs": 13,
+        "physical_pdf_pages": 1254,
+        "recording_metadata_records": 12,
+        "reading_metadata_records": 37,
+        "semantic_units": 212,
+        "semantic_visual_rows": 161
+      },
+      "coverage": {
+        "integrated": 137,
+        "covered-existing": 6,
+        "source-only": 41,
+        "excluded": 28,
+        "integrated_by_origin": {
+          "deck_rows": 102,
+          "reading_catalogue_rows": 35
+        },
+        "unique_active_destinations": 16
+      },
+      "visuals": {
+        "integrated": 47,
+        "source-only": 87,
+        "excluded": 27,
+        "unique_active_destinations": 12
+      },
+      "hub": {
+        "path": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+        "generated": false,
+        "assessment": "materially stale",
+        "stale_claims": [
+          "says coverage and visuals still describe only source-only or excluded archival state",
+          "says destination validation will happen in the future although it is active now",
+          "prints 42 integrated and 92 source-only visuals instead of current 47 and 87"
+        ],
+        "durable_edit_path": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md"
+      },
+      "shared_catalogue_stale_claim": "05 Источники/Курсы.md still describes Berkeley as source-only and editorial integration pending.",
+      "source_only_breakdown": {
+        "recording_metadata_without_media_body": 12,
+        "other_reviewed_source_only_units": 29
+      },
+      "useful_deferred_topics": [
+        "xGen video and GenS after video integration review",
+        "visual concept discovery after primary-source routing",
+        "Plan-Sequence-Learn if an embodied-agent route is created",
+        "AgentTrek after primary upstream and rights pin",
+        "proprietary-adjacent pages 118-121 after explicit rights review"
+      ],
+      "hard_exclusion": "meeting 6 physical page 117 is do-not-reuse"
+    },
+    "efficient_dl_systems": {
+      "status": "source-complete-and-thematically-linked-without-unit-ledger",
+      "imported_records": {
+        "total": 40,
+        "notebooks": 10,
+        "readmes": 20,
+        "slide_decks": 10
+      },
+      "transfer_matrix": {
+        "rows": 37,
+        "integrate": 33,
+        "source-only": 3,
+        "exclude": 1
+      },
+      "hub": {
+        "path": "05 Источники/Courses/Efficient DL Systems.md",
+        "generated": false
+      },
+      "evidence_limit": "The automated check proves destination existence and a direct source marker, not semantic transfer of every source section."
+    },
+    "harvard_ml_systems": {
+      "status": "source-complete-and-thematically-linked-without-unit-ledger",
+      "imported_records": {
+        "book_chapters": 29,
+        "marimo_labs": 34,
+        "beamer_slide_decks": 35,
+        "tinytorch_modules": 20
+      },
+      "transfer_matrix": {
+        "rows": 173,
+        "integrate": 114,
+        "cross-link": 59
+      },
+      "ml_systems_gap_matrix": {
+        "thematic_rows": 22,
+        "integrated": 22
+      },
+      "hub_ownership": [
+        {
+          "path": "05 Источники/Courses/Harvard ML Systems.md",
+          "generated": false
+        },
+        {
+          "path": "05 Источники/Courses/Harvard ML Systems/tinytorch/README.md",
+          "generated": true,
+          "template": "publishing/tools/import_tinytorch.py"
+        },
+        {
+          "path": "05 Источники/Courses/Harvard ML Systems/Labs and slides.md",
+          "generated": true,
+          "template": "publishing/tools/import_harvard_labs_slides.py::write_index"
+        }
+      ],
+      "evidence_limit": "The automated check validates 59 declared destination files and source markers, not semantic parity for all 173 rows."
+    },
+    "hse_ml_course": {
+      "status": "source-archive-complete-destination-integration-partial",
+      "imported_records": {
+        "total": 67,
+        "notebooks": 31,
+        "pdfs": 26,
+        "python_sources": 10
+      },
+      "canonical_links_observed": [
+        "00 Учебник/01 Классическое машинное обучение/06a Спектральная кластеризация и графовый Laplacian.md"
+      ],
+      "stale_contradiction": "The link map says Bookvar does not mirror HSE material, while the current generated archive mirrors 67 artifacts under recorded owner permission.",
+      "hub": {
+        "path": "05 Источники/Courses/HSE ML course.md",
+        "generated": true,
+        "template": "publishing/tools/import_hse_ml_course.py inline index template"
+      },
+      "evidence_limit": "The validator proves archive outputs, hashes, assets, provenance, and routes; there is no detailed canonical destination ledger."
+    },
+    "shad_llm": {
+      "status": "legacy-source-only",
+      "pages": 2,
+      "completed_weeks_claimed": 1,
+      "issues": [
+        "index says In progress",
+        "week note status is legacy",
+        "raw source path referenced by frontmatter is absent",
+        "links target the old Concepts layer",
+        "no current canonical destination map or detailed ledger"
+      ]
+    }
+  },
+  "sample": {
+    "scope": "five representative source-to-destination checks; not a full semantic re-audit",
+    "items": [
+      {
+        "course": "Stanford CS336",
+        "topic": "BPE execution trace",
+        "source": "lecture_01.py and archived edtrace steps 462-606",
+        "destination": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md#bpe-merge-trace",
+        "finding": "Substantive prose plus four preserved states and Assignment 1 limitations."
+      },
+      {
+        "course": "Stanford CS336",
+        "topic": "roofline and wave quantization",
+        "source": "Lecture 5 pages 20-23 and 45-48 plus Lecture 6 experiments",
+        "destination": "00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md#cs336-systems-roofline",
+        "finding": "Numerical explanation, preserved frames, bounded captions, and benchmark protocol."
+      },
+      {
+        "course": "Stanford CS336",
+        "topic": "MinHash and LSH",
+        "source": "Lecture 14 trace and Assignment 4",
+        "destination": "00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md#minhash-lsh",
+        "finding": "Derivation, three trace images, and finite-sample/threshold caveats."
+      },
+      {
+        "course": "Berkeley Agents",
+        "topic": "agent output attack chain",
+        "source": "Meeting 12 physical page 27",
+        "destination": "00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md#threat-model-before-defenses",
+        "finding": "Five-level table, full source page, and system-boundary mitigations."
+      },
+      {
+        "course": "Berkeley Agents",
+        "topic": "formal theorem-proving agents",
+        "source": "Meetings 8-9",
+        "destination": "00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md",
+        "finding": "Separates autoformalization/proving and explains proof state, tactic execution, search, and kernel checking with source visuals."
+      }
+    ]
+  },
+  "navigation_recommendation": {
+    "structure": "Rework the existing course catalogue as one thematic Courses and source routes map; do not create one short Bookvar page per lecture.",
+    "layers": [
+      "Study by Bookvar theme with canonical chapters and practice sequences",
+      "Open the original pinned course with inventory, rights, ledger state, and deferred topics"
+    ],
+    "preferred_authored_entry": "05 Источники/Курсы.md",
+    "english_counterpart": "en/05 Sources/Courses.md",
+    "route_rule": "Reuse the existing localized source route and do not add a second sidebar item.",
+    "wiring": [
+      "00 Учебник/_index.md",
+      "publishing/navigation.yml"
+    ],
+    "english_boundary": {
+      "root_course_markdown_pages_sampled_courses": 221,
+      "classification": "original source-layer pages, not /en/ translations",
+      "en_markdown_files": 37,
+      "en_files_with_locale_and_translation_of": 27
+    }
+  },
+  "validation": [
+    {
+      "command": "python3 publishing/tools/import_stanford_cs336.py --check",
+      "result": "passed"
+    },
+    {
+      "command": "python3 publishing/tools/import_berkeley_agents.py --check",
+      "result": "passed"
+    },
+    {
+      "command": "pnpm --dir publishing check:source-coverage",
+      "result": "passed"
+    },
+    {
+      "command": "pnpm --dir publishing check:course-ingestion",
+      "result": "passed outside sandbox after tsx IPC EPERM inside sandbox"
+    }
+  ],
+  "priority_queue": [
+    "P0 update Berkeley hub and add parity coverage",
+    "P0 update 05 Источники/Курсы.md and add en/05 Sources/Courses.md without duplicating source hubs or sidebar items",
+    "P0 correct the HSE link-map contradiction and label destination coverage partial",
+    "P1 expose Stanford and Berkeley theme routes with practice pairings",
+    "P1 integrate deferred topics only after primary-source, rights, and destination prerequisites",
+    "P2 restore SHAD provenance before any migration"
+  ]
+}

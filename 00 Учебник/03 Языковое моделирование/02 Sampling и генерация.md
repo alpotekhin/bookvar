@@ -2,7 +2,7 @@
 title: Выбор токенов и генерация
 type: textbook-chapter
 status: legacy
-last_updated: 2026-07-18
+last_updated: 2026-09-15
 ---
 
 # Выбор токенов и генерация
@@ -116,15 +116,63 @@ Self-consistency улучшает шанс получить правильную
 
 ## Минимальный sampling loop
 
+Пусть logits четырёх токенов равны $(\log4,\log3,\log2,\log1)$.
+При $T=1$ softmax даёт $(0{,}4,0{,}3,0{,}2,0{,}1)$, накопленные
+суммы — $(0{,}4,0{,}7,0{,}9,1)$. Для $p=0{,}8$ оставляются первые
+**три**, включая токен, пересёкший порог. После перенормировки получаем
+$(4/9,3/9,2/9,0)$. При $T=1/2$ вероятности до фильтрации равны
+$(16,9,4,1)/30$: первые два уже дают $25/30>0{,}8$, поэтому ядро
+содержит два токена с итоговыми вероятностями $(16/25,9/25,0,0)$.
+Нельзя просто удалить каждый токен, чья накопленная сумма больше $p$:
+тогда в первом примере ошибочно исчезнет третий токен.
+
+Следующая реализация работает с конечными logits формы `[B,V]`.
+Она сохраняет токен, если сумма вероятностей **до него** меньше порога;
+при точном достижении порога следующий токен уже не нужен. Равные logits
+сортируются стабильно, то есть tie-break определяется исходным ID.
+
 ```python
+import math
+import torch
+
+def top_p_filter(logits, top_p):
+    if not 0 < top_p <= 1:
+        raise ValueError("top_p must be in (0, 1]")
+    sorted_logits, indices = logits.sort(dim=-1, descending=True, stable=True)
+    probs = sorted_logits.softmax(dim=-1)
+    mass_before = probs.cumsum(dim=-1) - probs
+    remove = mass_before >= top_p
+    remove[..., 0] = False
+    if top_p == 1:
+        remove.zero_()
+    sorted_logits = sorted_logits.masked_fill(remove, -torch.inf)
+    return torch.empty_like(logits).scatter(-1, indices, sorted_logits)
+
+def choose_next(logits, temperature=1.0, top_p=1.0, generator=None):
+    if not math.isfinite(temperature) or temperature < 0:
+        raise ValueError("temperature must be finite and nonnegative")
+    if not 0 < top_p <= 1:
+        raise ValueError("top_p must be in (0, 1]")
+    if logits.ndim != 2 or logits.shape[-1] == 0 or not torch.isfinite(logits).all():
+        raise ValueError("expected finite logits [B, V] with V > 0")
+    if temperature == 0:
+        return logits.argmax(dim=-1, keepdim=True)
+    # Subtract before scaling: no positive overflow at small temperature.
+    scaled = (logits - logits.max(dim=-1, keepdim=True).values) / temperature
+    probs = top_p_filter(scaled, top_p).softmax(dim=-1)
+    return torch.multinomial(probs, 1, generator=generator)
+
+# model returns tensor logits [B,T,V]; fixed-length toy generation, no EOS stopping.
 for _ in range(max_new_tokens):
     logits = model(tokens)[:, -1]
-    logits = logits / temperature
-    logits = top_p_filter(logits, top_p)
-    probs = logits.softmax(dim=-1)
-    next_token = torch.multinomial(probs, 1)
+    next_token = choose_next(logits, temperature, top_p)
     tokens = torch.cat([tokens, next_token], dim=1)
 ```
+
+При $T=0$ nucleus-фильтрация не применяется: выбирается argmax исходных
+logits. Допустимы конечное $T\ge0$ и $0<p\le1$; отрицательная температура
+не является ещё одним режимом генерации. Сама последовательность случайных
+выборов дополнительно зависит от состояния переданного генератора.
 
 Промышленная генерация добавляет KV-кэш, динамическое объединение запросов в
 батчи, стоп-последовательности, штрафы за повторения и ограничения грамматикой.

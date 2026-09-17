@@ -2,7 +2,9 @@
 title: T5 — text-to-text Transformer
 type: textbook-chapter
 status: canonical
-last_updated: 2026-08-03
+locale: en
+translation_of: "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md"
+last_updated: 2026-09-15
 primary_sources:
   - https://jmlr.org/papers/v21/20-074.html
   - https://github.com/google-research/text-to-text-transfer-transformer
@@ -101,7 +103,7 @@ corruption. About 15% of tokens are grouped into contiguous spans with mean
 length near three tokens. Each deleted input span is replaced with a unique
 sentinel token such as `<extra_id_0>`, `<extra_id_1>`, and so on. The target
 lists deleted spans in their original order, prefixing each with its matching
-sentinel and ending with the next sentinel.
+sentinel; a remaining clean suffix becomes the next closing sentinel, as in the illustration below.
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-25-31/t5-span-corruption-figure2.png]]
 
@@ -112,8 +114,7 @@ corruption. Source: Raffel et al., [T5, Figure
 Suppose the original text is `Thank you for inviting me to your party last
 week`, with `for inviting` and `last` removed.
 
-1. The tokenizer constructs the sequence. A sampler selects positions and
-   merges neighboring selected tokens into two spans.
+1. The tokenizer constructs the sequence. For this illustrative example we manually select the two spans; it does not reproduce the 15%/mean-3 sampler on such a short string.
 2. The encoder receives `Thank you <extra_id_0> me to your party
    <extra_id_1> week`.
 3. The decoder target is `<extra_id_0> for inviting <extra_id_1> last
@@ -123,6 +124,12 @@ week`, with `for inviting` and `last` removed.
    all encoder memory, but no future answer token.
 5. The loss sums $-\log p(y_t\mid y_{<t},x_{corrupt})$ over target tokens. The
    undeleted source words need not be generated again.
+
+The actual sampler controls token count and span count separately. In the official [`random_spans_noise_mask` helper](https://github.com/google-research/text-to-text-transfer-transformer/blob/main/t5/data/preprocessors.py#L2705), for an ordinary sequence of $N\ge2$ tokens and `noise_density=0.15`, choose $m=\operatorname{clip}(\operatorname{round}(0.15N),1,N-1)$ noisy tokens, then $s=\max(1,\operatorname{round}(m/3))$ spans using `mean_noise_span_length=3.0`. Random seeds make the draws reproducible. The helper uniformly chooses $s-1$ cut points among $m-1$ gaps to partition noise into positive lengths; it independently partitions the $N-m$ clean tokens into the same number of positive lengths. Clean and noisy spans alternate. This is **not** independent Bernoulli masking followed by merging: the ratio $m/s$ controls mean span length, up to rounding.
+
+For $N=40$, $m=6$ and $s=2$. One possible draw has noise lengths $(2,4)$ and clean lengths $(17,17)$: the mask is `17 clean → 2 noise → 17 clean → 4 noise`. Exactly 6/40 tokens are hidden and their mean span length is 3. Neither individual span has to equal 3.
+
+The helper's default `random_roll=False` starts with a clean span and ends with noise. Its paired `nonnoise_span_to_unique_sentinel` target transform therefore need not append a further closing sentinel after the last noisy span; EOS closes the target later. The manually chosen example above ends with clean text and **does** yield the extra terminal sentinel. Do not confuse this boundary convention with the mean-length sampling rule; compare mask, input/target transforms, and EOS handling when reproducing a concrete preprocessing pipeline.
 
 A sentinel has two jobs. In the input, it identifies one particular gap; in the
 target, it associates reconstructed text with that gap. Unique sentinels keep

@@ -2,7 +2,12 @@
 title: Masking, multi-head attention, and tensor shapes
 type: textbook-chapter
 status: canonical
-last_updated: 2026-08-03
+locale: en
+translation_of: "00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров.md"
+last_updated: 2026-09-15
+source_unit_id:
+  - assignment-01-task-scaled-dot-product-attention
+  - assignment-01-task-multihead-self-attention
 primary_sources:
   - https://arxiv.org/abs/1706.03762
   - https://lena-voita.github.io/nlp_course/seq2seq_and_attention.html
@@ -87,6 +92,8 @@ does not stop real tokens from reading filler keys.
 
 ## Why one position needs several heads
 
+Here $X_Q,X_K,X_V$ denote **inputs before projection**. In self-attention they are the same $X$; in cross-attention $X_Q$ comes from the decoder and $X_K=X_V$ from the final encoder output. Projected $Q,K,V$ below keep the notation of the preceding chapter.
+
 One softmax creates one distribution over keys. A word may simultaneously need
 different relationships: its nearest neighbor, a governing subject, and a
 modifier that disambiguates its meaning. Multi-head attention supplies several
@@ -94,11 +101,11 @@ independently learned projection sets and several attention distributions:
 
 $$
 \operatorname{head}_r=
-\operatorname{Attention}(QW_r^Q,KW_r^K,VW_r^V),
+\operatorname{Attention}(X_QW_r^Q,X_KW_r^K,X_VW_r^V),
 $$
 
 $$
-\operatorname{MHA}(Q,K,V)=
+\operatorname{MHA}(X_Q,X_K,X_V)=
 \operatorname{Concat}(\operatorname{head}_1,\ldots,
 \operatorname{head}_H)W^O.
 $$
@@ -114,7 +121,11 @@ $D_h=D_{model}/H$. Concatenation therefore restores width
 $HD_h=D_{model}$, and $W^O$ mixes features across heads and returns them to the
 residual stream.
 
+<a id="named-attention-shapes"></a>
+
 ## Split and merge: one operation, two notations
+
+Name the axes first: `batch`, `sequence`, `heads`, `head_dim`. The split moves heads before sequence so the final two axes form a matrix. Named `rearrange` and `einsum` patterns in [CS336 Lecture 2](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_02.py) keep this meaning next to the operation. Check $D_{model}=HD_h$ and matching axes before multiplication; broadcasting repeats singleton axes but cannot decide what an axis means.
 
 In the mathematical definition, every head owns separate
 $W_r^Q,W_r^K,W_r^V$. Libraries usually concatenate those matrices. One
@@ -182,7 +193,7 @@ $H$ heads, and head width $D_h=D_{model}/H$.
 | output projection | $Z_{cat}W^O$ | `[B, T, Dmodel]` |
 
 Softmax runs over the **last** axis: for every `(b,h,i)`, the sum over keys $j$
-is one. Normalizing over queries would answer a different question and change
+is one when at least one key is allowed. Empty rows follow the explicit policy below. Normalizing over queries would answer a different question and change
 the mechanism.
 
 ## Broadcasting masks
@@ -198,20 +209,25 @@ physically store all those elements: axes of length one broadcast.
 
 ```python
 scores = q @ k.transpose(-2, -1) / math.sqrt(Dh)  # [B,H,T,T]
-
-causal = torch.ones(T, T, dtype=torch.bool).tril()
-causal = causal[None, None, :, :]                   # [1,1,T,T]
-
-key_ok = attention_mask[:, None, None, :].bool()   # [B,1,1,T]
-allowed = causal & key_ok
+causal = torch.ones(T, T, dtype=torch.bool, device=q.device).tril()
+key_ok = attention_mask[:, None, None, :].to(q.device).bool()
+query_ok = attention_mask[:, None, :, None].to(q.device).bool()
+allowed = causal[None, None, :, :] & key_ok & query_ok
+valid_query = allowed.any(dim=-1, keepdim=True)  # [B,1,T,1]
 scores = scores.masked_fill(~allowed, float("-inf"))
-weights = scores.softmax(dim=-1)
+# Avoid undefined softmax even in branches later discarded by torch.where.
+safe_scores = torch.where(valid_query, scores, torch.zeros_like(scores))
+weights = safe_scores.softmax(dim=-1)
+weights = torch.where(valid_query, weights, torch.zeros_like(weights))
+z = weights @ v  # zero for empty rows, before an output projection with bias
 ```
 
 Some APIs interpret boolean `True` as “allow”; others interpret it as “hide.”
 The argument name is not enough—check the exact function's documentation. In
 `torch.nn.functional.scaled_dot_product_attention`, `True` means an allowed
 element, while several older PyTorch interfaces use the opposite convention.
+
+Our explicit policy is zero attention weights and zero $AV$ for a query with no allowed key. We also exclude padding queries. For left padding `[0,0,1,1]`, row sums are therefore `[0,0,1,1]`: the first real token attends to itself, and the last to the two real tokens. Replacing `NaN` after softmax is unsafe for backward propagation, so empty rows receive finite placeholder scores **before** softmax and are zeroed afterwards. Output-projection bias and residual connections can make later padding states nonzero; the loss must still exclude padding targets. This is a local implementation policy, not a promise about every attention backend.
 
 ## Plausible-looking implementation errors
 
@@ -229,6 +245,8 @@ element, while several older PyTorch interfaces use the opposite convention.
   by a learned $W^O$.
 - **Wrong scale.** Divide by $\sqrt{D_h}$, not $\sqrt{D_{model}}$.
 
+<a id="shape-evidence"></a>
+
 ## Minimal implementation checks
 
 ```python
@@ -236,14 +254,15 @@ assert Dmodel == H * Dh
 assert q.shape == (B, H, T, Dh)
 assert scores.shape == (B, H, T, T)
 assert weights.shape == (B, H, T, T)
-assert torch.allclose(
-    weights.sum(dim=-1),
-    torch.ones_like(weights.sum(dim=-1)),
-    atol=1e-5,
-)
+row_sum = weights.sum(dim=-1)
+valid = valid_query.squeeze(-1).expand_as(row_sum)
+assert torch.isfinite(weights).all()
+assert torch.allclose(row_sum[valid], torch.ones_like(row_sum[valid]), atol=1e-5)
+assert torch.count_nonzero(row_sum[~valid]) == 0
+assert torch.count_nonzero(z.masked_select(~valid[..., None])) == 0
 
 # No causal head may assign weight to a future position.
-future = torch.ones(T, T, dtype=torch.bool).triu(diagonal=1)
+future = torch.ones(T, T, dtype=torch.bool, device=q.device).triu(diagonal=1)
 assert torch.count_nonzero(weights[..., future]) == 0
 ```
 

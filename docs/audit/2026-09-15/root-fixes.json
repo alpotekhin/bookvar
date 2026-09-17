@@ -1,0 +1,50 @@
+{
+  "date": "2026-09-15",
+  "status": "first-revision-batch-verified; full-book-rewrite-pending",
+  "reading_completed_by_primary": 116,
+  "reading_completed_total": 280,
+  "changed_by_root": [
+    "02 Атлас моделей/Семейства/Gemma.md",
+    "02 Атлас моделей/Семейства/GLM.md",
+    "02 Атлас моделей/Семейства/Kimi.md",
+    "06 Практика/03 Прочитать современный decoder в LitGPT.md",
+    "06 Практика/20 Собрать языковую модель с нуля.md",
+    "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+    "06 Практика/27 Проверяемый научный поиск на символьной регрессии.md",
+    "01 Справочник/Текст и токенизация/Токенизация.md",
+    "01 Справочник/FFN и MoE/Mixture of Experts.md",
+    "01 Справочник/Inference/vLLM — анатомия inference engine.md",
+    "01 Справочник/Inference/Triton и GPU kernels.md",
+    "03 Исследовательские линии/Эффективный attention.md",
+    "00 Учебник/00 Как пользоваться учебником.md",
+    "00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md",
+    "00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md",
+    "00 Учебник/_index.md",
+    "00 Учебник/Покрытие программы.md",
+    "00 Учебник/Редакционная матрица Bookvar.md",
+    "01 Справочник/Agents/Agent mechanisms.md",
+    "01 Справочник/Inference/SGLang и RadixAttention.md",
+    "01 Справочник/Security и Robustness/01 Security и privacy.md",
+    "02 Атлас моделей/Сравнения/Сравнение семейств.md",
+    "00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md",
+    "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md",
+    "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+    "00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism.md"
+  ],
+  "changed_content_files_total": 38,
+  "verification": {
+    "publisher_unit_tests": "181 passed (15 files)",
+    "publisher_output_tests": "11 passed (1 file)",
+    "site_tests": "6 passed (2 files)",
+    "git_diff_check": "passed",
+    "site_build": "passed: 1938 pages; local default-base build",
+    "visual": "Five pages inspected partially; MoE and GRPO also checked at 390px. No full visual acceptance."
+  },
+  "notes": [
+    "Full reading is complete only for the 280 canonical files in inventory.json, not all imported courses and English mirrors.",
+    "The 38 edits are targeted fixes and a small number of rewrites, not 38 fully rewritten chapters.",
+    "Changed passages and executable examples were checked by the primary agent.",
+    "English source materials were not translated. No commit, push, merge or deployment.",
+    "See README.md and revised-pages.json for current scope and remaining work."
+  ]
+}

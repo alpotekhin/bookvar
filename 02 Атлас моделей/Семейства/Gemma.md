@@ -20,8 +20,8 @@ Gemma — открытая компактная линия Google DeepMind, св
 
 | Релиз | Architecture diff | Tokenizer/context/modalities | Training/post-training | Evidence |
 |---|---|---|---|---|
-| Gemma 1 (2024-02) | dense decoder; MHA у 2B, MQA у 7B; GeGLU/RMSNorm/RoPE | SentencePiece 256K; 8K; text | 2T/6T tokens; IT variants | **A** |
-| Gemma 2 (2024-06) | GQA; alternating local 4K/global attention; logit soft-capping; 9B/27B | 8K; text | teacher distillation central to pre-training; SFT + RLHF | **A** |
+| Gemma 1 (2024-02) | dense decoder; MQA у 2B, MHA у 7B; GeGLU/RMSNorm/RoPE | SentencePiece 256K; 8K; text | 2T/6T tokens; IT variants | **A** |
+| Gemma 2 (2024-06; 2B добавлена позднее) | GQA; alternating local 4K/global attention; logit soft-capping; 2B/9B/27B | 8K; text | distillation при предобучении 2B и 9B; 27B обучена без этой дистилляции; SFT + RLHF | **A** |
 | Gemma 3 (2025-03) | 5 local : 1 global pattern; SigLIP vision encoder for 4B+; QK norm | 1B text-only 32K; 4B/12B/27B multimodal 128K; 140+ languages | distillation; multimodal and long-context stages; IT/function calling | **A/B** |
 | Gemma 3n / domain variants (2025+) | mobile-efficient or domain adapters/encoders | model-specific text/image/audio | specialized recipes; not a Gemma 4 claim | **B** |
 
@@ -37,14 +37,17 @@ Gemma — открытая компактная линия Google DeepMind, св
 
 Local attention уменьшает attention work/cache только при корректной реализации alternating pattern. 128K существенно повышает KV memory; Google публикует quantized variants и интеграции с Keras, Transformers, Gemma.cpp и облачными runtimes. Vision добавляет encoder и image tokens, поэтому text-only latency нельзя переносить на multimodal запрос. Gemma license/terms отличаются от Apache/MIT и проверяются перед распространением.
 
-## Визуальный первоисточник: где проявился data-centric выигрыш
+<a id="визуальный-первоисточник-где-проявился-data-centric-выигрыш"></a>
+## Визуальный первоисточник: сравнение результатов Gemma 1
 
 ![[00 Учебник/Assets/Figures/curated/atlas-courses-official/gemma-capability-comparison.png]]
 
 График Gemma 1 сравнивает 7B с Llama 2 и Mistral по агрегированным категориям:
-наиболее заметен разрыв в math/science и coding, а не в обычном QA. Это полезный
-контекст для последующего Gemma 2: distillation и data recipe развивали сильную
-сторону семейства, а не просто меняли local/global attention. Автор: Gemma Team,
+наиболее заметен разрыв в math/science и coding, а не в обычном QA. Это наблюдение о результатах разных готовых моделей, а не абляция данных:
+одновременно различаются архитектура, корпус и обучение. Поэтому график не
+позволяет выделить причинный вклад качества данных или объяснить результаты
+Gemma 2 дистилляцией. Режимы предобучения Gemma 2 (дистиллированные 2B/9B и
+недистиллированная 27B) подтверждаются отдельными источниками в таблице выше. Автор: Gemma Team,
 Google DeepMind. Источник: Figure 1,
 [Gemma: Open Models Based on Gemini Research and Technology](https://arxiv.org/pdf/2403.08295).
 Файл перенесён без изменения из официального PDF extraction. Использование
@@ -56,6 +59,8 @@ Google DeepMind. Источник: Figure 1,
 **Опубликовано:** три technical reports, weights/configs, tokenizer, model cards и reference implementations. **Неизвестно полностью:** training documents, точные доли synthetic/distilled data, закрытый Gemini teacher и полный post-training mixture. Архитектуру Gemma нельзя дополнять деталями Gemini без прямого источника.
 
 ## Источники
+
+- [Google: обзор архитектур Gemma](https://developers.googleblog.com/gemma-explained-overview-gemma-model-family-architectures/) — различия MQA/MHA в первом поколении и дистилляция Gemma 2.
 
 - [Gemma technical report](https://arxiv.org/abs/2403.08295) — **A**.
 - [Gemma 2 technical report](https://arxiv.org/abs/2408.00118) — **A**.

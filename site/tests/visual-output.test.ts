@@ -18,10 +18,16 @@ describe('handbook landing output', () => {
 
   test('renders every expected navigation card', async () => {
     const html = await read('dist/index.html');
-    for (const label of ['Учебник', 'Технологии', 'Семейства', 'Статьи', 'Практика', 'Вопросы']) {
-      expect(html).toContain(`>${label}</`);
-    }
-    expect(html.match(/class="entry-card/g)).toHaveLength(6);
+    const cards = [...html.matchAll(/<a class="entry-card" href="([^"]+)">([\s\S]*?)<\/a>/g)]
+      .map((match) => ({ href: match[1], label: match[2].match(/<strong>(.*?)<\/strong>/)?.[1] }));
+    expect(cards).toEqual([
+      { href: './textbook/', label: 'Учебник' },
+      { href: './reference/', label: 'Справочник' },
+      { href: './models/', label: 'Атлас моделей' },
+      { href: './sources/', label: 'Источники' },
+      { href: './practice/causal-self-attention/', label: 'Практика' },
+      { href: './questions/llm/', label: 'Вопросы' },
+    ]);
   });
 });
 

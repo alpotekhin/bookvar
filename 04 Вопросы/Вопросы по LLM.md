@@ -2,8 +2,8 @@
 title: Вопросы по LLM
 type: question-index
 status: active
-last_updated: 2026-07-20
-last_verified: 2026-07-20
+last_updated: 2026-09-15
+last_verified: 2026-09-15
 ---
 
 # Вопросы по LLM
@@ -87,7 +87,9 @@ last_verified: 2026-07-20
 
 ## Reasoning и evaluation
 
-- Чем pass@k, self-consistency и best-of-N различаются по способу выбора ответа?
+- Что измеряет pass@k? Как self-consistency и best-of-N выбирают один ответ
+  из нескольких кандидатов и почему высокий pass@k ещё не означает, что этот
+  выбор окажется верным?
   → [[02 Areas/ML & DL/00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#2. Две части любого метода: предложить и выбрать|Предложить и выбрать]]
 - Почему увеличение числа reasoning tokens не гарантирует улучшения ответа? →
   [[02 Areas/ML & DL/00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#6. Длинное рассуждение и последовательное исправление|Длинное рассуждение]]

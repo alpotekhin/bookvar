@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "id": "berkeley-agents-practice-27",
+  "title": "Verifiable scientific search with symbolic regression",
+  "source": {
+    "course": "UC Berkeley Advanced LLM Agents, Spring 2025",
+    "course_url": "https://rdi.berkeley.edu/adv-llm-agents/sp25",
+    "primary_readings": ["https://arxiv.org/abs/2409.09359"],
+    "adaptation_notice": "Bookvar adaptation; not an official Berkeley lab"
+  },
+  "dataset": {
+    "minimum_target_laws": 8,
+    "minimum_target_laws_scope": "full comparison project, not the one-polynomial starter",
+    "required_families": ["polynomial", "rational", "exponential decay", "periodic", "power product", "dimensionless group"],
+    "splits": ["train", "validation", "extrapolation"],
+    "hidden_from_proposal_model": ["target expression", "extrapolation labels", "grader manifest"],
+    "pinned": ["seeds", "input distributions", "noise", "precision", "operator grammar"]
+  },
+  "expression_runtime": {
+    "representation": "validated abstract syntax tree",
+    "forbidden": ["eval", "exec", "arbitrary imports", "filesystem", "network"],
+    "required_checks": ["finite output", "shape", "range", "dimensional consistency"],
+    "objective": "train NMSE + lambda * AST complexity + rho * invalidity penalty",
+    "selection_data": "train only"
+  },
+  "profiles": {
+    "starter": "Python 3.12 stdlib, one dimensionless noiseless polynomial, five fixed candidate ASTs, train-only selection and six invalid-expression checks; no evolutionary or LLM-search claim",
+    "evolution_only": "primitive operators only",
+    "static_library": "fixed general-purpose abstractions",
+    "learned_library": "versioned abstractions proposed from search history and admitted by held-out utility checks"
+  },
+  "design": {
+    "minimum_seeds": 5,
+    "matched_across_profiles": ["primitive operators", "initial seeds", "evaluated-expression budget", "wall time"],
+    "controlled_failure": "run a preregistered narrow-train phase, then add wider points to train for phase B while validation and extrapolation remain evaluation-only",
+    "library_admission": [
+      "parses in the safe AST grammar",
+      "declares typed parameters",
+      "compresses at least two strong candidates or improves held-out search seeds",
+      "does not expose target expressions or grader data"
+    ]
+  },
+  "metrics": [
+    "nmse_train",
+    "nmse_validation",
+    "nmse_extrapolation",
+    "ast_size",
+    "ast_depth",
+    "evaluated_candidates",
+    "time_to_best_valid_expression",
+    "exact_structure_after_simplification",
+    "numeric_equivalence_on_hidden_grid",
+    "library_size",
+    "concept_reuse_count",
+    "concept_marginal_gain",
+    "invalid_expression_rate"
+  ],
+  "required_outputs": [
+    "generator-manifest.json",
+    "grader-manifest.json",
+    "data-manifests/",
+    "grammar.json",
+    "ast-evaluator-tests.jsonl",
+    "candidates.jsonl",
+    "generations.csv",
+    "library_events.jsonl",
+    "metrics.csv",
+    "pareto-front.csv",
+    "report.md"
+  ],
+  "acceptance": [
+    "target expressions and extrapolation labels remain hidden",
+    "all candidates execute through the safe AST evaluator",
+    "fitting and selection use train only",
+    "all three profiles use matched seeds and budgets",
+    "every candidate and library update has provenance",
+    "fit, structural recovery and extrapolation are reported separately",
+    "negative results and every seed are retained",
+    "the controlled failure measures whether the learned library abandons the premature abstraction"
+  ],
+  "fail_if": [
+    "arbitrary code execution is possible",
+    "validation or extrapolation data affect parameter fitting or selection",
+    "the target law leaks through names, prompts or filenames",
+    "only the best formula or seed is reported",
+    "a concept is accepted only because its textual explanation sounds plausible"
+  ]
+}

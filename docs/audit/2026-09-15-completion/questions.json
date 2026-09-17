@@ -1,0 +1,682 @@
+{
+  "date": "2026-09-15",
+  "scope": "The three question pages with original findings; six zero-finding question pages and practice remain outside this tranche's renewed acceptance.",
+  "status": "accepted-with-separate-final-render-evidence",
+  "counts": {
+    "original_findings": 48,
+    "fixed": 48,
+    "open_pending_build": 0
+  },
+  "pages": [
+    {
+      "path": "04 Вопросы/100 вопросов по NLP — исходные ответы.md",
+      "before_sha256": "2b27cae33d29f35bb6ea95ad4e35891b327464078550f6ac9b8a944f06748f34",
+      "after_sha256": "9a480d1f272c933e4107f4b1db14a0c679979d7f67d2deae68ef647b988e210b",
+      "findings": [
+        {
+          "question": 1,
+          "severity": "P2",
+          "line": 157,
+          "excerpt": "vectors = np.array(vectors)",
+          "issue": "Подтверждённый дефект кода: строка имеет лишние табуляции относительно тела функции/цикла, а конвертация vectors должна быть после накопления всех строк.",
+          "action": "Не менять архив. В отдельной редакционной заметке/канонической главе: Опубликовать отдельную исправленную runnable версию и тест формы результата.",
+          "original_finding_index": 0,
+          "status": "fixed",
+          "resolution": "Corrected runnable tfidf() accumulates all rows before return; four Markdown-example tests cover output shape and edge cases.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 1,
+          "severity": "P2",
+          "line": 125,
+          "excerpt": "word_occurance = word_count.get(word, 0) + 1",
+          "issue": "Код считает log(N/(df+1)), хотя docstring и первая формула задают log(N/df). Общий всем документам термин получает отрицательный IDF; разные определения не обозначены как альтернативы.",
+          "action": "Не менять архив. В отдельной редакционной заметке/канонической главе: Выбрать и подписать одну формулу (unsmoothed либо documented smoothing), показать df=N и OOV/empty corpus.",
+          "original_finding_index": 1,
+          "status": "fixed",
+          "resolution": "One explicit smoothed IDF convention, df distinct from token count; ubiquitous term, empty documents/corpus, stable vocabulary and fit-only scope explained and tested.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 4,
+          "severity": "P1",
+          "line": 242,
+          "excerpt": "\\frac{ (1 - 0.2) \\cdot 0.86}{0.4} = \\frac {16}{43}",
+          "issue": "Подтверждённая арифметическая/вероятностная ошибка: написанное выражение равно1.72, а искомая P(first|standard)=0.8×0.4/0.86=16/43. Перепутаны событие, условие и prior.",
+          "action": "Не менять архив. В отдельной редакционной заметке/канонической главе: Показать дерево вероятностей и корректную подстановку; отдельно объяснить независимость слов УСЛОВНО на классе (стр.250).",
+          "original_finding_index": 2,
+          "status": "fixed",
+          "resolution": "Joint probability table and Bayes substitution yield 16/43; wrong expression 1.72 distinguished. Conditional-on-class independence explained.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 5,
+          "severity": "P2",
+          "line": 269,
+          "excerpt": "Слишком низкое значение может привести к переобучению.",
+          "issue": "Не назван параметр: для стандартного SVM C это направление обратное (C выше — штраф ошибок выше и регуляризация слабее), для lambda утверждение возможно. Ответ как инструкция двусмыслен.",
+          "action": "Не менять архив. В отдельной редакционной заметке/канонической главе: Выписать objective и различить C и lambda; сравнить малый/большой C.",
+          "sources": [
+            "https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html"
+          ],
+          "original_finding_index": 3,
+          "status": "fixed",
+          "resolution": "Explicit SVM objective identifies C as inverse regularization strength; lambda contrasted.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 6,
+          "severity": "P2",
+          "line": 279,
+          "excerpt": "doing, went, gone → go",
+          "issue": "Фактическая ошибка: doing лемматизируется в do, не go. В коде default noun POS оставляет playing неизменным, но причина не объяснена.",
+          "action": "Не менять архив. В отдельной редакционной заметке/канонической главе: Исправленную редакционную версию показать на doing→do, went/gone→go и WordNet POS='v'.",
+          "original_finding_index": 4,
+          "status": "fixed",
+          "resolution": "doing/do and went/gone/go corrected; WordNet verb POS and corpus dependency stated.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 7,
+          "severity": "P2",
+          "line": 301,
+          "excerpt": "Семантические примеры: cosine similarity, euclidean distance",
+          "issue": "Категориальная ошибка: cosine/Euclidean могут применяться к lexical TF-IDF или произвольным числам; семантика определяется representation/training, не названием метрики.",
+          "action": "Не менять архив. В отдельной редакционной заметке/канонической главе: Сопоставить cosine TF-IDF и trained sentence embeddings, указать ограничения нулевых векторов.",
+          "original_finding_index": 5,
+          "status": "fixed",
+          "resolution": "Cosine/Euclidean geometry separated from representation learning; zero-vector policy explicit.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 8,
+          "severity": "P2",
+          "line": 348,
+          "excerpt": "0 - identical vectors",
+          "issue": "Нулевое cosine distance означает одинаковое направление, не идентичные векторы: [1,0] и[2,0] имеют distance0. Similarity−1 означает противоположные направления, а не универсальную семантическую непохожесть.",
+          "action": "Не менять архив. В редакционном разборе: Привести эти численные векторы; cosine является косинусом угла, а не самим углом.",
+          "original_finding_index": 6,
+          "status": "fixed",
+          "resolution": "Ranges and parallel but unequal vectors explained, plus failure of triangle inequality.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 9,
+          "severity": "P2",
+          "line": 380,
+          "excerpt": "recall это показатель, чтобы не считать всех девушек подряд беременными",
+          "issue": "Классификатор, объявляющий всех положительными, имеет recall1; ограничение лишних положительных относится к precision/specificity. Проза противоречит собственной формуле.",
+          "action": "Не менять архив. В редакционном разборе: Использовать нейтральную confusion matrix с числами и показать all-positive/all-negative случаи.",
+          "original_finding_index": 7,
+          "status": "fixed",
+          "resolution": "Spam confusion matrix, all-positive counterexample, correct precision/recall denominators.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 10,
+          "severity": "P2",
+          "line": 391,
+          "excerpt": "по отношению к здоровым, классифицированным как больные",
+          "issue": "Текст описывает TN/FP вместо записанного TN/(FP+TN); строка390 аналогично описывает TP/FN вместо sensitivity. Правильное объяснение дальше не устраняет противоречие.",
+          "action": "Не менять архив. В редакционном разборе: Согласовать определения и показать изменение threshold: при росте threshold обычно sensitivity падает, specificity растёт.",
+          "original_finding_index": 8,
+          "status": "fixed",
+          "resolution": "Specificity denominator and monotone threshold effects explained with numerical table.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 12,
+          "severity": "P2",
+          "line": 435,
+          "excerpt": "чем меньше perplexity, тем лучше",
+          "issue": "Без фиксированного корпуса и токенизатора это переобобщение; perplexity не гарантирует task quality и не измеряет субъективное сомнение модели на её собственных generations.",
+          "action": "Не менять архив. В редакционном разборе: Определить exp(−mean log p(reference token|prefix)), указать tokenization/data contract и пример несовместимых perplexity.",
+          "original_finding_index": 9,
+          "status": "fixed",
+          "resolution": "Held-out-token PPL formula, tokenizer/context/data comparability and task-quality limitation.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 13,
+          "severity": "P2",
+          "line": 452,
+          "excerpt": "которые длиньше чем исходный текст",
+          "issue": "Фактическая ошибка: BP штрафует слишком КОРОТКУЮ гипотезу относительно reference, а не длинную относительно source. Собственная piecewise formula ниже это подтверждает.",
+          "action": "Не менять архив. В редакционном разборе: Показать c<r и c>r; уточнить modified clipped precision и отсутствие прямой проверки грамматики.",
+          "sources": [
+            "https://aclanthology.org/P02-1040.pdf"
+          ],
+          "original_finding_index": 10,
+          "status": "fixed",
+          "resolution": "BLEU short-hypothesis penalty with c=3,r=6; clipped n-gram precision and grammar limitation.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 14,
+          "severity": "P2",
+          "line": 514,
+          "excerpt": "{|\\text{unigram ref.}|}",
+          "issue": "В строке вычисления ROUGE precision знаменатель обозначен reference, хотя далее та же строка и предыдущая правильная формула используют candidate. Это внутреннее формульное противоречие.",
+          "action": "Не менять архив. В редакционном разборе: В отдельной errata согласовать знаменатель с candidate; считать clipped token multiset, а не множество уникальных слов. Числа примера на изображении требуют отдельного осмотра.",
+          "original_finding_index": 11,
+          "status": "fixed",
+          "resolution": "Actual screenshot inspected: seven-word candidate really has 6/7 precision. Separate nine-word prose candidate has 6/9. Correct candidate denominator and multiset interpretation.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 15,
+          "severity": "P2",
+          "line": 593,
+          "excerpt": "Главные отличия:",
+          "issue": "Ответ не завершён: после заголовка только ссылка; modified precision/geometric aggregation/BP против ROUGE recall/LCS не сопоставлены.",
+          "action": "Не менять архив. В редакционном разборе: Добавить отдельное сравнение на одном candidate/reference и вариант ROUGE-F1, не выдавая BLEU исключительно за translation-only.",
+          "original_finding_index": 12,
+          "status": "fixed",
+          "resolution": "BLEU versus ROUGE-N/L/S compared, F1 and variant conventions explicit.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 16,
+          "severity": "P2",
+          "line": 601,
+          "excerpt": "Word2Vec (CBOW) обучается предсказывать слово по контексту, таким образом",
+          "issue": "Ответ не отвечает на две ключевые части собственного вопроса: loss и максимум; предложение оборвано, вместо механизма дана PDF-ссылка.",
+          "action": "Не менять архив. В редакционном разборе: Дать канонический CBOW/Skip-gram likelihood, негативные пары и один training example.",
+          "original_finding_index": 13,
+          "status": "fixed",
+          "resolution": "CBOW/Skip-gram full conditional probability, negative-sampling objective and concrete training window.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 19,
+          "severity": "P2",
+          "line": 620,
+          "excerpt": "Skip-gram будет обучаться быстрее так как предсказывает только одно слово на основе контекста.",
+          "issue": "Перепутана архитектура: центральное слово по контексту предсказывает CBOW. Skip-gram строит предсказания контекстных слов по центральному; вывод о скорости не следует из указанной причины.",
+          "action": "Не менять архив. В редакционном разборе: Исправленное объяснение дать через число training pairs при одинаковом окне и sampling; сослаться на оригинальный Word2Vec.",
+          "original_finding_index": 14,
+          "status": "fixed",
+          "resolution": "CBOW and Skip-gram prediction direction, pair count and speed confounders corrected.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 25,
+          "severity": "P2",
+          "line": 660,
+          "excerpt": "Кол-о весов = 4",
+          "issue": "Фактическая подмена объекта: 4(HI+H²+H) относится к LSTM с одним bias на gate, а vanilla RNN имеет HI+H²+H до output head. PyTorch может хранить два bias-вектора.",
+          "action": "Не менять архив. В редакционном разборе: Развести vanilla/LSTM/GRU и явно указать наличие output head, bias convention, направления и слои.",
+          "original_finding_index": 15,
+          "status": "fixed",
+          "resolution": "Vanilla/LSTM parameter formulas and numerical examples, both one/two bias conventions.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 26,
+          "severity": "P2",
+          "line": 666,
+          "excerpt": "backpropagation through time - unroll the network through time",
+          "issue": "Недостаток объяснения обучения: нет суммы losses и накопления градиента общих weights по временным путям, что отличает BPTT от обычного последовательного forward.",
+          "action": "Не менять архив. В редакционном разборе: Показать2–3шага с общим W и вкладом каждого loss; отдельно optimizer step.",
+          "original_finding_index": 16,
+          "status": "fixed",
+          "resolution": "Shared-parameter BPTT example computes two contributions -0.375 and total -0.75, optimizer step distinguished.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 28,
+          "severity": "P2",
+          "line": 687,
+          "excerpt": "In GRU, the memory cell это candidate activation vector",
+          "issue": "Candidate activation не является сохраняемым состоянием GRU; сохраняется h_t после смешивания candidate и previous state. Позже ответ правильно говорит об одном h, создавая противоречие.",
+          "action": "Не менять архив. В редакционном разборе: Показать отдельные candidate и h_t в уравнении update; сравнить с c_t/h_t LSTM.",
+          "original_finding_index": 17,
+          "status": "fixed",
+          "resolution": "GRU candidate versus retained h_t; explicit interpolation and comparison to LSTM c_t/h_t.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 30,
+          "severity": "P2",
+          "line": 737,
+          "excerpt": "gradient clipping",
+          "issue": "Недостаток объяснения: clipping ограничивает exploding gradient, но не восстанавливает vanishing; dying ReLU и произведение recurrent Jacobians — разные причины.",
+          "action": "В редакционном дополнении разделить exploding→clipping, vanishing→gated/residual paths/initialization; показать произведение Jacobians.",
+          "original_finding_index": 18,
+          "status": "fixed",
+          "resolution": "Jacobian product and scalar fading/exploding examples, clipping scope versus vanishing and dying ReLU.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 31,
+          "severity": "P2",
+          "line": 755,
+          "excerpt": "В случае с CNN агрегация идет относительно pooling",
+          "issue": "Содержательная неточность: CNN смешивает позиции уже convolution, pooling необязателен; основное отличие от local attention — фиксированные веса фильтра против input-dependent scores.",
+          "action": "Добавить рядом с архивом пример одной convolution и query-dependent local weighted sum; отдельно обсудить stride/pooling.",
+          "original_finding_index": 19,
+          "status": "fixed",
+          "resolution": "Convolution coefficients versus input-dependent local attention; pooling optional.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 32,
+          "severity": "P2",
+          "line": 799,
+          "excerpt": "он же concat, soft and global",
+          "issue": "Фактическое смешение: additive — функция score, soft/hard — способ выбора/агрегации, global/local — область; это не синонимы. Русский перевод «обновления values» также скрывает получение нового output.",
+          "action": "В каноническом дополнении развести три оси и вычислить weights@V; уточнить, что V не обновляется in-place.",
+          "sources": [
+            "https://arxiv.org/html/1706.03762v7"
+          ],
+          "original_finding_index": 20,
+          "status": "fixed",
+          "resolution": "Three-axis comparison and numerical weighted-value output; scale is head key width.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 33,
+          "severity": "P2",
+          "line": 811,
+          "excerpt": "более эффективна для длинных последовательностей",
+          "issue": "Недостаток границ: FLOPs mixing-only не равны скорости полного слоя: QKV projections добавляют O(nd²), RNN имеет последовательный critical path, decoder inference отдельный режим.",
+          "action": "Явно подписать mixing-only, добавить projections и различить train/prefill/decode и FLOPs/latency.",
+          "sources": [
+            "https://arxiv.org/html/1706.03762v7"
+          ],
+          "original_finding_index": 21,
+          "status": "fixed",
+          "resolution": "Mixing/projection asymptotics, recurrent critical path and train/prefill versus decode separated.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 34,
+          "severity": "P2",
+          "line": 829,
+          "excerpt": "→ Vanishing gradient problem",
+          "issue": "Недостаток механизма: Markov hidden-state recurrence сама по себе не гарантирует vanishing — решает спектр произведения Jacobians; attention parallelism относится к известным входам, не всей autoregressive generation.",
+          "action": "Показать градиентную цепочку и отделить параллельность training/prefill от пошагового decode.",
+          "original_finding_index": 22,
+          "status": "fixed",
+          "resolution": "Jacobian mechanism rather than Markov claim; autoregressive decode distinguished from training parallelism.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 36,
+          "severity": "P2",
+          "line": 849,
+          "excerpt": "в decoder части в первом transformer блоке",
+          "issue": "Архитектурная неточность: masked self-attention и cross-attention — подслои каждого original encoder-decoder decoder block, а не первый и второй blocks; decoder-only не имеет обязательного cross-attention.",
+          "action": "В редакционном ответе нарисовать один decoder block и разграничить model family.",
+          "sources": [
+            "https://arxiv.org/html/1706.03762v7"
+          ],
+          "original_finding_index": 23,
+          "status": "fixed",
+          "resolution": "Each original decoder layer has three sublayers; GPT cross-attention not required, canonical diagram linked.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 37,
+          "severity": "P2",
+          "line": 862,
+          "excerpt": "(seq\\_length, seq\\_length)",
+          "issue": "Неполнота: вопрос во множественном числе, но не даны WQ/WK/WV, Q/K/V, heads/batch и output.",
+          "action": "Добавить полную shape-трассу B×T×d_model→B×h×T×d_head→B×h×T×T→B×T×d_model.",
+          "sources": [
+            "https://arxiv.org/html/1706.03762v7"
+          ],
+          "original_finding_index": 24,
+          "status": "fixed",
+          "resolution": "Complete B=2,T=5,D=8,h=2 shape table, matrices/projections/scores/output and cross-attention dimensions.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 38,
+          "severity": "P2",
+          "line": 866,
+          "excerpt": "В BERT используется masking, но он рандомен",
+          "issue": "Концептуальная ошибка: случайно выбираемые MLM positions — corruption входа и target loss; BERT self-attention обычно bidirectional, а causal mask GPT ограничивает рёбра внимания.",
+          "action": "Сопоставить две разные маски на одной последовательности: какие tokens заменены и какие attention edges запрещены.",
+          "original_finding_index": 25,
+          "status": "fixed",
+          "resolution": "Input corruption versus causal edges versus padding explained on three-token example.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 40,
+          "severity": "P2",
+          "line": 896,
+          "excerpt": "token embeddings - то, что обсудили сейчас",
+          "issue": "Терминологическая ошибка: lookup token embeddings BERT сами не contextual; контекстными становятся hidden representations после encoder. Segment embedding обозначает принадлежность сегменту, не ограничен text similarity task.",
+          "action": "В редакционном дополнении показать неизменный lookup mouse и разные h^L в двух предложениях.",
+          "original_finding_index": 26,
+          "status": "fixed",
+          "resolution": "Lookup token embedding versus contextual hidden states and segment membership clarified.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 41,
+          "severity": "P2",
+          "line": 913,
+          "excerpt": "статистик относительно слоя",
+          "issue": "Неполнота: в transformer LayerNorm статистики считаются по features каждого token/sample, не по всему слою. Internal Covariate Shift представлен как установленное объяснение эффективности, хотя это исходная гипотеза.",
+          "action": "Добавить оси для B×T×D и формулу; обозначить ICS как мотивацию исходной работы, не доказанный общий механизм.",
+          "original_finding_index": 27,
+          "status": "fixed",
+          "resolution": "B,T,D LayerNorm formula and axes; ICS labelled motivation and optimization research linked.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 42,
+          "severity": "P2",
+          "line": 929,
+          "excerpt": "Ответ согласно статье 2020 ‣ и блогпоста 2022 ‣",
+          "issue": "Проверяемость: вместо двух источников маркеры без URL. Утверждения о dependence gradient на layer number не задают: глубину модели, положение слоя, initialization и исследуемую норму; require verification.",
+          "action": "В sidecar восстановить Xiong et al. 2020 и точную формулировку теоремы с областью применимости; исходный английский не переводить.",
+          "sources": [
+            "https://proceedings.mlr.press/v119/xiong20b.html"
+          ],
+          "original_finding_index": 28,
+          "status": "fixed",
+          "resolution": "Xiong theorem 1: last-FFN Frobenius gradient, total depth, single-head square-matrix model, Gaussian inputs, bounded loss derivatives, zero Q/K and initially uniform attention, remaining matrices Xavier, concentration assumptions; upper bounds not equalities and warm-up scope corrected. The added initialization assumptions address independent review P2.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 43,
+          "severity": "P2",
+          "line": 968,
+          "excerpt": "В NLP мы используем именно global VS local",
+          "issue": "Фактическое сужение: hard/soft и global/local — независимые оси, hard attention также бывает в NLP. Эти работы 2015 года не являются ответом на Transformer 2017; local position бывает monotonic, а не только predicted.",
+          "action": "Добавить редакционную матрицу двух осей, исправить chronology в дополнении и привести monotonic local вариант.",
+          "original_finding_index": 29,
+          "status": "fixed",
+          "resolution": "Independent soft/hard and global/local axes, 2015 chronology and local-m/local-p distinction.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 44,
+          "severity": "P2",
+          "line": 978,
+          "excerpt": "засплитить весь наш эмбеддинг и прогнать каждую часть через разные матрицы",
+          "issue": "Фактическая ошибка: стандартная голова получает обученную проекцию полного d_model входа; сначала проецируют весь input (часто одной fused матрицей), затем reshape/split outputs. Split input первым ограничит головы разными subsets признаков.",
+          "action": "Показать X W_Q^i с W_Q^i размера d_model×d_head и эквивалент fused projection→reshape.",
+          "sources": [
+            "https://arxiv.org/html/1706.03762v7"
+          ],
+          "original_finding_index": 30,
+          "status": "fixed",
+          "resolution": "Full-input per-head projection before reshape; split-input variant distinguished.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 45,
+          "severity": "P2",
+          "line": 1011,
+          "excerpt": "Flash Attention loads keys, queries, and values once",
+          "issue": "Фактическая ошибка: FlashAttention использует tiling и online softmax с ограниченной SRAM; tiles могут перечитываться, выигрыш не требует загрузить все QKV один раз. SRAM — память, вычисления выполняют compute units. Строка про GQA лишь повторяет MHA/MQA.",
+          "action": "В редакционном дополнении дать число KV heads 1<h_kv<h_q и tile loop, не обещать однократное чтение/линейные FLOPs.",
+          "sources": [
+            "https://arxiv.org/html/2205.14135v2"
+          ],
+          "original_finding_index": 31,
+          "status": "fixed",
+          "resolution": "GQA head-count formula and FlashAttention tiled online softmax; no one-load guarantee or SRAM-compute confusion.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 46,
+          "severity": "P2",
+          "line": 1019,
+          "excerpt": "не увеличивает кол-о обучаемых параметров",
+          "issue": "Неполнота ответа: одинаковые parameters не показывают FLOPs, score memory и kernel efficiency. При fixed d ведущий mixing FLOPs сохраняется, но materialized attention имеет h×T² элементов и softmax/head overhead меняется.",
+          "action": "Дополнить раздельным сравнением parameters, leading FLOPs, memory и latency при fixed d versus fixed d_head.",
+          "sources": [
+            "https://arxiv.org/html/1706.03762v7"
+          ],
+          "original_finding_index": 32,
+          "status": "fixed",
+          "resolution": "Parameters, leading matmul cost, materialized score memory and kernel latency separated at fixed D versus fixed head width.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 47,
+          "severity": "P2",
+          "line": 1033,
+          "excerpt": "Поэтому на каждый train step генерится своя рандомная маска.",
+          "issue": "Неполнота: на широкий вопрос о превосходстве RoBERTa дан один фактор без данных о больших batches/data, longer training и изменении NSP; нельзя приписывать весь выигрыш dynamic masking.",
+          "action": "В каноническом дополнении сослаться на controlled ablations RoBERTa и отделить каждый фактор.",
+          "original_finding_index": 33,
+          "status": "fixed",
+          "resolution": "RoBERTa ablation factors and NSP/sequence construction dependence described.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 58,
+          "severity": "P2",
+          "line": 1082,
+          "excerpt": "у каждой позиции есть дополнительные n позициональных эмбеддингов",
+          "issue": "Неточность параметризации: Shaw-style uses shared embeddings по clipped relative distance, а не независимые n trainable embeddings для каждой позиции. Конкретный вариант выдан за relative PE вообще.",
+          "action": "Дополнить формулой r_clip(j-i) с одной общей таблицей 2k+1 offsets и примером одинакового offset в разных местах.",
+          "original_finding_index": 34,
+          "status": "fixed",
+          "resolution": "Shaw clipped relative-offset shared table with same-offset example.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 59,
+          "severity": "P2",
+          "line": 1088,
+          "excerpt": "Трансформация схожа с тем, что мы видели для sin-cosine",
+          "issue": "Недостаток объяснения: не указаны Q/K как вращаемые тензоры и тождество R_m^T R_n=R_(n-m); без него relative dependency остаётся утверждением.",
+          "action": "В sidecar добавить один 2D rotation и dot-product derivation; исходный English quote сохранить.",
+          "original_finding_index": 35,
+          "status": "fixed",
+          "resolution": "2D Q/K rotation and R_m^T R_n identity with cosine example; V rotation not required.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 64,
+          "severity": "P2",
+          "line": 1124,
+          "excerpt": "sentence piece** - такой же токенайзер",
+          "issue": "Фактическое смешение: SentencePiece — toolkit/representation с BPE и unigram, не отдельный merge criterion; whitespace escaping не вся его специфика.",
+          "action": "В редакционной таблице отделить tokenization algorithms от toolkit/pre-tokenization, показать BPE и unigram в SentencePiece.",
+          "sources": [
+            "https://github.com/google/sentencepiece"
+          ],
+          "original_finding_index": 36,
+          "status": "fixed",
+          "resolution": "SentencePiece toolkit separated from BPE/unigram algorithm, whitespace and preprocessing.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 65,
+          "severity": "P2",
+          "line": 1129,
+          "excerpt": "на них появятся новые эмбеддинги",
+          "issue": "Ошибочная практическая инструкция: tokenizer.add_tokens изменяет tokenizer; model.resize_token_embeddings(len(tokenizer)) требуется отдельно, иначе новые IDs выходят за пределы embedding matrix. Ответ обрывается.",
+          "action": "Добавить проверенный API example в каноническое дополнение, показать resizing input/output heads и необходимость обучения новых rows.",
+          "sources": [
+            "https://huggingface.co/docs/transformers/en/main_classes/tokenizer"
+          ],
+          "original_finding_index": 37,
+          "status": "fixed",
+          "resolution": "Tokenizer addition versus model resize, full vocabulary argument, output head/tied weights, training new rows and version-specific initialization.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 85,
+          "severity": "P2",
+          "line": 1236,
+          "excerpt": "если они не получают  активации",
+          "issue": "Подтверждённая ошибка: AdapterDrop удаляет adapters из нижних transformer layers при training/inference; отключение по отсутствию активации не является описанным механизмом. Core bottleneck и места LayerNorm также стоит разделить.",
+          "action": "В редакционном дополнении дать точный lower-layer removal contract из primary paper и изобразить residual bottleneck.",
+          "sources": [
+            "https://aclanthology.org/2021.emnlp-main.626/"
+          ],
+          "original_finding_index": 38,
+          "status": "fixed",
+          "resolution": "Residual bottleneck adapter and lower-layer AdapterDrop; no inactive-activation criterion.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 87,
+          "severity": "P2",
+          "line": 1264,
+          "excerpt": "for xin logits",
+          "issue": "Подтверждаемая по тексту code defect: «for xin» вместо «for x in», «bottomfor» и return вне тела def делают пример неисполняемым. exp без max-shift может переполняться.",
+          "action": "Не трогать архив; дать рядом исправленный стабильный softmax с тестом на сумму1 и extreme logits.",
+          "original_finding_index": 39,
+          "status": "fixed",
+          "resolution": "Executable stable positive-temperature softmax, max shift and explicit finite-logit contract, four tests.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 89,
+          "severity": "P2",
+          "line": 1310,
+          "excerpt": "K = ∞ is BFS (O(b \\* n) time)",
+          "issue": "Фактическая ошибка: полный b-арный поиск до глубины n экспоненциален O(b^n) при b>1, не O(bn). Первая формула зависит от selection implementation, а стоимость model forward не учтена.",
+          "action": "В редакционном дополнении разделить B×V candidate scoring/top-k и model forward; показать числа узлов без pruning.",
+          "original_finding_index": 40,
+          "status": "fixed",
+          "resolution": "Exponential unpruned search, BV candidates and top-k selection versus model forward; numerical node count.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 90,
+          "severity": "P2",
+          "line": 1320,
+          "excerpt": "CLS vector",
+          "issue": "Неполнота: raw CLS не гарантирует полезной semantic similarity; mean — уже pooling. Не объяснены training objective, masking и normalization.",
+          "action": "Дать отдельный canonical ответ с masked mean и contrastive sentence training, сравнить raw BERT CLS и tuned encoder.",
+          "original_finding_index": 41,
+          "status": "fixed",
+          "resolution": "Masked mean pooling, raw CLS limitations, contrastive training and normalization.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 91,
+          "severity": "P2",
+          "line": 1330,
+          "excerpt": "раскладываем по SVD",
+          "issue": "Фактическая ошибка: обычная LoRA непосредственно параметризует trainable low-rank ΔW=AB, не требует вычислять SVD. Отдельные SVD-initialized методы не определяют LoRA.",
+          "action": "В редакционном дополнении написать frozen W + α/r·AB, initialization и trainable parameters; SVD отнести к отдельным вариантам.",
+          "sources": [
+            "https://arxiv.org/html/2106.09685v2",
+            "https://arxiv.org/html/2305.14314v1"
+          ],
+          "original_finding_index": 42,
+          "status": "fixed",
+          "resolution": "LoRA trainable BA not SVD; initialization, scaling, count example, original figure 1 retained from local curated collection.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 91,
+          "severity": "P2",
+          "line": 1358,
+          "excerpt": "while the others remain on disk",
+          "issue": "Фактическая ошибка: QLoRA paged optimizers используют unified memory и перемещение optimizer states CPU↔GPU для memory spikes, не отдельный optimizer на каждую группу и не обязательный диск. Строка1357 смешивает quantization и paging.",
+          "action": "Отдельно объяснить NF4, double quantization и paged states; показать host RAM, GPU memory и activations.",
+          "sources": [
+            "https://arxiv.org/html/2106.09685v2",
+            "https://arxiv.org/html/2305.14314v1"
+          ],
+          "original_finding_index": 43,
+          "status": "fixed",
+          "resolution": "QLoRA frozen NF4, double quantization, computation dtype and CPU/GPU paged optimizer state, activation memory and checkpointing separated.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        },
+        {
+          "question": 92,
+          "severity": "P2",
+          "line": 1426,
+          "excerpt": "prefix эмбеддинги на относятся к каким-то виртуальным токенам",
+          "issue": "Фактическое сужение: prefix — continuous task-specific activations, на которые последующие tokens attend как к virtual tokens; literal vocabulary IDs не требуются. Ссылка с названием paper ведёт на Notion, не primary paper.",
+          "action": "В sidecar различить vocabulary tokens и virtual prefix positions; дать primary Prefix-Tuning URL.",
+          "sources": [
+            "https://aclanthology.org/2021.acl-long.353/"
+          ],
+          "original_finding_index": 44,
+          "status": "fixed",
+          "resolution": "Continuous prompt/prefix and virtual positions versus vocabulary IDs; primary Prefix-Tuning link restored.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        }
+      ],
+      "original_body_preserved": true,
+      "figures_before": 37,
+      "figures_after": 38,
+      "read_before": "full",
+      "read_after": "full original read before; unchanged body verified; all appended text reread"
+    },
+    {
+      "path": "04 Вопросы/100 вопросов по NLP.md",
+      "before_sha256": "a97eba71490910cc64c3c79db5a1a677a179e945f40d35dc1f3d27065d5803de",
+      "after_sha256": "99752501fd2c7f4fbc4df1311323741617ae084bc4549a7e5154711eecdb6f5c",
+      "findings": [
+        {
+          "severity": "P3",
+          "line": 79,
+          "excerpt": "soft и hard (local/global) attention",
+          "issue": "Редакционная двусмысленность: parenthetical local/global может читаться как синоним soft/hard, хотя исходный ответ43 затем различает эти пары.",
+          "action": "Добавить редакционную помету, что soft/hard и local/global не синонимы; отправить к каноническому примеру.",
+          "original_finding_index": 0,
+          "status": "fixed",
+          "resolution": "Original question preserved with immediate editorial clarification and deep link to the three-axis comparison.",
+          "acceptance": "accepted; see questions-review.md and final-acceptance.md"
+        }
+      ],
+      "original_body_preserved": null,
+      "figures_before": 0,
+      "figures_after": 0,
+      "read_before": "full",
+      "read_after": "full"
+    },
+    {
+      "path": "04 Вопросы/Вопросы по LLM.md",
+      "before_sha256": "0d3c3eb7bb3b400b1257cf4a54b712d11ebe22fd82bb759f76fdb414c30c69fa",
+      "after_sha256": "fb2087b7d53e5334302ac039b1793c77fc0bfe9d1b94b74f0cca632a9137149a",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 90,
+          "excerpt": "Чем pass@k, self-consistency и best-of-N различаются по способу выбора ответа?",
+          "issue": "Вопрос содержит неверную категориальную предпосылку: pass@k — метрика наличия успеха, а не способ выбора ответа.",
+          "action": "Спросить отдельно, что измеряет pass@k и как self-consistency/best-of-N превращают набор кандидатов в выбранный ответ.",
+          "original_finding_index": 0,
+          "status": "fixed",
+          "resolution": "pass@k now asks about a success metric separately from candidate-selection methods."
+        },
+        {
+          "severity": "P2",
+          "line": 51,
+          "excerpt": "#2. Вывод REINFORCE без пропущенных шагов",
+          "issue": "Publication blocker, не подтверждённая ошибка исходного anchor: built-link check корневого агента выявил7missing fragments (и EN fallback). Локальный осмотр HTML трёх target pages подтвердил пустой sl-markdown-content; все7исходных headings существуют.",
+          "action": "Сначала восстановить публикацию body/IDs в publisher и повторить build-links; anchors не менять до устранения причины.",
+          "original_finding_index": 1,
+          "status": "fixed",
+          "resolution": "Current emitted bodies and fragments restored by heading-alias and Scaling Laws delimiter fixes. Full output suite 12/12 PASS at 19:03:27 on the 19:02:45 build, including every internal route and fragment in both locale trees; final acceptance report records the subsequent rerun."
+        }
+      ],
+      "original_body_preserved": null,
+      "figures_before": 0,
+      "figures_after": 0,
+      "read_before": "full",
+      "read_after": "full"
+    }
+  ],
+  "verification": {
+    "tests": "python3 docs/audit/2026-09-15-completion/test_question_examples.py — 4 failed before implementation; 4 passed afterward",
+    "unit_baseline": "pnpm --dir publishing test:unit — 181 passed",
+    "archive_preservation": "Original author body (excluding trailing EOF whitespace) equal to task-local snapshot; all 37 original embeds unchanged; one original LoRA Figure 1 added in separate errata.",
+    "visuals": "Source ROUGE screenshot and local LoRA Figure 1 inspected. Rendered site review pending.",
+    "arithmetic": "Bayes 16/43; erroneous expression 1.72; RNN 32, PyTorch LSTM 144; ROUGE 12/13 and 0.8; BPTT -0.75; tree nodes 11111; LoRA 65536 versus 16777216; BP exp(-1)."
+  },
+  "english": "Existing ten-group EN errata inspected; English archive has 22 answers and no supplied MHA/LoRA/QLoRA answers. Its historical 78 placeholders remain untouched. No EN archival body rewritten.",
+  "limitations": [
+    "No Hugging Face model load, tokenizer resize or PyTorch examples executed; API checked against current official docs.",
+    "Built-route and fragment checks pass. Browser acceptance is a bounded textbook/interactive sample, not visual inspection of every archived question figure.",
+    "Canonical course/topic pages retain separate ownership and acceptance; archive errata alone do not close those tasks."
+  ]
+}

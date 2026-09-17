@@ -1,0 +1,3651 @@
+{
+  "schema": "bookvar-editorial-completion-v1",
+  "scope": "advanced",
+  "status": "complete",
+  "total_pages": 40,
+  "full_read_pages": 40,
+  "authored_en_full_read_pages": 7,
+  "findings_total": 55,
+  "manifest": "publishing/navigation.yml",
+  "limitations": [
+    "Full reading is a substantive source-text review, not browser/render verification; no full build was run while other agents edited the worktree.",
+    "Only primary-source claims and URLs explicitly listed per page were checked; this is not a revalidation of every historical benchmark, every reference, or every hyperlink.",
+    "All 47 files preserve original figure-reference order/count and explicit anchors; figure contents were not exhaustively visually re-reviewed. One local Berkeley debate figure was viewed for attribution/claim alignment.",
+    "Three pinned GitHub illustration URLs match the existing asset registry, but direct fetch failed (web internal/cache errors; shell proxy/DNS errors); URL identity is verified, HTTP availability is not.",
+    "The Berkeley Xinyun Chen lecture PDF fetch hit the tool's file-size limit; it is not classified as 404. The local debate image and Huang et al. Table 4 support the revised caption. The course /sp25/ trailing-slash URL returned 404; no global link-repair pass is claimed.",
+    "TRL example pins 0.23.1 and includes a tokenizer-mask fail-fast probe, but transformers/trl were unavailable in the local CPU environment. Jinja output/generation span was tested; actual tokenizer return_assistant_tokens_mask and training were not run.",
+    "Lean/Coq examples and the new Lean acceptance contract were reviewed against official documentation but not compiled/executed. Tool/handoff/security traces are explanatory fixtures, not live API or security integration tests.",
+    "JSON code fences were syntax-parsed, not validated by a full JSON Schema implementation; no dependency installation or full external tool execution was performed.",
+    "Review covers original findings and additional issues observed in full reading; not an independent final-review verdict or a deployment readiness claim."
+  ],
+  "pages": [
+    {
+      "index": 0,
+      "path": "00 Учебник/12 Post-training и Alignment/00 Карта модуля и источники.md",
+      "findings": [],
+      "en": null,
+      "before": "6f277d398be34add51f3a48e172b382a59843859ae9bde2632ae183a66fe0447",
+      "bytes": 10680,
+      "full_read": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/00 Учебник/12 Post-training и Alignment/00 Карта модуля и источники.md",
+      "read_evidence": "Full current page emitted and read, frontmatter through EOF; initial snapshot retained.",
+      "after": "6f277d398be34add51f3a48e172b382a59843859ae9bde2632ae183a66fe0447",
+      "changed_this_pass": false,
+      "bytes_after": 10680,
+      "snapshot_sha256": "6f277d398be34add51f3a48e172b382a59843859ae9bde2632ae183a66fe0447",
+      "snapshot_verified": true,
+      "reread": "not-required-unchanged",
+      "reread_evidence": "No edit in this pass; initial full reading covers the unchanged file.",
+      "sources_checked": [],
+      "source_verification": "local-editorial-or-executable-contract-check; no new remote-source claim",
+      "validation": [
+        "full-text-read",
+        "snapshot-sha256",
+        "original-figures-and-explicit-anchors-preserved"
+      ],
+      "limitations": [],
+      "additional_resolution": null
+    },
+    {
+      "index": 1,
+      "path": "00 Учебник/12 Post-training и Alignment/01 SFT, RLHF и DPO.md",
+      "findings": [],
+      "en": null,
+      "before": "3db23b5f6f430b8804427c61e0b8f3cb288440c1cd1e0251ba408fef22960ebe",
+      "bytes": 1113,
+      "full_read": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/00 Учебник/12 Post-training и Alignment/01 SFT, RLHF и DPO.md",
+      "read_evidence": "Full current page emitted and read, frontmatter through EOF; initial snapshot retained.",
+      "after": "3db23b5f6f430b8804427c61e0b8f3cb288440c1cd1e0251ba408fef22960ebe",
+      "changed_this_pass": false,
+      "bytes_after": 1113,
+      "snapshot_sha256": "3db23b5f6f430b8804427c61e0b8f3cb288440c1cd1e0251ba408fef22960ebe",
+      "snapshot_verified": true,
+      "reread": "not-required-unchanged",
+      "reread_evidence": "No edit in this pass; initial full reading covers the unchanged file.",
+      "sources_checked": [],
+      "source_verification": "local-editorial-or-executable-contract-check; no new remote-source claim",
+      "validation": [
+        "full-text-read",
+        "snapshot-sha256",
+        "original-figures-and-explicit-anchors-preserved"
+      ],
+      "limitations": [],
+      "additional_resolution": null
+    },
+    {
+      "index": 2,
+      "path": "00 Учебник/12 Post-training и Alignment/02 RLVR, reasoning и distillation.md",
+      "findings": [],
+      "en": null,
+      "before": "dbb8d9dbbe509c803c623df7f16bbdc5e1db0fc0ff32f1b8eb3bca33960e05a1",
+      "bytes": 833,
+      "full_read": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/00 Учебник/12 Post-training и Alignment/02 RLVR, reasoning и distillation.md",
+      "read_evidence": "Full current page emitted and read, frontmatter through EOF; initial snapshot retained.",
+      "after": "dbb8d9dbbe509c803c623df7f16bbdc5e1db0fc0ff32f1b8eb3bca33960e05a1",
+      "changed_this_pass": false,
+      "bytes_after": 833,
+      "snapshot_sha256": "dbb8d9dbbe509c803c623df7f16bbdc5e1db0fc0ff32f1b8eb3bca33960e05a1",
+      "snapshot_verified": true,
+      "reread": "not-required-unchanged",
+      "reread_evidence": "No edit in this pass; initial full reading covers the unchanged file.",
+      "sources_checked": [],
+      "source_verification": "local-editorial-or-executable-contract-check; no new remote-source claim",
+      "validation": [
+        "full-text-read",
+        "snapshot-sha256",
+        "original-figures-and-explicit-anchors-preserved"
+      ],
+      "limitations": [],
+      "additional_resolution": null
+    },
+    {
+      "index": 3,
+      "path": "00 Учебник/15 Embeddings, Retrieval и RAG/00 Карта модуля и источники.md",
+      "findings": [
+        {
+          "severity": "P3",
+          "line": 2,
+          "excerpt": "Embeddings, Retrieval и RAG — карта модуля и источники",
+          "issue": "Редакторская несогласованность: название обещает карту источников, тело содержит только перенос.",
+          "action": "Переименовать в указатель переноса либо дать ссылки на четыре главы маршрута и карту источников.",
+          "id": "advanced-04-1",
+          "status": "fixed",
+          "resolution": "Заголовок уточнён: это указатель актуального маршрута, а не несуществующая карта источников.",
+          "page_sha_before": "57252506265b51e514a8b4278b276d9d4a62d3fe635b63531730a22c9285b306",
+          "page_sha_after": "af6cb2508aa0ac43427c9a47d4fe6b3ed791c0adf34f896a64e62fa1ca386dab",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread"
+          ],
+          "limitations": []
+        }
+      ],
+      "en": null,
+      "before": "57252506265b51e514a8b4278b276d9d4a62d3fe635b63531730a22c9285b306",
+      "bytes": 795,
+      "full_read": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/00 Учебник/15 Embeddings, Retrieval и RAG/00 Карта модуля и источники.md",
+      "read_evidence": "Full current page emitted and read, frontmatter through EOF; initial snapshot retained.",
+      "reread": "full",
+      "after": "af6cb2508aa0ac43427c9a47d4fe6b3ed791c0adf34f896a64e62fa1ca386dab",
+      "changed_this_pass": true,
+      "bytes_after": 808,
+      "snapshot_sha256": "57252506265b51e514a8b4278b276d9d4a62d3fe635b63531730a22c9285b306",
+      "snapshot_verified": true,
+      "reread_evidence": "Entire changed page emitted and reread from frontmatter through EOF; any subsequent local correction read again.",
+      "sources_checked": [],
+      "source_verification": "local-editorial-or-executable-contract-check; no new remote-source claim",
+      "validation": [
+        "full-text-read",
+        "snapshot-sha256",
+        "original-figures-and-explicit-anchors-preserved",
+        "full-changed-page-reread"
+      ],
+      "limitations": [],
+      "additional_resolution": null
+    },
+    {
+      "index": 4,
+      "path": "00 Учебник/16 Multimodal Models/01 Vision-language и omni models.md",
+      "findings": [],
+      "en": null,
+      "before": "ca9f47047d6aed4e29351085c398c02ab7d6025901c75b8b9c3c262cddd8fee2",
+      "bytes": 1910,
+      "full_read": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/00 Учебник/16 Multimodal Models/01 Vision-language и omni models.md",
+      "read_evidence": "Full current page emitted and read, frontmatter through EOF; initial snapshot retained.",
+      "after": "ca9f47047d6aed4e29351085c398c02ab7d6025901c75b8b9c3c262cddd8fee2",
+      "changed_this_pass": false,
+      "bytes_after": 1910,
+      "snapshot_sha256": "ca9f47047d6aed4e29351085c398c02ab7d6025901c75b8b9c3c262cddd8fee2",
+      "snapshot_verified": true,
+      "reread": "not-required-unchanged",
+      "reread_evidence": "No edit in this pass; initial full reading covers the unchanged file.",
+      "sources_checked": [],
+      "source_verification": "local-editorial-or-executable-contract-check; no new remote-source claim",
+      "validation": [
+        "full-text-read",
+        "snapshot-sha256",
+        "original-figures-and-explicit-anchors-preserved"
+      ],
+      "limitations": [],
+      "additional_resolution": null
+    },
+    {
+      "index": 5,
+      "path": "00 Учебник/17 Tools и Agents/00 Agent Harness и Context Engineering — карта модуля.md",
+      "findings": [],
+      "en": null,
+      "before": "74a2b285a8c00e1ad03e66bb7b50cb9cf35a8ccec7ce21a4ea4bf6e861349115",
+      "bytes": 6730,
+      "lines": 58,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/00 Учебник/17 Tools и Agents/00 Agent Harness и Context Engineering — карта модуля.md",
+      "full_read": true,
+      "read_evidence": "Read full current page; long pages emitted in contiguous segments through EOF.",
+      "after": "74a2b285a8c00e1ad03e66bb7b50cb9cf35a8ccec7ce21a4ea4bf6e861349115",
+      "changed_this_pass": false,
+      "bytes_after": 6730,
+      "snapshot_sha256": "74a2b285a8c00e1ad03e66bb7b50cb9cf35a8ccec7ce21a4ea4bf6e861349115",
+      "snapshot_verified": true,
+      "reread": "not-required-unchanged",
+      "reread_evidence": "No edit in this pass; initial full reading covers the unchanged file.",
+      "sources_checked": [],
+      "source_verification": "local-editorial-or-executable-contract-check; no new remote-source claim",
+      "validation": [
+        "full-text-read",
+        "snapshot-sha256",
+        "original-figures-and-explicit-anchors-preserved"
+      ],
+      "limitations": [],
+      "additional_resolution": null
+    },
+    {
+      "index": 6,
+      "path": "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 206,
+          "excerpt": "Самый сильный\nградиент придёт от слова `надёжен`",
+          "issue": "Математическое преувеличение: из p_target известна производная по target-logit p−1, но параметрический градиент зависит от полного распределения и Jacobian логитов.",
+          "action": "Уточнить «наибольшая по модулю производная по логиту правильного токена» либо показать dL/dz=p−one_hot и оговорить переход к параметрам.",
+          "id": "advanced-07-1",
+          "status": "fixed",
+          "resolution": "Разведены производная CE по target-logit и параметрический градиент с Jacobian; приведены точные значения.",
+          "page_sha_before": "10d273c411659e2a16a954d41934481164cff13f6693a24e8cdf495533ec14ed",
+          "page_sha_after": "2d1109111635071b75718f5b473f9dda0678c0e024f98e48b7359b6b51f9171e",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://docs.pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread",
+            "arithmetic"
+          ],
+          "limitations": []
+        },
+        {
+          "severity": "P3",
+          "line": 138,
+          "excerpt": "`быстрее`",
+          "issue": "Учебная несогласованность: игрушечный target возвращает утверждение «UDP быстрее», от которого исходная демонстрация специально отказывается.",
+          "action": "Заменить токены на корректную краткую фразу, сохранив структуру маски.",
+          "id": "advanced-07-2",
+          "status": "fixed",
+          "resolution": "Игрушечная последовательность теперь говорит о сохранении порядка TCP и не утверждает, что UDP быстрее.",
+          "page_sha_before": "10d273c411659e2a16a954d41934481164cff13f6693a24e8cdf495533ec14ed",
+          "page_sha_after": "2d1109111635071b75718f5b473f9dda0678c0e024f98e48b7359b6b51f9171e",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://docs.pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread",
+            "arithmetic"
+          ],
+          "limitations": []
+        }
+      ],
+      "en": null,
+      "before": "10d273c411659e2a16a954d41934481164cff13f6693a24e8cdf495533ec14ed",
+      "bytes": 39303,
+      "lines": 537,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md",
+      "full_read": true,
+      "read_evidence": "Read full current page; long pages emitted in contiguous segments through EOF.",
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html"
+      ],
+      "reread": "full",
+      "reread_evidence": "Entire changed page emitted and reread from frontmatter through EOF; any subsequent local correction read again.",
+      "after": "2d1109111635071b75718f5b473f9dda0678c0e024f98e48b7359b6b51f9171e",
+      "changed_this_pass": true,
+      "bytes_after": 40205,
+      "snapshot_sha256": "10d273c411659e2a16a954d41934481164cff13f6693a24e8cdf495533ec14ed",
+      "snapshot_verified": true,
+      "source_verification": "selected-primary-sources-checked",
+      "validation": [
+        "full-text-read",
+        "snapshot-sha256",
+        "original-figures-and-explicit-anchors-preserved",
+        "full-changed-page-reread",
+        "arithmetic"
+      ],
+      "limitations": [],
+      "additional_resolution": "Повторное чтение также убрало необоснованную гарантию одновременного роста вероятности target на каждой позиции."
+    },
+    {
+      "index": 7,
+      "path": "00 Учебник/12 Post-training и Alignment/02 Preference data.md",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 260,
+          "excerpt": "\"source_policy\": row[\"responses\"][0][\"policy\"]",
+          "issue": "Недостаток учебного кода: всем парам приписывается policy первого ответа, даже если выбранные два ответа сгенерированы другими моделями.",
+          "action": "Сохранить источник каждого члена пары отдельно или добавить проверяемое ограничение одной policy на ranking group.",
+          "id": "advanced-08-1",
+          "status": "fixed",
+          "resolution": "Provenance сохраняется отдельно как chosen_policy/rejected_policy по ID выбранных ответов.",
+          "page_sha_before": "578d009c2dee4f3a1e7a5da5a724599e8217c1d1a2306b7f2b9d56958dc1bcfe",
+          "page_sha_after": "07e8f8ba24870a69b7d6d86fd6e659d8ee8c34291cde8cb75f75c11c2f61ee64",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread",
+            "preference_grpo"
+          ],
+          "limitations": []
+        }
+      ],
+      "en": null,
+      "before": "578d009c2dee4f3a1e7a5da5a724599e8217c1d1a2306b7f2b9d56958dc1bcfe",
+      "bytes": 20358,
+      "lines": 315,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/00 Учебник/12 Post-training и Alignment/02 Preference data.md",
+      "full_read": true,
+      "read_evidence": "Read full current page; long pages emitted in contiguous segments through EOF.",
+      "sources_checked": [],
+      "reread": "full",
+      "after": "07e8f8ba24870a69b7d6d86fd6e659d8ee8c34291cde8cb75f75c11c2f61ee64",
+      "changed_this_pass": true,
+      "bytes_after": 20434,
+      "snapshot_sha256": "578d009c2dee4f3a1e7a5da5a724599e8217c1d1a2306b7f2b9d56958dc1bcfe",
+      "snapshot_verified": true,
+      "reread_evidence": "Entire changed page emitted and reread from frontmatter through EOF; any subsequent local correction read again.",
+      "source_verification": "local-editorial-or-executable-contract-check; no new remote-source claim",
+      "validation": [
+        "full-text-read",
+        "snapshot-sha256",
+        "original-figures-and-explicit-anchors-preserved",
+        "full-changed-page-reread",
+        "preference_grpo"
+      ],
+      "limitations": [],
+      "additional_resolution": null
+    },
+    {
+      "index": 8,
+      "path": "00 Учебник/12 Post-training и Alignment/03 Reward modeling.md",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 231,
+          "excerpt": "Это уже RLVR: награда не обязана быть\nобученной моделью.",
+          "issue": "Категориальная ошибка: наличие программно проверяемого сигнала не делает процедуру reinforcement learning; такой verifier используют и при оценке/SFT-фильтрации.",
+          "action": "Написать «Такой сигнал используют в RLVR, если им оптимизируют policy методом RL» и отделить иные применения.",
+          "id": "advanced-09-1",
+          "status": "fixed",
+          "resolution": "RLVR отделён от оценки и SFT-фильтрации тем же верификатором.",
+          "page_sha_before": "a8d1c01e53ac5cc20a0bba6e119a7fa48f27ea049280843cfc5edd92732ce7d6",
+          "page_sha_after": "9f187e223d4143ed48e427266ab65406e960813bd722343874c2f476b0ad65bd",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://arxiv.org/abs/2411.15124"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread"
+          ],
+          "limitations": []
+        },
+        {
+          "severity": "P3",
+          "line": 256,
+          "excerpt": "Итеративное обучение actor и evaluator",
+          "issue": "Педагогический порядок: большой блок многократно опирается на DPO до главы, где его механизм вводится.",
+          "action": "Отметить блок как расширение после главы DPO либо перенести туда исследовательский маршрут, сохранив в основной главе мотивацию оценивания оценщика.",
+          "id": "advanced-09-2",
+          "status": "fixed",
+          "resolution": "Добавлен явный маршрут расширения после DPO без удаления исследовательских механизмов.",
+          "page_sha_before": "a8d1c01e53ac5cc20a0bba6e119a7fa48f27ea049280843cfc5edd92732ce7d6",
+          "page_sha_after": "9f187e223d4143ed48e427266ab65406e960813bd722343874c2f476b0ad65bd",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://arxiv.org/abs/2411.15124"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread"
+          ],
+          "limitations": []
+        }
+      ],
+      "en": null,
+      "before": "a8d1c01e53ac5cc20a0bba6e119a7fa48f27ea049280843cfc5edd92732ce7d6",
+      "bytes": 42589,
+      "lines": 616,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/00 Учебник/12 Post-training и Alignment/03 Reward modeling.md",
+      "full_read": true,
+      "read_evidence": "Read full current page; long pages emitted in contiguous segments through EOF.",
+      "sources_checked": [
+        "https://arxiv.org/abs/2411.15124"
+      ],
+      "reread": "full",
+      "after": "9f187e223d4143ed48e427266ab65406e960813bd722343874c2f476b0ad65bd",
+      "changed_this_pass": true,
+      "bytes_after": 43669,
+      "snapshot_sha256": "a8d1c01e53ac5cc20a0bba6e119a7fa48f27ea049280843cfc5edd92732ce7d6",
+      "snapshot_verified": true,
+      "reread_evidence": "Entire changed page emitted and reread from frontmatter through EOF; any subsequent local correction read again.",
+      "source_verification": "selected-primary-sources-checked",
+      "validation": [
+        "full-text-read",
+        "snapshot-sha256",
+        "original-figures-and-explicit-anchors-preserved",
+        "full-changed-page-reread"
+      ],
+      "limitations": [],
+      "additional_resolution": null
+    },
+    {
+      "index": 9,
+      "path": "00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 490,
+          "excerpt": "сохранённые\nвероятности уже плохо отражают стратегию, породившую текущие ответы.",
+          "issue": "Фактическая неточность механизма: при корректном логировании старые вероятности точно описывают behavior policy; проблема в её расхождении с текущей policy.",
+          "action": "Описать lag как off-policy mismatch, отдельно выделить реальную ошибку несовпадения версии logits с генератором.",
+          "id": "advanced-10-1",
+          "status": "fixed",
+          "resolution": "Устаревание данных объяснено mismatch старой/текущей policy; ошибка logprobs другого генератора выделена отдельно.",
+          "page_sha_before": "e04ebb11c574e0a0d2be2292ea30e82ff813697126c139c14974eb9f6c626516",
+          "page_sha_after": "0b25a5d2a08ad590ac27c5bd7f289ce32a9ad4339fb4bcfbe12cd9635c81a749",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://spinningup.openai.com/en/latest/algorithms/ppo.html"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread"
+          ],
+          "limitations": []
+        }
+      ],
+      "en": null,
+      "before": "e04ebb11c574e0a0d2be2292ea30e82ff813697126c139c14974eb9f6c626516",
+      "bytes": 31680,
+      "lines": 549,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md",
+      "full_read": true,
+      "read_evidence": "Read full current page; long pages emitted in contiguous segments through EOF.",
+      "sources_checked": [
+        "https://spinningup.openai.com/en/latest/algorithms/ppo.html"
+      ],
+      "reread": "full",
+      "after": "0b25a5d2a08ad590ac27c5bd7f289ce32a9ad4339fb4bcfbe12cd9635c81a749",
+      "changed_this_pass": true,
+      "bytes_after": 32262,
+      "snapshot_sha256": "e04ebb11c574e0a0d2be2292ea30e82ff813697126c139c14974eb9f6c626516",
+      "snapshot_verified": true,
+      "reread_evidence": "Entire changed page emitted and reread from frontmatter through EOF; any subsequent local correction read again.",
+      "source_verification": "selected-primary-sources-checked",
+      "validation": [
+        "full-text-read",
+        "snapshot-sha256",
+        "original-figures-and-explicit-anchors-preserved",
+        "full-changed-page-reread"
+      ],
+      "limitations": [],
+      "additional_resolution": null
+    },
+    {
+      "index": 10,
+      "path": "00 Учебник/12 Post-training и Alignment/05 DPO.md",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 297,
+          "excerpt": "повышает логарифм правдоподобия выбранного ответа",
+          "issue": "Утверждение о результате параметрического обновления слишком сильное и противоречит строкам 526–529 и 627–632: обе sequence probabilities могут падать при улучшении margin.",
+          "action": "Говорить о направлениях частных производных DPO по logπ_w/logπ_l и сразу оговорить связанные параметры; связать с NLL-компонентой IRPO.",
+          "id": "advanced-11-1",
+          "status": "fixed",
+          "resolution": "Частные производные DPO и реальные изменения вероятностей общих параметров разведены; подпись рисунка согласована.",
+          "page_sha_before": "c72692b71c93c037d6e3c0654b2ec1634dd72659e42c30a77a57d45ea9adf963",
+          "page_sha_after": "9147d179a9edd437dbf164910c62cf270a828d433730863e11cb6b6dffcc57fb",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://arxiv.org/html/2305.18290v2"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread"
+          ],
+          "limitations": []
+        }
+      ],
+      "en": null,
+      "before": "c72692b71c93c037d6e3c0654b2ec1634dd72659e42c30a77a57d45ea9adf963",
+      "bytes": 45193,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/00 Учебник/12 Post-training и Alignment/05 DPO.md",
+      "full_read": true,
+      "read_evidence": "Full page read in contiguous sections through EOF; missing truncated TTC segment re-emitted.",
+      "sources_checked": [
+        "https://arxiv.org/html/2305.18290v2"
+      ],
+      "reread": "full",
+      "after": "9147d179a9edd437dbf164910c62cf270a828d433730863e11cb6b6dffcc57fb",
+      "changed_this_pass": true,
+      "bytes_after": 45973,
+      "snapshot_sha256": "c72692b71c93c037d6e3c0654b2ec1634dd72659e42c30a77a57d45ea9adf963",
+      "snapshot_verified": true,
+      "reread_evidence": "Entire changed page emitted and reread from frontmatter through EOF; any subsequent local correction read again.",
+      "source_verification": "selected-primary-sources-checked",
+      "validation": [
+        "full-text-read",
+        "snapshot-sha256",
+        "original-figures-and-explicit-anchors-preserved",
+        "full-changed-page-reread"
+      ],
+      "limitations": [],
+      "additional_resolution": null
+    },
+    {
+      "index": 11,
+      "path": "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 198,
+          "excerpt": "FINAL = re.compile(r\"(?m)^FINAL:\\s*([-+]?\\d+(?:\\.\\d+)?)\\s*$\")",
+          "issue": "Ошибка учебного verifier-контракта: multiline-якоря допускают FINAL не в последней строке, вопреки условию строки80.",
+          "action": "Проверять окончание всего ответа или последнюю непустую строку; добавить отрицательный тест «FINAL: 4\\nдальнейший текст».",
+          "id": "advanced-12-1",
+          "status": "already-fixed",
+          "resolution": "До прохода parser уже проверял последнюю строку через fullmatch и имел отрицательные регрессионные тесты.",
+          "page_sha_before": "9b75b0cb4c95ee0ad38d296d235d2da590637cbeb8fe5847e2eb3eb45d41f094",
+          "page_sha_after": "9b75b0cb4c95ee0ad38d296d235d2da590637cbeb8fe5847e2eb3eb45d41f094",
+          "full_read": true,
+          "reread": "not-required-unchanged",
+          "sources_checked": [],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "rlvr"
+          ],
+          "limitations": []
+        },
+        {
+          "severity": "P2",
+          "line": 126,
+          "excerpt": "ответ $y_4$ получит такую же награду, как верное решение.",
+          "issue": "Арифметическая ошибка: при r=correct+1·format верные y1/y3 имеют2, неверный y4 имеет1, а y2 по текущему parser имеет0.",
+          "action": "Исправить расчёт и показать реальный случай конкуренции shaping: положительная награда при нулевой correctness либо отдельный семантически верный неформатный ответ, если correct проверяется независимо.",
+          "id": "advanced-12-2",
+          "status": "already-fixed",
+          "resolution": "До прохода уже указаны корректные награды (2,0,2,1) и объяснён shaping shortcut.",
+          "page_sha_before": "9b75b0cb4c95ee0ad38d296d235d2da590637cbeb8fe5847e2eb3eb45d41f094",
+          "page_sha_after": "9b75b0cb4c95ee0ad38d296d235d2da590637cbeb8fe5847e2eb3eb45d41f094",
+          "full_read": true,
+          "reread": "not-required-unchanged",
+          "sources_checked": [],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "rlvr"
+          ],
+          "limitations": []
+        }
+      ],
+      "en": null,
+      "before": "9b75b0cb4c95ee0ad38d296d235d2da590637cbeb8fe5847e2eb3eb45d41f094",
+      "bytes": 34452,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md",
+      "full_read": true,
+      "read_evidence": "Full page read in contiguous sections through EOF; missing truncated TTC segment re-emitted.",
+      "after": "9b75b0cb4c95ee0ad38d296d235d2da590637cbeb8fe5847e2eb3eb45d41f094",
+      "changed_this_pass": false,
+      "bytes_after": 34452,
+      "snapshot_sha256": "9b75b0cb4c95ee0ad38d296d235d2da590637cbeb8fe5847e2eb3eb45d41f094",
+      "snapshot_verified": true,
+      "reread": "not-required-unchanged",
+      "reread_evidence": "No edit in this pass; initial full reading covers the unchanged file.",
+      "sources_checked": [],
+      "source_verification": "local-editorial-or-executable-contract-check; no new remote-source claim",
+      "validation": [
+        "full-text-read",
+        "snapshot-sha256",
+        "original-figures-and-explicit-anchors-preserved",
+        "rlvr"
+      ],
+      "limitations": [],
+      "additional_resolution": null
+    },
+    {
+      "index": 12,
+      "path": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 245,
+          "excerpt": "Это разные\nоценки одной целевой величины.",
+          "issue": "Математическая неточность: sequence-mean и token-mean при переменных длинах меняют относительные веса ответов, то есть в общем оптимизируют разные взвешенные цели.",
+          "action": "Назвать разными способами взвешивания objective и показать два ответа длины2/20 с одинаковым token loss.",
+          "id": "advanced-13-1",
+          "status": "fixed",
+          "resolution": "Показаны разные веса ответов 2/20 и численный результат 1.5 против 1.909.",
+          "page_sha_before": "1f58a6299af585bee157dafeef8126fe14f853c1e62a455e6533f21af7ba4880",
+          "page_sha_after": "ccd2739e614212a881b8e59a0a09580dd0d08ef5b821eb0202e513c6e83ac61b",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://arxiv.org/html/2503.20783v1"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread",
+            "preference_grpo",
+            "arithmetic"
+          ],
+          "limitations": []
+        },
+        {
+          "severity": "P2",
+          "line": 291,
+          "excerpt": "математическое ожидание оценки сохраняет направление\nистинного градиента, но уменьшает его масштаб в $(G-1)/G$ раза.",
+          "issue": "Недостаточно определена область утверждения: фактор (G−1)/G верен для group-mean centering без action-dependent std/length normalization, но расположен сразу после полной GRPO-оценки.",
+          "action": "Выписать отдельно ненормированный score-function estimator и явно исключить std/length/clipping из этого доказательства.",
+          "id": "advanced-13-2",
+          "status": "fixed",
+          "resolution": "Доказательство (G-1)/G выписано отдельно без std/length/clipping и с iid предпосылками.",
+          "page_sha_before": "1f58a6299af585bee157dafeef8126fe14f853c1e62a455e6533f21af7ba4880",
+          "page_sha_after": "ccd2739e614212a881b8e59a0a09580dd0d08ef5b821eb0202e513c6e83ac61b",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://arxiv.org/html/2503.20783v1"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread",
+            "preference_grpo",
+            "arithmetic"
+          ],
+          "limitations": []
+        },
+        {
+          "severity": "P3",
+          "line": 344,
+          "excerpt": "В статье\nВ статье о MaxRL",
+          "issue": "Редакторский дубль стыка абзацев.",
+          "action": "Удалить повтор «В статье».",
+          "id": "advanced-13-3",
+          "status": "fixed",
+          "resolution": "Удалён повтор В статье.",
+          "page_sha_before": "1f58a6299af585bee157dafeef8126fe14f853c1e62a455e6533f21af7ba4880",
+          "page_sha_after": "ccd2739e614212a881b8e59a0a09580dd0d08ef5b821eb0202e513c6e83ac61b",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://arxiv.org/html/2503.20783v1"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread",
+            "preference_grpo",
+            "arithmetic"
+          ],
+          "limitations": []
+        }
+      ],
+      "en": null,
+      "before": "1f58a6299af585bee157dafeef8126fe14f853c1e62a455e6533f21af7ba4880",
+      "bytes": 43915,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+      "full_read": true,
+      "read_evidence": "Full page read in contiguous sections through EOF; missing truncated TTC segment re-emitted.",
+      "sources_checked": [
+        "https://arxiv.org/html/2503.20783v1"
+      ],
+      "reread": "full",
+      "after": "ccd2739e614212a881b8e59a0a09580dd0d08ef5b821eb0202e513c6e83ac61b",
+      "changed_this_pass": true,
+      "bytes_after": 45173,
+      "snapshot_sha256": "1f58a6299af585bee157dafeef8126fe14f853c1e62a455e6533f21af7ba4880",
+      "snapshot_verified": true,
+      "reread_evidence": "Entire changed page emitted and reread from frontmatter through EOF; any subsequent local correction read again.",
+      "source_verification": "selected-primary-sources-checked",
+      "validation": [
+        "full-text-read",
+        "snapshot-sha256",
+        "original-figures-and-explicit-anchors-preserved",
+        "full-changed-page-reread",
+        "preference_grpo",
+        "arithmetic"
+      ],
+      "limitations": [],
+      "additional_resolution": "Одиночные $ вокруг самостоятельных display-формул заменены на $$; механизмы группового нормирования сохранены."
+    },
+    {
+      "index": 13,
+      "path": "00 Учебник/12 Post-training и Alignment/08 Reasoning distillation.md",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 218,
+          "excerpt": "а после\nдополнительной ручной обработки — в 63,0%.",
+          "issue": "Подтверждённая ошибка источника: s1 §2.2 и Appendix A относят63,0% к s1K-1.1, где трассы заново сгенерированы DeepSeek-R1; показатель является решением grader, не аудитом каждого шага.",
+          "action": "Исправить происхождение s1K-1.1 и смысл correctness, отдельно назвать grader и наборы.",
+          "id": "advanced-14-1",
+          "status": "already-fixed",
+          "resolution": "До прохода уже исправлены s1K-1.1, DeepSeek-R1 и смысл grader correctness; сверено с s1.",
+          "page_sha_before": "e14cf6b8b724cf33f7d6ed112b45283134339b32cf0f120dee570d9388602cdc",
+          "page_sha_after": "7555a255199bbc2d258ffb52b5330cb3fc32e3290a839ef5bb2aa9556f2f97fa",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://arxiv.org/html/2501.19393",
+            "https://huggingface.co/docs/trl/v0.23.1/sft_trainer"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread",
+            "sft_template"
+          ],
+          "limitations": [
+            "Tokenizer mask API and TRL training not run; template rendering only."
+          ]
+        },
+        {
+          "severity": "P2",
+          "line": 131,
+          "excerpt": "max_length=32768,",
+          "issue": "Воспроизводимость минимального запуска не закрыта: текст требует EOS <|im_end|>, но конфиг не задаёт его; версия TRL также не закреплена.",
+          "action": "Добавить проверенный eos_token и pinned version, короткий assert на assistant mask и EOS до trainer.train().",
+          "id": "advanced-14-2",
+          "status": "fixed",
+          "resolution": "Закреплён TRL 0.23.1, EOS, template generation mask и fail-fast probe до trainer; полный training не выполнялся.",
+          "page_sha_before": "e14cf6b8b724cf33f7d6ed112b45283134339b32cf0f120dee570d9388602cdc",
+          "page_sha_after": "7555a255199bbc2d258ffb52b5330cb3fc32e3290a839ef5bb2aa9556f2f97fa",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://arxiv.org/html/2501.19393",
+            "https://huggingface.co/docs/trl/v0.23.1/sft_trainer"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread",
+            "sft_template"
+          ],
+          "limitations": [
+            "Tokenizer mask API and TRL training not run; template rendering only."
+          ]
+        }
+      ],
+      "en": null,
+      "before": "e14cf6b8b724cf33f7d6ed112b45283134339b32cf0f120dee570d9388602cdc",
+      "bytes": 32086,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/00 Учебник/12 Post-training и Alignment/08 Reasoning distillation.md",
+      "full_read": true,
+      "read_evidence": "Full page read in contiguous sections through EOF; missing truncated TTC segment re-emitted.",
+      "sources_checked": [
+        "https://arxiv.org/html/2501.19393",
+        "https://huggingface.co/docs/trl/v0.23.1/sft_trainer"
+      ],
+      "reread": "full",
+      "after": "7555a255199bbc2d258ffb52b5330cb3fc32e3290a839ef5bb2aa9556f2f97fa",
+      "changed_this_pass": true,
+      "bytes_after": 34082,
+      "snapshot_sha256": "e14cf6b8b724cf33f7d6ed112b45283134339b32cf0f120dee570d9388602cdc",
+      "snapshot_verified": true,
+      "reread_evidence": "Entire changed page emitted and reread from frontmatter through EOF; any subsequent local correction read again.",
+      "source_verification": "selected-primary-sources-checked",
+      "validation": [
+        "full-text-read",
+        "snapshot-sha256",
+        "original-figures-and-explicit-anchors-preserved",
+        "full-changed-page-reread",
+        "sft_template"
+      ],
+      "limitations": [
+        "Tokenizer mask API and TRL training not run; template rendering only."
+      ],
+      "additional_resolution": null
+    },
+    {
+      "index": 14,
+      "path": "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 440,
+          "excerpt": "если бюджет\nисчерпан, генерацию обрывают.",
+          "issue": "Неточно передан механизм s1: ограничивают thinking phase через end-of-thinking delimiter, затем генерируют final answer; обрыв всего ответа разрушит оценивание.",
+          "action": "Показать переход thinking→delimiter→final answer и раздельные бюджеты этих фаз.",
+          "id": "advanced-15-1",
+          "status": "fixed",
+          "resolution": "Ограничение thinking отделено от final answer, указаны раздельные бюджеты.",
+          "page_sha_before": "d7cad886c7623a61ed53efb9724e1a364984096efeb87fef668946d6a1d6fb94",
+          "page_sha_after": "e484dfc8bfdda2312d16eda48fd91a93a7379ef578a2569adb66e7b6f23f9b4a",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://arxiv.org/html/2501.19393"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread"
+          ],
+          "limitations": []
+        },
+        {
+          "severity": "P2",
+          "line": 156,
+          "excerpt": "Поиск возвращает проверенные случаи из\nвнешнего корпуса",
+          "issue": "Необоснованная гарантия: retrieval возвращает записи корпуса, проверенность не следует из способа получения.",
+          "action": "Оговорить «из заранее проверенного корпуса» либо явно отделить retrieval от верификации.",
+          "id": "advanced-15-2",
+          "status": "fixed",
+          "resolution": "Retrieval не обещает проверенности: доказательность зависит от корпуса и проверки применимости.",
+          "page_sha_before": "d7cad886c7623a61ed53efb9724e1a364984096efeb87fef668946d6a1d6fb94",
+          "page_sha_after": "e484dfc8bfdda2312d16eda48fd91a93a7379ef578a2569adb66e7b6f23f9b4a",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://arxiv.org/html/2501.19393"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread"
+          ],
+          "limitations": []
+        }
+      ],
+      "en": null,
+      "before": "d7cad886c7623a61ed53efb9724e1a364984096efeb87fef668946d6a1d6fb94",
+      "bytes": 48628,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md",
+      "full_read": true,
+      "read_evidence": "Full page read in contiguous sections through EOF; missing truncated TTC segment re-emitted.",
+      "sources_checked": [
+        "https://arxiv.org/html/2501.19393"
+      ],
+      "reread": "full",
+      "after": "e484dfc8bfdda2312d16eda48fd91a93a7379ef578a2569adb66e7b6f23f9b4a",
+      "changed_this_pass": true,
+      "bytes_after": 49471,
+      "snapshot_sha256": "d7cad886c7623a61ed53efb9724e1a364984096efeb87fef668946d6a1d6fb94",
+      "snapshot_verified": true,
+      "reread_evidence": "Entire changed page emitted and reread from frontmatter through EOF; any subsequent local correction read again.",
+      "source_verification": "selected-primary-sources-checked",
+      "validation": [
+        "full-text-read",
+        "snapshot-sha256",
+        "original-figures-and-explicit-anchors-preserved",
+        "full-changed-page-reread"
+      ],
+      "limitations": [],
+      "additional_resolution": null
+    },
+    {
+      "index": 15,
+      "path": "00 Учебник/15 Embeddings, Retrieval и RAG/01 Embeddings и retrieval.md",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 284,
+          "excerpt": "Доля запросов, для которых хотя бы один релевантный документ попал в первые\n$k$.",
+          "issue": "Неуточнённая метрическая конвенция: определён Hit/Success@k, а не полнота множества релевантных документов; различие существенно при нескольких gold passages.",
+          "action": "Развести hit@k и recall@k формулами и примером с тремя релевантными документами; если используется QA convention, назвать её явно.",
+          "id": "advanced-16-1",
+          "status": "fixed",
+          "resolution": "Hit и recall разведены формулами и примером с тремя gold-документами.",
+          "page_sha_before": "995b48c541614b363833c62c96750f9bb98be06b246475c90a43aa27614f03fa",
+          "page_sha_after": "adc641bedef00c13e97db0c3e24239c279ddba1001d4d0cad8ca20069a93bbcf",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-unranked-retrieval-sets-1.html"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread"
+          ],
+          "limitations": []
+        },
+        {
+          "severity": "P2",
+          "line": 4,
+          "excerpt": "status: legacy",
+          "issue": "Старый маршрут остаётся самостоятельной полной учебной цепочкой, а не перенаправлением; численные разборы рискуют остаться только здесь.",
+          "action": "При консолидации перенести уникальные расчёты в60–62 и сделать ясную карту переноса, не удаляя сильный материал.",
+          "id": "advanced-16-2",
+          "status": "fixed",
+          "resolution": "В начале explicit карта переноса; все уникальные вычисления contrastive/BM25/RRF/MaxSim перенесены в60–62, старый текст и фигуры сохранены.",
+          "page_sha_before": "995b48c541614b363833c62c96750f9bb98be06b246475c90a43aa27614f03fa",
+          "page_sha_after": "adc641bedef00c13e97db0c3e24239c279ddba1001d4d0cad8ca20069a93bbcf",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-unranked-retrieval-sets-1.html"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread"
+          ],
+          "limitations": []
+        }
+      ],
+      "en": null,
+      "before": "995b48c541614b363833c62c96750f9bb98be06b246475c90a43aa27614f03fa",
+      "bytes": 20817,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/00 Учебник/15 Embeddings, Retrieval и RAG/01 Embeddings и retrieval.md",
+      "full_read": true,
+      "read_evidence": "Complete page read through EOF before contextual edits.",
+      "reread": "full",
+      "after": "adc641bedef00c13e97db0c3e24239c279ddba1001d4d0cad8ca20069a93bbcf",
+      "changed_this_pass": true,
+      "bytes_after": 22370,
+      "snapshot_sha256": "995b48c541614b363833c62c96750f9bb98be06b246475c90a43aa27614f03fa",
+      "snapshot_verified": true,
+      "reread_evidence": "Entire changed page emitted and reread from frontmatter through EOF; any subsequent local correction read again.",
+      "sources_checked": [
+        "https://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-unranked-retrieval-sets-1.html"
+      ],
+      "source_verification": "selected-primary-sources-checked",
+      "validation": [
+        "full-text-read",
+        "snapshot-sha256",
+        "original-figures-and-explicit-anchors-preserved",
+        "full-changed-page-reread"
+      ],
+      "limitations": [],
+      "additional_resolution": "Сохранены исходные фигуры и старое содержание; основное развитие сквозных вычислений теперь есть и в канонических 60–62."
+    },
+    {
+      "index": 16,
+      "path": "00 Учебник/15 Embeddings, Retrieval и RAG/02 RAG как система.md",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 317,
+          "excerpt": "Разбор одной ошибки",
+          "issue": "Пробел объяснения: вместо обещанного разбора дан только список вопросов; читатель не видит изменение артефактов между этапами.",
+          "action": "Провести один конкретный сбой по исходному документу, chunks, ranks, context и неподдержанному claim с восстановлением причины.",
+          "id": "advanced-17-1",
+          "status": "fixed",
+          "resolution": "Добавлен последовательный trace исходник/chunks/ранги/context/claim с причиной потери исключения.",
+          "page_sha_before": "c74e96fb2e3608deab7226b534f29c464ccee3dcdb1fffa72a3f65718ec5afe5",
+          "page_sha_after": "391a41ea52d5fee10e9615ebb3fd2c04d27a37618d806e10bd42826b6416d99d",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread"
+          ],
+          "limitations": [
+            "Explanatory trace/geometry/state contract inspected; no live environment integration test."
+          ]
+        },
+        {
+          "severity": "P2",
+          "line": 330,
+          "excerpt": "Только после первых шести положительных ответов ошибка с уверенностью относится\nк генератору.",
+          "issue": "Слишком сильная диагностическая гарантия: наличие фрагмента не доказывает полноту доказательства и корректную упаковку, особенно при противоречиях и multi-hop.",
+          "action": "Заменить гарантию на диагностическую гипотезу и добавить oracle-context контроль.",
+          "id": "advanced-17-2",
+          "status": "fixed",
+          "resolution": "Гарантия заменена гипотезой с oracle-context контрольным опытом.",
+          "page_sha_before": "c74e96fb2e3608deab7226b534f29c464ccee3dcdb1fffa72a3f65718ec5afe5",
+          "page_sha_after": "391a41ea52d5fee10e9615ebb3fd2c04d27a37618d806e10bd42826b6416d99d",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread"
+          ],
+          "limitations": [
+            "Explanatory trace/geometry/state contract inspected; no live environment integration test."
+          ]
+        }
+      ],
+      "en": null,
+      "before": "c74e96fb2e3608deab7226b534f29c464ccee3dcdb1fffa72a3f65718ec5afe5",
+      "bytes": 28676,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/00 Учебник/15 Embeddings, Retrieval и RAG/02 RAG как система.md",
+      "full_read": true,
+      "read_evidence": "Complete page read through EOF before contextual edits.",
+      "reread": "full",
+      "after": "391a41ea52d5fee10e9615ebb3fd2c04d27a37618d806e10bd42826b6416d99d",
+      "changed_this_pass": true,
+      "bytes_after": 31237,
+      "snapshot_sha256": "c74e96fb2e3608deab7226b534f29c464ccee3dcdb1fffa72a3f65718ec5afe5",
+      "snapshot_verified": true,
+      "reread_evidence": "Entire changed page emitted and reread from frontmatter through EOF; any subsequent local correction read again.",
+      "sources_checked": [],
+      "source_verification": "local-editorial-or-executable-contract-check; no new remote-source claim",
+      "validation": [
+        "full-text-read",
+        "snapshot-sha256",
+        "original-figures-and-explicit-anchors-preserved",
+        "full-changed-page-reread"
+      ],
+      "limitations": [
+        "Explanatory trace/geometry/state contract inspected; no live environment integration test."
+      ],
+      "additional_resolution": "Oracle-context опыт сформулирован как диагностический контроль, не доказательство единственной причины."
+    },
+    {
+      "index": 17,
+      "path": "00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning.md",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 82,
+          "excerpt": "\\mathcal L_{q\\to d}",
+          "issue": "Недостаток учебного раскрытия: формула не проведена через конкретную пару и численный batch; уникальный worked example остаётся на legacy-странице.",
+          "action": "Перенести и развить численный contrastive пример из01, включая false-negative сценарий.",
+          "id": "advanced-18-1",
+          "status": "fixed",
+          "resolution": "Добавлен численный batch CE и false-negative multi-positive сценарий.",
+          "page_sha_before": "3949c8bed1478f9287fe10c6399867a0ccb3e9c9504b4a2126e6cb1a0bbb3d4f",
+          "page_sha_after": "955689acfc58fc4df225f3b3c6cb46e96879617710d1f1440441e3d422417931",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://docs.pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html",
+            "https://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-unranked-retrieval-sets-1.html"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread",
+            "arithmetic"
+          ],
+          "limitations": []
+        },
+        {
+          "severity": "P2",
+          "line": 168,
+          "excerpt": "recall@k — попало ли хотя бы одно доказательство",
+          "issue": "Hit rate назван recall без оговорки о QA-конвенции и числе релевантных документов.",
+          "action": "Ввести оба показателя и знаменатели.",
+          "id": "advanced-18-2",
+          "status": "fixed",
+          "resolution": "Recall и hit даны отдельно с явными знаменателями.",
+          "page_sha_before": "3949c8bed1478f9287fe10c6399867a0ccb3e9c9504b4a2126e6cb1a0bbb3d4f",
+          "page_sha_after": "955689acfc58fc4df225f3b3c6cb46e96879617710d1f1440441e3d422417931",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://docs.pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html",
+            "https://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-unranked-retrieval-sets-1.html"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread",
+            "arithmetic"
+          ],
+          "limitations": []
+        },
+        {
+          "severity": "P2",
+          "line": 160,
+          "excerpt": "Изменение pooling, длины текста или префиксов (`query:`,\n`passage:`) требует полного переиндексирования документов.",
+          "issue": "Излишне широкое техническое требование: только query-side изменение при неизменном document encoder не требует пересчитывать doc vectors.",
+          "action": "Разделить изменения query/document ветвей, оставив необходимость переоценки качества для обеих.",
+          "id": "advanced-18-3",
+          "status": "fixed",
+          "resolution": "Документные изменения отделены от query-only изменений и переоценки качества.",
+          "page_sha_before": "3949c8bed1478f9287fe10c6399867a0ccb3e9c9504b4a2126e6cb1a0bbb3d4f",
+          "page_sha_after": "955689acfc58fc4df225f3b3c6cb46e96879617710d1f1440441e3d422417931",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://docs.pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html",
+            "https://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-unranked-retrieval-sets-1.html"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread",
+            "arithmetic"
+          ],
+          "limitations": []
+        }
+      ],
+      "en": null,
+      "before": "3949c8bed1478f9287fe10c6399867a0ccb3e9c9504b4a2126e6cb1a0bbb3d4f",
+      "bytes": 15406,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning.md",
+      "full_read": true,
+      "read_evidence": "Complete page read through EOF before contextual edits.",
+      "reread": "full",
+      "after": "955689acfc58fc4df225f3b3c6cb46e96879617710d1f1440441e3d422417931",
+      "changed_this_pass": true,
+      "bytes_after": 18843,
+      "snapshot_sha256": "3949c8bed1478f9287fe10c6399867a0ccb3e9c9504b4a2126e6cb1a0bbb3d4f",
+      "snapshot_verified": true,
+      "reread_evidence": "Entire changed page emitted and reread from frontmatter through EOF; any subsequent local correction read again.",
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html",
+        "https://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-unranked-retrieval-sets-1.html"
+      ],
+      "source_verification": "selected-primary-sources-checked",
+      "validation": [
+        "full-text-read",
+        "snapshot-sha256",
+        "original-figures-and-explicit-anchors-preserved",
+        "full-changed-page-reread",
+        "arithmetic"
+      ],
+      "limitations": [],
+      "additional_resolution": "Display delimiters исправлены; query-only обновление не объявляется обязательной перестройкой document index."
+    },
+    {
+      "index": 18,
+      "path": "00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid.md",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 48,
+          "excerpt": "\\operatorname{BM25}(q,d)",
+          "issue": "Пробел самостоятельного объяснения: параметры и IDF не определены, ручного расчёта нет; читатель канонического маршрута не может восстановить score.",
+          "action": "Дать значения символов, форму IDF и перенести численный пример BM25 из legacy01; аналогично показать RRF на двух списках.",
+          "id": "advanced-19-1",
+          "status": "fixed",
+          "resolution": "Определены BM25 параметры/IDF; добавлены ручной расчёт и RRF двух списков.",
+          "page_sha_before": "4811e0e4fabc49cd4bd1aca45e4d1f063615907b6780622ec52a2bab348e90f7",
+          "page_sha_after": "4b6fdfa92ac5e7da70a99910cc651d539941432080b217679768bf7e389d64ba",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://nlp.stanford.edu/IR-book/html/htmledition/okapi-bm25-a-non-binary-model-1.html"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread",
+            "arithmetic"
+          ],
+          "limitations": []
+        }
+      ],
+      "en": null,
+      "before": "4811e0e4fabc49cd4bd1aca45e4d1f063615907b6780622ec52a2bab348e90f7",
+      "bytes": 13726,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid.md",
+      "full_read": true,
+      "read_evidence": "Complete page read through EOF before contextual edits.",
+      "reread": "full",
+      "after": "4b6fdfa92ac5e7da70a99910cc651d539941432080b217679768bf7e389d64ba",
+      "changed_this_pass": true,
+      "bytes_after": 16280,
+      "snapshot_sha256": "4811e0e4fabc49cd4bd1aca45e4d1f063615907b6780622ec52a2bab348e90f7",
+      "snapshot_verified": true,
+      "reread_evidence": "Entire changed page emitted and reread from frontmatter through EOF; any subsequent local correction read again.",
+      "sources_checked": [
+        "https://nlp.stanford.edu/IR-book/html/htmledition/okapi-bm25-a-non-binary-model-1.html"
+      ],
+      "source_verification": "selected-primary-sources-checked",
+      "validation": [
+        "full-text-read",
+        "snapshot-sha256",
+        "original-figures-and-explicit-anchors-preserved",
+        "full-changed-page-reread",
+        "arithmetic"
+      ],
+      "limitations": [],
+      "additional_resolution": null
+    },
+    {
+      "index": 19,
+      "path": "00 Учебник/15 Embeddings, Retrieval и RAG/62 Reranking — cross-encoder и late interaction.md",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 130,
+          "excerpt": "**Position bias:** модель привыкает к месту документа в исходной выдаче.",
+          "issue": "Неверно обобщено на pointwise cross-encoder: независимая пара query/document не содержит rank кандидата; порядок влияет на listwise judge/reranker или явно поданный rank.",
+          "action": "Разделить pointwise/pairwise/listwise интерфейсы и отнести permutation tests к моделям, видящим порядок.",
+          "id": "advanced-20-1",
+          "status": "fixed",
+          "resolution": "Position bias отнесён к видимому списку/паре; pointwise rank не видит.",
+          "page_sha_before": "0f40e36c94df1a54cf39b3473ba5344ceeb81e8dca184556feb9fd03beef6299",
+          "page_sha_after": "7fb98ef230b112506fcd930350804caa502a1a4b98653095c31215ca2d0f719c",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://arxiv.org/abs/2004.12832"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread",
+            "arithmetic"
+          ],
+          "limitations": []
+        },
+        {
+          "severity": "P2",
+          "line": 124,
+          "excerpt": "разрыв между oracle и candidate recall — потолок",
+          "issue": "Метрический разрыв не определён: oracle ranking metric и candidate recall могут иметь разные единицы; oracle hit@k на candidate set уже равен его hit rate.",
+          "action": "Показать единый пример с candidate recall, oracle nDCG и model nDCG, не вычитая несопоставимые показатели.",
+          "id": "advanced-20-2",
+          "status": "fixed",
+          "resolution": "Candidate recall и oracle/model nDCG сравниваются в согласованных единицах на одном примере.",
+          "page_sha_before": "0f40e36c94df1a54cf39b3473ba5344ceeb81e8dca184556feb9fd03beef6299",
+          "page_sha_after": "7fb98ef230b112506fcd930350804caa502a1a4b98653095c31215ca2d0f719c",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://arxiv.org/abs/2004.12832"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread",
+            "arithmetic"
+          ],
+          "limitations": []
+        },
+        {
+          "severity": "P2",
+          "line": 77,
+          "excerpt": "s(q,d)=\\sum",
+          "issue": "Учебный механизм MaxSim не подкреплён численной матрицей или одним изменением ранга, хотя материал имеется на legacy01.",
+          "action": "Перенести матрицу2×3 и дополнить сравнением двух документов.",
+          "id": "advanced-20-3",
+          "status": "fixed",
+          "resolution": "Добавлены матрицы2×3 двух документов и изменение порядка.",
+          "page_sha_before": "0f40e36c94df1a54cf39b3473ba5344ceeb81e8dca184556feb9fd03beef6299",
+          "page_sha_after": "7fb98ef230b112506fcd930350804caa502a1a4b98653095c31215ca2d0f719c",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://arxiv.org/abs/2004.12832"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread",
+            "arithmetic"
+          ],
+          "limitations": []
+        }
+      ],
+      "en": null,
+      "before": "0f40e36c94df1a54cf39b3473ba5344ceeb81e8dca184556feb9fd03beef6299",
+      "bytes": 11216,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/00 Учебник/15 Embeddings, Retrieval и RAG/62 Reranking — cross-encoder и late interaction.md",
+      "full_read": true,
+      "read_evidence": "Complete page read through EOF before contextual edits.",
+      "reread": "full",
+      "after": "7fb98ef230b112506fcd930350804caa502a1a4b98653095c31215ca2d0f719c",
+      "changed_this_pass": true,
+      "bytes_after": 13373,
+      "snapshot_sha256": "0f40e36c94df1a54cf39b3473ba5344ceeb81e8dca184556feb9fd03beef6299",
+      "snapshot_verified": true,
+      "reread_evidence": "Entire changed page emitted and reread from frontmatter through EOF; any subsequent local correction read again.",
+      "sources_checked": [
+        "https://arxiv.org/abs/2004.12832"
+      ],
+      "source_verification": "selected-primary-sources-checked",
+      "validation": [
+        "full-text-read",
+        "snapshot-sha256",
+        "original-figures-and-explicit-anchors-preserved",
+        "full-changed-page-reread",
+        "arithmetic"
+      ],
+      "limitations": [],
+      "additional_resolution": null
+    },
+    {
+      "index": 20,
+      "path": "00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер.md",
+      "findings": [
+        {
+          "severity": "P3",
+          "line": 62,
+          "excerpt": "обязательные sparse channel",
+          "issue": "Редакторское переобобщение: sparse retrieval — полезный baseline, но не обязательный компонент любой корректной RAG-системы.",
+          "action": "Заменить на «добавлены sparse channel...» либо «рекомендуемые для данного конвейера».",
+          "id": "advanced-21-1",
+          "status": "fixed",
+          "resolution": "Убран обязательный характер sparse channel в подписи.",
+          "page_sha_before": "f070ae7e13078ba30da5f6a49c428ac2f5df3ea5402a0603307b303003ca19f7",
+          "page_sha_after": "b29009604b9b9a4cbe018a6c04c67f7114d067fd19b3ee88ce30e405e645b41e",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread"
+          ],
+          "limitations": [
+            "Explanatory trace/geometry/state contract inspected; no live environment integration test."
+          ]
+        }
+      ],
+      "en": null,
+      "before": "f070ae7e13078ba30da5f6a49c428ac2f5df3ea5402a0603307b303003ca19f7",
+      "bytes": 28661,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер.md",
+      "full_read": true,
+      "read_evidence": "Full RU page and existing authored EN counterpart read through EOF; truncated segments re-emitted.",
+      "en_full_read": false,
+      "reread": "full",
+      "after": "b29009604b9b9a4cbe018a6c04c67f7114d067fd19b3ee88ce30e405e645b41e",
+      "changed_this_pass": true,
+      "bytes_after": 31168,
+      "snapshot_sha256": "f070ae7e13078ba30da5f6a49c428ac2f5df3ea5402a0603307b303003ca19f7",
+      "snapshot_verified": true,
+      "reread_evidence": "Entire changed page emitted and reread from frontmatter through EOF; any subsequent local correction read again.",
+      "sources_checked": [],
+      "source_verification": "local-editorial-or-executable-contract-check; no new remote-source claim",
+      "validation": [
+        "full-text-read",
+        "snapshot-sha256",
+        "original-figures-and-explicit-anchors-preserved",
+        "full-changed-page-reread"
+      ],
+      "limitations": [
+        "Explanatory trace/geometry/state contract inspected; no live environment integration test."
+      ],
+      "additional_resolution": "Полный RAG trace дополнительно перенесён в каноническую главу 63; oracle не называется универсальным математическим потолком."
+    },
+    {
+      "index": 21,
+      "path": "00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md",
+      "findings": [],
+      "en": "en/00 Textbook/16 Multimodal Models/64 Multimodal models.md",
+      "before": "5e354860bd007d0f2f58dfdb81825c552e150f8dea791035925b05eeb23d9163",
+      "bytes": 30488,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md",
+      "en_before": "af9700d2b9cbe9d98095f506b98672e3ffafc86813909e1a90f54a94af4e4bc5",
+      "en_snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/en/00 Textbook/16 Multimodal Models/64 Multimodal models.md",
+      "full_read": true,
+      "read_evidence": "Full RU page and existing authored EN counterpart read through EOF; truncated segments re-emitted.",
+      "en_full_read": true,
+      "en_reread": "full",
+      "after": "5e354860bd007d0f2f58dfdb81825c552e150f8dea791035925b05eeb23d9163",
+      "changed_this_pass": false,
+      "bytes_after": 30488,
+      "snapshot_sha256": "5e354860bd007d0f2f58dfdb81825c552e150f8dea791035925b05eeb23d9163",
+      "snapshot_verified": true,
+      "reread": "not-required-unchanged",
+      "reread_evidence": "No edit in this pass; initial full reading covers the unchanged file.",
+      "sources_checked": [],
+      "source_verification": "local-editorial-or-executable-contract-check; no new remote-source claim",
+      "validation": [
+        "full-text-read",
+        "snapshot-sha256",
+        "original-figures-and-explicit-anchors-preserved"
+      ],
+      "limitations": [],
+      "additional_resolution": "RU не изменён; в EN patchification/reshape отделён от собственно lossy preprocessing/projection/encoder.",
+      "en_after": "69ad3615bf15b78ae670ae8affd11ebb861b61bdcd4f11714d8e33b3a91e80a8",
+      "en_changed_this_pass": true,
+      "en_snapshot_sha256": "af9700d2b9cbe9d98095f506b98672e3ffafc86813909e1a90f54a94af4e4bc5",
+      "en_snapshot_verified": true,
+      "en_read_evidence": "Entire authored EN counterpart read from frontmatter through EOF, matched by publishing/navigation.yml; no fallback duplication.",
+      "en_reread_evidence": "Entire changed EN page emitted and reread from frontmatter through EOF."
+    },
+    {
+      "index": 22,
+      "path": "00 Учебник/16 Multimodal Models/64a Connectors и fusion.md",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 37,
+          "excerpt": "H_v=WZ_v.",
+          "issue": "Подтверждённая размерностная ошибка: Z_v определён как N_v×d_v, W далее как d_v×d_l; порядок WZ_v не совместим.",
+          "action": "Использовать H_v=Z_vW при текущей row-major конвенции или последовательно транспонировать определения.",
+          "id": "advanced-23-1",
+          "status": "already-fixed",
+          "resolution": "До прохода в RU и EN уже корректно H_v=Z_vW; размерности совпадают.",
+          "page_sha_before": "006b7f02cc4432b430264463760f32f914e35b5fe4e5cab1c815bc4c78a7b6a8",
+          "page_sha_after": "be7de7ba68c2c0e1af4a566873e1e9cd07654349bbc552abba06a81005c65b47",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread"
+          ],
+          "limitations": []
+        }
+      ],
+      "en": "en/00 Textbook/16 Multimodal Models/64a Connectors and fusion.md",
+      "before": "006b7f02cc4432b430264463760f32f914e35b5fe4e5cab1c815bc4c78a7b6a8",
+      "bytes": 29724,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/00 Учебник/16 Multimodal Models/64a Connectors и fusion.md",
+      "en_before": "abe04969c82c3cb2d543b555de62edb894f293c98c06a04477179758c1616d08",
+      "en_snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/en/00 Textbook/16 Multimodal Models/64a Connectors and fusion.md",
+      "full_read": true,
+      "read_evidence": "Full RU page and existing authored EN counterpart read through EOF; truncated segments re-emitted.",
+      "en_full_read": true,
+      "reread": "full",
+      "after": "be7de7ba68c2c0e1af4a566873e1e9cd07654349bbc552abba06a81005c65b47",
+      "changed_this_pass": true,
+      "bytes_after": 29914,
+      "snapshot_sha256": "006b7f02cc4432b430264463760f32f914e35b5fe4e5cab1c815bc4c78a7b6a8",
+      "snapshot_verified": true,
+      "reread_evidence": "Entire changed page emitted and reread from frontmatter through EOF; any subsequent local correction read again.",
+      "sources_checked": [],
+      "source_verification": "local-editorial-or-executable-contract-check; no new remote-source claim",
+      "validation": [
+        "full-text-read",
+        "snapshot-sha256",
+        "original-figures-and-explicit-anchors-preserved",
+        "full-changed-page-reread"
+      ],
+      "limitations": [],
+      "additional_resolution": "Проекция уже была верной; дополнительно убрана гарантия необходимости нового kernel для cross-attention: нужны отдельные блоки/состояния.",
+      "en_after": "abe04969c82c3cb2d543b555de62edb894f293c98c06a04477179758c1616d08",
+      "en_changed_this_pass": false,
+      "en_snapshot_sha256": "abe04969c82c3cb2d543b555de62edb894f293c98c06a04477179758c1616d08",
+      "en_snapshot_verified": true,
+      "en_read_evidence": "Entire authored EN counterpart read from frontmatter through EOF, matched by publishing/navigation.yml; no fallback duplication.",
+      "en_reread": "not-required-unchanged",
+      "en_reread_evidence": "Unchanged authored EN page fully read once; existing substantive expansion preserved."
+    },
+    {
+      "index": 23,
+      "path": "00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 112,
+          "excerpt": "весь preprocessing должен быть обратимым",
+          "issue": "Фактическая неточность: уменьшение и обрезка изображения не обратимы по содержимому; обратимым в сохранённой области может быть геометрическое отображение координат.",
+          "action": "Развести восстановление пикселей и обратный перевод координат по сохранённым scale/padding/crop metadata.",
+          "id": "advanced-24-1",
+          "status": "fixed",
+          "resolution": "Геометрическое обратное отображение отделено от невосстановимых пикселей; EN уточнён.",
+          "page_sha_before": "abdcbf6d5a34e4e82591b282c088849f116807cdc61fbc8cdfade2d822235271",
+          "page_sha_after": "3a1f7c9087f22dad604205758212c6d7fd5cdd9116c98aec600d8e32537e79ad",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://arxiv.org/html/2511.21631v1"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread"
+          ],
+          "limitations": []
+        },
+        {
+          "severity": "P3",
+          "line": 132,
+          "excerpt": "patch size задаёт нижнюю пространственную гранулярность",
+          "issue": "Неоднозначность: шаг patch grid не равен минимальной различимой детали, поскольку patch vector кодирует внутрипатчевую структуру.",
+          "action": "Уточнить «шаг сетки токенов» и не трактовать его как жёсткую границу распознавания.",
+          "id": "advanced-24-2",
+          "status": "fixed",
+          "resolution": "Шаг сетки patch tokens отделён от внутрипатчевой различимости.",
+          "page_sha_before": "abdcbf6d5a34e4e82591b282c088849f116807cdc61fbc8cdfade2d822235271",
+          "page_sha_after": "3a1f7c9087f22dad604205758212c6d7fd5cdd9116c98aec600d8e32537e79ad",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://arxiv.org/html/2511.21631v1"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread"
+          ],
+          "limitations": []
+        }
+      ],
+      "en": "en/00 Textbook/16 Multimodal Models/64b Resolution, tiling, and spatial positions.md",
+      "before": "abdcbf6d5a34e4e82591b282c088849f116807cdc61fbc8cdfade2d822235271",
+      "bytes": 22813,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md",
+      "en_before": "2777eb5c9d128e8b69871e51a8e3b8287d25a900050b0465662b44cf8f403f8f",
+      "en_snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/en/00 Textbook/16 Multimodal Models/64b Resolution, tiling, and spatial positions.md",
+      "full_read": true,
+      "read_evidence": "Full RU page and existing authored EN counterpart read through EOF; truncated segments re-emitted.",
+      "en_full_read": true,
+      "reread": "full",
+      "en_reread": "full",
+      "after": "3a1f7c9087f22dad604205758212c6d7fd5cdd9116c98aec600d8e32537e79ad",
+      "changed_this_pass": true,
+      "bytes_after": 23450,
+      "snapshot_sha256": "abdcbf6d5a34e4e82591b282c088849f116807cdc61fbc8cdfade2d822235271",
+      "snapshot_verified": true,
+      "reread_evidence": "Entire changed page emitted and reread from frontmatter through EOF; any subsequent local correction read again.",
+      "sources_checked": [
+        "https://arxiv.org/html/2511.21631v1"
+      ],
+      "source_verification": "selected-primary-sources-checked",
+      "validation": [
+        "full-text-read",
+        "snapshot-sha256",
+        "original-figures-and-explicit-anchors-preserved",
+        "full-changed-page-reread"
+      ],
+      "limitations": [],
+      "additional_resolution": "Позиционные IDs Qwen2.5-VL отделены от текстовых timestamps Qwen3-VL.",
+      "en_after": "e37d8e4edab6fbbe016d79e9243e237004e553391aebbd830072e92f3edc204d",
+      "en_changed_this_pass": true,
+      "en_snapshot_sha256": "2777eb5c9d128e8b69871e51a8e3b8287d25a900050b0465662b44cf8f403f8f",
+      "en_snapshot_verified": true,
+      "en_read_evidence": "Entire authored EN counterpart read from frontmatter through EOF, matched by publishing/navigation.yml; no fallback duplication.",
+      "en_reread_evidence": "Entire changed EN page emitted and reread from frontmatter through EOF."
+    },
+    {
+      "index": 24,
+      "path": "00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные.md",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 158,
+          "excerpt": "Пример переноса LLaVA-OneVision из Stanford CS336, Lecture 17.",
+          "issue": "Недостаток атрибуции двух локальных рисунков158/162: нет прямой ссылки на исходную страницу/изображение и конкретного авторства рядом с объектом.",
+          "action": "Добавить pinned URL на соответствующий image или PDF page и автора первичного рисунка; оригиналы не переводить.",
+          "id": "advanced-25-1",
+          "status": "fixed",
+          "resolution": "Добавлены прямые pinned URL двух transfer-иллюстраций и Li et al. рядом с объектами RU/EN; точные URL совпадают с существующим asset-registry. Доступность по HTTP не подтверждена из-за ошибок fetch, это не скрыто.",
+          "page_sha_before": "ffb10787c5b90328a9dba58b969a777fa8bd0618edace98316cb6911bfabe90f",
+          "page_sha_after": "b5669100514db1e08815f6a2098d358b01a34e81f5b790ccad4edc923f6c6dad",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://arxiv.org/html/2511.21631v1"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread"
+          ],
+          "limitations": [
+            "Pinned image URL identity checked against asset-registry; HTTP availability not confirmed."
+          ]
+        },
+        {
+          "severity": "P3",
+          "line": 186,
+          "excerpt": "Точная формула и маска остаются частью воспроизводимого описания",
+          "issue": "Текст подчёркивает необходимость точной sqrt-normalization, но сам её не даёт.",
+          "action": "Выписать формулу Qwen3-VL с коротким сравнением длин10/100 либо явно оформить как внешнее расширение.",
+          "id": "advanced-25-2",
+          "status": "fixed",
+          "resolution": "Оформлено внешнее расширение: report не содержит точного нормировочного контракта, формула не выдумана; RU/EN согласованы.",
+          "page_sha_before": "ffb10787c5b90328a9dba58b969a777fa8bd0618edace98316cb6911bfabe90f",
+          "page_sha_after": "b5669100514db1e08815f6a2098d358b01a34e81f5b790ccad4edc923f6c6dad",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://arxiv.org/html/2511.21631v1"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread"
+          ],
+          "limitations": [
+            "Pinned image URL identity checked against asset-registry; HTTP availability not confirmed."
+          ]
+        }
+      ],
+      "en": "en/00 Textbook/16 Multimodal Models/64c Training VLMs — alignment, instruction tuning, and data.md",
+      "before": "ffb10787c5b90328a9dba58b969a777fa8bd0618edace98316cb6911bfabe90f",
+      "bytes": 32940,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные.md",
+      "en_before": "dfb581fa6daa2dee003f0a2806de06a145b20256e6bca109eee83014950dde6a",
+      "en_snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/en/00 Textbook/16 Multimodal Models/64c Training VLMs — alignment, instruction tuning, and data.md",
+      "full_read": true,
+      "read_evidence": "Full RU page and existing authored EN counterpart read through EOF; truncated segments re-emitted.",
+      "en_full_read": true,
+      "reread": "full",
+      "en_reread": "full",
+      "after": "b5669100514db1e08815f6a2098d358b01a34e81f5b790ccad4edc923f6c6dad",
+      "changed_this_pass": true,
+      "bytes_after": 33957,
+      "snapshot_sha256": "ffb10787c5b90328a9dba58b969a777fa8bd0618edace98316cb6911bfabe90f",
+      "snapshot_verified": true,
+      "reread_evidence": "Entire changed page emitted and reread from frontmatter through EOF; any subsequent local correction read again.",
+      "sources_checked": [
+        "https://arxiv.org/html/2511.21631v1"
+      ],
+      "source_verification": "selected-primary-sources-checked",
+      "validation": [
+        "full-text-read",
+        "snapshot-sha256",
+        "original-figures-and-explicit-anchors-preserved",
+        "full-changed-page-reread"
+      ],
+      "limitations": [
+        "Pinned image URL identity checked against asset-registry; HTTP availability not confirmed."
+      ],
+      "additional_resolution": "Прямые pinned URL двух transfer-фигур подтверждены существующим asset-registry, но HTTP-доступность в этой среде не подтверждена.",
+      "en_after": "249f975d27f7001d8de8d2da3446f962cfb6675f019455a2e20f08b11a6a110d",
+      "en_changed_this_pass": true,
+      "en_snapshot_sha256": "dfb581fa6daa2dee003f0a2806de06a145b20256e6bca109eee83014950dde6a",
+      "en_snapshot_verified": true,
+      "en_read_evidence": "Entire authored EN counterpart read from frontmatter through EOF, matched by publishing/navigation.yml; no fallback duplication.",
+      "en_reread_evidence": "Entire changed EN page emitted and reread from frontmatter through EOF."
+    },
+    {
+      "index": 25,
+      "path": "00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding.md",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 83,
+          "excerpt": "`900` — цена двух единиц кофе",
+          "issue": "Неподдержанный вывод из табличного заголовка «Цена»: неизвестно, это цена единицы или сумма двух единиц. Пример рискует учить ошибочной арифметике извлечения.",
+          "action": "Уточнить заголовок и показать явное различие unit_price/quantity/line_total либо использовать неоднозначность как отрицательный пример.",
+          "id": "advanced-26-1",
+          "status": "fixed",
+          "resolution": "В RU и EN различены unit_price/quantity/line_total; число 900 больше не объявляется суммой двух единиц.",
+          "page_sha_before": "dd89fdc3071c115d03fa17ea48438575dd1cdc3a1f349502f7e6cb588a0f76b0",
+          "page_sha_after": "f8f8a82dcc0974165e38729f4b188620112a6b4d2bc70740643549a32aa6c3f2",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread"
+          ],
+          "limitations": [
+            "Explanatory trace/geometry/state contract inspected; no live environment integration test."
+          ]
+        }
+      ],
+      "en": "en/00 Textbook/16 Multimodal Models/64d Documents, OCR, and visual grounding.md",
+      "before": "dd89fdc3071c115d03fa17ea48438575dd1cdc3a1f349502f7e6cb588a0f76b0",
+      "bytes": 18373,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding.md",
+      "en_before": "b591ffa1d78e2470729efb8a422af74ed1a26bc93639bdce7a0335b2b9c3cf1d",
+      "en_snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/en/00 Textbook/16 Multimodal Models/64d Documents, OCR, and visual grounding.md",
+      "full_read": true,
+      "en_full_read": true,
+      "read_evidence": "Full RU page and, where mapped, authored EN counterpart emitted separately through EOF and read.",
+      "reread": "full",
+      "en_reread": "full",
+      "after": "f8f8a82dcc0974165e38729f4b188620112a6b4d2bc70740643549a32aa6c3f2",
+      "changed_this_pass": true,
+      "bytes_after": 18724,
+      "snapshot_sha256": "dd89fdc3071c115d03fa17ea48438575dd1cdc3a1f349502f7e6cb588a0f76b0",
+      "snapshot_verified": true,
+      "reread_evidence": "Entire changed page emitted and reread from frontmatter through EOF; any subsequent local correction read again.",
+      "sources_checked": [],
+      "source_verification": "local-editorial-or-executable-contract-check; no new remote-source claim",
+      "validation": [
+        "full-text-read",
+        "snapshot-sha256",
+        "original-figures-and-explicit-anchors-preserved",
+        "full-changed-page-reread"
+      ],
+      "limitations": [
+        "Explanatory trace/geometry/state contract inspected; no live environment integration test."
+      ],
+      "additional_resolution": "RU crop-origin/padding/resize coordinates приведены к уже корректной EN геометрии.",
+      "en_after": "7d431ffba62baefc6fcb8cab08d80255ff47f42e072a6b7cdb611c799a542c02",
+      "en_changed_this_pass": true,
+      "en_snapshot_sha256": "b591ffa1d78e2470729efb8a422af74ed1a26bc93639bdce7a0335b2b9c3cf1d",
+      "en_snapshot_verified": true,
+      "en_read_evidence": "Entire authored EN counterpart read from frontmatter through EOF, matched by publishing/navigation.yml; no fallback duplication.",
+      "en_reread_evidence": "Entire changed EN page emitted and reread from frontmatter through EOF."
+    },
+    {
+      "index": 26,
+      "path": "00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 131,
+          "excerpt": "моделирует текстовый inner-monologue вместе с первым аудиокодом",
+          "issue": "Фактическая ошибка архитектуры Moshi: в итоговой joint sequence текст имеет k=1, semantic audio k=2; logits k>1 создаёт Depth Transformer, а не отдельный audio head Temporal Transformer.",
+          "action": "Разделить audio-only RQ вводную и Moshi с текстом; показать порядок text→semantic audio→acoustic codes с отсылкой к eq.2/6.",
+          "id": "advanced-27-1",
+          "status": "already-fixed",
+          "resolution": "До прохода RU/EN уже описывали text→semantic→acoustic и Temporal/Depth с точной ссылкой eq.2/6; сверено с Moshi.",
+          "page_sha_before": "2972e82d3ec71d1da7f654aec1e9db8d037222fc60b0011a539801da4f0dedf6",
+          "page_sha_after": "ead730528af1f709ec33fee3fd495727d6d1069935739822d588a801f1ea3e11",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://arxiv.org/html/2410.00037v2#S3.SS4.SSS4",
+            "https://arxiv.org/html/2511.21631v1#S2.SS3"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread"
+          ],
+          "limitations": []
+        },
+        {
+          "severity": "P2",
+          "line": 25,
+          "excerpt": "projector, pooling или resampler",
+          "issue": "Если все перечисленные операции описаны как сокращающие последовательность, обычная проекция ошибочно приравнивается к pooling/resampling. Число позиций при linear/MLP projector сохраняется.",
+          "action": "Явно разделить отображение размерности и уменьшение числа токенов, согласовав с64a.",
+          "id": "advanced-27-2",
+          "status": "already-fixed",
+          "resolution": "До прохода RU/EN явно отличали position-wise projector от сокращающего длину pooling/resampler.",
+          "page_sha_before": "2972e82d3ec71d1da7f654aec1e9db8d037222fc60b0011a539801da4f0dedf6",
+          "page_sha_after": "ead730528af1f709ec33fee3fd495727d6d1069935739822d588a801f1ea3e11",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://arxiv.org/html/2410.00037v2#S3.SS4.SSS4",
+            "https://arxiv.org/html/2511.21631v1#S2.SS3"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread"
+          ],
+          "limitations": []
+        }
+      ],
+      "en": "en/00 Textbook/16 Multimodal Models/64e Video, audio, and omni models.md",
+      "before": "2972e82d3ec71d1da7f654aec1e9db8d037222fc60b0011a539801da4f0dedf6",
+      "bytes": 27947,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md",
+      "en_before": "256112e6354adf53bb521c363d44029ca125f821ca5b33c0cfc08a0f37f32a99",
+      "en_snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/en/00 Textbook/16 Multimodal Models/64e Video, audio, and omni models.md",
+      "full_read": true,
+      "en_full_read": true,
+      "read_evidence": "Full RU page and, where mapped, authored EN counterpart emitted separately through EOF and read.",
+      "sources_checked": [
+        "https://arxiv.org/html/2410.00037v2#S3.SS4.SSS4",
+        "https://arxiv.org/html/2511.21631v1#S2.SS3"
+      ],
+      "reread": "full",
+      "after": "ead730528af1f709ec33fee3fd495727d6d1069935739822d588a801f1ea3e11",
+      "changed_this_pass": true,
+      "bytes_after": 28508,
+      "snapshot_sha256": "2972e82d3ec71d1da7f654aec1e9db8d037222fc60b0011a539801da4f0dedf6",
+      "snapshot_verified": true,
+      "reread_evidence": "Entire changed page emitted and reread from frontmatter through EOF; any subsequent local correction read again.",
+      "source_verification": "selected-primary-sources-checked",
+      "validation": [
+        "full-text-read",
+        "snapshot-sha256",
+        "original-figures-and-explicit-anchors-preserved",
+        "full-changed-page-reread"
+      ],
+      "limitations": [],
+      "additional_resolution": "Оба исходных finding уже закрыты до прохода; дополнительно исправлено различие Qwen2.5-VL time IDs и Qwen3-VL текстовых timestamps.",
+      "en_after": "256112e6354adf53bb521c363d44029ca125f821ca5b33c0cfc08a0f37f32a99",
+      "en_changed_this_pass": false,
+      "en_snapshot_sha256": "256112e6354adf53bb521c363d44029ca125f821ca5b33c0cfc08a0f37f32a99",
+      "en_snapshot_verified": true,
+      "en_read_evidence": "Entire authored EN counterpart read from frontmatter through EOF, matched by publishing/navigation.yml; no fallback duplication.",
+      "en_reread": "not-required-unchanged",
+      "en_reread_evidence": "Unchanged authored EN page fully read once; existing substantive expansion preserved."
+    },
+    {
+      "index": 27,
+      "path": "00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM.md",
+      "findings": [],
+      "en": "en/00 Textbook/16 Multimodal Models/64f Evaluation, failure modes, and VLM serving.md",
+      "before": "7e8b03f3edf8593cfe1065c889124b50c3752e71fd9fed97f6619e161d07db67",
+      "bytes": 19585,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM.md",
+      "en_before": "5e67947a261984fed23ba7ed0011e489c2b8204ce57338c46c702623aa733b22",
+      "en_snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/en/00 Textbook/16 Multimodal Models/64f Evaluation, failure modes, and VLM serving.md",
+      "full_read": true,
+      "en_full_read": true,
+      "read_evidence": "Full RU page and, where mapped, authored EN counterpart emitted separately through EOF and read.",
+      "reread": "full",
+      "after": "9a0d36471092aeadd1a341b30941dfa05b0aeb96befe8a1617b992fe552589c1",
+      "changed_this_pass": true,
+      "bytes_after": 20054,
+      "snapshot_sha256": "7e8b03f3edf8593cfe1065c889124b50c3752e71fd9fed97f6619e161d07db67",
+      "snapshot_verified": true,
+      "reread_evidence": "Entire changed page emitted and reread from frontmatter through EOF; any subsequent local correction read again.",
+      "sources_checked": [],
+      "source_verification": "local-editorial-or-executable-contract-check; no new remote-source claim",
+      "validation": [
+        "full-text-read",
+        "snapshot-sha256",
+        "original-figures-and-explicit-anchors-preserved",
+        "full-changed-page-reread"
+      ],
+      "limitations": [],
+      "additional_resolution": "RU: 15 мс sampling/delivery не названы полным первым decode pass; общий TTFT 460 мс отделён от internal 195 мс и критического пути с перекрытием. EN уже был корректен.",
+      "en_after": "5e67947a261984fed23ba7ed0011e489c2b8204ce57338c46c702623aa733b22",
+      "en_changed_this_pass": false,
+      "en_snapshot_sha256": "5e67947a261984fed23ba7ed0011e489c2b8204ce57338c46c702623aa733b22",
+      "en_snapshot_verified": true,
+      "en_read_evidence": "Entire authored EN counterpart read from frontmatter through EOF, matched by publishing/navigation.yml; no fallback duplication.",
+      "en_reread": "not-required-unchanged",
+      "en_reread_evidence": "Unchanged authored EN page fully read once; existing substantive expansion preserved."
+    },
+    {
+      "index": 28,
+      "path": "00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений.md",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 55,
+          "excerpt": "scheduler вычисляет немного менее шумный",
+          "issue": "Недостаток объяснения: главный шаг генерации спрятан за названием компонента; bar-alpha во forward formula не определена. Без внешнего рисунка нельзя вычислить даже один переход.",
+          "action": "Определить alpha/beta/bar-alpha и добавить один выбранный reverse/DDIM шаг с численным скалярным примером и оговоркой о solver.",
+          "id": "advanced-29-1",
+          "status": "fixed",
+          "resolution": "Определены beta/alpha/bar-alpha; добавлен скалярный DDIM eta=0 переход 0.8→0.85218 с формулой и границей интерпретации.",
+          "page_sha_before": "fa16b3653c0d099bd81953f6cc3037f447d238cba406b4909bb547705f359647",
+          "page_sha_after": "9cfeb822081048c5f7e46e6ab75b69029ef09521f1b8de58c51c718d6e8a969c",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://arxiv.org/abs/2006.11239",
+            "https://arxiv.org/abs/2010.02502"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread",
+            "arithmetic"
+          ],
+          "limitations": []
+        },
+        {
+          "severity": "P3",
+          "line": 32,
+          "excerpt": "epsilon_\\theta",
+          "issue": "Опечатка LaTeX: имя epsilon набрано буквами вместо команды \\epsilon.",
+          "action": "Исправить запись предиктора на \\epsilon_\\theta и проверить рендер формулы.",
+          "id": "advanced-29-2",
+          "status": "fixed",
+          "resolution": "Исправлена LaTeX-команда epsilon и display delimiters; текстовый синтаксис проверен, browser/render не запускался.",
+          "page_sha_before": "fa16b3653c0d099bd81953f6cc3037f447d238cba406b4909bb547705f359647",
+          "page_sha_after": "9cfeb822081048c5f7e46e6ab75b69029ef09521f1b8de58c51c718d6e8a969c",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://arxiv.org/abs/2006.11239",
+            "https://arxiv.org/abs/2010.02502"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread",
+            "arithmetic"
+          ],
+          "limitations": []
+        }
+      ],
+      "en": null,
+      "before": "fa16b3653c0d099bd81953f6cc3037f447d238cba406b4909bb547705f359647",
+      "bytes": 13595,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений.md",
+      "full_read": true,
+      "read_evidence": "Full RU page and, where mapped, authored EN counterpart emitted separately through EOF and read.",
+      "sources_checked": [
+        "https://arxiv.org/abs/2006.11239",
+        "https://arxiv.org/abs/2010.02502"
+      ],
+      "reread": "full",
+      "after": "9cfeb822081048c5f7e46e6ab75b69029ef09521f1b8de58c51c718d6e8a969c",
+      "changed_this_pass": true,
+      "bytes_after": 15304,
+      "snapshot_sha256": "fa16b3653c0d099bd81953f6cc3037f447d238cba406b4909bb547705f359647",
+      "snapshot_verified": true,
+      "reread_evidence": "Entire changed page emitted and reread from frontmatter through EOF; any subsequent local correction read again.",
+      "source_verification": "selected-primary-sources-checked",
+      "validation": [
+        "full-text-read",
+        "snapshot-sha256",
+        "original-figures-and-explicit-anchors-preserved",
+        "full-changed-page-reread",
+        "arithmetic"
+      ],
+      "limitations": [],
+      "additional_resolution": "Display delimiters исправлены вместе с epsilon; DDIM шаг 0.85218 явно игрушечный, не измерение качества генерации."
+    },
+    {
+      "index": 29,
+      "path": "00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md",
+      "findings": [
+        {
+          "severity": "P3",
+          "line": 49,
+          "excerpt": "обратимый дискретизатор",
+          "issue": "Терминологическая неточность: наличие decoder не делает lossy quantization обратимым; последующий текст правильно описывает информационные потери.",
+          "action": "Заменить на «дискретный кодировщик с обученным декодером».",
+          "id": "advanced-30-1",
+          "status": "fixed",
+          "resolution": "Lossy tokenizer с decoder отделён от обратимого кодирования.",
+          "page_sha_before": "ef8e921d2ad5d0de2df517530df2a5bd498500265ddea562709ff54c6da449e1",
+          "page_sha_after": "8524b8cf70ac004e191060ce8db8deee0f6eae51ddb2b2c746b4d0bed419e6c9",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://arxiv.org/html/2405.09818v1"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread"
+          ],
+          "limitations": [
+            "Pinned image URL identity checked against asset-registry; HTTP availability not confirmed."
+          ]
+        },
+        {
+          "severity": "P3",
+          "line": 63,
+          "excerpt": "Схема векторного квантования из Stanford CS336, Lecture 17",
+          "issue": "У этого изображения нет прямого URL источника и указания исходного автора непосредственно в подписи.",
+          "action": "Добавить проверенную ссылку на конкретную лекцию/оригинальную Figure и авторство, сохранив оригинальные подписи.",
+          "id": "advanced-30-2",
+          "status": "fixed",
+          "resolution": "Названы авторы метода VQ-VAE и добавлен pinned URL учебной иллюстрации Stanford CS336 рядом с рисунком; точный объект сверен с существующим asset-registry, HTTP availability не подтверждена.",
+          "page_sha_before": "ef8e921d2ad5d0de2df517530df2a5bd498500265ddea562709ff54c6da449e1",
+          "page_sha_after": "8524b8cf70ac004e191060ce8db8deee0f6eae51ddb2b2c746b4d0bed419e6c9",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://arxiv.org/html/2405.09818v1"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread"
+          ],
+          "limitations": [
+            "Pinned image URL identity checked against asset-registry; HTTP availability not confirmed."
+          ]
+        }
+      ],
+      "en": null,
+      "before": "ef8e921d2ad5d0de2df517530df2a5bd498500265ddea562709ff54c6da449e1",
+      "bytes": 28851,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md",
+      "full_read": true,
+      "read_evidence": "Full RU page and, where mapped, authored EN counterpart emitted separately through EOF and read.",
+      "sources_checked": [
+        "https://arxiv.org/html/2405.09818v1"
+      ],
+      "reread": "full",
+      "after": "8524b8cf70ac004e191060ce8db8deee0f6eae51ddb2b2c746b4d0bed419e6c9",
+      "changed_this_pass": true,
+      "bytes_after": 29349,
+      "snapshot_sha256": "ef8e921d2ad5d0de2df517530df2a5bd498500265ddea562709ff54c6da449e1",
+      "snapshot_verified": true,
+      "reread_evidence": "Entire changed page emitted and reread from frontmatter through EOF; any subsequent local correction read again.",
+      "source_verification": "selected-primary-sources-checked",
+      "validation": [
+        "full-text-read",
+        "snapshot-sha256",
+        "original-figures-and-explicit-anchors-preserved",
+        "full-changed-page-reread"
+      ],
+      "limitations": [
+        "Pinned image URL identity checked against asset-registry; HTTP availability not confirmed."
+      ],
+      "additional_resolution": "Авторы VQ-VAE названы как авторы метода; pinned учебная иллюстрация остаётся Stanford CS336, а не объявляется первичной фигурой статьи."
+    },
+    {
+      "index": 30,
+      "path": "00 Учебник/17 Tools и Agents/01 Tool use и agents.md",
+      "findings": [],
+      "en": null,
+      "before": "13840bf13e6350cd0aa8c1f0ee71cdc58b40fc7b55eef1b4282a10dbed700c76",
+      "bytes": 22612,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/00 Учебник/17 Tools и Agents/01 Tool use и agents.md",
+      "full_read": true,
+      "read_evidence": "Full page read through EOF; page 67 split into two contiguous portions.",
+      "after": "13840bf13e6350cd0aa8c1f0ee71cdc58b40fc7b55eef1b4282a10dbed700c76",
+      "changed_this_pass": false,
+      "bytes_after": 22612,
+      "snapshot_sha256": "13840bf13e6350cd0aa8c1f0ee71cdc58b40fc7b55eef1b4282a10dbed700c76",
+      "snapshot_verified": true,
+      "reread": "not-required-unchanged",
+      "reread_evidence": "No edit in this pass; initial full reading covers the unchanged file.",
+      "sources_checked": [],
+      "source_verification": "local-editorial-or-executable-contract-check; no new remote-source claim",
+      "validation": [
+        "full-text-read",
+        "snapshot-sha256",
+        "original-figures-and-explicit-anchors-preserved"
+      ],
+      "limitations": [],
+      "additional_resolution": null
+    },
+    {
+      "index": 31,
+      "path": "00 Учебник/17 Tools и Agents/02 Evaluation и воспроизводимость.md",
+      "findings": [],
+      "en": null,
+      "before": "6c9fa3ee4d98900c04ea400a2fe0cce101d1925ae6a0a5a8cd6a900cd66008cc",
+      "bytes": 21557,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/00 Учебник/17 Tools и Agents/02 Evaluation и воспроизводимость.md",
+      "full_read": true,
+      "read_evidence": "Full page read through EOF; page 67 split into two contiguous portions.",
+      "after": "6c9fa3ee4d98900c04ea400a2fe0cce101d1925ae6a0a5a8cd6a900cd66008cc",
+      "changed_this_pass": false,
+      "bytes_after": 21557,
+      "snapshot_sha256": "6c9fa3ee4d98900c04ea400a2fe0cce101d1925ae6a0a5a8cd6a900cd66008cc",
+      "snapshot_verified": true,
+      "reread": "not-required-unchanged",
+      "reread_evidence": "No edit in this pass; initial full reading covers the unchanged file.",
+      "sources_checked": [],
+      "source_verification": "local-editorial-or-executable-contract-check; no new remote-source claim",
+      "validation": [
+        "full-text-read",
+        "snapshot-sha256",
+        "original-figures-and-explicit-anchors-preserved"
+      ],
+      "limitations": [],
+      "additional_resolution": null
+    },
+    {
+      "index": 32,
+      "path": "00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 118,
+          "excerpt": "минимальный контракт содержит имя, назначение, типы",
+          "issue": "Педагогический пробел центрального механизма: контракт перечислен, но в канонической главе ни одной полной схемы, аргументов и observation; формулы name/arguments не дают возможности проследить валидацию.",
+          "action": "Перенести/развить schema и короткий loop из legacy01; провести один запрос через валидный вызов, ошибку, исправление и независимую проверку.",
+          "id": "advanced-33-1",
+          "status": "fixed",
+          "resolution": "Добавлен полный schema→ошибка→исправление→observation→независимая проверка trace.",
+          "page_sha_before": "1af4fb366a7d25dd40493c414f5fd4fe2a532ca0327965f3f908d44c5a3d6cfd",
+          "page_sha_after": "a449a857d60eae1e2055a22d104d276e91136d9d2d2b16672666b2a1079d4965",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://www.anthropic.com/engineering/writing-tools-for-agents"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread",
+            "json-fence-syntax"
+          ],
+          "limitations": [
+            "Explanatory trace/geometry/state contract inspected; no live environment integration test."
+          ]
+        }
+      ],
+      "en": null,
+      "before": "1af4fb366a7d25dd40493c414f5fd4fe2a532ca0327965f3f908d44c5a3d6cfd",
+      "bytes": 26820,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md",
+      "full_read": true,
+      "read_evidence": "Full page read through EOF; page 67 split into two contiguous portions.",
+      "reread": "full",
+      "after": "a449a857d60eae1e2055a22d104d276e91136d9d2d2b16672666b2a1079d4965",
+      "changed_this_pass": true,
+      "bytes_after": 30093,
+      "snapshot_sha256": "1af4fb366a7d25dd40493c414f5fd4fe2a532ca0327965f3f908d44c5a3d6cfd",
+      "snapshot_verified": true,
+      "reread_evidence": "Entire changed page emitted and reread from frontmatter through EOF; any subsequent local correction read again.",
+      "sources_checked": [
+        "https://www.anthropic.com/engineering/writing-tools-for-agents"
+      ],
+      "source_verification": "selected-primary-sources-checked",
+      "validation": [
+        "full-text-read",
+        "snapshot-sha256",
+        "original-figures-and-explicit-anchors-preserved",
+        "full-changed-page-reread",
+        "json-fence-syntax"
+      ],
+      "limitations": [
+        "Explanatory trace/geometry/state contract inspected; no live environment integration test."
+      ],
+      "additional_resolution": null
+    },
+    {
+      "index": 33,
+      "path": "00 Учебник/17 Tools и Agents/66 Agent harness и context engineering.md",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 138,
+          "excerpt": "Compaction как преобразование состояния",
+          "issue": "Недостаток объяснения: центральная операция описана требованиями, но нет сквозного входа/выхода и теста сохранения незавершённой операции. Не видно, как отличить безопасный handoff от убедительного summary.",
+          "action": "Добавить короткий trace прерванной записи, structured task state, плохое и исправленное summary и проверку пары инвариантов; показать, что перечитывается из среды.",
+          "id": "advanced-34-1",
+          "status": "fixed",
+          "resolution": "Добавлен unknown-write handoff с key, task state, плохим/исправленным summary и двумя инвариантами.",
+          "page_sha_before": "836a41579afbab7ad0e6cfa5d29ac2e33a2557f58172d9a3057f2aae3202288f",
+          "page_sha_after": "124c4950849dc3f4c176a8b01ee600e5b0b16b127a627b2ff325b8c5901882f0",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread",
+            "json-fence-syntax"
+          ],
+          "limitations": [
+            "Explanatory trace/geometry/state contract inspected; no live environment integration test."
+          ]
+        }
+      ],
+      "en": null,
+      "before": "836a41579afbab7ad0e6cfa5d29ac2e33a2557f58172d9a3057f2aae3202288f",
+      "bytes": 25524,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/00 Учебник/17 Tools и Agents/66 Agent harness и context engineering.md",
+      "full_read": true,
+      "read_evidence": "Full page read through EOF; page 67 split into two contiguous portions.",
+      "reread": "full",
+      "after": "124c4950849dc3f4c176a8b01ee600e5b0b16b127a627b2ff325b8c5901882f0",
+      "changed_this_pass": true,
+      "bytes_after": 28605,
+      "snapshot_sha256": "836a41579afbab7ad0e6cfa5d29ac2e33a2557f58172d9a3057f2aae3202288f",
+      "snapshot_verified": true,
+      "reread_evidence": "Entire changed page emitted and reread from frontmatter through EOF; any subsequent local correction read again.",
+      "sources_checked": [
+        "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents"
+      ],
+      "source_verification": "selected-primary-sources-checked",
+      "validation": [
+        "full-text-read",
+        "snapshot-sha256",
+        "original-figures-and-explicit-anchors-preserved",
+        "full-changed-page-reread",
+        "json-fence-syntax"
+      ],
+      "limitations": [
+        "Explanatory trace/geometry/state contract inspected; no live environment integration test."
+      ],
+      "additional_resolution": null
+    },
+    {
+      "index": 34,
+      "path": "00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md",
+      "findings": [
+        {
+          "severity": "P3",
+          "line": 40,
+          "excerpt": "Память находится вне весов",
+          "issue": "Терминологическое переобобщение: сама глава147–162 признаёт параметрическую память. Заголовок выдаёт выбор внешней памяти агента за определение всей памяти.",
+          "action": "Уточнить «Внешняя память агента» и развести её с параметрическим знанием уже во вводном абзаце.",
+          "id": "advanced-35-1",
+          "status": "fixed",
+          "resolution": "Внешняя память отделена от параметрической; старый heading anchor сохранён.",
+          "page_sha_before": "e734c29265aa0e459d5250883344d469c811c39215c92d1e50ccf181ec49a283",
+          "page_sha_after": "0608e7b9ee12888863954c9366d20e247c53e90584c32e4932df4dfd65fb3c35",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://rdi.berkeley.edu/adv-llm-agents/slides/language_agents_YuSu_Berkeley.pdf",
+            "https://arxiv.org/html/2310.01798v1#S3.SS3"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread"
+          ],
+          "limitations": [
+            "Xinyun deck exceeded tool size limit; local debate image and primary Table 4 checked; no full visual review."
+          ]
+        },
+        {
+          "severity": "P2",
+          "line": 289,
+          "excerpt": "Self-Correct (Oracle)",
+          "issue": "Проверяемость источников: подписи к ряду Berkeley-рисунков216,230–233,289–292,303–306 называют лекцию/страницу, но не дают прямого URL deck/первичной Figure. Для таблиц эмпирических результатов это мешает проверить модель, условия и бюджет.",
+          "action": "Добавить рядом с каждым таким рисунком проверенные прямые ссылки и оригинальные названия/авторов, не переводя изображения; для debate связать точную экспериментальную таблицу.",
+          "id": "advanced-35-2",
+          "status": "fixed",
+          "resolution": "Каждый Berkeley figure получил прямой PDF-page URL и автора; debate привязан к проверенной Table4 с моделью и бюджетом.",
+          "page_sha_before": "e734c29265aa0e459d5250883344d469c811c39215c92d1e50ccf181ec49a283",
+          "page_sha_after": "0608e7b9ee12888863954c9366d20e247c53e90584c32e4932df4dfd65fb3c35",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://rdi.berkeley.edu/adv-llm-agents/slides/language_agents_YuSu_Berkeley.pdf",
+            "https://arxiv.org/html/2310.01798v1#S3.SS3"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread"
+          ],
+          "limitations": [
+            "Xinyun deck exceeded tool size limit; local debate image and primary Table 4 checked; no full visual review."
+          ]
+        }
+      ],
+      "en": null,
+      "before": "e734c29265aa0e459d5250883344d469c811c39215c92d1e50ccf181ec49a283",
+      "bytes": 37420,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md",
+      "full_read": true,
+      "read_evidence": "Full page read through EOF; page 67 split into two contiguous portions.",
+      "reread": "full",
+      "after": "0608e7b9ee12888863954c9366d20e247c53e90584c32e4932df4dfd65fb3c35",
+      "changed_this_pass": true,
+      "bytes_after": 38695,
+      "snapshot_sha256": "e734c29265aa0e459d5250883344d469c811c39215c92d1e50ccf181ec49a283",
+      "snapshot_verified": true,
+      "reread_evidence": "Entire changed page emitted and reread from frontmatter through EOF; any subsequent local correction read again.",
+      "sources_checked": [
+        "https://rdi.berkeley.edu/adv-llm-agents/slides/language_agents_YuSu_Berkeley.pdf",
+        "https://arxiv.org/html/2310.01798v1#S3.SS3"
+      ],
+      "source_verification": "selected-primary-sources-checked",
+      "validation": [
+        "full-text-read",
+        "snapshot-sha256",
+        "original-figures-and-explicit-anchors-preserved",
+        "full-changed-page-reread"
+      ],
+      "limitations": [
+        "Xinyun deck exceeded tool size limit; local debate image and primary Table 4 checked; no full visual review."
+      ],
+      "additional_resolution": "Пять Berkeley captions получили прямые PDF-page ссылки. Числа debate сверены с Table 4; равное число ответов не объявлено равным token/latency budget."
+    },
+    {
+      "index": 35,
+      "path": "00 Учебник/17 Tools и Agents/68 Оценивание агентных систем.md",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 183,
+          "excerpt": "pass@k` уместен только если продукт",
+          "issue": "Методологическое переобобщение: наличие продуктового selector не является условием применимости pass@k как исследовательской метрики покрытия/способности. Оно необходимо для интерпретации как delivered product quality.",
+          "action": "Уточнить область утверждения и сохранить pass@k как исследовательский upper bound; явно назвать отдельно selected-answer success.",
+          "id": "advanced-36-1",
+          "status": "fixed",
+          "resolution": "pass@k сохранён как исследовательская coverage-метрика; delivered selected-answer success отделён. Добавлен toy n10/c2/k3.",
+          "page_sha_before": "1b1a7c53bda44f3cb097d56d9780ee8e8f24213f39751d6427c17d4611e5ef8f",
+          "page_sha_after": "cb3c55299c141e5e2b92ced2409e07c6e1e1c8ffb94563a89e094b30dcbe635d",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://arxiv.org/abs/2107.03374"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread",
+            "arithmetic"
+          ],
+          "limitations": []
+        },
+        {
+          "severity": "P3",
+          "line": 158,
+          "excerpt": "1-\\frac{\\binom{n-c}{k}}{\\binom{n}{k}}",
+          "issue": "Педагогическое улучшение: формула объяснена, но нет численной проверки разницы с plug-in estimate.",
+          "action": "Добавить n=10,c=2,k=3: 1−56/120≈0.533 против1−0.8³≈0.488; подписать, что это toy sample, а не benchmark.",
+          "id": "advanced-36-2",
+          "status": "fixed",
+          "resolution": "Выписаны 1−56/120=.5333 и plugin .488 с объяснением конечной выборки.",
+          "page_sha_before": "1b1a7c53bda44f3cb097d56d9780ee8e8f24213f39751d6427c17d4611e5ef8f",
+          "page_sha_after": "cb3c55299c141e5e2b92ced2409e07c6e1e1c8ffb94563a89e094b30dcbe635d",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://arxiv.org/abs/2107.03374"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread",
+            "arithmetic"
+          ],
+          "limitations": []
+        }
+      ],
+      "en": null,
+      "before": "1b1a7c53bda44f3cb097d56d9780ee8e8f24213f39751d6427c17d4611e5ef8f",
+      "bytes": 29655,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/00 Учебник/17 Tools и Agents/68 Оценивание агентных систем.md",
+      "full_read": true,
+      "read_evidence": "Full page emitted/read frontmatter through EOF; long chapters 69/70 in contiguous chunks.",
+      "reread": "full",
+      "after": "cb3c55299c141e5e2b92ced2409e07c6e1e1c8ffb94563a89e094b30dcbe635d",
+      "changed_this_pass": true,
+      "bytes_after": 30813,
+      "snapshot_sha256": "1b1a7c53bda44f3cb097d56d9780ee8e8f24213f39751d6427c17d4611e5ef8f",
+      "snapshot_verified": true,
+      "reread_evidence": "Entire changed page emitted and reread from frontmatter through EOF; any subsequent local correction read again.",
+      "sources_checked": [
+        "https://arxiv.org/abs/2107.03374"
+      ],
+      "source_verification": "selected-primary-sources-checked",
+      "validation": [
+        "full-text-read",
+        "snapshot-sha256",
+        "original-figures-and-explicit-anchors-preserved",
+        "full-changed-page-reread",
+        "arithmetic"
+      ],
+      "limitations": [],
+      "additional_resolution": null
+    },
+    {
+      "index": 36,
+      "path": "00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md",
+      "findings": [
+        {
+          "severity": "P1",
+          "line": 416,
+          "excerpt": "restore(s(n))",
+          "issue": "Подтверждённая алгоритмическая ошибка: restore находится вне for; вторая и последующие альтернативы исполняются из состояния предыдущего ребёнка. Дети записываются как альтернативы одного узла, но фактически являются последовательной траекторией.",
+          "action": "Восстанавливать s(n) перед КАЖДОЙ альтернативой или использовать независимые clones; явно создавать child с parent/action/observation/snapshot. Добавить тест двух некоммутативных либо накопительных действий.",
+          "id": "advanced-37-1",
+          "status": "fixed",
+          "resolution": "Restore уже был внутри for до прохода. Добавлены explicit parent/action/observation child и исполнимый тест альтернатив 11/20.",
+          "page_sha_before": "acc7697bcbfaf84738f093a6ab3c165a9c18769979dded4a5c482d5f2145619d",
+          "page_sha_after": "bdab71660c7c4718cbf82ba36c1f008bb4fa21c819a9d97f745deac0e599abe3",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://arxiv.org/html/2405.15793v2"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread",
+            "branch_parser"
+          ],
+          "limitations": []
+        },
+        {
+          "severity": "P2",
+          "line": 112,
+          "excerpt": "ACI заменяет",
+          "issue": "Подтверждено первоисточником: SWE-agent ACI не убирает стандартный Linux Bash, а дополняет его специальными средствами. Текст смешивает интерфейс удобства с границей возможностей; Table4 оригинала прямо перечисляет additions to Bash.",
+          "action": "Описать ACI как дополнение/предпочтительный интерфейс; безопасность отнести к реальным sandbox/permissions. Отличие от Passerine без shell оставить явным.",
+          "id": "advanced-37-2",
+          "status": "already-fixed",
+          "resolution": "До прохода подпись уже явно называла ACI дополнением Bash и отделяла sandbox; сверено с SWE-agent Table4.",
+          "page_sha_before": "acc7697bcbfaf84738f093a6ab3c165a9c18769979dded4a5c482d5f2145619d",
+          "page_sha_after": "bdab71660c7c4718cbf82ba36c1f008bb4fa21c819a9d97f745deac0e599abe3",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://arxiv.org/html/2405.15793v2"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread",
+            "branch_parser"
+          ],
+          "limitations": []
+        },
+        {
+          "severity": "P2",
+          "line": 696,
+          "excerpt": "Сквозной разбор: задача «найди, измени, проверь»",
+          "issue": "Недостаток конкретики: раздел содержит только абстрактные фазы parser repair, а не прослеживаемый пример с наблюдениями и артефактами.",
+          "action": "Выписать маленький parser, failing input/assertion, две гипотезы, patch, тестовый вывод и terminal evidence; сохранить сопоставление с web/GUI.",
+          "id": "advanced-37-3",
+          "status": "fixed",
+          "resolution": "Добавлен конкретный split parser, failing input/ValueError, две гипотезы, минимальный diff и 4 проверки.",
+          "page_sha_before": "acc7697bcbfaf84738f093a6ab3c165a9c18769979dded4a5c482d5f2145619d",
+          "page_sha_after": "bdab71660c7c4718cbf82ba36c1f008bb4fa21c819a9d97f745deac0e599abe3",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://arxiv.org/html/2405.15793v2"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread",
+            "branch_parser"
+          ],
+          "limitations": []
+        }
+      ],
+      "en": null,
+      "before": "acc7697bcbfaf84738f093a6ab3c165a9c18769979dded4a5c482d5f2145619d",
+      "bytes": 65608,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md",
+      "full_read": true,
+      "read_evidence": "Full page emitted/read frontmatter through EOF; long chapters 69/70 in contiguous chunks.",
+      "reread": "full",
+      "after": "bdab71660c7c4718cbf82ba36c1f008bb4fa21c819a9d97f745deac0e599abe3",
+      "changed_this_pass": true,
+      "bytes_after": 69404,
+      "snapshot_sha256": "acc7697bcbfaf84738f093a6ab3c165a9c18769979dded4a5c482d5f2145619d",
+      "snapshot_verified": true,
+      "reread_evidence": "Entire changed page emitted and reread from frontmatter through EOF; any subsequent local correction read again.",
+      "sources_checked": [
+        "https://arxiv.org/html/2405.15793v2"
+      ],
+      "source_verification": "selected-primary-sources-checked",
+      "validation": [
+        "full-text-read",
+        "snapshot-sha256",
+        "original-figures-and-explicit-anchors-preserved",
+        "full-changed-page-reread",
+        "branch_parser"
+      ],
+      "limitations": [],
+      "additional_resolution": "Основной restore-дефект был устранён до прохода; новые изменения закрывают оставшиеся требования child records и исполнимого regression test."
+    },
+    {
+      "index": 37,
+      "path": "00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 602,
+          "excerpt": "критерий успеха",
+          "issue": "Существенная неполнота acceptance contract: перечислены версии и поиск, но нет проверки разрешённых аксиом, sorryAx в зависимостях и неизменности statement. Kernel acceptance корректен относительно окружения, а не гарантирует отсутствие допущенных пробелов.",
+          "action": "Добавить отрицательный пример с sorry/custom axiom, #print axioms, allowlist допустимых аксиом и проверку trusted statement; недоверенные tactics/build исполнять в sandbox. Сослаться на официальный Validating a Lean Proof.",
+          "id": "advanced-38-1",
+          "status": "fixed",
+          "resolution": "Добавлены sorry/custom-axiom отрицательные примеры, transitively checked allowlist, trusted challenge и sandbox/comparator boundary.",
+          "page_sha_before": "b0b4c2a2afe9e197b2bd0d5e4411c2cfe168df4d8fafce2bd0ff17c475ddd24a",
+          "page_sha_after": "dc885c1546d7d8328563d1f542033592c97cc8e2812549823f9a5e9c2dc108a3",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://lean-lang.org/doc/reference/latest/ValidatingProofs/"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread"
+          ],
+          "limitations": [
+            "Lean/Coq not run; native validation must be bound to pinned Lean version."
+          ]
+        },
+        {
+          "severity": "P3",
+          "line": 227,
+          "excerpt": "Граница автоматической проверки",
+          "issue": "Редакционная организация, не фактическая ошибка: разделы152,162,205,210,227 многократно возвращаются к разнице формальной и смысловой корректности, а32H2 делают её ровной с крупным примером компилятора.",
+          "action": "Сгруппировать существующие разделы в4части (основы/автоформализация/обучение и поиск/проектный пример), объединить повторяющие переходы; не сокращать механизмы или оригинальные английские рисунки ради числа заголовков.",
+          "id": "advanced-38-2",
+          "status": "fixed",
+          "resolution": "Существующие механизмы сгруппированы в 4 части; исходные заголовки и explicit anchors сохранены с понижением уровня, изображения не удалены.",
+          "page_sha_before": "b0b4c2a2afe9e197b2bd0d5e4411c2cfe168df4d8fafce2bd0ff17c475ddd24a",
+          "page_sha_after": "dc885c1546d7d8328563d1f542033592c97cc8e2812549823f9a5e9c2dc108a3",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://lean-lang.org/doc/reference/latest/ValidatingProofs/"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread"
+          ],
+          "limitations": [
+            "Lean/Coq not run; native validation must be bound to pinned Lean version."
+          ]
+        }
+      ],
+      "en": null,
+      "before": "b0b4c2a2afe9e197b2bd0d5e4411c2cfe168df4d8fafce2bd0ff17c475ddd24a",
+      "bytes": 63857,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md",
+      "full_read": true,
+      "read_evidence": "Full page emitted/read frontmatter through EOF; long chapters 69/70 in contiguous chunks.",
+      "after": "dc885c1546d7d8328563d1f542033592c97cc8e2812549823f9a5e9c2dc108a3",
+      "changed_this_pass": true,
+      "bytes_after": 66566,
+      "snapshot_sha256": "b0b4c2a2afe9e197b2bd0d5e4411c2cfe168df4d8fafce2bd0ff17c475ddd24a",
+      "snapshot_verified": true,
+      "reread": "full",
+      "reread_evidence": "Entire changed page emitted and reread from frontmatter through EOF; any subsequent local correction read again.",
+      "sources_checked": [
+        "https://lean-lang.org/doc/reference/latest/ValidatingProofs/"
+      ],
+      "source_verification": "selected-primary-sources-checked",
+      "validation": [
+        "full-text-read",
+        "snapshot-sha256",
+        "original-figures-and-explicit-anchors-preserved",
+        "full-changed-page-reread"
+      ],
+      "limitations": [
+        "Lean/Coq not run; native validation must be bound to pinned Lean version."
+      ],
+      "additional_resolution": "Новый acceptance contract охватывает транзитивные axioms, trusted statement/definitions/imports, sandbox и внешний comparator; native validation версия-зависима. Старые заголовки сохранены внутри 4 частей."
+    },
+    {
+      "index": 38,
+      "path": "00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 185,
+          "excerpt": "Один проход на условном примере",
+          "issue": "Педагогическая неполнота: нет данных и ни одного численно оценённого кандидата, поэтому нельзя проследить, почему понятие оказалось полезным и какой кандидат остаётся после fitness.",
+          "action": "Добавить маленькую таблицу r/y, два fitted expressions, MSE и выбранную complexity measure; отдельно показать validation selection и единственную финальную test/extrapolation проверку.",
+          "id": "advanced-39-1",
+          "status": "fixed",
+          "resolution": "Добавлен toy r/y train/validation, fitted 3.6/r и 4/r², MSE+operator penalty, selection и единственная final extrapolation test.",
+          "page_sha_before": "4f7ab7261aa984fe2288bbf65852f6d31d2c90bb540b5a5650df989db3a1c8c9",
+          "page_sha_after": "e86b4ce1126699ed9d1b548da452a2fef79988d5c4ab9f3e32cf35d855c073aa",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://rdi.berkeley.edu/adv-llm-agents/slides/swarat.pdf"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread",
+            "arithmetic"
+          ],
+          "limitations": []
+        },
+        {
+          "severity": "P3",
+          "line": 147,
+          "excerpt": "Источник: та же лекция, слайд 63",
+          "issue": "Атрибуция части изображений неполна локально: нет прямого URL deck/исходной Figure; для concept abstraction аналогично161.",
+          "action": "Дать проверенные прямые ссылки рядом со схемами и обозначить оригинальную Figure, сохранив авторство и английский оригинал.",
+          "id": "advanced-39-2",
+          "status": "fixed",
+          "resolution": "LaSR схемы получили точные direct PDF-page ссылки и авторов; URL deck доступен через web.",
+          "page_sha_before": "4f7ab7261aa984fe2288bbf65852f6d31d2c90bb540b5a5650df989db3a1c8c9",
+          "page_sha_after": "e86b4ce1126699ed9d1b548da452a2fef79988d5c4ab9f3e32cf35d855c073aa",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://rdi.berkeley.edu/adv-llm-agents/slides/swarat.pdf"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread",
+            "arithmetic"
+          ],
+          "limitations": []
+        }
+      ],
+      "en": null,
+      "before": "4f7ab7261aa984fe2288bbf65852f6d31d2c90bb540b5a5650df989db3a1c8c9",
+      "bytes": 26446,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md",
+      "full_read": true,
+      "read_evidence": "Full page emitted/read frontmatter through EOF; long chapters 69/70 in contiguous chunks.",
+      "after": "e86b4ce1126699ed9d1b548da452a2fef79988d5c4ab9f3e32cf35d855c073aa",
+      "changed_this_pass": true,
+      "bytes_after": 28676,
+      "snapshot_sha256": "4f7ab7261aa984fe2288bbf65852f6d31d2c90bb540b5a5650df989db3a1c8c9",
+      "snapshot_verified": true,
+      "reread": "full",
+      "reread_evidence": "Entire changed page emitted and reread from frontmatter through EOF; any subsequent local correction read again.",
+      "sources_checked": [
+        "https://rdi.berkeley.edu/adv-llm-agents/slides/swarat.pdf"
+      ],
+      "source_verification": "selected-primary-sources-checked",
+      "validation": [
+        "full-text-read",
+        "snapshot-sha256",
+        "original-figures-and-explicit-anchors-preserved",
+        "full-changed-page-reread",
+        "arithmetic"
+      ],
+      "limitations": [],
+      "additional_resolution": "При повторном чтении уточнены также PDF-page ссылки 68, 75–76 и 80–81. Toy train/validation/final-test не объявляется доказательством пользы learned concept library без ablation."
+    },
+    {
+      "index": 39,
+      "path": "00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md",
+      "findings": [
+        {
+          "severity": "P1",
+          "line": 246,
+          "excerpt": "исполнить в изоляции",
+          "issue": "Подтверждённая ошибка последовательности учебного security workflow: шаг4 исполняет, шаг5 только подтверждает необратимое действие. При буквальном исполнении confirmation приходит после side effect; изоляция не откатывает внешний API.",
+          "action": "Переставить approval до execute; привязать разрешение к identity/resource/точным аргументам/версии состояния, затем повторно проверить перед действием и журналировать эффект.",
+          "id": "advanced-40-1",
+          "status": "fixed",
+          "resolution": "Approval уже стоял до execute. Добавлены привязка identity/resource/args/version, invalidation и atomic compare-and-set boundary.",
+          "page_sha_before": "48d49ca9e756fcc8ff0706d211fa81de4ae93ad796d7a2cdf77e63ac768e84f6",
+          "page_sha_after": "e374ab17ac76aa05114defa897f89e22e60283435464f3ca0ee807498bb77f21",
+          "full_read": true,
+          "reread": "full",
+          "sources_checked": [
+            "https://arxiv.org/abs/2504.11703"
+          ],
+          "validation": [
+            "full-text-read",
+            "snapshot-sha256",
+            "original-figures-and-explicit-anchors-preserved",
+            "full-changed-page-reread"
+          ],
+          "limitations": [
+            "Explanatory trace/geometry/state contract inspected; no live environment integration test."
+          ]
+        }
+      ],
+      "en": null,
+      "before": "48d49ca9e756fcc8ff0706d211fa81de4ae93ad796d7a2cdf77e63ac768e84f6",
+      "bytes": 34260,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md",
+      "full_read": true,
+      "read_evidence": "Full page emitted/read frontmatter through EOF; long chapters 69/70 in contiguous chunks.",
+      "after": "e374ab17ac76aa05114defa897f89e22e60283435464f3ca0ee807498bb77f21",
+      "changed_this_pass": true,
+      "bytes_after": 34770,
+      "snapshot_sha256": "48d49ca9e756fcc8ff0706d211fa81de4ae93ad796d7a2cdf77e63ac768e84f6",
+      "snapshot_verified": true,
+      "reread": "full",
+      "reread_evidence": "Entire changed page emitted and reread from frontmatter through EOF; any subsequent local correction read again.",
+      "sources_checked": [
+        "https://arxiv.org/abs/2504.11703"
+      ],
+      "source_verification": "selected-primary-sources-checked",
+      "validation": [
+        "full-text-read",
+        "snapshot-sha256",
+        "original-figures-and-explicit-anchors-preserved",
+        "full-changed-page-reread"
+      ],
+      "limitations": [
+        "Explanatory trace/geometry/state contract inspected; no live environment integration test."
+      ],
+      "additional_resolution": "Approval уже стоял перед execute; новое здесь — binding к identity/resource/normalized args/recipient/state version, invalidation и условная atomic CAS граница. Без поддержки API остаточный TOCTOU явно сохраняется."
+    }
+  ],
+  "reread_changed_ru_pages": 31,
+  "reread_changed_en_pages": 4,
+  "date": "2026-09-15",
+  "baseline": "Byte-exact snapshots of the pre-existing dirty worktree immediately before this agent's new edits, not HEAD and not the older audit snapshot.",
+  "authored_en_pages": 7,
+  "changed_ru_pages": 31,
+  "changed_en_pages": 4,
+  "finding_counts": {
+    "fixed": 48,
+    "already-fixed": 7,
+    "open": 0
+  },
+  "scope_policy": "Exactly the 40 original RU pages and 7 authored EN counterparts resolved via publishing/navigation.yml. No fallback duplicates or missing translations created; no shared navigation, registry, schema, rendering, CI or AGENTS edits.",
+  "validation_results": {
+    "original_finding_identity": {
+      "pages": 40,
+      "findings": 55,
+      "original_fields_preserved": true,
+      "mismatches": []
+    },
+    "file_integrity": {
+      "files": 47,
+      "byte_exact_snapshot_sha_match": 47,
+      "figure_reference_order_and_count_preserved": 47,
+      "explicit_anchor_sets_preserved": 47,
+      "changed_files_with_full_reread": 35,
+      "details": [
+        {
+          "i": 0,
+          "path": "00 Учебник/12 Post-training и Alignment/00 Карта модуля и источники.md",
+          "before": "6f277d398be34add51f3a48e172b382a59843859ae9bde2632ae183a66fe0447",
+          "reread": false,
+          "after": "6f277d398be34add51f3a48e172b382a59843859ae9bde2632ae183a66fe0447",
+          "snapshot_sha": "6f277d398be34add51f3a48e172b382a59843859ae9bde2632ae183a66fe0447",
+          "snapshot_matches": true,
+          "bytes_after": 10680,
+          "lines_after": 122,
+          "changed": false,
+          "figures_before": 0,
+          "figures_after": 0,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 1,
+          "path": "00 Учебник/12 Post-training и Alignment/01 SFT, RLHF и DPO.md",
+          "before": "3db23b5f6f430b8804427c61e0b8f3cb288440c1cd1e0251ba408fef22960ebe",
+          "reread": false,
+          "after": "3db23b5f6f430b8804427c61e0b8f3cb288440c1cd1e0251ba408fef22960ebe",
+          "snapshot_sha": "3db23b5f6f430b8804427c61e0b8f3cb288440c1cd1e0251ba408fef22960ebe",
+          "snapshot_matches": true,
+          "bytes_after": 1113,
+          "lines_after": 20,
+          "changed": false,
+          "figures_before": 0,
+          "figures_after": 0,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 2,
+          "path": "00 Учебник/12 Post-training и Alignment/02 RLVR, reasoning и distillation.md",
+          "before": "dbb8d9dbbe509c803c623df7f16bbdc5e1db0fc0ff32f1b8eb3bca33960e05a1",
+          "reread": false,
+          "after": "dbb8d9dbbe509c803c623df7f16bbdc5e1db0fc0ff32f1b8eb3bca33960e05a1",
+          "snapshot_sha": "dbb8d9dbbe509c803c623df7f16bbdc5e1db0fc0ff32f1b8eb3bca33960e05a1",
+          "snapshot_matches": true,
+          "bytes_after": 833,
+          "lines_after": 17,
+          "changed": false,
+          "figures_before": 0,
+          "figures_after": 0,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 3,
+          "path": "00 Учебник/15 Embeddings, Retrieval и RAG/00 Карта модуля и источники.md",
+          "before": "57252506265b51e514a8b4278b276d9d4a62d3fe635b63531730a22c9285b306",
+          "reread": true,
+          "after": "af6cb2508aa0ac43427c9a47d4fe6b3ed791c0adf34f896a64e62fa1ca386dab",
+          "snapshot_sha": "57252506265b51e514a8b4278b276d9d4a62d3fe635b63531730a22c9285b306",
+          "snapshot_matches": true,
+          "bytes_after": 808,
+          "lines_after": 14,
+          "changed": true,
+          "figures_before": 0,
+          "figures_after": 0,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 4,
+          "path": "00 Учебник/16 Multimodal Models/01 Vision-language и omni models.md",
+          "before": "ca9f47047d6aed4e29351085c398c02ab7d6025901c75b8b9c3c262cddd8fee2",
+          "reread": false,
+          "after": "ca9f47047d6aed4e29351085c398c02ab7d6025901c75b8b9c3c262cddd8fee2",
+          "snapshot_sha": "ca9f47047d6aed4e29351085c398c02ab7d6025901c75b8b9c3c262cddd8fee2",
+          "snapshot_matches": true,
+          "bytes_after": 1910,
+          "lines_after": 20,
+          "changed": false,
+          "figures_before": 0,
+          "figures_after": 0,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 5,
+          "path": "00 Учебник/17 Tools и Agents/00 Agent Harness и Context Engineering — карта модуля.md",
+          "before": "74a2b285a8c00e1ad03e66bb7b50cb9cf35a8ccec7ce21a4ea4bf6e861349115",
+          "reread": false,
+          "after": "74a2b285a8c00e1ad03e66bb7b50cb9cf35a8ccec7ce21a4ea4bf6e861349115",
+          "snapshot_sha": "74a2b285a8c00e1ad03e66bb7b50cb9cf35a8ccec7ce21a4ea4bf6e861349115",
+          "snapshot_matches": true,
+          "bytes_after": 6730,
+          "lines_after": 57,
+          "changed": false,
+          "figures_before": 0,
+          "figures_after": 0,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 6,
+          "path": "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md",
+          "before": "10d273c411659e2a16a954d41934481164cff13f6693a24e8cdf495533ec14ed",
+          "reread": true,
+          "after": "2d1109111635071b75718f5b473f9dda0678c0e024f98e48b7359b6b51f9171e",
+          "snapshot_sha": "10d273c411659e2a16a954d41934481164cff13f6693a24e8cdf495533ec14ed",
+          "snapshot_matches": true,
+          "bytes_after": 40205,
+          "lines_after": 540,
+          "changed": true,
+          "figures_before": 6,
+          "figures_after": 6,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 7,
+          "path": "00 Учебник/12 Post-training и Alignment/02 Preference data.md",
+          "before": "578d009c2dee4f3a1e7a5da5a724599e8217c1d1a2306b7f2b9d56958dc1bcfe",
+          "reread": true,
+          "after": "07e8f8ba24870a69b7d6d86fd6e659d8ee8c34291cde8cb75f75c11c2f61ee64",
+          "snapshot_sha": "578d009c2dee4f3a1e7a5da5a724599e8217c1d1a2306b7f2b9d56958dc1bcfe",
+          "snapshot_matches": true,
+          "bytes_after": 20434,
+          "lines_after": 315,
+          "changed": true,
+          "figures_before": 3,
+          "figures_after": 3,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 8,
+          "path": "00 Учебник/12 Post-training и Alignment/03 Reward modeling.md",
+          "before": "a8d1c01e53ac5cc20a0bba6e119a7fa48f27ea049280843cfc5edd92732ce7d6",
+          "reread": true,
+          "after": "9f187e223d4143ed48e427266ab65406e960813bd722343874c2f476b0ad65bd",
+          "snapshot_sha": "a8d1c01e53ac5cc20a0bba6e119a7fa48f27ea049280843cfc5edd92732ce7d6",
+          "snapshot_matches": true,
+          "bytes_after": 43669,
+          "lines_after": 625,
+          "changed": true,
+          "figures_before": 6,
+          "figures_after": 6,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 9,
+          "path": "00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md",
+          "before": "e04ebb11c574e0a0d2be2292ea30e82ff813697126c139c14974eb9f6c626516",
+          "reread": true,
+          "after": "0b25a5d2a08ad590ac27c5bd7f289ce32a9ad4339fb4bcfbe12cd9635c81a749",
+          "snapshot_sha": "e04ebb11c574e0a0d2be2292ea30e82ff813697126c139c14974eb9f6c626516",
+          "snapshot_matches": true,
+          "bytes_after": 32262,
+          "lines_after": 552,
+          "changed": true,
+          "figures_before": 3,
+          "figures_after": 3,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 10,
+          "path": "00 Учебник/12 Post-training и Alignment/05 DPO.md",
+          "before": "c72692b71c93c037d6e3c0654b2ec1634dd72659e42c30a77a57d45ea9adf963",
+          "reread": true,
+          "after": "9147d179a9edd437dbf164910c62cf270a828d433730863e11cb6b6dffcc57fb",
+          "snapshot_sha": "c72692b71c93c037d6e3c0654b2ec1634dd72659e42c30a77a57d45ea9adf963",
+          "snapshot_matches": true,
+          "bytes_after": 45973,
+          "lines_after": 763,
+          "changed": true,
+          "figures_before": 4,
+          "figures_after": 4,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 11,
+          "path": "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md",
+          "before": "9b75b0cb4c95ee0ad38d296d235d2da590637cbeb8fe5847e2eb3eb45d41f094",
+          "reread": false,
+          "after": "9b75b0cb4c95ee0ad38d296d235d2da590637cbeb8fe5847e2eb3eb45d41f094",
+          "snapshot_sha": "9b75b0cb4c95ee0ad38d296d235d2da590637cbeb8fe5847e2eb3eb45d41f094",
+          "snapshot_matches": true,
+          "bytes_after": 34452,
+          "lines_after": 507,
+          "changed": false,
+          "figures_before": 5,
+          "figures_after": 5,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 12,
+          "path": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+          "before": "1f58a6299af585bee157dafeef8126fe14f853c1e62a455e6533f21af7ba4880",
+          "reread": true,
+          "after": "ccd2739e614212a881b8e59a0a09580dd0d08ef5b821eb0202e513c6e83ac61b",
+          "snapshot_sha": "1f58a6299af585bee157dafeef8126fe14f853c1e62a455e6533f21af7ba4880",
+          "snapshot_matches": true,
+          "bytes_after": 45173,
+          "lines_after": 686,
+          "changed": true,
+          "figures_before": 4,
+          "figures_after": 4,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 13,
+          "path": "00 Учебник/12 Post-training и Alignment/08 Reasoning distillation.md",
+          "before": "e14cf6b8b724cf33f7d6ed112b45283134339b32cf0f120dee570d9388602cdc",
+          "reread": true,
+          "after": "7555a255199bbc2d258ffb52b5330cb3fc32e3290a839ef5bb2aa9556f2f97fa",
+          "snapshot_sha": "e14cf6b8b724cf33f7d6ed112b45283134339b32cf0f120dee570d9388602cdc",
+          "snapshot_matches": true,
+          "bytes_after": 34082,
+          "lines_after": 506,
+          "changed": true,
+          "figures_before": 3,
+          "figures_after": 3,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 14,
+          "path": "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md",
+          "before": "d7cad886c7623a61ed53efb9724e1a364984096efeb87fef668946d6a1d6fb94",
+          "reread": true,
+          "after": "e484dfc8bfdda2312d16eda48fd91a93a7379ef578a2569adb66e7b6f23f9b4a",
+          "snapshot_sha": "d7cad886c7623a61ed53efb9724e1a364984096efeb87fef668946d6a1d6fb94",
+          "snapshot_matches": true,
+          "bytes_after": 49471,
+          "lines_after": 584,
+          "changed": true,
+          "figures_before": 7,
+          "figures_after": 7,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 15,
+          "path": "00 Учебник/15 Embeddings, Retrieval и RAG/01 Embeddings и retrieval.md",
+          "before": "995b48c541614b363833c62c96750f9bb98be06b246475c90a43aa27614f03fa",
+          "reread": true,
+          "after": "adc641bedef00c13e97db0c3e24239c279ddba1001d4d0cad8ca20069a93bbcf",
+          "snapshot_sha": "995b48c541614b363833c62c96750f9bb98be06b246475c90a43aa27614f03fa",
+          "snapshot_matches": true,
+          "bytes_after": 22370,
+          "lines_after": 381,
+          "changed": true,
+          "figures_before": 2,
+          "figures_after": 2,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 16,
+          "path": "00 Учебник/15 Embeddings, Retrieval и RAG/02 RAG как система.md",
+          "before": "c74e96fb2e3608deab7226b534f29c464ccee3dcdb1fffa72a3f65718ec5afe5",
+          "reread": true,
+          "after": "391a41ea52d5fee10e9615ebb3fd2c04d27a37618d806e10bd42826b6416d99d",
+          "snapshot_sha": "c74e96fb2e3608deab7226b534f29c464ccee3dcdb1fffa72a3f65718ec5afe5",
+          "snapshot_matches": true,
+          "bytes_after": 31237,
+          "lines_after": 444,
+          "changed": true,
+          "figures_before": 2,
+          "figures_after": 2,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 17,
+          "path": "00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning.md",
+          "before": "3949c8bed1478f9287fe10c6399867a0ccb3e9c9504b4a2126e6cb1a0bbb3d4f",
+          "reread": true,
+          "after": "955689acfc58fc4df225f3b3c6cb46e96879617710d1f1440441e3d422417931",
+          "snapshot_sha": "3949c8bed1478f9287fe10c6399867a0ccb3e9c9504b4a2126e6cb1a0bbb3d4f",
+          "snapshot_matches": true,
+          "bytes_after": 18843,
+          "lines_after": 229,
+          "changed": true,
+          "figures_before": 3,
+          "figures_after": 3,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 18,
+          "path": "00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid.md",
+          "before": "4811e0e4fabc49cd4bd1aca45e4d1f063615907b6780622ec52a2bab348e90f7",
+          "reread": true,
+          "after": "4b6fdfa92ac5e7da70a99910cc651d539941432080b217679768bf7e389d64ba",
+          "snapshot_sha": "4811e0e4fabc49cd4bd1aca45e4d1f063615907b6780622ec52a2bab348e90f7",
+          "snapshot_matches": true,
+          "bytes_after": 16280,
+          "lines_after": 213,
+          "changed": true,
+          "figures_before": 3,
+          "figures_after": 3,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 19,
+          "path": "00 Учебник/15 Embeddings, Retrieval и RAG/62 Reranking — cross-encoder и late interaction.md",
+          "before": "0f40e36c94df1a54cf39b3473ba5344ceeb81e8dca184556feb9fd03beef6299",
+          "reread": true,
+          "after": "7fb98ef230b112506fcd930350804caa502a1a4b98653095c31215ca2d0f719c",
+          "snapshot_sha": "0f40e36c94df1a54cf39b3473ba5344ceeb81e8dca184556feb9fd03beef6299",
+          "snapshot_matches": true,
+          "bytes_after": 13373,
+          "lines_after": 175,
+          "changed": true,
+          "figures_before": 2,
+          "figures_after": 2,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 20,
+          "path": "00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер.md",
+          "before": "f070ae7e13078ba30da5f6a49c428ac2f5df3ea5402a0603307b303003ca19f7",
+          "reread": true,
+          "after": "b29009604b9b9a4cbe018a6c04c67f7114d067fd19b3ee88ce30e405e645b41e",
+          "snapshot_sha": "f070ae7e13078ba30da5f6a49c428ac2f5df3ea5402a0603307b303003ca19f7",
+          "snapshot_matches": true,
+          "bytes_after": 31168,
+          "lines_after": 375,
+          "changed": true,
+          "figures_before": 4,
+          "figures_after": 4,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 21,
+          "path": "00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md",
+          "before": "5e354860bd007d0f2f58dfdb81825c552e150f8dea791035925b05eeb23d9163",
+          "reread": false,
+          "after": "5e354860bd007d0f2f58dfdb81825c552e150f8dea791035925b05eeb23d9163",
+          "snapshot_sha": "5e354860bd007d0f2f58dfdb81825c552e150f8dea791035925b05eeb23d9163",
+          "snapshot_matches": true,
+          "bytes_after": 30488,
+          "lines_after": 171,
+          "changed": false,
+          "figures_before": 3,
+          "figures_after": 3,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 21,
+          "path": "en/00 Textbook/16 Multimodal Models/64 Multimodal models.md",
+          "before": "af9700d2b9cbe9d98095f506b98672e3ffafc86813909e1a90f54a94af4e4bc5",
+          "reread": true,
+          "en": true,
+          "after": "69ad3615bf15b78ae670ae8affd11ebb861b61bdcd4f11714d8e33b3a91e80a8",
+          "snapshot_sha": "af9700d2b9cbe9d98095f506b98672e3ffafc86813909e1a90f54a94af4e4bc5",
+          "snapshot_matches": true,
+          "bytes_after": 11598,
+          "lines_after": 153,
+          "changed": true,
+          "figures_before": 3,
+          "figures_after": 3,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 22,
+          "path": "00 Учебник/16 Multimodal Models/64a Connectors и fusion.md",
+          "before": "006b7f02cc4432b430264463760f32f914e35b5fe4e5cab1c815bc4c78a7b6a8",
+          "reread": true,
+          "after": "be7de7ba68c2c0e1af4a566873e1e9cd07654349bbc552abba06a81005c65b47",
+          "snapshot_sha": "006b7f02cc4432b430264463760f32f914e35b5fe4e5cab1c815bc4c78a7b6a8",
+          "snapshot_matches": true,
+          "bytes_after": 29914,
+          "lines_after": 173,
+          "changed": true,
+          "figures_before": 5,
+          "figures_after": 5,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 22,
+          "path": "en/00 Textbook/16 Multimodal Models/64a Connectors and fusion.md",
+          "before": "abe04969c82c3cb2d543b555de62edb894f293c98c06a04477179758c1616d08",
+          "reread": false,
+          "en": true,
+          "after": "abe04969c82c3cb2d543b555de62edb894f293c98c06a04477179758c1616d08",
+          "snapshot_sha": "abe04969c82c3cb2d543b555de62edb894f293c98c06a04477179758c1616d08",
+          "snapshot_matches": true,
+          "bytes_after": 11471,
+          "lines_after": 144,
+          "changed": false,
+          "figures_before": 5,
+          "figures_after": 5,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 23,
+          "path": "00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md",
+          "before": "abdcbf6d5a34e4e82591b282c088849f116807cdc61fbc8cdfade2d822235271",
+          "reread": true,
+          "after": "3a1f7c9087f22dad604205758212c6d7fd5cdd9116c98aec600d8e32537e79ad",
+          "snapshot_sha": "abdcbf6d5a34e4e82591b282c088849f116807cdc61fbc8cdfade2d822235271",
+          "snapshot_matches": true,
+          "bytes_after": 23450,
+          "lines_after": 157,
+          "changed": true,
+          "figures_before": 5,
+          "figures_after": 5,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 23,
+          "path": "en/00 Textbook/16 Multimodal Models/64b Resolution, tiling, and spatial positions.md",
+          "before": "2777eb5c9d128e8b69871e51a8e3b8287d25a900050b0465662b44cf8f403f8f",
+          "reread": true,
+          "en": true,
+          "after": "e37d8e4edab6fbbe016d79e9243e237004e553391aebbd830072e92f3edc204d",
+          "snapshot_sha": "2777eb5c9d128e8b69871e51a8e3b8287d25a900050b0465662b44cf8f403f8f",
+          "snapshot_matches": true,
+          "bytes_after": 9962,
+          "lines_after": 122,
+          "changed": true,
+          "figures_before": 5,
+          "figures_after": 5,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 24,
+          "path": "00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные.md",
+          "before": "ffb10787c5b90328a9dba58b969a777fa8bd0618edace98316cb6911bfabe90f",
+          "reread": true,
+          "after": "b5669100514db1e08815f6a2098d358b01a34e81f5b790ccad4edc923f6c6dad",
+          "snapshot_sha": "ffb10787c5b90328a9dba58b969a777fa8bd0618edace98316cb6911bfabe90f",
+          "snapshot_matches": true,
+          "bytes_after": 33957,
+          "lines_after": 226,
+          "changed": true,
+          "figures_before": 8,
+          "figures_after": 8,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 24,
+          "path": "en/00 Textbook/16 Multimodal Models/64c Training VLMs — alignment, instruction tuning, and data.md",
+          "before": "dfb581fa6daa2dee003f0a2806de06a145b20256e6bca109eee83014950dde6a",
+          "reread": true,
+          "en": true,
+          "after": "249f975d27f7001d8de8d2da3446f962cfb6675f019455a2e20f08b11a6a110d",
+          "snapshot_sha": "dfb581fa6daa2dee003f0a2806de06a145b20256e6bca109eee83014950dde6a",
+          "snapshot_matches": true,
+          "bytes_after": 13800,
+          "lines_after": 174,
+          "changed": true,
+          "figures_before": 8,
+          "figures_after": 8,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 25,
+          "path": "00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding.md",
+          "before": "dd89fdc3071c115d03fa17ea48438575dd1cdc3a1f349502f7e6cb588a0f76b0",
+          "reread": true,
+          "after": "f8f8a82dcc0974165e38729f4b188620112a6b4d2bc70740643549a32aa6c3f2",
+          "snapshot_sha": "dd89fdc3071c115d03fa17ea48438575dd1cdc3a1f349502f7e6cb588a0f76b0",
+          "snapshot_matches": true,
+          "bytes_after": 18724,
+          "lines_after": 159,
+          "changed": true,
+          "figures_before": 2,
+          "figures_after": 2,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 25,
+          "path": "en/00 Textbook/16 Multimodal Models/64d Documents, OCR, and visual grounding.md",
+          "before": "b591ffa1d78e2470729efb8a422af74ed1a26bc93639bdce7a0335b2b9c3cf1d",
+          "reread": true,
+          "en": true,
+          "after": "7d431ffba62baefc6fcb8cab08d80255ff47f42e072a6b7cdb611c799a542c02",
+          "snapshot_sha": "b591ffa1d78e2470729efb8a422af74ed1a26bc93639bdce7a0335b2b9c3cf1d",
+          "snapshot_matches": true,
+          "bytes_after": 9320,
+          "lines_after": 128,
+          "changed": true,
+          "figures_before": 2,
+          "figures_after": 2,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 26,
+          "path": "00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md",
+          "before": "2972e82d3ec71d1da7f654aec1e9db8d037222fc60b0011a539801da4f0dedf6",
+          "reread": true,
+          "after": "ead730528af1f709ec33fee3fd495727d6d1069935739822d588a801f1ea3e11",
+          "snapshot_sha": "2972e82d3ec71d1da7f654aec1e9db8d037222fc60b0011a539801da4f0dedf6",
+          "snapshot_matches": true,
+          "bytes_after": 28508,
+          "lines_after": 186,
+          "changed": true,
+          "figures_before": 4,
+          "figures_after": 4,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 26,
+          "path": "en/00 Textbook/16 Multimodal Models/64e Video, audio, and omni models.md",
+          "before": "256112e6354adf53bb521c363d44029ca125f821ca5b33c0cfc08a0f37f32a99",
+          "reread": false,
+          "en": true,
+          "after": "256112e6354adf53bb521c363d44029ca125f821ca5b33c0cfc08a0f37f32a99",
+          "snapshot_sha": "256112e6354adf53bb521c363d44029ca125f821ca5b33c0cfc08a0f37f32a99",
+          "snapshot_matches": true,
+          "bytes_after": 10786,
+          "lines_after": 129,
+          "changed": false,
+          "figures_before": 4,
+          "figures_after": 4,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 27,
+          "path": "00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM.md",
+          "before": "7e8b03f3edf8593cfe1065c889124b50c3752e71fd9fed97f6619e161d07db67",
+          "reread": true,
+          "after": "9a0d36471092aeadd1a341b30941dfa05b0aeb96befe8a1617b992fe552589c1",
+          "snapshot_sha": "7e8b03f3edf8593cfe1065c889124b50c3752e71fd9fed97f6619e161d07db67",
+          "snapshot_matches": true,
+          "bytes_after": 20054,
+          "lines_after": 191,
+          "changed": true,
+          "figures_before": 2,
+          "figures_after": 2,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 27,
+          "path": "en/00 Textbook/16 Multimodal Models/64f Evaluation, failure modes, and VLM serving.md",
+          "before": "5e67947a261984fed23ba7ed0011e489c2b8204ce57338c46c702623aa733b22",
+          "reread": false,
+          "en": true,
+          "after": "5e67947a261984fed23ba7ed0011e489c2b8204ce57338c46c702623aa733b22",
+          "snapshot_sha": "5e67947a261984fed23ba7ed0011e489c2b8204ce57338c46c702623aa733b22",
+          "snapshot_matches": true,
+          "bytes_after": 9978,
+          "lines_after": 130,
+          "changed": false,
+          "figures_before": 2,
+          "figures_after": 2,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 28,
+          "path": "00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений.md",
+          "before": "fa16b3653c0d099bd81953f6cc3037f447d238cba406b4909bb547705f359647",
+          "reread": true,
+          "after": "9cfeb822081048c5f7e46e6ab75b69029ef09521f1b8de58c51c718d6e8a969c",
+          "snapshot_sha": "fa16b3653c0d099bd81953f6cc3037f447d238cba406b4909bb547705f359647",
+          "snapshot_matches": true,
+          "bytes_after": 15304,
+          "lines_after": 147,
+          "changed": true,
+          "figures_before": 2,
+          "figures_after": 2,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 29,
+          "path": "00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md",
+          "before": "ef8e921d2ad5d0de2df517530df2a5bd498500265ddea562709ff54c6da449e1",
+          "reread": true,
+          "after": "8524b8cf70ac004e191060ce8db8deee0f6eae51ddb2b2c746b4d0bed419e6c9",
+          "snapshot_sha": "ef8e921d2ad5d0de2df517530df2a5bd498500265ddea562709ff54c6da449e1",
+          "snapshot_matches": true,
+          "bytes_after": 29349,
+          "lines_after": 154,
+          "changed": true,
+          "figures_before": 3,
+          "figures_after": 3,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 30,
+          "path": "00 Учебник/17 Tools и Agents/01 Tool use и agents.md",
+          "before": "13840bf13e6350cd0aa8c1f0ee71cdc58b40fc7b55eef1b4282a10dbed700c76",
+          "reread": false,
+          "after": "13840bf13e6350cd0aa8c1f0ee71cdc58b40fc7b55eef1b4282a10dbed700c76",
+          "snapshot_sha": "13840bf13e6350cd0aa8c1f0ee71cdc58b40fc7b55eef1b4282a10dbed700c76",
+          "snapshot_matches": true,
+          "bytes_after": 22612,
+          "lines_after": 368,
+          "changed": false,
+          "figures_before": 2,
+          "figures_after": 2,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 31,
+          "path": "00 Учебник/17 Tools и Agents/02 Evaluation и воспроизводимость.md",
+          "before": "6c9fa3ee4d98900c04ea400a2fe0cce101d1925ae6a0a5a8cd6a900cd66008cc",
+          "reread": false,
+          "after": "6c9fa3ee4d98900c04ea400a2fe0cce101d1925ae6a0a5a8cd6a900cd66008cc",
+          "snapshot_sha": "6c9fa3ee4d98900c04ea400a2fe0cce101d1925ae6a0a5a8cd6a900cd66008cc",
+          "snapshot_matches": true,
+          "bytes_after": 21557,
+          "lines_after": 356,
+          "changed": false,
+          "figures_before": 0,
+          "figures_after": 0,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 32,
+          "path": "00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md",
+          "before": "1af4fb366a7d25dd40493c414f5fd4fe2a532ca0327965f3f908d44c5a3d6cfd",
+          "reread": true,
+          "after": "a449a857d60eae1e2055a22d104d276e91136d9d2d2b16672666b2a1079d4965",
+          "snapshot_sha": "1af4fb366a7d25dd40493c414f5fd4fe2a532ca0327965f3f908d44c5a3d6cfd",
+          "snapshot_matches": true,
+          "bytes_after": 30093,
+          "lines_after": 327,
+          "changed": true,
+          "figures_before": 3,
+          "figures_after": 3,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 33,
+          "path": "00 Учебник/17 Tools и Agents/66 Agent harness и context engineering.md",
+          "before": "836a41579afbab7ad0e6cfa5d29ac2e33a2557f58172d9a3057f2aae3202288f",
+          "reread": true,
+          "after": "124c4950849dc3f4c176a8b01ee600e5b0b16b127a627b2ff325b8c5901882f0",
+          "snapshot_sha": "836a41579afbab7ad0e6cfa5d29ac2e33a2557f58172d9a3057f2aae3202288f",
+          "snapshot_matches": true,
+          "bytes_after": 28605,
+          "lines_after": 304,
+          "changed": true,
+          "figures_before": 3,
+          "figures_after": 3,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 34,
+          "path": "00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md",
+          "before": "e734c29265aa0e459d5250883344d469c811c39215c92d1e50ccf181ec49a283",
+          "reread": true,
+          "after": "0608e7b9ee12888863954c9366d20e247c53e90584c32e4932df4dfd65fb3c35",
+          "snapshot_sha": "e734c29265aa0e459d5250883344d469c811c39215c92d1e50ccf181ec49a283",
+          "snapshot_matches": true,
+          "bytes_after": 38695,
+          "lines_after": 416,
+          "changed": true,
+          "figures_before": 8,
+          "figures_after": 8,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 35,
+          "path": "00 Учебник/17 Tools и Agents/68 Оценивание агентных систем.md",
+          "before": "1b1a7c53bda44f3cb097d56d9780ee8e8f24213f39751d6427c17d4611e5ef8f",
+          "reread": true,
+          "after": "cb3c55299c141e5e2b92ced2409e07c6e1e1c8ffb94563a89e094b30dcbe635d",
+          "snapshot_sha": "1b1a7c53bda44f3cb097d56d9780ee8e8f24213f39751d6427c17d4611e5ef8f",
+          "snapshot_matches": true,
+          "bytes_after": 30813,
+          "lines_after": 341,
+          "changed": true,
+          "figures_before": 4,
+          "figures_after": 4,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 36,
+          "path": "00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md",
+          "before": "acc7697bcbfaf84738f093a6ab3c165a9c18769979dded4a5c482d5f2145619d",
+          "reread": true,
+          "after": "bdab71660c7c4718cbf82ba36c1f008bb4fa21c819a9d97f745deac0e599abe3",
+          "snapshot_sha": "acc7697bcbfaf84738f093a6ab3c165a9c18769979dded4a5c482d5f2145619d",
+          "snapshot_matches": true,
+          "bytes_after": 69404,
+          "lines_after": 822,
+          "changed": true,
+          "figures_before": 16,
+          "figures_after": 16,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 37,
+          "path": "00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md",
+          "before": "b0b4c2a2afe9e197b2bd0d5e4411c2cfe168df4d8fafce2bd0ff17c475ddd24a",
+          "reread": true,
+          "after": "dc885c1546d7d8328563d1f542033592c97cc8e2812549823f9a5e9c2dc108a3",
+          "snapshot_sha": "b0b4c2a2afe9e197b2bd0d5e4411c2cfe168df4d8fafce2bd0ff17c475ddd24a",
+          "snapshot_matches": true,
+          "bytes_after": 66566,
+          "lines_after": 642,
+          "changed": true,
+          "figures_before": 32,
+          "figures_after": 32,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 38,
+          "path": "00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md",
+          "before": "4f7ab7261aa984fe2288bbf65852f6d31d2c90bb540b5a5650df989db3a1c8c9",
+          "reread": true,
+          "after": "e86b4ce1126699ed9d1b548da452a2fef79988d5c4ab9f3e32cf35d855c073aa",
+          "snapshot_sha": "4f7ab7261aa984fe2288bbf65852f6d31d2c90bb540b5a5650df989db3a1c8c9",
+          "snapshot_matches": true,
+          "bytes_after": 28676,
+          "lines_after": 325,
+          "changed": true,
+          "figures_before": 8,
+          "figures_after": 8,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        },
+        {
+          "i": 39,
+          "path": "00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md",
+          "before": "48d49ca9e756fcc8ff0706d211fa81de4ae93ad796d7a2cdf77e63ac768e84f6",
+          "reread": true,
+          "after": "e374ab17ac76aa05114defa897f89e22e60283435464f3ca0ee807498bb77f21",
+          "snapshot_sha": "48d49ca9e756fcc8ff0706d211fa81de4ae93ad796d7a2cdf77e63ac768e84f6",
+          "snapshot_matches": true,
+          "bytes_after": 34770,
+          "lines_after": 374,
+          "changed": true,
+          "figures_before": 8,
+          "figures_after": 8,
+          "figure_references_unchanged": true,
+          "missing_anchors": [],
+          "standalone_inline_delimiters": 0
+        }
+      ]
+    },
+    "json_code_fences": {
+      "parsed": 14,
+      "syntax_errors": []
+    },
+    "heading_preservation": {
+      "original_heading_text_preserved_except": [
+        {
+          "path": "00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md",
+          "old_heading": "1. Память находится вне весов",
+          "new_heading": "1. Внешняя память агента",
+          "old_explicit_anchor_preserved": true
+        }
+      ],
+      "formal_chapter_structure": "Four major parts; previous H2/H3 text retained as H3/H4 with stable anchors."
+    },
+    "cpu_environment": {
+      "python": "/private/tmp/bookvar-editorial-venv/bin/python",
+      "torch": "2.8.0",
+      "numpy": "2.2.6",
+      "execution": "CPU-only; no training",
+      "missing_packages": [
+        "transformers",
+        "trl",
+        "jsonschema"
+      ]
+    },
+    "cpu_checks": [
+      {
+        "id": "rlvr",
+        "code": "import re\nfrom decimal import Decimal, InvalidOperation\n\nFINAL = re.compile(r\"FINAL:[ \\t]*([-+]?[0-9]+(?:\\.[0-9]+)?)[ \\t]*\")\n\ndef parse_final(text: str) -> Decimal | None:\n    lines = text.splitlines()\n    if not lines or sum(line.startswith(\"FINAL:\") for line in lines) != 1:\n        return None           # отсутствующий или неоднозначный результат\n    match = FINAL.fullmatch(lines[-1])\n    if match is None:          # FINAL допускается только в последней строке\n        return None\n    try:\n        return Decimal(match.group(1))\n    except InvalidOperation:\n        return None\n\ndef numeric_reward(completion: str, answer: Decimal) -> dict[str, float]:\n    predicted = parse_final(completion)\n    format_ok = predicted is not None\n    correct = format_ok and predicted == answer\n    return {\n        \"correct\": float(correct),\n        \"format\": float(format_ok),\n        \"total\": float(correct) + 0.1 * float(format_ok),\n    }\n\nassert parse_final(\"FINAL: 4\\nтекст после результата\") is None\nassert parse_final(\"3x = 12\\nFINAL: 4\") == Decimal(\"4\")\nassert parse_final(\"FINAL: +4.0\\n\") == Decimal(\"4\")\nassert parse_final(\"FINAL: -2.5\") == Decimal(\"-2.5\")\nassert parse_final(\"\") is None\nassert parse_final(\"FINAL: 4\\nFINAL: 4\") is None\nassert parse_final(\"FINAL: ошибка\\nFINAL: 4\") is None\nassert parse_final(\"FINAL:\\n4\") is None\nassert parse_final(\"FINAL: 4\\n\\n\") is None\nassert parse_final(\"FINAL: NaN\") is None\nassert parse_final(\"FINAL: Infinity\") is None\nassert parse_final(\"FINAL: 4e0\") is None\nassert parse_final(\"FINAL: −4\") is None  # Unicode-минус вне контракта\nassert numeric_reward(\"FINAL: 4\", Decimal(\"4\")) == {\n    \"correct\": 1.0, \"format\": 1.0, \"total\": 1.1,\n}\nassert numeric_reward(\"FINAL: 12\", Decimal(\"4\")) == {\n    \"correct\": 0.0, \"format\": 1.0, \"total\": 0.1,\n}\n\nprint(\"RLVR verifier: PASS (15 assertions)\")\n",
+        "exit_code": 0,
+        "stdout": "RLVR verifier: PASS (15 assertions)\n",
+        "executed": true
+      },
+      {
+        "id": "branch_parser",
+        "code": "from copy import deepcopy\n\nroot = {\"id\": \"root\", \"snapshot\": {\"x\": 10}}\nactions = [(\"add_one\", lambda x: x + 1), (\"double\", lambda x: 2 * x)]\nchildren = []\nfor name, transition in actions:\n    env = deepcopy(root[\"snapshot\"])  # restore перед каждой альтернативой\n    env[\"x\"] = transition(env[\"x\"])\n    children.append({\n        \"parent\": root[\"id\"], \"action\": name,\n        \"observation\": {\"x\": env[\"x\"]}, \"snapshot\": deepcopy(env)\n    })\nassert [c[\"snapshot\"][\"x\"] for c in children] == [11, 20]\nassert all(c[\"parent\"] == \"root\" for c in children)\nassert root[\"snapshot\"][\"x\"] == 10\nprint(\"branch isolation: PASS (11, 20)\")\n\ndef parse_assignment(line):\n    key, value = line.split(\"=\")\n    return key.strip(), value.strip()\n\ntry:\n    parse_assignment(\"token=a=b\")\nexcept ValueError:\n    print(\"original parser: expected failure reproduced\")\nelse:\n    raise AssertionError(\"old parser did not fail\")\n\ndef parse_assignment(line):\n    key, value = line.split(\"=\", 1)\n    return key.strip(), value.strip()\n\nassert parse_assignment(\"token=a=b\") == (\"token\", \"a=b\")\nassert parse_assignment(\" timeout = 30 \") == (\"timeout\", \"30\")\nassert parse_assignment(\"empty=\") == (\"empty\", \"\")\ntry:\n    parse_assignment(\"missing_separator\")\nexcept ValueError:\n    pass\nelse:\n    raise AssertionError(\"missing separator must fail\")\nprint(\"parser contract: PASS (4 cases)\")\n",
+        "exit_code": 0,
+        "stdout": "branch isolation: PASS (11, 20)\noriginal parser: expected failure reproduced\nparser contract: PASS (4 cases)\n",
+        "executed": true
+      },
+      {
+        "id": "preference_grpo",
+        "code": "from itertools import combinations\n\ndef ranking_to_pairs(row, adjacent_only=False):\n    # номера ответов от лучшего к худшему\n    ids = row[\"ranking\"]\n    pairs = zip(ids, ids[1:]) if adjacent_only else combinations(ids, 2)\n    responses = {r[\"id\"]: r for r in row[\"responses\"]}\n    return [{\n        \"prompt\": row[\"prompt\"],\n        \"chosen\": responses[winner][\"text\"],\n        \"rejected\": responses[loser][\"text\"],\n        \"group_id\": row[\"prompt_id\"],\n        \"chosen_policy\": responses[winner][\"policy\"],\n        \"rejected_policy\": responses[loser][\"policy\"],\n    } for winner, loser in pairs]\n\n# Разделяйте group_id, а не отдельные пары.\n\nrow={\"prompt\":\"Q\",\"prompt_id\":\"g1\",\"ranking\":[\"c\",\"a\",\"d\",\"b\"],\"responses\":[{\"id\":k,\"text\":k.upper(),\"policy\":\"policy-\"+k} for k in \"abcd\"]}\nfor adjacent, count in [(False,6),(True,3)]:\n    pairs=ranking_to_pairs(row,adjacent)\n    assert len(pairs)==count\n    for pair in pairs:\n        assert pair[\"chosen_policy\"]==\"policy-\"+pair[\"chosen\"].lower()\n        assert pair[\"rejected_policy\"]==\"policy-\"+pair[\"rejected\"].lower()\nprint(\"mixed-policy provenance: PASS (all 6 and adjacent 3 pairs)\")\nimport torch\n\ndef group_advantages(rewards, eps=1e-4, scale=True):\n    rewards = torch.as_tensor(rewards, dtype=torch.float32)\n    centered = rewards - rewards.mean(dim=-1, keepdim=True)\n    if not scale:\n        return centered\n    std = rewards.std(dim=-1, keepdim=True, unbiased=False)\n    return centered / (std + eps)\n\ndef clipped_token_loss(new_lp, old_lp, advantages, mask, clip_eps=0.2):\n    # new_lp/old_lp: [batch, response_tokens]\n    ratio = (new_lp - old_lp).exp()\n    a = advantages[:, None]\n    surrogate = torch.minimum(\n        ratio * a,\n        ratio.clamp(1 - clip_eps, 1 + clip_eps) * a,\n    )\n    per_sequence = (surrogate * mask).sum(-1) / mask.sum(-1).clamp_min(1)\n    return -per_sequence.mean()\n\nr=torch.tensor([1.1,0,1.1,0.1])\na=group_advantages(r)\nassert torch.allclose(a,torch.tensor([.998,-1.093,.998,-.903]),atol=.001)\nassert torch.equal(group_advantages([1.1,1.1,1.1,1.1]),torch.zeros(4))\nassert torch.allclose(group_advantages(r,scale=False),r-r.mean())\nnew=torch.log(torch.tensor([[1.35,999.],[.7,999.]])); old=torch.zeros_like(new)\nloss=clipped_token_loss(new,old,torch.tensor([.998,-1.093]),torch.tensor([[1.,0.],[1.,0.]]))\nassert abs(loss.item()+.1616)<1e-5\nprint(\"GRPO math: PASS (group centering, zero variance, signs, padding)\")\n",
+        "exit_code": 0,
+        "stdout": "mixed-policy provenance: PASS (all 6 and adjacent 3 pairs)\nGRPO math: PASS (group centering, zero variance, signs, padding)\n",
+        "executed": true
+      },
+      {
+        "id": "sft_template",
+        "code": "import ast\nfrom jinja2 import Environment,nodes\nfrom jinja2.ext import Extension\nsource=\"from importlib.metadata import version\\nfrom datasets import load_dataset\\nfrom transformers import AutoTokenizer\\nfrom trl import SFTConfig, SFTTrainer\\n\\nassert version(\\\"trl\\\") == \\\"0.23.1\\\"\\nmodel_id = \\\"Qwen/Qwen2.5-Math-1.5B\\\"\\ntokenizer = AutoTokenizer.from_pretrained(model_id)\\ntokenizer.eos_token = \\\"<|im_end|>\\\"\\n# Учебный ChatML для текстовых сообщений; EOS входит в assistant mask.\\ntokenizer.chat_template = (\\n    \\\"{% for m in messages %}\\\"\\n    \\\"{{ '<|im_start|>' + m['role'] + '\\\\\\\\n' }}\\\"\\n    \\\"{% if m['role'] == 'assistant' %}{% generation %}\\\"\\n    \\\"{{ m['content'] + '<|im_end|>' }}{% endgeneration %}\\\"\\n    \\\"{% else %}{{ m['content'] + '<|im_end|>' }}{% endif %}\\\"\\n    \\\"{{ '\\\\\\\\n' }}{% endfor %}\\\"\\n    \\\"{% if add_generation_prompt %}{{ '<|im_start|>assistant\\\\\\\\n' }}{% endif %}\\\"\\n)\\nprobe = tokenizer.apply_chat_template(\\n    [{\\\"role\\\": \\\"user\\\", \\\"content\\\": \\\"2 + 2?\\\"},\\n     {\\\"role\\\": \\\"assistant\\\", \\\"content\\\": \\\"4\\\"}],\\n    tokenize=True, return_dict=True, return_assistant_tokens_mask=True,\\n)\\ntargets = [t for t, m in zip(probe[\\\"input_ids\\\"], probe[\\\"assistant_masks\\\"]) if m]\\nassert targets and targets[-1] == tokenizer.eos_token_id\\nassert tokenizer.decode(targets) == \\\"4<|im_end|>\\\"\\nassert 0 in probe[\\\"assistant_masks\\\"]  # запрос не является target\\n\\ndata = load_dataset(\\\"open-r1/Mixture-of-Thoughts\\\", \\\"all\\\", split=\\\"train\\\")\\nargs = SFTConfig(\\n    output_dir=\\\"reasoning-student\\\",\\n    max_length=32768,\\n    assistant_only_loss=True,\\n    eos_token=\\\"<|im_end|>\\\",\\n    packing=False,\\n    learning_rate=4e-5,\\n    num_train_epochs=1,\\n    bf16=True,\\n    gradient_checkpointing=True,\\n)\\ntrainer = SFTTrainer(\\n    model=model_id,\\n    processing_class=tokenizer,\\n    args=args,\\n    train_dataset=data,\\n)\\ntrainer.train()\\n\"\ntree=ast.parse(source)\nassignment=next(n for n in tree.body if isinstance(n,ast.Assign) and any(isinstance(t,ast.Attribute) and t.attr==\"chat_template\" for t in n.targets))\ntemplate=ast.literal_eval(assignment.value)\nclass Generation(Extension):\n    tags={\"generation\"}\n    def parse(self,parser):\n        lineno=next(parser.stream).lineno\n        body=parser.parse_statements([\"name:endgeneration\"],drop_needle=True)\n        return nodes.CallBlock(self.call_method(\"capture\"),[],[],body).set_lineno(lineno)\n    def capture(self,caller):\n        text=caller(); self.environment.captured.append(text); return text\nenv=Environment(extensions=[Generation]); env.captured=[]\nrendered=env.from_string(template).render(messages=[{\"role\":\"user\",\"content\":\"2 + 2?\"},{\"role\":\"assistant\",\"content\":\"4\"}],add_generation_prompt=False)\nassert rendered==\"<|im_start|>user\\n2 + 2?<|im_end|>\\n<|im_start|>assistant\\n4<|im_end|>\\n\"\nassert env.captured==[\"4<|im_end|>\"]\nprint(\"SFT template: PASS (Jinja text and generation span only; tokenizer mask not run)\")\n",
+        "exit_code": 0,
+        "stdout": "SFT template: PASS (Jinja text and generation span only; tokenizer mask not run)\n",
+        "executed": true
+      },
+      {
+        "id": "arithmetic",
+        "code": "import math\nimport numpy as np\nce=math.log(sum(math.exp(x) for x in (2,1,0)))-2\nhard=math.log(sum(math.exp(x) for x in (2,1.9,0)))-2\nmulti=math.log(sum(math.exp(x) for x in (2,1.9,0)))-math.log(math.exp(2)+math.exp(1.9))\nidf=math.log(1+(1000-10+.5)/(10+.5))\nlong=idf*3*2.2/(3+1.2*(1-.75+.75*200/100))\nshort=idf*3*2.2/(3+1.2)\nrrf={d:sum(1/(60+r.index(d)+1) for r in (['A','B','C'],['C','B','D']) if d in r) for d in 'ABCD'}\na=np.array([[.9,.1,.2],[.3,.7,.1]])\nb=np.array([[.8,.2,.1],[.2,.6,.3]])\nassert math.isclose(a.max(1).sum(),1.6) and math.isclose(b.max(1).sum(),1.4)\nassert math.isclose(a[:,[0,2]].max(1).sum(),1.2)\nassert sorted(rrf,key=rrf.get,reverse=True)==list('CBAD')\nmse=float(np.mean([(3.6/r-4/r**2)**2 for r in (3,4)]))\nxt=.8; eps=.2; bar=.64; prev=.81\nx0=(xt-math.sqrt(1-bar)*eps)/math.sqrt(bar)\nddim=math.sqrt(prev)*x0+math.sqrt(1-prev)*eps\npk=1-math.comb(8,3)/math.comb(10,3); plugin=1-.8**3\nassert abs(ce-.407606)<1e-6 and abs(hard-.713034)<1e-6\nassert abs(long-5.897785)<1e-6 and abs(short-7.161596)<1e-6\nassert abs(mse-.4966821)<1e-6 and abs(ddim-.85217798)<1e-6\nassert abs(pk-.5333333333)<1e-9 and abs(plugin-.488)<1e-9\nprint(dict(ce=ce,hard_negative=hard,multi_positive=multi,bm25_idf=idf,bm25_long=long,bm25_short=short,rrf=rrf,maxsim=(1.6,1.4,1.2),mse_validation_A=mse,ddim=ddim,passk=pk,plugin=plugin))\nprint('arithmetic: PASS')\n",
+        "exit_code": 0,
+        "stdout": "{'ce': 0.40760596444438013, 'hard_negative': 0.7130344617594373, 'multi_positive': 0.06863780168586642, 'bm25_idf': 4.557379522151743, 'bm25_long': 5.89778526396108, 'bm25_short': 7.16159639195274, 'rrf': {'A': 0.01639344262295082, 'B': 0.03225806451612903, 'C': 0.032266458495966696, 'D': 0.015873015873015872}, 'maxsim': (1.6, 1.4, 1.2), 'mse_validation_A': 0.4966820987654321, 'ddim': 0.8521779788708135, 'passk': 0.5333333333333333, 'plugin': 0.4879999999999999}\narithmetic: PASS\n",
+        "executed": true
+      }
+    ],
+    "url_identity_checks": [
+      {
+        "registry": "05 Источники/asset-registry.yml",
+        "lines": [
+          8623,
+          8625,
+          8639,
+          8641
+        ],
+        "objects": [
+          "llava-onevision-transfer-s1.png",
+          "llava-onevision-transfer-s2.png"
+        ],
+        "result": "Pinned source identities matched; HTTP fetch unavailable."
+      },
+      {
+        "registry": "05 Источники/asset-registry.yml",
+        "lines": [
+          8753,
+          8755
+        ],
+        "objects": [
+          "vq-vae.png"
+        ],
+        "result": "Pinned course illustration identity matched; HTTP fetch unavailable."
+      }
+    ],
+    "final_report_consistency": {
+      "executed": true,
+      "code": "const fs=require(\"fs\"),crypto=require(\"crypto\");\nconst r=JSON.parse(fs.readFileSync(\"docs/audit/2026-09-15-completion/advanced.json\",\"utf8\"));\nconst a=JSON.parse(fs.readFileSync(\"docs/audit/2026-09-15/advanced.json\",\"utf8\"));\nconst sha=p=>crypto.createHash(\"sha256\").update(fs.readFileSync(p)).digest(\"hex\");\nconst fail=m=>{throw new Error(m)};\nif(r.pages.length!==40||a.pages.length!==40)fail(\"page count\");\nlet counts={fixed:0,\"already-fixed\":0,open:0},ruChanged=0,enChanged=0,enRead=0,findings=0;\nfor(let i=0;i<40;i++){\n const p=r.pages[i],old=a.pages[i];\n if(p.path!==old.path||p.findings.length!==old.findings.length)fail(\"scope \"+i);\n if(!p.full_read)fail(\"full read \"+i);\n if(sha(p.path)!==p.after||sha(p.snapshot)!==p.before)fail(\"SHA \"+i);\n if(p.changed_this_pass){ruChanged++;if(p.reread!==\"full\")fail(\"reread \"+i)}\n for(let j=0;j<p.findings.length;j++){\n  const f=p.findings[j]; findings++;counts[f.status]++;\n  if(!f.resolution||f.page_sha_before!==p.before||f.page_sha_after!==p.after)fail(\"finding evidence \"+i+\"/\"+j);\n  for(const k of Object.keys(old.findings[j]))if(JSON.stringify(f[k])!==JSON.stringify(old.findings[j][k]))fail(\"original finding changed \"+i+\"/\"+j+\"/\"+k);\n }\n if(p.en){enRead++;if(!p.en_full_read||sha(p.en)!==p.en_after)fail(\"EN \"+i);\n  const snapshot=\".superpowers/sdd/2026-09-15-close-editorial-findings/task-3-before/\"+p.en;\n  if(sha(snapshot)!==p.en_snapshot_sha256)fail(\"EN snapshot \"+i);\n  if(p.en_changed_this_pass){enChanged++;if(p.en_reread!==\"full\")fail(\"EN reread \"+i)}\n }\n}\nif(findings!==55||counts.fixed!==48||counts[\"already-fixed\"]!==7||counts.open!==0||ruChanged!==31||enChanged!==4||enRead!==7)fail(\"final counts\");\nfor(const row of r.validation_results.file_integrity.details)if(sha(row.path)!==row.after||!row.snapshot_matches||!row.figure_reference_order_and_count_preserved&&row.figure_references_unchanged!==true||row.missing_anchors.length)fail(\"integrity \"+row.path);\nfor(const t of r.validation_results.cpu_checks)if(t.exit_code!==0||!t.executed)fail(\"test \"+t.id);\nconsole.log(JSON.stringify({pages:40,authored_en:enRead,findings,counts,changed_ru:ruChanged,changed_en:enChanged,changed_fully_reread:ruChanged+enChanged,snapshot_and_current_sha_files:47,original_finding_fields:\"unchanged\",cpu_groups:r.validation_results.cpu_checks.length,result:\"PASS\"}));\n",
+      "exit_code": 0,
+      "stdout": "{\"pages\":40,\"authored_en\":7,\"findings\":55,\"counts\":{\"fixed\":48,\"already-fixed\":7,\"open\":0},\"changed_ru\":31,\"changed_en\":4,\"changed_fully_reread\":35,\"snapshot_and_current_sha_files\":47,\"original_finding_fields\":\"unchanged\",\"cpu_groups\":5,\"result\":\"PASS\"}\n"
+    },
+    "git_diff_check": {
+      "executed": true,
+      "command": "git diff --check -- '00 Учебник/12 Post-training и Alignment/00 Карта модуля и источники.md' '00 Учебник/12 Post-training и Alignment/01 SFT, RLHF и DPO.md' '00 Учебник/12 Post-training и Alignment/02 RLVR, reasoning и distillation.md' '00 Учебник/15 Embeddings, Retrieval и RAG/00 Карта модуля и источники.md' '00 Учебник/16 Multimodal Models/01 Vision-language и omni models.md' '00 Учебник/17 Tools и Agents/00 Agent Harness и Context Engineering — карта модуля.md' '00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md' '00 Учебник/12 Post-training и Alignment/02 Preference data.md' '00 Учебник/12 Post-training и Alignment/03 Reward modeling.md' '00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md' '00 Учебник/12 Post-training и Alignment/05 DPO.md' '00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md' '00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md' '00 Учебник/12 Post-training и Alignment/08 Reasoning distillation.md' '00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md' '00 Учебник/15 Embeddings, Retrieval и RAG/01 Embeddings и retrieval.md' '00 Учебник/15 Embeddings, Retrieval и RAG/02 RAG как система.md' '00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning.md' '00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid.md' '00 Учебник/15 Embeddings, Retrieval и RAG/62 Reranking — cross-encoder и late interaction.md' '00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер.md' '00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md' 'en/00 Textbook/16 Multimodal Models/64 Multimodal models.md' '00 Учебник/16 Multimodal Models/64a Connectors и fusion.md' 'en/00 Textbook/16 Multimodal Models/64a Connectors and fusion.md' '00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md' 'en/00 Textbook/16 Multimodal Models/64b Resolution, tiling, and spatial positions.md' '00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные.md' 'en/00 Textbook/16 Multimodal Models/64c Training VLMs — alignment, instruction tuning, and data.md' '00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding.md' 'en/00 Textbook/16 Multimodal Models/64d Documents, OCR, and visual grounding.md' '00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md' 'en/00 Textbook/16 Multimodal Models/64e Video, audio, and omni models.md' '00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM.md' 'en/00 Textbook/16 Multimodal Models/64f Evaluation, failure modes, and VLM serving.md' '00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений.md' '00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md' '00 Учебник/17 Tools и Agents/01 Tool use и agents.md' '00 Учебник/17 Tools и Agents/02 Evaluation и воспроизводимость.md' '00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md' '00 Учебник/17 Tools и Agents/66 Agent harness и context engineering.md' '00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md' '00 Учебник/17 Tools и Agents/68 Оценивание агентных систем.md' '00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md' '00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md' '00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md' '00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md' 'docs/audit/2026-09-15-completion/advanced.json' 'docs/audit/2026-09-15-completion/advanced.md'",
+      "exit_code": 0,
+      "stdout": "",
+      "scope": "47 scoped source files plus the two completion reports; no full build."
+    },
+    "report_reread": {
+      "markdown": "Entire final 158-line report read after writing.",
+      "json": "Saved JSON parsed and checked against original 40 pages/55 findings and all current/snapshot SHA-256 values; field-level consistency checker PASS."
+    }
+  },
+  "next_step": "Independent parent/reviewer acceptance, then shared build/render checks under parent ownership. No new scope started."
+}

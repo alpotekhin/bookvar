@@ -2,7 +2,15 @@
 title: Building the Transformer — from the original block to BERT, GPT, and LLaMA
 type: textbook-chapter
 status: canonical
-last_updated: 2026-08-03
+locale: en
+translation_of: "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md"
+last_updated: 2026-09-15
+source_unit_id:
+  - lecture-01-section-175-model-architecture
+  - lecture-03-architecture-framing
+  - lecture-03-recap
+  - assignment-01-task-transformer-block
+  - assignment-01-task-transformer-lm
 primary_sources:
   - https://arxiv.org/abs/1706.03762
   - https://arxiv.org/abs/1810.04805
@@ -26,6 +34,8 @@ The 2017 architecture is the common starting point, while BERT, GPT, and LLaMA
 are defined by specific changes to its blocks and connections.
 
 ## 1. The central decomposition
+
+<a id="architecture-lineage"></a>
 
 Every layer performs two different operations:
 
@@ -88,9 +98,15 @@ $$
 
 ## 4. Positional information
 
-Without position information, self-attention cannot know which token is first:
-permuting input rows merely permutes output rows in the same way. The model
-therefore needs a positional signal.
+With **full unmasked** self-attention and no position features, permuting
+input rows permutes output rows in the same way. Such a block cannot
+distinguish absolute order. A fixed causal mask, however, breaks this
+symmetry: positions have different allowed prefixes. This provides an
+implicit positional signal, though not an explicit distance encoding.
+NoPE models can acquire position information without added PE
+([Haviv et al.](https://aclanthology.org/2022.findings-emnlp.99/);
+[Kazemnejad et al.](https://arxiv.org/abs/2305.19466)). Positional information
+and a separate positional encoding are therefore distinct questions.
 
 The original Transformer added sinusoidal encodings:
 
@@ -136,8 +152,15 @@ The decoder has three sublayers:
 In cross-attention,
 
 $$
-Q=\text{decoder states},\qquad K,V=\text{encoder outputs}.
+Q=H_{\mathrm{dec}}W_Q,\qquad
+K=H_{\mathrm{enc}}W_K,\qquad V=H_{\mathrm{enc}}W_V.
 $$
+
+For one head, $H_{\mathrm{dec}}$ contains current states after masked
+self-attention, while $H_{\mathrm{enc}}$ is the output of the **last**
+encoder block. Learned projections produce Q/K/V with shapes
+$T_{\mathrm{tgt}}\times d_k$, $T_{\mathrm{src}}\times d_k$, and
+$T_{\mathrm{src}}\times d_v$, omitting the batch axis.
 
 This develops Bahdanau attention: the decoder reads a memory of the source
 sequence. The compatibility function, multi-head organization, and absence of
@@ -147,8 +170,8 @@ a recurrent decoder state are different.
 
 *Jay Alammar, [The Illustrated
 Transformer](https://jalammar.github.io/illustrated-transformer/): the expanded
-encoder–decoder stack. Encoder outputs serve as K and V in cross-attention at
-every decoder block.*
+encoder–decoder stack. The last encoder block supplies the source states
+projected into K and V for cross-attention at every decoder block.*
 
 ## 7. Training and generation
 
@@ -201,8 +224,8 @@ next-token prediction.
 
 GPT-1 did not invent the decoder-only Transformer. It demonstrated that
 generative pre-training transfers to downstream NLP tasks. GPT-2 then scaled
-the model and data and emphasized task performance without task-specific
-training examples.
+the model and data and emphasized transfer without additional gradient
+training on the target task; this did not exclude demonstrations in a prompt.
 
 ### Modern decoder-only: LLaMA
 
@@ -233,13 +256,31 @@ preserved and what changes instead of repeating the whole Transformer.
 
 ## 10. Why Transformer displaced the recurrent backbone
 
+<a id="architecture-evidence-boundary"></a>
+
+Before comparing costs, separate architecture from an empirical recipe.
+Equations establish operation order, allowed attention edges, and tensor
+shapes. They do not establish that RMSNorm always beats LayerNorm, that
+SwiGLU always beats GELU, or that one FFN expansion ratio is optimal at
+every scale. [CS336 Lecture3](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_03.pdf)
+distinguishes mechanical properties from model-family recipes that depend
+on data, compute, and training procedure. Operation order is checked in
+code; optimization stability needs gradients and learning curves; design
+choices need controlled ablations at equal token budgets. A model name or
+leaderboard result cannot replace those forms of evidence.
+
 The original paper compares:
 
 | Layer | Complexity per layer | Sequential operations | Maximum path length |
 |---|---:|---:|---:|
 | self-attention | $O(T^2d)$ | $O(1)$ | $O(1)$ |
 | recurrent | $O(Td^2)$ | $O(T)$ | $O(T)$ |
-| convolution | $O(kTd^2)$ | $O(1)$ | $O(\log_k T)$ |
+| dilated convolution | $O(kTd^2)$ | $O(1)$ | $O(\log_k T)$ |
+
+The logarithmic path assumes a stack of increasingly dilated kernels with
+width $k>1$. For ordinary contiguous kernels, the paper gives $O(T/k)$:
+each layer expands the receptive field only linearly. Cost is per layer,
+while path length traverses the depth required to connect distant positions.
 
 The key gain is parallel training computation and a short path between any two
 positions. The price is a quadratic interaction matrix. At long context,
@@ -291,7 +332,7 @@ author now points readers to the newer `nanochat`.
 
 ## 13. Tensor-shape check
 
-For a causal LLM:
+For a causal LLM with ordinary multi-head attention (MHA):
 
 ```text
 token ids                 [B, T]
@@ -305,8 +346,16 @@ residual after FFN        [B, T, d]
 vocabulary logits         [B, T, |Vocab|]
 ```
 
+With GQA, Q uses $h_q$ heads while K and V use $h_{kv}<h_q$; their shapes are `[B,h_q,T,dh]` and `[B,h_kv,T,dh]`. The trace above is not a universal KV-head layout.
+
 An unexpected shape change along the residual stream almost always indicates a
 missing projection or incorrect head concatenation.
+
+The next systems question is how many parameters and matrix operations each
+arrow entails, and which activations must survive until backward. See
+[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость|Transformer shapes, parameters, and cost]],
+then implement the computation in
+[[02 Areas/ML & DL/06 Практика/20 Собрать языковую модель с нуля|Capstone1]].
 
 ## Summary
 

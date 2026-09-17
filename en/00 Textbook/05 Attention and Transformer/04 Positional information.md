@@ -2,7 +2,11 @@
 title: Positional information in Transformers
 type: textbook-chapter
 status: canonical
-last_updated: 2026-08-03
+locale: en
+translation_of: "00 Учебник/05 Attention и Transformer/04 Позиционная информация.md"
+last_updated: 2026-09-15
+source_unit_id:
+  - lecture-03-rope-derivation
 primary_sources:
   - https://arxiv.org/abs/1706.03762
   - https://arxiv.org/abs/1803.02155
@@ -13,22 +17,29 @@ primary_sources:
 
 # Positional information in Transformers
 
-`The dog bit the man` and `the man bit the dog` contain the same words but
-describe different events. Self-attention does not discover this difference by
-itself. Permuting the rows of the input matrix permutes query, key, value, and
-output rows in the same way. Without another signal, the operation knows
-**which** tokens are present but not **where** they occur.
+`John loves Mary` and `Mary loves John` contain exactly the same tokens but
+describe different relations. With **full unmasked** self-attention and no
+position features, permuting input rows permutes Q/K/V and output rows in
+the same way: $F(PX)=PF(X)$ for permutation matrix $P$. This is equivariance,
+not an unchanged output matrix: each row moves with its token. No
+lemmatization or changes of word form are needed for this control example.
 
-A causal mask solves a different problem. It prevents position $i$ from reading
-future keys $j>i$, but does not say whether an allowed key is one or one hundred
-tokens to the left. A padding mask merely hides empty slots. Order and distance
-must be introduced separately.
+A causal mask forbids reading future keys $j>i$, but also creates an
+asymmetry. Permuting tokens while keeping the same triangular mask changes
+their accessible predecessors, so the equality need not hold. The mask
+does not add an explicit metric distance code, yet can provide an implicit
+positional signal, as causal NoPE research demonstrates
+([Haviv et al.](https://aclanthology.org/2022.findings-emnlp.99/),
+[Kazemnejad et al.](https://arxiv.org/abs/2305.19466)). For an arbitrary mask,
+equivariance requires permuting its rows and columns together:
+$M\mapsto PMP^\top$. Padding masks exclude invalid positions; they do not
+replace the chosen positional mechanism.
 
 Position methods are easiest to compare by where they intervene:
 
 1. **Before the first layer:** add an absolute vector to the token embedding.
 2. **Inside the score:** add a term depending on relative offset $j-i$ to
-   $q_i^\top k_j$.
+   $q_i k_j^\top$.
 3. **Before the score:** transform query and key so their dot product depends
    on $j-i$.
 
@@ -38,14 +49,16 @@ beyond training length.
 
 ## Starting point: where position can enter attention
 
-For one head without a position signal,
+For one head without added positional encoding, use rows
+$x_i\in\mathbb R^{1\times d_{model}}$, $q_i,k_i\in\mathbb R^{1\times d_h}$.
+$W_Q,W_K$ have shape $d_{model}\times d_h$; here the Value width is also $d_h$:
 
 $$
 q_i=x_iW_Q,\qquad k_j=x_jW_K,\qquad v_j=x_jW_V,
 $$
 
 $$
-s_{ij}=\frac{q_i^\top k_j}{\sqrt{d_h}}+M_{ij},\qquad
+s_{ij}=\frac{q_i k_j^\top}{\sqrt{d_h}}+M_{ij},\qquad
 a_{ij}=\operatorname{softmax}_j(s_{ij}),\qquad
 z_i=\sum_j a_{ij}v_j.
 $$
@@ -129,7 +142,7 @@ Shaw, Uszkoreit, and Vaswani encode directed offset $j-i$ rather than addresses
 $i$ and $j$ separately. One variant uses
 
 $$
-s_{ij}=\frac{q_i^\top(k_j+a^K_{ij})}{\sqrt{d_h}},\qquad
+s_{ij}=\frac{q_i(k_j+a^K_{ij})^\top}{\sqrt{d_h}},\qquad
 z_i=\sum_j a_{ij}(v_j+a^V_{ij}).
 $$
 
@@ -158,9 +171,11 @@ T5 adds no positional embedding to the residual stream. Each attention head
 instead receives a learned logit bias:
 
 $$
-s_{ij}^{(h)}=\frac{(q_i^{(h)})^\top k_j^{(h)}}{\sqrt{d_h}}
+s_{ij}^{(h)}=q_i^{(h)}(k_j^{(h)})^\top
 +b_h(\operatorname{bucket}(j-i))+M_{ij}.
 $$
+
+T5 uses an unscaled query–key product here; the [reference implementation](https://github.com/huggingface/transformers/blob/main/src/transformers/models/t5/modeling_t5.py) sets the attention scale to 1. Generic scaled attention with an added T5-style bias is not the exact T5 convention.
 
 Unlike Shaw's vector, $b_h$ is a scalar. It changes softmax but not the Value.
 Heads can learn different preferences: one may amplify the previous token,
@@ -184,14 +199,16 @@ far. This is controlled generalization, not an exact coordinate system.
 
 ## RoPE: position as a rotation of query and key
 
+<a id="rope-relative-position-derivation"></a>
+
 Rotary Position Embedding neither adds a vector to $x_i$ nor a separate bias to
 the score. It rotates coordinate pairs **after** the $W_Q,W_K$ projections:
 
 $$
-q_i'=R_iq_i,\qquad k_j'=R_jk_j,
+q_i'=q_iR_i^\top,\qquad k_j'=k_jR_j^\top,
 $$
 
-with one coordinate pair using
+where the standard column-vector rotation for one coordinate pair is
 
 $$
 R_i(\theta)=
@@ -208,12 +225,13 @@ position-dependent angle. Compare one source vector under different
 $m\theta$: length stays fixed while phase changes. Source: Su et al.,
 [RoFormer, Figure 1](https://arxiv.org/pdf/2104.09864#page=5), 2021.*
 
-The key derivation is
+Our states are rows, so the same geometric rotation multiplies by the
+transpose on the right. The key derivation is
 
 $$
-(R_iq_i)^\top(R_jk_j)
-=q_i^\top R_i^\top R_jk_j
-=q_i^\top R_{j-i}k_j.
+(q_iR_i^\top)(k_jR_j^\top)^\top
+=q_i R_i^\top R_j k_j^\top
+=q_i R_{j-i}k_j^\top.
 $$
 
 Each vector rotates according to absolute position, but their dot product
@@ -236,10 +254,10 @@ stream once; RoPE transforms Q and K in every attention layer.
 Take one coordinate pair $q=(1,0)$, $k=(1,0)$, and $\theta=\pi/2$. Query is at
 $i=1$ and key at $j=2$.
 
-1. $R_1q=(0,1)$: query rotates by $90^\circ$.
-2. $R_2k=(-1,0)$: key rotates by $180^\circ$.
-3. Their score is $(0,1)^\top(-1,0)=0$.
-4. The relative form agrees: $q^\top R_{2-1}k=(1,0)^\top(0,1)=0$.
+1. $qR_1^\top=(0,1)$: query rotates by $90^\circ$.
+2. $kR_2^\top=(-1,0)$: key rotates by $180^\circ$.
+3. Their score is $(0,1)(-1,0)^\top=0$.
+4. The relative form agrees: $qR_{2-1}k^\top=(1,0)(0,1)^\top=0$.
 5. Shift both positions by five; relative distance remains one and this pair's
    score is unchanged.
 
@@ -258,7 +276,7 @@ Attention with Linear Biases creates neither embeddings nor rotations. In
 causal attention, each head receives a fixed linear penalty:
 
 $$
-s_{ij}^{(h)}=\frac{(q_i^{(h)})^\top k_j^{(h)}}{\sqrt{d_h}}
+s_{ij}^{(h)}=\frac{q_i^{(h)}(k_j^{(h)})^\top}{\sqrt{d_h}}
 -m_h(i-j),\qquad j\le i,
 $$
 

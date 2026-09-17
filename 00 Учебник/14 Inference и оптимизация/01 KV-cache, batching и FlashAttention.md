@@ -1,12 +1,13 @@
 ---
 title: "Инференс языковой модели: KV-кеш, пакетирование и FlashAttention"
 type: textbook-chapter
-status: legacy
+status: redirect
+redirect_to: "02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена"
 last_updated: 2026-07-20
 prerequisites:
   - "[[02 Areas/ML & DL/00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute]]"
 next:
-  - "[[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/02 Quantization и deployment]]"
+  - "[[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена]]"
 primary_sources:
   - https://arxiv.org/abs/2205.14135
   - https://arxiv.org/abs/2307.08691
@@ -14,6 +15,16 @@ primary_sources:
 ---
 
 # Инференс языковой модели: KV-кеш, пакетирование и FlashAttention
+
+> [!info] Карта вместо параллельного курса
+> Основной маршрут начинается с [[54 Декодирование и выбор следующего токена|декодирования]].
+> Затем идут [[55 KV-cache, пакетирование и PagedAttention|KV-кеш и PagedAttention]],
+> [[55a Физика LLM inference — prefill, decode и roofline|физика prefill/decode]],
+> [[55b Scheduling — continuous batching, chunked prefill и prefix caching|планирование]],
+> [[56 FlashAttention|FlashAttention]], [[57 Квантизация языковых моделей|квантизация]]
+> и [[58 Спекулятивное декодирование|спекулятивное декодирование]].
+> Прежнее введение, исходные рисунки и упражнения ниже сохранены для старых
+> ссылок. Они не образуют второй обязательный проход по тем же механизмам.
 
 > [!abstract] После этой главы
 > Вы сможете раздельно оценить стоимость обработки запроса и генерации ответа,
@@ -50,7 +61,7 @@ primary_sources:
 ## 2. Зачем нужен KV-кеш
 
 В слое причинного внимания для нового токена $t$ нужны его запрос $q_t$ и ключи
-и значения всех позиций $1,ldots,t$:
+и значения всех позиций $1,\ldots,t$:
 
 $$
 o_t=\operatorname{softmax}\left(\frac{q_tK_{1:t}^{\top}}{\sqrt{d_h}}+M\right)V_{1:t}.
@@ -215,11 +226,11 @@ FlashAttention особенно важен при обучении и prefill, �
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-algorithm.png]]
 
-*Algorithm 2 из Leviathan et al.,
-[Fast Inference from Transformers via Speculative Decoding](https://arxiv.org/abs/2211.17192),
+*Algorithm 2 из Charlie Chen et al.,
+[Accelerating Large Language Model Decoding with Speculative Sampling](https://arxiv.org/abs/2302.01318),
 приведённый в [Stanford CS336: Inference](https://cs336.stanford.edu/). Draft
 последовательно создаёт $K$ токенов, затем target параллельно вычисляет $K+1$
-набор логитов; ниже записаны acceptance ratio и residual distribution.*
+наборов логитов; на рисунке записаны вероятность принятия и остаточное распределение.*
 
 При корректном алгоритме принятия распределение ответов основной модели не
 меняется. Ускорение зависит от трёх величин:
@@ -241,7 +252,7 @@ FlashAttention особенно важен при обучении и prefill, �
 | ITL | распределение межтокенной задержки, включая скачки |
 | end-to-end latency | время до полного ответа |
 | throughput | полезные входные и выходные токены в секунду |
-| goodput | объём запросов, одновременно удовлетворяющих требованиям по задержке |
+| goodput | число успешно завершённых запросов, удовлетворяющих всем заданным SLO, в единицу времени |
 | KV occupancy | занятая и зарезервированная память кеша |
 | prefix-cache hit rate | доля входа, переиспользованная из кеша |
 
@@ -295,6 +306,7 @@ throughput, но увеличивает ожидание. Агрессивное
 - Dao, [FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning](https://arxiv.org/abs/2307.08691).
 - Kwon et al., [Efficient Memory Management for Large Language Model Serving with PagedAttention](https://arxiv.org/abs/2309.06180).
 - Leviathan et al., [Fast Inference from Transformers via Speculative Decoding](https://arxiv.org/abs/2211.17192).
+- Chen et al., [Accelerating Large Language Model Decoding with Speculative Sampling](https://arxiv.org/abs/2302.01318) — источник сохранённого Algorithm 2.
 
 > [!summary] Главное
 > Быстрый сервер не сводится к одному ядру. KV-кеш устраняет повторное

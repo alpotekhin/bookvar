@@ -3,7 +3,7 @@ title: "Qwen"
 type: model-family
 organization: Alibaba Qwen Team
 first_release: 2023-08
-latest_verified_release: Qwen3.6
+latest_verified_release: Qwen3.6 (scope of this card)
 last_verified: 2026-08-06
 architecture_base: decoder-only Transformer; later sparse MoE and hybrid linear attention
 modalities: [text, image, audio]
@@ -15,6 +15,8 @@ status: active
 ## Место в истории
 
 Qwen превратился из китайско-английской LLaMA-подобной модели в широкую открытую платформу: general, coder, math, vision-language, audio и embedding ветви разделяют tokenizer и tooling не всегда одинаково. Qwen2 сделал GQA и 128K типовой основой; Qwen2.5 вложил основной прогресс в данные и post-training; Qwen3 объединил dense/MoE и thinking/non-thinking в одном checkpoint. Qwen3-Next/3.5 изменили уже backbone: большая часть слоёв использует Gated Delta Networks, а attention остаётся периодическим якорем; Qwen3.6 развивает agentic coding поверх этой линии.
+
+Здесь рассмотрены поколения до Qwen3.6 и отдельные архитектурные ветви; это не исчерпывающий список всех последующих релизов.
 
 ## Неизменное ядро
 
@@ -41,6 +43,19 @@ Qwen превратился из китайско-английской LLaMA-п�
 
 **Qwen3-Next/3.5.** Gated DeltaNet поддерживает recurrent state вместо квадратной attention map на большинстве слоёв; full/GQA attention периодически восстанавливает content-addressable доступ. Sparse MoE снижает active compute, но увеличивает весовой footprint и expert-parallel traffic. Это самый крупный backbone diff в истории семейства.
 
+![[00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/qwen-next-hybrid-architecture.jpg]]
+
+*Полный слайд Stanford CS336 Spring 2026, [Lecture 4, p. 10](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=10), с оригинальной схемой Qwen3-Next слева. Авторы архитектуры: Qwen Team. Центральные результаты и правый график скорости относятся к конкретным сравнениям; они не доказывают, что любое чередование слоёв ускоряет любую задачу.*
+
+В Qwen3-Next повторяются 12 групп: три блока Gated DeltaNet, затем один блок полного gated attention. Поэтому из 48 слоёв 36 используют рекуррентную память, а 12 сохраняют KV-кэш. Каждый из этих блоков также содержит MoE. Это раскладка [Qwen3-Next-80B-A3B](https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Instruct), а не автоматическая спецификация каждого размера Qwen3.5.
+
+Упрощённая запись обновления одной головы поясняет два вида забывания:
+$$
+S_t=\gamma_t(I-\beta_t k_tk_t^\top)S_{t-1}
+      +\beta_t k_tv_t^\top,\qquad y_t=q_t^\top S_t.
+$$
+Здесь $S_t\in\mathbb R^{d_k\times d_v}$, а $q_t,k_t\in\mathbb R^{d_k}$ и $v_t\in\mathbb R^{d_v}$ — столбцы. Коэффициент $\gamma_t$ ослабляет старую память в целом; вычитание компоненты вдоль нормированного ключа $k_t$ позволяет заменить конкретную ассоциацию новым значением. Например, при $k=(1,0)^\top$, $\gamma=\beta=1$ первая строка памяти заменяется на $v^\top$, а вторая сохраняется. Это содержательнее обычного добавления нового внешнего произведения поверх старой записи. Полное внимание между такими блоками сохраняет адресный доступ к отдельным позициям. Вывод и численный пример — в [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#Gated DeltaNet: забыть старое и стереть конфликтующее|главе о delta-правиле]], раскладка — в [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#Три современных варианта чередования слоёв|сравнении гибридов]].
+
 ## Tokenizer, context и modalities
 
 Qwen с первого поколения использует большой byte-level BPE-подобный vocabulary, полезный для китайского, кода и multilingual текста. Между поколениями IDs специальных токенов и chat templates менялись: перенос prompt format без model card опасен. Vision/audio ветви имеют отдельные encoders и timestamp/position mechanisms; «Qwen поддерживает audio» — утверждение о семействе, не о каждом checkpoint.
@@ -63,8 +78,11 @@ Dense Qwen хорошо поддерживается Transformers/vLLM/SGLang. M
 
 Figure 1 отделяет четыре стадии flagship-моделей — long-CoT cold start,
 reasoning RL, fusion режимов и general RL — от strong-to-weak distillation для
-малых моделей. Это наглядное доказательство, почему thinking switch нельзя
-считать attention-механизмом. Автор: Qwen Team. Источник: p. 9,
+малых моделей. На стадии fusion модель учится отвечать как с развёрнутым рассуждением,
+так и без него, используя управляющий формат запроса. Переключение меняет
+обученный режим генерации, не заменяя оператор внимания в слоях. Сама схема
+показывает рецепт получения checkpoint, а не экспериментальное доказательство
+свойств attention. Автор: Qwen Team. Источник: p. 9,
 [Qwen3 Technical Report](https://arxiv.org/pdf/2505.09388).
 Локальный файл — crop официального PDF. Код и открытые веса Qwen3 опубликованы
 под Apache-2.0; отдельная лицензия рисунка в PDF не указана. Проверено 2026-07-20.

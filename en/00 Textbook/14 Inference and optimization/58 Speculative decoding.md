@@ -4,8 +4,8 @@ type: textbook-chapter
 status: canonical
 locale: en
 translation_of: "00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md"
-last_updated: 2026-07-20
-last_verified: 2026-07-22
+last_updated: 2026-09-15
+last_verified: 2026-09-15
 primary_sources:
   - https://arxiv.org/abs/2211.17192
   - https://arxiv.org/abs/2302.01318
@@ -78,15 +78,15 @@ respect to the specified target decoding procedure**.
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-algorithm.png]]
 
-*Algorithm 2 from Leviathan et al., [Fast Inference from Transformers via
-Speculative Decoding](https://arxiv.org/abs/2211.17192), as shown in
+*Algorithm 2 from Chen et al., [Accelerating Large Language Model Decoding with
+Speculative Sampling](https://arxiv.org/abs/2302.01318), as shown in
 [Stanford CS336: Inference](https://cs336.stanford.edu/). The upper portion has
 the draft generate $K$ tokens sequentially and the target compute $K+1$ sets of
 logits in parallel; the lower portion gives the acceptance ratio and residual
 distribution.*
 
 The statement that the target verifies tokens in parallel needs qualification.
-One target forward pass receives the prompt followed by all draft tokens. The
+Logically, verification covers the confirmed prefix and draft tokens; an existing KV cache avoids recomputing the already processed prompt. The
 causal mask ensures that logits at position $i$ depend only on earlier proposals,
 so the correct conditional distribution is available at every verification
 point.
@@ -116,10 +116,10 @@ XSum and HumanEval.
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-results.png]]
 
-*Table 1 from Leviathan et al. for $K=4$: speculative sampling reduces time per
-token by roughly 1.9–2.46 times, while metrics remain within the statistical
-variation of ordinary sampling. Source:
-[Leviathan et al.](https://arxiv.org/abs/2211.17192); table reproduced in the
+*Table 1 from Chen et al. for $K=4$: speculative sampling reduces time per
+token by roughly 1.9–2.46 times, with similar reported task metrics. Similar
+scores alone do not prove equality of output distributions. Source:
+[Chen et al.](https://arxiv.org/abs/2302.01318); table reproduced in the
 Stanford CS336 slides.*
 
 This is not a universal speedup. The table represents particular models,
@@ -129,14 +129,13 @@ copies, and scheduler behavior may change the result.
 ## Why more draft tokens are not always better
 
 The paper's plots show three competing effects. Raising $K$ initially lowers
-mean sampling time, but the improvement then saturates. Acceptance falls for
-later draft positions, while each verification pass grows longer.
+mean sampling time, but the improvement then saturates. The middle plot shows accepted output per cycle divided by $K+1$ as a function of lookahead $K$, not acceptance at individual draft positions. The right plot shows the increasing duration of a complete speculation cycle.
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-stats.png]]
 
-*Mean time to generate 128 tokens (left), acceptance by draft position (center),
-and duration of one verification cycle (right). Figure from Leviathan et al.,
-[Speculative Decoding](https://arxiv.org/abs/2211.17192), reproduced in CS336.*
+*Mean time to generate 128 tokens (left), accepted output per cycle divided by $K+1$ versus lookahead $K$ (center),
+and duration of a full draft-and-verification cycle (right). Figure from Chen et al.,
+[Speculative Sampling](https://arxiv.org/abs/2302.01318), reproduced in CS336.*
 
 Choose $K$ by minimum end-to-end latency, not by the largest number of tokens
 per target pass. Modern implementations may adapt draft length according to

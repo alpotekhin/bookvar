@@ -2,7 +2,7 @@
 title: Encoder-Decoder Transformer
 type: textbook-chapter
 status: legacy
-last_updated: 2026-07-20
+last_updated: 2026-09-15
 primary_sources: [https://arxiv.org/abs/1706.03762]
 ---
 
@@ -22,8 +22,9 @@ $$Q=Y W_Q,\qquad K=H W_K,\qquad V=H W_V.$$
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/The_transformer_encoder_decoder_stack.png]]
 
-*Стек encoder–decoder по визуальному разбору Jay Alammar: выход каждого
-encoder-блока передаётся каждому decoder-блоку как память для cross-attention.
+*Стек encoder–decoder по визуальному разбору Jay Alammar: выход последнего
+encoder-блока, то есть всего encoder-стека, становится памятью для cross-attention
+каждого decoder-блока. Промежуточные encoder-слои не передаются туда отдельно.
 Источник: [The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/),
 автор Jay Alammar, [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).*
 
@@ -56,8 +57,16 @@ $$\mathcal L=-\sum_{t=1}^{T}\log p(y_t\mid y_{<t},x).$$
 
 На инференсе истинного префикса нет: decoder генерирует токен, добавляет его к префиксу и повторяет шаг. Encoder memory вычисляется один раз; KV decoder self-attention кэшируются, а cross-attention K/V можно также подготовить заранее.
 
-Модель получает перевод, сдвинутый на один токен: перед первым словом стоит
-`BOS`, а последнее слово становится только целевой меткой. Причинная маска не
+Модель получает перевод, сдвинутый на один токен. Для законченного перевода `The cat` последний target — специальный `EOS`, а не последнее слово:
+
+```text
+position:        0      1      2       3
+decoder input:   BOS    The    cat     PAD
+target:          The    cat    EOS     PAD
+loss included:   yes    yes    yes     no
+```
+
+Это пример с отдельными IDs для `BOS`, `EOS` и `PAD`; если `EOS` и `PAD` разделяют ID, loss mask строят по реальной длине, чтобы не удалить настоящий `EOS`. В позиции 2 модель читает правильный префикс `BOS The cat` и учится завершать перевод. `EOS` не подаётся во вход последней действительной позиции. Причинная маска не
 даёт позиции подсмотреть правильные слова справа. На генерации правильного
 префикса уже нет: выбранный моделью токен добавляется ко входу следующего шага,
 как на анимации выше.

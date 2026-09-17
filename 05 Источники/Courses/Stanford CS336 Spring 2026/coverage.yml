@@ -931,7 +931,7 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-02",
-      "reason": "Reviewed and preserved at exact trace scope; this low-precision or evolving deep-network sequence belongs to a later systems treatment and is not flattened into Task 1.",
+      "reason": "FP4 at trace steps 111–117 is explained in 00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md#fp4-mxfp4-и-nvfp4 and #общая-шкала-связывает-соседние-значения, with authored EN parity. The encompassing source unit also includes CPU/GPU transfer, einops and FLOPs at steps 119–188; those are not dispositioned by this FP4 follow-through, so the whole unit remains source-only.",
       "evidence": "Lectures/repository/var/traces/lecture_02.json#steps=111-188:semantic=section-111-fp4; reviewed title: fp4"
     },
     {
@@ -1526,11 +1526,11 @@
       "primary_sources": [
         "lecture-04"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-04",
-      "reason": "The exact one-page MTP mechanism is preserved for the later training-objectives integration; Task 2 keeps it distinct from MoE and MLA instead of forcing it into either architecture chapter.",
-      "evidence": "Lectures/repository/lecture_04.pdf#page=59:semantic=deepseek-mtp; reviewed title: DeepSeek multi-token prediction auxiliary objective"
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md",
+      "destination_anchor": "multi-token-training-objective",
+      "reason": "Integrated into the existing training-objective chapter: independent heads versus DeepSeek sequential teacher-forced modules, valid target masks, shared embedding/output, auxiliary weighting, and training versus speculative inference.",
+      "evidence": "Lecture 4 page 59 read and rendered; primary DeepSeek-V3 v2 section 2.2 and Meta MTP v1 section 2 verified. Original licensed Meta Figure 1 illustrates the contrasted independent-head variant; it is not mislabeled as the DeepSeek slide."
     },
     {
       "id": "coverage-lecture-04-recap",
@@ -2656,11 +2656,11 @@
       "primary_sources": [
         "lecture-10"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-10",
-      "reason": "Retained for a future long-context attention expansion; the present Task 5 route does not flatten CLA into GQA or MLA.",
-      "evidence": "Lectures/repository/var/traces/lecture_10.json#steps=262-266:semantic=section-262-cross-layer-attention-cla"
+      "disposition": "integrated",
+      "destination": "00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md",
+      "destination_anchor": "cross-layer-kv-sharing",
+      "reason": "Explains shared KV projections versus per-layer queries, cache arithmetic with incomplete layer groups, composition with GQA, retraining and pipeline/latency limits. Original CLA Figure 1 retained with verified CC BY 4.0 attribution.",
+      "evidence": "Lectures/repository/var/traces/lecture_10.json#steps=262-266; Brandon et al. arXiv:2405.12981v1 section 2 verified."
     },
     {
       "id": "coverage-lecture-10-section-267-local-sliding-window-attention",
@@ -2672,11 +2672,11 @@
       "primary_sources": [
         "lecture-10"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-10",
-      "reason": "Retained for the dedicated long-context attention expansion; local attention requires its own receptive-field and global-token treatment.",
-      "evidence": "Lectures/repository/var/traces/lecture_10.json#steps=267-273:semantic=section-267-local-sliding-window-attention"
+      "disposition": "integrated",
+      "destination": "00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md",
+      "destination_anchor": "sliding-window-receptive-field",
+      "reason": "Retains the original Longformer masks and distinguishes bidirectional encoder masks from causal windows, derives 1+L(w-1) receptive field, rolling KV eviction, and the remaining linear cache term in local/full hybrid stacks.",
+      "evidence": "Lectures/repository/var/traces/lecture_10.json#steps=267-273; Mistral 7B section 2 and Longformer Figure 2 connected to explicit worked examples."
     },
     {
       "id": "coverage-lecture-10-section-274-deepseek-v4-attention",
@@ -3399,7 +3399,7 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-12",
-      "reason": "ARC-AGI-3 preview is retained for a future interactive-benchmark case study.",
+      "reason": "Interactive-benchmark narrative is explained in 00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md#arc-agi-3-действие-может-добывать-информацию. The frozen original screen was inspected and linked, but this image unit still lacks reviewed reproduction/registry/render evidence for canonical embedding.",
       "evidence": "Lectures/repository/var/traces/lecture_12.json#step=215:rendering=1"
     },
     {
@@ -3443,7 +3443,7 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-12",
-      "reason": "AIR-Bench overview is retained for a future safety-evaluation taxonomy; the present chapter keeps the general validity chain.",
+      "reason": "AIR-Bench narrative is explained in 00 Учебник/18 Evaluation и методология/59a Responsible systems.md#air-bench-покрытие-заданной-таксономии. The frozen taxonomy overview was inspected; this visual unit remains source-only until reproduction/registry/render evidence is completed.",
       "evidence": "Lectures/repository/var/traces/lecture_12.json#step=233:rendering=1"
     },
     {
@@ -3459,7 +3459,7 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-12",
-      "reason": "GCG examples are retained for a future adversarial-evaluation chapter.",
+      "reason": "GCG mechanism and adversarial-evaluation limits are explained in 00 Учебник/18 Evaluation и методология/59a Responsible systems.md#gcg-статический-отказ-ещё-не-означает-устойчивость. The frozen historical-response montage was inspected; this visual unit remains source-only until reproduction/registry/render evidence is completed.",
       "evidence": "Lectures/repository/var/traces/lecture_12.json#step=239:rendering=1"
     },
     {
@@ -11630,5 +11630,5 @@
       "evidence": "Assignments/assignment5-alignment/tests/test_data.py#L55"
     }
   ],
-  "editorial_overlay_sha256": "499fdf66de3a57327a9496ded75bc93b0b00b5a21504e1d47f70d7a6f0c315d6"
+  "editorial_overlay_sha256": "9732619423ca971090783666576cf14034229666b78e878ed67f8c4872fbd17b"
 }

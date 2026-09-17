@@ -146,10 +146,10 @@ $$
 T_{\mathrm{TTFT}}=
 T_{\mathrm{queue}}+T_{\mathrm{fetch}}+T_{\mathrm{decode\ media}}+
 T_{\mathrm{preprocess}}+T_{\mathrm{vision}}+T_{\mathrm{connector}}+
-T_{\mathrm{LLM\ prefill}}+T_{\mathrm{first\ decode}}.
+T_{\mathrm{LLM\ prefill}}+T_{\mathrm{sample/deliver},1}.
 $$
 
-Пусть очередь заняла 20 мс, загрузка и декодирование media — 80 мс, preprocessing — 35 мс, vision encoder — 120 мс, connector — 10 мс, LLM prefill — 180 мс, первый decode step — 15 мс. Тогда TTFT равен 460 мс. Engine, который логирует только `prefill + decode`, покажет 195 мс и скроет больше половины пользовательской задержки.
+Пусть очередь заняла 20 мс, загрузка и декодирование media — 80 мс, preprocessing — 35 мс, vision encoder — 120 мс, connector — 10 мс, LLM prefill — 180 мс, sampling и доставка первого токена после prefill — 15 мс. Тогда TTFT равен 460 мс. Первый токен обычно выбирают из логитов последней позиции prefill: отдельный полный decoder pass для него не обязателен. Разложение предполагает последовательные неперекрывающиеся интервалы; при overlap измеряют критический путь. Engine, который логирует только `prefill + sampling/delivery`, покажет 195 мс и скроет больше половины пользовательской задержки.
 
 Для streaming speech аналогичная пользовательская метрика — time-to-first-audio; после первого токена важны inter-token latency, real-time factor и interruption latency.
 

@@ -1,0 +1,84 @@
+schema_version: 1
+status: embedded-canonical
+note: "Exact full-page course extractions used in chapter 71; no redraw or crop."
+assets:
+  - file: m11-p61.png
+    sha256: bc932c9abd32fe75525d1da028a7ce398d1ff2f6a31a197be9d5d9cd7689edf2
+    size: 2400x1350
+    source: "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-11-slides.pdf#page=61"
+    source_pdf_sha256: ff4ecc5cacafe5d9fd3253ca28c968e8034466770c1e9d67481a7d51a7f70cc4
+    source_unit_id: meeting-11-slides-swarat-chaudhuri-lasr-concept-library-sequence
+    visual_id: meeting-11-slides-visual-swarat-chaudhuri-lasr-concept-library-sequence
+    transform: "Poppler pdftoppm 180 DPI; exact physical page; no crop"
+    used_in: "00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md#lasr-совместная-эволюция-формул-и-библиотеки-понятий"
+    attribution: "Swarat Chaudhuri et al., Berkeley Advanced LLM Agents, Spring 2025; LaSR primary paper arXiv:2409.09359"
+  - file: m11-p63-lasr-hypothesis-evolution.png
+    sha256: a16b176d6c60805760b51ad8f600c3dbf8fb4b973b11b67e14771cd3412f5358
+    size: 2400x1350
+    source: "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-11-slides.pdf#page=63"
+    source_pdf_sha256: ff4ecc5cacafe5d9fd3253ca28c968e8034466770c1e9d67481a7d51a7f70cc4
+    source_unit_id: meeting-11-slides-swarat-chaudhuri-lasr-concept-library-sequence
+    visual_id: meeting-11-slides-visual-swarat-chaudhuri-lasr-concept-library-sequence
+    transform: "Poppler pdftoppm 180 DPI; exact physical page; no crop"
+    used_in: "00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md#lasr-совместная-эволюция-формул-и-библиотеки-понятий"
+    attribution: "Swarat Chaudhuri et al., Berkeley Advanced LLM Agents, Spring 2025; LaSR primary paper arXiv:2409.09359"
+  - file: m11-p67.png
+    sha256: 29358a45467455c37b01817ef006b9cd9496e18657d2d4836a4d8b2038b2b78d
+    size: 2400x1350
+    source: "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-11-slides.pdf#page=67"
+    source_pdf_sha256: ff4ecc5cacafe5d9fd3253ca28c968e8034466770c1e9d67481a7d51a7f70cc4
+    source_unit_id: meeting-11-slides-swarat-chaudhuri-lasr-concept-library-sequence
+    visual_id: meeting-11-slides-visual-swarat-chaudhuri-lasr-concept-library-sequence
+    transform: "Poppler pdftoppm 180 DPI; exact physical page; no crop"
+    used_in: "00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md#lasr-совместная-эволюция-формул-и-библиотеки-понятий"
+    attribution: "Swarat Chaudhuri et al., Berkeley Advanced LLM Agents, Spring 2025; LaSR primary paper arXiv:2409.09359"
+  - file: m11-p68.png
+    sha256: f29b1938e36a6286db56f0025bda62bfca40125e01b12e0753dd67c8b568c830
+    size: 2400x1350
+    source: "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-11-slides.pdf#page=68"
+    source_pdf_sha256: ff4ecc5cacafe5d9fd3253ca28c968e8034466770c1e9d67481a7d51a7f70cc4
+    source_unit_id: meeting-11-slides-swarat-chaudhuri-lasr-concept-library-sequence
+    visual_id: meeting-11-slides-visual-swarat-chaudhuri-lasr-concept-library-sequence
+    transform: "Poppler pdftoppm 180 DPI; exact physical page; no crop"
+    used_in: "00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md#lasr-совместная-эволюция-формул-и-библиотеки-понятий"
+    attribution: "Swarat Chaudhuri et al., Berkeley Advanced LLM Agents, Spring 2025; LaSR primary paper arXiv:2409.09359"
+  - file: m11-p75-pysr-coulomb.png
+    sha256: 4358c3009e00a0642434915f2e8bced629d9e36011e20fa8e6a55d515acccbd1
+    size: 2400x1350
+    source: "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-11-slides.pdf#page=75"
+    source_pdf_sha256: ff4ecc5cacafe5d9fd3253ca28c968e8034466770c1e9d67481a7d51a7f70cc4
+    source_unit_id: meeting-11-slides-lasr-examples-and-scaling
+    visual_id: meeting-11-slides-visual-lasr-examples-and-scaling
+    transform: "Poppler pdftoppm 180 DPI; exact physical page; no crop"
+    used_in: "00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md#что-показали-feynman-equations-and-scaling-law-case"
+    attribution: "Swarat Chaudhuri et al., Berkeley Advanced LLM Agents, Spring 2025; LaSR primary paper arXiv:2409.09359"
+  - file: m11-p76-lasr-coulomb.png
+    sha256: 5ff0cc0c5181981ce36b02d97906f4d3e883a3b432622312a61ec75ad816215d
+    size: 2400x1350
+    source: "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-11-slides.pdf#page=76"
+    source_pdf_sha256: ff4ecc5cacafe5d9fd3253ca28c968e8034466770c1e9d67481a7d51a7f70cc4
+    source_unit_id: meeting-11-slides-lasr-examples-and-scaling
+    visual_id: meeting-11-slides-visual-lasr-examples-and-scaling
+    transform: "Poppler pdftoppm 180 DPI; exact physical page; no crop"
+    used_in: "00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md#что-показали-feynman-equations-and-scaling-law-case"
+    attribution: "Swarat Chaudhuri et al., Berkeley Advanced LLM Agents, Spring 2025; LaSR primary paper arXiv:2409.09359"
+  - file: m11-p80-scaling-curves.png
+    sha256: 3d341d831f1582553101b7db8728b98610c8bb43f84297a3d867b85bf644f381
+    size: 2400x1350
+    source: "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-11-slides.pdf#page=80"
+    source_pdf_sha256: ff4ecc5cacafe5d9fd3253ca28c968e8034466770c1e9d67481a7d51a7f70cc4
+    source_unit_id: meeting-11-slides-lasr-examples-and-scaling
+    visual_id: meeting-11-slides-visual-lasr-examples-and-scaling
+    transform: "Poppler pdftoppm 180 DPI; exact physical page; no crop"
+    used_in: "00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md#что-показали-feynman-equations-and-scaling-law-case"
+    attribution: "Swarat Chaudhuri et al., Berkeley Advanced LLM Agents, Spring 2025; LaSR primary paper arXiv:2409.09359"
+  - file: m11-p81-scaling-traits.png
+    sha256: eae7026a436199bd838f547286d275cefb4f7b74580b45ba7188188e0c70faed
+    size: 2400x1350
+    source: "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-11-slides.pdf#page=81"
+    source_pdf_sha256: ff4ecc5cacafe5d9fd3253ca28c968e8034466770c1e9d67481a7d51a7f70cc4
+    source_unit_id: meeting-11-slides-lasr-examples-and-scaling
+    visual_id: meeting-11-slides-visual-lasr-examples-and-scaling
+    transform: "Poppler pdftoppm 180 DPI; exact physical page; no crop"
+    used_in: "00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md#что-показали-feynman-equations-and-scaling-law-case"
+    attribution: "Swarat Chaudhuri et al., Berkeley Advanced LLM Agents, Spring 2025; LaSR primary paper arXiv:2409.09359"

@@ -5,7 +5,7 @@
   "integration_base_commit": "fad4d91373fcd94c18906bfaf209125188eb20cf",
   "retrieved_at": "2026-09-04",
   "syllabus_url": "https://rdi.berkeley.edu/adv-llm-agents/sp25",
-  "baseline_status": "inventory complete; editorial integration pending",
+  "editorial_status": "integration active; destinations validated",
   "bundle_count": 12,
   "official_pdf_count": 13,
   "reading_count": 37,

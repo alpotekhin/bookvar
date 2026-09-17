@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "review_method": "Every physical page of every official PDF was inspected in ordered contact sheets, cross-checked against pdftotext -layout output, and grouped into explicitly named semantic sections. Administrative pages and the source-marked confidential page are explicit exclusions; no keyword or one-row-per-page proxy was used.",
-  "semantic_review_sha256": "0dd492f1aa69d11aa3815aab7ce503f93341ac9ddb55689cbcc63dde3843a5b3",
+  "semantic_review_sha256": "4f3cdc494aa011875c2d978aeeba22dcaab4094643dc6fb8494a94d6e7bf7072",
   "units": [
     {
       "id": "official-syllabus-coursework-and-schedule",
@@ -1303,7 +1303,7 @@
       "order": 9,
       "source_location": "Lectures/meeting-07-slides.pages.txt#physical-pages=99-105",
       "kind": "mechanism",
-      "title": "GenS generalist foundation agents",
+      "title": "GenS: Generative Frame Sampler for long video understanding",
       "semantic_id": "gens",
       "page_start": 99,
       "page_end": 105

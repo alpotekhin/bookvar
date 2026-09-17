@@ -4,7 +4,7 @@ type: model-family
 organization: Technology Innovation Institute
 first_release: 2023
 latest_verified_release: Falcon-H1 Arabic and Falcon Perception
-last_verified: 2026-08-06
+last_verified: 2026-09-15
 architecture_base: decoder Transformer then parallel Mamba-attention hybrid
 modalities: [text, image]
 status: active
@@ -18,7 +18,7 @@ Falcon прошёл две архитектурные эпохи. Falcon 7B/40B/
 
 | Релиз | Существенный diff |
 |---|---|
-| Falcon 7B/40B (2023) | Multi-query attention, parallel attention/MLP; RefinedWeb как основной вклад в данные. |
+| Falcon 7B/40B (2023) | 7B: 71Q/1KV (MQA); 40B: 128Q/8KV (группировка KV); parallel attention/MLP, RefinedWeb. |
 | Falcon 180B (2023) | Масштабирование dense линии на 3.5T RefinedWeb tokens. |
 | Falcon 2 / Falcon 3 (2024) | Малые эффективные модели 1B–10B; Falcon 3 получил 14T токенов и 32K. |
 | Falcon-H1 (2025) | Параллельный hybrid-head: Mamba-2 SSM и attention в каждом mixer. |
@@ -33,11 +33,11 @@ Falcon прошёл две архитектурные эпохи. Falcon 7B/40B/
 
 Jamba чередует Mamba- и attention-слои. Falcon-H1 делит ширину mixer между двумя механизмами внутри каждого блока. Число SSM- и attention-heads можно менять независимо, поэтому модель выбирает долю рекуррентной памяти и прямого retrieval не только числом слоёв, но и каналами. RMSNorm стоит перед mixer и MLP, residual paths проходят вокруг обоих подслоёв.
 
-Ранняя Falcon-линия использовала MQA: все query-heads разделяют K/V, резко уменьшая KV-cache. Parallel block вычислял attention и MLP от одного нормализованного входа. Это нельзя автоматически переносить на H1, где основной diff — Mamba-2 + attention fusion.
+В ранней линии нужно различать [Falcon-7B config](https://huggingface.co/tiiuae/falcon-7b/blob/main/config.json) и [Falcon-40B config](https://huggingface.co/tiiuae/falcon-40b/blob/main/config.json). У 7B — 71 голова запросов и одна общая пара K/V (`multi_query: true`); у 40B — 128 голов запросов и 8 пар K/V (`num_kv_heads: 8`), то есть по 16 query-heads на группу. Это multi-group MQA, по вычислительному интерфейсу GQA, а не одна глобальная пара K/V. При размере головы 64 в BF16 один токен одного слоя требует для K+V соответственно 256 байт и 2048 байт без служебных накладных расходов. Для 40B обычное MHA с 128 KV-heads потребовало бы 32768 байт: выигрыш группировки — 16×, не 128×. Parallel block вычислял attention и MLP от одного нормализованного входа. Это нельзя автоматически переносить на H1, где основной diff — Mamba-2 + attention fusion.
 
 ## Данные и post-training
 
-RefinedWeb — отдельный открытый вклад TII: Common Crawl проходит deduplication и строгую фильтрацию вместо добавления большого числа курируемых источников. Falcon-H1 report описывает новую 18T-token multilingual mixture и размеры от 0.5B до 34B. Instruct-версии получают SFT и preference alignment; Arabic — дополнительную языковую специализацию. Falcon Perception обучает vision-language систему и не является продолжением текстовых весов только по имени.
+RefinedWeb — отдельный открытый вклад TII: Common Crawl проходит deduplication и строгую фильтрацию вместо добавления большого числа курируемых источников. Falcon-H1 report описывает размеры от 0.5B до 34B; объём обучения зависит от размера: в Table 1 указано 2.5T для 0.5B и около 18T для 34B, а не 18T для каждого checkpoint. Instruct-версии получают SFT и preference alignment; Arabic — дополнительную языковую специализацию. Falcon Perception обучает vision-language систему и не является продолжением текстовых весов только по имени.
 
 ## Serving
 
@@ -45,7 +45,7 @@ Falcon-H1 сохраняет постоянное Mamba-состояние, но
 
 ## Что опубликовано
 
-Для Falcon 1/RefinedWeb и H1 доступны papers, веса и configs. Falcon Perception официально анонсирован, но полная recipe может быть раскрыта слабее. Маркетинговые сравнения TII не заменяют независимые evaluation. Falcon-H1 Arabic — последний verified текстовый релиз; Perception — последняя новая ветка семейства.
+Для Falcon 1/RefinedWeb и H1 доступны papers, веса и configs. Falcon Perception официально анонсирован, но полная recipe может быть раскрыта слабее. Маркетинговые сравнения TII не заменяют независимые evaluation. Охват карточки включает перечисленные Falcon/H1, Arabic и Perception; это не утверждение об отсутствии более поздних моделей. За различием постоянного состояния, KV-cache и последовательной/параллельной композиции перейдите к [[02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры|главе о рекуррентных и гибридных архитектурах]] и [[02 Areas/ML & DL/02 Атлас моделей/Семейства/Jamba|карточке Jamba]].
 
 ## Источники
 

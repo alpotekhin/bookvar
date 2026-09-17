@@ -89,6 +89,12 @@ body {
   margin-inline: auto;
 }
 
+/* Paper figures often have transparent backgrounds and black labels/arrows.
+   Preserve the source artwork, including in the site's dark theme. */
+.sl-markdown-content img[src*='/Assets/Figures/'] {
+  background-color: #fff;
+}
+
 .sl-markdown-content figure {
   max-width: 100%;
   margin-inline: 0;

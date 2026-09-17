@@ -2,7 +2,9 @@
 title: GPT-1 — generative pre-training
 type: textbook-chapter
 status: canonical
-last_updated: 2026-08-03
+locale: en
+translation_of: "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md"
+last_updated: 2026-09-15
 primary_sources: [https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf]
 ---
 
@@ -106,11 +108,24 @@ $$
 L_3(C)=L_2(C)+\lambda L_1(C),
 $$
 
-where $L_2$ is the likelihood of the correct label and $L_1$ is next-token
-likelihood. This term supplies additional supervision and keeps the
+where $L_2$ sums correct-label log-probabilities and $L_1$ sums next-token log-probabilities. This term supplies additional supervision and keeps the
 representation closer to what was learned from books. In the paper it helped
 particularly on larger labeled datasets; that observation is not a universal
 guarantee for every fine-tuning regime.
+
+The $L_1,L_2,L_3$ notation follows the paper: these are **log-likelihoods to maximize**, not positive losses to minimize. An optimizer minimizes $\mathcal L=-L_3=\mathcal L_{classification}+\lambda\mathcal L_{LM}$ with $\lambda\ge0$.
+
+For a complete entailment example, serialize the premise and hypothesis as follows. Words are shown as single toy tokens to make the final position explicit; actual BPE may split them.
+
+```text
+index:  0       1  2   3     4        5  6      7    8
+input:  Start   A  cat sleeps Delim    An animal rests Extract
+label:  entailment
+```
+
+The last-layer state $h_l^8$ can attend to both sentences. It feeds a three-class head, not the vocabulary head: $[1,768]@[768,3]\to[1,3]$. For hand calculation reduce the state to $h=(1,2)$ and choose columns of $W_y$ as $(1,0)$, $(0,0)$, and $(-1,0)$ for entailment, neutral, and contradiction. Logits are $(1,0,-1)$, softmax is approximately $(0.6652,0.2447,0.0900)$, and the correct-label loss is $-\ln0.6652\approx0.4076$. The label itself is **not** appended as an input token.
+
+For an illustrative auxiliary calculation, suppose all eight next-token targets in this serialized toy sequence have probability $0.5$. The summed LM loss is $8\ln2\approx5.5452$; with $\lambda=0.1$, total minimized loss is $0.4076+0.1(5.5452)\approx0.9621$. These are invented arithmetic values, not GPT-1 measurements or a claimed default reduction. Changing sum to mean changes the effective weight of $\lambda$; padding must not add LM targets. Both terms send gradients into the shared Transformer.
 
 ## Reading the key experiments
 

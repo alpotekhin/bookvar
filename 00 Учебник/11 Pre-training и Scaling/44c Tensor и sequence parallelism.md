@@ -28,10 +28,10 @@ Transformer из глав об attention, collectives из [[44a Processes, coll
 
 $$X\in\mathbb R^{T\times D},\quad A\in\mathbb R^{D\times H},\quad B\in\mathbb R^{H\times D},\quad Y=\phi(XA)B,$$
 
-где $T=B_{\mathrm{micro}}S$. При $p$ TP-rank:
+где $T=B_{\mathrm{micro}}S$, а $\phi$ применяется поэлементно. При $p$ TP-rank:
 
 1. Column-parallel $A=[A_0,\ldots,A_{p-1}]$, $A_r\in\mathbb R^{D\times H/p}$.
-2. Каждый rank вычисляет $U_r=XA_r\in\mathbb R^{T\times H/p}$.
+2. Каждый rank вычисляет $Z_r=XA_r$ и $U_r=\phi(Z_r)$, оба тензора имеют форму $[T,H/p]$.
 3. Row-parallel $B_r\in\mathbb R^{H/p\times D}$ даёт partial $Y_r=U_rB_r\in\mathbb R^{T\times D}$.
 4. AllReduce суммирует $\sum_rY_r$ или ReduceScatter сразу оставляет sequence shard для SP.
 
@@ -39,14 +39,16 @@ $$X\in\mathbb R^{T\times D},\quad A\in\mathbb R^{D\times H},\quad B\in\mathbb R^
 
 *Источник: Harvard Edge ML Systems Book, commit `45ecc8d…`, [Distributed Training, `sec-distributed-training-systems-systems-tensor-parallelism-d76e`, figure `fig-tensor-parallel-split`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/distributed_training.qmd), CC BY-NC-SA 4.0.*
 
-Backward проходит границы в обратном порядке: градиент реплицированного выхода умножается на локальный $B_r^\top$ и даёт принадлежащий rank тензор $dU_r:[T,H/p]$; объединять его не нужно. Затем каждый rank вычисляет свой вклад $dX_r=dU_rA_r^\top:[T,D]$, и уже эти вклады суммируются между rank. Градиенты весов остаются рядом с соответствующими shards параметров.
+Backward проходит границы в обратном порядке: градиент реплицированного выхода умножается на локальный $B_r^\top$ и даёт принадлежащий rank тензор $dU_r=dYB_r^\top:[T,H/p]$; объединять его не нужно. Через нелинейность градиент проходит локально: $dZ_r=dU_r\odot\phi'(Z_r):[T,H/p]$. Затем каждый rank вычисляет свой вклад $dX_r=dZ_rA_r^\top:[T,D]$, и уже эти вклады суммируются между rank. Градиенты весов остаются рядом с соответствующими shards параметров.
 
 ### Shape ledger для SwiGLU
 
 Для SwiGLU удобнее сразу записать обе входные проекции:
 
-$$U=XW_u,\quad G=XW_g,\quad H=\operatorname{SiLU}(G)\odot U,
-\quad Y=HW_o,$$
+$$
+U=XW_u,\quad G=XW_g,\quad H=\operatorname{SiLU}(G)\odot U,
+\quad Y=HW_o,
+$$
 
 где $X:[T,D]$, $W_u,W_g:[D,F]$, $W_o:[F,D]$. При column-sharding на
 $p$ rank каждый держит $W_{u,r},W_{g,r}:[D,F/p]$ и получает
@@ -151,8 +153,9 @@ $$Q_r,K_r,V_r:[B,S/p,h,d_h].$$
 state = empty_online_softmax()
 kv = local_kv
 for round in 0 .. p-1:
-    state = attention_update(local_q, kv, causal_block_mask)
-    kv = ring_send_recv(kv)
+    state = attention_update(state, local_q, kv, causal_block_mask)
+    if round < p - 1:
+        kv = ring_send_recv(kv)
 output = finalize(state)
 ```
 

@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "id": "berkeley-agents-practice-26",
+  "title": "Lean proof search with an executable verifier",
+  "source": {
+    "course": "UC Berkeley Advanced LLM Agents, Spring 2025",
+    "course_url": "https://rdi.berkeley.edu/adv-llm-agents/sp25",
+    "primary_readings": [
+      "https://arxiv.org/abs/2306.15626",
+      "https://arxiv.org/abs/2310.04353",
+      "https://arxiv.org/abs/2210.12283"
+    ],
+    "adaptation_notice": "Bookvar adaptation; not an official Berkeley lab"
+  },
+  "environment": {
+    "runtime": "pinned Lean and Lake versions",
+    "library": "pinned Mathlib or equivalent commit",
+    "required_manifests": ["lake-manifest.json", "theorem-split.json", "imports.json"],
+    "minimum_theorems": 12,
+    "minimum_theorems_scope": "full comparison project, not the one-theorem starter",
+    "domains": ["arithmetic", "lists", "finite sets", "multi-lemma chain"],
+    "forbidden": ["sorry", "admit", "new axioms", "statement modification", "test-proof retrieval"]
+  },
+  "interfaces": {
+    "reset_theorem": "reset_theorem(theorem_id) -> ProofState",
+    "list_accessible_premises": "list_accessible_premises(state) -> list[Premise]",
+    "apply_tactic": "apply_tactic(state_id, tactic, timeout_ms) -> TacticResult",
+    "check_completed_proof": "check_completed_proof(theorem_id, proof_text) -> KernelResult",
+    "tactic_statuses": ["progress", "no_progress", "error", "solved", "timeout"],
+    "state_identity": "stable hash of the elaborated proof state"
+  },
+  "profiles": {
+    "starter": "one Nat theorem on Lean/Lake 4.19.0, no external libraries, bad tactic then accepted proof and a second clean-process verification; no LLM or retrieval claim",
+    "state_only": "proposal model sees the proof state without retrieved premises",
+    "retrieval": "proposal model sees top-k accessible premises",
+    "oracle_premises": "diagnostic upper bound with reference premises but no proof term",
+    "draft_sketch_prove": "informal draft, Lean sketch with holes, then the same bounded prover loop per hole"
+  },
+  "search": {
+    "pass_at_k_unit": "independent complete search restarts for each theorem under a fixed policy and budget; adaptive internal branches are not independent samples",
+    "strategy": "explicit frontier with stateful backtracking",
+    "close_branch_on": ["timeout", "repeated state", "no progress", "exhausted actions"],
+    "matched_budgets": ["model calls", "tactic executions", "wall time"]
+  },
+  "metrics": [
+    "pass_at_1",
+    "pass_at_k",
+    "premise_recall_at_k",
+    "tactic_error_rate",
+    "timeout_rate",
+    "no_progress_rate",
+    "repeated_state_rate",
+    "kernel_calls",
+    "expanded_nodes",
+    "search_depth",
+    "time_to_first_proof"
+  ],
+  "required_outputs": [
+    "theorem-split.json",
+    "premise-index.jsonl",
+    "attempts.jsonl",
+    "states.jsonl",
+    "retrieval.jsonl",
+    "kernel_results.jsonl",
+    "accepted-proofs/",
+    "metrics.csv",
+    "report.md"
+  ],
+  "acceptance": [
+    "the runtime and theorem split are pinned by hashes",
+    "test solutions and future premises are absent from the index",
+    "every accepted proof passes in a clean Lean process",
+    "every tactic transition and diagnostic is logged",
+    "loops and timeouts terminate deterministically",
+    "all profiles use matched budgets",
+    "autoformalization, if present, is evaluated separately from proving",
+    "one successful and one failed trajectory are reconstructed step by step"
+  ],
+  "fail_if": [
+    "a proof contains a forbidden placeholder",
+    "the theorem statement or imports are modified to make the task easier",
+    "the retriever sees a hidden solution",
+    "a model judgment substitutes for the Lean kernel result",
+    "only the best seed is reported"
+  ]
+}

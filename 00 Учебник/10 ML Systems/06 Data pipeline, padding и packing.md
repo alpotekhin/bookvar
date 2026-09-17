@@ -47,10 +47,10 @@ augmentations могут стать узким местом. Pillow-SIMD, jpeg-t
 
 Если длины $l_i$, а batch padded до $L_{\max}$, доля полезных tokens:
 
-$$\eta_{\text{pad}}=\frac{\sum_i l_i}{B L_{\max}},
+$\eta_{\text{pad}}=\frac{\sum_i l_i}{B L_{\max}},
 \qquad
 waste=1-\eta_{\text{pad}}.
-$$
+$
 
 Для длин `[128, 140, 160, 1024]` полезность
 $1452/(4\cdot1024)\approx35{,}4\%$: почти две трети token-level compute
@@ -128,7 +128,7 @@ Synthetic-тест: изменение tokens A не должно менять l
 objective, напротив, сознательно разрешает переход через EOS — режимы нельзя
 смешивать.
 
-## Каркас pipeline
+## Базовый путь загрузки без доказанного перекрытия
 
 ```python
 from torch.nn.utils.rnn import pad_sequence
@@ -150,6 +150,13 @@ for cpu_batch in loader:
     batch = {k: v.cuda(non_blocking=True) for k, v in cpu_batch.items()}
     loss = model(**batch).loss
 ```
+
+Этот каркас асинхронен относительно CPU, но копирование и вычисления ставятся
+в один текущий CUDA stream и исполняются по порядку. `non_blocking=True` само
+по себе не доказывает перекрытие H2D с работой модели. Для этого нужны отдельный
+поток копирования, два буфера, явная зависимость через event и проверка
+временной трассы; разобранная модель 3 мс копирования/7 мс вычисления приведена
+в [[02 Areas/ML & DL/00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти|главе о GPU и CUDA]].
 
 `pad_id` не следует молча приравнивать к EOS. Bounded queues создают
 backpressure вместо роста RAM. Для поиска bottleneck логируют `next(loader)`,

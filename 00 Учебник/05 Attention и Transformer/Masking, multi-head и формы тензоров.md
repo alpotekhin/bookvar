@@ -2,7 +2,7 @@
 title: Masking, multi-head и формы тензоров
 type: textbook-chapter
 status: canonical
-last_updated: 2026-09-04
+last_updated: 2026-09-15
 source_unit_id:
   - assignment-01-task-scaled-dot-product-attention
   - assignment-01-task-multihead-self-attention
@@ -94,6 +94,8 @@ $$
 
 ## Зачем одной позиции несколько голов
 
+Обозначим через $X_Q,X_K,X_V$ **входы до проекций**. В self-attention это один и тот же $X$, а в cross-attention $X_Q$ приходит из decoder, $X_K=X_V$ — из последнего выхода encoder. Уже спроецированные $Q,K,V$ ниже сохраняют смысл обозначений предыдущей главы.
+
 Один softmax создаёт одно распределение по ключам. Между тем одному слову могут
 быть одновременно нужны разные отношения: ближайший сосед, согласуемое
 подлежащее и слово, уточняющее значение. Multi-head attention предоставляет
@@ -102,11 +104,11 @@ attention:
 
 $$
 \operatorname{head}_r=
-\operatorname{Attention}(QW_r^Q,KW_r^K,VW_r^V),
+\operatorname{Attention}(X_QW_r^Q,X_KW_r^K,X_VW_r^V),
 $$
 
 $$
-\operatorname{MHA}(Q,K,V)=
+\operatorname{MHA}(X_Q,X_K,X_V)=
 \operatorname{Concat}(\operatorname{head}_1,\ldots,
 \operatorname{head}_H)W^O.
 $$
@@ -204,7 +206,7 @@ $D_{model}$, число голов — $H$, а ширина головы — $D_
 | выходная проекция | $Z_{cat}W^O$ | `[B, T, Dmodel]` |
 
 Softmax выполняется по **последней** оси: для каждого `(b, h, i)` сумма по всем
-ключам $j$ равна единице. Нормировка по запросам отвечала бы на другой вопрос и
+ключам $j$ равна единице для непустой разрешённой строки. Для пустых строк ниже задана отдельная политика. Нормировка по запросам отвечала бы на другой вопрос и
 изменила бы механизм.
 
 ## Broadcasting масок
@@ -221,14 +223,17 @@ broadcasting.
 
 ```python
 scores = q @ k.transpose(-2, -1) / math.sqrt(Dh)  # [B,H,T,T]
-
-causal = torch.ones(T, T, dtype=torch.bool).tril()
-causal = causal[None, None, :, :]                   # [1,1,T,T]
-
-key_ok = attention_mask[:, None, None, :].bool()   # [B,1,1,T]
-allowed = causal & key_ok
+causal = torch.ones(T, T, dtype=torch.bool, device=q.device).tril()
+key_ok = attention_mask[:, None, None, :].to(q.device).bool()
+query_ok = attention_mask[:, None, :, None].to(q.device).bool()
+allowed = causal[None, None, :, :] & key_ok & query_ok
+valid_query = allowed.any(dim=-1, keepdim=True)  # [B,1,T,1]
 scores = scores.masked_fill(~allowed, float("-inf"))
-weights = scores.softmax(dim=-1)
+# Avoid undefined softmax even in branches later discarded by torch.where.
+safe_scores = torch.where(valid_query, scores, torch.zeros_like(scores))
+weights = safe_scores.softmax(dim=-1)
+weights = torch.where(valid_query, weights, torch.zeros_like(weights))
+z = weights @ v  # zero for empty rows, before an output projection with bias
 ```
 
 В некоторых API булево значение `True` означает «разрешить», в других —
@@ -236,6 +241,8 @@ weights = scores.softmax(dim=-1)
 конкретной функции. У `torch.nn.functional.scaled_dot_product_attention`
 булева маска использует `True` для разрешённого элемента, тогда как у ряда
 старых интерфейсов PyTorch смысл противоположен.
+
+В этом примере явно выбрана политика: нулевые веса и нулевой $AV$ для запроса без разрешённых ключей; padding-запросы тоже исключаются. При left padding `[0,0,1,1]` суммы строк равны `[0,0,1,1]`: первый настоящий токен читает себя, последний — два настоящих токена. Заменять `NaN` после softmax недостаточно для безопасного backward, поэтому пустые строки получают конечные вспомогательные оценки **до** softmax и обнуляются после него. Bias выходной проекции и residual connections могут снова сделать последующие padding-состояния ненулевыми; padding targets всё равно исключаются из loss. Это политика данной реализации, а не обещание о поведении любого attention backend.
 
 ## Ошибки, которые выглядят правдоподобно
 
@@ -263,14 +270,15 @@ assert Dmodel == H * Dh
 assert q.shape == (B, H, T, Dh)
 assert scores.shape == (B, H, T, T)
 assert weights.shape == (B, H, T, T)
-assert torch.allclose(
-    weights.sum(dim=-1),
-    torch.ones_like(weights.sum(dim=-1)),
-    atol=1e-5,
-)
+row_sum = weights.sum(dim=-1)
+valid = valid_query.squeeze(-1).expand_as(row_sum)
+assert torch.isfinite(weights).all()
+assert torch.allclose(row_sum[valid], torch.ones_like(row_sum[valid]), atol=1e-5)
+assert torch.count_nonzero(row_sum[~valid]) == 0
+assert torch.count_nonzero(z.masked_select(~valid[..., None])) == 0
 
 # Ни одна causal-голова не должна отдавать вес будущему.
-future = torch.ones(T, T, dtype=torch.bool).triu(diagonal=1)
+future = torch.ones(T, T, dtype=torch.bool, device=q.device).triu(diagonal=1)
 assert torch.count_nonzero(weights[..., future]) == 0
 ```
 

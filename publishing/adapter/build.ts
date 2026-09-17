@@ -9,6 +9,7 @@ import { loadLinkAllowlist } from './link-policy.js';
 import { loadManifest } from './manifest.js';
 import type { PublicationSidebarItem } from './manifest.js';
 import { createRouteRegistry } from './routes.js';
+import { mapMarkdownProse } from './markdown-prose.js';
 
 export interface BuildOptions {
   rootDir: string;
@@ -119,9 +120,10 @@ interface MarkdownHeading {
   text: string;
   normalized: string;
   offset: number;
+  explicitAnchor?: string;
 }
 
-export function parseMarkdownHeadings(markdown: string): MarkdownHeading[] {
+export function parseMarkdownHeadings(markdown: string, includeExplicitAnchors = false): MarkdownHeading[] {
   const headings: MarkdownHeading[] = [];
   let fence: { character: '`' | '~'; length: number } | undefined;
   let offset = 0;
@@ -151,6 +153,15 @@ export function parseMarkdownHeadings(markdown: string): MarkdownHeading[] {
       if (match) {
         const text = match[1].replace(/[ \t]+#$/, '').trim();
         headings.push({ text, normalized: normalizeObsidianHeading(text), offset });
+      }
+      if (includeExplicitAnchors) {
+        // Only empty, standalone anchors are editorial fragment aliases.
+        // The same fence scanner excludes literal HTML in code examples.
+        const anchor = content.match(/^ {0,3}<(a|span)\s+id=["']([^"'<>\s]+)["'](?:\s+aria-hidden=["']true["'])?\s*>\s*<\/\1>\s*$/);
+        if (anchor) headings.push({
+          text: anchor[2], normalized: normalizeObsidianHeading(anchor[2]),
+          offset, explicitAnchor: anchor[2]
+        });
       }
     }
     offset += line.length;
@@ -266,7 +277,7 @@ function prepareLinkedCourseArtifacts(
     route === `${routeRoot}/index` || route.startsWith(`${routeRoot}/`)
   );
   const artifacts: LinkedCourseArtifact[] = [];
-  const converted = markdown.replace(MARKDOWN_LINK, (match, label: string, rawTarget: string) => {
+  const converted = mapMarkdownProse(markdown, (prose) => prose.replace(MARKDOWN_LINK, (match, label: string, rawTarget: string) => {
     const target = rawTarget.trim();
     if (
       target === ''
@@ -286,7 +297,7 @@ function prepareLinkedCourseArtifacts(
     } catch {
       return match;
     }
-    if (!course && !/\.md$/i.test(decodedPath)) return match;
+    if (!course && !LINKED_SOURCE_ARTIFACT.test(decodedPath)) return match;
     const targetSource = join(dirname(source), decodedPath).split(sep).join('/');
     const targetPath = contained(rootDir, targetSource, 'Linked source artifact');
     const normalizedSource = relative(rootDir, targetPath).split(sep).join('/');
@@ -294,14 +305,17 @@ function prepareLinkedCourseArtifacts(
     if (targetRoute) {
       return `[${label}](${publicationHref(targetRoute)}${suffix})`;
     }
-    if (!course || !LINKED_SOURCE_ARTIFACT.test(decodedPath)) return match;
+    const artifactCourse = course ?? COURSE_PUBLICATIONS.find(
+      ({ sourceRoot }) => normalizedSource.startsWith(`${sourceRoot}/`)
+    );
+    if (!artifactCourse || !LINKED_SOURCE_ARTIFACT.test(decodedPath)) return match;
     if (/\.md$/i.test(decodedPath) && !APPROVED_RAW_MARKDOWN_ARTIFACTS.has(normalizedSource)) {
       throw new Error(
         `Linked source artifact is not an approved raw Markdown course artifact: ${normalizedSource}`
       );
     }
 
-    const courseRoot = resolve(rootDir, course.sourceRoot);
+    const courseRoot = resolve(rootDir, artifactCourse.sourceRoot);
     const sourceOffset = relative(courseRoot, targetPath);
     if (
       sourceOffset === ''
@@ -311,12 +325,12 @@ function prepareLinkedCourseArtifacts(
     ) {
       throw new Error(`Linked source artifact path escapes course root: ${target}`);
     }
-    const publicPath = join(course.routeRoot, sourceOffset).split(sep).join('/');
+    const publicPath = join(artifactCourse.routeRoot, sourceOffset).split(sep).join('/');
     contained(rootDir, publicPath, 'Linked source artifact destination');
-    artifacts.push({ source: targetPath, publicPath, course });
+    artifacts.push({ source: targetPath, publicPath, course: artifactCourse });
     const href = publicPath.split('/').map(encodeURIComponent).join('/');
     return `[${label}](${publicationBasePath()}/${href}${suffix})`;
-  });
+  }));
   return { markdown: converted, artifacts };
 }
 
@@ -577,7 +591,7 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
   ]);
   const headingsByRoute = new Map(preparedPages.map(({ entry, locale, prepared }) => [
     publicationHref(entry.route, locale),
-    parseMarkdownHeadings(prepared.markdown)
+    parseMarkdownHeadings(prepared.markdown, true)
   ]));
   for (const { entry, pageEn } of parsed) {
     if (pageEn) continue;
@@ -601,14 +615,22 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
         : registry.routeForWikiTarget(target);
       if (!route) continue;
       const exact = headingsByRoute.get(route)?.filter(
-        (candidate) => candidate.normalized === normalizeObsidianHeading(heading)
+        (candidate) => candidate.explicitAnchor
+          ? candidate.explicitAnchor === heading || candidate.explicitAnchor === wikiHeadingSlug(heading)
+          : candidate.normalized === normalizeObsidianHeading(heading)
       ) ?? [];
-      if (exact.length !== 1) continue;
+      const resolvedFragments = new Set(exact.map(
+        (candidate) => candidate.explicitAnchor ?? wikiHeadingSlug(candidate.text)
+      ));
+      // One retained alias may coincide with one native heading. Multiple
+      // headings or repeated explicit IDs are still ambiguous destinations.
+      if (exact.filter((candidate) => !candidate.explicitAnchor).length > 1
+        || exact.filter((candidate) => candidate.explicitAnchor).length > 1) continue;
+      if (resolvedFragments.size !== 1) continue;
       const anchors = fragmentAnchors.get(route) ?? new Map<string, string>();
-      // Astro/Starlight already assigns this slug to the Markdown heading.
-      // Linking to that native anchor avoids injecting raw HTML before a
-      // heading, which can make the page body disappear during rendering.
-      anchors.set(heading, wikiHeadingSlug(heading));
+      // Use an existing explicit alias or the native heading slug; never inject
+      // another HTML element into the chapter during link conversion.
+      anchors.set(heading, [...resolvedFragments][0]);
       fragmentAnchors.set(route, anchors);
     }
   }

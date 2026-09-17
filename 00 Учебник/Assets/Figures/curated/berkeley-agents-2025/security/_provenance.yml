@@ -1,0 +1,73 @@
+schema_version: 1
+course:
+  title: Berkeley Advanced LLM Agents, Spring 2025
+  meeting: 12
+  lecturer: Dawn Song
+  course_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+  source_path: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-12-slides.pdf
+  source_sha256: 395a0add9ee6328bc4206a042b90dbc70063fc6a8aa0420ad4483ffe0d2cab6b
+  retrieved: 2026-09-04
+  rights_status: permission-recorded
+  rights_note: "User permission covers attributed educational preservation and reuse in this textbook. This record does not assert a named open-source or Creative Commons license for the slide deck. Embedded third-party figures retain their original attribution."
+assets:
+  - local_path: ../12-dawn-song-agentic-threat-model-sequence.png
+    source_page: 20
+    source_page_canvas: 960x540pt
+    output_size: 1920x1080
+    output_sha256: 10ccfbbb91ffb4b017a420e5131b4797b78b0cf89637811695b11be86faa4a96
+    transform: full PDF page rendered at 144 dpi without cropping or content changes
+    used_in: 00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md#семь-поверхностей-host-user-system-model-tools-response-long-running-process
+  - local_path: m12-p27.png
+    source_page: 27
+    source_page_canvas: 960x540pt
+    output_size: 1920x1080
+    output_sha256: 15f46904fc5f1a8af1f0c6f605ce1a09043990b71a68e1e919ec1667fc7c4d65
+    transform: full PDF page rendered at 144 dpi without cropping or content changes
+    used_in: 00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md#когда-output-модели-становится-query-parameter-or-executable-code
+  - local_path: m12-p48.png
+    source_page: 48
+    source_page_canvas: 960x540pt
+    output_size: 1920x1080
+    output_sha256: c9e5430bf354b8693aa7496efb4a67e8e71a4e77ffa95398d00319a732dd9c01
+    transform: full PDF page rendered at 144 dpi without cropping or content changes
+    primary_source: https://www.usenix.org/conference/usenixsecurity24/presentation/liu-yupei
+    used_in: 00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md#direct-indirect-and-retrieval-memory-poisoning
+  - local_path: ../12-prompt-injection-agentpoison.png
+    source_page: 50
+    source_page_canvas: 960x540pt
+    output_size: 1920x1080
+    output_sha256: da1ee53b482c1823067266706e496937ebfd1b4b3027e9c503195087f04274aa
+    transform: full PDF page rendered at 144 dpi without cropping or content changes
+    primary_source: https://arxiv.org/abs/2407.12784
+    used_in: 00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md#direct-indirect-and-retrieval-memory-poisoning
+  - local_path: m12-p65.png
+    source_page: 65
+    source_page_canvas: 960x540pt
+    output_size: 1920x1080
+    output_sha256: fcf2003a1adb4def7a247e7f17753a975cefb7c8883782a7c9052849b05ad87e
+    transform: full PDF page rendered at 144 dpi without cropping or content changes
+    used_in: 00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md#defense-in-depth-hardening-validation-policy-and-isolation
+  - local_path: ../12-dawn-song-privilege-control-sequence.png
+    source_page: 81
+    source_page_canvas: 960x540pt
+    output_size: 1920x1080
+    output_sha256: 455d62525cfebf8ea15aa7c6b3d390219e796d5670494cdbf1acdbf7c78816c8
+    transform: full PDF page rendered at 144 dpi without cropping or content changes
+    primary_source: https://arxiv.org/abs/2504.11703
+    used_in: 00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md#progent-least-privilege-as-an-executable-tool-call-policy
+  - local_path: m12-p90.png
+    source_page: 90
+    source_page_canvas: 960x540pt
+    output_size: 1920x1080
+    output_sha256: 8d829dbd052df042ef489c5e9c3e0ad2120e5caf6f96fec8c841151e20adc6d3
+    transform: full PDF page rendered at 144 dpi without cropping or content changes
+    primary_source: https://www.usenix.org/conference/13th-usenix-security-symposium/privtrans-automatically-partitioning-programs-privilege
+    used_in: 00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md#privilege-separation-опасная-операция-живёт-в-меньшем-компоненте
+  - local_path: ../12-agent-monitoring-and-verification.png
+    source_page: 93
+    source_page_canvas: 960x540pt
+    output_size: 1920x1080
+    output_sha256: 9d0e41b018ed59ff17c74b92658d6d15654bd3b268549e0b15f2076d3de07c66
+    transform: full PDF page rendered at 144 dpi without cropping or content changes
+    primary_source: https://arxiv.org/abs/2504.11358
+    used_in: 00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md#monitoring-information-flow-datasentinel-and-formal-policy-verification

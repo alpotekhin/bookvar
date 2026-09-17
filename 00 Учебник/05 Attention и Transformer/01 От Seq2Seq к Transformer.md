@@ -2,7 +2,7 @@
 title: От Seq2Seq к Attention
 type: textbook-chapter
 status: canonical
-last_updated: 2026-07-18
+last_updated: 2026-09-15
 previous: "[[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора]]"
 next: "[[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V]]"
 primary_sources:
@@ -256,13 +256,32 @@ model. Исторически точнее не делать вид, что Q/K/
 ```python
 # decoder_state: [B, d_s]
 # encoder_states: [B, T, d_h]
+# source_lengths: integer [B], right-padded sources with 1 <= length <= T
 
 query = W_s(decoder_state).unsqueeze(1)       # [B, 1, d_a]
 memory = W_h(encoder_states)                  # [B, T, d_a]
 scores = v(torch.tanh(query + memory)).squeeze(-1)  # [B, T]
+T = encoder_states.size(1)
+if ((source_lengths < 1) | (source_lengths > T)).any():
+    raise ValueError("each source must have between 1 and T real positions")
+positions = torch.arange(T, device=encoder_states.device)
+valid_keys = positions[None, :] < source_lengths[:, None]
+scores = scores.masked_fill(~valid_keys, -torch.inf)
 weights = scores.softmax(dim=-1)              # [B, T]
 context = torch.einsum("bt,btd->bd", weights, encoder_states)
 ```
+
+`source_lengths` находится на том же устройстве, что и память; `W_s`,
+`W_h`, `v` — созданные заранее линейные проекции. Перед softmax мы
+исключили padding keys, а не обнулили их готовые веса: оставшиеся
+реальные позиции должны заново получить суммарную массу 1. Например,
+при равных scores, $T=3$ и длинах `[3,1]` строки весов будут
+`[1/3,1/3,1/3]` и `[1,0,0]`. Пустой источник здесь отклоняется,
+поскольку softmax полностью запрещённой строки не определён.
+Для left padding или произвольных пропусков вместо сравнения с длиной
+нужна явная boolean-маска `[B,T]`. Маска чтения также не исправляет
+encoder states, уже загрязнённые padding: encoder обязан корректно
+обрабатывать действительные длины, особенно при двунаправленной RNN.
 
 Обратите внимание: здесь decoder создаёт один запрос к encoder memory. В
 self-attention следующей главы все $T$ позиций создадут запросы одновременно.

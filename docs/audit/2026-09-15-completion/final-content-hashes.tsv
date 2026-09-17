@@ -1,0 +1,319 @@
+path	sha256	bytes
+00 Учебник/00 Как пользоваться учебником.md	13b5aa40e01de70b5b5f26bc008abdfd7520dbfc5eb9d7a9a2dd35ecd2674a8d	6552
+00 Учебник/00 Математические и ML-основания/01 Векторы, матрицы и тензоры.md	ef16b64cb97a014ec6d06247c20de16cec17dcaf3678782466c41165120200b0	17997
+00 Учебник/00 Математические и ML-основания/02 Производная и градиент.md	454937e034fa5ed30480d19fb8d5ae49350389505aadf5e75f2a7a2f9daaa69d	17322
+00 Учебник/00 Математические и ML-основания/03 Вероятность, правдоподобие и логарифм.md	9762e698ea59cc4750c04a80689e71798564c6161f655cf68274c3da2cb26f9c	12920
+00 Учебник/00 Математические и ML-основания/04 Функции потерь.md	0b522f015a4b8bb8193bab79d0ed7d76c8cf53b8a959ab2360481ee1e50a6e7f	13984
+00 Учебник/00 Математические и ML-основания/05 Train, validation и test.md	8c7bea69356d52d10f1beed81ee94d31cf88fae5c45eade513f142cb7cfdcccc	12407
+00 Учебник/00 Математические и ML-основания/06 Переобучение, регуляризация и оценивание.md	1675de08e54bc0ad0f44a1fbe4781352b7bccb0a76ebe8096084dead8f125bad	17517
+00 Учебник/01 Классическое машинное обучение/00 Карта модуля.md	eef1ea832e61990a71d72b53aee64b0c114c0eeee0b4726dfae7f857ff2ce56c	5067
+00 Учебник/01 Классическое машинное обучение/01 Задача обучения и predictive pipeline.md	b188f5bbd8fef8802e2ef18fe3f180e8bc94d2925af2a3138577e8c6f7b229b2	20049
+00 Учебник/01 Классическое машинное обучение/02 Линейная регрессия и классификация.md	a20ab01f3d353f04f0a922773f10089f85c01bc73bc70d6ec8b6ff17905096c7	17817
+00 Учебник/01 Классическое машинное обучение/03 Деревья решений.md	cb4e77ee2968ec8a95ffaf16e00329ccafe94af76c601befeb29d59d31e5718e	14285
+00 Учебник/01 Классическое машинное обучение/04 Bagging, random forest и gradient boosting.md	103493befe0e502202ef474018a5c22bb820e1e567840099b6130d13d37e0a1e	18090
+00 Учебник/01 Классическое машинное обучение/05 Оценивание, кросс-валидация и выбор порога.md	24e93c8bacc89066b16aa122c5c1ede94e1c0c540f031847e80b9eb9d93d4d30	20237
+00 Учебник/01 Классическое машинное обучение/06 Кластеризация и её ограничения.md	4f5e89090c3bb906b3cd9fded9e9fffbd3cafee3a7597f8924a9f279e995f72e	21995
+00 Учебник/01 Классическое машинное обучение/06a Спектральная кластеризация и графовый Laplacian.md	52af70baf5e70420404e3ee70366a638857ae7b3cc21c8b2b6567f08799cae82	22128
+00 Учебник/01 Классическое машинное обучение/07 PCA, t-SNE и UMAP.md	c4925068d84c9d173fca5bb918a73efc3630bc7554d2379d30918c42a97aa98b	21951
+00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM.md	48638e21a991e6d5879777c1c15f48d115e5f7d84431424c9f4da4d4d35805dd	21455
+00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features.md	4c0a0d159c6ee59fb94f233009858507c888f393b068829da3c5daf10da130b9	21004
+00 Учебник/01 Основы нейронных сетей/01 Нейрон и MLP.md	5611ca4e2e5545be7f5fc89a00e3adb6a58ecc27e8d794f62c172cd278b669dc	13801
+00 Учебник/01 Основы нейронных сетей/01 Нейрон, градиент и backpropagation.md	cfc70cfd57de9e045b459bf82d0ae9c3da595c26c71b2de3e5b5afc967294f6e	19365
+00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md	45306623c89ae89f89422882b0e7e98ccd126a4dbb0a41fae0ca2115f7787e4c	33976
+00 Учебник/01 Основы нейронных сетей/02 Функции активации.md	0a914295be641aa3056d04ece048828ccb5776b842b059bbb9ae179f83b0a9af	13353
+00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections.md	a7bdd435be16dbd3cab787dcff1c2d5adc41284a551aede3aafd0520ff8e7491	11172
+00 Учебник/01 Основы нейронных сетей/06 Dropout и регуляризация.md	89ba5881b53bbc3025d3c7448785b936f190e4bc7cb0a400a8643a52fe46d721	14167
+00 Учебник/01 Основы нейронных сетей/07 CNN — от свёртки до ResNet.md	8b4fc20203c508a72b7452f946e52809f1b28113e9747bb9de2baf7f557a2008	14592
+00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE.md	091ab377baf722ca7e5a917c77a614224a73290ef77e531aa981c5ca3cbd4900	14133
+00 Учебник/02 Представление текста и токенизация/00 План источников раздела.md	7e9d3ce1facb66ac23e449ffa824ce4d3c13b9ad7961e5819d879c56a8e191b1	3279
+00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings.md	08eb673df9123ac39d3aa702505791068bf510d2764e7772e58e455bed018aab	23601
+00 Учебник/02 Представление текста и токенизация/01 Представление текста числами.md	990e2bf4db0245edc2a4cde974d7462f485bc349d3274c31ddecf96b07e483f2	11902
+00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md	e56be63c263f8b13212592aa24c75158d457cc4b00e1d9247ef4a3888536a59c	31711
+00 Учебник/02 Рекомендательные системы/00 Карта модуля.md	d02ac6c0124b33956339f3b5cc8a502c7b1eb79d480532b9e44fa64c0baa7768	17006
+00 Учебник/02 Рекомендательные системы/01 Задача рекомендации, данные и pipeline.md	0cf15d2a1e945418d4df3ef3b7ff595426138516aca6d41ec09efd062fa884aa	20397
+00 Учебник/02 Рекомендательные системы/02 Collaborative filtering и matrix factorization.md	9c2f5305233c50b87ba443b10323978ebc5e897c33ff71826b1a4ac4da2dae63	17371
+00 Учебник/02 Рекомендательные системы/03 Ranking и нейронные рекомендательные модели.md	5b8e14cc51339c59f8fe31921f713b99abbd2c4c13d70564a28855a686f80b7b	20511
+00 Учебник/02 Рекомендательные системы/04 Последовательные рекомендации и признаки.md	bdffc2e21125a8243fff8fb22c2b7fc8d848b3bc98369a8964743d0d34794fa0	18647
+00 Учебник/02 Рекомендательные системы/05 Оценивание и эксплуатация.md	c94f8d35036b29e37aa1b157155e75c860c7380149565eba6682dc821e94461d	27209
+00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель.md	91357ea247a1316c9b3d68bcabc4d184d9ed6be3d698d3ace620fb0b213a2024	13121
+00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction.md	b0205fe2b566cdd98d67b74e3a338a60ec980c40aa70ff82343fb01943b9210b	11855
+00 Учебник/03 Языковое моделирование/02 Sampling и генерация.md	2882b2cef731ec974ecaf8f8017b72066e92e92c830109e5971a5686a8b4ab5e	11458
+00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT.md	7d5a399b7264f41015ef6be3262a30c7611cb1853e832a60bb26e722fd3f9bf5	15786
+00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN, LSTM и Seq2Seq.md	601ad8c301da506673bef58d360ed171bf1baa95c1c026d79b866e5516a8ff9f	17401
+00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU.md	f977e07887b104b327e3ea8e60c5a815e0c172767983b6c1e4965671c5c82b74	15840
+00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора.md	d656fe42e038122df03bb8c16c9f2031e761d8d4ab51c53d9b72b34fcd7b8990	17324
+00 Учебник/05 Attention и Transformer/00 Источники и визуальный стандарт.md	0471ff58a69773e5be22a9814daf5ac118863c61cba6ff4eab601eec63cd6753	14583
+00 Учебник/05 Attention и Transformer/01 От Seq2Seq к Transformer.md	0332b8584e2d3bded9f082d7a7ebfd3f62d61b8fa095fd4958cc6f318881c476	17353
+00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V.md	7f6fa6fcf5e9cd1b451395712c36849b0488461bfcb0f7222fb6c27f5cc07796	12628
+00 Учебник/05 Attention и Transformer/03 Полный Transformer.md	566e8fdbd9b0d8b6ccdeb5dfc48b41e22964707ab571f8caa57571845876c8e6	24693
+00 Учебник/05 Attention и Transformer/04 Позиционная информация.md	5f1acc5a26a9769fcbf133bc4302bd52ab0dbdb695c82a8dcc19911f6e221a2a	30586
+00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров.md	84cb6955535e0282241071216bfd3c7e48023df1ec42b193ab0b610f85817b3e	22962
+00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md	df74468c152bba2498a23f446ebe257e62f6bc3f573c8265280bf6971e58d909	26030
+00 Учебник/06 Encoder, Decoder и Encoder-Decoder/02 Encoder-Decoder Transformer.md	f86b01b82df2c64cde3780b5b7f295b3c42a524ce64dcb9bebcff72f3e4db925	9939
+00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md	287efca47e3ce89e0b4c751556ff5c9e011660c16a3b78a47cdd8fd1ff8d249e	27468
+00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md	f10f0a3e21d7ea7b207420c0ea0a00210af1d6bdc1da9475a656939421ee38f9	17616
+00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык.md	ba02e4131bb09eb334254eb90a7affa6c761ea4508701c27400c42f8846dfa34	17443
+00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning.md	64b8fc86a86e69fbac77f85eb9c096f0f44a2466ace9e7cca0604cd2e62403ad	20970
+00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md	c96dce53be2521aa573181be175e0f979c9cb52677a5ade31ff04c3f96ca0df8	27013
+00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md	ea7413af665ed3a042c5952582fa6e46b7856019e7c1f8e62e8cda3b2ddd1a9f	29988
+00 Учебник/07 Анатомия современной LLM/02 Современный decoder block.md	185f0026670c8928c16ee03f7217ee2f18a9a06903e8c1bace578ec2ee4452ae	34783
+00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual.md	2fa4869dd10c01fde99c27dd5b01e32e5af89ba20d7409c6f9292c27c12c922f	21731
+00 Учебник/07 Анатомия современной LLM/04 RoPE.md	86fb1f58f6ddaa72f6424c55ee810359d05749cd4f284d67ba4bf0c92e635bbc	22906
+00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md	6a7ac021bd8acbe1781e4f2c846a047ed0a06359fe6a90b5a2974c01c0632ef6	26850
+00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md	60402496763f3a3c4f1464d6ae354770805dbadb0566830001a1d9a0a6196f53	18129
+00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md	03f760bc4321e59bed4119152399d3e3487aaff6a6763e785a31b7a27dd7b528	25951
+00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md	a905656cb7446ed983d0dce75ce80a8173eb0f0346a2aa7960efe054c0dcb433	33046
+00 Учебник/09 Dense FFN и Mixture of Experts/00 Карта модуля и источники.md	84e2a54c6c0d2cc3b95190c9aa7b41135f96fc8406faaabe5f14253424fb7ccc	1982
+00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating.md	5647f04ffc0a1526e57a2ef2f84a17cb1f78362185e671e465b386a5854249fb	21380
+00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md	749852e844bc2cf6de647cf715d66cc42a4a9d669d830ee5f0e07943db898d31	47086
+00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md	6d2f115d509a8e8e1897562af4f33818a7ebd3887f7f76b4017d7c07cf6df0d9	36453
+00 Учебник/10 ML Systems/01 Модель как часть системы.md	1d7e20ed20e425dc040c8d3470bd1f9c7dd859a837f5bae8028a71f23e7c7561	18628
+00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md	fd414057cfd23d8fe41388c4a27a535b10fd709fe747755c79a1542a4c881dfa	19127
+00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md	910e3c11957b3dc5d71c908d63627fdd70f4e3acaf845d891b394f6d0cdc117f	16201
+00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md	799ec801a0897859d5aedac9d09a27196a814573e4a8e08fb9c276175566ff62	30894
+00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md	e60fcff8e2398de8adb203c9b1e3af085b095bafaca780ada9eb380021ce9f8d	17251
+00 Учебник/10 ML Systems/06 Data pipeline, padding и packing.md	d04bd28dc355091673d1412744060133c3ab55011b5588513e79c6db09e84ba3	12311
+00 Учебник/10 ML Systems/07 Profiling ML-нагрузки.md	e98e9aec75bb77345508334752ab4ab96705f5314d63afd9f31caa0283a2050e	25898
+00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md	9f57d28da5aa5e427abc497e844285d33bd6dda977b1bd3fe6f61536afa59e1f	26951
+00 Учебник/10 Атлас современных архитектур/01 Llama, Qwen и DeepSeek как эволюция блока.md	dc3650e0a6f084f21f8ab13c29f73e2bd7236a68d1881e79d847736e3db8d28f	39617
+00 Учебник/10 Атлас современных архитектур/02 Альтернативы Transformer и multimodality.md	858f46d20abeef04aee0638a4825a4685133f5913aed453fb4a46cfa6ea73cfc	26645
+00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md	25c5b4c0eabf9e0950550c50725b86361c16d4e959ce2b48e3a6409295129c1b	14120
+00 Учебник/11 Pre-training и Scaling/02 Distributed training и precision.md	c334f3836fb2a6a654f60eb63b10bdd4a64fa18ece96ebdfa6e03e48d3bf893c	22941
+00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md	e4114c4769d542acae4686b921cddfe863dc2a02facf2b3279212c043aafc68a	30299
+00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md	322a0dcbdb6945ad96878851750f863ffcc0b0ce33a13a19ff89eb7106a78f2d	21145
+00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md	9db385e6450e19734669a2cb76d648cecec264e494ae2a86ec8226bd93380ba7	25723
+00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md	082fcc2b81f7d505f4207e5e81c17a7d280e36abbe2ed649da8afb8dac98567d	70647
+00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md	d59e5153642832de6540b7f6322af6944ca07a3c61cd1e8bafd9090d363e456b	36477
+00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md	ec22eec7a476fca78d7e6225853e8134ead2ac2c3ad2aecd0696b965dfe4a49d	18324
+00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload.md	6069d33e0651c6b0ad18ec35a0f6d992cf28d6a2e8b1af6db65b3f806a77102d	15500
+00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism.md	20385481ec40f32adc6e0524ecd2b175101f57bc7aa42c17a3da1cf0a7ee50ae	16877
+00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism.md	8c5fa3bcc941293a33b6db544bf6e7ffaf4b6353ecb5b512932ba8f3e2edf304	15696
+00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor.md	5033ef23f81ed9ff7020e9582039e7f203a66c7ca4814109e77a51f56495c909	14368
+00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism.md	876e62b6be93073e895f881e1ee122c6fbd8b4080c56e3b5ac0537db672a50ce	15993
+00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints.md	ac84fac2444e90bbd4e90d6c31d914349fda3312e9d779db62fc134e2d371e4a	10661
+00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration.md	a0bca59826e0f29c4eca3b4a1d938a7982916989b748f58da23aff4d8dcb4135	12845
+00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md	657dffe3e7a1a3cabc522d641c39223afc80c097996aebc17dd857ccf177e1dd	30858
+00 Учебник/12 Post-training и Alignment/00 Карта модуля и источники.md	6f277d398be34add51f3a48e172b382a59843859ae9bde2632ae183a66fe0447	10680
+00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md	2d1109111635071b75718f5b473f9dda0678c0e024f98e48b7359b6b51f9171e	40205
+00 Учебник/12 Post-training и Alignment/01 SFT, RLHF и DPO.md	3db23b5f6f430b8804427c61e0b8f3cb288440c1cd1e0251ba408fef22960ebe	1113
+00 Учебник/12 Post-training и Alignment/02 Preference data.md	07e8f8ba24870a69b7d6d86fd6e659d8ee8c34291cde8cb75f75c11c2f61ee64	20434
+00 Учебник/12 Post-training и Alignment/02 RLVR, reasoning и distillation.md	dbb8d9dbbe509c803c623df7f16bbdc5e1db0fc0ff32f1b8eb3bca33960e05a1	833
+00 Учебник/12 Post-training и Alignment/03 Reward modeling.md	9f187e223d4143ed48e427266ab65406e960813bd722343874c2f476b0ad65bd	43669
+00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md	0b25a5d2a08ad590ac27c5bd7f289ce32a9ad4339fb4bcfbe12cd9635c81a749	32262
+00 Учебник/12 Post-training и Alignment/05 DPO.md	2c01405ddf084d092b9838dc2b26efb43f8962fc1ee1b5b8190ea87c68f5a4ec	50370
+00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md	9b75b0cb4c95ee0ad38d296d235d2da590637cbeb8fe5847e2eb3eb45d41f094	34452
+00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md	ccd2739e614212a881b8e59a0a09580dd0d08ef5b821eb0202e513c6e83ac61b	45173
+00 Учебник/12 Post-training и Alignment/08 Reasoning distillation.md	7555a255199bbc2d258ffb52b5330cb3fc32e3290a839ef5bb2aa9556f2f97fa	34082
+00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md	e484dfc8bfdda2312d16eda48fd91a93a7379ef578a2569adb66e7b6f23f9b4a	49471
+00 Учебник/14 Inference и оптимизация/01 KV-cache, batching и FlashAttention.md	f3c159329e77e176c58a343f81feedb4f9510c98771ec0b0788c5e061ef35d3b	23743
+00 Учебник/14 Inference и оптимизация/02 Quantization и deployment.md	10e4c2faf10abb48f366aae22a547a73ba44d12483b6950222e907d873a04dc2	21946
+00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена.md	6f65678e44f477887b65951c64d9f14562fdb6579438fb20f6ab9d1fcea3912f	18175
+00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md	8ade831971faa695e8af42adbad9b8f88e68f98c714d87b426b548829a502c9b	23419
+00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md	1f01150be41926f7d46dd04af5196dac91748bda3ee25a2766e56a2a060da6e7	36303
+00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md	a2e0c582adfb539b97aaa701c544c7d0a083791ee580f46df474f388644b27ab	30301
+00 Учебник/14 Inference и оптимизация/55c Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer.md	f54520d943b9212ef64ffe186180193191252a23a51e1f37e8f419ce9f3f9312	26086
+00 Учебник/14 Inference и оптимизация/56 FlashAttention.md	f81181d605ac0f45383ca72c6936729eaffadd73bef7f9db4bdcee7ebb54fdf4	25616
+00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md	cda51ab3783d41beaf37a6cfcd94d0453126a2ecb367820f6a01935dd88abb15	30952
+00 Учебник/14 Inference и оптимизация/57a KV-cache compression и offload.md	0f74e649631111b3793d3fd7b9e637180e1f0b801125bca0aca03ae217d4f1b8	16932
+00 Учебник/14 Inference и оптимизация/57b Сжатие моделей — pruning, distillation и low-rank.md	ba973aa5aef08c115ac85157fd62d1e644a5dc9cf432c4771ede13e021078655	21651
+00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md	65433285dc3d1b200be0ba7e6c97c42a9ea174761ea10ea91847fa04092a577a	28035
+00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md	ce01e1dc7f9a28aeb15ee30ba609c9d61256f17357e66c71a2037f62d4b637cf	32988
+00 Учебник/14 Inference и оптимизация/58a2 Раздельное обслуживание prefill и decode.md	a555424bbc6eba9d4e2e4e111456690d7257b6395b22ae16155804ed12a296bf	35640
+00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md	6f28c505a6f48f804b8a6153a55a729bf39c005ee9aefb7ce8ea8947bb7aa839	30215
+00 Учебник/14 Inference и оптимизация/58c Queueing и capacity planning.md	70521d320689e56945aee8d21b72b4195cfc9042fd6a5498a53d5fea6a674a2a	14772
+00 Учебник/15 Embeddings, Retrieval и RAG/00 Карта модуля и источники.md	af6cb2508aa0ac43427c9a47d4fe6b3ed791c0adf34f896a64e62fa1ca386dab	808
+00 Учебник/15 Embeddings, Retrieval и RAG/01 Embeddings и retrieval.md	adc641bedef00c13e97db0c3e24239c279ddba1001d4d0cad8ca20069a93bbcf	22370
+00 Учебник/15 Embeddings, Retrieval и RAG/02 RAG как система.md	391a41ea52d5fee10e9615ebb3fd2c04d27a37618d806e10bd42826b6416d99d	31237
+00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning.md	955689acfc58fc4df225f3b3c6cb46e96879617710d1f1440441e3d422417931	18843
+00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid.md	4b6fdfa92ac5e7da70a99910cc651d539941432080b217679768bf7e389d64ba	16280
+00 Учебник/15 Embeddings, Retrieval и RAG/62 Reranking — cross-encoder и late interaction.md	7fb98ef230b112506fcd930350804caa502a1a4b98653095c31215ca2d0f719c	13373
+00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер.md	b29009604b9b9a4cbe018a6c04c67f7114d067fd19b3ee88ce30e405e645b41e	31168
+00 Учебник/16 Multimodal Models/01 Vision-language и omni models.md	ca9f47047d6aed4e29351085c398c02ab7d6025901c75b8b9c3c262cddd8fee2	1910
+00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md	5e354860bd007d0f2f58dfdb81825c552e150f8dea791035925b05eeb23d9163	30488
+00 Учебник/16 Multimodal Models/64a Connectors и fusion.md	be7de7ba68c2c0e1af4a566873e1e9cd07654349bbc552abba06a81005c65b47	29914
+00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md	3a1f7c9087f22dad604205758212c6d7fd5cdd9116c98aec600d8e32537e79ad	23450
+00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные.md	b5669100514db1e08815f6a2098d358b01a34e81f5b790ccad4edc923f6c6dad	33957
+00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding.md	f8f8a82dcc0974165e38729f4b188620112a6b4d2bc70740643549a32aa6c3f2	18724
+00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md	5fa2da00592cdf652c45368a90bd8434778e0f1ff0fb241cd98396343fcb9b63	36030
+00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM.md	9a0d36471092aeadd1a341b30941dfa05b0aeb96befe8a1617b992fe552589c1	20054
+00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений.md	9cfeb822081048c5f7e46e6ab75b69029ef09521f1b8de58c51c718d6e8a969c	15304
+00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md	8524b8cf70ac004e191060ce8db8deee0f6eae51ddb2b2c746b4d0bed419e6c9	29349
+00 Учебник/17 Tools и Agents/00 Agent Harness и Context Engineering — карта модуля.md	74a2b285a8c00e1ad03e66bb7b50cb9cf35a8ccec7ce21a4ea4bf6e861349115	6730
+00 Учебник/17 Tools и Agents/01 Tool use и agents.md	13840bf13e6350cd0aa8c1f0ee71cdc58b40fc7b55eef1b4282a10dbed700c76	22612
+00 Учебник/17 Tools и Agents/02 Evaluation и воспроизводимость.md	6c9fa3ee4d98900c04ea400a2fe0cce101d1925ae6a0a5a8cd6a900cd66008cc	21557
+00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md	a449a857d60eae1e2055a22d104d276e91136d9d2d2b16672666b2a1079d4965	30093
+00 Учебник/17 Tools и Agents/66 Agent harness и context engineering.md	124c4950849dc3f4c176a8b01ee600e5b0b16b127a627b2ff325b8c5901882f0	28605
+00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md	0608e7b9ee12888863954c9366d20e247c53e90584c32e4932df4dfd65fb3c35	38695
+00 Учебник/17 Tools и Agents/68 Оценивание агентных систем.md	cb3c55299c141e5e2b92ced2409e07c6e1e1c8ffb94563a89e094b30dcbe635d	30813
+00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md	bdab71660c7c4718cbf82ba36c1f008bb4fa21c819a9d97f745deac0e599abe3	69404
+00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md	dc885c1546d7d8328563d1f542033592c97cc8e2812549823f9a5e9c2dc108a3	66566
+00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md	670e7741669b1da2d88ef7a763ed7877a6f43cf51645d4abbf0cf34e4b361e22	35669
+00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md	e374ab17ac76aa05114defa897f89e22e60283435464f3ca0ee807498bb77f21	34770
+00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md	819a889699e5b9ea3757a1cdc661946b8396c724a55253b576f4e67e2b4883f5	37796
+00 Учебник/18 Evaluation и методология/59a Responsible systems.md	072e39dead161f8e2d12305cabd692764b801815f03ed1532426ae49ccddde72	29714
+00 Учебник/18 Evaluation и методология/59a Несбалансированная классификация.md	0514b6edf30441cee34589868071f5db2f29b3e4d26062383a0a844c28c53d56	33511
+00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow.md	064e53fbdccc09b1e966e4a7452e8e9216cb86df2932bd33784cfa9034115abe	25617
+00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps.md	53617e1a482cafda823507939c05c914985ecbd31e19f5c5c476ec76778ee832	31775
+00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment.md	4042530ad2e667be1c25ddc69a794fd6cab3d8d978de139eb67bd01f9206a58f	35406
+00 Учебник/Assets/Attention evolution.md	88869b620257f7ebaeb3564db4751cc741de62a28c6a69f861772f80b214c00d	775
+00 Учебник/Assets/FFN to MoE.md	4defb482c6e6a07751f0b174efd768bfc2551ee2af4c3eed6f53f95efb3759b2	745
+00 Учебник/Assets/Model innovation matrix.md	a828fc7c5bb4cb4100b924d6d89f7acdadf408f47986958914bdfe54ecf47fe5	5184
+00 Учебник/Assets/Modern decoder block.md	999987fe19138afa0d11bb52ed2002a620aeb0e381dd15e8a078d97f3d611379	724
+00 Учебник/Assets/README.md	10734c125072c3553c7ce0f99cce0f6d54399b1b6a47399eaf3a1f4bfc9cd222	1302
+00 Учебник/Assets/Transformer family map.md	4dcc0b552b705ebe35babf0d467bd81415ffd8054183bb70891232d8464949b3	893
+00 Учебник/Assets/Учебная карта.md	33aba11c6bf269389b576e64ff8260adc9a73c0ff3f8a804644aa2b7478064ea	433
+00 Учебник/_index.md	62df67b6347becf4071f2cd18792a45a2061af5558929c82fcbd65e978e9888a	29731
+00 Учебник/Аудит иллюстраций 2026-07-17.md	a07ee43e419bd9938efdc53e391abb25543f6a74320fed346350e5f09a10fdec	6949
+00 Учебник/Карта крупных учебных модулей.md	51e69362f7d4c5334cab0ee4115e79028af5ef4c626a17603a173c7925fb2260	689
+00 Учебник/Покрытие программы.md	18efb6ddeb569fdc53586fa2b2f5439ae6a8d35e7fa6f6ce6d29389f3adaa03e	6420
+00 Учебник/Редакционная матрица Bookvar.md	0517fad4797607894db913a50d6a6cc4e5074c6f6a4e710678d526e856826e87	26633
+00 Учебник/Редакционный аудит 2026-07-17.md	c3083d40d2439413acff5681a1c501225189b11cac01c7da1f17f13a944125ad	5813
+01 Справочник/Agents/Agent mechanisms.md	5b8a8cd16793f3f811076a7c2ee28c9e6374e07cb22ea9ce7e84f6f701f16df6	20741
+01 Справочник/Attention/Cross-Attention.md	185887e92835202620a24219d6f053eadbe88f0d2f1e72372edcdb9e9978b8fc	3405
+01 Справочник/Attention/GQA.md	f8c0dbfaa6d042964a79cad0b0c8d535d9fe5bdce8093d9c70b75bbcab913dec	437
+01 Справочник/Attention/MHA, MQA и GQA.md	3cc006c4ecaa8da99066da7bc252c6b7f8fb3b49397764ded69ee881274b9d39	7031
+01 Справочник/Attention/MHA.md	6b5c02740360d8b0feb455dbfb0ae6484bd124ecf03f1bfbd40ae39309f731e5	485
+01 Справочник/Attention/MLA.md	f83cfc67e7293802a034fa92fd8ef867e83870e93a27f22e71d8f93f825285be	4776
+01 Справочник/Attention/MQA.md	0c0bd3745704086507d3e91fb17e2f352e21f60c87edede795ede51d6de48c49	457
+01 Справочник/Attention/Self-Attention.md	abe3ad6744c7cc1c89fed9c375a3a07071899c901a7ede44a4632d9e3630fd11	3762
+01 Справочник/Evaluation/Evaluation.md	047fa7677177c76461f5154c0f96053ccae8f98cc23f5576502bedddcb15483e	9258
+01 Справочник/FFN и MoE/Dense FFN и gated activations.md	c9601ad61e01d72d00cdd11e554a8f3de87f704eb0fa7672636f620448b65e2e	9090
+01 Справочник/FFN и MoE/Mixture of Experts.md	373913e41e4a65bf3b47747e9c09d30e0d6d2e4f6aa31acae96caf41ca212ba5	8877
+01 Справочник/FFN и MoE/SwiGLU.md	613404a5632fbc32a7b1d1a5d024fd34d888c017903b7e18998a0292f0685f9f	366
+01 Справочник/Inference/FlashAttention.md	55c4e7904ac568f47db052649bbf531c3e1e7e399025bd67c390c3006ebdd9ee	3808
+01 Справочник/Inference/KV-cache.md	71affb78e77e41f8c1bc2fb7f3187f2b85586b12c35ab8b0cfe4366baef5e3a4	6509
+01 Справочник/Inference/PagedAttention.md	794f9383bae1f34488f14f677234efa389378995eeb4bff4277abf932a5988e5	10932
+01 Справочник/Inference/SGLang и RadixAttention.md	3ce29e8fc7670c33f3345ac04688764b077f0abc3793c1c52ed3cfbdcb8f6f94	12872
+01 Справочник/Inference/Triton и GPU kernels.md	c4ac642d23b610cbf4f4232b6757bd51e3b67e38b632d4adebeea80fe8868628	13217
+01 Справочник/Inference/vLLM — анатомия inference engine.md	b266c24285d2f32df73ef1895e937ca94966474bf8a1118cdb15d4da2ae775dc	22419
+01 Справочник/Post-training/DPO.md	1e92bde6ab1696528968ea76cb18f06ecfc3471f59182e8215b51b39eb4df8f6	4918
+01 Справочник/Post-training/GRPO.md	76eec6574b83082cf03e40e624d6d69c2cfb7306fcb74df3aac9816cf655b403	4921
+01 Справочник/Post-training/RLHF.md	532551c9b9f38d0bac81a45df2b6280bae6cf134d9673583ec0bb106ea4eb38f	4736
+01 Справочник/Post-training/RLVR.md	a882007e7c9b7fb96f77b329bbc36726fc2258b6d9fd31735fc4c3a1c07c4032	5484
+01 Справочник/Post-training/Reward Model.md	e84dfadbeee92129d3e19aeb6bc872d3805dddf0fd0e07926a0190fbbc9ff839	3864
+01 Справочник/Post-training/SFT.md	b96ab79063ffa2db1bc91137d4d3b219da060ac3e3b76a2b8b38339a47ee653f	4373
+01 Справочник/Post-training/Verifiable Reward.md	dac546581e5d60f6c6d69cdb8c9889e208559dde254309af0809c1c48872734c	5047
+01 Справочник/Retrieval/Embeddings.md	7fe971c4dc422fd669a9c844cc28908f8e81f91d85fea721267856d1953fc1c3	4243
+01 Справочник/Retrieval/RAG.md	a40a45100efe81980249980ac94795be831d8260910e617a59a8ba02b540cdd2	4864
+01 Справочник/Retrieval/Retrieval.md	cdd633d1c376c1bf63391b2680d1c58fbe47d2a701043fe7a84b39466665791e	5591
+01 Справочник/Security и Robustness/01 Security и privacy.md	9c590a886aa99f00eb28f8d0190a5016a854eeba5aa034a27baeed68157af527	23393
+01 Справочник/Security и Robustness/02 Robustness.md	8877b9174d7ef2de8c071bf2b0a3795c3da38d8fb789efd2222e39446e759ce0	23149
+01 Справочник/_index.md	9f82537d499f5e501316a9e5f91e07a8dd51b2874f38bdf5ea57e139f1f805e3	4422
+01 Справочник/Архитектурные паттерны/Decoder-only.md	88662f687eefe3f65fb5f5e17857e05d8c742006277414c2fab4077d14025dc6	4015
+01 Справочник/Архитектурные паттерны/Encoder-Decoder.md	65a12b916fbe40f1589974a3037d57553c3f69d3d50d015a198a0078624cfc9d	4082
+01 Справочник/Архитектурные паттерны/Encoder-only.md	97134cddf046c48f7afa8232342f8d4d535a29e13803a057aa4e24b164221a83	3930
+01 Справочник/Математика и DL/Нормализация.md	6815f63ffa4bdba9dd4629a7a65370d86ff5058449551b7d7b7bfa5ff70c7a95	4494
+01 Справочник/Позиционные представления/RoPE.md	9760a831bc06f8d3024d5b651be0bd3876734a2d9074a8f059bc08d47968a6f7	4681
+01 Справочник/Текст и токенизация/Токенизация.md	7712cd4481087abf5fecc05e5260eeceee25bfc3e9e1c514179378d69a462fb0	5506
+02 Атлас моделей/Timeline.md	486e1d79c182c2679109774d4a7e8cbce38c33e776b8e725b426fc973babbed0	27652
+02 Атлас моделей/_index.md	1a08660ffc2fdada88d6f0f77bbcba14658e4c55919710e6d1777f264d68f189	15157
+02 Атлас моделей/Семейства/BERT.md	fd48361e66b15d397ae913532826bc371e3211f8c57aeaa19ed56f189ded7ee9	8003
+02 Атлас моделей/Семейства/Baichuan.md	a0b2e20ce5c1dbe4da8d3107be295b79ac1a279bdf665d7a5874b2e0a40ae06f	9144
+02 Атлас моделей/Семейства/Command R.md	9f1b8422be29e84b8a7e89887c6911d0dbc5cfcc61720fad556f90f868361eeb	8156
+02 Атлас моделей/Семейства/DBRX.md	8411fd99a021db39c1636ef793742ad0fa10491f1d12df43e8101f9e577bcdfd	6463
+02 Атлас моделей/Семейства/DeepSeek.md	922432e4f44a0ec5360475bb561bcc15df5438ef78be2c0651cb08e7a1d42206	10499
+02 Атлас моделей/Семейства/Falcon.md	4558710667de04eb5d12a963e6d507774be92ba46c285ddf3611be39151a1128	6906
+02 Атлас моделей/Семейства/GLM.md	153c71b1ddd2d4f23578ee6550c9d246c48691cc362b6320d83fdc63b17ac8f9	7962
+02 Атлас моделей/Семейства/GPT.md	8a800269739b1010b48f43373e8106edb05d1fbdcc6aa84cf8814c585f50e63e	8874
+02 Атлас моделей/Семейства/Gemma.md	5e3bbedfc74ab90acfee105a010dad6be8eb87a545259c56a6dc0c194b188bf2	6987
+02 Атлас моделей/Семейства/InternLM.md	ca848ea21c14cf463618be77731358bbaa8339c363f38d8747c6a3f889771b4f	6992
+02 Атлас моделей/Семейства/Jamba.md	26ba768152a94987208b53eeb06e1e01a4d6c0edfe54e88dc0cee01af44b4ac3	6315
+02 Атлас моделей/Семейства/Kimi.md	df641246623d8079e327145c37dc799cff5a4025c64c0019c457d1bcb215b951	10051
+02 Атлас моделей/Семейства/Llama.md	8d5ae02e6f5b818e4a6eb6507458edaa30d97fcfb54614ef6ec3c84d7a8069b0	8993
+02 Атлас моделей/Семейства/Mamba.md	117146c73d4572c087c392f543428a55c87b7aa0c07f12f0a80d609ce16ec0f3	7634
+02 Атлас моделей/Семейства/Mistral и Mixtral.md	5930e31a119d674c0a696cd8b86f05d0e946255ea3fbaf5a85f34b4311fafb2d	9108
+02 Атлас моделей/Семейства/Nemotron.md	ace74bd899a8dd12b979d3fe78ac1223f0bc296f356a50330f63364e99527c35	7963
+02 Атлас моделей/Семейства/Phi.md	3b4e7d346e25778e30af0afc1ca7a0d036787f63c6e9157aa07d8e516d329c19	8482
+02 Атлас моделей/Семейства/Qwen.md	f2d18cb7da6a131c84d4925f6f559561c78a6323b575e8a9eeff2f77203c2204	12905
+02 Атлас моделей/Семейства/RWKV.md	d1a64bd5641c184a01ecaa12cf3f7dd55f496519e16d19f90ff30e9fa3c958b6	9081
+02 Атлас моделей/Семейства/RetNet.md	2f7e17d735fc28ef937b725e26340994173c48834302bb35ad5fb331929acf76	7512
+02 Атлас моделей/Семейства/T5.md	85ef055551fc8a65df6552e5bffa8d3492f8f5f16aa1c64437f1bd22a6d24bf0	8117
+02 Атлас моделей/Семейства/Yi.md	caa2a2df7f4437905e4728fe87e701258faeb5e3e99351e698959f57fadd5a8f	5023
+02 Атлас моделей/Семейства/Мультимодальные семейства.md	fc9420308d6dcc9d9d7dfbef3b6bae6c62946107c046f3eb12ec79f964b79e3c	21792
+02 Атлас моделей/Сравнения/Карта архитектурных линий.md	4017955fe3ddcff8febc21efbab1a214d7649f57b0d5bfb4fb58b3bdd9a507b4	6530
+02 Атлас моделей/Сравнения/Перенос vision encoder между VLM.md	0e1bacdc9a5c466e73b5396db928f5e006fa3db60a3ae002bb840ec87d6e4f33	4887
+02 Атлас моделей/Сравнения/Сравнение семейств.md	12b98bbc8aa4248db540b8eaa78ba70da2689b23da50cc99fa250468ebfe3482	8531
+03 Исследовательские линии/Agentic learning.md	091a405c0590786a00bf42d0252cd720c3141bdc813bb3ae75948f9209a990b7	18872
+03 Исследовательские линии/RLHF → DPO → RLVR.md	536ad9e8847178a4c4924381f745f92467f400835cc6c96f5c81f7a42031db6f	13596
+03 Исследовательские линии/Reasoning и test-time compute.md	d38568f39f5e16f5c0fe1821440100881852ef89461a97427a725c99bc25d222	13523
+03 Исследовательские линии/Sparse и MoE-модели.md	7a23fb41697468d6917324057d8bb85b3f70ba7975d64d6738d420b6f0a4ead2	8416
+03 Исследовательские линии/_index.md	aca21e1b629fe7b77cb8736d4121efb87e84fb8883314ed25fffb540007bd390	3384
+03 Исследовательские линии/Длинный контекст.md	fd53dd9f16723c80535cc37e94f1b13b1de541c61946e52451de25198c95ff70	8334
+03 Исследовательские линии/Синтетические данные и дистилляция.md	68373c14949d90afe924ab8bc1fdd2e208c7e39f7e0f69b572ba02000700a60f	8850
+03 Исследовательские линии/Эффективный attention.md	5a62fb7ace6426a63d23b38e9d654f787bef79e6709a77985f80ed6366444a98	9979
+04 Вопросы/100 вопросов по NLP — исходные ответы.md	9a480d1f272c933e4107f4b1db14a0c679979d7f67d2deae68ef647b988e210b	162977
+04 Вопросы/100 вопросов по NLP.md	99752501fd2c7f4fbc4df1311323741617ae084bc4549a7e5154711eecdb6f5c	31887
+04 Вопросы/_index.md	e5fedebd0cce25eb46a039fa8d497be469f4bbe4074d70ba472c821817ee6c00	1345
+04 Вопросы/Вопросы по LLM.md	fb2087b7d53e5334302ac039b1793c77fc0bfe9d1b94b74f0cca632a9137149a	13356
+04 Вопросы/Вопросы по NLP.md	ec11eff759e7f855e0643d46a69692a5e00c02b92d9e6b81863556cbbd038f2e	20264
+04 Вопросы/Вопросы по Retrieval и RAG.md	b8a3be91ee04704fb2d61adfddc69afe236e4ccc999582a66a98242c2f0b47e3	7046
+04 Вопросы/Вопросы по агентам.md	946e51f7b52c00f049bde194d58e1de0c4ff9500229821348e4fc6bd78bad51d	18464
+04 Вопросы/Вопросы по архитектурам.md	74603334ee4bf38554d3cd97824708dbeb4894cd0ef95ab5897d96b4c526ff6b	9654
+04 Вопросы/Вопросы по мультимодальным моделям.md	628a01f42e795ff316d0f91d983a66b2464e9c760c9c5d8c402148c98344f141	5715
+06 Практика/01 Собрать micrograd и bigram LM.md	0a5eea3c67c725657b914230e17c8d4b7b62195e43c85ffda79687f67fd07a78	8784
+06 Практика/02 Реализовать causal self-attention.md	50186bdb29fdb10c2cb7281bab250426ac560f77acddd9a28747fd715b84c660	4852
+06 Практика/03 Прочитать современный decoder в LitGPT.md	92d2593fd193550672099b629a5a95667ae9487a6e95db1ecaa15b7d2f29973d	5131
+06 Практика/04 Проследить RLVR pipeline в Open-R1.md	997752a914c7adeb5ab6fa4ccfec59178622a90e2d8442b9426d220182febd40	5000
+06 Практика/05 Измерить KV-cache и quantization.md	e4bd4f22091c429293cc112c7a589f4b2a936b1d7351ce82cf184bfb8e517bfa	6554
+06 Практика/06 Измерить CUDA без самообмана.md	23b1dd4213b3fab8f638609dd87cc1de4505c26c857283b78c206be92d717367	2565
+06 Практика/06a Проверить mixed precision и loss scaling.md	f00502366dc94a56b751200adf7adddfd87c561977a251b1a2714e0d9d9de186	6261
+06 Практика/07 Построить roofline и найти bottleneck.md	616ded0ba6bef21182ab450edc0e75b1a5199003f5e90ec9a61b3d2f26aba15b	3372
+06 Практика/08 Ускорить data pipeline.md	4d203e974345972e4a4d5d539ff51b15135ed0879a1b89a5d02237423cf5eadc	1631
+06 Практика/09 Реализовать ring all-reduce.md	8a279f5f0a5d876f9326bcd90e30c4208285ee95867b97a00f60dfe9d6fbfd51	3024
+06 Практика/10 Измерить checkpointing и offload.md	bc9c2725cf5aaba1918da8332d8c1f7ab89274e03204471e071bfa4ee2e67969	4065
+06 Практика/11 Разрезать Transformer по TP и SP.md	23ec2c669976cfcda2397fda6be99641f7260eb133d3fc33aab0849655d10d68	2450
+06 Практика/12 Собрать и проверить FSDP.md	fd2b148468a94f2f6a587b09f092707286fd9db4274071c0f1739f903d316f7b	3984
+06 Практика/13 Оптимизировать один Transformer step.md	444962666a6abf9f73459c32ce666a74da182003d90840cab1cf3aa217aa59d0	2629
+06 Практика/14 Собрать минимальный inference engine.md	5315e35516a200b68cc8d50c1fad635d33dfce549c039b882563f4be1283c165	2551
+06 Практика/15 Реализовать W8A8 и SmoothQuant.md	3bffad62e351c51493cd6224642602f12a8c6fcd2bb4f0f72e6c3f519dcef6f4	2260
+06 Практика/16 Проверить speculative decoding и rollback KV.md	3563f5e94e78f724c3ee29750fdb8f7d61345f3d07caed20410e93db456d891c	5611
+06 Практика/17 Развернуть наблюдаемый ML сервис.md	764181fb13392908de2f2f930614c98c6591b140b00db1aac76e977ff10eebdf	1912
+06 Практика/18 Harvard ML Systems — интерактивные design labs.md	268ffeb55311cb3179e89f97b91bd0fda1377ccc0c676c9a254b98f8676e0d81	7796
+06 Практика/19 Найти автомобильный номер в видеопотоке.md	a64efba17e40ed80e36d4686b6f4db818e59412e416e079aa195f542254989c8	8622
+06 Практика/20 Собрать языковую модель с нуля.md	af5e18ba9416a9dd882266adf37edc4feeee1a6054507bf68e920c40bac561b5	23428
+06 Практика/21 Профилировать и ускорить Transformer kernel.md	f9fb06c577a4312acd631a8fee7077cb9172dc37962c43a9c1d852fdc462e370	21883
+06 Практика/22 Провести scaling-law campaign.md	731252a7e28513b25c6cd861c71a1a075c39f8fd0c5367e33dee6635269e2a04	27227
+06 Практика/23 Собрать воспроизводимый pretraining corpus.md	3c1c129aa0cd0e64432b2e4dac51d91df052c99f2d41dd6c10a1296fbddb67df	20960
+06 Практика/24 Post-training и RLVR для математического reasoning.md	731e6220359e1d3734b40a231a8b235110053c8820ba51c572615d2da7b6232c	33615
+06 Практика/25 Воспроизводимо оценить и red-team компьютерного агента.md	15481b90f2ab6b77629d24e7984207c1b53d2c8e53d769938e1f94f0309267bb	21645
+06 Практика/26 Поиск доказательства в Lean с verifier.md	d5b21b67db291c6482c3882be938f669d402fbc1ff661fe90430a1d5db7cac1b	18944
+06 Практика/27 Проверяемый научный поиск на символьной регрессии.md	f176c7fe5c8ce20dafb1a65c7d4b022999a5327e47a7a8eea02e4df06225e3c3	20122
+06 Практика/_index.md	1c1e45ba745e6d11b7e39f69f87d37ec0774392cbbdca9404d0881469fc417ce	9774
+en/00 Textbook/05 Attention and Transformer/02 Self-Attention — Q, K, V.md	0abb7aad9c2d76b10cb0894cc69c4f3c321eadaf7045d790e07a7c94b52d1b8a	8590
+en/00 Textbook/05 Attention and Transformer/03 Masking, multi-head attention, and tensor shapes.md	f3828a4a6b0f43c517f3b3e7c73a8bbc75d56a57a536747cf90786aa43c89a27	14260
+en/00 Textbook/05 Attention and Transformer/04 Positional information.md	10de5dfa9cea752b88dfacf9775602a7b1ef7aec5deafac02ce8dfaaed6e2a17	18054
+en/00 Textbook/05 Attention and Transformer/05 The complete Transformer.md	dbb6f8470d6ad92af518013a8ecbbdaacdcc49fdd10655a50309154e727e0223	16578
+en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/01 Three architectural patterns.md	a7a5dc42bb01dd54c1ee9835fe1883d3ece57883fdcad22adafae05aa908267a	16546
+en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03 BERT, RoBERTa, and DeBERTa.md	3103bdee9ad3082b82895151ac86e5d915ba867df9359f0aa64cb6d45a73ed34	16795
+en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/04 GPT-1 — generative pre-training.md	41e5825e5e28d91e836314306623fd2b6abc80774ca3b1b99b9d90849521b204	10649
+en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/05 GPT-2 — zero-shot through language.md	1eafd960b14038c8b001c3f1baf6374a96ffcbcec97be7f2522e20c545571c56	10947
+en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/06 GPT-3 — in-context learning.md	6b2634e62bd0c53a293e541aa1b48f4fd814e39ac7841c10f6fbefc2842ec533	12753
+en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/07 T5 — text-to-text Transformer.md	a1a59d9354dcbed22da3b83a8dfd70c953629a87793f5e1e6404ef3c615a9bb1	17057
+en/00 Textbook/14 Inference and optimization/54 Decoding and next-token selection.md	85cb6167d5d6e68b701782a199b6f05cc26657ac97238d7108bc7c9d2587259b	11255
+en/00 Textbook/14 Inference and optimization/55 KV cache batching and PagedAttention.md	d1c7af406487c83a02c3b58fea6f0be1d1a2aea82bca568b299ec9998c6646bd	11835
+en/00 Textbook/14 Inference and optimization/55a The physics of LLM inference — prefill, decode, and roofline.md	fb18a0eada8a1b658ea585191a996aaa97b551f4f784b3b9984ea6aba664e19b	15520
+en/00 Textbook/14 Inference and optimization/55b Scheduling — continuous batching, chunked prefill, and prefix caching.md	dd0bb009641e9fe7b157abe7dd3cf8aefb1a601a912a1c3372c1bbf631a254d7	14889
+en/00 Textbook/14 Inference and optimization/55c Serving engines — vLLM, SGLang, TensorRT-LLM, and FlashInfer.md	dbd632059a82a23a0a9b8bd03a6042f0edbc77529f0cd64b70ecf2d2344322fa	15161
+en/00 Textbook/14 Inference and optimization/56 FlashAttention.md	ce76b03c3956dc44a1b3159327c4338514479ece221045f2451c216d2b9a16a3	9871
+en/00 Textbook/14 Inference and optimization/57 Quantizing language models.md	048baec70fca25bea4f92043f12a818feafb3b8053f7165afa05c59ecbd5485e	21145
+en/00 Textbook/14 Inference and optimization/58 Speculative decoding.md	bdfa41bea90eef726f6f0aa1840c13410c38bce8f7561852c2d3f8998cd4cc27	10768
+en/00 Textbook/14 Inference and optimization/58a Distributed inference and disaggregated serving.md	d9ed1d9ca06a883850a644914fa3f667def410713ff7e4ea233696e5c198e1f6	18659
+en/00 Textbook/14 Inference and optimization/58a2 Disaggregated prefill and decode serving.md	123c92d25eea4fb943fda9e9a2bf4d5de499696e76ecea691d9f72c732ae4959	23523
+en/00 Textbook/14 Inference and optimization/58b Benchmarking SLOs and inference operations.md	6bb8469a3a97193e018af15f712d538a6c8aedf8c86f2fc0998f3605fc0be538	16067
+en/00 Textbook/16 Multimodal Models/64 Multimodal models.md	69ad3615bf15b78ae670ae8affd11ebb861b61bdcd4f11714d8e33b3a91e80a8	11598
+en/00 Textbook/16 Multimodal Models/64a Connectors and fusion.md	abe04969c82c3cb2d543b555de62edb894f293c98c06a04477179758c1616d08	11471
+en/00 Textbook/16 Multimodal Models/64b Resolution, tiling, and spatial positions.md	e37d8e4edab6fbbe016d79e9243e237004e553391aebbd830072e92f3edc204d	9962
+en/00 Textbook/16 Multimodal Models/64c Training VLMs — alignment, instruction tuning, and data.md	249f975d27f7001d8de8d2da3446f962cfb6675f019455a2e20f08b11a6a110d	13800
+en/00 Textbook/16 Multimodal Models/64d Documents, OCR, and visual grounding.md	7d431ffba62baefc6fcb8cab08d80255ff47f42e072a6b7cdb611c799a542c02	9320
+en/00 Textbook/16 Multimodal Models/64e Video, audio, and omni models.md	1975c1ee74a813104c013d89b9f40b53eb83772cb4ae4ffb2f59d6ed3272411d	14912
+en/00 Textbook/16 Multimodal Models/64f Evaluation, failure modes, and VLM serving.md	5e67947a261984fed23ba7ed0011e489c2b8204ce57338c46c702623aa733b22	9978
+en/00 Textbook/_index.md	3fa441ae1ad34de324a288845e57094aad85122b0082ae4d7e78ba3cadf7895e	9892
+en/04 Questions/100 questions about NLP — original answers.md	7bfc73683cf4aeb1dd99c0ceaab6f5b36c835d62451830597254bc672dc50972	50130
+en/04 Questions/100 questions about NLP.md	0d4bd9a207621f2dad0c18d458591bd02bda83364800203b793ef43e7ab7eb46	17854
+en/04 Questions/_index.md	fe903ca9ea15268510e5c214f39df7521f612cf1987fa5c35bbd88b926bbef14	1040
+en/05 Sources/Courses.md	d54875e844b2fa318f24fe64f933ae62b807513bd8809a365941de288dea40c1	13276
+en/05 Sources/LMCache/CacheBlend — non-prefix KV reuse.md	de1d5761ad340c9c154594a011e7528209bb0aa371a42c7351b74ce73e9ed210	344
+en/05 Sources/LMCache/KV cache as persistent inference state.md	bc95a562d383544b37da4036e632503d608f85cdefc94f76d431b68cf29eaacf	356
+en/05 Sources/LMCache/LMCache MP mode — transfer paths.md	eeb807f221cae520b6a90ef89bbfc0573402da609caebe0230eb5db5af83c084	344
+en/05 Sources/LMCache/LMCache — an external KV cache layer.md	2edbba1546f6051763cf1e7b9adab23209c0c20c6c57523151e81e06ea6ad441	356
+en/05 Sources/LMCache/LMCache — map of materials.md	00637916c5a6b9ed502442de397aaab77883dff6197a79f08b8a327c81b2192f	28527

@@ -4,8 +4,8 @@ type: textbook-chapter
 status: canonical
 locale: en
 translation_of: "00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md"
-last_updated: 2026-07-22
-last_verified: 2026-07-22
+last_updated: 2026-09-15
+last_verified: 2026-09-15
 primary_sources:
   - https://cs336.stanford.edu/spring2025/
   - https://www.usenix.org/conference/osdi24/presentation/zhong-yinmin
@@ -55,14 +55,14 @@ streaming stalls. **Time per output token (TPOT)** is usually the request-level
 mean interval after the first token:
 
 $$
-TPOT=\frac{t_N-t_1}{N-1}.
+TPOT=\frac{t_N-t_1}{N-1},\qquad N>1.
 $$
+
+For a one-token answer there is no inter-token interval: TPOT is undefined and must be excluded or handled by an explicitly stated benchmark policy, not silently set to zero.
 
 Mean TPOT smooths pauses, so a streaming interface should also retain
 percentiles of the individual ITLs. Finally, **end-to-end latency (E2E)** is
-$t_N-t_0$. Approximately, $E2E=TTFT+(N-1)TPOT$, but exact values should come
-from request timestamps: network buffering, retries, and post-processing can
-violate the simple model.
+$t_N-t_0$. With these same token-arrival timestamps and $N>1$, $E2E=TTFT+(N-1)TPOT$ is an exact identity. A separately measured API-completion latency can additionally include post-processing, retries, or transport after the last token; it is a different interval.
 
 Each metric answers a different product question. TTFT governs how quickly an
 assistant begins to respond; TPOT and tail ITL govern reading comfort; E2E and
@@ -99,7 +99,7 @@ G=\frac{1}{T}\sum_r
 \mathbf 1[TTFT_r\le S_{TTFT}\land TPOT_r\le S_{TPOT}].
 $$
 
-E2E or other conditions may be added. Throughput counts all completions;
+E2E or other conditions may be added. One-token answers require an explicit rule, such as testing TTFT/E2E without the undefined TPOT. Throughput counts all completions;
 goodput counts only those with acceptable service. A system that admits too
 much work and creates a long queue can increase throughput while reducing
 goodput.
@@ -114,8 +114,7 @@ within both limits, although each phase alone can sustain a higher rate. The
 image is cropped from the original vector figure in the public USENIX PDF.*
 
 DistServe also uses **SLO attainment**, the fraction of requests within the
-limits. “Goodput of 10 rps at 90% attainment” means the system must admit a load
-at which at least 90% of requests satisfy the conditions jointly. An average
+limits. Under the request-rate definition above, goodput equals completion throughput times joint attainment: 10 completed requests/s at 90% attainment gives 9 good requests/s. DistServe also reports maximum sustainable offered rate under an attainment target; that capacity metric must be labeled separately. An average
 TTFT below the threshold does not establish that result.
 
 ## Why percentiles are necessary
@@ -146,8 +145,10 @@ offered load as well. This models a fixed population of sequential clients, but
 can hide overload because rising latency automatically throttles arrivals.
 
 In an **open-loop** test, requests arrive on an external schedule independent of
-completions. Inter-arrival times are often modeled as a Poisson process, and
-`--request-rate` in `vllm bench serve` sets the mean rate. The queue grows when
+completions. Arrivals are often modeled as a Poisson process, giving exponentially distributed inter-arrival times, and
+`--request-rate` in `vllm bench serve` sets the mean rate $\lambda$ in
+requests/s; the mean interval is $1/\lambda$ seconds. A non-unit
+`--burstiness` uses a gamma distribution of intervals instead. The queue grows when
 offered load exceeds capacity, revealing the stability boundary. Burstiness is
 as important as the mean: real traffic arrives in bursts, and two streams with
 equal mean rps can produce very different p99 latency.

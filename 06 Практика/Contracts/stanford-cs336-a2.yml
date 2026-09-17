@@ -129,8 +129,14 @@
     "cross_shape_regression_passes": true,
     "evidence_complete": true
   },
+  "learner_changes": {
+    "adapter_bodies": "required",
+    "adapter_signatures_and_semantics": "preserved",
+    "tests_and_fixtures": "immutable",
+    "source_hash_scope": "unmodified archival snapshot, not learner adapter bodies"
+  },
   "fail_if": [
-    "official tests, adapters or fixtures are modified",
+    "official tests or fixtures are modified, or adapter signatures or numerical semantics are changed",
     "source commit differs from the pinned commit",
     "the submission script exit code is treated as a passing test result without inspecting pytest results",
     "a parametrized family is reduced to one happy-path case",

@@ -1,0 +1,885 @@
+{
+  "date": "2026-09-15",
+  "status": "edited-and-primary-reread-awaiting-independent-and-render-acceptance",
+  "scope": "29 practice pages from the 280-page audit; no authored EN mappings in publication manifest",
+  "counts": {
+    "pages": 29,
+    "full_read": 29,
+    "edited": 25,
+    "findings": 38,
+    "fixed": 34,
+    "already_fixed": 4,
+    "open": 0
+  },
+  "pages": [
+    {
+      "path": "06 Практика/01 Собрать micrograd и bigram LM.md",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 65,
+          "excerpt": "сравните ... с нормированными счётчиками",
+          "issue": "Сглаженная count-модель с α и несглаженный MLE по наблюдаемым парам не обязаны совпасть; критерий сравнения не задан.",
+          "action": "Либо сравнивать с несглаженным MLE, либо добавить псевдосчётчики/регуляризацию; объяснить различие.",
+          "original_finding_index": 0,
+          "status": "fixed",
+          "resolution": "Smoothed counts now matched to pseudocount cross-entropy, unsmoothed MLE distinguished, full CPU example actually converges to stated probabilities.",
+          "acceptance": "pending-independent-review-built-links-and-visuals"
+        }
+      ],
+      "current_sha256": "0a5eea3c67c725657b914230e17c8d4b7b62195e43c85ffda79687f67fd07a78",
+      "snapshot_sha256": "8db924104b03d5d1903da1e2261d3b9ad16434cd3d47f51a538e19c350f52b5e",
+      "full_read": true,
+      "edited_in_tranche": true,
+      "reread": "full-post-edit-page-read-plus-later-local-delta-checks",
+      "changed_mechanisms": ["Aligned the learned cross-entropy objective with pseudocount-smoothed counts and retained unsmoothed MLE as a separate comparison."],
+      "source_urls": ["https://github.com/karpathy/micrograd", "https://github.com/karpathy/nn-zero-to-hero/tree/master/lectures/makemore"],
+      "figures": {"snapshot_embeds": 0, "current_embeds": 0, "retained": 0, "added": 0},
+      "executed_checks": ["test_practice_examples.py::test_smoothed_bigram_objective_matches_counts — PASS"],
+      "remaining_limitations": ["The executable starter checks the bigram objective, not a complete micrograd implementation or full learner submission."]
+    },
+    {
+      "path": "06 Практика/02 Реализовать causal self-attention.md",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 19,
+          "excerpt": "q @ k.transpose",
+          "issue": "Не заданы layout входов, causal_mask и dropout режима SDPA; новичок не может воспроизвести обещанную проверку без догадок.",
+          "action": "Дать маленький полный fixture B,H,T,D, mask и SDPA(is_causal=True,dropout_p=0), tolerances; проверить лабораторию отдельно.",
+          "original_finding_index": 0,
+          "status": "fixed",
+          "resolution": "Runnable B,H,T,D float64 CPU fixture, mask construction, explicit SDPA dropout/is_causal/tolerances, future-invariance and merged shape tested.",
+          "acceptance": "pending-independent-review-built-links-and-visuals"
+        }
+      ],
+      "current_sha256": "50186bdb29fdb10c2cb7281bab250426ac560f77acddd9a28747fd715b84c660",
+      "snapshot_sha256": "0abed2e506a8779f6762f35b8bb1ddf0ffcfee20c48771d9bb0da6c5650f23fb",
+      "full_read": true,
+      "edited_in_tranche": true,
+      "reread": "full-post-edit-page-read-plus-later-local-delta-checks",
+      "changed_mechanisms": ["Added an explicit B,H,T,D layout, causal-mask polarity, deterministic SDPA call, merge shape, tolerances, and future-token invariance."],
+      "source_urls": ["https://docs.pytorch.org/docs/2.8/generated/torch.nn.functional.scaled_dot_product_attention.html", "https://nlp.seas.harvard.edu/annotated-transformer/"],
+      "figures": {"snapshot_embeds": 0, "current_embeds": 0, "retained": 0, "added": 0},
+      "executed_checks": ["test_practice_examples.py::test_causal_attention_shapes_sdpa_and_future_independence — PASS"],
+      "remaining_limitations": ["CPU numerical correctness does not establish fused-kernel or GPU behavior."]
+    },
+    {
+      "path": "06 Практика/03 Прочитать современный decoder в LitGPT.md",
+      "findings": [
+        {
+          "severity": "P1",
+          "line": 56,
+          "excerpt": "q.shape[-2] == config.n_head",
+          "issue": "После transpose в LitGPT layout (B,heads,T,dim), поэтому [-2] — T, а не число голов. Псевдоинвариант отвергает корректную трассу.",
+          "action": "Указать точку hook и layout, проверять ось 1 для post-transpose tensors; размер heads до repeat KV.",
+          "original_finding_index": 0,
+          "status": "already-fixed",
+          "resolution": "Already corrected before this tranche: post-transpose heads axis1 and positions axis2, before KV-repeat, unequal T/heads. Verified against live LitGPT model.py.",
+          "acceptance": "pending-independent-review-built-links-and-visuals"
+        }
+      ],
+      "current_sha256": "92d2593fd193550672099b629a5a95667ae9487a6e95db1ecaa15b7d2f29973d",
+      "snapshot_sha256": "92d2593fd193550672099b629a5a95667ae9487a6e95db1ecaa15b7d2f29973d",
+      "full_read": true,
+      "edited_in_tranche": false,
+      "reread": "full-current-unchanged",
+      "changed_mechanisms": [],
+      "source_urls": ["https://github.com/Lightning-AI/litgpt", "https://github.com/Lightning-AI/litgpt/blob/main/litgpt/model.py"],
+      "figures": {"snapshot_embeds": 0, "current_embeds": 0, "retained": 0, "added": 0},
+      "executed_checks": [],
+      "remaining_limitations": ["The page is a guided source trace; no LitGPT execution was performed in this acceptance pass."]
+    },
+    {
+      "path": "06 Практика/04 Проследить RLVR pipeline в Open-R1.md",
+      "findings": [
+        {
+          "severity": "P3",
+          "line": 69,
+          "excerpt": "baseline",
+          "issue": "Требование сравнить пользу RL выходит за пределы заявленной работы «проследить один record» и может потребовать дорогого обучения.",
+          "action": "Отметить сравнительное обучение как дополнительный этап, обязательным оставить трассу и regression tests.",
+          "original_finding_index": 0,
+          "status": "fixed",
+          "resolution": "Main task is one-record trace/reward regression; comparative RL training explicitly optional, not required.",
+          "acceptance": "pending-independent-review-built-links-and-visuals"
+        }
+      ],
+      "current_sha256": "997752a914c7adeb5ab6fa4ccfec59178622a90e2d8442b9426d220182febd40",
+      "snapshot_sha256": "29f114f4ce73a83bfe930a7f0657683bbf6ffd8cca48006a295baa8abc60f610",
+      "full_read": true,
+      "edited_in_tranche": true,
+      "reread": "full-post-edit-page-read-plus-later-local-delta-checks",
+      "changed_mechanisms": ["Made one-record pipeline tracing and reward regression the required task; moved comparative RL training to an optional extension."],
+      "source_urls": ["https://github.com/huggingface/open-r1"],
+      "figures": {"snapshot_embeds": 0, "current_embeds": 0, "retained": 0, "added": 0},
+      "executed_checks": [],
+      "remaining_limitations": ["Open-R1 was not installed or trained; this review accepts the trace contract, not an executed RL experiment."]
+    },
+    {
+      "path": "06 Практика/05 Измерить KV-cache и quantization.md",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 58,
+          "excerpt": "KV-составляющая должна вырасти",
+          "issue": "При заранее выделенном cache изменение фактической длины prompt не меняет allocated memory. Формула логической занятости смешана с конфигурируемой ёмкостью llama.cpp.",
+          "action": "Разделить live tokens, n_ctx capacity и allocation; фиксировать concurrent sequences отдельно от token batch.",
+          "original_finding_index": 0,
+          "status": "fixed",
+          "resolution": "Logical token occupancy distinguished from configured capacity and allocated bytes; concurrent sequences versus token batch; two controlled experiments.",
+          "acceptance": "pending-independent-review-built-links-and-visuals"
+        }
+      ],
+      "current_sha256": "e4bd4f22091c429293cc112c7a589f4b2a936b1d7351ce82cf184bfb8e517bfa",
+      "snapshot_sha256": "17d75b6e5200f644067a2f3aafc3719dbba1b7985fd35be3be4305428a223452",
+      "full_read": true,
+      "edited_in_tranche": true,
+      "reread": "full-post-edit-page-read-plus-later-local-delta-checks",
+      "changed_mechanisms": ["Separated logical live-token occupancy, configured context capacity, allocated cache bytes, concurrent sequences, and token batching."],
+      "source_urls": ["https://github.com/ggml-org/llama.cpp/blob/master/tools/server/README.md"],
+      "figures": {"snapshot_embeds": 0, "current_embeds": 0, "retained": 0, "added": 0},
+      "executed_checks": [],
+      "remaining_limitations": ["No llama.cpp memory or quality sweep was executed; measurements remain learner work."]
+    },
+    {
+      "path": "06 Практика/06 Измерить CUDA без самообмана.md",
+      "findings": [],
+      "current_sha256": "23b1dd4213b3fab8f638609dd87cc1de4505c26c857283b78c206be92d717367",
+      "snapshot_sha256": "23b1dd4213b3fab8f638609dd87cc1de4505c26c857283b78c206be92d717367",
+      "full_read": true,
+      "edited_in_tranche": false,
+      "reread": "full-current-unchanged",
+      "changed_mechanisms": [],
+      "source_urls": [],
+      "figures": {"snapshot_embeds": 0, "current_embeds": 0, "retained": 0, "added": 0},
+      "executed_checks": [],
+      "remaining_limitations": ["The CUDA benchmark protocol was read only; no GPU timing or profiler trace was produced."]
+    },
+    {
+      "path": "06 Практика/06a Проверить mixed precision и loss scaling.md",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 37,
+          "excerpt": "меньше ... нормального FP16",
+          "issue": "Ниже smallest_normal ещё есть subnormal числа, поэтому этот порог сам по себе не гарантирует обнуление и нужный эффект underflow.",
+          "action": "Задать несколько конкретных градиентов в normal/subnormal/zero диапазонах и учитывать kernel flush-to-zero.",
+          "original_finding_index": 0,
+          "status": "fixed",
+          "resolution": "Normal/subnormal/zero concrete FP16 values; executable half-gradient loss-scaling demonstration passes on CPU; GPU flush-to-zero caveat.",
+          "acceptance": "pending-independent-review-built-links-and-visuals"
+        }
+      ],
+      "current_sha256": "f00502366dc94a56b751200adf7adddfd87c561977a251b1a2714e0d9d9de186",
+      "snapshot_sha256": "c6f27baf48b53341af311d5b8339f040227cac02854e0d9bff402f5bbdde3444",
+      "full_read": true,
+      "edited_in_tranche": true,
+      "reread": "full-post-edit-page-read-plus-later-local-delta-checks",
+      "changed_mechanisms": ["Distinguished FP16 normal, subnormal, and zero ranges; added a loss-scaling recovery example and GPU flush-to-zero caveat."],
+      "source_urls": ["https://numpy.org/doc/2.2/reference/generated/numpy.finfo.html"],
+      "figures": {"snapshot_embeds": 0, "current_embeds": 0, "retained": 0, "added": 0},
+      "executed_checks": ["test_practice_examples.py::test_fp16_subnormal_and_gradient_scaling — PASS"],
+      "remaining_limitations": ["The CPU fixture establishes representability and scaling logic, not hardware-specific GPU FTZ, performance, or AMP behavior."]
+    },
+    {
+      "path": "06 Практика/07 Построить roofline и найти bottleneck.md",
+      "findings": [
+        {
+          "severity": "P3",
+          "line": 36,
+          "excerpt": "число независимых запусков",
+          "issue": "Увеличение числа launches не устраняет per-launch overhead; нужен batching/graph replay или amortization.",
+          "action": "Уточнить, что меняется batch/work per launch, а не просто количество одинаковых маленьких запусков.",
+          "original_finding_index": 0,
+          "status": "fixed",
+          "resolution": "More launches no longer alleged to remove per-launch overhead; batching work and CUDA Graph submission effects distinguished.",
+          "acceptance": "pending-independent-review-built-links-and-visuals"
+        }
+      ],
+      "current_sha256": "616ded0ba6bef21182ab450edc0e75b1a5199003f5e90ec9a61b3d2f26aba15b",
+      "snapshot_sha256": "9c144961b63ad3ccfea3dcef27f90d5b5bbee32f441c7baf7c958290a72bb69b",
+      "full_read": true,
+      "edited_in_tranche": true,
+      "reread": "full-post-edit-page-read-plus-later-local-delta-checks",
+      "changed_mechanisms": ["Replaced the claim that more launches remove launch overhead with batching, work-per-launch, and CUDA Graph amortization guidance."],
+      "source_urls": [],
+      "figures": {"snapshot_embeds": 0, "current_embeds": 0, "retained": 0, "added": 0},
+      "executed_checks": [],
+      "remaining_limitations": ["No target-GPU roofline or profiler trace was executed."]
+    },
+    {
+      "path": "06 Практика/08 Ускорить data pipeline.md",
+      "findings": [],
+      "current_sha256": "4d203e974345972e4a4d5d539ff51b15135ed0879a1b89a5d02237423cf5eadc",
+      "snapshot_sha256": "4d203e974345972e4a4d5d539ff51b15135ed0879a1b89a5d02237423cf5eadc",
+      "full_read": true,
+      "edited_in_tranche": false,
+      "reread": "full-current-unchanged",
+      "changed_mechanisms": [],
+      "source_urls": [],
+      "figures": {"snapshot_embeds": 0, "current_embeds": 0, "retained": 0, "added": 0},
+      "executed_checks": [],
+      "remaining_limitations": ["No DataLoader/tokenizer pipeline or timing run was executed."]
+    },
+    {
+      "path": "06 Практика/09 Реализовать ring all-reduce.md",
+      "findings": [
+        {
+          "severity": "P3",
+          "line": 12,
+          "excerpt": "$p$ процессов",
+          "issue": "Нет явного указания, что correctness можно проверить локально CPU/Gloo, а performance требует реальной topology.",
+          "action": "Указать два режима выполнения, чтобы не смешивать учебную корректность и сетевые измерения.",
+          "original_finding_index": 0,
+          "status": "fixed",
+          "resolution": "Local CPU/Gloo correctness separated from multi-node/GPU/NCCL performance and hardware claims.",
+          "acceptance": "pending-independent-review-built-links-and-visuals"
+        }
+      ],
+      "current_sha256": "8a279f5f0a5d876f9326bcd90e30c4208285ee95867b97a00f60dfe9d6fbfd51",
+      "snapshot_sha256": "6b279336c94a122d3bc7805760f5d7995011c4a26564dcc3d4165c5793db98c4",
+      "full_read": true,
+      "edited_in_tranche": true,
+      "reread": "full-post-edit-page-read-plus-later-local-delta-checks",
+      "changed_mechanisms": ["Separated local CPU/Gloo correctness from topology-dependent multi-node GPU/NCCL performance evidence."],
+      "source_urls": [],
+      "figures": {"snapshot_embeds": 0, "current_embeds": 0, "retained": 0, "added": 0},
+      "executed_checks": [],
+      "remaining_limitations": ["No distributed process group, collective, NCCL run, or bandwidth curve was executed."]
+    },
+    {
+      "path": "06 Практика/10 Измерить checkpointing и offload.md",
+      "findings": [
+        {
+          "severity": "P3",
+          "line": 19,
+          "excerpt": "совпадение loss",
+          "issue": "Для dropout checkpoint recomputation требуется сохранение RNG; без фиксации источник расхождения не диагностируется.",
+          "action": "Указать общий state/seed и preserve_rng_state, отдельно проверить stochastic operators.",
+          "original_finding_index": 0,
+          "status": "fixed",
+          "resolution": "Same state and RNG protocol, preserve_rng_state/use_reentrant scope; actual CPU dropout gradient checkpoint example passes including negative control.",
+          "acceptance": "pending-independent-review-built-links-and-visuals"
+        }
+      ],
+      "current_sha256": "bc9c2725cf5aaba1918da8332d8c1f7ab89274e03204471e071bfa4ee2e67969",
+      "snapshot_sha256": "98c44b9495c4626fd3d696f8685e0f2e32b03e2d47f543b1882e7578a5acf2d7",
+      "full_read": true,
+      "edited_in_tranche": true,
+      "reread": "full-post-edit-page-read-plus-later-local-delta-checks",
+      "changed_mechanisms": ["Specified RNG/state equivalence for dropout recomputation and added a negative-control checkpoint gradient example."],
+      "source_urls": ["https://docs.pytorch.org/docs/2.8/checkpoint.html"],
+      "figures": {"snapshot_embeds": 0, "current_embeds": 0, "retained": 0, "added": 0},
+      "executed_checks": ["test_practice_examples.py::test_checkpoint_preserves_dropout_gradient — PASS"],
+      "remaining_limitations": ["The CPU fixture checks RNG-preserving recomputation, not offload performance or a full memory-time Pareto sweep."]
+    },
+    {
+      "path": "06 Практика/11 Разрезать Transformer по TP и SP.md",
+      "findings": [
+        {
+          "severity": "P3",
+          "line": 17,
+          "excerpt": "sequence parallelism",
+          "issue": "Термин имеет разные значения в современных стэках, хотя здесь подразумевается Megatron-SP для replicated activations.",
+          "action": "Явно назвать вариант SP и отличить его от context parallelism.",
+          "original_finding_index": 0,
+          "status": "fixed",
+          "resolution": "Explicit Megatron-SP, not context-parallel attention; source linked.",
+          "acceptance": "pending-independent-review-built-links-and-visuals"
+        }
+      ],
+      "current_sha256": "23ec2c669976cfcda2397fda6be99641f7260eb133d3fc33aab0849655d10d68",
+      "snapshot_sha256": "e40de1992dc676d622d05f1073667afbbac1f3404b8ea0a2b025d79e4a79c34c",
+      "full_read": true,
+      "edited_in_tranche": true,
+      "reread": "full-post-edit-page-read-plus-later-local-delta-checks",
+      "changed_mechanisms": ["Scoped sequence parallelism to Megatron-style sharding of otherwise replicated activations and distinguished it from context-parallel attention."],
+      "source_urls": ["https://arxiv.org/abs/2205.05198"],
+      "figures": {"snapshot_embeds": 0, "current_embeds": 0, "retained": 0, "added": 0},
+      "executed_checks": [],
+      "remaining_limitations": ["No tensor/sequence-parallel implementation or collective trace was executed."]
+    },
+    {
+      "path": "06 Практика/12 Собрать и проверить FSDP.md",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 22,
+          "excerpt": "другим числом ranks",
+          "issue": "Изменение world size меняет global batch и RNG/order без отдельного протокола; «восстановление следующего шага» не определяет требуемую эквивалентность.",
+          "action": "Указать поддерживаемый distributed checkpoint API и что сохраняется при reshard: weights/optimizer, global batch, sample order; отделить побитовую от численной эквивалентности.",
+          "original_finding_index": 0,
+          "status": "fixed",
+          "resolution": "DCP get/set state API, same global batch/sample order/normalization, numeric versus bitwise parity and stochastic limits for changed world size.",
+          "acceptance": "pending-independent-review-built-links-and-visuals"
+        }
+      ],
+      "current_sha256": "fd2b148468a94f2f6a587b09f092707286fd9db4274071c0f1739f903d316f7b",
+      "snapshot_sha256": "94f9ba465fc324c4f198df501c7424088cbef5d8bf8a547a7e71d7947e642336",
+      "full_read": true,
+      "edited_in_tranche": true,
+      "reread": "full-post-edit-page-read-plus-later-local-delta-checks",
+      "changed_mechanisms": ["Defined global-batch, sample-order, loss-normalization, RNG, and numerical-equivalence conditions for DDP/FSDP and changed-world-size checkpoint checks."],
+      "source_urls": ["https://docs.pytorch.org/docs/2.8/distributed.checkpoint.html"],
+      "figures": {"snapshot_embeds": 0, "current_embeds": 0, "retained": 0, "added": 0},
+      "executed_checks": [],
+      "remaining_limitations": ["No multi-rank FSDP run, memory snapshot, or distributed checkpoint restore was executed."]
+    },
+    {
+      "path": "06 Практика/13 Оптимизировать один Transformer step.md",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 10,
+          "excerpt": "Полный исполняемый модуль",
+          "issue": "Вступление представляет TinyTorch capstone как полный код следующей EDLS работы, хотя это два отдельных проекта и задания.",
+          "action": "Назвать один основной маршрут; TinyTorch выделить альтернативой с её входами и результатом, не обещая совместимого исполнения.",
+          "original_finding_index": 0,
+          "status": "fixed",
+          "resolution": "EDLS primary route; TinyTorch capstone alternative with separate prerequisites/environment, not compatible implementation of EDLS task.",
+          "acceptance": "pending-independent-review-built-links-and-visuals"
+        }
+      ],
+      "current_sha256": "444962666a6abf9f73459c32ce666a74da182003d90840cab1cf3aa217aa59d0",
+      "snapshot_sha256": "907ffa06d15bd7976ae17654b65454d0f7864c8f063e0bc303a23dbac946011c",
+      "full_read": true,
+      "edited_in_tranche": true,
+      "reread": "full-post-edit-page-read-plus-later-local-delta-checks",
+      "changed_mechanisms": ["Separated the EDLS task from the optional Harvard TinyTorch capstone, including their different environments and prerequisites."],
+      "source_urls": [],
+      "figures": {"snapshot_embeds": 0, "current_embeds": 0, "retained": 0, "added": 0},
+      "executed_checks": [],
+      "remaining_limitations": ["Neither the EDLS optimization assignment nor the TinyTorch capstone was executed."]
+    },
+    {
+      "path": "06 Практика/14 Собрать минимальный inference engine.md",
+      "findings": [
+        {
+          "severity": "P3",
+          "line": 17,
+          "excerpt": "inter-token latency/TPOT",
+          "issue": "Межтокенные интервалы и усреднённый per-request TPOT объединены косой чертой, хотя хвосты отличаются.",
+          "action": "Развести две метрики в списке измерений.",
+          "original_finding_index": 0,
+          "status": "fixed",
+          "resolution": "Per-token ITL separated from per-request TPOT, N=1 undefined, client chunk aggregation not per-token timestamps.",
+          "acceptance": "pending-independent-review-built-links-and-visuals"
+        }
+      ],
+      "current_sha256": "5315e35516a200b68cc8d50c1fad635d33dfce549c039b882563f4be1283c165",
+      "snapshot_sha256": "9b02b7ce95c2939b0908064143fd30425481de28df471ca27d187cd80312af84",
+      "full_read": true,
+      "edited_in_tranche": true,
+      "reread": "full-post-edit-page-read-plus-later-local-delta-checks",
+      "changed_mechanisms": ["Separated per-token inter-token latency from per-request TPOT and marked the N=1 TPOT denominator as undefined."],
+      "source_urls": [],
+      "figures": {"snapshot_embeds": 0, "current_embeds": 0, "retained": 0, "added": 0},
+      "executed_checks": [],
+      "remaining_limitations": ["No scheduler, inference engine, load test, or SLO trace was executed."]
+    },
+    {
+      "path": "06 Практика/15 Реализовать W8A8 и SmoothQuant.md",
+      "findings": [
+        {
+          "severity": "P3",
+          "line": 16,
+          "excerpt": "calibration statistics",
+          "issue": "Не назван независимый calibration split; можно нечаянно подобрать scales по eval.",
+          "action": "Явно отделить calibration/eval и запретить подбор α на test.",
+          "original_finding_index": 0,
+          "status": "fixed",
+          "resolution": "Separate calibration, validation alpha selection and held-out evaluation; no test-set scale fitting.",
+          "acceptance": "pending-independent-review-built-links-and-visuals"
+        }
+      ],
+      "current_sha256": "3bffad62e351c51493cd6224642602f12a8c6fcd2bb4f0f72e6c3f519dcef6f4",
+      "snapshot_sha256": "808d69c8275d64f736172c5a7e87626ebd1e4c3d263a4f9feb9235e8ee65c6e3",
+      "full_read": true,
+      "edited_in_tranche": true,
+      "reread": "full-post-edit-page-read-plus-later-local-delta-checks",
+      "changed_mechanisms": ["Separated calibration, validation-time alpha selection, and held-out evaluation to prevent test-set scale fitting."],
+      "source_urls": ["https://arxiv.org/abs/2211.10438"],
+      "figures": {"snapshot_embeds": 0, "current_embeds": 0, "retained": 0, "added": 0},
+      "executed_checks": [],
+      "remaining_limitations": ["No quantized kernel, calibration sweep, accuracy evaluation, or hardware benchmark was executed."]
+    },
+    {
+      "path": "06 Практика/16 Проверить speculative decoding и rollback KV.md",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 17,
+          "excerpt": "коммитить accepted prefix",
+          "issue": "Не описаны cache offsets для correction/bonus token, уже выданного, но ещё не обработанного target/draft; именно здесь типичны off-by-one.",
+          "action": "Добавить маленькую трассу k=3 с частичным отклонением и отдельными generated/materialized lengths обеих моделей.",
+          "original_finding_index": 0,
+          "status": "fixed",
+          "resolution": "k=3 partial and full acceptance trace; generated/materialized cache lengths for both models, correction/bonus processing and stale logits handling.",
+          "acceptance": "pending-independent-review-built-links-and-visuals"
+        }
+      ],
+      "current_sha256": "3563f5e94e78f724c3ee29750fdb8f7d61345f3d07caed20410e93db456d891c",
+      "snapshot_sha256": "a11e93596ac41388977a711fa16e8a8b7bee284880017c1461c5460ca7de88ba",
+      "full_read": true,
+      "edited_in_tranche": true,
+      "reread": "full-post-edit-page-read-plus-later-local-delta-checks",
+      "changed_mechanisms": ["Added k=3 partial/full-acceptance cache-offset traces covering rollback, correction, bonus processing, and stale-logit invalidation."],
+      "source_urls": [],
+      "figures": {"snapshot_embeds": 0, "current_embeds": 0, "retained": 0, "added": 0},
+      "executed_checks": [],
+      "remaining_limitations": ["The cache trace was inspected manually; no speculative decoder implementation or statistical equivalence run was executed."]
+    },
+    {
+      "path": "06 Практика/17 Развернуть наблюдаемый ML сервис.md",
+      "findings": [],
+      "current_sha256": "764181fb13392908de2f2f930614c98c6591b140b00db1aac76e977ff10eebdf",
+      "snapshot_sha256": "764181fb13392908de2f2f930614c98c6591b140b00db1aac76e977ff10eebdf",
+      "full_read": true,
+      "edited_in_tranche": false,
+      "reread": "full-current-unchanged",
+      "changed_mechanisms": [],
+      "source_urls": [],
+      "figures": {"snapshot_embeds": 0, "current_embeds": 0, "retained": 0, "added": 0},
+      "executed_checks": [],
+      "remaining_limitations": ["No container, service deployment, metrics backend, dashboard, or load test was run."]
+    },
+    {
+      "path": "06 Практика/18 Harvard ML Systems — интерактивные design labs.md",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 12,
+          "excerpt": "все 34",
+          "issue": "Количество и complete original source — проверяемые обещания, в этом чтении не сверены с inventory исходников и upstream commit.",
+          "action": "Отдельно проверить весь manifest 34 лабораторий и наличие запускаемых исходников; не маркировать visual/runtime pass по этой странице.",
+          "original_finding_index": 0,
+          "status": "fixed",
+          "resolution": "Exact upstream tree inventory of34 labs, pinned hashes and all archived Python bodies/syntax verified; page accurately disclaims unperformed Marimo runtime.",
+          "acceptance": "pending-independent-review-built-links-and-visuals"
+        }
+      ],
+      "current_sha256": "268ffeb55311cb3179e89f97b91bd0fda1377ccc0c676c9a254b98f8676e0d81",
+      "snapshot_sha256": "c25b0b84d8642c04babd83b9720d499c96f4d8fc007e4b7efe0b2778ba8d0d80",
+      "full_read": true,
+      "edited_in_tranche": true,
+      "reread": "full-post-edit-page-read-plus-later-local-delta-checks",
+      "changed_mechanisms": ["Replaced an implied runnable-archive claim with exact source-body/hash/syntax evidence and an explicit no-Marimo-runtime boundary."],
+      "source_urls": ["https://github.com/harvard-edge/cs249r_book/tree/45ecc8d82fcae70c149cdce550d3b3d3411df913/labs"],
+      "figures": {"snapshot_embeds": 0, "current_embeds": 0, "retained": 0, "added": 0},
+      "executed_checks": ["harvard-lab-sources.json inspected: 34 exact upstream paths, 34 matching hashes/bodies, 34 Python syntax passes; runtime not run, visuals not reviewed"],
+      "remaining_limitations": ["No Marimo app or lab output was executed; source preservation and Python compilation are not runtime acceptance."]
+    },
+    {
+      "path": "06 Практика/19 Найти автомобильный номер в видеопотоке.md",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 34,
+          "excerpt": "сумма log-probabilities по символам",
+          "issue": "Сумма по символам предполагает выравненные позиции и калиброванные вероятности; OCR со вставками/пропусками этого не гарантирует.",
+          "action": "Указать alignment гипотез/CTC decoding и независимость кадров как допущение; дать минимальный пример несовпадающих строк.",
+          "original_finding_index": 0,
+          "status": "fixed",
+          "resolution": "OCR alignment example for deletion, CTC and conditional independence/calibration caveats; authorized/synthetic datasets and privacy-safe reporting.",
+          "acceptance": "pending-independent-review-built-links-and-visuals"
+        },
+        {
+          "severity": "P3",
+          "line": 48,
+          "excerpt": "test set",
+          "issue": "Нет ограничения на источник видео, согласие и обезличивание при публикации результатов, хотя номера потенциально идентифицируют людей.",
+          "action": "Указать учебный/разрешённый набор, не публиковать реальные номера и видео без прав.",
+          "original_finding_index": 1,
+          "status": "fixed",
+          "resolution": "OCR alignment example for deletion, CTC and conditional independence/calibration caveats; authorized/synthetic datasets and privacy-safe reporting.",
+          "acceptance": "pending-independent-review-built-links-and-visuals"
+        }
+      ],
+      "current_sha256": "a64efba17e40ed80e36d4686b6f4db818e59412e416e079aa195f542254989c8",
+      "snapshot_sha256": "9f43388a6c510fcb674773f8940380cdae49cb0d12eda08340ffb1bf1efd091b",
+      "full_read": true,
+      "edited_in_tranche": true,
+      "reread": "full-post-edit-page-read-plus-later-local-delta-checks",
+      "changed_mechanisms": ["Added deletion-aware OCR alignment, CTC and conditional-independence caveats, calibration guidance, and authorized/synthetic-data privacy boundaries."],
+      "source_urls": ["https://docs.ultralytics.com/modes/track/", "https://www.paddleocr.ai/latest/en/version3.x/pipeline_usage/OCR.html"],
+      "figures": {"snapshot_embeds": 0, "current_embeds": 0, "retained": 0, "added": 0},
+      "executed_checks": [],
+      "remaining_limitations": ["No detector, tracker, OCR model, dataset, or end-to-end ALPR evaluation was executed."]
+    },
+    {
+      "path": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "findings": [
+        {
+          "severity": "P1",
+          "line": 305,
+          "excerpt": "FAIL: ... функции-переходники",
+          "issue": "Запрещено изменять adapters, которые по строкам126/249 студент обязан заполнить своей реализацией; критерии прохождения логически невыполнимы.",
+          "action": "Разрешить реализацию adapters с неизменными signatures/semantics; immutable сделать тесты/fixtures, а не незаполненные функции.",
+          "original_finding_index": 0,
+          "status": "fixed",
+          "resolution": "Existing text adapter correction reconciled with newly fixed contract fail_if/learner_changes; archive hash versus learner edits distinguished. cpu_local explicitly recommendation with actual upstream test entrypoint and learner-defined training CLI.",
+          "acceptance": "pending-independent-review-built-links-and-visuals"
+        },
+        {
+          "severity": "P2",
+          "line": 149,
+          "excerpt": "cpu_local использует",
+          "issue": "Объявлен готовый профиль, но нет ссылки/команды его запуска; пользователь получает строгий контракт вместо работающего стартового маршрута.",
+          "action": "Дать точный entrypoint существующего профиля или обозначить это рекомендуемой конфигурацией, которую нужно собрать.",
+          "original_finding_index": 1,
+          "status": "fixed",
+          "resolution": "Existing text adapter correction reconciled with newly fixed contract fail_if/learner_changes; archive hash versus learner edits distinguished. cpu_local explicitly recommendation with actual upstream test entrypoint and learner-defined training CLI.",
+          "acceptance": "pending-independent-review-built-links-and-visuals"
+        }
+      ],
+      "current_sha256": "af5e18ba9416a9dd882266adf37edc4feeee1a6054507bf68e920c40bac561b5",
+      "snapshot_sha256": "4ca253061bd1dddfb1df7afef0906688e9697d63e480d750b2d4392bd591328d",
+      "full_read": true,
+      "edited_in_tranche": true,
+      "reread": "full-post-edit-page-read-plus-later-local-delta-checks",
+      "changed_mechanisms": ["Reconciled learner-edited adapter bodies with immutable signatures/tests/fixtures; separated archive hashes, actual upstream entrypoints, learner-defined training commands, and Bookvar CPU/full profiles."],
+      "source_urls": ["https://github.com/stanford-cs336/assignment1-basics/tree/a158843b20107949f1a8d7df1b05cd33b9166712", "https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf"],
+      "figures": {"snapshot_embeds": 0, "current_embeds": 0, "retained": 0, "added": 0},
+      "executed_checks": ["Independent static count: 21 adapter functions and 48 test functions in the pinned local source tree"],
+      "remaining_limitations": ["The 48 official tests, learner implementation, TinyStories training, validation-loss thresholds, GPU runtime, and generated samples were not executed in this independent pass."]
+    },
+    {
+      "path": "06 Практика/21 Профилировать и ускорить Transformer kernel.md",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 176,
+          "excerpt": "Первый Triton kernel: fused RMSNorm",
+          "issue": "Авторское дополнительное упражнение не отделено от обязательных upstream gates, а на 8 gates нет минимальной команды запуска или лимита железа.",
+          "action": "Разделить обязательное ядро и optional упражнения, дать CPU/GPU маршруты с точками запуска и ожидаемым результатом.",
+          "original_finding_index": 0,
+          "status": "fixed",
+          "resolution": "CPU/single-GPU/distributed paths, pinned clone/setup/test commands and expected unimplemented-adapter failures; extra RMSNorm optional; unobservable accumulator dtype recorded rather than rejecting a valid benchmark.",
+          "acceptance": "pending-independent-review-built-links-and-visuals"
+        },
+        {
+          "severity": "P3",
+          "line": 173,
+          "excerpt": "неизвестный accumulator dtype",
+          "issue": "Неизвестный внутренний dtype закрытого kernel превращён в стоп-условие, хотя корректный benchmark возможен с документированным ограничением наблюдаемости.",
+          "action": "Отдельно фиксировать известные и ненаблюдаемые свойства; не блокировать корректное измерение без основания.",
+          "original_finding_index": 1,
+          "status": "fixed",
+          "resolution": "CPU/single-GPU/distributed paths, pinned clone/setup/test commands and expected unimplemented-adapter failures; extra RMSNorm optional; unobservable accumulator dtype recorded rather than rejecting a valid benchmark.",
+          "acceptance": "pending-independent-review-built-links-and-visuals"
+        }
+      ],
+      "current_sha256": "f9fb06c577a4312acd631a8fee7077cb9172dc37962c43a9c1d852fdc462e370",
+      "snapshot_sha256": "266a89f942b97bd629b65bccceba2c559c600482bd437326b226633bd46a6e8b",
+      "full_read": true,
+      "edited_in_tranche": true,
+      "reread": "full-post-edit-page-read-plus-later-local-delta-checks",
+      "changed_mechanisms": ["Separated CPU, single-GPU, multi-GPU, and full-step profiles; added pinned setup/test commands, expected blank-adapter failures, optional RMSNorm scope, and observable accumulator-evidence rules."],
+      "source_urls": ["https://github.com/stanford-cs336/assignment2-systems/tree/ca8bc81a59b70516f7ebb2da4808daade877c736", "https://github.com/stanford-cs336/lectures/tree/8b59b50730766695c2ffedd1a79c50cd09b9eb91"],
+      "figures": {"snapshot_embeds": 0, "current_embeds": 0, "retained": 0, "added": 0},
+      "executed_checks": [],
+      "remaining_limitations": ["No Assignment 2 pytest suite, Triton/CUDA kernel, profiler trace, benchmark, DDP/FSDP, or GPU/NCCL run was executed in this independent pass."]
+    },
+    {
+      "path": "06 Практика/22 Провести scaling-law campaign.md",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 68,
+          "excerpt": "Сгенерируйте таблицу",
+          "issue": "Синтетический профиль объявлен основным, но ни генератор, ни пример таблицы, ни plot fixture не даны. Основной объём посвящён bookkeeping.",
+          "action": "Предоставить минимальный не-upstream synthetic fixture и notebook для fit/диагностики; оставить отчётные схемы справочным приложением.",
+          "original_finding_index": 0,
+          "status": "fixed",
+          "resolution": "Added and executed complete synthetic 65-point/5-budget generator, ordinary and robust nonlinear fits, three diagnostic plots, held-out MAE0.00291; full campaign distinguished from starter.",
+          "acceptance": "pending-independent-review-built-links-and-visuals"
+        },
+        {
+          "severity": "P3",
+          "line": 217,
+          "excerpt": "log-linearized fit",
+          "issue": "Для суммы с неизвестным E,A,B нельзя просто взять логарифм и получить линейную регрессию.",
+          "action": "Уточнить конкретную альтернативную параметризацию/допущение либо сравнивать обычный и robust nonlinear fit.",
+          "original_finding_index": 1,
+          "status": "fixed",
+          "resolution": "Explained why log of the additive loss model is not linear regression; compare least_squares linear/soft_l1 in the original loss space.",
+          "acceptance": "pending-independent-review-built-links-and-visuals"
+        }
+      ],
+      "current_sha256": "731252a7e28513b25c6cd861c71a1a075c39f8fd0c5367e33dee6635269e2a04",
+      "snapshot_sha256": "bab82226332b5ac65103e287d976c89442dd471e50c4589591fbe8a07dd6dbd8",
+      "full_read": true,
+      "edited_in_tranche": true,
+      "reread": "full-post-edit-page-read-plus-later-local-delta-checks",
+      "changed_mechanisms": ["Added a complete 65-point five-budget synthetic campaign, train/held-out split, ordinary and robust nonlinear fits in original loss space, and three diagnostic plots; kept the full Stanford campaign separate."],
+      "source_urls": ["https://github.com/stanford-cs336/assignment3-scaling/tree/03e9372992e913061b9e78b5cfcb62ad8a87de35", "https://arxiv.org/abs/2203.15556", "https://arxiv.org/abs/2406.19146"],
+      "figures": {"snapshot_embeds": 0, "current_embeds": 0, "retained": 0, "added": 0},
+      "executed_checks": ["test_practice_examples.py::test_scaling_fixture_fits_without_heldout_leakage — PASS; 52 train and 13 held-out points, held-out MAE 0.00291, three Matplotlib axes"],
+      "remaining_limitations": ["The synthetic CPU fixture is not the Stanford course API, official answer-bearing data, learner training campaign, or B200 scaling result."]
+    },
+    {
+      "path": "06 Практика/23 Собрать воспроизводимый pretraining corpus.md",
+      "findings": [
+        {
+          "severity": "P1",
+          "line": 302,
+          "excerpt": "adapters/tests ... без изменений",
+          "issue": "Снова запрещается изменение adapters, в которые строка135 требует подключить собственную реализацию.",
+          "action": "Разделить неизменность тестов и обязательную реализацию adapters.",
+          "original_finding_index": 0,
+          "status": "already-fixed",
+          "resolution": "Before this tranche the page already allowed adapter bodies while preserving test signatures/fixtures; verified complete current page.",
+          "acceptance": "pending-independent-review-built-links-and-visuals"
+        },
+        {
+          "severity": "P2",
+          "line": 249,
+          "excerpt": "uint16 .bin",
+          "issue": "Разрешён произвольный tokenizer, но uint16 пригоден только при IDs≤65535; для крупных словарей возникает переполнение.",
+          "action": "Выбирать uint16/uint32 по максимальному token ID и тестировать round-trip сериализации.",
+          "original_finding_index": 1,
+          "status": "already-fixed",
+          "resolution": "Before this tranche uint16/uint32 selection already used maximum ID65535; retained and clarified document IDs versus token IDs.",
+          "acceptance": "pending-independent-review-built-links-and-visuals"
+        },
+        {
+          "severity": "P2",
+          "line": 115,
+          "excerpt": "Локальный режим содержит",
+          "issue": "Обещается готовый локальный набор и 5выходных файлов без прямой ссылки на fixtures или команды.",
+          "action": "Связать текст с реальным fixture-path и smoke command либо честно описать требуемую подготовку.",
+          "original_finding_index": 2,
+          "status": "fixed",
+          "resolution": "Pinned upstream moby.html/moby_extracted.txt and dedup fixtures, clone/uv/pytest commands and expected adapter failures; 25-document local corpus explicitly learner-prepared.",
+          "acceptance": "pending-independent-review-built-links-and-visuals"
+        }
+      ],
+      "current_sha256": "3c1c129aa0cd0e64432b2e4dac51d91df052c99f2d41dd6c10a1296fbddb67df",
+      "snapshot_sha256": "6bda85317d76a83e9ee9f77bb8afc5c66f0cde7131dc818169e1bcc6f02f4ee1",
+      "full_read": true,
+      "edited_in_tranche": true,
+      "reread": "full-post-edit-page-read-plus-later-local-delta-checks",
+      "changed_mechanisms": ["Pointed to real pinned extraction/dedup fixtures and commands, kept adapter bodies learner-owned, separated document IDs from token IDs, and labeled the 25-document corpus as learner-prepared."],
+      "source_urls": ["https://github.com/stanford-cs336/assignment4-data/tree/0555bea66369872d912652debf10b115ca0688c8", "https://github.com/stanford-cs336/assignment4-data/blob/0555bea66369872d912652debf10b115ca0688c8/tests/test_extract.py", "https://github.com/stanford-cs336/assignment4-data/blob/0555bea66369872d912652debf10b115ca0688c8/tests/test_deduplication.py"],
+      "figures": {"snapshot_embeds": 0, "current_embeds": 0, "retained": 0, "added": 0},
+      "executed_checks": ["Independent fixture-presence check: pinned moby.html, moby_extracted.txt, exact-line expected outputs, and fuzzy-duplicate fixtures are present locally"],
+      "remaining_limitations": ["Assignment 4 tests, Common Crawl processing, the learner's 25-document corpus, filtering, MinHash sweep, tokenizer training, and fixed-budget model comparison were not executed."]
+    },
+    {
+      "path": "06 Практика/24 Post-training и RLVR для математического reasoning.md",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 412,
+          "excerpt": "одинаковые хэши двух коротких запусков",
+          "issue": "Не уточнено, какие артефакты хэшируются: логи времени/hostname/run IDs по определению различаются, даже если модель детерминирована.",
+          "action": "Задать канонизируемые численные fixtures для exact hash и tolerances для GPU результатов; provenance хранить отдельно.",
+          "original_finding_index": 0,
+          "status": "fixed",
+          "resolution": "Exact SHA limited to canonical numeric CPU fixture, runtime/provenance fields separate; GPU comparisons use tolerances. Matching two executed fixture digests recorded.",
+          "acceptance": "pending-independent-review-built-links-and-visuals"
+        },
+        {
+          "severity": "P2",
+          "line": 127,
+          "excerpt": "smoke_cpu",
+          "issue": "Нет команды, пакета fixtures или стартового notebook для обещанного smoke_cpu. Много точных интерфейсов, но не воспроизводимый старт.",
+          "action": "Дать один проверенный CPU пример маски/rewards/градиента со ссылкой на fixture и ожидаемым выводом.",
+          "original_finding_index": 1,
+          "status": "fixed",
+          "resolution": "Added complete executable CPU logits/labels/response-mask/reward/advantage/gradient example; actual extraction-based test passed on torch2.8.0.",
+          "acceptance": "pending-independent-review-built-links-and-visuals"
+        }
+      ],
+      "current_sha256": "731e6220359e1d3734b40a231a8b235110053c8820ba51c572615d2da7b6232c",
+      "snapshot_sha256": "c6a6684b2b55cf024bc562297ca0bc4c9bac8c48dd45784125c5d4ae33f70c77",
+      "full_read": true,
+      "edited_in_tranche": true,
+      "reread": "full-post-edit-page-read-plus-later-local-delta-checks",
+      "changed_mechanisms": ["Added a deterministic CPU logits/labels/response-mask/reward/advantage/gradient fixture; restricted exact hashes to canonical numeric evidence and kept runtime/provenance fields and GPU tolerances separate."],
+      "source_urls": ["https://github.com/stanford-cs336/assignment5-alignment/tree/c2734a26308710949fe13226960a1e8cece94b7e", "https://arxiv.org/abs/2402.03300", "https://arxiv.org/abs/2501.12948"],
+      "figures": {"snapshot_embeds": 0, "current_embeds": 0, "retained": 0, "added": 0},
+      "executed_checks": ["test_practice_examples.py::test_rlvr_mask_reward_gradient_and_digest — PASS; two extracted runs produced identical digest 91cdc4b119b49ea52dd4a15b4a1a8501cc07dd39841fcafefa7f3b332c0b7633"],
+      "remaining_limitations": ["The fixture does not execute Assignment 5 tests, SFT/DPO/GRPO training, vLLM generation, GPU comparisons, verifier transfer, or full course thresholds."]
+    },
+    {
+      "path": "06 Практика/25 Воспроизводимо оценить и red-team компьютерного агента.md",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 177,
+          "excerpt": "ASR",
+          "issue": "Условная ASR по exposed полезна, но нулевой denominator не определён, и по ней одной нельзя оценить end-to-end риск с retrieval.",
+          "action": "Указать ASR|exposed, NaN/NA при нуле и дополнительную unconditional ASR по всем атакующим эпизодам.",
+          "original_finding_index": 0,
+          "status": "fixed",
+          "resolution": "Conditional and overall ASR with explicit numerators/denominators, N/A for zero denominator, counted infra exclusions and 20/8/2 example.",
+          "acceptance": "pending-independent-review-built-links-and-visuals"
+        },
+        {
+          "severity": "P2",
+          "line": 156,
+          "excerpt": "только внутри workspace/",
+          "issue": "Текстовый prefix path не обеспечивает containment при ../, symlink и гонках.",
+          "action": "Добавить обязательные traversal/symlink tests и безопасное разрешение пути; описать sandbox вне model policy.",
+          "original_finding_index": 1,
+          "status": "fixed",
+          "resolution": "Outer no-network disposable isolation for every profile; path-component containment, symlinks and TOCTOU, Linux openat2 alternative and negative fixtures; contract aligned.",
+          "acceptance": "pending-independent-review-built-links-and-visuals"
+        },
+        {
+          "severity": "P3",
+          "line": 215,
+          "excerpt": "не менее десяти безопасных отказов",
+          "issue": "Фиксированное число отказов может отсутствовать в корректном эксперименте.",
+          "action": "Требовать разбор всех имеющихся отказов и не добирать их искусственно.",
+          "original_finding_index": 2,
+          "status": "fixed",
+          "resolution": "Review actual refusals or declared sample of10 if more; zero allowed and no fabricated refusals.",
+          "acceptance": "pending-independent-review-built-links-and-visuals"
+        }
+      ],
+      "current_sha256": "15481b90f2ab6b77629d24e7984207c1b53d2c8e53d769938e1f94f0309267bb",
+      "snapshot_sha256": "8909ecd2e652bd9975ccf1fee5d7c8662c94a191598f72c78e4a42469589aac7",
+      "full_read": true,
+      "edited_in_tranche": true,
+      "reread": "full-post-edit-page-read-plus-later-local-delta-checks",
+      "changed_mechanisms": ["Defined conditional and overall ASR denominators and undefined cases; retained outer isolation for open profiles; added component-aware path containment, symlink/TOCTOU, fail-closed, and refusal-sampling contracts."],
+      "source_urls": ["https://arxiv.org/abs/2404.07972", "https://arxiv.org/abs/2407.12784", "https://arxiv.org/abs/2504.11703", "https://man7.org/linux/man-pages/man2/openat2.2.html"],
+      "figures": {"snapshot_embeds": 0, "current_embeds": 0, "retained": 0, "added": 0},
+      "executed_checks": [],
+      "remaining_limitations": ["The YAML is an illustrative contract, not a supplied twelve-task fixture; no agent, retriever, policy engine, sandbox, reset, or red-team episode was executed."]
+    },
+    {
+      "path": "06 Практика/26 Поиск доказательства в Lean с verifier.md",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 163,
+          "excerpt": "используйте комбинаторную оценку",
+          "issue": "Комбинаторный pass@k требует соответствующего sampling protocol. Adaptive branches одного поиска не независимые кандидаты; это не объяснено.",
+          "action": "Считать повторные независимые полные попытки поиска; зафиксировать распределение и бюджет, не подставлять узлы дерева в pass@k.",
+          "original_finding_index": 0,
+          "status": "fixed",
+          "resolution": "Independent complete search restarts under fixed policy/budget, not adaptive tree branches; formula and n5/c2/k2=.7 example.",
+          "acceptance": "pending-independent-review-built-links-and-visuals"
+        },
+        {
+          "severity": "P2",
+          "line": 49,
+          "excerpt": "Smoke-набор содержит",
+          "issue": "Предлагает полный Lean harness и12теорем, но не даёт готового pinned project/команды проверки.",
+          "action": "Сначала предоставить одно полностью исполняемое маленькое доказательство с reset/ошибкой/retry, затем расширение до benchmark.",
+          "original_finding_index": 1,
+          "status": "fixed",
+          "resolution": "Pinned Lean4.19.0 four-file starter with bad tactic, rfl proof and separate-process repeat; actually run via official Lean/Lake binary; 12-theorem project explicitly separate.",
+          "acceptance": "pending-independent-review-built-links-and-visuals"
+        }
+      ],
+      "current_sha256": "d5b21b67db291c6482c3882be938f669d402fbc1ff661fe90430a1d5db7cac1b",
+      "snapshot_sha256": "e7c5d6cef1cddeceb0b8ed8e090eecdc3380999ae3607576f35a4d1f81ffbaa2",
+      "full_read": true,
+      "edited_in_tranche": true,
+      "reread": "full-post-edit-page-read-plus-later-local-delta-checks",
+      "changed_mechanisms": ["Added a four-file Lean 4.19.0 starter with a failing tactic and repeated accepted proof; separated it from the twelve-theorem project and defined pass@k over independent full-search restarts."],
+      "source_urls": ["https://github.com/leanprover/lean4/releases/tag/v4.19.0", "https://lean-lang.org/doc/reference/4.19.0/Build-Tools-and-Distribution/Lake/", "https://arxiv.org/abs/2306.15626", "https://arxiv.org/abs/2310.04353"],
+      "figures": {"snapshot_embeds": 0, "current_embeds": 0, "retained": 0, "added": 0},
+      "executed_checks": ["test_practice_examples.py::test_lean_error_reset_and_kernel_acceptance — PASS with Lean/Lake 4.19.0: Bad nonzero with missing_lemma; Good and clean-process repeat exit 0"],
+      "remaining_limitations": ["The starter has no model, retrieval, interactive proof-state API, Mathlib, theorem split, backtracking search, or twelve-theorem evaluation."]
+    },
+    {
+      "path": "06 Практика/27 Проверяемый научный поиск на символьной регрессии.md",
+      "findings": [
+        {
+          "severity": "P1",
+          "line": 89,
+          "excerpt": "a/protected_div(b)",
+          "issue": "Пример вызывает protected_div с одним аргументом и дополнительно делит на результат; это не заявленный ratio(a,b).",
+          "action": "Исправить на protected_div(a,b), определить нулевой знаменатель и совместимость единиц.",
+          "original_finding_index": 0,
+          "status": "fixed",
+          "resolution": "Prior binary protected_div fix retained; added zero-near-zero behavior and dimensionless scope in runnable checked starter.",
+          "acceptance": "pending-independent-review-built-links-and-visuals"
+        },
+        {
+          "severity": "P2",
+          "line": 65,
+          "excerpt": "число узлов дерева",
+          "issue": "После добавления абстракций стоимость узлов меняется: один узел библиотечного вызова может скрывать длинную формулу, ломая fair complexity comparison.",
+          "action": "Отчётно считать expanded AST и стоимость определения/вызова библиотеки отдельно.",
+          "original_finding_index": 1,
+          "status": "already-fixed",
+          "resolution": "Expanded AST cost and library-definition accounting already corrected before this tranche; retained.",
+          "acceptance": "pending-independent-review-built-links-and-visuals"
+        },
+        {
+          "severity": "P2",
+          "line": 35,
+          "excerpt": "не менее восьми законов",
+          "issue": "Большой объём сборки начинается без готового grammar/evaluator/fixture; не хватает маленького рабочего примера.",
+          "action": "Добавить runnable starter на 1законе и тесты AST, а8законов сделать расширением.",
+          "original_finding_index": 2,
+          "status": "fixed",
+          "resolution": "Python3.12 stdlib one-polynomial/five-candidate AST starter with train-only selection, held-out NMSE0 and six invalid-expression checks; eight-law project separate.",
+          "acceptance": "pending-independent-review-built-links-and-visuals"
+        }
+      ],
+      "current_sha256": "f176c7fe5c8ce20dafb1a65c7d4b022999a5327e47a7a8eea02e4df06225e3c3",
+      "snapshot_sha256": "475a542928064ea90a16697a5b9a19ac9ae301aee3f04ee410848d6b343faf07",
+      "full_read": true,
+      "edited_in_tranche": true,
+      "reread": "full-post-edit-page-read-plus-later-local-delta-checks",
+      "changed_mechanisms": ["Added a bounded validated AST, explicit protected-division convention, train-only five-candidate polynomial selection, six invalid cases, and expanded primitive-cost accounting for learned library calls."],
+      "source_urls": ["https://arxiv.org/abs/2409.09359", "https://rdi.berkeley.edu/adv-llm-agents/sp25"],
+      "figures": {"snapshot_embeds": 0, "current_embeds": 0, "retained": 0, "added": 0},
+      "executed_checks": ["test_practice_examples.py::test_symbolic_starter_selects_on_train_and_checks_ast — PASS; expanded_quadratic, 9 nodes, held-out NMSE 0, six rejected invalid cases"],
+      "remaining_limitations": ["The starter does not execute evolution, an LLM, concept-library learning, the eight-law benchmark, multiple seeds, or transfer evaluation."]
+    },
+    {
+      "path": "06 Практика/_index.md",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 37,
+          "excerpt": "4–8 часов",
+          "issue": "Для capstone21 перечислены Triton, FlashAttention backward, DDP, FSDP, checkpointing, а таблица обещает4–8ч и одинkernel. Объём не соответствует карточке.",
+          "action": "Разделить минимальный маршрут и полный capstone, убрать неподтверждённые сроки или пометить оценочными для конкретного профиля.",
+          "original_finding_index": 0,
+          "status": "fixed",
+          "resolution": "Removed unverified duration promises and separated small starters from full CS336/agent projects; kernel result no longer promises speedup.",
+          "acceptance": "pending-independent-review-built-links-and-visuals"
+        }
+      ],
+      "current_sha256": "1c1e45ba745e6d11b7e39f69f87d37ec0774392cbbdca9404d0881469fc417ce",
+      "snapshot_sha256": "62cd9fab0d69b2efa12433edc9bb664b69eca70ca884bbae7ca5712ebd45237b",
+      "full_read": true,
+      "edited_in_tranche": true,
+      "reread": "full-post-edit-page-read-plus-later-local-delta-checks",
+      "changed_mechanisms": ["Removed unsupported duration estimates and guaranteed kernel-speedup wording; separated bounded starters from full Stanford and Berkeley projects."],
+      "source_urls": [],
+      "figures": {"snapshot_embeds": 0, "current_embeds": 0, "retained": 0, "added": 0},
+      "executed_checks": [],
+      "remaining_limitations": ["Final link, route, desktop, and narrow-width rendering checks remain part of combined acceptance."]
+    }
+  ],
+  "executed_checks": [
+    "8 extracted Markdown CPU/Lean examples PASS: bigram, causal attention, FP16, checkpoint RNG, scaling fit/plots, RLVR, Lean bad/good/repeat, symbolic AST (2026-09-15).",
+    "Runtime: Python3.12.14, torch2.8.0, NumPy2.2.6, SciPy1.18.1, Matplotlib3.11.2, Lean/Lake4.19.0 arm64 official release6caaee842e94.",
+    "2 adapter-policy regression tests and4 A1 contract tests passed earlier this turn.",
+    "34 Harvard labs: exact pinned upstream inventory, file hashes, complete Markdown Python body and syntax; no Marimo runtime (harvard-lab-sources.json)."
+  ],
+  "limitations": [
+    "Independent review still pending.",
+    "Final build/link/UI checks not yet run.",
+    "GPU/NCCL, actual LLM training and full course/student implementations not executed.",
+    "Full Marimo app runtime and all course lab outputs not verified; archive/source check is not runtime acceptance."
+  ],
+  "extra_repairs": [
+    "Corrected 'running code only checks syntax' in practice20.",
+    "RMSNorm tests refer to mean-square rather than centered variance; removed guaranteed fusion speedup; improved practice21 prose.",
+    "Removed contradictory zero-ASR claim when exposure is absent; all profiles retain outer isolation.",
+    "Corrected illustrative Lean search tree (unknown tactic/error, skip/no progress, rfl/solved).",
+    "Updated a1/a2 learner adapter policies, a5 canonical numeric reproducibility and Berkeley25/26/27 scope/metric contracts."
+  ]
+}

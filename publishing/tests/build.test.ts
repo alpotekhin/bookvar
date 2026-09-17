@@ -1,4 +1,4 @@
-import { mkdtempSync, mkdirSync, readFileSync, symlinkSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdtempSync, mkdirSync, readFileSync, symlinkSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import matter from 'gray-matter';
@@ -75,6 +75,75 @@ function fixture(
 }
 
 describe('buildPublication', () => {
+  it.each([
+    (link: string) => `\`\`\`md\n${link}\n\`\`\``,
+    (link: string) => `\`\`${link}\`\``,
+    (link: string) => `~~~~md\n\`\`\`\n${link}\n\`\`\`\n~~~~~`,
+    (link: string) => `~~~md\n${link}`
+  ])('keeps artifact links in literal code unchanged without publishing them', async (wrap) => {
+    const link = '[Lecture](../05%20Источники/Courses/Stanford%20CS336%20Spring%202026/Lectures/repository/lecture_06.py)';
+    const body = wrap(link);
+    const options = fixture(body);
+    write(join(options.rootDir, '05 Источники/Courses/Stanford CS336 Spring 2026/Lectures/repository/lecture_06.py'), 'original\n');
+    await buildPublication(options);
+    expect(readFileSync(join(options.outputDir, 'nested/page-a.md'), 'utf8')).toContain(body);
+    expect(existsSync(join(options.rootDir, 'site/public/sources/courses/stanford-cs336-spring-2026/Lectures/repository/lecture_06.py'))).toBe(false);
+  });
+
+  it.each(['Lecture code', '`lecture_06.py`', 'Download **`lecture_06.py`**'])(
+    'publishes a pinned course Python artifact with label %s', async (label) => {
+    const options = fixture(`[${label}](../05%20Источники/Courses/Stanford%20CS336%20Spring%202026/Lectures/repository/lecture_06.py)`);
+    const code = 'print("original lecture")\n';
+    write(join(options.rootDir, '05 Источники/Courses/Stanford CS336 Spring 2026/Lectures/repository/lecture_06.py'), code);
+    await buildPublication(options);
+    expect(readFileSync(join(options.outputDir, 'nested', 'page-a.md'), 'utf8'))
+      .toContain(`${publicationBase}/sources/courses/stanford-cs336-spring-2026/Lectures/repository/lecture_06.py`);
+    expect(readFileSync(join(options.outputDir, 'nested', 'page-a.md'), 'utf8'))
+      .toContain(`[${label}](`);
+    expect(readFileSync(join(options.rootDir, 'site/public/sources/courses/stanford-cs336-spring-2026/Lectures/repository/lecture_06.py'), 'utf8'))
+      .toBe(code);
+  });
+  it('distinguishes a code-formatted link label from a whole link inside inline code', async () => {
+    const target = '../05%20Источники/Courses/Stanford%20CS336%20Spring%202026/Lectures/repository/lecture_06.py';
+    const literal = '``[`lecture_06.py`](' + target + ')``';
+    const options = fixture(`${literal}\n\nDownload [\`lecture_06.py\`](${target}).`);
+    write(join(options.rootDir, '05 Источники/Courses/Stanford CS336 Spring 2026/Lectures/repository/lecture_06.py'), 'original\n');
+    await buildPublication(options);
+    const output = readFileSync(join(options.outputDir, 'nested/page-a.md'), 'utf8');
+    expect(output).toContain(literal);
+    expect(output).toContain(`Download [\`lecture_06.py\`](${publicationBase}/sources/courses/stanford-cs336-spring-2026/Lectures/repository/lecture_06.py).`);
+  });
+  it('resolves stable explicit anchors and old heading slugs after a rename', async () => {
+    const options = fixture(
+      '[[Page B#stable-topic|topic]] and [[Page B#Old title: context|old link]]',
+      '<a id="stable-topic"></a>\n\n<a id="old-title-context"></a>\n\n## New title\n\nExplanation.'
+    );
+    await buildPublication(options);
+    const output = readFileSync(join(options.outputDir, 'nested', 'page-a.md'), 'utf8');
+    expect(output).toContain(`[topic](${publicationBase}/page-b/#stable-topic)`);
+    expect(output).toContain(`[old link](${publicationBase}/page-b/#old-title-context)`);
+  });
+
+  it('does not resolve an HTML anchor that only occurs in a fenced example', async () => {
+    const options = fixture('[[Page B#fake-id]]', '~~~html\n<a id="fake-id"></a>\n~~~');
+    await expect(buildPublication(options)).rejects.toThrow('Page B#fake-id');
+  });
+
+  it('accepts a retained alias that equals the native heading slug', async () => {
+    const options = fixture('[[Page B#Router и top-k]]', '<a id="router-и-top-k"></a>\n\n## Router и top-k\n\nBody.');
+    await buildPublication(options);
+    expect(readFileSync(join(options.outputDir, 'nested', 'page-a.md'), 'utf8'))
+      .toContain(`${publicationBase}/page-b/#router-и-top-k`);
+  });
+
+  it.each([
+    '## Repeated\n\nFirst\n\n## Repeated\n\nSecond',
+    '<a id="repeated"></a>\n\nFirst\n\n<span id="repeated"></span>\n\nSecond'
+  ])('rejects duplicate native headings or duplicate explicit IDs', async (target) => {
+    const options = fixture('[[Page B#Repeated]]', target);
+    await expect(buildPublication(options)).rejects.toThrow('Page B#Repeated');
+  });
+
   it('uses the emitted directory URL for section index routes', () => {
     expect(publicationHref('textbook/index')).toBe(`${publicationBase}/textbook/`);
     expect(publicationHref('textbook/chapter')).toBe(`${publicationBase}/textbook/chapter/`);

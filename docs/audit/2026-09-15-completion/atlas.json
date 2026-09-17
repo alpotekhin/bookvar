@@ -1,0 +1,1067 @@
+{
+  "status": "implementation-complete; ready for independent review",
+  "scope": "28 atlas pages; 43 original findings; no authored EN mappings in publishing/navigation.yml",
+  "pages": [
+    {
+      "index": 0,
+      "path": "02 Атлас моделей/_index.md",
+      "audit_sha256": "9d013be8ee207d7b43490f04ca12dde2e6e8a216844e927a4abbc7990481bc32",
+      "full_read_before": true,
+      "full_read_after": true,
+      "findings": [
+        {
+          "severity": "P3",
+          "line": 23,
+          "excerpt": "Гибрид или рекуррентная альтернатива",
+          "issue": "Таблица топологий смешивает класс self-attention, альтернативный оператор и мультимодальность, которая совместима с разными топологиями.",
+          "action": "Явно назвать оси невзаимоисключающими уже в первой таблице, как сделано ниже.",
+          "outcome": "fixed",
+          "evidence": "Перед первой таблицей явно разделены топология внимания, оператор последовательности и состав модальностей; приведён совместимый гибридный мультимодальный decoder. Полная карта и её ссылки сохранены."
+        }
+      ],
+      "before_sha256": "9d013be8ee207d7b43490f04ca12dde2e6e8a216844e927a4abbc7990481bc32",
+      "after_sha256": "1a08660ffc2fdada88d6f0f77bbcba14658e4c55919710e6d1777f264d68f189",
+      "en_counterpart": null,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/snapshots/task-4-atlas-before/02 Атлас моделей/_index.md",
+      "sources_checked": [],
+      "numerical_checks": [],
+      "figures_retained": [],
+      "visual_review": "No new figure; original embeds retained"
+    },
+    {
+      "index": 1,
+      "path": "02 Атлас моделей/Семейства/Мультимодальные семейства.md",
+      "audit_sha256": "f445464666d1a84bd8ee90625f83034c4ddea885ca1eec88169558ea913d2d56",
+      "full_read_before": true,
+      "full_read_after": true,
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 88,
+          "excerpt": "В отличие от фиксированной сетки InternVL ... глобальный обзор",
+          "issue": "Предыдущий абзац сам описывает thumbnail InternVL, поэтому наличие глобального обзора не является указанным отличием.",
+          "action": "Сравнить перекрытие crops, подбор сетки, thumbnail и последовательность признаков на одном изображении.",
+          "outcome": "fixed",
+          "evidence": "Убрано ложное отличие по наличию обзора. На одном изображении сопоставлены подбор неперекрывающейся сетки/thumbnail InternVL, перекрытие Molmo, удаление дублирующих признаков и row-major последовательность с маркерами."
+        },
+        {
+          "severity": "P2",
+          "line": 45,
+          "excerpt": "Стрелки обратного распространения",
+          "issue": "Подпись требует сверки с конкретной фигурой Thinker–Talker: не вся стрелка между компонентами обозначает backprop.",
+          "action": "При визуальном аудите сопоставить легенду оригинала и удалить непроверенное толкование.",
+          "outcome": "fixed",
+          "evidence": "Просмотрен фактический PNG: легенда прямо обозначает solid Forward Propagation и dashed Backward Propagation. Подпись теперь различает эти стрелки и не объявляет всю схему потоком градиентов."
+        }
+      ],
+      "before_sha256": "f445464666d1a84bd8ee90625f83034c4ddea885ca1eec88169558ea913d2d56",
+      "after_sha256": "fc9420308d6dcc9d9d7dfbef3b6bae6c62946107c046f3eb12ec79f964b79e3c",
+      "en_counterpart": null,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/snapshots/task-4-atlas-before/02 Атлас моделей/Семейства/Мультимодальные семейства.md",
+      "sources_checked": [
+        "https://arxiv.org/html/2412.05271v2#S3.SS1",
+        "https://arxiv.org/html/2409.17146v2#S2",
+        "https://arxiv.org/html/2503.20215v1#S2"
+      ],
+      "numerical_checks": [
+        "Qwen2-VL arithmetic: (224/14)^2=256; 256/(2*2)=64; unchanged local scalar derivation."
+      ],
+      "figures_retained": [
+        "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/atlas-remainder-official/flamingo-architecture.png]]",
+        "![[00 Учебник/Assets/Figures/curated/vlm-2026/qwen25omni-figure2-thinker-talker.png]]",
+        "![[00 Учебник/Assets/Figures/curated/vlm-2026/internvl25-figure2-dynamic-tiles.png]]",
+        "![[00 Учебник/Assets/Figures/curated/vlm-2026/molmo-figure5-image-tokenization.png]]"
+      ],
+      "visual_review": "Viewed actual Qwen2.5-Omni and Molmo PNGs; all 4 original figures retained, no new assets."
+    },
+    {
+      "index": 2,
+      "path": "02 Атлас моделей/Семейства/Baichuan.md",
+      "audit_sha256": "12076e0c27cb6541ea66a164abf980461201fdb47038867645709f90c74796c1",
+      "full_read_before": true,
+      "full_read_after": true,
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 40,
+          "excerpt": "M1–M3 ... clinical inquiry",
+          "issue": "Современная ветка перечислена через назначения, но ключевые архитектурные/обучающие отличия M3 фактически отложены за ссылку.",
+          "action": "Добавить конкретные изменения M3 из отчёта и один пример inquiry-loop; медоценки не представлять как клиническую пригодность.",
+          "outcome": "fixed",
+          "evidence": "M3 привязана к фактическому Qwen3 MoE config (94 слоя, 128/top-8, 64Q/4KV); post-trained checkpoint не назван base. Объяснены три стадии RL/distillation, четыре сегмента консультации, quality gate и fact verifier. Добавлен явно синтетический inquiry-loop и граница медицинской пригодности."
+        }
+      ],
+      "before_sha256": "12076e0c27cb6541ea66a164abf980461201fdb47038867645709f90c74796c1",
+      "after_sha256": "a0b2e20ce5c1dbe4da8d3107be295b79ac1a279bdf665d7a5874b2e0a40ae06f",
+      "en_counterpart": null,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/snapshots/task-4-atlas-before/02 Атлас моделей/Семейства/Baichuan.md",
+      "sources_checked": [
+        "https://arxiv.org/html/2602.06570v1",
+        "https://huggingface.co/baichuan-inc/Baichuan-M3-235B",
+        "https://huggingface.co/baichuan-inc/Baichuan-M3-235B/blob/main/config.json"
+      ],
+      "numerical_checks": [
+        "Проверены config values; примеры генерации M3 не запускались, clinical validation не заявлена."
+      ],
+      "figures_retained": [
+        "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/atlas-remainder-official/baichuan2-data-and-config.png]]"
+      ],
+      "visual_review": "No new figure; original embeds retained"
+    },
+    {
+      "index": 3,
+      "path": "02 Атлас моделей/Семейства/BERT.md",
+      "audit_sha256": "ada9dfa4fa9a3bc7282f0439db7b39e9bdf862bc1764b1c9250336ef73978434",
+      "full_read_before": true,
+      "full_read_after": true,
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 31,
+          "excerpt": "ALBERT разделила параметры между слоями",
+          "issue": "Фраза читается как разные параметры по слоям, хотя имеется в виду совместное использование весов.",
+          "action": "Писать weight sharing: одни веса используются повторно в нескольких слоях; исправить также таблицу и источник.",
+          "outcome": "fixed",
+          "evidence": "Все три упоминания ALBERT исправлены на совместное повторное использование весов между слоями; явно отделено количество параметров от последовательных вычислений."
+        },
+        {
+          "severity": "P2",
+          "line": 46,
+          "excerpt": "Fine-tuning и inference",
+          "issue": "Карточка не ведёт к соответствующей главе учебника, хотя главы BERT и паттернов уже существуют.",
+          "action": "Добавить точный переход к MLM/NSP и формам выходов в учебнике; не дублировать отдельную лекцию здесь.",
+          "outcome": "fixed",
+          "evidence": "Добавлены существующие учебные главы MLM/NSP и архитектурных паттернов; пути и разделы проверены через rg. Объяснён переход от векторов encoder к task-head."
+        }
+      ],
+      "before_sha256": "ada9dfa4fa9a3bc7282f0439db7b39e9bdf862bc1764b1c9250336ef73978434",
+      "after_sha256": "fd48361e66b15d397ae913532826bc371e3211f8c57aeaa19ed56f189ded7ee9",
+      "en_counterpart": null,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/snapshots/task-4-atlas-before/02 Атлас моделей/Семейства/BERT.md",
+      "sources_checked": [
+        "https://arxiv.org/html/1909.11942v6#S3.SS1"
+      ],
+      "numerical_checks": [
+        "768/12=64 и 1024/16=64: согласованные размеры голов; полноразмерная модель не запускалась."
+      ],
+      "figures_retained": [
+        "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/atlas-remainder-official/bert-input-output.png]]"
+      ],
+      "visual_review": "No new figure; original embeds retained"
+    },
+    {
+      "index": 4,
+      "path": "02 Атлас моделей/Семейства/Command R.md",
+      "audit_sha256": "ba4654209a2adb6909988ef8fd20a2ce0f6fc3d3f14b93e424169cedb71731fa",
+      "full_read_before": true,
+      "full_read_after": true,
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 35,
+          "excerpt": "параметры A+ нужно брать из его model card",
+          "issue": "Заявлен latest verified A+, но существенные признаки нового релиза читателю предлагается добыть самостоятельно.",
+          "action": "Записать подтверждённый backbone/параметры/модальности с локальными ссылками на механизмы или честно обозначить частичное покрытие.",
+          "outcome": "fixed",
+          "evidence": "Добавлены проверенные 218B/25B, 128000 context, 64000 max output, text+image→text; расхождение 24B в анонсе vs25B в документации явно раскрыто. Переходы к MoE и VLM, W4A4-условие железа и нижняя оценка памяти; частичные сведения vision не домыслены."
+        }
+      ],
+      "before_sha256": "ba4654209a2adb6909988ef8fd20a2ce0f6fc3d3f14b93e424169cedb71731fa",
+      "after_sha256": "9f1b8422be29e84b8a7e89887c6911d0dbc5cfcc61720fad556f90f868361eeb",
+      "en_counterpart": null,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/snapshots/task-4-atlas-before/02 Атлас моделей/Семейства/Command R.md",
+      "sources_checked": [
+        "https://cohere.com/blog/cohere-releases-command-a-plus",
+        "https://docs.cohere.com/docs/command-a-plus"
+      ],
+      "numerical_checks": [
+        "Executed Node scalar: 218e9*2=436GB BF16; 218e9*0.5=109GB ideal4bit. Not deployment measurement."
+      ],
+      "figures_retained": [
+        "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/atlas-remainder-official/command-a-architecture.png]]"
+      ],
+      "visual_review": "No new figure; original embeds retained"
+    },
+    {
+      "index": 5,
+      "path": "02 Атлас моделей/Семейства/DBRX.md",
+      "audit_sha256": "ec67cd05b4c142adf095a7e4ab37769dd69dee3f8b7b41917359ea6d42159daa",
+      "full_read_before": true,
+      "full_read_after": true,
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 23,
+          "excerpt": "dbrx-comparison.png",
+          "issue": "Единственная иллюстрация — release benchmark, при этом центральная заявленная тема16/top4 и132B/36B не имеет наглядного разбора.",
+          "action": "Найти исходный рисунок маршрутизации или сравнить конфигурации в компактной таблице с числовым расчётом.",
+          "outcome": "fixed",
+          "evidence": "Сохранена оригинальная release-иллюстрация. Добавлены компактная таблица 16/top4 vs8/top2, C(16,4)=1820 vs28, два примерных набора маршрутов и выведение S≈4/E≈128 из округлённых total/active."
+        },
+        {
+          "severity": "P3",
+          "line": 39,
+          "excerpt": "На20июля ... DBRX-2",
+          "issue": "Негативное утверждение о релизах быстро стареет и не имеет точного проверенного каталога.",
+          "action": "Оставить датированный охват карточки Base/Instruct, проверку новизны вынести в provenance.",
+          "outcome": "fixed",
+          "evidence": "Удалено недоказуемое отрицание существования DBRX-2. Охват ограничен датированным Base/Instruct 2024, перепроверка не заявляет исчерпывающую новизну."
+        }
+      ],
+      "before_sha256": "ec67cd05b4c142adf095a7e4ab37769dd69dee3f8b7b41917359ea6d42159daa",
+      "after_sha256": "8411fd99a021db39c1636ef793742ad0fa10491f1d12df43e8101f9e577bcdfd",
+      "en_counterpart": null,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/snapshots/task-4-atlas-before/02 Атлас моделей/Семейства/DBRX.md",
+      "sources_checked": [
+        "https://www.databricks.com/blog/introducing-dbrx-new-state-art-open-llm"
+      ],
+      "numerical_checks": [
+        "Executed Node: combinations1820,28; ratio65; shared4/expert128; active36; 132*2=264GB (scalar arithmetic). HF model card/config inaccessible (401); did not claim weight tensor verification."
+      ],
+      "figures_retained": [
+        "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/atlas-remainder-official/dbrx-comparison.png]]"
+      ],
+      "visual_review": "No new figure; original embeds retained"
+    },
+    {
+      "index": 6,
+      "path": "02 Атлас моделей/Семейства/DeepSeek.md",
+      "audit_sha256": "8efd7dd87c6e41f2f42dadaa08ae7dd057a29a4381def3945d080f53e2c524dd",
+      "full_read_before": true,
+      "full_read_after": true,
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 34,
+          "excerpt": "Механизмы",
+          "issue": "Ключевые механизмы описаны по абзацу без ссылок к уже существующим подробным главам; читателю приходится искать их отдельно.",
+          "action": "Поставить точные переходы MLA/MoE/MTP/DSA/RLVR; не дублировать всю теорию в карточке.",
+          "outcome": "fixed",
+          "evidence": "Добавлены точные переходы к MLA, MoE, DSA, RLVR и GRPO. Для MTP дан прямой §2.2 первичного отчёта: отдельной подробной локальной главы MTP не найдено. Глава о спекулятивном декодировании связана только с применением MTP при выводе."
+        }
+      ],
+      "before_sha256": "8efd7dd87c6e41f2f42dadaa08ae7dd057a29a4381def3945d080f53e2c524dd",
+      "after_sha256": "922432e4f44a0ec5360475bb561bcc15df5438ef78be2c0651cb08e7a1d42206",
+      "en_counterpart": null,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/snapshots/task-4-atlas-before/02 Атлас моделей/Семейства/DeepSeek.md",
+      "sources_checked": [
+        "https://arxiv.org/html/2412.19437v2#S2.SS2"
+      ],
+      "numerical_checks": [
+        "No new numeric example; local targets verified by rg --files/headings."
+      ],
+      "figures_retained": [
+        "![[00 Учебник/Assets/Figures/deepseek-r1-figure1-hq.png]]",
+        "![[00 Учебник/Assets/Figures/curated/atlas-courses-official/deepseek-v2-mla-moe.png]]"
+      ],
+      "visual_review": "Actual R1 PNG viewed: AIMEaccuracy and response-length learningcurves; original two figures preserved."
+    },
+    {
+      "index": 7,
+      "path": "02 Атлас моделей/Семейства/Falcon.md",
+      "audit_sha256": "7164820964baf3655cd8c640a78f8717673c79dd7c081943825626b6317c5280",
+      "full_read_before": true,
+      "full_read_after": true,
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 21,
+          "excerpt": "Multi-query attention",
+          "issue": "Ранние модели7B/40B объединены под одним названием без размеров KV-групп, хотя распределённая40B имеет особенности multi-group MQA.",
+          "action": "Проверить конфигурации обеих моделей и пояснить отличие глобальной MQA от вариантов группировки; пока требует первичной проверки.",
+          "outcome": "fixed",
+          "evidence": "По официальным конфигурациям разведены Falcon 7B (71 Q, одна KV-голова) и Falcon 40B (128 Q, 8 KV-голов). Объяснено отличие глобальной и групповой схем; вычислен объём K+V на токен и слой."
+        },
+        {
+          "severity": "P3",
+          "line": 48,
+          "excerpt": "последний verified",
+          "issue": "Метаданные и конец текста повторяют датированную новизну, но нет ссылок к механизмам гибрида.",
+          "action": "Указать охват, а основным переходом сделать Mamba/attention-топологии.",
+          "outcome": "fixed",
+          "evidence": "Убрано абсолютное утверждение о последнем релизе. Указаны границы охвата и переходы к гибридам/Jamba. По Table 1 Falcon-H1 объём данных уточнён для разных размеров: 18T не приписывается всем моделям."
+        }
+      ],
+      "before_sha256": "7164820964baf3655cd8c640a78f8717673c79dd7c081943825626b6317c5280",
+      "after_sha256": "4558710667de04eb5d12a963e6d507774be92ba46c285ddf3611be39151a1128",
+      "en_counterpart": null,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/snapshots/task-4-atlas-before/02 Атлас моделей/Семейства/Falcon.md",
+      "sources_checked": [
+        "https://huggingface.co/tiiuae/falcon-7b/blob/main/config.json",
+        "https://huggingface.co/tiiuae/falcon-40b/blob/main/config.json",
+        "https://arxiv.org/html/2507.22448v1"
+      ],
+      "numerical_checks": [
+        "Executed Node: hd64 both;128/8=16;2*1*64*2=256B,2*8*64*2=2048B,2*128*64*2=32768B;16x cache ratio. No full-model inference."
+      ],
+      "figures_retained": [
+        "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/atlas-remainder-official/falcon-h1-architecture.png]]"
+      ],
+      "visual_review": "No new figure; original embeds retained"
+    },
+    {
+      "index": 8,
+      "path": "02 Атлас моделей/Семейства/Gemma.md",
+      "audit_sha256": "1adcc5d6b2493c0b83a2a685dd8368bf69398d9abe1dded58beeef2c75d60268",
+      "full_read_before": true,
+      "full_read_after": true,
+      "findings": [
+        {
+          "severity": "P1",
+          "line": 23,
+          "excerpt": "MHA у 2B, MQA у 7B",
+          "issue": "В Gemma1 виды внимания переставлены местами: официальный обзор Google указывает MQA2B иMHA7B.",
+          "action": "Исправить таблицу и проверить повторения в сравнительном атласе.",
+          "outcome": "already-fixed",
+          "evidence": "В исходном снимке уже правильно указаны MQA у 2B и MHA у 7B; сведения повторно подтверждены официальным обзором Google."
+        },
+        {
+          "severity": "P2",
+          "line": 44,
+          "excerpt": "где проявился data-centric выигрыш",
+          "issue": "Сравнительный benchmark не позволяет приписать выигрыш именно данным без абляции.",
+          "action": "Подпись должна описывать наблюдаемое сравнение, а причинность data-centric подтвердить экспериментом либо убрать.",
+          "outcome": "fixed",
+          "evidence": "После просмотра графика убрана причинная интерпретация о выигрыше от данных. Новый заголовок описывает сравнение результатов; прежний slug сохранён явным якорем."
+        },
+        {
+          "severity": "P2",
+          "line": 24,
+          "excerpt": "teacher distillation central",
+          "issue": "Не отделены дистиллированные2B/9B от27B; читатель может отнести один рецепт ко всему поколению.",
+          "action": "Явно указать различие режимов предобучения размеров.",
+          "outcome": "already-fixed",
+          "evidence": "В исходном снимке уже разделены дистиллированные 2B/9B и 27B без этой дистилляции; подтверждено официальным обзором Google."
+        }
+      ],
+      "before_sha256": "8cb650c81c45afb6d433a51a4209792e12aa2b00c03a01beb8ad5a8cb8749e87",
+      "after_sha256": "5e3bbedfc74ab90acfee105a010dad6be8eb87a545259c56a6dc0c194b188bf2",
+      "en_counterpart": null,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/snapshots/task-4-atlas-before/02 Атлас моделей/Семейства/Gemma.md",
+      "sources_checked": [
+        "https://developers.googleblog.com/gemma-explained-overview-gemma-model-family-architectures/"
+      ],
+      "numerical_checks": [],
+      "figures_retained": [
+        "![[00 Учебник/Assets/Figures/curated/atlas-courses-official/gemma-capability-comparison.png]]"
+      ],
+      "visual_review": "Viewed actual Gemma performance PNG, no edits to image; old heading slug retained as explicit anchor."
+    },
+    {
+      "index": 9,
+      "path": "02 Атлас моделей/Семейства/GLM.md",
+      "audit_sha256": "21ca8ba6b91a31c8b7361f1dff8c6102c26532edc7a8e1c41b3059bab8035fe9",
+      "full_read_before": true,
+      "full_read_after": true,
+      "findings": [
+        {
+          "severity": "P1",
+          "line": 28,
+          "excerpt": "MLA-like efficient attention",
+          "issue": "GLM4.5 в официальном config имеет96query и8KVheads (GQA); термин MLA-like приписывает иное представление KV без основания.",
+          "action": "Назвать GQA и перенести MLA/DSA только в релизы с прямым подтверждением.",
+          "outcome": "already-fixed",
+          "evidence": "В исходном снимке уже была исправлена GQA. Проверенная закреплённая официальная конфигурация содержит 96 Q и 8 KV-голов; MLA не приписывается GLM-4.5."
+        },
+        {
+          "severity": "P2",
+          "line": 17,
+          "excerpt": "GLM-5.1 — текущий post-trained",
+          "issue": "Вступление категорично, а раздел неизвестного ниже говорит, что не установлено новое pretraining или posttraining.",
+          "action": "Согласовать уровень уверенности во всём тексте и дать точную опору для границы5/5.1.",
+          "outcome": "fixed",
+          "evidence": "Устранено противоречие между введением и строкой 5.1. Равенство 744B/40B не названо доказательством идентичности архитектуры или предобучения; охват ограничен рассмотренными версиями при наличии более новых поколений в каталоге."
+        }
+      ],
+      "before_sha256": "a23f78663a32562944f8c8ef292a42adbb997a7ef965c540f2291b7fd7fbf0db",
+      "after_sha256": "153c71b1ddd2d4f23578ee6550c9d246c48691cc362b6320d83fdc63b17ac8f9",
+      "en_counterpart": null,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/snapshots/task-4-atlas-before/02 Атлас моделей/Семейства/GLM.md",
+      "sources_checked": [
+        "https://huggingface.co/zai-org/GLM-4.5/blob/8b91a96cb5e3a6dde04be29567b87b06f3dd61dc/config.json",
+        "https://github.com/zai-org/GLM-5"
+      ],
+      "numerical_checks": [
+        "96/8=12 heads per group; direct scalar relation, no weight loading."
+      ],
+      "figures_retained": [
+        "![[00 Учебник/Assets/Figures/curated/atlas-courses-official/glm-family-timeline.png]]"
+      ],
+      "visual_review": "No new figure; original embeds retained"
+    },
+    {
+      "index": 10,
+      "path": "02 Атлас моделей/Семейства/GPT.md",
+      "audit_sha256": "e1e2375987f859833f8a8cb8cce90a85d78f733e6f0b517930eae620d49df729",
+      "full_read_before": true,
+      "full_read_after": true,
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 15,
+          "excerpt": "воспроизводимая архитектурная линия",
+          "issue": "Публичное описание архитектуры не делает полное обучение GPT3 воспроизводимым: данные и веса не опубликованы целиком.",
+          "action": "Заменить на документированную; отдельно перечислить доступные код/веса/данные для1/2/3.",
+          "outcome": "fixed",
+          "evidence": "Документированность отделена от воспроизводимости: по официальным репозиториям раздельно описаны код, веса и данные GPT-1/2/3. Синтетические оценочные данные GPT-3 не названы обучающим корпусом."
+        },
+        {
+          "severity": "P2",
+          "line": 24,
+          "excerpt": "InstructGPT / ChatGPT ... не полностью раскрыт",
+          "issue": "Объединение скрывает раскрытые размеры1.3B/6B/175B InstructGPT и закрытость конкретных ChatGPT.",
+          "action": "Разделить строки исследовательского InstructGPT и продукта ChatGPT; дать связь с соответствующей главой.",
+          "outcome": "fixed",
+          "evidence": "Разделены исследовательские политики InstructGPT 1.3B/6B/175B и продукт ChatGPT; модель награды 6B выделена отдельно. Добавлены главы SFT, reward modeling и PPO; охват продукта ограничен указанным поколением."
+        }
+      ],
+      "before_sha256": "e1e2375987f859833f8a8cb8cce90a85d78f733e6f0b517930eae620d49df729",
+      "after_sha256": "8a800269739b1010b48f43373e8106edb05d1fbdcc6aa84cf8814c585f50e63e",
+      "en_counterpart": null,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/snapshots/task-4-atlas-before/02 Атлас моделей/Семейства/GPT.md",
+      "sources_checked": [
+        "https://github.com/openai/finetune-transformer-lm",
+        "https://github.com/openai/gpt-2",
+        "https://github.com/openai/gpt-3",
+        "https://arxiv.org/html/2203.02155v1",
+        "https://openai.com/index/gpt-5-6/"
+      ],
+      "numerical_checks": [
+        "No numeric toy, model sizes verified in paper; no training reproduction claimed."
+      ],
+      "figures_retained": [
+        "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/atlas-remainder-official/gpt-decoder-block.png]]"
+      ],
+      "visual_review": "No new figure; original embeds retained"
+    },
+    {
+      "index": 11,
+      "path": "02 Атлас моделей/Семейства/InternLM.md",
+      "audit_sha256": "2c447a1e7673c76145aa9b2871594146cfcf49dc39459374670921a9233c3171",
+      "full_read_before": true,
+      "full_read_after": true,
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 38,
+          "excerpt": "layout Q/K/V",
+          "issue": "Техническая особенность названа, но не показано, что изменено в форме/порядке и почему это влияет на shard.",
+          "action": "Добавить компактный пример конфигурации/порядка QKV с прямым источником либо точную ссылку к подробному разбору.",
+          "outcome": "fixed",
+          "evidence": "Порядок QKV взят из официального InternLM2Attention: 8 групп × (4Q+K+V) × 128 = 6144. Добавлены формы тензоров и пример для 4 Q/2 KV с объяснением смежного группового разбиения. Изменение числа KV-голов требует преобразования весов, а не только конфигурации."
+        }
+      ],
+      "before_sha256": "2c447a1e7673c76145aa9b2871594146cfcf49dc39459374670921a9233c3171",
+      "after_sha256": "ca848ea21c14cf463618be77731358bbaa8339c363f38d8747c6a3f889771b4f",
+      "en_counterpart": null,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/snapshots/task-4-atlas-before/02 Атлас моделей/Семейства/InternLM.md",
+      "sources_checked": [
+        "https://huggingface.co/internlm/internlm2-7b/blob/main/config.json",
+        "https://huggingface.co/internlm/internlm2-7b/blob/main/modeling_internlm2.py"
+      ],
+      "numerical_checks": [
+        "Actual PyTorch2.8 CPU reshape/slice toy:Q=[0,1,2,3,8,9,10,11],K=[4,5,12,13],V=[6,7,14,15],shapes[1,4,1,2]/[1,2,1,2];PASS. Configscalar6144PASS. No downloaded model."
+      ],
+      "figures_retained": [
+        "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/atlas-remainder-official/internlm-data-pipeline.png]]"
+      ],
+      "visual_review": "No new figure; original embeds retained"
+    },
+    {
+      "index": 12,
+      "path": "02 Атлас моделей/Семейства/Jamba.md",
+      "audit_sha256": "3279904018239b991ef0689a68aeadc0d5dc082646ed6ee406414489b6455999",
+      "full_read_before": true,
+      "full_read_after": true,
+      "findings": [
+        {
+          "severity": "P3",
+          "line": 15,
+          "excerpt": "нельзя объяснить",
+          "issue": "Начальное противопоставление сообщает, как не объяснять модель, вместо краткого описания её устройства.",
+          "action": "Начать с чередования Mamba/attention и экспертных FFN; сохранить полезный разбор ниже.",
+          "outcome": "fixed",
+          "evidence": "Введение описывает конструкцию: семь Mamba-слоёв и один слой внимания, MoE в каждом втором слое, выбор двух из шестнадцати экспертов. По фактическому изображению исправлена подпись: слева стек, справа типы слоёв. Attention MoE показан как вариант, не выбранный в исходной конфигурации. Существующий crop сохранён, обрезка подписи отмечена, дана прямая ссылка на Figure 1 и CC BY-SA 4.0."
+        }
+      ],
+      "before_sha256": "3279904018239b991ef0689a68aeadc0d5dc082646ed6ee406414489b6455999",
+      "after_sha256": "bd62715b6a6030359446d06c9d98a40d423d9ef0f39dc5b64b9abbb6c5d15ada",
+      "en_counterpart": null,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/snapshots/task-4-atlas-before/02 Атлас моделей/Семейства/Jamba.md",
+      "sources_checked": [
+        "https://arxiv.org/html/2403.19887v2"
+      ],
+      "numerical_checks": [
+        "Counted depicted8layers=7Mamba+1attention;4MoEpositions; no inferencebenchmark."
+      ],
+      "figures_retained": [
+        "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/atlas-remainder-official/jamba-architecture.png]]"
+      ],
+      "visual_review": "Actual local PNG inspected; bottom originalcaption clipped; parent owns bestoriginalregistry decision."
+    },
+    {
+      "index": 13,
+      "path": "02 Атлас моделей/Семейства/Kimi.md",
+      "audit_sha256": "62858eb6734433bc1830cab7a4099b8e7f5f4003054aa7e253cef9126b4f45c3",
+      "full_read_before": true,
+      "full_read_after": true,
+      "findings": [
+        {
+          "severity": "P1",
+          "line": 24,
+          "excerpt": "3B dense testbed",
+          "issue": "Moonlight ошибочно назван плотной 3B-моделью: официальный репозиторий описывает 16B total / 3B active MoE.",
+          "action": "Исправить строку, пояснить total/active; связать Muon с этой экспериментальной моделью.",
+          "outcome": "already-fixed",
+          "evidence": "До этой задачи строка Moonlight уже правильно различала 16B всего и 3B активных параметров; полное чтение и официальная таблица подтверждают исправление."
+        },
+        {
+          "severity": "P2",
+          "line": 37,
+          "excerpt": "Kimi K2",
+          "issue": "Единственная иллюстрация показывает RL-систему Kimi 1.5, не главную архитектуру K2/KDA.",
+          "action": "Добавить оригинальную схему K2/MoE либо KDA с объяснением и ссылками к соответствующим главам.",
+          "outcome": "fixed",
+          "evidence": "Добавлена неизменённая оригинальная схема Kimi Linear с проверенной MIT-лицензией и закреплённым commit. Визуально сверены левый стек, KDA и MoE; объяснены отношение 3:1, фиксированное состояние, периодический MLA и независимость маршрутизации экспертов. Сохранена схема k1.5, добавлены ссылки на локальные главы."
+        }
+      ],
+      "before_sha256": "4cc44f22b81657e203113336f43d7de1322b856d6cc730a0886a61076d461512",
+      "after_sha256": "df641246623d8079e327145c37dc799cff5a4025c64c0019c457d1bcb215b951",
+      "en_counterpart": null,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/snapshots/task-4-atlas-before/02 Атлас моделей/Семейства/Kimi.md",
+      "sources_checked": [
+        "https://github.com/MoonshotAI/Moonlight",
+        "https://github.com/MoonshotAI/Kimi-Linear",
+        "https://raw.githubusercontent.com/MoonshotAI/Kimi-Linear/8c1d85eb6b5f8fcefb15758691b0ce50b0827ce3/LICENSE"
+      ],
+      "numerical_checks": [],
+      "figures_retained": [
+        "![[00 Учебник/Assets/Figures/curated/kimi-linear/arch.jpg]]",
+        "![[00 Учебник/Assets/Figures/curated/atlas-courses-official/kimi-k15-rl-system.png]]"
+      ],
+      "visual_review": "Viewed original 1272×1398 JPEG, 237810 bytes, SHA256 132ae021fa4661ed39e7be784d46f05f22b82aabb9afd2bab8dbdc0a5a61cba0. Upstream arch.png saved as arch.jpg without changing bytes; primary owns registry and full MIT notice."
+    },
+    {
+      "index": 14,
+      "path": "02 Атлас моделей/Семейства/Llama.md",
+      "audit_sha256": "9c2dcc1cc12d1dabe268626ee92e9dfb4af2f638cfedbf384eacfcf80a095f23",
+      "full_read_before": true,
+      "full_read_after": true,
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 48,
+          "excerpt": "новая архитектура",
+          "issue": "Изменения блока вроде MHA→GQA обесцениваются как неархитектурные, чтобы противопоставить им Llama 4. Это смешивает семейство decoder-only с конкретной архитектурой.",
+          "action": "Различить сохранение общей схемы decoder и изменения attention/FFN; не отрицать архитектурный характер GQA.",
+          "outcome": "fixed",
+          "evidence": "Разделены общая причинная decoder-топология и архитектура подслоёв. GQA прямо названа архитектурным изменением; Llama 4 также сохраняет decoder, меняя FFN и мультимодальный вход. Исходная иллюстрация и ссылки сохранены."
+        }
+      ],
+      "before_sha256": "9c2dcc1cc12d1dabe268626ee92e9dfb4af2f638cfedbf384eacfcf80a095f23",
+      "after_sha256": "8d5ae02e6f5b818e4a6eb6507458edaa30d97fcfb54614ef6ec3c84d7a8069b0",
+      "en_counterpart": null,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/snapshots/task-4-atlas-before/02 Атлас моделей/Семейства/Llama.md",
+      "sources_checked": [],
+      "numerical_checks": [
+        "Conceptual classification correction; no new numeric claim."
+      ],
+      "figures_retained": [
+        "![[00 Учебник/Assets/Figures/curated/atlas-courses-official/llama3-architecture.png]]"
+      ],
+      "visual_review": "No new figure; original embeds retained"
+    },
+    {
+      "index": 15,
+      "path": "02 Атлас моделей/Семейства/Mamba.md",
+      "audit_sha256": "af8d052acfd833ea2bc32f8546e0e36139d8c130fd23038b77aa61591ed284c7",
+      "full_read_before": true,
+      "full_read_after": true,
+      "findings": [
+        {
+          "severity": "P3",
+          "line": 43,
+          "excerpt": "сложнее переиспользовать",
+          "issue": "Сравнение prefix caching слишком общее: snapshot состояния возможен, но granular reuse и branching требуют иной реализации.",
+          "action": "Добавить ссылку на разбор snapshot/branching вместо универсального сравнения сложности.",
+          "outcome": "fixed",
+          "evidence": "Убрано универсальное утверждение о сложности prefix caching. Объяснены сохранение состояния всех слоёв и свёрток, независимые ветви, невозможность получить произвольный более ранний префикс из единственного позднего снимка, отличие от KV-блоков; даны ссылки и вычисленный скалярный пример."
+        }
+      ],
+      "before_sha256": "af8d052acfd833ea2bc32f8546e0e36139d8c130fd23038b77aa61591ed284c7",
+      "after_sha256": "117146c73d4572c087c392f543428a55c87b7aa0c07f12f0a80d609ce16ec0f3",
+      "en_counterpart": null,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/snapshots/task-4-atlas-before/02 Атлас моделей/Семейства/Mamba.md",
+      "sources_checked": [],
+      "numerical_checks": [
+        "Executed scalar recurrence: prefix [2,4] -> 5; branches +1 -> 3.5 and +3 -> 5.5. This is not a Mamba benchmark."
+      ],
+      "figures_retained": [
+        "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/atlas-remainder-official/mamba-block.png]]"
+      ],
+      "visual_review": "No new figure; original embeds retained"
+    },
+    {
+      "index": 16,
+      "path": "02 Атлас моделей/Семейства/Mistral и Mixtral.md",
+      "audit_sha256": "b381fecdd75409daff602d1afc97cfb24f1bc4343583c3a68812a3eb299c0565",
+      "full_read_before": true,
+      "full_read_after": true,
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 31,
+          "excerpt": "closed/open-weight",
+          "issue": "Противоречивая классификация публикации в одной ячейке, которую нельзя использовать как справочный факт.",
+          "action": "Указать конкретную модель, дату и фактически опубликованные веса/условия по карточке; неизвестное отметить отдельно.",
+          "outcome": "fixed",
+          "evidence": "Medium 3.5 теперь однозначно обозначена как open-weight под Modified MIT, с датой и прямой официальной карточкой. Исправлены противоречивые метаданные latest_open_generalist; доступность весов отделена от полного рецепта обучения."
+        },
+        {
+          "severity": "P3",
+          "line": 27,
+          "excerpt": "Mistral Nemo / Ministral",
+          "issue": "Объединённая строка может приписывать Tekken и один контекст разным семействам без различения checkpoints.",
+          "action": "Разделить Nemo и Ministral или явно подписать, к какой модели относятся свойства.",
+          "outcome": "fixed",
+          "evidence": "NeMo и Ministral 2024 разделены: Tekken относится к NeMo, обе исходные линии заявляли 128K, но права на веса различались. Для Ministral 8B указана исследовательская публикация, коммерческое развёртывание не приравнено к Apache-2.0."
+        }
+      ],
+      "before_sha256": "b381fecdd75409daff602d1afc97cfb24f1bc4343583c3a68812a3eb299c0565",
+      "after_sha256": "5930e31a119d674c0a696cd8b86f05d0e946255ea3fbaf5a85f34b4311fafb2d",
+      "en_counterpart": null,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/snapshots/task-4-atlas-before/02 Атлас моделей/Семейства/Mistral и Mixtral.md",
+      "sources_checked": [
+        "https://docs.mistral.ai/models/mistral-medium-3-5-26-04",
+        "https://mistral.ai/news/ministraux/",
+        "https://mistral.ai/news/mistral-nemo/"
+      ],
+      "numerical_checks": [],
+      "figures_retained": [
+        "![[00 Учебник/Assets/Figures/curated/mixtral-of-experts/smoe-layer.png]]",
+        "![[00 Учебник/Assets/Figures/curated/atlas-courses-official/mistral-sliding-window-attention.png]]"
+      ],
+      "visual_review": "No new figure; original embeds retained"
+    },
+    {
+      "index": 17,
+      "path": "02 Атлас моделей/Семейства/Nemotron.md",
+      "audit_sha256": "e8b07dc6761963065c1d49326fe8c8137a71ae88f58b33a0bfc09043cca65e29",
+      "full_read_before": true,
+      "full_read_after": true,
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 48,
+          "excerpt": "NVFP4 уменьшает bandwidth",
+          "issue": "Формат pre-training в предыдущем разделе автоматически переносится на serving. Экономия при инференсе зависит от формата checkpoint и kernel.",
+          "action": "Разделить NVFP4 pre-training и конкретные форматы/ядра serving; не обещать экономию для BF16 checkpoint.",
+          "outcome": "fixed",
+          "evidence": "Разделены формат предобучения и формат контрольной точки/ядра при выводе. Убрана безусловная экономия bandwidth, явно исключено перенесение FP4-стоимости на BF16. Пример 240 GB против 60 GB назван идеальной упаковкой весов без накладных расходов, а не измерением скорости."
+        }
+      ],
+      "before_sha256": "e8b07dc6761963065c1d49326fe8c8137a71ae88f58b33a0bfc09043cca65e29",
+      "after_sha256": "ace74bd899a8dd12b979d3fe78ac1223f0bc296f356a50330f63364e99527c35",
+      "en_counterpart": null,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/snapshots/task-4-atlas-before/02 Атлас моделей/Семейства/Nemotron.md",
+      "sources_checked": [],
+      "numerical_checks": [
+        "Executed Node arithmetic: 120e9*2=240 GB; 120e9*0.5=60 GB."
+      ],
+      "figures_retained": [
+        "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/atlas-remainder-official/nemotron3-layer-pattern.png]]",
+        "![[00 Учебник/Assets/Figures/curated/topics-53-59-source-first/nemotron-generate-rank-filter.png]]"
+      ],
+      "visual_review": "No new figure; original embeds retained"
+    },
+    {
+      "index": 18,
+      "path": "02 Атлас моделей/Семейства/Phi.md",
+      "audit_sha256": "aadcd60b90515f5529f59470194c82011feab9ffb95450dd44db923429477667",
+      "full_read_before": true,
+      "full_read_after": true,
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 47,
+          "excerpt": "при обучении на одной смеси",
+          "issue": "Подпись выводит преимущество качества данных из сравнения моделей якобы на одной смеси; причинный вывод не следует из такого описания эксперимента.",
+          "action": "Сверить исходный Figure 3 и точно назвать оси, корпуса и сравнение. Не приписывать разницу данным без соответствующей абляции.",
+          "outcome": "fixed",
+          "evidence": "Осмотрен полный локальный Figure 3 и исходная подпись Phi-3 v4. Точно названы логарифмические оси, серии и относящаяся к Llama 2 фраза о фиксированных данных. Убран недоказанный причинный вывод о качестве данных."
+        },
+        {
+          "severity": "P2",
+          "line": 37,
+          "excerpt": "pivot tokens",
+          "issue": "Ключевой метод Phi-4 назван, но не объяснено, как выбираются такие позиции и строятся preference pairs.",
+          "action": "Добавить краткое точное объяснение и ссылку на подробную главу post-training.",
+          "outcome": "fixed",
+          "evidence": "PTS объяснён по Phi-4 §4.3: оценки успешности продолжений по oracle, рекурсивная локализация, общий префикс как запрос и однотокенные accepted/rejected ответы. Отделены вероятность успеха и вероятность токена, отмечена неполнота поиска и ссылка на DPO."
+        }
+      ],
+      "before_sha256": "aadcd60b90515f5529f59470194c82011feab9ffb95450dd44db923429477667",
+      "after_sha256": "3b4e7d346e25778e30af0afc1ca7a0d036787f63c6e9157aa07d8e516d329c19",
+      "en_counterpart": null,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/snapshots/task-4-atlas-before/02 Атлас моделей/Семейства/Phi.md",
+      "sources_checked": [
+        "https://arxiv.org/html/2404.14219v4",
+        "https://arxiv.org/html/2412.08905v1#S4.SS3"
+      ],
+      "numerical_checks": [],
+      "figures_retained": [
+        "![[00 Учебник/Assets/Figures/curated/atlas-courses-official/phi-data-optimal-scaling.png]]"
+      ],
+      "visual_review": "Viewed local Phi-3 Figure 3; no image changes."
+    },
+    {
+      "index": 19,
+      "path": "02 Атлас моделей/Семейства/Qwen.md",
+      "audit_sha256": "2da01681c5980cfeb8f6d5f9572b275cd8e4220cb8f5775c9907a710968fc429",
+      "full_read_before": true,
+      "full_read_after": true,
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 42,
+          "excerpt": "Gated DeltaNet",
+          "issue": "Новое ядро семейства описано одним общим предложением о состоянии; нет обновления памяти, схемы hybrid-блока и перехода к главе с механизмом.",
+          "action": "Дать оригинальную схему Qwen3-Next/3.5, объяснить запись/забывание и чередование слоёв; связать с главой hybrid attention.",
+          "outcome": "fixed",
+          "evidence": "Переиспользован полный оригинальный слайд CS336 с архитектурой Qwen3-Next. Осмотрено изображение; по официальной карточке сверены 48 слоёв, 36 GDN и 12 gated attention. Добавлена размерностно согласованная рекурсия, механизм глобального забывания и направленной замены, вычисленный пример, ссылки на подробную главу."
+        },
+        {
+          "severity": "P3",
+          "line": 66,
+          "excerpt": "наглядное доказательство",
+          "issue": "Схема стадий обучения объявляется доказательством утверждения об attention, которого она не исследует.",
+          "action": "Прямо объяснить, какую стадию проходит checkpoint и что изменяется в режиме thinking.",
+          "outcome": "fixed",
+          "evidence": "Убрано слово «доказательство»; схема теперь описывает получение checkpoint, слияние режимов и обученное переключение формата генерации без замены attention."
+        }
+      ],
+      "before_sha256": "2da01681c5980cfeb8f6d5f9572b275cd8e4220cb8f5775c9907a710968fc429",
+      "after_sha256": "f2d18cb7da6a131c84d4925f6f559561c78a6323b575e8a9eeff2f77203c2204",
+      "en_counterpart": null,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/snapshots/task-4-atlas-before/02 Атлас моделей/Семейства/Qwen.md",
+      "sources_checked": [
+        "https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Instruct"
+      ],
+      "numerical_checks": [
+        "PyTorch CPU: k=[1,0], gamma=beta=1 replaces first row [2,3] with v=[7,8], retaining second [4,5]."
+      ],
+      "figures_retained": [
+        "![[00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/qwen-next-hybrid-architecture.jpg]]",
+        "![[00 Учебник/Assets/Figures/qwen25-figure1-hq.png]]",
+        "![[00 Учебник/Assets/Figures/curated/atlas-courses-official/qwen3-post-training-pipeline.png]]"
+      ],
+      "visual_review": "Viewed full Qwen3-Next CS336 slide; reused existing registered image unchanged."
+    },
+    {
+      "index": 20,
+      "path": "02 Атлас моделей/Семейства/RetNet.md",
+      "audit_sha256": "029d3dd6ab9f506df90136a180e03db71b2876487467f898e23c9415886914fa",
+      "full_read_before": true,
+      "full_read_after": true,
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 23,
+          "excerpt": "chunkwise-р form",
+          "issue": "Повреждённая фраза и отсутствие самой рекуррентной записи оставляют читателя без проверяемой связи трёх режимов.",
+          "action": "Исправить фразу; добавить короткую рекурсию с размерностями и ссылку на её вывод в учебнике.",
+          "outcome": "fixed",
+          "evidence": "Исправлена повреждённая фраза chunkwise; добавлены рекурсия, размерности комплексных q/k и состояния, сопряжение ключа, развёрнутая сумма и перенос через границу блока. Все три формы сопоставлены на скалярном примере и связаны с подробным выводом."
+        }
+      ],
+      "before_sha256": "029d3dd6ab9f506df90136a180e03db71b2876487467f898e23c9415886914fa",
+      "after_sha256": "2f7e17d735fc28ef937b725e26340994173c48834302bb35ad5fb331929acf76",
+      "en_counterpart": null,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/snapshots/task-4-atlas-before/02 Атлас моделей/Семейства/RetNet.md",
+      "sources_checked": [],
+      "numerical_checks": [
+        "Executed scalar recurrence [2,4,8], gamma=.5 gives [2,5,10.5]; full sum and chunk boundary give 10.5."
+      ],
+      "figures_retained": [
+        "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/atlas-remainder-official/retnet-dual-form.png]]"
+      ],
+      "visual_review": "No new figure; original embeds retained"
+    },
+    {
+      "index": 21,
+      "path": "02 Атлас моделей/Семейства/RWKV.md",
+      "audit_sha256": "d2cc65384a0694d847b087826e1c0bd88c97d57e313d30743f47e65df03061e9",
+      "full_read_before": true,
+      "full_read_after": true,
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 34,
+          "excerpt": "зависимым от текущего входа",
+          "issue": "Переход v5/6→v7 описан слишком общо: у v6 тоже есть data-dependent компоненты; не показан новый член обновления состояния.",
+          "action": "Уточнить отличия по формулам Eagle/Finch и Goose, либо дать прямой переход к подробному сравнению.",
+          "outcome": "fixed",
+          "evidence": "По Eagle/Finch и Goose разделены фиксированное затухание v5, входозависимые коэффициенты v6 и диагонально-низкоранговое обновление v7. Даны формула, размерности, смысл нового члена и вычисленный пример переноса столбца; ссылки на первичные статьи и локальный вывод v4."
+        },
+        {
+          "severity": "P3",
+          "line": 15,
+          "excerpt": "интересен не обещанием",
+          "issue": "Начало построено на споре с отсутствующим тезисом вместо описания модели.",
+          "action": "Начать с хранения истории в состоянии; сохранить следующее содержательное объяснение.",
+          "outcome": "fixed",
+          "evidence": "Вводный абзац начинается с хранения истории в состоянии, без спора с отсутствующим обещанием."
+        }
+      ],
+      "before_sha256": "d2cc65384a0694d847b087826e1c0bd88c97d57e313d30743f47e65df03061e9",
+      "after_sha256": "d1a64bd5641c184a01ecaa12cf3f7dd55f496519e16d19f90ff30e9fa3c958b6",
+      "en_counterpart": null,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/snapshots/task-4-atlas-before/02 Атлас моделей/Семейства/RWKV.md",
+      "sources_checked": [
+        "https://arxiv.org/html/2404.05892v2#S3",
+        "https://arxiv.org/html/2503.14456v2#S3"
+      ],
+      "numerical_checks": [
+        "PyTorch CPU: S=[[1,2],[3,4]], z=[1,0], b=[0,1]; S outer(z,b)=[[0,1],[0,3]], moves first column into correction of second."
+      ],
+      "figures_retained": [
+        "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/atlas-remainder-official/rwkv-architecture.png]]"
+      ],
+      "visual_review": "No new figure; original embeds retained"
+    },
+    {
+      "index": 22,
+      "path": "02 Атлас моделей/Семейства/T5.md",
+      "audit_sha256": "1a49877a678df776f205db561224c7ae0a5986b54259563cf593d134914a1399",
+      "full_read_before": true,
+      "full_read_after": true,
+      "findings": [
+        {
+          "severity": "P3",
+          "line": 27,
+          "excerpt": "удалённые spans",
+          "issue": "Механизм точен, но короткий пример input/target сделал бы sentinel-формат сразу понятным.",
+          "action": "Добавить одну пару вход/выход с двумя пропусками и завершающим sentinel при следующей редакции.",
+          "outcome": "fixed",
+          "evidence": "Добавлена точная input/target пара с двумя удалёнными фрагментами, двумя входными маркерами и завершающим extra_id_2. Объяснены невключение оставленной точки в цель, EOS и условность разбиения без запуска SentencePiece; дана ссылка на подробную главу."
+        }
+      ],
+      "before_sha256": "1a49877a678df776f205db561224c7ae0a5986b54259563cf593d134914a1399",
+      "after_sha256": "85ef055551fc8a65df6552e5bffa8d3492f8f5f16aa1c64437f1bd22a6d24bf0",
+      "en_counterpart": null,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/snapshots/task-4-atlas-before/02 Атлас моделей/Семейства/T5.md",
+      "sources_checked": [],
+      "numerical_checks": [
+        "Manual reconstruction using quick brown and lazy dog recovers the original sentence with retained terminal dot; target includes exactly three ordered sentinels."
+      ],
+      "figures_retained": [
+        "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/atlas-remainder-official/t5-text-to-text.png]]"
+      ],
+      "visual_review": "No new figure; original embeds retained"
+    },
+    {
+      "index": 23,
+      "path": "02 Атлас моделей/Семейства/Yi.md",
+      "audit_sha256": "b730ea012c1fafa6b9f6e5354c27f5a2e903e7f9fce4d67d6e4a3122bf3da446",
+      "full_read_before": true,
+      "full_read_after": true,
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 15,
+          "excerpt": "свидетельство того, насколько сильна training recipe",
+          "issue": "Из отсутствия нового attention причинный вклад рецепта не установлен; формулировка заменяет факты оценкой.",
+          "action": "Начать с конкретных изменений данных и long-context training, а вывод о вкладе сопровождать абляциями либо убрать.",
+          "outcome": "fixed",
+          "evidence": "Вступление теперь перечисляет фильтрацию, long-context этап и RoPE, мультимодальность и кодовую специализацию. Убран причинный вывод о силе recipe из отсутствия нового attention; сравнения изменений явно разделены. Непроверенная исчерпывающая latest-формулировка заменена границами охвата."
+        }
+      ],
+      "before_sha256": "b730ea012c1fafa6b9f6e5354c27f5a2e903e7f9fce4d67d6e4a3122bf3da446",
+      "after_sha256": "caa2a2df7f4437905e4728fe87e701258faeb5e3e99351e698959f57fadd5a8f",
+      "en_counterpart": null,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/snapshots/task-4-atlas-before/02 Атлас моделей/Семейства/Yi.md",
+      "sources_checked": [],
+      "numerical_checks": [],
+      "figures_retained": [
+        "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/atlas-remainder-official/yi-data-pipeline.png]]"
+      ],
+      "visual_review": "No new figure; original embeds retained"
+    },
+    {
+      "index": 24,
+      "path": "02 Атлас моделей/Сравнения/Карта архитектурных линий.md",
+      "audit_sha256": "975315612617cce75935c4a72b56bfcfd6c135602439785667628ac6bd7f8a25",
+      "full_read_before": true,
+      "full_read_after": true,
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 10,
+          "excerpt": "Стрелка означает",
+          "issue": "Карта обещает стрелки родства, но состоит из четырёх несвязанных рисунков без общего сопоставления или переходов к главам.",
+          "action": "Убрать несуществующую семантику стрелок; оформить компактную таблицу механизм→семейства→глава и использовать рисунки как иллюстрации конкретных строк.",
+          "outcome": "fixed",
+          "evidence": "Убрана семантика отсутствующих стрелок. Добавлена таблица механизм → конкретные поколения → глава; четыре сохранённых рисунка соотнесены со строками. При осмотре Jamba и сверке статьи дополнительно исправлен ошибочный номер Figure 1 на Figure 6 (training-loss curves, не layout/MoE)."
+        }
+      ],
+      "before_sha256": "975315612617cce75935c4a72b56bfcfd6c135602439785667628ac6bd7f8a25",
+      "after_sha256": "4017955fe3ddcff8febc21efbab1a214d7649f57b0d5bfb4fb58b3bdd9a507b4",
+      "en_counterpart": null,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/snapshots/task-4-atlas-before/02 Атлас моделей/Сравнения/Карта архитектурных линий.md",
+      "sources_checked": [
+        "https://arxiv.org/html/2403.19887v2#S6.F6"
+      ],
+      "numerical_checks": [],
+      "figures_retained": [
+        "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-35-36/cs336-mha-gqa-mqa-mla.png]]",
+        "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/modern-37-40-moe/mixtral-smoe-layer.png]]",
+        "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/modern-37-40-alternatives/mamba-selective-ssm.png]]",
+        "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/modern-37-40-alternatives/jamba-hybrid.png]]"
+      ],
+      "visual_review": "Viewed Jamba loss image; retained all four original figures."
+    },
+    {
+      "index": 25,
+      "path": "02 Атлас моделей/Сравнения/Перенос vision encoder между VLM.md",
+      "audit_sha256": "662e32e9a13b575d8650e98f76ea7a64b4d964c06a06dbaf8a5a4aaa125e6399",
+      "full_read_before": true,
+      "full_read_after": true,
+      "findings": [
+        {
+          "severity": "P3",
+          "line": 26,
+          "excerpt": "заморозить обе башни",
+          "issue": "Рецепт представлен как единственный обязательный путь, хотя это разумный baseline, не универсальное условие.",
+          "action": "Явно назвать заморозку первым проверяемым baseline, а не общим законом переноса.",
+          "outcome": "fixed",
+          "evidence": "Заморозка обеих башен названа первым проверяемым baseline, а не законом переноса. Убран запрет на более раннее размораживание; объяснён контролируемый сравнительный эксперимент с фиксированными данными, бюджетом и оценками."
+        }
+      ],
+      "before_sha256": "662e32e9a13b575d8650e98f76ea7a64b4d964c06a06dbaf8a5a4aaa125e6399",
+      "after_sha256": "0e1bacdc9a5c466e73b5396db928f5e006fa3db60a3ae002bb840ec87d6e4f33",
+      "en_counterpart": null,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/snapshots/task-4-atlas-before/02 Атлас моделей/Сравнения/Перенос vision encoder между VLM.md",
+      "sources_checked": [],
+      "numerical_checks": [],
+      "figures_retained": [],
+      "visual_review": "No new figure; original embeds retained"
+    },
+    {
+      "index": 26,
+      "path": "02 Атлас моделей/Сравнения/Сравнение семейств.md",
+      "audit_sha256": "3160433084cd84ba47178cb943b0920555c29438f2aedaee1b73d4de228b2710",
+      "full_read_before": true,
+      "full_read_after": true,
+      "findings": [
+        {
+          "severity": "P1",
+          "line": 16,
+          "excerpt": "Qwen | GQA",
+          "issue": "Таблица устарела относительно самих карточек: у Qwen потерян DeltaNet, у Falcon H1 — Mamba, у Nemotron 3 — hybrid MoE. Пользователь получает противоречивые справочные сведения.",
+          "action": "Синхронизировать с карточками; явно задавать поколение в каждой строке и не усреднять все семейство одной архитектурой.",
+          "outcome": "already-fixed",
+          "evidence": "Исходный P1 уже был исправлен до начала этой задачи: в полном pre-task снимке присутствуют отдельные строки Qwen3-Next/3.5 с DeltaNet, Falcon-H1 с Mamba-2 и Nemotron 3 Super с LatentMoE. Дополнительно уточнены Kimi K2/Linear, Mistral/Mixtral, Falcon 7B/40B и историческая область Baichuan."
+        }
+      ],
+      "before_sha256": "9845eefaa1d458fc8a1b4c3207a8ab9b9be08c7f583c91fd1ae4acbf28e7283c",
+      "after_sha256": "12b98bbc8aa4248db540b8eaa78ba70da2689b23da50cc99fa250468ebfe3482",
+      "en_counterpart": null,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/snapshots/task-4-atlas-before/02 Атлас моделей/Сравнения/Сравнение семейств.md",
+      "sources_checked": [
+        "https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Instruct"
+      ],
+      "numerical_checks": [],
+      "figures_retained": [],
+      "visual_review": "No new figure; original embeds retained"
+    },
+    {
+      "index": 27,
+      "path": "02 Атлас моделей/Timeline.md",
+      "audit_sha256": "d4e9d6aef906a8eb1a1720a561a94d9a0a0133686cf0b93490b904038683a76c",
+      "full_read_before": true,
+      "full_read_after": true,
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 68,
+          "excerpt": "2024-01 | Mixtral",
+          "issue": "Даты смешивают выпуск весов и публикацию paper без маркировки события: карточка Mixtral даёт декабрь 2023, Qwen2 — июнь 2024, Gemma2 — июнь, здесь другие месяцы.",
+          "action": "Добавить тип события (релиз/статья) или统一 дату первого релиза. Не назвать publication date датой релиза.",
+          "outcome": "fixed",
+          "evidence": "В календарных таблицах явно указан тип события. Для Mixtral, Qwen2, Gemma/Gemma 2 разведены публикация статьи и выпуск весов, с прямыми первичными ссылками. По arXiv дополнительно исправлена дата подачи Gemma 2 на 2024-07-31."
+        },
+        {
+          "severity": "P2",
+          "line": 98,
+          "excerpt": "Nemotron 3",
+          "issue": "Запись сводит Nemotron3 к post-training и пропускает главное для этой хронологии — hybrid Mamba/attention MoE.",
+          "action": "Согласовать архитектурный сдвиг с карточкой семейства.",
+          "outcome": "fixed",
+          "evidence": "Nemotron 3 теперь описан как Mamba-2/attention MoE, с отдельными LatentMoE/MTP/NVFP4 у Super. Строка исходного семейства отнесена к декабрю 2025 года, а не только 2026 post-training."
+        },
+        {
+          "severity": "P2",
+          "line": 111,
+          "excerpt": "/textbook/agents/",
+          "issue": "Абсолютные локальные URL требуют проверки base /bookvar при Pages; wiki-ссылки в остальном корпусе проходят иной converter.",
+          "action": "Проверить generated HTML links на Pages base и заменить каноническими ссылками, если base не добавляется.",
+          "outcome": "fixed",
+          "evidence": "11 абсолютных agent-route ссылок заменены каноническими wiki-ссылками с точными заголовками. Исполненный тест импортировал publicationHref и convertWikiSyntax при /bookvar: raw root-relative URL остаётся без base, wiki URL получает base. Полный Pages HTML build оставлен primary; результат не выдан за полный site build."
+        }
+      ],
+      "before_sha256": "d4e9d6aef906a8eb1a1720a561a94d9a0a0133686cf0b93490b904038683a76c",
+      "after_sha256": "486e1d79c182c2679109774d4a7e8cbce38c33e776b8e725b426fc973babbed0",
+      "en_counterpart": null,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/snapshots/task-4-atlas-before/02 Атлас моделей/Timeline.md",
+      "sources_checked": [
+        "https://mistral.ai/news/mixtral-of-experts/",
+        "https://qwenlm.github.io/blog/qwen2/",
+        "https://blog.google/innovation-and-ai/technology/developers-tools/gemma-open-models/",
+        "https://blog.google/innovation-and-ai/technology/developers-tools/google-gemma-2/",
+        "https://arxiv.org/abs/2408.00118"
+      ],
+      "numerical_checks": [
+        "Executed actual adapter functions with PUBLICATION_BASE_PATH=/bookvar: raw Markdown remains /textbook/agents/formal-math/; wiki -> /bookvar/textbook/agents/formal-math/#copra. Full generated HTML validation delegated to primary."
+      ],
+      "figures_retained": [],
+      "visual_review": "No new figure; original embeds retained"
+    }
+  ],
+  "summary": {
+    "pages": 28,
+    "original_findings": 43,
+    "fixed": 38,
+    "already_fixed": 5,
+    "rejected_with_evidence": 0,
+    "open": 0,
+    "authored_en_counterparts": 0
+  },
+  "verification": {
+    "snapshots": "28/28 exact SHA-256 matches; preserved all original embeds and headings (renamed Gemma heading has compatibility anchor).",
+    "local_links": "182 wiki targets and explicit heading references checked: zero errors.",
+    "unit_tests": "2 files / 12 tests passed: links.test.ts, check-built-links.test.ts.",
+    "pages_base": "Executed actual publicationHref/convertWikiSyntax at /bookvar. Raw root-relative links are unchanged; wiki links acquire base. Timeline's 11 agent links now use wiki syntax.",
+    "diff_check": "git diff --check -- '02 Атлас моделей' 'docs/audit/2026-09-15-completion/atlas.json': exit 0.",
+    "full_site_build": "Not run: primary owns full build and final generated HTML checks.",
+    "runtime": "Node scalar checks and PyTorch 2.8 CPU in /private/tmp/bookvar-editorial-venv/bin/python; no weights downloaded or training run."
+  },
+  "limitations": [
+    "This pass resolves the 43 assigned findings; it is not an exhaustive latest-release inventory or a claim that every inherited model-card statement was re-researched.",
+    "Primary acceptance and independent editorial review are pending.",
+    "Jamba architecture crop has a partially clipped caption; retained unchanged, correct figure link and description provided. Any replacement/registry work remains with primary.",
+    "No authored EN counterparts were mapped for the 28 pages; fallback copies were not treated as authored translations."
+  ],
+  "new_asset": {
+    "path": "00 Учебник/Assets/Figures/curated/kimi-linear/arch.jpg",
+    "source": "https://raw.githubusercontent.com/MoonshotAI/Kimi-Linear/8c1d85eb6b5f8fcefb15758691b0ce50b0827ce3/figures/arch.png",
+    "commit": "8c1d85eb6b5f8fcefb15758691b0ce50b0827ce3",
+    "author": "Moonshot AI / Kimi Linear authors",
+    "license": "MIT",
+    "license_url": "https://raw.githubusercontent.com/MoonshotAI/Kimi-Linear/8c1d85eb6b5f8fcefb15758691b0ce50b0827ce3/LICENSE",
+    "bytes": 237810,
+    "sha256": "132ae021fa4661ed39e7be784d46f05f22b82aabb9afd2bab8dbdc0a5a61cba0",
+    "dimensions": "1272x1398",
+    "format": "JPEG/JFIF; unchanged upstream bytes, filename extension corrected locally",
+    "primary_registry_status": "Primary reported registry entry and full unchanged MIT notice in site/public/licenses/kimi-linear-MIT.txt; 18 registry tests passed on primary side."
+  }
+}

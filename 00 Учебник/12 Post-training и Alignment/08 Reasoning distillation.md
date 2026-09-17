@@ -11,6 +11,9 @@ primary_sources:
   - https://arxiv.org/abs/1503.02531
   - https://arxiv.org/abs/2501.12948
   - https://arxiv.org/abs/2306.13649
+  - https://arxiv.org/abs/2501.19393
+source_unit_id:
+  - meeting-04-slides-s1k-data
 ---
 
 # Дистилляция моделей рассуждения
@@ -119,26 +122,62 @@ $$
 ### Минимальный код
 
 ```python
+from importlib.metadata import version
 from datasets import load_dataset
+from transformers import AutoTokenizer
 from trl import SFTConfig, SFTTrainer
+
+assert version("trl") == "0.23.1"
+model_id = "Qwen/Qwen2.5-Math-1.5B"
+tokenizer = AutoTokenizer.from_pretrained(model_id)
+tokenizer.eos_token = "<|im_end|>"
+# Учебный ChatML для текстовых сообщений; EOS входит в assistant mask.
+tokenizer.chat_template = (
+    "{% for m in messages %}"
+    "{{ '<|im_start|>' + m['role'] + '\\n' }}"
+    "{% if m['role'] == 'assistant' %}{% generation %}"
+    "{{ m['content'] + '<|im_end|>' }}{% endgeneration %}"
+    "{% else %}{{ m['content'] + '<|im_end|>' }}{% endif %}"
+    "{{ '\\n' }}{% endfor %}"
+    "{% if add_generation_prompt %}{{ '<|im_start|>assistant\\n' }}{% endif %}"
+)
+probe = tokenizer.apply_chat_template(
+    [{"role": "user", "content": "2 + 2?"},
+     {"role": "assistant", "content": "4"}],
+    tokenize=True, return_dict=True, return_assistant_tokens_mask=True,
+)
+targets = [t for t, m in zip(probe["input_ids"], probe["assistant_masks"]) if m]
+assert targets and targets[-1] == tokenizer.eos_token_id
+assert tokenizer.decode(targets) == "4<|im_end|>"
+assert 0 in probe["assistant_masks"]  # запрос не является target
 
 data = load_dataset("open-r1/Mixture-of-Thoughts", "all", split="train")
 args = SFTConfig(
     output_dir="reasoning-student",
     max_length=32768,
     assistant_only_loss=True,
+    eos_token="<|im_end|>",
+    packing=False,
     learning_rate=4e-5,
     num_train_epochs=1,
     bf16=True,
     gradient_checkpointing=True,
 )
 trainer = SFTTrainer(
-    model="Qwen/Qwen2.5-Math-1.5B",
+    model=model_id,
+    processing_class=tokenizer,
     args=args,
     train_dataset=data,
 )
 trainer.train()
 ```
+
+Пример использует [API TRL 0.23.1](https://huggingface.co/docs/trl/v0.23.1/sft_trainer)
+(`pip install trl==0.23.1` в отдельном окружении). Это конфигурация учебного
+запуска, не выполненное обучение. До загрузки весов probe проверяет фактическую
+маску и EOS токенизатора; при несовместимой версии Transformers он должен
+остановить запуск. Для воспроизводимого эксперимента дополнительно закрепляют
+ревизии модели и датасета и весь lockfile окружения.
 
 Шаблон диалога должен позволять отделить маской токены ассистента. Для базовых
 моделей Qwen токен конца должен совпадать с используемым в ChatML
@@ -168,6 +207,65 @@ trainer.train()
 Это существенно сложнее, чем «скачать ответы R1 и обучить модель». Ограничение
 длины, число попыток, полнота проверяющей программы и правила отбора определяют,
 какую учебную программу в итоге увидит ученик.
+
+<span id="s1-59-тысяч-1-тысяча"></span>
+## s1: 59 тысяч → 1 тысяча
+
+<!-- source_unit_id: meeting-04-slides-s1k-data -->
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m04-p128-s1-data-funnel.png]]
+
+*Прочитайте воронку как четыре разных решения о данных, а не как один фильтр:
+техническая пригодность, корректность формата, трудность для выбранных student
+models и разнообразие предметных областей. Число 1 000 имеет смысл только вместе
+с этими критериями. Источник: Hanna Hajishirzi, Berkeley Advanced LLM Agents,
+meeting 4,
+[слайд 128](https://rdi.berkeley.edu/adv-llm-agents/slides/OLMo-Tulu-Reasoning-Hanna.pdf#page=128).*
+
+В работе s1 подробно документирован процесс отбора синтетических решений.
+Авторы собрали 59 029 задач из открытых
+математических, научных и логических наборов и добавили собственные трудные
+задачи. Для каждой задачи Gemini Flash Thinking породила рассуждение и финальный
+ответ. Эта исходная коллекция ещё не была готовым учебным набором: в ней
+оставались ошибки API, испорченная разметка, простые примеры и сильный перекос в
+сторону самых многочисленных источников.
+
+Сокращение происходило в три содержательно разных этапа:
+
+| этап | осталось | что удаляли | зачем |
+|---|---:|---|---|
+| исходная генерация | 59 029 | — | сохранить широкий пул задач и решений учителя |
+| проверка качества | 54 116, затем 51 581 | ошибки API, пустые или неправильно оформленные ответы | не обучать модель на технически испорченных последовательностях |
+| проверка трудности | 24 496 | задачи, которые уже решали Qwen2.5-7B-Instruct или Qwen2.5-32B-Instruct | направить ограниченный бюджет на примеры, где ученику ещё есть чему учиться |
+| отбор разнообразия | 1 000 | избыток близких задач внутри доменов | покрыть 50 предметных областей, сохранив трудные длинные решения |
+
+На последнем этапе задачи распределили по предметным областям и выбирали их так,
+чтобы области были представлены равномернее. Внутри области предпочтение
+отдавали более длинным рассуждениям: длина служила приближённым признаком
+трудности. Получившийся s1K использовали для обычного SFT Qwen2.5-32B-Instruct.
+Следовательно, переход от 59 тысяч к тысяче — это не утверждение «меньше данных
+всегда лучше», а попытка убрать лёгкие и повторяющиеся примеры при фиксированном
+бюджете обучения.
+
+У такого отбора есть цена. Трудность определяется успехом двух конкретных
+моделей, поэтому задача, лёгкая для них, могла бы быть полезна другому ученику.
+Длинное решение не обязательно труднее или лучше короткого. Наконец,
+автоматические фильтры не гарантировали истинность каждой трассы. По вердиктам
+grader авторов правильными признаны 53,6% ответов s1K и 63,0% ответов
+s1K-1.1. Второе число относится не к ручной правке прежних ответов: для тех же
+1 000 задач заново сгенерировали трассы с DeepSeek-R1. Протокол проверки
+сопоставляет ответ с эталоном с помощью Claude 3.5 Sonnet; эти доли не означают
+доказанную правильность каждого промежуточного шага. См.
+[s1, §2.2, Appendix A и C.3](https://arxiv.org/html/2501.19393#A1).
+Поэтому названия стадий `quality`, `difficulty` и `diversity` описывают правила
+отбора, но не доказывают качество, трудность и разнообразие каждого примера.
+
+Воронка отбора показана в
+[Berkeley Advanced LLM Agents, meeting 4, слайды 126–132](https://rdi.berkeley.edu/adv-llm-agents/slides/OLMo-Tulu-Reasoning-Hanna.pdf#page=126),
+а точные правила, источники задач и проверка качества описаны в
+[s1: Simple test-time scaling](https://arxiv.org/abs/2501.19393). Продолжение
+работы — принудительное управление вычислительным бюджетом во время генерации —
+относится уже к test-time compute, а не к созданию s1K.
 
 ## Смещение, внесённое отбором
 
@@ -396,6 +494,8 @@ ACCELERATE_LOG_LEVEL=info accelerate launch \
   модели Qwen/Llama, обученные на последовательностях R1, и многоэтапная схема.
 - Agarwal et al., 2024 — [On-Policy Distillation of Language Models: Learning from Self-Generated Mistakes](https://arxiv.org/abs/2306.13649):
   обобщённая дистилляция на собственных генерациях авторегрессионных моделей.
+- Muennighoff et al., 2025 — [s1: Simple test-time scaling](https://arxiv.org/abs/2501.19393):
+  документированная воронка отбора 59 029 синтетических решений в s1K.
 - Hugging Face — [Open-R1 repository](https://github.com/huggingface/open-r1)
   и открытая схема создания проверенных данных.
 

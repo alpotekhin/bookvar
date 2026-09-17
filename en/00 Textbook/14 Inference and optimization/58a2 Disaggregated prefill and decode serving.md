@@ -41,20 +41,23 @@ A simplified online request follows these stages:
 2. a router chooses a replica and considers prefix-cache overlap;
 3. the scheduler places the prompt in a waiting queue;
 4. prefill computes layer activations, keys, values, and final-position logits;
-5. sampling selects the first output token, ending time to first token;
+5. sampling selects the first output token; TTFT ends when the client receives it;
 6. the request occupies a slot and KV blocks in a decode batch;
-7. every decode step reads weights and KV, samples a token, and appends its KV;
+7. every decode step appends KV for its input token and samples the next token;
 8. EOS, a stop condition, cancellation, or a length limit releases the blocks.
 
 The user observes at least two distinct latency classes. **Time to first token**
-includes frontend work, queuing, and prompt computation:
+includes frontend work, queuing, and prompt computation when the prefill worker
+immediately emits its first token (the P-first policy). In the formula,
+$T_{first\ sample}$ includes sampling and delivery of that token to the client:
 
 $$
 TTFT=T_{frontend}+T_{queue,P}+T_{prefill}+T_{first\ sample}.
 $$
 
-**Inter-token latency** or **time per output token** describes pauses after the
-first token. For an $O$-token output,
+**Inter-token latency** measures individual gaps after the first token;
+**time per output token** usually averages these gaps. For an $O$-token output,
+using consistent client timestamps through the last token, the exact identity is
 
 $$
 E2E=TTFT+\sum_{i=2}^{O}ITL_i.
@@ -78,9 +81,10 @@ memory- or communication-bound. The system-level distinction still holds:
 prefill has independent token positions and can form large matrix operations. A
 single request has no comparable parallelism during decode.
 
-Prefill cost is driven mainly by input length. Attention work grows rapidly with
-context length; the linear blocks scale linearly in tokens but dominate model
-parameters. A long prompt may occupy a GPU for the time of tens or hundreds of
+Prefill cost is driven mainly by input length. Dense exact attention remains
+$O(S^2d)$ even after tiling: tiling reduces HBM traffic and avoids a materialized
+score matrix, but does not remove permitted query–key pairs. Linear blocks scale
+linearly in tokens but dominate model parameters. A long prompt may occupy a GPU for the time of tens or hundreds of
 ordinary decode steps. A scheduler that inserts it into an active decode batch
 can therefore create a visible pause in already-streaming answers.
 
@@ -206,7 +210,8 @@ backpressure but requires source KV to remain alive until acknowledgement.
 **Layer-wise streaming** begins moving early-layer K/V while prefill computes
 later layers. Mooncake describes overlapping computation and transfer. It helps
 only if the network finishes near the final layer; otherwise the remaining tail
-still increases TTFT. A remote or shared cache can expose blocks without
+delays continuation. Under P-first it increases the first inter-token gap;
+when the first token is buffered until decode is ready, it increases TTFT. A remote or shared cache can expose blocks without
 immediate eager copying, but autoregressive attention is usually too
 bandwidth-sensitive to read remote KV on every step. Remote tiers are more
 useful for bootstrap, prefix reuse, or offload.
@@ -216,6 +221,32 @@ dtype/quantization, layer layout, KV-head count, block size, positional scheme,
 parallel-rank mapping, and backend serialization must agree. Different TP
 degrees require explicit resharding. Some systems support heterogeneous layouts,
 but the transformation belongs in latency and bandwidth measurements.
+
+### First-token emission determines the latency ledger
+
+Let $A$ be the time until prefill selects token 1, $X$ the remaining KV transfer
+and coordination time, $Q_D$ the subsequent decode queue wait, and $D_1$ the
+first decode step producing token 2. For this example the intervals are
+sequential, without overlap; client delivery is included or negligible.
+
+- **P-first:** emit token 1 after $A$, then perform $X\to Q_D\to D_1$ and emit
+  token 2. Thus $TTFT=A$, $TTST=A+X+Q_D+D_1$, and the first ITL is $X+Q_D+D_1$.
+- **D-ready:** buffer token 1 through $X\to Q_D$, emit it when decode is ready,
+  then run $D_1$. Thus $TTFT=A+X+Q_D$, the same $TTST=A+X+Q_D+D_1$, and first
+  ITL $D_1$.
+
+TTST is time from request submission to token 2. If queues and transfers overlap,
+use their measured critical path instead of adding them. A policy that waits
+for the first decode step before emitting both tokens has another TTFT boundary
+and must also be declared.
+
+With 32 layers, eight KV heads, head dimension 128, BF16, and 8192 prompt tokens,
+the prompt cache is exactly 1 GiB. At an effective 25 GiB/s, transfer takes 40 ms;
+add 5 ms coordination for $X=45$ ms. Let $A=120$ ms, $Q_D=15$ ms, and $D_1=10$ ms.
+P-first yields TTFT 120 ms and first ITL 70 ms; D-ready yields TTFT 180 ms and
+first ITL 10 ms. Token 2 arrives at 190 ms in both cases. This hypothetical
+calculation is not a DistServe or Dynamo measurement: moving handoff out of TTFT
+has not made the second token arrive sooner.
 
 ## Routing: load meets state locality
 

@@ -23,6 +23,14 @@ primary_sources:
 часть графа. Transformer сделал естественной единицей маршрутизации токен, а
 взаимозаменяемыми ветвями — несколько FFN.
 
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/modern-37-40-moe/mixtral-smoe-layer.png]]
+
+*В sparse MoE-слое router вычисляет веса экспертов отдельно для каждого токена,
+выбирает top-k FFN и смешивает их выходы. Иллюстрация из Omar Sanseviero et al.,
+[Mixture of Experts Explained](https://huggingface.co/blog/moe); исходный файл
+опубликован в наборе
+[Hugging Face documentation-images](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/moe/01_moe_layer.png).*
+
 [Sparsely-Gated Mixture-of-Experts (2017)](https://arxiv.org/abs/1701.06538)
 показала MoE-слой с noisy top-k gating и одновременно сформулировала две
 сохранившиеся проблемы: router должен обучаться через почти дискретный выбор, а
@@ -32,24 +40,20 @@ primary_sources:
 top-1. Это уменьшило коммуникацию, но потребовало capacity factor, auxiliary
 balancing loss и правил обработки переполнения.
 
-## Тезис
-
-Sparse-модель хранит много параметров, но активирует лишь часть вычислительного
-графа для каждого токена. В MoE sparsity обычно находится в FFN:
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/modern-37-40-moe/mixtral-smoe-layer.png]]
-
-*В sparse MoE-слое router вычисляет веса экспертов отдельно для каждого токена,
-выбирает top-k FFN и смешивает их выходы. Иллюстрация из Omar Sanseviero et al.,
-[Mixture of Experts Explained](https://huggingface.co/blog/moe); исходный файл
-опубликован в наборе
-[Hugging Face documentation-images](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/moe/01_moe_layer.png).*
+<span id="тезис"></span>
 
 ## Что даёт MoE
 
-- больше total parameters при близком active compute;
-- специализацию экспертов;
-- лучший quality/compute trade-off при достаточном масштабе.
+MoE позволяет увеличить общее число параметров, ограничивая число активных
+FFN на токен. Выигрыш качества при данном объёме вычислений — эмпирический
+результат конкретного обучения, а не гарантия выбора разреженной архитектуры.
+Распределение токенов между экспертами также не означает, что возникли
+устойчивые «эксперт по математике» и «эксперт по литературе».
+
+В [Mixtral, §4 и Figure 8](https://arxiv.org/html/2401.04088v1) маршрутизация
+в исследованных слоях сильнее связана с синтаксическими признаками, чем с
+тематическим доменом. Специализацию проверяют по токенам, слоям и сдвигам
+данных; её нельзя выводить из одного названия Mixture of Experts.
 
 Но total parameters всё равно нужно хранить и перемещать. MoE переносит нагрузку
 из матричных вычислений в routing, коммуникацию и memory bandwidth.
@@ -69,8 +73,10 @@ Router создаёт положительную обратную связь: ex
 и bias correction противодействуют коллапсу, но иногда посылают токен менее
 подходящему expert. На нескольких GPU затем возникает all-to-all: токены
 группируются по назначению, пересылаются к experts и возвращаются. Поэтому
-теоретические active FLOPs реализуются только при достаточно большом batch;
-малый batch и слабая сеть способны сделать dense-модель быстрее.
+малое число активных FLOPs не гарантирует высокой загрузки устройств:
+маленькие матричные операции и слабая сеть способны сделать плотную модель
+быстрее. Увеличение пакета иногда улучшает загрузку, но повышает требования
+к памяти и допустимой задержке.
 
 ## Исследовательские ветви
 

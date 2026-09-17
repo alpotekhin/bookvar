@@ -12,7 +12,7 @@
     "tests": {"root": "tests", "tree_hash_algorithm": "sha256(sorted repository-relative path + NUL + bytes + NUL)", "tree_sha256": "a914c30275ae4e3dfc37eada657fb7703efb00e5984ddfe4f88bc9c4d0a29253"}
   },
   "profiles": {
-    "smoke_cpu": {"required": true, "hardware": "CPU", "network_after_setup": false, "deterministic": true, "input": "versioned local prompt/response/reward fixtures and tiny frozen policy/reference models"},
+    "smoke_cpu": {"required": true, "hardware": "CPU", "network_after_setup": false, "deterministic": true, "input": "inline bookvar: rlvr-smoke fixture with fixed labels/rewards and trainable logits; then implemented upstream adapters in the course environment", "starter_scope": "mask, finite rewards/advantages, gradient direction; not full GRPO training"},
     "onpolicy_small_gpu": {"required": false, "minimum_seeds": 3, "variants": ["sft_fixed_demo", "standard_grpo", "grpo_constant", "dr_grpo", "rft", "maxrl_course_constant"]},
     "offpolicy_small_gpu": {"required": false, "minimum_seeds": 3, "rollout_batch_size": 256, "train_batch_size": 8, "updates_per_rollout_batch": 32, "variants": ["none", "noclip", "grpo_clip", "gspo_clip"]},
     "optional_dpo_safety": {"required": false, "separate_pass_gate": true, "stages": ["baseline", "packed_sft", "hh_dpo", "matched_evaluation"]},
@@ -83,7 +83,7 @@
   "outputs": {"root": "evidence", "required": ["environment.json", "source_manifest.json", "prompt_and_grader_manifest.json", "prompting_baselines.jsonl", "parser_audit.csv", "response_mask_fixture.json", "algorithm_matrix.yml", "rollout_manifest.jsonl", "reward_components.jsonl", "train_metrics.csv", "validation_metrics.csv", "ratio_and_clip_metrics.csv", "seed_summary.csv", "rollout_examples_before_after.md", "artifact_hashes.json", "report.md"], "optional": ["optional_dpo_metrics.json"], "all_files_require_sha256": true},
   "pass_fail": [
     "all pinned upstream tests pass unchanged",
-    "two smoke runs produce identical artifact hashes",
+    "two CPU smoke runs in one pinned deterministic environment produce identical canonical numeric-fixture hashes; timestamps, hostnames and run IDs are excluded",
     "response mask fixture proves exact shifted-label alignment",
     "parser audit includes false accepts and false rejects",
     "all-equal reward groups remain finite",

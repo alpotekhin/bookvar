@@ -2,7 +2,9 @@
 title: Self-attention from the inside — Q, K, V
 type: textbook-chapter
 status: canonical
-last_updated: 2026-08-03
+locale: en
+translation_of: "00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V.md"
+last_updated: 2026-09-15
 primary_sources:
   - https://arxiv.org/abs/1706.03762
 ---
@@ -84,10 +86,12 @@ $$
 q_i=x_iW_Q,\qquad k_i=x_iW_K.
 $$
 
-Compatibility between the query at $i$ and key at $j$ is
+Here $x_i$ is a $1\times d_{\mathrm{model}}$ row, $W_Q,W_K$ have shape
+$d_{\mathrm{model}}\times d_k$, and $q_i,k_i$ are $1\times d_k$ rows.
+Compatibility between the query at $i$ and key at $j$ is a scalar:
 
 $$
-s_{ij}=q_i^\top k_j.
+s_{ij}=q_i k_j^\top=\sum_{a=1}^{d_k}q_{i,a}k_{j,a}.
 $$
 
 A large $s_{ij}$ does not mean that two words are generally similar. It means
@@ -175,16 +179,16 @@ $$
 ### Step C: softmax
 
 $$
-\alpha_3\approx[0.248,0.248,0.503].
+\alpha_3\approx[0.248255,0.248255,0.503490].
 $$
 
-Rounding explains why the displayed values sum to 0.999.
+The weights are normalized across the three keys; the displayed rounding sums to one.
 
 ### Step D: weighted sum of Values
 
 $$
-z_3=0.248[1,0]+0.248[0,2]+0.503[3,1]
-\approx[1.758,0.999].
+z_3=0.248255[1,0]+0.248255[0,2]+0.503490[3,1]
+\approx[1.758725,1].
 $$
 
 The third position now has a contextual representation. It combines content
@@ -196,7 +200,7 @@ If components of $q$ and $k$ are independent with mean zero and variance one,
 then
 
 $$
-\operatorname{Var}(q^\top k)=d_k.
+\operatorname{Var}(q k^\top)=d_k.
 $$
 
 Dot-product magnitude grows with dimension. Softmax of large-magnitude scores

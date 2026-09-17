@@ -2,7 +2,9 @@
 title: GPT-2 — zero-shot through language
 type: textbook-chapter
 status: canonical
-last_updated: 2026-08-03
+locale: en
+translation_of: "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык.md"
+last_updated: 2026-09-15
 primary_sources: [https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf]
 ---
 
@@ -107,10 +109,17 @@ residual paths, and the FFN. Source: Jay Alammar, [The Illustrated
 GPT-2](https://jalammar.github.io/illustrated-gpt2/), [CC BY-NC-SA
 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).*
 
-Here *zero-shot* means no gradient training on the target dataset. It does not
-mean that WebText contained no information about the task: the model may have
-seen other questions, summaries, and translations. A more precise description
-is transfer to a new dataset and format through conditional text context.
+The report uses *zero-shot transfer* broadly for evaluation without target-task gradient updates. This is not the later strict prompting definition “zero demonstrations”: translation (§3.7) and Natural Questions (§3.8) already put example pairs in context. WebText may also contain related tasks. Always report both axes separately: were weights updated, and how many demonstrations were supplied?
+
+Here is a complete illustrative translation prefix following the paper’s format, not a quoted experimental prompt:
+
+```text
+The cat sleeps. = Le chat dort.
+The dog runs. = Le chien court.
+The bird sings. =
+```
+
+Two completed pairs specify the language direction and punctuation; the third line contains only the new source. The generator continues after the final equals sign, for example with `L'oiseau chante.`—an intended answer, not a measured model output. Each generated token conditions on both demonstrations and the unfinished pair; no optimizer runs. The report decoded greedily and used the first generated sentence. In modern terminology this is two-shot prompting with frozen weights, while a lone `TL;DR:` task hint contains no demonstration.
 
 ## What the experiments showed
 
@@ -122,7 +131,7 @@ but it is not yet arbitrary instruction following.
 
 The model was then applied to the Children's Book Test, Winograd Schema, CoQA,
 CNN/DailyMail summarization, and translation. Results were mixed. On CoQA it
-scored 55 F1, compared with 89.8 for a strong supervised system. Summaries after
+scored 55 F1; the report describes the strong supervised BERT system as approaching human performance of about 89 F1. Summaries after
 `TL;DR:` were often coherent but substantially behind specialized models on
 ROUGE. Translation appeared without parallel-data fine-tuning, but 5 BLEU for
 English-to-French remained far below task-specific systems. The important
@@ -159,9 +168,7 @@ errors, and likelihood does not rule out toxic or false text. A 1024-token
 window is small for long documents, WebText is biased toward the English web,
 and the largest model is more expensive for every generated token.
 
-GPT-2 framed a task as textual context and showed that this kind of transfer
-improves with model scale. It still lacked a reliable way to explain a new
-format. [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning|GPT-3]] places several demonstrations directly in the context window and systematically compares zero-, one-, and few-shot regimes.
+GPT-2 already used demonstrations for some tasks and showed a scale-related improvement in transfer. It did not yet systematically separate the effect of demonstration count from model size. [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning|GPT-3]] systematically compares zero-, one-, and few-shot regimes across model scales, rather than introducing demonstrations for the first time.
 
 ## Sources and further reading
 

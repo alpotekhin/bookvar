@@ -4,8 +4,8 @@ type: textbook-chapter
 status: canonical
 locale: en
 translation_of: "00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md"
-last_updated: 2026-07-20
-last_verified: 2026-07-22
+last_updated: 2026-09-15
+last_verified: 2026-09-15
 primary_sources:
   - https://cs336.stanford.edu/
   - https://arxiv.org/abs/2309.06180
@@ -121,7 +121,7 @@ cache addresses rather than one dense rectangle.
 A larger batch amortizes model-weight reads and raises throughput. It can also
 make a request wait longer for the scheduler and increase its TPOT because of
 neighboring work. A serving system should therefore optimize **goodput**—the
-number of requests that meet both TTFT and TPOT constraints—not abstract
+rate of requests that meet both TTFT and TPOT constraints—not abstract
 tokens/s.
 
 ## Why continuous batching is not enough
@@ -172,6 +172,16 @@ blocks to the pool.
 [PagedAttention](https://arxiv.org/abs/2309.06180); image reproduced in Stanford
 CS336.*
 
+### A block-size calculation
+
+For the configuration above, each cached token costs 128 KiB. Three independent
+requests of lengths 17, 31, and 40 contain 88 useful tokens, or 11 MiB.
+With 16-token blocks they need 2, 2, and 3 blocks: 112 reserved token slots,
+14 MiB, and 24 unused slots. With 32-token blocks they need 1, 1, and 2 blocks:
+128 slots, 16 MiB, and 40 unused slots. If a block-table index takes four bytes,
+the entries occupy 28 versus 16 bytes; this excludes reference counts and other
+allocator metadata. Larger blocks shorten tables but may waste more KV memory.
+
 ## Sharing a prefix
 
 Paged placement allows several continuations to reference the same physical
@@ -185,6 +195,13 @@ whether already computed history may be reused for a matching prefix;
 PagedAttention determines how that history is placed and addressed. Paging makes
 sharing cheaper, but does not discover semantically equivalent prompts or remove
 the need for exact token and model-parameter matches.
+
+For example, fork a 20-token prefix into two continuations. With 16-token blocks,
+the full first block stays shared and the four-token partial block needs one
+additional block when both branches write: an extra 16 slots, or 2 MiB. With
+32-token blocks, the entire partial block needs an additional copy: 4 MiB.
+This assumes copy-on-write allocation with one original block retained; it is a
+memory calculation, not a latency measurement.
 
 ## The scheduler couples computation and memory
 

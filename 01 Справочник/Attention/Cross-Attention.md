@@ -9,16 +9,24 @@ primary_sources:
 
 # Cross-Attention
 
-В **cross-attention** queries приходят из одной последовательности, а keys и values — из другой:
+В **cross-attention** запросы $Q$ строятся из состояний одной последовательности,
+а ключи $K$ и значения $V$ — из состояний другой:
 
 $$Q=YW_Q,\qquad K=XW_K,\qquad V=XW_V.$$
+
+Здесь $Y\in\mathbb{R}^{n_q\times d_y}$ содержит состояния позиций, которым
+нужна информация, а $X\in\mathbb{R}^{n_m\times d_x}$ — состояния памяти
+источника. Обучаемые матрицы $W_Q,W_K$ переводят их в общее пространство
+размерности $d_k$, а $W_V$ — в пространство значений размерности $d_v$.
+Поэтому $QK^\top$ имеет форму $n_q\times n_m$: каждой позиции запроса
+соответствует свой набор весов по позициям памяти.
 
 Например, decoder спрашивает: «какая часть входного предложения нужна для следующего слова?», а encoder предоставляет память.
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/t5/encoder-decoder-architecture.png]]
 
-*В T5 cross-attention находится в decoder: queries строятся из уже созданного
-выхода, а keys и values — из памяти encoder. Схема из Colin Raffel et al.,
+*В T5 cross-attention находится в decoder: запросы строятся из состояний
+известной части выхода, а ключи и значения — из памяти encoder. Схема из Colin Raffel et al.,
 [Exploring the Limits of Transfer Learning with a Unified Text-to-Text
 Transformer, Figure 1](https://arxiv.org/abs/1910.10683).*
 
@@ -29,8 +37,8 @@ Transformer, Figure 1](https://arxiv.org/abs/1910.10683).*
 Cross-attention связывает и другие представления: текст с изображением, decoder
 с audio encoder, latent queries с vision features. В отличие от
 [[02 Areas/ML & DL/01 Справочник/Attention/Self-Attention|self-attention]],
-длины query и memory могут различаться, поэтому score matrix имеет форму
-`[n_query, n_memory]`.
+длины последовательности запросов и памяти могут различаться, поэтому матрица
+оценок имеет форму `[n_query, n_memory]`.
 
 Cross-attention — механизм, а не самостоятельный архитектурный класс. Он является центральной частью [[02 Areas/ML & DL/01 Справочник/Архитектурные паттерны/Encoder-Decoder|Encoder–Decoder]], но может добавляться и в decoder-only backbone.
 

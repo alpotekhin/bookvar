@@ -24,7 +24,7 @@ Phi — наиболее чистый пример data-centric линии: Phi-
 | Phi-2 (2023-12) | dense 2.7B | 2K; text/code | 1.4T tokens, curriculum/data curation; base checkpoint | **B** |
 | Phi-3 Mini/Small/Medium (2024) | dense 3.8B/7B/14B; GQA varies by size | 4K и 128K variants; text | 3.3T heavily filtered/synthetic tokens; SFT + DPO/safety | **A/B** |
 | Phi-3 Vision (2024) | vision encoder/projector + Phi decoder | image+text, 128K | multimodal instruction tuning | **B** |
-| Phi-4 (2024-12) | dense 14B | 16K; text | pivot tokens + curated synthetic reasoning data; SFT/DPO | **A** |
+| Phi-4 (2024-12) | dense 14B | 16K; text | целевые синтетические данные; PTS-пары для DPO; SFT/DPO | **A** |
 | Phi-4 mini (2025-02) | dense 3.8B, GQA | 128K; multilingual text | reasoning + function calling post-training | **B** |
 | Phi-4 multimodal (2025-02) | 5.6B unified text/vision/speech model with modality encoders/adapters | 128K; image/audio+text | joint/specialized multimodal stages | **A/B** |
 
@@ -34,7 +34,9 @@ Phi — наиболее чистый пример data-centric линии: Phi-
 
 ## Pre-training, post-training и reasoning
 
-Ключевой метод — создание «textbook-quality» данных: фильтрация источников по образовательной ценности и синтетические учебники/задачи. Phi-3 смешивает web и synthetic corpora, а Phi-4 отдельно проектирует reasoning data и «pivot tokens» для обучения сложным переходам. Это сильная гипотеза о качестве данных, но не доказательство, что масштаб параметров не нужен вообще. Phi-4 post-training использует SFT, preference optimization и safety data; function calling у mini — обученный output protocol.
+Ключевой метод — создание «textbook-quality» данных: фильтрация источников по образовательной ценности и синтетические учебники/задачи. Phi-3 смешивает web и synthetic corpora, а Phi-4 отдельно проектирует данные рассуждений и использует Pivotal Token Search (PTS) на стадии обучения предпочтениям. Это сильная гипотеза о качестве данных, но не доказательство, что масштаб параметров не нужен вообще. Phi-4 post-training использует SFT, preference optimization и safety data; function calling у mini — обученный output protocol.
+
+PTS ищет не редкие токены, а решения, после которых резко меняется вероятность правильного ответа. Из префиксов сэмплируют продолжения и проверяют их тестами или эталонным ответом; затем рекурсивно делят участки последовательности, локализуя значимые изменения. В DPO-паре запросом становится исходный вопрос вместе с общим префиксом, а предпочтительным и отвергаемым продолжениями — два отдельных токена с более высокой и низкой вероятностью дальнейшего успеха. Например, условные оценки 0.8 и 0.3 для двух следующих токенов дают сигнал в пользу первого; это не их вероятности по модели. Поиск не гарантирует обнаружения всех важных позиций. Такой DPO дополняется отдельной стадией с полноразмерными ответами. См. [Phi-4, §4.3](https://arxiv.org/html/2412.08905v1#S4.SS3) и [[00 Учебник/12 Post-training и Alignment/05 DPO|вывод DPO]].
 
 ## Inference и serving
 
@@ -44,11 +46,7 @@ Phi — наиболее чистый пример data-centric линии: Phi-
 
 ![[00 Учебник/Assets/Figures/curated/atlas-courses-official/phi-data-optimal-scaling.png]]
 
-Figure 3 сравнивает scaling curves Phi и Llama 2 при обучении на одной смеси:
-линия Phi достигает меньшей ошибки при существенно меньшем размере. Это не
-доказывает превосходство на любой задаче, но визуально фиксирует главную
-гипотезу семейства — качество и curriculum данных сдвигают размер, нужный для
-заданного уровня ошибки. Автор: Microsoft Phi-3 Team. Источник: Figure 3,
+На Figure 3 по горизонтали отложено число параметров в миллиардах, по вертикали — процент ошибок MMLU; обе оси логарифмические. Синие точки соответствуют Phi-1.5, Phi-2, Phi-3-mini и Phi-3-small, зелёные — Llama 2 7B, 13B, 34B и 70B. Фраза оригинальной подписи об одинаковых фиксированных данных относится к моделям внутри сравниваемой линии Llama 2, а не к общему корпусу Phi и Llama 2. Для Phi авторы подбирали отфильтрованные веб-данные и синтетические данные с учётом масштаба модели. График сопоставляет результаты разных рецептов; это не контролируемая абляция, выделяющая отдельный причинный вклад фильтрации или curriculum. Автор: Microsoft Phi-3 Team. Источник: Figure 3,
 [Phi-3 Technical Report](https://arxiv.org/pdf/2404.14219).
 Файл перенесён без изменения из официального PDF extraction; лицензия рисунка
 отдельно не указана. Проверено 2026-07-20.

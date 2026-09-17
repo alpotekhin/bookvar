@@ -2,7 +2,9 @@
 title: GPT-3 — scaling and in-context learning
 type: textbook-chapter
 status: canonical
-last_updated: 2026-08-03
+locale: en
+translation_of: "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning.md"
+last_updated: 2026-09-15
 primary_sources: [https://arxiv.org/abs/2005.14165]
 ---
 
@@ -57,9 +59,19 @@ used examples as temporary memory within the prompt.
 
 ## Mechanics of a few-shot prompt
 
-Consider sentiment classification with labels `positive` and `negative`. The
-prefix contains an instruction, several reviews with correct labels, and one
-new review without an answer.
+Consider a complete two-shot sentiment prompt with two allowed label strings. It is a teaching example, not a prompt or output measured in the GPT-3 paper:
+
+```text
+Classify the review. Answer only: positive sentiment or negative sentiment.
+Review: The acting was wonderful and I enjoyed every minute.
+Label: positive sentiment
+Review: The story was dull and the dialogue was painful.
+Label: negative sentiment
+Review: The beautiful scenery could not rescue the boring plot.
+Label:
+```
+
+The final label is absent from the input. The two completed reviews are demonstrations; the instruction itself does not count as a shot.
 
 1. The tokenizer turns the instruction, separators, demonstrations, and query
    into one sequence of length $T$.
@@ -71,6 +83,17 @@ new review without an answer.
    spans several tokens, the remainder is generated autoregressively.
 5. Scoring must include the whole label string rather than only its first
    token.
+
+To score candidates, temporarily force each candidate prefix without updating weights. Assume a toy tokenizer splits the labels as `[positive, sentiment]` and `[negative, sentiment]`; real token IDs and leading spaces must be inspected. Let $p(positive\mid D,q)=0.6$, $p(sentiment\mid D,q,positive)=0.3$, while the negative branch has probabilities $0.4$ and $0.8$. Then
+
+$$
+\log p(positive\ sentiment\mid D,q)=\ln0.6+\ln0.3=\ln0.18\approx-1.7148,
+$$
+$$
+\log p(negative\ sentiment\mid D,q)=\ln0.4+\ln0.8=\ln0.32\approx-1.1394.
+$$
+
+The first token alone favors positive, but the complete label favors negative. Restricted normalization across these two strings gives $0.18/(0.18+0.32)=0.36$ versus $0.64$, not the model’s unrestricted probability over every possible answer. These probabilities are invented for arithmetic, not GPT-3 measurements. If the scored answer includes a newline or another terminator, include its conditional probability too; equal factors cancel only if they really are equal. Different-length labels also require an explicit sum-versus-length-normalized scoring choice.
 
 Demonstration order, separators, class balance, and label wording become
 interface hyperparameters. If the most recent examples all belong to one class,

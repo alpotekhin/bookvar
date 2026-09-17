@@ -1,8 +1,8 @@
 ---
 title: HSE ML course — current material map
 type: source-note
-status: link-only
-last_verified: 2026-07-24
+status: active
+last_verified: 2026-09-15
 ---
 
 # HSE ML course — current material map
@@ -11,11 +11,20 @@ Repository:
 [`esokolov/ml-course-hse`](https://github.com/esokolov/ml-course-hse/tree/4b21051531fb72dc9eef58632332ad971c92d006),
 commit `4b21051531fb72dc9eef58632332ad971c92d006`.
 
-No license file or other explicit reuse grant was present in the inspected
-snapshot. Bookvar therefore does **not** mirror the PDFs, notebooks, TeX
-sources, solutions, or images. This page points to the exact source files that
-extend the textbook. If the maintainers add a compatible license or grant
-permission, the same map can drive a source-native import.
+The [[05 Источники/Courses/HSE ML course|local course archive]] now contains
+67 artifacts from the two Spring 2026 tracks: 31 notebooks, 26 PDFs, and 10
+Python files. They retain the source language. The import records a permission
+basis separately from a repository license; no repository-wide license was
+present in the inspected snapshot.
+
+This table maps source topics to intended textbook sections. It is not a
+completed-integration ledger: most destination cells below are topic labels,
+not evidence that every explanation or exercise has been incorporated. Use
+[[00 Учебник/01 Классическое машинное обучение/00 Карта модуля|the classical ML module]]
+for the reading sequence and the local archive for the original lectures and
+seminars. The [[00 Учебник/01 Классическое машинное обучение/06a Спектральная кластеризация и графовый Laplacian|spectral clustering chapter]]
+already links the relevant HSE seminar and assignment; broader chapter-by-chapter
+coverage still needs a separate content audit.
 
 The repository contains several historical editions. The table below prefers
 `ml1-2026-spring` and `ml2-2026-spring`; older editions are used only when they

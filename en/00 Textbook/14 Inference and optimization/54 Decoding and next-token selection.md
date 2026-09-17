@@ -202,8 +202,11 @@ Logits may be modified further before selection.
 
 Penalties do not cure the cause of repetition and may damage necessary anaphora,
 code, or tabular output. For structured output, a finite-state machine or grammar
-is more reliable than arbitrary logit reductions: it guarantees syntax, though
-not the truth of field values.
+is more reliable than arbitrary logit reductions: it preserves compatibility
+with the grammar at every step. A complete syntactically valid result still
+requires reaching an accepting state. A length limit, cancellation, or refusal
+can leave an incomplete prefix; test these outcomes separately. Even a valid
+completed structure does not guarantee that its field values are true.
 
 ## Stopping is part of decoding
 

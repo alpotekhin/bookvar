@@ -38,7 +38,14 @@ GPUDirect RDMA открывает адаптеру прямой доступ к 
 
 *Источник: Harvard Edge ML Systems Book, [Network Fabrics, section `sec-network-fabrics-rdma`, figure `fig-gpudirect-data-path`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/network_fabrics/network_fabrics.qmd), CC BY-NC-SA 4.0.*
 
-InfiniBand предоставляет credit-based lossless fabric и RDMA как единый стек. RoCEv2 переносит RDMA поверх Ethernet/IP, но нуждается в согласованных PFC/ECN и congestion control: pause storms и head-of-line blocking могут сделать «lossless» сеть нестабильной. Выбор проверяют не названием протокола, а tail collective latency, retransmission/ECN/PFC counters и bisection bandwidth.
+InfiniBand предоставляет credit-based lossless fabric и RDMA как единый стек.
+RoCEv2 переносит RDMA поверх Ethernet/IP. В распространённом lossless-дизайне
+PFC предотвращает потери для выбранного класса, а ECN и управление перегрузкой
+снижают необходимость пауз; несогласованная настройка способна вызвать pause
+storms и head-of-line blocking. Но PFC — не универсальное требование любого
+RoCEv2 deployment: например, [Cumulus Linux 5.12](https://docs.nvidia.com/networking-ethernet-software/cumulus-linux-512/Layer-1-and-Switch-Ports/Quality-of-Service/RDMA-over-Converged-Ethernet-RoCE/)
+различает lossless с PFC/ECN и lossy с ECN. Возможность и качество такого режима
+зависят от NIC, коммутаторов, механизмов повторной передачи и нагрузки. Выбор проверяют не названием протокола, а tail collective latency, retransmission/ECN/PFC counters и bisection bandwidth.
 
 Топология задаёт oversubscription и число hops. Для TP с несколькими exchanges на слой crossing медленной spine связи умножается на число слоёв; DP all-reduce можно иерархически свернуть внутри узла и только затем пересечь spine. Topology-aware rank mapping должен совпадать с collective hierarchy.
 
@@ -70,13 +77,18 @@ Distributed checkpoint должен:
 5. проверяться restore на другой допустимой topology.
 
 ```text
-freeze logical step metadata
+freeze consistent state snapshot and metadata at one logical step
 for each rank in parallel:
-    write_large_shard(temp_generation, checksum, global_tensor_metadata)
+    write_large_shard(snapshot, temp_generation, checksum, global_tensor_metadata)
 barrier_and_validate_all_shards()
 single_committer.write_atomic_manifest(generation, durable=true)
 garbage_collect_only_generations_older_than_last_known_good()
 ```
+
+Асинхронный writer должен читать согласованный снимок одного шага, а не
+живые параметры, которые уже меняет оптимизатор. Обучение продолжается после
+фиксации или безопасного копирования состояния в staging; лишь его запись
+в долговременное хранилище переносится в фон.
 
 Неполный каталог нельзя считать последним checkpoint. Temp generation + atomic commit marker отделяет завершённую версию от оборванной.
 

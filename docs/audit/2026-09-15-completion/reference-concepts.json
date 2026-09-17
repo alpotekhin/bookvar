@@ -1,0 +1,2756 @@
+{
+  "schema": "bookvar-editorial-completion-v1",
+  "scope": "reference-concepts",
+  "status": "completed-pending-independent-review",
+  "date": "2026-09-15",
+  "total_pages": 45,
+  "findings_total": 57,
+  "manifest": "publishing/navigation.yml",
+  "pages": [
+    {
+      "index": 0,
+      "path": "01 Справочник/_index.md",
+      "en": null,
+      "route": "reference/index",
+      "before": "9f82537d499f5e501316a9e5f91e07a8dd51b2874f38bdf5ea57e139f1f805e3",
+      "full_read": true,
+      "reread": false,
+      "findings": [],
+      "reading_evidence": "Entire current page emitted and read from frontmatter through EOF; byte-exact snapshot verified before edits.",
+      "after": "9f82537d499f5e501316a9e5f91e07a8dd51b2874f38bdf5ea57e139f1f805e3",
+      "audit_original_read_sha256": "9f82537d499f5e501316a9e5f91e07a8dd51b2874f38bdf5ea57e139f1f805e3",
+      "changed_in_this_task": false,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/01 Справочник/_index.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 64,
+        "sha256": "9f82537d499f5e501316a9e5f91e07a8dd51b2874f38bdf5ea57e139f1f805e3"
+      },
+      "reread_coverage": null,
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      },
+      "sources_checked": []
+    },
+    {
+      "index": 1,
+      "path": "01 Справочник/Архитектурные паттерны/Decoder-only.md",
+      "en": null,
+      "route": "reference/arhitekturnye-patterny/decoder-only",
+      "before": "98fff5dbe3787957dd4462579b4fbd1c16e12e7238df2c78ca5d7c8fb6dac010",
+      "full_read": true,
+      "reread": true,
+      "findings": [
+        {
+          "severity": "P3",
+          "line": 24,
+          "excerpt": "losses для всех позиций",
+          "issue": "Смешанный язык и повтор того же объяснения teacher forcing в следующем абзаце.",
+          "action": "Объединить два абзаца, заменить общеупотребимые английские слова русскими.",
+          "id": "reference-concepts-02-1",
+          "status": "fixed",
+          "resolution": "Teacher forcing explanation unified with causal diagonal/shift; ordinary English nouns translated.",
+          "page_sha_before": "98fff5dbe3787957dd4462579b4fbd1c16e12e7238df2c78ca5d7c8fb6dac010",
+          "page_sha_after": "88662f687eefe3f65fb5f5e17857e05d8c742006277414c2fab4077d14025dc6",
+          "full_read": true,
+          "reread": true
+        }
+      ],
+      "reading_evidence": "Entire current page emitted and read from frontmatter through EOF; byte-exact snapshot verified before edits.",
+      "reread_evidence": "Entire changed page emitted/read; subsequent local display-delimiter correction read again.",
+      "after": "88662f687eefe3f65fb5f5e17857e05d8c742006277414c2fab4077d14025dc6",
+      "audit_original_read_sha256": "98fff5dbe3787957dd4462579b4fbd1c16e12e7238df2c78ca5d7c8fb6dac010",
+      "changed_in_this_task": true,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/01 Справочник/Архитектурные паттерны/Decoder-only.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 56,
+        "sha256": "98fff5dbe3787957dd4462579b4fbd1c16e12e7238df2c78ca5d7c8fb6dac010"
+      },
+      "reread_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 61,
+        "sha256": "88662f687eefe3f65fb5f5e17857e05d8c742006277414c2fab4077d14025dc6"
+      },
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      },
+      "sources_checked": []
+    },
+    {
+      "index": 2,
+      "path": "01 Справочник/Архитектурные паттерны/Encoder-Decoder.md",
+      "en": null,
+      "route": "reference/arhitekturnye-patterny/encoder-decoder",
+      "before": "8fcb5e1267aee5c586acfe1572c8eab94656f982254672b7e76a7fd0aeb441d7",
+      "full_read": true,
+      "reread": true,
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 33,
+          "excerpt": "источник кодируется один раз",
+          "issue": "Это подано как сравнительное преимущество, но decoder-only с KV-cache также не пересчитывает префикс на каждом шаге.",
+          "action": "Сравнить двунаправленное кодирование входа и отдельные стеки при оговорённых размерах моделей; не подразумевать повторный prefill у decoder-only.",
+          "id": "reference-concepts-03-1",
+          "status": "fixed",
+          "resolution": "Separate bidirectional source stack distinguished from cache reuse also available in decoder-only; no unconditional speed claim.",
+          "page_sha_before": "8fcb5e1267aee5c586acfe1572c8eab94656f982254672b7e76a7fd0aeb441d7",
+          "page_sha_after": "65a12b916fbe40f1589974a3037d57553c3f69d3d50d015a198a0078624cfc9d",
+          "full_read": true,
+          "reread": true
+        }
+      ],
+      "reading_evidence": "Entire current page emitted and read from frontmatter through EOF; byte-exact snapshot verified before edits.",
+      "sources_checked": [
+        "https://arxiv.org/abs/1910.10683",
+        "https://huggingface.co/docs/transformers/main/cache_explanation"
+      ],
+      "reread_evidence": "Entire changed page emitted/read; subsequent local display-delimiter correction read again.",
+      "after": "65a12b916fbe40f1589974a3037d57553c3f69d3d50d015a198a0078624cfc9d",
+      "audit_original_read_sha256": "8fcb5e1267aee5c586acfe1572c8eab94656f982254672b7e76a7fd0aeb441d7",
+      "changed_in_this_task": true,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/01 Справочник/Архитектурные паттерны/Encoder-Decoder.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 50,
+        "sha256": "8fcb5e1267aee5c586acfe1572c8eab94656f982254672b7e76a7fd0aeb441d7"
+      },
+      "reread_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 62,
+        "sha256": "65a12b916fbe40f1589974a3037d57553c3f69d3d50d015a198a0078624cfc9d"
+      },
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      }
+    },
+    {
+      "index": 3,
+      "path": "01 Справочник/Архитектурные паттерны/Encoder-only.md",
+      "en": null,
+      "route": "reference/arhitekturnye-patterny/encoder-only",
+      "before": "723c6ad89062c16deba18b639d6bc217f73196746ca6e21ab93d5dad6cad186c",
+      "full_read": true,
+      "reread": true,
+      "findings": [
+        {
+          "severity": "P3",
+          "line": 16,
+          "excerpt": "token, segment и position embeddings",
+          "issue": "Терминология смешана даже в описании простых компонентов.",
+          "action": "Редакторски унифицировать русские названия; названия API и методов сохранить.",
+          "id": "reference-concepts-04-1",
+          "status": "fixed",
+          "resolution": "Token/segment/position embeddings and task-head/FFN prose unified in Russian.",
+          "page_sha_before": "723c6ad89062c16deba18b639d6bc217f73196746ca6e21ab93d5dad6cad186c",
+          "page_sha_after": "97134cddf046c48f7afa8232342f8d4d535a29e13803a057aa4e24b164221a83",
+          "full_read": true,
+          "reread": true
+        }
+      ],
+      "reading_evidence": "Entire current page emitted and read from frontmatter through EOF; byte-exact snapshot verified before edits.",
+      "reread_evidence": "Entire changed page emitted/read; subsequent local display-delimiter correction read again.",
+      "after": "97134cddf046c48f7afa8232342f8d4d535a29e13803a057aa4e24b164221a83",
+      "audit_original_read_sha256": "723c6ad89062c16deba18b639d6bc217f73196746ca6e21ab93d5dad6cad186c",
+      "changed_in_this_task": true,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/01 Справочник/Архитектурные паттерны/Encoder-only.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 55,
+        "sha256": "723c6ad89062c16deba18b639d6bc217f73196746ca6e21ab93d5dad6cad186c"
+      },
+      "reread_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 56,
+        "sha256": "97134cddf046c48f7afa8232342f8d4d535a29e13803a057aa4e24b164221a83"
+      },
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      },
+      "sources_checked": []
+    },
+    {
+      "index": 4,
+      "path": "01 Справочник/Математика и DL/Нормализация.md",
+      "en": null,
+      "route": "reference/matematika-i-dl/normalizatsiya",
+      "before": "406102330d57c6dcafab2ecebb4e5848b4a388cae9cad2b4694621abc9801991",
+      "full_read": true,
+      "reread": true,
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 16,
+          "excerpt": "gamma, mu, sigma, epsilon",
+          "issue": "Параметры обеих формул не определены рядом с записью; читатель справочника должен угадывать обучаемые и вычисляемые величины.",
+          "action": "Определить среднее/дисперсию по d признакам, gamma/beta и epsilon; дать короткий численный пример.",
+          "id": "reference-concepts-05-1",
+          "status": "fixed",
+          "resolution": "Defined per-token mean/variance and learned gamma/beta/epsilon; computed x=(1,3) LayerNorm/RMSNorm example.",
+          "page_sha_before": "406102330d57c6dcafab2ecebb4e5848b4a388cae9cad2b4694621abc9801991",
+          "page_sha_after": "6815f63ffa4bdba9dd4629a7a65370d86ff5058449551b7d7b7bfa5ff70c7a95",
+          "full_read": true,
+          "reread": true
+        }
+      ],
+      "reading_evidence": "Entire current page emitted and read from frontmatter through EOF; byte-exact snapshot verified before edits.",
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/stable/generated/torch.nn.LayerNorm.html",
+        "https://arxiv.org/abs/1910.07467"
+      ],
+      "reread_evidence": "Entire changed page emitted/read; subsequent local display-delimiter correction read again.",
+      "after": "6815f63ffa4bdba9dd4629a7a65370d86ff5058449551b7d7b7bfa5ff70c7a95",
+      "audit_original_read_sha256": "406102330d57c6dcafab2ecebb4e5848b4a388cae9cad2b4694621abc9801991",
+      "changed_in_this_task": true,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/01 Справочник/Математика и DL/Нормализация.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 52,
+        "sha256": "406102330d57c6dcafab2ecebb4e5848b4a388cae9cad2b4694621abc9801991"
+      },
+      "reread_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 69,
+        "sha256": "6815f63ffa4bdba9dd4629a7a65370d86ff5058449551b7d7b7bfa5ff70c7a95"
+      },
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      }
+    },
+    {
+      "index": 5,
+      "path": "01 Справочник/Позиционные представления/RoPE.md",
+      "en": null,
+      "route": "reference/pozitsionnye-predstavleniya/rope",
+      "before": "3bd65668092c47e66ce17fc4bb0ddeb64b088ae644bf6c7dc3eac45b9b80d05c",
+      "full_read": true,
+      "reread": true,
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 38,
+          "excerpt": "зависит от относительного смещения",
+          "issue": "Центральное свойство заявлено, но не записано; матрица вращения сама по себе его не показывает.",
+          "action": "Добавить тождество (R_m q)^T(R_n k)=q^T R_(n-m) k с определением позиций и частот.",
+          "id": "reference-concepts-06-1",
+          "status": "fixed",
+          "resolution": "Added relative-rotation identity, per-pair frequency/base definitions and cosine example; distinguished fixed content vectors from contextual states.",
+          "page_sha_before": "3bd65668092c47e66ce17fc4bb0ddeb64b088ae644bf6c7dc3eac45b9b80d05c",
+          "page_sha_after": "9760a831bc06f8d3024d5b651be0bd3876734a2d9074a8f059bc08d47968a6f7",
+          "full_read": true,
+          "reread": true
+        }
+      ],
+      "reading_evidence": "Full text read frontmatter through EOF; long Agent mechanisms page covered across displayed contiguous ranges.",
+      "sources_checked": [
+        "https://arxiv.org/html/2104.09864v5"
+      ],
+      "reread_evidence": "Entire changed page emitted and reread from frontmatter through EOF.",
+      "after": "9760a831bc06f8d3024d5b651be0bd3876734a2d9074a8f059bc08d47968a6f7",
+      "audit_original_read_sha256": "3bd65668092c47e66ce17fc4bb0ddeb64b088ae644bf6c7dc3eac45b9b80d05c",
+      "changed_in_this_task": true,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/01 Справочник/Позиционные представления/RoPE.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 57,
+        "sha256": "3bd65668092c47e66ce17fc4bb0ddeb64b088ae644bf6c7dc3eac45b9b80d05c"
+      },
+      "reread_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 76,
+        "sha256": "9760a831bc06f8d3024d5b651be0bd3876734a2d9074a8f059bc08d47968a6f7"
+      },
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      }
+    },
+    {
+      "index": 6,
+      "path": "01 Справочник/Текст и токенизация/Токенизация.md",
+      "en": null,
+      "route": "reference/tekst-i-tokenizatsiya/tokenizatsiya",
+      "before": "7712cd4481087abf5fecc05e5260eeceee25bfc3e9e1c514179378d69a462fb0",
+      "full_read": true,
+      "reread": false,
+      "findings": [
+        {
+          "severity": "P1",
+          "line": 14,
+          "excerpt": "обратимо преобразует текст",
+          "issue": "Определение противоречит описанной ниже нормализации: Lowercase/StripAccents теряют исходный регистр/диакритику.",
+          "action": "Не объявлять любую токенизацию обратимой; показать Hello/hello и отдельно объяснить обратимость byte-level без потерь нормализации.",
+          "id": "reference-concepts-07-1",
+          "status": "already-fixed",
+          "resolution": "Before this pass the definition already avoided reversibility claims, gave Hello/hello and byte-level/no-loss conditions; verified against HF normalizers.",
+          "page_sha_before": "7712cd4481087abf5fecc05e5260eeceee25bfc3e9e1c514179378d69a462fb0",
+          "page_sha_after": "7712cd4481087abf5fecc05e5260eeceee25bfc3e9e1c514179378d69a462fb0",
+          "full_read": true,
+          "reread": false
+        }
+      ],
+      "reading_evidence": "Full text read frontmatter through EOF; long Agent mechanisms page covered across displayed contiguous ranges.",
+      "sources_checked": [
+        "https://huggingface.co/docs/tokenizers/api/normalizers"
+      ],
+      "after": "7712cd4481087abf5fecc05e5260eeceee25bfc3e9e1c514179378d69a462fb0",
+      "audit_original_read_sha256": "a0ecefba9c6db8a21f9e0f6e7e5ab0be6a4d144fa6eca4e1bc78e1adc0b65bc1",
+      "changed_in_this_task": false,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/01 Справочник/Текст и токенизация/Токенизация.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 74,
+        "sha256": "7712cd4481087abf5fecc05e5260eeceee25bfc3e9e1c514179378d69a462fb0"
+      },
+      "reread_coverage": null,
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      }
+    },
+    {
+      "index": 7,
+      "path": "01 Справочник/Agents/Agent mechanisms.md",
+      "en": null,
+      "route": "reference/agents/mechanisms",
+      "before": "9a44b6de22856795f013f4244935461e51e0d9bf8f9671d56a01abe3c7276283",
+      "full_read": true,
+      "reread": true,
+      "findings": [
+        {
+          "severity": "P1",
+          "line": 149,
+          "excerpt": "для программы — компилятор и тесты",
+          "issue": "Под заголовком формального verifier смешиваются проверка доказательства и испытание программы на тестах.",
+          "action": "Разделить формальную верификацию, проверку типизации/компиляции и исполняемый набор тестов; тесты не доказывают общую спецификацию.",
+          "id": "reference-concepts-08-1",
+          "status": "already-fixed",
+          "resolution": "Before this pass the full Formal verifier section already separated Lean kernel checks, compilation and finite tests, with sorting counterexample and official Lean documentation.",
+          "page_sha_before": "9a44b6de22856795f013f4244935461e51e0d9bf8f9671d56a01abe3c7276283",
+          "page_sha_after": "5b8a8cd16793f3f811076a7c2ee28c9e6374e07cb22ea9ce7e84f6f701f16df6",
+          "full_read": true,
+          "reread": true
+        },
+        {
+          "severity": "P2",
+          "line": 201,
+          "excerpt": "окончательное утверждение принадлежит execution grader-у",
+          "issue": "Категоричная формула скрывает неполноту проверяющего и неопределённость требований.",
+          "action": "Описать, какое именно свойство подтверждено проверкой, без персонификации grader.",
+          "id": "reference-concepts-08-2",
+          "status": "fixed",
+          "resolution": "Replaced grader ownership slogan with exact properties established and limitations of tests/specification; made reset scope explicit.",
+          "page_sha_before": "9a44b6de22856795f013f4244935461e51e0d9bf8f9671d56a01abe3c7276283",
+          "page_sha_after": "5b8a8cd16793f3f811076a7c2ee28c9e6374e07cb22ea9ce7e84f6f701f16df6",
+          "full_read": true,
+          "reread": true
+        }
+      ],
+      "reading_evidence": "Full text read frontmatter through EOF; long Agent mechanisms page covered across displayed contiguous ranges.",
+      "sources_checked": [
+        "https://lean-lang.org/doc/reference/latest/ValidatingProofs/"
+      ],
+      "reread_evidence": "Entire changed page emitted and reread from frontmatter through EOF.",
+      "after": "5b8a8cd16793f3f811076a7c2ee28c9e6374e07cb22ea9ce7e84f6f701f16df6",
+      "audit_original_read_sha256": "ecdc00135667b67a09023a61ab71f2287a3701518c5986f5b85b0bce654f2d63",
+      "changed_in_this_task": true,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/01 Справочник/Agents/Agent mechanisms.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 223,
+        "sha256": "9a44b6de22856795f013f4244935461e51e0d9bf8f9671d56a01abe3c7276283"
+      },
+      "reread_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 230,
+        "sha256": "5b8a8cd16793f3f811076a7c2ee28c9e6374e07cb22ea9ce7e84f6f701f16df6"
+      },
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      }
+    },
+    {
+      "index": 8,
+      "path": "01 Справочник/Attention/Cross-Attention.md",
+      "en": null,
+      "route": "reference/attention/cross-attention",
+      "before": "8fd8a0ec332358f360ee706de5a454f7481909b574d369202e738e56fdd31032",
+      "full_read": true,
+      "reread": true,
+      "findings": [
+        {
+          "severity": "P3",
+          "line": 12,
+          "excerpt": "queries приходят",
+          "issue": "Русско-английская смесь мешает последовательности с основным текстом.",
+          "action": "Сохранить Q/K/V, обозначения дать по-русски; определить X/Y как состояния двух последовательностей.",
+          "id": "reference-concepts-09-1",
+          "status": "fixed",
+          "resolution": "Defined Q/K/V in Russian and X/Y dimensions, projection matrices and n_query by n_memory scores.",
+          "page_sha_before": "8fd8a0ec332358f360ee706de5a454f7481909b574d369202e738e56fdd31032",
+          "page_sha_after": "185887e92835202620a24219d6f053eadbe88f0d2f1e72372edcdb9e9978b8fc",
+          "full_read": true,
+          "reread": true
+        }
+      ],
+      "reading_evidence": "Full text read frontmatter through EOF; long Agent mechanisms page covered across displayed contiguous ranges.",
+      "reread_evidence": "Entire changed page emitted and reread from frontmatter through EOF.",
+      "after": "185887e92835202620a24219d6f053eadbe88f0d2f1e72372edcdb9e9978b8fc",
+      "audit_original_read_sha256": "8fd8a0ec332358f360ee706de5a454f7481909b574d369202e738e56fdd31032",
+      "changed_in_this_task": true,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/01 Справочник/Attention/Cross-Attention.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 45,
+        "sha256": "8fd8a0ec332358f360ee706de5a454f7481909b574d369202e738e56fdd31032"
+      },
+      "reread_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 53,
+        "sha256": "185887e92835202620a24219d6f053eadbe88f0d2f1e72372edcdb9e9978b8fc"
+      },
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      },
+      "sources_checked": []
+    },
+    {
+      "index": 9,
+      "path": "01 Справочник/Attention/GQA.md",
+      "en": null,
+      "route": "reference/attention/gqa",
+      "before": "f8c0dbfaa6d042964a79cad0b0c8d535d9fe5bdce8093d9c70b75bbcab913dec",
+      "full_read": true,
+      "reread": false,
+      "findings": [],
+      "reading_evidence": "Full text read frontmatter through EOF; long Agent mechanisms page covered across displayed contiguous ranges.",
+      "after": "f8c0dbfaa6d042964a79cad0b0c8d535d9fe5bdce8093d9c70b75bbcab913dec",
+      "audit_original_read_sha256": "f8c0dbfaa6d042964a79cad0b0c8d535d9fe5bdce8093d9c70b75bbcab913dec",
+      "changed_in_this_task": false,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/01 Справочник/Attention/GQA.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 14,
+        "sha256": "f8c0dbfaa6d042964a79cad0b0c8d535d9fe5bdce8093d9c70b75bbcab913dec"
+      },
+      "reread_coverage": null,
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      },
+      "sources_checked": []
+    },
+    {
+      "index": 10,
+      "path": "01 Справочник/Attention/MHA, MQA и GQA.md",
+      "en": null,
+      "route": "reference/attention/mha-mqa-gqa",
+      "before": "3cc006c4ecaa8da99066da7bc252c6b7f8fb3b49397764ded69ee881274b9d39",
+      "full_read": true,
+      "reread": false,
+      "findings": [],
+      "reading_evidence": "Entire current page emitted/read from frontmatter through EOF; redirect role preserved.",
+      "after": "3cc006c4ecaa8da99066da7bc252c6b7f8fb3b49397764ded69ee881274b9d39",
+      "audit_original_read_sha256": "3cc006c4ecaa8da99066da7bc252c6b7f8fb3b49397764ded69ee881274b9d39",
+      "changed_in_this_task": false,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/01 Справочник/Attention/MHA, MQA и GQA.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 125,
+        "sha256": "3cc006c4ecaa8da99066da7bc252c6b7f8fb3b49397764ded69ee881274b9d39"
+      },
+      "reread_coverage": null,
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      },
+      "sources_checked": []
+    },
+    {
+      "index": 11,
+      "path": "01 Справочник/Attention/MHA.md",
+      "en": null,
+      "route": "reference/attention/mha",
+      "before": "6b5c02740360d8b0feb455dbfb0ae6484bd124ecf03f1bfbd40ae39309f731e5",
+      "full_read": true,
+      "reread": false,
+      "findings": [],
+      "reading_evidence": "Entire current page emitted/read from frontmatter through EOF; redirect role preserved.",
+      "after": "6b5c02740360d8b0feb455dbfb0ae6484bd124ecf03f1bfbd40ae39309f731e5",
+      "audit_original_read_sha256": "6b5c02740360d8b0feb455dbfb0ae6484bd124ecf03f1bfbd40ae39309f731e5",
+      "changed_in_this_task": false,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/01 Справочник/Attention/MHA.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 14,
+        "sha256": "6b5c02740360d8b0feb455dbfb0ae6484bd124ecf03f1bfbd40ae39309f731e5"
+      },
+      "reread_coverage": null,
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      },
+      "sources_checked": []
+    },
+    {
+      "index": 12,
+      "path": "01 Справочник/Attention/MLA.md",
+      "en": null,
+      "route": "reference/attention/mla",
+      "before": "adc3818c8562f8923837822246b7df417a1d70cf3c4470989732d058b589a9c1",
+      "full_read": true,
+      "reread": true,
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 32,
+          "excerpt": "детали сложнее",
+          "issue": "Справочная формула не отражает сохранение RoPE-ключа, поэтому по ней нельзя даже оценить память реальной MLA.",
+          "action": "Указать состав cache: latent плюс позиционный ключ; определить размерности, отделить учебное упрощение от реализации.",
+          "id": "reference-concepts-13-1",
+          "status": "fixed",
+          "resolution": "Defined latent plus separate shared RoPE key cache, dimensions and variable-length logical-byte formula; V2 512+64 gives 1152 bytes/token/layer at 2 bytes.",
+          "page_sha_before": "adc3818c8562f8923837822246b7df417a1d70cf3c4470989732d058b589a9c1",
+          "page_sha_after": "f83cfc67e7293802a034fa92fd8ef867e83870e93a27f22e71d8f93f825285be",
+          "full_read": true,
+          "reread": true
+        }
+      ],
+      "reading_evidence": "Entire current page emitted/read from frontmatter through EOF; redirect role preserved.",
+      "sources_checked": [
+        "https://arxiv.org/html/2405.04434v5"
+      ],
+      "reread_evidence": "Full revised text reread from frontmatter through EOF.",
+      "after": "f83cfc67e7293802a034fa92fd8ef867e83870e93a27f22e71d8f93f825285be",
+      "audit_original_read_sha256": "adc3818c8562f8923837822246b7df417a1d70cf3c4470989732d058b589a9c1",
+      "changed_in_this_task": true,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/01 Справочник/Attention/MLA.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 53,
+        "sha256": "adc3818c8562f8923837822246b7df417a1d70cf3c4470989732d058b589a9c1"
+      },
+      "reread_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 76,
+        "sha256": "f83cfc67e7293802a034fa92fd8ef867e83870e93a27f22e71d8f93f825285be"
+      },
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      }
+    },
+    {
+      "index": 13,
+      "path": "01 Справочник/Attention/MQA.md",
+      "en": null,
+      "route": "reference/attention/mqa",
+      "before": "0c0bd3745704086507d3e91fb17e2f352e21f60c87edede795ede51d6de48c49",
+      "full_read": true,
+      "reread": false,
+      "findings": [],
+      "reading_evidence": "Entire current page emitted/read from frontmatter through EOF; redirect role preserved.",
+      "after": "0c0bd3745704086507d3e91fb17e2f352e21f60c87edede795ede51d6de48c49",
+      "audit_original_read_sha256": "0c0bd3745704086507d3e91fb17e2f352e21f60c87edede795ede51d6de48c49",
+      "changed_in_this_task": false,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/01 Справочник/Attention/MQA.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 14,
+        "sha256": "0c0bd3745704086507d3e91fb17e2f352e21f60c87edede795ede51d6de48c49"
+      },
+      "reread_coverage": null,
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      },
+      "sources_checked": []
+    },
+    {
+      "index": 14,
+      "path": "01 Справочник/Attention/Self-Attention.md",
+      "en": null,
+      "route": "reference/attention/self-attention",
+      "before": "a931b6a1c5e774f8c0d7f69e1506c9fb9c63bccdae6859516c5f87a9af89f624",
+      "full_read": true,
+      "reread": true,
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 31,
+          "excerpt": "causal mask разрешает только прошлое",
+          "issue": "Не оговорено, что при стандартном сдвиге target текущая входная позиция тоже разрешена; возможна ошибка диагонали маски.",
+          "action": "Указать j<=i и связать текущий входной токен с предсказанием следующего.",
+          "id": "reference-concepts-15-1",
+          "status": "fixed",
+          "resolution": "Causal diagonal j<=i explicitly linked to next-token target shift; example of third input predicting fourth.",
+          "page_sha_before": "a931b6a1c5e774f8c0d7f69e1506c9fb9c63bccdae6859516c5f87a9af89f624",
+          "page_sha_after": "abe3ad6744c7cc1c89fed9c375a3a07071899c901a7ede44a4632d9e3630fd11",
+          "full_read": true,
+          "reread": true
+        },
+        {
+          "severity": "P3",
+          "line": 19,
+          "excerpt": "Интерактивная визуализация",
+          "issue": "На странице встроен PNG, а не интерактивный компонент.",
+          "action": "Назвать снимком визуализации и дать ссылку на интерактивный оригинал, если он доступен.",
+          "id": "reference-concepts-15-2",
+          "status": "fixed",
+          "resolution": "Local PNG called a snapshot rather than interactive component; original source link retained.",
+          "page_sha_before": "a931b6a1c5e774f8c0d7f69e1506c9fb9c63bccdae6859516c5f87a9af89f624",
+          "page_sha_after": "abe3ad6744c7cc1c89fed9c375a3a07071899c901a7ede44a4632d9e3630fd11",
+          "full_read": true,
+          "reread": true
+        }
+      ],
+      "reading_evidence": "Entire current page emitted/read from frontmatter through EOF; redirect role preserved.",
+      "sources_checked": [
+        "https://huggingface.co/docs/transformers/main/cache_explanation"
+      ],
+      "reread_evidence": "Full revised text reread from frontmatter through EOF.",
+      "after": "abe3ad6744c7cc1c89fed9c375a3a07071899c901a7ede44a4632d9e3630fd11",
+      "audit_original_read_sha256": "a931b6a1c5e774f8c0d7f69e1506c9fb9c63bccdae6859516c5f87a9af89f624",
+      "changed_in_this_task": true,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/01 Справочник/Attention/Self-Attention.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 47,
+        "sha256": "a931b6a1c5e774f8c0d7f69e1506c9fb9c63bccdae6859516c5f87a9af89f624"
+      },
+      "reread_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 54,
+        "sha256": "abe3ad6744c7cc1c89fed9c375a3a07071899c901a7ede44a4632d9e3630fd11"
+      },
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      }
+    },
+    {
+      "index": 15,
+      "path": "01 Справочник/Evaluation/Evaluation.md",
+      "en": null,
+      "route": "reference/evaluation/evaluation",
+      "before": "11997f2b1dadd7a02ba32245ca0c9bd30740b2319ae311d590762e885fe67296",
+      "full_read": true,
+      "reread": true,
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 79,
+          "excerpt": "Минимальный протокол",
+          "issue": "Почти все пункты заданы английскими терминами без определения: decision, slices, agreement, bias, setup.",
+          "action": "Сохранить компактный протокол, но определить единицу измерения, выборку, критерий успеха и неопределённость на одном коротком примере.",
+          "id": "reference-concepts-16-1",
+          "status": "fixed",
+          "resolution": "Protocol translated and anchored in one 200-query example: 172 successes, success+deadline criterion, Wilson interval and independent/user-cluster units.",
+          "page_sha_before": "11997f2b1dadd7a02ba32245ca0c9bd30740b2319ae311d590762e885fe67296",
+          "page_sha_after": "047fa7677177c76461f5154c0f96053ccae8f98cc23f5576502bedddcb15483e",
+          "full_read": true,
+          "reread": true
+        }
+      ],
+      "reading_evidence": "Entire current page read frontmatter through EOF; no keyword-only review.",
+      "reread_evidence": "Entire revised page read from frontmatter through EOF.",
+      "after": "047fa7677177c76461f5154c0f96053ccae8f98cc23f5576502bedddcb15483e",
+      "audit_original_read_sha256": "11997f2b1dadd7a02ba32245ca0c9bd30740b2319ae311d590762e885fe67296",
+      "changed_in_this_task": true,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/01 Справочник/Evaluation/Evaluation.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 100,
+        "sha256": "11997f2b1dadd7a02ba32245ca0c9bd30740b2319ae311d590762e885fe67296"
+      },
+      "reread_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 111,
+        "sha256": "047fa7677177c76461f5154c0f96053ccae8f98cc23f5576502bedddcb15483e"
+      },
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      },
+      "sources_checked": []
+    },
+    {
+      "index": 16,
+      "path": "01 Справочник/FFN и MoE/Dense FFN и gated activations.md",
+      "en": null,
+      "route": "reference/ffn-i-moe/dense-ffn-gated-activations",
+      "before": "65291d2c34cde8b0d83cd0183fbea7191bd96f45225ce3ab45a8ae7683165120",
+      "full_read": true,
+      "reread": true,
+      "findings": [
+        {
+          "severity": "P3",
+          "line": 39,
+          "excerpt": "Столько же скалярных умножений",
+          "issue": "Оговорка multiply-add смешивает точный подсчёт умножений и принятую FLOPs-конвенцию.",
+          "action": "Явно развести MAC и2FLOPs, веса bias и стоимость нелинейности.",
+          "id": "reference-concepts-17-1",
+          "status": "fixed",
+          "resolution": "Separated weights/bias, scalar multiplications, MAC/2-FLOP convention and nonlinear cost, including d=4,m=16 example.",
+          "page_sha_before": "65291d2c34cde8b0d83cd0183fbea7191bd96f45225ce3ab45a8ae7683165120",
+          "page_sha_after": "c9601ad61e01d72d00cdd11e554a8f3de87f704eb0fa7672636f620448b65e2e",
+          "full_read": true,
+          "reread": true
+        }
+      ],
+      "reading_evidence": "Entire current page read frontmatter through EOF; no keyword-only review.",
+      "reread_evidence": "Entire revised page read from frontmatter through EOF.",
+      "after": "c9601ad61e01d72d00cdd11e554a8f3de87f704eb0fa7672636f620448b65e2e",
+      "audit_original_read_sha256": "65291d2c34cde8b0d83cd0183fbea7191bd96f45225ce3ab45a8ae7683165120",
+      "changed_in_this_task": true,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/01 Справочник/FFN и MoE/Dense FFN и gated activations.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 136,
+        "sha256": "65291d2c34cde8b0d83cd0183fbea7191bd96f45225ce3ab45a8ae7683165120"
+      },
+      "reread_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 144,
+        "sha256": "c9601ad61e01d72d00cdd11e554a8f3de87f704eb0fa7672636f620448b65e2e"
+      },
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      },
+      "sources_checked": []
+    },
+    {
+      "index": 17,
+      "path": "01 Справочник/FFN и MoE/Mixture of Experts.md",
+      "en": null,
+      "route": "reference/ffn-i-moe/mixture-of-experts",
+      "before": "55cedd07df755ffe5cd81807640b79c3c0f2ba9e251cf3b7cb965a54a782822d",
+      "full_read": true,
+      "reread": true,
+      "findings": [
+        {
+          "severity": "P1",
+          "line": 32,
+          "excerpt": "без auxiliary loss",
+          "issue": "Не все методы требуют вспомогательной функции потерь: существуют alternative balancing strategies (DeepSeek-V3).",
+          "action": "Писать о необходимости контролировать нагрузку, а не обязательности конкретного loss; назвать bias-based balancing и источник.",
+          "id": "reference-concepts-18-1",
+          "status": "already-fixed",
+          "resolution": "Pre-edit page already explained V3 bias-based routing and weak sequence-wise auxiliary term; source confirmed exact distinction.",
+          "page_sha_before": "55cedd07df755ffe5cd81807640b79c3c0f2ba9e251cf3b7cb965a54a782822d",
+          "page_sha_after": "373913e41e4a65bf3b47747e9c09d30e0d6d2e4f6aa31acae96caf41ca212ba5",
+          "full_read": true,
+          "reread": true
+        },
+        {
+          "severity": "P2",
+          "line": 26,
+          "excerpt": "p_i(x)",
+          "issue": "Не определены g,p и нормировка весов выбранных экспертов, смешаны capacity памяти и capacity factor.",
+          "action": "Дать определения router scores, top-k weights и различить число параметров/ёмкость буфера.",
+          "id": "reference-concepts-18-2",
+          "status": "fixed",
+          "resolution": "Added explicit g(x), top-2 softmax weights and buffer capacity-factor worked example; parameter capacity remains distinct.",
+          "page_sha_before": "55cedd07df755ffe5cd81807640b79c3c0f2ba9e251cf3b7cb965a54a782822d",
+          "page_sha_after": "373913e41e4a65bf3b47747e9c09d30e0d6d2e4f6aa31acae96caf41ca212ba5",
+          "full_read": true,
+          "reread": true
+        }
+      ],
+      "reading_evidence": "Entire current page read frontmatter through EOF; no keyword-only review.",
+      "sources_checked": [
+        "https://arxiv.org/html/2412.19437v2",
+        "https://arxiv.org/html/2401.04088v1"
+      ],
+      "reread_evidence": "Entire revised page read from frontmatter through EOF.",
+      "after": "373913e41e4a65bf3b47747e9c09d30e0d6d2e4f6aa31acae96caf41ca212ba5",
+      "audit_original_read_sha256": "b9e5d12fec3ef16e46857d9d0eaf680580d135741324758e6dec578bf666fcbd",
+      "changed_in_this_task": true,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/01 Справочник/FFN и MoE/Mixture of Experts.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 97,
+        "sha256": "55cedd07df755ffe5cd81807640b79c3c0f2ba9e251cf3b7cb965a54a782822d"
+      },
+      "reread_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 114,
+        "sha256": "373913e41e4a65bf3b47747e9c09d30e0d6d2e4f6aa31acae96caf41ca212ba5"
+      },
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      }
+    },
+    {
+      "index": 18,
+      "path": "01 Справочник/FFN и MoE/SwiGLU.md",
+      "en": null,
+      "route": "reference/ffn-i-moe/swiglu",
+      "before": "613404a5632fbc32a7b1d1a5d024fd34d888c017903b7e18998a0292f0685f9f",
+      "full_read": true,
+      "reread": false,
+      "findings": [],
+      "reading_evidence": "Entire current page read frontmatter through EOF; no keyword-only review.",
+      "after": "613404a5632fbc32a7b1d1a5d024fd34d888c017903b7e18998a0292f0685f9f",
+      "audit_original_read_sha256": "613404a5632fbc32a7b1d1a5d024fd34d888c017903b7e18998a0292f0685f9f",
+      "changed_in_this_task": false,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/01 Справочник/FFN и MoE/SwiGLU.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 14,
+        "sha256": "613404a5632fbc32a7b1d1a5d024fd34d888c017903b7e18998a0292f0685f9f"
+      },
+      "reread_coverage": null,
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      },
+      "sources_checked": []
+    },
+    {
+      "index": 19,
+      "path": "01 Справочник/Inference/FlashAttention.md",
+      "en": null,
+      "route": "reference/inference/flashattention",
+      "before": "a8f8c1142374efcae252767b8d88ea9fa90bc11cf13fd9b86798241ee57a367f",
+      "full_read": true,
+      "reread": true,
+      "findings": [
+        {
+          "severity": "P3",
+          "line": 35,
+          "excerpt": "Более новые версии",
+          "issue": "Для обновления справочника стоит указать дату проверенной реализации, а не бессрочную формулировку о новых версиях.",
+          "action": "Сохранять математический принцип отдельно от списка реализаций с last_verified.",
+          "id": "reference-concepts-20-1",
+          "status": "fixed",
+          "resolution": "Added verified date and bounded FA1/FA2 scope; implementation support is release/commit-specific, not an undated latest-version claim.",
+          "page_sha_before": "a8f8c1142374efcae252767b8d88ea9fa90bc11cf13fd9b86798241ee57a367f",
+          "page_sha_after": "55c4e7904ac568f47db052649bbf531c3e1e7e399025bd67c390c3006ebdd9ee",
+          "full_read": true,
+          "reread": true
+        }
+      ],
+      "reading_evidence": "Entire current page read frontmatter through EOF; no keyword-only review.",
+      "sources_checked": [
+        "https://github.com/Dao-AILab/flash-attention"
+      ],
+      "reread_evidence": "Entire revised page read from frontmatter through EOF.",
+      "after": "55c4e7904ac568f47db052649bbf531c3e1e7e399025bd67c390c3006ebdd9ee",
+      "audit_original_read_sha256": "a8f8c1142374efcae252767b8d88ea9fa90bc11cf13fd9b86798241ee57a367f",
+      "changed_in_this_task": true,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/01 Справочник/Inference/FlashAttention.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 47,
+        "sha256": "a8f8c1142374efcae252767b8d88ea9fa90bc11cf13fd9b86798241ee57a367f"
+      },
+      "reread_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 56,
+        "sha256": "55c4e7904ac568f47db052649bbf531c3e1e7e399025bd67c390c3006ebdd9ee"
+      },
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      }
+    },
+    {
+      "index": 20,
+      "path": "01 Справочник/Inference/KV-cache.md",
+      "en": null,
+      "route": "reference/inference/kv-cache",
+      "before": "8da8e58101e8e7bc0eb4bd4624a81550d6b853bec383e1c3f4cbbf7059958853",
+      "full_read": true,
+      "reread": true,
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 30,
+          "excerpt": "дополнительно умножить на batch/число sequences",
+          "issue": "Это верно для равных длин; при переменных длинах требуется сумма длин, часть обозначений не расшифрована.",
+          "action": "Расшифровать n_kv,d_h,bytes и дать форму через сумму T_b; разграничить логический объём и реально выделенную память.",
+          "id": "reference-concepts-21-1",
+          "status": "fixed",
+          "resolution": "Defined variable-length logical cache sum, all dimensions and bytes; 384 MiB vs 512 MiB padding example, plus common safe-reuse contract.",
+          "page_sha_before": "8da8e58101e8e7bc0eb4bd4624a81550d6b853bec383e1c3f4cbbf7059958853",
+          "page_sha_after": "71affb78e77e41f8c1bc2fb7f3187f2b85586b12c35ab8b0cfe4366baef5e3a4",
+          "full_read": true,
+          "reread": true
+        }
+      ],
+      "reading_evidence": "Full current page read frontmatter through EOF.",
+      "reread_evidence": "Full revised page reread frontmatter through EOF.",
+      "limitations": [
+        "No live serving/GPU execution; worked examples are explicitly toy CPU arithmetic."
+      ],
+      "sources_checked": [
+        "https://docs.vllm.ai/en/latest/design/prefix_caching/",
+        "https://huggingface.co/docs/transformers/main/cache_explanation"
+      ],
+      "after": "71affb78e77e41f8c1bc2fb7f3187f2b85586b12c35ab8b0cfe4366baef5e3a4",
+      "audit_original_read_sha256": "8da8e58101e8e7bc0eb4bd4624a81550d6b853bec383e1c3f4cbbf7059958853",
+      "changed_in_this_task": true,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/01 Справочник/Inference/KV-cache.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 50,
+        "sha256": "8da8e58101e8e7bc0eb4bd4624a81550d6b853bec383e1c3f4cbbf7059958853"
+      },
+      "reread_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 86,
+        "sha256": "71affb78e77e41f8c1bc2fb7f3187f2b85586b12c35ab8b0cfe4366baef5e3a4"
+      },
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      }
+    },
+    {
+      "index": 21,
+      "path": "01 Справочник/Inference/PagedAttention.md",
+      "en": null,
+      "route": "reference/inference/pagedattention",
+      "before": "c8a53cacb4e64713b1f8afcd9e4db8dfca2f95ed79a5921765ea90972641d7f7",
+      "full_read": true,
+      "reread": true,
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 27,
+          "excerpt": "MQA, GQA и MLA уменьшают отдельные множители",
+          "issue": "MLA меняет представление cache; её нельзя подставить как меньшее число KV-heads в стандартную формулу.",
+          "action": "Ограничить эту формулу MHA/MQA/GQA, отдельно сослаться на latent-plus-RoPE формулу MLA.",
+          "id": "reference-concepts-22-1",
+          "status": "fixed",
+          "resolution": "Restricted head-based formula to MHA/MQA/GQA and linked latent-plus-RoPE MLA formula; clarified reference-count/cache retention on release.",
+          "page_sha_before": "c8a53cacb4e64713b1f8afcd9e4db8dfca2f95ed79a5921765ea90972641d7f7",
+          "page_sha_after": "794f9383bae1f34488f14f677234efa389378995eeb4bff4277abf932a5988e5",
+          "full_read": true,
+          "reread": true
+        }
+      ],
+      "reading_evidence": "Full current page read frontmatter through EOF.",
+      "reread_evidence": "Full revised page reread frontmatter through EOF.",
+      "limitations": [
+        "No live serving/GPU execution; worked examples are explicitly toy CPU arithmetic."
+      ],
+      "sources_checked": [
+        "https://arxiv.org/html/2405.04434v5"
+      ],
+      "after": "794f9383bae1f34488f14f677234efa389378995eeb4bff4277abf932a5988e5",
+      "audit_original_read_sha256": "c8a53cacb4e64713b1f8afcd9e4db8dfca2f95ed79a5921765ea90972641d7f7",
+      "changed_in_this_task": true,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/01 Справочник/Inference/PagedAttention.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 148,
+        "sha256": "c8a53cacb4e64713b1f8afcd9e4db8dfca2f95ed79a5921765ea90972641d7f7"
+      },
+      "reread_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 154,
+        "sha256": "794f9383bae1f34488f14f677234efa389378995eeb4bff4277abf932a5988e5"
+      },
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      }
+    },
+    {
+      "index": 22,
+      "path": "01 Справочник/Inference/SGLang и RadixAttention.md",
+      "en": null,
+      "route": "reference/inference/sglang-radixattention",
+      "before": "dfec9043df26a2651676108b651b9bff66d463e9431ec1440235cd3bb3bd2202",
+      "full_read": true,
+      "reread": true,
+      "findings": [
+        {
+          "severity": "P1",
+          "line": 44,
+          "excerpt": "зависит только от token IDs",
+          "issue": "Без фиксированных весов/адаптера, позиции и мультимодальных входов утверждение неверно и опасно для cache correctness.",
+          "action": "Явно перечислить условия повторного использования и то, что входит в ключ cache кроме token IDs.",
+          "id": "reference-concepts-23-1",
+          "status": "already-fixed",
+          "resolution": "Pre-edit page already required fixed weights, LoRA, positions/masks and multimodal inputs and described extra_key; live RadixCache source confirms namespace behavior.",
+          "page_sha_before": "dfec9043df26a2651676108b651b9bff66d463e9431ec1440235cd3bb3bd2202",
+          "page_sha_after": "3ce29e8fc7670c33f3345ac04688764b077f0abc3793c1c52ed3cfbdcb8f6f94",
+          "full_read": true,
+          "reread": true
+        },
+        {
+          "severity": "P2",
+          "line": 110,
+          "excerpt": "повторный prefill точного prefix",
+          "issue": "В таблице выигрыш описан как повторный prefill вместо его пропуска.",
+          "action": "Писать о пропуске prefill для совпавших полных блоков; остаток досчитывается.",
+          "id": "reference-concepts-23-2",
+          "status": "fixed",
+          "resolution": "Hash-cache table now says skip prefill of matching full blocks and compute remainder; linked common contract.",
+          "page_sha_before": "dfec9043df26a2651676108b651b9bff66d463e9431ec1440235cd3bb3bd2202",
+          "page_sha_after": "3ce29e8fc7670c33f3345ac04688764b077f0abc3793c1c52ed3cfbdcb8f6f94",
+          "full_read": true,
+          "reread": true
+        }
+      ],
+      "reading_evidence": "Full current page read frontmatter through EOF.",
+      "reread_evidence": "Full revised page reread frontmatter through EOF.",
+      "limitations": [
+        "No live serving/GPU execution; worked examples are explicitly toy CPU arithmetic."
+      ],
+      "sources_checked": [
+        "https://github.com/sgl-project/sglang/blob/main/python/sglang/srt/mem_cache/radix_cache.py"
+      ],
+      "after": "3ce29e8fc7670c33f3345ac04688764b077f0abc3793c1c52ed3cfbdcb8f6f94",
+      "audit_original_read_sha256": "56ef09e0220146c04b244c1f1f44e96223c25bbf84ff0400bd8082ee18adfe35",
+      "changed_in_this_task": true,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/01 Справочник/Inference/SGLang и RadixAttention.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 177,
+        "sha256": "dfec9043df26a2651676108b651b9bff66d463e9431ec1440235cd3bb3bd2202"
+      },
+      "reread_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 180,
+        "sha256": "3ce29e8fc7670c33f3345ac04688764b077f0abc3793c1c52ed3cfbdcb8f6f94"
+      },
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      }
+    },
+    {
+      "index": 23,
+      "path": "01 Справочник/Inference/Triton и GPU kernels.md",
+      "en": null,
+      "route": "reference/inference/triton",
+      "before": "fbf85ef206d189af477bde13e0807efd5816e6acc3c64a3ae7f7bc76cdd7f0a7",
+      "full_read": true,
+      "reread": true,
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 79,
+          "excerpt": "row-major обход tiles быстро меняет строки A",
+          "issue": "Для стандартного row-major обхода выходных блоков сначала меняется столбец N при фиксированном M; подпись может учить неверной локальности.",
+          "action": "Сопоставить подпись с официальным tutorial: явные последовательности координат (m,n), какие A/B повторно читаются.",
+          "id": "reference-concepts-24-1",
+          "status": "already-fixed",
+          "resolution": "Pre-edit caption already correctly said column index changes first under row-major, with GPU scheduling caveat. Added explicit 2x3 coordinate sequences as extra explanation.",
+          "page_sha_before": "fbf85ef206d189af477bde13e0807efd5816e6acc3c64a3ae7f7bc76cdd7f0a7",
+          "page_sha_after": "c4ac642d23b610cbf4f4232b6757bd51e3b67e38b632d4adebeea80fe8868628",
+          "full_read": true,
+          "reread": true
+        },
+        {
+          "severity": "P2",
+          "line": 62,
+          "excerpt": "C_{m:n}",
+          "issue": "Индексный диапазон выглядит как срез вектора, хотя обсуждается двумерный блок.",
+          "action": "Обозначить блоки C_IJ, A_IK,B_KJ и размеры; это устранит неопределённость.",
+          "id": "reference-concepts-24-2",
+          "status": "fixed",
+          "resolution": "Replaced ambiguous vector-like slice indices with C_IJ, A_IR, B_RJ and explicit tile/global dimensions; CPU edge-tile matmul verified.",
+          "page_sha_before": "fbf85ef206d189af477bde13e0807efd5816e6acc3c64a3ae7f7bc76cdd7f0a7",
+          "page_sha_after": "c4ac642d23b610cbf4f4232b6757bd51e3b67e38b632d4adebeea80fe8868628",
+          "full_read": true,
+          "reread": true
+        }
+      ],
+      "reading_evidence": "Full current page read frontmatter through EOF.",
+      "reread_evidence": "Full revised page reread frontmatter through EOF.",
+      "limitations": [
+        "No live serving/GPU execution; worked examples are explicitly toy CPU arithmetic."
+      ],
+      "sources_checked": [
+        "https://triton-lang.org/main/getting-started/tutorials/03-matrix-multiplication.html"
+      ],
+      "after": "c4ac642d23b610cbf4f4232b6757bd51e3b67e38b632d4adebeea80fe8868628",
+      "audit_original_read_sha256": "17a6569f53452c1c17f319a718abbb0f54f97050ced297806f3e96759e65e8f1",
+      "changed_in_this_task": true,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/01 Справочник/Inference/Triton и GPU kernels.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 180,
+        "sha256": "fbf85ef206d189af477bde13e0807efd5816e6acc3c64a3ae7f7bc76cdd7f0a7"
+      },
+      "reread_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 198,
+        "sha256": "c4ac642d23b610cbf4f4232b6757bd51e3b67e38b632d4adebeea80fe8868628"
+      },
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      }
+    },
+    {
+      "index": 24,
+      "path": "01 Справочник/Inference/vLLM — анатомия inference engine.md",
+      "en": null,
+      "route": "reference/inference/vllm",
+      "before": "92bdc08a8f2a2e3217fdb3a56d87566a527b157b9b1ed1ca9ae7d9a63babff9e",
+      "full_read": true,
+      "reread": true,
+      "findings": [
+        {
+          "severity": "P1",
+          "line": 208,
+          "excerpt": "goodput — долю запросов",
+          "issue": "Доля выполнения SLO не тождественна goodput как скорости успешной обработки при SLO; единицы измерения потеряны.",
+          "action": "Развести SLO attainment (%) и SLO-compliant throughput(req/s или tokens/s); указать принятую в источнике convention.",
+          "id": "reference-concepts-25-1",
+          "status": "already-fixed",
+          "resolution": "Pre-edit page already separated 90% SLO attainment from 9 req/s goodput and gave DistServe's max-arrival-per-GPU convention; live paper checked.",
+          "page_sha_before": "92bdc08a8f2a2e3217fdb3a56d87566a527b157b9b1ed1ca9ae7d9a63babff9e",
+          "page_sha_after": "b266c24285d2f32df73ef1895e937ca94966474bf8a1118cdb15d4da2ae775dc",
+          "full_read": true,
+          "reread": true
+        },
+        {
+          "severity": "P2",
+          "line": 109,
+          "excerpt": "KV-cache определяется последовательностью",
+          "issue": "Как и в SGLang, опущены фиксированная модель/адаптер и мультимодальные входы.",
+          "action": "Дать общий блок условий безопасного prefix reuse и сослаться на него.",
+          "id": "reference-concepts-25-2",
+          "status": "fixed",
+          "resolution": "Replaced tokens-only cache claim with shared model/input/position/namespace compatibility contract and primary vLLM hash documentation.",
+          "page_sha_before": "92bdc08a8f2a2e3217fdb3a56d87566a527b157b9b1ed1ca9ae7d9a63babff9e",
+          "page_sha_after": "b266c24285d2f32df73ef1895e937ca94966474bf8a1118cdb15d4da2ae775dc",
+          "full_read": true,
+          "reread": true
+        },
+        {
+          "severity": "P2",
+          "line": 14,
+          "excerpt": "Оригинал следует читать целиком",
+          "issue": "Страница честно маркирована путеводителем, но этим не выполняется требование иметь полный материал внутри учебника.",
+          "action": "Согласовать роль: путеводитель в источниках или содержательное тематическое изложение с полными worked examples.",
+          "id": "reference-concepts-25-3",
+          "status": "fixed",
+          "resolution": "Clarified reference-page role and historical commit scope; added complete 3-step A/B/C schedule with token-vs-output timing, block rounding, completion and release. Not a full translation.",
+          "page_sha_before": "92bdc08a8f2a2e3217fdb3a56d87566a527b157b9b1ed1ca9ae7d9a63babff9e",
+          "page_sha_after": "b266c24285d2f32df73ef1895e937ca94966474bf8a1118cdb15d4da2ae775dc",
+          "full_read": true,
+          "reread": true
+        }
+      ],
+      "reading_evidence": "Full current page read frontmatter through EOF.",
+      "reread_evidence": "Full revised page reread frontmatter through EOF.",
+      "limitations": [
+        "No live serving/GPU execution; worked examples are explicitly toy CPU arithmetic."
+      ],
+      "sources_checked": [
+        "https://docs.vllm.ai/en/latest/design/prefix_caching/",
+        "https://arxiv.org/html/2401.09670v1",
+        "https://vllm-project.github.io/2025/09/05/anatomy-of-vllm.html"
+      ],
+      "after": "b266c24285d2f32df73ef1895e937ca94966474bf8a1118cdb15d4da2ae775dc",
+      "audit_original_read_sha256": "8fce40a318f8be9e01d89c1f59a271666e2fc67056b25080014697e713d93bac",
+      "changed_in_this_task": true,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/01 Справочник/Inference/vLLM — анатомия inference engine.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 236,
+        "sha256": "92bdc08a8f2a2e3217fdb3a56d87566a527b157b9b1ed1ca9ae7d9a63babff9e"
+      },
+      "reread_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 273,
+        "sha256": "b266c24285d2f32df73ef1895e937ca94966474bf8a1118cdb15d4da2ae775dc"
+      },
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      }
+    },
+    {
+      "index": 25,
+      "path": "01 Справочник/Post-training/DPO.md",
+      "en": null,
+      "route": "reference/post-training/dpo",
+      "before": "d85bd4075ad3841ba0af24de522db35e39159703ed0dcf2ed9170b0694fb803a",
+      "full_read": true,
+      "reread": true,
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 16,
+          "excerpt": "L_DPO",
+          "issue": "x,y+/-,pi_theta,pi_ref и sigma не объяснены; beta описан только как сила отклонения.",
+          "action": "Определить обозначения и отношение вероятностей; показать изменение pair margin на числах.",
+          "id": "reference-concepts-26-1",
+          "status": "fixed",
+          "resolution": "Defined every symbol, full-sequence probability and pair averaging; worked 0.2/0.2 to 0.3/0.1 example; beta KL meaning distinguished from empirical monotonicity. Russian explanatory prose restored.",
+          "page_sha_before": "d85bd4075ad3841ba0af24de522db35e39159703ed0dcf2ed9170b0694fb803a",
+          "page_sha_after": "1e92bde6ab1696528968ea76cb18f06ecfc3471f59182e8215b51b39eb4df8f6",
+          "full_read": true,
+          "reread": true
+        }
+      ],
+      "reading_evidence": "Full current page read frontmatter through EOF.",
+      "reread_evidence": "Full revised page reread frontmatter through EOF after terminology cleanup.",
+      "sources_checked": [
+        "https://arxiv.org/html/2305.18290"
+      ],
+      "limitations": [
+        "Toy arithmetic; no policy training run."
+      ],
+      "after": "1e92bde6ab1696528968ea76cb18f06ecfc3471f59182e8215b51b39eb4df8f6",
+      "audit_original_read_sha256": "d85bd4075ad3841ba0af24de522db35e39159703ed0dcf2ed9170b0694fb803a",
+      "changed_in_this_task": true,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/01 Справочник/Post-training/DPO.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 51,
+        "sha256": "d85bd4075ad3841ba0af24de522db35e39159703ed0dcf2ed9170b0694fb803a"
+      },
+      "reread_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 70,
+        "sha256": "1e92bde6ab1696528968ea76cb18f06ecfc3471f59182e8215b51b39eb4df8f6"
+      },
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      }
+    },
+    {
+      "index": 26,
+      "path": "01 Справочник/Post-training/GRPO.md",
+      "en": null,
+      "route": "reference/post-training/grpo",
+      "before": "9541c9fe89115f3c1cab67acaaf0042cf299b709c66a5d7fdeda32687ff859ad",
+      "full_read": true,
+      "reread": true,
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 30,
+          "excerpt": "A_i",
+          "issue": "Оценка преимущества дана без расчёта на конкретной группе и случая одинаковых rewards.",
+          "action": "Показать r=[1,0,0,1], нулевую группу и значение epsilon; полный objective оставить в связанной главе.",
+          "id": "reference-concepts-27-1",
+          "status": "fixed",
+          "resolution": "Computed [1,0,0,1] with explicit population std and epsilon=1e-6; constant groups give zero relative reward signal but can retain KL gradient; paper epsilon not invented.",
+          "page_sha_before": "9541c9fe89115f3c1cab67acaaf0042cf299b709c66a5d7fdeda32687ff859ad",
+          "page_sha_after": "76eec6574b83082cf03e40e624d6d69c2cfb7306fcb74df3aac9816cf655b403",
+          "full_read": true,
+          "reread": true
+        }
+      ],
+      "reading_evidence": "Full current page read frontmatter through EOF.",
+      "reread_evidence": "Full revised page reread frontmatter through EOF after terminology cleanup.",
+      "sources_checked": [
+        "https://arxiv.org/html/2402.03300v3#S4.SS1.SSS2"
+      ],
+      "limitations": [
+        "Toy arithmetic; no policy training run."
+      ],
+      "after": "76eec6574b83082cf03e40e624d6d69c2cfb7306fcb74df3aac9816cf655b403",
+      "audit_original_read_sha256": "9541c9fe89115f3c1cab67acaaf0042cf299b709c66a5d7fdeda32687ff859ad",
+      "changed_in_this_task": true,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/01 Справочник/Post-training/GRPO.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 56,
+        "sha256": "9541c9fe89115f3c1cab67acaaf0042cf299b709c66a5d7fdeda32687ff859ad"
+      },
+      "reread_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 73,
+        "sha256": "76eec6574b83082cf03e40e624d6d69c2cfb7306fcb74df3aac9816cf655b403"
+      },
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      }
+    },
+    {
+      "index": 27,
+      "path": "01 Справочник/Post-training/Reward Model.md",
+      "en": null,
+      "route": "reference/post-training/reward-model",
+      "before": "0d34ff681ec09a84abd11d55d12bb2ab40afc463bc7029227215f87b435000dc",
+      "full_read": true,
+      "reread": true,
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 25,
+          "excerpt": "требует правильного порядка пары",
+          "issue": "Логистическая pairwise loss зависит и от разности оценок, не только от их порядка.",
+          "action": "Показать sigmoid разности и разные потери для двух положительных margin; отделить ranking accuracy от probabilistic loss.",
+          "id": "reference-concepts-28-1",
+          "status": "fixed",
+          "resolution": "Separated ranking correctness from logistic confidence: margins 1 and 3 give distinct sigmoid probabilities/losses; shift invariance distinguished from scaling.",
+          "page_sha_before": "0d34ff681ec09a84abd11d55d12bb2ab40afc463bc7029227215f87b435000dc",
+          "page_sha_after": "e84dfadbeee92129d3e19aeb6bc872d3805dddf0fd0e07926a0190fbbc9ff839",
+          "full_read": true,
+          "reread": true
+        }
+      ],
+      "reading_evidence": "Full current page read frontmatter through EOF.",
+      "reread_evidence": "Full revised page reread frontmatter through EOF after terminology cleanup.",
+      "sources_checked": [
+        "https://arxiv.org/html/2305.18290"
+      ],
+      "limitations": [
+        "Toy arithmetic; no policy training run."
+      ],
+      "after": "e84dfadbeee92129d3e19aeb6bc872d3805dddf0fd0e07926a0190fbbc9ff839",
+      "audit_original_read_sha256": "0d34ff681ec09a84abd11d55d12bb2ab40afc463bc7029227215f87b435000dc",
+      "changed_in_this_task": true,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/01 Справочник/Post-training/Reward Model.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 40,
+        "sha256": "0d34ff681ec09a84abd11d55d12bb2ab40afc463bc7029227215f87b435000dc"
+      },
+      "reread_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 52,
+        "sha256": "e84dfadbeee92129d3e19aeb6bc872d3805dddf0fd0e07926a0190fbbc9ff839"
+      },
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      }
+    },
+    {
+      "index": 28,
+      "path": "01 Справочник/Post-training/RLHF.md",
+      "en": null,
+      "route": "reference/post-training/rlhf",
+      "before": "d66abff6acabfe2888cbda8b2c4fe19b4ebe973cffc3c1ae1e67c6c97c20c192",
+      "full_read": true,
+      "reread": true,
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 29,
+          "excerpt": "E[r_phi(x,y)]",
+          "issue": "Не указано, по каким распределениям берётся ожидание, а условный KL записан без усреднения по запросам.",
+          "action": "Определить x~D,y~pi(.|x), условные распределения и beta, дать trade-off на одном ответе.",
+          "id": "reference-concepts-29-1",
+          "status": "fixed",
+          "resolution": "Made prompt distribution and conditional answer expectation explicit; conditional KL average and beta defined; single-sample 2-0.5log2 example is not KL itself; bounded reward-hacking claim.",
+          "page_sha_before": "d66abff6acabfe2888cbda8b2c4fe19b4ebe973cffc3c1ae1e67c6c97c20c192",
+          "page_sha_after": "532551c9b9f38d0bac81a45df2b6280bae6cf134d9673583ec0bb106ea4eb38f",
+          "full_read": true,
+          "reread": true
+        }
+      ],
+      "reading_evidence": "Full current page read frontmatter through EOF.",
+      "reread_evidence": "Full revised page reread frontmatter through EOF after terminology cleanup.",
+      "sources_checked": [
+        "https://arxiv.org/html/2305.18290",
+        "https://arxiv.org/html/2203.02155v1"
+      ],
+      "limitations": [
+        "Toy arithmetic; no policy training run."
+      ],
+      "after": "532551c9b9f38d0bac81a45df2b6280bae6cf134d9673583ec0bb106ea4eb38f",
+      "audit_original_read_sha256": "d66abff6acabfe2888cbda8b2c4fe19b4ebe973cffc3c1ae1e67c6c97c20c192",
+      "changed_in_this_task": true,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/01 Справочник/Post-training/RLHF.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 44,
+        "sha256": "d66abff6acabfe2888cbda8b2c4fe19b4ebe973cffc3c1ae1e67c6c97c20c192"
+      },
+      "reread_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 65,
+        "sha256": "532551c9b9f38d0bac81a45df2b6280bae6cf134d9673583ec0bb106ea4eb38f"
+      },
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      }
+    },
+    {
+      "index": 29,
+      "path": "01 Справочник/Post-training/RLVR.md",
+      "en": null,
+      "route": "reference/post-training/rlvr",
+      "before": "665d0c14b1911296ba5c1cf53c714e154da8db3d37c659216c8d90c3824c4606",
+      "full_read": true,
+      "reread": true,
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 31,
+          "excerpt": "дешёвое после создания verifier",
+          "issue": "Верификация кодом/симулятором может быть дорогой; удешевление человеческой разметки не равно малой вычислительной цене.",
+          "action": "Заменить на автоматизируемое масштабирование, отдельно учитывать rollout и verifier cost.",
+          "id": "reference-concepts-30-1",
+          "status": "fixed",
+          "resolution": "Replaced cheap-verifier guarantee by automated scaling; separated trajectory generation, checking, simulation and timeout cost; source distinguishes math and code verification.",
+          "page_sha_before": "665d0c14b1911296ba5c1cf53c714e154da8db3d37c659216c8d90c3824c4606",
+          "page_sha_after": "a882007e7c9b7fb96f77b329bbc36726fc2258b6d9fd31735fc4c3a1c07c4032",
+          "full_read": true,
+          "reread": true
+        }
+      ],
+      "reading_evidence": "Full current page read frontmatter through EOF.",
+      "reread_evidence": "Full revised page reread frontmatter through EOF after terminology cleanup.",
+      "sources_checked": [
+        "https://arxiv.org/html/2501.12948v1#S2.SS2.SSS2"
+      ],
+      "limitations": [
+        "Toy arithmetic; no policy training run."
+      ],
+      "after": "a882007e7c9b7fb96f77b329bbc36726fc2258b6d9fd31735fc4c3a1c07c4032",
+      "audit_original_read_sha256": "665d0c14b1911296ba5c1cf53c714e154da8db3d37c659216c8d90c3824c4606",
+      "changed_in_this_task": true,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/01 Справочник/Post-training/RLVR.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 55,
+        "sha256": "665d0c14b1911296ba5c1cf53c714e154da8db3d37c659216c8d90c3824c4606"
+      },
+      "reread_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 57,
+        "sha256": "a882007e7c9b7fb96f77b329bbc36726fc2258b6d9fd31735fc4c3a1c07c4032"
+      },
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      }
+    },
+    {
+      "index": 30,
+      "path": "01 Справочник/Post-training/SFT.md",
+      "en": null,
+      "route": "reference/post-training/sft",
+      "before": "37467b8689429c1c8fd813b7dc40e3f1a74361bbaea698bf88402b89e9726e7d",
+      "full_read": true,
+      "reread": true,
+      "findings": [
+        {
+          "severity": "P3",
+          "line": 26,
+          "excerpt": "модель условится",
+          "issue": "Неестественная формулировка затрудняет основную мысль.",
+          "action": "Объяснить, что весь диалог участвует в вычислении ответа, а loss суммируется только по размеченным позициям.",
+          "id": "reference-concepts-31-1",
+          "status": "fixed",
+          "resolution": "Explicit causal prior dialogue, selected target positions and gradient path through context.",
+          "page_sha_before": "37467b8689429c1c8fd813b7dc40e3f1a74361bbaea698bf88402b89e9726e7d",
+          "page_sha_after": "b96ab79063ffa2db1bc91137d4d3b219da060ac3e3b76a2b8b38339a47ee653f",
+          "full_read": true,
+          "reread": true
+        },
+        {
+          "severity": "P2",
+          "line": 20,
+          "excerpt": "-100 исключают их из cross-entropy",
+          "issue": "Без оговорки об ignore_index запись -100 выглядит математическим свойством маски.",
+          "action": "Назвать соглашение используемой реализации и сдвиг labels на один токен.",
+          "id": "reference-concepts-31-2",
+          "status": "fixed",
+          "resolution": "Explained ignore_index=-100 as implementation convention, one-token shift exactly once, and BOS/Q/A/EOS worked alignment; CPU gradient assertion passed.",
+          "page_sha_before": "37467b8689429c1c8fd813b7dc40e3f1a74361bbaea698bf88402b89e9726e7d",
+          "page_sha_after": "b96ab79063ffa2db1bc91137d4d3b219da060ac3e3b76a2b8b38339a47ee653f",
+          "full_read": true,
+          "reread": true
+        }
+      ],
+      "reading_evidence": "Full current page read frontmatter through EOF.",
+      "reread_evidence": "Full revised page reread frontmatter through EOF; retrieval reread separately after output truncation.",
+      "sources_checked": [
+        "https://huggingface.co/docs/trl/sft_trainer",
+        "https://docs.pytorch.org/docs/2.14/generated/torch.nn.CrossEntropyLoss.html"
+      ],
+      "limitations": [
+        "No end-to-end model/retrieval run; toy examples and local tensor checks only."
+      ],
+      "after": "b96ab79063ffa2db1bc91137d4d3b219da060ac3e3b76a2b8b38339a47ee653f",
+      "audit_original_read_sha256": "37467b8689429c1c8fd813b7dc40e3f1a74361bbaea698bf88402b89e9726e7d",
+      "changed_in_this_task": true,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/01 Справочник/Post-training/SFT.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 44,
+        "sha256": "37467b8689429c1c8fd813b7dc40e3f1a74361bbaea698bf88402b89e9726e7d"
+      },
+      "reread_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 57,
+        "sha256": "b96ab79063ffa2db1bc91137d4d3b219da060ac3e3b76a2b8b38339a47ee653f"
+      },
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      }
+    },
+    {
+      "index": 31,
+      "path": "01 Справочник/Post-training/Verifiable Reward.md",
+      "en": null,
+      "route": "reference/post-training/verifiable-reward",
+      "before": "6a0ad3fa9312aac59c792d73d179dbe2ac7904ed85601cf9c559d285a23d21de",
+      "full_read": true,
+      "reread": true,
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 45,
+          "excerpt": "Verifier может быть ... человеком",
+          "issue": "Смешано широкое значение слова verifier и специфический смысл verifiable rewards в сопоставлении с RLHF.",
+          "action": "Отделить проверяющего вообще от программно проверяемой награды; модель/человек могут размечать шаги, но это другой источник надёжности.",
+          "id": "reference-concepts-32-1",
+          "status": "fixed",
+          "resolution": "Separated generic verifier from programmatically verifiable reward; human/model process labels remain distinct; Lean statement/axioms and finite test boundary explicit.",
+          "page_sha_before": "6a0ad3fa9312aac59c792d73d179dbe2ac7904ed85601cf9c559d285a23d21de",
+          "page_sha_after": "dac546581e5d60f6c6d69cdb8c9889e208559dde254309af0809c1c48872734c",
+          "full_read": true,
+          "reread": true
+        }
+      ],
+      "reading_evidence": "Full current page read frontmatter through EOF.",
+      "reread_evidence": "Full revised page reread frontmatter through EOF; retrieval reread separately after output truncation.",
+      "sources_checked": [
+        "https://lean-lang.org/doc/reference/latest/ValidatingProofs/",
+        "https://arxiv.org/html/2501.12948v1#S2.SS2.SSS2"
+      ],
+      "limitations": [
+        "No end-to-end model/retrieval run; toy examples and local tensor checks only."
+      ],
+      "after": "dac546581e5d60f6c6d69cdb8c9889e208559dde254309af0809c1c48872734c",
+      "audit_original_read_sha256": "6a0ad3fa9312aac59c792d73d179dbe2ac7904ed85601cf9c559d285a23d21de",
+      "changed_in_this_task": true,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/01 Справочник/Post-training/Verifiable Reward.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 56,
+        "sha256": "6a0ad3fa9312aac59c792d73d179dbe2ac7904ed85601cf9c559d285a23d21de"
+      },
+      "reread_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 58,
+        "sha256": "dac546581e5d60f6c6d69cdb8c9889e208559dde254309af0809c1c48872734c"
+      },
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      }
+    },
+    {
+      "index": 32,
+      "path": "01 Справочник/Retrieval/Embeddings.md",
+      "en": null,
+      "route": "reference/retrieval/embeddings",
+      "before": "54f9c22fa972c869f822485367bbe94fab05a23ddba73695c736edc6db22b49d",
+      "full_read": true,
+      "reread": true,
+      "findings": [
+        {
+          "severity": "P3",
+          "line": 24,
+          "excerpt": "Правая ветвь обычно точнее",
+          "issue": "Общее сравнение зависит от обучения и бюджета и не подтверждается самой архитектурой.",
+          "action": "Оговорить сопоставимые модели/задачу; оставить главным свойством совместную обработку пары.",
+          "id": "reference-concepts-33-1",
+          "status": "fixed",
+          "resolution": "Qualified cross-encoder advantage by task/training/size/budget; explained pairwise interaction versus independently indexable vectors.",
+          "page_sha_before": "54f9c22fa972c869f822485367bbe94fab05a23ddba73695c736edc6db22b49d",
+          "page_sha_after": "7fe971c4dc422fd669a9c844cc28908f8e81f91d85fea721267856d1953fc1c3",
+          "full_read": true,
+          "reread": true
+        }
+      ],
+      "reading_evidence": "Full current page read frontmatter through EOF.",
+      "reread_evidence": "Full revised page reread frontmatter through EOF; retrieval reread separately after output truncation.",
+      "sources_checked": [
+        "https://www.sbert.net/examples/cross_encoder/applications/README.html"
+      ],
+      "limitations": [
+        "No end-to-end model/retrieval run; toy examples and local tensor checks only."
+      ],
+      "after": "7fe971c4dc422fd669a9c844cc28908f8e81f91d85fea721267856d1953fc1c3",
+      "audit_original_read_sha256": "54f9c22fa972c869f822485367bbe94fab05a23ddba73695c736edc6db22b49d",
+      "changed_in_this_task": true,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/01 Справочник/Retrieval/Embeddings.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 52,
+        "sha256": "54f9c22fa972c869f822485367bbe94fab05a23ddba73695c736edc6db22b49d"
+      },
+      "reread_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 61,
+        "sha256": "7fe971c4dc422fd669a9c844cc28908f8e81f91d85fea721267856d1953fc1c3"
+      },
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      }
+    },
+    {
+      "index": 33,
+      "path": "01 Справочник/Retrieval/RAG.md",
+      "en": null,
+      "route": "reference/retrieval/rag",
+      "before": "0fd23867d282c8dfd35ed169f42594345b567c813b7aa0e72a7974a7258ed5a6",
+      "full_read": true,
+      "reread": true,
+      "findings": [
+        {
+          "severity": "P3",
+          "line": 43,
+          "excerpt": "evidence ... problem",
+          "issue": "Диагностический блок целиком написан гибридным языком.",
+          "action": "Сохранить саму причинную цепочку, перевести общеупотребимые названия состояний и ошибок без перевода исходных материалов.",
+          "id": "reference-concepts-34-1",
+          "status": "fixed",
+          "resolution": "Translated complete diagnostic chain and pipeline into Russian; added lost-context example and caveat diagnostic branch is not unique-cause proof.",
+          "page_sha_before": "0fd23867d282c8dfd35ed169f42594345b567c813b7aa0e72a7974a7258ed5a6",
+          "page_sha_after": "a40a45100efe81980249980ac94795be831d8260910e617a59a8ba02b540cdd2",
+          "full_read": true,
+          "reread": true
+        }
+      ],
+      "reading_evidence": "Full current page read frontmatter through EOF.",
+      "reread_evidence": "Full revised page reread frontmatter through EOF; retrieval reread separately after output truncation.",
+      "sources_checked": [],
+      "limitations": [
+        "No end-to-end model/retrieval run; toy examples and local tensor checks only."
+      ],
+      "after": "a40a45100efe81980249980ac94795be831d8260910e617a59a8ba02b540cdd2",
+      "audit_original_read_sha256": "0fd23867d282c8dfd35ed169f42594345b567c813b7aa0e72a7974a7258ed5a6",
+      "changed_in_this_task": true,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/01 Справочник/Retrieval/RAG.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 62,
+        "sha256": "0fd23867d282c8dfd35ed169f42594345b567c813b7aa0e72a7974a7258ed5a6"
+      },
+      "reread_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 62,
+        "sha256": "a40a45100efe81980249980ac94795be831d8260910e617a59a8ba02b540cdd2"
+      },
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      }
+    },
+    {
+      "index": 34,
+      "path": "01 Справочник/Retrieval/Retrieval.md",
+      "en": null,
+      "route": "reference/retrieval/retrieval",
+      "before": "6eed664bc5aa49ae16738ab210c58285aa2ba7e14683288610a1a91d42810993",
+      "full_read": true,
+      "reread": true,
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 37,
+          "excerpt": "Recall@k, MRR, nDCG",
+          "issue": "Все три метрики описаны как попадание релевантного документа в кандидаты, хотя MRR/nDCG оценивают ранги и nDCG допускает градуированную релевантность.",
+          "action": "Развести полноту кандидатов, ранг первого релевантного и качество ранжирования; дать определения или точные ссылки.",
+          "id": "reference-concepts-35-1",
+          "status": "fixed",
+          "resolution": "Separated Recall@k, MRR@k, hit rate and graded nDCG with definition/formula and ranking example; CPU rank-effect check passed.",
+          "page_sha_before": "6eed664bc5aa49ae16738ab210c58285aa2ba7e14683288610a1a91d42810993",
+          "page_sha_after": "cdd633d1c376c1bf63391b2680d1c58fbe47d2a701043fe7a84b39466665791e",
+          "full_read": true,
+          "reread": true
+        },
+        {
+          "severity": "P3",
+          "line": 39,
+          "excerpt": "smaller chunks — точность",
+          "issue": "Утверждение выглядит монотонным, хотя уменьшение может потерять необходимый контекст.",
+          "action": "Описать компромисс без гарантии повышения точности.",
+          "id": "reference-concepts-35-2",
+          "status": "fixed",
+          "resolution": "Removed monotonic smaller-chunk accuracy claim; concrete lost-exception example and end-to-end selection trade-off.",
+          "page_sha_before": "6eed664bc5aa49ae16738ab210c58285aa2ba7e14683288610a1a91d42810993",
+          "page_sha_after": "cdd633d1c376c1bf63391b2680d1c58fbe47d2a701043fe7a84b39466665791e",
+          "full_read": true,
+          "reread": true
+        }
+      ],
+      "reading_evidence": "Full current page read frontmatter through EOF.",
+      "reread_evidence": "Full revised page reread frontmatter through EOF; retrieval reread separately after output truncation.",
+      "sources_checked": [
+        "https://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-ranked-retrieval-results-1.html"
+      ],
+      "limitations": [
+        "No end-to-end model/retrieval run; toy examples and local tensor checks only."
+      ],
+      "after": "cdd633d1c376c1bf63391b2680d1c58fbe47d2a701043fe7a84b39466665791e",
+      "audit_original_read_sha256": "6eed664bc5aa49ae16738ab210c58285aa2ba7e14683288610a1a91d42810993",
+      "changed_in_this_task": true,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/01 Справочник/Retrieval/Retrieval.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 50,
+        "sha256": "6eed664bc5aa49ae16738ab210c58285aa2ba7e14683288610a1a91d42810993"
+      },
+      "reread_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 63,
+        "sha256": "cdd633d1c376c1bf63391b2680d1c58fbe47d2a701043fe7a84b39466665791e"
+      },
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      }
+    },
+    {
+      "index": 35,
+      "path": "01 Справочник/Security и Robustness/01 Security и privacy.md",
+      "en": null,
+      "route": "reference/security-robustness/security-privacy",
+      "before": "1eb1ff73f497c8f89897e75c8f7bcd6c076e3b5d37571337f83641e690a6f6de",
+      "full_read": true,
+      "reread": true,
+      "findings": [
+        {
+          "severity": "P1",
+          "line": 169,
+          "excerpt": "записью одного человека",
+          "issue": "Уровень одной записи незаметно становится гарантией для человека с несколькими записями.",
+          "action": "Явно различить record-level и user-level соседство, связать clipping со выбранной единицей защиты.",
+          "id": "reference-concepts-36-1",
+          "status": "already-fixed",
+          "resolution": "Before snapshot already distinguishes record/user adjacency and per-example versus user clipping; verified Dwork–Roth Definition 2.4 and group privacy.",
+          "page_sha_before": "1eb1ff73f497c8f89897e75c8f7bcd6c076e3b5d37571337f83641e690a6f6de",
+          "page_sha_after": "9c590a886aa99f00eb28f8d0190a5016a854eeba5aa034a27baeed68157af527",
+          "full_read": true,
+          "reread": true
+        },
+        {
+          "severity": "P2",
+          "line": 180,
+          "excerpt": "delta допускает малую вероятность нарушения",
+          "issue": "Упрощение approximate DP может быть прочитано как буквальная вероятность катастрофической утечки.",
+          "action": "Опираться на определяющее неравенство, осторожно объяснить добавочный slack; проверить по Dwork–Roth.",
+          "id": "reference-concepts-36-2",
+          "status": "already-fixed",
+          "resolution": "Before snapshot already calls delta additive slack in defining inequality, not probability of catastrophic disclosure; source definition checked.",
+          "page_sha_before": "1eb1ff73f497c8f89897e75c8f7bcd6c076e3b5d37571337f83641e690a6f6de",
+          "page_sha_after": "9c590a886aa99f00eb28f8d0190a5016a854eeba5aa034a27baeed68157af527",
+          "full_read": true,
+          "reread": true
+        },
+        {
+          "severity": "P2",
+          "line": 243,
+          "excerpt": "Минимальный security review",
+          "issue": "Сильные математические разделы заканчиваются длинным перечнем jargon; исходных ситуаций/вычисленного privacy примера нет.",
+          "action": "Добавить пример запроса-count с Laplace sensitivity и обеспечить естественные переходы, не заменять всю главу краткой карточкой.",
+          "id": "reference-concepts-36-3",
+          "status": "fixed",
+          "resolution": "Added complete unique-user count example, sensitivity 1 vs bounded-20 events, Laplace scales 2/40, expected absolute error and composition; review checklist translated and tied to threat evidence.",
+          "page_sha_before": "1eb1ff73f497c8f89897e75c8f7bcd6c076e3b5d37571337f83641e690a6f6de",
+          "page_sha_after": "9c590a886aa99f00eb28f8d0190a5016a854eeba5aa034a27baeed68157af527",
+          "full_read": true,
+          "reread": true
+        }
+      ],
+      "reading_evidence": "Full current page read frontmatter through EOF; truncated combined output repeated individually.",
+      "reread_evidence": "Full revised page reread through EOF, large Security and Robustness pages in separate calls.",
+      "sources_checked": [
+        "https://maxkasy.github.io/home/files/other/ML_Econ_Oxford/differential_privacy.pdf"
+      ],
+      "limitations": [
+        "Author-host privacybook PDF timed out; same Dwork–Roth primary text read from university-course mirror (Definition 2.4, §3.3). No DP training/attack experiment."
+      ],
+      "after": "9c590a886aa99f00eb28f8d0190a5016a854eeba5aa034a27baeed68157af527",
+      "audit_original_read_sha256": "7b34c2101255f3dd8f6ac247784a60bc9965ea334daa798d503c4308f5376ba8",
+      "changed_in_this_task": true,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/01 Справочник/Security и Robustness/01 Security и privacy.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 272,
+        "sha256": "1eb1ff73f497c8f89897e75c8f7bcd6c076e3b5d37571337f83641e690a6f6de"
+      },
+      "reread_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 294,
+        "sha256": "9c590a886aa99f00eb28f8d0190a5016a854eeba5aa034a27baeed68157af527"
+      },
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      }
+    },
+    {
+      "index": 36,
+      "path": "01 Справочник/Security и Robustness/02 Robustness.md",
+      "en": null,
+      "route": "reference/security-robustness/robustness",
+      "before": "704c59f094490a2b44c788804746e67ebe288201a7fde692bbea66f866291854",
+      "full_read": true,
+      "reread": true,
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 84,
+          "excerpt": "PSI ... sum_i(a_i-e_i)",
+          "issue": "Доли a/e и работа с нулевыми корзинами не определены; каталог метрик не даёт вычислить даже одну.",
+          "action": "Дать двухкорзинный численный пример и способ обработки нулей.",
+          "id": "reference-concepts-37-1",
+          "status": "fixed",
+          "resolution": "Defined shared bins/window proportions and normalized pseudo-count smoothing; calculated 2-bin PSI=0.25ln3≈0.275 with threshold caveat.",
+          "page_sha_before": "704c59f094490a2b44c788804746e67ebe288201a7fde692bbea66f866291854",
+          "page_sha_after": "8877b9174d7ef2de8c071bf2b0a3795c3da38d8fb789efd2222e39446e759ce0",
+          "full_read": true,
+          "reread": true
+        },
+        {
+          "severity": "P2",
+          "line": 119,
+          "excerpt": "FGSM ... PGD ... l_p",
+          "issue": "Приведённый sign-градиент соответствует l_infinity; переход к общему l_p может создать ложное обобщение.",
+          "action": "Указать норму для FGSM и различие шага/проекции PGD при разных нормах.",
+          "id": "reference-concepts-37-2",
+          "status": "fixed",
+          "resolution": "Explicit FGSM Linf and gradient (3,4) comparison against L2; distinct PGD step/projection and pixel domain.",
+          "page_sha_before": "704c59f094490a2b44c788804746e67ebe288201a7fde692bbea66f866291854",
+          "page_sha_after": "8877b9174d7ef2de8c071bf2b0a3795c3da38d8fb789efd2222e39446e759ce0",
+          "full_read": true,
+          "reread": true
+        },
+        {
+          "severity": "P3",
+          "line": 215,
+          "excerpt": "Huber loss",
+          "issue": "Врезка Huber появляется между backdoor и hardware без связки с устойчивой регрессией.",
+          "action": "Связать с ограничением влияния выбросов и отослать к главе потерь; не выставлять защитой от backdoor.",
+          "id": "reference-concepts-37-3",
+          "status": "fixed",
+          "resolution": "Connected Huber to robust regression, derivative saturation example and leverage/backdoor/hardware non-guarantees; linked loss chapter.",
+          "page_sha_before": "704c59f094490a2b44c788804746e67ebe288201a7fde692bbea66f866291854",
+          "page_sha_after": "8877b9174d7ef2de8c071bf2b0a3795c3da38d8fb789efd2222e39446e759ce0",
+          "full_read": true,
+          "reread": true
+        }
+      ],
+      "reading_evidence": "Full current page read frontmatter through EOF; truncated combined output repeated individually.",
+      "reread_evidence": "Full revised page reread through EOF, large Security and Robustness pages in separate calls.",
+      "sources_checked": [
+        "https://mlsysbook.ai/vol2/robust_ai/robust_ai.html#population-stability-index-psi",
+        "https://arxiv.org/html/1706.06083",
+        "https://arxiv.org/html/1412.6572"
+      ],
+      "limitations": [
+        "Primary results checked, not independently reproduced; no training/browser/GPU benchmark."
+      ],
+      "after": "8877b9174d7ef2de8c071bf2b0a3795c3da38d8fb789efd2222e39446e759ce0",
+      "audit_original_read_sha256": "704c59f094490a2b44c788804746e67ebe288201a7fde692bbea66f866291854",
+      "changed_in_this_task": true,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/01 Справочник/Security и Robustness/02 Robustness.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 305,
+        "sha256": "704c59f094490a2b44c788804746e67ebe288201a7fde692bbea66f866291854"
+      },
+      "reread_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 344,
+        "sha256": "8877b9174d7ef2de8c071bf2b0a3795c3da38d8fb789efd2222e39446e759ce0"
+      },
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      }
+    },
+    {
+      "index": 37,
+      "path": "03 Исследовательские линии/Agentic learning.md",
+      "en": null,
+      "route": "research/agentic-learning",
+      "before": "8090a40201b2f7deb9c3467f83772e61540fc8827b40619d4ede8a887b6f1c37",
+      "full_read": true,
+      "reread": true,
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 134,
+          "excerpt": "Лестница обучения",
+          "issue": "В одну лестницу поставлены происхождение данных, алгоритм обучения и вид награды. Synthetic trajectories могут одновременно быть SFT или RL-data, а process rewards — частью RL.",
+          "action": "Объединить две соседние таблицы: отдельно происхождение траекторий, объект обновления и сигнал; убрать ложную последовательность уровней.",
+          "id": "reference-concepts-38-1",
+          "status": "fixed",
+          "resolution": "Merged duplicate tables into orthogonal provenance/update/signal matrix; kept old ladder anchor, explained synthetic SFT≠RL.",
+          "page_sha_before": "8090a40201b2f7deb9c3467f83772e61540fc8827b40619d4ede8a887b6f1c37",
+          "page_sha_after": "091a405c0590786a00bf42d0252cd720c3141bdc813bb3ae75948f9209a990b7",
+          "full_read": true,
+          "reread": true
+        },
+        {
+          "severity": "P3",
+          "line": 195,
+          "excerpt": "Надёжнее всего подтверждено",
+          "issue": "Обобщённый рейтинг силы доказательств не сопровождается конкретными результатами/условиями, хотя выше есть подходящие кейсы.",
+          "action": "Привязать вывод к двум конкретным проверенным экспериментам вместо безадресной оценки всей области.",
+          "id": "reference-concepts-38-2",
+          "status": "fixed",
+          "resolution": "Replaced global evidence ranking with live-checked Aguvis Table 6 step/localization ablation and InSTA v2 §6.1–6.2 SFT transfer conditions, with judge caveat.",
+          "page_sha_before": "8090a40201b2f7deb9c3467f83772e61540fc8827b40619d4ede8a887b6f1c37",
+          "page_sha_after": "091a405c0590786a00bf42d0252cd720c3141bdc813bb3ae75948f9209a990b7",
+          "full_read": true,
+          "reread": true
+        }
+      ],
+      "reading_evidence": "Full current page read frontmatter through EOF; truncated combined output repeated individually.",
+      "reread_evidence": "Full revised page reread through EOF, large Security and Robustness pages in separate calls.",
+      "sources_checked": [
+        "https://arxiv.org/html/2412.04454",
+        "https://arxiv.org/html/2502.06776v2"
+      ],
+      "limitations": [
+        "Primary results checked, not independently reproduced; no training/browser/GPU benchmark."
+      ],
+      "after": "091a405c0590786a00bf42d0252cd720c3141bdc813bb3ae75948f9209a990b7",
+      "audit_original_read_sha256": "8090a40201b2f7deb9c3467f83772e61540fc8827b40619d4ede8a887b6f1c37",
+      "changed_in_this_task": true,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/03 Исследовательские линии/Agentic learning.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 222,
+        "sha256": "8090a40201b2f7deb9c3467f83772e61540fc8827b40619d4ede8a887b6f1c37"
+      },
+      "reread_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 225,
+        "sha256": "091a405c0590786a00bf42d0252cd720c3141bdc813bb3ae75948f9209a990b7"
+      },
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      }
+    },
+    {
+      "index": 38,
+      "path": "03 Исследовательские линии/RLHF → DPO → RLVR.md",
+      "en": null,
+      "route": "research/alignment-rlhf-dpo-rlvr",
+      "before": "f83a82ae9368f1316cfaff8522cd358d800f319dfad12f9c32b9de9137ba4a33",
+      "full_read": true,
+      "reread": true,
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 124,
+          "excerpt": "RLHF | learned RM | да",
+          "issue": "Таблица делает online rollouts свойством всего RLHF, хотя соседний текст объясняет пересекающиеся оси и DPO тоже использует человеческие preferences.",
+          "action": "Назвать конкретно PPO-RLHF в сравнении и явно отделить семью сигналов от алгоритмов.",
+          "id": "reference-concepts-39-1",
+          "status": "fixed",
+          "resolution": "Comparison names PPO-RLHF and concrete offline DPO/RLVR-GRPO; distinguishes feedback family from algorithms and external data refresh.",
+          "page_sha_before": "f83a82ae9368f1316cfaff8522cd358d800f319dfad12f9c32b9de9137ba4a33",
+          "page_sha_after": "536ad9e8847178a4c4924381f745f92467f400835cc6c96f5c81f7a42031db6f",
+          "full_read": true,
+          "reread": true
+        },
+        {
+          "severity": "P3",
+          "line": 95,
+          "excerpt": "Методы и источники сигнала",
+          "issue": "Две таблицы с почти одинаковым сравнением разнесены коротким блоком R1.",
+          "action": "Свести в одну таблицу после истории алгоритмов; сохранить R1 как пример сочетания.",
+          "id": "reference-concepts-39-2",
+          "status": "fixed",
+          "resolution": "Reduced two tables to one; R1 comparison now explains combined stages instead of duplicating cells.",
+          "page_sha_before": "f83a82ae9368f1316cfaff8522cd358d800f319dfad12f9c32b9de9137ba4a33",
+          "page_sha_after": "536ad9e8847178a4c4924381f745f92467f400835cc6c96f5c81f7a42031db6f",
+          "full_read": true,
+          "reread": true
+        }
+      ],
+      "reading_evidence": "Full current page read frontmatter through EOF; truncated combined output repeated individually.",
+      "reread_evidence": "Full revised page reread through EOF, large Security and Robustness pages in separate calls.",
+      "sources_checked": [
+        "https://arxiv.org/html/2305.18290",
+        "https://arxiv.org/html/2501.12948v1"
+      ],
+      "limitations": [
+        "Primary results checked, not independently reproduced; no training/browser/GPU benchmark."
+      ],
+      "after": "536ad9e8847178a4c4924381f745f92467f400835cc6c96f5c81f7a42031db6f",
+      "audit_original_read_sha256": "f83a82ae9368f1316cfaff8522cd358d800f319dfad12f9c32b9de9137ba4a33",
+      "changed_in_this_task": true,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/03 Исследовательские линии/RLHF → DPO → RLVR.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 161,
+        "sha256": "f83a82ae9368f1316cfaff8522cd358d800f319dfad12f9c32b9de9137ba4a33"
+      },
+      "reread_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 166,
+        "sha256": "536ad9e8847178a4c4924381f745f92467f400835cc6c96f5c81f7a42031db6f"
+      },
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      }
+    },
+    {
+      "index": 39,
+      "path": "03 Исследовательские линии/Reasoning и test-time compute.md",
+      "en": null,
+      "route": "research/reasoning-test-time-compute",
+      "before": "f112df02a6402439a620af49eb87145f94f07178d5165092abab265d724e6401",
+      "full_read": true,
+      "reread": true,
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 137,
+          "excerpt": "pass@k естественно измеряет пользу",
+          "issue": "Pass@k измеряет наличие правильного кандидата при оракульной проверке, а не качество реального выбора ответа с несовершенным verifier.",
+          "action": "Прямо отделить pass@k от accuracy выбранного ответа и стоимости выбора; дать ссылку на соответствующий раздел оценки.",
+          "id": "reference-concepts-40-1",
+          "status": "fixed",
+          "resolution": "Separated oracle/test-relative candidate coverage from selected-answer accuracy, selection cost, incomplete tests; worked 1 correct vs 3 wrong vote example and HumanEval §2.1.",
+          "page_sha_before": "f112df02a6402439a620af49eb87145f94f07178d5165092abab265d724e6401",
+          "page_sha_after": "d38568f39f5e16f5c0fe1821440100881852ef89461a97427a725c99bc25d222",
+          "full_read": true,
+          "reread": true
+        },
+        {
+          "severity": "P3",
+          "line": 93,
+          "excerpt": "R1-Zero",
+          "issue": "Berkeley-вставка и следующий блок R1 повторяют одно объяснение cold-start/rejection/alignment.",
+          "action": "Объединить историю R1 в один связный фрагмент с одной ссылкой на подробную главу.",
+          "id": "reference-concepts-40-2",
+          "status": "fixed",
+          "resolution": "Merged repeated R1 history into one account and direct detailed chapter link; preserved Berkeley source-unit anchor.",
+          "page_sha_before": "f112df02a6402439a620af49eb87145f94f07178d5165092abab265d724e6401",
+          "page_sha_after": "d38568f39f5e16f5c0fe1821440100881852ef89461a97427a725c99bc25d222",
+          "full_read": true,
+          "reread": true
+        }
+      ],
+      "reading_evidence": "Full current page read frontmatter through EOF; truncated combined output repeated individually.",
+      "reread_evidence": "Full revised page reread through EOF, large Security and Robustness pages in separate calls.",
+      "sources_checked": [
+        "https://arxiv.org/html/2107.03374#S2.SS1",
+        "https://arxiv.org/html/2408.03314",
+        "https://arxiv.org/html/2501.12948v1"
+      ],
+      "limitations": [
+        "Primary results checked, not independently reproduced; no training/browser/GPU benchmark."
+      ],
+      "after": "d38568f39f5e16f5c0fe1821440100881852ef89461a97427a725c99bc25d222",
+      "audit_original_read_sha256": "f112df02a6402439a620af49eb87145f94f07178d5165092abab265d724e6401",
+      "changed_in_this_task": true,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/03 Исследовательские линии/Reasoning и test-time compute.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 159,
+        "sha256": "f112df02a6402439a620af49eb87145f94f07178d5165092abab265d724e6401"
+      },
+      "reread_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 170,
+        "sha256": "d38568f39f5e16f5c0fe1821440100881852ef89461a97427a725c99bc25d222"
+      },
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      }
+    },
+    {
+      "index": 40,
+      "path": "03 Исследовательские линии/Sparse и MoE-модели.md",
+      "en": null,
+      "route": "research/sparse-i-moe-modeli",
+      "before": "a24be46c3b1573dbe81a982722e6dd40046fd67332d531e8d2f3ae4679992764",
+      "full_read": true,
+      "reread": true,
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 51,
+          "excerpt": "специализацию экспертов",
+          "issue": "Специализация подана как гарантированная выгода, затем семантическая специализация справедливо названа непостоянной.",
+          "action": "Различить распределение вычислений и доказанную семантическую специализацию; убрать её из списка безусловных выгод.",
+          "id": "reference-concepts-41-1",
+          "status": "fixed",
+          "resolution": "Removed guaranteed semantic-specialization benefit; separated conditional parameter capacity from empirical quality and added Mixtral §4/Figure 8 syntax-vs-domain evidence. Also corrected active-FLOP utilization wording.",
+          "page_sha_before": "a24be46c3b1573dbe81a982722e6dd40046fd67332d531e8d2f3ae4679992764",
+          "page_sha_after": "7a23fb41697468d6917324057d8bb85b3f70ba7975d64d6738d420b6f0a4ead2",
+          "full_read": true,
+          "reread": true
+        },
+        {
+          "severity": "P3",
+          "line": 35,
+          "excerpt": "Тезис",
+          "issue": "После содержательной истории повторяется вводное определение MoE.",
+          "action": "Перенести рисунок к первому объяснению и сократить повторное вступление.",
+          "id": "reference-concepts-41-2",
+          "status": "fixed",
+          "resolution": "Moved intact source figure/caption next to first mechanism; removed repeated definition and preserved thesis anchor.",
+          "page_sha_before": "a24be46c3b1573dbe81a982722e6dd40046fd67332d531e8d2f3ae4679992764",
+          "page_sha_after": "7a23fb41697468d6917324057d8bb85b3f70ba7975d64d6738d420b6f0a4ead2",
+          "full_read": true,
+          "reread": true
+        }
+      ],
+      "reading_evidence": "Full current page read frontmatter through EOF.",
+      "reread_evidence": "Full revised page reread frontmatter through EOF.",
+      "sources_checked": [
+        "https://arxiv.org/html/2401.04088v1"
+      ],
+      "limitations": [
+        "No benchmark reproduction or rendered-page review."
+      ],
+      "after": "7a23fb41697468d6917324057d8bb85b3f70ba7975d64d6738d420b6f0a4ead2",
+      "audit_original_read_sha256": "a24be46c3b1573dbe81a982722e6dd40046fd67332d531e8d2f3ae4679992764",
+      "changed_in_this_task": true,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/03 Исследовательские линии/Sparse и MoE-модели.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 113,
+        "sha256": "a24be46c3b1573dbe81a982722e6dd40046fd67332d531e8d2f3ae4679992764"
+      },
+      "reread_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 119,
+        "sha256": "7a23fb41697468d6917324057d8bb85b3f70ba7975d64d6738d420b6f0a4ead2"
+      },
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      }
+    },
+    {
+      "index": 41,
+      "path": "03 Исследовательские линии/_index.md",
+      "en": null,
+      "route": "research/index",
+      "before": "0d95650b1e5606db2e9f522dc622d3cb915294d320dcea07f360db89a2a72ffe",
+      "full_read": true,
+      "reread": true,
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 35,
+          "excerpt": "только после повторения результата",
+          "issue": "Правило противоречит фактическому включению новых единичных работ Berkeley в учебник и намерению пользователя быстро добавлять новые papers.",
+          "action": "Допускать в учебник явно помеченные новые результаты с границами подтверждения; не обещать несуществующий reproduction gate.",
+          "id": "reference-concepts-42-1",
+          "status": "fixed",
+          "resolution": "Removed fictional reproduction gate; distinguishes newly labeled source results from replicated evidence and stable knowledge; local index only.",
+          "page_sha_before": "0d95650b1e5606db2e9f522dc622d3cb915294d320dcea07f360db89a2a72ffe",
+          "page_sha_after": "aca21e1b629fe7b77cb8736d4121efb87e84fb8883314ed25fffb540007bd390",
+          "full_read": true,
+          "reread": true
+        }
+      ],
+      "reading_evidence": "Full current page read frontmatter through EOF.",
+      "reread_evidence": "Full revised page reread frontmatter through EOF.",
+      "sources_checked": [],
+      "limitations": [
+        "No benchmark reproduction or rendered-page review."
+      ],
+      "after": "aca21e1b629fe7b77cb8736d4121efb87e84fb8883314ed25fffb540007bd390",
+      "audit_original_read_sha256": "0d95650b1e5606db2e9f522dc622d3cb915294d320dcea07f360db89a2a72ffe",
+      "changed_in_this_task": true,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/03 Исследовательские линии/_index.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 37,
+        "sha256": "0d95650b1e5606db2e9f522dc622d3cb915294d320dcea07f360db89a2a72ffe"
+      },
+      "reread_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 42,
+        "sha256": "aca21e1b629fe7b77cb8736d4121efb87e84fb8883314ed25fffb540007bd390"
+      },
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      }
+    },
+    {
+      "index": 42,
+      "path": "03 Исследовательские линии/Длинный контекст.md",
+      "en": null,
+      "route": "research/long-context",
+      "before": "5ae5fdfb10031275d9cf76fdda5f4251fcb747715851dc890bbf838e5882003a",
+      "full_read": true,
+      "reread": true,
+      "findings": [
+        {
+          "severity": "P3",
+          "line": 41,
+          "excerpt": "Тезис",
+          "issue": "Первое объяснение четырёх условий повторено новым введением, а затем ещё раз в списке и разделе споров.",
+          "action": "Перенести рисунки к историческим методам и объединить проверку заявлений/споры/оценивание в один раздел.",
+          "id": "reference-concepts-43-1",
+          "status": "fixed",
+          "resolution": "Moved source Longformer figure to mechanism and Lost-in-the-Middle figure to evaluation; merged repetitive evidence/spores/evaluation into one section with retained old anchors.",
+          "page_sha_before": "5ae5fdfb10031275d9cf76fdda5f4251fcb747715851dc890bbf838e5882003a",
+          "page_sha_after": "fd53dd9f16723c80535cc37e94f1b13b1de541c61946e52451de25198c95ff70",
+          "full_read": true,
+          "reread": true
+        },
+        {
+          "severity": "P3",
+          "line": 30,
+          "excerpt": "локальные, глобальные и случайные связи",
+          "issue": "Общая фраза не уточняет, что random edges относятся к BigBird, а не к стандартному Longformer.",
+          "action": "Разделить отличия двух методов в одном предложении.",
+          "id": "reference-concepts-43-2",
+          "status": "fixed",
+          "resolution": "Separated Longformer local/global structure from additional random links in BigBird, live primary comparison.",
+          "page_sha_before": "5ae5fdfb10031275d9cf76fdda5f4251fcb747715851dc890bbf838e5882003a",
+          "page_sha_after": "fd53dd9f16723c80535cc37e94f1b13b1de541c61946e52451de25198c95ff70",
+          "full_read": true,
+          "reread": true
+        }
+      ],
+      "reading_evidence": "Full current page read frontmatter through EOF.",
+      "reread_evidence": "Full revised page reread frontmatter through EOF.",
+      "sources_checked": [
+        "https://arxiv.org/html/2004.05150",
+        "https://arxiv.org/html/2007.14062",
+        "https://arxiv.org/html/2307.03172"
+      ],
+      "limitations": [
+        "No benchmark reproduction or rendered-page review."
+      ],
+      "after": "fd53dd9f16723c80535cc37e94f1b13b1de541c61946e52451de25198c95ff70",
+      "audit_original_read_sha256": "5ae5fdfb10031275d9cf76fdda5f4251fcb747715851dc890bbf838e5882003a",
+      "changed_in_this_task": true,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/03 Исследовательские линии/Длинный контекст.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 121,
+        "sha256": "5ae5fdfb10031275d9cf76fdda5f4251fcb747715851dc890bbf838e5882003a"
+      },
+      "reread_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 113,
+        "sha256": "fd53dd9f16723c80535cc37e94f1b13b1de541c61946e52451de25198c95ff70"
+      },
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      }
+    },
+    {
+      "index": 43,
+      "path": "03 Исследовательские линии/Синтетические данные и дистилляция.md",
+      "en": null,
+      "route": "research/synthetic-data-distillation",
+      "before": "dca829663878631140ad9b895633b7a41edf9ccedc63da311cef8319246b4180",
+      "full_read": true,
+      "reread": true,
+      "findings": [
+        {
+          "severity": "P3",
+          "line": 74,
+          "excerpt": "DeepSeek-R1",
+          "issue": "Два подряд абзаца повторяют один вывод о перенесённом поведении и невоспроизведённом внутреннем поиске.",
+          "action": "Оставить один абзац и добавить конкретные размеры student/данных с прямой отсылкой к кейсу R1.",
+          "id": "reference-concepts-44-1",
+          "status": "fixed",
+          "resolution": "Merged duplicate R1 discussion; specified ~800k data split 600k reasoning/200k general, exact Qwen/Llama student bases and SFT-only stage from §2.4; transfer not identity of search.",
+          "page_sha_before": "dca829663878631140ad9b895633b7a41edf9ccedc63da311cef8319246b4180",
+          "page_sha_after": "68373c14949d90afe924ab8bc1fdd2e208c7e39f7e0f69b572ba02000700a60f",
+          "full_read": true,
+          "reread": true
+        }
+      ],
+      "reading_evidence": "Full current page read frontmatter through EOF.",
+      "reread_evidence": "Full revised page reread frontmatter through EOF.",
+      "sources_checked": [
+        "https://arxiv.org/html/2501.12948v1#S2.SS4"
+      ],
+      "limitations": [
+        "No benchmark reproduction or rendered-page review."
+      ],
+      "after": "68373c14949d90afe924ab8bc1fdd2e208c7e39f7e0f69b572ba02000700a60f",
+      "audit_original_read_sha256": "dca829663878631140ad9b895633b7a41edf9ccedc63da311cef8319246b4180",
+      "changed_in_this_task": true,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/03 Исследовательские линии/Синтетические данные и дистилляция.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 127,
+        "sha256": "dca829663878631140ad9b895633b7a41edf9ccedc63da311cef8319246b4180"
+      },
+      "reread_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 130,
+        "sha256": "68373c14949d90afe924ab8bc1fdd2e208c7e39f7e0f69b572ba02000700a60f"
+      },
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      }
+    },
+    {
+      "index": 44,
+      "path": "03 Исследовательские линии/Эффективный attention.md",
+      "en": null,
+      "route": "research/effektivnyy-attention",
+      "before": "575e2fd86bb07a82384f826b7285c36491c3577d241b431cf3276f2fb1e072f6",
+      "full_read": true,
+      "reread": true,
+      "findings": [
+        {
+          "severity": "P1",
+          "line": 58,
+          "excerpt": "sparse/linear pattern меняет множество",
+          "issue": "Linear attention не обязательно удаляет взаимодействия: kernelized attention может сохранять все causal пары, меняя весовую функцию и вычисление.",
+          "action": "Развести sparse pattern и kernel/recurrent linear attention; объяснить, что меняется множество рёбер, а что — функция сходства/агрегация.",
+          "id": "reference-concepts-45-1",
+          "status": "already-fixed",
+          "resolution": "Pre-edit page already separates sparse edge removal from linear kernel/aggregation with all prior positions. Added source-linked cumulative S/z mechanism and CPU equivalence check to strengthen existing correct account, not to count the already-resolved P1 as a new fix.",
+          "page_sha_before": "575e2fd86bb07a82384f826b7285c36491c3577d241b431cf3276f2fb1e072f6",
+          "page_sha_after": "5a62fb7ace6426a63d23b38e9d654f787bef79e6709a77985f80ed6366444a98",
+          "full_read": true,
+          "reread": true
+        }
+      ],
+      "reading_evidence": "Full current page read frontmatter through EOF.",
+      "reread_evidence": "Full revised page reread frontmatter through EOF.",
+      "sources_checked": [
+        "https://arxiv.org/html/2006.16236#S3.SS3"
+      ],
+      "limitations": [
+        "No benchmark reproduction or rendered-page review."
+      ],
+      "after": "5a62fb7ace6426a63d23b38e9d654f787bef79e6709a77985f80ed6366444a98",
+      "audit_original_read_sha256": "f2ea2c7ed8c78f04f24e330f60f00eae39f7cd1e4e112e26128e04d36a97c941",
+      "changed_in_this_task": true,
+      "snapshot_path": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-4-reference-before/03 Исследовательские линии/Эффективный attention.md",
+      "read_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 125,
+        "sha256": "575e2fd86bb07a82384f826b7285c36491c3577d241b431cf3276f2fb1e072f6"
+      },
+      "reread_coverage": {
+        "kind": "full",
+        "from": 1,
+        "to": 136,
+        "sha256": "5a62fb7ace6426a63d23b38e9d654f787bef79e6709a77985f80ed6366444a98"
+      },
+      "checks": {
+        "snapshot_sha_matches": true,
+        "images_preserved": true,
+        "source_ids_preserved": true,
+        "removed_headings_retained_as_explicit_anchors": true,
+        "fences_balanced": true,
+        "display_delimiters_balanced": true,
+        "new_wikilink_files_exist": true
+      }
+    }
+  ],
+  "full_read_pages": 45,
+  "authored_en_pages": 0,
+  "snapshot_files": 45,
+  "snapshot_verified": 45,
+  "cpu_checks": [
+    {
+      "id": "reference_math_1",
+      "code": "import math\nimport numpy as np\nimport torch\nx=torch.tensor([1.,3.],dtype=torch.float64)\nln=torch.nn.functional.layer_norm(x,(2,),eps=1e-5)\nrms=x/torch.sqrt((x*x).mean()+1e-5)\nassert np.allclose(ln.numpy(),[-.999995,.999995],atol=1e-6)\nassert np.allclose(rms.numpy(),[.447213,1.341639],atol=1e-6)\ndef rot(a): return np.array([[math.cos(a),-math.sin(a)],[math.sin(a),math.cos(a)]])\nqv=np.array([.3,1.2]);kv=np.array([2.,-.4]);m,n,th=3,7,.4\nassert np.allclose((rot(m*th)@qv)@(rot(n*th)@kv),qv@rot((n-m)*th)@kv)\nassert (512+64)*2==1152\nphat=172/200;z=1.959963984540054;nobs=200\ncenter=(phat+z*z/(2*nobs))/(1+z*z/nobs)\nhalf=z*math.sqrt(phat*(1-phat)/nobs+z*z/(4*nobs*nobs))/(1+z*z/nobs)\nlo,hi=center-half,center+half\nassert abs(lo-.805)<.001 and abs(hi-.901)<.001\nassert 2*4*16==128 and 4+16==20 and math.ceil(1.2*100/4)==30\nprint(dict(layernorm=ln.tolist(),rmsnorm=rms.tolist(),wilson95=(lo,hi),mla_bytes=1152))\nprint('reference math batch 1: PASS')\n",
+      "exit_code": 0,
+      "stdout": "{'layernorm': [-0.9999950000374997, 0.9999950000374997], 'rmsnorm': [0.4472131482870333, 1.3416394448610998], 'wilson95': (0.8051011913429243, 0.9013301736654437), 'mla_bytes': 1152}\nreference math batch 1: PASS\n",
+      "final_rerun": true
+    },
+    {
+      "id": "reference_serving_math",
+      "code": "import math\nimport numpy as np\nnbytes=2*32*8*128*2*(1024+2048)\npadded=2*32*8*128*2*(2*2048)\nassert nbytes==402653184 and nbytes/2**20==384 and padded/2**20==512\nrows=[{'A':3,'B':1},{'A':4,'B':2},{'A':5,'C':3}]\nused=[sum(math.ceil(v/2) for v in r.values()) for r in rows]\nassert used==[3,3,5]\nassert sum(rows[0].values())==4 and sum(rows[2].values())==8\nassert used[1]-math.ceil(rows[1]['B']/2)==2\nassert used[2]-math.ceil(rows[2]['A']/2)==2\nassert 90/100==.9 and 90/10==9\nrow=[(pid//3,pid%3) for pid in range(6)]\ngroup=[(pid%2,pid//2) for pid in range(6)]\nassert row==[(0,0),(0,1),(0,2),(1,0),(1,1),(1,2)]\nassert group==[(0,0),(1,0),(0,1),(1,1),(0,2),(1,2)]\na=np.arange(35.).reshape(5,7);b=np.arange(42.).reshape(7,6);c=np.zeros((5,6))\nfor i in range(0,5,2):\n for j in range(0,6,3):\n  for k in range(0,7,4): c[i:i+2,j:j+3]+=a[i:i+2,k:k+4]@b[k:k+4,j:j+3]\nassert np.allclose(c,a@b)\nprint(dict(logical_MiB=384,padded_MiB=512,kv_blocks=used,row_major=row,grouped=group))\nprint('reference serving arithmetic and tiled matmul: PASS (toy CPU checks, not engine/GPU execution)')\n",
+      "exit_code": 0,
+      "stdout": "{'logical_MiB': 384, 'padded_MiB': 512, 'kv_blocks': [3, 3, 5], 'row_major': [(0, 0), (0, 1), (0, 2), (1, 0), (1, 1), (1, 2)], 'grouped': [(0, 0), (1, 0), (0, 1), (1, 1), (0, 2), (1, 2)]}\nreference serving arithmetic and tiled matmul: PASS (toy CPU checks, not engine/GPU execution)\n",
+      "final_rerun": true
+    },
+    {
+      "id": "reference_posttraining_retrieval",
+      "code": "import math\nimport numpy as np\nimport torch\nimport torch.nn.functional as F\nz=math.log(.3/.2)-math.log(.1/.2)\nassert abs(1/(1+math.exp(-z))-.75)<1e-12\nassert round(math.log1p(math.exp(-z)),3)==.288\nassert [round(math.log1p(math.exp(-d)),3) for d in [1,3]]==[.313,.049]\nfor r in [np.array([1.,0,0,1]),np.zeros(4),np.ones(4)]:\n a=(r-r.mean())/(r.std(ddof=0)+1e-6)\n assert np.isfinite(a).all()\n assert np.allclose(a,[1,-1,-1,1],atol=1e-5) if r.std() else np.all(a==0)\n print(\"GRPO\",a.tolist())\nassert round(2-.5*math.log(2),3)==1.653\nassert round(2-math.log(2),3)==1.307\nlogits=torch.tensor([[[0.,0,0,0],[0.,0,3,0],[0.,0,0,3],[0.,0,0,0]]],requires_grad=True)\nlabels=torch.tensor([[-100,-100,2,3]])\nloss=F.cross_entropy(logits[:,:-1,:].reshape(-1,4),labels[:,1:].reshape(-1),ignore_index=-100)\nmanual=(-F.log_softmax(logits,dim=-1)[0,1,2]-F.log_softmax(logits,dim=-1)[0,2,3])/2\nassert torch.allclose(loss,manual)\nloss.backward()\nassert logits.grad[0,0].eq(0).all() and logits.grad[0,3].eq(0).all()\nassert logits.grad[0,1].abs().sum()>0 and logits.grad[0,2].abs().sum()>0\ndcg=lambda r: sum((2**v-1)/math.log2(i+2) for i,v in enumerate(r))\nideal=dcg([1,1,0])\nassert dcg([1,0,0])/ideal>dcg([0,1,0])/ideal\nprint(\"PASS: DPO/RM/RLHF numbers; SFT shift and ignored gradients; nDCG rank effect\",float(loss.detach()))\n",
+      "exit_code": 0,
+      "stdout": "GRPO [0.999998000004, -0.999998000004, -0.999998000004, 0.999998000004]\nGRPO [0.0, 0.0, 0.0, 0.0]\nGRPO [0.0, 0.0, 0.0, 0.0]\nPASS: DPO/RM/RLHF numbers; SFT shift and ignored gradients; nDCG rank effect 0.13920624554157257\n",
+      "final_rerun": true
+    },
+    {
+      "id": "reference_privacy_robust_linear",
+      "code": "import math\nimport numpy as np\nimport torch\nassert 1/.5==2 and 20/.5==40 and 120+1.4==121.4\n# E|Lap(0,b)| = integral_0^infinity z/b exp(-z/b) dz = b.\nz=np.linspace(0,60,100001); b=2\nassert abs(np.trapezoid(z/b*np.exp(-z/b),z)-2)<1e-6\na=np.array([.75,.25]); e=np.array([.5,.5])\npsi=np.sum((a-e)*np.log(a/e))\nassert abs(psi-.25*math.log(3))<1e-12 and round(psi,3)==.275\nsmooth=lambda n:(n+.5)/(n.sum()+len(n)*.5)\np,q=smooth(np.array([100.,0.])),smooth(np.array([0.,100.]))\nassert p.min()>0 and q.min()>0 and np.isclose(p.sum(),1) and np.isfinite(((p-q)*np.log(p/q)).sum())\ng=np.array([3.,4.]); linf=.1*np.sign(g); l2=.1*g/np.linalg.norm(g)\nassert np.allclose(linf,[.1,.1]) and np.linalg.norm(linf)>.1\nassert np.allclose(l2,[.06,.08]) and np.isclose(np.linalg.norm(l2),.1)\nres=torch.tensor([10.,100.],requires_grad=True)\ntorch.nn.functional.huber_loss(res,torch.zeros_like(res),delta=1,reduction=\"sum\").backward()\nassert torch.allclose(res.grad,torch.ones(2))\nrng=np.random.default_rng(17)\nq,k,v=rng.normal(size=(3,5,4))\nphi=lambda x:np.where(x>=0,x+1,np.exp(x))\nq,k=phi(q),phi(k); S=np.zeros((4,4)); Z=np.zeros(4)\nfor t in range(5):\n S+=np.outer(k[t],v[t]); Z+=k[t]\n recursive=q[t]@S/(q[t]@Z)\n weights=q[t]@k[:t+1].T\n direct=weights@v[:t+1]/weights.sum()\n assert np.allclose(recursive,direct)\nprint(\"PASS: count sensitivity/Laplace Eabs, PSI\",psi,\"zero-bin smoothing, FGSM/PGD norm, Huber gradients, recurrent vs all-causal linear attention\")\n",
+      "exit_code": 0,
+      "stdout": "PASS: count sensitivity/Laplace Eabs, PSI 0.2746530721670274 zero-bin smoothing, FGSM/PGD norm, Huber gradients, recurrent vs all-causal linear attention\n",
+      "final_rerun": true
+    }
+  ],
+  "completed_scope": "All 45 assigned RU pages fully read; all 57 original findings adjudicated. 38 RU pages changed and fully reread. No authored EN mappings in manifest.",
+  "reread_pages": 38,
+  "changed_ru_pages": 38,
+  "finding_counts": {
+    "fixed": 48,
+    "already-fixed": 9,
+    "rejected-with-evidence": 0,
+    "open": 0
+  },
+  "validation": {
+    "snapshot_sha_matches": 45,
+    "figures_preserved": 68,
+    "source_id_sets_and_order_preserved": 45,
+    "all_route_mappings_match": true,
+    "authored_en_mappings": 0,
+    "old_heading_aliases_preserved": true,
+    "new_wikilink_files_exist": true,
+    "git_diff_check": "PASS, scoped to the 45 owned page paths",
+    "fence_and_display_delimiter_counts": "PASS; initial ^$$ heuristic falsely counted inline display equations; corrected to all literal double-dollar delimiters, no content changes needed",
+    "cpu": "4 groups rerun on CPU, all exit 0; full code and stdout recorded in cpu_checks",
+    "build": "not-run per parent instruction",
+    "rendering": "not-run",
+    "independent_review": "pending parent/reviewer"
+  },
+  "limitations": [
+    "Completion means adjudication of this exact audit subset, not independent replication of all cited model results or a new audit of all historical claims.",
+    "No full publishing build, browser/Obsidian rendering, GPU kernels, serving engine, large training or adversarial attack evaluation was run.",
+    "Preserved 68 existing figure embeds, source-unit IDs and attribution. No newly drawn SVG/Mermaid or replacement illustrations. Existing licensing was not re-audited; no new source image was copied.",
+    "Authored EN mappings: 0. Locale fallback is not counted as a translation; none was created.",
+    "Dwork–Roth author PDF failed to fetch; the same primary textbook was verified via the course-hosted mirror listed on Security page evidence. Original canonical source URL was retained.",
+    "Primary source checks targeted findings and material additions; scores such as Aguvis/InSTA are author-reported, not independently reproduced.",
+    "Repository was dirty before assignment; snapshots and before/after hashes distinguish only this task's changes, not HEAD diff. Shared navigation/registry/build files were read where relevant but not edited.",
+    "Some retained historical prose uses English technical labels; this pass corrected all original language findings and new explanatory prose, not every pre-existing English term across the entire reference library."
+  ],
+  "skills_used": [
+    "superpowers:executing-plans",
+    "llm-wiki:llm-wiki",
+    "superpowers:verification-before-completion"
+  ],
+  "progress_checkpoints": [
+    5,
+    10,
+    15,
+    20,
+    25,
+    30,
+    35,
+    40,
+    45
+  ]
+}

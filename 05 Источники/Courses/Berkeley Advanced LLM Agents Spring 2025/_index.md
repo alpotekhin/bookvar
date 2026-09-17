@@ -2,38 +2,61 @@
 title: Berkeley Advanced LLM Agents — Spring 2025
 type: source-note
 status: verified
-last_verified: 2026-09-07
+last_verified: 2026-09-15
 ---
 
 # Berkeley Advanced LLM Agents — Spring 2025
 
 [Официальная страница курса](https://rdi.berkeley.edu/adv-llm-agents/sp25) ·
-`semantic-review.json` · `audit-contract.json` · `editorial-map.yml` · `source-manifest.yml` · `source-units.yml` · `coverage.yml` · `visuals.yml` ·
-`snapshot-lock.json`
+[[05 Источники/Курсы|Все курсы и тематический маршрут]]
 
-Статус исходного слоя: **архив проверен, редакционная карта подготовлена**.
-Реестры `coverage.yml` и `visuals.yml` пока описывают только исходный архив: их
-строки остаются `source-only` или `excluded`, пока в учебнике не появятся все
-запланированные абзацы, якоря и изображения. В `editorial-map.yml` уже записано
-окончательное решение для каждого смыслового фрагмента и каждой иллюстрации.
-Импортёр не позволит преждевременно объявить материал перенесённым: при
-активации карты он должен найти страницу, точный якорь, обратную ссылку через
-`source_unit_id` и локальный файл выбранной иллюстрации.
+Курс связывает обучение моделей рассуждения с памятью и планированием агентов,
+работой в браузере, программированием, формальными доказательствами и безопасностью.
+Ниже можно выбрать главу учебника по теме или открыть оригинальные английские
+слайды и список статей соответствующей лекции. Материалы курса не образуют
+отдельную обязательную последовательность внутри нашего учебника.
+
+## Где читать тему
+
+| Тема | В учебнике | Оригинальные лекции |
+|---|---|---|
+| Поиск решения, проверка и дополнительные вычисления при ответе | [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute|Test-time compute]], [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers|RLVR и проверяющие программы]] | [1–2: reasoning](#meeting-01), [4: post-training](#meeting-04) |
+| Память, планирование и модели мира | [[00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов|Память и планирование]] | [3: memory and planning](#meeting-03) |
+| Программирование, браузер и графический интерфейс | [[00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents|Coding, web и computer-use agents]] | [5: coding](#meeting-05), [6: web](#meeting-06), [7: GUI](#meeting-07) |
+| Формализация и доказательство теорем | [[00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты|Математические агенты]] | [8: AlphaProof](#meeting-08), [9: autoformalization](#meeting-09), [10: theorem proving](#meeting-10) |
+| Научный поиск и построение абстракций | [[00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery|Агенты научного поиска]] | [11: abstraction and discovery](#meeting-11) |
+| Угрозы, недоверенные данные и ограничение полномочий | [[00 Учебник/17 Tools и Agents/72 Безопасность агентных систем|Безопасность агентов]] | [12: safe and secure agentic AI](#meeting-12) |
+
+## Что уже перенесено и что осталось
+
+Материал уже связан с главами, а не только сохранён в архиве. В реестре
+`coverage.yml` 140 фрагментов отмечены как `integrated`, ещё 6 — как
+`covered-existing`: для них указаны конкретные разделы учебника и обратные
+ссылки на источник. 38 фрагментов пока доступны только в исходных материалах,
+28 исключены с указанием причины. Это числа смысловых фрагментов, не лекций
+или страниц PDF.
+
+В числе 140 записей `integrated` — 105 фрагментов слайдов и 35 записей
+каталога статей. Последние дают ссылку на первоисточник и его описание;
+полные тексты этих статей не перенесены в учебник.
+
+Статус переноса подтверждает наличие текста и связей, но не заменяет
+постраничную проверку объяснения и читаемости рисунков. Оставшиеся материалы
+разбираются по темам: полезное дополнение расширяет соответствующую главу;
+дублирование и административная информация не становятся новыми главами.
 
 ### Редакционная карта
 
-В `editorial-map.yml` нет решения «по умолчанию». Все **212 смысловых
-фрагментов** получили ровно один статус: 137 `integrated`, 6
-`covered-existing`, 41 `source-only` и 28 `excluded`. Для **161
-иллюстрации** также записано ровно одно решение:
-42 `integrated`, 92 `source-only` и 27 `excluded`.
+Карта активна. Валидатор проверяет страницы назначения, якоря, обратные ссылки
+`source_unit_id` и локальные файлы перенесённых иллюстраций. Из 161 записи
+визуального реестра 47 отмечены `integrated`, 87 — `source-only`, 27 —
+`excluded`. Запись может описывать последовательность слайдов, а не один рисунок.
 
-Карта уже проверяется при каждой пересборке, но пока только на структурную
-полноту. После переноса текста и изображений тот же валидатор дополнительно
-проверит все страницы и якоря, обратные ссылки на источники и файлы
-иллюстраций. Промежуточная сборка поэтому остаётся рабочей, а незакрытый перенос
-остаётся заметным: состояние карты и её SHA-256 закреплены в
-`snapshot-lock.json`.
+Проверочные данные: [coverage.yml](coverage.yml), [visuals.yml](visuals.yml),
+[editorial-map.yml](editorial-map.yml), [source-units.yml](source-units.yml),
+[semantic-review.json](semantic-review.json), [audit-contract.json](audit-contract.json),
+[source-manifest.yml](source-manifest.yml), [snapshot-lock.json](snapshot-lock.json).
+Эти реестры нужны для обновления и аудита; для чтения достаточно ссылок в таблице.
 
 ## Что закреплено
 
@@ -86,14 +109,15 @@ importer. Затем обязательны focused regressions, importer `--che
 > `rights_scope: do-not-reuse`; общая permission record курса не перекрывает
 > более строгое ограничение конкретной страницы.
 
-## Встречи и будущие назначения
+<a id="встречи-и-будущие-назначения"></a>
+## Лекции, слайды и статьи
 
 <a id="meeting-01"></a>
 ### 1. 27 января — inference-time reasoning
 
 Артефакты: [Intro, 16 pages](Lectures/meeting-01-intro.pdf),
 [основной deck, 74 pages](Lectures/meeting-01-slides.pdf), recording metadata и
-3 readings. Будущее назначение: prompting, decomposition, self-consistency,
+3 readings. Темы: prompting, decomposition, self-consistency,
 verifiers, Tree of Thoughts, reflection и self-correction failures.
 
 Readings:
@@ -106,7 +130,7 @@ Readings:
 ### 2. 3 февраля — learning to reason
 
 Артефакты: [deck, 106 pages](Lectures/meeting-02-slides.pdf), recording metadata
-и 3 readings. Будущее назначение: DPO, self-rewarding models, IRPO,
+и 3 readings. Темы: DPO, self-rewarding models, IRPO,
 meta-rewarding и evaluation-guided planning.
 
 Readings:
@@ -132,7 +156,7 @@ Readings:
 ### 4. 24 февраля — open post-training recipes
 
 Артефакты: [deck, 155 pages](Lectures/meeting-04-slides.pdf), recording metadata
-и 3 readings. Будущее назначение: Tülu, SFT mixtures, preference optimization,
+и 3 readings. Темы: Tülu, SFT mixtures, preference optimization,
 RLVR, test-time scaling и OLMo openness. Physical page 155 сохранена как
 содержательный chart `Human Preference Evaluation`, а не generic appendix.
 
@@ -158,7 +182,7 @@ Readings:
 ### 6. 10 марта — multimodal web agents
 
 Артефакты: [deck, 126 pages](Lectures/meeting-06-slides.pdf), recording metadata
-и 4 readings. Будущее назначение: Mind2Web, WebArena, VisualWebArena, tree
+и 4 readings. Темы: Mind2Web, WebArena, VisualWebArena, tree
 search, verification и inference-time scaling. Page 117 — обязательное
 `do-not-reuse` исключение, указанное выше.
 
@@ -173,7 +197,7 @@ Readings:
 ### 7. 17 марта — GUI agents from perception to action
 
 Артефакты: [deck, 106 pages](Lectures/meeting-07-slides.pdf), recording metadata
-и 2 readings. Будущее назначение: OSWorld, trajectory construction, TACO,
+и 2 readings. Темы: OSWorld, trajectory construction, TACO,
 Aguvis, video understanding и generalist agents.
 
 Readings:
@@ -185,7 +209,7 @@ Readings:
 ### 8. 31 марта — AlphaProof
 
 Артефакты: [deck, 112 pages](Lectures/meeting-08-slides.pdf), recording metadata
-и 4 readings. Будущее назначение: formal mathematics, Lean, AlphaZero,
+и 4 readings. Темы: formal mathematics, Lean, AlphaZero,
 AlphaProof, IMO evidence и test-time RL.
 
 Readings:
@@ -212,7 +236,7 @@ Readings:
 ### 10. 14 апреля — advanced theorem proving
 
 Артефакты: [deck, 118 pages](Lectures/meeting-10-slides.pdf), recording metadata
-и 4 readings. Будущее назначение: Lean-STaR, Draft-Sketch-Prove, LeanHammer,
+и 4 readings. Темы: Lean-STaR, Draft-Sketch-Prove, LeanHammer,
 research workflows и miniCTX. Pages 116–117 остаются source-only как
 содержательный accessibility/benchmarking и prover-method recap; только p.118
 имеет administrative `excluded` disposition.

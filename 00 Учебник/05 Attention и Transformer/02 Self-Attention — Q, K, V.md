@@ -2,7 +2,7 @@
 title: Self-Attention изнутри — Q, K, V
 type: textbook-chapter
 status: canonical
-last_updated: 2026-07-18
+last_updated: 2026-09-15
 previous: "[[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/01 От Seq2Seq к Transformer]]"
 next: "[[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров]]"
 primary_sources:
@@ -86,10 +86,13 @@ $$
 q_i=x_iW_Q,\qquad k_i=x_iW_K.
 $$
 
-Совместимость запроса позиции $i$ и ключа позиции $j$:
+Здесь $x_i$ — строка $1\times d_{\mathrm{model}}$,
+$W_Q,W_K$ имеют форму $d_{\mathrm{model}}\times d_k$, а
+$q_i,k_i$ — строки $1\times d_k$. Совместимость запроса позиции $i$
+и ключа позиции $j$ — скаляр:
 
 $$
-s_{ij}=q_i^\top k_j.
+s_{ij}=q_i k_j^\top=\sum_{a=1}^{d_k}q_{i,a}k_{j,a}.
 $$
 
 Большое значение $s_{ij}$ означает не «слова вообще похожи», а «в этом слое и
@@ -176,17 +179,17 @@ $$
 ### Шаг C. Softmax
 
 $$
-\alpha_3\approx[0.248,0.248,0.503].
+\alpha_3\approx[0.248255,0.248255,0.503490].
 $$
 
-Погрешность округления объясняет, почему сумма показанных чисел равна 0.999.
+Веса нормированы по трём keys; в показанном округлении их сумма равна 1.
 
 ### Шаг D. Weighted sum Values
 
 $$
 z_3=
-0.248[1,0]+0.248[0,2]+0.503[3,1]
-\approx[1.758,0.999].
+0.248255[1,0]+0.248255[0,2]+0.503490[3,1]
+\approx[1.758725,1].
 $$
 
 Третья позиция получила новое контекстное представление. В нём смешано содержимое всех
@@ -197,7 +200,7 @@ $$
 Если компоненты $q$ и $k$ независимы, имеют среднее 0 и дисперсию 1, то
 
 $$
-\operatorname{Var}(q^\top k)=d_k.
+\operatorname{Var}(q k^\top)=d_k.
 $$
 
 С ростом размерности dot products по модулю увеличиваются. Softmax от больших

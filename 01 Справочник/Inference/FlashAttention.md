@@ -2,7 +2,8 @@
 title: FlashAttention
 type: concept
 status: canonical
-last_updated: 2026-07-16
+last_updated: 2026-09-15
+last_verified: 2026-09-15
 primary_sources:
   - https://arxiv.org/abs/2205.14135
   - https://arxiv.org/abs/2307.08691
@@ -32,7 +33,15 @@ Dao et al., [FlashAttention, Algorithm 1](https://arxiv.org/abs/2205.14135).*
 - он не уменьшает размер [[02 Areas/ML & DL/01 Справочник/Inference/KV-cache|KV-cache]] сам по себе;
 - поддержка masks, dropout, GQA и hardware зависит от версии/kernel implementation.
 
-FlashAttention-2 улучшил partitioning работы и utilisation GPU. Более новые версии и vendor kernels развивают ту же IO-aware идею; свойства нужно проверять по конкретной реализации.
+FlashAttention-2 изменил распределение работы между блоками и варпами GPU и
+уменьшил накладные расходы, сохранив математический оператор внимания.
+Проверенный срез этой карточки — 2026-09-15: определения относятся к
+FlashAttention и FlashAttention-2, а не являются исчерпывающим каталогом релизов.
+Поддерживаемые GPU, типы данных, размерности голов и варианты масок следует
+сверять с [README официальной реализации](https://github.com/Dao-AILab/flash-attention)
+для закреплённого release/commit. Название FlashAttention само по себе не
+гарантирует, что конкретный вызов или оборудование поддерживаются выбранным
+ядром.
 
 ## Подробнее
 

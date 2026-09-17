@@ -21,6 +21,24 @@ type SystemsAsset = {
   used_in?: unknown;
 };
 
+type CuratedAsset = {
+  id?: string;
+  author?: string;
+  license?: string;
+  license_url?: string;
+  asset: string;
+  derivation?: string;
+  provenance_confirmation?: string;
+  source_asset?: string;
+  source_asset_sha256?: string;
+  source_page?: number;
+  source_url?: string;
+  commit?: string;
+  metadata_status?: string;
+  modifications?: string;
+  sha256?: string;
+};
+
 function requireNonEmptyString(value: unknown, field: string): string {
   if (typeof value !== 'string' || value.trim().length === 0) {
     throw new Error(`${field} must be a non-empty string`);
@@ -68,6 +86,65 @@ function sha256(path: string): string {
   return createHash('sha256').update(readFileSync(path)).digest('hex');
 }
 
+function validateCuratedSourceAsset(entry: CuratedAsset, repositoryRoot = root): void {
+  if (!entry.source_asset) {
+    expect(entry.provenance_confirmation).toBe('pinned-upstream-repository');
+    const sourceMatch = entry.source_url?.match(
+      /^https:\/\/github\.com\/[^/]+\/[^/]+\/blob\/([0-9a-f]{40})\/.+/
+    );
+    expect(sourceMatch, `Curated upstream source must be a pinned GitHub blob: ${entry.asset}`).toBeTruthy();
+    expect(entry.commit).toMatch(/^[0-9a-f]{40}$/);
+    expect(sourceMatch?.[1]).toBe(entry.commit);
+    expect(entry.metadata_status).toBe('verified');
+    return;
+  }
+
+  if (entry.provenance_confirmation === 'source-license-verified') {
+    requireNonEmptyString(entry.author, 'author');
+    requireNonEmptyString(entry.license, 'license');
+    expect(entry.source_url).toMatch(/^https:\/\//);
+    expect(entry.license_url).toMatch(/^https:\/\//);
+    expect(entry.metadata_status).toBe('verified');
+  } else {
+    expect(entry.provenance_confirmation).toBe('user-confirmed-open-materials');
+  }
+  if (entry.source_asset.startsWith('raw/papers/')) {
+    const sourceAsset = resolve(repositoryRoot, entry.source_asset);
+    if (!existsSync(sourceAsset)) {
+      // `raw` is intentionally ignored in the public repository. CI validates
+      // the curated binary and its provenance metadata; a local checkout that
+      // has the immutable source archive also verifies byte-level derivation.
+      return;
+    }
+    if (entry.derivation === 'pdf-page-render-crop') {
+      expect(entry.source_asset).toMatch(/\.pdf$/);
+    } else if (entry.derivation === 'lossless-format-conversion') {
+      expect(entry.source_asset).toMatch(/\.jpe?g$/i);
+      expect(entry.asset).toMatch(/\.png$/i);
+      expect(entry.modifications).toMatch(/converted to PNG without resizing or content changes/i);
+    } else {
+      expect(sha256(resolve(repositoryRoot, entry.asset))).toBe(sha256(sourceAsset));
+    }
+    return;
+  }
+
+  expect(entry.source_asset).toMatch(
+    /^05 Источники\/Courses\/[^/]+\/Lectures\/[^/]+\.pdf$/
+  );
+  expect(entry.derivation).toBe('pdf-page-render');
+  expect(entry.source_asset_sha256).toMatch(/^[a-f0-9]{64}$/);
+  expect(Number.isInteger(entry.source_page) && Number(entry.source_page) > 0).toBe(true);
+  const sourceAsset = resolve(repositoryRoot, entry.source_asset);
+  expect(existsSync(sourceAsset), `Missing tracked course PDF: ${entry.source_asset}`).toBe(true);
+  expect(sha256(sourceAsset), `Source PDF hash mismatch: ${entry.source_asset}`).toBe(
+    entry.source_asset_sha256
+  );
+  expect(entry.sha256).toMatch(/^[a-f0-9]{64}$/);
+  expect(sha256(resolve(repositoryRoot, entry.asset)), `Curated output hash mismatch: ${entry.asset}`).toBe(
+    entry.sha256
+  );
+}
+
 function expectDecodableImage(path: string): void {
   const bytes = readFileSync(path);
   const extension = extname(path).toLowerCase();
@@ -98,6 +175,37 @@ function expectDecodableImage(path: string): void {
 }
 
 describe('publication asset registry', () => {
+  it('keeps the original Kimi Linear JPEG bytes and its complete MIT notice', () => {
+    const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8'), { merge: true }) as { assets: CuratedAsset[] };
+    const entry = registry.assets.find((asset) => asset.id === 'curated-kimi-linear-architecture-132ae021fa46')!;
+    expect(entry).toBeTruthy();
+    expect(entry.asset).toMatch(/arch\.jpg$/);
+    validateCuratedSourceAsset(entry);
+    expect(sha256(resolve(root, entry.asset))).toBe('132ae021fa4661ed39e7be784d46f05f22b82aabb9afd2bab8dbdc0a5a61cba0');
+    expectDecodableImage(resolve(root, entry.asset));
+    const notice = readFileSync(resolve(root, 'site/public/licenses/kimi-linear-MIT.txt'), 'utf8');
+    expect(notice).toContain('Copyright (c) 2025 Moonshot AI');
+    expect(notice).toContain('The above copyright notice and this permission notice shall be included');
+    expect(notice).toContain('THE SOFTWARE IS PROVIDED "AS IS"');
+  });
+
+  it('attributes the three speculative-sampling figures to Chen with the published license', () => {
+    const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8'), { merge: true }) as { assets: CuratedAsset[] };
+    const ids = ['curated-spec-alg-000000000047', 'curated-spec-results-000000000048', 'curated-spec-stats-000000000049'];
+    for (const id of ids) {
+      const entry = registry.assets.find((asset) => asset.id === id);
+      expect(entry).toBeTruthy();
+      if (!entry) continue;
+      expect(entry.author).toBe('Charlie Chen et al.');
+      expect(entry.source_url).toBe('https://arxiv.org/abs/2302.01318');
+      expect(entry.license).toBe('CC BY 4.0');
+      expect(entry.license_url).toBe('https://creativecommons.org/licenses/by/4.0/');
+      validateCuratedSourceAsset(entry);
+      expect(() => validateCuratedSourceAsset({ ...entry, license: '' })).toThrow();
+      expect(() => validateCuratedSourceAsset({ ...entry, license_url: undefined })).toThrow();
+    }
+  });
+
   it('registers every curated ML systems asset with pinned provenance', () => {
     const manifestPath = resolve(systemsAssetRoot, 'assets.yml');
     const manifest = parse(readFileSync(manifestPath, 'utf8')) as {
@@ -265,16 +373,7 @@ describe('publication asset registry', () => {
 
   it('registers every tracked curated binary exactly once', () => {
     const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8'), { merge: true }) as {
-      assets: Array<{
-        id?: string;
-        asset: string;
-        derivation?: string;
-        provenance_confirmation?: string;
-        source_asset?: string;
-        source_url?: string;
-        commit?: string;
-        metadata_status?: string;
-      }>;
+      assets: CuratedAsset[];
     };
     const curatedRoot = resolve(root, '00 Учебник/Assets/Figures/curated');
     const files = existsSync(curatedRoot)
@@ -296,37 +395,27 @@ describe('publication asset registry', () => {
     expect(new Set(curatedEntries.map(({ id }) => id)).size).toBe(curatedEntries.length);
     for (const entry of curatedEntries) {
       expect(entry.id).toMatch(/^curated-[a-z0-9-]+-[a-f0-9]{12}$/);
-      if (!entry.source_asset) {
-        expect(entry.provenance_confirmation).toBe('pinned-upstream-repository');
-        const sourceMatch = entry.source_url?.match(
-          /^https:\/\/github\.com\/[^/]+\/[^/]+\/blob\/([0-9a-f]{40})\/.+/
-        );
-        expect(sourceMatch, `Curated upstream source must be a pinned GitHub blob: ${entry.asset}`).toBeTruthy();
-        expect(entry.commit).toMatch(/^[0-9a-f]{40}$/);
-        expect(sourceMatch?.[1]).toBe(entry.commit);
-        expect(entry.metadata_status).toBe('verified');
-        continue;
-      }
-      expect(entry.provenance_confirmation).toBe('user-confirmed-open-materials');
-      expect(entry.source_asset).toMatch(/^raw\/papers\//);
-      const sourceAsset = resolve(root, entry.source_asset as string);
-      if (!existsSync(sourceAsset)) {
-        // `raw` is intentionally ignored in the public repository. CI validates
-        // the curated binary and its provenance metadata; a local checkout that
-        // has the immutable source archive also verifies byte-level derivation.
-        continue;
-      }
-      if (entry.derivation === 'pdf-page-render-crop') {
-        expect(entry.source_asset).toMatch(/\.pdf$/);
-      } else if (entry.derivation === 'lossless-format-conversion') {
-        expect(entry.source_asset).toMatch(/\.jpe?g$/i);
-        expect(entry.asset).toMatch(/\.png$/i);
-        expect(entry.modifications).toMatch(/converted to PNG without resizing or content changes/i);
-      } else {
-        expect(sha256(resolve(root, entry.asset))).toBe(
-          sha256(sourceAsset)
-        );
-      }
+      validateCuratedSourceAsset(entry);
     }
+  });
+
+  it('rejects invalid tracked course PDF provenance', () => {
+    const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8'), { merge: true }) as {
+      assets: CuratedAsset[];
+    };
+    const valid = registry.assets.find(({ asset }) =>
+      asset.startsWith('00 Учебник/Assets/Figures/curated/berkeley-agents-2025/')
+    );
+    expect(valid).toBeTruthy();
+    if (!valid) return;
+
+    expect(() => validateCuratedSourceAsset({ ...valid, source_asset: 'elsewhere/course.pdf' })).toThrow();
+    expect(() => validateCuratedSourceAsset({
+      ...valid,
+      source_asset: '05 Источники/Courses/missing/Lectures/missing.pdf'
+    })).toThrow();
+    expect(() => validateCuratedSourceAsset({ ...valid, source_asset_sha256: '0'.repeat(64) })).toThrow();
+    expect(() => validateCuratedSourceAsset({ ...valid, source_page: 0 })).toThrow();
+    expect(() => validateCuratedSourceAsset({ ...valid, derivation: 'pdf-page-render-crop' })).toThrow();
   });
 });

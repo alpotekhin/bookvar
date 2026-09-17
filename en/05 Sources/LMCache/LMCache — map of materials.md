@@ -4,7 +4,7 @@ type: source-note
 status: active
 locale: en
 translation_of: "05 Источники/LMCache/LMCache — карта материалов.md"
-last_verified: 2026-07-23
+last_verified: 2026-09-15
 ---
 
 # LMCache: a distributed memory layer for LLM inference
@@ -24,7 +24,7 @@ a storage object and a communication medium between inference engines. This
 single change connects several apparently separate serving techniques:
 
 - prefix reuse avoids recomputing a context that another request has already
-  prefetched;
+  computed;
 - multi-tier offloading exchanges scarce GPU memory for larger CPU, local-disk,
   or remote-storage capacity;
 - prefill/decode disaggregation transfers computed KV state from a prefill
@@ -39,8 +39,9 @@ distributed state layer with a data plane, a control plane, storage policies,
 failure modes, and an economic break-even point. This chapter follows the
 current multiprocess architecture described in the
 [official MP documentation](https://docs.lmcache.ai/mp/index.html). Older
-in-process examples remain useful historically, but the project marks that mode
-as deprecated.
+in-process examples remain useful historically, but the project's
+[legacy-mode documentation](https://docs.lmcache.ai/legacy/index.html) marks that
+mode as deprecated.
 
 ## 1. When moving KV is better than recomputing it
 
@@ -277,14 +278,35 @@ centralized L2 store offers a different topology. The current
 advertisement, discovery, lookup timeouts, load timeouts, and a transfer-engine
 choice.
 
-The P/D break-even condition includes overlap:
+An ideal-overlap estimate for the P/D tail is:
 
 $$
-T_{\text{PD}} =
-\max(T_{\text{remaining prefill}},T_{\text{KV transfer}})
+T_{\text{PD,tail}}^{\text{ideal}} =
+\max(T_{\text{remaining prefill}},T_{\text{KV transfer service}})
 +
 T_{\text{handoff}}+T_{\text{decode queue}}.
 $$
+
+Here the clock begins when overlapped transfer starts; this is a remaining
+handoff-stage clock, not total request latency or complete TTFT. Pure transfer
+service time excludes waiting for KV chunks to become ready. The maximum is a
+lower bound under ideal overlap, not a general equality for actual elapsed
+time: a chunk cannot transfer before the computation producing it finishes.
+The additive handoff and decode-queue terms assume those stages follow the
+compute/transfer interval without overlap.
+
+For example, suppose the final KV chunk becomes ready at 100 ms on this clock
+and needs 20 ms to transfer. Even if all pure transfer work totals at most
+100 ms, the destination cannot have the complete state before 120 ms. The
+simple maximum would predict only 100 ms before handoff and queueing. Actual
+tail latency follows the critical path through chunk readiness, transfer,
+synchronization and subsequent stages. Earlier prefill and frontend time must
+also be included when measuring from request arrival.
+
+The official [layerwise-transfer documentation](https://docs.lmcache.ai/kv_cache_optimizations/layerwise.html)
+illustrates these readiness and stream-synchronization dependencies. It
+documents legacy in-process mode; it is not evidence of MP-mode feature parity
+or a guarantee of complete overlap in a particular deployment.
 
 Disaggregation is attractive only when improved specialization, batching, or
 decode scheduling outweighs handoff and queue costs. It is not a guaranteed
@@ -316,7 +338,7 @@ the LMCache core.
 ## 8. CacheBlend: reuse beyond a common prefix
 
 Prefix caching is exact because causal attention ensures that a token's KV state
-depends only on the tokens before it. Moving a text chunk to a new position or
+depends on the current token and its preceding context, with the same model and positional configuration. Moving a text chunk to a new position or
 placing another retrieved document before it changes that history. Reusing the
 old KV unchanged would omit cross-chunk attention and can alter model quality.
 
@@ -448,7 +470,10 @@ XPU paths, but availability of a package is not evidence that every backend,
 codec, and transfer mode has equal maturity on every platform.
 
 KV reuse is not limited to text-only prompts. LMCache documents multimodal
-caching through its vLLM integration, including an Ultravox example. The same
+caching through its vLLM integration, including an
+[Ultravox example](https://docs.lmcache.ai/getting_started/quickstart/multimodality.html)
+under the legacy in-process documentation. That example is not by itself proof
+of feature parity in MP mode. The same
 identity rule becomes stricter here: cached state depends on the processed media
 inputs and their preprocessing path, not merely on visible text. Hybrid
 attention recipes likewise cover models that combine ordinary attention with

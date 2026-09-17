@@ -49,16 +49,23 @@ attention projections, FFN и LM head. Сохраните формы входо�
 prefill используйте последовательность длины 8, затем выполните один decode
 step с KV-cache.
 
+Для обычного MHA/GQA-блока остановитесь после разделения Q/K/V и перестановки
+осей, но до возможного повторения KV-голов. В этой точке ожидается layout
+`[B, heads, T, head_dim]`: ось 1 содержит головы, ось 2 — позиции.
 Проверьте инварианты:
 
 ```python
 assert hidden.shape[-1] == config.n_embd
-assert q.shape[-2] == config.n_head
-assert k.shape[-2] == config.n_query_groups
+assert q.shape[1] == config.n_head
+assert k.shape[1] == config.n_query_groups
 assert logits.shape[-1] == config.padded_vocab_size
 ```
 
-Названия полей могут отличаться; смысл проверок должен сохраниться.
+Возьмите `T=8`, а число query-голов — например, 4: разные значения помогут
+заметить перепутанные оси. В [реализации LitGPT](https://github.com/Lightning-AI/litgpt/blob/main/litgpt/model.py)
+нужная перестановка записана как `transpose(1, 2)`. Закрепите её точное место
+в выбранном commit. Названия полей и layout до перестановки могут отличаться;
+для MLA сначала отдельно установите, какие проекции соответствуют Q и K.
 
 ## Шаг 3. Архитектурный diff
 

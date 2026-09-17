@@ -137,12 +137,13 @@ describe('Stanford CS336 Lecture 17 publication integration', () => {
       'textbook/multimodal/evaluation-serving',
       'textbook/multimodal/diffusion-flow-images',
       multimodalRoute,
+      'textbook/agents/module-map',
       'textbook/agents/tool-use'
     ];
 
     expect(pageRoutes.filter((route) => route === multimodalRoute)).toHaveLength(1);
     expect(sidebarRoutes.filter((route) => route === multimodalRoute)).toHaveLength(1);
-    expect(pageRoutes.slice(pageRoutes.indexOf(expected[0]), pageRoutes.indexOf(expected[0]) + 4))
+    expect(pageRoutes.slice(pageRoutes.indexOf(expected[0]), pageRoutes.indexOf(expected[0]) + expected.length))
       .toEqual(expected);
     expect(sidebarRoutes.slice(-3)).toEqual(expected.slice(0, 3));
 

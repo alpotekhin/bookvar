@@ -251,13 +251,14 @@ def ranking_to_pairs(row, adjacent_only=False):
     # номера ответов от лучшего к худшему
     ids = row["ranking"]
     pairs = zip(ids, ids[1:]) if adjacent_only else combinations(ids, 2)
-    text = {r["id"]: r["text"] for r in row["responses"]}
+    responses = {r["id"]: r for r in row["responses"]}
     return [{
         "prompt": row["prompt"],
-        "chosen": text[winner],
-        "rejected": text[loser],
+        "chosen": responses[winner]["text"],
+        "rejected": responses[loser]["text"],
         "group_id": row["prompt_id"],
-        "source_policy": row["responses"][0]["policy"],
+        "chosen_policy": responses[winner]["policy"],
+        "rejected_policy": responses[loser]["policy"],
     } for winner, loser in pairs]
 
 # Разделяйте group_id, а не отдельные пары.

@@ -265,7 +265,10 @@ $$
 отрицательна — параметр нужно увеличить. Скорость обучения $\eta$ задаёт размер
 шага.
 
-Минимальный цикл обучения:
+Псевдокод цикла в стиле micrograd (`data` здесь — числовое поле `Value`,
+а не рекомендуемый способ изменять PyTorch-тензоры). Определения `model`,
+`criterion` и данных опущены; полный пример есть в
+[демонстрационном notebook micrograd](https://github.com/karpathy/micrograd/blob/master/demo.ipynb):
 
 ```python
 for x, y in data:
@@ -281,6 +284,36 @@ for x, y in data:
 
 Вызов `backward()` сам по себе не обучает модель: он только вычисляет и
 накапливает градиенты. Параметры изменяются на шаге оптимизатора.
+
+Следующий самостоятельный пример делает ровно один шаг SGD для одного
+нейрона в PyTorch. Мы задаём параметры явно, чтобы значение до обучения
+можно было проверить вручную: $z=2\cdot1-1\cdot2-0{,}5=-0{,}5$.
+
+```python
+import torch
+
+x = torch.tensor([1.0, 2.0], dtype=torch.float64)
+w = torch.nn.Parameter(torch.tensor([2.0, -1.0], dtype=torch.float64))
+b = torch.nn.Parameter(torch.tensor(-0.5, dtype=torch.float64))
+optimizer = torch.optim.SGD([w, b], lr=0.1)
+
+optimizer.zero_grad()
+prediction = torch.tanh(w @ x + b)
+loss = 0.5 * (prediction - 1.0).square()
+loss.backward()
+assert w.grad.shape == w.shape
+before = loss.item()
+optimizer.step()
+with torch.no_grad():
+    after = (0.5 * (torch.tanh(w @ x + b) - 1.0).square()).item()
+assert after < before
+print(before, after)
+```
+
+`optimizer.step()` изменяет параметры с учётом накопленных градиентов.
+Блок `no_grad()` нужен только для контрольной оценки после обновления;
+если поместить в него обучающий прямой проход, обратный путь исчезнет.
+Соглашение соответствует [учебнику PyTorch по оптимизации](https://docs.pytorch.org/tutorials/beginner/basics/optimization_tutorial.html).
 
 ## 8. Почему градиенты нужно обнулять
 

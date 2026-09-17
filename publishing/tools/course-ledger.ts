@@ -32,6 +32,7 @@ export type CourseLedgerOptions = {
 
 const coverageDispositions = new Set(['integrated', 'covered-existing', 'contract-only', 'source-only', 'excluded']);
 const visualDispositions = new Set(['integrated', 'covered-existing', 'source-only', 'excluded']);
+const berkeleyAgentsCourse = 'Berkeley Advanced LLM Agents';
 const authorities = new Set(['official-course', 'official-author', 'primary-paper', 'third-party-mirror', 'bookvar-original']);
 const rights = new Set(['licensed', 'permission-recorded', 'link-only', 'unknown']);
 const sourceObjectKinds = new Set(['executable-lecture', 'pdf', 'assignment', 'video']);
@@ -523,7 +524,8 @@ function visuals(
   units: ReadonlyMap<string, SourceUnit>,
   repositoryRoot: string,
   courseRoot: string,
-  registered: ReadonlySet<string>
+  registered: ReadonlySet<string>,
+  useLocalFiles: boolean
 ): void {
   schema(document, 'visuals');
   const rows = records(document, 'rows', 'visuals');
@@ -557,10 +559,17 @@ function visuals(
     const disposition = enumField(entry, 'disposition', visualDispositions, label);
     if (disposition === 'integrated' || disposition === 'covered-existing') {
       if (rightsStatus === 'link-only' || rightsStatus === 'unknown') fail(`${label} cannot reuse a ${rightsStatus} visual`);
-      const localFile = field(entry, 'local_file', label);
       destinationPage(entry, repositoryRoot, label);
-      if (!existsSync(under(repositoryRoot, localFile, `${label}.local_file`))) fail(`${label}.local_file does not exist: ${localFile}`);
-      if (!registered.has(localFile)) fail(`${label}.local_file is absent from the asset registry: ${localFile}`);
+      if (useLocalFiles && entry.local_file !== undefined) fail(`${label}.local_file is not allowed; use local_files`);
+      const localFiles = useLocalFiles
+        ? list(entry.local_files, `${label}.local_files`).map((value, index) => text(value, `${label}.local_files[${index}]`))
+        : [field(entry, 'local_file', label)];
+      if (localFiles.length === 0) fail(`${label}.local_files must not be empty`);
+      for (const [index, localFile] of localFiles.entries()) {
+        const localFileLabel = useLocalFiles ? `${label}.local_files[${index}]` : `${label}.local_file`;
+        if (!existsSync(under(repositoryRoot, localFile, localFileLabel))) fail(`${localFileLabel} does not exist: ${localFile}`);
+        if (!registered.has(localFile)) fail(`${localFileLabel} is absent from the asset registry: ${localFile}`);
+      }
       sha256(entry.parent_sha256, `${label}.parent_sha256`);
       field(entry, 'transformation', label);
       field(entry, 'caption', label);
@@ -582,10 +591,19 @@ export function validateCourseLedger(courseRoot: string, options: CourseLedgerOp
   const absoluteCourseRoot = resolve(courseRoot);
   const repositoryRoot = resolve(options.repositoryRoot ?? resolve(absoluteCourseRoot, '../../..'));
   const assetRegistryPath = resolve(repositoryRoot, options.assetRegistryPath ?? '05 Источники/asset-registry.yml');
-  const objects = manifest(yaml(resolve(absoluteCourseRoot, 'source-manifest.yml')), absoluteCourseRoot);
+  const manifestDocument = yaml(resolve(absoluteCourseRoot, 'source-manifest.yml'));
+  const objects = manifest(manifestDocument, absoluteCourseRoot);
   const units = sourceUnits(yaml(resolve(absoluteCourseRoot, 'source-units.yml')), objects);
   coverage(yaml(resolve(absoluteCourseRoot, 'coverage.yml')), objects, units, repositoryRoot, absoluteCourseRoot);
-  visuals(yaml(resolve(absoluteCourseRoot, 'visuals.yml')), objects, units, repositoryRoot, absoluteCourseRoot, assetPaths(assetRegistryPath));
+  visuals(
+    yaml(resolve(absoluteCourseRoot, 'visuals.yml')),
+    objects,
+    units,
+    repositoryRoot,
+    absoluteCourseRoot,
+    assetPaths(assetRegistryPath),
+    field(manifestDocument, 'course', 'source-manifest') === berkeleyAgentsCourse
+  );
 }
 
 /** Validate real ledgers only after their course directories have been created. */

@@ -185,6 +185,8 @@ sections:
         route: textbook/pretraining/network-storage-checkpoints
       - source: 00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration.md
         route: textbook/pretraining/fault-tolerance-orchestration
+      - source: 00 Учебник/12 Post-training и Alignment/00 Карта модуля и источники.md
+        route: textbook/post-training/module-map
       - source: 00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md
         route: textbook/post-training/sft-instruction-data
       - source: 00 Учебник/12 Post-training и Alignment/02 Preference data.md
@@ -289,6 +291,8 @@ sections:
         route: textbook/multimodal/diffusion-flow-images
       - source: 00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md
         route: textbook/multimodal/unified-sequence-chameleon
+      - source: 00 Учебник/17 Tools и Agents/00 Agent Harness и Context Engineering — карта модуля.md
+        route: textbook/agents/module-map
       - source: 00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md
         route: textbook/agents/tool-use
       - source: 00 Учебник/17 Tools и Agents/66 Agent harness и context engineering.md
@@ -297,6 +301,14 @@ sections:
         route: textbook/agents/memory-planning-orchestration
       - source: 00 Учебник/17 Tools и Agents/68 Оценивание агентных систем.md
         route: textbook/agents/evaluation
+      - source: 00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md
+        route: textbook/agents/coding-web-computer-use
+      - source: 00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md
+        route: textbook/agents/formal-math
+      - source: 00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md
+        route: textbook/agents/scientific-discovery
+      - source: 00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md
+        route: textbook/agents/security
     sidebar:
       - label: Оглавление
         label_en: Contents
@@ -497,6 +509,8 @@ sections:
             route: textbook/pretraining/network-storage-checkpoints
           - label: 44.8 Отказоустойчивость и управление кластером
             route: textbook/pretraining/fault-tolerance-orchestration
+          - label: Карта post-training и источники
+            route: textbook/post-training/module-map
           - label: 45. SFT и instruction data
             route: textbook/post-training/sft-instruction-data
           - label: 46. Preference data
@@ -617,6 +631,8 @@ sections:
       - label: XIV. Инструменты и агенты
         label_en: XIV. Tools and agents
         items:
+          - label: Карта модуля и источники
+            route: textbook/agents/module-map
           - label: 65. Tool use — от вызова функции к действию
             route: textbook/agents/tool-use
           - label: 66. Agent harness и context engineering
@@ -625,6 +641,14 @@ sections:
             route: textbook/agents/memory-planning-orchestration
           - label: 68. Оценивание агентных систем
             route: textbook/agents/evaluation
+          - label: 69. Coding, web и computer-use agents
+            route: textbook/agents/coding-web-computer-use
+          - label: 70. Формальные доказательства и математические агенты
+            route: textbook/agents/formal-math
+          - label: 71. Агенты научного поиска и discovery
+            route: textbook/agents/scientific-discovery
+          - label: 72. Безопасность агентных систем
+            route: textbook/agents/security
   - id: models
     title: Справочник
     title_en: Reference
@@ -691,6 +715,8 @@ sections:
     pages:
       - source: 01 Справочник/_index.md
         route: reference/index
+      - source: 01 Справочник/Agents/Agent mechanisms.md
+        route: reference/agents/mechanisms
       - source: 03 Исследовательские линии/_index.md
         route: research/index
       - source: 03 Исследовательские линии/RLHF → DPO → RLVR.md
@@ -857,6 +883,7 @@ sections:
       - source: 05 Источники/Community repositories.md
         route: sources/community-repositories
       - source: 05 Источники/Курсы.md
+        source_en: en/05 Sources/Courses.md
         route: sources/kursy
       - source: 05 Источники/Courses/Stanford CS336 Spring 2026/_index.md
         route: sources/courses/stanford-cs336-spring-2026/index
@@ -2331,3 +2358,9 @@ sections:
         route: practice/23-sobrat-vosproizvodimyy-pretraining-corpus
       - source: 06 Практика/24 Post-training и RLVR для математического reasoning.md
         route: practice/24-post-training-rlvr-mathematical-reasoning
+      - source: 06 Практика/25 Воспроизводимо оценить и red-team компьютерного агента.md
+        route: practice/25-computer-agent-evaluation-red-team
+      - source: 06 Практика/26 Поиск доказательства в Lean с verifier.md
+        route: practice/26-lean-proof-search-verifier
+      - source: 06 Практика/27 Проверяемый научный поиск на символьной регрессии.md
+        route: practice/27-verifiable-scientific-discovery

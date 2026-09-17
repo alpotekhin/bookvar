@@ -57,3 +57,7 @@ last_updated: 2026-07-16
 - [[02 Areas/ML & DL/01 Справочник/Retrieval/Retrieval|Retrieval]]
 - [[02 Areas/ML & DL/01 Справочник/Retrieval/RAG|RAG]]
 - [[02 Areas/ML & DL/01 Справочник/Evaluation/Evaluation|Evaluation]]
+
+## Агенты
+
+- [[02 Areas/ML & DL/01 Справочник/Agents/Agent mechanisms|Agent mechanisms — интерфейс, среда, память, поиск и проверка]]

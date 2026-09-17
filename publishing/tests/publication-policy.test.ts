@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import YAML from 'yaml';
@@ -8,6 +8,13 @@ import { loadManifest, type PublicationSidebarItem } from '../adapter/manifest.j
 const root = resolve(import.meta.dirname, '../..');
 
 describe('publication workflow policy', () => {
+  it('provides the 404 content entry requested by Starlight without indexing it as a chapter', () => {
+    const entry = resolve(root, 'site/src/content/docs/404.md');
+    expect(existsSync(entry), 'Starlight requests the docs/404 entry during every build').toBe(true);
+    const frontmatter = YAML.parse(readFileSync(entry, 'utf8').split('---')[1]);
+    expect(frontmatter).toMatchObject({ template: 'splash', editUrl: false, pagefind: false });
+  });
+
   it('separates unit tests from built-output tests and runs them around the build', () => {
     const publishing = JSON.parse(readFileSync(resolve(root, 'publishing/package.json'), 'utf8'));
     const workflow = readFileSync(resolve(root, '.github/workflows/verify.yml'), 'utf8');

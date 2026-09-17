@@ -46,7 +46,7 @@ METADATA_ROOT = COURSE_ROOT / "Metadata"
 SEMANTIC_REVIEW_PATH = COURSE_ROOT / "semantic-review.json"
 AUDIT_CONTRACT_PATH = COURSE_ROOT / "audit-contract.json"
 EDITORIAL_MAP_PATH = COURSE_ROOT / "editorial-map.yml"
-AUDIT_CONTRACT_SHA256 = "71fc60d9c4717b85fa2b664876af02adf0098f340bee4a13eb55d13ae7812fb5"
+AUDIT_CONTRACT_SHA256 = "8b3a6f5d9e416b90f9681731a80d30fd069bc6e830a5053aa4acc7457fed4ba4"
 SYLLABUS_URL = "https://rdi.berkeley.edu/adv-llm-agents/sp25"
 SYLLABUS_PATH = METADATA_ROOT / "syllabus.html"
 BASE_COMMIT = "fad4d91373fcd94c18906bfaf209125188eb20cf"
@@ -980,7 +980,7 @@ def build_manifest() -> dict[str, Any]:
         "integration_base_commit": BASE_COMMIT,
         "retrieved_at": RETRIEVED_AT,
         "syllabus_url": SYLLABUS_URL,
-        "baseline_status": "inventory complete; editorial integration pending",
+        "editorial_status": "integration active; destinations validated",
         "bundle_count": 12,
         "official_pdf_count": 13,
         "reading_count": 37,
@@ -1241,7 +1241,7 @@ COVERAGE_EDITORIAL_FIELDS = {
     "evidence",
 }
 VISUAL_EDITORIAL_FIELDS = COVERAGE_EDITORIAL_FIELDS | {
-    "local_file",
+    "local_files",
     "transformation",
     "caption",
     "rendered_route",
@@ -1382,6 +1382,63 @@ def validate_destination(
         raise ValueError(
             f"{decision_id}: destination lacks reciprocal source_unit_id values: {missing}"
         )
+
+
+def destination_image_targets(text: str) -> list[str]:
+    targets = [
+        target.split("|", 1)[0].split("#", 1)[0].strip()
+        for target in re.findall(r"!\[\[([^\]\n]+)\]\]", text)
+    ]
+    targets.extend(
+        target.strip().removeprefix("<").removesuffix(">")
+        for target in re.findall(r"!\[[^\]\n]*\]\(([^)\n]+)\)", text)
+    )
+    return targets
+
+
+def destination_embeds_file(
+    repository_root: Path,
+    destination: Path,
+    text: str,
+    relative_path: str,
+) -> bool:
+    repository_root = repository_root.resolve()
+    asset = (repository_root / relative_path).resolve()
+    normalized_relative = Path(relative_path).as_posix().lstrip("./")
+    for raw_target in destination_image_targets(text):
+        target = urllib.parse.unquote(raw_target).strip()
+        normalized_target = target.replace("\\", "/").lstrip("./")
+        if normalized_target == normalized_relative or normalized_target.endswith(f"/{normalized_relative}"):
+            return True
+        if target.startswith(("http://", "https://", "data:")):
+            continue
+        if (destination.parent / target).resolve() == asset:
+            return True
+    return False
+
+
+def validate_visual_files(
+    repository_root: Path,
+    visual_id: str,
+    decision: dict[str, Any],
+) -> None:
+    destination = resolve_repository_file(
+        repository_root,
+        decision["destination"],
+        f"{visual_id}: destination",
+    )
+    text = destination.read_text("utf-8")
+    for index, relative_path in enumerate(decision["local_files"]):
+        resolve_repository_file(
+            repository_root,
+            relative_path,
+            f"{visual_id}: local_files[{index}]",
+        )
+        if not destination_embeds_file(repository_root, destination, text, relative_path):
+            raise ValueError(
+                f"{visual_id}: local_files[{index}] is not embedded in destination: "
+                f"{decision['destination']}"
+            )
 
 
 def _validate_restricted_decisions(
@@ -1549,7 +1606,6 @@ def apply_editorial_overlay(
             if destinations != {(row.get("destination"), row.get("destination_anchor"))}:
                 raise ValueError(f"{visual_id}: visual and source-unit destinations disagree")
             required_fields = (
-                "local_file",
                 "transformation",
                 "caption",
                 "rendered_route",
@@ -1562,6 +1618,13 @@ def apply_editorial_overlay(
                 value = row.get(field)
                 if not isinstance(value, str) or not value.strip():
                     raise ValueError(f"{visual_id}: integrated visual lacks {field}")
+            local_files = row.get("local_files")
+            if (
+                not isinstance(local_files, list)
+                or not local_files
+                or not all(isinstance(path, str) and path.strip() for path in local_files)
+            ):
+                raise ValueError(f"{visual_id}: integrated visual lacks non-empty local_files")
             if validate_destinations:
                 for field in ("transformation", "rendered_route", "desktop_evidence", "narrow_evidence", "reviewer", "checked_at"):
                     if "pending" in row[field].casefold() or "planned" in row[field].casefold():
@@ -1571,15 +1634,16 @@ def apply_editorial_overlay(
                 if re.fullmatch(r"\d{4}-\d{2}-\d{2}", row["checked_at"]) is None:
                     raise ValueError(f"{visual_id}: checked_at must be an ISO date")
                 validate_destination(repository_root, visual_id, row, reciprocal)
-                resolve_repository_file(repository_root, row["local_file"], f"{visual_id}: local_file")
+                validate_visual_files(repository_root, visual_id, row)
 
     integrated_local_files = [
-        row["local_file"]
+        local_file
         for row in output_visuals.values()
         if row.get("disposition") in {"integrated", "covered-existing"}
+        for local_file in row["local_files"]
     ]
     if len(integrated_local_files) != len(set(integrated_local_files)):
-        raise ValueError("integrated visuals must not share a local_file")
+        raise ValueError("integrated visuals must not share a local_files entry")
 
     overlay_sha = editorial_overlay_sha256(overlay)
     coverage["editorial_overlay_sha256"] = overlay_sha
@@ -1603,21 +1667,13 @@ def build_documents() -> dict[str, dict[str, Any]]:
             + "\n- ".join(closure_failures)
         )
 
-    # Task 10 activation gate: the final audit overlay is already checked for exact
-    # unit/visual closure, but its destinations and extracted assets are being
-    # landed in later batches. Keep generated ledgers at the truthful baseline
-    # until those files exist. Final activation replaces the two assignments
-    # below with the validated overlay result and removes validate_destinations=False.
-    apply_editorial_overlay(
+    coverage, visuals, _ = apply_editorial_overlay(
         manifest,
         units,
         baseline_coverage,
         baseline_visuals,
         load_editorial_overlay(),
-        validate_destinations=False,
     )
-    coverage = baseline_coverage
-    visuals = baseline_visuals
     return {
         "source-manifest.yml": manifest,
         "source-units.yml": units,
@@ -1822,7 +1878,7 @@ def build_snapshot_lock(documents: dict[str, dict[str, Any]]) -> dict[str, Any]:
         "generated_audit": {
             "semantic_review_sha256": sha256_file(SEMANTIC_REVIEW_PATH),
             "audit_contract_sha256": sha256_file(AUDIT_CONTRACT_PATH),
-            "staged_editorial_overlay_sha256": editorial_overlay_sha256(load_editorial_overlay()),
+            "editorial_overlay_sha256": editorial_overlay_sha256(load_editorial_overlay()),
             "importer_sha256": sha256_file(Path(__file__).resolve()),
             "extractor_revision": EXTRACTOR_REVISION,
             "page_index_tool": PAGE_INDEX_TOOL,
@@ -1842,9 +1898,8 @@ def build_snapshot_lock(documents: dict[str, dict[str, Any]]) -> dict[str, Any]:
             "recordings": 12,
             "individual_readings": 37,
             "reading_distribution": EXPECTED_READING_DISTRIBUTION,
-            "baseline_dispositions": ["source-only", "excluded"],
-            "editorial_overlay_status": "staged-pending-destination-validation",
-            "staged_editorial_counts": editorial_disposition_counts(load_editorial_overlay()),
+            "editorial_overlay_status": "active-destination-validated",
+            "editorial_counts": editorial_disposition_counts(load_editorial_overlay()),
         },
     }
 
@@ -1859,7 +1914,7 @@ def build_artifact_inventory(documents: dict[str, dict[str, Any]]) -> dict[str, 
         "schema_version": 1,
         "course": COURSE_NAME,
         "offering": OFFERING,
-        "status": "inventory complete; editorial overlay staged",
+        "status": "inventory complete; editorial overlay active",
         "audit_contract": {
             "local_path": "audit-contract.json",
             "sha256": AUDIT_CONTRACT_SHA256,
@@ -1884,7 +1939,7 @@ def build_artifact_inventory(documents: dict[str, dict[str, Any]]) -> dict[str, 
             )),
         },
         "reading_distribution": [len(bundle["readings"]) for bundle in manifest["meeting_bundles"]],
-        "staged_editorial_counts": editorial_disposition_counts(load_editorial_overlay()),
+        "editorial_counts": editorial_disposition_counts(load_editorial_overlay()),
         "decks": [
             {
                 "id": deck.object_id,
@@ -1929,9 +1984,9 @@ def validate_generated_documents(
         if audit.get("records") != ledger_record_count(name, actual_document):
             failures.append(f"{name}: generated lock record-count mismatch")
     expected_overlay_sha = editorial_overlay_sha256(load_editorial_overlay())
-    locked_overlay_sha = snapshot_lock.get("generated_audit", {}).get("staged_editorial_overlay_sha256")
+    locked_overlay_sha = snapshot_lock.get("generated_audit", {}).get("editorial_overlay_sha256")
     if locked_overlay_sha != expected_overlay_sha:
-        failures.append("snapshot lock staged editorial overlay SHA differs from the reviewed overlay")
+        failures.append("snapshot lock editorial overlay SHA differs from the reviewed overlay")
 
 
 def validate_local_artifacts(manifest: dict[str, Any], failures: list[str]) -> None:

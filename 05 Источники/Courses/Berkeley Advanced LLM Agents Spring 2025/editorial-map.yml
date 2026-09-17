@@ -75,7 +75,7 @@
     "meeting-01-recording-full-session": {
       "disposition": "source-only",
       "reason": "Official recording metadata is pinned; no media body is mirrored.",
-      "evidence": "https://www.youtube.com/watch?v=g0Dwtf3BH-0#t=0s; Official recording link in source-manifest.yml for meeting 01."
+      "evidence": "https://www.youtube.com/watch?v=g0Dwtf3BH-0#t=0s"
     },
     "meeting-01-intro-course-identity-and-staff": {
       "disposition": "source-only",
@@ -120,7 +120,7 @@
     "meeting-01-slides-outline-before-prompting": {
       "disposition": "excluded",
       "reason": "Divider only.",
-      "evidence": "Lectures/meeting-01-slides.pages.txt#physical-pages=7-8; Lectures/meeting-01-slides.pages.txt#physical-pages=6-6"
+      "evidence": "Lectures/meeting-01-slides.pages.txt#physical-pages=7-8"
     },
     "meeting-01-slides-prompting-for-reasoning": {
       "disposition": "integrated",
@@ -145,12 +145,12 @@
     "meeting-01-slides-outline-before-self-consistency": {
       "disposition": "excluded",
       "reason": "Divider only.",
-      "evidence": "Lectures/meeting-01-slides.pages.txt#physical-pages=38-38; Lectures/meeting-01-slides.pages.txt#physical-pages=37-37"
+      "evidence": "Lectures/meeting-01-slides.pages.txt#physical-pages=38-38"
     },
     "meeting-01-slides-self-consistency-sampling": {
       "disposition": "covered-existing",
       "destination": "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md",
-      "destination_anchor": "self-consistency"
+      "destination_anchor": "4-self-consistency"
     },
     "meeting-01-slides-code-selection-and-verifiers": {
       "disposition": "integrated",
@@ -165,12 +165,12 @@
     "meeting-01-slides-outline-before-reflection": {
       "disposition": "excluded",
       "reason": "Divider only.",
-      "evidence": "Lectures/meeting-01-slides.pages.txt#physical-pages=59-59; Lectures/meeting-01-slides.pages.txt#physical-pages=60-60"
+      "evidence": "Lectures/meeting-01-slides.pages.txt#physical-pages=59-59"
     },
     "meeting-01-slides-reflection-and-self-debugging": {
       "disposition": "integrated",
       "destination": "00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md",
-      "destination_anchor": "рефлексия-полезна-только-через-наблюдаемую-обратную-связь"
+      "destination_anchor": "7-рефлексия-полезна-только-через-наблюдаемую-обратную-связь"
     },
     "meeting-01-slides-self-correction-failure-modes": {
       "disposition": "integrated",
@@ -180,7 +180,7 @@
     "meeting-01-slides-compute-capability-bitter-lesson": {
       "disposition": "integrated",
       "destination": "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md",
-      "destination_anchor": "как-распределять-flop-бюджет-между-размером-модели-и-числом-попыток"
+      "destination_anchor": "8-как-распределять-flop-бюджет-между-размером-модели-и-числом-попыток"
     },
     "meeting-01-slides-meeting-01-closing": {
       "disposition": "excluded",
@@ -200,22 +200,22 @@
     "meeting-01-reading-03-catalogue-record": {
       "disposition": "integrated",
       "destination": "00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md",
-      "destination_anchor": "рефлексия-полезна-только-через-наблюдаемую-обратную-связь"
+      "destination_anchor": "7-рефлексия-полезна-только-через-наблюдаемую-обратную-связь"
     },
     "meeting-02-recording-full-session": {
       "disposition": "source-only",
       "reason": "Official recording metadata is pinned; no media body is mirrored.",
-      "evidence": "https://www.youtube.com/watch?v=_MNlLhU33H0#t=0s; Official recording link in source-manifest.yml for meeting 02."
+      "evidence": "https://www.youtube.com/watch?v=_MNlLhU33H0#t=0s"
     },
     "meeting-02-slides-learning-to-reason-framing": {
       "disposition": "source-only",
       "reason": "Framing is preserved at the source hub.",
-      "evidence": "Lectures/meeting-02-slides.pages.txt#physical-pages=1-3; Lectures/meeting-02-slides.pages.txt#physical-pages=1-4"
+      "evidence": "Lectures/meeting-02-slides.pages.txt#physical-pages=1-3"
     },
     "meeting-02-slides-reasoning-training-foundations": {
       "disposition": "source-only",
       "reason": "The broad historical sequence is useful context but not a bounded mechanism claim.",
-      "evidence": "Lectures/meeting-02-slides.pages.txt#physical-pages=4-21; Lectures/meeting-02-slides.pages.txt#physical-pages=5-22"
+      "evidence": "Lectures/meeting-02-slides.pages.txt#physical-pages=4-21"
     },
     "meeting-02-slides-posttraining-and-prompting": {
       "disposition": "integrated",
@@ -240,7 +240,7 @@
     "meeting-02-slides-irpo": {
       "disposition": "integrated",
       "destination": "00 Учебник/12 Post-training и Alignment/05 DPO.md",
-      "destination_anchor": "iterative-reasoning-preference-optimization"
+      "destination_anchor": "11-iterative-reasoning-preference-optimization"
     },
     "meeting-02-slides-o1-deepseek-transition": {
       "disposition": "integrated",
@@ -265,7 +265,7 @@
     "meeting-02-slides-learning-to-reason-synthesis": {
       "disposition": "source-only",
       "reason": "The synthesis duplicates the integrated mechanism units.",
-      "evidence": "Lectures/meeting-02-slides.pages.txt#physical-pages=103-105; Lectures/meeting-02-slides.pages.txt#physical-pages=101-105"
+      "evidence": "Lectures/meeting-02-slides.pages.txt#physical-pages=103-105"
     },
     "meeting-02-slides-meeting-02-closing": {
       "disposition": "excluded",
@@ -275,12 +275,12 @@
     "meeting-02-reading-01-catalogue-record": {
       "disposition": "integrated",
       "destination": "00 Учебник/12 Post-training и Alignment/05 DPO.md",
-      "destination_anchor": "dpo-и-ppo-общая-постановка-разные-способы-обучения"
+      "destination_anchor": "10-dpo-и-ppo-общая-постановка-разные-способы-обучения"
     },
     "meeting-02-reading-02-catalogue-record": {
       "disposition": "integrated",
       "destination": "00 Учебник/12 Post-training и Alignment/05 DPO.md",
-      "destination_anchor": "iterative-reasoning-preference-optimization"
+      "destination_anchor": "11-iterative-reasoning-preference-optimization"
     },
     "meeting-02-reading-03-catalogue-record": {
       "disposition": "integrated",
@@ -290,12 +290,12 @@
     "meeting-03-recording-full-session": {
       "disposition": "source-only",
       "reason": "Official recording metadata is pinned; no media body is mirrored.",
-      "evidence": "https://www.youtube.com/watch?v=zvI4UN2_i-w#t=0s; Official recording link in source-manifest.yml for meeting 03."
+      "evidence": "https://www.youtube.com/watch?v=zvI4UN2_i-w#t=0s"
     },
     "meeting-03-slides-memory-planning-orientation": {
       "disposition": "source-only",
       "reason": "Orientation remains at the course hub.",
-      "evidence": "Lectures/meeting-03-slides.pages.txt#physical-pages=1-4; Lectures/meeting-03-slides.pages.txt#physical-pages=1-7"
+      "evidence": "Lectures/meeting-03-slides.pages.txt#physical-pages=1-4"
     },
     "meeting-03-slides-yu-su-agent-first-vs-llm-first": {
       "disposition": "integrated",
@@ -305,27 +305,27 @@
     "meeting-03-slides-meeting-03-outline-a": {
       "disposition": "excluded",
       "reason": "Divider only.",
-      "evidence": "Lectures/meeting-03-slides.pages.txt#physical-pages=16-17; Lectures/meeting-03-slides.pages.txt#physical-pages=14-14"
+      "evidence": "Lectures/meeting-03-slides.pages.txt#physical-pages=16-17"
     },
     "meeting-03-slides-long-term-memory-rag-problem": {
       "disposition": "integrated",
-      "destination": "00 Учебник/15 Embeddings, Retrieval и RAG/02 RAG как система.md",
+      "destination": "00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер.md",
       "destination_anchor": "почему-похожий-фрагмент-не-всегда-является-нужной-памятью"
     },
     "meeting-03-slides-yu-su-hipporag-memory-sequence": {
       "disposition": "integrated",
-      "destination": "00 Учебник/15 Embeddings, Retrieval и RAG/02 RAG как система.md",
+      "destination": "00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер.md",
       "destination_anchor": "hipporag-ассоциативное-извлечение-по-графу"
     },
     "meeting-03-slides-memory-takeaway": {
       "disposition": "covered-existing",
       "destination": "00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md",
-      "destination_anchor": "извлечение-не-только-nearest-neighbors"
+      "destination_anchor": "5-извлечение-не-только-nearest-neighbors"
     },
     "meeting-03-slides-meeting-03-outline-b": {
       "disposition": "excluded",
       "reason": "Divider only.",
-      "evidence": "Lectures/meeting-03-slides.pages.txt#physical-pages=36-36; Lectures/meeting-03-slides.pages.txt#physical-pages=39-39"
+      "evidence": "Lectures/meeting-03-slides.pages.txt#physical-pages=36-36"
     },
     "meeting-03-slides-grokking-planning": {
       "disposition": "integrated",
@@ -335,7 +335,7 @@
     "meeting-03-slides-meeting-03-outline-c": {
       "disposition": "excluded",
       "reason": "Divider only.",
-      "evidence": "Lectures/meeting-03-slides.pages.txt#physical-pages=53-53; Lectures/meeting-03-slides.pages.txt#physical-pages=52-52"
+      "evidence": "Lectures/meeting-03-slides.pages.txt#physical-pages=53-53"
     },
     "meeting-03-slides-planning-paradigms": {
       "disposition": "integrated",
@@ -355,7 +355,7 @@
     "meeting-03-slides-meeting-03-closing": {
       "disposition": "excluded",
       "reason": "Closing and blank pages.",
-      "evidence": "Lectures/meeting-03-slides.pages.txt#physical-pages=76-78; Lectures/meeting-03-slides.pages.txt#physical-pages=76-79"
+      "evidence": "Lectures/meeting-03-slides.pages.txt#physical-pages=76-78"
     },
     "meeting-03-slides-parametric-memory-appendix": {
       "disposition": "integrated",
@@ -369,7 +369,7 @@
     },
     "meeting-03-reading-02-catalogue-record": {
       "disposition": "integrated",
-      "destination": "00 Учебник/15 Embeddings, Retrieval и RAG/02 RAG как система.md",
+      "destination": "00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер.md",
       "destination_anchor": "hipporag-ассоциативное-извлечение-по-графу"
     },
     "meeting-03-reading-03-catalogue-record": {
@@ -380,12 +380,12 @@
     "meeting-04-recording-full-session": {
       "disposition": "source-only",
       "reason": "Official recording metadata is pinned; no media body is mirrored.",
-      "evidence": "https://www.youtube.com/watch?v=cMiu3A7YBks#t=0s; Official recording link in source-manifest.yml for meeting 04."
+      "evidence": "https://www.youtube.com/watch?v=cMiu3A7YBks#t=0s"
     },
     "meeting-04-slides-open-posttraining-overview": {
       "disposition": "source-only",
       "reason": "Ecosystem orientation is preserved without duplicating the post-training route.",
-      "evidence": "Lectures/meeting-04-slides.pages.txt#physical-pages=1-14; Lectures/meeting-04-slides.pages.txt#physical-pages=1-15"
+      "evidence": "Lectures/meeting-04-slides.pages.txt#physical-pages=1-14"
     },
     "meeting-04-slides-tulu-recipe": {
       "disposition": "integrated",
@@ -405,12 +405,12 @@
     "meeting-04-slides-preference-optimization": {
       "disposition": "covered-existing",
       "destination": "00 Учебник/12 Post-training и Alignment/05 DPO.md",
-      "destination_anchor": "dpo-и-ppo-общая-постановка-разные-способы-обучения"
+      "destination_anchor": "10-dpo-и-ppo-общая-постановка-разные-способы-обучения"
     },
     "meeting-04-slides-tulu3-preference-recipe": {
       "disposition": "integrated",
       "destination": "00 Учебник/12 Post-training и Alignment/05 DPO.md",
-      "destination_anchor": "tülu-3-данные-length-normalization-и-место-dpo-в-recipe"
+      "destination_anchor": "12-tülu-3-данные-length-normalization-и-место-dpo-в-recipe"
     },
     "meeting-04-slides-rlvr-method": {
       "disposition": "covered-existing",
@@ -440,12 +440,12 @@
     "meeting-04-slides-olmo-pretraining": {
       "disposition": "source-only",
       "reason": "Stanford and the pre-training route own this topic; the OLMo material remains discoverable here.",
-      "evidence": "Lectures/meeting-04-slides.pages.txt#physical-pages=143-152; Lectures/meeting-04-slides.pages.txt#physical-pages=143-150"
+      "evidence": "Lectures/meeting-04-slides.pages.txt#physical-pages=143-152"
     },
     "meeting-04-slides-open-recipe-synthesis": {
       "disposition": "source-only",
       "reason": "The conclusion is represented by the integrated mechanisms.",
-      "evidence": "Lectures/meeting-04-slides.pages.txt#physical-pages=153-153; Lectures/meeting-04-slides.pages.txt#physical-pages=151-153"
+      "evidence": "Lectures/meeting-04-slides.pages.txt#physical-pages=153-153"
     },
     "meeting-04-slides-meeting-04-closing": {
       "disposition": "excluded",
@@ -465,17 +465,17 @@
     "meeting-04-reading-02-catalogue-record": {
       "disposition": "integrated",
       "destination": "00 Учебник/12 Post-training и Alignment/05 DPO.md",
-      "destination_anchor": "dpo-и-ppo-общая-постановка-разные-способы-обучения"
+      "destination_anchor": "10-dpo-и-ppo-общая-постановка-разные-способы-обучения"
     },
     "meeting-04-reading-03-catalogue-record": {
       "disposition": "integrated",
-      "destination": "00 Учебник/15 Embeddings, Retrieval и RAG/02 RAG как система.md",
+      "destination": "00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер.md",
       "destination_anchor": "openscholar-литературный-поиск-как-итеративный-retrieval-and-synthesis-loop"
     },
     "meeting-05-recording-full-session": {
       "disposition": "source-only",
       "reason": "Official recording metadata is pinned; no media body is mirrored.",
-      "evidence": "https://www.youtube.com/watch?v=JCk6qJtaCSU#t=0s; Official recording link in source-manifest.yml for meeting 05."
+      "evidence": "https://www.youtube.com/watch?v=JCk6qJtaCSU#t=0s"
     },
     "meeting-05-slides-coding-agent-orientation": {
       "disposition": "integrated",
@@ -530,12 +530,12 @@
     "meeting-06-recording-full-session": {
       "disposition": "source-only",
       "reason": "Official recording metadata is pinned; no media body is mirrored.",
-      "evidence": "https://www.youtube.com/watch?v=RPINOYM12RU#t=0s; Official recording link in source-manifest.yml for meeting 06."
+      "evidence": "https://www.youtube.com/watch?v=RPINOYM12RU#t=0s"
     },
     "meeting-06-slides-web-agent-overview": {
       "disposition": "source-only",
       "reason": "Demos and orientation remain supplementary source material.",
-      "evidence": "Lectures/meeting-06-slides.pages.txt#physical-pages=1-13; Lectures/meeting-06-slides.pages.txt#physical-pages=1-17"
+      "evidence": "Lectures/meeting-06-slides.pages.txt#physical-pages=1-13"
     },
     "meeting-06-slides-visualwebarena": {
       "disposition": "integrated",
@@ -575,17 +575,17 @@
     "meeting-06-slides-plan-sequence-learn": {
       "disposition": "source-only",
       "reason": "Robotics is outside the current canonical route.",
-      "evidence": "Lectures/meeting-06-slides.pages.txt#physical-pages=107-116; Lectures/meeting-06-slides.pages.txt#physical-pages=105-116"
+      "evidence": "Lectures/meeting-06-slides.pages.txt#physical-pages=107-116"
     },
     "meeting-06-slides-nvidia-confidential-page": {
       "disposition": "excluded",
       "reason": "Permanent do-not-reuse exclusion.",
-      "evidence": "Lectures/meeting-06-slides.pages.txt#physical-pages=117-117; Meeting 6 p.117 is marked NVIDIA CONFIDENTIAL. DO NOT DISTRIBUTE."
+      "evidence": "Lectures/meeting-06-slides.pages.txt#physical-pages=117-117; NVIDIA CONFIDENTIAL. DO NOT DISTRIBUTE."
     },
     "meeting-06-slides-proprietary-adjacent-demo": {
       "disposition": "source-only",
       "reason": "Pages 118-121 remain archive-only pending explicit rights review.",
-      "evidence": "Lectures/meeting-06-slides.pages.txt#physical-pages=118-121; pending rights review"
+      "evidence": "Lectures/meeting-06-slides.pages.txt#physical-pages=118-121"
     },
     "meeting-06-slides-web-agent-synthesis": {
       "disposition": "integrated",
@@ -600,7 +600,7 @@
     "meeting-06-slides-meeting-06-closing": {
       "disposition": "excluded",
       "reason": "Closing slide.",
-      "evidence": "Lectures/meeting-06-slides.pages.txt#physical-pages=126-126; Lectures/meeting-06-slides.pages.txt#physical-pages=125-126"
+      "evidence": "Lectures/meeting-06-slides.pages.txt#physical-pages=126-126"
     },
     "meeting-06-reading-01-catalogue-record": {
       "disposition": "integrated",
@@ -625,12 +625,12 @@
     "meeting-07-recording-full-session": {
       "disposition": "source-only",
       "reason": "Official recording metadata is pinned; no media body is mirrored.",
-      "evidence": "https://www.youtube.com/watch?v=n__Tim8K2IY#t=0s; Official recording link in source-manifest.yml for meeting 07."
+      "evidence": "https://www.youtube.com/watch?v=n__Tim8K2IY#t=0s"
     },
     "meeting-07-slides-gui-agent-landscape": {
       "disposition": "source-only",
       "reason": "The landscape is time-sensitive orientation.",
-      "evidence": "Lectures/meeting-07-slides.pages.txt#physical-pages=1-8; Lectures/meeting-07-slides.pages.txt#physical-pages=1-10"
+      "evidence": "Lectures/meeting-07-slides.pages.txt#physical-pages=1-8"
     },
     "meeting-07-slides-osworld": {
       "disposition": "integrated",
@@ -640,7 +640,7 @@
     "meeting-07-slides-meeting-07-outline-a": {
       "disposition": "excluded",
       "reason": "Divider only.",
-      "evidence": "Lectures/meeting-07-slides.pages.txt#physical-pages=32-32; Lectures/meeting-07-slides.pages.txt#physical-pages=23-23"
+      "evidence": "Lectures/meeting-07-slides.pages.txt#physical-pages=32-32"
     },
     "meeting-07-slides-agenttrek": {
       "disposition": "integrated",
@@ -655,7 +655,7 @@
     "meeting-07-slides-meeting-07-outline-b": {
       "disposition": "excluded",
       "reason": "Divider only.",
-      "evidence": "Lectures/meeting-07-slides.pages.txt#physical-pages=62-62; Lectures/meeting-07-slides.pages.txt#physical-pages=58-58"
+      "evidence": "Lectures/meeting-07-slides.pages.txt#physical-pages=62-62"
     },
     "meeting-07-slides-aguvis": {
       "disposition": "integrated",
@@ -663,19 +663,19 @@
       "destination_anchor": "aguvis-единое-визуальное-observationaction-space"
     },
     "meeting-07-slides-xgen-video": {
-      "disposition": "source-only",
-      "reason": "Task 8 owns temporal video compression; defer until its merge is reviewed.",
-      "evidence": "Lectures/meeting-07-slides.pages.txt#physical-pages=84-98; Lectures/meeting-07-slides.pages.txt#physical-pages=81-91"
+      "disposition": "integrated",
+      "destination": "00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md",
+      "destination_anchor": "xgen-video-temporal-compression"
     },
     "meeting-07-slides-gens": {
-      "disposition": "source-only",
-      "reason": "Task 8 owns temporal interval selection; defer until its merge is reviewed.",
-      "evidence": "Lectures/meeting-07-slides.pages.txt#physical-pages=99-105; Lectures/meeting-07-slides.pages.txt#physical-pages=92-103"
+      "disposition": "integrated",
+      "destination": "00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md",
+      "destination_anchor": "gens-question-aware-frame-selection"
     },
     "meeting-07-slides-gui-agent-summary": {
       "disposition": "source-only",
       "reason": "The summary is represented by the preceding mechanism units.",
-      "evidence": "Lectures/meeting-07-slides.pages.txt#physical-pages=106-106; Lectures/meeting-07-slides.pages.txt#physical-pages=104-106"
+      "evidence": "Lectures/meeting-07-slides.pages.txt#physical-pages=106-106"
     },
     "meeting-07-reading-01-catalogue-record": {
       "disposition": "integrated",
@@ -690,12 +690,12 @@
     "meeting-08-recording-full-session": {
       "disposition": "source-only",
       "reason": "Official recording metadata is pinned; no media body is mirrored.",
-      "evidence": "https://www.youtube.com/watch?v=3gaEMscOMAU#t=0s; Official recording link in source-manifest.yml for meeting 08."
+      "evidence": "https://www.youtube.com/watch?v=3gaEMscOMAU#t=0s"
     },
     "meeting-08-slides-alphaproof-orientation": {
       "disposition": "source-only",
       "reason": "Orientation remains supplementary source material.",
-      "evidence": "Lectures/meeting-08-slides.pages.txt#physical-pages=1-4; Lectures/meeting-08-slides.pages.txt#physical-pages=1-8"
+      "evidence": "Lectures/meeting-08-slides.pages.txt#physical-pages=1-4"
     },
     "meeting-08-slides-formal-proving-setup": {
       "disposition": "integrated",
@@ -740,22 +740,22 @@
     "meeting-08-slides-meeting-08-demo-divider": {
       "disposition": "excluded",
       "reason": "Divider only.",
-      "evidence": "Lectures/meeting-08-slides.pages.txt#physical-pages=93-93; Lectures/meeting-08-slides.pages.txt#physical-pages=90-90"
+      "evidence": "Lectures/meeting-08-slides.pages.txt#physical-pages=93-93"
     },
     "meeting-08-slides-riemann-zeta-demo": {
       "disposition": "source-only",
       "reason": "The long lecture demonstration is linked by exact pages rather than reproduced as a brittle sequence.",
-      "evidence": "Lectures/meeting-08-slides.pages.txt#physical-pages=94-107; Lectures/meeting-08-slides.pages.txt#physical-pages=91-105"
+      "evidence": "Lectures/meeting-08-slides.pages.txt#physical-pages=94-107"
     },
     "meeting-08-slides-formal-reasoning-future": {
       "disposition": "source-only",
       "reason": "Speculative future claims remain source-only.",
-      "evidence": "Lectures/meeting-08-slides.pages.txt#physical-pages=108-110; Lectures/meeting-08-slides.pages.txt#physical-pages=106-111"
+      "evidence": "Lectures/meeting-08-slides.pages.txt#physical-pages=108-110"
     },
     "meeting-08-slides-meeting-08-closing": {
       "disposition": "excluded",
       "reason": "Thanks and closing.",
-      "evidence": "Lectures/meeting-08-slides.pages.txt#physical-pages=111-112; Lectures/meeting-08-slides.pages.txt#physical-pages=112-112"
+      "evidence": "Lectures/meeting-08-slides.pages.txt#physical-pages=111-112"
     },
     "meeting-08-reading-01-catalogue-record": {
       "disposition": "integrated",
@@ -780,12 +780,12 @@
     "meeting-09-recording-full-session": {
       "disposition": "source-only",
       "reason": "Official recording metadata is pinned; no media body is mirrored.",
-      "evidence": "https://www.youtube.com/watch?v=cLhWEyMQ4mQ#t=0s; Official recording link in source-manifest.yml for meeting 09."
+      "evidence": "https://www.youtube.com/watch?v=cLhWEyMQ4mQ#t=0s"
     },
     "meeting-09-slides-autoformalization-capability-race": {
       "disposition": "source-only",
       "reason": "The capability race is quickly dated orientation.",
-      "evidence": "Lectures/meeting-09-slides.pages.txt#physical-pages=1-6; Lectures/meeting-09-slides.pages.txt#physical-pages=1-13"
+      "evidence": "Lectures/meeting-09-slides.pages.txt#physical-pages=1-6"
     },
     "meeting-09-slides-autoformalization-sft-rlvr": {
       "disposition": "integrated",
@@ -860,12 +860,12 @@
     "meeting-10-recording-full-session": {
       "disposition": "source-only",
       "reason": "Official recording metadata is pinned; no media body is mirrored.",
-      "evidence": "https://www.youtube.com/watch?v=Gy5Nm17l9oo#t=0s; Official recording link in source-manifest.yml for meeting 10."
+      "evidence": "https://www.youtube.com/watch?v=Gy5Nm17l9oo#t=0s"
     },
     "meeting-10-slides-advanced-proving-frame": {
       "disposition": "source-only",
       "reason": "Expert framing remains at the source hub.",
-      "evidence": "Lectures/meeting-10-slides.pages.txt#physical-pages=1-3; Lectures/meeting-10-slides.pages.txt#physical-pages=1-8"
+      "evidence": "Lectures/meeting-10-slides.pages.txt#physical-pages=1-3"
     },
     "meeting-10-slides-informal-and-formal-math": {
       "disposition": "integrated",
@@ -880,7 +880,7 @@
     "meeting-10-slides-meeting-10-methods-divider": {
       "disposition": "excluded",
       "reason": "Divider only.",
-      "evidence": "Lectures/meeting-10-slides.pages.txt#physical-pages=28-28; Lectures/meeting-10-slides.pages.txt#physical-pages=20-20"
+      "evidence": "Lectures/meeting-10-slides.pages.txt#physical-pages=28-28"
     },
     "meeting-10-slides-lean-star": {
       "disposition": "integrated",
@@ -890,7 +890,7 @@
     "meeting-10-slides-meeting-10-outline": {
       "disposition": "excluded",
       "reason": "Divider only.",
-      "evidence": "Lectures/meeting-10-slides.pages.txt#physical-pages=53-53; Lectures/meeting-10-slides.pages.txt#physical-pages=49-49"
+      "evidence": "Lectures/meeting-10-slides.pages.txt#physical-pages=53-53"
     },
     "meeting-10-slides-modular-prover-motivation": {
       "disposition": "integrated",
@@ -915,7 +915,7 @@
     "meeting-10-slides-meeting-10-research-divider": {
       "disposition": "excluded",
       "reason": "Divider only.",
-      "evidence": "Lectures/meeting-10-slides.pages.txt#physical-pages=95-95; Lectures/meeting-10-slides.pages.txt#physical-pages=90-90"
+      "evidence": "Lectures/meeting-10-slides.pages.txt#physical-pages=95-95"
     },
     "meeting-10-slides-proving-research-workflow": {
       "disposition": "integrated",
@@ -955,12 +955,12 @@
     "meeting-11-recording-full-session": {
       "disposition": "source-only",
       "reason": "Official recording metadata is pinned; no media body is mirrored.",
-      "evidence": "https://www.youtube.com/watch?v=IHc0TEMrEdY#t=0s; Official recording link in source-manifest.yml for meeting 11."
+      "evidence": "https://www.youtube.com/watch?v=IHc0TEMrEdY#t=0s"
     },
     "meeting-11-slides-abstraction-discovery-frame": {
       "disposition": "source-only",
       "reason": "Orientation remains at the source hub.",
-      "evidence": "Lectures/meeting-11-slides.pages.txt#physical-pages=1-5; Lectures/meeting-11-slides.pages.txt#physical-pages=1-8"
+      "evidence": "Lectures/meeting-11-slides.pages.txt#physical-pages=1-5"
     },
     "meeting-11-slides-neural-and-formal-systems": {
       "disposition": "integrated",
@@ -985,7 +985,7 @@
     "meeting-11-slides-meeting-11-divider": {
       "disposition": "excluded",
       "reason": "Divider only.",
-      "evidence": "Lectures/meeting-11-slides.pages.txt#physical-pages=45-45; Lectures/meeting-11-slides.pages.txt#physical-pages=48-48"
+      "evidence": "Lectures/meeting-11-slides.pages.txt#physical-pages=45-45"
     },
     "meeting-11-slides-scientific-process-symbolic-regression": {
       "disposition": "integrated",
@@ -1003,9 +1003,9 @@
       "destination_anchor": "что-показали-feynman-equations-and-scaling-law-case"
     },
     "meeting-11-slides-visual-concept-discovery": {
-      "disposition": "source-only",
-      "reason": "The extension lacks a sufficiently connected primary-source route in this integration.",
-      "evidence": "Lectures/meeting-11-slides.pages.txt#physical-pages=82-88; Lectures/meeting-11-slides.pages.txt#physical-pages=74-86"
+      "disposition": "integrated",
+      "destination": "00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md",
+      "destination_anchor": "escher-visual-concept-library"
     },
     "meeting-11-slides-abstraction-discovery-synthesis": {
       "disposition": "integrated",
@@ -1015,7 +1015,7 @@
     "meeting-11-slides-meeting-11-closing": {
       "disposition": "excluded",
       "reason": "Collaborators slide.",
-      "evidence": "Lectures/meeting-11-slides.pages.txt#physical-pages=93-93; Lectures/meeting-11-slides.pages.txt#physical-pages=87-93"
+      "evidence": "Lectures/meeting-11-slides.pages.txt#physical-pages=93-93"
     },
     "meeting-11-reading-01-catalogue-record": {
       "disposition": "integrated",
@@ -1030,7 +1030,7 @@
     "meeting-12-recording-full-session": {
       "disposition": "source-only",
       "reason": "Official recording metadata is pinned; no media body is mirrored.",
-      "evidence": "https://www.youtube.com/watch?v=ti6yPE2VPZc#t=0s; Official recording link in source-manifest.yml for meeting 12."
+      "evidence": "https://www.youtube.com/watch?v=ti6yPE2VPZc#t=0s"
     },
     "meeting-12-slides-agent-security-frame": {
       "disposition": "integrated",
@@ -1045,7 +1045,7 @@
     "meeting-12-slides-meeting-12-outline-a": {
       "disposition": "excluded",
       "reason": "Divider only.",
-      "evidence": "Lectures/meeting-12-slides.pages.txt#physical-pages=19-19; Lectures/meeting-12-slides.pages.txt#physical-pages=18-19"
+      "evidence": "Lectures/meeting-12-slides.pages.txt#physical-pages=19-19"
     },
     "meeting-12-slides-dawn-song-agentic-threat-model-sequence": {
       "disposition": "integrated",
@@ -1075,7 +1075,7 @@
     "meeting-12-slides-meeting-12-outline-c": {
       "disposition": "excluded",
       "reason": "Divider only.",
-      "evidence": "Lectures/meeting-12-slides.pages.txt#physical-pages=63-63; Lectures/meeting-12-slides.pages.txt#physical-pages=66-66"
+      "evidence": "Lectures/meeting-12-slides.pages.txt#physical-pages=63-63"
     },
     "meeting-12-slides-agent-defense-mechanisms": {
       "disposition": "integrated",
@@ -1100,7 +1100,7 @@
     "meeting-12-slides-meeting-12-closing": {
       "disposition": "excluded",
       "reason": "Promotional closing.",
-      "evidence": "Lectures/meeting-12-slides.pages.txt#physical-pages=99-99; Lectures/meeting-12-slides.pages.txt#physical-pages=98-99"
+      "evidence": "Lectures/meeting-12-slides.pages.txt#physical-pages=99-99"
     },
     "meeting-12-reading-01-catalogue-record": {
       "disposition": "integrated",
@@ -1202,15 +1202,18 @@
     "meeting-01-slides-visual-self-consistency-sampling": {
       "disposition": "integrated",
       "destination": "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md",
-      "destination_anchor": "self-consistency",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/01-self-consistency-sampling.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "destination_anchor": "4-self-consistency",
+      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about Self-consistency and sampling?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/reasoning/test-time-compute/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m01-p40-self-consistency.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m01-p42-sample-scaling.png"
+      ]
     },
     "meeting-01-slides-visual-code-selection-and-verifiers": {
       "disposition": "source-only",
@@ -1221,14 +1224,17 @@
       "disposition": "integrated",
       "destination": "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md",
       "destination_anchor": "поиск-по-промежуточным-состояниям",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/01-tree-of-thoughts-search.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about Tree of Thoughts search?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/reasoning/test-time-compute/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m01-p54-response-selection-vs-search.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m01-p55-game-of-24.png"
+      ]
     },
     "meeting-01-slides-visual-outline-before-reflection": {
       "disposition": "excluded",
@@ -1238,28 +1244,33 @@
     "meeting-01-slides-visual-reflection-and-self-debugging": {
       "disposition": "integrated",
       "destination": "00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md",
-      "destination_anchor": "рефлексия-полезна-только-через-наблюдаемую-обратную-связь",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/01-reflection-and-self-debugging.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "destination_anchor": "7-рефлексия-полезна-только-через-наблюдаемую-обратную-связь",
+      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about Reflection and self-debugging?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/agents/memory-planning-orchestration/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m01-p64-self-debugging-feedback.png"
+      ]
     },
     "meeting-01-slides-visual-self-correction-failure-modes": {
       "disposition": "integrated",
       "destination": "00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md",
       "destination_anchor": "почему-самокритика-без-внешнего-сигнала-не-является-проверкой",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/01-self-correction-failure-modes.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about Self-correction failure modes and debate?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/agents/memory-planning-orchestration/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m01-p67-self-correction-no-oracle.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m01-p69-debate-vs-self-consistency.png"
+      ]
     },
     "meeting-01-slides-visual-compute-capability-bitter-lesson": {
       "disposition": "source-only",
@@ -1295,14 +1306,16 @@
       "disposition": "integrated",
       "destination": "00 Учебник/12 Post-training и Alignment/03 Reward modeling.md",
       "destination_anchor": "одна-модель-как-actor-и-judge",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/02-self-rewarding-setup.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about Self-rewarding language-model setup?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/post-training/reward-modeling/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m02-p52-self-rewarding-loop.png"
+      ]
     },
     "meeting-02-slides-visual-self-rewarding-results": {
       "disposition": "source-only",
@@ -1312,15 +1325,17 @@
     "meeting-02-slides-visual-irpo": {
       "disposition": "integrated",
       "destination": "00 Учебник/12 Post-training и Alignment/05 DPO.md",
-      "destination_anchor": "iterative-reasoning-preference-optimization",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/02-irpo.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "destination_anchor": "11-iterative-reasoning-preference-optimization",
+      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about Iterative reasoning preference optimization?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/post-training/dpo/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m02-p74-irpo-loop.png"
+      ]
     },
     "meeting-02-slides-visual-o1-deepseek-transition": {
       "disposition": "source-only",
@@ -1336,27 +1351,31 @@
       "disposition": "integrated",
       "destination": "00 Учебник/12 Post-training и Alignment/03 Reward modeling.md",
       "destination_anchor": "meta-judge-кто-оценивает-оценщика",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/02-meta-rewarding.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about Meta-rewarding language models?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/post-training/reward-modeling/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m02-p89-meta-rewarding-loop.png"
+      ]
     },
     "meeting-02-slides-visual-evalplanner": {
       "disposition": "integrated",
       "destination": "00 Учебник/12 Post-training и Alignment/03 Reward modeling.md",
       "destination_anchor": "планирование-проверки-перед-вердиктом",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/02-evalplanner.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about EvalPlanner planning with feedback?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/post-training/reward-modeling/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m02-p98-evalplanner-loop.png"
+      ]
     },
     "meeting-02-slides-visual-learning-to-reason-synthesis": {
       "disposition": "source-only",
@@ -1390,16 +1409,18 @@
     },
     "meeting-03-slides-visual-yu-su-hipporag-memory-sequence": {
       "disposition": "integrated",
-      "destination": "00 Учебник/15 Embeddings, Retrieval и RAG/02 RAG как система.md",
+      "destination": "00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер.md",
       "destination_anchor": "hipporag-ассоциативное-извлечение-по-графу",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/03-yu-su-hipporag-memory-sequence.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about HippoRAG associative memory?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/rag/full-pipeline/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m03-p31-hipporag-index-and-retrieval.png"
+      ]
     },
     "meeting-03-slides-visual-memory-takeaway": {
       "disposition": "source-only",
@@ -1430,14 +1451,17 @@
       "disposition": "integrated",
       "destination": "00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md",
       "destination_anchor": "webdreamer-вообразить-переход-до-необратимого-действия",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/03-yu-su-world-model-planning-sequence.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about World models for language-agent planning?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/agents/memory-planning-orchestration/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m03-p63-world-model-definition.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m03-p70-webdreamer-worked-example.png"
+      ]
     },
     "meeting-03-slides-visual-planning-takeaways": {
       "disposition": "source-only",
@@ -1468,14 +1492,17 @@
       "disposition": "integrated",
       "destination": "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md",
       "destination_anchor": "от-capability-eval-к-обучающей-смеси",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/04-sft-data-construction.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about Supervised fine-tuning data construction?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/post-training/sft-instruction-data/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m04-p30-training-data-gates.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m04-p54-voting-filter.png"
+      ]
     },
     "meeting-04-slides-visual-cot-persona-data-mix": {
       "disposition": "source-only",
@@ -1496,27 +1523,32 @@
       "disposition": "integrated",
       "destination": "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md",
       "destination_anchor": "главное-различие",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/04-rlvr-method.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about Reinforcement learning with verifiable rewards?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/post-training/rlvr-verifiers/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m04-p90-tulu-rlvr-stage.png"
+      ]
     },
     "meeting-04-slides-visual-rlvr-results": {
       "disposition": "integrated",
       "destination": "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md",
       "destination_anchor": "что-показывает-кривая-rlvr-а-чего-она-не-доказывает",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/04-rlvr-results.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about RLVR experiments and scaling results?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/post-training/rlvr-verifiers/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m04-p104-rlvr-experimental-setup.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m04-p118-rlvr-scaling-curves.png"
+      ]
     },
     "meeting-04-slides-visual-minimal-posttraining-recipe": {
       "disposition": "source-only",
@@ -1527,27 +1559,31 @@
       "disposition": "integrated",
       "destination": "00 Учебник/12 Post-training и Alignment/08 Reasoning distillation.md",
       "destination_anchor": "s1-59-тысяч-1-тысяча",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/04-s1k-data.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about S1K reasoning-data construction?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/post-training/reasoning-distillation/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m04-p128-s1-data-funnel.png"
+      ]
     },
     "meeting-04-slides-visual-test-time-scaling": {
       "disposition": "integrated",
       "destination": "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md",
       "destination_anchor": "budget-forcing-заставить-траекторию-продолжиться",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/04-test-time-scaling.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about Test-time scaling?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/reasoning/test-time-compute/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m04-p134-budget-forcing.png"
+      ]
     },
     "meeting-04-slides-visual-olmo-pretraining": {
       "disposition": "source-only",
@@ -1583,27 +1619,32 @@
       "disposition": "integrated",
       "destination": "00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md",
       "destination_anchor": "swe-agent-модель-управляет-циклом-через-aci",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/05-swe-agent-loop.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m05-p17-react-aci.png"
+      ],
+      "transformation": "Exact full physical PDF page render at 144 DPI; no crop, redraw, or semantic content change.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about SWE-agent interaction loop?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/agents/coding-web-computer-use/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07"
     },
     "meeting-05-slides-visual-coding-agent-design-comparisons": {
       "disposition": "integrated",
       "destination": "00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md",
       "destination_anchor": "свободный-loop-aci-и-процедурный-workflow",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/05-coding-agent-design-comparisons.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m05-p22-agentless-control-flow.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m05-p28-autocoderover-two-trajectories.png"
+      ],
+      "transformation": "Exact full physical PDF pages rendered at 144 DPI; no crop, redraw, or semantic content change.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about Coding-agent design comparisons?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/agents/coding-web-computer-use/",
+      "desktop_evidence": "Full-resolution course frames and adjacent explanatory captions reviewed at desktop content width.",
+      "narrow_evidence": "Responsive images preserve each complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07"
     },
     "meeting-05-slides-visual-ctf-agents": {
       "disposition": "source-only",
@@ -1616,9 +1657,19 @@
       "evidence": "Lectures/meeting-05-slides.pages.txt#physical-pages=41-45"
     },
     "meeting-05-slides-visual-charles-sutton-vulnerability-discovery-loop": {
-      "disposition": "source-only",
-      "reason": "Embedded upstream asset owner is not yet identified; retain source-only pending rights review.",
-      "evidence": "Lectures/meeting-05-slides.pages.txt#physical-pages=46-53"
+      "disposition": "integrated",
+      "destination": "00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md",
+      "destination_anchor": "big-sleep-гипотеза-исполнение-sanitizer-воспроизводимый-crash",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m05-p48-big-sleep-design.png"
+      ],
+      "transformation": "Exact full physical PDF page render at 144 DPI; no crop, redraw, or semantic content change.",
+      "caption": "Attributed Berkeley course visual: Big Sleep's vulnerability-discovery loop.",
+      "rendered_route": "/textbook/agents/coding-web-computer-use/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07"
     },
     "meeting-05-slides-visual-coding-agent-conclusions": {
       "disposition": "source-only",
@@ -1634,27 +1685,32 @@
       "disposition": "integrated",
       "destination": "00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md",
       "destination_anchor": "visualwebarena-страница-как-частично-наблюдаемая-среда",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/06-visualwebarena.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m06-p18-visualwebarena-shopping.png"
+      ],
+      "transformation": "Exact full physical PDF page rendered at 144 DPI; no crop, redraw, or semantic content change.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about VisualWebArena benchmark?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/agents/coding-web-computer-use/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07"
     },
     "meeting-06-slides-visual-vision-language-web-agents": {
       "disposition": "integrated",
       "destination": "00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md",
       "destination_anchor": "html-accessibility-tree-screenshot-и-set-of-marks",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/06-vision-language-web-agents.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m06-p29-html-vs-som.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m06-p35-som-trajectory.png"
+      ],
+      "transformation": "Exact full physical PDF pages rendered at 144 DPI; no crop, redraw, or semantic content change.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about Vision-language web agents?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/agents/coding-web-computer-use/",
+      "desktop_evidence": "Full-resolution course frames and adjacent explanatory captions reviewed at desktop content width.",
+      "narrow_evidence": "Responsive images preserve each complete frames without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07"
     },
     "meeting-06-slides-visual-search-agent-motivation": {
       "disposition": "source-only",
@@ -1665,58 +1721,67 @@
       "disposition": "integrated",
       "destination": "00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md",
       "destination_anchor": "best-first-search-в-реальной-web-среде",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/06-web-agent-tree-search.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m06-p50-best-first-search.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m06-p60-search-backtracking.png"
+      ],
+      "transformation": "Exact full physical PDF pages rendered at 144 DPI; no crop, redraw, or semantic content change.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about Tree-search agents for web tasks?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/agents/coding-web-computer-use/",
+      "desktop_evidence": "Full-resolution course frames and adjacent explanatory captions reviewed at desktop content width.",
+      "narrow_evidence": "Responsive images preserve each complete frames without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07"
     },
     "meeting-06-slides-visual-web-agent-tree-search-results": {
       "disposition": "integrated",
       "destination": "00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md",
       "destination_anchor": "когда-дополнительный-поиск-окупается",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/06-web-agent-tree-search-results.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m06-p70-search-results.png"
+      ],
+      "transformation": "Exact full physical PDF page rendered at 144 DPI; no crop, redraw, or semantic content change.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about Tree-search agent results?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/agents/coding-web-computer-use/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07"
     },
     "meeting-06-slides-visual-insta-setup": {
       "disposition": "integrated",
       "destination": "00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md",
       "destination_anchor": "insta-синтетические-задачи-из-работающего-web",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/06-insta-setup.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m06-p80-insta-pipeline.png"
+      ],
+      "transformation": "Exact full physical PDF page rendered at 144 DPI; no crop, redraw, or semantic content change.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about Inference-time self-training agent setup?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/agents/coding-web-computer-use/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07"
     },
     "meeting-06-slides-visual-insta-verification-scaling": {
       "disposition": "integrated",
       "destination": "00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md",
       "destination_anchor": "верификатор-как-фильтр-синтетической-траектории",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/06-insta-verification-scaling.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m06-p90-automatic-verifier.png"
+      ],
+      "transformation": "Exact full physical PDF page rendered at 144 DPI; no crop, redraw, or semantic content change.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about Verification and inference-time scaling?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/agents/coding-web-computer-use/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07"
     },
     "meeting-06-slides-visual-plan-sequence-learn": {
       "disposition": "source-only",
-      "reason": "Not selected by the full visual audit: redundant orientation, broad synthesis, result-only evidence, or a weaker visual than the chosen mechanism sequence.",
-      "evidence": "Lectures/meeting-06-slides.pages.txt#physical-pages=107-116"
+      "reason": "Retained with its robotics mechanism outside the current canonical route; coherent teaching requires motion-planning, perception and low-level-control context not supplied by the current web/GUI agent chapters.",
+      "evidence": "Lectures/meeting-06-slides.pages.txt#physical-pages=107-116; https://planseqlearn.github.io/"
     },
     "meeting-06-slides-visual-nvidia-confidential-page": {
       "disposition": "excluded",
@@ -1752,14 +1817,16 @@
       "disposition": "integrated",
       "destination": "00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md",
       "destination_anchor": "osworld-resettable-vm-executable-action-and-final-state-grader",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/07-osworld.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m07-p11-osworld-contract.png"
+      ],
+      "transformation": "Exact full physical PDF page rendered at 144 DPI; no crop, redraw, or semantic content change.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about OSWorld environment and evaluation?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/agents/coding-web-computer-use/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07"
     },
     "meeting-07-slides-visual-meeting-07-outline-a": {
       "disposition": "excluded",
@@ -1768,8 +1835,8 @@
     },
     "meeting-07-slides-visual-agenttrek": {
       "disposition": "source-only",
-      "reason": "No upstream publication or repository is pinned; retain source-only pending rights review.",
-      "evidence": "Lectures/meeting-07-slides.pages.txt#physical-pages=33-45"
+      "reason": "The primary paper and upstream repository are verified and the mechanism is already integrated in chapter 69. This course visual sequence has not been selected with a figure-specific rights basis and rendered-site evidence; no new image is claimed.",
+      "evidence": "Lectures/meeting-07-slides.pages.txt#physical-pages=33-45; https://arxiv.org/html/2412.09605v1; https://github.com/xlang-ai/AgentTrek"
     },
     "meeting-07-slides-visual-taco": {
       "disposition": "source-only",
@@ -1785,24 +1852,28 @@
       "disposition": "integrated",
       "destination": "00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md",
       "destination_anchor": "aguvis-единое-визуальное-observationaction-space",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/07-aguvis.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m07-p69-aguvis-design-goals.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m07-p75-aguvis-data-stages.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m07-p80-aguvis-ablation.png"
+      ],
+      "transformation": "Exact full physical PDF pages rendered at 144 DPI; no crop, redraw, or semantic content change.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about Aguvis unified pure-vision agents?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/agents/coding-web-computer-use/",
+      "desktop_evidence": "Full-resolution course frames and adjacent explanatory captions reviewed at desktop content width.",
+      "narrow_evidence": "Responsive images preserve each complete frames without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07"
     },
     "meeting-07-slides-visual-xgen-video": {
       "disposition": "source-only",
-      "reason": "Not selected by the full visual audit: redundant orientation, broad synthesis, result-only evidence, or a weaker visual than the chosen mechanism sequence.",
-      "evidence": "Lectures/meeting-07-slides.pages.txt#physical-pages=84-98"
+      "reason": "The xGen mechanism is integrated in RU/EN 64e; original paper Figure 3 is linked, not locally reproduced. No new figure-specific rights basis was confirmed. Existing OneVision imagery is not reuse of this slide sequence.",
+      "evidence": "Lectures/meeting-07-slides.pages.txt#physical-pages=84-98; https://arxiv.org/html/2410.16267v2#S2.F3"
     },
     "meeting-07-slides-visual-gens": {
       "disposition": "source-only",
-      "reason": "Not selected by the full visual audit: redundant orientation, broad synthesis, result-only evidence, or a weaker visual than the chosen mechanism sequence.",
-      "evidence": "Lectures/meeting-07-slides.pages.txt#physical-pages=99-105"
+      "reason": "The GenS frame-selection mechanism is integrated in RU/EN 64e; original paper Figure 1 is linked, not locally reproduced. Code/model or website-template licensing is not treated as paper-figure permission.",
+      "evidence": "Lectures/meeting-07-slides.pages.txt#physical-pages=99-105; https://arxiv.org/html/2503.09146v1#S0.F1"
     },
     "meeting-07-slides-visual-gui-agent-summary": {
       "disposition": "source-only",
@@ -1828,14 +1899,16 @@
       "disposition": "integrated",
       "destination": "00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md",
       "destination_anchor": "почему-формальная-математика-допускает-alphazero-подобный-цикл",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/08-rl-and-alphazero.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about Reinforcement learning and AlphaZero?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/agents/formal-math/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m08-p30.png"
+      ]
     },
     "meeting-08-slides-visual-alphaproof-premise": {
       "disposition": "source-only",
@@ -1856,27 +1929,32 @@
       "disposition": "integrated",
       "destination": "00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md",
       "destination_anchor": "от-mathlib-sft-к-rl-с-lean-verifier",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/08-alphaproof-methods.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about AlphaProof methods?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/agents/formal-math/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m08-p79.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m08-p84.png"
+      ]
     },
     "meeting-08-slides-visual-test-time-rl": {
       "disposition": "integrated",
       "destination": "00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md",
       "destination_anchor": "test-time-rl-как-локальная-специализация-вокруг-трудной-задачи",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/08-test-time-rl.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about Test-time reinforcement learning?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/agents/formal-math/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m08-p91.png"
+      ]
     },
     "meeting-08-slides-visual-meeting-08-demo-divider": {
       "disposition": "excluded",
@@ -1922,19 +2000,31 @@
       "disposition": "integrated",
       "destination": "00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md",
       "destination_anchor": "neural-prover-premise-retrieval-tactic-proposal-search-kernel",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/09-kaiyu-yang-lean-theorem-proving-pipeline.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about Lean theorem-proving pipeline?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/agents/formal-math/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m09-p55.png"
+      ]
     },
     "meeting-09-slides-visual-formalizing-inequalities": {
-      "disposition": "source-only",
-      "reason": "Not selected by the full visual audit: redundant orientation, broad synthesis, result-only evidence, or a weaker visual than the chosen mechanism sequence.",
-      "evidence": "Lectures/meeting-09-slides.pages.txt#physical-pages=56-66"
+      "disposition": "integrated",
+      "destination": "00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md",
+      "destination_anchor": "lips-сузить-бесконечное-пространство-действий-символическим-инструментом",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m09-p58.png"
+      ],
+      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
+      "caption": "What does the reviewed sequence establish about Formalizing inequalities?",
+      "rendered_route": "/textbook/agents/formal-math/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07"
     },
     "meeting-09-slides-visual-autoformalization-challenges": {
       "disposition": "source-only",
@@ -1945,32 +2035,47 @@
       "disposition": "integrated",
       "destination": "00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md",
       "destination_anchor": "leaneuclid-текст-диаграмма-domain-system-and-smt",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/09-leaneuclid.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about LeanEuclid representation?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/agents/formal-math/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m09-p84.png"
+      ]
     },
     "meeting-09-slides-visual-euclid-logical-gap": {
       "disposition": "integrated",
       "destination": "00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md",
       "destination_anchor": "разобранный-пример-скрытая-посылка-на-диаграмме",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/09-euclid-logical-gap.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about Euclidean geometry logical-gap case study?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/agents/formal-math/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m09-p89.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m09-p97.png"
+      ]
     },
     "meeting-09-slides-visual-equivalence-and-diagrams": {
-      "disposition": "source-only",
-      "reason": "Not selected by the full visual audit: redundant orientation, broad synthesis, result-only evidence, or a weaker visual than the chosen mechanism sequence.",
-      "evidence": "Lectures/meeting-09-slides.pages.txt#physical-pages=98-105"
+      "disposition": "integrated",
+      "destination": "00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md",
+      "destination_anchor": "семантическая-эквивалентность-и-диаграммные-следствия",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m09-p105.png"
+      ],
+      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
+      "caption": "What does the reviewed sequence establish about Equivalence and diagram understanding?",
+      "rendered_route": "/textbook/agents/formal-math/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07"
     },
     "meeting-09-slides-visual-end-to-end-autoformalization": {
       "disposition": "source-only",
@@ -2006,14 +2111,17 @@
       "disposition": "integrated",
       "destination": "00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md",
       "destination_anchor": "lean-star-thought-before-tactic-and-expert-iteration",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/10-lean-star.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about Lean-STaR self-training?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/agents/formal-math/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m10-p39.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m10-p42.png"
+      ]
     },
     "meeting-10-slides-visual-meeting-10-outline": {
       "disposition": "excluded",
@@ -2029,27 +2137,34 @@
       "disposition": "integrated",
       "destination": "00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md",
       "destination_anchor": "draftsketchprove-отделить-математический-план-от-заполнения-holes",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/10-draft-sketch-prove.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about Draft, Sketch, and Prove?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/agents/formal-math/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m10-p64.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m10-p66.png"
+      ]
     },
     "meeting-10-slides-visual-leanhammer": {
       "disposition": "integrated",
       "destination": "00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md",
       "destination_anchor": "leanhammer-premise-selector-atp-aesop-and-reconstruction",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/10-leanhammer.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about LeanHammer premise selection and proof search?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/agents/formal-math/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m10-p79.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m10-p82.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m10-p85.png"
+      ]
     },
     "meeting-10-slides-visual-advanced-prover-recap": {
       "disposition": "source-only",
@@ -2070,14 +2185,19 @@
       "disposition": "integrated",
       "destination": "00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md",
       "destination_anchor": "minictx-контекст-реального-проекта-и-time-split",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/10-minictx.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about miniCTX, accessibility gaps, and prover-method recap?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/agents/formal-math/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m10-p109.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m10-p110.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m10-p111.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m10-p112.png"
+      ]
     },
     "meeting-10-slides-visual-meeting-10-closing": {
       "disposition": "excluded",
@@ -2098,27 +2218,40 @@
       "disposition": "integrated",
       "destination": "00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md",
       "destination_anchor": "copra-stateful-backtracking-with-prover-feedback",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/11-copra.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about COPRA in-context theorem proving?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/agents/formal-math/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m11-p16.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m11-p17.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m11-p24.png"
+      ]
     },
     "meeting-11-slides-visual-compiler-verification": {
       "disposition": "integrated",
       "destination": "00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md",
       "destination_anchor": "сквозной-пример-корректность-компилятора",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/11-compiler-verification.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about Compiler verification with language models?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/agents/formal-math/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m11-p27.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m11-p30.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m11-p32.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m11-p33.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m11-p34.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m11-p37.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m11-p38.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m11-p39.png"
+      ]
     },
     "meeting-11-slides-visual-formal-reasoning-summary": {
       "disposition": "source-only",
@@ -2139,24 +2272,42 @@
       "disposition": "integrated",
       "destination": "00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md",
       "destination_anchor": "lasr-совместная-эволюция-формул-и-библиотеки-понятий",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/11-swarat-chaudhuri-lasr-concept-library-sequence.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about LaSR concept-library discovery loop?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/agents/scientific-discovery/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/discovery/m11-p61.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/discovery/m11-p63-lasr-hypothesis-evolution.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/discovery/m11-p67.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/discovery/m11-p68.png"
+      ]
     },
     "meeting-11-slides-visual-lasr-examples-and-scaling": {
-      "disposition": "source-only",
-      "reason": "Not selected by the full visual audit: redundant orientation, broad synthesis, result-only evidence, or a weaker visual than the chosen mechanism sequence.",
-      "evidence": "Lectures/meeting-11-slides.pages.txt#physical-pages=74-81"
+      "disposition": "integrated",
+      "destination": "00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md",
+      "destination_anchor": "что-показали-feynman-equations-and-scaling-law-case",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/discovery/m11-p75-pysr-coulomb.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/discovery/m11-p76-lasr-coulomb.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/discovery/m11-p80-scaling-curves.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/discovery/m11-p81-scaling-traits.png"
+      ],
+      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
+      "caption": "What does the reviewed sequence establish about LaSR examples and scaling?",
+      "rendered_route": "/textbook/agents/scientific-discovery/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07"
     },
     "meeting-11-slides-visual-visual-concept-discovery": {
       "disposition": "source-only",
-      "reason": "Not selected by the full visual audit: redundant orientation, broad synthesis, result-only evidence, or a weaker visual than the chosen mechanism sequence.",
-      "evidence": "Lectures/meeting-11-slides.pages.txt#physical-pages=82-88"
+      "reason": "ESCHER is integrated in chapter 71 with the independent paper's original CC BY 4.0 Figure 2. The Berkeley pages 82-88 visual sequence was not reproduced and is not promoted by that separate asset.",
+      "evidence": "Lectures/meeting-11-slides.pages.txt#physical-pages=82-88; https://arxiv.org/html/2504.00185v1; docs/audit/2026-09-15-completion/course-berkeley-follow-through.md"
     },
     "meeting-11-slides-visual-abstraction-discovery-synthesis": {
       "disposition": "source-only",
@@ -2187,14 +2338,17 @@
       "disposition": "integrated",
       "destination": "00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md",
       "destination_anchor": "threat-model-before-defenses",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/12-dawn-song-agentic-threat-model-sequence.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about Agentic threat model?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/agents/security/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/12-dawn-song-agentic-threat-model-sequence.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/security/m12-p27.png"
+      ]
     },
     "meeting-12-slides-visual-agent-sql-rce-cases": {
       "disposition": "source-only",
@@ -2205,14 +2359,17 @@
       "disposition": "integrated",
       "destination": "00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md",
       "destination_anchor": "direct-indirect-and-retrieval-memory-poisoning",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/12-prompt-injection-agentpoison.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about Prompt injection and AgentPoison?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/agents/security/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/12-prompt-injection-agentpoison.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/security/m12-p48.png"
+      ]
     },
     "meeting-12-slides-visual-meeting-12-outline-b": {
       "disposition": "excluded",
@@ -2230,35 +2387,50 @@
       "evidence": "The page is a navigation divider."
     },
     "meeting-12-slides-visual-agent-defense-mechanisms": {
-      "disposition": "source-only",
-      "reason": "Not selected by the full visual audit: redundant orientation, broad synthesis, result-only evidence, or a weaker visual than the chosen mechanism sequence.",
-      "evidence": "Lectures/meeting-12-slides.pages.txt#physical-pages=64-75"
+      "disposition": "integrated",
+      "destination": "00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md",
+      "destination_anchor": "defense-in-depth-hardening-validation-policy-and-isolation",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/security/m12-p65.png"
+      ],
+      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
+      "caption": "What does the reviewed sequence establish about Agent-defense mechanisms?",
+      "rendered_route": "/textbook/agents/security/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07"
     },
     "meeting-12-slides-visual-dawn-song-privilege-control-sequence": {
       "disposition": "integrated",
       "destination": "00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md",
       "destination_anchor": "progent-least-privilege-as-an-executable-tool-call-policy",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/12-dawn-song-privilege-control-sequence.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about Privilege control for agentic systems?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/agents/security/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/12-dawn-song-privilege-control-sequence.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/security/m12-p90.png"
+      ]
     },
     "meeting-12-slides-visual-agent-monitoring-and-verification": {
       "disposition": "integrated",
       "destination": "00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md",
       "destination_anchor": "monitoring-information-flow-datasentinel-and-formal-policy-verification",
-      "local_file": "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/12-agent-monitoring-and-verification.png",
-      "transformation": "planned source-page extraction at 2x; preserve ordered mechanism sequence and readable labels; no model redraw",
+      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
       "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about Monitoring, DataSentinel, and formal verification?",
-      "rendered_route": "pending final destination render",
-      "desktop_evidence": "pending final destination render",
-      "narrow_evidence": "pending final destination render",
-      "reviewer": "pending independent visual review",
-      "checked_at": "pending"
+      "rendered_route": "/textbook/agents/security/",
+      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
+      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
+      "reviewer": "Codex source-to-destination visual audit",
+      "checked_at": "2026-09-07",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/12-agent-monitoring-and-verification.png"
+      ]
     },
     "meeting-12-slides-visual-agent-safety-conclusion": {
       "disposition": "source-only",

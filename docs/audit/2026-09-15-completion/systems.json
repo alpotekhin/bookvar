@@ -1,0 +1,2932 @@
+{
+  "schema": 1,
+  "date": "2026-09-15",
+  "owner": "systems",
+  "status": "complete-pending-independent-review",
+  "scope_pages": 60,
+  "scope_findings": 88,
+  "summary": {
+    "ru_pages_full_read": 60,
+    "ru_pages_changed": 50,
+    "en_pages_full_read": 11,
+    "en_pages_changed": 9,
+    "findings": {
+      "fixed": 82,
+      "already-fixed": 6,
+      "rejected-with-evidence": 0,
+      "open": 0
+    },
+    "snapshots": 59,
+    "total_retained_figure_embeds": 392
+  },
+  "read_method": "Full current page before changes and complete changed-page reread. Labels ending plus-local-correction mean the full reread exposed a final small correction whose replacement block was then read in context; not a claim of another full-page sweep after that local correction. Unchanged pages were fully read once.",
+  "scope_boundary": "Only original systems RU pages, existing EN counterparts, own snapshots and these reports. No registry/navigation/raw/test infrastructure changes; no new translation, visuals, full build, commit, push, merge or deployment.",
+  "numerical_verification": {
+    "runtime": {
+      "torch": "2.8.0",
+      "numpy": "2.2.6",
+      "device": "cpu"
+    },
+    "checks": {
+      "kv_units": {
+        "bytes": 3272704000,
+        "GB": 3.272704,
+        "GiB": 3.047943115234375,
+        "capacity_decimal": [
+          194,
+          45
+        ]
+      },
+      "dsa_training": {
+        "warmup_tokens": 2097152000,
+        "sparse_tokens": 943718400000
+      },
+      "checkpoint_intervals": {
+        "sqrt_seconds": 3219.937887599697,
+        "lowest_order_seconds": 3099.937887599697,
+        "three_term_seconds": 3140.4347915946973,
+        "write_fraction": 0.16666666666666666
+      },
+      "rwkv_recurrence": {
+        "outputs": [
+          2,
+          3,
+          5.2
+        ],
+        "final_state": [
+          10.5,
+          1.75
+        ]
+      },
+      "hybrid_state_memory": {
+        "full_kv_GiB": 16,
+        "hybrid_attention_GiB": 4,
+        "ssm_conv_MiB": 6.75
+      },
+      "masked_nll": {
+        "loss_all": 1.3862943611198906,
+        "loss_masked": 1.0397207708399179,
+        "PPL_masked": 2.8284271247461903
+      },
+      "paged_blocks": {
+        "blocks": {
+          "16": 7,
+          "32": 4
+        },
+        "useful_MiB": 11,
+        "reserved_MiB": [
+          14,
+          16
+        ],
+        "cow_extra_MiB": [
+          2,
+          4
+        ]
+      },
+      "inference_collective_cost": {
+        "decode_us": 28.573439999999998,
+        "prefill_ms": 4.725620480000001,
+        "decode_160AR_ms": 4.5717504,
+        "prefill_160AR_ms": 756.0992768000001
+      },
+      "pd_latency": {
+        "KV_GiB": 1,
+        "transfer_ms": 40,
+        "coord_ms": 5,
+        "TTFT_ms": [
+          120,
+          180
+        ],
+        "ITL_ms": [
+          70,
+          10
+        ],
+        "TTST_ms": 190
+      },
+      "imbalance_decisions": [
+        {
+          "TP": 60,
+          "FP": 40,
+          "FN": 40,
+          "TN": 9860,
+          "precision": 0.6,
+          "recall": 0.6,
+          "BA": 0.797979797979798,
+          "cost": 4040,
+          "alerts": 100
+        },
+        {
+          "TP": 90,
+          "FP": 210,
+          "FN": 10,
+          "TN": 9690,
+          "precision": 0.3,
+          "recall": 0.9,
+          "BA": 0.9393939393939394,
+          "cost": 1210,
+          "alerts": 300
+        }
+      ],
+      "fedavg": {
+        "aggregate": [
+          4,
+          6
+        ],
+        "one_client": [
+          1,
+          3
+        ],
+        "fp32_Adam_10M_bytes": 160000000,
+        "clipped_update": [
+          1.2,
+          1.6
+        ]
+      },
+      "other_ledgers": {
+        "ROI_net": 0.25,
+        "carbon_kgCO2e": 480,
+        "Nplus1_replicas": 5,
+        "cost_USD_request": 0.00040404040404040404,
+        "input_tok_s": 28160,
+        "output_tok_s": 3967.9999999999995,
+        "M_M_1_seconds": [
+          0.2,
+          1
+        ]
+      },
+      "low_rank_storage": {
+        "W_params": 16777216,
+        "r512_params": 4194304,
+        "r3072_params": 25165824,
+        "r512_Z_bytes": 32768,
+        "r3072_Z_bytes": 196608
+      },
+      "MLA_absorption": {
+        "max_abs_error": 8.881784197001252e-16
+      },
+      "TP_forward_backward": {
+        "output_error": 1.3322676295501878e-15,
+        "gradient_errors": [
+          2.842170943040401e-14,
+          1.0658141036401503e-14,
+          1.4210854715202004e-14
+        ]
+      },
+      "online_causal_attention": {
+        "output_error": 1.6653345369377348e-16,
+        "gradient_error": 6.661338147750939e-16,
+        "pairs": 28,
+        "dense_pairs": 49
+      },
+      "speculative_mass": {
+        "accepted": [
+          0.1,
+          0.2,
+          0.3
+        ],
+        "correction_mass": [
+          0.30000000000000004,
+          0,
+          0.10000000000000003
+        ],
+        "total": [
+          0.4,
+          0.2,
+          0.4
+        ]
+      },
+      "AMP_cpu_parameter_dtype": {
+        "parameter_dtypes": [
+          "torch.float32",
+          "torch.float32"
+        ],
+        "gradient_dtypes": [
+          "torch.float32",
+          "torch.float32"
+        ]
+      },
+      "published_pipeline_tables": {
+        "tables": 2,
+        "operations": 64,
+        "live_peaks": [
+          [
+            4,
+            4,
+            4,
+            4
+          ],
+          [
+            4,
+            4,
+            3,
+            1
+          ]
+        ]
+      },
+      "published_RMSNorm": {
+        "fp32_max_error": 2.384185791015625e-7,
+        "bf16_input_fp32_gain_output_dtype": "torch.float32",
+        "bf16_gain_output_dtype": "torch.bfloat16"
+      },
+      "unequal_tokens_virtual_DDP": {
+        "local_token_counts": [
+          2,
+          5
+        ],
+        "max_gradient_error": 5.551115123125783e-17,
+        "limitation": "Algebraic emulation of DDP mean, not multiprocess collective execution."
+      },
+      "checkpoint_dropout_rng": {
+        "outputs_equal": true,
+        "gradients_equal": true,
+        "device": "cpu",
+        "preserve_rng_state": true
+      }
+    },
+    "passed": 22
+  },
+  "verification": {
+    "snapshot_sha256": "All 59 snapshots match exact pre-edit content; all 60 RU pre-edit hashes match initial recorded hashes. EN before/after hashes included per page.",
+    "structure": "71 pages: all 392 original image embeds retained as multisets; source_unit_id and explicit anchors preserved; fenced blocks balanced.",
+    "diff_check": {
+      "command": "git diff --check restricted to systems-owned chapter directories and existing inference EN directory",
+      "exit_code": 0,
+      "stdout": ""
+    }
+  },
+  "limitations": [
+    "CPU-only numerical/shape/mechanism checks are not GPU timing evidence.",
+    "CUDA/Triton kernels, Nsight capture, NCCL/network communication, multi-process DDP, actual serving engines, long model training, and deployment were not executed.",
+    "Virtual DDP check emulates arithmetic averaging and token normalization, not distributed communication.",
+    "The sklearn/imblearn pipeline was read but not executed; hypothetical confusion-matrix arithmetic was executed.",
+    "The speculative mass check proves the stated one-step chain identity; no claim of general sampled-tree verifier exactness is made.",
+    "Last-verified dates were not blanket-updated. Source-specific revisions and verification notes are explicit; not every changing external product description is independently re-benchmarked.",
+    "Global route/build/render checks and independent delta review remain owned by the primary agent. Source assets/registry were not modified by this task."
+  ],
+  "pages": [
+    {
+      "path": "00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md",
+      "en": null,
+      "before_sha256": "0e93b210439751ee2974688459aa8d0b09cf4341e4f12af46244ebd7fa40cc47",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P2",
+          "line": 353,
+          "excerpt": "Обычный FFN с шириной $4d$ имеет примерно $8d^2$ weights в двух matrices.\nSwiGLU использует три matrices. Чтобы parameter count оставался сопоставимым,\nбазовую внутреннюю ширину уменьшают примерно до $\\frac83d$, а затем округляют до",
+          "issue": "В авторском русском изложении регулярно встречается не терминологическая необходимость, а переключение обычных существительных: weights, matrices, shapes, learnable scale. Это затрудняет связное чтение.",
+          "action": "Выправить русский текст, сохранив названия методов и API: веса, матрицы, формы тензоров, обучаемый масштаб.",
+          "status": "fixed",
+          "evidence": "Переписаны обычные английские существительные в русском изложении, сохранены формулы/код/оригинальные рисунки; уточнена ε-граница RMSNorm."
+        },
+        {
+          "finding": 2,
+          "severity": "P2",
+          "line": 563,
+          "excerpt": "**Дальше:** [[02 Areas/ML & DL/00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA|почему при генерации именно K/V становятся узким местом и как GQA уменьшает cache.]]",
+          "issue": "Внизу предлагается переход к GQA, тогда как frontmatter ведёт в decoder block; следующая глава и глава о нормализации повторяют значительную часть подробного вывода этой страницы.",
+          "action": "Назначить этой главе роль исторической архитектурной точки отсчёта, оставить один сквозной проход и согласовать следующий шаг с маршрутом 02→03→04→05; подробные механизмы не объяснять заново.",
+          "status": "fixed",
+          "evidence": "Определена историческая роль главы, следующие шаги decoder→norm→RoPE и ссылки на GQA согласованы; изложение полезных механизмов не удалялось."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page-plus-local-correction",
+      "figures": "all existing embed references retained; no new figures",
+      "after_sha256": "ea7413af665ed3a042c5952582fa6e46b7856019e7c1f8e62e8cda3b2ddd1a9f",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 5,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Meta LLaMA reference model.py checked for RMSNorm, block ordering and cached position semantics; published RMSNorm snippet executed on CPU.",
+      "executed_example_checks": [
+        "Task 2 CPU verification executed the published RMSNorm example: FP32 maximum error 2.38e-7; BF16 input with FP32 gain produced FP32 output, while BF16 gain produced BF16 output."
+      ],
+      "limitations": [
+        "CPU dtype/arithmetic only; no model training, CUDA kernel, or architecture benchmark was executed."
+      ]
+    },
+    {
+      "path": "00 Учебник/07 Анатомия современной LLM/02 Современный decoder block.md",
+      "en": null,
+      "before_sha256": "8e790c7eb567938ff7a00ee1a9f4e92052343ba0e41803b975a8af09ff54b268",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P2",
+          "line": 263,
+          "excerpt": "2.5 для T5 v1.1, 2.67–2.68 для Qwen 14B, DeepSeek 67B и LLaMA 70B, 3.5 для\nMistral 7B и LLaMA 2 70B. T5 11B с $d_{ff}=65536$ и $d_{model}=1024$ служит\nпредупреждением против превращения правила в ограничение: отношение 64",
+          "issue": "Таблица отношений использует неоднозначное имя «LLaMA 70B» рядом с LLaMA 2 70B и двумя разными отношениями. Читатель не может однозначно восстановить конфигурацию. Requires verification по первичному config/слайду.",
+          "action": "Указать точные поколения/размеры и d_model,d_ff для каждой строки, сверить со снимком конфигурации; вероятную опечатку не переносить дальше.",
+          "status": "fixed",
+          "evidence": "Вместо неоднозначной LLaMA70B дана таблица точных T5v1.1Base, Qwen1.5-14B, Mistral7Bv0.1 с d_model/d_ff; отдельно пояснено соглашение исходного Qwen14B."
+        },
+        {
+          "finding": 2,
+          "severity": "P3",
+          "line": 75,
+          "excerpt": "## От GPT-2 к LLaMA: что сохранилось, а что заменили\n\nНа схеме Джея Аламмара представление одной позиции проходит через",
+          "issue": "Историческое сравнение, GQA и устройство SwiGLU дублируют предыдущую главу; собственная ценность страницы — проход с формами — теряется среди повторного введения.",
+          "action": "Оставить минимум повторения со ссылками и поставить сквозной пример сразу после двух формул блока.",
+          "status": "fixed",
+          "evidence": "Историческое сравнение перенесено после сквозного прохода. Разбор форм GQA/SwiGLU оставлен как необходимая часть прохода, а не исторический повтор."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page-plus-local-correction",
+      "figures": "all existing embed references retained; no new figures",
+      "after_sha256": "185f0026670c8928c16ee03f7217ee2f18a9a06903e8c1bace578ec2ee4452ae",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/07 Анатомия современной LLM/02 Современный decoder block.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 6,
+        "ordering": "GPT-2 historical figure moved after modern walkthrough; same six original embeds"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Exact T5 v1.1 Base, Qwen1.5-14B and Mistral7B v0.1 configuration sources; original Qwen14B code at pinned revision checked for intermediate_size/2 convention.",
+      "executed_example_checks": [],
+      "limitations": [
+        "No page-specific executable example is recorded for this page; evidence is full-page/source/contract review, not runtime verification."
+      ]
+    },
+    {
+      "path": "00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual.md",
+      "en": null,
+      "before_sha256": "4c4ba8f99853f5a513f9bc8adec509bca49c0840ef07d592e9244a71c147a552",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P3",
+          "line": 91,
+          "excerpt": "после последнего блока необходима финальная нормализация перед LM head. В очень\nглубоких моделях применяют дополнительные приёмы — масштабирование residual,\nDeepNorm, sandwich-нормализацию, QK-norm, — но это уже отдельные архитектурные",
+          "issue": "Слово «необходима» превращает стандарт конкретного pre-norm recipe в универсальное математическое требование; на странице не задана граница этого утверждения.",
+          "action": "Уточнить: в рассматриваемом LLaMA-подобном recipe финальная нормализация контролирует масштаб перед LM head; иные архитектурные решения требуют собственной проверки.",
+          "status": "fixed",
+          "evidence": "Финальная нормализация ограничена рассматриваемой LLaMA-подобной конфигурацией, снято универсальное требование также в списке ошибок."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page",
+      "figures": "all existing embed references retained; no new figures",
+      "after_sha256": "2fa4869dd10c01fde99c27dd5b01e32e5af89ba20d7409c6f9292c27c12c922f",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 2,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Current page and original audit finding(s) read in full; cited source context retained. This entry does not claim fresh verification of every external link.",
+      "executed_example_checks": [
+        "Task 2 CPU verification executed the published RMSNorm example: FP32 maximum error 2.38e-7; BF16 input with FP32 gain produced FP32 output, while BF16 gain produced BF16 output."
+      ],
+      "limitations": [
+        "CPU dtype/arithmetic only; no model training, CUDA kernel, or norm ablation was executed."
+      ]
+    },
+    {
+      "path": "00 Учебник/07 Анатомия современной LLM/04 RoPE.md",
+      "en": null,
+      "before_sha256": "86fb1f58f6ddaa72f6424c55ee810359d05749cd4f284d67ba4bf0c92e635bbc",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P2",
+          "line": 198,
+          "excerpt": "$R_0k_0,\\ldots,R_3k_3$. На следующем шаге строится $R_4q_4$ и сравнивается со\nвсеми четырьмя cached keys:",
+          "issue": "Пример не включает собственные K/V текущей позиции 4, а таблица откладывает их добавление до конца шага. В causal self-attention текущая позиция также разрешена; эталон Meta записывает новые K/V до attention и читает префикс включая их.",
+          "action": "Показать пять разрешённых позиций 0…4 для q4 и явно различить подачу ранее выбранного токена в decoder и выбор следующего токена.",
+          "status": "already-fixed",
+          "evidence": "Текущая полная страница уже содержит пять ключей0…4, запись нового K/V до внимания и предсказание позиции5. Сверено с Meta model.py."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "not-needed-unchanged",
+      "figures": "all existing embed references retained; no new figures",
+      "after_sha256": "86fb1f58f6ddaa72f6424c55ee810359d05749cd4f284d67ba4bf0c92e635bbc",
+      "changed": false,
+      "snapshot": null,
+      "figure_verification": {
+        "retained": true,
+        "count": 2,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Meta reference implementation checked; current page already includes current input K/V before prediction of next position.",
+      "executed_example_checks": [],
+      "limitations": [
+        "No page-specific executable example is recorded for this page; evidence is full-page/source/contract review, not runtime verification."
+      ]
+    },
+    {
+      "path": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "en": null,
+      "before_sha256": "ff8fbb60f2f0340eeae8c0ab4a2299ab03a33bf9fc7931d252c8bd84b3ab27a6",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P2",
+          "line": 69,
+          "excerpt": "Делимость $D$ на $H$ — обязательное условие архитектуры: без неё тензор нельзя\nразложить на одинаковые головы. Входные token IDs имеют форму $[B,T]$.\nEmbedding lookup добавляет ось признаков:",
+          "issue": "Условие выбранного reshape объявлено обязательным для Transformer вообще. Соседняя глава decoder block прямо объясняет, что n_heads*d_head не обязано равняться d_model: Q/K/V-проекции могут менять ширину.",
+          "action": "Ограничить формулировку базовой MHA-конфигурацией A1, не выдавая D=HK за общее архитектурное требование.",
+          "status": "fixed",
+          "evidence": "Делимость D/H явно ограничена базовой MHA A1; проекции общего Transformer могут менять ширину."
+        },
+        {
+          "finding": 2,
+          "severity": "P2",
+          "line": 166,
+          "excerpt": "становятся всё заметнее. LM head стоит примерно $2NDV$, что особенно существенно\nпри большом словаре и untied выходной матрице.",
+          "issue": "Weight tying уменьшает число хранимых параметров, но не убирает умножение на словарь и не меняет данный FLOPs-член. Соседство untied с вычислительной стоимостью смешивает две статьи бюджета.",
+          "action": "Убрать связь с untied из оценки FLOPs и отдельно подчеркнуть, что связанная матрица всё равно участвует в выходном умножении.",
+          "status": "fixed",
+          "evidence": "2NDV теперь не зависит от tied/untied; отдельно разведены FLOPs и хранимые параметры."
+        },
+        {
+          "finding": 3,
+          "severity": "P3",
+          "line": 30,
+          "excerpt": "previous: \"[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/04 RoPE и позиционная информация]]\"\nnext: \"[[02 Areas/ML & DL/06 Практика/20 Собрать языковую модель с нуля]]\"\n---",
+          "issue": "Имя предыдущей страницы в frontmatter не совпадает с прочитанным файлом 04 RoPE.md.",
+          "action": "Проверить разрешение ссылки в публикуемой навигации и заменить на каноническую цель.",
+          "status": "fixed",
+          "evidence": "previous указывает на существующую каноническую 04 RoPE."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page",
+      "figures": "all existing embed references retained; no new figures",
+      "after_sha256": "6a7ac021bd8acbe1781e4f2c846a047ed0a06359fe6a90b5a2974c01c0632ef6",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 16,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Current page and original audit finding(s) read in full; cited source context retained. This entry does not claim fresh verification of every external link.",
+      "executed_example_checks": [],
+      "limitations": [
+        "No page-specific executable example is recorded for this page; evidence is full-page/source/contract review, not runtime verification."
+      ]
+    },
+    {
+      "path": "00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md",
+      "en": null,
+      "before_sha256": "60402496763f3a3c4f1464d6ae354770805dbadb0566830001a1d9a0a6196f53",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P2",
+          "line": 45,
+          "excerpt": "\\operatorname{Attn}(q_{S+1},K_{1:S},V_{1:S})=\n\\operatorname{softmax}\\!\\left(\n\\frac{q_{S+1}K_{1:S}^{\\top}}{\\sqrt{d_h}}",
+          "issue": "Формула decode пропускает собственные ключ и значение позиции S+1. В стандартном causal decoder текущая позиция входит в разрешённый префикс; это подтверждает эталон Meta.",
+          "action": "Записать attention для q_t по K_1:t,V_1:t, пояснив, что новый токен сначала получает Q/K/V, а затем предсказывает следующий.",
+          "status": "already-fixed",
+          "evidence": "В полной текущей странице attention записан для q_S по K_1:S,V_1:S и объяснено включение текущей позиции."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "not-needed-unchanged",
+      "figures": "all existing embeds retained",
+      "after_sha256": "60402496763f3a3c4f1464d6ae354770805dbadb0566830001a1d9a0a6196f53",
+      "changed": false,
+      "snapshot": null,
+      "figure_verification": {
+        "retained": true,
+        "count": 5,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Current page and original audit finding(s) read in full; cited source context retained. This entry does not claim fresh verification of every external link.",
+      "executed_example_checks": [],
+      "limitations": [
+        "No page-specific executable example is recorded for this page; evidence is full-page/source/contract review, not runtime verification."
+      ]
+    },
+    {
+      "path": "00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md",
+      "en": null,
+      "before_sha256": "e0a7df0cfb7b4c318e64aef0009601100c5e490520162840896123937ccc5476",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P3",
+          "line": 66,
+          "excerpt": "c_t^{KV}=W^{DKV}h_t,\n\\qquad\nW^{DKV}\\in\\mathbb R^{d_c\\times d},",
+          "issue": "В первом выводе латент линейный, а при чтении реального кода позже появляется kv_norm. Упрощение не оговорено в момент, когда называются факторизованные полные матрицы.",
+          "action": "Сразу пометить упрощённую линейную запись и сказать, что реальный нормализованный латент не делает весь путь h→K одной линейной матрицей; перенос UK/UV относительно латента остаётся верным.",
+          "status": "fixed",
+          "evidence": "Введено допущение линейного латента, рядом дана реальная RMSNorm(W_DKV h); поглощение ограничено линейными повышающими проекциями относительно нормализованного латента. Сверено с DeepSeek-V3 model.py lines434–461."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page",
+      "figures": "all existing embeds retained",
+      "after_sha256": "03f760bc4321e59bed4119152399d3e3487aaff6a6763e785a31b7a27dd7b528",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 5,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "DeepSeek-V3 reference model.py lines 434–461 checked: latent LayerNorm/RMSNorm boundary before linear key/value up projections.",
+      "executed_example_checks": [
+        "Task 2 NumPy verification reproduced the MLA absorption identity with maximum absolute error 8.88e-16."
+      ],
+      "limitations": [
+        "The CPU identity check does not execute an MLA model, attention kernel, or long-context benchmark."
+      ]
+    },
+    {
+      "path": "00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md",
+      "en": null,
+      "before_sha256": "e0ec1c773129e02a1f7dba638d8285f98c75217e0e894da6e7e7f2afff8f48a5",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P2",
+          "line": 41,
+          "excerpt": "| sliding window | пары и cache до $O(Tw)$ | прямой доступ только на $w$ позиций |\n| global+sparse | оставляет дальние маршруты | шаблон нужно выбрать заранее |\n| recurrence/compression | фиксированное состояние | часть прошлого необратимо сжимается |",
+          "issue": "В одной оценке смешаны количество пар для полного prefill и размер постоянного KV-cache при decode. O(Tw) относится к парам; при чисто локальном окне постоянный cache одного слоя ограничен O(w) позиций, с учётом размеров голов.",
+          "action": "Разделить столбцы prefill FLOPs/attention pairs и decode cache; явно оговорить смешанные локально-глобальные модели.",
+          "status": "fixed",
+          "evidence": "Таблица раздельно определяет prefill pairs и resident decode cache; учтены смешанные локально-глобальные слои."
+        },
+        {
+          "finding": 2,
+          "severity": "P3",
+          "line": 161,
+          "excerpt": "top-$k$ выбор с $k=2048$ и продолжали обучение всей модели на 943,7 млрд токенов\nдлиной 128K. Такой объём показывает смысл слова «адаптация»: речь идёт не о\nпараметре среды исполнения, а о существенном продолжении предобучения.",
+          "issue": "Точная современная конфигурация DSA приведена без last_verified; число и режим требуют проверки первичного отчёта перед утверждением актуальности.",
+          "action": "Добавить дату первичной сверки и закреплённую версию отчёта; текущий аудит не объявляет это число ошибкой.",
+          "status": "fixed",
+          "evidence": "Первичный PDF pinned commit840f3c924a6b1604b1998baebf0c5f167e10375a (2025-09-29), §2.1 pp2–3 прочитан; p3 визуально проверена. 1000×16×131072=2.097152B;15000×480×131072=943.7184B;k2048. Дата сверки только у этого фрагмента2026-09-15, не blanket last_verified."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page-plus-local-correction",
+      "figures": "all existing embeds retained",
+      "after_sha256": "27d6339100edf3151f4aaf5f0290f27171e1e0da800aa1466d2154d95d6bf8d1",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 4,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "DeepSeek-V3.2-Exp report pinned 840f3c924a6b1604b1998baebf0c5f167e10375a dated 2025-09-29, section 2.1 pages 2–3 read; page 3 visually checked; verification dated 2026-09-15 only for that report.",
+      "executed_example_checks": [
+        "Task 2 arithmetic verification recomputed DSA warm-up and sparse-training token counts as 2,097,152,000 and 943,718,400,000."
+      ],
+      "limitations": [
+        "Token-count arithmetic and source inspection are not a DSA training or long-context runtime evaluation."
+      ]
+    },
+    {
+      "path": "00 Учебник/09 Dense FFN и Mixture of Experts/00 Карта модуля и источники.md",
+      "en": null,
+      "before_sha256": "427925de403be59ad5e0695bd7715f24885235ccd5e0f0086f4e440af1b37f6d",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P3",
+          "line": 11,
+          "excerpt": "Модуль состоит из двух последовательных глав. Сначала рассматривается плотная\nполносвязная сеть Transformer: какие тензоры она преобразует, зачем расширяет\nвнутреннюю размерность и как работает SwiGLU. Затем та же ветвь блока заменяется",
+          "issue": "В инвентаре того же каталога есть третья глава о Mamba/RWKV/RetNet; формулировка карты не объясняет её место.",
+          "action": "Либо обозначить карту именно как вход в две FFN/MoE-главы, либо добавить роль третьей главы в общей структуре.",
+          "status": "fixed",
+          "evidence": "Карта ограничена FFN/MoE и добавлен переход к третьей главе как замене межпозиционного механизма."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page",
+      "figures": "all existing embeds retained",
+      "after_sha256": "84e2a54c6c0d2cc3b95190c9aa7b41135f96fc8406faaabe5f14253424fb7ccc",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/09 Dense FFN и Mixture of Experts/00 Карта модуля и источники.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 0,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Current page and original audit finding(s) read in full; cited source context retained. This entry does not claim fresh verification of every external link.",
+      "executed_example_checks": [],
+      "limitations": [
+        "No page-specific executable example is recorded for this page; evidence is full-page/source/contract review, not runtime verification."
+      ]
+    },
+    {
+      "path": "00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating.md",
+      "en": null,
+      "before_sha256": "943a8beb5b22a2c17df3173e63691af6db3bc1430416d9a58fec471413124795",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P2",
+          "line": 57,
+          "excerpt": "Если бы обе проекции были линейны, $W_2W_1$ можно было бы свернуть в одну\nматрицу. Нелинейность между ними создаёт набор признаков в пространстве ширины\n$m=d_{ff}$. В исходном Transformer $m=4d$ и ReLU. BERT/GPT используют GELU;",
+          "issue": "При определённых ранее формах W1[d,m],W2[m,d] композиция для X равна W1W2[d,d]. Написанное W2W1 имеет форму [m,m] и не является оператором вход→выход в данных обозначениях.",
+          "action": "Согласовать порядок произведения с row-vector записью и проверить затем строки/столбцы в метафоре FFN-памяти.",
+          "status": "fixed",
+          "evidence": "При строковых векторах написано X(W1W2), форма[d,d]; исправлена ориентация столбцовW1 и строкW2 в объяснении памяти."
+        },
+        {
+          "finding": 2,
+          "severity": "P2",
+          "line": 308,
+          "excerpt": "  [GLU](https://arxiv.org/abs/2002.12327),\n  [Transformer FFN Layers Are Key-Value Memories](https://arxiv.org/abs/2012.14913)\n  и [Megatron-LM](https://arxiv.org/abs/1909.08053).",
+          "issue": "Проверенная ссылка ведёт на A Primer in BERTology, а не работу о GLU. Тот же неверный URL указан в primary_sources.",
+          "action": "Заменить на первичную работу о gated convolutional networks/GLU и синхронно исправить metadata.",
+          "status": "already-fixed",
+          "evidence": "В полной текущей странице metadata и GLU ссылка уже используют1612.08083; arXiv подтверждает Language Modeling with Gated Convolutional Networks."
+        },
+        {
+          "finding": 3,
+          "severity": "P3",
+          "line": 237,
+          "excerpt": "Промежуточный тензор $[B,T,m]$ крупнее residual stream $[B,T,d]$. Activation\nСохранение только контрольных активаций уменьшает расход памяти ценой повторного\nпрямого прохода. Объединённое ядро SwiGLU",
+          "issue": "Остаток неоконченного перевода делает предложение грамматически повреждённым.",
+          "action": "Удалить отдельное Activation и объяснить пересчёт активаций естественной фразой.",
+          "status": "fixed",
+          "evidence": "Убрано отдельное Activation; объяснено хранение выбранных активаций и пересчёт остальных в backward."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page",
+      "figures": "all existing embeds retained",
+      "after_sha256": "5647f04ffc0a1526e57a2ef2f84a17cb1f78362185e671e465b386a5854249fb",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 4,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Dauphin et al. arXiv:1612.08083 primary record checked; current GLU link was already correct.",
+      "executed_example_checks": [],
+      "limitations": [
+        "No page-specific executable example is recorded for this page; evidence is full-page/source/contract review, not runtime verification."
+      ]
+    },
+    {
+      "path": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+      "en": null,
+      "before_sha256": "c9f5d1071790fed526409d83dc4172dd7a2d902de07c9d9b612d18387e06ab9b",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P3",
+          "line": 401,
+          "excerpt": "4. в начале все эксперты вычисляют почти одну функцию, поэтому качество\n   исходного чекпойнта сохраняется;\n5. при продолжении предобучения разные маршруты дают экспертам разные данные, и",
+          "issue": "Сохранение функции зависит также от нормировки коэффициентов смеси и отсутствия dropping; одних одинаковых копий FFN недостаточно при произвольной сумме весов.",
+          "action": "Добавить условие суммы коэффициентов 1 и оговорить исходную инициализацию роутера в конкретном upcycling recipe.",
+          "status": "fixed",
+          "evidence": "Сохранение upcycled FFN ограничено sumα=1 и отсутствием dropping; показан контрпример удвоения и необходимость recipe-specific router."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page-plus-local-correction",
+      "figures": "all existing embeds retained; R1 PNG inspected on page13",
+      "after_sha256": "749852e844bc2cf6de647cf715d66cc42a4a9d669d830ee5f0e07943db898d31",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 21,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Current page and original audit finding(s) read in full; cited source context retained. This entry does not claim fresh verification of every external link.",
+      "executed_example_checks": [
+        "Independent acceptance recomputed the published M=4096, N=8, k=2, c=1.25 capacity ledger: 8192 assignments, C=1280 per expert, 10240 reserved slots.",
+        "Independent acceptance executed the copied-expert counterexample: weights 0.5+0.5 preserve F(x), while weights 1+1 produce 2F(x)."
+      ],
+      "limitations": [
+        "No MoE training, router optimization, all-to-all, grouped GEMM, or serving runtime was executed in independent acceptance.",
+        "The independent sample checked the capacity/upcycling mechanisms in the page; it did not re-fetch every cited external source."
+      ]
+    },
+    {
+      "path": "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md",
+      "en": null,
+      "before_sha256": "f65af3ca1a2002cce508350d9cee1516cc36a560b8d5bf2bd86286c23e00021b",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P2",
+          "line": 218,
+          "excerpt": "## RWKV: attention-подобное смешивание как recurrence\n\nRWKV чередует смешивание по времени и по каналам. Взвешенную сумму ключей и",
+          "issue": "RWKV описан несколькими качественными абзацами без правила записи/чтения; цель главы требует различать RWKV и RetNet, но достаточных оснований для этого в тексте нет.",
+          "action": "Добавить формулу упрощённого WKV с явной версией и короткий численный пример затухания/нормировки; сопоставить одинаковую последовательность с retention.",
+          "status": "fixed",
+          "evidence": "Добавлены RWKV-4 WKV-оператор, нормализатор и численный проход2,4,8, сопоставленный с retention при γ=.5; источник Peng§3.1.2/AppendixD."
+        },
+        {
+          "finding": 2,
+          "severity": "P3",
+          "line": 104,
+          "excerpt": "Её можно вычислять рекуррентно, храня $O(1)$ состояния на шаг, или раскрыть как свёртку:\n\n$$",
+          "issue": "Свёрточная формула опускает вклад начального состояния, но не указывает нулевое начальное условие.",
+          "action": "Явно задать h до первого токена равным нулю или дописать соответствующий член.",
+          "status": "fixed",
+          "evidence": "В свёрточной развёртке явно задано h_-1=0 при нумерации с0."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page-plus-local-correction",
+      "figures": "all existing embeds retained; R1 PNG inspected on page13",
+      "after_sha256": "6d2f115d509a8e8e1897562af4f33818a7ebd3887f7f76b4017d7c07cf6df0d9",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 13,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "RWKV-4 paper section 3.1.2 / Appendix D checked; normalized WKV recurrence distinguished from retention.",
+      "executed_example_checks": [
+        "Task 2 CPU verification reproduced the RWKV-4 recurrence outputs 2, 3, 5.2 and final state 10.5/1.75.",
+        "Task 2 arithmetic verification reproduced the hybrid-state ledger: 16 GiB full KV versus 4 GiB attention KV plus 6.75 MiB SSM/convolution state."
+      ],
+      "limitations": [
+        "Small CPU recurrences and memory arithmetic do not execute or benchmark the full architectures."
+      ]
+    },
+    {
+      "path": "00 Учебник/10 Атлас современных архитектур/01 Llama, Qwen и DeepSeek как эволюция блока.md",
+      "en": null,
+      "before_sha256": "aa3f6504e88bef4339d2fecc43cc16a72827c820bb414f9b17ff4471ea918428",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P2",
+          "line": 361,
+          "excerpt": "### Как добавить новую работу семейства DeepSeek\n\nЕсли появляется работа «DeepSeek-X с RLVR», её сначала нужно разложить по",
+          "issue": "Значительная часть учебной главы превращена в руководство редактору базы: как добавлять карточки, связывать вопросы, обновлять граф знаний. Этот материал прерывает сравнение моделей и повторён снова с 517-й строки.",
+          "action": "Вынести процесс обновления в guide для авторов; оставить учебный кейс сравнения двух реальных конфигураций с явным итоговым diff.",
+          "status": "fixed",
+          "evidence": "Редакторские процедуры заменены учебным сравнением V3Base/R1 и T5/Mistral; убраны инструкции добавления в базу."
+        },
+        {
+          "finding": 2,
+          "severity": "P2",
+          "line": 282,
+          "excerpt": "| Qwen3-Next | гибридная разреженная модель | Gated DeltaNet/полное внимание + MoE | несколько следующих токенов и версии с рассуждением |\n\nОсновные первичные источники:",
+          "issue": "В таблице MTP помещена в столбец post-training, хотя выше и в классификации DeepSeek правильно названа дополнительной целью предобучения.",
+          "action": "Перенести MTP в колонку training objective и оставить в post-training только режимы соответствующих checkpoints.",
+          "status": "fixed",
+          "evidence": "В таблице Qwen отдельная колонка pretraining objective; MTP отделена от посттренинга."
+        },
+        {
+          "finding": 3,
+          "severity": "P3",
+          "line": 491,
+          "excerpt": "cfg = AutoConfig.from_pretrained(model_id, trust_remote_code=True)\n\nfields = [",
+          "issue": "Код по умолчанию исполняет remote code и не фиксирует revision, хотя следующая оговорка требует доверенного и закреплённого источника.",
+          "action": "Показать чтение config без исполнения кода либо явный доверенный model_id и pinned revision; не оставлять безопасные условия только после примера.",
+          "status": "fixed",
+          "evidence": "Код читает local config.json какJSON без remote code; revision/hash требуется зафиксировать вместе с файлом."
+        },
+        {
+          "finding": 4,
+          "severity": "P3",
+          "line": 346,
+          "excerpt": "*Процедура из статьи DeepSeek-R1. Схема описывает последовательность этапов\nобучения; формулы MLA и MoE при этом не меняются.*",
+          "issue": "Подпись приписывает figure1 содержимое pipeline; изображение в данном аудите не просмотрено и соответствие первичному рисунку требует проверки.",
+          "action": "На визуальном аудите сравнить локальный файл с figure1 первичного R1 paper, не считать имя файла доказательством содержания.",
+          "status": "fixed",
+          "evidence": "Просмотрен исходный локальный PNG: AIME accuracy и response length R1Zero. Подпись исправлена, версия нумерации оговорена."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page-plus-local-correction",
+      "figures": "all existing embeds retained; R1 PNG inspected on page13",
+      "after_sha256": "dc3650e0a6f084f21f8ab13c29f73e2bd7236a68d1881e79d847736e3db8d28f",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/10 Атлас современных архитектур/01 Llama, Qwen и DeepSeek как эволюция блока.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 6,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Original R1-Zero figure inspected; Transformers v4.57.0 Qwen3-Next implementation and official Qwen3-Next-80B-A3B-Instruct model card checked for zero-centered gain and non-thinking model behavior.",
+      "executed_example_checks": [],
+      "limitations": [
+        "No page-specific executable example is recorded for this page; evidence is full-page/source/contract review, not runtime verification."
+      ]
+    },
+    {
+      "path": "00 Учебник/10 Атлас современных архитектур/02 Альтернативы Transformer и multimodality.md",
+      "en": null,
+      "before_sha256": "175032e164d214a084941f7d4b1e920590b789cc16c18506cdca78b617402284",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P2",
+          "line": 106,
+          "excerpt": "y_t=\\sum_{j=1}^{t}C\\bar A^{t-j}\\bar Bx_j.\n$$",
+          "issue": "При разворачивании системы пропал прямой член Dx_t, введённый строкой80. Условие h0=0 его не устраняет.",
+          "action": "Вернуть Dx_t или заранее ограничить рассматриваемую модель D=0.",
+          "status": "fixed",
+          "evidence": "В развёртку SSM возвращён прямой член Dx_t."
+        },
+        {
+          "finding": 2,
+          "severity": "P2",
+          "line": 4,
+          "excerpt": "status: legacy\nlast_updated: 2026-07-20\nprevious: \"[[02 Areas/ML & DL/00 Учебник/10 Атлас современных архитектур/01 Llama, Qwen и DeepSeek как эволюция блока]]\"",
+          "issue": "Полная legacy-глава остаётся явным следующим шагом из атласа и почти целиком повторяет текущую главу Mamba/RWKV/RetNet в модуле09, создавая две независимые версии объяснения.",
+          "action": "Сохранить уникальные примеры и упражнения в канонической главе, а legacy превратить в redirect/историческую страницу с недвусмысленной навигацией.",
+          "status": "fixed",
+          "evidence": "Страница явно redirect на canonicalMamba/RWKV/RetNet; исходные рисунки сохранены, уникальные scalar/state-byte упражнения перенесены."
+        },
+        {
+          "finding": 3,
+          "severity": "P3",
+          "line": 428,
+          "excerpt": "Для Transformer из 32 слоёв с восемью KV-головами и гибрида, в котором внимание\nиспользуется в каждом четвёртом слое, вычислите размер кэша при контексте 128\nтысяч токенов. Затем добавьте фиксированное состояние SSM.",
+          "issue": "В упражнении не заданы head_dim, dtype, batch и размер/формат состояния SSM; численный ответ недоопределён.",
+          "action": "Дать все параметры либо прямо попросить сначала вывести символическую формулу и выбрать предположения.",
+          "status": "fixed",
+          "evidence": "Заданы batch,131072токена,head128,BF16KV и формы/dtype SSMstate; итог16GiB против4GiB+6.75MiB."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page",
+      "figures": "all existing embeds retained; R1 PNG inspected on page13",
+      "after_sha256": "858f46d20abeef04aee0638a4825a4685133f5913aed453fb4a46cfa6ea73cfc",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/10 Атлас современных архитектур/02 Альтернативы Transformer и multimodality.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 6,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Current page and original audit finding(s) read in full; cited source context retained. This entry does not claim fresh verification of every external link.",
+      "executed_example_checks": [
+        "Task 2 arithmetic verification reproduced the hybrid-state ledger: 16 GiB full KV versus 4 GiB attention KV plus 6.75 MiB SSM/convolution state."
+      ],
+      "limitations": [
+        "The memory ledger is illustrative; no full model, multimodal pipeline, or serving runtime was executed."
+      ]
+    },
+    {
+      "path": "00 Учебник/10 ML Systems/01 Модель как часть системы.md",
+      "en": null,
+      "before_sha256": "104e964b6a98b875c207430df65001d93a2f3c7d336516ee077726ec36fe52e2",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P2",
+          "line": 42,
+          "excerpt": "**D·A·M** — диагностическая таксономия: Data задаёт примеры и байты, Algorithm —\nструктуру и объём работы, Machine — доступные compute, memory и communication.\nУскорение одной оси передвигает bottleneck: быстрый GPU обнаруживает медленный",
+          "issue": "Дальше материал преимущественно становится списком английских таксономий и сокращений (binding constraint, envelope, gates, entropy), а не развитием одного понятного системного случая.",
+          "action": "Провести один сквозной пример: задача→бюджет задержки/байтов/энергии→узкое место→выбор размещения→обратная связь. Английские labels оставить вторично после русских объяснений.",
+          "status": "fixed",
+          "evidence": "Развёрнут условный кейс локального классификатора50мс, запретвывозакадров,20Вт и feedback; русское изложение связное."
+        },
+        {
+          "finding": 2,
+          "severity": "P2",
+          "line": 53,
+          "excerpt": "T \\approx \\frac{D_{\\rm vol}}{BW}\n  + \\frac{O}{R_{\\rm peak}\\eta_{\\rm hw}} + L_{\\rm lat}.\n$$",
+          "issue": "У формулы нет полного списка обозначений и единиц и ни одного расчёта; читателю предложено применять диагностическую модель, не показав, что именно суммировать и когда брать максимум.",
+          "action": "Расписать байты, байты/с, операции, операции/с, безразмерную эффективность и секунды; выполнить расчёт для последовательного и перекрытого пути.",
+          "status": "fixed",
+          "evidence": "Все переменные/единицы IronLaw определены; рассчитаны4мс передачи+40мсарифметики+3мспрочего=47мс, overlap43мс."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page-plus-local-correction",
+      "figures": "all existing embeds retained; R1 PNG inspected on page13",
+      "after_sha256": "1d7e20ed20e425dc040c8d3470bd1f9c7dd859a837f5bae8028a71f23e7c7561",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/10 ML Systems/01 Модель как часть системы.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 4,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Current page and original audit finding(s) read in full; cited source context retained. This entry does not claim fresh verification of every external link.",
+      "executed_example_checks": [],
+      "limitations": [
+        "No page-specific executable example is recorded for this page; evidence is full-page/source/contract review, not runtime verification."
+      ]
+    },
+    {
+      "path": "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+      "en": null,
+      "before_sha256": "e36b65fdc7d76c3c66643468d02bff7d073e425c4f1b14669103ef4c3cc50776",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P2",
+          "line": 32,
+          "excerpt": "Host ставит kernel launch в очередь device. Grid делится на thread blocks; block\nназначается одному Streaming Multiprocessor (SM), где threads группируются в\nwarps по 32 lanes. Warp scheduler выбирает готовый warp каждый цикл. Если warp",
+          "issue": "Сразу вводится много не объяснённых обычным языком объектов host/device/grid/block/warp/lane/SM, затем resident/occupancy. Новичку не дан один конкретный фрагмент программы, на котором эти уровни можно сопоставить.",
+          "action": "Начать с сложения двух векторов и разложить заданное N на потоки, блоки и warps; показать адреса 4–8 соседних потоков и только затем дать термины и аппаратную схему.",
+          "status": "fixed",
+          "evidence": "Введён CUDA C++ add дляN1000,4блоков×256потоков,32warps,24пустых потоков; разобраны восемь FP32адресов."
+        },
+        {
+          "finding": 2,
+          "severity": "P3",
+          "line": 133,
+          "excerpt": "$I=F/Q_{\\mathrm{HBM}}$: те же FLOP выполняются при меньшем traffic. Слева от\nridge производительность ограничена $BW_{\\mathrm{HBM}}I$; после ridge —\ncompute ceiling.",
+          "issue": "Ridge и compute ceiling используются до определения roofline в следующей главе.",
+          "action": "Дать короткое русское объяснение точки излома либо перенести абзац к следующему разделу.",
+          "status": "fixed",
+          "evidence": "Определена ridge I*=Ppeak/BW и два ограничения до применения термина."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page",
+      "figures": "all existing embeds retained",
+      "after_sha256": "fd414057cfd23d8fe41388c4a27a535b10fd709fe747755c79a1542a4c881dfa",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 5,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "CUDA execution/memory documentation checked; CUDA kernel not executed because only CPU runtime available.",
+      "executed_example_checks": [],
+      "limitations": [
+        "This page records source inspection and an explicit no-runtime boundary; CUDA/GPU execution and performance were not verified."
+      ]
+    },
+    {
+      "path": "00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md",
+      "en": null,
+      "before_sha256": "910e3c11957b3dc5d71c908d63627fdd70f4e3acaf845d891b394f6d0cdc117f",
+      "findings": [],
+      "reading": "complete-full-page",
+      "reread": "not-needed-unchanged",
+      "figures": "all existing embeds retained",
+      "after_sha256": "910e3c11957b3dc5d71c908d63627fdd70f4e3acaf845d891b394f6d0cdc117f",
+      "changed": false,
+      "snapshot": null,
+      "figure_verification": {
+        "retained": true,
+        "count": 6,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Current page and original audit finding(s) read in full; cited source context retained. This entry does not claim fresh verification of every external link.",
+      "executed_example_checks": [],
+      "limitations": [
+        "No page-specific executable example is recorded for this page; evidence is full-page/source/contract review, not runtime verification."
+      ]
+    },
+    {
+      "path": "00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md",
+      "en": null,
+      "before_sha256": "18d40aa3978e634bcd2998d02b8468403301c726dd87cdf5b435c9164879f052",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P2",
+          "line": 362,
+          "excerpt": "stage 0: F1 F2 B1 F3 B2 F4 B3 .. B4\nstage 1: .. F1 B1 F2 B2 F3 B3 F4 B4\n```",
+          "issue": "В 1F1B-диаграмме B1 на stage0 стоит в том же временном слоте, что B1 на stage1, хотя первый зависит от градиента второго. Аналогичный конфликт возникает дальше; расписание не исполнимо как нарисовано.",
+          "action": "Перестроить временную диаграмму с явными границами слотов и зависимостями backward между стадиями; сверить все микропакеты.",
+          "status": "fixed",
+          "evidence": "1F1B расписание10слотов с межстадийными backwardзависимостями; B1stage0 начинается после B1stage1."
+        },
+        {
+          "finding": 2,
+          "severity": "P3",
+          "line": 337,
+          "excerpt": "На 800 TFLOP/s идеал — 7,2 ms. Важно не спутать эту оценку с 2,4–2,5 ms для\n**одной проекции GroupedGEMM**:",
+          "issue": "В разделе TP=8/EP=8 не уточнено, 800 TFLOP/s — один GPU или совокупная скорость группы, хотя FLOPs выписаны для всего пакета.",
+          "action": "Отдельно выписать aggregate FLOPs, local FLOPs при равномерном разделении и одинаково определённый R_eff.",
+          "status": "fixed",
+          "evidence": "Разведены aggregate5.77TFLOP, local0.721TFLOP и800TFLOP/s pergroup/perGPU; численные границы0.901/7.2ms."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page-plus-local-correction",
+      "figures": "all existing embeds retained",
+      "after_sha256": "799ec801a0897859d5aedac9d09a27196a814573e4a8e08fb9c276175566ff62",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 4,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Current page and original audit finding(s) read in full; cited source context retained. This entry does not claim fresh verification of every external link.",
+      "executed_example_checks": [],
+      "limitations": [
+        "No page-specific executable example is recorded for this page; evidence is full-page/source/contract review, not runtime verification."
+      ]
+    },
+    {
+      "path": "00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md",
+      "en": null,
+      "before_sha256": "a62a06c36fb7f4e0db448b614db8ff02096e5b1730366758f28a6b797e54c6ac",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P2",
+          "line": 66,
+          "excerpt": "часто шире input. Оптимизатор обновляет FP32 **master weights**, после чего\nрабочая low-precision копия используется в forward.",
+          "issue": "Общая схема explicit mixed precision подана как объяснение следующего стандартного torch.autocast примера. Native autocast оставляет модель в исходной точности и выбирает dtype операций; он не требует отдельного постоянного low-precision checkpoint/master-weight механизма.",
+          "action": "Развести native AMP с FP32 parameters и explicit low-precision parameters+master copy; составить отдельный ledger для показанного кода.",
+          "status": "fixed",
+          "evidence": "Разведены native AMP FP32параметры и explicitlowprecision/master; постоянные16B и16–18B определены отдельно."
+        },
+        {
+          "finding": 2,
+          "severity": "P3",
+          "line": 148,
+          "excerpt": "Формально $q=\\mathrm{clip}_{FP8}(\\mathrm{round}(x/s))$, $\\hat x=sq$. Scale\nвыбирают по `amax=max(abs(x))`, иногда по истории amax: current scaling быстрее\nреагирует, delayed scaling дешевле, но отстаёт от смены распределения. Нужны",
+          "issue": "Обозначение round может быть прочитано как округление до целого, хотя FP8 квантует на плавающую сетку. Последующая оговорка не объясняет эту разницу.",
+          "action": "Обозначить cast/round_to_FP8 и показать маленький пример нецелого представимого уровня.",
+          "status": "fixed",
+          "evidence": "cast_FP8 вместо integerround; пример E4M3:1.2→1.25."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page-plus-local-correction",
+      "figures": "all existing embeds retained",
+      "after_sha256": "e60fcff8e2398de8adb203c9b1e3af085b095bafaca780ada9eb380021ce9f8d",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 3,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Current page and original audit finding(s) read in full; cited source context retained. This entry does not claim fresh verification of every external link.",
+      "executed_example_checks": [
+        "Task 2 native CPU autocast check confirmed model parameters and gradients remain FP32; this is not a CUDA AMP execution."
+      ],
+      "limitations": [
+        "CPU autocast does not establish CUDA AMP, tensor-core execution, throughput, or training stability."
+      ]
+    },
+    {
+      "path": "00 Учебник/10 ML Systems/06 Data pipeline, padding и packing.md",
+      "en": null,
+      "before_sha256": "7bba8ad5b946a4bd75912e0d25fb522a2fd93d5d03d6dedf7fd590ef7d44990a",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P3",
+          "line": 150,
+          "excerpt": "    batch = {k: v.cuda(non_blocking=True) for k, v in cpu_batch.items()}\n    loss = model(**batch).loss\n```",
+          "issue": "В каркасе нет отдельного copy stream, поэтому non_blocking не демонстрирует H2D/compute overlap, обсуждаемый как цель оптимизации.",
+          "action": "Явно назвать код базовым loader-путём; для overlap дать отдельный double-buffer пример или ссылку на разобранный протокол.",
+          "status": "fixed",
+          "evidence": "Код назван базовым single-stream; отмечено, что non_blocking не доказывает overlap, есть ссылка на разобранную модель double-buffer."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page",
+      "figures": "all existing embeds retained",
+      "after_sha256": "d04bd28dc355091673d1412744060133c3ab55011b5588513e79c6db09e84ba3",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/10 ML Systems/06 Data pipeline, padding и packing.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 2,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Current page and original audit finding(s) read in full; cited source context retained. This entry does not claim fresh verification of every external link.",
+      "executed_example_checks": [],
+      "limitations": [
+        "No page-specific executable example is recorded for this page; evidence is full-page/source/contract review, not runtime verification."
+      ]
+    },
+    {
+      "path": "00 Учебник/10 ML Systems/07 Profiling ML-нагрузки.md",
+      "en": null,
+      "before_sha256": "0c8710fd1fa16b38f85040b4590f3df88dfe2f6f41b14bd2a3d8fe42502c71d4",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P2",
+          "line": 143,
+          "excerpt": "  --capture-range=cudaProfilerApi \\\n  --output=artifacts/transformer-step \\\n  python benchmark.py",
+          "issue": "Команда ждёт сигнал cudaProfilerStart/Stop, но в показанном Python-коде есть только NVTX range. Сам NVTX не запускает cudaProfilerApi capture; готовый рецепт неполон.",
+          "action": "Показать cudart profiler start/stop после прогрева либо изменить режим capture на явно показанный механизм; отметить это как требующую версионной сверки команду.",
+          "status": "fixed",
+          "evidence": "Добавлены явные cudaProfilerStart/Stop с synchronize после прогрева; NVTX отделён от capture API, Nsight User Guide проверен. CUDA/trace не запускались."
+        },
+        {
+          "finding": 2,
+          "severity": "P2",
+          "line": 194,
+          "excerpt": "Baseline после warmup: step median/p95 420/470 ms. `py-spy` показывает ожидание\n`next(loader)`. PyTorch trace раскладывает median: 110 ms loader wait, 18 ms\nH2D, 275 ms CUDA kernels, 17 ms launch gaps. Nsight Systems подтверждает:",
+          "issue": "Кейс содержит точные до/после измерения без источника, manifest или пометки, что это условные числа. Текст читается как реальный эксперимент.",
+          "action": "Если это учебная конструкция, обозначить числа как условные; если измерение — дать конфигурацию и первичный trace/отчёт.",
+          "status": "fixed",
+          "evidence": "Числа420/470 и288/315ms прямо помечены условным примером, не измерением."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page-plus-local-correction",
+      "after_sha256": "e98e9aec75bb77345508334752ab4ab96705f5314d63afd9f31caa0283a2050e",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/10 ML Systems/07 Profiling ML-нагрузки.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 9,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "NVIDIA Nsight Systems User Guide checked for cudaProfilerApi capture range and NVTX distinction; no CUDA trace captured.",
+      "executed_example_checks": [],
+      "limitations": [
+        "This page records source inspection and an explicit no-runtime boundary; CUDA/GPU execution and performance were not verified."
+      ]
+    },
+    {
+      "path": "00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md",
+      "en": null,
+      "before_sha256": "b17f7a6e82967c1b59179f9ee381ffed660f8ef9f7ec7008985ce8ea14ac1494",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P2",
+          "line": 161,
+          "excerpt": "может увеличить register pressure; маленький block создаёт больше launches и\nможет терять reuse.",
+          "issue": "Размер BLOCK меняет число program instances/blocks в grid одного запуска, а не число host kernel launches. Ошибка повторяется строкой274: число launches не должно совпадать с grid.",
+          "action": "Развести один вызов kernel[grid](...) и множество instances; показать численный N=4096,BLOCK=256 → один launch,16 instances.",
+          "status": "fixed",
+          "evidence": "Один kernel[(16,)] при4096/256 содержит16 instances; исправлен повтор в чтении профиля."
+        },
+        {
+          "finding": 2,
+          "severity": "P2",
+          "line": 164,
+          "excerpt": "## Первый полный пример: softmax одной строки\n\nДля $X\\in\\mathbb{R}^{M\\times N}$ softmax по строкам равен",
+          "issue": "Обещанный полный пример содержит формулу и список действий, но не полный Triton softmax, host wrapper или проверку результата; единственный kernel выше — неполный каркас с undefined operation.",
+          "action": "Дать один законченный запускаемый softmax-пример с тестом, либо честно назвать раздел разбором алгоритма и сослаться на полный локальный код.",
+          "status": "fixed",
+          "evidence": "Раздел назван разбором алгоритма и связан с существующим lecture_06.py; GPU execution не заявлено."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page",
+      "after_sha256": "f20c17d07a57eab5ddcffd411cece58229a4ba3f87b1b0895c0c359a56f1adf1",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 10,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Official Triton vector-add/softmax teaching material checked; compiler/GPU kernel execution not performed.",
+      "executed_example_checks": [],
+      "limitations": [
+        "This page records source inspection and an explicit no-runtime boundary; CUDA/GPU execution and performance were not verified."
+      ]
+    },
+    {
+      "path": "00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md",
+      "en": null,
+      "before_sha256": "25c5b4c0eabf9e0950550c50725b86361c16d4e959ce2b48e3a6409295129c1b",
+      "findings": [],
+      "reading": "complete-full-page",
+      "reread": "not-needed-unchanged",
+      "after_sha256": "25c5b4c0eabf9e0950550c50725b86361c16d4e959ce2b48e3a6409295129c1b",
+      "changed": false,
+      "snapshot": null,
+      "figure_verification": {
+        "retained": true,
+        "count": 5,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Current page and original audit finding(s) read in full; cited source context retained. This entry does not claim fresh verification of every external link.",
+      "executed_example_checks": [],
+      "limitations": [
+        "No page-specific executable example is recorded for this page; evidence is full-page/source/contract review, not runtime verification."
+      ]
+    },
+    {
+      "path": "00 Учебник/11 Pre-training и Scaling/02 Distributed training и precision.md",
+      "en": null,
+      "before_sha256": "272516ed09af144e8f91172ec018786615e8c2b60f588e9520c6d44fb691b3b0",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P2",
+          "line": 4,
+          "excerpt": "status: legacy\nlast_updated: 2026-07-20\nprimary_sources:",
+          "issue": "Полноразмерная legacy-глава конкурирует с главой44 и её подразделами, а также численными форматами ML Systems. В конце она уводит сразу в SFT, минуя актуальный подробный distributed-маршрут.",
+          "action": "Сохранить ясное вводное сравнение, определить единственную обзорную страницу, остальное превратить в redirect и согласовать последовательность.",
+          "status": "fixed",
+          "evidence": "Redirect в44 и актуальный следующий шаг; прежнее ясное сопоставление сохранено без удаления материала."
+        },
+        {
+          "finding": 2,
+          "severity": "P2",
+          "line": 172,
+          "excerpt": "Если используются степени $D$, $T$, $P$, $E$ и $C$ для параллелизма по данным,\nтензорам, конвейеру, экспертам и контексту, общее число устройств в простой\nдекартовой конфигурации составляет",
+          "issue": "Даже с оговоркой «простая декартова конфигурация» не объяснено, что EP часто разбивает уже имеющуюся data-parallel группу и не является независимым множителем. Для цели выбора конфигурации этого недостаточно.",
+          "action": "Определить группы и их вложенность на конкретной сетке; оставить произведение только для явно независимых осей.",
+          "status": "fixed",
+          "evidence": "На16GPU TP2 PP2 DP4; EP2 делит DP, expert-DP2, не даёт32GPU."
+        },
+        {
+          "finding": 3,
+          "severity": "P3",
+          "line": 144,
+          "excerpt": "Увеличение $m$ уменьшает пузырь, но требует дольше хранить активации. Чередование\nнескольких фрагментов модели на одном устройстве улучшает загрузку ценой более\nсложного расписания.",
+          "issue": "Утверждение зависит от расписания: для GPipe число сохранённых микропакетов растёт, а steady-state 1F1B ограничивается глубиной конвейера.",
+          "action": "Назвать GPipe/flush-схему и дать ссылку на 1F1B.",
+          "status": "fixed",
+          "evidence": "Утверждение scoped GPipe; 1F1B bounded-by-depth объяснён."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page",
+      "after_sha256": "c334f3836fb2a6a654f60eb63b10bdd4a64fa18ece96ebdfa6e03e48d3bf893c",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/11 Pre-training и Scaling/02 Distributed training и precision.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 0,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Current page and original audit finding(s) read in full; cited source context retained. This entry does not claim fresh verification of every external link.",
+      "executed_example_checks": [
+        "Task 2 virtual unequal-token DDP check used local token counts 2 and 5 and matched the global token mean gradient to 5.55e-17; it emulated arithmetic, not a collective.",
+        "Task 2 native CPU autocast check confirmed model parameters and gradients remain FP32; this is not a CUDA AMP execution."
+      ],
+      "limitations": [
+        "Arithmetic emulation and CPU autocast do not execute multi-process DDP, NCCL, CUDA AMP, or training."
+      ]
+    },
+    {
+      "path": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+      "en": null,
+      "before_sha256": "c78707dc4b89f810971905414332dd662e09755ed2d0cd822bfef557c6ea61b0",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P2",
+          "line": 296,
+          "excerpt": "$p_i$ — вероятность выбрать из него следующий документ. Тогда\n\n$$",
+          "issue": "Далее e_i=p_i*T_train/n_i использует p_i как долю токенов. При разных средних длинах документов вероятность выбора документа не равна доле токенов; ожидаемые эпохи получаются неверными.",
+          "action": "Определить p_i как token-mixture weight либо вывести долю токенов через p_i и среднюю длину; добавить пример двух источников разной длины.",
+          "status": "fixed",
+          "evidence": "p_i определено как доля токенов, q_i как вероятность документа;100/900 иравныеq дают0.1/0.9токенов."
+        },
+        {
+          "finding": 2,
+          "severity": "P2",
+          "line": 191,
+          "excerpt": "Первая может быть перплексией $n$-граммной модели, обученной на целевой\nколлекции; вторая — вероятностью fastText или другого классификатора, который\nотличает целевую коллекцию от случайного веба. Решение",
+          "issue": "Перед этим s_gen=log p_T(x), где лучше больше; для perplexity лучше меньше. Кроме знака, total log-probability зависит от длины документа.",
+          "action": "Определить нормированную среднюю log-likelihood/negative perplexity как score с направлением больше=лучше или разнести пороги для NLL/PPL.",
+          "status": "fixed",
+          "evidence": "s_gen средняя log-likelihood поLтокенам;PPL=exp(-s_gen), направлениепороговразведено."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page-in-contiguous-parts",
+      "after_sha256": "e4114c4769d542acae4686b921cddfe863dc2a02facf2b3279212c043aafc68a",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 11,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Current page and original audit finding(s) read in full; cited source context retained. This entry does not claim fresh verification of every external link.",
+      "executed_example_checks": [],
+      "limitations": [
+        "No page-specific executable example is recorded for this page; evidence is full-page/source/contract review, not runtime verification."
+      ]
+    },
+    {
+      "path": "00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md",
+      "en": null,
+      "before_sha256": "702f667f47a6aa1423022a16d4ae9d434a70809d417888deb8f99e84e6490549",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P3",
+          "line": 215,
+          "excerpt": "7. найти connected components в графе повторов;\n8. детерминированно выбрать представителя компоненты;\n9. сохранить причины удаления и параметры процедуры.",
+          "issue": "Пороговая похожесть не транзитивна: A похож на B, B на C, но A может быть непохож на C. Один представитель компоненты способен удалить не прямые дубли, а цепочку разных текстов.",
+          "action": "Добавить трёхдокументный контрпример и правило контроля крупных/цепочечных компонент.",
+          "status": "fixed",
+          "evidence": "Контрпример JAB=JBC=.75,JAC=.5 припороге.7; прямое сравнение с retained representative."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page",
+      "after_sha256": "322a0dcbdb6945ad96878851750f863ffcc0b0ce33a13a19ff89eb7106a78f2d",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 3,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Current page and original audit finding(s) read in full; cited source context retained. This entry does not claim fresh verification of every external link.",
+      "executed_example_checks": [],
+      "limitations": [
+        "No page-specific executable example is recorded for this page; evidence is full-page/source/contract review, not runtime verification."
+      ]
+    },
+    {
+      "path": "00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md",
+      "en": null,
+      "before_sha256": "2617b9820388ec8a0a2f6bab58dcb14e92c0b3c5008125b63a5e41a624424484",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P3",
+          "line": 16,
+          "excerpt": "$$\\mathcal L_{NTP}=-\\frac{1}{M}\\sum_{t\\in\\mathcal M}\\log p_\\theta(x_t\\mid x_{<t}),$$\n\nгде $\\mathcal M$ исключает заполнители и, при необходимости, часть служебных токенов.",
+          "issue": "M явно не определено; из соседнего текста можно лишь догадаться, что это число немаскированных целевых позиций.",
+          "action": "Указать M=|M| (использовав разные символы для множества и мощности) и дать ручной расчёт 2–3 token losses.",
+          "status": "fixed",
+          "evidence": "M=число учитываемых позиций>0; ручные token losses дают1.3863/PPL4 и masked1.0397/PPL2.8284."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page-plus-local-correction",
+      "after_sha256": "282e667b68c5f27e8d56585e2e216d797fef565f61f8595efff0e8b77995056d",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 2,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Current page and original audit finding(s) read in full; cited source context retained. This entry does not claim fresh verification of every external link.",
+      "executed_example_checks": [
+        "Task 2 arithmetic verification reproduced masked NLL 1.0397207708 and perplexity 2.8284271247."
+      ],
+      "limitations": [
+        "The scalar masked-loss check does not execute model training or validate corpus/data-pipeline behavior."
+      ]
+    },
+    {
+      "path": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "en": null,
+      "before_sha256": "e665d125b7eea1f190b2d59c91b90f2f3e53e7a13caf581da0f9c55ce94bd83f",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P3",
+          "line": 493,
+          "excerpt": "\\eta_{\\mathrm{opt}}=0.3118C^{-0.1250},\n\\qquad\nB_{\\mathrm{opt}}=0.2920C^{0.3271}.",
+          "issue": "Численные коэффициенты размерных power-law fits DeepSeek нельзя воспроизвести без явных единиц/нормировки C и Bopt; общая оговорка о непереносимости коэффициентов этого не заменяет.",
+          "action": "Рядом с формулами указать единицы compute и batch из первоисточника либо оставить только показатели степени; exact source convention requires verification.",
+          "status": "fixed",
+          "evidence": "Проверены DeepSeek LLM v1 §3.1 и оси сохранённой Figure3: CnonembeddingFLOPs, Btokens. Добавлен пример1e20."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page-in-contiguous-parts-plus-local-correction",
+      "after_sha256": "c9c536acb67bbcb21eb79b463a548e3d2e7462fac8a748944b33e06354f546f7",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 37,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "DeepSeek LLM primary report section 3.1 Figure 3 read and relevant figure visually checked; compute units and batch/learning-rate formulas reconciled.",
+      "executed_example_checks": [],
+      "limitations": [
+        "No page-specific executable example is recorded for this page; evidence is full-page/source/contract review, not runtime verification."
+      ]
+    },
+    {
+      "path": "00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md",
+      "en": null,
+      "before_sha256": "176bec792c8c5738e7c38f02600e8d66f63bc51107fe456ef019ec1e1c183641",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P3",
+          "line": 58,
+          "excerpt": "$A$ backward-проходов. Loss либо делят на $A$ заранее, либо эквивалентно\nнормируют накопленный градиент. Эта мелочь принципиальна: изменение числа GPU\nне должно незаметно менять масштаб обновления.",
+          "issue": "Деление средних loss на число microbatches эквивалентно глобальному token-mean только при одинаковом числе учитываемых токенов. Packing и loss masks из соседних глав делают это условие существенным.",
+          "action": "Добавить условие равного числа loss-bearing tokens и альтернативу: сумма token losses, нормированная на общий count с учётом DDP averaging.",
+          "status": "fixed",
+          "evidence": "Равное число токенов явно условие loss/A; выведена локальная сумма*NDP/M сDDP averaging. Псевдокодпомечен."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page-in-contiguous-parts",
+      "after_sha256": "d59e5153642832de6540b7f6322af6944ca07a3c61cd1e8bafd9090d363e456b",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 6,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Current page and original audit finding(s) read in full; cited source context retained. This entry does not claim fresh verification of every external link.",
+      "executed_example_checks": [
+        "Task 2 native CPU autocast check confirmed model parameters and gradients remain FP32; this is not a CUDA AMP execution.",
+        "Task 2 virtual unequal-token DDP check used local token counts 2 and 5 and matched the global token mean gradient to 5.55e-17; it emulated arithmetic, not a collective."
+      ],
+      "limitations": [
+        "Arithmetic emulation and CPU autocast do not execute multi-process DDP, NCCL, CUDA AMP, or training."
+      ]
+    },
+    {
+      "path": "00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md",
+      "en": null,
+      "before_sha256": "33d21c147799f3271f99eb0a2bd62e51cbc75486c128bc7c37659947fc1020f2",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P3",
+          "line": 90,
+          "excerpt": "DDP копирует параметры и optimizer state, раздаёт разные микропакеты и во время backward объединяет градиенты. Параметры группируют в buckets: как только bucket готов, его all-reduce перекрывается с вычислением более ранних слоёв. Но bucket, готовый слишком поздно, остаётся на critical path.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/data-parallel-flow.svg]]",
+          "issue": "Фраза смешивает логическую репликацию optimizer state в обучении и функции DDP wrapper: из текста можно решить, что wrapper сам переносит и синхронизирует состояние оптимизатора.",
+          "action": "Разделить ответственность процесса/инициализации optimizer и DDP gradient synchronization; уточнить загрузку optimizer state при resume.",
+          "status": "fixed",
+          "evidence": "Инициализация модели, optimizer, sampler отделена отDDP wrapper; resumeoptimizerstateявно. Нормировкаlossуточнена."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page",
+      "after_sha256": "ec22eec7a476fca78d7e6225853e8134ead2ac2c3ad2aecd0696b965dfe4a49d",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 5,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Current page and original audit finding(s) read in full; cited source context retained. This entry does not claim fresh verification of every external link.",
+      "executed_example_checks": [
+        "Task 2 virtual unequal-token DDP check used local token counts 2 and 5 and matched the global token mean gradient to 5.55e-17; it emulated arithmetic, not a collective."
+      ],
+      "limitations": [
+        "The virtual gradient mean is not multi-process execution and does not test communication, failures, or performance."
+      ]
+    },
+    {
+      "path": "00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload.md",
+      "en": null,
+      "before_sha256": "7319a030d93427e3e34aec226fde204f78e6db8948f5ee2d230b668ef98c9e52",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P2",
+          "line": 56,
+          "excerpt": "Naive attention материализует score/probability tensors порядка $O(BHS^2)$, тогда как FlashAttention выполняет tiled online softmax и для backward сохраняет главным образом входы, выход и статистики нормировки порядка $O(BHSD)$, повторяя tile-local промежуточные значения. Поэтому $O(LBSD)$ — не замена полному ledger: attention backend нужно указать отдельно.\n\n| Operator | Сохранить | Пересчитать | Причина |",
+          "issue": "В начале D определён как hidden size, а здесь дополнительный множитель H делает оценку памяти FlashAttention несогласованной: для Q/K/V полный hidden уже включает головы. Если D означает head_dim, это нужно переопределить.",
+          "action": "Использовать d_model и d_head раздельно: Q/K/V/output порядка BSd_model, LSE порядка BHS; показать shapes каждого сохраняемого объекта.",
+          "status": "fixed",
+          "evidence": "Разведены d_model=H*d_head, QKV/output[B,H,S,d_head], LSE[B,H,S]."
+        },
+        {
+          "finding": 2,
+          "severity": "P3",
+          "line": 116,
+          "excerpt": "Пусть 48 блоков дают 12 GiB saved activations, а бюджет после weights и buffers — 4 GiB. Восемь checkpoint-сегментов оставляют около 2 GiB boundaries. Два 512-MiB pinned buffers поддерживают double buffering; prefetch сегмента $j+1$ запускается при вычислении $j$, eviction $j-1$ — только после его backward. Peak равен `boundaries + current + next + temporaries`, а не одним boundaries. Если trace показывает три prefetched сегмента, policy нарушает рассчитанный бюджет.\n\n## Инженерный выбор",
+          "issue": "Численный worked configuration не сообщает, какое состояние занимает current/next и относится ли 512 MiB к host staging или HBM. Поэтому заявленный бюджет 4 GiB невозможно проверить из строки.",
+          "action": "Разделить host pinned и device buffers, назвать объект offload и посчитать GPU peak вместе с активациями пересчитываемого сегмента.",
+          "status": "fixed",
+          "evidence": "Условный offload конкретно boundaryactivations:2GiBhoststorage+1GiBpinned отдельно, HBM1+1.5+.25=2.75GiB."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page",
+      "after_sha256": "6069d33e0651c6b0ad18ec35a0f6d992cf28d6a2e8b1af6db65b3f806a77102d",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 2,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Current page and original audit finding(s) read in full; cited source context retained. This entry does not claim fresh verification of every external link.",
+      "executed_example_checks": [
+        "Task 2 CPU checkpoint/dropout check confirmed exact output and gradient equality with preserve_rng_state=True."
+      ],
+      "limitations": [
+        "The CPU dropout/RNG check does not execute GPU activation offload, transfer overlap, or memory profiling."
+      ]
+    },
+    {
+      "path": "00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism.md",
+      "en": null,
+      "before_sha256": "fdca148234b84498d669bfc07e5a561234c501337880f462637215f9b793859e",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P2",
+          "line": 35,
+          "excerpt": "3. Row-parallel $B_r\\in\\mathbb R^{H/p\\times D}$ даёт partial $Y_r=U_rB_r\\in\\mathbb R^{T\\times D}$.\n4. AllReduce суммирует $\\sum_rY_r$ или ReduceScatter сразу оставляет sequence shard для SP.",
+          "issue": "В определении MLP Y=φ(XA)B, но пошаговая реализация задаёт U_r=XA_r и затем Y_r=U_rB_r: нелинейность исчезает. В backward строка 42 также пропускает её производную.",
+          "action": "Ввести Z_r=XA_r, U_r=φ(Z_r), затем Y_r=U_rB_r; явно включить dZ_r=dU_r⊙φ′(Z_r) перед dX.",
+          "status": "already-fixed",
+          "evidence": "Текущая страница уже содержит Z=XA,U=phi(Z),dZ=dU*phi'(Z). Дополнительно убран лишний последний ring send."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page-plus-local-correction",
+      "after_sha256": "20385481ec40f32adc6e0524ecd2b175101f57bc7aa42c17a3da1cf0a7ee50ae",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 2,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Current page and original audit finding(s) read in full; cited source context retained. This entry does not claim fresh verification of every external link.",
+      "executed_example_checks": [
+        "Independent acceptance executed a two-rank NumPy tanh MLP split with column-sharded A and row-sharded B: dense and summed-shard forward outputs matched to 2.22e-16, dX matched to 4.44e-16, and shard dA/dB matched dense gradients."
+      ],
+      "limitations": [
+        "The independent test emulates tensor-parallel arithmetic on CPU; it does not execute distributed collectives, CUDA kernels, sequence/context parallelism, or profiler traces."
+      ]
+    },
+    {
+      "path": "00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism.md",
+      "en": null,
+      "before_sha256": "1ac76123158b106e75e37cfeabfdcc539a17506ea29718b8d22db83527734887",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P3",
+          "line": 128,
+          "excerpt": "warmup = min(p - stage - 1, m)\nrun warmup forward operations",
+          "issue": "Псевдокод стандартного порядка F/B не порождает в точности нарисованный schedule S1: по формуле warmup=2, затем F2 и B0, но таблица выполняет ещё F3 до B0. Таблица dependency-valid, однако связь алгоритма и примера не объяснена.",
+          "action": "Либо перестроить S1 по псевдокоду, либо пояснить разрешённый eager-forward вариант с расширенным warmup и его повышенным live-count.",
+          "status": "fixed",
+          "evidence": "Таблица прямо определена eager-forward вариантом с дополнительнымFнаS1иS2; strictpseudocodeи4/3/2/1vs4/4/3/1liveразведены."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page",
+      "after_sha256": "8c5fa3bcc941293a33b6db544bf6e7ffaf4b6353ecb5b512932ba8f3e2edf304",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 3,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Current page and original audit finding(s) read in full; cited source context retained. This entry does not claim fresh verification of every external link.",
+      "executed_example_checks": [
+        "Independent acceptance parsed the two published p=4, m=4 schedules as 64 total operations, verified every forward/backward dependency and one operation per stage/slot, and reproduced live-activation peaks GPipe 4/4/4/4 and eager 1F1B 4/4/3/1."
+      ],
+      "limitations": [
+        "The schedule validator is a CPU dependency simulation; no multi-process pipeline runtime, send/recv ordering, restart, or measured bubble was executed."
+      ]
+    },
+    {
+      "path": "00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor.md",
+      "en": null,
+      "before_sha256": "5033ef23f81ed9ff7020e9582039e7f203a66c7ca4814109e77a51f56495c909",
+      "findings": [],
+      "reading": "complete-full-page",
+      "reread": "not-needed-unchanged",
+      "after_sha256": "5033ef23f81ed9ff7020e9582039e7f203a66c7ca4814109e77a51f56495c909",
+      "changed": false,
+      "snapshot": null,
+      "figure_verification": {
+        "retained": true,
+        "count": 4,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Current page and original audit finding(s) read in full; cited source context retained. This entry does not claim fresh verification of every external link.",
+      "executed_example_checks": [],
+      "limitations": [
+        "No page-specific executable example is recorded for this page; evidence is full-page/source/contract review, not runtime verification."
+      ]
+    },
+    {
+      "path": "00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism.md",
+      "en": null,
+      "before_sha256": "876e62b6be93073e895f881e1ee122c6fbd8b4080c56e3b5ac0537db672a50ce",
+      "findings": [],
+      "reading": "complete-full-page",
+      "reread": "not-needed-unchanged",
+      "after_sha256": "876e62b6be93073e895f881e1ee122c6fbd8b4080c56e3b5ac0537db672a50ce",
+      "changed": false,
+      "snapshot": null,
+      "figure_verification": {
+        "retained": true,
+        "count": 4,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Current page and original audit finding(s) read in full; cited source context retained. This entry does not claim fresh verification of every external link.",
+      "executed_example_checks": [],
+      "limitations": [
+        "No page-specific executable example is recorded for this page; evidence is full-page/source/contract review, not runtime verification."
+      ]
+    },
+    {
+      "path": "00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints.md",
+      "en": null,
+      "before_sha256": "ee69b4e798058e4ce4d4354de3131ccae5f2fdd61a828c9fc7d9092b19783d4a",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P3",
+          "line": 41,
+          "excerpt": "InfiniBand предоставляет credit-based lossless fabric и RDMA как единый стек. RoCEv2 переносит RDMA поверх Ethernet/IP, но нуждается в согласованных PFC/ECN и congestion control: pause storms и head-of-line blocking могут сделать «lossless» сеть нестабильной. Выбор проверяют не названием протокола, а tail collective latency, retransmission/ECN/PFC counters и bisection bandwidth.\n\nТопология задаёт oversubscription и число hops. Для TP с несколькими exchanges на слой crossing медленной spine связи умножается на число слоёв; DP all-reduce можно иерархически свернуть внутри узла и только затем пересечь spine. Topology-aware rank mapping должен совпадать с collective hierarchy.",
+          "issue": "Категоричная формулировка может читаться как универсальная обязательность PFC для любого RoCEv2 deployment; конкретная политика congestion/losslessness зависит от стека. Это требует отдельной технической верификации.",
+          "action": "Указать рассматриваемый lossless design и границы утверждения; lossless/semi-lossless/lossy RoCE configurations requires verification по документации выбранного NIC/fabric.",
+          "status": "fixed",
+          "evidence": "Проверена NVIDIA Cumulus5.12документация:losslessPFC/ECN vs lossyECN; требованиеPFCограниченоdesign."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page-plus-local-correction",
+      "after_sha256": "ac84fac2444e90bbd4e90d6c31d914349fda3312e9d779db62fc134e2d371e4a",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 3,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "NVIDIA Cumulus Linux 5.12 RoCE documentation checked: lossy ECN versus lossless PFC/ECN configuration.",
+      "executed_example_checks": [],
+      "limitations": [
+        "No page-specific executable example is recorded for this page; evidence is full-page/source/contract review, not runtime verification."
+      ]
+    },
+    {
+      "path": "00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration.md",
+      "en": null,
+      "before_sha256": "deeada4fe8935cc266eaf36ad226640f3ee4a73c0b24509dad849d96b9619697",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P3",
+          "line": 45,
+          "excerpt": "Daly учитывает checkpoint duration и даёт практическую поправку порядка $T_{\\mathrm{Daly}}\\approx\\sqrt{2CM}-C$ при обычных предпосылках.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/young-daly-optimization.svg]]",
+          "issue": "Точное имя и знак поправки зависят от определения интервала (полезный compute или checkpoint-to-checkpoint) и порядка приближения. У главы есть определение T, но приписывание именно этой поправки Daly требует первичной проверки; DOI в этом аудите открыть не удалось.",
+          "action": "Проверить формулу по статье Daly и выписать конвенцию интервала рядом; до проверки пометить requires verification, не использовать как подтверждённый факт.",
+          "status": "fixed",
+          "evidence": "Daly2006полныйPDF pp304,312Eq37/38; compute intervalT vsT+C, lowestorder vs3term; числаcorrected."
+        },
+        {
+          "finding": 2,
+          "severity": "P3",
+          "line": 78,
+          "excerpt": "Slurm естественно даёт atomic allocation, topology constraints, fair-share и backfill для batch HPC. Kubernetes по умолчанию планирует pods независимо; для distributed jobs нужны admission/gang abstractions (Volcano/Coscheduling/Kueue), Training Operator, RDMA device plugins, host networking и storage QoS. Выбор не религиозный: dedicated training fleet часто проще на Slurm, смешанный training/serving control plane — на Kubernetes; возможен гибрид.\n\nAutoscaling training ограничен gang size, временем provisioning и checkpoint/reconfiguration. Масштабировать по мгновенной загрузке GPU бессмысленно: полезный сигнал — queue wait, ожидаемая длительность job, compact topology capacity и цена изменения world. Inference autoscaling реагирует быстрее; training fleet планируют минутами/часами.",
+          "issue": "Требования к Kubernetes перечислены без отделения необходимых свойств от вариантов реализации; host networking не следует из самого факта distributed job.",
+          "action": "Переформулировать как возможный HPC/RDMA stack и отдельно назвать обязательные rendezvous, согласованную allocation и доступность transport.",
+          "status": "fixed",
+          "evidence": "Необходимые rendezvous/allocation/transport отделены от реализаций;hostNetworkoptional."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page-plus-local-correction",
+      "after_sha256": "a0bca59826e0f29c4eca3b4a1d938a7982916989b748f58da23aff4d8dcb4135",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 3,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Daly 2006 full PDF read; pages 304/312, equations 37/38 distinguish compute interval, Young/lower-order approximation and three-term expression.",
+      "executed_example_checks": [
+        "Task 2 arithmetic verification reproduced checkpoint intervals: Young 3219.94 s, lowest-order 3099.94 s, three-term 3140.43 s, with write fraction 1/6."
+      ],
+      "limitations": [
+        "Checkpoint interval arithmetic is not a failure-injection, restart, storage-throughput, or fleet test."
+      ]
+    },
+    {
+      "path": "00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md",
+      "en": null,
+      "before_sha256": "238aee75c023b58868e245a0e2af7fa35eb8fb29a202a8164016f63393503f06",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P3",
+          "line": 233,
+          "excerpt": "Обычная смесь задаёт вероятность выбора источника. **Учебная программа**\n(*curriculum*) позволяет этой вероятности меняться во времени:",
+          "issue": "Curriculum объяснён формулой p_i(t), но на странице нет маленького численного расписания, которое показало бы token counts и долю replay. Это единственная заявленная в названии часть без разобранного примера.",
+          "action": "Добавить 2–3 этапа с фиксированным token budget, p_i(t), replay и измерением забывания; обозначить границу pre/mid/post-training.",
+          "status": "fixed",
+          "evidence": "Три10Mэтапа; ptokenweights,replay15M,domain9M,synthetic6M; fixedmixконтрольиΔloss."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page-plus-local-correction",
+      "after_sha256": "657dffe3e7a1a3cabc522d641c39223afc80c097996aebc17dd857ccf177e1dd",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 8,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Current page and original audit finding(s) read in full; cited source context retained. This entry does not claim fresh verification of every external link.",
+      "executed_example_checks": [],
+      "limitations": [
+        "No page-specific executable example is recorded for this page; evidence is full-page/source/contract review, not runtime verification."
+      ]
+    },
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/01 KV-cache, batching и FlashAttention.md",
+      "en": null,
+      "before_sha256": "1f28928b36bf0c7ffbd4ef01eb9535e3d4699e509f33678647c9f7c36849c705",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P2",
+          "line": 4,
+          "excerpt": "status: legacy\nlast_updated: 2026-07-20\nprerequisites:",
+          "issue": "Полноценный повторный курс KV/batching/PagedAttention/FlashAttention/speculation остаётся на старой основной цепочке next/prerequisites и не объясняет, как соотносится с 54–58c. Дублирование увеличивает объём, не создавая новый уровень объяснения.",
+          "action": "Сделать краткой картой inference со ссылками на канонические механизмы; сохранить вводный сюжет и перенести уникальные упражнения.",
+          "status": "fixed",
+          "evidence": "Redirect на54 и карта55–58; прежниеfiguresexercisesоставленыarchive, не второйобязательныйкурс."
+        },
+        {
+          "finding": 2,
+          "severity": "P3",
+          "line": 53,
+          "excerpt": "и значения всех позиций $1,ldots,t$:\n\n$$",
+          "issue": "Повреждена математическая последовательность позиций: вместо команды многоточия напечатан ldots.",
+          "action": "Исправить на 1,\\ldots,t и проверить рендер формулы.",
+          "status": "fixed",
+          "evidence": "Исправлено1,\\\\ldots,t."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page-plus-local-correction",
+      "after_sha256": "f3c159329e77e176c58a343f81feedb4f9510c98771ec0b0788c5e061ef35d3b",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/14 Inference и оптимизация/01 KV-cache, batching и FlashAttention.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 4,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Current page and original audit finding(s) read in full; cited source context retained. This entry does not claim fresh verification of every external link.",
+      "executed_example_checks": [],
+      "limitations": [
+        "No page-specific executable example is recorded for this page; evidence is full-page/source/contract review, not runtime verification."
+      ]
+    },
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/02 Quantization и deployment.md",
+      "en": null,
+      "before_sha256": "564c084c5e2b6f70176642dfc2b8453512a4475947c2e06f1ac98220612ac942",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P2",
+          "line": 4,
+          "excerpt": "status: legacy\nlast_updated: 2026-07-20\nprerequisites:",
+          "issue": "Старая полноценная глава повторяет будущую каноническую «57 Квантизация языковых моделей», но сохраняет переход прямо в RAG и не предлагает выбрать один маршрут.",
+          "action": "Назначить роль краткого введения/redirect, перенести уникальный ручной пример и упражнения в одну каноническую главу.",
+          "status": "fixed",
+          "evidence": "Redirect на57; сохранён исторический ручнойпример иупражнения, следующийшагнеRAG."
+        },
+        {
+          "finding": 2,
+          "severity": "P2",
+          "line": 188,
+          "excerpt": "градиенты проходят только через адаптеры.\n\nNF4 использует не равномерную целочисленную сетку, а уровни, рассчитанные для",
+          "issue": "Замороженность базовых параметров смешана с прохождением градиента по вычислительному графу. Для обучения ранних адаптеров backward проходит через операции базовых слоёв; отсутствуют именно обновления и parameter gradients базы.",
+          "action": "Написать, что обучаемые параметры и хранимые parameter gradients принадлежат LoRA, но градиенты активаций проходят через замороженную базу.",
+          "status": "fixed",
+          "evidence": "Отделены параметрические градиентыLoRA отactivationgradientsчереззамороженнуюбазу."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page-plus-local-correction",
+      "after_sha256": "10e4c2faf10abb48f366aae22a547a73ba44d12483b6950222e907d873a04dc2",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/14 Inference и оптимизация/02 Quantization и deployment.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 0,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Current page and original audit finding(s) read in full; cited source context retained. This entry does not claim fresh verification of every external link.",
+      "executed_example_checks": [],
+      "limitations": [
+        "No page-specific executable example is recorded for this page; evidence is full-page/source/contract review, not runtime verification."
+      ]
+    },
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена.md",
+      "en": "en/00 Textbook/14 Inference and optimization/54 Decoding and next-token selection.md",
+      "before_sha256": "3c91b2464730ea548c548d30f5cf82aeb5b40a0f4c7e811f18c29962aa8bb3ad",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P3",
+          "line": 210,
+          "excerpt": "грамматика надёжнее произвольного понижения логитов: они гарантируют синтаксис,\nхотя не гарантируют истинность значений.",
+          "issue": "Гарантия грамматики относится к корректно завершённому выводу; остановка по max tokens/внешнему stop может оставить лишь допустимый префикс, но не валидный JSON. Следующий раздел про остановку не связывает эту границу с гарантией.",
+          "action": "Добавить условие достижения принимающего состояния и отдельный тест truncation/abort/refusal.",
+          "status": "fixed",
+          "evidence": "Грамматика гарантирует завершённыйсинтаксисприпринимающемсостоянии;truncation/abort/refusalпроверяютсяотдельно."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page",
+      "en_review": {
+        "reading": "complete-full-page",
+        "changed": true,
+        "reread": "complete-full-page",
+        "evidence": "Grammar accepting-state guarantee and truncation aligned.",
+        "before_sha256": "8d774e0ab8d1aa861eac0b823415126235c595e7a069dc3300fb052441e7a7ef",
+        "after_sha256": "85cb6167d5d6e68b701782a199b6f05cc26657ac97238d7108bc7c9d2587259b",
+        "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/en/00 Textbook/14 Inference and optimization/54 Decoding and next-token selection.md",
+        "figures_retained": true,
+        "figures_count": 6,
+        "explicit_anchors_preserved": true,
+        "code_fences_balanced": true,
+        "executed_example_checks": [],
+        "limitations": [
+          "No page-specific executable example is recorded for this page; evidence is full-page/source/contract review, not runtime verification."
+        ]
+      },
+      "after_sha256": "6f65678e44f477887b65951c64d9f14562fdb6579438fb20f6ab9d1fcea3912f",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 6,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Current page and original audit finding(s) read in full; cited source context retained. This entry does not claim fresh verification of every external link.",
+      "executed_example_checks": [],
+      "limitations": [
+        "No page-specific executable example is recorded for this page; evidence is full-page/source/contract review, not runtime verification."
+      ]
+    },
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md",
+      "en": "en/00 Textbook/14 Inference and optimization/55 KV cache batching and PagedAttention.md",
+      "before_sha256": "c433df2f91bd0dbc0db63fef24d594c077cdc1254f4c6250d235d2f3d4dfe3e5",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P3",
+          "line": 164,
+          "excerpt": "При росте ответа менеджер выделяет ещё один свободный блок. Внутренний остаток\nвозможен только в последнем блоке последовательности, а внешняя фрагментация\nмежду длинными непрерывными буферами исчезает. Цена — таблица адресов и ядро,",
+          "issue": "Не хватает небольшого расчёта влияния block size: reader узнаёт механизм фрагментации, но не может из примера сопоставить reserved/useful bytes и overhead таблицы.",
+          "action": "Добавить два-три запроса и block sizes 16/32 с подсчётом выделенных блоков, пустого хвоста и COW на разветвлении.",
+          "status": "fixed",
+          "evidence": "17/31/40токенов,blocks16vs32:reserve112/128,waste24/40,11/14vs11/16MiB;index28/16B иCOW2/4MiB."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page-plus-local-correction",
+      "en_review": {
+        "reading": "complete-full-page",
+        "changed": true,
+        "reread": "complete-full-page",
+        "evidence": "Block16/32 memory and prefix copy-on-write example aligned.",
+        "before_sha256": "28db7fc0b21edc7a227b5b66f61bf1f2fea55327bb1703d5a0cabcc2ee1b69c2",
+        "after_sha256": "d1c7af406487c83a02c3b58fea6f0be1d1a2aea82bca568b299ec9998c6646bd",
+        "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/en/00 Textbook/14 Inference and optimization/55 KV cache batching and PagedAttention.md",
+        "figures_retained": true,
+        "figures_count": 5,
+        "explicit_anchors_preserved": true,
+        "code_fences_balanced": true,
+        "executed_example_checks": [
+          "Task 2 arithmetic verification reproduced 7 versus 4 paged blocks, 14/16 MiB reserved, and 2/4 MiB copy-on-write overhead."
+        ],
+        "limitations": [
+          "The block ledger is arithmetic only; no serving engine, allocator, or copy-on-write runtime was executed."
+        ]
+      },
+      "after_sha256": "8ade831971faa695e8af42adbad9b8f88e68f98c714d87b426b548829a502c9b",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 7,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Current page and original audit finding(s) read in full; cited source context retained. This entry does not claim fresh verification of every external link.",
+      "executed_example_checks": [
+        "Task 2 arithmetic verification reproduced 7 versus 4 paged blocks, 14/16 MiB reserved, and 2/4 MiB copy-on-write overhead."
+      ],
+      "limitations": [
+        "The block ledger is arithmetic only; no serving engine, allocator, or copy-on-write runtime was executed."
+      ]
+    },
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md",
+      "en": "en/00 Textbook/14 Inference and optimization/55a The physics of LLM inference — prefill, decode, and roofline.md",
+      "before_sha256": "80b7ef2606ad97a95f19da6bcd3e1ff11a5d561bcd1221a427075b1f47957986",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P3",
+          "line": 163,
+          "excerpt": "F_{\\text{attn,prefill}}\\approx 4S^2d\n$$",
+          "issue": "Коэффициент относится к полной квадратной attention matrix. Для causal kernels, пропускающих верхний треугольник, leading executed FLOPs примерно вдвое меньше; страница начинается с causal attention, но cost convention не проговорён.",
+          "action": "Подписать dense-equivalent FLOPs и отдельно дать triangular executed-FLOP convention; так сравнение с MFU/профилем не получит скрытый factor 2.",
+          "status": "fixed",
+          "evidence": "4S²d помеченоdense-equivalent;2S(S+1)d каузальноеисполнение; границапроведенаиинтенсивности."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page-plus-local-correction",
+      "en_review": {
+        "reading": "complete-full-page",
+        "changed": true,
+        "reread": "complete-full-page-plus-local-correction",
+        "evidence": "Causal FLOP convention and exact timestamp identity aligned; 1000tokens requires999decode steps.",
+        "before_sha256": "bacc89f141d514959a6fbf0a3c8a4a50e7b92b800b9ccf22b8e8e94b305609a1",
+        "after_sha256": "fb18a0eada8a1b658ea585191a996aaa97b551f4f784b3b9984ea6aba664e19b",
+        "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/en/00 Textbook/14 Inference and optimization/55a The physics of LLM inference — prefill, decode, and roofline.md",
+        "figures_retained": true,
+        "figures_count": 3,
+        "explicit_anchors_preserved": true,
+        "code_fences_balanced": true,
+        "executed_example_checks": [],
+        "limitations": [
+          "No page-specific executable example is recorded for this page; evidence is full-page/source/contract review, not runtime verification."
+        ]
+      },
+      "after_sha256": "1f01150be41926f7d46dd04af5196dac91748bda3ee25a2766e56a2a060da6e7",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 5,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Current page and original audit finding(s) read in full; cited source context retained. This entry does not claim fresh verification of every external link.",
+      "executed_example_checks": [],
+      "limitations": [
+        "No page-specific executable example is recorded for this page; evidence is full-page/source/contract review, not runtime verification."
+      ]
+    },
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md",
+      "en": "en/00 Textbook/14 Inference and optimization/55b Scheduling — continuous batching, chunked prefill, and prefix caching.md",
+      "before_sha256": "a2e0c582adfb539b97aaa701c544c7d0a083791ee580f46df474f388644b27ab",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P2",
+          "line": 104,
+          "excerpt": "X_{packed}\\in\\mathbb{R}^{(\\sum_i S_i)\\times d}.\n$$",
+          "issue": "S_i объявлены длинами активных последовательностей, поэтому packed token-wise input выглядит как вся история каждого запроса. При KV decode обрабатывается одна новая позиция, не S_i; при chunked prefill — текущий chunk.",
+          "action": "Ввести T_i — число позиций, назначенных текущей итерации, X_packed:[ΣT_i,d]; S_i оставить для длины KV и показать смешанный пример decode+prefill.",
+          "status": "already-fixed",
+          "evidence": "Текущаястраница ужеS_iKV vsT_iитерация,[sumTi,d], пример1+1+4=6."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "not-needed-unchanged",
+      "en_review": {
+        "reading": "complete-full-page",
+        "changed": false,
+        "reread": "not-needed-unchanged",
+        "evidence": "No incorrect packed-sum formula in existing translation; scheduler selects current tokens, KV occupancy describes historical lengths. Unchanged.",
+        "before_sha256": "dd0bb009641e9fe7b157abe7dd3cf8aefb1a601a912a1c3372c1bbf631a254d7",
+        "after_sha256": "dd0bb009641e9fe7b157abe7dd3cf8aefb1a601a912a1c3372c1bbf631a254d7",
+        "snapshot": null,
+        "figures_retained": true,
+        "figures_count": 5,
+        "explicit_anchors_preserved": true,
+        "code_fences_balanced": true,
+        "executed_example_checks": [],
+        "limitations": [
+          "No page-specific executable example is recorded for this page; evidence is full-page/source/contract review, not runtime verification."
+        ]
+      },
+      "after_sha256": "a2e0c582adfb539b97aaa701c544c7d0a083791ee580f46df474f388644b27ab",
+      "changed": false,
+      "snapshot": null,
+      "figure_verification": {
+        "retained": true,
+        "count": 7,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Current page and original audit finding(s) read in full; cited source context retained. This entry does not claim fresh verification of every external link.",
+      "executed_example_checks": [],
+      "limitations": [
+        "No page-specific executable example is recorded for this page; evidence is full-page/source/contract review, not runtime verification."
+      ]
+    },
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/55c Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer.md",
+      "en": "en/00 Textbook/14 Inference and optimization/55c Serving engines — vLLM, SGLang, TensorRT-LLM, and FlashInfer.md",
+      "before_sha256": "2f75ca8325ee500fc4cfa851fe7241782c9647ab585b56a2a81ac2ee8a47f4f7",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P2",
+          "line": 165,
+          "excerpt": "TensorRT-LLM решает ту же конечную задачу обслуживания LLM, но делает больший\nакцент на компиляции и специализированных реализациях для NVIDIA GPU. Модель\nпроходит этап подготовки или построения engine: выбираются precision,",
+          "issue": "Раздел представляет compile/build TensorRT-engine как общую архитектуру TensorRT-LLM и противопоставляет её динамичной PyTorch-экосистеме. Проверенная официальная Architecture Overview описывает LLM → PyExecutor/ModelEngine и PyTorch-based inference; TensorRT engine вынесен в отдельный путь.",
+          "action": "Развести современный PyTorch backend и TensorRT-engine backend, привязать build trade-off ко второму, указать версию среза.",
+          "status": "fixed",
+          "evidence": "ПровереноArchitectureOverviewcommit0c9430e2025-09-15:LLM→PyExecutor/ModelEngine,PyTorch;TensorRTengineвыделенотдельно."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page-plus-local-correction",
+      "en_review": {
+        "reading": "complete-full-page",
+        "changed": true,
+        "reread": "complete-full-page",
+        "evidence": "PyTorch/PyExecutor path distinguished from TensorRT-engine build, dated revision cited.",
+        "before_sha256": "a3b9da79d9e78c2eeadae6fc43067cf3b6015c0c16693b7a6ad5b973474d58b2",
+        "after_sha256": "dbd632059a82a23a0a9b8bd03a6042f0edbc77529f0cd64b70ecf2d2344322fa",
+        "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/en/00 Textbook/14 Inference and optimization/55c Serving engines — vLLM, SGLang, TensorRT-LLM, and FlashInfer.md",
+        "figures_retained": true,
+        "figures_count": 5,
+        "explicit_anchors_preserved": true,
+        "code_fences_balanced": true,
+        "executed_example_checks": [],
+        "limitations": [
+          "No page-specific executable example is recorded for this page; evidence is full-page/source/contract review, not runtime verification."
+        ]
+      },
+      "after_sha256": "f54520d943b9212ef64ffe186180193191252a23a51e1f37e8f419ce9f3f9312",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/14 Inference и оптимизация/55c Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 5,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Official TensorRT-LLM architecture overview checked, footer source revision 0c9430e5a530ba958fc9dca561a3ad865ad9f492 dated 2025-09-15; PyExecutor PyTorch path distinguished from legacy TensorRT-engine path.",
+      "executed_example_checks": [],
+      "limitations": [
+        "No page-specific executable example is recorded for this page; evidence is full-page/source/contract review, not runtime verification."
+      ]
+    },
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/56 FlashAttention.md",
+      "en": "en/00 Textbook/14 Inference and optimization/56 FlashAttention.md",
+      "before_sha256": "f81181d605ac0f45383ca72c6936729eaffadd73bef7f9db4bdcee7ebb54fdf4",
+      "findings": [],
+      "reading": "complete-full-page",
+      "reread": "not-needed-unchanged",
+      "en_review": {
+        "reading": "complete-full-page",
+        "changed": false,
+        "reread": "not-needed-unchanged",
+        "evidence": "Full page read; exact IO-aware attention, online softmax, FA3/4 descriptions consistent, no changes.",
+        "before_sha256": "ce76b03c3956dc44a1b3159327c4338514479ece221045f2451c216d2b9a16a3",
+        "after_sha256": "ce76b03c3956dc44a1b3159327c4338514479ece221045f2451c216d2b9a16a3",
+        "snapshot": null,
+        "figures_retained": true,
+        "figures_count": 2,
+        "explicit_anchors_preserved": true,
+        "code_fences_balanced": true,
+        "executed_example_checks": [
+          "Task 2 NumPy online-causal-attention check matched dense output to 1.67e-16 and gradients to 6.66e-16 over 28 allowed pairs of 49."
+        ],
+        "limitations": [
+          "The NumPy identity check is not a CUDA/Triton FlashAttention kernel or performance benchmark."
+        ]
+      },
+      "after_sha256": "f81181d605ac0f45383ca72c6936729eaffadd73bef7f9db4bdcee7ebb54fdf4",
+      "changed": false,
+      "snapshot": null,
+      "figure_verification": {
+        "retained": true,
+        "count": 10,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Official FlashAttention repository README checked for FA3 Hopper and FA4 CuTe DSL architecture qualifications; no page edit necessary.",
+      "executed_example_checks": [
+        "Task 2 NumPy online-causal-attention check matched dense output to 1.67e-16 and gradients to 6.66e-16 over 28 allowed pairs of 49."
+      ],
+      "limitations": [
+        "The NumPy identity check is not a CUDA/Triton FlashAttention kernel or performance benchmark."
+      ]
+    },
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md",
+      "en": "en/00 Textbook/14 Inference and optimization/57 Quantizing language models.md",
+      "before_sha256": "4530580354967507250b5576836b0fe8f589d7ae22856b4187bd641cb146b4f2",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P3",
+          "line": 363,
+          "excerpt": "- Ashkboos et al., [SpinQuant](https://arxiv.org/abs/2405.16406) — rotation-assisted W4A4KV4.\n- NVIDIA CUDA Math API, [`__nv_fp4_e2m1`](https://docs.nvidia.com/cuda/archive/13.0.2/cuda-math-api/cuda_math_api/struct____nv__fp4__e2m1.html) — точный E2M1 layout и отсутствие Inf/NaN.\n- Open Compute Project, [Microscaling Formats (MX) v1.0](https://www.opencompute.org/documents/ocp-microscaling-formats-mx-v1-0-spec-final-pdf), Table 1 and §5.3 — MXFP4 block 32, E2M1 и E8M0 scale.",
+          "issue": "Первый автор SpinQuant по указанному arXiv — Zechun Liu, не Ashkboos. URL и название правильные, атрибуция ошибочная.",
+          "action": "Исправить на Liu et al.; не смешивать с авторством QuaRot.",
+          "status": "fixed",
+          "evidence": "Автор SpinQuant исправлен на Liu et al.; первичная arXiv2405.16406v4 проверена."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page-plus-local-correction",
+      "en_review": {
+        "reading": "complete-full-page",
+        "changed": true,
+        "reread": "complete-full-page-plus-local-correction",
+        "evidence": "Full page reread after authored parity repair: FP8 limits, FP4/MXFP4/NVFP4 scaling and layouts, W4A16/W8A8 memory ledger, and SpinQuant rotation/fusion now align substantively with the RU treatment; exact sources and hash are recorded in course-fp4-eval.md.",
+        "notes": "Task-2 GPTQ orientation, all-zero groups, and AWQ caption corrections are retained; later course follow-through closed the independently reported EN57 depth gap without claiming hardware execution.",
+        "before_sha256": "e291269fbdeecb6059c165191ed8608f8823ec3d75aa8b2d4f8252660d1383d7",
+        "after_sha256": "048baec70fca25bea4f92043f12a818feafb3b8053f7165afa05c59ecbd5485e",
+        "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/en/00 Textbook/14 Inference and optimization/57 Quantizing language models.md",
+        "figures_retained": true,
+        "figures_count": 2,
+        "explicit_anchors_preserved": true,
+        "code_fences_balanced": true,
+        "executed_example_checks": [
+          "Course follow-through CPU checks enumerated all 256 FP8 byte encodings, reproduced E4M3FN/E5M2 limits, FP4 shared-scale MSE, W4A16/W8A8 payload arithmetic, and orthogonal-rotation equivalence; exact code and runtime are in course-fp4-eval.md."
+        ],
+        "limitations": [
+          "No native low-precision kernel, quantized-model inference or training, hardware throughput, or quality benchmark was executed."
+        ]
+      },
+      "after_sha256": "cda51ab3783d41beaf37a6cfcd94d0453126a2ecb367820f6a01935dd88abb15",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 2,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "SpinQuant arXiv:2405.16406v2/v4, GPTQ arXiv:2210.17323, AWQ arXiv:2306.00978v5, NVIDIA NVFP4 introduction, Transformer Engine 2.15 NVFP4 guide, OCP MX v1.0, and CUDA 13.0.2 E2M1 format definition checked; exact URLs and source-edition boundaries are recorded in docs/audit/2026-09-15-completion/course-fp4-eval.md.",
+      "executed_example_checks": [
+        "Independent acceptance reproduced the published 3-bit symmetric grid q=(-3,-1,1,3), reconstruction (-1,-1/3,1/3,1), all-zero finite-scale branch, and 4.125/4.25 bits-per-weight metadata arithmetic on CPU.",
+        "Course follow-through CPU checks enumerated all 256 FP8 byte encodings, reproduced E4M3FN/E5M2 limits, FP4 shared-scale MSE, W4A16/W8A8 payload arithmetic, and orthogonal-rotation equivalence; exact code and runtime are in course-fp4-eval.md."
+      ],
+      "limitations": [
+        "No quantized model, low-precision kernel, calibration run, perplexity benchmark, or serving runtime was executed in independent acceptance.",
+        "The independent review checked the page's numerical contracts and cited-source attribution, not every device-specific performance claim on hardware.",
+        "Course follow-through did not execute native FP4/FP8 kernels, quantized-model inference or training, throughput, or quality evaluation."
+      ]
+    },
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/57a KV-cache compression и offload.md",
+      "en": null,
+      "before_sha256": "067631569214acebdc6ce8c24b236a3ce8479a9077cc36c4e5ac6790418686a5",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P2",
+          "line": 42,
+          "excerpt": "получается около 3.05 GB на запрос. При бюджете `weights + KV + scratch <= HBM`\nслайды оценивают верхние границы batch как 209 для 8×H200\n(`470 + B*3.05 + 20 <= 1128`) и 49 для 8×H100",
+          "issue": "По указанным параметрам 2×94×4×128×17000×2=3 272 704 000 bytes=3,272704 GB=3,04794 GiB. Запись 3,05 GB смешивает единицы и затем завышает batch bounds 209/49.",
+          "action": "Вести все слагаемые ledger в одной единице. Если 470/20/1128/640 — десятичные GB, границы floor(638/3,272704)=194 и floor(150/3,272704)=45; также исправить производную FP8-оценку в строке102.",
+          "status": "fixed",
+          "evidence": "KV: 3,272,704,000 bytes = 3.272704 GB ≈ 3.048 GiB; decimal ledger даёт 194/45 requests; FP8 1.636352 GB."
+        },
+        {
+          "finding": 2,
+          "severity": "P3",
+          "line": 205,
+          "excerpt": "**Следующая глава:** [[58 Спекулятивное декодирование|Спекулятивное декодирование]]",
+          "issue": "Прямой next пропускает каноническую 57b, которая сама считает 57a своей предыдущей страницей.",
+          "action": "Согласовать цепочку 57→57a→57b→58 или явно пометить ветвление на опциональную главу.",
+          "status": "fixed",
+          "evidence": "Next link now points to existing 57b; chain 57 → 57a → 57b → 58 is explicit, without navigation.yml changes."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page-plus-local-correction",
+      "after_sha256": "0f74e649631111b3793d3fd7b9e637180e1f0b801125bca0aca03ae217d4f1b8",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/14 Inference и оптимизация/57a KV-cache compression и offload.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 3,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Current page and original audit finding(s) read in full; cited source context retained. This entry does not claim fresh verification of every external link.",
+      "executed_example_checks": [
+        "Task 2 arithmetic verification reproduced the EDLS KV ledger: 3,272,704,000 bytes = 3.272704 GB = 3.047943115 GiB and capacities 194/45 under the page budgets."
+      ],
+      "limitations": [
+        "The capacity ledger is arithmetic only; no compressed/offloaded KV cache or serving engine was executed."
+      ]
+    },
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/57b Сжатие моделей — pruning, distillation и low-rank.md",
+      "en": null,
+      "before_sha256": "2113f67b79903a2ba5a0a234a0e326b18ece992c78cf02db6dcbddf41caa7160",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P3",
+          "line": 169,
+          "excerpt": "параметров меняется с $mn$ на $r(m+n)$. Экономия существует, когда\n$r(m+n)<mn$; для скорости дополнительно нужно, чтобы два новых GEMM вместе с\nзаписью промежуточной activation были дешевле исходного.",
+          "issue": "Low-rank часть останавливается на символическом критерии; в отличие от Minitron у неё нет маленького примера shapes/bytes/intermediate activation.",
+          "action": "Добавить один W[4096,4096], два rank и подсчёт параметров/временной активации, чтобы показать границу, где два GEMM перестают быть выгодными.",
+          "status": "fixed",
+          "evidence": "Добавлен полный X→Z→Y пример 4096×4096, ranks 512/3072, параметры/байты/граница2048, без заявления измеренного ускорения."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page",
+      "after_sha256": "ba973aa5aef08c115ac85157fd62d1e644a5dc9cf432c4771ede13e021078655",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/14 Inference и оптимизация/57b Сжатие моделей — pruning, distillation и low-rank.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 7,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Current page and original audit finding(s) read in full; cited source context retained. This entry does not claim fresh verification of every external link.",
+      "executed_example_checks": [
+        "Task 2 arithmetic verification reproduced low-rank storage: rank 512 gives 4,194,304 parameters and 32 KiB Z; rank 3072 gives 25,165,824 parameters and 192 KiB Z."
+      ],
+      "limitations": [
+        "Parameter/storage arithmetic does not execute compression, training, kernel fusion, or quality evaluation."
+      ]
+    },
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md",
+      "en": "en/00 Textbook/14 Inference and optimization/58 Speculative decoding.md",
+      "before_sha256": "452a7ff0eb31f294ba21f8299cfe0974c3aed1261e365f3d2e449320fc182aba",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P2",
+          "line": 130,
+          "excerpt": "*Таблица 1 Leviathan et al. для $K=4$: спекулятивная выборка сокращает время на\nтокен примерно в 1,9–2,46 раза, а метрики остаются в пределах статистического\nразброса обычной выборки. Источник:",
+          "issue": "Таблица XSum/HumanEval при K=4 со speedups 1,92/2,01/2,46 принадлежит Chen et al. (2302.01318), не Leviathan et al. (2211.17192). Соседнее описание Figure1 с 128 tokens тоже совпадает с Chen. Первоисточник результата подменён.",
+          "action": "Исправить авторство/ссылки подписей таблицы и графиков, проверить Algorithm2 и исходный asset manifest; оставить обе независимые работы с точными ролями.",
+          "status": "already-fixed",
+          "evidence": "Авторство Algorithm2/Table1/Figure1 уже Chen et al.; проверена первичная2302.01318v1. Оригинальные assets сохранены."
+        },
+        {
+          "finding": 2,
+          "severity": "P2",
+          "line": 215,
+          "excerpt": "3. Target одним forward вычисляет $q_i$ для всех узлов. Verifier проходит\n   выбранную ветвь слева направо: greedy сравнивает argmax; sampling использует\n   $p_i,q_i$ и residual rule этой главы.",
+          "issue": "Корректность для одной sampled цепочки не автоматически переносится на дерево нескольких кандидатов и выбор самой длинной ветви. Не заданы порядок sibling proposals, conditional proposal probabilities и обновление residual после нескольких отклонений; lossless tree semantics остаётся недоказанной.",
+          "action": "Выписать конкретный tree verifier EAGLE с источником и инвариантом распределения либо ограничить учебный псевдокод greedy; exact sampling tree rule requires verification.",
+          "status": "fixed",
+          "evidence": "Дерево явно ограничено greedy; задана маска/позиции, единственный путь, дополнительный argmax и KV rollback. Sampling-tree exactness не заявляется."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page-plus-local-correction",
+      "en_review": {
+        "reading": "complete-full-page",
+        "changed": true,
+        "reread": "complete-full-page",
+        "evidence": "Full original and changed EN page read; Chen attribution already correct, added existing-KV reuse qualifier without generating absent EAGLE translation.",
+        "before_sha256": "98597274b2cd0446e71d1e23791e5fad2a567651efe772ffdd4330c3aa941c6f",
+        "after_sha256": "bdfa41bea90eef726f6f0aa1840c13410c38bce8f7561852c2d3f8998cd4cc27",
+        "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/en/00 Textbook/14 Inference and optimization/58 Speculative decoding.md",
+        "figures_retained": true,
+        "figures_count": 3,
+        "explicit_anchors_preserved": true,
+        "code_fences_balanced": true,
+        "executed_example_checks": [
+          "Task 2 one-step chain-mass check showed accepted plus correction mass reproduces target (0.4, 0.2, 0.4); it is not a sampled-tree proof."
+        ],
+        "limitations": [
+          "The one-step chain identity does not establish general tree sampling correctness, model quality, or speedup."
+        ]
+      },
+      "after_sha256": "65433285dc3d1b200be0ba7e6c97c42a9ea174761ea10ea91847fa04092a577a",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 4,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Chen et al. arXiv:2302.01318 primary HTML: Algorithm 2, Table 1 and Figure 1 checked; EAGLE primary papers consulted for feature/token targets; generic tree verifier explicitly restricted to greedy.",
+      "executed_example_checks": [
+        "Task 2 one-step chain-mass check showed accepted plus correction mass reproduces target (0.4, 0.2, 0.4); it is not a sampled-tree proof."
+      ],
+      "limitations": [
+        "The one-step chain identity does not establish general tree sampling correctness, model quality, or speedup."
+      ]
+    },
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md",
+      "en": "en/00 Textbook/14 Inference and optimization/58a Distributed inference and disaggregated serving.md",
+      "before_sha256": "68381fa523ea52677fff1d8b088648216da34cd11c47a6652853ee84422cf871",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P3",
+          "line": 62,
+          "excerpt": "## Коллективные операции: четыре преобразования размещения\n\nКоллективная операция выполняется согласованно всеми ranks одной process group.",
+          "issue": "Полные определения четырёх collectives и ring formula заново занимают большую часть начала после детальных44a/44c. Это повтор механизма, а не специфики inference.",
+          "action": "Оставить компактное напоминание/ссылку на каноническую главу collectives, а высвободившееся место дать численному сравнению decode message latency и prefill bandwidth.",
+          "status": "fixed",
+          "evidence": "Сохранены все четыре исходные схемы/якоря, определения сокращены до напоминания с каноническими ссылками. Добавлено сравнение ring8, alpha2us, beta50GB/s: decode16KiB против prefill128MiB."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page",
+      "en_review": {
+        "reading": "complete-full-page",
+        "changed": true,
+        "reread": "complete-full-page",
+        "evidence": "Compact collectives reminder and original figures retained; inference ring-message example aligned.",
+        "before_sha256": "18ac05497029f1d78c55fa1a0b07ffefd5ee32a45fdaf9f1c2d055d655219e8a",
+        "after_sha256": "d9ed1d9ca06a883850a644914fa3f667def410713ff7e4ea233696e5c198e1f6",
+        "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/en/00 Textbook/14 Inference and optimization/58a Distributed inference and disaggregated serving.md",
+        "figures_retained": true,
+        "figures_count": 5,
+        "explicit_anchors_preserved": true,
+        "code_fences_balanced": true,
+        "executed_example_checks": [
+          "Independent acceptance reproduced the English ring-AllReduce example: 28.57344 us for a 16 KiB decode message, 4.72562048 ms for a 128 MiB prefill message, and 4.5717504/756.0992768 ms for 160 unoverlapped reductions."
+        ],
+        "limitations": [
+          "This is arithmetic under the page's hypothetical alpha/beta ring model, not a measured NCCL run or GPU/network benchmark."
+        ]
+      },
+      "after_sha256": "ce01e1dc7f9a28aeb15ee30ba609c9d61256f17357e66c71a2037f62d4b637cf",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 8,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Current page and original audit finding(s) read in full; cited source context retained. This entry does not claim fresh verification of every external link.",
+      "executed_example_checks": [
+        "Independent acceptance reproduced the ring-AllReduce example: 28.57344 us for a 16 KiB decode message, 4.72562048 ms for a 128 MiB prefill message, and 4.5717504/756.0992768 ms for 160 unoverlapped reductions."
+      ],
+      "limitations": [
+        "This is arithmetic under the page's hypothetical alpha/beta ring model, not a measured NCCL run or GPU/network benchmark.",
+        "No actual TP/PP/CP/EP serving layout or collective topology was executed in independent acceptance."
+      ]
+    },
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/58a2 Раздельное обслуживание prefill и decode.md",
+      "en": "en/00 Textbook/14 Inference and optimization/58a2 Disaggregated prefill and decode serving.md",
+      "before_sha256": "2bf6647025c2e06d817cb4032eda6205ce6c3d3c597e0cf8df34c46a822e8d2e",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P2",
+          "line": 80,
+          "excerpt": "применения оптимизированного tiled kernel имеет квадратичную работу по $S$;\nлинейные слои — линейную по числу токенов, но доминируют по параметрам. Длинный\nprompt способен занять GPU на десятки или сотни обычных decode steps. Именно",
+          "issue": "Оборот «до применения» создаёт ложный вывод, что tiled exact attention устраняет квадратичную арифметику. Глава46 правильно объясняет, что уменьшается IO/материализация, не число разрешённых пар.",
+          "action": "Явно сохранить O(S²d) для dense exact attention после tiling, отделить уменьшение HBM traffic.",
+          "status": "fixed",
+          "evidence": "Exact dense attention сохраняет O(S²d) после tiling; уменьшение IO отделено от арифметики."
+        },
+        {
+          "finding": 2,
+          "severity": "P2",
+          "line": 51,
+          "excerpt": "TTFT=T_{frontend}+T_{queue,P}+T_{prefill}+T_{first\\ sample}.\n$$",
+          "issue": "Для PD latency ledger не задаёт момент выдачи первого токена: можно выдать его с P и перенести handoff в ITL1→2 или ждать D и включить transfer/decode queue в TTFT. Ниже transfer tail объявляется частью TTFT без выбора этой политики.",
+          "action": "Нарисовать/выписать обе временные линии с first-token emission, queueD, transfer и first decode; дать один расчёт promptKV/эффективнаясеть/TTFT/TTST.",
+          "status": "fixed",
+          "evidence": "Разобраны P-first/D-ready с точкой выдачи токена: KV1GiB, X45ms, A120ms,QD15ms,D10ms; TTFT120/180ms, TTST190ms, ITL70/10ms."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page-plus-local-correction",
+      "en_review": {
+        "reading": "complete-full-page",
+        "changed": true,
+        "reread": "complete-full-page-plus-local-correction",
+        "evidence": "Both first-token policies, TTST, KV transfer arithmetic and exact tiling complexity aligned.",
+        "before_sha256": "30148615e8f0af2765b093cdbceb2f58e0583e4a191b57406a4233684a947cd0",
+        "after_sha256": "123c92d25eea4fb943fda9e9a2bf4d5de499696e76ecea691d9f72c732ae4959",
+        "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/en/00 Textbook/14 Inference and optimization/58a2 Disaggregated prefill and decode serving.md",
+        "figures_retained": true,
+        "figures_count": 4,
+        "explicit_anchors_preserved": true,
+        "code_fences_balanced": true,
+        "executed_example_checks": [
+          "Independent acceptance reproduced the English P/D example: 1 GiB KV, X=45 ms, P-first TTFT/ITL=120/70 ms, D-ready TTFT/ITL=180/10 ms, and TTST=190 ms under the stated serial assumptions."
+        ],
+        "limitations": [
+          "This is a deterministic arithmetic check with no overlap; no DistServe, Dynamo, SGLang, RDMA/NIXL, queue, or autoscaling runtime was executed."
+        ]
+      },
+      "after_sha256": "a555424bbc6eba9d4e2e4e111456690d7257b6395b22ae16155804ed12a296bf",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/14 Inference и оптимизация/58a2 Раздельное обслуживание prefill и decode.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 5,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Current page and original audit finding(s) read in full; cited source context retained. This entry does not claim fresh verification of every external link.",
+      "executed_example_checks": [
+        "Independent acceptance reproduced the P/D example: 1 GiB KV, X=45 ms, P-first TTFT/ITL=120/70 ms, D-ready TTFT/ITL=180/10 ms, and TTST=190 ms under the stated serial assumptions."
+      ],
+      "limitations": [
+        "This is a deterministic arithmetic check with no overlap; no DistServe, Dynamo, SGLang, RDMA/NIXL, queue, or autoscaling runtime was executed.",
+        "The exact-attention complexity statement was reviewed algebraically; no attention kernel or long-context benchmark was run."
+      ]
+    },
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md",
+      "en": "en/00 Textbook/14 Inference and optimization/58b Benchmarking SLOs and inference operations.md",
+      "before_sha256": "c578ce4d21ac3632665e763e149245ae34dcdde7fb854d71946ebbfa4882f905",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P2",
+          "line": 153,
+          "excerpt": "завершений. Часто межприходные интервалы моделируют распределением Пуассона, а\nпараметр `--request-rate` в `vllm bench serve` задаёт среднюю частоту. Здесь\nочередь растёт, если offered load превышает capacity, поэтому тест показывает",
+          "issue": "Пуассоновское распределение описывает число событий за интервал. В однородном пуассоновском процессе межприходные интервалы экспоненциальны; текущая формулировка задаёт другой генератор нагрузки.",
+          "action": "Написать Poisson arrivals с exponential inter-arrival times и указать единицы λ; burstiness/gamma — отдельный режим.",
+          "status": "fixed",
+          "evidence": "Poisson counts / exponential inter-arrival 1/lambda s; gamma burstiness отдельно, официальная vLLM CLI проверена."
+        },
+        {
+          "finding": 2,
+          "severity": "P3",
+          "line": 65,
+          "excerpt": "$t_N-t_0$. Приближённо $E2E=TTFT+(N-1)TPOT$, но точное значение следует брать\nиз временных меток запроса: сетевые буферы, ретраи и post-processing могут\nнарушить простую модель.",
+          "issue": "При данных непосредственно выше определениях через одни t0,t1,tN это точное тождество, и сетевые буферы его не нарушают. Кроме того, для N=1 TPOT не определён.",
+          "action": "Назвать равенство точным при согласованных timestamps, отдельно обозначить extended E2E до post-processing и политику TPOT для однотокенных ответов.",
+          "status": "fixed",
+          "evidence": "TTFT+(N−1)TPOT названо тождеством; N=1 TPOT=N/A и отдельная SLO policy, extended E2E имеет другую конечную метку."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page-plus-local-correction",
+      "en_review": {
+        "reading": "complete-full-page",
+        "changed": true,
+        "reread": "complete-full-page-plus-local-correction",
+        "evidence": "Poisson intervals and exact E2E identity already fixed; lambda units and gamma regime added.",
+        "before_sha256": "82ac891078568d66b3fa76ab8ae251ed291ae6756a0c9db4265d5b34df8a975f",
+        "after_sha256": "6bb8469a3a97193e018af15f712d538a6c8aedf8c86f2fc0998f3605fc0be538",
+        "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/en/00 Textbook/14 Inference and optimization/58b Benchmarking SLOs and inference operations.md",
+        "figures_retained": true,
+        "figures_count": 2,
+        "explicit_anchors_preserved": true,
+        "code_fences_balanced": true,
+        "executed_example_checks": [],
+        "limitations": [
+          "No page-specific executable example is recorded for this page; evidence is full-page/source/contract review, not runtime verification."
+        ]
+      },
+      "after_sha256": "6f28c505a6f48f804b8a6153a55a729bf39c005ee9aefb7ce8ea8947bb7aa839",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 2,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Official vLLM bench serve documentation checked for request-rate / burstiness interval distributions; pinned EDLS notebook read but CUDA benchmark not executed.",
+      "executed_example_checks": [],
+      "limitations": [
+        "No page-specific executable example is recorded for this page; evidence is full-page/source/contract review, not runtime verification."
+      ]
+    },
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/58c Queueing и capacity planning.md",
+      "en": null,
+      "before_sha256": "1bd74f55a048f274f9b1fe3262039634486d8425d61e929e9f6203544aa9dd60",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P3",
+          "line": 61,
+          "excerpt": "Даже простая M/M/1-модель даёт $W=1/(\\mu-\\lambda)$; это не точная модель LLM,\nно она правильно показывает расходимость при $\\lambda\\rightarrow\\mu$.",
+          "issue": "μ и предпосылки M/M/1 не определены, хотя формула вводится как учебная мотивация knee.",
+          "action": "Определить μ в requests/s, Poisson arrivals, exponential service, один сервер и λ<μ; пояснить, почему continuous batching не соответствует этим предпосылкам.",
+          "status": "fixed",
+          "evidence": "Определены M/M/1, lambda/mu requests/s, экспоненциальное обслуживание, устойчивость и отличие continuous batching; пример mu10lambda5/9."
+        },
+        {
+          "finding": 2,
+          "severity": "P3",
+          "line": 50,
+          "excerpt": "Для 20 запросов, средней текущей длины 4k и 128 KiB KV на токен средний KV ledger\nравен $20\\cdot4096\\cdot128$ KiB = 10 GiB. P95 длины и burst делают необходимый\nрезерв больше. Закон Литтла также служит проверкой telemetry: если наблюдаемые",
+          "issue": "Предыдущий абзац включает в N ожидающие запросы, которые могут ещё не иметь KV. Для перехода к memory ledger нужно указать, что 4k — среднее по реально resident KV или условный верхний сценарий для всех20.",
+          "action": "Раздельно определить N_inflight и N_KV-resident либо явно учесть нулевой KV у waiting; не представлять произведение несогласованных средних как измеренный ledger.",
+          "status": "fixed",
+          "evidence": "Разделены in-flight и resident; 10GiB относится к снимку20 реально резидентных кешей,12 дают6GiB; временное среднее не равно произвольному произведению средних."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page",
+      "after_sha256": "70521d320689e56945aee8d21b72b4195cfc9042fd6a5498a53d5fea6a674a2a",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/14 Inference и оптимизация/58c Queueing и capacity planning.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 3,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Current page and original audit finding(s) read in full; cited source context retained. This entry does not claim fresh verification of every external link.",
+      "executed_example_checks": [
+        "Task 2 arithmetic verification reproduced the M/M/1 examples at 0.2 s and 1 s and the associated conditional capacity ledger; no queueing service was run."
+      ],
+      "limitations": [
+        "Hypothetical queue arithmetic is not a workload replay, calibrated service model, or production capacity measurement."
+      ]
+    },
+    {
+      "path": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+      "en": null,
+      "before_sha256": "99ff867723b878f91f3d0c8256f5d9a4dcbc3a2f9a1694aac06e346f168f369a",
+      "findings": [],
+      "reading": "complete-full-page",
+      "reread": "not-needed-unchanged",
+      "after_sha256": "819a889699e5b9ea3757a1cdc661946b8396c724a55253b576f4e67e2b4883f5",
+      "changed": false,
+      "snapshot": null,
+      "figure_verification": {
+        "retained": true,
+        "count": 7,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "ARC-AGI-3 technical report (https://arcprize.org/media/ARC_AGI_3_Technical_Report.pdf) and the frozen course trace were checked; the accessed report edition/date and scorer ambiguity are recorded in course-fp4-eval.md.",
+      "executed_example_checks": [
+        "Course follow-through reproduced the illustrative ARC per-level contributions (12/24)^2 = 0.25 and (12/48)^2 = 0.0625 on CPU."
+      ],
+      "limitations": [
+        "The illustrative calculation is not a reproduction of the complete ARC-AGI-3 aggregate scorer; no benchmark agent or interactive environment was run.",
+        "The evolving report URL is not a pinned artifact, and its prose cap versus displayed squared-min expression remains unresolved."
+      ]
+    },
+    {
+      "path": "00 Учебник/18 Evaluation и методология/59a Несбалансированная классификация.md",
+      "en": null,
+      "before_sha256": "6f322f248d769915dbf1503f2066e82dee12be398112f05dd7168a2e9f0350e0",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P3",
+          "line": 129,
+          "excerpt": "Практический отчёт для несбалансированной бинарной задачи обычно включает:\n\n- долю положительного класса в обучающей, валидационной и тестовой выборках;",
+          "issue": "Несколько важных формул введены подряд, но ни одна конкретная confusion matrix с числами не проходит через precision/recall/BA и выбор порога. В 445строках преобладают объяснения методов и требования к отчёту.",
+          "action": "Добавить один пример с редкостью1%, двумя порогами, TP/FP/FN/TN, alert capacity и стоимостью ошибок; показать, почему ranking и рабочее решение расходятся.",
+          "status": "fixed",
+          "evidence": "Добавлена confusion matrix 1%: пороги TP60/90,FP40/210; precision/recall/BA,цена4040/1210 и capacity150. Ранжирование фиксировано."
+        },
+        {
+          "finding": 2,
+          "severity": "P3",
+          "line": 419,
+          "excerpt": "**«Sampler можно применить один раз до CV».** Это data leakage и искажение\nвалидационное распределение.",
+          "issue": "Есть следы механической редакции русского текста (также «за пределами наблюдавшегося области» в56–57 и «обычная стратификации» в344).",
+          "action": "Локально вычитать согласование, сохраняя английские исходники без перевода.",
+          "status": "fixed",
+          "evidence": "Исправлены падежи наблюдавшейся области/обычной стратификации/валидационного распределения и русские связки."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page",
+      "after_sha256": "0514b6edf30441cee34589868071f5db2f29b3e4d26062383a0a844c28c53d56",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/18 Evaluation и методология/59a Несбалансированная классификация.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 4,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Official imbalanced-learn and scikit-learn evaluation/threshold documentation checked; numerical decision example recomputed, full sklearn pipeline not executed.",
+      "executed_example_checks": [
+        "Task 2 arithmetic verification reproduced balanced accuracy 0.7979798/0.9393939, decision cost 4040/1210, and alert counts 100/300."
+      ],
+      "limitations": [
+        "The confusion-matrix arithmetic was executed, but the cited sklearn/imblearn pipeline was not."
+      ]
+    },
+    {
+      "path": "00 Учебник/18 Evaluation и методология/59a Responsible systems.md",
+      "en": null,
+      "before_sha256": "51128ccb19b0127d60601619af116caa8b130d9a2e7fc61e099f5a855572da56",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P3",
+          "line": 98,
+          "excerpt": "особенно опасен пропуск случая; для уголовного риска ложное обвинение затрагивает\nсвободу человека. Таблица по группам должна включать не только долю положительных\nрешений, но и TPR, FPR, FNR, калибровку, размер выборки и доверительные интервалы.",
+          "issue": "В контексте COMPAS ложноположительная оценка риска повторного правонарушения и ложное обвинение в совершении преступления — разные события; формулировка смешивает прогноз и правовой исход.",
+          "action": "Назвать ошибку завышенной оценкой риска и отдельно описать, на какое решение она влияет; количественный исторический кейс привязать к первичному аудиту (requires verification).",
+          "status": "fixed",
+          "evidence": "Прогноз риска отделён от обвинения; первичный аудит ProPublica2016 Broward2years FPR45/23 проверен, источники добавлены."
+        },
+        {
+          "finding": 2,
+          "severity": "P3",
+          "line": 205,
+          "excerpt": "где \\(I_{\\text{grid}}\\) — углеродная интенсивность конкретной энергосистемы,\nа не универсальная константа. Одних GPU-hours недостаточно: учитывают\nпотребление всей площадки, PUE, загрузку оборудования и регион/время работы.",
+          "issue": "Единицы C и I_grid не указаны, а E_kWh не различает IT energy и facility energy: при неявном PUE легко учесть охлаждение дважды.",
+          "action": "Определить kgCO2e/kWh и границу измерения энергии; дать маленький расчёт IT energy×PUE×grid intensity.",
+          "status": "fixed",
+          "evidence": "C kgCO2e, grid kgCO2e/kWh; facility vs IT×PUE, пример1000×1.2×.4=480 без двойногоPUE."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page",
+      "after_sha256": "072e39dead161f8e2d12305cabd692764b801815f03ed1532426ae49ccddde72",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/18 Evaluation и методология/59a Responsible systems.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 7,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "ProPublica 2016 COMPAS methodology/repository, AIR-Bench arXiv:2407.17436v1 (https://arxiv.org/html/2407.17436v1), GCG arXiv:2307.15043v2 (https://arxiv.org/html/2307.15043v2), and the frozen Harvard/course context were checked.",
+      "executed_example_checks": [
+        "Course follow-through reproduced the illustrative AIR refusal rate 14/20 = 0.7 versus mean score (14 + 4*0.5)/20 = 0.8, and illustrative unaided/attacked outcomes 2/40 = 0.05 versus 10/40 = 0.25 on CPU."
+      ],
+      "limitations": [
+        "No grader model, benchmark suite, jailbreak search, attack suffix, or policy evaluation was executed; the calculations only check denominators and reported example arithmetic."
+      ]
+    },
+    {
+      "path": "00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow.md",
+      "en": null,
+      "before_sha256": "064e53fbdccc09b1e966e4a7452e8e9216cb86df2932bd33784cfa9034115abe",
+      "findings": [],
+      "reading": "complete-full-page",
+      "reread": "not-needed-unchanged",
+      "after_sha256": "064e53fbdccc09b1e966e4a7452e8e9216cb86df2932bd33784cfa9034115abe",
+      "changed": false,
+      "snapshot": null,
+      "figure_verification": {
+        "retained": true,
+        "count": 2,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Current page and original audit finding(s) read in full; cited source context retained. This entry does not claim fresh verification of every external link.",
+      "executed_example_checks": [],
+      "limitations": [
+        "No page-specific executable example is recorded for this page; evidence is full-page/source/contract review, not runtime verification."
+      ]
+    },
+    {
+      "path": "00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps.md",
+      "en": null,
+      "before_sha256": "d625ded451e7f6fe6a1e4fb9410ac3850bafaec0fa1e76040a30c80ad6cf90d6",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P3",
+          "line": 335,
+          "excerpt": "\\frac{N_{models}\\,T_{saved}\\,C_{engineer}}{C_{platform}}.\n$$",
+          "issue": "Показатель назван ROI, но вычисляет отношение валовой экономии к стоимости (1,25), без вычитания затрат; читатель может спутать его с чистой отдачей 0,25.",
+          "action": "Назвать показатель отношением выгоды к затратам либо явно определить используемую конвенцию ROI и общий месячный интервал.",
+          "status": "fixed",
+          "evidence": "Метрика названа benefit/cost; общий месяц,150k/120k1.25 против netROI.25;20models .5/net−.5."
+        },
+        {
+          "finding": 2,
+          "severity": "P3",
+          "line": 344,
+          "excerpt": "Многопользовательская платформа позволяет статистически мультиплексировать нагрузку: пики разных команд не всегда\nсовпадают, поэтому общий парк использует оборудование лучше выделенных квот.\nОднако средняя утилизация опасна как единственная цель. Перегруженная система",
+          "issue": "В последних разделах связная русская речь сменяется плотными вставками queue time, useful throughput, compact topology, jobs, gates и lineage без того же уровня объяснения, что в начале.",
+          "action": "Сохранить точные термины там, где они именуют метрики или интерфейс; обычные связки и описания перевести в естественную русскую речь.",
+          "status": "fixed",
+          "evidence": "Заключительные разделы runbook,capacity,maturity переписаны связным русским с введением точных терминов; согласования CT исправлены."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page-in-contiguous-parts-plus-local-correction",
+      "after_sha256": "53617e1a482cafda823507939c05c914985ecbd31e19f5c5c476ec76778ee832",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 8,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Current page and original audit finding(s) read in full; cited source context retained. This entry does not claim fresh verification of every external link.",
+      "executed_example_checks": [
+        "Task 2 arithmetic verification reproduced the conditional operations ledger: ROI 0.25, carbon 480 kgCO2e, five replicas, and $0.0004040404 per request; these are hypothetical examples."
+      ],
+      "limitations": [
+        "The operational numbers are hypothetical arithmetic, not measured deployment, energy, cost, or reliability evidence."
+      ]
+    },
+    {
+      "path": "00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment.md",
+      "en": null,
+      "before_sha256": "833ea4111d1e3ce702e2490fda4a5f69fb5f059aee29c3be4dc6273f183c656d",
+      "findings": [
+        {
+          "finding": 1,
+          "severity": "P2",
+          "line": 224,
+          "excerpt": "**Differential privacy** ограничивает влияние одного record или пользователя:\nupdates clipping до нормы $C$ ограничивает sensitivity, затем в aggregate\nдобавляется калиброванный noise. Гарантия задаётся $(\\varepsilon,\\delta)$,",
+          "issue": "Начиная с приватности и до производственного checklist многие объяснения написаны смешанной русско-английской телеграфной речью: updates clipping, adjacency definition, composition по rounds, unit of privacy. Новые предпосылки не вводятся на языке читателя.",
+          "action": "Переписать русские пояснения связно, сохранив принятый английский термин при первом вводе; определения соседних наборов, единицы приватности и композиции дать словами и на одном малом примере, не переводя исходники.",
+          "status": "fixed",
+          "evidence": "Приватность и весь хвост главы переписаны связно; DP adjacency record/user,clipping[3,4]→[1.2,1.6],sensitivityC/2C,sumvsweightedmean,composition10×(.2,1e−6) явно условно."
+        },
+        {
+          "finding": 2,
+          "severity": "P3",
+          "line": 160,
+          "excerpt": "\\theta^{t+1}\n=\n\\sum_{k\\in S_t}\n\\frac{n_k}{\\sum_{j\\in S_t}n_j}\\theta_k^{t+1}.",
+          "issue": "FedAvg задан формулой, но нет разобранного раунда с весами клиентов и результатом агрегации; ресурсная модель также не закреплена явными dtype и байтами.",
+          "action": "Добавить один проход двух клиентов с разными n_k и локальными θ, затем показать, что меняется при выпадении клиента; для Adam указать dtype весов, градиентов и моментов.",
+          "status": "fixed",
+          "evidence": "FedAvg n100/300, theta(1,3)/(5,7)→(4,6),dropout→(1,3) илиотменаsecureagg;FP32Adam16Pbytes,10Mparams160MB."
+        }
+      ],
+      "reading": "complete-full-page",
+      "reread": "complete-full-page-in-contiguous-parts",
+      "after_sha256": "4042530ad2e667be1c25ddc69a794fd6cab3d8d978de139eb67bd01f9206a58f",
+      "changed": true,
+      "snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-2-before/00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment.md",
+      "figure_verification": {
+        "retained": true,
+        "count": 8,
+        "ordering": "unchanged"
+      },
+      "source_unit_ids_preserved": true,
+      "explicit_anchors_preserved": true,
+      "code_fences_balanced": true,
+      "checked_sources": "Dwork/Roth DP definitions/composition and McMahan et al. user-level DP primary sources checked; hypothetical clipping/FedAvg/composition calculations distinguished from a real privacy accountant.",
+      "executed_example_checks": [
+        "Task 2 arithmetic verification reproduced FedAvg (4,6), accepted-single-client result (1,3), and clipped update (1.2,1.6); no privacy accountant or federated runtime was executed."
+      ],
+      "limitations": [
+        "The arithmetic check is not a federated run, secure aggregation, record/user DP implementation, or privacy-accountant execution."
+      ]
+    }
+  ]
+}

@@ -67,6 +67,8 @@ Sampling может пропустить очень короткие функц�
 Профилируют ограниченное окно после warmup:
 
 ```python
+from itertools import islice
+
 with torch.profiler.profile(
     activities=[
         torch.profiler.ProfilerActivity.CPU,
@@ -77,7 +79,7 @@ with torch.profiler.profile(
     profile_memory=True,
     with_stack=True,
 ) as prof:
-    for batch in loader:
+    for batch in islice(loader, 5):  # wait=1 + warmup=1 + active=3
         step(batch)
         prof.step()
 ```
@@ -145,7 +147,25 @@ nsys profile \
   python benchmark.py
 ```
 
-Capture начинают после warmup: иначе timeline занят initialization и compile.
+При `--capture-range=cudaProfilerApi` одних NVTX-меток недостаточно: сбор
+ожидает вызова CUDA Profiler API. В `benchmark.py` оборачивают выбранные шаги
+так (функция `run_steps` здесь обозначает уже определённый цикл нагрузки):
+
+```python
+run_steps()  # прогрев, включая компиляцию
+torch.cuda.synchronize()
+torch.cuda.cudart().cudaProfilerStart()
+try:
+    run_steps()
+finally:
+    torch.cuda.synchronize()
+    torch.cuda.cudart().cudaProfilerStop()
+```
+
+Начало и конец окна задают именно `cudaProfilerStart`/`cudaProfilerStop`,
+как описано в [Nsight Systems User Guide](https://docs.nvidia.com/nsight-systems/UserGuide/index.html#focused-profiling).
+NVTX внутри окна только размечает операции. Capture начинают после warmup:
+иначе timeline занят initialization и compile.
 NVTX range должен охватывать ровно тот Python interval, который требуется
 объяснить, но его длительность на CPU нельзя выдавать за device time. CUDA
 launch асинхронен; причинную связь устанавливают по вложенности range, CUDA API
@@ -189,9 +209,13 @@ CC BY-NC-SA 4.0. Сопоставьте строку с наблюдаемым �
 к системному профилю, а уже локализованный медленный kernel — к аппаратным
 счётчикам.*
 
-## End-to-end кейс
+## Условный сквозной пример
 
-Baseline после warmup: step median/p95 420/470 ms. `py-spy` показывает ожидание
+Следующие числа иллюстрируют диагностический ход; это не результаты запуска
+в этой книге и не опубликованный benchmark. Для подтверждения на своей машине
+нужны trace и manifest из следующего раздела.
+
+Допустим, baseline после warmup: step median/p95 420/470 ms. `py-spy` показывает ожидание
 `next(loader)`. PyTorch trace раскладывает median: 110 ms loader wait, 18 ms
 H2D, 275 ms CUDA kernels, 17 ms launch gaps. Nsight Systems подтверждает:
 pageable H2D не перекрывается с compute.

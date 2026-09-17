@@ -23,8 +23,8 @@ GPU.
 
 Названия vLLM, SGLang, TensorRT-LLM и FlashInfer часто оказываются в одной
 таблице, хотя они описывают не вполне одинаковые уровни системы. vLLM и SGLang
-предоставляют готовые runtimes и серверы. TensorRT-LLM соединяет компиляцию и
-оптимизированный runtime, тесно связанный со стеком NVIDIA. FlashInfer прежде
+предоставляют готовые runtimes и серверы. TensorRT-LLM предоставляет оптимизированный runtime для NVIDIA GPU
+с PyTorch-путём исполнения и отдельным TensorRT-engine backend. FlashInfer прежде
 всего является библиотекой ядер для attention, sampling и MoE; её может
 использовать другой runtime. Чтобы сравнивать эти проекты осмысленно, сначала
 нужно разложить inference-систему на уровни.
@@ -160,23 +160,33 @@ RadixAttention и PagedAttention решают разные задачи. Paging 
 Подробный пошаговый разбор находится на странице
 [[02 Areas/ML & DL/01 Справочник/Inference/SGLang и RadixAttention|SGLang и RadixAttention]].
 
-## TensorRT-LLM: оптимизация графа и runtime как единый стек
+## TensorRT-LLM: два пути исполнения внутри одного проекта
 
-TensorRT-LLM решает ту же конечную задачу обслуживания LLM, но делает больший
-акцент на компиляции и специализированных реализациях для NVIDIA GPU. Модель
-проходит этап подготовки или построения engine: выбираются precision,
-quantization, parallelism и набор оптимизированных plugins. Runtime исполняет
-полученный engine, управляет in-flight batching и paged KV-cache, а executor API
-организует запросы и распределённое исполнение.
+Срез [Architecture Overview](https://nvidia.github.io/TensorRT-LLM/architecture/overview.html),
+помеченный в документации commit `0c9430e` и датой 2025-09-15
+([закреплённая ревизия](https://github.com/NVIDIA/TensorRT-LLM/tree/0c9430e5a530ba958fc9dca561a3ad865ad9f492)),
+проверен здесь 2026-09-15 и описывает
+PyTorch-based inference: входной `LLM` создаёт `PyExecutor` на каждом rank.
+В его цикле `Scheduler` выбирает работу, `KVCacheManager` выделяет состояние,
+`ModelEngine` исполняет модель, а `Sampler` выбирает токены. CUDA Graphs и
+перекрытие CPU/GPU уменьшают накладные расходы этого пути. Имя `ModelEngine`
+само по себе не означает предварительно собранный TensorRT engine.
+
+Отдельный путь TensorRT-engine подготавливает/строит engine с выбранными
+precision, quantization, parallelism и plugins, после чего runtime его
+исполняет. Именно к этому backend относится цена build и ограничения
+подготовленного артефакта. Поэтому нельзя описывать весь TensorRT-LLM как
+обязательную компиляцию TensorRT-графа или противопоставлять его целиком
+PyTorch-экосистеме.
 
 Важное следствие: сравнение «vLLM против TensorRT-LLM» нельзя сводить к одной
 цифре tokens/s. Результат зависит от того, поддерживается ли конкретная модель
-оптимизированным plugin, сколько времени допустимо потратить на build, нужна ли
-динамичность PyTorch-экосистемы, какие precision и parallelism разрешены, какова
-реальная смесь длин prompts и outputs. TensorRT-LLM способен особенно хорошо
-использовать известную заранее конфигурацию NVIDIA, тогда как vLLM часто удобнее
-как быстро меняющийся открытый runtime с широким модельным интерфейсом. Это
-инженерные профили, а не универсальный рейтинг.
+выбранным backend и его kernels, сколько времени допустимо потратить на
+подготовку (и build для TensorRT-engine), какие precision и parallelism
+разрешены, какова реальная смесь длин prompts и outputs. Backend, release или
+commit, модель и конфигурация должны быть записаны рядом с результатом.
+Широта поддержки и удобство обновлений — проверяемые свойства конкретной
+версии, а не устойчивое преимущество одного названия над другим.
 
 Документация TensorRT-LLM обновляется часто. Поэтому перечень поддерживаемых
 plugins, флаги build и server options не фиксируются в основном тексте. Их нужно

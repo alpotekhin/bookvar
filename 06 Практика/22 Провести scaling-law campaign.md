@@ -2,7 +2,7 @@
 title: "22. Провести scaling-law campaign"
 type: practice
 status: reviewed
-last_updated: 2026-09-06
+last_updated: 2026-09-15
 source_unit_id:
   - assignment-03-isoflops-fit-workflow
   - assignment-03-task-chinchilla-isoflops
@@ -27,11 +27,11 @@ contract: "[[06 Практика/Contracts/stanford-cs336-a3.yml]]"
 
 # 22. Провести scaling-law campaign
 
-В этой работе нужно не подобрать красивую степенную линию к готовой таблице, а
-провести полный цикл принятия решения: определить измеряемые величины,
-распределить ограниченный бюджет, найти IsoFLOP-минимумы, сравнить несколько
-моделей, сделать прогноз на удержанном масштабе и объяснить ошибку после
-раскрытия результата.
+Как распределить ограниченный вычислительный бюджет между размером модели
+и числом обучающих токенов? В этой работе вы сравните несколько сочетаний
+при одинаковой стоимости, оцените положение минимумов и предскажете результат
+для большего бюджета. Этот результат сначала скрыт: после его раскрытия
+можно проверить точность прогноза и разобрать причины ошибки.
 
 Практика основана на Stanford CS336 Assignment 3, но не является его решением и
 не публикует данные, по которым можно восстановить ответ задания. Официальное задание использует общую
@@ -63,6 +63,89 @@ parameters, разные токенизаторы или разные validation
 
 ### `offline_local` — обязательный
 
+Начать можно с полностью исполняемого примера ниже. Он генерирует **учебные,
+не измеренные** данные и не использует таблицы или API Stanford. Понадобятся
+Python, NumPy, SciPy и Matplotlib; код можно выполнить одной ячейкой notebook.
+Он строит пять IsoFLOP-групп по 13 точек. Четыре группы доступны при оценке
+параметров, крупнейшая используется только после фиксации модели.
+
+```python
+# bookvar: scaling-fixture
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.optimize import least_squares
+
+rng = np.random.default_rng(42)
+budgets = 6e14 * 10.0 ** np.arange(5)
+C = np.repeat(budgets, 13)
+N = np.tile(np.geomspace(1e5, 1e9, 13), 5)
+D = C / (6 * N)
+train = C < budgets[-1]
+
+def predict(p, n, d):
+    E, A, B, alpha, beta = p
+    return E + A * (n / 1e6)**(-alpha) + B * (d / 1e8)**(-beta)
+
+# Только синтетический генератор: эти числа не оценивают настоящую LLM.
+observed = predict([1.1, .8, 1.2, .25, .30], N, D)
+observed += rng.normal(0, .003, len(N))
+observed[17] += .10  # Один выброс в обучающей части для сравнения оценок.
+
+def residual(p):
+    return predict(p, N[train], D[train]) - observed[train]
+
+starts = [[1., 1., 1., .2, .2], [.5, 2., 2., .5, .5],
+          [1.5, .5, 1., .3, .4]]
+fits = {}
+for loss in ["linear", "soft_l1"]:
+    candidates = [least_squares(
+        residual, start, bounds=([0, .001, .001, .05, .05],
+                                [3, 10, 10, 1, 1]),
+        loss=loss, f_scale=.005, max_nfev=5000,
+        xtol=1e-12, ftol=1e-12, gtol=1e-12
+    ) for start in starts]
+    fits[loss] = min(candidates, key=lambda result: result.cost)
+
+# Метод выбран заранее; held-out значения не участвуют в residual().
+fit = fits["soft_l1"]
+prediction = predict(fit.x, N[~train], D[~train])
+heldout_mae = np.mean(np.abs(prediction - observed[~train]))
+print("E,A,B,alpha,beta:", np.round(fit.x, 4))
+print("held-out MAE:", round(float(heldout_mae), 5))
+
+fig, axes = plt.subplots(1, 3, figsize=(13, 3.6))
+for budget in budgets:
+    mask = C == budget
+    axes[0].semilogx(N[mask], observed[mask], "o-", label=f"{budget:.0e}")
+axes[0].set(xlabel="Parameters N", ylabel="Synthetic loss L",
+            title="IsoFLOP groups; largest is held out")
+axes[0].legend(title="Proxy FLOPs", fontsize=7)
+axes[1].scatter(predict(fit.x, N[train], D[train]), observed[train],
+                s=12, label="fit groups")
+axes[1].scatter(prediction, observed[~train], marker="x", label="held out")
+axes[1].set(xlabel="Predicted L", ylabel="Observed L")
+axes[1].legend()
+for label, result in fits.items():
+    axes[2].semilogx(C[train], residual(result.x), ".", label=label)
+axes[2].axhline(0, color="black", linewidth=.5)
+axes[2].set(xlabel="Proxy FLOPs C", ylabel="Predicted minus observed L")
+axes[2].legend()
+fig.tight_layout()
+plt.show()
+```
+
+На этом фиксированном примере робастная оценка даёт ошибку крупнейшей группы
+меньше `0.05`; это проверка запуска и подгонки, не оценка точности scaling laws
+для реального обучения. Сравните остатки обычной и робастной оценок, уберите
+искусственный выброс и повторите опыт. Затем скройте уже два крупнейших бюджета:
+так можно увидеть влияние длины экстраполяции. Коэффициенты $A,B$ здесь относятся
+к нормированным $N/10^6,D/10^8$; их нельзя сравнивать с коэффициентами при
+ненормированных аргументах без пересчёта.
+
+Эта демонстрация даёт данные, нелинейную подгонку и первые три графика. Полная
+работа ниже добавляет оценку минимумов, неопределённость, журнал бюджета
+и независимый прогноз; успешный запуск одной ячейки не означает её завершения.
+
 Используйте один из двух источников точек:
 
 1. **Синтетический стенд.** Сгенерируйте таблицу по заранее записанной гладкой
@@ -75,9 +158,11 @@ parameters, разные токенизаторы или разные validation
    convention, schedule и compute proxy. Зафиксируйте лицензию и checksum
    исходной таблицы.
 
-Запрещено копировать или преобразовывать
-`data/isoflops_curves.json` из Stanford Assignment 3: этот файл нужен для
-официального упражнения, и по нему можно восстановить ответ.
+Для официального упражнения у Stanford есть `data/isoflops_curves.json`.
+Его можно изучать вместе с исходной постановкой, но он не служит независимой
+проверкой локального прогноза: целевой ответ уже связан с этими данными.
+В профиле `offline_local` используйте отдельный генератор или заранее
+разделённые наблюдения и не подменяйте ими друг друга после просмотра результатов.
 
 ### `course_api_observation` — необязательный
 
@@ -214,9 +299,12 @@ $$
 L(N,D)=E+A N^{-\alpha}+B D^{-\beta}.
 $$
 
-Оцените параметры нелинейно в исходном loss space и сравните с разумной
-альтернативой: log-linearized fit, robust loss, weighted likelihood или модель
-с другим residual term. Для каждого варианта сохраните начальные приближения,
+Оцените параметры нелинейно в исходном пространстве потерь и сравните обычный
+метод наименьших квадратов с робастной функцией ошибки, например `soft_l1`.
+Пример выше показывает обе оценки на одинаковых данных. Логарифм суммы
+$E+A N^{-\alpha}+B D^{-\beta}$ не превращает её в линейную регрессию;
+не применяйте log-linear fit, не задав другую модель и её допущения.
+Для каждого варианта сохраните начальные приближения,
 ограничения параметров, веса точек и причину выбора.
 
 Нельзя выбрать Fit A для одного рисунка, Fit B для другого и скрыть их

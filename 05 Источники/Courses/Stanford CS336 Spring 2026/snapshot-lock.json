@@ -83,7 +83,7 @@
     "extractor_revision": "stanford-cs336-semantic-audit-v3",
     "extractor_sha256": "3c027d06917180ad8ebd241c837bd6f80df5c4281b98ab503d848043c3d2bb85",
     "semantic_review_sha256": "831a84f95b2a72bfc6eb4749092e7d6c0181c8988b46d794072a5deece0de53e",
-    "editorial_overlay_sha256": "499fdf66de3a57327a9496ded75bc93b0b00b5a21504e1d47f70d7a6f0c315d6",
+    "editorial_overlay_sha256": "9732619423ca971090783666576cf14034229666b78e878ed67f8c4872fbd17b",
     "tool_versions": {
       "edtrace": "0.1.15",
       "pdfinfo": "26.04.0",
@@ -104,11 +104,11 @@
         "records": 807
       },
       "coverage.yml": {
-        "sha256": "4b65cfcfd9b005db6b1f62116245d14d6acf16a92ce2746331ee2bf661e792b1",
+        "sha256": "a5941b2d29dbc387f63effbcd89439ce4e011589ebcaccc955aa331924296187",
         "records": 807
       },
       "visuals.yml": {
-        "sha256": "648b72c9adba9ac9db119141a8ecfd6600fd3c36e7c10fcd8f4a8208d9a38fe4",
+        "sha256": "4ab1e83c2bf8c1465d6800672a609031414e5821404db7dc4d3db2db085091fa",
         "records": 159
       }
     }

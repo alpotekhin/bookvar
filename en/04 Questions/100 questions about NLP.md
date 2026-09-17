@@ -4,13 +4,13 @@ type: question-index
 status: active
 locale: en
 translation_of: "04 Вопросы/100 вопросов по NLP.md"
-last_updated: 2026-07-23
-last_verified: 2026-07-23
+last_updated: 2026-09-15
+last_verified: 2026-09-15
 ---
 
 # 100 questions about NLP
 
-This list was imported from the [public Notion page](https://dynamic-epoch-4bb.notion.site/100-questions-NLP-english-337ac246920c4afd9c54af825f5076f1). “Original answer” links to the preserved source notes. The English source currently contains substantive answers to 22 of the 100 questions; it trails the newer Russian page, so missing translations are marked explicitly. Links to canonical Bookvar chapters are maintained separately: a source answer is not a substitute for a textbook chapter.
+This list was imported from the [public Notion page](https://dynamic-epoch-4bb.notion.site/100-questions-NLP-english-337ac246920c4afd9c54af825f5076f1). “Original answer” links to the preserved source notes. The English source currently contains substantive answers to 22 of the 100 questions; it trails the newer Russian page, so missing translations are marked explicitly. [[en/04 Questions/100 questions about NLP — original answers#Editor's errata — 15 September 2026|Editor's errata]] identifies confirmed errors without changing the archive. Links to canonical Bookvar chapters are maintained separately: a source answer is not a substitute for a textbook chapter.
 
 ## Classical methods and TF–IDF
 
@@ -171,4 +171,3 @@ This list was imported from the [public Notion page](https://dynamic-epoch-4bb.n
 - **98. Explain the working principle of KV cache, Grouped-Query Attention, and MultiQuery Attention.** — answer not yet supplied
 - **99. Explain the technology behind MixTral, what are its pros and cons?** — answer not yet supplied
 - **100. How are you? How are things going?** — answer not yet supplied
-

@@ -16,6 +16,7 @@ from pathlib import Path
 REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
 COURSE_ROOT = REPOSITORY_ROOT / "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025"
 IMPORTER_PATH = REPOSITORY_ROOT / "publishing/tools/import_berkeley_agents.py"
+BERKELEY_ASSET_ROOT = REPOSITORY_ROOT / "00 Учебник/Assets/Figures/curated/berkeley-agents-2025"
 EXPECTED_READING_DISTRIBUTION = [3, 3, 3, 3, 2, 4, 2, 4, 3, 4, 2, 4]
 
 
@@ -193,7 +194,7 @@ class BerkeleyAgentsSourceAuditTest(unittest.TestCase):
         units = {unit["semantic_id"]: unit for unit in self.units["units"] if "semantic_id" in unit}
         coverage = {row["source_unit"]: row for row in self.coverage["rows"]}
         for semantic_id in ("human-preference-evaluation", "minictx"):
-            self.assertEqual(coverage[units[semantic_id]["id"]]["disposition"], "source-only")
+            self.assertEqual(coverage[units[semantic_id]["id"]]["disposition"], "integrated")
         self.assertEqual(coverage[units["meeting-10-closing"]["id"]]["disposition"], "excluded")
 
     def test_visual_ledger_closes_every_deck_page_and_links_provenance(self) -> None:
@@ -225,7 +226,13 @@ class BerkeleyAgentsSourceAuditTest(unittest.TestCase):
             "pdftotext -layout (Poppler 26.04.0)"
         )
         self.assertTrue(all(row["extraction_tool"] == expected_method for row in self.visuals["rows"]))
-        self.assertTrue(all(row["reviewer"] == "Codex source audit" for row in self.visuals["rows"]))
+        for row in self.visuals["rows"]:
+            expected_reviewer = (
+                "Codex source-to-destination visual audit"
+                if row["disposition"] in {"integrated", "covered-existing"}
+                else "Codex source audit"
+            )
+            self.assertEqual(row["reviewer"], expected_reviewer, row["id"])
 
     def test_required_multi_member_sequences_are_real(self) -> None:
         by_semantic_id = {row.get("semantic_id"): row for row in self.visuals["rows"]}
@@ -259,12 +266,14 @@ class BerkeleyAgentsSourceAuditTest(unittest.TestCase):
         }
         rows = {row["source_unit"]: row for row in self.coverage["rows"]}
         self.assertEqual(len(reading_units), 37)
+        dispositions: Counter[str] = Counter()
         for unit_id, unit in reading_units.items():
             row = rows[unit_id]
             bundle = bundles_by_reading[unit["source_object"]]
             self.assertEqual(row["primary_sources"], [unit["source_object"]])
             self.assertEqual(row["secondary_sources"], bundle["decks"])
-            self.assertEqual(row["disposition"], "source-only")
+            dispositions[row["disposition"]] += 1
+        self.assertEqual(dispositions, Counter({"integrated": 35, "source-only": 2}))
 
     def test_big_sleep_preserves_primary_byline_organizations_and_contributors(self) -> None:
         expected_contributors = [
@@ -325,18 +334,22 @@ class BerkeleyAgentsSourceAuditTest(unittest.TestCase):
         coverage = next(row for row in self.coverage["rows"] if row["source_unit"] == mirror_units[0]["id"])
         self.assertEqual(coverage["disposition"], "excluded")
         self.assertEqual(coverage["reason"], "discovery lead only")
-        self.assertIn("cannot substantiate an official lab contract", coverage["evidence"])
+        self.assertIn("cannot substantiate an official Berkeley lab contract", coverage["evidence"])
 
         hub = (COURSE_ROOT / "_index.md").read_text("utf-8")
         self.assertIn("does not expose a verified official lab artifact", hub)
         self.assertIn("adaptation inspired by the course", hub)
 
-    def test_baseline_has_no_textbook_integration_and_no_invented_license(self) -> None:
-        self.assertTrue(
-            all(row["disposition"] in {"source-only", "excluded"} for row in self.coverage["rows"])
+    def test_generated_ledgers_apply_final_editorial_integration_without_invented_license(self) -> None:
+        self.assertEqual(self.manifest["editorial_status"], "integration active; destinations validated")
+        self.assertNotIn("baseline_status", self.manifest)
+        self.assertEqual(
+            Counter(row["disposition"] for row in self.coverage["rows"]),
+            Counter({"integrated": 140, "covered-existing": 6, "source-only": 38, "excluded": 28}),
         )
-        self.assertTrue(
-            all(row["disposition"] in {"source-only", "excluded"} for row in self.visuals["rows"])
+        self.assertEqual(
+            Counter(row["disposition"] for row in self.visuals["rows"]),
+            Counter({"integrated": 47, "source-only": 87, "excluded": 27}),
         )
         course_objects = [
             row for row in self.manifest["objects"] if row["source_authority"] == "official-course"
@@ -347,7 +360,7 @@ class BerkeleyAgentsSourceAuditTest(unittest.TestCase):
             if row["rights_status"] == "permission-recorded":
                 self.assertEqual(row["license_identifier"], "User permission record (not a license)")
 
-    def test_staged_editorial_overlay_decides_every_unit_visual_and_object(self) -> None:
+    def test_editorial_overlay_decides_every_unit_visual_and_object(self) -> None:
         object_ids = {row["id"] for row in self.manifest["objects"]}
         unit_ids = {row["id"] for row in self.units["units"]}
         visual_ids = {row["id"] for row in self.visuals["rows"]}
@@ -359,31 +372,43 @@ class BerkeleyAgentsSourceAuditTest(unittest.TestCase):
         self.assertEqual(set(self.editorial["visuals"]), visual_ids)
         self.assertEqual(
             Counter(row["disposition"] for row in self.editorial["coverage"].values()),
-            Counter({"integrated": 137, "covered-existing": 6, "source-only": 41, "excluded": 28}),
+            Counter({"integrated": 140, "covered-existing": 6, "source-only": 38, "excluded": 28}),
         )
         self.assertEqual(
             Counter(row["disposition"] for row in self.editorial["visuals"].values()),
-            Counter({"integrated": 42, "source-only": 92, "excluded": 27}),
+            Counter({"integrated": 47, "source-only": 87, "excluded": 27}),
         )
 
-    def test_staged_overlay_hash_and_counts_are_locked_without_relabelling_baseline(self) -> None:
+    def test_active_overlay_hash_and_counts_are_locked(self) -> None:
         importer = self._load_importer()
         expected_hash = importer.editorial_overlay_sha256(self.editorial)
         expected_counts = importer.editorial_disposition_counts(self.editorial)
         self.assertEqual(
-            self.lock["generated_audit"]["staged_editorial_overlay_sha256"],
+            self.lock["generated_audit"]["editorial_overlay_sha256"],
             expected_hash,
         )
-        self.assertEqual(self.lock["invariants"]["staged_editorial_counts"], expected_counts)
-        self.assertEqual(self.inventory["staged_editorial_counts"], expected_counts)
+        self.assertEqual(self.lock["invariants"]["editorial_counts"], expected_counts)
+        self.assertEqual(self.inventory["editorial_counts"], expected_counts)
         self.assertEqual(
             self.lock["invariants"]["editorial_overlay_status"],
-            "staged-pending-destination-validation",
+            "active-destination-validated",
         )
-        self.assertNotIn("editorial_overlay_sha256", self.coverage)
-        self.assertNotIn("editorial_overlay_sha256", self.visuals)
+        self.assertEqual(self.coverage["editorial_overlay_sha256"], expected_hash)
+        self.assertEqual(self.visuals["editorial_overlay_sha256"], expected_hash)
 
-    def test_staged_visual_selection_matches_the_full_audit_exactly(self) -> None:
+    def test_deferred_unit_evidence_uses_one_exact_source_range(self) -> None:
+        units = {row["id"]: row for row in self.units["units"]}
+        page_range = re.compile(r"Lectures/[^;\s]+\.pages\.txt#physical-pages=\d+-\d+")
+        for unit_id, decision in self.editorial["coverage"].items():
+            if decision["disposition"] not in {"source-only", "excluded"}:
+                continue
+            source_location = units[unit_id]["source_location"]
+            evidence = decision["evidence"]
+            self.assertIn(source_location, evidence, unit_id)
+            if source_location.startswith("Lectures/"):
+                self.assertEqual(page_range.findall(evidence), [source_location], unit_id)
+
+    def test_integrated_visual_selection_matches_the_full_audit_exactly(self) -> None:
         expected = {
             "meeting-01-slides-visual-self-consistency-sampling",
             "meeting-01-slides-visual-tree-of-thoughts-search",
@@ -402,6 +427,7 @@ class BerkeleyAgentsSourceAuditTest(unittest.TestCase):
             "meeting-04-slides-visual-test-time-scaling",
             "meeting-05-slides-visual-swe-agent-loop",
             "meeting-05-slides-visual-coding-agent-design-comparisons",
+            "meeting-05-slides-visual-charles-sutton-vulnerability-discovery-loop",
             "meeting-06-slides-visual-visualwebarena",
             "meeting-06-slides-visual-vision-language-web-agents",
             "meeting-06-slides-visual-web-agent-tree-search",
@@ -414,8 +440,10 @@ class BerkeleyAgentsSourceAuditTest(unittest.TestCase):
             "meeting-08-slides-visual-alphaproof-methods",
             "meeting-08-slides-visual-test-time-rl",
             "meeting-09-slides-visual-kaiyu-yang-lean-theorem-proving-pipeline",
+            "meeting-09-slides-visual-formalizing-inequalities",
             "meeting-09-slides-visual-leaneuclid",
             "meeting-09-slides-visual-euclid-logical-gap",
+            "meeting-09-slides-visual-equivalence-and-diagrams",
             "meeting-10-slides-visual-lean-star",
             "meeting-10-slides-visual-draft-sketch-prove",
             "meeting-10-slides-visual-leanhammer",
@@ -423,10 +451,12 @@ class BerkeleyAgentsSourceAuditTest(unittest.TestCase):
             "meeting-11-slides-visual-copra",
             "meeting-11-slides-visual-compiler-verification",
             "meeting-11-slides-visual-swarat-chaudhuri-lasr-concept-library-sequence",
+            "meeting-11-slides-visual-lasr-examples-and-scaling",
             "meeting-12-slides-visual-dawn-song-agentic-threat-model-sequence",
             "meeting-12-slides-visual-prompt-injection-agentpoison",
             "meeting-12-slides-visual-dawn-song-privilege-control-sequence",
             "meeting-12-slides-visual-agent-monitoring-and-verification",
+            "meeting-12-slides-visual-agent-defense-mechanisms",
         }
         actual = {
             visual_id
@@ -435,7 +465,7 @@ class BerkeleyAgentsSourceAuditTest(unittest.TestCase):
         }
         self.assertEqual(actual, expected)
 
-    def test_staged_unit_deferrals_and_exclusions_match_the_full_audit_exactly(self) -> None:
+    def test_final_unit_deferrals_and_exclusions_match_the_full_audit_exactly(self) -> None:
         expected_covered = {
             "meeting-01-slides-self-consistency-sampling",
             "meeting-01-slides-tree-of-thoughts-search",
@@ -463,8 +493,6 @@ class BerkeleyAgentsSourceAuditTest(unittest.TestCase):
             "meeting-06-slides-plan-sequence-learn",
             "meeting-06-slides-proprietary-adjacent-demo",
             "meeting-07-slides-gui-agent-landscape",
-            "meeting-07-slides-xgen-video",
-            "meeting-07-slides-gens",
             "meeting-07-slides-gui-agent-summary",
             "meeting-08-slides-alphaproof-orientation",
             "meeting-08-slides-riemann-zeta-demo",
@@ -474,7 +502,6 @@ class BerkeleyAgentsSourceAuditTest(unittest.TestCase):
             "meeting-09-slides-autoformalization-capability-race",
             "meeting-10-slides-advanced-proving-frame",
             "meeting-11-slides-abstraction-discovery-frame",
-            "meeting-11-slides-visual-concept-discovery",
         }
         expected_excluded = {
             "practice-precioux-discovery-link",
@@ -518,7 +545,7 @@ class BerkeleyAgentsSourceAuditTest(unittest.TestCase):
             }
             self.assertEqual(actual, expected, disposition)
 
-    def test_staged_overlay_is_structurally_applied_without_claiming_destination_completion(self) -> None:
+    def test_editorial_overlay_is_applied_with_destination_validation(self) -> None:
         importer = self._load_importer()
         review = importer.semantic_review()
         manifest = importer.build_manifest()
@@ -531,26 +558,89 @@ class BerkeleyAgentsSourceAuditTest(unittest.TestCase):
             baseline_coverage,
             baseline_visuals,
             self.editorial,
-            validate_destinations=False,
         )
         self.assertRegex(overlay_sha, r"^[a-f0-9]{64}$")
         self.assertEqual(Counter(row["disposition"] for row in coverage["rows"]), Counter({
-            "integrated": 137,
+            "integrated": 140,
             "covered-existing": 6,
-            "source-only": 41,
+            "source-only": 38,
             "excluded": 28,
         }))
         self.assertEqual(Counter(row["disposition"] for row in visuals["rows"]), Counter({
-            "integrated": 42,
-            "source-only": 92,
+            "integrated": 47,
+            "source-only": 87,
             "excluded": 27,
         }))
         generated = importer.build_documents()
-        self.assertNotIn("editorial_overlay_sha256", generated["coverage.yml"])
+        self.assertEqual(generated["coverage.yml"]["editorial_overlay_sha256"], overlay_sha)
+        self.assertEqual(generated["visuals.yml"]["editorial_overlay_sha256"], overlay_sha)
+        self.assertEqual(generated["coverage.yml"], coverage)
+        self.assertEqual(generated["visuals.yml"], visuals)
+
+    def test_integrated_visuals_use_unique_nonempty_local_files_arrays(self) -> None:
+        integrated = [
+            decision
+            for decision in self.editorial["visuals"].values()
+            if decision["disposition"] in {"integrated", "covered-existing"}
+        ]
+        self.assertTrue(integrated)
+        self.assertTrue(all("local_file" not in decision for decision in integrated))
         self.assertTrue(all(
-            row["disposition"] in {"source-only", "excluded"}
-            for row in generated["coverage.yml"]["rows"]
+            isinstance(decision.get("local_files"), list)
+            and decision["local_files"]
+            and all(isinstance(path, str) and path.strip() for path in decision["local_files"])
+            for decision in integrated
         ))
+        local_files = [path for decision in integrated for path in decision["local_files"]]
+        self.assertEqual(len(local_files), len(set(local_files)))
+        expected_files = {
+            path.relative_to(REPOSITORY_ROOT).as_posix()
+            for path in BERKELEY_ASSET_ROOT.rglob("*.png")
+        }
+        self.assertEqual(set(local_files), expected_files)
+
+    def test_visual_asset_validation_rejects_missing_unembedded_and_reused_files(self) -> None:
+        importer = self._load_importer()
+        visual_ids = [
+            visual_id
+            for visual_id, decision in self.editorial["visuals"].items()
+            if decision["disposition"] in {"integrated", "covered-existing"}
+        ]
+        first_id, second_id = visual_ids[:2]
+
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            destination = root / "chapter.md"
+            destination.write_text("# Chapter\n\n![used](used.png)\n", "utf-8")
+            (root / "used.png").write_bytes(b"used")
+            (root / "unembedded.png").write_bytes(b"unembedded")
+
+            with self.assertRaisesRegex(ValueError, "local_files\\[0\\].*does not exist"):
+                importer.validate_visual_files(root, first_id, {
+                    "destination": "chapter.md",
+                    "local_files": ["missing-berkeley-asset.png"],
+                })
+
+            with self.assertRaisesRegex(ValueError, "is not embedded in destination"):
+                importer.validate_visual_files(root, first_id, {
+                    "destination": "chapter.md",
+                    "local_files": ["unembedded.png"],
+                })
+
+        review = importer.semantic_review()
+        manifest = importer.build_manifest()
+        units = importer.build_units(review)
+        baseline_coverage = importer.build_coverage(manifest, units, review)
+        baseline_visuals = importer.build_visuals(review)
+        reused = copy.deepcopy(self.editorial)
+        reused["visuals"][second_id]["local_files"].append(
+            reused["visuals"][first_id]["local_files"][0]
+        )
+        with self.assertRaisesRegex(ValueError, "must not share a local_files entry"):
+            importer.apply_editorial_overlay(
+                manifest, units, baseline_coverage, baseline_visuals, reused,
+                validate_destinations=False,
+            )
 
     def test_editorial_overlay_fails_closed_on_missing_or_unknown_decisions(self) -> None:
         importer = self._load_importer()
@@ -800,7 +890,9 @@ class BerkeleyAgentsSourceAuditTest(unittest.TestCase):
         )
         for registry in registries:
             frontmatter = "\n".join(registry.read_text("utf-8").splitlines()[:12])
-            self.assertIn("last_verified: 2026-09-04", frontmatter, registry)
+            matched = re.search(r"^last_verified: (\d{4}-\d{2}-\d{2})$", frontmatter, re.M)
+            self.assertIsNotNone(matched, registry)
+            self.assertGreaterEqual(matched.group(1), "2026-09-04", registry)
 
     @staticmethod
     def _load_importer():

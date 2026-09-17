@@ -36,14 +36,14 @@ sections:
 `;
 
 describe('loadManifest', () => {
-  it('keeps the published textbook index on the same 1 through 68 primary route', () => {
+  it('keeps the published textbook index on the same 1 through 72 primary route', () => {
     const root = join(import.meta.dirname, '..', '..');
     const index = readFileSync(join(root, '00 Учебник', '_index.md'), 'utf8');
     const primaryNumbers = [...index.matchAll(/^(\d+)\. \[\[/gm)]
       .map((match) => Number(match[1]));
-    expect(primaryNumbers).toEqual(Array.from({ length: 68 }, (_, index) => index + 1));
-    expect(index).toContain('S1. [[02 Areas/ML & DL/00 Учебник/10 ML Systems/01 Модель как часть системы]]');
-    expect(index).toContain('S7. [[02 Areas/ML & DL/00 Учебник/10 ML Systems/07 Profiling ML-нагрузки]]');
+    expect(primaryNumbers).toEqual(Array.from({ length: 72 }, (_, index) => index + 1));
+    expect(index).toContain('S1. [[02 Areas/ML & DL/00 Учебник/10 ML Systems/01 Модель как часть системы|Модель как часть системы]]');
+    expect(index).toContain('S7. [[02 Areas/ML & DL/00 Учебник/10 ML Systems/07 Profiling ML-нагрузки|Profiling ML-нагрузки]]');
     expect(index).toContain('Вводная: [[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура');
   });
 
@@ -218,7 +218,7 @@ describe('loadManifest', () => {
       .filter((match): match is RegExpMatchArray => match !== null)
       .map((match) => Number(match[1]));
     expect(primaryNumbers).toEqual(
-      Array.from({ length: 68 }, (_, index) => index + 1)
+      Array.from({ length: 72 }, (_, index) => index + 1)
     );
     expect(moduleItems.filter((item) => /^\d+\.\d+ /.test(item.label)).map((item) => item.label))
       .toEqual(expect.arrayContaining([

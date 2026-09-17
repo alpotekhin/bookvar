@@ -42,13 +42,30 @@ $$W(T)\approx \frac{C}{T}+\frac{T}{2M}.$$
 
 $$T^*=\sqrt{2CM}.$$
 
-Daly учитывает checkpoint duration и даёт практическую поправку порядка $T_{\mathrm{Daly}}\approx\sqrt{2CM}-C$ при обычных предпосылках.
+Здесь $T$ — только полезное вычисление между записями; полный безотказный
+цикл занимает $T+C$. В статье Daly (2006), §6, формула (38),
+$\sqrt{2CM}-C$ дана как низший порядок приближения для $C<M/2$,
+а не как полная поправка высокого порядка. Более точное трёхчленное
+приближение (37) при $C<2M$ имеет вид
+
+$
+T_{\mathrm{Daly}}\approx\sqrt{2CM}
+\left[1+\frac13\sqrt{\frac{C}{2M}}+\frac19\frac{C}{2M}\right]-C.
+$
+
+Соглашение об интервале и обе формулы сверены по
+[полной статье, pp. 304, 312](https://graal.ens-lyon.fr/~lmarchal/scheduling/articles/daly_checkpoint.pdf).
+Это модель пуассоновских отказов, а не точный закон для любого кластера.
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/young-daly-optimization.svg]]
 
 *Источник: Harvard Edge ML Systems Book, [Fault Tolerance, section `sec-fault-tolerance-checkpoint-optimization`, figure `fig-young-daly-optimization`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/fault_tolerance/fault_tolerance.qmd), CC BY-NC-SA 4.0.*
 
-Пример: $C=120$ s, $M=12$ h $=43200$ s. $T^*=\sqrt{10\,368\,000}=3219$ s ≈53.6 min; Daly ≈51.6 min. Checkpoint каждые 10 min платит 20% только записью; каждые 3 h теряет в среднем 1.5 h при failure. Формула предполагает стационарные независимые отказы и синхронный checkpoint; реальные preemption windows и correlated failures требуют simulation/trace.
+Пример: $C=120$ s, $M=12$ h $=43200$ s. $T^*=\sqrt{10\,368\,000}\approx3220$ s ≈53.7 min;
+низший порядок с вычитанием $C$ даёт 51.7 min, а трёхчленное приближение —
+52.3 min полезного вычисления (полный цикл около 54.3 min).
+Checkpoint после каждых 10 min полезного вычисления добавляет 20% к этому
+вычислению; доля записи в безотказном wall time равна $120/(600+120)=16.7\%$; каждые 3 h теряет в среднем 1.5 h при failure. Формула предполагает стационарные независимые отказы и синхронный checkpoint; реальные preemption windows и correlated failures требуют simulation/trace.
 
 Recovery time включает detection $D$, scheduler/rendezvous $Q$, restore $R$ и replay примерно $T/2$. Availability полезной работы оценивают с этими членами, не только с $C/T$.
 
@@ -75,7 +92,15 @@ Gang scheduling запускает job только если одновреме�
 
 Topology-aware placement минимизирует дорогие edges: TP ranks в одном NVLink node, EP/DP groups по полным rails, PP stages рядом и в порядке пути. Рассыпанные свободные GPU не эквивалентны компактному блоку.
 
-Slurm естественно даёт atomic allocation, topology constraints, fair-share и backfill для batch HPC. Kubernetes по умолчанию планирует pods независимо; для distributed jobs нужны admission/gang abstractions (Volcano/Coscheduling/Kueue), Training Operator, RDMA device plugins, host networking и storage QoS. Выбор не религиозный: dedicated training fleet часто проще на Slurm, смешанный training/serving control plane — на Kubernetes; возможен гибрид.
+Slurm поддерживает совместное выделение ресурсов, ограничения топологии,
+fair-share и backfill для batch HPC. Kubernetes по умолчанию планирует pods
+по отдельности. Распределённому запуску нужны согласованное выделение ресурсов,
+обнаружение участников и rendezvous, а также доступный выбранным процессам
+транспорт. Это свойства системы, не обязательный список продуктов.
+Admission/gang-механизмы (например, Kueue или Volcano), Training Operator,
+RDMA device plugins и storage QoS — возможные части HPC-стека.
+`hostNetwork` выбирают только при требованиях конкретного сетевого пути;
+распределённое обучение само по себе его не требует. Выбор не религиозный: dedicated training fleet часто проще на Slurm, смешанный training/serving control plane — на Kubernetes; возможен гибрид.
 
 Autoscaling training ограничен gang size, временем provisioning и checkpoint/reconfiguration. Масштабировать по мгновенной загрузке GPU бессмысленно: полезный сигнал — queue wait, ожидаемая длительность job, compact topology capacity и цена изменения world. Inference autoscaling реагирует быстрее; training fleet планируют минутами/часами.
 

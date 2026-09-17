@@ -2,7 +2,9 @@
 title: Three Transformer architectural patterns
 type: textbook-chapter
 status: canonical
-last_updated: 2026-08-03
+locale: en
+translation_of: "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md"
+last_updated: 2026-09-15
 primary_sources:
   - https://arxiv.org/abs/1810.04805
   - https://arxiv.org/abs/1910.10683
@@ -97,12 +99,14 @@ The cat did not eat the [MASK] because it was spoiled.
                        “food”
 ```
 
-Probability is predicted only at masked positions:
+The training loss is evaluated only at selected positions:
 
 $$
 \mathcal L_{\text{MLM}}
-=-\sum_{i\in\mathcal M}\log p_\theta(x_i\mid x_{\setminus\mathcal M}).
+=-\sum_{i\in\mathcal M}\log p_\theta(x_i\mid \tilde x).
 $$
+
+Here $\tilde x$ is the corrupted input. Original BERT selects 15% of positions: 80% of those become `[MASK]`, 10% receive a random token, and 10% remain unchanged. Selected does not mean always hidden; the unchanged cases deliberately retain the original input token.
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/bert/BERT-language-modeling-masked-lm.png]]
 
@@ -136,7 +140,7 @@ representations of known input, not “to classify.”*
 During MLM, the model saw `[MASK]` and right context. In open generation, right
 context does not yet exist and literal mask tokens do not occur naturally. An
 encoder can fill blanks iteratively, but that is not the simple autoregressive
-process it was trained to perform.
+process: original BERT was trained for MLM, not left-to-right prefix continuation.
 
 :::caution[Common mistake]
 “BERT cannot generate because it has no decoder” is imprecise. The central
@@ -353,8 +357,7 @@ inference procedures define the exact difference.
 :::
 
 :::danger[“A bidirectional model sees the answer”]
-In MLM, the correct token is replaced or hidden. The model sees right context,
-but not the target at the same position.
+In BERT, most selected tokens are replaced, but 10% remain unchanged. Right context is intentional, and so are these unchanged cases. The loss is restricted to the selected set; this is not unrestricted copying of every input token.
 :::
 
 :::danger[“Decoder-only training is sequential”]
@@ -379,8 +382,7 @@ every row answers: “which keys may this query read?”
 
 Take a ready-made BERT encoder and a causal LM. Feed sentences containing an
 ambiguous word in different contexts. Compare representations with and without
-context. The goal is not a benchmark, but direct evidence that a “word vector”
-now depends on its sentence.
+context. Use `They reached the bank beside the river.` and `They reached the bank beside the office.`: the same ambiguous word and left prefix, different right context. Compare aligned subword positions with dropout disabled. A full-attention encoder may change the `bank` representation; a causal LM must keep it equal up to numerical tolerance, because the changed suffix is inaccessible. This tests visibility, not semantic understanding by itself.
 
 ### 3. Read real code
 
@@ -393,7 +395,7 @@ pointed to in code.
 
 After this chapter, you should be able to explain without memorized slogans:
 
-- why BERT uses right context without copying its target;
+- how BERT uses right context and why some selected MLM targets remain in the input;
 - why GPT trains in parallel but generates sequentially;
 - where Q, K, and V come from in cross-attention;
 - why changing a mask can change the mode of the same stack;

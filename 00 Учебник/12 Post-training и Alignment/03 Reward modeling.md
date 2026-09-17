@@ -9,9 +9,19 @@ next: "[[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/04 Pol
 primary_sources:
   - https://arxiv.org/abs/2203.02155
   - https://arxiv.org/abs/2403.13787
+  - https://arxiv.org/abs/2401.10020
+  - https://arxiv.org/abs/2410.10630
+  - https://arxiv.org/abs/2407.19594
+  - https://arxiv.org/abs/2501.18099
 source_unit_id:
   - lecture-15-preference-data
   - lecture-15-rlhf-failure-modes
+  - meeting-02-slides-self-rewarding-setup
+  - meeting-02-slides-self-rewarding-results
+  - meeting-02-slides-thinking-language-models
+  - meeting-02-slides-meta-rewarding
+  - meeting-02-slides-evalplanner
+  - meeting-04-slides-human-preference-evaluation
 ---
 
 # Модель награды: перенос предпочтений на новые ответы
@@ -218,9 +228,12 @@ print((-F.logsigmoid(rw - rl)))  # примерно [1.313, 0.263]
 ### Проверяемая награда
 
 Модульные тесты, проверка точного ответа, компилятор или программа проверки
-доказательств дают программный сигнал. Это уже RLVR: награда не обязана быть
-обученной моделью. Верификатор точен только относительно спецификации; модель
-может эксплуатировать слабый тест.
+доказательств дают программный сигнал. Если этим сигналом оптимизируют
+стратегию методом обучения с подкреплением, получается RLVR: награда не обязана
+быть обученной моделью. Сам по себе запуск проверки ещё не является RL:
+тот же верификатор может оценивать готовую модель или фильтровать примеры для
+SFT без обновления стратегии по награде. Верификатор точен только относительно
+спецификации; модель может эксплуатировать слабый тест.
 
 ### Генеративный оценщик, или LLM-судья
 
@@ -243,7 +256,218 @@ print((-F.logsigmoid(rw - rl)))  # примерно [1.313, 0.263]
 обучения или одинаковый смысл предсказания. Источник: Nathan Lambert,
 [RLHF & Post-Training, лекция 2, слайд 56](https://rlhfbook.com/teach/course/lec2-chap4-5-9/#/55).*
 
-## 6. Проверка до обучения с подкреплением
+## 6. Итеративное обучение actor и evaluator
+
+> [!note] Расширение после DPO
+> Этот исследовательский раздел опирается на механизм
+> [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/05 DPO|DPO]].
+> При первом чтении можно перейти к разделу 7: для проверки модели награды
+> достаточно уже введённых парных оценок. После DPO вернитесь сюда и проследите,
+> как оценщик создаёт пары для обновления следующей версии модели.
+
+До сих пор оценщик был отдельной функцией: скалярной головой, verifier или
+LLM-судьёй. Следующие методы исследуют более рискованный режим — одна и та же
+языковая модель создаёт ответы и участвует в создании сигнала, по которому затем
+обновляется. Их нужно читать как конкретные алгоритмы построения нового датасета,
+а не как доказательство того, что модель способна объективно оценить саму себя.
+
+### Одна модель как actor и judge
+
+<!-- source_unit_id: meeting-02-slides-self-rewarding-setup -->
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m02-p52-self-rewarding-loop.png]]
+
+*Проследите замкнутый цикл: одна версия модели порождает ответы, та же модель в
+режиме judge превращает их в preference pairs, а DPO обучает следующую версию.
+Критическое место схемы — не стрелка обновления, а происхождение и независимая
+проверка judge-сигнала. Источник: Jason Weston, Berkeley Advanced LLM Agents,
+meeting 2,
+[слайд 52](https://rdi.berkeley.edu/adv-llm-agents/slides/Jason-Weston-Reasoning-Alignment-Berkeley-Talk.pdf#page=52).*
+
+В [Self-Rewarding Language Models](https://arxiv.org/abs/2401.10020) две роли
+реализуются одним Transformer, но разными входными задачами.
+
+- В роли **actor** модель получает пользовательский prompt $x$ и генерирует
+  response $y$.
+- В роли **judge** она получает $x$, один response $y$ и rubric, после чего
+  генерирует текстовое обоснование и итоговый score от 0 до 5.
+
+Это не модель награды со скалярной головой из начала главы. Score является
+токенами, извлечёнными parser из генерации LLM-as-a-Judge. Один набор весов
+условно выполняет обе задачи благодаря разным шаблонам входа.
+
+Начальная модель $M_1$ получается из Llama 2 70B совместным SFT на двух малых
+наборах OpenAssistant. **IFT** содержит обычные пары `instruction → response`.
+**EFT** содержит `instruction + candidate response + rubric → justification +
+score`; синтетическую оценку оставляли только тогда, когда порядок scores для
+четырёх ответов полностью совпадал с человеческим ranking. Эта seed-стадия
+важна: без неё следующая итерация не имеет независимого основания считать
+собственные оценки полезными.
+
+Одна итерация затем превращает генерации $M_t$ в DPO-данные:
+
+```text
+seed prompts → новые prompts xᵢ
+Mₜ(actor, xᵢ) → yᵢ¹, yᵢ², yᵢ³, yᵢ⁴
+Mₜ(judge, xᵢ, yᵢⁿ, rubric) → justificationᵢⁿ + scoreᵢⁿ
+argmax score → chosen; argmin score → rejected
+(xᵢ, chosen, rejected) → DPO(Mₜ) → Mₜ₊₁
+```
+
+В эксперименте каждый response оценивали несколько раз и усредняли разобранные
+scores; пару с равными крайними оценками отбрасывали. Поэтому объект обучения —
+не «мнение модели о себе», а версионированный набор троек
+`(prompt, chosen, rejected)`, созданный определённой policy, judge prompt и
+parser. Для воспроизведения нужно сохранить все три версии.
+
+Лекция Jason Weston показывает actor/judge и data-creation loop на
+[слайдах 40–52](https://rdi.berkeley.edu/adv-llm-agents/slides/Jason-Weston-Reasoning-Alignment-Berkeley-Talk.pdf#page=40).
+
+### Что показали итерации и где наступило насыщение
+
+<!-- source_unit_id: meeting-02-slides-self-rewarding-results -->
+
+Self-Rewarding оценивали по двум разным осям. Качество actor проверяли на
+instruction-following prompts, AlpacaEval 2 и MT-Bench; judge — по совпадению его
+ranking с человеческим ranking на отложенной части OpenAssistant. От $M_1$ к
+$M_2$ и $M_3$ обе оси улучшались в описанном эксперименте. Например,
+AlpacaEval-2 win rate относительно GPT-4 Turbo, вычисленный GPT-4-judge, вырос с
+9,94% до 15,38% и 20,44%.
+
+Эти числа нельзя читать как независимое доказательство самосовершенствования.
+Тот же класс моделей создаёт responses и scores, основной instruction-following
+benchmark использует другого модельного судью, а тонкий анализ авторов показывает
+меньшие gains на математике и reasoning, чем на общих письменных задачах. Кроме
+того, улучшение judge в Self-Rewarding является побочным эффектом общего DPO на
+actor pairs: отдельные preference pairs для качества **самих judgments** не
+строятся. Именно эта связь даёт естественное объяснение насыщения — actor всё
+лучше оптимизирует оценки judge, но механизм не гарантирует, что judge учится
+различать новые ошибки.
+
+Экспериментальные оси и результаты разобраны на
+[слайдах 53–73](https://rdi.berkeley.edu/adv-llm-agents/slides/Jason-Weston-Reasoning-Alignment-Berkeley-Talk.pdf#page=53);
+точный протокол и актуальная версия результатов находятся в первичной статье.
+
+### Обучение рассуждать над общей задачей оценки
+
+<!-- source_unit_id: meeting-02-slides-thinking-language-models -->
+
+[Thinking LLMs](https://arxiv.org/abs/2410.10630) переносит preference
+optimization с готового ответа на пару `thought → response`. Для каждого prompt
+модель сначала порождает несколько явных thoughts, затем по каждому thought
+создаёт ответ. Внешний judge сравнивает **ответы**, не получая право считать
+красивый thought истинным. Лучший и худший варианты образуют preference pair,
+включающую соответствующие thought tokens; после обновления процесс повторяется.
+
+Такой Thought Preference Optimization отличается и от SFT на одной цепочке, и от
+PRM. SFT сообщает единственный эталонный trace. PRM пытается оценивать отдельные
+шаги. Здесь supervision остаётся outcome-level: thought получает положительный
+или отрицательный градиент через качество ответа, к которому он привёл. Работа
+показывает этот цикл на general instruction following, а не только на задачах с
+точным математическим результатом; поэтому judge и контроль style/length входят
+в определение эксперимента. Схема генерации thoughts, отбора responses и
+повторного обучения собрана на
+[слайдах 83–87 курса Berkeley](https://rdi.berkeley.edu/adv-llm-agents/slides/Jason-Weston-Reasoning-Alignment-Berkeley-Talk.pdf#page=83).
+
+### Meta-judge: кто оценивает оценщика
+
+<!-- source_unit_id: meeting-02-slides-meta-rewarding -->
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m02-p89-meta-rewarding-loop.png]]
+
+*Сопоставьте два уровня supervision: judge выставляет оценку ответу, а
+meta-judge оценивает уже качество этого judgment. Рисунок помогает не смешивать
+улучшение actor с улучшением самого оценщика. Источник: Jason Weston, Berkeley
+Advanced LLM Agents, meeting 2,
+[слайд 89](https://rdi.berkeley.edu/adv-llm-agents/slides/Jason-Weston-Reasoning-Alignment-Berkeley-Talk.pdf#page=89).*
+
+[Meta-Rewarding](https://arxiv.org/abs/2407.19594) добавляет обучающий сигнал для
+judge. Одна модель по-прежнему выполняет все роли, но данные разделяются:
+
+1. **Actor data.** Actor порождает несколько responses; judge несколько раз
+   оценивает каждый response. Средний разобранный score позволяет выбрать
+   `chosen response` и `rejected response`.
+2. **Judge data.** Для одного response judge порождает несколько judgments —
+   каждое содержит рассуждение и score. Meta-judge попарно сравнивает уже не
+   responses, а качество этих judgments с учётом исходного prompt, response и
+   rubric.
+3. **Два обновления в одном DPO-наборе.** Пары responses обучают модель как
+   actor; пары judgments обучают те же веса как judge.
+
+Попарные решения meta-judge агрегируются не простым большинством. Для пары
+judgments порядок показа меняют, чтобы измерить positional bias; результаты
+составляют battle matrix $B$. Затем для каждого judgment оценивают Elo-подобный
+параметр $\varepsilon_m$, максимизируя попарное правдоподобие
+
+$$
+\sum_{m,n}B_{mn}\log\sigma(\varepsilon_m-\varepsilon_n).
+$$
+
+Judgment с наибольшим Elo становится chosen, с наименьшим — rejected. Это делает
+переход от нескольких шумных meta-judgments к DPO-паре явным. Но круговой
+характер никуда не исчезает: actor, judge и meta-judge имеют общие веса и могут
+разделять одну систематическую ошибку. В работе дополнительно понадобился length
+control, потому что judge и meta-judge предпочитали более длинные тексты.
+
+На слайдах
+[88–94](https://rdi.berkeley.edu/adv-llm-agents/slides/Jason-Weston-Reasoning-Alignment-Berkeley-Talk.pdf#page=88)
+этот процесс показан как три роли; статья задаёт battle matrix, агрегацию и
+length-control достаточно точно, чтобы воспроизвести построение данных.
+
+### Планирование проверки перед вердиктом
+
+<!-- source_unit_id: meeting-02-slides-evalplanner -->
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m02-p98-evalplanner-loop.png]]
+
+*Отделите на схеме два объекта: сначала модель строит task-specific plan
+проверки, затем применяет его к candidate response. Это позволяет диагностировать
+не только ошибочный verdict, но и пропущенный критерий в самом плане. Источник:
+Jason Weston, Berkeley Advanced LLM Agents, meeting 2,
+[слайд 98](https://rdi.berkeley.edu/adv-llm-agents/slides/Jason-Weston-Reasoning-Alignment-Berkeley-Talk.pdf#page=98).*
+
+Обычный LLM-as-a-Judge часто получает универсальную rubric и сразу пишет
+обоснование. Для сложного запроса этого недостаточно: сначала нужно вывести, что
+именно следует проверить, затем выполнить проверки и только после этого выбрать
+ответ. [EvalPlanner](https://arxiv.org/abs/2501.18099) разделяет сгенерированную
+последовательность на три части:
+
+$$
+\underbrace{z}_{\text{evaluation plan}}
+\rightarrow
+\underbrace{e}_{\text{execution}}
+\rightarrow
+\underbrace{y}_{\text{final verdict}}.
+$$
+
+Для нашего TCP/UDP prompt план мог бы потребовать: проверить гарантии доставки и
+порядка, убедиться, что примеры согласуются с этими свойствами, затем проверить
+лимит длины и отсутствие абсолютного утверждения «UDP всегда быстрее». Execution
+сопоставляет оба ответа с этими пунктами и приводит к A/B verdict. Важно, что
+план строится **для конкретного запроса**, а не копирует один список критериев
+для всех задач.
+
+Обучающие preference pairs создаются синтетически. Для general prompts хорошему
+ответу противопоставляют ответ на специально искажённую похожую инструкцию; для
+математики correctness финального ответа даёт метку. Текущая модель семплирует
+несколько plans и несколько executions каждого плана. Тройки
+`(plan, execution, verdict)`, закончившиеся правильным verdict, становятся
+chosen, ошибочные — rejected; DPO обновляет модель, после чего цикл генерации
+данных повторяется.
+
+Это не checklist prompting. Checklist заранее задаёт структуру проверки и
+меняет один inference call. EvalPlanner обучает распределение task-specific
+plans: в абляции авторов unconstrained plans превосходили фиксированный список
+критериев и список verification questions в рассмотренном RewardBench setup.
+Результат не доказывает, что свободный план всегда лучше; он показывает, что
+форма плана является обучаемой частью evaluator, которую нужно сравнивать при
+одинаковых данных и модели.
+
+Механизм и его граница представлены на
+[слайдах 95–102](https://rdi.berkeley.edu/adv-llm-agents/slides/Jason-Weston-Reasoning-Alignment-Berkeley-Talk.pdf#page=95)
+и подробно определены в первичной статье EvalPlanner.
+
+## 7. Проверка до обучения с подкреплением
 
 <a id="rm-validation"></a>
 
@@ -267,7 +491,10 @@ $$
 <a id="annotator-effects"></a>
 <!-- source_unit_id: lecture-15-preference-data -->
 
-### Чьи предпочтения аппроксимирует модель
+<span id="человеческое-предпочтение-наблюдение-а-не-истинная-награда"></span>
+### Человеческое предпочтение — наблюдение, а не истинная награда
+
+<!-- source_unit_id: meeting-04-slides-human-preference-evaluation -->
 
 Пара `chosen/rejected` не является безличным измерением качества. Она фиксирует
 выбор конкретного аннотатора при конкретной инструкции, интерфейсе и порядке
@@ -295,6 +522,10 @@ $$
 какая именно субъективность оказалась в данных и какие короткие признаки модель
 использует вместо содержательного сравнения.
 
+Различие между наблюдаемым человеческим выбором и абстрактной «истинной
+наградой» вынесено в отдельную схему на
+[слайде 155 лекции Berkeley](https://rdi.berkeley.edu/adv-llm-agents/slides/OLMo-Tulu-Reasoning-Hanna.pdf#page=155).
+
 ### Проверочные наборы
 
 Нужны пары:
@@ -316,7 +547,7 @@ RewardBench оценивает предпочтения в диалоге, ра�
 падает, критерий уже эксплуатируется. Такой тест дешевле полноценного PPO и
 часто раньше обнаруживает проблему.
 
-## 7. Эксплуатация награды и сдвиг распределения
+## 8. Эксплуатация награды и сдвиг распределения
 
 <a id="reward-overoptimization"></a>
 <!-- source_unit_id: lecture-15-rlhf-failure-modes -->
@@ -343,7 +574,7 @@ KL ограничивает уход стратегии, но не превра�
 Венг приводит примеры, где разрыв между приближённой и настоящей целью остаётся
 и при регуляризации: проблему Гудхарта нельзя решить одним коэффициентом.
 
-## 8. Типичные ошибки
+## 9. Типичные ошибки
 
 | Симптом | Причина | Что проверить |
 |---|---|---|

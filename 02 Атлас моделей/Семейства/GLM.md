@@ -3,8 +3,8 @@ title: "GLM"
 type: model-family
 organization: Zhipu AI, Z.ai and Tsinghua KEG
 first_release: 2021
-latest_verified_release: GLM-5.1
-last_verified: 2026-08-06
+latest_verified_release: GLM-5.1 (scope of this card)
+last_verified: 2026-09-15
 architecture_base: autoregressive blank infilling; later causal MoE
 modalities: [text, image]
 status: active
@@ -14,7 +14,7 @@ status: active
 
 ## Место в истории
 
-GLM начался не как очередной causal decoder: paper 2021 обучал autoregressive blank infilling с двумерными positional IDs и объединял понимание, conditional generation и unconditional generation. GLM-130B масштабировал этот подход и подробно документировал engineering. ChatGLM сделал bilingual dialogue-модель практичной и открытой. В GLM-4/4.5 фокус сместился к long context, tools и agents, а GLM-4.5 впервые дал крупную открытую MoE-базу. GLM-5 масштабировал её и добавил DeepSeek Sparse Attention; GLM-5.1 — текущий post-trained agentic engineering release, но не отдельный опубликованный backbone.
+GLM начался не как очередной causal decoder: paper 2021 обучал autoregressive blank infilling с двумерными positional IDs и объединял понимание, conditional generation и unconditional generation. GLM-130B масштабировал этот подход и подробно документировал engineering. ChatGLM сделал bilingual dialogue-модель практичной и открытой. В GLM-4/4.5 фокус сместился к long context, tools и agents, а GLM-4.5 впервые дал крупную открытую MoE-базу. GLM-5 масштабировал её и добавил DeepSeek Sparse Attention; GLM-5.1 позиционируется как релиз для длительных агентных инженерных задач. Официальная таблица весов относит и 5, и 5.1 к 744B-A40B, но одинаковый размер сам по себе не доказывает неизменность предобучения или тождество backbone.
 
 ## Релизы как diff
 
@@ -25,9 +25,11 @@ GLM начался не как очередной causal decoder: paper 2021 о�
 | ChatGLM-6B (2023) | GLM dialogue adaptation; INT4/8 support | 2K→32K variants; Chinese/English | instruction/dialogue tuning | **A/B** |
 | ChatGLM2/3 (2023) | MQA, longer context; tool/agent formats | до 32K/128K by variant | stronger alignment and tool use | **B** |
 | GLM-4 / 4V (2024) | proprietary text backbone; separate vision line | 128K and multimodal variants | All Tools, browsing/code interpreter | **A/B; часть architecture закрыта** |
-| GLM-4.5 (2025-07) | 355B/32B active MoE; Air 106B/12B; MLA-like efficient attention | 128K text | 23T tokens; thinking/non-thinking; agentic RL | **A/B** |
+| GLM-4.5 (2025-07) | 355B/32B active MoE; Air 106B/12B; GQA | 128K text | 23T tokens; thinking/non-thinking; agentic RL | **A/B** |
 | GLM-5 (2026) | 744B/40B active; DeepSeek Sparse Attention | long-context text | 28.5T tokens; asynchronous RL via slime | **A/B** |
-| GLM-5.1 (2026-04) | GLM-5-class weights/backbone per official repo | agentic text/coding | long-horizon engineering post-training | **B** |
+| GLM-5.1 (2026-04) | 744B-A40B по официальной таблице весов; равенство размеров не доказывает идентичность backbone | agentic text/coding | заявлены улучшения длительной инженерной работы; полный diff обучения здесь не установлен | **B** |
+
+Проверка 15 сентября 2026 года относится к поколениям до GLM-5.1 включительно. В [официальном каталоге](https://github.com/zai-org/GLM-5) уже перечислены также 5.2, 5.3 и 5.3-Flash; они не входят в подробный архитектурный охват этой карточки. Поэтому поле `latest_verified_release` означает верхнюю границу рассмотрения, не последний доступный продукт.
 
 ## Неизменное ядро и перелом линии
 
@@ -58,6 +60,8 @@ All Tools — следующее поколение одного backbone»: в�
 **Опубликовано:** papers GLM/130B/GLM-4/4.5/5, official repos/configs и часть weights. **Неизвестно:** точная архитектура некоторых закрытых GLM-4 API versions, полный data/RL mixture, является ли 5.1 новым pre-trained checkpoint или преимущественно post-training revision. Поэтому карточка не выводит архитектуру 5.1 из SWE-Bench (**C**).
 
 ## Источники
+
+- [Конфигурация GLM-4.5, закреплённая ревизия](https://huggingface.co/zai-org/GLM-4.5/blob/8b91a96cb5e3a6dde04be29567b87b06f3dd61dc/config.json) — 96 query-голов и 8 KV-голов: каждая группа из 12 query-голов использует общие ключи и значения. Это GQA, не латентный KV-кэш MLA.
 
 - [GLM: General Language Model Pretraining](https://arxiv.org/abs/2103.10360) — **A**.
 - [GLM-130B](https://arxiv.org/abs/2210.02414) — **A**.

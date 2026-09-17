@@ -2,7 +2,7 @@
 title: Post-training и RLVR для математических рассуждений
 type: practice
 status: canonical
-last_updated: 2026-09-07
+last_updated: 2026-09-15
 contract: Contracts/stanford-cs336-a5.yml
 primary_sources:
   - https://github.com/stanford-cs336/assignment5-alignment/tree/c2734a26308710949fe13226960a1e8cece94b7e
@@ -124,8 +124,10 @@ source_unit_id:
 
 ## Режимы
 
-- `smoke_cpu` — tiny frozen model, локальные fixtures, все adapter tests,
-  повторяемые hashes; сеть после setup не нужна.
+- `smoke_cpu` — маленькая проверка маски, наград и градиента ниже; затем
+  реализация адаптеров и применимые CPU-тесты курса. Опорные значения
+  фиксированы, обучаемые логиты/параметры не заморожены; сеть после установки
+  зависимостей не нужна.
 - `onpolicy_small_gpu` — prompting, grader audit, фиксированный SFT baseline,
   GRPO, Dr. GRPO, RFT и `MaxRL_course` при сопоставимом token/update budget.
 - `offpolicy_small_gpu` — один пакет rollouts используется в 32 minibatch
@@ -135,6 +137,68 @@ source_unit_id:
   обучению рассуждениям.
 - `course_full_reference` — неизменённые параметры Stanford и четыре seed;
   только справочный режим.
+
+### Первый CPU-пример: два ответа, одна маска и один градиент
+
+Скопируйте следующую ячейку в Python с PyTorch. Она не загружает модель и
+не реализует полный GRPO: на явно заданных логитах проверяются сдвиг целей,
+исключение запроса и padding, награда и знак policy gradient. В словаре
+`1,2` — запрос, `3` — правильный ответ «4», `5` — неправильный «5»,
+`4` — EOS, `0` — padding. Проверяющая функция рассчитана только на это
+искусственное задание и не заменяет математический parser.
+
+```python
+# bookvar: rlvr-smoke
+import hashlib
+import json
+import torch
+
+ids = torch.tensor([[1, 2, 3, 4, 0], [1, 2, 5, 4, 0]])
+labels = ids[:, 1:]
+mask = torch.tensor([[0., 1., 1., 0.], [0., 1., 1., 0.]],
+                    dtype=torch.float64)
+responses = ["4", "5"]
+rewards = torch.tensor([float(answer == "4") for answer in responses],
+                       dtype=torch.float64)
+
+def advantages(r):
+    # В этом примере std — по всей группе (correction=0).
+    return (r - r.mean()) / (r.std(unbiased=False) + 1e-6)
+
+adv = advantages(rewards).detach()
+assert torch.isfinite(advantages(torch.ones(2))).all()
+assert torch.count_nonzero(advantages(torch.ones(2))) == 0
+logits = torch.zeros(2, 4, 6, dtype=torch.float64, requires_grad=True)
+log_probs = logits.log_softmax(-1).gather(-1, labels.unsqueeze(-1)).squeeze(-1)
+loss = -(adv[:, None] * log_probs * mask).sum() / mask.sum()
+loss.backward()
+assert torch.count_nonzero(logits.grad[:, [0, 3]]) == 0
+assert logits.grad[0, 1, 3] < 0  # Шаг спуска повышает логит верного ответа.
+assert logits.grad[1, 1, 5] > 0  # И понижает логит неверного.
+assert torch.isfinite(logits.grad).all()
+
+numeric_fixture = {
+    "labels": labels.tolist(), "response_mask": mask.tolist(),
+    "rewards": rewards.tolist(), "advantages": adv.tolist(),
+    "loss": loss.item(), "gradient": logits.grad.tolist()
+}
+canonical = json.dumps(numeric_fixture, sort_keys=True, separators=(",", ":"),
+                       allow_nan=False).encode("utf-8")
+digest = hashlib.sha256(canonical).hexdigest()
+print("rewards:", rewards.tolist(), "response tokens:", int(mask.sum()))
+print("OK: mask, finite advantages, gradient direction; digest:", digest)
+```
+
+Ожидаются награды `[1.0, 0.0]` и четыре токена под маской. При равномерных
+начальных логитах скалярная потеря здесь равна нулю: положительное и
+отрицательное преимущества компенсируются. Градиент при этом не нулевой,
+что проверяют два неравенства. Поэтому одно значение loss не доказывает,
+что обучение не работает.
+
+Этот пример проверен на CPU в PyTorch 2.8.0. Полный набор тестов Stanford
+запускается отдельно в закреплённом окружении курса после реализации
+`tests/adapters.py` командой `uv run pytest -v tests/test_grpo.py`.
+Прохождение маленького примера не заменяет эти тесты и сравнительное обучение.
 
 <a id="prompting-baselines"></a>
 <!-- source_unit_id: assignment-05-deliverable-prompting-baselines-001 -->
@@ -216,7 +280,7 @@ run_compute_rollout_rewards(reward_fn, rollout_responses,
 <!-- source_unit_id: assignment-05-task-compute-policy-gradient-loss-on-policy -->
 <!-- source_unit_id: assignment-05-task-grpo-train-step-standard-on-policy -->
 
-Реализуйте ещё пять интерфейсов:
+Реализуйте ещё четыре интерфейса:
 
 ```python
 run_compute_group_normalized_rewards(raw_rewards, group_size, baseline="mean",
@@ -410,12 +474,21 @@ evidence/
 ```
 
 Зачёт требует пройти неизменённые тесты исходного задания, получить конечные
-значения на группах с одинаковой наградой, воспроизвести одинаковые хэши двух
-коротких запусков, вручную проверить разборщик, сохранить происхождение старых
+значения на группах с одинаковой наградой, повторить короткую CPU-проверку
+на численных данных, вручную проверить разборщик, сохранить происхождение старых
 логарифмов вероятностей, сравнить методы при одинаковом бюджете и провести
 оценку, независимую от обучающей проверяющей программы. Каждый артефакт получает
 SHA-256. Отрицательный результат допустим, если контракт соблюдён, а причины
 разобраны.
+
+Одинаковый SHA-256 требуется только для канонического численного fixture
+в одном закреплённом детерминированном окружении: идентификаторов токенов,
+маски, наград, преимуществ, потери и градиента, как в примере выше. Порядок
+JSON-ключей и формат сериализации фиксируются. Время запуска, hostname,
+run ID и длительности хранятся отдельно: их хэши между запусками закономерно
+различаются. Для GPU-результатов сравнивайте численные массивы с заранее
+оговорёнными допусками; хэш каждого файла нужен для происхождения артефакта,
+а не как обещание побитово одинакового GPU-обучения.
 
 ## Первоисточники
 

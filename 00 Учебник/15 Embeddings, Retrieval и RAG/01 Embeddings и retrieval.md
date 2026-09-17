@@ -15,6 +15,14 @@ primary_sources:
 
 # Поиск: BM25, эмбеддинги и переранжирование
 
+> [!note] Карта переноса
+> Канонический маршрут теперь разделён на
+> [[02 Areas/ML & DL/00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning|60: эмбеддинги и contrastive loss]],
+> [[02 Areas/ML & DL/00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid|61: BM25, ANN и RRF]] и
+> [[02 Areas/ML & DL/00 Учебник/15 Embeddings, Retrieval и RAG/62 Reranking — cross-encoder и late interaction|62: reranking и MaxSim]].
+> Численные примеры перенесены и развиты там. Эта legacy-страница сохранена
+> для старых ссылок и иллюстраций, а не как второй обязательный маршрут.
+
 > [!abstract] После этой главы
 > Вы сможете вручную вычислить BM25 и contrastive loss, объяснить различие между
 > двухбашенной моделью, cross-encoder и ColBERT, собрать гибридный поиск и
@@ -281,9 +289,20 @@ $$
 
 ### Recall@k
 
-Доля запросов, для которых хотя бы один релевантный документ попал в первые
-$k$. Для RAG это главная метрика раннего извлечения: потерянное доказательство
-невозможно восстановить генератором.
+Для запроса $q$ обозначим множество релевантных документов $R_q$, а первые
+$k$ результатов — $C_k(q)$. Тогда
+
+$$
+\operatorname{Recall@k}(q)=\frac{|R_q\cap C_k(q)|}{|R_q|},\qquad
+\operatorname{Hit@k}(q)=\mathbf1[|R_q\cap C_k(q)|>0].
+$$
+
+При трёх релевантных документах и одном найденном Recall@k равен $1/3$,
+а Hit@k — 1. Затем значения усредняют по запросам; случаи $|R_q|=0$ оценивают
+отдельно как неотвечаемые. В некоторых QA-работах hit называют recall:
+такую конвенцию необходимо указывать явно, а не переносить на задачу поиска
+всех доказательств. Различие соответствует
+[определению полноты в Introduction to Information Retrieval](https://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-unranked-retrieval-sets-1.html).
 
 ### MRR
 

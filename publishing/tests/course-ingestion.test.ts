@@ -54,6 +54,13 @@ function visual(bundle: Fixture, id: string): LedgerRow {
   return rowById(bundle.visuals, 'rows', id);
 }
 
+function useBerkeleyVisualSchema(bundle: Fixture, localFiles: string[]): void {
+  bundle.source_manifest.course = 'Berkeley Advanced LLM Agents';
+  const row = visual(bundle, 'visual-01');
+  delete row.local_file;
+  row.local_files = localFiles;
+}
+
 function materialize(bundle: Fixture): { courseRoot: string; repositoryRoot: string } {
   const repositoryRoot = mkdtempSync(resolve(tmpdir(), 'course-ledger-'));
   temporaryDirectories.push(repositoryRoot);
@@ -94,6 +101,36 @@ describe('course ingestion ledger', () => {
     object(bundle, 'lecture-01').canonical_url =
       'https://raw.githubusercontent.com/example/course/0123456789abcdef0123456789abcdef01234567/lecture.md';
     validate(bundle);
+  });
+
+  it('accepts multiple local files for an integrated Berkeley visual', () => {
+    const bundle = clone(fixture('course-ledger.valid.yml'));
+    const secondAsset = '00 Учебник/Assets/Figures/fixture/visual-02.png';
+    useBerkeleyVisualSchema(bundle, [
+      '00 Учебник/Assets/Figures/fixture/visual-01.png',
+      secondAsset
+    ]);
+    rows(bundle.asset_registry, 'assets').push({ asset: secondAsset, metadata_status: 'verified' });
+    bundle.files!.push(secondAsset);
+    validate(bundle);
+  });
+
+  it('rejects an empty local_files array for an integrated Berkeley visual', () => {
+    const bundle = clone(fixture('course-ledger.valid.yml'));
+    useBerkeleyVisualSchema(bundle, []);
+    expect(() => validate(bundle)).toThrow(/local_files must not be empty/i);
+  });
+
+  it('rejects legacy singular local_file for an integrated Berkeley visual', () => {
+    const bundle = clone(fixture('course-ledger.valid.yml'));
+    bundle.source_manifest.course = 'Berkeley Advanced LLM Agents';
+    expect(() => validate(bundle)).toThrow(/local_file is not allowed; use local_files/i);
+  });
+
+  it('rejects a missing asset in a Berkeley local_files array', () => {
+    const bundle = clone(fixture('course-ledger.valid.yml'));
+    useBerkeleyVisualSchema(bundle, ['00 Учебник/Assets/Figures/fixture/missing.png']);
+    expect(() => validate(bundle)).toThrow(/local_files\[0\].*does not exist/i);
   });
 
   it('rejects the required malformed fixture', () => {

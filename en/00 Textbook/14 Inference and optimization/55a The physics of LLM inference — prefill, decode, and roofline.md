@@ -35,7 +35,8 @@ $$
 p(y_{1:T}\mid x)=\prod_{t=1}^{T}p(y_t\mid x,y_{<t}).
 $$
 
-Even a short forward pass must therefore be repeated a thousand times for a thousand-token answer. More GPUs do not remove this dependency; they can only shorten an individual step or serve more requests concurrently.
+A thousand-token answer therefore requires prefill for the first token and
+999 subsequent ordinary decode steps. More GPUs do not remove this dependency; they can only shorten an individual step or serve more requests concurrently.
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-latency_diagram.png]]
 
@@ -57,7 +58,12 @@ $$
 F_{\text{attn,prefill}}\approx 4S^2d
 $$
 
-operations: roughly $2S^2d$ for $QK^\top$ and the same amount for multiplying probabilities by $V$. For $L$ layers and batch size $B$, this term is multiplied by $LB$. Parameterized matrix layers dominate at moderate context lengths, but the quadratic term becomes material as $S$ grows.
+operations if both full square products are evaluated: roughly $2S^2d$ for
+$QK^\top$ and the same amount for multiplying probabilities by $V$. A causal
+implementation that skips forbidden pairs performs about $2S(S+1)d$ operations
+instead, since only $S(S+1)/2$ pairs are allowed. Both counts remain quadratic;
+tiling and reduced HBM traffic do not remove this arithmetic. For $L$ layers
+and batch size $B$, the term is multiplied by $LB$. Parameterized matrix layers dominate at moderate context lengths, but the quadratic term becomes material as $S$ grows.
 
 At decode, the new query is compared with all $S$ cached keys and used to aggregate their values. The attention cost for one layer is then
 
@@ -158,18 +164,23 @@ PagedAttention addresses placement by dividing logical history into blocks and m
 At least two independent quantities matter to a user. **TTFT** (*time to first token*) runs from request submission to receipt of the first token:
 
 $$
-\operatorname{TTFT}=T_{queue}+T_{schedule}+T_{prefill}+T_{sample,1}.
+\operatorname{TTFT}=T_{front}+T_{queue}+T_{schedule}+T_{prefill}+T_{sample,1}.
 $$
+
+Here the terms denote disjoint portions of the critical path: $T_{front}$ includes tokenization, transport, and other frontend work not counted elsewhere; $T_{sample,1}$ includes delivery of the first token. Overlapping work must not be added twice.
 
 **TPOT** (*time per output token*) is the mean interval during subsequent generation. The related **ITL** (*inter-token latency*) retains each individual interval and exposes tail behavior. For an answer of $T$ tokens,
 
 $$
-T_{E2E}\approx\operatorname{TTFT}+(T-1)\operatorname{TPOT},
+T_{E2E}=\operatorname{TTFT}+(T-1)\operatorname{TPOT},\qquad T>1,
 $$
 
-although an average conceals pauses in particular iterations. Interactive chat may tolerate moderate TTFT but feel erratic when ITL spikes; offline summarization cares more about aggregate throughput.
+an exact identity when all metrics use the same client timestamps through the
+last token. An average still conceals pauses in particular iterations. For
+$T=1$, TPOT is undefined and $T_{E2E}=TTFT$; post-processing after the last token
+belongs to a separately defined extended E2E metric. Interactive chat may tolerate moderate TTFT but feel erratic when ITL spikes; offline summarization cares more about aggregate throughput.
 
-**Throughput** is the number of requests or tokens completed per unit time. It can rise with batch size while per-request latency deteriorates. Serving systems therefore use **goodput**: work completed while meeting constraints such as TTFT below 500 ms and TPOT below 50 ms. A system with the highest tokens/s may have lower goodput if its queues violate the SLO.
+**Throughput** is the number of requests or tokens completed per unit time. It can rise with batch size while per-request latency deteriorates. Serving systems therefore use **goodput**: work completed per unit time while meeting constraints such as TTFT below 500 ms and TPOT below 50 ms. A system with the highest tokens/s may have lower goodput if its queues violate the SLO.
 
 ## One request competes for several resources
 

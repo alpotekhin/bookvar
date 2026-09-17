@@ -3166,7 +3166,7 @@
           "height": 50
         }
       ],
-      "reason": "The exact page is preserved for a later training-objective integration; reproducing it in the MoE chapter would incorrectly present MTP as part of expert routing.",
+      "reason": "The mechanism is now integrated in the NTP training-objective chapter, with a separately licensed original Meta MTP figure and an explicit contrast to DeepSeek. This exact composite DeepSeek/EAGLE slide is preserved in the source archive, not claimed as a reused visual.",
       "evidence": "Lectures/repository/lecture_04.pdf#page=59:semantic=deepseek-mtp; question reviewed: Where does the auxiliary next-next-token prediction module attach during DeepSeek-V3 training?"
     },
     {
@@ -16442,5 +16442,5 @@
       "evidence": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#pages=15-18"
     }
   ],
-  "editorial_overlay_sha256": "499fdf66de3a57327a9496ded75bc93b0b00b5a21504e1d47f70d7a6f0c315d6"
+  "editorial_overlay_sha256": "9732619423ca971090783666576cf14034229666b78e878ed67f8c4872fbd17b"
 }

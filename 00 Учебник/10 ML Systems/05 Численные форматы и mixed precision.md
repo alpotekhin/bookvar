@@ -61,12 +61,18 @@ instructions. Догадываться об использовании Tensor Co
 умножения хорошо работают в узком формате, тогда как softmax, нормализация и
 накопление сумм часто требуют более высокой точности.
 
-Autocast выбирает low precision для подходящих GEMM/convolution и оставляет
-чувствительные reductions/normalization в более широком формате. Accumulation
-часто шире input. Оптимизатор обновляет FP32 **master weights**, после чего
-рабочая low-precision копия используется в forward.
+В стандартном PyTorch AMP параметры модели остаются FP32. `autocast` выбирает
+тип отдельных операций: подходящие матричные умножения могут использовать FP16,
+а чувствительные редукции — FP32. Тип накопителя также может быть шире типа
+операндов. Это не то же самое, что заранее перевести все параметры модели в FP16.
 
-Полный AMP-flow:
+Другая схема явно хранит рабочие веса пониженной точности и отдельную FP32-копию
+для обновления оптимизатором (master weights). Её поддерживает конкретная система
+обучения; сам вызов `torch.autocast` такой постоянной пары копий не требует.
+См. [PyTorch AMP](https://docs.pytorch.org/docs/2.8/amp.html).
+
+Ниже — один шаг native AMP; предполагаются `model` с параметрами FP32,
+`optimizer` и заранее созданный `torch.amp.GradScaler("cuda")`:
 
 ```python
 optimizer.zero_grad(set_to_none=True)
@@ -79,8 +85,10 @@ scaler.step(optimizer)           # пропускает step при inf/nan
 scaler.update()
 ```
 
-При gradient accumulation loss нормируют на microsteps, а `step/update`
-вызывают только на границе логического batch. GEMM partial sums, reductions,
+При gradient accumulation деление loss на число microsteps корректно для
+микропакетов с одинаковым числом учитываемых токенов. При разных размерах
+нужна нормировка по их общему числу, как в главе о distributed training.
+`step/update` вызывают только на границе логического batch. GEMM partial sums, reductions,
 softmax statistics и optimizer update обычно сохраняют в более широком типе.
 
 ### Два dtype у одной матричной операции
@@ -117,8 +125,8 @@ optimizer state.
 
 Малые FP16 gradients могут округлиться в ноль. Умножаем loss на $s$:
 
-$$\tilde L=sL,\qquad \nabla\tilde L=s\nabla L,
-$$
+$\tilde L=sL,\qquad \nabla\tilde L=s\nabla L,
+$
 
 затем перед step делим gradients на $s$. Dynamic scaler уменьшает $s$ при
 Inf/NaN и постепенно увеличивает после стабильных шагов. BF16 обычно меньше
@@ -128,9 +136,11 @@ Inf/NaN и постепенно увеличивает после стабиль
 
 Для Adam полный расчёт памяти выглядит так:
 
-- FP32: weight 4 + gradient 4 + moments 8 = 16 B/parameter;
-- AMP: low-precision weight 2 + master weight 4 + gradient 2 (иногда 4) +
-  moments 8 = 16–18 B/parameter.
+- обычный FP32 Adam: вес 4 + градиент 4 + два момента 8 =16 байт на параметр;
+- показанный native AMP с FP32-параметрами: те же постоянные 16 байт на параметр;
+  временные преобразования, кэш autocast и активации считаются отдельно;
+- явная схема с рабочими весами FP16/BF16: вес 2 + master copy 4 + градиент 2
+  (или 4) + моменты 8 =16–18 байт на параметр. Это отдельное соглашение хранения.
 
 Главный выигрыш памяти часто приходит от activations, а не states. Это не
 противоречит ускорению: GEMM и communications всё равно могут стать быстрее.
@@ -145,7 +155,11 @@ FP8 values разделяют компактно представленный sc
 block. Результаты H100/Transformer Engine нельзя объявлять свойством «FP8
 вообще».
 
-Формально $q=\mathrm{clip}_{FP8}(\mathrm{round}(x/s))$, $\hat x=sq$. Scale
+Формально $q=\operatorname{cast}_{FP8}(x/s)$, $\hat x=sq$. Операция
+$\operatorname{cast}_{FP8}$ округляет к сетке выбранного формата с заданным
+правилом насыщения, а не до ближайшего целого. Например, в E4M3 около единицы
+шаг равен 0.125: при $s=1$ число 1.2 округляется до 1.25, а не до 1.
+Масштаб
 выбирают по `amax=max(abs(x))`, иногда по истории amax: current scaling быстрее
 реагирует, delayed scaling дешевле, но отстаёт от смены распределения. Нужны
 отдельные scales для weights, activations и gradients, а также saturation,
@@ -174,11 +188,12 @@ CC BY-NC-SA 4.0; файл не изменён. Разбиение tensor на
 Оператор читает два и пишет один tensor по $10^8$ элементов. FP32 traffic —
 1,2 GB, BF16 — 0,6 GB. При эффективных 1,5 TB/s:
 
-$$t_{FP32}\ge0{,}80\text{ ms},\qquad t_{BF16}\ge0{,}40\text{ ms}.$$
+$t_{FP32}\ge0{,}80\text{ ms},\qquad t_{BF16}\ge0{,}40\text{ ms}.$
 
 Это верхняя надежда на 2× от bytes, не обещание end-to-end: launch, conversion
-и compute остаются. Для Adam на 1B параметров AMP всё ещё может занимать
-16–18 GB model states, хотя activations уменьшаются вдвое.
+и compute остаются. Для Adam на 1 млрд параметров native AMP с FP32-параметрами сохраняет около 16 GB
+постоянного состояния; явная схема с master copy — 16–18 GB по таблице выше.
+Объём некоторых активаций уменьшается, но не обязательно ровно вдвое для всего графа.
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/foundation/training_optimizer_memory.svg]]
 
@@ -198,9 +213,9 @@ CC BY-NC-SA 4.0.
 
 ## MFU и HFU
 
-$$MFU=\frac{\text{model FLOP per step}/t_{\text{step}}}
+$MFU=\frac{\text{model FLOP per step}/t_{\text{step}}}
 {P_{\text{peak}}}.
-$$
+$
 
 MFU считает полезную модельную арифметику; recompute обычно не добавляют в
 числитель. HFU считает фактически выполненную hardware arithmetic, поэтому при

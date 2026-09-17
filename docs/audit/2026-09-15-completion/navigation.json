@@ -1,0 +1,361 @@
+{
+  "status": "editorial-pass-complete-awaiting-build-render",
+  "date": "2026-09-15",
+  "scope": "14 navigation and historical pages plus authored EN textbook index",
+  "counts": {
+    "pages": 14,
+    "findings": 11,
+    "fixed": 6,
+    "already_fixed": 4,
+    "rejected_with_evidence": 1,
+    "open": 0
+  },
+  "checks": [
+    "textbook-index.test.ts: 5 passed; systems-list regression observed failing before repair and passing afterwards",
+    "asset-registry.test.ts: 17 passed; exact Chen source attribution and verified-license branch",
+    "publisher unit suite: 189 passed before added systems-list test; full rerun pending",
+    "independent navigation review found no blocker before final list/metadata edits; build and visual acceptance not claimed"
+  ],
+  "source_evidence": [
+    "https://arxiv.org/html/2403.19887v2#S2",
+    "https://arxiv.org/html/2412.19437v2",
+    "https://arxiv.org/html/2505.09388v1",
+    "https://arxiv.org/html/2407.21783v1",
+    "https://arxiv.org/html/2302.13971v1"
+  ],
+  "authored_en": {
+    "path": "en/00 Textbook/_index.md",
+    "reading": "full-page-reread",
+    "after_sha256": "3fa441ae1ad34de324a288845e57094aad85122b0082ae4d7e78ba3cadf7895e"
+  },
+  "pages": [
+    {
+      "path": "00 Учебник/_index.md",
+      "read_sha256": "41e757189602df037d4baf936789fff23e4253dd9c08f2162c12211a4b8c0160",
+      "reading": "full-page",
+      "role": "Навигация / служебная страница",
+      "verdict": "needs-revision",
+      "strengths": "Оглавление действительно включает GPT1–3,T5,MLsystems,RAG,VLMиagents; большая часть прогрессии осмысленна.",
+      "findings": [
+        {
+          "severity": "P1",
+          "line": 64,
+          "excerpt": "III. Нейронные сети",
+          "issue": "Нумерация частей расходится с publishing/navigation.yml: рекомендации там отдельная IIIчасть, нейронныеIV. Это источник прежней путаницы пользователя.",
+          "action": "Взять один источник порядка и синхронизировать оглавление/боковую панель/prev-next; нейронные recsys не предлагать до основ нейросетей без prerequisite.",
+          "id": "navigation-01-1",
+          "status": "fixed",
+          "resolution": "Fourteen module ordinals and prerequisites match canonical navigation. Five regression tests also verify every source, sidebar ordinal and both omitted chapter links."
+        },
+        {
+          "severity": "P2",
+          "line": 181,
+          "excerpt": "58.1",
+          "issue": "Распределённый inference, MLOps и edge вложены под спекулятивное декодирование, хотя не являются его подчастями.",
+          "action": "Дать самостоятельные темы в модуле эксплуатации, отделить нумерацию stable slug от структуры изложения.",
+          "id": "navigation-01-2",
+          "status": "fixed",
+          "resolution": "Distributed inference and operations are standalone list items; deployment has its own part rather than nesting under speculative decoding. Stable identifiers retained."
+        }
+      ],
+      "source_verification": "not-run",
+      "visual_review": "not-rendered",
+      "after_sha256": "76ed7bcf3a178629ec9bdb704697e7aed837926cddf26bff0375bbd22113f5ae",
+      "baseline_snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-6-before/ru-index.md",
+      "baseline_sha256": "10d6e86227966ba0d881ec59a7f6ba80b42bb0fecf03b74cc38e4936cbd008ca",
+      "post_read": "full-page-reread-or-full-read-plus-local-delta"
+    },
+    {
+      "path": "00 Учебник/00 Как пользоваться учебником.md",
+      "read_sha256": "02c743dad4e99d9a6a267235f535d88613141ecb8961682bcc2ffe337e14fec9",
+      "reading": "full-page",
+      "role": "Навигация / служебная страница",
+      "verdict": "needs-revision",
+      "strengths": "Объясняет роли источников, моделей и практики; оригинальные фигуры имеют атрибуцию.",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 21,
+          "excerpt": "Три уровня понимания",
+          "issue": "Большая часть страницы учит тому, каким должен быть учебник, а не помогает читателю выбрать старт. Нет коротких маршрутов для новичка/MLзнакомого/inference.",
+          "action": "Сократить методические рассуждения, дать3конкретные точки входа с prerequisites; убрать советы об усвоении в редакционную документацию.",
+          "id": "navigation-02-1",
+          "status": "already-fixed",
+          "resolution": "At tranche start the page already provided three entry routes and prerequisites; full read confirms."
+        },
+        {
+          "severity": "P3",
+          "line": 68,
+          "excerpt": "пересказывает материал самостоятельно",
+          "issue": "Не отражает присутствие оригинальных импортированных лекций на английском.",
+          "action": "Прямо описать русские главы, оригинальные источники и неизменяемый язык цитируемого материала.",
+          "id": "navigation-02-2",
+          "status": "already-fixed",
+          "resolution": "At tranche start original English course sources and language boundaries were already explicit."
+        }
+      ],
+      "source_verification": "not-run",
+      "visual_review": "not-rendered",
+      "after_sha256": "13b5aa40e01de70b5b5f26bc008abdfd7520dbfc5eb9d7a9a2dd35ecd2674a8d",
+      "baseline_snapshot": null,
+      "baseline_sha256": null,
+      "post_read": "unchanged-full-read"
+    },
+    {
+      "path": "00 Учебник/Аудит иллюстраций 2026-07-17.md",
+      "read_sha256": "cd85dacfec95cb61cf1e6f07136186399ea5e3bb89b6e806e6054a8ee32e97ed",
+      "reading": "full-page",
+      "role": "Навигация / служебная страница",
+      "verdict": "service-page",
+      "strengths": "Исторический аудит честно различает автоматическую проверку и ручной просмотр и отмечает отозванные решения.",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 30,
+          "excerpt": "Jamba ... architecture Figure1",
+          "issue": "Историческая запись противоречит текущей исправленной подписи: Figure1Jamba losscurves, неarchitecture.",
+          "action": "Сохранить как исторический документ вне учебного маршрута, добавить заметку об ошибке/ссылку на текущий аудит.",
+          "id": "navigation-03-1",
+          "status": "rejected-with-evidence",
+          "resolution": "The allegation conflates filenames. Jamba paper v2 Figure 1 and jamba-figure1-hq.png are architecture; curated/jamba/fig1.png is loss curves. Both local images and primary HTML were inspected. Historical warning and explicit distinction added, original table preserved."
+        }
+      ],
+      "source_verification": "not-run",
+      "visual_review": "not-rendered",
+      "after_sha256": "a07ee43e419bd9938efdc53e391abb25543f6a74320fed346350e5f09a10fdec",
+      "baseline_snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-6-before/00 Учебник/Аудит иллюстраций 2026-07-17.md",
+      "baseline_sha256": "cd85dacfec95cb61cf1e6f07136186399ea5e3bb89b6e806e6054a8ee32e97ed",
+      "post_read": "full-page-reread-or-full-read-plus-local-delta"
+    },
+    {
+      "path": "00 Учебник/Карта крупных учебных модулей.md",
+      "read_sha256": "51e69362f7d4c5334cab0ee4115e79028af5ef4c626a17603a173c7925fb2260",
+      "reading": "full-page",
+      "role": "Навигация / служебная страница",
+      "verdict": "service-page",
+      "strengths": "Корректный redirect к каноническому оглавлению.",
+      "findings": [],
+      "source_verification": "not-run",
+      "visual_review": "not-rendered",
+      "after_sha256": "51e69362f7d4c5334cab0ee4115e79028af5ef4c626a17603a173c7925fb2260",
+      "baseline_snapshot": null,
+      "baseline_sha256": null,
+      "post_read": "unchanged-full-read"
+    },
+    {
+      "path": "00 Учебник/Покрытие программы.md",
+      "read_sha256": "5edc082e505886c847da6b5b511fa75315ae58b43eaf4cef10051d3d34ad9b7b",
+      "reading": "full-page",
+      "role": "Навигация / служебная страница",
+      "verdict": "needs-revision",
+      "strengths": "Матрица прослеживает исторические40тем, полезна как архив старого плана.",
+      "findings": [
+        {
+          "severity": "P1",
+          "line": 10,
+          "excerpt": "40 основных тем",
+          "issue": "Статус canonical и обещание актуального покрытия не соответствуют72+главам; большая часть ссылок указывает старые агрегаты/redirects.",
+          "action": "Перевести в архив и вести актуальное покрытие по канонической навигации/исходным units; не показывать это как доказательство полноты.",
+          "id": "navigation-05-1",
+          "status": "already-fixed",
+          "resolution": "Historical warning and non-current coverage were already present before this tranche."
+        }
+      ],
+      "source_verification": "not-run",
+      "visual_review": "not-rendered",
+      "after_sha256": "18efb6ddeb569fdc53586fa2b2f5439ae6a8d35e7fa6f6ce6d29389f3adaa03e",
+      "baseline_snapshot": null,
+      "baseline_sha256": null,
+      "post_read": "unchanged-full-read"
+    },
+    {
+      "path": "00 Учебник/Редакционная матрица Bookvar.md",
+      "read_sha256": "3a6988f83fd252f92bc0bbab6240a8b0a223fcc0b76def0c908821e1feaadae8",
+      "reading": "full-page",
+      "role": "Навигация / служебная страница",
+      "verdict": "service-page",
+      "strengths": "Исторический документ различает набор источников и маршрут читателя.",
+      "findings": [
+        {
+          "severity": "P1",
+          "line": 32,
+          "excerpt": "принято",
+          "issue": "Матрица заявляет содержательную, визуальную и техническую приёмку при старой программе68тем; текущий аудит находит фактические ошибки и расширенный корпус. Это ложный текущий статус.",
+          "action": "Пометить матрицу исторической, снять её нормативность; текущую приёмку вести по page hash с отдельными content/facts/render статусами.",
+          "id": "navigation-06-1",
+          "status": "already-fixed",
+          "resolution": "The matrix was already historical and its past acceptance explicitly revoked."
+        },
+        {
+          "severity": "P2",
+          "line": 296,
+          "excerpt": "Собственная схема допустима",
+          "issue": "Исключение расходится с действующим AGENTS и явным требованием пользователя не заменять готовые иллюстрации собственными.",
+          "action": "Прямо сослаться на текущие редакционные правила и архивный характер прежнего исключения.",
+          "id": "navigation-06-2",
+          "status": "fixed",
+          "resolution": "Added explicit notice that the old own-diagram exception is obsolete; current AGENTS applies."
+        }
+      ],
+      "source_verification": "not-run",
+      "visual_review": "not-rendered",
+      "after_sha256": "0517fad4797607894db913a50d6a6cc4e5074c6f6a4e710678d526e856826e87",
+      "baseline_snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-6-before/00 Учебник/Редакционная матрица Bookvar.md",
+      "baseline_sha256": "7f08bcfbb350ccc268df10fba6258ad215b79b301206d22ac7484b09968cd099",
+      "post_read": "full-page-reread-or-full-read-plus-local-delta"
+    },
+    {
+      "path": "00 Учебник/Редакционный аудит 2026-07-17.md",
+      "read_sha256": "16263fd5f3a8ca7ebe66bf6e5b3b49334128451a25c1e7e44352e487e080f4ed",
+      "reading": "full-page",
+      "role": "Навигация / служебная страница",
+      "verdict": "service-page",
+      "strengths": "Явно сообщает, что структурный gate не равен финальной приёмке.",
+      "findings": [
+        {
+          "severity": "P3",
+          "line": 4,
+          "excerpt": "status: active",
+          "issue": "Датированный отчёт сохраняет active без отметки архивности; его количество строк/картинок легко принять за текущий результат.",
+          "action": "Архивная отметка и ссылка на новый аудит, без удаления исторических результатов.",
+          "id": "navigation-07-1",
+          "status": "fixed",
+          "resolution": "Status historical and dated warning added; original measurements preserved."
+        }
+      ],
+      "source_verification": "not-run",
+      "visual_review": "not-rendered",
+      "after_sha256": "c3083d40d2439413acff5681a1c501225189b11cac01c7da1f17f13a944125ad",
+      "baseline_snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-6-before/00 Учебник/Редакционный аудит 2026-07-17.md",
+      "baseline_sha256": "16263fd5f3a8ca7ebe66bf6e5b3b49334128451a25c1e7e44352e487e080f4ed",
+      "post_read": "full-page-reread-or-full-read-plus-local-delta"
+    },
+    {
+      "path": "00 Учебник/Assets/Учебная карта.md",
+      "read_sha256": "33aba11c6bf269389b576e64ff8260adc9a73c0ff3f8a804644aa2b7478064ea",
+      "reading": "full-page",
+      "role": "Навигация / служебная страница",
+      "verdict": "service-page",
+      "strengths": "Redirect к действующему оглавлению; нет заглушки, выдаваемой за учебный материал.",
+      "findings": [],
+      "source_verification": "not-run",
+      "visual_review": "not-rendered",
+      "after_sha256": "33aba11c6bf269389b576e64ff8260adc9a73c0ff3f8a804644aa2b7478064ea",
+      "baseline_snapshot": null,
+      "baseline_sha256": null,
+      "post_read": "unchanged-full-read"
+    },
+    {
+      "path": "00 Учебник/Assets/Attention evolution.md",
+      "read_sha256": "88869b620257f7ebaeb3564db4751cc741de62a28c6a69f861772f80b214c00d",
+      "reading": "full-page",
+      "role": "Навигация / служебная страница",
+      "verdict": "service-page",
+      "strengths": "Redirect ведёт к двум настоящим главам о KV-организации.",
+      "findings": [],
+      "source_verification": "not-run",
+      "visual_review": "not-rendered",
+      "after_sha256": "88869b620257f7ebaeb3564db4751cc741de62a28c6a69f861772f80b214c00d",
+      "baseline_snapshot": null,
+      "baseline_sha256": null,
+      "post_read": "unchanged-full-read"
+    },
+    {
+      "path": "00 Учебник/Assets/FFN to MoE.md",
+      "read_sha256": "4defb482c6e6a07751f0b174efd768bfc2551ee2af4c3eed6f53f95efb3759b2",
+      "reading": "full-page",
+      "role": "Навигация / служебная страница",
+      "verdict": "service-page",
+      "strengths": "Redirect соединяет denseFFN и MoE без дублирования объяснений.",
+      "findings": [],
+      "source_verification": "not-run",
+      "visual_review": "not-rendered",
+      "after_sha256": "4defb482c6e6a07751f0b174efd768bfc2551ee2af4c3eed6f53f95efb3759b2",
+      "baseline_snapshot": null,
+      "baseline_sha256": null,
+      "post_read": "unchanged-full-read"
+    },
+    {
+      "path": "00 Учебник/Assets/Model innovation matrix.md",
+      "read_sha256": "3589bd8ae6bf5a69d079b0310254a97e33112c7aa97022169522216e49741673",
+      "reading": "full-page",
+      "role": "Навигация / служебная страница",
+      "verdict": "needs-revision",
+      "strengths": "Различает архитектуру, данные, post-training и систему.",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 16,
+          "excerpt": "DualPipe",
+          "issue": "DualPipe помещён в колонку inference/system, хотя это training pipeline schedule; FP8 также смешан с pre-training recipe вместо системы обучения.",
+          "action": "Разделить training systems и inference либо перенести DualPipe в явно обучающую колонку; добавить первоисточники и точную версию модели.",
+          "id": "navigation-11-1",
+          "status": "fixed",
+          "resolution": "Split training systems from inference, moved DualPipe/FP8, clarified MTP train/inference roles, version-scoped rows and added primary links. Full rewritten page reread."
+        }
+      ],
+      "source_verification": "not-run",
+      "visual_review": "not-rendered",
+      "after_sha256": "a828fc7c5bb4cb4100b924d6d89f7acdadf408f47986958914bdfe54ecf47fe5",
+      "baseline_snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-6-before/00 Учебник/Assets/Model innovation matrix.md",
+      "baseline_sha256": "4bf8d2384a6f9f1911b0f74f7ec6b3d8d4524b26ab15e46d2a4b465b99b3470b",
+      "post_read": "full-page-reread-or-full-read-plus-local-delta"
+    },
+    {
+      "path": "00 Учебник/Assets/Modern decoder block.md",
+      "read_sha256": "999987fe19138afa0d11bb52ed2002a620aeb0e381dd15e8a078d97f3d611379",
+      "reading": "full-page",
+      "role": "Навигация / служебная страница",
+      "verdict": "service-page",
+      "strengths": "Redirect к каноническому decoder block.",
+      "findings": [],
+      "source_verification": "not-run",
+      "visual_review": "not-rendered",
+      "after_sha256": "999987fe19138afa0d11bb52ed2002a620aeb0e381dd15e8a078d97f3d611379",
+      "baseline_snapshot": null,
+      "baseline_sha256": null,
+      "post_read": "unchanged-full-read"
+    },
+    {
+      "path": "00 Учебник/Assets/README.md",
+      "read_sha256": "96249b1f07c5125f5e8d29f592acdd25c305b88bf29bf2f62be2868137779282",
+      "reading": "full-page",
+      "role": "Навигация / служебная страница",
+      "verdict": "service-page",
+      "strengths": "Короткое описание бывшего общего цветового кода.",
+      "findings": [
+        {
+          "severity": "P2",
+          "line": 10,
+          "excerpt": "синий",
+          "issue": "Фиксированная цветовая семантика не соответствует неизменённым оригинальным рисункам разных курсов.",
+          "action": "Пометить архивом старых собственных схем; для оригиналов трактовать цвета по подписи автора, не навязывать палитру.",
+          "id": "navigation-13-1",
+          "status": "fixed",
+          "resolution": "Palette labelled an archive for early homemade figures; source-author legends govern original figures."
+        }
+      ],
+      "source_verification": "not-run",
+      "visual_review": "not-rendered",
+      "after_sha256": "10734c125072c3553c7ce0f99cce0f6d54399b1b6a47399eaf3a1f4bfc9cd222",
+      "baseline_snapshot": ".superpowers/sdd/2026-09-15-close-editorial-findings/task-6-before/00 Учебник/Assets/README.md",
+      "baseline_sha256": "70556660754290b9d8f3c07e06c6cb119fb638873c3dc876d89162d78fb906da",
+      "post_read": "full-page-reread-or-full-read-plus-local-delta"
+    },
+    {
+      "path": "00 Учебник/Assets/Transformer family map.md",
+      "read_sha256": "4dcc0b552b705ebe35babf0d467bd81415ffd8054183bb70891232d8464949b3",
+      "reading": "full-page",
+      "role": "Навигация / служебная страница",
+      "verdict": "service-page",
+      "strengths": "Redirect к общим архитектурным паттернам и атласу.",
+      "findings": [],
+      "source_verification": "not-run",
+      "visual_review": "not-rendered",
+      "after_sha256": "4dcc0b552b705ebe35babf0d467bd81415ffd8054183bb70891232d8464949b3",
+      "baseline_snapshot": null,
+      "baseline_sha256": null,
+      "post_read": "unchanged-full-read"
+    }
+  ]
+}

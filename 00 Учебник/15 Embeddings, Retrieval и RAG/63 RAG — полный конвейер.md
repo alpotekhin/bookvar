@@ -2,13 +2,20 @@
 title: "RAG: от источника до проверяемого ответа"
 type: textbook-chapter
 status: canonical
-last_updated: 2026-07-20
+last_updated: 2026-09-07
 primary_sources:
   - https://arxiv.org/abs/2005.11401
+  - https://arxiv.org/abs/2405.14831
+  - https://arxiv.org/abs/2411.14199
   - https://web.stanford.edu/~jurafsky/slp3/11.pdf
   - https://github.com/danqi/acl2020-openqa-tutorial
   - https://huggingface.co/learn/cookbook/en/rag_evaluation
   - https://www.deeplearning.ai/courses/retrieval-augmented-generation-rag/
+source_unit_id:
+  - meeting-03-slides-long-term-memory-rag-problem
+  - meeting-03-slides-yu-su-hipporag-memory-sequence
+  - meeting-03-reading-02-catalogue-record
+  - meeting-04-reading-03-catalogue-record
 ---
 
 # RAG: от источника до проверяемого ответа
@@ -52,7 +59,7 @@ Lewis et al., NeurIPS 2020. Пунктиром показано обучение
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-60-64/hf-rag-evaluation-workflow.png]]
 
-*Схема из [Hugging Face RAG Evaluation cookbook](https://huggingface.co/learn/cookbook/en/rag_evaluation), Aymeric Roucher. Она одновременно показывает chunking, embedding и построение vector store до production; затем query embedding, retrieval top-k, агрегацию context и generation. В нашей главе к этой исходной схеме добавлены обязательные sparse channel, ACL, provenance и stage metrics, описанные в тексте.*
+*Схема из [Hugging Face RAG Evaluation cookbook](https://huggingface.co/learn/cookbook/en/rag_evaluation), Aymeric Roucher. Она одновременно показывает chunking, embedding и построение vector store до production; затем query embedding, retrieval top-k, агрегацию context и generation. В нашей главе к этой исходной схеме добавлены sparse channel, ACL, provenance и stage metrics, описанные в тексте.*
 
 ## 2. Сначала — задача и набор проверки
 
@@ -127,6 +134,67 @@ Sparse и dense lists объединяют RRF или обученным fusion.
 оценивают recall@k и nDCG до генерации. Если evidence не найден, хороший prompt
 не восстановит его надёжно.
 
+<span id="почему-похожий-фрагмент-не-всегда-является-нужной-памятью"></span>
+### Почему похожий фрагмент не всегда является нужной памятью
+
+<!-- source_unit_id: meeting-03-slides-long-term-memory-rag-problem -->
+
+Dense retrieval хорошо находит перефразировку одного утверждения, но
+многошаговый вопрос может не быть похож ни на один passage, который нужен для
+ответа. Рассмотрим запрос: «Какой профессор Stanford занимается neuroscience
+of Alzheimer’s?» Один документ связывает исследователя со Stanford, другой —
+того же человека с neuroscience, третий уточняет Alzheimer’s. Эмбеддинг всего
+вопроса может поднять общие страницы о Stanford или болезни, не восстановив
+цепочку через общую сущность.
+
+Это не просто недостаток top-k. У retriever-а нет явной операции «активируй
+сущность из первого факта и пройди к связанному второму факту». Итеративный RAG
+может сначала извлечь один passage, переписать запрос и повторить поиск, но
+каждый дополнительный шаг умножает стоимость и риск semantic drift. В лекции 3
+Berkeley, стр. 18–24, этот разрыв формулируется как различие поверхностной
+схожести и associative recall.
+
+Графовый retriever хранит сущности, связи и обратные ссылки на исходные
+фрагменты, а запрос запускает распространение активации от найденных сущностей.
+Это отдельный retrieval channel, а не замена provenance: итоговый контекст всё
+равно должен состоять из проверяемых passages.
+
+<span id="hipporag-ассоциативное-извлечение-по-графу"></span>
+### HippoRAG: ассоциативное извлечение по графу
+
+<!-- source_unit_id: meeting-03-slides-yu-su-hipporag-memory-sequence -->
+<!-- source_unit_id: meeting-03-reading-02-catalogue-record -->
+
+В [HippoRAG](https://arxiv.org/abs/2405.14831) offline-этап извлекает из
+passages сущности и отношения, связывает близкие сущности и сохраняет обратные
+ссылки на тексты. Online-этап превращает сущности запроса в начальное
+распределение Personalized PageRank, распространяет активацию по графу и
+возвращает passages найденных узлов. При сравнении с dense baseline фиксируют
+corpus snapshot, passage recall, стоимость построения и обновления графа, а
+также downstream answer quality; ошибки entity linking проверяют отдельно.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m03-p31-hipporag-index-and-retrieval.png]]
+
+*Верхняя половина слайда показывает offline indexing: извлечение triples,
+сопоставление сущностей и построение графа. Нижняя — online retrieval: сущности
+запроса задают personalization vector, PageRank распространяет активацию, а
+passage links возвращают исходный текст. Источник: Yu Su,
+[Berkeley Advanced LLM Agents, meeting 3](https://rdi.berkeley.edu/adv-llm-agents/sp25),
+слайд 31; первичный источник: Gutiérrez et al., HippoRAG.*
+
+Вернёмся к вопросу о профессоре. Запрос активирует узлы «Stanford» и
+«Alzheimer’s»; граф распространяет вес к сущностям, связанным с обоими
+понятиями; passage links возвращают два фрагмента, из которых можно восстановить
+ответ. В терминах аналогии авторов entity encoder выполняет pattern separation,
+а графовое распространение — pattern completion. Аналогия поясняет механизм,
+но не превращает систему в модель человеческой памяти.
+
+Граф не устраняет ошибки retrieval, а переносит их. Неверное слияние тёзок
+создаёт ложный путь, пропущенная сущность разрывает нужный, а популярный hub
+может собрать PageRank-массу лишь из-за степени вершины. Поэтому графовый канал
+сравнивают с BM25, dense и итеративным retrieval на одинаковом corpus snapshot;
+измеряют passage recall и стоимость отдельно от качества финального ответа.
+
 ## 7. Переранжирование
 
 Cross-encoder перечитывает запрос вместе с каждым кандидатом и улучшает точный
@@ -168,6 +236,33 @@ span затрудняет аудит и скрывает ошибку chunking.
 но отсутствует в retrieved context, grounded RAG должен либо найти evidence,
 либо обозначить ответ как неподтверждённый.
 
+<span id="openscholar-литературный-поиск-как-итеративный-retrieval-and-synthesis-loop"></span>
+### OpenScholar: литературный поиск как итеративный retrieval-and-synthesis loop
+
+<!-- source_unit_id: meeting-04-reading-03-catalogue-record -->
+
+Научный обзор редко строится одним top-k запросом. Формулировка уточняется после
+чтения, разные утверждения требуют разных источников, а итоговые citations нужно
+сверить с passages. [OpenScholar](https://arxiv.org/abs/2411.14199) оформляет
+это как итеративный цикл над коллекцией open-access papers: система извлекает
+кандидатные passages, пишет черновой synthesis, с помощью self-feedback
+обнаруживает неподдержанные или неполные места, формирует дополнительные
+запросы и пересобирает ответ с цитатами.
+
+Представим вопрос о том, помогает ли graph retrieval в multi-hop QA. Первый
+поиск возвращает HippoRAG и несколько обзоров. Черновик утверждает, что граф
+«всегда быстрее». Citation checker не находит такого общего доказательства и
+локализует утверждение. Следующий запрос ищет protocol, corpus и стоимость
+baseline; новая редакция ограничивает вывод экспериментами исходной работы.
+Такой цикл улучшает не красоту текста, а соответствие «claim → passage → paper».
+
+OpenScholar не следует называть законченным «научным агентом» только из-за
+итераций. Его проверяемый контракт — литературный поиск и synthesis. Авторы
+оценивают систему на ScholarQABench и отдельно измеряют корректность и качество
+цитат; перенос на новый домен требует нового corpus snapshot, expert queries и
+проверки coverage. Новая итерация не отменяет versioned corpus, точные source
+spans и независимую проверку citation correctness.
+
 ## 10. Оценивание по этапам
 
 End-to-end score не локализует ошибку. Минимальная таблица:
@@ -193,10 +288,37 @@ context precision/recall, faithfulness и answer relevance. LLM-as-judge удо�
 *Результат последовательных ablations из того же [HF cookbook](https://huggingface.co/learn/cookbook/en/rag_evaluation). На конкретном учебном наборе автор сначала подбирает chunk size, затем embedding model, reranker и reader. Числа нельзя переносить на другой корпус; ценность рисунка — в экспериментальном порядке: менять один компонент и повторно измерять один и тот же набор вопросов.*
 
 Нужны ablations: generator без retrieval, oracle context, retrieved context и
-retrieval без generation. Oracle context показывает потолок generator;
-разница между oracle и retrieved — ущерб retrieval/context stages.
+retrieval без generation. Oracle context даёт контроль качества generator при заранее проверенном evidence, а не математический потолок: другой порядок или формулировка могут изменить результат. Разница с retrieved context помогает диагностировать вклад retrieval/context stages при прочих равных.
 
 ## 11. Failure modes
+
+### Как исключение теряется после успешного retrieval
+
+Рассмотрим учебный документ `policy-17/v2`: «Журналы доступа хранятся три
+года. Исключение: отладочные журналы хранятся 30 дней». Вопрос пользователя:
+«Сколько хранить отладочные журналы?» После разбора обе фразы сохранены,
+но chunker разделил правило и исключение:
+
+| артефакт | наблюдаемое содержимое |
+|---|---|
+| `p4/c1` | «Журналы доступа хранятся три года» |
+| `p4/c2` | «Исключение: отладочные журналы хранятся 30 дней» |
+| BM25 top-3 | `c2, c1, unrelated` |
+| dense top-3 | `c1, unrelated, c2` |
+| после reranker | `c1: 0.91, c2: 0.88, unrelated: 0.10` |
+| context при лимите одного chunk | только `c1` |
+| generated claim | «Отладочные журналы хранятся три года [c1]» |
+
+Цитата существует и первый retrieval нашёл исключение, однако evidence для
+данного типа журнала исчезло при сборке контекста. Сначала возвращаем обе фразы
+как родительский раздел и повторяем **тот же** запрос генератору. Если ответ
+становится «30 дней», этот oracle-context контроль поддерживает гипотезу об
+ошибке упаковки. Если ответ всё ещё «три года», нужно исследовать и генератор,
+и формулировку запроса; один успешный контроль не доказывает причинность на всём
+распределении. Артефакты и ранги здесь заданы для учебного разбора, а не получены
+из измеренного production-запуска.
+
+### Классификация по первому месту потери
 
 1. **Нет документа:** ingestion coverage или freshness, а не prompting.
 2. **Документ есть, chunk не содержит evidence:** изменить parsing/chunking.

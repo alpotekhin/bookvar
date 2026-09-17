@@ -2,6 +2,7 @@
 .obsidian/workspace*.json
 .superpowers/
 .worktrees/
+/tmp/
 raw/
 node_modules/
 .cache/mlsysbook/

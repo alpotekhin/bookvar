@@ -1,0 +1,794 @@
+{
+  "audit_date": "2026-09-15",
+  "worktree": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion",
+  "scope": {
+    "initial_authored_en_markdown_inventory": 37,
+    "current_authored_en_markdown_inventory": 38,
+    "added_by_parallel_task": [
+      {
+        "path": "en/05 Sources/Courses.md",
+        "owner": "primary agent",
+        "reading_status": "outside initial existing-page scope",
+        "initial_sha256": null,
+        "current_sha256": null
+      }
+    ],
+    "owned_fully_read": 36,
+    "owned_changed": 23,
+    "excluded": [
+      {
+        "path": "en/00 Textbook/_index.md",
+        "owner": "primary agent / Task 3",
+        "reading_status": "delegated",
+        "initial_sha256": null,
+        "current_sha256": null
+      }
+    ]
+  },
+  "status": "editorial pass complete; independent review and final site build/visual acceptance pending with primary agent",
+  "prior_ru_audit": "docs/audit/2026-09-15/revised-pages.json (38 pages) and associated findings",
+  "archive_integrity": {
+    "method": "Current UTF-8 text starts with the exact original captured text; captured original SHA matches baseline SHA.",
+    "body_preserved": true,
+    "original_answered_or_partially_answered": 22,
+    "original_unanswered_markers": 78,
+    "total_numbered_questions": 100
+  },
+  "verification": {
+    "machine_checks": "passed",
+    "checks": "36 baseline SHA, locale and RU targets; retained/existing images for edited files; exact archived prefix and 78 placeholders; patch/merge, projection, coordinate, video/audio, mixture, Bayes, ROUGE, POPE, TTFT, goodput and attention arithmetic",
+    "diff_check": "git diff --check -- en: passed",
+    "site_build": "not run; primary agent owns build",
+    "visual_review": "Three speculative-decoding source figures visually reviewed; final English site visual inspection delegated",
+    "review_refinement_checks": "Full baseline integrity suite passed again; display delimiter counts and readiness counterexample additionally verified."
+  },
+  "pages": [
+    {
+      "path": "en/04 Questions/100 questions about NLP — original answers.md",
+      "initial_sha256": "675230e0d2459894ba296cae00544f8f87fb1eb73688499c84e472d008da1966",
+      "translation_of": "04 Вопросы/100 вопросов по NLP — исходные ответы.md",
+      "current_sha256": "7bfc73683cf4aeb1dd99c0ceaab6f5b36c835d62451830597254bc672dc50972",
+      "changed": true,
+      "word_count": 6929,
+      "reading_status": "read_in_full",
+      "findings": [
+        "Preserved exact original archive; appended ten explicit errata groups covering actual existing answers and retained 78 unanswered markers."
+      ],
+      "source_verification": {
+        "method": "Read full archive; checked actual supplied answers, primary metric definitions, exact literal sentence arithmetic. Did not execute archived code or fill missing answers.",
+        "sources": [
+          "https://aclanthology.org/P02-1040/",
+          "https://aclanthology.org/W04-1013/",
+          "https://scikit-learn.org/stable/modules/svm.html",
+          "https://arxiv.org/abs/1810.04805"
+        ]
+      },
+      "unresolved_gaps": [
+        "78 original unanswered placeholders intentionally retained.",
+        "Archived code is preserved, not guaranteed executable; specific defects are documented in separate errata."
+      ]
+    },
+    {
+      "path": "en/04 Questions/100 questions about NLP.md",
+      "initial_sha256": "131f8b00520e19acda29fe880d9de59d4a2b1bf2fbbb320f94a6c4339d179bc9",
+      "translation_of": "04 Вопросы/100 вопросов по NLP.md",
+      "current_sha256": "0d4bd9a207621f2dad0c18d458591bd02bda83364800203b793ef43e7ab7eb46",
+      "changed": true,
+      "word_count": 2581,
+      "reading_status": "read_in_full",
+      "findings": [
+        "Linked separate English archive errata; retained original-answer versus unanswered distinction.",
+        "Used source-heading wiki resolution."
+      ],
+      "source_verification": {
+        "method": "Full-text editorial and mathematical consistency review against applicable prior RU findings; numerical examples checked where specified in report. No comprehensive current software-support revalidation claimed.",
+        "sources": []
+      },
+      "unresolved_gaps": []
+    },
+    {
+      "path": "en/04 Questions/_index.md",
+      "initial_sha256": "fe903ca9ea15268510e5c214f39df7521f612cf1987fa5c35bbd88b926bbef14",
+      "translation_of": "04 Вопросы/_index.md",
+      "current_sha256": "fe903ca9ea15268510e5c214f39df7521f612cf1987fa5c35bbd88b926bbef14",
+      "changed": false,
+      "word_count": 116,
+      "reading_status": "read_in_full",
+      "findings": [
+        "No definite error requiring a scoped edit was found in this pass."
+      ],
+      "source_verification": {
+        "method": "Full-text editorial and mathematical consistency review against applicable prior RU findings; numerical examples checked where specified in report. No comprehensive current software-support revalidation claimed.",
+        "sources": []
+      },
+      "unresolved_gaps": []
+    },
+    {
+      "path": "en/00 Textbook/05 Attention and Transformer/02 Self-Attention — Q, K, V.md",
+      "initial_sha256": "ea26c9f7db0532c506ebf05f65093cd46d0ac69176d5a3cfed6e0b7c621ae804",
+      "current_sha256": "e100e0b09d40b8ee09ee6bd382a6c2e9572707b09b5184b92f3ee5397e4661b3",
+      "changed": true,
+      "translation_of": "00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V.md",
+      "word_count": 1082,
+      "reading_status": "read_in_full",
+      "findings": [
+        "Added missing locale and exact navigation-mapped Russian counterpart."
+      ],
+      "source_verification": {
+        "method": "Full-text editorial and mathematical consistency review against applicable prior RU findings; numerical examples checked where specified in report. No comprehensive current software-support revalidation claimed.",
+        "sources": []
+      },
+      "unresolved_gaps": []
+    },
+    {
+      "path": "en/00 Textbook/05 Attention and Transformer/03 Masking, multi-head attention, and tensor shapes.md",
+      "initial_sha256": "edb535009b9aedf760614de74fa8c02038402606f12825c7331183cd94ccc9b9",
+      "current_sha256": "1d07498b1ba18f1e450aba8390ab5ae04ba8b1c57ae3a82ee556ecad528fb5f7",
+      "changed": true,
+      "translation_of": "00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров.md",
+      "word_count": 1529,
+      "reading_status": "read_in_full",
+      "findings": [
+        "Added missing locale and exact navigation-mapped Russian counterpart."
+      ],
+      "source_verification": {
+        "method": "Full-text editorial and mathematical consistency review against applicable prior RU findings; numerical examples checked where specified in report. No comprehensive current software-support revalidation claimed.",
+        "sources": []
+      },
+      "unresolved_gaps": []
+    },
+    {
+      "path": "en/00 Textbook/05 Attention and Transformer/04 Positional information.md",
+      "initial_sha256": "c727cea6a1d8e6ea8d5e2690840d47af73a9e8e3474badaf96028bf0b8a8dadb",
+      "current_sha256": "67045dd4ca11aa5c442195576c0aad1b7ffab96b67b7299948f5785cc6bfd640",
+      "changed": true,
+      "translation_of": "00 Учебник/05 Attention и Transformer/04 Позиционная информация.md",
+      "word_count": 2289,
+      "reading_status": "read_in_full",
+      "findings": [
+        "Added missing locale and exact navigation-mapped Russian counterpart.",
+        "T5 bias formula now uses its unscaled query/key product.",
+        "Added implementation source for scaling convention."
+      ],
+      "source_verification": {
+        "method": "Checked T5 official Transformers implementation: scaling=1; preserved existing positional conventions elsewhere.",
+        "sources": [
+          "https://raw.githubusercontent.com/huggingface/transformers/main/src/transformers/models/t5/modeling_t5.py"
+        ]
+      },
+      "unresolved_gaps": []
+    },
+    {
+      "path": "en/00 Textbook/05 Attention and Transformer/05 The complete Transformer.md",
+      "initial_sha256": "a38494eab482e2502bdb7ab1534f9411180795090528590f1ad50d58083de9a8",
+      "current_sha256": "b2d96e75c568d57c178374e6e58f2474ba8e51fb878872e5261903fdd1c5fe28",
+      "changed": true,
+      "translation_of": "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md",
+      "word_count": 1774,
+      "reading_status": "read_in_full",
+      "findings": [
+        "Added missing locale and exact navigation-mapped Russian counterpart.",
+        "Scoped equal Q/K/V head trace to MHA and distinguished GQA."
+      ],
+      "source_verification": {
+        "method": "Full-text editorial and mathematical consistency review against applicable prior RU findings; numerical examples checked where specified in report. No comprehensive current software-support revalidation claimed.",
+        "sources": []
+      },
+      "unresolved_gaps": []
+    },
+    {
+      "path": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/01 Three architectural patterns.md",
+      "initial_sha256": "879ff2df8b5ff0bf435312b1c134943b6849e50481affa7d09323a82145a6e57",
+      "current_sha256": "18beb8222ec5af93f58b26430ca0b51888eccd3b93fed5cbb2d964376e357ce5",
+      "changed": true,
+      "translation_of": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md",
+      "word_count": 2182,
+      "reading_status": "read_in_full",
+      "findings": [
+        "Added missing locale and exact navigation-mapped Russian counterpart.",
+        "Corrected selected-versus-hidden MLM positions and corrupted-input notation."
+      ],
+      "source_verification": {
+        "method": "Checked BERT MLM corruption/selected loss positions; loss now conditions on corrupted sequence.",
+        "sources": [
+          "https://arxiv.org/abs/1810.04805"
+        ]
+      },
+      "unresolved_gaps": []
+    },
+    {
+      "path": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03 BERT, RoBERTa, and DeBERTa.md",
+      "initial_sha256": "2c524797a86db800c4c79f093faea99a6beccc42b12da68b9f9e4683623adf3b",
+      "current_sha256": "534756abd309bf9469862e4492d459c639707e44bec7f51495867c9a5621a00c",
+      "changed": true,
+      "translation_of": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md",
+      "word_count": 2072,
+      "reading_status": "read_in_full",
+      "findings": [
+        "Added missing locale and exact navigation-mapped Russian counterpart."
+      ],
+      "source_verification": {
+        "method": "Full-text editorial and mathematical consistency review against applicable prior RU findings; numerical examples checked where specified in report. No comprehensive current software-support revalidation claimed.",
+        "sources": []
+      },
+      "unresolved_gaps": []
+    },
+    {
+      "path": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/04 GPT-1 — generative pre-training.md",
+      "initial_sha256": "62530354e7dbc54e82b42b127cf3efd59cbdca5f7fa0f1129b9730d5e41995a1",
+      "current_sha256": "ef937dcf4b0af32ed77be3e25bdc44389b594a4ace737f3f96359d19aca657ae",
+      "changed": true,
+      "translation_of": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md",
+      "word_count": 1240,
+      "reading_status": "read_in_full",
+      "findings": [
+        "Added missing locale and exact navigation-mapped Russian counterpart."
+      ],
+      "source_verification": {
+        "method": "Full-text editorial and mathematical consistency review against applicable prior RU findings; numerical examples checked where specified in report. No comprehensive current software-support revalidation claimed.",
+        "sources": []
+      },
+      "unresolved_gaps": []
+    },
+    {
+      "path": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/05 GPT-2 — zero-shot through language.md",
+      "initial_sha256": "21f99813f068087de378815d5787f352ede6d8ddd717aab5c4a31a07e91237bb",
+      "current_sha256": "70bf5a2c3b1f2db6501b550252a09901aa71e6ca93e01ce9ce6963ef36a27234",
+      "changed": true,
+      "translation_of": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык.md",
+      "word_count": 1351,
+      "reading_status": "read_in_full",
+      "findings": [
+        "Added missing locale and exact navigation-mapped Russian counterpart."
+      ],
+      "source_verification": {
+        "method": "Full-text editorial and mathematical consistency review against applicable prior RU findings; numerical examples checked where specified in report. No comprehensive current software-support revalidation claimed.",
+        "sources": []
+      },
+      "unresolved_gaps": []
+    },
+    {
+      "path": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/06 GPT-3 — in-context learning.md",
+      "initial_sha256": "e72ac94c13d5c9ac855eaaaa15bf06b6b597f5c6e3bbd812535eff2bca11c68a",
+      "current_sha256": "2d10254fcd15aeee1151a341b74a86703e4f9badd7fa0e71324dbaaeaaa726aa",
+      "changed": true,
+      "translation_of": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning.md",
+      "word_count": 1558,
+      "reading_status": "read_in_full",
+      "findings": [
+        "Added missing locale and exact navigation-mapped Russian counterpart."
+      ],
+      "source_verification": {
+        "method": "Full-text editorial and mathematical consistency review against applicable prior RU findings; numerical examples checked where specified in report. No comprehensive current software-support revalidation claimed.",
+        "sources": []
+      },
+      "unresolved_gaps": []
+    },
+    {
+      "path": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/07 T5 — text-to-text Transformer.md",
+      "initial_sha256": "47f92e6023d357c4eed4a79c722125819477441e20f116279b0a9413923a4f0f",
+      "current_sha256": "003721171a06d5efbf43b86e1037253ec258e6d10c4140b5c9003c789d9d4d86",
+      "changed": true,
+      "translation_of": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md",
+      "word_count": 2081,
+      "reading_status": "read_in_full",
+      "findings": [
+        "Added missing locale and exact navigation-mapped Russian counterpart."
+      ],
+      "source_verification": {
+        "method": "Full-text editorial and mathematical consistency review against applicable prior RU findings; numerical examples checked where specified in report. No comprehensive current software-support revalidation claimed.",
+        "sources": []
+      },
+      "unresolved_gaps": []
+    },
+    {
+      "path": "en/00 Textbook/14 Inference and optimization/54 Decoding and next-token selection.md",
+      "initial_sha256": "8d774e0ab8d1aa861eac0b823415126235c595e7a069dc3300fb052441e7a7ef",
+      "translation_of": "00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена.md",
+      "current_sha256": "8d774e0ab8d1aa861eac0b823415126235c595e7a069dc3300fb052441e7a7ef",
+      "changed": false,
+      "word_count": 1422,
+      "reading_status": "read_in_full",
+      "findings": [
+        "No definite error requiring a scoped edit was found in this pass."
+      ],
+      "source_verification": {
+        "method": "Full-text editorial and mathematical consistency review against applicable prior RU findings; numerical examples checked where specified in report. No comprehensive current software-support revalidation claimed.",
+        "sources": []
+      },
+      "unresolved_gaps": []
+    },
+    {
+      "path": "en/00 Textbook/14 Inference and optimization/55 KV cache batching and PagedAttention.md",
+      "initial_sha256": "9bfe37c4120ed039fcfce0876e7771e9bb0c27d91deff602001d85a48b06cac5",
+      "translation_of": "00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md",
+      "current_sha256": "28db7fc0b21edc7a227b5b66f61bf1f2fea55327bb1703d5a0cabcc2ee1b69c2",
+      "changed": true,
+      "word_count": 1425,
+      "reading_status": "read_in_full",
+      "findings": [
+        "Restored per-time units in goodput definition."
+      ],
+      "source_verification": {
+        "method": "Full-text editorial and mathematical consistency review against applicable prior RU findings; numerical examples checked where specified in report. No comprehensive current software-support revalidation claimed.",
+        "sources": []
+      },
+      "unresolved_gaps": []
+    },
+    {
+      "path": "en/00 Textbook/14 Inference and optimization/55a The physics of LLM inference — prefill, decode, and roofline.md",
+      "initial_sha256": "bacc89f141d514959a6fbf0a3c8a4a50e7b92b800b9ccf22b8e8e94b305609a1",
+      "translation_of": "00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md",
+      "current_sha256": "bacc89f141d514959a6fbf0a3c8a4a50e7b92b800b9ccf22b8e8e94b305609a1",
+      "changed": false,
+      "word_count": 1970,
+      "reading_status": "read_in_full",
+      "findings": [
+        "No definite error requiring a scoped edit was found in this pass."
+      ],
+      "source_verification": {
+        "method": "Full-text editorial and mathematical consistency review against applicable prior RU findings; numerical examples checked where specified in report. No comprehensive current software-support revalidation claimed.",
+        "sources": []
+      },
+      "unresolved_gaps": []
+    },
+    {
+      "path": "en/00 Textbook/14 Inference and optimization/55b Scheduling — continuous batching, chunked prefill, and prefix caching.md",
+      "initial_sha256": "dd0bb009641e9fe7b157abe7dd3cf8aefb1a601a912a1c3372c1bbf631a254d7",
+      "translation_of": "00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md",
+      "current_sha256": "dd0bb009641e9fe7b157abe7dd3cf8aefb1a601a912a1c3372c1bbf631a254d7",
+      "changed": false,
+      "word_count": 1964,
+      "reading_status": "read_in_full",
+      "findings": [
+        "No definite error requiring a scoped edit was found in this pass."
+      ],
+      "source_verification": {
+        "method": "Full-text editorial and mathematical consistency review against applicable prior RU findings; numerical examples checked where specified in report. No comprehensive current software-support revalidation claimed.",
+        "sources": []
+      },
+      "unresolved_gaps": []
+    },
+    {
+      "path": "en/00 Textbook/14 Inference and optimization/55c Serving engines — vLLM, SGLang, TensorRT-LLM, and FlashInfer.md",
+      "initial_sha256": "a3b9da79d9e78c2eeadae6fc43067cf3b6015c0c16693b7a6ad5b973474d58b2",
+      "translation_of": "00 Учебник/14 Inference и оптимизация/55c Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer.md",
+      "current_sha256": "a3b9da79d9e78c2eeadae6fc43067cf3b6015c0c16693b7a6ad5b973474d58b2",
+      "changed": false,
+      "word_count": 1942,
+      "reading_status": "read_in_full",
+      "findings": [
+        "No definite error requiring a scoped edit was found in this pass."
+      ],
+      "source_verification": {
+        "method": "Full-text editorial and mathematical consistency review against applicable prior RU findings; numerical examples checked where specified in report. No comprehensive current software-support revalidation claimed.",
+        "sources": []
+      },
+      "unresolved_gaps": []
+    },
+    {
+      "path": "en/00 Textbook/14 Inference and optimization/56 FlashAttention.md",
+      "initial_sha256": "ce76b03c3956dc44a1b3159327c4338514479ece221045f2451c216d2b9a16a3",
+      "translation_of": "00 Учебник/14 Inference и оптимизация/56 FlashAttention.md",
+      "current_sha256": "ce76b03c3956dc44a1b3159327c4338514479ece221045f2451c216d2b9a16a3",
+      "changed": false,
+      "word_count": 1321,
+      "reading_status": "read_in_full",
+      "findings": [
+        "No definite error requiring a scoped edit was found in this pass."
+      ],
+      "source_verification": {
+        "method": "Read full chapter and checked current official FlashAttention repository for FA4 hardware scope; no textual correction needed.",
+        "sources": [
+          "https://github.com/Dao-AILab/flash-attention"
+        ]
+      },
+      "unresolved_gaps": []
+    },
+    {
+      "path": "en/00 Textbook/14 Inference and optimization/57 Quantizing language models.md",
+      "initial_sha256": "e291269fbdeecb6059c165191ed8608f8823ec3d75aa8b2d4f8252660d1383d7",
+      "translation_of": "00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md",
+      "current_sha256": "e291269fbdeecb6059c165191ed8608f8823ec3d75aa8b2d4f8252660d1383d7",
+      "changed": false,
+      "word_count": 1508,
+      "reading_status": "read_in_full",
+      "findings": [
+        "No definite error requiring a scoped edit was found in this pass."
+      ],
+      "source_verification": {
+        "method": "Full-text editorial and mathematical consistency review against applicable prior RU findings; numerical examples checked where specified in report. No comprehensive current software-support revalidation claimed.",
+        "sources": []
+      },
+      "unresolved_gaps": []
+    },
+    {
+      "path": "en/00 Textbook/14 Inference and optimization/58 Speculative decoding.md",
+      "initial_sha256": "baa8f7a40daa72440f0d6d6758f378a8c54aa7e432f4ecdd5c8e314345d0c9e3",
+      "translation_of": "00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md",
+      "current_sha256": "98597274b2cd0446e71d1e23791e5fad2a567651efe772ffdd4330c3aa941c6f",
+      "changed": true,
+      "word_count": 1453,
+      "reading_status": "read_in_full",
+      "findings": [
+        "Corrected three original figure attributions to Chen et al., while retaining Leviathan paper as an independent source.",
+        "Corrected x-axis and efficiency interpretation.",
+        "Corrected plot caption.",
+        "Removed unsupported statistical-variation claim from Table 1 caption; no uncertainty bars or significance test are supplied."
+      ],
+      "source_verification": {
+        "method": "Viewed all three existing local speculative figures and compared Chen et al. Table 1 and Figure 1 to caption/axes claims.",
+        "sources": [
+          "https://arxiv.org/html/2302.01318v1"
+        ]
+      },
+      "unresolved_gaps": []
+    },
+    {
+      "path": "en/00 Textbook/14 Inference and optimization/58a Distributed inference and disaggregated serving.md",
+      "initial_sha256": "18ac05497029f1d78c55fa1a0b07ffefd5ee32a45fdaf9f1c2d055d655219e8a",
+      "translation_of": "00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md",
+      "current_sha256": "18ac05497029f1d78c55fa1a0b07ffefd5ee32a45fdaf9f1c2d055d655219e8a",
+      "changed": false,
+      "word_count": 2518,
+      "reading_status": "read_in_full",
+      "findings": [
+        "No definite error requiring a scoped edit was found in this pass."
+      ],
+      "source_verification": {
+        "method": "Full-text editorial and mathematical consistency review against applicable prior RU findings; numerical examples checked where specified in report. No comprehensive current software-support revalidation claimed.",
+        "sources": []
+      },
+      "unresolved_gaps": []
+    },
+    {
+      "path": "en/00 Textbook/14 Inference and optimization/58a2 Disaggregated prefill and decode serving.md",
+      "initial_sha256": "30148615e8f0af2765b093cdbceb2f58e0583e4a191b57406a4233684a947cd0",
+      "translation_of": "00 Учебник/14 Inference и оптимизация/58a2 Раздельное обслуживание prefill и decode.md",
+      "current_sha256": "30148615e8f0af2765b093cdbceb2f58e0583e4a191b57406a4233684a947cd0",
+      "changed": false,
+      "word_count": 2907,
+      "reading_status": "read_in_full",
+      "findings": [
+        "No definite error requiring a scoped edit was found in this pass."
+      ],
+      "source_verification": {
+        "method": "Full-text editorial and mathematical consistency review against applicable prior RU findings; numerical examples checked where specified in report. No comprehensive current software-support revalidation claimed.",
+        "sources": []
+      },
+      "unresolved_gaps": []
+    },
+    {
+      "path": "en/00 Textbook/14 Inference and optimization/58b Benchmarking SLOs and inference operations.md",
+      "initial_sha256": "35052a70f5d7ba624ef54f7ad7d0599efa27b2445886986d78e8bdcffb62231d",
+      "translation_of": "00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md",
+      "current_sha256": "82ac891078568d66b3fa76ab8ae251ed291ae6756a0c9db4265d5b34df8a975f",
+      "changed": true,
+      "word_count": 2152,
+      "reading_status": "read_in_full",
+      "findings": [
+        "Fixed TPOT N=1 edge, exact timestamp identity, Poisson arrival wording, and goodput/attainment arithmetic."
+      ],
+      "source_verification": {
+        "method": "Full-text editorial and mathematical consistency review against applicable prior RU findings; numerical examples checked where specified in report. No comprehensive current software-support revalidation claimed.",
+        "sources": []
+      },
+      "unresolved_gaps": []
+    },
+    {
+      "path": "en/00 Textbook/16 Multimodal Models/64 Multimodal models.md",
+      "initial_sha256": "af16af32017080b53e139ffe4c6747c8f8dc1b2ef65c0618f7f4c4d394756621",
+      "translation_of": "00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md",
+      "current_sha256": "af9700d2b9cbe9d98095f506b98672e3ffafc86813909e1a90f54a94af4e4bc5",
+      "changed": true,
+      "word_count": 1512,
+      "reading_status": "read_in_full",
+      "findings": [
+        "Expanded to RU scope: perception/generation distinction, explicit patch projection shapes, CLIP loss/matrix, SigLIP normalization and source figure, architecture comparison.",
+        "Converted standalone single-dollar delimiter lines to double-dollar display math; inline math and source images unchanged."
+      ],
+      "source_verification": {
+        "method": "Read current RU counterpart and primary references; targeted model-specific architecture/objective assertions checked, arithmetic executed. Preserved source figures; final rendered-page inspection is primary-agent owned.",
+        "sources": [
+          "https://arxiv.org/abs/2010.11929",
+          "https://arxiv.org/abs/2103.00020",
+          "https://arxiv.org/pdf/2303.15343",
+          "https://arxiv.org/html/2408.03326v3",
+          "https://arxiv.org/abs/2301.12597",
+          "https://arxiv.org/html/2511.21631v1",
+          "https://arxiv.org/abs/2210.03347",
+          "https://arxiv.org/html/2410.00037v2",
+          "https://arxiv.org/abs/2204.03162"
+        ]
+      },
+      "unresolved_gaps": [
+        "Final site rendering and independent editorial acceptance belong to the primary agent.",
+        "Worked numbers are illustrative calculations, not measured model benchmarks."
+      ]
+    },
+    {
+      "path": "en/00 Textbook/16 Multimodal Models/64a Connectors and fusion.md",
+      "initial_sha256": "734cb5010d5d0e5d11d7738683e662ebc446ec58d0e522fee088216fed74e983",
+      "translation_of": "00 Учебник/16 Multimodal Models/64a Connectors и fusion.md",
+      "current_sha256": "abe04969c82c3cb2d543b555de62edb894f293c98c06a04477179758c1616d08",
+      "changed": true,
+      "word_count": 1493,
+      "reading_status": "read_in_full",
+      "findings": [
+        "Fixed projector multiplication; added LLaVA-1.5 shape/budget trace, OneVision and DeepStack with source figures, second-stage BLIP-2, resampler worked shapes, gradient and compatibility boundaries.",
+        "Converted standalone single-dollar delimiter lines to double-dollar display math; inline math and source images unchanged."
+      ],
+      "source_verification": {
+        "method": "Read current RU counterpart and primary references; targeted model-specific architecture/objective assertions checked, arithmetic executed. Preserved source figures; final rendered-page inspection is primary-agent owned.",
+        "sources": [
+          "https://arxiv.org/abs/2010.11929",
+          "https://arxiv.org/abs/2103.00020",
+          "https://arxiv.org/pdf/2303.15343",
+          "https://arxiv.org/html/2408.03326v3",
+          "https://arxiv.org/abs/2301.12597",
+          "https://arxiv.org/html/2511.21631v1",
+          "https://arxiv.org/abs/2210.03347",
+          "https://arxiv.org/html/2410.00037v2",
+          "https://arxiv.org/abs/2204.03162"
+        ]
+      },
+      "unresolved_gaps": [
+        "Final site rendering and independent editorial acceptance belong to the primary agent.",
+        "Worked numbers are illustrative calculations, not measured model benchmarks."
+      ]
+    },
+    {
+      "path": "en/00 Textbook/16 Multimodal Models/64b Resolution, tiling, and spatial positions.md",
+      "initial_sha256": "5c0d3fa55833b10e22692bc234e7dd4fa7b08281cefe7aa334a7638276539e25",
+      "translation_of": "00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md",
+      "current_sha256": "2777eb5c9d128e8b69871e51a8e3b8287d25a900050b0465662b44cf8f403f8f",
+      "changed": true,
+      "word_count": 1256,
+      "reading_status": "read_in_full",
+      "findings": [
+        "Expanded RU parity: patch/merge budget table, AnyRes and Qwen2-VL source figures, 64 versus boundary tokens, interleaved axes, inverse-coordinate example, stage-specific diagnostics.",
+        "Converted standalone single-dollar delimiter lines to double-dollar display math; inline math and source images unchanged.",
+        "Review refinement: Qwen3-VL textual timestamps replace Qwen2.5-VL absolute-time-scaled temporal IDs while interleaved M-RoPE remains."
+      ],
+      "source_verification": {
+        "method": "Read current RU counterpart and primary references; targeted model-specific architecture/objective assertions checked, arithmetic executed. Preserved source figures; final rendered-page inspection is primary-agent owned.",
+        "sources": [
+          "https://arxiv.org/abs/2010.11929",
+          "https://arxiv.org/abs/2103.00020",
+          "https://arxiv.org/pdf/2303.15343",
+          "https://arxiv.org/html/2408.03326v3",
+          "https://arxiv.org/abs/2301.12597",
+          "https://arxiv.org/html/2511.21631v1",
+          "https://arxiv.org/abs/2210.03347",
+          "https://arxiv.org/html/2410.00037v2",
+          "https://arxiv.org/abs/2204.03162",
+          "https://arxiv.org/html/2511.21631v1#S2.SS3"
+        ]
+      },
+      "unresolved_gaps": [
+        "Final site rendering and independent editorial acceptance belong to the primary agent.",
+        "Worked numbers are illustrative calculations, not measured model benchmarks."
+      ]
+    },
+    {
+      "path": "en/00 Textbook/16 Multimodal Models/64c Training VLMs — alignment, instruction tuning, and data.md",
+      "initial_sha256": "9d41eacbca1b235dd2feb72ca39378201a7f789ac3bc3892a649033468ad916f",
+      "translation_of": "00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные.md",
+      "current_sha256": "dfb581fa6daa2dee003f0a2806de06a145b20256e6bca109eee83014950dde6a",
+      "changed": true,
+      "word_count": 1652,
+      "reading_status": "read_in_full",
+      "findings": [
+        "Expanded RU parity: stage/objective table, gradient path, assistant loss masks, mixture arithmetic, LLaVA/OneVision/Qwen curricula and six additional inherited source figures (eight total), transfer ablation and reproducibility contract.",
+        "Converted standalone single-dollar delimiter lines to double-dollar display math; inline math and source images unchanged."
+      ],
+      "source_verification": {
+        "method": "Read current RU counterpart and primary references; targeted model-specific architecture/objective assertions checked, arithmetic executed. Preserved source figures; final rendered-page inspection is primary-agent owned.",
+        "sources": [
+          "https://arxiv.org/abs/2010.11929",
+          "https://arxiv.org/abs/2103.00020",
+          "https://arxiv.org/pdf/2303.15343",
+          "https://arxiv.org/html/2408.03326v3",
+          "https://arxiv.org/abs/2301.12597",
+          "https://arxiv.org/html/2511.21631v1",
+          "https://arxiv.org/abs/2210.03347",
+          "https://arxiv.org/html/2410.00037v2",
+          "https://arxiv.org/abs/2204.03162"
+        ]
+      },
+      "unresolved_gaps": [
+        "Final site rendering and independent editorial acceptance belong to the primary agent.",
+        "Worked numbers are illustrative calculations, not measured model benchmarks."
+      ]
+    },
+    {
+      "path": "en/00 Textbook/16 Multimodal Models/64d Documents, OCR, and visual grounding.md",
+      "initial_sha256": "c35f14c16dd7c3e47b78a242b336208306371425f25c4799f37d73f3ac9b464e",
+      "translation_of": "00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding.md",
+      "current_sha256": "b591ffa1d78e2470729efb8a422af74ed1a26bc93639bdce7a0335b2b9c3cf1d",
+      "changed": true,
+      "word_count": 1230,
+      "reading_status": "read_in_full",
+      "findings": [
+        "Expanded RU parity with document architectures and Pix2Struct figure, invoice trace, table ambiguity, grounded counting, explicit coordinate convention, CER/WER/IoU examples and evidence/abstention contract.",
+        "Converted standalone single-dollar delimiter lines to double-dollar display math; inline math and source images unchanged."
+      ],
+      "source_verification": {
+        "method": "Read current RU counterpart and primary references; targeted model-specific architecture/objective assertions checked, arithmetic executed. Preserved source figures; final rendered-page inspection is primary-agent owned.",
+        "sources": [
+          "https://arxiv.org/abs/2010.11929",
+          "https://arxiv.org/abs/2103.00020",
+          "https://arxiv.org/pdf/2303.15343",
+          "https://arxiv.org/html/2408.03326v3",
+          "https://arxiv.org/abs/2301.12597",
+          "https://arxiv.org/html/2511.21631v1",
+          "https://arxiv.org/abs/2210.03347",
+          "https://arxiv.org/html/2410.00037v2",
+          "https://arxiv.org/abs/2204.03162"
+        ]
+      },
+      "unresolved_gaps": [
+        "Final site rendering and independent editorial acceptance belong to the primary agent.",
+        "Worked numbers are illustrative calculations, not measured model benchmarks."
+      ]
+    },
+    {
+      "path": "en/00 Textbook/16 Multimodal Models/64e Video, audio, and omni models.md",
+      "initial_sha256": "db125a97ef772e53979d86b2b08ed1df196268eac4e4ea7593425133857af0ad",
+      "translation_of": "00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md",
+      "current_sha256": "256112e6354adf53bb521c363d44029ca125f821ca5b33c0cfc08a0f37f32a99",
+      "changed": true,
+      "word_count": 1435,
+      "reading_status": "read_in_full",
+      "findings": [
+        "Expanded RU parity: event-aligned request, frame and codec arithmetic, projection versus sequence compression, OneVision/ImageBind source figures, codec objectives, Moshi text-first ordering, duplex/streaming and evaluation matrix.",
+        "Converted standalone single-dollar delimiter lines to double-dollar display math; inline math and source images unchanged.",
+        "Review refinement: Qwen3-VL textual timestamps replace Qwen2.5-VL absolute-time-scaled temporal IDs while interleaved M-RoPE remains."
+      ],
+      "source_verification": {
+        "method": "Read current RU counterpart and primary references; targeted model-specific architecture/objective assertions checked, arithmetic executed. Preserved source figures; final rendered-page inspection is primary-agent owned.",
+        "sources": [
+          "https://arxiv.org/abs/2010.11929",
+          "https://arxiv.org/abs/2103.00020",
+          "https://arxiv.org/pdf/2303.15343",
+          "https://arxiv.org/html/2408.03326v3",
+          "https://arxiv.org/abs/2301.12597",
+          "https://arxiv.org/html/2511.21631v1",
+          "https://arxiv.org/abs/2210.03347",
+          "https://arxiv.org/html/2410.00037v2",
+          "https://arxiv.org/abs/2204.03162",
+          "https://arxiv.org/html/2511.21631v1#S2.SS3"
+        ]
+      },
+      "unresolved_gaps": [
+        "Final site rendering and independent editorial acceptance belong to the primary agent.",
+        "Worked numbers are illustrative calculations, not measured model benchmarks."
+      ]
+    },
+    {
+      "path": "en/00 Textbook/16 Multimodal Models/64f Evaluation, failure modes, and VLM serving.md",
+      "initial_sha256": "eb1ffc3549c38e103da2b3dd2af6ff3bcecc17cad36ea0b7c3b446b5c6bce572",
+      "translation_of": "00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM.md",
+      "current_sha256": "5e67947a261984fed23ba7ed0011e489c2b8204ce57338c46c702623aa733b22",
+      "changed": true,
+      "word_count": 1287,
+      "reading_status": "read_in_full",
+      "findings": [
+        "Expanded RU parity: benchmark capability map, Winoground inequalities, POPE arithmetic, two-page admission example, 460ms TTFT trace, pre-LLM blocking, cache-layer identity, judge/security and fallback continuation.",
+        "Converted standalone single-dollar delimiter lines to double-dollar display math; inline math and source images unchanged."
+      ],
+      "source_verification": {
+        "method": "Read current RU counterpart and primary references; targeted model-specific architecture/objective assertions checked, arithmetic executed. Preserved source figures; final rendered-page inspection is primary-agent owned.",
+        "sources": [
+          "https://arxiv.org/abs/2010.11929",
+          "https://arxiv.org/abs/2103.00020",
+          "https://arxiv.org/pdf/2303.15343",
+          "https://arxiv.org/html/2408.03326v3",
+          "https://arxiv.org/abs/2301.12597",
+          "https://arxiv.org/html/2511.21631v1",
+          "https://arxiv.org/abs/2210.03347",
+          "https://arxiv.org/html/2410.00037v2",
+          "https://arxiv.org/abs/2204.03162"
+        ]
+      },
+      "unresolved_gaps": [
+        "Final site rendering and independent editorial acceptance belong to the primary agent.",
+        "Worked numbers are illustrative calculations, not measured model benchmarks."
+      ]
+    },
+    {
+      "path": "en/05 Sources/LMCache/CacheBlend — non-prefix KV reuse.md",
+      "initial_sha256": "de1d5761ad340c9c154594a011e7528209bb0aa371a42c7351b74ce73e9ed210",
+      "translation_of": "05 Источники/LMCache/CacheBlend — non-prefix KV reuse.md",
+      "current_sha256": "de1d5761ad340c9c154594a011e7528209bb0aa371a42c7351b74ce73e9ed210",
+      "changed": false,
+      "word_count": 43,
+      "reading_status": "read_in_full",
+      "findings": [
+        "No definite error requiring a scoped edit was found in this pass."
+      ],
+      "source_verification": {
+        "method": "Full-text editorial and mathematical consistency review against applicable prior RU findings; numerical examples checked where specified in report. No comprehensive current software-support revalidation claimed.",
+        "sources": []
+      },
+      "unresolved_gaps": []
+    },
+    {
+      "path": "en/05 Sources/LMCache/KV cache as persistent inference state.md",
+      "initial_sha256": "bc95a562d383544b37da4036e632503d608f85cdefc94f76d431b68cf29eaacf",
+      "translation_of": "05 Источники/LMCache/KV cache as persistent inference state.md",
+      "current_sha256": "bc95a562d383544b37da4036e632503d608f85cdefc94f76d431b68cf29eaacf",
+      "changed": false,
+      "word_count": 46,
+      "reading_status": "read_in_full",
+      "findings": [
+        "No definite error requiring a scoped edit was found in this pass."
+      ],
+      "source_verification": {
+        "method": "Full-text editorial and mathematical consistency review against applicable prior RU findings; numerical examples checked where specified in report. No comprehensive current software-support revalidation claimed.",
+        "sources": []
+      },
+      "unresolved_gaps": []
+    },
+    {
+      "path": "en/05 Sources/LMCache/LMCache MP mode — transfer paths.md",
+      "initial_sha256": "eeb807f221cae520b6a90ef89bbfc0573402da609caebe0230eb5db5af83c084",
+      "translation_of": "05 Источники/LMCache/LMCache MP mode — transfer paths.md",
+      "current_sha256": "eeb807f221cae520b6a90ef89bbfc0573402da609caebe0230eb5db5af83c084",
+      "changed": false,
+      "word_count": 46,
+      "reading_status": "read_in_full",
+      "findings": [
+        "No definite error requiring a scoped edit was found in this pass."
+      ],
+      "source_verification": {
+        "method": "Full-text editorial and mathematical consistency review against applicable prior RU findings; numerical examples checked where specified in report. No comprehensive current software-support revalidation claimed.",
+        "sources": []
+      },
+      "unresolved_gaps": []
+    },
+    {
+      "path": "en/05 Sources/LMCache/LMCache — an external KV cache layer.md",
+      "initial_sha256": "2edbba1546f6051763cf1e7b9adab23209c0c20c6c57523151e81e06ea6ad441",
+      "translation_of": "05 Источники/LMCache/LMCache — an external KV cache layer.md",
+      "current_sha256": "2edbba1546f6051763cf1e7b9adab23209c0c20c6c57523151e81e06ea6ad441",
+      "changed": false,
+      "word_count": 49,
+      "reading_status": "read_in_full",
+      "findings": [
+        "No definite error requiring a scoped edit was found in this pass."
+      ],
+      "source_verification": {
+        "method": "Full-text editorial and mathematical consistency review against applicable prior RU findings; numerical examples checked where specified in report. No comprehensive current software-support revalidation claimed.",
+        "sources": []
+      },
+      "unresolved_gaps": []
+    },
+    {
+      "path": "en/05 Sources/LMCache/LMCache — map of materials.md",
+      "initial_sha256": "6a5e0797cb454806f701c07fe2e408a76699d190bb6f5950dcc89b4af63ac689",
+      "translation_of": "05 Источники/LMCache/LMCache — карта материалов.md",
+      "current_sha256": "00637916c5a6b9ed502442de397aaab77883dff6197a79f08b8a327c81b2192f",
+      "changed": true,
+      "word_count": 3866,
+      "reading_status": "read_in_full",
+      "findings": [
+        "Corrected prefetch versus computation, current-token cache dependency, and labeled overlap equation as remaining tail latency.",
+        "Linked verified legacy deprecation and scoped Ultravox example to in-process mode; no automatic MP feature-parity claim.",
+        "Review refinement: max of remaining prefill and pure transfer service is an ideal-overlap lower bound, not actual elapsed equality; 100ms readiness plus20ms final transfer gives120ms critical path."
+      ],
+      "source_verification": {
+        "method": "Checked current MP state-transfer protocol, explicit legacy deprecation and legacy scope of Ultravox example. Existing support matrix remains its labeled 2026-07-23 snapshot.",
+        "sources": [
+          "https://docs.lmcache.ai/mp/index.html",
+          "https://docs.lmcache.ai/legacy/index.html",
+          "https://docs.lmcache.ai/getting_started/quickstart/multimodality.html",
+          "https://docs.lmcache.ai/kv_cache_optimizations/layerwise.html"
+        ]
+      },
+      "unresolved_gaps": [
+        "2026-07-23 support matrix not comprehensively revalidated for every backend; deployment compatibility needs exact revisions and runtime tests."
+      ]
+    }
+  ]
+}

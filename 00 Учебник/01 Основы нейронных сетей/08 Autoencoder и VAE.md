@@ -88,8 +88,22 @@ CC BY-SA 4.0.*
 
 ## ELBO: reconstruction и regularization latent space
 
-Log-likelihood данных содержит трудно вычислимый интеграл по $z$. VAE
-максимизирует evidence lower bound:
+Log-likelihood данных содержит трудно вычислимый интеграл по $z$.
+Введём $q=q_\phi(z\mid x)$ и используем правило Байеса внутри ожидания:
+
+$$
+\begin{aligned}
+D_{KL}(q\|p_\theta(z\mid x))
+&=\mathbb E_q[\log q-\log p_\theta(x,z)+\log p_\theta(x)]\\
+&=\log p_\theta(x)-\mathbb E_q[\log p_\theta(x,z)-\log q].
+\end{aligned}
+$$
+
+Последнее ожидание обозначают ELBO. Поскольку
+$p_\theta(x,z)=p_\theta(x\mid z)p(z)$, оно равно reconstruction term
+минус KL к prior. Получено точное тождество
+$\log p_\theta(x)=\mathrm{ELBO}+D_{KL}(q\|p_\theta(z\mid x))$.
+Неотрицательность последнего KL даёт нижнюю границу:
 
 $$
 \log p_\theta(x)\ge
@@ -103,6 +117,14 @@ $$
 каждому примеру занять произвольный изолированный участок latent space. Слишком
 сильный KL может привести к posterior collapse: decoder игнорирует $z$, а
 $q(z\mid x)$ приближается к prior.
+
+Важно не смешивать два KL. Расстояние до **истинного posterior** — зазор
+между ELBO и log-likelihood; расстояние до **prior** — одно из слагаемых
+самой ELBO. Это тот же вариационный приём, что в
+[[00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM|EM для GMM]].
+Но E-step GMM вычисляет точный posterior для текущих параметров, а VAE
+приближает его одной обучаемой сетью сразу для многих объектов; зазор обычно
+не равен нулю.
 
 ## Reparameterization trick
 
@@ -128,19 +150,77 @@ $z=\mu+\sigma\epsilon$ становится дифференцируемой ф�
 [From Autoencoder to Beta-VAE](https://lilianweng.github.io/posts/2018-08-12-vae/),
 прямая [ссылка](https://lilianweng.github.io/posts/2018-08-12-vae/reparameterization-trick.png).*
 
+Зафиксируем модель наблюдений: два бинарных признака независимы при заданном
+$z$, а decoder возвращает их Bernoulli logits. Тогда отрицательный
+reconstruction log-likelihood — сумма binary cross-entropy по двум признакам.
+Для диагонального Gaussian posterior KL вычисляется аналитически:
+
+$$
+D_{KL}(q\|\mathcal N(0,I))=
+\frac12\sum_j\left(\mu_j^2+\exp(\mathrm{logvar}_j)-1-\mathrm{logvar}_j\right).
+$$
+
+Например, для $x=(1,0)$, logits $(\log3,0)$, $\mu=0{,}5$,
+$\sigma^2=1$ reconstruction loss равен
+$-\log0{,}75-\log0{,}5\approx0{,}980829$, KL равен $0{,}125$,
+а их сумма — $1{,}105829$. Усреднение BCE по признакам вместо суммы
+уменьшило бы только reconstruction term вдвое и изменило относительный
+вес KL. Поэтому reduction — часть модели обучения.
+
+Следующий маленький батч иллюстрирует законченный шаг. Размер latent равен 1;
+encoder выдаёт две координаты: mean и log-variance. Для каждого объекта берётся
+один независимый sample, суммы считаются по признакам/latent-координатам,
+а среднее — только по объектам батча.
+
 ```python
+import torch
+from torch import nn
+from torch.nn import functional as F
+
+torch.manual_seed(7)
+x = torch.tensor([[1.0, 0.0], [0.0, 1.0]])
+encoder = nn.Linear(2, 2)
+decoder = nn.Linear(1, 2)  # Bernoulli logits, not probabilities
+parameters = list(encoder.parameters()) + list(decoder.parameters())
+optimizer = torch.optim.SGD(parameters, lr=0.01)
+
+optimizer.zero_grad()
 mu, logvar = encoder(x).chunk(2, dim=-1)
-std = torch.exp(0.5 * logvar)
-eps = torch.randn_like(std)
-z = mu + std * eps
-x_hat = decoder(z)
+z = mu + torch.exp(0.5 * logvar) * torch.randn_like(mu)
+logits = decoder(z)
+rec = F.binary_cross_entropy_with_logits(logits, x, reduction="none").sum(-1)
+kl = 0.5 * (mu.square() + logvar.exp() - 1 - logvar).sum(-1)
+loss = (rec + kl).mean()
+loss.backward()
+assert all(p.grad is not None and torch.isfinite(p.grad).all() for p in parameters)
+optimizer.step()
+print(rec.detach(), kl.detach(), loss.item())
 ```
+
+Это один шаг, не обученная генеративная модель. Из-за нового случайного $z$
+следующая оценка loss не обязана стать меньше. Проверять реализацию градиента
+центральной разностью следует при фиксированном $\epsilon$, а проверять
+качество обучения — по многим объектам и нескольким samples. Полный цикл на
+изображениях приведён в [примере PyTorch](https://github.com/pytorch/examples/blob/main/vae/main.py).
 
 ## Генерация и интерполяция
 
 После обучения можно взять $z\sim p(z)$ и декодировать новый объект. Плавность
 latent space делает интерполяции более осмысленными, но качество зависит от
-decoder likelihood и баланса ELBO. VAE часто даёт более размытые изображения,
+decoder likelihood и баланса ELBO. Для предыдущего Bernoulli decoder код
+генерации отделён от реконструкции: входной объект и encoder не нужны.
+
+```python
+with torch.no_grad():
+    z_prior = torch.randn(4, 1)
+    probabilities = torch.sigmoid(decoder(z_prior))
+    samples = torch.bernoulli(probabilities)
+assert samples.shape == (4, 2)
+```
+
+`probabilities` — условные средние, а `samples` — собственно бинарные
+наблюдения. После одного учебного шага они ещё не обязаны соответствовать
+распределению данных. VAE часто даёт более размытые изображения,
 чем adversarial или diffusion models, зато имеет явную вероятностную постановку
 и удобную сеть приближённого вывода.
 

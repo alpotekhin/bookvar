@@ -1,0 +1,247 @@
+{
+  "commit": "45ecc8d82fcae70c149cdce550d3b3d3411df913",
+  "count": 34,
+  "upstream_inventory": "exact-match",
+  "results": [
+    {
+      "source": "labs/vol1/lab_00_introduction.py",
+      "sha256": "68ed806ad82ca633e80ebabc7926daf0c25b2b6f9d874f1941d4403938b15500",
+      "upstream_hash": "match",
+      "archived_body": "match-except-final-whitespace",
+      "python_syntax": "pass"
+    },
+    {
+      "source": "labs/vol1/lab_01_ml_intro.py",
+      "sha256": "7788cd8bf66e00f755fb3f1f826f57098b47378106fe55a757283c2184c32f49",
+      "upstream_hash": "match",
+      "archived_body": "match-except-final-whitespace",
+      "python_syntax": "pass"
+    },
+    {
+      "source": "labs/vol1/lab_02_ml_systems.py",
+      "sha256": "004f309d4c7ff4838690cb72e541f62d87069349a3e62eca4be01db07c8db3fa",
+      "upstream_hash": "match",
+      "archived_body": "match-except-final-whitespace",
+      "python_syntax": "pass"
+    },
+    {
+      "source": "labs/vol1/lab_03_ml_workflow.py",
+      "sha256": "93b0196375cb889b6557f2c4377d9a01f16c894afafa7f38628bddb0a703402a",
+      "upstream_hash": "match",
+      "archived_body": "match-except-final-whitespace",
+      "python_syntax": "pass"
+    },
+    {
+      "source": "labs/vol1/lab_04_data_engr.py",
+      "sha256": "496b8fd2508dda4ad68c3c8cc51dfe5c44035023a36e1e2bc2bfe023f7fcb953",
+      "upstream_hash": "match",
+      "archived_body": "match-except-final-whitespace",
+      "python_syntax": "pass"
+    },
+    {
+      "source": "labs/vol1/lab_05_nn_compute.py",
+      "sha256": "7cc2be9b8ab05c92303ff615a4695437ee57deda0d1a1634ea875aed1f3190f3",
+      "upstream_hash": "match",
+      "archived_body": "match-except-final-whitespace",
+      "python_syntax": "pass"
+    },
+    {
+      "source": "labs/vol1/lab_06_nn_arch.py",
+      "sha256": "181ccf098b317f439b3f5ec5a739ba618f31abee400598ad86875b476665f9a6",
+      "upstream_hash": "match",
+      "archived_body": "match-except-final-whitespace",
+      "python_syntax": "pass"
+    },
+    {
+      "source": "labs/vol1/lab_07_ml_frameworks.py",
+      "sha256": "f20820e4a59aa6a9735b2288130ffa5e7dc72bc34df9e4ba6bf86cdeb6c25918",
+      "upstream_hash": "match",
+      "archived_body": "match-except-final-whitespace",
+      "python_syntax": "pass"
+    },
+    {
+      "source": "labs/vol1/lab_08_model_train.py",
+      "sha256": "4064f98d0048428af7507083be592a53651efbac30faf4c54fc0b8c1cfe1d76d",
+      "upstream_hash": "match",
+      "archived_body": "match-except-final-whitespace",
+      "python_syntax": "pass"
+    },
+    {
+      "source": "labs/vol1/lab_09_data_selection.py",
+      "sha256": "2c9b7159f921ff9bceef64dbac0ca4a67d6986e6fdb5e47276719fd57d4c219c",
+      "upstream_hash": "match",
+      "archived_body": "match-except-final-whitespace",
+      "python_syntax": "pass"
+    },
+    {
+      "source": "labs/vol1/lab_10_model_compress.py",
+      "sha256": "91b9f786295921dba651f13733668965734c838aa4fbc10c37208b36d939c097",
+      "upstream_hash": "match",
+      "archived_body": "match-except-final-whitespace",
+      "python_syntax": "pass"
+    },
+    {
+      "source": "labs/vol1/lab_11_hw_accel.py",
+      "sha256": "f92b8d45b173847c7f935601e770634084ac9e67f1b36c0b66d0d82f0c24ccb3",
+      "upstream_hash": "match",
+      "archived_body": "match-except-final-whitespace",
+      "python_syntax": "pass"
+    },
+    {
+      "source": "labs/vol1/lab_12_perf_bench.py",
+      "sha256": "966e7c77004315a9ab27a2e712839a8c12ef464420d4f1f80120f79be24a1ad6",
+      "upstream_hash": "match",
+      "archived_body": "match-except-final-whitespace",
+      "python_syntax": "pass"
+    },
+    {
+      "source": "labs/vol1/lab_13_model_serving.py",
+      "sha256": "0a2c4c17e0395736f4c235fac7e0f4412e8a7ab65b756b5f27c412bd39ca6a08",
+      "upstream_hash": "match",
+      "archived_body": "match-except-final-whitespace",
+      "python_syntax": "pass"
+    },
+    {
+      "source": "labs/vol1/lab_14_ml_ops.py",
+      "sha256": "ce245d29828180dacebfb812f437a25ea879fefd7763e18c9ba3e4660d1731ea",
+      "upstream_hash": "match",
+      "archived_body": "match-except-final-whitespace",
+      "python_syntax": "pass"
+    },
+    {
+      "source": "labs/vol1/lab_15_responsible_engr.py",
+      "sha256": "d9ec0b577cf745356fa2466621d53901d279c6af4d8d514a68241ffcc8deb284",
+      "upstream_hash": "match",
+      "archived_body": "match-except-final-whitespace",
+      "python_syntax": "pass"
+    },
+    {
+      "source": "labs/vol1/lab_16_ml_conclusion.py",
+      "sha256": "ca7033613b1be29d38d497c68e0dbf8c5f4adc9cc2e8d0e4c6fdb5f9a4802f6b",
+      "upstream_hash": "match",
+      "archived_body": "match-except-final-whitespace",
+      "python_syntax": "pass"
+    },
+    {
+      "source": "labs/vol2/lab_01_introduction.py",
+      "sha256": "41563385c6a50493b6f93815d922f6cf02344feed5224defb5b5cff3029ed94a",
+      "upstream_hash": "match",
+      "archived_body": "match-except-final-whitespace",
+      "python_syntax": "pass"
+    },
+    {
+      "source": "labs/vol2/lab_02_compute_infra.py",
+      "sha256": "737fbc905b098f708b5516596ade69ddde2fa5b34a713f7ad96d7309d533eccd",
+      "upstream_hash": "match",
+      "archived_body": "match-except-final-whitespace",
+      "python_syntax": "pass"
+    },
+    {
+      "source": "labs/vol2/lab_03_communication.py",
+      "sha256": "858216429a3f88a534b5e08b8965e3d0aa9f3aedb22d2dc49523066adcee8939",
+      "upstream_hash": "match",
+      "archived_body": "match-except-final-whitespace",
+      "python_syntax": "pass"
+    },
+    {
+      "source": "labs/vol2/lab_04_data_storage.py",
+      "sha256": "980efe73660c3270a44bb04bcc72601b40a5d691ca537ed80b35578eae6fc1aa",
+      "upstream_hash": "match",
+      "archived_body": "match-except-final-whitespace",
+      "python_syntax": "pass"
+    },
+    {
+      "source": "labs/vol2/lab_05_dist_train.py",
+      "sha256": "400c776d523f8a282369ac1d1cc83918b3280fcff58aa5d724899be881f6806b",
+      "upstream_hash": "match",
+      "archived_body": "match-except-final-whitespace",
+      "python_syntax": "pass"
+    },
+    {
+      "source": "labs/vol2/lab_06_collective_communication.py",
+      "sha256": "5b2b9b5827f05f441299eb21c5441166f776c09f77a4808757c1d92744ad4ff5",
+      "upstream_hash": "match",
+      "archived_body": "match-except-final-whitespace",
+      "python_syntax": "pass"
+    },
+    {
+      "source": "labs/vol2/lab_07_fault_tolerance.py",
+      "sha256": "98c518f10fa80189dd84e5cec5edd1feaa166da8ece478cb788699b66e8f8a63",
+      "upstream_hash": "match",
+      "archived_body": "match-except-final-whitespace",
+      "python_syntax": "pass"
+    },
+    {
+      "source": "labs/vol2/lab_08_fleet_orch.py",
+      "sha256": "85936097b5a4cf9747c5724323a67d99fa6503a91901d63a758522dc9d9dfe1b",
+      "upstream_hash": "match",
+      "archived_body": "match-except-final-whitespace",
+      "python_syntax": "pass"
+    },
+    {
+      "source": "labs/vol2/lab_09_perf_engineering.py",
+      "sha256": "610454e785c393c7375fea944d6ebac0796d570f29d055285b02c31b3cea36eb",
+      "upstream_hash": "match",
+      "archived_body": "match-except-final-whitespace",
+      "python_syntax": "pass"
+    },
+    {
+      "source": "labs/vol2/lab_10_inference.py",
+      "sha256": "82b6f9a57c635a3026319e976dca90ce34bc2605bd71d9856af8271de9e4e239",
+      "upstream_hash": "match",
+      "archived_body": "match-except-final-whitespace",
+      "python_syntax": "pass"
+    },
+    {
+      "source": "labs/vol2/lab_11_edge_intelligence.py",
+      "sha256": "6490ab7647d2ce7b9a9d9c60dbec87b821bcad2f76434024864c9e85d385353d",
+      "upstream_hash": "match",
+      "archived_body": "match-except-final-whitespace",
+      "python_syntax": "pass"
+    },
+    {
+      "source": "labs/vol2/lab_12_ops_scale.py",
+      "sha256": "ec9b37e07f0579cc9937656d65d886efd79a560576f8b49038deea48ad7e6046",
+      "upstream_hash": "match",
+      "archived_body": "match-except-final-whitespace",
+      "python_syntax": "pass"
+    },
+    {
+      "source": "labs/vol2/lab_13_security_privacy.py",
+      "sha256": "782c0221fccf55f1399a39b0386bba46ac81a55bf7951e45cb9d6cd42bc74324",
+      "upstream_hash": "match",
+      "archived_body": "match-except-final-whitespace",
+      "python_syntax": "pass"
+    },
+    {
+      "source": "labs/vol2/lab_14_robust_ai.py",
+      "sha256": "d14d43df65c6a1c3a62eca666050fdcba9955bb0d6657068c8b536936242d6f9",
+      "upstream_hash": "match",
+      "archived_body": "match-except-final-whitespace",
+      "python_syntax": "pass"
+    },
+    {
+      "source": "labs/vol2/lab_15_sustainable_ai.py",
+      "sha256": "484c46a5d4741b47dcb902ad9da2953005c90f3d98646f74cd06acca5e9ca4b1",
+      "upstream_hash": "match",
+      "archived_body": "match-except-final-whitespace",
+      "python_syntax": "pass"
+    },
+    {
+      "source": "labs/vol2/lab_16_responsible_ai.py",
+      "sha256": "e734748522d4f34e8c7e76903e923548184f4df49f4ce5f1cdf9f2afc839c9d5",
+      "upstream_hash": "match",
+      "archived_body": "match-except-final-whitespace",
+      "python_syntax": "pass"
+    },
+    {
+      "source": "labs/vol2/lab_17_fleet_synthesis.py",
+      "sha256": "9ffefa34829d91e50de124d52ee48a6c8c53dcdc8024b1f86ac060b1a795cbec",
+      "upstream_hash": "match",
+      "archived_body": "match-except-final-whitespace",
+      "python_syntax": "pass"
+    }
+  ],
+  "runtime": "not-run",
+  "visual": "not-reviewed"
+}

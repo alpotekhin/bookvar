@@ -145,7 +145,7 @@
         {"title": "Generalist-agent outline divider", "semantic_id": "meeting-07-outline-b", "kind": "administrative", "page_start": 62, "page_end": 62, "visual_kind": "administrative", "disposition": "excluded", "reason": "lecture outline", "evidence": "The page is a navigation divider."},
         {"title": "Aguvis unified pure-vision agents", "semantic_id": "aguvis", "kind": "mechanism", "page_start": 63, "page_end": 83, "visual_kind": "training-sequence"},
         {"title": "xGen video understanding", "semantic_id": "xgen-video", "kind": "mechanism", "page_start": 84, "page_end": 98, "visual_kind": "system-sequence"},
-        {"title": "GenS generalist foundation agents", "semantic_id": "gens", "kind": "mechanism", "page_start": 99, "page_end": 105, "visual_kind": "system-sequence"},
+        {"title": "GenS: Generative Frame Sampler for long video understanding", "semantic_id": "gens", "kind": "mechanism", "page_start": 99, "page_end": 105, "visual_kind": "system-sequence"},
         {"title": "GUI-agent summary", "semantic_id": "gui-agent-summary", "kind": "section", "page_start": 106, "page_end": 106, "visual_kind": "synthesis"}
       ]
     },

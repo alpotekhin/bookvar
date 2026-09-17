@@ -4,23 +4,32 @@ import starlight from '@astrojs/starlight';
 import rehypeKatex from 'rehype-katex';
 import remarkMath from 'remark-math';
 import sidebar from './generated-sidebar.mjs';
+import { normalizeArchiveMath } from '../publishing/adapter/math.ts';
+import { createHash } from 'node:crypto';
+import { readFileSync } from 'node:fs';
 
-function rejectNonAsciiMath() {
-  return (tree, file) => {
-    // Source-native course pages are preserved verbatim. Several notebooks use
-    // perfectly valid localized labels such as `\\text{граница}` in KaTeX;
-    // applying Bookvar's authoring lint to those imports made Starlight skip
-    // their rendered content. Keep the stricter rule for our own pages only.
-    if (file.path?.includes('/generated/sources/')) return;
-    const visit = (node) => {
-      if ((node.type === 'math' || node.type === 'inlineMath') && /[^\x00-\x7F]/.test(node.value)) {
-        throw new Error(`Non-ASCII text in LaTeX at ${file.path}: ${node.value}`);
-      }
-      if (Array.isArray(node.children)) node.children.forEach(visit);
-    };
-    visit(tree);
+const processor = unified({
+  remarkPlugins: [remarkMath],
+  rehypePlugins: [rehypeKatex]
+});
+// Astro's content digest serializes processor options, not imported function
+// dependencies. Invalidate cached HTML whenever render normalization changes.
+Object.assign(processor.options, {
+  bookvarMathSourceSha256: createHash('sha256')
+    .update(readFileSync(new URL('../publishing/adapter/math.ts', import.meta.url)))
+    .digest('hex')
+});
+const createRenderer = processor.createRenderer.bind(processor);
+processor.createRenderer = async (shared) => {
+  const renderer = await createRenderer(shared);
+  return {
+    ...renderer,
+    render(content, options) {
+      const normalized = normalizeArchiveMath(content, options?.fileURL);
+      return renderer.render(normalized, options);
+    }
   };
-}
+};
 
 export default defineConfig({
   site: 'https://alpotekhin.github.io',
@@ -30,10 +39,7 @@ export default defineConfig({
     '/en/practice/causal-self-attention': '/practice/causal-self-attention'
   },
   markdown: {
-    processor: unified({
-      remarkPlugins: [remarkMath, rejectNonAsciiMath],
-      rehypePlugins: [rehypeKatex]
-    })
+    processor
   },
   integrations: [
     starlight({

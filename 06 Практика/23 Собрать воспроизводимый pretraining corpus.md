@@ -2,7 +2,7 @@
 title: Собрать воспроизводимый pretraining corpus
 type: practice
 status: canonical
-last_updated: 2026-09-06
+last_updated: 2026-09-15
 contract: Contracts/stanford-cs336-a4.yml
 source_unit_id:
   - assignment-04-task-look-at-cc
@@ -112,8 +112,31 @@ primary_sources:
 <!-- source_unit_id: assignment-04-deliverable-look-at-cc-003 -->
 <!-- source_unit_id: assignment-04-deliverable-look-at-cc-004 -->
 
-Локальный режим содержит маленькие HTML/WARC-like records и их WET-like
-производные. Для не менее 25 записей заполните таблицу:
+Начните с готовых входов официального репозитория: `tests/fixtures/moby.html`
+и ожидаемого текста `tests/fixtures/moby_extracted.txt`. Они позволяют
+проверить одну стадию извлечения без загрузки Common Crawl. Подготовка
+рабочей копии и запуск после реализации адаптера:
+
+```bash
+git clone https://github.com/stanford-cs336/assignment4-data.git
+git -C assignment4-data checkout 0555bea66369872d912652debf10b115ca0688c8
+cd assignment4-data
+uv sync
+uv run pytest -v tests/test_extract.py
+uv run pytest -v tests/test_deduplication.py
+```
+
+На незаполненных адаптерах ожидается ошибка, а не успешный тест. Имена файлов
+и ожидаемые результаты заданы в закреплённых
+[тестах извлечения](https://github.com/stanford-cs336/assignment4-data/blob/0555bea66369872d912652debf10b115ca0688c8/tests/test_extract.py)
+и [дедупликации](https://github.com/stanford-cs336/assignment4-data/blob/0555bea66369872d912652debf10b115ca0688c8/tests/test_deduplication.py).
+
+Следующий этап — **подготовить**, а не найти уже готовый в Bookvar набор из
+не менее 25 небольших HTML-документов и их текстовых производных с разрешённым
+использованием. Это локальная имитация обработки веб-корпуса, не готовый
+WARC/WET-пакет. Чтобы исследовать именно контейнеры WARC/WET, отдельно
+возьмите закреплённый небольшой фрагмент Common Crawl и сохраните его адрес
+и контрольную сумму. Для выбранных документов заполните таблицу:
 
 | doc_id | URL/домен | язык | тип страницы | полезный текст | шаблонный мусор/потери извлечения | решение |
 |---|---|---|---|---|---|---|
@@ -203,8 +226,12 @@ run_minhash_deduplication(input_files, num_hashes, num_bands, ngrams,
 <!-- source_unit_id: assignment-04-task-minhash-deduplication -->
 <!-- source_unit_id: assignment-04-deliverable-minhash-deduplication-024 -->
 
-Стадия точной построчной дедупликации обязана воспроизводимо получить ожидаемые пять выходных файлов
-локального набора. Стадия MinHash принимает `num_hashes`, `num_bands`, словесные `ngrams`,
+Официальный `test_exact_line_deduplication` читает
+`tests/fixtures/documents_with_line_duplicates/doc*.txt` и сравнивает пять
+выходных файлов с `tests/fixtures/documents_line_deduplicated/doc*.txt`.
+Это конкретный тестовый набор, не требование получать пять файлов из любого
+корпуса. Проверьте его приведённой выше командой, затем добавьте свои случаи.
+Стадия MinHash принимает `num_hashes`, `num_bands`, словесные `ngrams`,
 `jaccard_threshold` и output directory. Сначала LSH создаёт candidates, затем
 точный Jaccard подтверждает рёбра, connected components задают кластеры.
 
@@ -246,12 +273,17 @@ MIT licenses проверяет функцию, но не качество на 
 
 Закрепите GPT-2 tokenizer revision для совместимости с upstream full mode или
 укажите собственный неизменяемый tokenizer. После каждого документа добавляйте
-EOS. Помимо `uint16 .bin`, запишите `tokenizer_manifest.json` с hash,
+EOS. Для GPT-2 достаточно `uint16 .bin`; для другого токенизатора сначала
+проверьте максимальный ID, включая служебные токены. Если он превышает 65 535,
+используйте `uint32`, чтобы сериализация не обрезала старшие биты.
+Зафиксируйте dtype и порядок байтов. Вместе с `.bin` запишите `tokenizer_manifest.json` с hash,
 special-token IDs, числом документов/токенов и индексом диапазонов
 `doc_id → [start,end)`.
 
-Проверьте round-trip на fixture, EOS boundaries, отсутствие validation IDs и
-соответствие числа сериализованных элементов заявленному token count.
+Проверьте обратное чтение сериализованных ID на тестовом примере, границы EOS
+и соответствие числа элементов заявленному числу токенов. Идентификаторы
+валидационных **документов** не должны встречаться в обучающем манифесте;
+это не запрет на общие ID токенов из одного словаря.
 
 <a id="fixed-budget"></a>
 ## 7. Сравнить данные при фиксированном бюджете
@@ -299,8 +331,9 @@ evidence/
   report.md
 ```
 
-Практика пройдена, если upstream adapters/tests выполняются без изменений,
-повторный smoke run даёт те же hashes, балансы стадий сходятся, validation не
+Практика пройдена, если собственная реализация подключена через upstream
+adapters с неизменными сигнатурами, исходные тесты и fixtures не изменены,
+повторный smoke run даёт те же hashes данных, балансы стадий сходятся, validation не
 попадает в train, duplicate representatives детерминированы, manual audit
 содержит обе стороны решений, а fixed-budget comparison воспроизводим. Улучшение
 loss не является обязательным: корректно объяснённый отрицательный результат —

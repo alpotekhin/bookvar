@@ -1726,7 +1726,7 @@
     },
     "lecture-02-section-111-fp4": {
       "disposition": "source-only",
-      "reason": "Reviewed and preserved at exact trace scope; this low-precision or evolving deep-network sequence belongs to a later systems treatment and is not flattened into Task 1.",
+      "reason": "FP4 at trace steps 111–117 is explained in 00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md#fp4-mxfp4-и-nvfp4 and #общая-шкала-связывает-соседние-значения, with authored EN parity. The encompassing source unit also includes CPU/GPU transfer, einops and FLOPs at steps 119–188; those are not dispositioned by this FP4 follow-through, so the whole unit remains source-only.",
       "evidence": "Lectures/repository/var/traces/lecture_02.json#steps=111-188:semantic=section-111-fp4; reviewed title: fp4"
     },
     "lecture-02-figure-step-125-rendering-1": {
@@ -2660,9 +2660,11 @@
       "destination_anchor": "deepseek-mla-cache-compression"
     },
     "lecture-04-deepseek-mtp": {
-      "disposition": "source-only",
-      "reason": "The exact one-page MTP mechanism is preserved for the later training-objectives integration; Task 2 keeps it distinct from MoE and MLA instead of forcing it into either architecture chapter.",
-      "evidence": "Lectures/repository/lecture_04.pdf#page=59:semantic=deepseek-mtp; reviewed title: DeepSeek multi-token prediction auxiliary objective"
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md",
+      "destination_anchor": "multi-token-training-objective",
+      "reason": "Integrated into the existing training-objective chapter: independent heads versus DeepSeek sequential teacher-forced modules, valid target masks, shared embedding/output, auxiliary weighting, and training versus speculative inference.",
+      "evidence": "Lecture 4 page 59 read and rendered; primary DeepSeek-V3 v2 section 2.2 and Meta MTP v1 section 2 verified. Original licensed Meta Figure 1 illustrates the contrasted independent-head variant; it is not mislabeled as the DeepSeek slide."
     },
     "lecture-04-recap": {
       "disposition": "integrated",
@@ -3656,14 +3658,18 @@
     "destination_anchor": "deepseek-mla-cache-compression"
   },
   "lecture-10-section-262-cross-layer-attention-cla": {
-    "disposition": "source-only",
-    "reason": "Retained for a future long-context attention expansion; the present Task 5 route does not flatten CLA into GQA or MLA.",
-    "evidence": "Lectures/repository/var/traces/lecture_10.json#steps=262-266:semantic=section-262-cross-layer-attention-cla"
+    "disposition": "integrated",
+    "destination": "00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md",
+    "destination_anchor": "cross-layer-kv-sharing",
+    "reason": "Explains shared KV projections versus per-layer queries, cache arithmetic with incomplete layer groups, composition with GQA, retraining and pipeline/latency limits. Original CLA Figure 1 retained with verified CC BY 4.0 attribution.",
+    "evidence": "Lectures/repository/var/traces/lecture_10.json#steps=262-266; Brandon et al. arXiv:2405.12981v1 section 2 verified."
   },
   "lecture-10-section-267-local-sliding-window-attention": {
-    "disposition": "source-only",
-    "reason": "Retained for the dedicated long-context attention expansion; local attention requires its own receptive-field and global-token treatment.",
-    "evidence": "Lectures/repository/var/traces/lecture_10.json#steps=267-273:semantic=section-267-local-sliding-window-attention"
+    "disposition": "integrated",
+    "destination": "00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md",
+    "destination_anchor": "sliding-window-receptive-field",
+    "reason": "Retains the original Longformer masks and distinguishes bidirectional encoder masks from causal windows, derives 1+L(w-1) receptive field, rolling KV eviction, and the remaining linear cache term in local/full hybrid stacks.",
+    "evidence": "Lectures/repository/var/traces/lecture_10.json#steps=267-273; Mistral 7B section 2 and Longformer Figure 2 connected to explicit worked examples."
   },
   "lecture-10-section-274-deepseek-v4-attention": {
     "disposition": "source-only",
@@ -3872,7 +3878,7 @@
   },
   "lecture-12-figure-step-215-rendering-1": {
     "disposition": "source-only",
-    "reason": "ARC-AGI-3 preview is retained for a future interactive-benchmark case study.",
+    "reason": "Interactive-benchmark narrative is explained in 00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md#arc-agi-3-действие-может-добывать-информацию. The frozen original screen was inspected and linked, but this image unit still lacks reviewed reproduction/registry/render evidence for canonical embedding.",
     "evidence": "Lectures/repository/var/traces/lecture_12.json#step=215:rendering=1"
   },
   "lecture-12-figure-step-216-rendering-1": {
@@ -3887,12 +3893,12 @@
   },
   "lecture-12-figure-step-233-rendering-1": {
     "disposition": "source-only",
-    "reason": "AIR-Bench overview is retained for a future safety-evaluation taxonomy; the present chapter keeps the general validity chain.",
+    "reason": "AIR-Bench narrative is explained in 00 Учебник/18 Evaluation и методология/59a Responsible systems.md#air-bench-покрытие-заданной-таксономии. The frozen taxonomy overview was inspected; this visual unit remains source-only until reproduction/registry/render evidence is completed.",
     "evidence": "Lectures/repository/var/traces/lecture_12.json#step=233:rendering=1"
   },
   "lecture-12-figure-step-239-rendering-1": {
     "disposition": "source-only",
-    "reason": "GCG examples are retained for a future adversarial-evaluation chapter.",
+    "reason": "GCG mechanism and adversarial-evaluation limits are explained in 00 Учебник/18 Evaluation и методология/59a Responsible systems.md#gcg-статический-отказ-ещё-не-означает-устойчивость. The frozen historical-response montage was inspected; this visual unit remains source-only until reproduction/registry/render evidence is completed.",
     "evidence": "Lectures/repository/var/traces/lecture_12.json#step=239:rendering=1"
   },
   "lecture-12-evaluation-validity-failure-modes": {
@@ -4583,9 +4589,9 @@
       "reason": "The Lecture 4 pages 57-58 derivation is preserved in the pinned PDF; the canonical MLA chapter already uses higher-resolution primary-paper diagrams for the same absorption and decoupled-RoPE mechanism.",
       "evidence": "Lectures/repository/lecture_04.pdf#pages=57-58:semantic=deepseek-mla; question reviewed: Which projections can be absorbed so that the latent activation becomes persistent KV-cache state?"
     },
-    "lecture-04-visual-deepseek-mtp": {
-      "disposition": "source-only",
-      "reason": "The exact page is preserved for a later training-objective integration; reproducing it in the MoE chapter would incorrectly present MTP as part of expert routing.",
+  "lecture-04-visual-deepseek-mtp": {
+    "disposition": "source-only",
+    "reason": "The mechanism is now integrated in the NTP training-objective chapter, with a separately licensed original Meta MTP figure and an explicit contrast to DeepSeek. This exact composite DeepSeek/EAGLE slide is preserved in the source archive, not claimed as a reused visual.",
       "evidence": "Lectures/repository/lecture_04.pdf#page=59:semantic=deepseek-mtp; question reviewed: Where does the auxiliary next-next-token prediction module attach during DeepSeek-V3 training?"
     },
     "lecture-09-visual-data-scaling": {

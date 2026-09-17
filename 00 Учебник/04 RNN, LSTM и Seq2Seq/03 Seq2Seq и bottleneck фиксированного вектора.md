@@ -2,7 +2,7 @@
 title: Seq2Seq и bottleneck фиксированного вектора
 type: textbook-chapter
 status: canonical
-last_updated: 2026-07-31
+last_updated: 2026-09-15
 previous: "[[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU]]"
 next: "[[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/01 От Seq2Seq к Transformer]]"
 primary_sources:
@@ -72,6 +72,11 @@ decoder получает именно последние состояния, х�
 `чёрная, кошка, спит, <eos>`. Сдвиг на один шаг реализует условную языковую
 модель; padding маскируется при суммировании cross-entropy.
 
+В следующем фрагменте `PAD` обязан отличаться от `EOS`: иначе сравнение
+по ID исключит настоящий terminator из loss. Альтернатива с маской
+целевых позиций и `-100` показана в
+[[02 Areas/ML & DL/00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#Минимальная реализация функции потерь|главе о next-token prediction]].
+
 ```python
 enc_outputs, enc_state = encoder(src_ids, src_lengths)
 dec_input = tgt_ids[:, :-1]       # начинается с <bos>
@@ -118,12 +123,36 @@ $y_t=\arg\max_v p(v\mid y_{<t},x)$. Локально лучший токен н�
 
 ```python
 beams = [([BOS], 0.0, init_state)]
+alpha = 0.6  # chosen on validation, not test
+def beam_score(beam):
+    seq, log_prob, _ = beam
+    length = max(1, len(seq) - 1)  # exclude BOS, include generated EOS
+    return log_prob / length**alpha
+
 for _ in range(max_len):
-    candidates = expand_each_beam(beams)  # добавить log p(token)
-    beams = top_k(candidates, k=beam_size, length_normalize=True)
+    candidates = []
+    for beam in beams:
+        if beam[0][-1] == EOS:
+            candidates.append(beam)       # frozen sequence, score and state
+        else:
+            candidates.extend(expand_one_beam(beam))  # add log p(next token)
+    beams = sorted(candidates, key=beam_score, reverse=True)[:beam_size]
     if all(seq[-1] == EOS for seq, _, _ in beams):
         break
+finished = [beam for beam in beams if beam[0][-1] == EOS]
+result = max(finished, key=beam_score) if finished else None
 ```
+
+Это псевдокод поиска: `expand_one_beam` должен вернуть новые последовательности,
+накопленные log-probabilities и соответствующие decoder states, не изменяя
+родительский объект. Завершённая гипотеза переносится без расширения:
+после EOS не появляется ещё одно слово. Здесь выбран явный length penalty
+$s(y)/|y|^{0{,}6}$, где $s$ — сумма log-probabilities, длина не включает
+BOS и включает EOS. Это эвристика ранжирования, не логарифм новой
+нормированной вероятности; возможны другие правила. Даже с ней beam
+search не гарантирует глобальный максимум. При достижении `max_len`
+оставшиеся незавершённые гипотезы нельзя выдавать как корректно завершённые;
+`None` означает, что данный поиск не нашёл EOS-гипотезу в своём beam.
 
 Beam search не исправляет потерянную encoder-информацию: он лишь лучше ищет в
 распределении, которое уже задала модель.

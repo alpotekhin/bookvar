@@ -234,8 +234,14 @@
       "evidence_complete": true
     }
   },
+  "learner_changes": {
+    "adapter_bodies": "required",
+    "adapter_signatures_and_semantics": "preserved",
+    "tests_and_fixtures": "immutable",
+    "source_hash_scope": "unmodified archival snapshot, not learner adapter bodies"
+  },
   "fail_if": [
-    "official tests or adapters are modified",
+    "official tests or fixtures are modified, or adapter signatures or numerical semantics are changed",
     "source commit differs from the pinned commit",
     "NaN or Inf occurs",
     "train/validation leakage is detected",

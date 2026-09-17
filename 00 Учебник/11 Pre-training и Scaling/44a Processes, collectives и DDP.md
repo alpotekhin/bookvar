@@ -87,13 +87,22 @@ Butterfly/recursive doubling соединяет rank с партнёром, от
 
 ## DDP как replicated state machine
 
-DDP копирует параметры и optimizer state, раздаёт разные микропакеты и во время backward объединяет градиенты. Параметры группируют в buckets: как только bucket готов, его all-reduce перекрывается с вычислением более ранних слоёв. Но bucket, готовый слишком поздно, остаётся на critical path.
+Каждый процесс создаёт свою модель, оптимизатор и загрузчик данных; sampler
+распределяет примеры. DDP при обычной инициализации синхронизирует параметры
+и буферы модели и во время backward объединяет градиенты, но не создаёт,
+не копирует и не синхронизирует состояния оптимизатора. При восстановлении
+каждый процесс должен загрузить согласованное optimizer state вместе с
+моделью, scheduler и scaler. Одинаковые начальные состояния и одинаковые
+усреднённые градиенты затем дают одинаковое обновление. Параметры группируют в buckets: как только bucket готов, его all-reduce перекрывается с вычислением более ранних слоёв. Но bucket, готовый слишком поздно, остаётся на critical path.
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/data-parallel-flow.svg]]
 
 *Источник: Harvard Edge ML Systems Book, [Distributed Training, figure `fig-data-parallel-flow`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/distributed_training.qmd), CC BY-NC-SA 4.0.*
 
-Если каждый rank вычисляет средний градиент по $b$ примерам, то после sum all-reduce нужно делить на $N$ (или доверить это реализации), чтобы получить градиент global batch $Nb$. Нельзя одновременно суммировать loss и ещё раз делить gradient: это меняет learning rate.
+Если каждый rank вычисляет средний градиент по $b$ примерам, то после sum all-reduce нужно делить на $N$ (или доверить это реализации), чтобы получить градиент global batch $Nb$. Нормировка должна выполняться ровно один раз с учётом reduction у loss
+и DDP. Для локальных сумм token losses и неодинакового числа токенов используют
+глобальный счётчик: формула $N/M$ приведена в [[44 Distributed training и mixed precision|обзоре]].
+Псевдокод ниже предполагает равные числа учитываемых токенов.
 
 ```text
 initialize_process_group(rank, world_size)
