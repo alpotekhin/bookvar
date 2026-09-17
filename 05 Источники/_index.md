@@ -2,7 +2,7 @@
 title: Источники
 type: source-note
 status: active
-last_updated: 2026-09-15
+last_updated: 2026-09-17
 ---
 
 # Источники
@@ -20,6 +20,10 @@ last_updated: 2026-09-15
 - [[02 Areas/ML & DL/05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index|Berkeley Advanced LLM Agents — Spring 2025]]
 - [[02 Areas/ML & DL/05 Источники/Визуальные материалы и лицензии]]
 - [[02 Areas/ML & DL/05 Источники/LMCache/LMCache — карта материалов|LMCache: architecture, storage, transfer, and operations]]
+- [[02 Areas/ML & DL/05 Источники/Papers/TTT layers|TTT layers]]
+- [[02 Areas/ML & DL/05 Источники/Papers/End-to-End Test-Time Training|End-to-End TTT]]
+- [[02 Areas/ML & DL/05 Источники/Papers/Gated Delta Networks|Gated Delta Networks]]
+- [[02 Areas/ML & DL/05 Источники/Papers/Recall in efficient sequence models|Recall в эффективных sequence models]]
 
 Первичные материалы хранятся в `raw`, а опубликованные обзоры и указатели —
 в этом разделе источников.

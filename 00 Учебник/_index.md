@@ -2,7 +2,7 @@
 title: Машинное обучение и языковые модели
 type: textbook-chapter
 status: active
-last_updated: 2026-09-15
+last_updated: 2026-09-17
 ---
 
 # Машинное обучение и языковые модели
