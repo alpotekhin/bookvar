@@ -7,6 +7,7 @@ assets:
     modified: false
     used_in:
       - 00 Учебник/10 ML Systems/01 Модель как часть системы.md
+    review_note: "Withdrawn from model-as-part-of-system on 2026-09-28: unlabelled D/C/L proportions do not represent the worked example; replaced by full lifecycle diagram. The used_in list above records the historical placement. Current usage is recorded in the central registry."
   - file: harvard/foundation/introduction_energy_hierarchy.svg
     author: Harvard Edge ML Systems Book contributors
     source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/introduction/images/svg/introduction_energy_hierarchy.svg
@@ -15,6 +16,7 @@ assets:
     modified: false
     used_in:
       - 00 Учебник/10 ML Systems/01 Модель как часть системы.md
+    review_note: "Withdrawn from model-as-part-of-system on 2026-09-28: figure omits different operation/byte normalizations and historical technology context; not a modern GPU energy specification. The used_in list above records the historical placement. Current usage is recorded in the central registry."
   - file: harvard/foundation/ml_systems_memory_wall_divergence.svg
     author: Harvard Edge ML Systems Book contributors
     source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/ml_systems/images/svg/ml_systems_memory_wall_divergence.svg
@@ -24,6 +26,7 @@ assets:
     sha256: 8efdc56567a3017c10b042ec9ae143862ef640f8f193bdc8aa4445a201dc4560
     used_in:
       - 00 Учебник/10 ML Systems/01 Модель как часть системы.md
+    review_note: "Withdrawn from model-as-part-of-system on 2026-09-28: unlabeled conceptual curves, not a measured historical trend. The used_in list above records the historical placement. Current usage is recorded in the central registry."
   - file: harvard/foundation/ml_systems_deployment_span.svg
     author: Harvard Edge ML Systems Book contributors
     source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/ml_systems/images/svg/ml_systems_deployment_span.svg
@@ -33,6 +36,7 @@ assets:
     sha256: 296bb2c0b6ed094f776d6ba59715227ae79887f1b9f4e9b18a2ae0d5d009640c
     used_in:
       - 00 Учебник/10 ML Systems/01 Модель как часть системы.md
+    review_note: "Withdrawn from model-as-part-of-system on 2026-09-28: facility-scale Cloud power compared with single-device powers; replaced by qualitative placement discussion and full hybrid diagram. The used_in list above records the historical placement. Current usage is recorded in the central registry."
   - file: harvard/foundation/frameworks_dispatch_tax_divergence.svg
     author: Harvard Edge ML Systems Book contributors
     source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/frameworks/images/svg/frameworks_dispatch_tax_divergence.svg
@@ -51,6 +55,7 @@ assets:
     used_in:
       - 00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md
       - 00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md
+    review_note: "Historical placements only: withdrawn from arithmetic and precision chapters by 2026-09-29; current usage is in the central registry."
   - file: harvard/foundation/hw_acceleration_roofline_elbow.svg
     author: Harvard Edge ML Systems Book contributors
     source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/hw_acceleration/images/svg/hw_acceleration_roofline_elbow.svg
@@ -60,6 +65,7 @@ assets:
     sha256: 4d20898ae8244de893577b70fc843b4c24f444842056f32d0cfcdc3169e42b5e
     used_in:
       - 00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md
+    review_note: "Withdrawn from gpu-cuda-memory-hierarchy on 2026-09-28: unlabeled axes; roofline is explained with units in the next chapter. The used_in list above records the historical placement. Current usage is recorded in the central registry."
   - file: harvard/foundation/hw_acceleration_energy_ladder.svg
     author: Harvard Edge ML Systems Book contributors
     source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/hw_acceleration/images/svg/hw_acceleration_energy_ladder.svg
@@ -76,6 +82,7 @@ assets:
     modified: false
     used_in:
       - 00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md
+    review_note: "Withdrawn from performance-measurement-roofline on 2026-09-29: compares different scenarios and statistics, not a median and tail from one distribution. used_in above is historical; current usage is in the central registry."
   - file: harvard/foundation/benchmarking_confidence_detectability.svg
     author: Harvard Edge ML Systems Book contributors
     source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/benchmarking/images/svg/benchmarking_confidence_detectability.svg
@@ -85,6 +92,7 @@ assets:
     sha256: 13d8e440e099438cc6b1b530e7559cca085d7a09057fb47e320e2840e6d91168
     used_in:
       - 00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md
+    review_note: "Withdrawn from performance-measurement-roofline on 2026-09-29: model accuracy proportion illustration was incorrectly presented as timing uncertainty. used_in above is historical; current usage is in the central registry."
   - file: harvard/distributed/five-level-model.svg
     author: Harvard Edge ML Systems Book contributors
     source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/network_fabrics/images/svg/five-level-model.svg
@@ -234,6 +242,7 @@ assets:
     modified: false
     used_in:
       - 00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md
+    review_note: "Withdrawn from performance-measurement-roofline on 2026-09-29: incorrect numeric coordinates and underspecified workload markers; replaced by JAX original. used_in above is historical; current usage is in the central registry."
   - file: harvard/performance/gpu-memory-hierarchy.svg
     author: Harvard Edge ML Systems Book contributors
     source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/gpu-memory-hierarchy.svg
@@ -242,6 +251,7 @@ assets:
     modified: false
     used_in:
       - 00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md
+    review_note: "Withdrawn from gpu-cuda-memory-hierarchy on 2026-09-28: unlimited register bandwidth label is misleading; mixes per-SM and per-device capacity and presents energy estimates as H100 specifications. The used_in list above records the historical placement. Current usage is recorded in the central registry."
   - file: harvard/performance/operator-fusion.svg
     author: Harvard Edge ML Systems Book contributors
     source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/operator-fusion.svg
@@ -251,6 +261,7 @@ assets:
     sha256: 6b23d97b249a7d6841aaea70af6827148003f5f6806978a91aedcf3b553cfcf8
     used_in:
       - 00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md
+    review_note: "Withdrawn from gpu-cuda-memory-hierarchy on 2026-09-28: the LayerNorm/GeLU/Linear diagram omits weight traffic and makes a general six-to-two transfer claim. Replaced by explicitly scoped scalar-affine/ReLU example. The used_in list above records the historical placement. Current usage is recorded in the central registry."
   - file: harvard/performance/flashattention-tiling.svg
     author: Harvard Edge ML Systems Book contributors
     source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/flashattention-tiling.svg
@@ -285,6 +296,7 @@ assets:
     sha256: bf5a098a20c40e4df50919f6d9b9564690a6a4d93ad4115049873cb8f07affc2
     used_in:
       - 00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md
+    review_note: "Historical placement only: withdrawn from precision chapter on 2026-09-29; current usage is in the central registry."
   - file: harvard/performance/diagnostic-flow.svg
     author: Harvard Edge ML Systems Book contributors
     source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/diagnostic-flow.svg

@@ -26,6 +26,54 @@ sources:
     canonical_url: https://rdi.berkeley.edu/adv-llm-agents/slides/Multimodal_Agent_caiming.pdf
     source_canvas_pt: "720x405"
 assets:
+  - id: berkeley-m05-p23-agentless-pipeline
+    local_path: m05-p23-agentless-pipeline.png
+    local_sha256: d9ae867aab400b9fb7a4fa5f3fcebd87fabfb2b5d447440f2ca914375fec39f6
+    source: meeting-05-slides.pdf
+    source_page_1_based: 23
+    source_unit_id: meeting-05-slides-coding-agent-design-comparisons
+    source_visual_id: meeting-05-slides-visual-coding-agent-design-comparisons
+    used_in: "00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md#свободный-loop-aci-и-процедурный-workflow"
+    transform: "Poppler pdftoppm 216 DPI; full physical page; no crop, redraw, or semantic modification"
+    file_dimensions_px: "2160x1215"
+    rights_note: "Reuses the existing pinned course source and its recorded permission status; no new license is asserted."
+    caption_intent: "Explain hierarchical localization, candidate repair, and test-based filtering through the actual Agentless pipeline."
+  - id: berkeley-m07-p70-aguvis-observation-action
+    local_path: m07-p70-aguvis-observation-action.png
+    local_sha256: a889e8d55744103cd2db1014ae370c7dea87c0c30e3643c96f71a19ef3b31e06
+    source: meeting-07-slides.pdf
+    source_page_1_based: 70
+    source_unit_id: meeting-07-slides-aguvis
+    source_visual_id: meeting-07-slides-visual-aguvis
+    used_in: "00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md#aguvis-единое-визуальное-observationaction-space"
+    transform: "Poppler pdftoppm 216 DPI; full physical page; no crop, redraw, or semantic modification"
+    file_dimensions_px: "2160x1215"
+    rights_note: "Reuses the existing pinned course source and its recorded permission status; no new license is asserted."
+    caption_intent: "Trace the Boston-to-North-Station task from the screenshot and next-step explanation to the click and text-entry actions."
+  - id: berkeley-m07-p72-aguvis-two-stage-training
+    local_path: m07-p72-aguvis-two-stage-training.png
+    local_sha256: 0931b28eb8c844302023d1e95d2641b1fd47c37ec9fab210314d9da7eb8acb5f
+    source: meeting-07-slides.pdf
+    source_page_1_based: 72
+    source_unit_id: meeting-07-slides-aguvis
+    source_visual_id: meeting-07-slides-visual-aguvis
+    used_in: "00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md#aguvis-единое-визуальное-observationaction-space"
+    transform: "Poppler pdftoppm 216 DPI; full physical page; no crop, redraw, or semantic modification"
+    file_dimensions_px: "2160x1215"
+    rights_note: "Reuses the existing pinned course source and its recorded permission status; no new license is asserted."
+    caption_intent: "Contrast supervised element grounding with history-conditioned planning and action prediction."
+  - id: berkeley-m07-p73-aguvis-data-collection
+    local_path: m07-p73-aguvis-data-collection.png
+    local_sha256: 3d94daead5bf1e36789a130fb8d1d3b87330c5122b78dc88406fd3912add616d
+    source: meeting-07-slides.pdf
+    source_page_1_based: 73
+    source_unit_id: meeting-07-slides-aguvis
+    source_visual_id: meeting-07-slides-visual-aguvis
+    used_in: "00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md#aguvis-единое-визуальное-observationaction-space"
+    transform: "Poppler pdftoppm 216 DPI; full physical page; no crop, redraw, or semantic modification"
+    file_dimensions_px: "2160x1215"
+    rights_note: "Reuses the existing pinned course source and its recorded permission status; no new license is asserted."
+    caption_intent: "Distinguish instruction-action augmentation from synthetic explanations added to existing trajectories."
   - id: berkeley-m05-p17-react-aci
     local_path: m05-p17-react-aci.png
     local_sha256: 18a2110990eafd3ed959102584cfdd8e5500bc74c3a561a3445c0daca2929e34
@@ -36,16 +84,6 @@ assets:
     used_in: "00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md#SWE-agent: модель управляет циклом через ACI"
     file_dimensions_px: "1440x810"
     caption_intent: "Separate a dynamic ReAct loop from unrestricted shell access and locate the ACI boundary."
-  - id: berkeley-m05-p22-agentless-control-flow
-    local_path: m05-p22-agentless-control-flow.png
-    local_sha256: 4db553ddd0b3ad66e4f9bcfdf1eb729449e212e4a1e27e6f52c92960aad4f2c1
-    source: meeting-05-slides.pdf
-    source_page_1_based: 22
-    source_unit_id: meeting-05-slides-coding-agent-design-comparisons
-    source_visual_id: meeting-05-slides-visual-coding-agent-design-comparisons
-    used_in: "00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md#Свободный loop, ACI и процедурный workflow"
-    file_dimensions_px: "1440x810"
-    caption_intent: "Locate control flow in code rather than in the model for localization, repair and validation."
   - id: berkeley-m05-p28-autocoderover-two-trajectories
     local_path: m05-p28-autocoderover-two-trajectories.png
     local_sha256: 521b076c0d85c89de40d3daa171388219a50e385a066647237a35c52493f2b0b
@@ -156,16 +194,6 @@ assets:
     used_in: "00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md#OSWorld: resettable VM, executable action and final-state grader"
     file_dimensions_px: "1440x810"
     caption_intent: "Separate task setup, agent observations, executable actions and final-state evaluation in OSWorld."
-  - id: berkeley-m07-p69-aguvis-design-goals
-    local_path: m07-p69-aguvis-design-goals.png
-    local_sha256: 7df8fb7faada77cd27c0e790d3becda1616730814fa7d07f6fc699424f63b3a6
-    source: meeting-07-slides.pdf
-    source_page_1_based: 69
-    source_unit_id: meeting-07-slides-aguvis
-    source_visual_id: meeting-07-slides-visual-aguvis
-    used_in: "00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md#Aguvis: единое визуальное observation/action space"
-    file_dimensions_px: "1440x810"
-    caption_intent: "Connect unified vision-only interaction to grounding training and explicit multistep reasoning."
   - id: berkeley-m07-p75-aguvis-data-stages
     local_path: m07-p75-aguvis-data-stages.png
     local_sha256: 8cad2a00e450de71c372ab13505a1d873359128940d7dd2591a8cc0cbe8800cd

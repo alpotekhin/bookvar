@@ -453,7 +453,7 @@ sections:
             route: textbook/modern-llm/mla-kv-compression
           - label: 37. Длинный контекст — расширение, разреженность и оценивание
             route: textbook/modern-llm/long-context
-          - label: 38. Dense FFN — token-wise вычисление, expansion и gating
+          - label: 38. Dense FFN — расширение размерности и SwiGLU
             route: textbook/modern-llm/dense-ffn
           - label: 39. Mixture of Experts — routing, capacity и serving
             route: textbook/moe/mixture-of-experts
@@ -2167,6 +2167,18 @@ sections:
         route: sources/papers/phi-4-technical-report
       - source: Papers/Nemotron-4 340B Technical Report.md
         route: sources/papers/nemotron-4-340b-technical-report
+      - source: 05 Источники/Papers/Self-Instruct.md
+        route: sources/papers/self-instruct
+      - source: 05 Источники/Papers/Nemotron-CC.md
+        route: sources/papers/nemotron-cc
+      - source: 05 Источники/Papers/OpenThoughts.md
+        route: sources/papers/openthoughts
+      - source: 05 Источники/Papers/SWE data pipelines.md
+        route: sources/papers/swe-data-pipelines
+      - source: 05 Источники/Papers/OLMo 2 Dolmino.md
+        route: sources/papers/olmo2-dolmino
+      - source: 05 Источники/Papers/Model collapse and data accumulation.md
+        route: sources/papers/model-collapse-data-accumulation
       - source: Papers/Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks.md
         route: sources/papers/retrieval-augmented-generation-for-knowledge-intensive-nlp-tasks
       - source: Papers/REALM.md

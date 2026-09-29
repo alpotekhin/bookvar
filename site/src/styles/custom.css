@@ -91,7 +91,9 @@ body {
 
 /* Paper figures often have transparent backgrounds and black labels/arrows.
    Preserve the source artwork, including in the site's dark theme. */
-.sl-markdown-content img[src*='/Assets/Figures/'] {
+.sl-markdown-content img[src*='/Assets/Figures/'],
+.sl-markdown-content img[src$='/2f10e92057738ef1e4a50e524fddf5389d61d795.svg'],
+.sl-markdown-content img[src$='/3b022a3ffa6f028fe2c2c3165c292a16a3a9e0ff.svg'] {
   background-color: #fff;
 }
 
@@ -137,6 +139,16 @@ body {
 
 .sl-markdown-content img[src$='/data/data_engineering_storage_latency_hierarchy.svg'] {
   width: min(100%, 28rem);
+}
+
+.sl-markdown-content img[src$='/Assets/Figures/curated/ffn-review-2026-09/geva-ffn-memory.svg'] {
+  width: min(100%, 36rem);
+  height: auto;
+}
+
+.sl-markdown-content img[src$='/Assets/Figures/curated/attention-review-2026-09/mha-mla-projections.svg'] {
+  width: min(100%, 48rem);
+  height: auto;
 }
 
 /* Legacy reference pages can still contain Mermaid diagrams. Keep them

@@ -604,6 +604,36 @@ describe('buildPublication', () => {
     expect(generated.content).toBe('\n# Second heading\n\nBody\n');
   });
 
+  it.each([
+    '<a id="overview"></a>\n',
+    '<a id="overview"></a>\n\n<span id="old-title" aria-hidden="true"></span>\n\n',
+    "   <a id='overview'></a>\r\n\r\n"
+  ])('preserves explicit anchors before an omitted leading H1', async (anchors) => {
+    const options = fixture(`\n${anchors}# Source title\n\n# Second heading\n\nBody`);
+
+    await buildPublication(options);
+
+    const generated = matter(readFileSync(join(options.outputDir, 'nested', 'page-a.md'), 'utf8'));
+    expect(generated.content).toBe(`${anchors}\n# Second heading\n\nBody\n`);
+  });
+
+  it.each([
+    '<a id="overview"></a>\n\nIntroduction.\n\n# Later heading',
+    '<a id="overview">Visible content</a>\n\n# Later heading',
+    '<a href="https://example.org">Link</a>\n\n# Later heading',
+    '<a id="overview"></a> trailing content\n\n# Later heading',
+    '<a id="overview"></a>\n\n## First subsection',
+    '```html\n<a id="overview"></a>\n# Example heading\n```',
+    '#\nBody is not a heading'
+  ])('does not remove content before a non-leading H1: %s', async (body) => {
+    const options = fixture(body);
+
+    await buildPublication(options);
+
+    const generated = matter(readFileSync(join(options.outputDir, 'nested', 'page-a.md'), 'utf8'));
+    expect(generated.content).toBe(`${body}\n`);
+  });
+
   it('preserves content that has no leading H1', async () => {
     const options = fixture('\n## First subsection\n\nBody');
 

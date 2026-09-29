@@ -107,9 +107,19 @@ const IMAGE_EXTENSION = /\.(?:png|jpe?g|webp|svg|gif)$/i;
 const EMBED = /!\[\[([^\]\n]+)\]\]/g;
 
 function removeLeadingSourceHeading(markdown: string): string {
-  const heading = markdown.match(/^(?:[ \t]*\r?\n)*#\s+.+?(?:\r?\n|$)/);
-  if (!heading) return markdown;
-  return markdown.slice(heading[0].length);
+  let offset = 0;
+  for (const line of markdown.split(/(?<=\n)/)) {
+    const content = line.replace(/\r?\n$/, '');
+    if (/^[ \t]*$/.test(content)
+      || /^ {0,3}<(a|span)\s+id=["']([^"'<>\s]+)["'](?:\s+aria-hidden=["']true["'])?\s*>\s*<\/\1>\s*$/.test(content)) {
+      offset += line.length;
+      continue;
+    }
+    if (!/^#[ \t]+.+$/.test(content)) return markdown;
+    const anchors = markdown.slice(0, offset).replace(/^(?:[ \t]*\r?\n)*/, '');
+    return anchors + markdown.slice(offset + line.length);
+  }
+  return markdown;
 }
 
 export function normalizeObsidianHeading(heading: string): string {

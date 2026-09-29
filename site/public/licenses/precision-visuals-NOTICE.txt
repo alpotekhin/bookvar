@@ -1,0 +1,16 @@
+Precision chapter illustration notices
+
+NVIDIA Transformer Engine contributors, Apache License 2.0.
+Pinned revision: eb56ba22fd2b3c1fa4c962a4a575d4ba12d1fcbc
+License: nvidia-transformer-engine-Apache-2.0.txt
+te-float-bits.png and te-mxfp8-blocks.png are unchanged originals.
+te-master-weights.svg is a viewBox crop of the two right-hand columns;
+original CSS is embedded. No labels or diagram geometry have been redrawn.
+
+Hugging Face Ultra-Scale Playbook authors: Nouamane Tazi, Ferdinand Mom,
+Haojun Zhao, Phuc Nguyen, Mohamed Mekkouri, Leandro von Werra, Thomas Wolf.
+Pinned revision: c93890dd4b22356ee18ed9b863e6f2d0909729bc
+Apache License 2.0: huggingface-ultrascale-Apache-2.0.txt
+hf-format-ranges.png and hf-format-resolution.png are unchanged originals.
+
+Exact source URLs and SHA-256 hashes are recorded in 05 Источники/asset-registry.yml.

@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest';
 import YAML from 'yaml';
 
 import { loadManifest, type PublicationSidebarItem } from '../adapter/manifest.js';
+import { wikiHeadingSlug } from '../adapter/links.js';
 
 const root = resolve(import.meta.dirname, '../..');
 
@@ -116,6 +117,59 @@ describe('publication workflow policy', () => {
     for (const hub of hubs) {
       expect(routes.get(hub), hub).toBeDefined();
       expect(sourceIndex, hub).toContain(`[[02 Areas/ML & DL/${hub.slice(0, -'.md'.length)}`);
+    }
+  });
+
+  it('offers both named courses on the homepage and puts reading before audit details', () => {
+    const homepage = readFileSync(resolve(root, 'site/src/content/docs/index.md'), 'utf8');
+    const manifest = loadManifest(resolve(root, 'publishing/navigation.yml'));
+    const publishedSources = new Set(manifest.sections.flatMap((section) => section.pages.map((page) => page.source)));
+    const courses = [
+      ['Stanford CS336', 'stanford-cs336-spring-2026', 'Stanford CS336 Spring 2026'],
+      ['Berkeley Advanced LLM Agents', 'berkeley-advanced-llm-agents-spring-2025', 'Berkeley Advanced LLM Agents Spring 2025']
+    ];
+    for (const [name, route, folder] of courses) {
+      expect(homepage).toContain(name);
+      expect(homepage).toContain(`href="./sources/courses/${route}/"`);
+      expect(homepage).not.toContain(`href="./sources/courses/${route}/index/"`);
+      const hub = readFileSync(resolve(root, `05 Источники/Courses/${folder}/_index.md`), 'utf8');
+      expect(hub.indexOf('## Где читать тему')).toBeGreaterThan(0);
+      expect(hub.indexOf('<details>')).toBeGreaterThan(hub.indexOf('## Где читать тему'));
+      const readerText = hub.split('<details>')[0];
+      expect(readerText).not.toMatch(/dependency closure|semantic extraction|Visual ledger|pinned revisions|source layer/i);
+      for (const match of readerText.matchAll(/\[\[([^\]|#]+)(?:[^\]]*)\]\]/g)) {
+        expect(publishedSources.has(`${match[1]}.md`), `${name}: ${match[1]}`).toBe(true);
+      }
+    }
+    const berkeley = readFileSync(resolve(root, `05 Источники/Courses/${courses[1][2]}/_index.md`), 'utf8');
+    expect(berkeley).toContain('NVIDIA CONFIDENTIAL. DO NOT DISTRIBUTE.');
+    expect(berkeley).toContain('не официальные задания Berkeley');
+    expect(berkeley).not.toContain('](Lectures/meeting-06-slides.pdf)');
+    expect([...berkeley.matchAll(/\]\(Readings\/meeting-\d+-reading-\d+\.md\)/g)]).toHaveLength(37);
+    expect([...berkeley.matchAll(/\]\(https:\/\/www.youtube.com\/watch\?v=/g)]).toHaveLength(12);
+    for (let number = 1; number <= 12; number += 1) {
+      expect(berkeley).toContain(`<a id="meeting-${String(number).padStart(2, '0')}"></a>`);
+    }
+  });
+
+  it('uses stable Stanford lecture anchors in both course overviews and preserves old heading links', () => {
+    const courseRoot = resolve(root, '05 Источники/Courses/Stanford CS336 Spring 2026');
+    const hub = readFileSync(resolve(courseRoot, '_index.md'), 'utf8');
+    for (const source of ['05 Источники/Курсы.md', 'en/05 Sources/Courses.md']) {
+      const overview = readFileSync(resolve(root, source), 'utf8');
+      const links = [...overview.matchAll(/\[\[05 Источники\/Courses\/Stanford CS336 Spring 2026\/_index#([^|\]]+)/g)];
+      expect(links, source).toHaveLength(9);
+      for (const [, anchor] of links) {
+        expect(anchor, source).toMatch(/^lecture-\d{2}$/);
+        expect(hub, `${source}#${anchor}`).toContain(`<a id="${anchor}"></a>`);
+      }
+    }
+    const manifest = JSON.parse(readFileSync(resolve(courseRoot, 'source-manifest.yml'), 'utf8')) as {
+      objects: Array<{ id: string; title: string }>;
+    };
+    for (const object of manifest.objects) {
+      const previousHeading = `${object.id}: ${object.title}`;
+      expect(hub, previousHeading).toContain(`<a id="${wikiHeadingSlug(previousHeading)}"></a>`);
     }
   });
 });

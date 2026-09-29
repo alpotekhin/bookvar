@@ -45,6 +45,328 @@ course_asset_defaults:
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
 assets:
+  - id: "curated-synthetic-nemotron-transformations-06a68df5ce97"
+    asset: "00 Учебник/Assets/Figures/curated/synthetic-review-2026-09/nemotron-transformations.png"
+    author: "Dan Su et al."
+    source_url: "https://aclanthology.org/2025.acl-long.123.pdf#page=13"
+    source_asset: "05 Источники/Papers/Source PDFs/nemotron-cc-acl2025.pdf"
+    source_asset_sha256: "e69a36de5eb327d7c7dac5662f7cc9ae415b87910d345b3eab3021af17030c39"
+    source_page: 13
+    sha256: "06a68df5ce97367695819bc9443f51c74b9c3473c03e4515c0f2c0a2927f4ff3"
+    license: "CC BY 4.0"
+    license_url: "https://creativecommons.org/licenses/by/4.0/"
+    license_evidence_url: "https://aclanthology.org/faq/copyright/"
+    modifications: "Figure 3, Poppler 300 DPI, x=515 y=975 width=1450 height=1460; all branches and labels retained; external page margins and paragraph caption excluded; no redraw"
+    used_in: ["00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md"]
+    metadata_status: "verified"
+    provenance_confirmation: "source-license-verified"
+    derivation: "pdf-page-render-crop"
+  - id: "curated-synthetic-openthoughts-pipeline-d7c9da681555"
+    asset: "00 Учебник/Assets/Figures/curated/synthetic-review-2026-09/openthoughts-pipeline.png"
+    author: "Etash Guha et al.; OpenThoughts team"
+    source_url: "https://arxiv.org/pdf/2506.04178v2#page=11"
+    source_asset: "05 Источники/Papers/Source PDFs/openthoughts-v2.pdf"
+    source_asset_sha256: "b18e962b0dea90c45acdb291403b03860e0a85e0b2571b6f1e5be5b436989c0a"
+    source_page: 11
+    sha256: "d7c9da6815550a86b3b83876f5ab023d03320c3513368890c79b7806b11c2659"
+    license: "CC BY 4.0"
+    license_url: "https://creativecommons.org/licenses/by/4.0/"
+    license_evidence_url: "https://arxiv.org/abs/2506.04178v2"
+    modifications: "Figure 4, Poppler 400 DPI, x=570 y=430 width=2260 height=1080; complete Sankey diagram, original pastel colors retained; no redraw"
+    used_in: ["00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md"]
+    metadata_status: "verified"
+    provenance_confirmation: "source-license-verified"
+    derivation: "pdf-page-render-crop"
+  - id: "curated-synthetic-shumailov-collapse-71db37c1ce16"
+    asset: "00 Учебник/Assets/Figures/curated/synthetic-review-2026-09/shumailov-collapse.png"
+    author: "Ilia Shumailov et al."
+    source_url: "https://www.nature.com/articles/s41586-024-07566-y.pdf#page=2"
+    source_asset: "05 Источники/Papers/Source PDFs/shumailov-nature-2024-corrected.pdf"
+    source_asset_sha256: "474c820b5224b6bfa337e98a0ff942eca4b7808b44236121af828c6122a860ae"
+    source_page: 2
+    sha256: "71db37c1ce1628cdd64b79f080676e53d7bbfad03647519ba6eec8f739f6c893"
+    license: "CC BY 4.0"
+    license_url: "https://creativecommons.org/licenses/by/4.0/"
+    license_evidence_url: "https://www.nature.com/articles/s41586-024-07566-y"
+    modifications: "Corrected 2025-03-21 PDF, Figure 1 a-c, Poppler 360 DPI, x=620 y=235 width=1770 height=1860; all panels, legends and axes retained; no redraw"
+    used_in: ["00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md"]
+    metadata_status: "verified"
+    provenance_confirmation: "source-license-verified"
+    derivation: "pdf-page-render-crop"
+  - id: "curated-synthetic-swe-rebench-caeb3e00810f"
+    asset: "00 Учебник/Assets/Figures/curated/synthetic-review-2026-09/swe-rebench.png"
+    author: "SWE-Rebench authors"
+    source_url: "https://arxiv.org/abs/2505.20411v1"
+    source_image_url: "https://arxiv.org/html/2505.20411v1/data_collection_v2.png"
+    source_asset_sha256: "caeb3e00810fcc52df939c90c50661512874165a0e06fad667bd7927a72f9769"
+    sha256: "caeb3e00810fcc52df939c90c50661512874165a0e06fad667bd7927a72f9769"
+    license: "CC BY 4.0"
+    license_url: "https://creativecommons.org/licenses/by/4.0/"
+    license_evidence_url: "https://arxiv.org/abs/2505.20411v1"
+    modifications: "Byte-for-byte original 2420x1294 PNG; no crop, resizing or visual modification"
+    used_in: ["00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md"]
+    metadata_status: "verified"
+    provenance_confirmation: "source-license-verified"
+    derivation: "source-raster-copy"
+  - id: "curated-ttc-s1-budget-forcing-1ff0408b3b4c"
+    asset: "00 Учебник/Assets/Figures/curated/ttc-review-2026-09/s1-budget-forcing.png"
+    author: "Niklas Muennighoff et al.; simplescaling/s1 contributors"
+    source_url: "https://github.com/simplescaling/s1/blob/77272c6e925d610257a50b520bad15330b513389/visuals/raspberry_single.pdf"
+    commit: "77272c6e925d610257a50b520bad15330b513389"
+    source_asset: "05 Источники/Papers/Source PDFs/s1-budget-forcing.pdf"
+    source_asset_sha256: "ab4783a3cf9141feb3070580471632f464844ef4fe3182bb7cc941a72de0b324"
+    source_page: 1
+    sha256: "1ff0408b3b4cbc11ca72fd72b24a48c3c0ee8e5f2ef95faea1db5df85100a1c9"
+    license: "Apache-2.0"
+    license_url: "https://github.com/simplescaling/s1/blob/77272c6e925d610257a50b520bad15330b513389/LICENSE"
+    modifications: "Original standalone author figure PDF page 1 rendered with Poppler at 144 DPI, x=0 y=0 width=1814 height=1318 pixels; full PDF bounds [0,0,907,659] points retained; no crop, redraw or text changes"
+    used_in: ["00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md"]
+    metadata_status: "verified"
+    provenance_confirmation: "source-license-verified"
+    derivation: "pdf-page-render-crop"
+  - id: "curated-ttc-snell-budget-difficulty-d7581a61e881"
+    asset: "00 Учебник/Assets/Figures/curated/ttc-review-2026-09/snell-budget-difficulty.png"
+    author: "Charlie Snell, Jaehoon Lee, Kelvin Xu, Aviral Kumar"
+    source_url: "https://arxiv.org/pdf/2408.03314v1#page=9"
+    source_asset: "05 Источники/Papers/Source PDFs/snell-test-time-compute-v1.pdf"
+    source_asset_sha256: "ded7b20b51493258c5ce2a1a024cd33dd752de1fa3373d1207620da4cfe24545"
+    source_page: 9
+    sha256: "d7581a61e881961e9e4190266d6b128bbe8a2b9fee4b415d270641fb1679ceb5"
+    license: "CC BY 4.0"
+    license_url: "https://creativecommons.org/licenses/by/4.0/"
+    modifications: "Figure 3 cropped with Poppler at 320 DPI, x=268 y=370 width=2192 height=750 pixels; both panels, axes and legends retained; surrounding caption excluded; no redraw or text changes"
+    used_in: ["00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md"]
+    metadata_status: "verified"
+    provenance_confirmation: "source-license-verified"
+    derivation: "pdf-page-render-crop"
+  - id: "curated-ttc-snell-revisions-parallel-94724c579dd6"
+    asset: "00 Учебник/Assets/Figures/curated/ttc-review-2026-09/snell-revisions-parallel.png"
+    author: "Charlie Snell, Jaehoon Lee, Kelvin Xu, Aviral Kumar"
+    source_url: "https://arxiv.org/pdf/2408.03314v1#page=11"
+    source_asset: "05 Источники/Papers/Source PDFs/snell-test-time-compute-v1.pdf"
+    source_asset_sha256: "ded7b20b51493258c5ce2a1a024cd33dd752de1fa3373d1207620da4cfe24545"
+    source_page: 11
+    sha256: "94724c579dd6427c2a452c4e2405606327f9ad7d3bcae691416d7b5929c66e55"
+    license: "CC BY 4.0"
+    license_url: "https://creativecommons.org/licenses/by/4.0/"
+    modifications: "Figure 5 cropped with Poppler at 320 DPI, x=268 y=340 width=2192 height=876 pixels; complete diagram and legend retained; surrounding caption excluded; no redraw or text changes"
+    used_in: ["00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md"]
+    metadata_status: "verified"
+    provenance_confirmation: "source-license-verified"
+    derivation: "pdf-page-render-crop"
+  - id: "curated-ttc-self-consistency-0a0adfa4ace5"
+    asset: "00 Учебник/Assets/Figures/curated/ttc-review-2026-09/self-consistency.png"
+    author: "Xuezhi Wang et al."
+    source_url: "https://arxiv.org/pdf/2203.11171v4#page=2"
+    source_asset: "05 Источники/Papers/Source PDFs/self-consistency-v4.pdf"
+    source_asset_sha256: "1a49ce0373afc89d2d6e97fb1aa8230f6b818c70590d732a3187f753f4df6aba"
+    source_page: 2
+    sha256: "0a0adfa4ace56bf86251d5bfc13889dc9f76ebfd65fc791f274452ead2b9d2f3"
+    license: "CC BY 4.0"
+    license_url: "https://creativecommons.org/licenses/by/4.0/"
+    modifications: "Figure 1 cropped with Poppler at 320 DPI, x=470 y=324 width=1780 height=846 pixels; complete prompt, reasoning paths and answer aggregation retained; surrounding caption excluded; no redraw or text changes"
+    used_in: ["00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md"]
+    metadata_status: "verified"
+    provenance_confirmation: "source-license-verified"
+    derivation: "pdf-page-render-crop"
+  - id: "curated-ttc-opro-loop-429103d859bb"
+    asset: "00 Учебник/Assets/Figures/curated/ttc-review-2026-09/opro-loop.png"
+    author: "Chengrun Yang et al."
+    source_url: "https://arxiv.org/pdf/2309.03409v3#page=3"
+    source_asset: "05 Источники/Papers/Source PDFs/opro-v3.pdf"
+    source_asset_sha256: "61c8493c964f6d4436f69ae63ff52d3a91540708e9387615f3a8f034bab081c0"
+    source_page: 3
+    sha256: "429103d859bb8b9064c124e172ab8164e842d4ab0d11d9d1fba0942bf87d9030"
+    license: "CC0 1.0"
+    license_url: "https://creativecommons.org/publicdomain/zero/1.0/"
+    modifications: "Figure 2 cropped with Poppler at 360 DPI, x=960 y=385 width=1110 height=620 pixels; complete optimization loop retained; surrounding caption excluded; no redraw or text changes"
+    used_in: ["00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md"]
+    metadata_status: "verified"
+    provenance_confirmation: "source-license-verified"
+    derivation: "pdf-page-render-crop"
+  - id: "curated-ttc-self-discover-stages-224a07822efb"
+    asset: "00 Учебник/Assets/Figures/curated/ttc-review-2026-09/self-discover-stages.png"
+    author: "Pei Zhou et al."
+    source_url: "https://arxiv.org/pdf/2402.03620v1#page=3"
+    source_asset: "05 Источники/Papers/Source PDFs/self-discover-v1.pdf"
+    source_asset_sha256: "a7e7c65754343960fb6eefc10aacc91b1d307f8fd1ceda0ee3db4ca99dddc9b7"
+    source_page: 3
+    sha256: "224a07822efb43cec16e445ab32c4306777ca0c0fd6d1942111cb989267619b4"
+    license: "CC BY 4.0"
+    license_url: "https://creativecommons.org/licenses/by/4.0/"
+    modifications: "Figure 2 cropped with Poppler at 300 DPI, x=315 y=270 width=1880 height=665 pixels; both stages and original labels retained; surrounding caption excluded; no redraw or text changes"
+    used_in: ["00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md"]
+    metadata_status: "verified"
+    provenance_confirmation: "source-license-verified"
+    derivation: "pdf-page-render-crop"
+  - id: "curated-ttc-tot-search-532ef62996f2"
+    asset: "00 Учебник/Assets/Figures/curated/ttc-review-2026-09/tot-search.png"
+    author: "Shunyu Yao et al."
+    source_url: "https://arxiv.org/pdf/2305.10601v2#page=2"
+    source_asset: "05 Источники/Papers/Source PDFs/tree-of-thoughts-v2.pdf"
+    source_asset_sha256: "79c5237e3f63953a73f2b0d6894327702ee1f7e981450c251bb1b5cb4f8d7b8f"
+    source_page: 2
+    sha256: "532ef62996f2831eb1d682857002fb4789fb69a12b0fd4d5f50e85e625aa86b3"
+    license: "CC BY 4.0"
+    license_url: "https://creativecommons.org/licenses/by/4.0/"
+    modifications: "Figure 1 cropped with Poppler at 320 DPI, x=640 y=320 width=1460 height=700 pixels; original search comparison retained; surrounding caption excluded; no redraw or text changes"
+    used_in: ["00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md"]
+    metadata_status: "verified"
+    provenance_confirmation: "source-license-verified"
+    derivation: "pdf-page-render-crop"
+  - id: "curated-ttc-tot-game24-df22d9f237c0"
+    asset: "00 Учебник/Assets/Figures/curated/ttc-review-2026-09/tot-game24.png"
+    author: "Shunyu Yao et al."
+    source_url: "https://arxiv.org/pdf/2305.10601v2#page=5"
+    source_asset: "05 Источники/Papers/Source PDFs/tree-of-thoughts-v2.pdf"
+    source_asset_sha256: "79c5237e3f63953a73f2b0d6894327702ee1f7e981450c251bb1b5cb4f8d7b8f"
+    source_page: 5
+    sha256: "df22d9f237c04522708092b8bdd5ad8bd819f9f2a3b3cc2c1fb0a68233553cf2"
+    license: "CC BY 4.0"
+    license_url: "https://creativecommons.org/licenses/by/4.0/"
+    modifications: "Figure 2 cropped with Poppler at 320 DPI, x=560 y=1430 width=1600 height=480 pixels; original Game of 24 search example retained; surrounding caption excluded; no redraw or text changes"
+    used_in: ["00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md"]
+    metadata_status: "verified"
+    provenance_confirmation: "source-license-verified"
+    derivation: "pdf-page-render-crop"
+  - id: "curated-self-instruct-pipeline-759e2bc177da"
+    asset: "00 Учебник/Assets/Figures/curated/sft-review-2026-09/self-instruct-pipeline.png"
+    author: "Yizhong Wang et al."
+    source_url: "https://aclanthology.org/2023.acl-long.754.pdf#page=2"
+    source_asset: "05 Источники/Papers/Source PDFs/self-instruct-acl2023.pdf"
+    source_asset_sha256: "87f1d8476fa041d0c6b09b9239253ed698c4efac973347aebe83c487eab91c78"
+    source_page: 2
+    sha256: "759e2bc177da5ed1f63b3da22b259cc6cd474d4b3a6d4e0881acc341aa57c5a2"
+    license: "CC BY 4.0"
+    license_url: "https://aclanthology.org/faq/copyright/"
+    modifications: "Figure 2 cropped with Poppler at 300 DPI, x=360 y=295 width=1810 height=790 pixels; complete diagram retained, no redraw or text changes"
+    used_in: ["00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md", "00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md"]
+    metadata_status: "verified"
+    provenance_confirmation: "source-license-verified"
+    derivation: "pdf-page-render-crop"
+  - id: "curated-pytorch-ddp-fig3-order-and-unused-gradients-4a23162170cc"
+    asset: "00 Учебник/Assets/Figures/curated/ddp-review-2026-09/pytorch-ddp-fig3-order-and-unused-gradients.png"
+    author: "Shen Li et al."
+    source_url: "https://arxiv.org/pdf/2006.15704v1#page=5"
+    source_asset: "05 Источники/Papers/Source PDFs/pytorch-ddp-2006.15704v1.pdf"
+    source_asset_sha256: "246af7a675cfb58a4110c1f92b952baa571038e0a57457459137e8c49f8fcf96"
+    source_page: 5
+    sha256: "4a23162170ccaa4921fce1f8872f7fd4cb90a7050cf4b9311737cb6d48bfca0f"
+    license: "CC BY-NC-SA 4.0"
+    license_url: "https://creativecommons.org/licenses/by-nc-sa/4.0/"
+    modifications: "Original figure cropped with Poppler at 400 DPI, x=300 y=275 width=1280 height=755 pixels; complete labels and legend retained, no redraw"
+    used_in: ["00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md"]
+    metadata_status: "verified"
+    provenance_confirmation: "source-license-verified"
+    derivation: "pdf-page-render-crop"
+  - id: "curated-pytorch-ddp-fig4-gradient-reduction-38a0bb0a21ba"
+    asset: "00 Учебник/Assets/Figures/curated/ddp-review-2026-09/pytorch-ddp-fig4-gradient-reduction.png"
+    author: "Shen Li et al."
+    source_url: "https://arxiv.org/pdf/2006.15704v1#page=6"
+    source_asset: "05 Источники/Papers/Source PDFs/pytorch-ddp-2006.15704v1.pdf"
+    source_asset_sha256: "246af7a675cfb58a4110c1f92b952baa571038e0a57457459137e8c49f8fcf96"
+    source_page: 6
+    sha256: "38a0bb0a21ba86f27fa2c580ff03e027516f050fb427e3bc19366af8245f0474"
+    license: "CC BY-NC-SA 4.0"
+    license_url: "https://creativecommons.org/licenses/by-nc-sa/4.0/"
+    modifications: "Original figure cropped with Poppler at 400 DPI, x=300 y=275 width=1280 height=880 pixels; complete labels and legend retained, no redraw"
+    used_in: ["00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md"]
+    metadata_status: "verified"
+    provenance_confirmation: "source-license-verified"
+    derivation: "pdf-page-render-crop"
+  - id: "curated-memgpt-hierarchy-136e1de6954b"
+    asset: "00 Учебник/Assets/Figures/curated/agent-memory-review-2026-09/memgpt-figure3-memory-hierarchy.png"
+    author: "Charles Packer et al."
+    source_url: "https://arxiv.org/pdf/2310.08560v2#page=3"
+    source_asset: "05 Источники/Papers/Source PDFs/memgpt-2310.08560v2.pdf"
+    source_asset_sha256: "9f674bcff69c86f11c813dcfad613d8841f5f8ed17979e3c4df06a91df7762e0"
+    source_page: 3
+    sha256: "136e1de6954b34212f646ad84e528d1fc8829efeabca885285429a4d0bd656ae"
+    license: "CC BY 4.0"
+    license_url: "https://arxiv.org/html/2310.08560v2"
+    modifications: "Figure 3 cropped with Poppler at 300 DPI, x=308 y=262 width=1908 height=717 pixels; full diagram retained, outside paragraph and caption excluded"
+    used_in: ["00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md"]
+    metadata_status: "verified"
+    provenance_confirmation: "source-license-verified"
+    derivation: "pdf-page-render-crop"
+  - id: "curated-webdreamer-paradigms-d27a590a9aec"
+    asset: "00 Учебник/Assets/Figures/curated/agent-memory-review-2026-09/webdreamer-planning-paradigms.png"
+    author: "Yu Gu et al."
+    source_url: "https://arxiv.org/abs/2411.06559v1"
+    source_image_url: "https://arxiv.org/html/2411.06559v1/wm_fig1.png"
+    source_asset_sha256: "d27a590a9aec9357dbd3fa35619b3e9fde3373a82732dbfade9a50af1f86a1b2"
+    sha256: "d27a590a9aec9357dbd3fa35619b3e9fde3373a82732dbfade9a50af1f86a1b2"
+    license: "CC BY 4.0"
+    license_url: "https://arxiv.org/html/2411.06559v1"
+    modifications: "Unchanged original Figure 1 PNG from the versioned arXiv HTML; byte-for-byte copy, no crop, resize or redraw"
+    used_in: ["00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md"]
+    metadata_status: "verified"
+    provenance_confirmation: "source-license-verified"
+    derivation: "source-raster-copy"
+  - id: curated-berkeley-agents-2025-coding-web-computer-use-m05-p23-agentless-pipeline-d9ae867aab40
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m05-p23-agentless-pipeline.png
+    author: Charles Sutton; Chunqiu Steven Xia et al. (Agentless)
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/Code%20Agents%20and%20AI%20for%20Vulnerability%20Detection.pdf#page=23
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-05-slides.pdf
+    source_asset_sha256: c242e0298f5c46adf38af284637209a0986db7fca2b63c626dd29218b5dd809e
+    source_page: 23
+    sha256: d9ae867aab400b9fb7a4fa5f3fcebd87fabfb2b5d447440f2ca914375fec39f6
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler at 216 DPI; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-coding-web-computer-use-m07-p70-aguvis-observation-action-a889e8d55744
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m07-p70-aguvis-observation-action.png
+    author: Caiming Xiong; Tianbao Xu et al. (Aguvis)
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/Multimodal_Agent_caiming.pdf#page=70
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-07-slides.pdf
+    source_asset_sha256: 3f12ea7b44c64d43d3c3804596700feacda59a26290ba188935fdd5cdde3847d
+    source_page: 70
+    sha256: a889e8d55744103cd2db1014ae370c7dea87c0c30e3643c96f71a19ef3b31e06
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler at 216 DPI; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-coding-web-computer-use-m07-p72-aguvis-two-stage-training-0931b28eb8c8
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m07-p72-aguvis-two-stage-training.png
+    author: Caiming Xiong; Tianbao Xu et al. (Aguvis)
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/Multimodal_Agent_caiming.pdf#page=72
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-07-slides.pdf
+    source_asset_sha256: 3f12ea7b44c64d43d3c3804596700feacda59a26290ba188935fdd5cdde3847d
+    source_page: 72
+    sha256: 0931b28eb8c844302023d1e95d2641b1fd47c37ec9fab210314d9da7eb8acb5f
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler at 216 DPI; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
+  - id: curated-berkeley-agents-2025-coding-web-computer-use-m07-p73-aguvis-data-collection-3d94daead5bf
+    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m07-p73-aguvis-data-collection.png
+    author: Caiming Xiong; Tianbao Xu et al. (Aguvis)
+    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/Multimodal_Agent_caiming.pdf#page=73
+    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-07-slides.pdf
+    source_asset_sha256: 3f12ea7b44c64d43d3c3804596700feacda59a26290ba188935fdd5cdde3847d
+    source_page: 73
+    sha256: 3d94daead5bf1e36789a130fb8d1d3b87330c5122b78dc88406fd3912add616d
+    license: User permission record (not a license)
+    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
+    modifications: full physical PDF page rendered with Poppler at 216 DPI; no crop, redraw, or semantic content change
+    used_in:
+    - 00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md
+    metadata_status: verified
+    provenance_confirmation: user-confirmed-open-materials
+    derivation: pdf-page-render
   - id: curated-escher-figure2-f8cc16778fe2
     asset: 00 Учебник/Assets/Figures/curated/course-follow-through/escher-figure2-original.svg
     author: Aditya Sehgal et al.
@@ -585,12 +907,14 @@ assets:
   - id: curated-deepseek-r1-51d3877bb09b
     asset: 00 Учебник/Assets/Figures/curated/deepseek-r1/figure2-pipeline.png
     author: DeepSeek-AI
-    source_url: https://arxiv.org/abs/2501.12948
-    license: null
-    license_url: null
+    source_url: https://arxiv.org/abs/2501.12948v2
+    license: CC BY 4.0
+    license_url: https://www.nature.com/articles/s41586-025-09422-z#rightslink
     modifications: rendered at 300 DPI and cropped from page 6 of the local source PDF
     used_in:
       - Papers/DeepSeek-R1 Reasoning via RL.md
+      - 00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md
+      - 05 Источники/Papers/DeepSeek-R1.md
     metadata_status: needs-confirmation
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/deepseek-r1/paper.pdf
@@ -628,23 +952,23 @@ assets:
     license_url: null
     modifications: copied without modification from the local raw source for publication packaging
     used_in:
-      - 00 Учебник/12 Post-training и Alignment/05 DPO.md
       - Concepts/Training/DPO.md
     metadata_status: needs-confirmation
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/dpo/images/dpo-pipeline.png
   - id: curated-dpo-af51c0802725
     asset: 00 Учебник/Assets/Figures/curated/dpo/fig1.png
-    author: null
+    author: Rafael Rafailov et al.
     source_url: https://arxiv.org/abs/2305.18290
-    license: null
-    license_url: null
+    license: CC BY 4.0
+    license_url: https://arxiv.org/abs/2305.18290v3
     modifications: copied without modification from the local raw source for publication packaging
     used_in:
+      - 00 Учебник/12 Post-training и Alignment/05 DPO.md
       - Concepts/Training/DPO.md
       - Concepts/Training/RLHF.md
       - Papers/DPO.md
-    metadata_status: needs-confirmation
+    metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/dpo/images/fig1.png
   - id: curated-dpo-6172e6344252
@@ -851,29 +1175,37 @@ assets:
     source_asset: raw/papers/gpt-30/images/self-attention-and-masked-self-attention.png
   - id: curated-gqa-02c3d00ec9f3
     asset: 00 Учебник/Assets/Figures/curated/gqa/mha-gqa-mqa.png
-    author: null
-    source_url: null
-    license: null
-    license_url: null
-    modifications: copied without modification from the local raw source for publication packaging
+    author: Joshua Ainslie et al.
+    source_url: https://arxiv.org/abs/2305.13245v3
+    source_image_url: https://arxiv.org/html/2305.13245v3/images/gmq_architecture.png
+    source_asset_sha256: 02c3d00ec9f339211daae34392aeed850b013457b64f8088f1c5c054a5e94ab6
+    derivation: source-raster-copy
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    modifications: Original Figure 2; byte equality with the versioned arXiv original verified 2026-09-28.
+    sha256: 02c3d00ec9f339211daae34392aeed850b013457b64f8088f1c5c054a5e94ab6
     used_in:
       - 00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md
       - Concepts/Architectures/GQA.md
-    metadata_status: needs-confirmation
-    provenance_confirmation: user-confirmed-open-materials
-    source_asset: raw/papers/gqa/images/mha-mqa-gqa.png
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    last_verified: 2026-09-28
   - id: curated-gqa-96869d5f7e01
     asset: 00 Учебник/Assets/Figures/curated/gqa/uptrain-recycling.png
-    author: null
-    source_url: null
-    license: null
-    license_url: null
-    modifications: copied without modification from the local raw source for publication packaging
+    author: Joshua Ainslie et al.
+    source_url: https://arxiv.org/abs/2305.13245v3
+    source_image_url: https://arxiv.org/html/2305.13245v3/images/recycling.png
+    source_asset_sha256: 96869d5f7e013dc55093c0581b9fee75e3a7d27ed5a9da34136a6d3ffb5f1933
+    derivation: source-raster-copy
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    modifications: Original Figure 1; byte equality with the versioned arXiv original verified 2026-09-28.
+    sha256: 96869d5f7e013dc55093c0581b9fee75e3a7d27ed5a9da34136a6d3ffb5f1933
     used_in:
       - 00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md
-    metadata_status: needs-confirmation
-    provenance_confirmation: user-confirmed-open-materials
-    source_asset: raw/papers/gqa/images/uptrain-recycling.png
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    last_verified: 2026-09-28
   - id: curated-grpo-4f71b08072d5
     asset: 00 Учебник/Assets/Figures/curated/grpo/iterative-rl-curves.png
     author: null
@@ -900,8 +1232,8 @@ assets:
     source_asset: raw/papers/grpo/images/majk-passk.png
   - id: curated-grpo-84b71426c8c2
     asset: 00 Учебник/Assets/Figures/curated/grpo/ppo-vs-grpo.png
-    author: null
-    source_url: null
+    author: Zhihong Shao et al.
+    source_url: https://arxiv.org/abs/2402.03300v3
     license: null
     license_url: null
     modifications: copied without modification from the local raw source for publication packaging
@@ -937,8 +1269,8 @@ assets:
     source_asset: raw/papers/in-context-learning/images/icl-scaling-model-size.png
   - id: curated-instructgpt-ffb549dc81ca
     asset: 00 Учебник/Assets/Figures/curated/instructgpt/chatgpt-training-pipeline.png
-    author: null
-    source_url: https://arxiv.org/abs/2203.02155
+    author: Chip Huyen
+    source_url: https://huyenchip.com/2023/05/02/rlhf.html
     license: null
     license_url: null
     modifications: copied without modification from the local raw source for publication packaging
@@ -982,7 +1314,6 @@ assets:
     license_url: null
     modifications: copied without modification from the local raw source for publication packaging
     used_in:
-      - 00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md
       - Concepts/Training/PPO.md
       - Concepts/Training/RLHF.md
     metadata_status: needs-confirmation
@@ -1166,17 +1497,19 @@ assets:
     source_asset: raw/papers/lstm/images/lstm-chain.png
   - id: curated-mamba-20fb747e600a
     asset: 00 Учебник/Assets/Figures/curated/mamba/mamba-block.png
-    author: null
-    source_url: https://arxiv.org/abs/2312.00752
+    author: Maarten Grootendorst
+    source_url: https://www.maartengrootendorst.com/blog/mamba/#the-mamba-block
     license: null
     license_url: null
     modifications: copied without modification from the local raw source for publication packaging
     used_in:
+      - 00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md
       - 00 Учебник/10 Атлас современных архитектур/02 Альтернативы Transformer и multimodality.md
       - Concepts/Architectures/Mamba.md
     metadata_status: needs-confirmation
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/mamba/images/mamba-block.png
+    provenance_note: "Source attribution corrected by visual comparison on 2026-09-28; existing raster retained. Reuse license is still unconfirmed."
   - id: curated-mamba-a7be647f0f21
     asset: 00 Учебник/Assets/Figures/curated/mamba/mamba-vs-transformer.png
     author: null
@@ -1191,12 +1524,13 @@ assets:
     source_asset: raw/papers/mamba/images/mamba-vs-transformer.png
   - id: curated-mamba-95120fa4fd87
     asset: 00 Учебник/Assets/Figures/curated/mamba/selective-ssm.png
-    author: null
+    author: Albert Gu and Tri Dao
     source_url: https://arxiv.org/abs/2312.00752
     license: null
     license_url: null
     modifications: copied without modification from the local raw source for publication packaging
     used_in:
+      - 00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md
       - 00 Учебник/10 Атлас современных архитектур/02 Альтернативы Transformer и multimodality.md
       - Concepts/Architectures/Mamba.md
     metadata_status: needs-confirmation
@@ -1204,17 +1538,19 @@ assets:
     source_asset: raw/papers/mamba/images/selective-ssm.png
   - id: curated-mamba-c02ede92a399
     asset: 00 Учебник/Assets/Figures/curated/mamba/ssm-three-views.png
-    author: null
-    source_url: https://arxiv.org/abs/2312.00752
+    author: Maarten Grootendorst
+    source_url: https://www.maartengrootendorst.com/blog/mamba/#what-is-a-state-space-model
     license: null
     license_url: null
     modifications: copied without modification from the local raw source for publication packaging
     used_in:
+      - 00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md
       - 00 Учебник/10 Атлас современных архитектур/02 Альтернативы Transformer и multimodality.md
       - Concepts/Architectures/Mamba.md
     metadata_status: needs-confirmation
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/mamba/images/ssm-three-views.png
+    provenance_note: "Source attribution and caption corrected on 2026-09-28: the figure shows A/B/C/D signal paths, not three SSM computational views. Reuse license remains unconfirmed."
   - id: curated-mistral-7b-6725e4201510
     asset: 00 Учебник/Assets/Figures/curated/mistral-7b/benchmark-comparison.png
     author: null
@@ -1772,7 +2108,6 @@ assets:
     modifications: figure crop or extraction; exact process requires confirmation
     used_in:
       - 00 Учебник/10 Атлас современных архитектур/01 Llama, Qwen и DeepSeek как эволюция блока.md
-      - 00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md
       - Papers/DeepSeek-R1 Reasoning via RL.md
     metadata_status: needs-confirmation
   - asset: 00 Учебник/Assets/Figures/deepseek-r1-page4.png
@@ -1955,12 +2290,13 @@ assets:
     used_in: []
     metadata_status: needs-confirmation
   - asset: 00 Учебник/Assets/Figures/retnet-figure3-hq.png
-    author: null
+    author: Yutao Sun et al.
     source_url: https://arxiv.org/abs/2307.08621
     license: null
     license_url: null
     modifications: figure crop or extraction; exact process requires confirmation
     used_in:
+      - 00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md
       - 00 Учебник/10 Атлас современных архитектур/02 Альтернативы Transformer и multimodality.md
     metadata_status: needs-confirmation
   - asset: 00 Учебник/Assets/Figures/retnet-page4.png
@@ -2003,8 +2339,7 @@ assets:
     license: null
     license_url: null
     modifications: figure crop or extraction; exact source and process require confirmation
-    used_in:
-      - 00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md
+    used_in: []
     metadata_status: needs-confirmation
   - asset: 00 Учебник/Assets/Figures/tot-page2.png
     author: null
@@ -2472,13 +2807,13 @@ assets:
     asset: 00 Учебник/Assets/Figures/curated/modern-37-40-long-context/rope-decay.png
     author: Jianlin Su et al.
     source_url: https://arxiv.org/pdf/2104.09864
-    license: open-paper-material; reuse confirmed by repository owner
+    license: Reuse not confirmed; arXiv non-exclusive distribution license is not a reuse license
     license_url: https://arxiv.org/abs/2104.09864
     modifications: Figure 2 rendered from the official PDF at high resolution and cropped without content changes
-    used_in:
-      - 00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md
-    metadata_status: verified
+    used_in: []
+    metadata_status: needs-confirmation
     provenance_confirmation: user-confirmed-open-materials
+    review_note: Removed from the long-context chapter on 2026-09-28; PI original now explains position extension directly. Existing file preserved.
     source_asset: raw/papers/rope/paper.pdf
     derivation: pdf-page-render-crop
   - id: curated-jalammar-ffn-000000000026
@@ -2718,8 +3053,7 @@ assets:
     license: open educational material; reuse confirmed by repository owner
     license_url: https://developer.nvidia.com/blog/leverage-our-latest-open-models-for-synthetic-data-generation-with-nvidia-nemotron-4-340b/
     modifications: copied or extracted without visual modification for publication
-    used_in:
-      - 00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/topics-53-59/nemotron-generate-rank-filter.png
@@ -3026,6 +3360,7 @@ assets:
     modifications: cropped Figure 3 from page 21 without altering the plot
     used_in:
       - 00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual.md
+      - 00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating.md
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/cs336/cs336_assignment1_basics.pdf
@@ -3077,8 +3412,7 @@ assets:
     license: open-course-material; reuse confirmed by repository owner
     license_url: https://rlhfbook.com/teach/course/
     modifications: full PDF slide rendered at 150 dpi without content changes
-    used_in:
-      - 00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/rlhfbook/sft-prompt-masking.pdf
@@ -3103,8 +3437,7 @@ assets:
     license: open-course-material; reuse confirmed by repository owner
     license_url: https://rlhfbook.com/teach/course/
     modifications: full PDF slide rendered at 150 dpi without content changes
-    used_in:
-      - 00 Учебник/12 Post-training и Alignment/02 Preference data.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/rlhfbook/preference-data-biases.pdf
@@ -3116,8 +3449,7 @@ assets:
     license: open-course-material; reuse confirmed by repository owner
     license_url: https://rlhfbook.com/teach/course/
     modifications: full PDF slide rendered at 150 dpi without content changes
-    used_in:
-      - 00 Учебник/12 Post-training и Alignment/03 Reward modeling.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/rlhfbook/reward-model-training.pdf
@@ -3129,8 +3461,7 @@ assets:
     license: open-course-material; reuse confirmed by repository owner
     license_url: https://rlhfbook.com/teach/course/
     modifications: full PDF slide rendered at 150 dpi without content changes
-    used_in:
-      - 00 Учебник/12 Post-training и Alignment/03 Reward modeling.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/rlhfbook/reward-model-types.pdf
@@ -3142,8 +3473,7 @@ assets:
     license: open-course-material; reuse confirmed by repository owner
     license_url: https://rlhfbook.com/teach/course/
     modifications: full PDF slide rendered at 150 dpi without content changes
-    used_in:
-      - 00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/rlhfbook/ppo-step-inputs.pdf
@@ -3155,8 +3485,7 @@ assets:
     license: open-course-material; reuse confirmed by repository owner
     license_url: https://rlhfbook.com/teach/course/
     modifications: full PDF slide rendered at 150 dpi without content changes
-    used_in:
-      - 00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/rlhfbook/ppo-four-models.pdf
@@ -3168,8 +3497,7 @@ assets:
     license: open-course-material; reuse confirmed by repository owner
     license_url: https://rlhfbook.com/teach/course/
     modifications: full PDF slide rendered at 150 dpi without content changes
-    used_in:
-      - 00 Учебник/12 Post-training и Alignment/05 DPO.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/rlhfbook/dpo-gradient.pdf
@@ -3181,8 +3509,7 @@ assets:
     license: open-course-material; reuse confirmed by repository owner
     license_url: https://rlhfbook.com/teach/course/
     modifications: full PDF slide rendered at 150 dpi without content changes
-    used_in:
-      - 00 Учебник/12 Post-training и Alignment/05 DPO.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/rlhfbook/dpo-offline-vs-online.pdf
@@ -3194,8 +3521,7 @@ assets:
     license: open-course-material; reuse confirmed by repository owner
     license_url: https://rlhfbook.com/teach/course/
     modifications: full PDF slide rendered at 150 dpi without content changes
-    used_in:
-      - 00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/rlhfbook/rlhf-vs-rlvr.pdf
@@ -3207,8 +3533,7 @@ assets:
     license: open-course-material; reuse confirmed by repository owner
     license_url: https://rlhfbook.com/teach/course/
     modifications: full PDF slide rendered at 150 dpi without content changes
-    used_in:
-      - 00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/rlhfbook/rlvr-feedback-loop.pdf
@@ -3220,8 +3545,7 @@ assets:
     license: open-course-material; reuse confirmed by repository owner
     license_url: https://rlhfbook.com/teach/course/
     modifications: full PDF slide rendered at 150 dpi without content changes
-    used_in:
-      - 00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/rlhfbook/grpo-group-relative.pdf
@@ -3233,8 +3557,7 @@ assets:
     license: open-course-material; reuse confirmed by repository owner
     license_url: https://rlhfbook.com/teach/course/
     modifications: full PDF slide rendered at 150 dpi without content changes
-    used_in:
-      - 00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/rlhfbook/grpo-vs-ppo-implementation.pdf
@@ -3246,8 +3569,7 @@ assets:
     license: open-course-material; reuse confirmed by repository owner
     license_url: https://rlhfbook.com/teach/course/
     modifications: full PDF slide rendered at 150 dpi without content changes
-    used_in:
-      - 00 Учебник/12 Post-training и Alignment/08 Reasoning distillation.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/rlhfbook/distillation-two-meanings.pdf
@@ -3259,8 +3581,7 @@ assets:
     license: open-course-material; reuse confirmed by repository owner
     license_url: https://rlhfbook.com/teach/course/
     modifications: full PDF slide rendered at 150 dpi without content changes
-    used_in:
-      - 00 Учебник/12 Post-training и Alignment/08 Reasoning distillation.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/rlhfbook/distillation-data-pipeline.pdf
@@ -3497,8 +3818,7 @@ assets:
     license: open educational material; reuse confirmed by repository owner
     license_url: https://arxiv.org/abs/2310.08560
     modifications: Figure 3 rendered from the official PDF; the complete memory-hierarchy diagram is preserved, while the original caption and surrounding body text are removed because Bookvar provides its own linked caption
-    used_in:
-      - 00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/source-first-65-68/memgpt-memory-hierarchy.png
@@ -4009,16 +4329,19 @@ assets:
   - id: curated-snell-prm-search-7e44420a8340
     asset: 00 Учебник/Assets/Figures/curated/test-time-compute/snell-prm-search-methods.png
     author: Charlie Snell, Jaehoon Lee, Kelvin Xu, Aviral Kumar
-    source_url: https://arxiv.org/abs/2408.03314
-    license: open-paper-material; reuse confirmed by repository owner
-    license_url: https://arxiv.org/abs/2408.03314
-    modifications: Figure 2 rendered from page 8 of the paper and cropped to the figure area
+    source_url: https://arxiv.org/pdf/2408.03314v1#page=8
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    modifications: Figure 2 cropped with Poppler at 320 DPI, x=300 y=340 width=2100 height=1030 pixels; full bottom legend and all three panels retained; surrounding caption excluded; no redraw or text changes
     used_in:
       - 00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md
+      - 03 Исследовательские линии/Reasoning и test-time compute.md
     metadata_status: verified
-    provenance_confirmation: user-confirmed-open-materials
-    source_asset: raw/papers/2408.03314.pdf
+    provenance_confirmation: source-license-verified
+    source_asset: 05 Источники/Papers/Source PDFs/snell-test-time-compute-v1.pdf
+    source_asset_sha256: ded7b20b51493258c5ce2a1a024cd33dd752de1fa3373d1207620da4cfe24545
     source_page: 8
+    sha256: 2c9294412ce71508da40353e52f1ca2ec1898fd5076a21f454cb42b2c4916486
     derivation: pdf-page-render-crop
   - id: curated-mml-vector-geometry-00000000009e
     asset: 00 Учебник/Assets/Figures/curated/foundations-source-first/mml-vector-geometry.png
@@ -4280,13 +4603,12 @@ assets:
     source_asset: raw/papers/external/foundations-source-first/google-low-lambda.svg
   - id: curated-cs336-prefill-decode-0000000000b1
     asset: 00 Учебник/Assets/Figures/curated/source-first-35-36/cs336-prefill-decode.png
-    author: Stanford CS336 course staff
-    source_url: https://github.com/stanford-cs336/spring2025-lectures/blob/main/lecture_01.py
-    license: MIT
-    license_url: https://github.com/stanford-cs336/spring2025-lectures/blob/main/LICENSE
-    modifications: copied without modification from the course repository
-    used_in:
-      - 00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md
+    author: Baolin Li, Yankai Jiang, Vijay Gadepally, Devesh Tiwari
+    source_url: https://arxiv.org/abs/2407.12391v1
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    modifications: Legacy lower-resolution copy of Figure 2 distributed through Stanford CS336. Replaced in the chapter by the original on 2026-09-28; retained for historical provenance.
+    used_in: []
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/source-first-35-36/cs336-prefill-decode.png
@@ -4294,8 +4616,8 @@ assets:
     asset: 00 Учебник/Assets/Figures/curated/source-first-35-36/gqa-quality-latency-table.png
     author: Joshua Ainslie et al.
     source_url: https://aclanthology.org/2023.emnlp-main.298/
-    license: open-paper-material; reuse confirmed by repository owner
-    license_url: https://aclanthology.org/2023.emnlp-main.298/
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
     modifications: Table 1 crop distributed with Stanford CS336 Lecture 10
     used_in:
       - 00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md
@@ -4306,8 +4628,8 @@ assets:
     asset: 00 Учебник/Assets/Figures/curated/source-first-35-36/gqa-groups-speed.png
     author: Joshua Ainslie et al.
     source_url: https://aclanthology.org/2023.emnlp-main.298/
-    license: open-paper-material; reuse confirmed by repository owner
-    license_url: https://aclanthology.org/2023.emnlp-main.298/
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
     modifications: Figure 6 crop distributed with Stanford CS336 Lecture 10
     used_in:
       - 00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md
@@ -4316,25 +4638,24 @@ assets:
     source_asset: raw/papers/external/source-first-35-36/gqa-groups-speed.png
   - id: curated-cs336-attention-comparison-0000000000b4
     asset: 00 Учебник/Assets/Figures/curated/source-first-35-36/cs336-mha-gqa-mqa-mla.png
-    author: Stanford CS336 course staff
-    source_url: https://github.com/stanford-cs336/spring2025-lectures/blob/main/lecture_10.py
-    license: MIT
-    license_url: https://github.com/stanford-cs336/spring2025-lectures/blob/main/LICENSE
-    modifications: copied without modification; course adaptation of DeepSeek-V2 Figure 3
+    author: DeepSeek-AI; reproduced in Stanford CS336
+    source_url: https://arxiv.org/abs/2405.04434v5
+    license: Figure reuse terms unconfirmed; arXiv non-exclusive distribution is not a reuse license
+    license_url: https://arxiv.org/abs/2405.04434v5
+    modifications: Existing course copy of DeepSeek-V2 Figure 3 retained. Stanford repository MIT license must not be assumed to cover the underlying paper figure. Attribution corrected 2026-09-28.
     used_in:
       - 00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md
-    metadata_status: verified
+    metadata_status: needs-confirmation
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/source-first-35-36/cs336-mha-gqa-mqa-mla.png
   - id: curated-mla-absorption-orders-0000000000b5
     asset: 00 Учебник/Assets/Figures/curated/source-first-35-36/mla-weight-absorption-orders.png
     author: Robin Geens; Marian Verhelst
     source_url: https://arxiv.org/abs/2506.02523
-    license: open-paper-material; reuse confirmed by repository owner
-    license_url: https://arxiv.org/abs/2506.02523
-    modifications: Figure 2 cropped from the official paper PDF without content changes
-    used_in:
-      - 00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    modifications: Figure 2 cropped from official PDF. Withdrawn from chapter 2026-09-28 because plotted operation counts do not reproduce from the stated matrix orders; see docs/audit/2026-09-28-gqa-mla.md. Asset retained, not silently altered.
+    used_in: []
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/2506.02523.pdf
@@ -4631,26 +4952,26 @@ assets:
     asset: 00 Учебник/Assets/Figures/curated/source-first-37-40-audit/longformer-attention-patterns.png
     author: Iz Beltagy; Matthew E. Peters; Arman Cohan
     source_url: https://arxiv.org/abs/2004.05150
-    license: open-paper-material; reuse confirmed by repository owner
+    license: Reuse not confirmed; arXiv non-exclusive distribution license is not a reuse license
     license_url: https://arxiv.org/abs/2004.05150
     modifications: Figure 2 rendered from the official paper and cropped without content changes
-    used_in:
-      - 00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md
-    metadata_status: verified
+    used_in: []
+    metadata_status: needs-confirmation
     provenance_confirmation: user-confirmed-open-materials
+    review_note: Removed from the chapter on 2026-09-28 because crop includes unrelated adjacent text; chapter links the original and uses the CC BY 4.0 Mistral causal-window figure. Existing file preserved.
     source_asset: raw/papers/external/2004.05150.pdf
     derivation: pdf-page-render-crop
   - id: curated-lost-middle-figure1-0000000000ce
     asset: 00 Учебник/Assets/Figures/curated/source-first-37-40-audit/lost-in-the-middle-figure-1.png
     author: Nelson F. Liu et al.
     source_url: https://arxiv.org/abs/2307.03172
-    license: open-paper-material; reuse confirmed by repository owner
+    license: Reuse of this arXiv-derived copy not separately confirmed; publisher version is CC BY 4.0
     license_url: https://arxiv.org/abs/2307.03172
     modifications: Figure 1 rendered from the official paper and cropped without content changes
-    used_in:
-      - 00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md
-    metadata_status: verified
+    used_in: []
+    metadata_status: needs-confirmation
     provenance_confirmation: user-confirmed-open-materials
+    review_note: Replaced on 2026-09-28 by a clean original plot from the CC BY 4.0 TACL publisher PDF; this crop cuts the caption. Existing file preserved.
     source_asset: raw/papers/external/2307.03172.pdf
     derivation: pdf-page-render-crop
   - id: curated-switch-parallelism-0000000000cf
@@ -4945,16 +5266,21 @@ assets:
     source_asset: raw/papers/external/inference-serving/triton/fused-softmax-performance.png
   - id: curated-triton-grouping-a1b2c3d4e50e
     asset: 00 Учебник/Assets/Figures/curated/inference-serving/triton-grouped-vs-row-major.png
-    author: OpenAI Triton project
-    source_url: https://triton-lang.org/main/getting-started/tutorials/03-matrix-multiplication.html
+    author: Philippe Tillet, OpenAI and Triton contributors
+    source_url: https://github.com/triton-lang/triton/blob/1b24a39939875de5333e3990bec3ddcbfc64eb80/docs/getting-started/tutorials/grouped_vs_row_major_ordering.png
+    source_image_url: https://raw.githubusercontent.com/triton-lang/triton/1b24a39939875de5333e3990bec3ddcbfc64eb80/docs/getting-started/tutorials/grouped_vs_row_major_ordering.png
+    source_page_url: https://triton-lang.org/main/getting-started/tutorials/03-matrix-multiplication.html
+    commit: 1b24a39939875de5333e3990bec3ddcbfc64eb80
+    sha256: e664da23d7f348c63655c37ccd515ee5dcb17cbfcd27c134426b1386574db8fc
     license: MIT
-    license_url: https://github.com/triton-lang/triton/blob/main/LICENSE
-    modifications: copied without visual modification from the official tutorial
+    license_url: https://github.com/triton-lang/triton/blob/1b24a39939875de5333e3990bec3ddcbfc64eb80/LICENSE
+    modifications: Original PNG unchanged; existing local bytes verified against the pinned upstream original. Notice retained in site/public/licenses/triton-MIT.txt.
     used_in:
       - 01 Справочник/Inference/Triton и GPU kernels.md
+      - 00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md
     metadata_status: verified
-    provenance_confirmation: user-confirmed-open-materials
-    source_asset: raw/papers/external/inference-serving/triton/grouped-vs-row-major-ordering.png
+    provenance_confirmation: pinned-upstream-repository
+    last_verified: 2026-09-28
   - id: curated-triton-matmul-fp16-a1b2c3d4e50f
     asset: 00 Учебник/Assets/Figures/curated/inference-serving/triton-matmul-benchmark-fp16.png
     author: OpenAI Triton project
@@ -5395,6 +5721,7 @@ assets:
     used_in: []
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
+    review_note: "Withdrawn from model-as-part-of-system on 2026-09-28: unlabelled D/C/L proportions do not represent the worked example; replaced by full lifecycle diagram."
   - id: curated-sklearn-pca-iris-21d57f4be28d
     asset: 00 Учебник/Assets/Figures/curated/advanced-unsupervised-classical/pca-iris.png
     author: The scikit-learn developers
@@ -5519,6 +5846,7 @@ assets:
     used_in: []
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
+    review_note: "Withdrawn from model-as-part-of-system on 2026-09-28: figure omits different operation/byte normalizations and historical technology context; not a modern GPU energy specification."
   - id: curated-harvard-harvard-foundation-ml-systems-memory-wall-divergence-svg-9d2b337867e9
     asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/foundation/ml_systems_memory_wall_divergence.svg
     author: Harvard Edge ML Systems Book contributors
@@ -5528,10 +5856,10 @@ assets:
     license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
     modifications: copied without modification; path changed for tracked publication packaging
     sha256: 8efdc56567a3017c10b042ec9ae143862ef640f8f193bdc8aa4445a201dc4560
-    used_in:
-      - 00 Учебник/10 ML Systems/01 Модель как часть системы.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
+    review_note: "Withdrawn from model-as-part-of-system on 2026-09-28: unlabeled conceptual curves, not a measured historical trend."
   - id: curated-harvard-harvard-foundation-frameworks-dispatch-tax-divergence-svg-db660dab5df0
     asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/foundation/frameworks_dispatch_tax_divergence.svg
     author: Harvard Edge ML Systems Book contributors
@@ -5552,9 +5880,8 @@ assets:
     license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
     modifications: copied without modification; path changed for tracked publication packaging
     sha256: 585cbabc2fedafe80abc87ea7da39ef32bc985d01003fedf07eee7f458a2fb4d
-    used_in:
-      - 00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md
-      - 00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md
+    used_in: []
+    review_note: "Withdrawn from precision chapter on 2026-09-29; replaced by explicit state accounting and original NVIDIA master-weight diagram."
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
   - id: curated-harvard-harvard-foundation-hw-acceleration-roofline-elbow-svg-837ecd35b4f8
@@ -5566,10 +5893,10 @@ assets:
     license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
     modifications: copied without modification; path changed for tracked publication packaging
     sha256: 4d20898ae8244de893577b70fc843b4c24f444842056f32d0cfcdc3169e42b5e
-    used_in:
-      - 00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
+    review_note: "Withdrawn from gpu-cuda-memory-hierarchy on 2026-09-28: unlabeled axes; roofline is explained with units in the next chapter."
   - id: curated-harvard-harvard-foundation-hw-acceleration-energy-ladder-svg-f7d298e7765a
     asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/foundation/hw_acceleration_energy_ladder.svg
     author: Harvard Edge ML Systems Book contributors
@@ -5592,6 +5919,7 @@ assets:
     used_in: []
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
+    review_note: "Withdrawn from performance-measurement-roofline on 2026-09-29: compares benchmark mean 15 ms with production p99 200 ms; not a latency distribution or median comparison. Other historical uses are unchanged."
   - id: curated-harvard-harvard-distributed-five-level-model-svg-c25d1ccb33a0
     asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/five-level-model.svg
     author: Harvard Edge ML Systems Book contributors
@@ -5666,7 +5994,8 @@ assets:
     license: CC BY-NC-SA 4.0
     license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
     modifications: copied without modification; path changed for tracked publication packaging
-    used_in: []
+    used_in:
+      - 00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating.md
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
   - id: curated-harvard-harvard-distributed-pipeline-parallelism-svg-95d0f500fd4a
@@ -5679,10 +6008,10 @@ assets:
     modifications: copied without modification; path changed for tracked publication packaging
     sha256: 6464aeac450f95fdc299e87d05c519e49e439e4b1a7dcfe2339850124f97f5eb
     used_in:
-      - 00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md
       - 00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism.md
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
+    review_note: "Withdrawn from arithmetic chapter 2026-09-29: backward microbatch dependencies violated by displayed schedule. Other historical uses pending page-by-page audit."
   - id: curated-harvard-harvard-distributed-moe-all-to-all-routing-svg-914d887b52e8
     asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/moe-all-to-all-routing.svg
     author: Harvard Edge ML Systems Book contributors
@@ -5693,10 +6022,10 @@ assets:
     modifications: copied without modification; path changed for tracked publication packaging
     sha256: 4571f4c2f935765e2deeb623ffa8c8143fc27821d07dcdc6b8325d88b620702d
     used_in:
-      - 00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md
       - 00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism.md
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
+    review_note: "Withdrawn from arithmetic chapter 2026-09-29: top-2 routing contradicts traffic footer omitting k; dropping and auxiliary loss are not universal. Other historical uses pending audit."
   - id: curated-harvard-harvard-distributed-zero-memory-partitioning-svg-a8e4a48164b4
     asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/zero-memory-partitioning.svg
     author: Harvard Edge ML Systems Book contributors
@@ -5785,6 +6114,7 @@ assets:
     used_in: []
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
+    review_note: "Withdrawn from performance-measurement-roofline on 2026-09-29: ridge label near 600 placed on tick 512, inconsistent slope coordinates and insufficiently specified workload markers. Replaced by the original JAX schematic."
   - id: curated-harvard-harvard-performance-gpu-memory-hierarchy-svg-0f49a30b32c8
     asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/gpu-memory-hierarchy.svg
     author: Harvard Edge ML Systems Book contributors
@@ -5796,6 +6126,7 @@ assets:
     used_in: []
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
+    review_note: "Withdrawn from gpu-cuda-memory-hierarchy on 2026-09-28: unlimited register bandwidth label is misleading; mixes per-SM and per-device capacity and presents energy estimates as H100 specifications."
   - id: curated-harvard-harvard-performance-operator-fusion-svg-efe422f26289
     asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/operator-fusion.svg
     author: Harvard Edge ML Systems Book contributors
@@ -5805,10 +6136,10 @@ assets:
     license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
     modifications: copied without modification; path changed for tracked publication packaging
     sha256: 6b23d97b249a7d6841aaea70af6827148003f5f6806978a91aedcf3b553cfcf8
-    used_in:
-      - 00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
+    review_note: "Withdrawn from gpu-cuda-memory-hierarchy on 2026-09-28: the LayerNorm/GeLU/Linear diagram omits weight traffic and makes a general six-to-two transfer claim. Replaced by explicitly scoped scalar-affine/ReLU example."
   - id: curated-harvard-harvard-performance-flashattention-tiling-svg-7c84d90bdbb9
     asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/flashattention-tiling.svg
     author: Harvard Edge ML Systems Book contributors
@@ -5875,10 +6206,10 @@ assets:
     license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
     modifications: copied without modification; path changed for tracked publication packaging
     sha256: 296bb2c0b6ed094f776d6ba59715227ae79887f1b9f4e9b18a2ae0d5d009640c
-    used_in:
-      - 00 Учебник/10 ML Systems/01 Модель как часть системы.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
+    review_note: "Withdrawn from model-as-part-of-system on 2026-09-28: facility-scale Cloud power compared with single-device powers; replaced by qualitative placement discussion and full hybrid diagram."
   - id: curated-harvard-benchmarking-confidence-svg-13d8e440e099
     asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/foundation/benchmarking_confidence_detectability.svg
     author: Harvard Edge ML Systems Book contributors
@@ -5888,10 +6219,10 @@ assets:
     license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
     modifications: copied without modification; path changed for tracked publication packaging
     sha256: 13d8e440e099438cc6b1b530e7559cca085d7a09057fb47e320e2840e6d91168
-    used_in:
-      - 00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
+    review_note: "Withdrawn from performance-measurement-roofline on 2026-09-29: concerns a binomial accuracy estimate near 95 percent and one percentage point precision, not timing uncertainty or a guaranteed two-model regression detection threshold."
   - id: curated-harvard-distributed-memory-budget-svg-2c3994815fd3
     asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/distributed_training_memory_budget.svg
     author: Harvard Edge ML Systems Book contributors
@@ -5901,10 +6232,10 @@ assets:
     license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
     modifications: copied without modification; path changed for tracked publication packaging
     sha256: 2c3994815fd37fcf0d335c16a591860cde0ea8c1d6b7c2109af3dba1c797753c
-    used_in:
-      - 00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
+    review_note: "Withdrawn from arithmetic chapter 2026-09-29: covers weights, gradients and optimizer state, not activations as the old caption claimed."
   - id: curated-harvard-block-quantization-svg-bf5a098a20c4
     asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/block-quantization.svg
     author: Harvard Edge ML Systems Book contributors
@@ -5914,8 +6245,8 @@ assets:
     license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
     modifications: copied without modification; path changed for tracked publication packaging
     sha256: bf5a098a20c40e4df50919f6d9b9564690a6a4d93ad4115049873cb8f07affc2
-    used_in:
-      - 00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md
+    used_in: []
+    review_note: "Withdrawn from precision chapter on 2026-09-29; replaced by NVIDIA MXFP8 diagram with explicit 32-element specification caveat."
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
   - id: curated-harvard-storage-latency-svg-f95d2489900b
@@ -6163,8 +6494,7 @@ assets:
     license: User permission record (not a named license)
     license_url: https://cs336.stanford.edu/
     modifications: byte-for-byte copy of images/transformer-architecture.png from the pinned lecture repository; image content unchanged
-    used_in:
-    - 00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
     derivation: byte-for-byte-copy
@@ -6248,8 +6578,7 @@ assets:
     license_url: https://cs336.stanford.edu/
     modifications: rendered from pinned lecture source with edtrace 0.1.15 in a 1440x1000 browser viewport; exact screenshot cropped to the 617x100 state panel at x=20 y=20;
       trace entry 475 selected for initial UTF-8 byte sequence from complete steps 462-606
-    used_in:
-    - 00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
     derivation: source-code-trace-render-crop
@@ -6263,8 +6592,7 @@ assets:
     license_url: https://cs336.stanford.edu/
     modifications: rendered from pinned lecture source with edtrace 0.1.15 in a 1440x1000 browser viewport; exact screenshot cropped to the informative 556x480 top of the state panel at x=20 y=20;
       trace entry 486 selected for first selected BPE merge from complete steps 462-606
-    used_in:
-    - 00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
     derivation: source-code-trace-render-crop
@@ -6278,8 +6606,7 @@ assets:
     license_url: https://cs336.stanford.edu/
     modifications: rendered from pinned lecture source with edtrace 0.1.15 in a 1440x1000 browser viewport; exact screenshot cropped to the informative 500x480 top of the state panel at x=20 y=20;
       trace entry 500 selected for third selected BPE merge from complete steps 462-606
-    used_in:
-    - 00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
     derivation: source-code-trace-render-crop
@@ -6293,8 +6620,7 @@ assets:
     license_url: https://cs336.stanford.edu/
     modifications: rendered from pinned lecture source with edtrace 0.1.15 in a 1440x1000 browser viewport; exact screenshot cropped to the 658x103 round-trip state panel at x=20 y=20;
       trace entry 600 selected for encode/decode round-trip from complete steps 462-606
-    used_in:
-    - 00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
     derivation: source-code-trace-render-crop
@@ -6308,8 +6634,7 @@ assets:
     license_url: https://cs336.stanford.edu/
     modifications: rendered from pinned lecture source with edtrace 0.1.15 and Chrome 137.0.7151.41 headless at viewport 1440x1000, deviceScaleFactor 2; cropped x=95 y=80 w=1250 h=840;
       trace entry 290 selected for ReLU bytes-per-FLOP derivation from complete steps 260-353
-    used_in:
-    - 00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
     derivation: source-code-trace-render-crop
@@ -6323,8 +6648,7 @@ assets:
     license_url: https://cs336.stanford.edu/
     modifications: rendered from pinned lecture source with edtrace 0.1.15 and Chrome 137.0.7151.41 headless at viewport 1440x1000, deviceScaleFactor 2; cropped x=95 y=80 w=1250 h=840;
       trace entry 320 selected for matrix-vector bytes-per-FLOP derivation from complete steps 260-353
-    used_in:
-    - 00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
     derivation: source-code-trace-render-crop
@@ -6338,8 +6662,7 @@ assets:
     license_url: https://cs336.stanford.edu/
     modifications: rendered from pinned lecture source with edtrace 0.1.15 and Chrome 137.0.7151.41 headless at viewport 1440x1000, deviceScaleFactor 2; cropped x=95 y=80 w=1250 h=840;
       trace entry 333 selected for square matrix-vector limiting case from complete steps 260-353
-    used_in:
-    - 00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
     derivation: source-code-trace-render-crop
@@ -6353,8 +6676,7 @@ assets:
     license_url: https://cs336.stanford.edu/
     modifications: rendered from pinned lecture source with edtrace 0.1.15 and Chrome 137.0.7151.41 headless at viewport 1440x1000, deviceScaleFactor 2; cropped x=95 y=80 w=1250 h=840;
       trace entry 346 selected for matrix-multiplication arithmetic-intensity conclusion from complete steps 260-353
-    used_in:
-    - 00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
     derivation: source-code-trace-render-crop
@@ -6653,8 +6975,8 @@ assets:
     license: User permission record (not a named license)
     license_url: https://cs336.stanford.edu/
     modifications: exact embedded raster extracted from PDF page 12; no redraw or semantic crop beyond the source image boundary
-    used_in:
-    - 00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md
+    used_in: []
+    review_note: Removed from the chapter on 2026-09-28; screenshot of prose and equations replaced with the actual architecture figure from the pinned MIT-licensed DeepSeek report.
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
     derivation: pdf-embedded-raster-extraction
@@ -6826,7 +7148,7 @@ assets:
 
   - id: curated-stanford-cs336-architectures-moe-capacity-token-dropping-3ced1421ac76
     asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/moe-capacity-token-dropping.png
-    author: Stanford CS336 staff; source figure attributed to the Switch Transformer authors
+    author: Stanford CS336 staff; figure reproduced on Lecture 4 page 47
     source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=47
     commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
     sha256: 3ced1421ac7697e3f294921a62a3d826c69ca48b8be2a93df53635a1921a4ef1
@@ -7527,14 +7849,17 @@ assets:
     commit: ca8bc81a59b70516f7ebb2da4808daade877c736
     source_parent_sha256: f5667e3b6fac23c3a6d4ad4a999445b96aab3fb2246904d13ec86b79320b1a84
     sha256: 7dd8944a6c6e123547e92fbf38ab2cbc88a826b657b1c9f693955981ca092f6f
-    license: User permission record (not a named license)
-    license_url: https://cs336.stanford.edu/
+    license: MIT
+    license_url: https://github.com/stanford-cs336/assignment2-systems/blob/ca8bc81a59b70516f7ebb2da4808daade877c736/LICENSE
+    license_notice: site/public/licenses/stanford-cs336-and-jax-scaling-MIT.txt
     modifications: "lossless explanatory body or figure crop from Assignment 2 PDF page 5, exported at 3278×1986; page chrome removed; no redraw"
     used_in:
       - 00 Учебник/10 ML Systems/07 Profiling ML-нагрузки.md
+      - 00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
     derivation: pdf-page-crop
+    last_verified: 2026-09-29
 
   - id: curated-stanford-cs336-systems-a2-p23-attention-equations-763b6af5dcae
     asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/a2-p23-attention-equations.png
@@ -7619,7 +7944,9 @@ assets:
   - id: curated-stanford-cs336-systems-cuda-grid-cta-3aebbb52b47d
     asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/cuda-grid-cta.png
     author: "NVIDIA; preserved by Stanford CS336 course staff"
-    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/cuda-grid-cta.png
+    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/var/files/image-1390e250b108c0d04b315ac7995eccd0-https_docs_nvidia_com_cuda_parallel-thread-execution__images_grid-with-CTAs_png
+    source_image_url: https://docs.nvidia.com/cuda/parallel-thread-execution/_images/grid-with-CTAs.png
+    review_note: Corrected nonexistent images/cuda-grid-cta.png source path to exact pinned raster cache; no new license claim.
     commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
     source_parent_sha256: 3aebbb52b47d4cef0c67785ffb9781032e06924320289283a4f2aa59a91d28ea
     sha256: 3aebbb52b47d4cef0c67785ffb9781032e06924320289283a4f2aa59a91d28ea
@@ -7709,11 +8036,11 @@ assets:
     license: User permission record (not a named license)
     license_url: https://cs336.stanford.edu/
     modifications: "complete PDF page 20 rendered at 2200×1239; no redraw or semantic alteration"
-    used_in:
-      - 00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
     derivation: pdf-page-render
+    review_note: "Withdrawn from performance-measurement-roofline on 2026-09-29: redundant overview of the same matrix-size experiment; kept page 47 with the divisibility legend and layout explanation. File preserved."
 
   - id: curated-stanford-cs336-systems-l05-p31-833a051a43fb
     asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l05-p31.png
@@ -7853,11 +8180,11 @@ assets:
     license: User permission record (not a named license)
     license_url: https://cs336.stanford.edu/
     modifications: "complete PDF page 48 rendered at 2200×1239; no redraw or semantic alteration"
-    used_in:
-      - 00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
     derivation: pdf-page-render
+    review_note: "Withdrawn from performance-measurement-roofline on 2026-09-29: the final sentence is truncated in the source PDF itself. The 98-to-120 tile calculation is explained in text with the one-resident-block-per-SM assumption. File preserved."
 
   - id: curated-stanford-cs336-systems-l05-p52-97c70c11566d
     asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l05-p52.png
@@ -8567,8 +8894,7 @@ assets:
     license: User permission record (not a named license)
     license_url: https://cs336.stanford.edu/
     modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging
-    used_in:
-    - 00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
     derivation: source-raster-copy
@@ -8583,8 +8909,7 @@ assets:
     license: User permission record (not a named license)
     license_url: https://cs336.stanford.edu/
     modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging
-    used_in:
-    - 00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
     derivation: source-raster-copy
@@ -8596,8 +8921,8 @@ assets:
     commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
     source_parent_sha256: 66870908b3187debd1a8102abeb8cfe4f5b2973e9f5decb3625f348fab3d4c22
     sha256: 66870908b3187debd1a8102abeb8cfe4f5b2973e9f5decb3625f348fab3d4c22
-    license: User permission record (not a named license)
-    license_url: https://cs336.stanford.edu/
+    license: CC BY-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-sa/4.0/
     modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging
     used_in:
     - 00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md
@@ -8612,8 +8937,8 @@ assets:
     commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
     source_parent_sha256: a1ed5f5e1d938299d9fd92dc0c5258098eaf233dd301f7dc7126ecd082acc43b
     sha256: a1ed5f5e1d938299d9fd92dc0c5258098eaf233dd301f7dc7126ecd082acc43b
-    license: User permission record (not a named license)
-    license_url: https://cs336.stanford.edu/
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
     modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging
     used_in:
     - 00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md
@@ -8628,11 +8953,10 @@ assets:
     commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91
     source_parent_sha256: e37b64b85903b47508bc23868d4868fad4760de4638c35aa8fc064acd360af28
     sha256: e37b64b85903b47508bc23868d4868fad4760de4638c35aa8fc064acd360af28
-    license: User permission record (not a named license)
-    license_url: https://cs336.stanford.edu/
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
     modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging
-    used_in:
-    - 00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: pinned-upstream-repository
     derivation: source-raster-copy
@@ -9531,8 +9855,7 @@ assets:
     license: User permission record (not a license)
     license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
     modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
-    used_in:
-    - 00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     derivation: pdf-page-render
@@ -9563,8 +9886,7 @@ assets:
     license: User permission record (not a license)
     license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
     modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
-    used_in:
-    - 00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     derivation: pdf-page-render
@@ -9579,8 +9901,7 @@ assets:
     license: User permission record (not a license)
     license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
     modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
-    used_in:
-    - 00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     derivation: pdf-page-render
@@ -9643,8 +9964,7 @@ assets:
     license: User permission record (not a license)
     license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
     modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
-    used_in:
-    - 00 Учебник/12 Post-training и Alignment/03 Reward modeling.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     derivation: pdf-page-render
@@ -9691,8 +10011,7 @@ assets:
     license: User permission record (not a license)
     license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
     modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
-    used_in:
-    - 00 Учебник/12 Post-training и Alignment/03 Reward modeling.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     derivation: pdf-page-render
@@ -9709,6 +10028,7 @@ assets:
     modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
     used_in:
     - 00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер.md
+    - 00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     derivation: pdf-page-render
@@ -9723,8 +10043,7 @@ assets:
     license: User permission record (not a license)
     license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
     modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
-    used_in:
-    - 00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     derivation: pdf-page-render
@@ -9787,8 +10106,7 @@ assets:
     license: User permission record (not a license)
     license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
     modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
-    used_in:
-    - 00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     derivation: pdf-page-render
@@ -9803,8 +10121,7 @@ assets:
     license: User permission record (not a license)
     license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
     modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
-    used_in:
-    - 00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     derivation: pdf-page-render
@@ -9819,8 +10136,7 @@ assets:
     license: User permission record (not a license)
     license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
     modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
-    used_in:
-    - 00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     derivation: pdf-page-render
@@ -9851,8 +10167,7 @@ assets:
     license: User permission record (not a license)
     license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
     modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
-    used_in:
-    - 00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md
+    used_in: []
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
     derivation: pdf-page-render
@@ -9992,22 +10307,6 @@ assets:
     source_asset_sha256: c242e0298f5c46adf38af284637209a0986db7fca2b63c626dd29218b5dd809e
     source_page: 17
     sha256: 18a2110990eafd3ed959102584cfdd8e5500bc74c3a561a3445c0daca2929e34
-    license: User permission record (not a license)
-    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
-    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
-    used_in:
-    - 00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md
-    metadata_status: verified
-    provenance_confirmation: user-confirmed-open-materials
-    derivation: pdf-page-render
-  - id: curated-berkeley-agents-2025-coding-web-computer-use-m05-p22-agentless-control-flow-4db553ddd0b3
-    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m05-p22-agentless-control-flow.png
-    author: Charles Sutton
-    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/Code%20Agents%20and%20AI%20for%20Vulnerability%20Detection.pdf#page=22
-    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-05-slides.pdf
-    source_asset_sha256: c242e0298f5c46adf38af284637209a0986db7fca2b63c626dd29218b5dd809e
-    source_page: 22
-    sha256: 4db553ddd0b3ad66e4f9bcfdf1eb729449e212e4a1e27e6f52c92960aad4f2c1
     license: User permission record (not a license)
     license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
     modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
@@ -10184,22 +10483,6 @@ assets:
     source_asset_sha256: 3f12ea7b44c64d43d3c3804596700feacda59a26290ba188935fdd5cdde3847d
     source_page: 11
     sha256: bc09bab696428d94a95a263fc4f07af63ab711a369a7800928e576bb1d0a1637
-    license: User permission record (not a license)
-    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
-    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
-    used_in:
-    - 00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md
-    metadata_status: verified
-    provenance_confirmation: user-confirmed-open-materials
-    derivation: pdf-page-render
-  - id: curated-berkeley-agents-2025-coding-web-computer-use-m07-p69-aguvis-design-goals-7df8fb7faada
-    asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m07-p69-aguvis-design-goals.png
-    author: Caiming Xiong
-    source_url: https://rdi.berkeley.edu/adv-llm-agents/slides/Multimodal_Agent_caiming.pdf#page=69
-    source_asset: 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-07-slides.pdf
-    source_asset_sha256: 3f12ea7b44c64d43d3c3804596700feacda59a26290ba188935fdd5cdde3847d
-    source_page: 69
-    sha256: 7df8fb7faada77cd27c0e790d3becda1616730814fa7d07f6fc699424f63b3a6
     license: User permission record (not a license)
     license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25
     modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change
@@ -10416,3 +10699,1438 @@ assets:
     provenance_confirmation: user-confirmed-open-materials
     source_asset: raw/papers/external/alternatives-transformer-2026/papers/ttt.pdf
     derivation: pdf-page-render-crop
+  - id: curated-stanford-a1-complete-model-block-e76f4539f68d
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/a1-figures1-2-model-block.png
+    author: Stanford CS336 course staff
+    source_url: https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=13
+    commit: a158843b20107949f1a8d7df1b05cd33b9166712
+    license: MIT
+    license_url: https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/LICENSE
+    license_notice: site/public/licenses/stanford-cs336-and-jax-scaling-MIT.txt
+    source_asset: 05 Источники/Courses/Stanford CS336 Spring 2026/Assignments/assignment1-basics/cs336_assignment1_basics.pdf
+    source_asset_sha256: cf402d1c6d3c66da035bdf33b3e2c1bbc4bb92a78b006ee36577e925a265e328
+    source_page: 13
+    sha256: e76f4539f68dd365073ee3578dd5fcf5e3a4f108f8f9fd47d5091ce48529d1aa
+    modifications: "PDF page 13 rendered with pdftoppm at 300 dpi, extraction rectangle x=290 y=1700 width=1970 height=1210; both complete figures and original captions retained, surrounding prose omitted; no redraw"
+    used_in:
+      - 00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    derivation: pdf-page-render-crop
+  - id: curated-reward-review-5293f88e4903
+    asset: 00 Учебник/Assets/Figures/curated/preference-reward-review-2026-09/self-rewarding-loop.png
+    author: Weizhe Yuan et al.
+    source_url: https://proceedings.mlr.press/v235/yuan24d.html
+    source_asset: 05 Источники/Papers/Source PDFs/self-rewarding-icml2024.pdf
+    source_asset_sha256: e6b39ea13e3482ea54852d32751281e3af1c9a108f42540753f7b2b5362e06dc
+    source_page: 2
+    sha256: 5293f88e4903fad3cde90901d21eee4aace374dac8f3c3bdc55dcb9cd1ae0c90
+    license: CC BY 4.0
+    license_url: https://proceedings.mlr.press/pmlr-license-agreement.html
+    modifications: "Figure 1, Poppler 240 dpi; x=180 y=205 width=1635 height=440; complete diagram retained, no redraw."
+    used_in:
+      - 00 Учебник/12 Post-training и Alignment/03 Reward modeling.md
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    derivation: pdf-page-render-crop
+  - id: curated-reward-review-e28b20278c3e
+    asset: 00 Учебник/Assets/Figures/curated/preference-reward-review-2026-09/evalplanner-plan-execution-loop.png
+    author: Swarnadeep Saha et al.
+    source_url: https://proceedings.mlr.press/v267/saha25b.html
+    source_asset: 05 Источники/Papers/Source PDFs/evalplanner-icml2025.pdf
+    source_asset_sha256: f3a7848044e707932d9173dc93984d777fd9eb980bf71df59c830cfbf142498b
+    source_page: 4
+    sha256: e28b20278c3e583c81ebd1a89ac32bffbda4320cad506b1d1916b6e2a24a507b
+    license: CC BY 4.0
+    license_url: https://proceedings.mlr.press/pmlr-license-agreement.html
+    modifications: "Figure 2, Poppler 240 dpi; x=255 y=210 width=1490 height=490; complete diagram retained, no redraw."
+    used_in:
+      - 00 Учебник/12 Post-training и Alignment/03 Reward modeling.md
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    derivation: pdf-page-render-crop
+  - id: curated-reward-review-219751157f38
+    asset: 00 Учебник/Assets/Figures/curated/preference-reward-review-2026-09/reward-overoptimization-best-of-n.png
+    author: Leo Gao, John Schulman, Jacob Hilton
+    source_url: https://proceedings.mlr.press/v202/gao23h.html
+    source_asset: 05 Источники/Papers/Source PDFs/reward-overoptimization-icml2023.pdf
+    source_asset_sha256: 2f9f55ea8ab48e6e08b0702a71591794e1a01bb36c7bc88a61b124cb8f5cf783
+    source_page: 3
+    sha256: 219751157f38c646d723bae800d595e7cf76d63ad40e69bda80d8ce71de793e5
+    license: CC BY 4.0
+    license_url: https://proceedings.mlr.press/pmlr-license-agreement.html
+    modifications: "Figure 2(a), Poppler 240 dpi; x=313 y=260 width=1353 height=960; axes and legend retained, no redraw."
+    used_in:
+      - 00 Учебник/12 Post-training и Alignment/03 Reward modeling.md
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    derivation: pdf-page-render-crop
+  - id: curated-reward-review-2b5e36bfedca
+    asset: 00 Учебник/Assets/Figures/curated/preference-reward-review-2026-09/preference-rm-training.png
+    author: Nathan Lambert
+    source_url: https://github.com/natolambert/rlhf-book/blob/3f573487c58548c16a548cd5fb8979a0189384c7/book/images/pref_rm_training.png
+    commit: 3f573487c58548c16a548cd5fb8979a0189384c7
+    license: MIT
+    license_url: https://github.com/natolambert/rlhf-book/blob/3f573487c58548c16a548cd5fb8979a0189384c7/LICENSE-CODE
+    license_notice: site/public/licenses/rlhf-book-MIT.txt
+    sha256: 2b5e36bfedca9400fcbe06186af34280245ae17f4d140b8ab7f12961f17fad36
+    modifications: Original PNG copied byte-for-byte; no crop or redraw.
+    used_in:
+      - 00 Учебник/12 Post-training и Alignment/03 Reward modeling.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-reward-review-2549359b2444
+    asset: 00 Учебник/Assets/Figures/curated/preference-reward-review-2026-09/prm-step-supervision.png
+    author: Nathan Lambert
+    source_url: https://github.com/natolambert/rlhf-book/blob/3f573487c58548c16a548cd5fb8979a0189384c7/book/images/prm_training_inference.png
+    commit: 3f573487c58548c16a548cd5fb8979a0189384c7
+    license: MIT
+    license_url: https://github.com/natolambert/rlhf-book/blob/3f573487c58548c16a548cd5fb8979a0189384c7/LICENSE-CODE
+    license_notice: site/public/licenses/rlhf-book-MIT.txt
+    sha256: 2549359b244474880d28ec904154359ded160d552b71fe41bf6b9a3f4d5170ba
+    modifications: Original PNG copied byte-for-byte; no crop or redraw.
+    used_in:
+      - 00 Учебник/12 Post-training и Alignment/03 Reward modeling.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-dpo-review-bed21d4dfd6d
+    asset: 00 Учебник/Assets/Figures/curated/dpo-review-2026-09/reward-kl-frontier.png
+    author: Rafael Rafailov et al.
+    source_url: https://proceedings.neurips.cc/paper_files/paper/2023/file/a85b405ed65c6477a4fe8302b5e06ce7-Paper-Conference.pdf#page=7
+    license: CC BY 4.0
+    license_url: https://arxiv.org/abs/2305.18290v3
+    license_scope: The same authors' Figure 2 is released in the arXiv v3 paper under CC BY 4.0; the preserved source PDF is the NeurIPS conference version, not labelled arXiv v3.
+    source_asset: 05 Источники/Papers/Source PDFs/dpo-neurips-2023.pdf
+    source_asset_sha256: 894386aafb8581f85644773b303dd7cd96377cafe5c23e1b6b442ac6f5884e7c
+    source_page: 7
+    sha256: bed21d4dfd6d6e5ead0de54c36d5b9fcd6bc34a4446f677a1d3fe3de53ab1285
+    modifications: "Figure 2 left panel rendered with Poppler at 640 dpi; crop x=940 y=640 width=1800 height=1300. Complete axes and legend retained; no redraw."
+    used_in:
+      - 00 Учебник/12 Post-training и Alignment/05 DPO.md
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    derivation: pdf-page-render-crop
+  - id: curated-ppo-review-7bea1360f9c9
+    asset: 00 Учебник/Assets/Figures/curated/ppo-review-2026-09/rlhf-overview.png
+    author: Nathan Lambert
+    source_url: https://github.com/natolambert/rlhf-book/blob/3f573487c58548c16a548cd5fb8979a0189384c7/book/images/rlhf-overview.png
+    commit: 3f573487c58548c16a548cd5fb8979a0189384c7
+    license: MIT
+    license_url: https://github.com/natolambert/rlhf-book/blob/3f573487c58548c16a548cd5fb8979a0189384c7/LICENSE-CODE
+    license_notice: site/public/licenses/rlhf-book-MIT.txt
+    sha256: 7bea1360f9c9ce4e62a866f6746a295467f1d2ebcda03160baa52fcc4297f8c2
+    modifications: Original PNG copied byte-for-byte; no redraw, crop, or resizing.
+    used_in:
+      - 00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-ppo-review-b23a0f215197
+    asset: 00 Учебник/Assets/Figures/curated/ppo-review-2026-09/ppo-clip-viz.png
+    author: Nathan Lambert
+    source_url: https://github.com/natolambert/rlhf-book/blob/3f573487c58548c16a548cd5fb8979a0189384c7/book/images/ppo-clip-viz.png
+    commit: 3f573487c58548c16a548cd5fb8979a0189384c7
+    license: MIT
+    license_url: https://github.com/natolambert/rlhf-book/blob/3f573487c58548c16a548cd5fb8979a0189384c7/LICENSE-CODE
+    license_notice: site/public/licenses/rlhf-book-MIT.txt
+    sha256: b23a0f2151970951720a5c736257127fe6ebf96d0c9347b0fb8351251739d026
+    modifications: Original PNG copied byte-for-byte; no redraw, crop, or resizing.
+    used_in:
+      - 00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-ppo-review-669a0852e8ce
+    asset: 00 Учебник/Assets/Figures/curated/ppo-review-2026-09/value-fn-training.png
+    author: Nathan Lambert
+    source_url: https://github.com/natolambert/rlhf-book/blob/3f573487c58548c16a548cd5fb8979a0189384c7/book/images/value_fn_training.png
+    commit: 3f573487c58548c16a548cd5fb8979a0189384c7
+    license: MIT
+    license_url: https://github.com/natolambert/rlhf-book/blob/3f573487c58548c16a548cd5fb8979a0189384c7/LICENSE-CODE
+    license_notice: site/public/licenses/rlhf-book-MIT.txt
+    sha256: 669a0852e8cee79f52631a82f44a7fb546227424af9ac86abbcd86aabdae15bf
+    modifications: Original PNG copied byte-for-byte; no redraw, crop, or resizing.
+    used_in:
+      - 00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+  - id: curated-jax-scaling-roofline-2c9018ab614d
+    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/jax-scaling-roofline.webp
+    author: Jacob Austin et al., How To Scale Your Model
+    source_url: https://jax-ml.github.io/scaling-book/roofline/#visualizing-rooflines
+    upstream_source_url: https://jax-ml.github.io/scaling-book/assets/img/roofline-improved-1400.webp
+    course_source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_02.py#L474-L484
+    license: MIT
+    license_url: https://github.com/jax-ml/scaling-book/blob/main/LICENSE
+    license_notice: site/public/licenses/stanford-cs336-and-jax-scaling-MIT.txt
+    source_asset: 05 Источники/Courses/Stanford CS336 Spring 2026/Lectures/repository/var/files/image-42d32b9c87939fe9a4b0a268d6d02ea7-https_jax-ml_github_io_scaling-book_assets_img_roofline-improved-1400_webp
+    source_asset_sha256: 2c9018ab614d888baec0a3cc15c41e67d195988df0f0224985968c8d36e064ce
+    sha256: 2c9018ab614d888baec0a3cc15c41e67d195988df0f0224985968c8d36e064ce
+    modifications: Byte-for-byte copy of the original JAX Scaling Book illustration cached in the pinned CS336 Lecture 2; no crop or redraw
+    used_in:
+      - 00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    derivation: source-raster-copy
+  - id: "curated-reasoning-review-fcbb170874c4"
+    asset: "00 Учебник/Assets/Figures/curated/grpo-review-2026-09/group-advantages.png"
+    author: "Nathan Lambert"
+    source_url: "https://github.com/natolambert/rlhf-book/blob/3f573487c58548c16a548cd5fb8979a0189384c7/book/images/grpo_tikz.png"
+    commit: "3f573487c58548c16a548cd5fb8979a0189384c7"
+    license: "MIT"
+    license_url: "https://github.com/natolambert/rlhf-book/blob/3f573487c58548c16a548cd5fb8979a0189384c7/LICENSE-CODE"
+    license_notice: "site/public/licenses/rlhf-book-MIT.txt"
+    modifications: "Original PNG copied byte-for-byte; no crop or redraw."
+    provenance_confirmation: "pinned-upstream-repository"
+    sha256: "fcbb170874c481a76b54c9274b9ea814c9bf5044ae33cef079a879e2d368849b"
+    used_in:
+      - "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md"
+    metadata_status: "verified"
+  - id: "curated-reasoning-review-4d3059ac6f71"
+    asset: "00 Учебник/Assets/Figures/curated/grpo-review-2026-09/length-difficulty-bias.png"
+    author: "Zichen Liu et al."
+    source_url: "https://arxiv.org/abs/2503.20783v1"
+    source_asset: "05 Источники/Papers/Source PDFs/dr-grpo-v1.pdf"
+    source_asset_sha256: "4bb21c1d5bf7bd306a58e9dac9e0aeca660e204a8fa2e81f0ee2231f5d0f0173"
+    source_page: 7
+    license: "CC BY 4.0"
+    license_url: "https://creativecommons.org/licenses/by/4.0/"
+    modifications: "Figure 5, Poppler 360 dpi; x=520 y=320 width=2020 height=305; diagram and legend retained, no redraw."
+    provenance_confirmation: "source-license-verified"
+    derivation: "pdf-page-render-crop"
+    sha256: "4d3059ac6f7133ec85a82fe111510ae3ffc2ece2ecb3c1e5390b98925076cb28"
+    used_in:
+      - "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md"
+    metadata_status: "verified"
+  - id: "curated-reasoning-review-81873a3ce8ba"
+    asset: "00 Учебник/Assets/Figures/curated/grpo-review-2026-09/length-and-accuracy-ablation.png"
+    author: "Zichen Liu et al."
+    source_url: "https://arxiv.org/abs/2503.20783v1"
+    source_asset: "05 Источники/Papers/Source PDFs/dr-grpo-v1.pdf"
+    source_asset_sha256: "4bb21c1d5bf7bd306a58e9dac9e0aeca660e204a8fa2e81f0ee2231f5d0f0173"
+    source_page: 8
+    license: "CC BY 4.0"
+    license_url: "https://creativecommons.org/licenses/by/4.0/"
+    modifications: "Figure 6, Poppler 240 dpi; x=320 y=250 width=1400 height=600; all five panels, axes and legend retained, no redraw."
+    provenance_confirmation: "source-license-verified"
+    derivation: "pdf-page-render-crop"
+    sha256: "81873a3ce8ba4fa2420145744c8a9a72b05490d787089d7a6e1672e8c36877d9"
+    used_in:
+      - "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md"
+    metadata_status: "verified"
+  - id: "curated-reasoning-review-caf35f162aab"
+    asset: "00 Учебник/Assets/Figures/curated/grpo-review-2026-09/r1-zero-training-dynamics.png"
+    author: "DeepSeek-AI"
+    source_url: "https://arxiv.org/abs/2501.12948v2"
+    source_asset: "05 Источники/Papers/Source PDFs/deepseek-r1-v2.pdf"
+    source_asset_sha256: "b191b0a365a64b4ab2791d117069ed17a2933d03554a662ced58b37df52018f4"
+    source_page: 4
+    license: "CC BY 4.0"
+    license_url: "https://www.nature.com/articles/s41586-025-09422-z#rightslink"
+    license_scope: "Same authors' Figure 1 published in Nature under CC BY 4.0; preserved PDF is the arXiv v2 version, not claimed to carry a CC license itself."
+    modifications: "Figure 1, Poppler 240 dpi; x=250 y=290 width=1490 height=545; both panels and legends retained, no redraw."
+    provenance_confirmation: "source-license-verified"
+    derivation: "pdf-page-render-crop"
+    sha256: "caf35f162aabbea10623ed9b9e25b377dd3eee1805740e60c551c42e61a018b8"
+    used_in:
+      - "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md"
+    metadata_status: "verified"
+  - id: "curated-reasoning-review-547f4b75e5c6"
+    asset: "00 Учебник/Assets/Figures/curated/rlvr-review-2026-09/tulu-rlvr-loop.png"
+    author: "Nathan Lambert et al."
+    source_url: "https://arxiv.org/abs/2411.15124v5"
+    source_image_url: "https://arxiv.org/html/2411.15124v5/rlvrv5.png"
+    source_asset_sha256: "547f4b75e5c6d7ee82d5cb39c3a8ed45cfbcbf8c793a5d6f98e80d079510205f"
+    license: "CC BY 4.0"
+    license_url: "https://creativecommons.org/licenses/by/4.0/"
+    modifications: "Original PNG copied byte-for-byte; no crop or redraw."
+    provenance_confirmation: "source-license-verified"
+    derivation: "source-raster-copy"
+    sha256: "547f4b75e5c6d7ee82d5cb39c3a8ed45cfbcbf8c793a5d6f98e80d079510205f"
+    used_in:
+      - "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md"
+    metadata_status: "verified"
+  - id: "curated-reasoning-review-8ff938e2d2aa"
+    asset: "00 Учебник/Assets/Figures/curated/rlvr-review-2026-09/tulu-ifeval-kl-and-generalization.png"
+    author: "Nathan Lambert et al."
+    source_url: "https://arxiv.org/abs/2411.15124v5"
+    source_image_url: "https://arxiv.org/html/2411.15124v5/figures_images/post-training/rl/plot_2_ifeval.png"
+    source_asset_sha256: "8ff938e2d2aa45e6b5132d39017636b191969ed1f9d6b5f7d040553cdc84dbb6"
+    license: "CC BY 4.0"
+    license_url: "https://creativecommons.org/licenses/by/4.0/"
+    modifications: "Original PNG copied byte-for-byte; no crop or redraw."
+    provenance_confirmation: "source-license-verified"
+    derivation: "source-raster-copy"
+    sha256: "8ff938e2d2aa45e6b5132d39017636b191969ed1f9d6b5f7d040553cdc84dbb6"
+    used_in:
+      - "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md"
+    metadata_status: "verified"
+  - id: "curated-reasoning-review-f6bacec0baca"
+    asset: "00 Учебник/Assets/Figures/curated/rlvr-review-2026-09/tulu-value-initialization.png"
+    author: "Nathan Lambert et al."
+    source_url: "https://arxiv.org/abs/2411.15124v5"
+    source_image_url: "https://arxiv.org/html/2411.15124v5/figures_images/post-training/x32_RLVR_KL.png"
+    source_asset_sha256: "f6bacec0bacabe08fce904854b39d75cd90d5310d6544f9275d8cdee31fabe8b"
+    license: "CC BY 4.0"
+    license_url: "https://creativecommons.org/licenses/by/4.0/"
+    modifications: "Original PNG copied byte-for-byte; no crop or redraw."
+    provenance_confirmation: "source-license-verified"
+    derivation: "source-raster-copy"
+    sha256: "f6bacec0bacabe08fce904854b39d75cd90d5310d6544f9275d8cdee31fabe8b"
+    used_in:
+      - "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md"
+    metadata_status: "verified"
+  - id: "curated-reasoning-review-4082839870e7"
+    asset: "00 Учебник/Assets/Figures/curated/rlvr-review-2026-09/tulu-rlvr-training-curves.png"
+    author: "Nathan Lambert et al."
+    source_url: "https://arxiv.org/abs/2411.15124v5"
+    source_asset: "05 Источники/Papers/Source PDFs/tulu3-rlvr-arxiv-v5.pdf"
+    source_asset_sha256: "79bed1ef4ce4bb332f43bdc87d60709e644560f8f3bb6d14913a473cc82c251f"
+    source_page: 33
+    license: "CC BY 4.0"
+    license_url: "https://creativecommons.org/licenses/by/4.0/"
+    modifications: "Figure 19 top three rows, Poppler 240 dpi; x=257 y=215 width=1520 height=1085. Nine panels and common legend retained; lower evaluation row excluded, no redraw."
+    provenance_confirmation: "source-license-verified"
+    derivation: "pdf-page-render-crop"
+    sha256: "4082839870e7c6f8dcbd5c004a246c7e64af9032a0e200003566e38f3023ed7a"
+    used_in:
+      - "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md"
+    metadata_status: "verified"
+  - id: "curated-reasoning-review-f1502efc5e5f"
+    asset: "00 Учебник/Assets/Figures/curated/distillation-review-2026-09/sequence-distillation.png"
+    author: "Nathan Lambert"
+    source_url: "https://github.com/natolambert/rlhf-book/blob/3f573487c58548c16a548cd5fb8979a0189384c7/book/images/synthetic_data_distillation_tikz.png"
+    commit: "3f573487c58548c16a548cd5fb8979a0189384c7"
+    license: "MIT"
+    license_url: "https://github.com/natolambert/rlhf-book/blob/3f573487c58548c16a548cd5fb8979a0189384c7/LICENSE-CODE"
+    license_notice: "site/public/licenses/rlhf-book-MIT.txt"
+    sha256: "f1502efc5e5f594dd4b48cc12d99d45c1c566e5c4d7b31be8feaa6035f58ea4d"
+    modifications: "Original PNG copied byte-for-byte; no crop or redraw."
+    used_in:
+      - "00 Учебник/12 Post-training и Alignment/08 Reasoning distillation.md"
+    metadata_status: "verified"
+    provenance_confirmation: "pinned-upstream-repository"
+  - id: "curated-reasoning-review-d2f3081645cd"
+    asset: "00 Учебник/Assets/Figures/curated/distillation-review-2026-09/token-distributions.png"
+    author: "Nathan Lambert"
+    source_url: "https://github.com/natolambert/rlhf-book/blob/3f573487c58548c16a548cd5fb8979a0189384c7/book/images/knowledge_distillation_tikz.png"
+    commit: "3f573487c58548c16a548cd5fb8979a0189384c7"
+    license: "MIT"
+    license_url: "https://github.com/natolambert/rlhf-book/blob/3f573487c58548c16a548cd5fb8979a0189384c7/LICENSE-CODE"
+    license_notice: "site/public/licenses/rlhf-book-MIT.txt"
+    sha256: "d2f3081645cdb0f50e6843ea8e0d945aa68d82898f27350b220fcc8abca4d505"
+    modifications: "Original PNG copied byte-for-byte; no crop or redraw."
+    used_in:
+      - "00 Учебник/12 Post-training и Alignment/08 Reasoning distillation.md"
+    metadata_status: "verified"
+    provenance_confirmation: "pinned-upstream-repository"
+  - id: "curated-reasoning-review-0c0d497babb9"
+    asset: "00 Учебник/Assets/Figures/curated/distillation-review-2026-09/gkd-task-comparison.png"
+    author: "Rishabh Agarwal et al."
+    source_url: "https://arxiv.org/abs/2306.13649v3"
+    source_asset: "05 Источники/Papers/Source PDFs/gkd-iclr2024.pdf"
+    source_asset_sha256: "a81c71fa0cd15506642092790d854347f030c29ee1d6aa643b55aa51348e6869"
+    source_page: 1
+    sha256: "0c0d497babb92856f1d8b73b5cfe97cbf3d914c62f466652ab64a31b96c5f404"
+    license: "CC BY 4.0"
+    license_url: "https://creativecommons.org/licenses/by/4.0/"
+    modifications: "Figure 1, Poppler 300 dpi; x=440 y=1890 width=1670 height=635. Complete chart, legend and axes retained; no redraw."
+    used_in:
+      - "00 Учебник/12 Post-training и Alignment/08 Reasoning distillation.md"
+    metadata_status: "verified"
+    provenance_confirmation: "source-license-verified"
+    derivation: "pdf-page-render-crop"
+  - id: curated-sequence-rwkv4-92f374fb9a52
+    asset: 00 Учебник/Assets/Figures/curated/sequence-review-2026-09/rwkv4-architecture.svg
+    author: Bo Peng et al.
+    source_url: https://arxiv.org/abs/2305.13048v2
+    source_image_url: https://arxiv.org/html/2305.13048v2/RWKV-arch-ver5.svg
+    source_asset_sha256: 92f374fb9a529063df3e897bc1d708af1c3d10cf1eb705e68a885ddcae49a6f4
+    derivation: source-svg-copy
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    modifications: "Original SVG downloaded byte-for-byte; no crop, redraw, or changes to text."
+    sha256: 92f374fb9a529063df3e897bc1d708af1c3d10cf1eb705e68a885ddcae49a6f4
+    used_in:
+      - 00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    last_verified: 2026-09-28
+  - id: curated-sequence-rwkv7-046abe9e2b39
+    asset: 00 Учебник/Assets/Figures/curated/sequence-review-2026-09/rwkv7-state-update.svg
+    author: Bo Peng et al.
+    source_url: https://arxiv.org/abs/2503.14456v1
+    source_image_url: https://arxiv.org/html/2503.14456v1/diaglora.svg
+    source_asset_sha256: 046abe9e2b390289fd081ff9906f130cfe8091d124d6c085b91bdaec8c9b9071
+    derivation: source-svg-copy
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    modifications: "Original SVG downloaded byte-for-byte; no crop, redraw, or changes to text."
+    sha256: 046abe9e2b390289fd081ff9906f130cfe8091d124d6c085b91bdaec8c9b9071
+    used_in:
+      - 00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    last_verified: 2026-09-28
+  - id: curated-moe-standard-4faa85d7ce72
+    asset: 00 Учебник/Assets/Figures/curated/moe-review-2026-09/standard-moe.png
+    author: Venmugil Elango et al.
+    source_url: https://arxiv.org/abs/2601.18089v1
+    source_image_url: https://arxiv.org/html/2601.18089v1/figures/standard_moe.png
+    source_asset_sha256: 4faa85d7ce72bf4958d535f315d39f7cce0cf487658ff96ce104b806033bd8b6
+    derivation: source-raster-copy
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    modifications: "Original Figure 1(a) copied byte-for-byte; no crop, redraw, or changes to text."
+    sha256: 4faa85d7ce72bf4958d535f315d39f7cce0cf487658ff96ce104b806033bd8b6
+    used_in:
+      - 00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    last_verified: 2026-09-28
+  - id: curated-moe-latent-1bfcacc1cfe6
+    asset: 00 Учебник/Assets/Figures/curated/moe-review-2026-09/latent-moe.png
+    author: Venmugil Elango et al.
+    source_url: https://arxiv.org/abs/2601.18089v1
+    source_image_url: https://arxiv.org/html/2601.18089v1/figures/latent_moe.png
+    source_asset_sha256: 1bfcacc1cfe641d4f5f46d174fc9b31c12d84022dfaadd003c5b3106872bc13b
+    derivation: source-raster-copy
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    modifications: "Original Figure 1(b) copied byte-for-byte; no crop, redraw, or changes to text."
+    sha256: 1bfcacc1cfe641d4f5f46d174fc9b31c12d84022dfaadd003c5b3106872bc13b
+    used_in:
+      - 00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    last_verified: 2026-09-28
+  - id: curated-ffn-expand-92476dcc5264
+    asset: 00 Учебник/Assets/Figures/curated/ffn-review-2026-09/gpt2-mlp-expand.gif
+    author: Jay Alammar
+    source_url: https://github.com/jalammar/jalammar.github.io/blob/e4dbd4bb1cd3f05375d842b6c12f69ff37b01475/images/gpt2/gpt2-mlp1.gif
+    source_image_url: https://raw.githubusercontent.com/jalammar/jalammar.github.io/e4dbd4bb1cd3f05375d842b6c12f69ff37b01475/images/gpt2/gpt2-mlp1.gif
+    source_page_url: https://jalammar.github.io/illustrated-gpt2/
+    commit: e4dbd4bb1cd3f05375d842b6c12f69ff37b01475
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: "Original animated GIF copied byte-for-byte; all frames retained, no crop or redraw. License stated in the Illustrated GPT-2 article footer, not inferred from repository code license."
+    sha256: 92476dcc5264938644d27d0625ec77b26c6f6361ff8dca4a73d5b040f133700f
+    used_in:
+      - 00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    last_verified: 2026-09-28
+  - id: curated-ffn-project-4f52a21bbbb5
+    asset: 00 Учебник/Assets/Figures/curated/ffn-review-2026-09/gpt2-mlp-project.gif
+    author: Jay Alammar
+    source_url: https://github.com/jalammar/jalammar.github.io/blob/e4dbd4bb1cd3f05375d842b6c12f69ff37b01475/images/gpt2/gpt2-mlp-2.gif
+    source_image_url: https://raw.githubusercontent.com/jalammar/jalammar.github.io/e4dbd4bb1cd3f05375d842b6c12f69ff37b01475/images/gpt2/gpt2-mlp-2.gif
+    source_page_url: https://jalammar.github.io/illustrated-gpt2/
+    commit: e4dbd4bb1cd3f05375d842b6c12f69ff37b01475
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: "Original animated GIF copied byte-for-byte; all frames retained, no crop or redraw. License stated in the Illustrated GPT-2 article footer, not inferred from repository code license."
+    sha256: 4f52a21bbbb53fe0671f60f8ffddfc952f465cc661c7f00c993b0d230d072bbf
+    used_in:
+      - 00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    last_verified: 2026-09-28
+  - id: curated-ffn-memory-c897dd1e8cfd
+    asset: 00 Учебник/Assets/Figures/curated/ffn-review-2026-09/geva-ffn-memory.svg
+    author: Mor Geva, Roei Schuster, Jonathan Berant, Omer Levy
+    source_url: https://arxiv.org/abs/2012.14913v1
+    source_image_url: https://arxiv.org/html/2012.14913v1/hypothesis.svg
+    source_asset_sha256: c897dd1e8cfd62e3532f706f31e2d0f0ba11c61f06d8bbe74bbd337de2135aee
+    derivation: source-svg-copy
+    license: CC0 1.0
+    license_url: https://creativecommons.org/publicdomain/zero/1.0/
+    modifications: "Original Figure 1 SVG from the explicitly CC0 arXiv v1 copied byte-for-byte; no crop, redraw, or text changes."
+    sha256: c897dd1e8cfd62e3532f706f31e2d0f0ba11c61f06d8bbe74bbd337de2135aee
+    used_in:
+      - 00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating.md
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    last_verified: 2026-09-28
+  - id: curated-attention-c5df87a583d9
+    asset: 00 Учебник/Assets/Figures/curated/attention-review-2026-09/cached-first-token.png
+    author: Jay Alammar
+    source_url: https://github.com/jalammar/jalammar.github.io/blob/e4dbd4bb1cd3f05375d842b6c12f69ff37b01475/images/gpt2/gpt2-self-attention-qkv-2-2.png
+    source_image_url: https://raw.githubusercontent.com/jalammar/jalammar.github.io/e4dbd4bb1cd3f05375d842b6c12f69ff37b01475/images/gpt2/gpt2-self-attention-qkv-2-2.png
+    source_page_url: https://jalammar.github.io/illustrated-gpt2/
+    commit: e4dbd4bb1cd3f05375d842b6c12f69ff37b01475
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: "Original image copied byte-for-byte; no crop, redraw, translation, or text changes. License verified on the source article."
+    sha256: c5df87a583d98ae3dcbeaf069a2d1a270464ae193181486eee05d82c266c84b7
+    used_in:
+      - 00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    last_verified: 2026-09-28
+  - id: curated-attention-6c608bc2633d
+    asset: 00 Учебник/Assets/Figures/curated/attention-review-2026-09/next-token-attends-cache.png
+    author: Jay Alammar
+    source_url: https://github.com/jalammar/jalammar.github.io/blob/e4dbd4bb1cd3f05375d842b6c12f69ff37b01475/images/gpt2/gpt2-self-attention-qkv-3-2.png
+    source_image_url: https://raw.githubusercontent.com/jalammar/jalammar.github.io/e4dbd4bb1cd3f05375d842b6c12f69ff37b01475/images/gpt2/gpt2-self-attention-qkv-3-2.png
+    source_page_url: https://jalammar.github.io/illustrated-gpt2/
+    commit: e4dbd4bb1cd3f05375d842b6c12f69ff37b01475
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    modifications: "Original image copied byte-for-byte; no crop, redraw, translation, or text changes. License verified on the source article."
+    sha256: 6c608bc2633dd7ce6a4c3469fc63d0e900632ee0caf3c99298f5a666e300888b
+    used_in:
+      - 00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    last_verified: 2026-09-28
+  - id: curated-attention-947a70b7cef4
+    asset: 00 Учебник/Assets/Figures/curated/attention-review-2026-09/prefill-decode.png
+    author: Baolin Li, Yankai Jiang, Vijay Gadepally, Devesh Tiwari
+    source_url: https://arxiv.org/abs/2407.12391v1
+    source_image_url: https://arxiv.org/html/2407.12391v1/llm_inference.png
+    source_asset_sha256: 947a70b7cef4d1875d295692731cd4216f189daaf5ac7b586106fc542626e3a6
+    derivation: source-raster-copy
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    modifications: "Original image copied byte-for-byte; no crop, redraw, translation, or text changes. License verified on the source article."
+    sha256: 947a70b7cef4d1875d295692731cd4216f189daaf5ac7b586106fc542626e3a6
+    used_in:
+      - 00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    last_verified: 2026-09-28
+  - id: curated-attention-6dadfbfa4e80
+    asset: 00 Учебник/Assets/Figures/curated/attention-review-2026-09/mha-mla-projections.svg
+    author: Robin Geens, Marian Verhelst
+    source_url: https://arxiv.org/abs/2506.02523v1
+    source_image_url: https://arxiv.org/html/2506.02523v1/diagram.svg
+    source_asset_sha256: 6dadfbfa4e80c3ab7232e8f341f158d5bf07dcc0302f7e5cbd5b50e8db78ec2e
+    derivation: source-svg-copy
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    modifications: "Original image copied byte-for-byte; no crop, redraw, translation, or text changes. License verified on the source article."
+    sha256: 6dadfbfa4e80c3ab7232e8f341f158d5bf07dcc0302f7e5cbd5b50e8db78ec2e
+    used_in:
+      - 00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    last_verified: 2026-09-28
+
+  - id: curated-long-context-0e698e0187f6
+    asset: 00 Учебник/Assets/Figures/curated/long-context-review-2026-09/position-interpolation.png
+    author: Shouyuan Chen, Sherman Wong, Liangjian Chen, Yuandong Tian
+    source_url: https://arxiv.org/abs/2306.15595v2
+    source_image_url: https://arxiv.org/html/2306.15595v2/sin.png
+    derivation: source-raster-copy
+    source_asset_sha256: 0e698e0187f69b78e38cd443b44db1b55b675d8d8bd328e7567168b189e1f111
+    sha256: 0e698e0187f69b78e38cd443b44db1b55b675d8d8bd328e7567168b189e1f111
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    license_evidence: https://arxiv.org/abs/2306.15595v2
+    modifications: "Original Figure 1 copied unchanged, 1697x995; no redraw, crop, or translation."
+    used_in:
+      - 00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    last_verified: 2026-09-28
+
+  - id: curated-long-context-016d62666f89
+    asset: 00 Учебник/Assets/Figures/curated/long-context-review-2026-09/yarn-method-summary.png
+    author: Bowen Peng, Jeffrey Quesnelle, Honglu Fan, Enrico Shippole
+    source_url: https://arxiv.org/abs/2309.00071v3
+    source_image_url: https://arxiv.org/html/2309.00071v3/charts/method_summary.png
+    derivation: source-raster-copy
+    source_asset_sha256: 016d62666f893299512ef8c85a74dd8031c482747fb4e667d9154ca9d6487aaf
+    sha256: 016d62666f893299512ef8c85a74dd8031c482747fb4e667d9154ca9d6487aaf
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    license_evidence: https://arxiv.org/abs/2309.00071v3
+    modifications: "Original Figure 1 copied unchanged, 861x217. Also present in ICLR 2024 proceedings PDF page 2; asset fetched from v3."
+    used_in:
+      - 00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    last_verified: 2026-09-28
+
+  - id: curated-long-context-2c0f0d17c4d9
+    asset: 00 Учебник/Assets/Figures/curated/long-context-review-2026-09/mistral-sliding-window.png
+    author: Albert Q. Jiang et al. / Mistral AI
+    source_url: https://arxiv.org/abs/2310.06825v1
+    source_image_url: https://arxiv.org/html/2310.06825v1/swa.png
+    derivation: source-raster-copy
+    source_asset_sha256: 2c0f0d17c4d9e06d3f3f6c52d3a2e64603a81dfac1399bc8d12996a2bae0c50e
+    sha256: 2c0f0d17c4d9e06d3f3f6c52d3a2e64603a81dfac1399bc8d12996a2bae0c50e
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    license_evidence: https://arxiv.org/abs/2310.06825v1
+    modifications: "Original Figure 1 copied unchanged; no crop, redraw, or translation."
+    used_in:
+      - 00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    last_verified: 2026-09-28
+
+  - id: curated-long-context-7caf66139895
+    asset: 00 Учебник/Assets/Figures/curated/long-context-review-2026-09/mistral-rolling-buffer.png
+    author: Albert Q. Jiang et al. / Mistral AI
+    source_url: https://arxiv.org/abs/2310.06825v1
+    source_image_url: https://arxiv.org/html/2310.06825v1/rolling_buffer.png
+    derivation: source-raster-copy
+    source_asset_sha256: 7caf661398953644737c8975515c494e395fe58fad18940be60fc241ded56af9
+    sha256: 7caf661398953644737c8975515c494e395fe58fad18940be60fc241ded56af9
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    license_evidence: https://arxiv.org/abs/2310.06825v1
+    modifications: "Original Figure 2 copied unchanged; no crop, redraw, or translation."
+    used_in: []
+    review_note: Original source retained for the three timestep panels displayed in the chapter.
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    last_verified: 2026-09-28
+
+  - id: curated-long-context-4a225287680e
+    asset: 00 Учебник/Assets/Figures/curated/long-context-review-2026-09/lost-in-the-middle.png
+    author: Nelson F. Liu, Kevin Lin, John Hewitt, Ashwin Paranjape, Michele Bevilacqua, Fabio Petroni, Percy Liang
+    source_url: https://aclanthology.org/2024.tacl-1.9/
+    source_image_url: https://aclanthology.org/2024.tacl-1.9.pdf
+    source_asset: 05 Источники/Papers/Source PDFs/lost-in-the-middle-tacl-2024.pdf
+    source_asset_sha256: f37f6fabe0fe0d8c73b67579cd115dbf14e282cfb7b7af655ae8109638402c9b
+    source_page: 2
+    derivation: pdf-page-render-crop
+    sha256: 4a225287680ef0b81dd45bcd2e525cc51d2d98de80a4fe3feb319f9d22187507
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    license_evidence: https://aclanthology.org/2024.tacl-1.9/
+    modifications: "Figure 1 plot rendered from publisher PDF page 2 at scale 5; PDF-point crop [71,55,291,263], 1100x1040. Axes and legend intact; surrounding prose excluded; caption supplied as live text."
+    used_in:
+      - 00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    last_verified: 2026-09-28
+
+  - id: curated-long-context-aba35c6acfdf
+    asset: 00 Учебник/Assets/Figures/curated/long-context-review-2026-09/deepseek-dsa-architecture.png
+    author: DeepSeek
+    source_url: https://github.com/deepseek-ai/DeepSeek-V3.2-Exp/blob/840f3c924a6b1604b1998baebf0c5f167e10375a/DeepSeek_V3_2.pdf#page=2
+    source_image_url: https://raw.githubusercontent.com/deepseek-ai/DeepSeek-V3.2-Exp/840f3c924a6b1604b1998baebf0c5f167e10375a/DeepSeek_V3_2.pdf
+    source_asset: 05 Источники/Papers/Source PDFs/deepseek-v32-exp-840f3c9.pdf
+    source_asset_sha256: f8ef04ddf50f924a7d251861d4453d7605ff5711f3941ae8320e1ea780dc3041
+    source_page: 2
+    derivation: pdf-page-render-crop
+    sha256: aba35c6acfdfb9fe34679a8827380c1bba733521e15506f978036758b5088bd7
+    license: MIT
+    license_url: https://github.com/deepseek-ai/DeepSeek-V3.2-Exp/blob/840f3c924a6b1604b1998baebf0c5f167e10375a/LICENSE
+    license_evidence: https://github.com/deepseek-ai/DeepSeek-V3.2-Exp/blob/840f3c924a6b1604b1998baebf0c5f167e10375a/LICENSE
+    modifications: "Original Figure 1 rendered from pinned PDF page 2 at scale 4; PDF-point crop [74,77,520,312], 1784x940. All diagram labels retained; prose excluded. Copyright and permission notice in site/public/licenses/deepseek-v32-exp-MIT.txt."
+    used_in:
+      - 00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    last_verified: 2026-09-28
+
+  - id: curated-long-context-ec2eec93132d
+    asset: 00 Учебник/Assets/Figures/curated/long-context-review-2026-09/mistral-rolling-step-0.png
+    author: Albert Q. Jiang et al. / Mistral AI
+    source_url: https://arxiv.org/html/2310.06825v1#S2.F2
+    source_image_url: https://arxiv.org/html/2310.06825v1/rolling_buffer.png
+    source_asset: 00 Учебник/Assets/Figures/curated/long-context-review-2026-09/mistral-rolling-buffer.png
+    derivation: source-raster-crop
+    crop_box_px: [375, 0, 900, 322]
+    source_asset_sha256: 7caf661398953644737c8975515c494e395fe58fad18940be60fc241ded56af9
+    sha256: ec2eec93132d88fc97cde4edf71eb397f5a50e9339424dd0ae9b04d1676ccc7d
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    license_evidence: https://arxiv.org/abs/2310.06825v1
+    modifications: "Complete timestep panel 0 cropped at source pixels [375,0,900,322] from original Figure 2; labels and cells unchanged. Wide source retained. Panels displayed separately for legibility."
+    used_in:
+      - 00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    last_verified: 2026-09-28
+
+  - id: curated-long-context-028ce9571bb6
+    asset: 00 Учебник/Assets/Figures/curated/long-context-review-2026-09/mistral-rolling-step-1.png
+    author: Albert Q. Jiang et al. / Mistral AI
+    source_url: https://arxiv.org/html/2310.06825v1#S2.F2
+    source_image_url: https://arxiv.org/html/2310.06825v1/rolling_buffer.png
+    source_asset: 00 Учебник/Assets/Figures/curated/long-context-review-2026-09/mistral-rolling-buffer.png
+    derivation: source-raster-crop
+    crop_box_px: [945, 0, 1475, 322]
+    source_asset_sha256: 7caf661398953644737c8975515c494e395fe58fad18940be60fc241ded56af9
+    sha256: 028ce9571bb6e29f2d32788090466bf541c59c4147f065261acd2fa027269339
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    license_evidence: https://arxiv.org/abs/2310.06825v1
+    modifications: "Complete timestep panel 1 cropped at source pixels [945,0,1475,322] from original Figure 2; labels and cells unchanged. Wide source retained. Panels displayed separately for legibility."
+    used_in:
+      - 00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    last_verified: 2026-09-28
+
+  - id: curated-long-context-6024cd0121fa
+    asset: 00 Учебник/Assets/Figures/curated/long-context-review-2026-09/mistral-rolling-step-2.png
+    author: Albert Q. Jiang et al. / Mistral AI
+    source_url: https://arxiv.org/html/2310.06825v1#S2.F2
+    source_image_url: https://arxiv.org/html/2310.06825v1/rolling_buffer.png
+    source_asset: 00 Учебник/Assets/Figures/curated/long-context-review-2026-09/mistral-rolling-buffer.png
+    derivation: source-raster-crop
+    crop_box_px: [1520, 0, 2039, 322]
+    source_asset_sha256: 7caf661398953644737c8975515c494e395fe58fad18940be60fc241ded56af9
+    sha256: 6024cd0121faeef0547b97e2fa3e5ca6028467e37e39fd146a4ec7cf5d4972fb
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    license_evidence: https://arxiv.org/abs/2310.06825v1
+    modifications: "Complete timestep panel 2 cropped at source pixels [1520,0,2039,322] from original Figure 2; labels and cells unchanged. Wide source retained. Panels displayed separately for legibility."
+    used_in:
+      - 00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    last_verified: 2026-09-28
+
+  - id: curated-systems-ml-lifecycle-05fdb7e3a7c1
+    asset: 00 Учебник/Assets/Figures/curated/systems-foundations-review-2026-09/ml-lifecycle.png
+    author: Harvard Edge ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/introduction/images/png/_ml_lifecycle_overview.png
+    source_image_url: https://raw.githubusercontent.com/harvard-edge/cs249r_book/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/introduction/images/png/_ml_lifecycle_overview.png
+    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
+    sha256: 05fdb7e3a7c16485cc708f34393073ad6079f5d933aefbb9b129f9edb33adf37
+    license: CC BY-NC-SA 4.0
+    license_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md
+    modifications: "Original copied byte-for-byte; no redraw, crop, translation or text changes."
+    used_in:
+      - 00 Учебник/10 ML Systems/01 Модель как часть системы.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    last_verified: 2026-09-28
+
+  - id: curated-systems-banks-stride-1-fee761c92092
+    asset: 00 Учебник/Assets/Figures/curated/systems-foundations-review-2026-09/banks-stride-1.svg
+    author: Jakub Beránek
+    source_url: https://github.com/Kobzol/hardware-effects-gpu/blob/1b03fa9816002ba835132a2a34581a7481964e61/bank-conflicts/offset-1.svg
+    source_image_url: https://raw.githubusercontent.com/Kobzol/hardware-effects-gpu/1b03fa9816002ba835132a2a34581a7481964e61/bank-conflicts/offset-1.svg
+    commit: 1b03fa9816002ba835132a2a34581a7481964e61
+    sha256: fee761c920926de9876c3e2c81a0d53e64e8f05c33592437b6527c2640ea94f3
+    license: MIT
+    license_url: https://github.com/Kobzol/hardware-effects-gpu/blob/1b03fa9816002ba835132a2a34581a7481964e61/LICENSE.md
+    modifications: "Original copied byte-for-byte; no redraw, crop, translation or text changes. Copyright and permission notice retained in site/public/licenses/hardware-effects-gpu-MIT.txt."
+    used_in:
+      - 00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    last_verified: 2026-09-28
+
+  - id: curated-systems-banks-stride-2-6d6e82a67dd8
+    asset: 00 Учебник/Assets/Figures/curated/systems-foundations-review-2026-09/banks-stride-2.svg
+    author: Jakub Beránek
+    source_url: https://github.com/Kobzol/hardware-effects-gpu/blob/1b03fa9816002ba835132a2a34581a7481964e61/bank-conflicts/offset-2.svg
+    source_image_url: https://raw.githubusercontent.com/Kobzol/hardware-effects-gpu/1b03fa9816002ba835132a2a34581a7481964e61/bank-conflicts/offset-2.svg
+    commit: 1b03fa9816002ba835132a2a34581a7481964e61
+    sha256: 6d6e82a67dd8385b3fcfc660d3a0b8b788ab3b8952149464385f6fee889d2dca
+    license: MIT
+    license_url: https://github.com/Kobzol/hardware-effects-gpu/blob/1b03fa9816002ba835132a2a34581a7481964e61/LICENSE.md
+    modifications: "Original copied byte-for-byte; no redraw, crop, translation or text changes. Copyright and permission notice retained in site/public/licenses/hardware-effects-gpu-MIT.txt."
+    used_in:
+      - 00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    last_verified: 2026-09-28
+
+  - id: curated-systems-banks-stride-4-54d92f07f413
+    asset: 00 Учебник/Assets/Figures/curated/systems-foundations-review-2026-09/banks-stride-4.svg
+    author: Jakub Beránek
+    source_url: https://github.com/Kobzol/hardware-effects-gpu/blob/1b03fa9816002ba835132a2a34581a7481964e61/bank-conflicts/offset-4.svg
+    source_image_url: https://raw.githubusercontent.com/Kobzol/hardware-effects-gpu/1b03fa9816002ba835132a2a34581a7481964e61/bank-conflicts/offset-4.svg
+    commit: 1b03fa9816002ba835132a2a34581a7481964e61
+    sha256: 54d92f07f41348225c1ff16307cf4ddce2d6ec93f74455d9a53a2d9b51fa47f3
+    license: MIT
+    license_url: https://github.com/Kobzol/hardware-effects-gpu/blob/1b03fa9816002ba835132a2a34581a7481964e61/LICENSE.md
+    modifications: "Original copied byte-for-byte; no redraw, crop, translation or text changes. Copyright and permission notice retained in site/public/licenses/hardware-effects-gpu-MIT.txt."
+    used_in:
+      - 00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    last_verified: 2026-09-28
+
+  - id: curated-performance-jax-roofline-1e4b0e2321c6
+    asset: 00 Учебник/Assets/Figures/curated/performance-review-2026-09/jax-roofline.png
+    author: Jacob Austin et al., How To Scale Your Model
+    source_url: https://github.com/jax-ml/scaling-book/blob/9e2bbee091bf0919a28211a2c6bc5e5d42851dbd/assets/img/roofline-improved.png
+    source_image_url: https://raw.githubusercontent.com/jax-ml/scaling-book/9e2bbee091bf0919a28211a2c6bc5e5d42851dbd/assets/img/roofline-improved.png
+    commit: 9e2bbee091bf0919a28211a2c6bc5e5d42851dbd
+    sha256: 1e4b0e2321c6ad087fb9e33dfe18891659f120bedb619d4ffa4bfb41261937d4
+    license: MIT
+    license_url: https://github.com/jax-ml/scaling-book/blob/9e2bbee091bf0919a28211a2c6bc5e5d42851dbd/LICENSE
+    license_notice: site/public/licenses/stanford-cs336-and-jax-scaling-MIT.txt
+    modifications: "Original 2162 by 1802 PNG copied byte-for-byte. No crop, translation or redraw. Existing MIT notice retains both copyright holders."
+    used_in:
+      - 00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    last_verified: 2026-09-29
+
+  - id: curated-systems-mit-amdahl-4d9db2b5cb2a
+    asset: 00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/mit-amdahl.png
+    author: Chris Terman, MIT OpenCourseWare
+    source_url: https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/pages/c21/c21s1/
+    source_image_url: https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/7a4415bef593b6e79608a078d2e9ebf8_Slide16.png
+    source_asset_sha256: 4d9db2b5cb2a6ccd2eca361b79f5a007f7029282169288bc31596668cc456f38
+    sha256: 4d9db2b5cb2a6ccd2eca361b79f5a007f7029282169288bc31596668cc456f38
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    license_evidence_url: https://ocw.mit.edu/pages/privacy-and-terms-of-use/
+    modifications: "Original 1024 by 768 course slide, copied byte-for-byte without cropping, redrawing or translating. External snapshot identified by source URL and SHA-256, not a Git commit."
+    used_in:
+      - 00 Учебник/10 ML Systems/01 Модель как часть системы.md
+    metadata_status: verified
+    provenance_confirmation: official-course-asset
+    derivation: source-raster-copy
+    last_verified: 2026-09-29
+
+  - id: curated-systems-mit-pipeline-4df082985236
+    asset: 00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/mit-pipeline.png
+    author: Chris Terman, MIT OpenCourseWare
+    source_url: https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/pages/c7/c7s1/
+    source_image_url: https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/6ea4cc61191c176d87723be128e03557_Slide09.png
+    source_asset_sha256: 4df0829852360d1a96d5186e866740ee1232ef2e1effc040ca115f425c748301
+    sha256: 4df0829852360d1a96d5186e866740ee1232ef2e1effc040ca115f425c748301
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    license_evidence_url: https://ocw.mit.edu/pages/privacy-and-terms-of-use/
+    modifications: "Original 1024 by 768 course slide, copied byte-for-byte without cropping, redrawing or translating. Clocked digital circuit, not the camera pipeline's measured timeline."
+    used_in:
+      - 00 Учебник/10 ML Systems/01 Модель как часть системы.md
+    metadata_status: verified
+    provenance_confirmation: official-course-asset
+    derivation: source-raster-copy
+    last_verified: 2026-09-29
+
+  - id: curated-systems-d2l-asyncgraph-23c8c5789842
+    asset: 00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/d2l-asyncgraph.svg
+    author: Aston Zhang, Zachary C. Lipton, Mu Li, Alexander J. Smola
+    source_url: https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/img/asyncgraph.svg
+    source_image_url: https://raw.githubusercontent.com/d2l-ai/d2l-en/23d7a5aecceee57d1292c56e90cce307f183bb0a/img/asyncgraph.svg
+    commit: 23d7a5aecceee57d1292c56e90cce307f183bb0a
+    sha256: 23c8c57898425d5f981a04376ef0df5d6d939dc22b38e25387b4dde57b751ce6
+    license: CC BY-SA 4.0
+    license_url: https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/LICENSE
+    modifications: "Original SVG copied byte-for-byte; no crop, redraw or translation."
+    used_in:
+      - 00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-svg-copy
+    last_verified: 2026-09-29
+
+
+  - id: curated-systems-nvidia-coalescing-4-09050dad2efd
+    asset: 00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-coalescing-4.png
+    author: NVIDIA and University of Illinois
+    source_url: https://engineering.purdue.edu/~smidkiff/ece563/NVidiaGPUTeachingToolkit/Mod6/Lecture-6-2-memory-coalescing.pdf#page=4
+    source_asset: 05 Источники/Courses/NVIDIA GPU Teaching Kit/Lectures/memory-coalescing.pdf
+    source_asset_sha256: 5dd51f23bf9393438c3d90a6948abf7ce53982bac2e27b066e6b253095661899
+    source_page: 4
+    sha256: 09050dad2efd51c2250d725a23ff277748b88520ff03717906de9d40076bd59a
+    license: CC BY-NC 4.0
+    license_url: https://creativecommons.org/licenses/by-nc/4.0/
+    license_evidence_url: https://engineering.purdue.edu/~smidkiff/ece563/NVidiaGPUTeachingToolkit/Mod6/Lecture-6-2-memory-coalescing.pdf#page=13
+    derivation: pdf-page-render-crop
+    render_page_size_px: [1800, 1350]
+    crop_box_px: [150, 280, 1640, 760]
+    modifications: "Original diagram cropped from PDF rendered at 1800 by 1350 pixels with pdftoppm. Slide heading and footer removed; no redrawing, translated labels or changed arrows. Authors and license retained in caption and original PDF. Historical four-thread/four-address-segment teaching model; lower DRAM simplification omitted and limits explained in chapter."
+    used_in:
+      - 00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    last_verified: 2026-09-29
+
+  - id: curated-systems-nvidia-coalescing-5-eef0aa3053d3
+    asset: 00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-coalescing-5.png
+    author: NVIDIA and University of Illinois
+    source_url: https://engineering.purdue.edu/~smidkiff/ece563/NVidiaGPUTeachingToolkit/Mod6/Lecture-6-2-memory-coalescing.pdf#page=5
+    source_asset: 05 Источники/Courses/NVIDIA GPU Teaching Kit/Lectures/memory-coalescing.pdf
+    source_asset_sha256: 5dd51f23bf9393438c3d90a6948abf7ce53982bac2e27b066e6b253095661899
+    source_page: 5
+    sha256: eef0aa3053d384c27803055e99a06dbda3077dacd46f6c80832a1760248e8093
+    license: CC BY-NC 4.0
+    license_url: https://creativecommons.org/licenses/by-nc/4.0/
+    license_evidence_url: https://engineering.purdue.edu/~smidkiff/ece563/NVidiaGPUTeachingToolkit/Mod6/Lecture-6-2-memory-coalescing.pdf#page=13
+    derivation: pdf-page-render-crop
+    render_page_size_px: [1800, 1350]
+    crop_box_px: [150, 280, 1640, 760]
+    modifications: "Original diagram cropped from PDF rendered at 1800 by 1350 pixels with pdftoppm. Slide heading and footer removed; no redrawing, translated labels or changed arrows. Authors and license retained in caption and original PDF. Historical four-thread/four-address-segment teaching model; lower DRAM simplification omitted and limits explained in chapter."
+    used_in:
+      - 00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    last_verified: 2026-09-29
+
+  - id: curated-systems-nvidia-gemm-step-6-dac9d5acdd76
+    asset: 00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-gemm-step-6.png
+    author: NVIDIA and University of Illinois
+    source_url: https://engineering.purdue.edu/~smidkiff/ece563/NVidiaGPUTeachingToolkit/Mod4/Lecture-4-3-tiled-matrix-multiplication.pdf#page=6
+    source_asset: 05 Источники/Courses/NVIDIA GPU Teaching Kit/Lectures/tiled-matrix-multiplication.pdf
+    source_asset_sha256: 16308c4d1d01113b651be769491138729c2557e927acc1f1a20b8ca50bb414a4
+    source_page: 6
+    sha256: dac9d5acdd76ec4e288cb56dd9fd639e85e3da520e26f699c5e9ad0b9d264bf1
+    license: CC BY-NC 4.0
+    license_url: https://creativecommons.org/licenses/by-nc/4.0/
+    license_evidence_url: https://engineering.purdue.edu/~smidkiff/ece563/NVidiaGPUTeachingToolkit/Mod4/Lecture-4-3-tiled-matrix-multiplication.pdf#page=15
+    derivation: pdf-page-render-crop
+    render_page_size_px: [1800, 1350]
+    crop_box_px: [315, 330, 1560, 980]
+    modifications: "Original diagram cropped from PDF rendered at 1800 by 1350 pixels with pdftoppm. Slide heading and footer removed; no redrawing, translated labels or changed arrows. Authors and license retained in caption and original PDF."
+    used_in:
+      - 00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    last_verified: 2026-09-29
+
+  - id: curated-systems-nvidia-gemm-step-7-9e39534927ee
+    asset: 00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-gemm-step-7.png
+    author: NVIDIA and University of Illinois
+    source_url: https://engineering.purdue.edu/~smidkiff/ece563/NVidiaGPUTeachingToolkit/Mod4/Lecture-4-3-tiled-matrix-multiplication.pdf#page=7
+    source_asset: 05 Источники/Courses/NVIDIA GPU Teaching Kit/Lectures/tiled-matrix-multiplication.pdf
+    source_asset_sha256: 16308c4d1d01113b651be769491138729c2557e927acc1f1a20b8ca50bb414a4
+    source_page: 7
+    sha256: 9e39534927ee1ec5f17c22b3ec4bac3edf4d1032e24facb27b7ff8028d799e68
+    license: CC BY-NC 4.0
+    license_url: https://creativecommons.org/licenses/by-nc/4.0/
+    license_evidence_url: https://engineering.purdue.edu/~smidkiff/ece563/NVidiaGPUTeachingToolkit/Mod4/Lecture-4-3-tiled-matrix-multiplication.pdf#page=15
+    derivation: pdf-page-render-crop
+    render_page_size_px: [1800, 1350]
+    crop_box_px: [315, 330, 1560, 980]
+    modifications: "Original diagram cropped from PDF rendered at 1800 by 1350 pixels with pdftoppm. Slide heading and footer removed; no redrawing, translated labels or changed arrows. Authors and license retained in caption and original PDF."
+    used_in:
+      - 00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    last_verified: 2026-09-29
+
+  - id: curated-systems-nvidia-gemm-step-8-4aebfccfe3c0
+    asset: 00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-gemm-step-8.png
+    author: NVIDIA and University of Illinois
+    source_url: https://engineering.purdue.edu/~smidkiff/ece563/NVidiaGPUTeachingToolkit/Mod4/Lecture-4-3-tiled-matrix-multiplication.pdf#page=8
+    source_asset: 05 Источники/Courses/NVIDIA GPU Teaching Kit/Lectures/tiled-matrix-multiplication.pdf
+    source_asset_sha256: 16308c4d1d01113b651be769491138729c2557e927acc1f1a20b8ca50bb414a4
+    source_page: 8
+    sha256: 4aebfccfe3c0bf5683c8eba733f57f4932d96069227762e3f0edbf1cb32a0497
+    license: CC BY-NC 4.0
+    license_url: https://creativecommons.org/licenses/by-nc/4.0/
+    license_evidence_url: https://engineering.purdue.edu/~smidkiff/ece563/NVidiaGPUTeachingToolkit/Mod4/Lecture-4-3-tiled-matrix-multiplication.pdf#page=15
+    derivation: pdf-page-render-crop
+    render_page_size_px: [1800, 1350]
+    crop_box_px: [315, 330, 1560, 980]
+    modifications: "Original diagram cropped from PDF rendered at 1800 by 1350 pixels with pdftoppm. Slide heading and footer removed; no redrawing, translated labels or changed arrows. Authors and license retained in caption and original PDF."
+    used_in:
+      - 00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    last_verified: 2026-09-29
+
+  - id: curated-systems-nvidia-gemm-step-9-cc783d18c00a
+    asset: 00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-gemm-step-9.png
+    author: NVIDIA and University of Illinois
+    source_url: https://engineering.purdue.edu/~smidkiff/ece563/NVidiaGPUTeachingToolkit/Mod4/Lecture-4-3-tiled-matrix-multiplication.pdf#page=9
+    source_asset: 05 Источники/Courses/NVIDIA GPU Teaching Kit/Lectures/tiled-matrix-multiplication.pdf
+    source_asset_sha256: 16308c4d1d01113b651be769491138729c2557e927acc1f1a20b8ca50bb414a4
+    source_page: 9
+    sha256: cc783d18c00a2049f6827f3a48e4e5feaa5b774d110317780e626c95de2551f7
+    license: CC BY-NC 4.0
+    license_url: https://creativecommons.org/licenses/by-nc/4.0/
+    license_evidence_url: https://engineering.purdue.edu/~smidkiff/ece563/NVidiaGPUTeachingToolkit/Mod4/Lecture-4-3-tiled-matrix-multiplication.pdf#page=15
+    derivation: pdf-page-render-crop
+    render_page_size_px: [1800, 1350]
+    crop_box_px: [315, 330, 1560, 980]
+    modifications: "Original diagram cropped from PDF rendered at 1800 by 1350 pixels with pdftoppm. Slide heading and footer removed; no redrawing, translated labels or changed arrows. Authors and license retained in caption and original PDF."
+    used_in:
+      - 00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    last_verified: 2026-09-29
+
+  - id: curated-systems-nvidia-same-stream-e2710b37fae9
+    asset: 00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-same-stream.png
+    author: NVIDIA Accelerated Computing Hub contributors
+    source_url: https://github.com/NVIDIA/accelerated-computing-hub/blob/c16da250e9aa79936b28a1976738877fc772f8a2/tutorials/cuda-cpp/notebooks/02.03-Streams/Images/async-copy-same-stream.png
+    source_image_url: https://media.githubusercontent.com/media/NVIDIA/accelerated-computing-hub/c16da250e9aa79936b28a1976738877fc772f8a2/tutorials/cuda-cpp/notebooks/02.03-Streams/Images/async-copy-same-stream.png
+    commit: c16da250e9aa79936b28a1976738877fc772f8a2
+    sha256: e2710b37fae9d9c39ce0f2c6be5fcc9c0c9e829a8b7dea22b92970278278afba
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    license_evidence_url: https://github.com/NVIDIA/accelerated-computing-hub/blob/c16da250e9aa79936b28a1976738877fc772f8a2/README.md#license
+    derivation: source-raster-copy
+    modifications: "Original copied byte-for-byte, without redrawing, crop or translation. Written tutorial materials use CC BY-NC-SA 4.0, distinct from the repository's Apache-2.0 code license."
+    used_in:
+      - 00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    last_verified: 2026-09-29
+
+  - id: curated-systems-nvidia-two-streams-adfe78c1708d
+    asset: 00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-two-streams.png
+    author: NVIDIA Accelerated Computing Hub contributors
+    source_url: https://github.com/NVIDIA/accelerated-computing-hub/blob/c16da250e9aa79936b28a1976738877fc772f8a2/tutorials/cuda-cpp/notebooks/02.03-Streams/Images/async-copy.png
+    source_image_url: https://media.githubusercontent.com/media/NVIDIA/accelerated-computing-hub/c16da250e9aa79936b28a1976738877fc772f8a2/tutorials/cuda-cpp/notebooks/02.03-Streams/Images/async-copy.png
+    commit: c16da250e9aa79936b28a1976738877fc772f8a2
+    sha256: adfe78c1708d1c19b733db540457fe707f5cb523ea0e7e8974b4b72675f37f17
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    license_evidence_url: https://github.com/NVIDIA/accelerated-computing-hub/blob/c16da250e9aa79936b28a1976738877fc772f8a2/README.md#license
+    derivation: source-raster-copy
+    modifications: "Original copied byte-for-byte, without redrawing, crop or translation. Written tutorial materials use CC BY-NC-SA 4.0, distinct from the repository's Apache-2.0 code license."
+    used_in:
+      - 00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    last_verified: 2026-09-29
+
+  - id: curated-systems-nvidia-fusion-413b00d91b14
+    asset: 00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-fusion.svg
+    author: NVIDIA Accelerated Computing Hub contributors
+    source_url: https://github.com/NVIDIA/accelerated-computing-hub/blob/c16da250e9aa79936b28a1976738877fc772f8a2/tutorials/warp/notebooks/images/intro-to-warp/warp-kernel-fusion.svg
+    source_image_url: https://raw.githubusercontent.com/NVIDIA/accelerated-computing-hub/c16da250e9aa79936b28a1976738877fc772f8a2/tutorials/warp/notebooks/images/intro-to-warp/warp-kernel-fusion.svg
+    commit: c16da250e9aa79936b28a1976738877fc772f8a2
+    sha256: 413b00d91b14655611290b4bbbde9f80321a6fe7116b5ed65433bba97a2718d2
+    license: CC BY-NC-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    license_evidence_url: https://github.com/NVIDIA/accelerated-computing-hub/blob/c16da250e9aa79936b28a1976738877fc772f8a2/README.md#license
+    derivation: source-svg-copy
+    modifications: "Original copied byte-for-byte, without redrawing, crop or translation. Written tutorial materials use CC BY-NC-SA 4.0, distinct from the repository's Apache-2.0 code license."
+    used_in:
+      - 00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    last_verified: 2026-09-29
+
+  - id: curated-systems-d2l-threading-8ec521ea838a
+    asset: 00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/d2l-threading.svg
+    author: Aston Zhang, Zachary C. Lipton, Mu Li, Alexander J. Smola
+    source_url: https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/img/threading.svg
+    source_image_url: https://raw.githubusercontent.com/d2l-ai/d2l-en/23d7a5aecceee57d1292c56e90cce307f183bb0a/img/threading.svg
+    commit: 23d7a5aecceee57d1292c56e90cce307f183bb0a
+    sha256: 8ec521ea838a6d0e71afeb0ebb48e3752b92fd79f87ed7eef1c4f3ebd961af34
+    license: CC BY-SA 4.0
+    license_url: https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/LICENSE
+    modifications: "Original SVG copied byte-for-byte; frontend/backend execution diagram, not a trace of a particular PyTorch implementation. No crop, redraw or translation."
+    used_in:
+      - 00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    derivation: source-svg-copy
+    last_verified: 2026-09-29
+
+  - id: curated-arithmetic-jax-transformer-bf82777555b5
+    asset: 00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/jax-transformer.png
+    author: JAX Scaling Book authors and Google LLC
+    source_url: https://github.com/jax-ml/scaling-book/blob/9e2bbee091bf0919a28211a2c6bc5e5d42851dbd/assets/img/transformer-diagram.png
+    source_image_url: https://raw.githubusercontent.com/jax-ml/scaling-book/9e2bbee091bf0919a28211a2c6bc5e5d42851dbd/assets/img/transformer-diagram.png
+    commit: 9e2bbee091bf0919a28211a2c6bc5e5d42851dbd
+    sha256: bf82777555b58ffa2eb0e60c438f139197198050eed1abbd9eb2b6b544fb09f9
+    license: MIT
+    license_url: https://github.com/jax-ml/scaling-book/blob/9e2bbee091bf0919a28211a2c6bc5e5d42851dbd/LICENSE
+    derivation: source-raster-copy
+    modifications: "Original file copied byte-for-byte. No cropping, redrawing or translated labels. Terminology, scope and assumptions explained alongside the figure."
+    used_in:
+      - 00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    last_verified: 2026-09-29
+
+  - id: curated-arithmetic-jax-fsdp-a93683fa1062
+    asset: 00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/jax-fsdp.png
+    author: JAX Scaling Book authors and Google LLC
+    source_url: https://github.com/jax-ml/scaling-book/blob/9e2bbee091bf0919a28211a2c6bc5e5d42851dbd/assets/img/fsdp.png
+    source_image_url: https://raw.githubusercontent.com/jax-ml/scaling-book/9e2bbee091bf0919a28211a2c6bc5e5d42851dbd/assets/img/fsdp.png
+    commit: 9e2bbee091bf0919a28211a2c6bc5e5d42851dbd
+    sha256: a93683fa106229924ec4033fd4882122d7a4c76316c4c0a63a465b814bbaff29
+    license: MIT
+    license_url: https://github.com/jax-ml/scaling-book/blob/9e2bbee091bf0919a28211a2c6bc5e5d42851dbd/LICENSE
+    derivation: source-raster-copy
+    modifications: "Original file copied byte-for-byte. No cropping, redrawing or translated labels. Terminology, scope and assumptions explained alongside the figure."
+    used_in:
+      - docs/audit/2026-09-29-arithmetic-visual-redesign.md
+    review_note: "Removed from chapter after visual review: superseded by clearer source artwork or linked as supplementary detail. Retained for provenance."
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    last_verified: 2026-09-29
+
+  - id: curated-arithmetic-jax-pipeline-bubble-3c909d42ee87
+    asset: 00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/jax-pipeline-bubble.png
+    author: JAX Scaling Book authors and Google LLC
+    source_url: https://github.com/jax-ml/scaling-book/blob/9e2bbee091bf0919a28211a2c6bc5e5d42851dbd/assets/gpu/pipeline-bubble.png
+    source_image_url: https://raw.githubusercontent.com/jax-ml/scaling-book/9e2bbee091bf0919a28211a2c6bc5e5d42851dbd/assets/gpu/pipeline-bubble.png
+    commit: 9e2bbee091bf0919a28211a2c6bc5e5d42851dbd
+    sha256: 3c909d42ee8772ef29354390030a9b13521dea8f28deadb617fb5160928fff81
+    license: MIT
+    license_url: https://github.com/jax-ml/scaling-book/blob/9e2bbee091bf0919a28211a2c6bc5e5d42851dbd/LICENSE
+    derivation: source-raster-copy
+    modifications: "Original file copied byte-for-byte. No cropping, redrawing or translated labels. Terminology, scope and assumptions explained alongside the figure."
+    used_in:
+      - docs/audit/2026-09-29-arithmetic-visual-redesign.md
+    review_note: "Removed from chapter after visual review: superseded by clearer source artwork or linked as supplementary detail. Retained for provenance."
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    last_verified: 2026-09-29
+
+  - id: curated-arithmetic-jax-pipeline-transfer-91b3f04a5289
+    asset: 00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/jax-pipeline-transfer.png
+    author: JAX Scaling Book authors and Google LLC
+    source_url: https://github.com/jax-ml/scaling-book/blob/9e2bbee091bf0919a28211a2c6bc5e5d42851dbd/assets/gpu/pipeline-transfer.png
+    source_image_url: https://raw.githubusercontent.com/jax-ml/scaling-book/9e2bbee091bf0919a28211a2c6bc5e5d42851dbd/assets/gpu/pipeline-transfer.png
+    commit: 9e2bbee091bf0919a28211a2c6bc5e5d42851dbd
+    sha256: 91b3f04a5289cc87de2125b7b80d88a66f57ca79828d633818ddeb73d0d0781b
+    license: MIT
+    license_url: https://github.com/jax-ml/scaling-book/blob/9e2bbee091bf0919a28211a2c6bc5e5d42851dbd/LICENSE
+    derivation: source-raster-copy
+    modifications: "Original file copied byte-for-byte. No cropping, redrawing or translated labels. Terminology, scope and assumptions explained alongside the figure."
+    used_in:
+      - docs/audit/2026-09-29-arithmetic-visual-redesign.md
+    review_note: "Removed from chapter after visual review: superseded by clearer source artwork or linked as supplementary detail. Retained for provenance."
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    last_verified: 2026-09-29
+
+  - id: curated-arithmetic-pytorch-checkpoint-13bc1fead2c8
+    asset: 00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/pytorch-checkpoint.png
+    author: PyTorch contributors
+    source_url: https://github.com/pytorch/pytorch.github.io/blob/563f92c6e87782196b81894c4e671428cd8d34af/assets/images/activation-checkpointing-techniques/fg5.png
+    source_image_url: https://raw.githubusercontent.com/pytorch/pytorch.github.io/563f92c6e87782196b81894c4e671428cd8d34af/assets/images/activation-checkpointing-techniques/fg5.png
+    commit: 563f92c6e87782196b81894c4e671428cd8d34af
+    sha256: 13bc1fead2c8b4976effff97a3f6dff14eb81788e27adca200c1e77e972aab74
+    license: BSD-3-Clause
+    license_url: https://github.com/pytorch/pytorch.github.io/blob/563f92c6e87782196b81894c4e671428cd8d34af/LICENSE
+    derivation: source-raster-copy
+    modifications: "Original file copied byte-for-byte. No cropping, redrawing or translated labels. Terminology, scope and assumptions explained alongside the figure."
+    used_in:
+      - docs/audit/2026-09-29-arithmetic-visual-redesign.md
+    review_note: "Removed from chapter after visual review: superseded by clearer source artwork or linked as supplementary detail. Retained for provenance."
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    last_verified: 2026-09-29
+
+  - id: curated-arithmetic-pytorch-selective-checkpoint-14955736f9fe
+    asset: 00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/pytorch-selective-checkpoint.png
+    author: PyTorch contributors
+    source_url: https://github.com/pytorch/pytorch.github.io/blob/563f92c6e87782196b81894c4e671428cd8d34af/assets/images/activation-checkpointing-techniques/fg8.png
+    source_image_url: https://raw.githubusercontent.com/pytorch/pytorch.github.io/563f92c6e87782196b81894c4e671428cd8d34af/assets/images/activation-checkpointing-techniques/fg8.png
+    commit: 563f92c6e87782196b81894c4e671428cd8d34af
+    sha256: 14955736f9fe3a8b870e0ebf94c32fde67fd514f0e6090fbfa6763b4f73551c0
+    license: BSD-3-Clause
+    license_url: https://github.com/pytorch/pytorch.github.io/blob/563f92c6e87782196b81894c4e671428cd8d34af/LICENSE
+    derivation: source-raster-copy
+    modifications: "Original file copied byte-for-byte. No cropping, redrawing or translated labels. Terminology, scope and assumptions explained alongside the figure."
+    used_in:
+      - docs/audit/2026-09-29-arithmetic-visual-redesign.md
+    review_note: "Removed from chapter after visual review: superseded by clearer source artwork or linked as supplementary detail. Retained for provenance."
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    last_verified: 2026-09-29
+
+  - id: curated-arithmetic-pytorch-fsdp-workflow-47b8a1a89b5c
+    asset: 00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/pytorch-fsdp-workflow.png
+    author: PyTorch contributors
+    source_url: https://github.com/pytorch/tutorials/blob/65e2e1a1c1520a6ccb1adc7fb2a55ce78ccdc598/_static/img/distributed/fsdp_workflow.png
+    source_image_url: https://raw.githubusercontent.com/pytorch/tutorials/65e2e1a1c1520a6ccb1adc7fb2a55ce78ccdc598/_static/img/distributed/fsdp_workflow.png
+    commit: 65e2e1a1c1520a6ccb1adc7fb2a55ce78ccdc598
+    sha256: 47b8a1a89b5cbd9199493ae56841e4deff0b44372515121b4bfeecfa6160efd8
+    license: BSD-3-Clause
+    license_url: https://github.com/pytorch/tutorials/blob/65e2e1a1c1520a6ccb1adc7fb2a55ce78ccdc598/LICENSE
+    derivation: source-raster-copy
+    modifications: "Original file copied byte-for-byte. No cropping, redrawing or translated labels. Terminology, scope and assumptions explained alongside the figure."
+    used_in:
+      - docs/audit/2026-09-29-arithmetic-visual-redesign.md
+    review_note: "Removed from chapter after visual review: superseded by clearer source artwork or linked as supplementary detail. Retained for provenance."
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    last_verified: 2026-09-29
+
+  - id: curated-arithmetic-dualpipev-ae0bb45143b7
+    asset: 00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/dualpipev.png
+    author: Jiashi Li, Chengqi Deng, Wenfeng Liang and DeepSeek
+    source_url: https://github.com/deepseek-ai/DualPipe/blob/030ce4325f4ebeb437da4ebc6d00a70469dd58ae/images/dualpipev.png
+    source_image_url: https://raw.githubusercontent.com/deepseek-ai/DualPipe/030ce4325f4ebeb437da4ebc6d00a70469dd58ae/images/dualpipev.png
+    commit: 030ce4325f4ebeb437da4ebc6d00a70469dd58ae
+    sha256: ae0bb45143b74319d0f41fc42d398956bf1b19dea6e89065210ec313dcce30d5
+    license: MIT
+    license_url: https://github.com/deepseek-ai/DualPipe/blob/030ce4325f4ebeb437da4ebc6d00a70469dd58ae/LICENSE
+    derivation: source-raster-copy
+    modifications: "Original file copied byte-for-byte. No cropping, redrawing or translated labels. Terminology, scope and assumptions explained alongside the figure."
+    used_in:
+      - docs/audit/2026-09-29-arithmetic-visual-redesign.md
+    review_note: "Removed from chapter after visual review: superseded by clearer source artwork or linked as supplementary detail. Retained for provenance."
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    last_verified: 2026-09-29
+
+  - id: curated-arithmetic-edls-tp-13fa952d7f86
+    asset: 00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/edls-tp.png
+    author: Mikhail Khrushchev, Efficient DL Systems course authors
+    source_url: https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week06_dl_arithmetic/lecture.pdf#page=129
+    source_image_url: https://raw.githubusercontent.com/mryab/efficient-dl-systems/e632aa89ca9e6638d52e1b686095e7442faffbb0/week06_dl_arithmetic/lecture.pdf
+    commit: e632aa89ca9e6638d52e1b686095e7442faffbb0
+    sha256: 13fa952d7f8632f41c649c43bc059b0aa1be782dba9ae4059907af93f87b006a
+    license: MIT
+    license_url: https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/LICENSE
+    derivation: pdf-page-render
+    source_asset: 05 Источники/Courses/Efficient DL Systems/Lectures/deep-learning-arithmetic.pdf
+    source_asset_sha256: 64b6f4285f9fe9bc62bf8293f3585eb26e738d493723b22c2301c58a5a191215
+    source_page: 129
+    render_page_size_px: [1600, 900]
+    render_command: "pdftoppm -f 129 -l 129 -scale-to 1600 -png -singlefile source.pdf output"
+    modifications: "Full original PDF page rendered with Poppler at 1600 by 900 pixels. No crop, redrawing or translated labels. Original vector course diagram; no embedded third-party raster on this page."
+    used_in:
+      - 00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    last_verified: 2026-09-29
+
+  - id: curated-precision-te-float-bits-png-975d48f49f46
+    asset: 00 Учебник/Assets/Figures/curated/precision-review-2026-09/te-float-bits.png
+    author: NVIDIA Transformer Engine documentation contributors
+    source_url: https://github.com/NVIDIA/TransformerEngine/blob/eb56ba22fd2b3c1fa4c962a4a575d4ba12d1fcbc/docs/examples/fp8_formats.png
+    source_image_url: https://raw.githubusercontent.com/NVIDIA/TransformerEngine/eb56ba22fd2b3c1fa4c962a4a575d4ba12d1fcbc/docs/examples/fp8_formats.png
+    commit: eb56ba22fd2b3c1fa4c962a4a575d4ba12d1fcbc
+    sha256: 975d48f49f46ee22524541e4cfa9857d7c2b949a8787662bda5d5e73223b3443
+    license: Apache-2.0
+    license_url: https://github.com/NVIDIA/TransformerEngine/blob/eb56ba22fd2b3c1fa4c962a4a575d4ba12d1fcbc/LICENSE
+    derivation: source-raster-copy
+    modifications: "Original PNG copied byte-for-byte; no cropping, redrawing or translated labels."
+    used_in:
+      - 00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    last_verified: 2026-09-29
+
+  - id: curated-precision-hf-format-ranges-png-8891a3a71a81
+    asset: 00 Учебник/Assets/Figures/curated/precision-review-2026-09/hf-format-ranges.png
+    author: Nouamane Tazi, Ferdinand Mom, Haojun Zhao, Phuc Nguyen, Mohamed Mekkouri, Leandro von Werra, Thomas Wolf; Hugging Face
+    source_url: https://huggingface.co/spaces/nanotron/ultrascale-playbook/blob/c93890dd4b22356ee18ed9b863e6f2d0909729bc/assets/images/mixedprecision.png
+    source_image_url: https://huggingface.co/spaces/nanotron/ultrascale-playbook/resolve/c93890dd4b22356ee18ed9b863e6f2d0909729bc/assets/images/mixedprecision.png
+    commit: c93890dd4b22356ee18ed9b863e6f2d0909729bc
+    sha256: 8891a3a71a819f217c5b2bfa39d68c794eca480f24bfbb74b618aebde2971fc8
+    license: Apache-2.0
+    license_url: https://huggingface.co/spaces/nanotron/ultrascale-playbook/blob/c93890dd4b22356ee18ed9b863e6f2d0909729bc/README.md
+    derivation: source-raster-copy
+    modifications: "Original PNG copied byte-for-byte; no cropping, redrawing or translated labels."
+    used_in:
+      - 00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    last_verified: 2026-09-29
+
+  - id: curated-precision-hf-format-resolution-png-d4cac7b16899
+    asset: 00 Учебник/Assets/Figures/curated/precision-review-2026-09/hf-format-resolution.png
+    author: Nouamane Tazi, Ferdinand Mom, Haojun Zhao, Phuc Nguyen, Mohamed Mekkouri, Leandro von Werra, Thomas Wolf; Hugging Face
+    source_url: https://huggingface.co/spaces/nanotron/ultrascale-playbook/blob/c93890dd4b22356ee18ed9b863e6f2d0909729bc/assets/images/mixedprecision_2.png
+    source_image_url: https://huggingface.co/spaces/nanotron/ultrascale-playbook/resolve/c93890dd4b22356ee18ed9b863e6f2d0909729bc/assets/images/mixedprecision_2.png
+    commit: c93890dd4b22356ee18ed9b863e6f2d0909729bc
+    sha256: d4cac7b16899d1c36f4936ddcf6751ce96391831397199735a3ef64b6daa0a07
+    license: Apache-2.0
+    license_url: https://huggingface.co/spaces/nanotron/ultrascale-playbook/blob/c93890dd4b22356ee18ed9b863e6f2d0909729bc/README.md
+    derivation: source-raster-copy
+    modifications: "Original PNG copied byte-for-byte; no cropping, redrawing or translated labels."
+    used_in:
+      - 00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    last_verified: 2026-09-29
+
+  - id: curated-precision-te-mxfp8-blocks-png-a814e91bfb1d
+    asset: 00 Учебник/Assets/Figures/curated/precision-review-2026-09/te-mxfp8-blocks.png
+    author: NVIDIA Transformer Engine documentation contributors
+    source_url: https://github.com/NVIDIA/TransformerEngine/blob/eb56ba22fd2b3c1fa4c962a4a575d4ba12d1fcbc/docs/examples/MXFP8_FP8_comparison_1.png
+    source_image_url: https://raw.githubusercontent.com/NVIDIA/TransformerEngine/eb56ba22fd2b3c1fa4c962a4a575d4ba12d1fcbc/docs/examples/MXFP8_FP8_comparison_1.png
+    commit: eb56ba22fd2b3c1fa4c962a4a575d4ba12d1fcbc
+    sha256: a814e91bfb1d62cdc45eab30f2e99c95f8373783e60d4c61e89622c5d51123d7
+    license: Apache-2.0
+    license_url: https://github.com/NVIDIA/TransformerEngine/blob/eb56ba22fd2b3c1fa4c962a4a575d4ba12d1fcbc/LICENSE
+    derivation: source-raster-copy
+    modifications: "Original PNG copied byte-for-byte; no cropping, redrawing or translated labels."
+    used_in:
+      - 00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    last_verified: 2026-09-29
+
+  - id: curated-precision-te-master-weights-svg-e7a20b16b14e
+    asset: 00 Учебник/Assets/Figures/curated/precision-review-2026-09/te-master-weights.svg
+    author: NVIDIA Transformer Engine documentation contributors
+    source_url: https://github.com/NVIDIA/TransformerEngine/blob/eb56ba22fd2b3c1fa4c962a4a575d4ba12d1fcbc/docs/features/low_precision_training/introduction/img/master_weights_approaches.svg
+    source_image_url: https://raw.githubusercontent.com/NVIDIA/TransformerEngine/eb56ba22fd2b3c1fa4c962a4a575d4ba12d1fcbc/docs/features/low_precision_training/introduction/img/master_weights_approaches.svg
+    commit: eb56ba22fd2b3c1fa4c962a4a575d4ba12d1fcbc
+    sha256: e7a20b16b14e4ccf0c3837949baea19cffac926a8c2a99d3a8a376078e4261c8
+    license: Apache-2.0
+    license_url: https://github.com/NVIDIA/TransformerEngine/blob/eb56ba22fd2b3c1fa4c962a4a575d4ba12d1fcbc/LICENSE
+    derivation: source-svg-crop
+    modifications: "Original SVG viewBox restricted to [350,45,700,530], showing the two complete right-hand columns without the overall title or first column. Exact upstream diagram-colors.css embedded inside CDATA instead of external import. No redrawing or translated labels."
+    source_asset_sha256: 5cb1e933816f095ae00e344cd08fc7f7670b33dee9368b6cae4db40a6c72c432
+    source_stylesheet_url: https://raw.githubusercontent.com/NVIDIA/TransformerEngine/eb56ba22fd2b3c1fa4c962a4a575d4ba12d1fcbc/docs/_static/css/diagram-colors.css
+    source_stylesheet_sha256: ee997e774be6887f4a6ed2f26a14702386ef71e60e7aca4071464bcf650c3c5f
+    used_in:
+      - 00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    last_verified: 2026-09-29
+
+
+  - id: curated-arithmetic-hf-training-memory-9c1813a69168
+    asset: 00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/hf-training-memory.svg
+    author: Nouamane Tazi, Ferdinand Mom, Haojun Zhao, Phuc Nguyen, Mohamed Mekkouri, Leandro von Werra, Thomas Wolf; Hugging Face
+    source_url: https://huggingface.co/spaces/nanotron/ultrascale-playbook/blob/c93890dd4b22356ee18ed9b863e6f2d0909729bc/assets/images/memory_profile.svg
+    source_image_url: https://huggingface.co/spaces/nanotron/ultrascale-playbook/resolve/c93890dd4b22356ee18ed9b863e6f2d0909729bc/assets/images/memory_profile.svg
+    commit: c93890dd4b22356ee18ed9b863e6f2d0909729bc
+    sha256: 9c1813a69168e87e7d94bace30a7c07209757c8f7b95848f4cce8d567b298198
+    license: Apache-2.0
+    license_url: https://huggingface.co/spaces/nanotron/ultrascale-playbook/blob/c93890dd4b22356ee18ed9b863e6f2d0909729bc/README.md
+    derivation: source-svg-copy
+    modifications: "Original SVG copied byte-for-byte; no redrawing, cropping or translated labels."
+    used_in:
+      - 00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    last_verified: 2026-09-29
+
+  - id: curated-arithmetic-hf-fsdp-forward-df0793b7d70e
+    asset: 00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/hf-fsdp-forward.svg
+    author: Nouamane Tazi, Ferdinand Mom, Haojun Zhao, Phuc Nguyen, Mohamed Mekkouri, Leandro von Werra, Thomas Wolf; Hugging Face
+    source_url: https://huggingface.co/spaces/nanotron/ultrascale-playbook/blob/c93890dd4b22356ee18ed9b863e6f2d0909729bc/assets/images/dp_zero3_fwd.svg
+    source_image_url: https://huggingface.co/spaces/nanotron/ultrascale-playbook/resolve/c93890dd4b22356ee18ed9b863e6f2d0909729bc/assets/images/dp_zero3_fwd.svg
+    commit: c93890dd4b22356ee18ed9b863e6f2d0909729bc
+    sha256: df0793b7d70e31ce289bf135288dc7a8c08f5888ef91cc4f9b1224c8248d9b3b
+    license: Apache-2.0
+    license_url: https://huggingface.co/spaces/nanotron/ultrascale-playbook/blob/c93890dd4b22356ee18ed9b863e6f2d0909729bc/README.md
+    derivation: source-svg-copy
+    modifications: "Original SVG copied byte-for-byte; no redrawing, cropping or translated labels."
+    used_in:
+      - 00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    last_verified: 2026-09-29
+
+  - id: curated-arithmetic-hf-fsdp-backward-ed98197af279
+    asset: 00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/hf-fsdp-backward.svg
+    author: Nouamane Tazi, Ferdinand Mom, Haojun Zhao, Phuc Nguyen, Mohamed Mekkouri, Leandro von Werra, Thomas Wolf; Hugging Face
+    source_url: https://huggingface.co/spaces/nanotron/ultrascale-playbook/blob/c93890dd4b22356ee18ed9b863e6f2d0909729bc/assets/images/dp_zero3_bwd.svg
+    source_image_url: https://huggingface.co/spaces/nanotron/ultrascale-playbook/resolve/c93890dd4b22356ee18ed9b863e6f2d0909729bc/assets/images/dp_zero3_bwd.svg
+    commit: c93890dd4b22356ee18ed9b863e6f2d0909729bc
+    sha256: ed98197af27915a3b34401939e9dc8d4fb99a218350dc255354ad89e10d6918a
+    license: Apache-2.0
+    license_url: https://huggingface.co/spaces/nanotron/ultrascale-playbook/blob/c93890dd4b22356ee18ed9b863e6f2d0909729bc/README.md
+    derivation: source-svg-copy
+    modifications: "Original SVG copied byte-for-byte; no redrawing, cropping or translated labels."
+    used_in:
+      - 00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    last_verified: 2026-09-29
+
+  - id: curated-arithmetic-hf-pipeline-gpipe-e2d09e04833a
+    asset: 00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/hf-pipeline-gpipe.svg
+    author: Nouamane Tazi, Ferdinand Mom, Haojun Zhao, Phuc Nguyen, Mohamed Mekkouri, Leandro von Werra, Thomas Wolf; Hugging Face
+    source_url: https://huggingface.co/spaces/nanotron/ultrascale-playbook/blob/c93890dd4b22356ee18ed9b863e6f2d0909729bc/assets/images/pp_afab2.svg
+    source_image_url: https://huggingface.co/spaces/nanotron/ultrascale-playbook/resolve/c93890dd4b22356ee18ed9b863e6f2d0909729bc/assets/images/pp_afab2.svg
+    commit: c93890dd4b22356ee18ed9b863e6f2d0909729bc
+    sha256: e2d09e04833aedb3740f7111eb67c6955d5f75d826388a20a5b19185d2372709
+    license: Apache-2.0
+    license_url: https://huggingface.co/spaces/nanotron/ultrascale-playbook/blob/c93890dd4b22356ee18ed9b863e6f2d0909729bc/README.md
+    derivation: source-svg-copy
+    modifications: "Original SVG copied byte-for-byte; no redrawing, cropping or translated labels."
+    used_in:
+      - 00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    last_verified: 2026-09-29
+
+  - id: curated-arithmetic-hf-pipeline-1f1b-eb889cb061f1
+    asset: 00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/hf-pipeline-1f1b.svg
+    author: Nouamane Tazi, Ferdinand Mom, Haojun Zhao, Phuc Nguyen, Mohamed Mekkouri, Leandro von Werra, Thomas Wolf; Hugging Face
+    source_url: https://huggingface.co/spaces/nanotron/ultrascale-playbook/blob/c93890dd4b22356ee18ed9b863e6f2d0909729bc/assets/images/pp_1f1b.svg
+    source_image_url: https://huggingface.co/spaces/nanotron/ultrascale-playbook/resolve/c93890dd4b22356ee18ed9b863e6f2d0909729bc/assets/images/pp_1f1b.svg
+    commit: c93890dd4b22356ee18ed9b863e6f2d0909729bc
+    sha256: eb889cb061f115e4512008de58c62864f72944521fd87c49c6c4aabb1a41efeb
+    license: Apache-2.0
+    license_url: https://huggingface.co/spaces/nanotron/ultrascale-playbook/blob/c93890dd4b22356ee18ed9b863e6f2d0909729bc/README.md
+    derivation: source-svg-copy
+    modifications: "Original SVG copied byte-for-byte; no redrawing, cropping or translated labels."
+    used_in:
+      - 00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    last_verified: 2026-09-29
+
+  - id: curated-arithmetic-nemo-checkpointing-08f34fd0293f
+    asset: 00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/nemo-checkpointing.jpg
+    author: NVIDIA NeMo documentation contributors
+    source_url: https://github.com/NVIDIA/NeMo/blob/e938df327c6d1e9d26e9670e51c1ceea0bf5a677/docs/source/features/optimizations/activation_recomputation.rst
+    source_image_url: https://github.com/NVIDIA/NeMo/releases/download/v2.0.0rc0/asset-post-activation-recomputation-exampe-2.jpg
+    commit: e938df327c6d1e9d26e9670e51c1ceea0bf5a677
+    sha256: 08f34fd0293f8d7077bf081539350a26fa066b15a27ae0c09816ee989dcbae56
+    license: Apache-2.0
+    license_url: https://github.com/NVIDIA/NeMo/blob/e938df327c6d1e9d26e9670e51c1ceea0bf5a677/LICENSE
+    derivation: source-raster-copy
+    modifications: "Original release image preserved byte-for-byte as provenance for the inline two-block crop."
+    used_in:
+      - docs/audit/2026-09-29-arithmetic-visual-redesign.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    review_note: "Release asset 182675761, uploaded 2024-07-30; linked directly as a NeMo schematic in pinned documentation."
+    last_verified: 2026-09-29
+
+  - id: curated-arithmetic-nemo-source-51aa27b5909c
+    asset: 00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/nemo-checkpointing-source.png
+    author: NVIDIA NeMo documentation contributors
+    source_url: https://github.com/NVIDIA/NeMo/blob/e938df327c6d1e9d26e9670e51c1ceea0bf5a677/docs/source/features/optimizations/activation_recomputation.rst
+    source_image_url: https://github.com/NVIDIA/NeMo/releases/download/v2.0.0rc0/asset-post-activation-recomputation-exampe-2.jpg
+    commit: e938df327c6d1e9d26e9670e51c1ceea0bf5a677
+    sha256: 51aa27b5909c15549957f15b49c260b6af8598d6978ac833a95c46a7d2f47d43
+    license: Apache-2.0
+    license_url: https://github.com/NVIDIA/NeMo/blob/e938df327c6d1e9d26e9670e51c1ceea0bf5a677/LICENSE
+    derivation: lossless-format-conversion
+    modifications: "Source JPG decoded to PNG with sips, without resizing or content changes; 1768 by 604 pixels. Original JPG hash 08f34fd0293f8d7077bf081539350a26fa066b15a27ae0c09816ee989dcbae56."
+    used_in:
+      - docs/audit/2026-09-29-arithmetic-visual-redesign.md
+    metadata_status: verified
+    provenance_confirmation: pinned-upstream-repository
+    last_verified: 2026-09-29
+
+  - id: curated-arithmetic-nemo-detail-21cca42adf5b
+    asset: 00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/nemo-checkpointing-detail.png
+    author: NVIDIA NeMo documentation contributors
+    source_url: https://github.com/NVIDIA/NeMo/blob/e938df327c6d1e9d26e9670e51c1ceea0bf5a677/docs/source/features/optimizations/activation_recomputation.rst
+    source_image_url: https://github.com/NVIDIA/NeMo/releases/download/v2.0.0rc0/asset-post-activation-recomputation-exampe-2.jpg
+    commit: e938df327c6d1e9d26e9670e51c1ceea0bf5a677
+    source_asset: 00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/nemo-checkpointing-source.png
+    source_asset_sha256: 51aa27b5909c15549957f15b49c260b6af8598d6978ac833a95c46a7d2f47d43
+    crop_box_px: [0, 0, 728, 604]
+    sha256: 21cca42adf5b812c5528ba7239fbbe1ee1e40f2af6c7e06b09d4a3d22700c2c1
+    license: Apache-2.0
+    license_url: https://github.com/NVIDIA/NeMo/blob/e938df327c6d1e9d26e9670e51c1ceea0bf5a677/LICENSE
+    derivation: source-raster-crop
+    modifications: "Crop [0,0,728,604] keeps the first two complete blocks of both full and selective examples, including their headings and saved-input markers. Repeated third/fourth blocks and legend omitted; legend explained in adjacent text and complete original linked. No redrawing."
+    used_in:
+      - 00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    last_verified: 2026-09-29
+
+  - id: curated-arithmetic-edls-ep-a237a0948fff
+    asset: 00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/edls-ep.png
+    author: Mikhail Khrushchev, Efficient DL Systems course authors
+    source_url: https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week06_dl_arithmetic/lecture.pdf#page=130
+    source_image_url: https://raw.githubusercontent.com/mryab/efficient-dl-systems/e632aa89ca9e6638d52e1b686095e7442faffbb0/week06_dl_arithmetic/lecture.pdf
+    commit: e632aa89ca9e6638d52e1b686095e7442faffbb0
+    sha256: a237a0948fff688849d98a9ccad76f2af95db88a30638d8e052feaa282aa6810
+    license: MIT
+    license_url: https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/LICENSE
+    derivation: pdf-page-render
+    source_asset: 05 Источники/Courses/Efficient DL Systems/Lectures/deep-learning-arithmetic.pdf
+    source_asset_sha256: 64b6f4285f9fe9bc62bf8293f3585eb26e738d493723b22c2301c58a5a191215
+    source_page: 130
+    render_page_size_px: [1600, 900]
+    render_command: "pdftoppm -f 130 -l 130 -scale-to 1600 -png -singlefile source.pdf output"
+    modifications: "Full original PDF page rendered with Poppler at 1600 by 900 pixels. No crop, redrawing or translated labels. Original vector course diagram; no embedded third-party raster on this page."
+    used_in:
+      - 00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    last_verified: 2026-09-29

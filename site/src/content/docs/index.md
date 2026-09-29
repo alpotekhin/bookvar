@@ -55,6 +55,23 @@ hero:
   </a>
 </nav>
 
+<div class="landing-intro">
+  <p class="eyebrow">Университетские курсы</p>
+  <h2 id="university-courses">Stanford CS336 и Berkeley Advanced LLM Agents</h2>
+  <p>Лекции в оригинале, слайды, задания и ссылки на соответствующие темы учебника.</p>
+</div>
+
+<nav class="entry-grid" aria-labelledby="university-courses">
+  <a class="entry-card" href="./sources/courses/stanford-cs336-spring-2026/">
+    <strong>Stanford CS336 — Language Modeling from Scratch</strong>
+    <span>Токенизация, архитектура Transformer, обучение на GPU, данные, масштабирование и post-training. Лекции и пять заданий Spring 2026.</span>
+  </a>
+  <a class="entry-card" href="./sources/courses/berkeley-advanced-llm-agents-spring-2025/">
+    <strong>Berkeley Advanced LLM Agents</strong>
+    <span>Рассуждение, память и планирование, программирование, работа в браузере, доказательство теорем и безопасность. Слайды и записи 12 лекций Spring 2025.</span>
+  </a>
+</nav>
+
 <section class="curriculum" aria-labelledby="curriculum-title">
   <div class="curriculum-copy">
     <p class="eyebrow">Учебный маршрут</p>

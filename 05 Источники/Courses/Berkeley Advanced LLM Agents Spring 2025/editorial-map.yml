@@ -1203,15 +1203,15 @@
       "disposition": "integrated",
       "destination": "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md",
       "destination_anchor": "4-self-consistency",
-      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
-      "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about Self-consistency and sampling?",
+      "transformation": "Wang et al. Figure 1 extracted from the versioned primary PDF; Berkeley p42 retained in full. No redraw or translated image text.",
+      "caption": "Self-consistency aggregates final answers; the retained course plot compares voting, sample-and-rank and greedy decoding.",
       "rendered_route": "/textbook/reasoning/test-time-compute/",
-      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
-      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
-      "reviewer": "Codex source-to-destination visual audit",
-      "checked_at": "2026-09-07",
+      "desktop_evidence": "2026-09-21: inspected rebuilt /textbook/reasoning/test-time-compute/ at 1360px. All 10 images load at their native aspect ratio, stay within the article and link to full-size originals; captions and math render correctly.",
+      "narrow_evidence": "2026-09-21: inspected the same 10 figures at 390px. Complete frames retained with no horizontal page overflow; dense original labels are available through the full-size links, with mechanisms also explained in adjacent text.",
+      "reviewer": "Source and textbook editorial review",
+      "checked_at": "2026-09-21",
       "local_files": [
-        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m01-p40-self-consistency.png",
+        "00 Учебник/Assets/Figures/curated/ttc-review-2026-09/self-consistency.png",
         "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m01-p42-sample-scaling.png"
       ]
     },
@@ -1224,16 +1224,16 @@
       "disposition": "integrated",
       "destination": "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md",
       "destination_anchor": "поиск-по-промежуточным-состояниям",
-      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
-      "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about Tree of Thoughts search?",
+      "transformation": "Replaced duplicate course screenshots with full original Figures 1 and 2 from the tracked Yao et al. v2 PDF. Extracted at 320 dpi, without redraw.",
+      "caption": "ToT state selection and the separate propose/value prompts, explained through Game of 24.",
       "rendered_route": "/textbook/reasoning/test-time-compute/",
-      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
-      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
-      "reviewer": "Codex source-to-destination visual audit",
-      "checked_at": "2026-09-07",
+      "desktop_evidence": "2026-09-21: inspected rebuilt /textbook/reasoning/test-time-compute/ at 1360px. All 10 images load at their native aspect ratio, stay within the article and link to full-size originals; captions and math render correctly.",
+      "narrow_evidence": "2026-09-21: inspected the same 10 figures at 390px. Complete frames retained with no horizontal page overflow; dense original labels are available through the full-size links, with mechanisms also explained in adjacent text.",
+      "reviewer": "Source and textbook editorial review",
+      "checked_at": "2026-09-21",
       "local_files": [
-        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m01-p54-response-selection-vs-search.png",
-        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m01-p55-game-of-24.png"
+        "00 Учебник/Assets/Figures/curated/ttc-review-2026-09/tot-search.png",
+        "00 Учебник/Assets/Figures/curated/ttc-review-2026-09/tot-game24.png"
       ]
     },
     "meeting-01-slides-visual-outline-before-reflection": {
@@ -1306,15 +1306,15 @@
       "disposition": "integrated",
       "destination": "00 Учебник/12 Post-training и Alignment/03 Reward modeling.md",
       "destination_anchor": "одна-модель-как-actor-и-judge",
-      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
-      "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about Self-rewarding language-model setup?",
+      "transformation": "Replaced the lecture slide with the complete original Figure 1 from the final ICML 2024 Self-Rewarding paper (CC BY 4.0); surrounding page prose omitted, diagram not redrawn.",
+      "caption": "Weizhe Yuan et al.: the same model generates answers and rewards, builds preference pairs, and starts the next DPO iteration.",
       "rendered_route": "/textbook/post-training/reward-modeling/",
-      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
-      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
-      "reviewer": "Codex source-to-destination visual audit",
-      "checked_at": "2026-09-07",
+      "desktop_evidence": "Original diagram with every node and the feedback arrow retained; checked at 1360 px viewport and linked to full-size source raster.",
+      "narrow_evidence": "Checked at 390 px viewport; aspect ratio retained, adjacent prose explains the complete iteration.",
+      "reviewer": "Editorial source and browser review",
+      "checked_at": "2026-09-21",
       "local_files": [
-        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m02-p52-self-rewarding-loop.png"
+        "00 Учебник/Assets/Figures/curated/preference-reward-review-2026-09/self-rewarding-loop.png"
       ]
     },
     "meeting-02-slides-visual-self-rewarding-results": {
@@ -1366,15 +1366,15 @@
       "disposition": "integrated",
       "destination": "00 Учебник/12 Post-training и Alignment/03 Reward modeling.md",
       "destination_anchor": "планирование-проверки-перед-вердиктом",
-      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
-      "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about EvalPlanner planning with feedback?",
+      "transformation": "Replaced misidentified Self-Taught Evaluator slide with actual EvalPlanner Figure 2 from the final ICML 2025 paper (CC BY 4.0); complete diagram crop, no redraw.",
+      "caption": "Swarnadeep Saha et al.: query-only planning, execution on candidate pairs, and preference optimization of the judge.",
       "rendered_route": "/textbook/post-training/reward-modeling/",
-      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
-      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
-      "reviewer": "Codex source-to-destination visual audit",
-      "checked_at": "2026-09-07",
+      "desktop_evidence": "Complete original diagram checked at 1360 px viewport, with verified source attribution and full-size image link.",
+      "narrow_evidence": "Checked at 390 px viewport; no clipping or aspect-ratio distortion, adjacent text explains plan/execution/label distinctions.",
+      "reviewer": "Editorial source and browser review",
+      "checked_at": "2026-09-21",
       "local_files": [
-        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m02-p98-evalplanner-loop.png"
+        "00 Учебник/Assets/Figures/curated/preference-reward-review-2026-09/evalplanner-plan-execution-loop.png"
       ]
     },
     "meeting-02-slides-visual-learning-to-reason-synthesis": {
@@ -1459,7 +1459,6 @@
       "reviewer": "Codex source-to-destination visual audit",
       "checked_at": "2026-09-07",
       "local_files": [
-        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m03-p63-world-model-definition.png",
         "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m03-p70-webdreamer-worked-example.png"
       ]
     },
@@ -1523,31 +1522,32 @@
       "disposition": "integrated",
       "destination": "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md",
       "destination_anchor": "главное-различие",
-      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
-      "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about Reinforcement learning with verifiable rewards?",
+      "transformation": "Replaced the lecture screenshot with the original Tulu 3 v5 Figure 18 raster, without changes; source version, license and SHA256 are recorded in asset-registry.yml.",
+      "caption": "Generation, verifiable reward and policy update. The text distinguishes the figure's reward scale gamma from discounting and its minimization convention from the chapter's maximized objective.",
       "rendered_route": "/textbook/post-training/rlvr-verifiers/",
-      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
-      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
-      "reviewer": "Codex source-to-destination visual audit",
-      "checked_at": "2026-09-07",
+      "desktop_evidence": "Browser reviewed at 1360px: original figure and adjacent explanation; image decodes, preserves its aspect ratio, fits content width and links to full size.",
+      "narrow_evidence": "Browser checked at 390px: complete image, no page overflow or KaTeX errors; explanatory caption remains readable and full-size original is linked.",
+      "reviewer": "Bookvar editorial review",
+      "checked_at": "2026-09-21",
       "local_files": [
-        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m04-p90-tulu-rlvr-stage.png"
+        "00 Учебник/Assets/Figures/curated/rlvr-review-2026-09/tulu-rlvr-loop.png"
       ]
     },
     "meeting-04-slides-visual-rlvr-results": {
       "disposition": "integrated",
       "destination": "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md",
       "destination_anchor": "что-показывает-кривая-rlvr-а-чего-она-не-доказывает",
-      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
-      "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about RLVR experiments and scaling results?",
+      "transformation": "Replaced lecture screenshots with primary Tulu 3 v5 figures: the upper nine training panels and shared legend of Figure 19, plus unchanged original rasters for IFEval/generalization and value-model initialization. PDF crop coordinates and source hashes are recorded in asset-registry.yml.",
+      "caption": "The text separately explains training reward, KL, response length, held-out IFEval and average benchmark scores, then distinguishes value-model initialization from the source of the reward.",
       "rendered_route": "/textbook/post-training/rlvr-verifiers/",
-      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
-      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
-      "reviewer": "Codex source-to-destination visual audit",
-      "checked_at": "2026-09-07",
+      "desktop_evidence": "Source figures inspected directly; browser checks at 1360px confirm decoded images, preserved aspect ratios, no horizontal page overflow and full-size links.",
+      "narrow_evidence": "390px browser screenshot reviewed: the nine-panel figure remains complete, explanatory prose carries the comparisons, and the full-resolution original is accessible. All three images pass fit and aspect-ratio checks.",
+      "reviewer": "Bookvar editorial review",
+      "checked_at": "2026-09-21",
       "local_files": [
-        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m04-p104-rlvr-experimental-setup.png",
-        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m04-p118-rlvr-scaling-curves.png"
+        "00 Учебник/Assets/Figures/curated/rlvr-review-2026-09/tulu-rlvr-training-curves.png",
+        "00 Учебник/Assets/Figures/curated/rlvr-review-2026-09/tulu-ifeval-kl-and-generalization.png",
+        "00 Учебник/Assets/Figures/curated/rlvr-review-2026-09/tulu-value-initialization.png"
       ]
     },
     "meeting-04-slides-visual-minimal-posttraining-recipe": {
@@ -1574,15 +1574,15 @@
       "disposition": "integrated",
       "destination": "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md",
       "destination_anchor": "budget-forcing-заставить-траекторию-продолжиться",
-      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
-      "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about Test-time scaling?",
+      "transformation": "Replaced course screenshot with the complete author-owned raspberry_single.pdf figure at a pinned s1 repository revision. Full-page render, no crop or redraw.",
+      "caption": "Wait extends an existing reasoning sequence; final-answer generation remains a separate stage. The example is not a guarantee of correction.",
       "rendered_route": "/textbook/reasoning/test-time-compute/",
-      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
-      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
-      "reviewer": "Codex source-to-destination visual audit",
-      "checked_at": "2026-09-07",
+      "desktop_evidence": "2026-09-21: inspected rebuilt /textbook/reasoning/test-time-compute/ at 1360px. All 10 images load at their native aspect ratio, stay within the article and link to full-size originals; captions and math render correctly.",
+      "narrow_evidence": "2026-09-21: inspected the same 10 figures at 390px. Complete frames retained with no horizontal page overflow; dense original labels are available through the full-size links, with mechanisms also explained in adjacent text.",
+      "reviewer": "Source and textbook editorial review",
+      "checked_at": "2026-09-21",
       "local_files": [
-        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m04-p134-budget-forcing.png"
+        "00 Учебник/Assets/Figures/curated/ttc-review-2026-09/s1-budget-forcing.png"
       ]
     },
     "meeting-04-slides-visual-olmo-pretraining": {
@@ -1635,16 +1635,16 @@
       "destination": "00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md",
       "destination_anchor": "свободный-loop-aci-и-процедурный-workflow",
       "local_files": [
-        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m05-p22-agentless-control-flow.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m05-p23-agentless-pipeline.png",
         "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m05-p28-autocoderover-two-trajectories.png"
       ],
-      "transformation": "Exact full physical PDF pages rendered at 144 DPI; no crop, redraw, or semantic content change.",
-      "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about Coding-agent design comparisons?",
+      "transformation": "Exact full physical PDF pages: Agentless page 23 rendered at 216 DPI; AutoCodeRover page 28 retained at 144 DPI; no crop, redraw, or semantic content change.",
+      "caption": "Agentless localizes files, functions and edit locations before generating and testing patches; AutoCodeRover uses separate context-retrieval and patch-generation trajectories.",
       "rendered_route": "/textbook/agents/coding-web-computer-use/",
-      "desktop_evidence": "Full-resolution course frames and adjacent explanatory captions reviewed at desktop content width.",
-      "narrow_evidence": "Responsive images preserve each complete frame without cropping; adjacent searchable text carries dense labels and claims.",
-      "reviewer": "Codex source-to-destination visual audit",
-      "checked_at": "2026-09-07"
+      "desktop_evidence": "Replacement Agentless page 23 inspected in the rebuilt article at 1360x950. The complete diagram and caption are retained. Some lettering is rasterized in the upstream slide; adjacent prose explains every stage instead of assuming those labels are readable inline.",
+      "narrow_evidence": "Checked at 390x950: images load without document overflow; the new Agentless image retains its aspect ratio and links to the full-size file. Small source labels require opening the image. Existing AutoCodeRover source page was not replaced.",
+      "reviewer": "Bookvar source-figure review",
+      "checked_at": "2026-09-21"
     },
     "meeting-05-slides-visual-ctf-agents": {
       "disposition": "source-only",
@@ -1853,17 +1853,19 @@
       "destination": "00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md",
       "destination_anchor": "aguvis-единое-визуальное-observationaction-space",
       "local_files": [
-        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m07-p69-aguvis-design-goals.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m07-p70-aguvis-observation-action.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m07-p72-aguvis-two-stage-training.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m07-p73-aguvis-data-collection.png",
         "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m07-p75-aguvis-data-stages.png",
         "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m07-p80-aguvis-ablation.png"
       ],
-      "transformation": "Exact full physical PDF pages rendered at 144 DPI; no crop, redraw, or semantic content change.",
-      "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about Aguvis unified pure-vision agents?",
+      "transformation": "Exact full physical PDF pages: Aguvis pages 70, 72, 73 rendered at 216 DPI; pages 75, 80 retained at 144 DPI; no crop, redraw, or semantic content change.",
+      "caption": "Aguvis observation-to-action example, two training stages, construction of instruction/action and planning data, training mixture and ablation results.",
       "rendered_route": "/textbook/agents/coding-web-computer-use/",
-      "desktop_evidence": "Full-resolution course frames and adjacent explanatory captions reviewed at desktop content width.",
-      "narrow_evidence": "Responsive images preserve each complete frames without cropping; adjacent searchable text carries dense labels and claims.",
-      "reviewer": "Codex source-to-destination visual audit",
-      "checked_at": "2026-09-07"
+      "desktop_evidence": "New pages 70, 72 and 73 inspected in the rebuilt article at 1360x950: full slide frames, stage relationships and captions are present. The surrounding prose explains the route-entry example, grounding/planning distinction and synthetic inner-monologue annotations. Existing pages 75 and 80 remain unchanged.",
+      "narrow_evidence": "Checked at 390x950: all article images load; the three new figures fit the viewport, retain their aspect ratios and link to full-size files. Small screenshot text is not readable inline and must be opened at full size.",
+      "reviewer": "Bookvar source-figure review",
+      "checked_at": "2026-09-21"
     },
     "meeting-07-slides-visual-xgen-video": {
       "disposition": "source-only",

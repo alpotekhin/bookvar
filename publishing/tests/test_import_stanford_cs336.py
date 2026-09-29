@@ -169,6 +169,34 @@ def complete_overlay() -> dict:
     }
 
 
+class StanfordReaderEntryTest(unittest.TestCase):
+    def test_generated_hub_matches_the_reader_entry(self) -> None:
+        importer = load_importer()
+        hub = importer.hub_markdown(
+            read_document("snapshot-lock.json"),
+            read_document("source-manifest.yml"),
+            read_document("source-units.yml"),
+            read_document("coverage.yml"),
+            read_document("visuals.yml"),
+        )
+        self.assertEqual(hub, (COURSE_ROOT / "_index.md").read_text("utf-8"))
+        self.assertLess(hub.index("## Где читать тему"), hub.index("## 19 встреч курса"))
+        self.assertLess(hub.index("## Assignments 1–5"), hub.index("<details>"))
+        self.assertLess(hub.index("<details>"), hub.index("## Реестры аудита"))
+        self.assertNotIn("source layer", hub.split("<details>")[0])
+        for number, _, _, _, filename in importer.SCHEDULE:
+            self.assertIn(f"| {number} |", hub)
+            if filename:
+                self.assertIn(f'<a id="lecture-{number:02d}"></a>', hub)
+                self.assertIn(f"Lectures/repository/{filename}", hub)
+            else:
+                self.assertIn("В сохранённом расписании ссылка на материалы не опубликована", hub)
+        for number, repository, _, _ in importer.ASSIGNMENT_META:
+            self.assertIn(f'<a id="assignment-{number:02d}"></a>', hub)
+            self.assertIn(f"Assignments/{repository}/README.md", hub)
+        self.assertIn('<a id="assignment-05-safety-supplement"></a>', hub)
+
+
 class StanfordSemanticAuditTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:

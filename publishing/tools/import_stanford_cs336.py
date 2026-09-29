@@ -2160,6 +2160,12 @@ def hub_markdown(
 ) -> str:
     revisions = {item["repository"]: item["revision"] for item in lock["repositories"]}
     objects = {item["id"]: item for item in manifest["objects"]}
+    legacy_anchors = {
+        object_id: re.sub(
+            r"[^a-z0-9_-]", "", f"{object_id}: {item['title']}".lower().replace(" ", "-")
+        )
+        for object_id, item in objects.items()
+    }
     lines = [
         "---",
         "title: Stanford CS336 — Language Modeling from Scratch, Spring 2026",
@@ -2170,91 +2176,161 @@ def hub_markdown(
         "",
         "# Stanford CS336 — Language Modeling from Scratch, Spring 2026",
         "",
-        "Это закреплённый source layer официального курса, а не основной учебный маршрут.",
-        "Последовательное изучение идёт по каноническим главам учебника; здесь сохранены",
-        "оригинальные англоязычные материалы, их dependency closure и аудит границ.",
+        "[Официальная страница курса](https://cs336.stanford.edu/) ·",
+        "[[05 Источники/Курсы|Все курсы]]",
         "",
-        "Статус: **inventory complete; editorial integration active**. Semantic extraction",
-        "остаётся воспроизводимой из immutable archive; редакционные решения наложены",
-        "отдельным проверяемым overlay и не переписывают source semantics.",
+        "Как обучить языковую модель с нуля и понять, на что уходят память, время",
+        "и вычисления? Курс Percy Liang и Tatsunori Hashimoto разбирает эту задачу",
+        "от токенизатора и устройства Transformer до подготовки корпуса,",
+        "распределённого обучения и проверки качества модели. Пять заданий",
+        "позволяют реализовать основные части этой системы самостоятельно.",
         "",
-        "## Реестры аудита",
+        "Ниже — материалы Spring 2026 на английском языке: оригинальные лекции,",
+        "слайды и задания. Для каждой темы указаны соответствующие главы Bookvar",
+        "и лекции с оригинальным разбором.",
         "",
-        "- [source-manifest.yml](source-manifest.yml) — объекты и pinned revisions;",
-        "- [semantic-review.json](semantic-review.json) — reviewed per-source semantic boundaries;",
-        "- [editorial-map.yml](editorial-map.yml) — persistent reviewed destinations and explicit deferrals;",
-        "- [source-units.yml](source-units.yml) — semantic extraction index;",
-        "- [coverage.yml](coverage.yml) — одна строка покрытия на каждый source unit;",
-        "- [visuals.yml](visuals.yml) — semantic figure/table/code-trace/derivation sequences;",
-        "- [artifact-inventory.json](artifact-inventory.json) — SHA-256 каждого файла;",
-        "- [snapshot-lock.json](snapshot-lock.json) — SHA репозиториев и архивов.",
+        "## Где читать тему",
         "",
-        "Извлечение executable lectures идёт из архивированных edtrace renderings;",
-        "PDF/handout spans проверяются Poppler. Версии инструментов, extractor SHA,",
-        "ledger SHA/counts и parent checksums записаны в `snapshot-lock.json`/visual ledger.",
-        "Raw page/raster detections служат evidence и не становятся отдельными teaching visuals.",
+        "| Тема | Главы Bookvar | Лекции курса |",
+        "|---|---|---|",
+        "| Токенизатор и реализация Transformer | [[00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram|BPE, WordPiece и Unigram]]; [[00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость|Формы тензоров, параметры и стоимость]] | [1](#lecture-01), [2](#lecture-02), [3](#lecture-03) |",
+        "| Альтернативы attention и MoE | [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving|Mixture of Experts]]; [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры|Рекуррентные и гибридные модели]] | [4](#lecture-04) |",
+        "| GPU, память и быстрые ядра | [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти|GPU и иерархия памяти]]; [[00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению|Ядра и Triton]] | [5](#lecture-05), [6](#lecture-06) |",
+        "| Распределённое обучение | [[00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision|Параллельное обучение]]; [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP|Коллективные операции и DDP]] | [7](#lecture-07), [8](#lecture-08) |",
+        "| Размер модели, объём данных и бюджет обучения | [[00 Учебник/11 Pre-training и Scaling/43 Scaling laws|Scaling laws]] | [9](#lecture-09), [11](#lecture-11) |",
+        "| Генерация и обслуживание запросов | [[00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline|Prefill, decode и roofline]]; [[00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention|KV-cache и пакетирование]] | [10](#lecture-10) |",
+        "| Оценивание и подготовка данных | [[00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация|Оценивание моделей]]; [[00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных|Сбор, очистка и смеси данных]] | [12](#lecture-12), [13](#lecture-13), [14](#lecture-14) |",
+        "| Дообучение по примерам, предпочтениям и проверяемой награде | [[00 Учебник/12 Post-training и Alignment/01 SFT и instruction data|SFT]]; [[00 Учебник/12 Post-training и Alignment/05 DPO|DPO]]; [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers|RLVR]] | [15](#lecture-15), [16](#lecture-16) |",
+        "| Изображения и другие модальности | [[00 Учебник/16 Multimodal Models/64 Мультимодальные модели|Мультимодальные модели]]; [[00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные|Обучение VLM]] | [17](#lecture-17) |",
         "",
-        "## Pinned revisions",
+        "## 19 встреч курса",
         "",
+        "Открывайте название лекции для краткого описания и ссылок на материалы.",
+        "Видеозаписи доступны через [официальное расписание](https://cs336.stanford.edu/#schedule).",
+        "У двух гостевых встреч в сохранённой версии расписания нет ссылки на материалы.",
+        "",
+        "| № | Дата | Тема | Преподаватель |",
+        "|---:|---|---|---|",
     ]
+    for number, meeting_date, title, lecturer, filename in SCHEDULE:
+        topic = f"[{title}](#lecture-{number:02d})" if filename else title
+        lines.append(f"| {number} | {meeting_date} | {topic} | {lecturer} |")
+    descriptions = {
+        "lecture-01": "От байтов и Unicode к словарю токенов: почему разбиение текста влияет на длину последовательности и стоимость модели. Сравниваются простые способы токенизации и BPE; обучение токенизатора отделено от применения готового словаря.",
+        "lecture-02": "Формы тензоров, операции PyTorch и einops, градиенты и шаг оптимизатора. На этих операциях разбирается подсчёт параметров, FLOPs и памяти: важно учитывать не только веса, но и активации, градиенты и состояние оптимизатора.",
+        "lecture-03": "Выбор компонентов Transformer: нормализация, позиционные представления, функции активации и устройство attention. Архитектурные решения рассматриваются вместе с гиперпараметрами обучения, а не как независимый список приёмов.",
+        "lecture-04": "Как уменьшить стоимость обработки длинных последовательностей и увеличить число параметров без пропорционального роста вычислений. Лекция сопоставляет альтернативы полному attention и разреженные MoE-модели с выбором экспертов для каждого токена.",
+        "lecture-05": "Устройство GPU и TPU, матричные вычисления и движение данных между уровнями памяти. Пропускная способность памяти и вычислительная мощность ограничивают разные операции; это объясняет, почему число FLOPs само по себе не предсказывает время работы.",
+        "lecture-06": "От операции PyTorch к отдельному GPU-ядру: измерение времени, объединение операций и разбиение работы на блоки в Triton. Примеры связывают организацию вычислений с числом обращений к памяти и фактическим ускорением.",
+        "lecture-07": "Процессы, обмен тензорами и коллективные операции, необходимые для обучения на нескольких GPU. Разбирается, какие данные нужно передавать между устройствами и как согласовать локальные вычисления с синхронизацией.",
+        "lecture-08": "Способы распределить данные, параметры и слои модели между устройствами. Сравнение учитывает память, объём обменов и простой устройств: одного увеличения числа GPU недостаточно, чтобы обучение ускорилось пропорционально.",
+        "lecture-09": "Как по небольшим экспериментам оценить эффект увеличения модели и обучающего корпуса. Законы масштабирования связывают функцию потерь, число параметров, объём данных и вычислительный бюджет.",
+        "lecture-10": "Чем обработка запроса отличается от последовательной генерации токенов и почему KV-cache меняет стоимость attention. Далее рассматриваются квантизация, сжатие, спекулятивное декодирование и обслуживание запросов разной длины.",
+        "lecture-11": "Продолжение темы масштабирования: выбор соотношения размера модели и числа обучающих токенов. Экстраполяция требует нескольких измерений и проверки предположений, особенно когда меняются данные или режим обучения.",
+        "lecture-12": "Что измеряет тест языковой модели и когда его результат можно сравнивать с другими моделями. Обсуждаются наборы задач, метрики, загрязнение тестовых данных и ограничения оценок, полученных с помощью другой языковой модели.",
+        "lecture-13": "Откуда берутся данные для предобучения: веб, книги, научные тексты, код и специализированные наборы. Происхождение корпуса определяет его состав, доступность и ограничения использования.",
+        "lecture-14": "Как превратить собранные документы в обучающий корпус: фильтрация, удаление повторов и выбор пропорций источников. Синтетические данные рассматриваются вместе с проверкой их качества, а не как автоматически полезное увеличение корпуса.",
+        "lecture-15": "Как после предобучения научить модель выполнять инструкции и учитывать предпочтения. Обсуждаются обучающие примеры для SFT, сравнения ответов и оптимизация поведения модели после обучения модели награды.",
+        "lecture-16": "Обучение с наградой, которую можно вычислить по проверке результата, например ответа на математическую задачу. Разбирается связь между генерацией решений, проверяющей программой и обновлением модели в RLVR.",
+        "lecture-17": "Как связать текстовую модель с изображениями и другими модальностями. Разбираются представления входных данных, архитектурные способы их объединения и задачи обучения, согласующие разные представления.",
+        "assignment-01": "Реализовать BPE-токенизатор, Transformer и оптимизатор, затем обучить небольшую языковую модель. Задание связывает формулы с работающим кодом: готовую реализацию модели вместо собственной использовать не предполагается.",
+        "assignment-02": "Измерить узкие места модели из первого задания, реализовать FlashAttention-2 на Triton и распределённое обучение с экономией памяти. Результат проверяется не только корректностью, но и измерениями времени и памяти.",
+        "assignment-03": "Спланировать серию обучений, подобрать закон масштабирования и предсказать подходящий размер модели при заданном бюджете. В README отдельно описаны работа через учебный API и самостоятельный запуск для читателей вне Stanford.",
+        "assignment-04": "Подготовить данные для предобучения из Common Crawl: извлечь текст, отфильтровать документы и удалить повторы. Эффект обработки корпуса проверяется по обученной модели, а не только по числу оставшихся документов.",
+        "assignment-05": "Дообучить модель на математических задачах с помощью SFT и обучения с подкреплением. Задание включает проверяемую награду и GRPO; в репозитории есть тесты, к которым нужно подключить собственную реализацию.",
+        "assignment-05-safety-supplement": "Необязательное продолжение пятого задания: безопасность, выполнение инструкций и обучение по предпочтениям, в том числе DPO. Это дополнение к Assignment 5, а не отдельное шестое задание.",
+    }
+    lines.extend(["", "## Лекции: что читать и смотреть", ""])
+    for number, _, title, _, filename in SCHEDULE:
+        object_id = f"lecture-{number:02d}"
+        if object_id in legacy_anchors:
+            lines.append(f'<a id="{legacy_anchors[object_id]}"></a>')
+        lines.extend([f'<a id="{object_id}"></a>', f"### {number}. {title}", ""])
+        if not filename:
+            lines.extend(["В сохранённом расписании ссылка на материалы не опубликована.", ""])
+            continue
+        lines.extend([descriptions[object_id], ""])
+        if filename.endswith(".py"):
+            lines.append(
+                f"[Оригинальная лекция с кодом и иллюстрациями]"
+                f"(https://cs336.stanford.edu/lectures/?trace=lecture_{number:02d}) · "
+                f"[сохранённый Python-файл](Lectures/repository/{filename})"
+            )
+        else:
+            lines.append(
+                f"[Слайды PDF](Lectures/repository/{filename}) · "
+                f"[оригинал в репозитории]({objects[object_id]['canonical_url']})"
+            )
+        lines.append("")
+    lines.extend(["", "## Assignments 1–5", ""])
+    for number, repository, title, _ in ASSIGNMENT_META:
+        object_id = f"assignment-{number:02d}"
+        lines.extend([
+            f'<a id="{legacy_anchors[object_id]}"></a>',
+            f'<a id="{object_id}"></a>',
+            f"### Assignment {number}: {title}",
+            "",
+            descriptions[object_id],
+            "",
+            f"[Условия и запуск](Assignments/{repository}/README.md) · "
+            f"[репозиторий задания]({objects[object_id]['canonical_url']})",
+            "",
+        ])
+    lines.extend(
+        [
+            f'<a id="{legacy_anchors["assignment-05-safety-supplement"]}"></a>',
+            '<a id="assignment-05-safety-supplement"></a>',
+            "### Assignment 5: optional safety supplement",
+            "",
+            descriptions["assignment-05-safety-supplement"],
+            "",
+            "[Условия дополнения, PDF](Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf)",
+            "",
+            "## Об оригиналах и заимствованиях",
+            "",
+            "Тексты лекций и заданий сохранены на английском языке. Авторство и ссылки",
+            "на источники сохраняются при переносе материала в главы. Условия использования",
+            "кода, лекционных слайдов и рисунков из других публикаций могут различаться;",
+            "доступность файла в интернете сама по себе не устанавливает его лицензию.",
+            "",
+            "<details>",
+            "<summary>Для редакторов: состав архива, версии и проверка переноса</summary>",
+            "",
+            "## Реестры аудита",
+            "",
+            "Архив материалов сохранён; тематическое дополнение и редактура глав продолжаются.",
+            "Технический статус: **inventory complete; editorial integration active**.",
+            "Наличие записи в реестре не заменяет проверку качества объяснения или рисунка.",
+            "",
+            "- [source-manifest.yml](source-manifest.yml) — перечень оригинальных материалов;",
+            "- [semantic-review.json](semantic-review.json) — границы смысловых разделов;",
+            "- [editorial-map.yml](editorial-map.yml) — решения о переносе в главы;",
+            "- [source-units.yml](source-units.yml) и [coverage.yml](coverage.yml) — фрагменты источников и их назначение;",
+            "- [visuals.yml](visuals.yml) — иллюстрации и последовательности слайдов;",
+            "- [artifact-inventory.json](artifact-inventory.json) — контрольные суммы файлов;",
+            "- [snapshot-lock.json](snapshot-lock.json) — версии репозиториев и инструментов проверки.",
+            "",
+            "### Сохранённые версии репозиториев",
+            "",
+        ]
+    )
     for repository in REPOSITORIES:
         lines.append(
             f"- `{repository.name}`: "
             f"[`{revisions[repository.name]}`]"
             f"(https://github.com/{GITHUB_ORG}/{repository.name}/tree/{revisions[repository.name]})"
         )
-    lines.extend(["", "## 19 встреч курса", "", "| № | Дата | Тема | Артефакт |", "|---:|---|---|---|"])
-    for number, meeting_date, title, lecturer, filename in SCHEDULE:
-        if filename:
-            artifact = f"[`{filename}`](Lectures/repository/{filename})"
-        else:
-            artifact = "официальный артефакт не опубликован; слот зафиксирован явно"
-        lines.append(f"| {number} | {meeting_date} | {title} — {lecturer} | {artifact} |")
-    lines.extend(["", "## Assignments 1–5", ""])
-    for number, repository, title, _ in ASSIGNMENT_META:
-        lines.append(
-            f"- Assignment {number}: [{title}](Assignments/{repository}/README.md), "
-            f"pinned at `{revisions[repository]}`."
-        )
     lines.extend(
         [
-            "- Assignment 5 optional branch: "
-            "[safety, instruction tuning, and RLHF supplement]"
-            "(Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf). "
-            "Это объект внутри pinned `assignment5-alignment`, а не шестой репозиторий.",
             "",
-            "## Объекты source layer",
+            "### Права и атрибуция",
             "",
-        ]
-    )
-    unit_counts: dict[str, int] = {}
-    visual_counts: dict[str, int] = {}
-    for unit in units["units"]:
-        unit_counts[unit["source_object"]] = unit_counts.get(unit["source_object"], 0) + 1
-    for row in visuals["rows"]:
-        visual_counts[row["source_object"]] = visual_counts.get(row["source_object"], 0) + 1
-    for object_id, source_object in objects.items():
-        lines.extend(
-            [
-                f'<a id="{object_id}"></a>',
-                f"### {object_id}: {source_object['title']}",
-                "",
-                f"- local path: `{source_object['local_path']}`;",
-                f"- extracted units: {unit_counts.get(object_id, 0)};",
-                f"- semantic visual rows: {visual_counts.get(object_id, 0)};",
-                "- disposition is recorded per unit/visual in the generated coverage ledgers.",
-                "",
-            ]
-        )
-    lines.extend(
-        [
-            "## Права и атрибуция",
+            "Запись `rights_status: permission-recorded` фиксирует пользовательское",
+            "подтверждение образовательного переиспользования, а не название лицензии",
+            "правообладателя. Файлы LICENSE сохранены вместе с репозиториями. Условия",
+            "переноса сторонних рисунков проверяются отдельно для каждой иллюстрации.",
             "",
-            "Пользователь подтвердил открытое образовательное переиспользование для локального",
-            "сохранения и последующего атрибутированного переноса. Это зафиксировано как",
-            "`rights_status: permission-recorded`, а не как название лицензии. Явные",
-            "LICENSE-файлы репозиториев сохранены в оригинальных snapshot directories;",
-            "права на заимствованные upstream figures всё равно проверяются пообъектно.",
+            "</details>",
             "",
         ]
     )

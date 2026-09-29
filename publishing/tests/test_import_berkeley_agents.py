@@ -227,11 +227,15 @@ class BerkeleyAgentsSourceAuditTest(unittest.TestCase):
         )
         self.assertTrue(all(row["extraction_tool"] == expected_method for row in self.visuals["rows"]))
         for row in self.visuals["rows"]:
-            expected_reviewer = (
+            default_reviewer = (
                 "Codex source-to-destination visual audit"
                 if row["disposition"] in {"integrated", "covered-existing"}
                 else "Codex source audit"
             )
+            decision = self.editorial["visuals"].get(row["id"], {})
+            expected_reviewer = decision.get("reviewer", default_reviewer)
+            self.assertIsInstance(expected_reviewer, str, row["id"])
+            self.assertTrue(expected_reviewer.strip(), row["id"])
             self.assertEqual(row["reviewer"], expected_reviewer, row["id"])
 
     def test_required_multi_member_sequences_are_real(self) -> None:
@@ -597,7 +601,44 @@ class BerkeleyAgentsSourceAuditTest(unittest.TestCase):
             path.relative_to(REPOSITORY_ROOT).as_posix()
             for path in BERKELEY_ASSET_ROOT.rglob("*.png")
         }
+        # Source screenshots remain available after a reviewed replacement by
+        # a higher-quality primary figure. Presence on disk is not integration.
+        retired_frames = {
+            "m01-p40-self-consistency.png",
+            "m01-p54-response-selection-vs-search.png",
+            "m01-p55-game-of-24.png",
+            "m02-p52-self-rewarding-loop.png",
+            "m02-p98-evalplanner-loop.png",
+            "m03-p63-world-model-definition.png",
+            "m04-p90-tulu-rlvr-stage.png",
+            "m04-p104-rlvr-experimental-setup.png",
+            "m04-p118-rlvr-scaling-curves.png",
+            "m04-p134-budget-forcing.png",
+        }
+        expected_files -= {
+            (BERKELEY_ASSET_ROOT / "reasoning-posttraining-memory" / name)
+            .relative_to(REPOSITORY_ROOT).as_posix()
+            for name in retired_frames
+        }
+        primary_figures = {
+            "preference-reward-review-2026-09/self-rewarding-loop.png",
+            "preference-reward-review-2026-09/evalplanner-plan-execution-loop.png",
+            "rlvr-review-2026-09/tulu-rlvr-loop.png",
+            "rlvr-review-2026-09/tulu-rlvr-training-curves.png",
+            "rlvr-review-2026-09/tulu-ifeval-kl-and-generalization.png",
+            "rlvr-review-2026-09/tulu-value-initialization.png",
+            "ttc-review-2026-09/self-consistency.png",
+            "ttc-review-2026-09/tot-search.png",
+            "ttc-review-2026-09/tot-game24.png",
+            "ttc-review-2026-09/s1-budget-forcing.png",
+        }
+        expected_files |= {
+            f"00 Учебник/Assets/Figures/curated/{name}"
+            for name in primary_figures
+        }
         self.assertEqual(set(local_files), expected_files)
+        for path in expected_files:
+            self.assertTrue((REPOSITORY_ROOT / path).is_file(), path)
 
     def test_visual_asset_validation_rejects_missing_unembedded_and_reused_files(self) -> None:
         importer = self._load_importer()

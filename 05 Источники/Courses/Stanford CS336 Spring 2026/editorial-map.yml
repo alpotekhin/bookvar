@@ -4083,14 +4083,14 @@
         "disposition": "integrated",
         "destination": "00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md",
         "destination_anchor": "teacher-data",
-        "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/openthoughts-pipeline.png",
-        "transformation": "The chapter preserves four pinned source rasters from the reviewed sequence; this row points to the first pipeline.",
-        "caption": "Compare where generation, filtering, executable verification, and replay enter post-training data construction.",
-        "rendered_route": "/textbook/pretraining/synthetic-data-and-curricula/",
-        "desktop_evidence": "The source visual and its surrounding explanation were inspected at desktop width; the labels and causal role remain legible.",
-        "narrow_evidence": "At narrow width the visual remains inside the article column; the full-size source is available through the image link and the adjacent caption states the intended reading.",
-        "reviewer": "Codex Task 6 pretraining-data integration",
-        "checked_at": "2026-09-07"
+        "local_file": "00 Учебник/Assets/Figures/curated/synthetic-review-2026-09/openthoughts-pipeline.png",
+        "transformation": "OpenThoughts Figure 4 re-extracted from licensed arXiv v2 at 400 DPI, 2260x1080; Rebench replaced by its complete 2420x1294 original PNG. Smith and Zero pinned rasters retained. No diagrams redrawn or recolored.",
+        "caption": "Follow question filtering before generating 16 answers; final OpenThoughts3 omits answer filtering. Distinguish SWE task construction, trajectory collection, executable grading and evaluation-time execution.",
+        "rendered_route": "/textbook/pretraining/synthetic-data-curricula/",
+        "desktop_evidence": "Inspected at 1360px on 2026-09-22: all nine figures decoded, retained natural aspect ratios and fit the article; full-size links resolve to the originals; no broken KaTeX or wide formula.",
+        "narrow_evidence": "Inspected at 390px: all nine complete figures fit the article, no page overflow; dense source labels require opening the full-size image. Adjacent prose explains the stages and legends.",
+        "reviewer": "Bookvar source and visual review",
+        "checked_at": "2026-09-22"
     },
     "lecture-14-visual-figure-step-19-rendering-1": {
         "disposition": "integrated",
@@ -4272,17 +4272,9 @@
         "evidence": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#pages=15-18"
       },
     "lecture-01-visual-bpe-merge-code-trace": {
-      "disposition": "integrated",
-      "destination": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
-      "destination_anchor": "bpe-merge-trace",
-      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/bpe-trace-01-bytes.png",
-      "transformation": "Pinned edtrace 0.1.15 rendered in a 1440x1000 browser viewport; exact screenshots were tightly cropped to the state panels at trace entries 475 (617x100), 486 (556x480), 500 (500x480), and 600 (658x103) from the complete steps 462-606 sequence.",
-      "caption": "Four preserved states show bytes, the first merge, the third merge, and encode/decode round-trip; inspect changing indices, pair, and ordered merges.",
-      "rendered_route": "/textbook/text-representation/tokenization/",
-      "desktop_evidence": "Full route inspected at 1440x1000, then the final tight BPE crops were rebuilt and rechecked at 1280x720: all four state panels remain inside the article column with no clipping or broken assets.",
-      "narrow_evidence": "Inspected at 390x844 after the final rebuild: document scrollWidth equals clientWidth (390), all four images load, rendered sizes are 358x58, 358x309, 358x344, and 358x56, and click-to-zoom exposes the dense merge states at full resolution.",
-      "reviewer": "Codex Task 1 editorial integration",
-      "checked_at": "2026-09-06"
+      "disposition": "source-only",
+      "reason": "The debugger captures have translucent overlapping text and clipped state values. Their teaching content is retained as a verified merge table and prose at bpe-merge-trace; the original executable lecture is linked instead of embedding the damaged captures.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#steps=462-606; source code lecture_01.py lines 698-764; native screenshot review on 2026-09-21."
     },
     "lecture-01-visual-figure-step-5-rendering-1": {
       "disposition": "excluded",
@@ -4328,17 +4320,9 @@
       "checked_at": "2026-09-06"
     },
     "lecture-01-visual-figure-step-177-rendering-1": {
-      "disposition": "integrated",
-      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
-      "destination_anchor": "a1-construction",
-      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/transformer-architecture.png",
-      "transformation": "Byte-for-byte copy of images/transformer-architecture.png from lectures commit 8b59b50730766695c2ffedd1a79c50cd09b9eb91; SHA-256 4b0d6566bc625057d41c3e5522db7e3a029b6ffc1a942a727c964c122655bdcc.",
-      "caption": "Trace the invariant B,T,D block boundary before following residual branches and the path from token IDs to logits.",
-      "rendered_route": "/textbook/modern-llm/transformer-shapes-resources/",
-      "desktop_evidence": "Inspected on the complete transformer resource-accounting route at 1440x1000: the architecture labels and B,T,D shape path are visible without crop or broken assets.",
-      "narrow_evidence": "Inspected at 390x844: the figure scales inside the article column, the document has no page-wide overflow, and full resolution remains reachable through click-to-zoom.",
-      "reviewer": "Codex Task 1 editorial integration",
-      "checked_at": "2026-09-06"
+      "disposition": "source-only",
+      "reason": "This overview depicts absolute position embeddings and dropout, whereas the chapter constructs the RoPE-based Assignment 1 model. It is replaced in the chapter by complete Figures 1-2 from the pinned MIT-licensed Assignment 1 PDF, registered separately with their original provenance.",
+      "evidence": "Lectures/repository/images/transformer-architecture.png; replacement: Assignments/assignment1-basics/cs336_assignment1_basics.pdf#page=13."
     },
     "lecture-01-visual-figure-step-214-rendering-1": {
       "disposition": "integrated",
@@ -4392,17 +4376,9 @@
       "checked_at": "2026-09-06"
     },
     "lecture-02-visual-arithmetic-intensity-derivation": {
-      "disposition": "integrated",
-      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
-      "destination_anchor": "arithmetic-intensity",
-      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/arithmetic-intensity-01-relu.png",
-      "transformation": "Pinned edtrace 0.1.15; Chrome 137.0.7151.41 headless, viewport 1440x1000, deviceScaleFactor 2, crop x=95 y=80 w=1250 h=840; four semantic states selected at trace entries 290, 320, 333, and 346 from the complete steps 260-353 sequence.",
-      "caption": "The four-frame sequence derives bytes/FLOP for ReLU, matrix-vector, square matrix-vector, and matrix multiplication before drawing a roofline conclusion.",
-      "rendered_route": "/textbook/modern-llm/transformer-shapes-resources/",
-      "desktop_evidence": "All four derivation frames were inspected in sequence on the full route at 1440x1000; equations, highlighted lines, and captions render without clipping or missing assets.",
-      "narrow_evidence": "All four frames were inspected at 390x844: the document width remains 390, each frame stays inside the article column, and dense notation is available at full resolution through click-to-zoom.",
-      "reviewer": "Codex Task 1 editorial integration",
-      "checked_at": "2026-09-06"
+      "disposition": "source-only",
+      "reason": "Overlapping and clipped debugger captures are not embedded. The chapter retains the complete arithmetic-intensity calculation as accessible equations and a table for ReLU, GeLU, dot product, matrix-vector and matrix-matrix multiplication, followed by the original JAX roofline figure used in the course.",
+      "evidence": "Lectures/repository/var/traces/lecture_02.json#steps=260-353; textbook anchor arithmetic-intensity; Lecture 2 lines 363-484."
     },
     "lecture-02-visual-figure-step-8-rendering-1": {
       "disposition": "excluded",
@@ -4415,9 +4391,17 @@
       "evidence": "Lectures/repository/var/traces/lecture_02.json#step=125:rendering=1; question reviewed: How does cpu gpu support the lecture section “fp4”?"
     },
     "lecture-02-visual-figure-step-358-rendering-1": {
-      "disposition": "excluded",
-      "reason": "Decorative, vendor, social-media, or third-party frame is unnecessary for the selected teaching argument and is not reused without stronger teaching and rights justification.",
-      "evidence": "Lectures/repository/var/traces/lecture_02.json#step=358:rendering=1; question reviewed: How does image 42d32b9c87939fe9a4b0a268d6d02ea7 https jax ml github io scaling book assets img roofline improved 1400 webp support the lecture section “Model FLOPs utilization (MFU)”?"
+      "disposition": "integrated",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "arithmetic-intensity",
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/jax-scaling-roofline.webp",
+      "transformation": "Byte-for-byte copy of JAX Scaling Book roofline-improved-1400.webp cached in pinned Lecture 2; SHA-256 2c9018ab614d888baec0a3cc15c41e67d195988df0f0224985968c8d36e064ce. Upstream MIT notice is preserved in site/public/licenses/stanford-cs336-and-jax-scaling-MIT.txt.",
+      "caption": "Two memory bandwidths at the same compute peak explain the sloping bandwidth limit, flat compute limit, and why improving bandwidth changes Algo 1 but not Algo 2.",
+      "rendered_route": "/textbook/modern-llm/transformer-shapes-resources/",
+      "desktop_evidence": "Rebuilt page inspected in Chromium at 1360x950: the 1400x1167 source is displayed proportionally inside the article; both rooflines, axes and labels are intact, with explanatory prose and source attribution next to it.",
+      "narrow_evidence": "Rebuilt page inspected at 390x950: no document overflow or image clipping; original aspect ratio is retained and the image links to its full-size file. Dense labels require opening that file; inline legibility of every label is not claimed.",
+      "reviewer": "Bookvar source-figure review",
+      "checked_at": "2026-09-21"
     },
     "lecture-02-visual-figure-step-369-rendering-1": {
       "disposition": "source-only",
@@ -4483,10 +4467,10 @@
       "transformation": "Complete pinned Lecture 4 pages 4, 5, 7, and 9 rendered with Poppler at 180 DPI; original p11 comparison raster also extracted without redraw.",
       "caption": "The preserved sequence derives the associative rearrangement, its recurrent state, and the gated Mamba-2 and Gated DeltaNet updates.",
       "rendered_route": "/textbook/modern-llm/sequence-model-alternatives/",
-      "desktop_evidence": "Source rasters were inspected at original resolution and all referenced files resolve; full-route desktop QA remains pending because the shared build is blocked by unresolved Task 3/4 links outside this integration.",
-      "narrow_evidence": "Not yet claimed: narrow route QA must run after the shared Task 3/4 links permit a complete site build.",
-      "reviewer": "Codex Task 2 architecture integration",
-      "checked_at": "2026-09-06"
+      "desktop_evidence": "2026-09-28: the complete chapter and all 35 rendered images were inspected at 1440px, including the associativity, recurrent-state, Mamba-2, Gated DeltaNet and comparison-table sequence. Images decode and remain within the article; formulas render without KaTeX errors. Details: docs/audit/2026-09-28-sequence-model-alternatives.md.",
+      "narrow_evidence": "2026-09-28: all 35 images inspected at 390px; no document overflow or CSS cropping. Dense slide text needs enlargement through the original-image link, which opens a separate page rather than a lightbox. Both RU and EN-fallback routes checked.",
+      "reviewer": "Bookvar editorial review",
+      "checked_at": "2026-09-28"
     },
     "lecture-04-visual-hybrid-sequence-models": {
       "disposition": "integrated",
@@ -4496,10 +4480,10 @@
       "transformation": "Complete pinned Lecture 4 pages 6 and 10 rendered with Poppler at 180 DPI; exact p8 and p11 evidence rasters extracted without redraw.",
       "caption": "MiniMax, Nemotron, and Qwen examples expose distinct recurrent-to-attention ratios, followed by the course's controlled long-context ratio evidence.",
       "rendered_route": "/textbook/modern-llm/sequence-model-alternatives/",
-      "desktop_evidence": "Source rasters were inspected at original resolution and all referenced files resolve; full-route desktop QA remains pending because the shared build is blocked by unresolved Task 3/4 links outside this integration.",
-      "narrow_evidence": "Not yet claimed: narrow route QA must run after the shared Task 3/4 links permit a complete site build.",
-      "reviewer": "Codex Task 2 architecture integration",
-      "checked_at": "2026-09-06"
+      "desktop_evidence": "2026-09-28: the MiniMax, Nemotron, Qwen and RULER figures were inspected in the full chapter at 1440px. Captions distinguish model comparisons from ratio ablations; no broken images or article overflow. Details: docs/audit/2026-09-28-sequence-model-alternatives.md.",
+      "narrow_evidence": "2026-09-28: complete source figures fit the article at 390px without CSS cropping. Dense architecture and chart labels require the original-image link for enlargement. The EN route displays an explicit untranslated-content notice; no English translation is claimed.",
+      "reviewer": "Bookvar editorial review",
+      "checked_at": "2026-09-28"
     },
     "lecture-04-visual-deepseek-sparse-attention": {
       "disposition": "integrated",
@@ -4522,10 +4506,10 @@
       "transformation": "Exact embedded rasters from pinned Lecture 4 pages 27, 31, and 32 extracted without redraw; the routing family diagram is the representative file.",
       "caption": "The sequence contrasts token-, expert-, and globally chosen assignments before deriving top-k gates and fine-grained shared-expert routing.",
       "rendered_route": "/textbook/moe/mixture-of-experts/",
-      "desktop_evidence": "Source rasters were inspected at original resolution and all referenced files resolve; full-route desktop QA remains pending because the shared build is blocked by unresolved Task 3/4 links outside this integration.",
-      "narrow_evidence": "Not yet claimed: narrow route QA must run after the shared Task 3/4 links permit a complete site build.",
-      "reviewer": "Codex Task 2 architecture integration",
-      "checked_at": "2026-09-06"
+      "desktop_evidence": "2026-09-28: routing figures inspected in the rebuilt chapter at 1440px. The text now separates selection from weighting, derives the top-1 gradient, and states Expert Choice's causality limitation. No broken images or article overflow. See docs/audit/2026-09-28-moe.md.",
+      "narrow_evidence": "2026-09-28: inspected at 390px; full figure boundaries retained. Dense multi-panel labels require enlargement through the original-image link. RU and explicit EN fallback render without KaTeX errors.",
+      "reviewer": "Bookvar editorial review",
+      "checked_at": "2026-09-28"
     },
     "lecture-04-visual-moe-discrete-routing-training": {
       "disposition": "source-only",
@@ -4540,23 +4524,23 @@
       "transformation": "Exact embedded rasters from pinned Lecture 4 pages 40, 42, and 43 extracted without redraw; the Switch balance derivation is the representative file.",
       "caption": "The sequence connects the Switch auxiliary objective, DeepSeek-V3 selection bias, and OLMoE's no-balance-loss ablation.",
       "rendered_route": "/textbook/moe/mixture-of-experts/",
-      "desktop_evidence": "Source rasters were inspected at original resolution and all referenced files resolve; full-route desktop QA remains pending because the shared build is blocked by unresolved Task 3/4 links outside this integration.",
-      "narrow_evidence": "Not yet claimed: narrow route QA must run after the shared Task 3/4 links permit a complete site build.",
-      "reviewer": "Codex Task 2 architecture integration",
-      "checked_at": "2026-09-06"
+      "desktop_evidence": "2026-09-28: Switch, bias-routing and OLMoE plots inspected at 1440px. Worked examples distinguish expert counts, GPU placement and the differentiable probability term in the loss. No broken images or article overflow. See docs/audit/2026-09-28-moe.md.",
+      "narrow_evidence": "2026-09-28: all panels fit at 390px without CSS cropping; the typeset equations remain readable separately from source screenshots. Original-image links are required for small chart legends.",
+      "reviewer": "Bookvar editorial review",
+      "checked_at": "2026-09-28"
     },
     "lecture-04-visual-moe-systems-capacity": {
       "disposition": "integrated",
       "destination": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
       "destination_anchor": "moe-systems-capacity",
-      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/latentmoe-communication-compression.png",
-      "transformation": "Exact embedded rasters from pinned Lecture 4 pages 46 and 47 extracted without redraw; the LatentMoE architecture is the representative file.",
-      "caption": "The paired systems evidence separates communication compression from fixed-capacity permutation and batch-dependent token dropping.",
+      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/moe-capacity-token-dropping.png",
+      "transformation": "Page 47's exact embedded capacity raster remains the representative course figure. Page 46's composite LatentMoE screenshot is replaced in the chapter by the two original Figure 1 PNG panels from arXiv:2601.18089v1 (CC BY 4.0), copied without changes; the course original remains in the frozen archive.",
+      "caption": "Capacity overflow is distinct from communication cost. Original LatentMoE panels and the comparison table distinguish the eff variant (less traffic) from acc (more active experts at approximately unchanged traffic).",
       "rendered_route": "/textbook/moe/mixture-of-experts/",
-      "desktop_evidence": "Source rasters were inspected at original resolution and all referenced files resolve; full-route desktop QA remains pending because the shared build is blocked by unresolved Task 3/4 links outside this integration.",
-      "narrow_evidence": "Not yet claimed: narrow route QA must run after the shared Task 3/4 links permit a complete site build.",
-      "reviewer": "Codex Task 2 architecture integration",
-      "checked_at": "2026-09-06"
+      "desktop_evidence": "2026-09-28: capacity, MegaBlocks, EP and both new LatentMoE panels inspected at 1440px. The text follows dispatch/combine, defines the EP-group byte estimate, and distinguishes local routes from network traffic. See docs/audit/2026-09-28-moe.md.",
+      "narrow_evidence": "2026-09-28: inspected at 390px, with no clipping or article overflow. Separate portrait LatentMoE panels retain their full labels and boundaries; the multi-stage capacity diagram needs original-size enlargement for its smallest labels.",
+      "reviewer": "Bookvar editorial review",
+      "checked_at": "2026-09-28"
     },
     "lecture-04-visual-moe-stability-finetuning": {
       "disposition": "integrated",
@@ -4566,10 +4550,10 @@
       "transformation": "Exact embedded rasters from pinned Lecture 4 pages 49 and 50 extracted without redraw; the z-loss ablation is the representative file and the sequence explicitly includes the page-50 fine-tuning parameter ablation.",
       "caption": "The two figures distinguish numerical router stabilization from the separate choice of which dense or sparse parameters to update during fine-tuning.",
       "rendered_route": "/textbook/moe/mixture-of-experts/",
-      "desktop_evidence": "Source rasters were inspected at original resolution and all referenced files resolve; full-route desktop QA remains pending because the shared build is blocked by unresolved Task 3/4 links outside this integration.",
-      "narrow_evidence": "Not yet claimed: narrow route QA must run after the shared Task 3/4 links permit a complete site build.",
-      "reviewer": "Codex Task 2 architecture integration",
-      "checked_at": "2026-09-06"
+      "desktop_evidence": "2026-09-28: both plots inspected at 1440px. The ST-MoE course raster is only 438x368; its readable qualitative comparison is explained in prose, and it is not represented as a high-resolution original. The z-loss derivation distinguishes log-partition from logit differences. See docs/audit/2026-09-28-moe.md.",
+      "narrow_evidence": "2026-09-28: inspected at 390px without cropping. Source labels All/Non MoE/MoE/Attention/FFN remain legible; dense OLMoE panels require enlargement. EN uses an explicit Russian fallback, not a completed translation.",
+      "reviewer": "Bookvar editorial review",
+      "checked_at": "2026-09-28"
     },
     "lecture-04-visual-deepseek-moe": {
       "disposition": "integrated",
@@ -4577,12 +4561,12 @@
       "destination_anchor": "deepseek-moe-evolution",
       "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/deepseek-v1-moe-slide.png",
       "transformation": "Complete pinned Lecture 4 pages 54 and 55 rendered with Poppler at 180 DPI. Page 56 is deliberately not published because its V2 title and 258-expert wording conflict with the primary DeepSeek-V3 report.",
-      "caption": "The first two slides preserve the move from fine-grained shared experts to topology-aware routing; V3 counts and balancing are corrected from the primary report in prose.",
+      "caption": "The first two slides preserve the move from fine-grained shared experts to topology-aware routing. The chapter and first caption explicitly correct the slide's device-balance claim for DeepSeekMoE 16B; V2 receive-side balancing and V3 counts follow primary reports.",
       "rendered_route": "/textbook/moe/mixture-of-experts/",
-      "desktop_evidence": "Both 1800x1014 source slides were inspected at original resolution and their chapter references resolve; full-route desktop QA remains pending because the shared build is blocked by unresolved Task 3/4 links.",
-      "narrow_evidence": "Not yet claimed: narrow route QA must run after the shared Task 3/4 links permit a complete site build.",
-      "reviewer": "Codex Task 2 architecture integration",
-      "checked_at": "2026-09-06"
+      "desktop_evidence": "2026-09-28: both full slides inspected in the chapter and at original resolution. Factual corrections are in the adjacent prose, not silently edited into course images. See docs/audit/2026-09-28-moe.md.",
+      "narrow_evidence": "2026-09-28: both slides fit at 390px without crop, but their smallest formulas require original-size enlargement; the chapter supplies typeset explanations and model counts independently.",
+      "reviewer": "Bookvar editorial review",
+      "checked_at": "2026-09-28"
     },
     "lecture-04-visual-deepseek-mla": {
       "disposition": "source-only",

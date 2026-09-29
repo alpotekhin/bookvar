@@ -13,7 +13,7 @@
   "generated_audit": {
     "semantic_review_sha256": "4f3cdc494aa011875c2d978aeeba22dcaab4094643dc6fb8494a94d6e7bf7072",
     "audit_contract_sha256": "8b3a6f5d9e416b90f9681731a80d30fd069bc6e830a5053aa4acc7457fed4ba4",
-    "editorial_overlay_sha256": "50ba337969cbf410d783f5f5c2df538270e604e155b9fed10aee4e2721b416ef",
+    "editorial_overlay_sha256": "d746b461180a9a3d2a955eed0c8668becb32bc8441ffdd1d4c0133de79a7547f",
     "importer_sha256": "ddb05e2c7582a189f6ae38fa1c975045b3217f604ed17acc21f7af3344a6d2c8",
     "extractor_revision": "berkeley-advanced-llm-agents-semantic-audit-v2",
     "page_index_tool": "pdftotext -layout (Poppler 26.04.0)",
@@ -27,11 +27,11 @@
         "records": 212
       },
       "coverage.yml": {
-        "sha256": "ac09a7b2226893f5d55ae1d5ab4316a4bbc85a49db9fcf7d8313b27dc3273c58",
+        "sha256": "a2ada5e57e837f232bfb255ffd8467a9349f20360b82fa7971584321563d4f22",
         "records": 212
       },
       "visuals.yml": {
-        "sha256": "6db66d68bd3a920fff5ebe88950e5d1bfa96e96e0486af19ac86d533a4487fda",
+        "sha256": "d87ac8784ba309313aba3fad5ce4452fcd8465351e95ff0dd80650212a648f29",
         "records": 161
       }
     }

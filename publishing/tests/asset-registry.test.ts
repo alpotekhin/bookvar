@@ -32,7 +32,9 @@ type CuratedAsset = {
   source_asset?: string;
   source_asset_sha256?: string;
   source_page?: number;
+  crop_box_px?: unknown;
   source_url?: string;
+  source_image_url?: string;
   commit?: string;
   metadata_status?: string;
   modifications?: string;
@@ -86,9 +88,81 @@ function sha256(path: string): string {
   return createHash('sha256').update(readFileSync(path)).digest('hex');
 }
 
+function pngDimensions(path: string): number[] {
+  const bytes = readFileSync(path);
+  expect(bytes.length, `Truncated PNG: ${path}`).toBeGreaterThanOrEqual(33);
+  expect([...bytes.subarray(0, 8)], `Invalid PNG signature: ${path}`).toEqual([137, 80, 78, 71, 13, 10, 26, 10]);
+  expect(bytes.readUInt32BE(8), `Invalid PNG IHDR length: ${path}`).toBe(13);
+  expect(bytes.toString('ascii', 12, 16), `Missing PNG IHDR: ${path}`).toBe('IHDR');
+  const dimensions = [bytes.readUInt32BE(16), bytes.readUInt32BE(20)];
+  expect(dimensions.every(value => value > 0), `Invalid PNG dimensions: ${path}`).toBe(true);
+  return dimensions;
+}
+
 function validateCuratedSourceAsset(entry: CuratedAsset, repositoryRoot = root): void {
+  if (entry.provenance_confirmation === 'official-course-asset') {
+    // MIT OCW publishes course images at named, hash-prefixed URLs, not Git blobs.
+    // Keep the official course page, exact asset URL and unchanged file hash.
+    requireNonEmptyString(entry.author, 'author');
+    requireNonEmptyString(entry.modifications, 'modifications');
+    expect(entry.source_asset).toBeUndefined();
+    expect(entry.source_url).toMatch(/^https:\/\/ocw\.mit\.edu\/courses\/6-004-computation-structures-spring-2017\/pages\/c(?:7|21)\/c(?:7|21)s1\/$/);
+    expect(entry.source_image_url).toMatch(/^https:\/\/ocw\.mit\.edu\/courses\/6-004-computation-structures-spring-2017\/[a-f0-9]{32}_Slide\d+\.png$/);
+    expect(entry.license).toBe('CC BY-NC-SA 4.0');
+    expect(entry.license_url).toBe('https://creativecommons.org/licenses/by-nc-sa/4.0/');
+    expect(entry.metadata_status).toBe('verified');
+    expect(entry.derivation).toBe('source-raster-copy');
+    expect(entry.asset).toMatch(/^00 Учебник\/Assets\/Figures\/curated\/(?:[\w-]+\/)+[\w-]+\.png$/);
+    expect(entry.source_asset_sha256).toMatch(/^[a-f0-9]{64}$/);
+    expect(entry.sha256).toBe(entry.source_asset_sha256);
+    expect(sha256(resolve(repositoryRoot, entry.asset))).toBe(entry.sha256);
+    expectDecodableImage(resolve(repositoryRoot, entry.asset));
+    return;
+  }
+  if (!entry.source_asset && entry.provenance_confirmation === 'source-license-verified') {
+    // arXiv HTML exposes unchanged original figures under a versioned paper URL.
+    // Retain both source and output hashes; never accept an unversioned latest URL.
+    requireNonEmptyString(entry.author, 'author');
+    requireNonEmptyString(entry.license, 'license');
+    expect(entry.license_url).toMatch(/^https:\/\//);
+    expect(entry.metadata_status).toBe('verified');
+    expect(['source-raster-copy', 'source-svg-copy']).toContain(entry.derivation);
+    const extension = entry.derivation === 'source-svg-copy' ? 'svg' : '(png|jpg|jpeg|webp)';
+    expect(entry.asset).toMatch(new RegExp(`\\.${extension}$`));
+    const paper = entry.source_url?.match(/^https:\/\/arxiv\.org\/abs\/(\d{4}\.\d{4,5}v[1-9]\d*)$/);
+    expect(paper).toBeTruthy();
+    expect(entry.source_image_url).toMatch(new RegExp(
+      `^https://arxiv\\.org/html/${paper?.[1].replace('.', '\\.')}/(?:[a-zA-Z0-9_-]+/)*[a-zA-Z0-9_-]+\\.${extension}$`
+    ));
+    expect(entry.source_asset_sha256).toMatch(/^[a-f0-9]{64}$/);
+    expect(entry.sha256).toBe(entry.source_asset_sha256);
+    expect(sha256(resolve(repositoryRoot, entry.asset))).toBe(entry.sha256);
+    requireNonEmptyString(entry.modifications, 'modifications');
+    return;
+  }
   if (!entry.source_asset) {
     expect(entry.provenance_confirmation).toBe('pinned-upstream-repository');
+    if (entry.source_url?.startsWith('https://huggingface.co/')) {
+      const sourceMatch = entry.source_url.match(
+        /^https:\/\/huggingface\.co\/spaces\/([\w-]+\/[\w.-]+)\/blob\/([0-9a-f]{40})\/((?:[\w-]+\/)*[\w-]+\.(svg|png))$/
+      );
+      expect(sourceMatch, `Curated Hugging Face source must be a pinned Space SVG or PNG: ${entry.asset}`).toBeTruthy();
+      expect(entry.commit).toMatch(/^[0-9a-f]{40}$/);
+      expect(sourceMatch?.[2]).toBe(entry.commit);
+      expect(entry.source_image_url).toBe(entry.source_url.replace('/blob/', '/resolve/'));
+      requireNonEmptyString(entry.author, 'author');
+      requireNonEmptyString(entry.license, 'license');
+      requireNonEmptyString(entry.modifications, 'modifications');
+      expect(entry.license_url).toMatch(/^https:\/\//);
+      expect(entry.metadata_status).toBe('verified');
+      expect(entry.derivation).toBe(sourceMatch?.[4] === 'svg' ? 'source-svg-copy' : 'source-raster-copy');
+      expect(entry.asset).toMatch(/^00 Учебник\/Assets\/Figures\/curated\/(?:[\w-]+\/)+[\w-]+\.(svg|png)$/);
+      expect(extname(entry.asset)).toBe(`.${sourceMatch?.[4]}`);
+      expect(entry.sha256).toMatch(/^[a-f0-9]{64}$/);
+      expect(sha256(resolve(repositoryRoot, entry.asset))).toBe(entry.sha256);
+      expectDecodableImage(resolve(repositoryRoot, entry.asset));
+      return;
+    }
     const sourceMatch = entry.source_url?.match(
       /^https:\/\/github\.com\/[^/]+\/[^/]+\/blob\/([0-9a-f]{40})\/.+/
     );
@@ -108,6 +182,31 @@ function validateCuratedSourceAsset(entry: CuratedAsset, repositoryRoot = root):
   } else {
     expect(entry.provenance_confirmation).toBe('user-confirmed-open-materials');
   }
+  if (entry.provenance_confirmation === 'source-license-verified'
+    && entry.derivation === 'source-raster-crop') {
+    expect(entry.source_asset).toMatch(/^00 Учебник\/Assets\/Figures\/curated\/(?:[^/]+\/)*[^/]+\.png$/i);
+    expect(entry.source_asset.split('/').some(segment => segment === '.' || segment === '..')).toBe(false);
+    expect(entry.asset).toMatch(/\.png$/i);
+    requireNonEmptyString(entry.modifications, 'crop description');
+    expect(entry.source_asset_sha256).toMatch(/^[a-f0-9]{64}$/);
+    expect(sha256(resolve(repositoryRoot, entry.source_asset))).toBe(entry.source_asset_sha256);
+    expect(entry.sha256).toMatch(/^[a-f0-9]{64}$/);
+    expect(sha256(resolve(repositoryRoot, entry.asset))).toBe(entry.sha256);
+    expect(Array.isArray(entry.crop_box_px)).toBe(true);
+    const crop = entry.crop_box_px as number[];
+    expect(crop).toHaveLength(4);
+    expect(crop.every(Number.isInteger)).toBe(true);
+    const [left, top, right, bottom] = crop;
+    const [width, height] = pngDimensions(resolve(repositoryRoot, entry.source_asset));
+    expect(left).toBeGreaterThanOrEqual(0);
+    expect(top).toBeGreaterThanOrEqual(0);
+    expect(right).toBeGreaterThan(left);
+    expect(bottom).toBeGreaterThan(top);
+    expect(right).toBeLessThanOrEqual(width);
+    expect(bottom).toBeLessThanOrEqual(height);
+    expect(pngDimensions(resolve(repositoryRoot, entry.asset))).toEqual([right - left, bottom - top]);
+    return;
+  }
   if (entry.source_asset.startsWith('raw/papers/')) {
     const sourceAsset = resolve(repositoryRoot, entry.source_asset);
     if (!existsSync(sourceAsset)) {
@@ -124,6 +223,27 @@ function validateCuratedSourceAsset(entry: CuratedAsset, repositoryRoot = root):
       expect(entry.modifications).toMatch(/converted to PNG without resizing or content changes/i);
     } else {
       expect(sha256(resolve(repositoryRoot, entry.asset))).toBe(sha256(sourceAsset));
+    }
+    return;
+  }
+
+  // Licensed figures can come from tracked paper/assignment/lecture PDFs or the
+  // original raster cache of an executable lecture.
+  if (entry.provenance_confirmation === 'source-license-verified'
+    && ['pdf-page-render-crop', 'source-raster-copy'].includes(entry.derivation ?? '')) {
+    if (entry.derivation === 'pdf-page-render-crop') {
+      expect(entry.source_asset).toMatch(/^05 Источники\/(?:Courses\/[^/]+\/(?:Assignments\/[^/]+|Lectures)|Papers\/Source PDFs)\/[^/]+\.pdf$/);
+      expect(Number.isInteger(entry.source_page) && Number(entry.source_page) > 0).toBe(true);
+      requireNonEmptyString(entry.modifications, 'crop description');
+    } else {
+      expect(entry.source_asset).toMatch(/^05 Источники\/Courses\/[^/]+\/Lectures\/repository\/var\/files\/[^/]+$/);
+    }
+    expect(entry.source_asset_sha256).toMatch(/^[a-f0-9]{64}$/);
+    expect(sha256(resolve(repositoryRoot, entry.source_asset))).toBe(entry.source_asset_sha256);
+    expect(entry.sha256).toMatch(/^[a-f0-9]{64}$/);
+    expect(sha256(resolve(repositoryRoot, entry.asset))).toBe(entry.sha256);
+    if (entry.derivation === 'source-raster-copy') {
+      expect(entry.sha256).toBe(entry.source_asset_sha256);
     }
     return;
   }
@@ -175,6 +295,176 @@ function expectDecodableImage(path: string): void {
 }
 
 describe('publication asset registry', () => {
+  it('verifies pinned Hugging Face Space SVG and PNG copies and rejects mismatched provenance', () => {
+    const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8'), { merge: true }) as { assets: CuratedAsset[] };
+    const fixtures = [
+      'arithmetic-review-2026-09/hf-training-memory.svg',
+      'arithmetic-review-2026-09/hf-fsdp-forward.svg',
+      'arithmetic-review-2026-09/hf-fsdp-backward.svg',
+      'arithmetic-review-2026-09/hf-pipeline-gpipe.svg',
+      'arithmetic-review-2026-09/hf-pipeline-1f1b.svg',
+      'precision-review-2026-09/hf-format-ranges.png',
+      'precision-review-2026-09/hf-format-resolution.png'
+    ];
+    const entries = fixtures.map(filename => registry.assets.find(asset =>
+      asset.asset === `00 Учебник/Assets/Figures/curated/${filename}`
+    )!);
+    for (const entry of entries) {
+      expect(entry).toBeTruthy();
+      expect(() => validateCuratedSourceAsset(entry)).not.toThrow();
+      const wrongExtension = entry.asset.endsWith('.svg') ? '.png' : '.svg';
+      for (const invalid of [
+        { source_url: undefined },
+        { source_url: entry.source_url?.replace(`/blob/${entry.commit}/`, '/blob/main/') },
+        { source_image_url: entry.source_image_url?.replace(`/resolve/${entry.commit}/`, '/resolve/main/') },
+        { source_url: entry.source_url?.replace(entry.commit!, '0'.repeat(40)) },
+        { source_image_url: entry.source_image_url?.replace(entry.commit!, '0'.repeat(40)) },
+        { commit: '0'.repeat(40) },
+        { commit: undefined },
+        { source_url: entry.source_url?.replace('/nanotron/', '/another-owner/') },
+        { source_image_url: entry.source_image_url?.replace('/ultrascale-playbook/', '/another-repository/') },
+        { source_url: entry.source_url?.replace(/\/[^/]+\.(svg|png)$/, `/another-figure${extname(entry.asset)}`) },
+        { source_image_url: entry.source_image_url?.replace(/\/[^/]+\.(svg|png)$/, `/another-figure${extname(entry.asset)}`) },
+        { source_image_url: entry.source_image_url?.replace(/\.(svg|png)$/, wrongExtension) },
+        {
+          source_url: entry.source_url?.replace(/\.(svg|png)$/, wrongExtension),
+          source_image_url: entry.source_image_url?.replace(/\.(svg|png)$/, wrongExtension)
+        },
+        { source_image_url: undefined },
+        { asset: entry.asset.replace('/curated/', '/curated/../curated/') },
+        { asset: entry.asset.replace(/\.(svg|png)$/, wrongExtension) },
+        { sha256: '0'.repeat(64) },
+        { sha256: undefined },
+        { provenance_confirmation: undefined },
+        { author: '' },
+        { license: '' },
+        { license_url: undefined },
+        { modifications: '' },
+        { metadata_status: 'unverified' },
+        { derivation: entry.derivation === 'source-svg-copy' ? 'source-raster-copy' : 'source-svg-copy' },
+        { derivation: undefined }
+      ]) {
+        expect(() => validateCuratedSourceAsset({ ...entry, ...invalid })).toThrow();
+      }
+    }
+  });
+
+  it('verifies unchanged MIT OCW course images and rejects unrelated or incomplete provenance', () => {
+    const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8'), { merge: true }) as { assets: CuratedAsset[] };
+    const entries = registry.assets.filter(asset => asset.provenance_confirmation === 'official-course-asset');
+    expect(entries).toHaveLength(2);
+    for (const entry of entries) {
+      expect(() => validateCuratedSourceAsset(entry)).not.toThrow();
+      for (const invalid of [
+        { source_image_url: 'https://example.org/figure.png' },
+        { source_image_url: entry.source_image_url?.replace('6-004-computation-structures-spring-2017', 'another-course') },
+        { source_image_url: entry.source_image_url?.replace(/\.png$/, '.html') },
+        { source_url: undefined },
+        { author: '' },
+        { license: 'unknown' },
+        { license_url: undefined },
+        { sha256: '0'.repeat(64) },
+        { source_asset_sha256: undefined },
+        { metadata_status: 'unverified' },
+        { derivation: 'redraw' },
+        { modifications: '' }
+      ]) {
+        expect(() => validateCuratedSourceAsset({ ...entry, ...invalid })).toThrow();
+      }
+    }
+  });
+
+  it.each([
+    [0, [375, 0, 900, 322]],
+    [1, [945, 0, 1475, 322]],
+    [2, [1520, 0, 2039, 322]]
+  ])('verifies licensed tracked PNG crop panel %s and rejects invalid provenance or bounds', (step, crop_box_px) => {
+    const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8'), { merge: true }) as { assets: CuratedAsset[] };
+    const entry = registry.assets.find(asset => asset.asset.endsWith(`/mistral-rolling-step-${step}.png`))!;
+    expect(entry).toBeTruthy();
+    const valid: CuratedAsset = {
+      ...entry,
+      derivation: 'source-raster-crop',
+      source_asset: '00 Учебник/Assets/Figures/curated/long-context-review-2026-09/mistral-rolling-buffer.png',
+      crop_box_px
+    };
+    expect(() => validateCuratedSourceAsset(valid)).not.toThrow();
+    for (const invalid of [
+      { source_asset: undefined },
+      { source_asset: '../unrelated-source.png' },
+      { source_asset: valid.source_asset?.replace('/curated/', '/curated/../curated/') },
+      { source_asset: valid.source_asset?.replace(/\.png$/, '.jpg') },
+      { source_asset_sha256: undefined },
+      { source_asset_sha256: '0'.repeat(64) },
+      { sha256: undefined },
+      { sha256: '0'.repeat(64) },
+      { asset: valid.source_asset!, sha256: valid.source_asset_sha256 },
+      { provenance_confirmation: 'user-confirmed-open-materials' },
+      { author: '' },
+      { license: '' },
+      { license_url: undefined },
+      { metadata_status: 'unverified' },
+      { modifications: '' },
+      { crop_box_px: undefined },
+      { crop_box_px: '375,0,900,322' },
+      { crop_box_px: [375, 0, 900] },
+      { crop_box_px: [375, 0, 900, 322, 0] },
+      { crop_box_px: [375.5, 0, 900, 322] },
+      { crop_box_px: [375, -1, 900, 322] },
+      { crop_box_px: [-1, 0, 900, 322] },
+      { crop_box_px: [900, 0, 375, 322] },
+      { crop_box_px: [375, 322, 900, 0] },
+      { crop_box_px: [375, 0, 375, 322] },
+      { crop_box_px: [375, 0, 900, 0] },
+      { crop_box_px: [375, 0, 2040, 322] },
+      { crop_box_px: [375, 0, 900, 323] },
+      { crop_box_px: [375, 0, 901, 322] }
+    ]) {
+      expect(() => validateCuratedSourceAsset({ ...valid, ...invalid })).toThrow();
+    }
+  });
+
+  it('verifies tracked paper crops and a version-pinned unchanged arXiv figure', () => {
+    const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8'), { merge: true }) as { assets: CuratedAsset[] };
+    const crops = registry.assets.filter(asset => asset.source_asset?.startsWith('05 Источники/Papers/Source PDFs/'));
+    expect(crops.length).toBeGreaterThanOrEqual(4);
+    for (const entry of crops) {
+      validateCuratedSourceAsset(entry);
+      expect(() => validateCuratedSourceAsset({ ...entry, source_asset: '../paper.pdf' })).toThrow();
+      expect(() => validateCuratedSourceAsset({ ...entry, source_asset_sha256: '0'.repeat(64) })).toThrow();
+      expect(() => validateCuratedSourceAsset({ ...entry, sha256: '0'.repeat(64) })).toThrow();
+      expect(() => validateCuratedSourceAsset({ ...entry, source_page: 0 })).toThrow();
+      expect(() => validateCuratedSourceAsset({ ...entry, license: '' })).toThrow();
+    }
+    const original = registry.assets.find(asset => asset.source_image_url?.includes('2411.06559v1'))!;
+    expect(original).toBeTruthy();
+    validateCuratedSourceAsset(original);
+    expect(() => validateCuratedSourceAsset({ ...original, source_url: 'https://arxiv.org/abs/2411.06559' })).toThrow();
+    expect(() => validateCuratedSourceAsset({ ...original, source_image_url: original.source_image_url?.replace('v1', 'v2') })).toThrow();
+    expect(() => validateCuratedSourceAsset({ ...original, sha256: '0'.repeat(64) })).toThrow();
+    expect(() => validateCuratedSourceAsset({ ...original, source_asset_sha256: undefined })).toThrow();
+    expect(() => validateCuratedSourceAsset({ ...original, license_url: undefined })).toThrow();
+    expect(() => validateCuratedSourceAsset({ ...original, derivation: 'redrawn' })).toThrow();
+  });
+  it('verifies licensed assignment figures and unchanged lecture-cache originals', () => {
+    const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8'), { merge: true }) as { assets: CuratedAsset[] };
+    const ids = ['curated-stanford-a1-complete-model-block-e76f4539f68d', 'curated-jax-scaling-roofline-2c9018ab614d'];
+    for (const id of ids) {
+      const entry = registry.assets.find(asset => asset.id === id)!;
+      expect(entry).toBeTruthy();
+      validateCuratedSourceAsset(entry);
+      expectDecodableImage(resolve(root, entry.asset));
+      expect(() => validateCuratedSourceAsset({ ...entry, source_asset: '../unrelated-source' })).toThrow();
+      expect(() => validateCuratedSourceAsset({ ...entry, source_asset_sha256: '0'.repeat(64) })).toThrow();
+      expect(() => validateCuratedSourceAsset({ ...entry, sha256: '0'.repeat(64) })).toThrow();
+      expect(() => validateCuratedSourceAsset({ ...entry, license_url: undefined })).toThrow();
+      expect(() => validateCuratedSourceAsset({ ...entry, derivation: 'redrawn' })).toThrow();
+      if (entry.derivation === 'pdf-page-render-crop') {
+        expect(() => validateCuratedSourceAsset({ ...entry, source_page: 0 })).toThrow();
+      }
+    }
+  });
+
   it('keeps the original Kimi Linear JPEG bytes and its complete MIT notice', () => {
     const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8'), { merge: true }) as { assets: CuratedAsset[] };
     const entry = registry.assets.find((asset) => asset.id === 'curated-kimi-linear-architecture-132ae021fa46')!;
@@ -314,9 +604,14 @@ describe('publication asset registry', () => {
     );
     expect(deepseekR1?.used_in).toEqual([
       '00 Учебник/10 Атлас современных архитектур/01 Llama, Qwen и DeepSeek как эволюция блока.md',
-      '00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md',
       'Papers/DeepSeek-R1 Reasoning via RL.md'
     ]);
+    const deepseekPipeline = registry.assets.find((asset) =>
+      asset.asset === '00 Учебник/Assets/Figures/curated/deepseek-r1/figure2-pipeline.png'
+    );
+    expect(deepseekPipeline?.used_in).toContain(
+      '00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md'
+    );
   });
 
   it('publishes without retaining any raw-asset-blocked allowlist entry', () => {
@@ -398,6 +693,59 @@ describe('publication asset registry', () => {
       validateCuratedSourceAsset(entry);
     }
   });
+
+  it('accepts nested arXiv figure paths but rejects unpinned or unrelated sources', () => {
+    const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8'), { merge: true }) as {
+      assets: CuratedAsset[];
+    };
+    const valid = registry.assets.find(({ asset }) => asset.endsWith('/tulu-ifeval-kl-and-generalization.png'));
+    expect(valid).toBeTruthy();
+    if (!valid) return;
+    expect(() => validateCuratedSourceAsset(valid)).not.toThrow();
+    for (const source_image_url of [
+      'https://arxiv.org/html/2411.15124/figures_images/post-training/rl/plot_2_ifeval.png',
+      'https://arxiv.org/html/2411.15124v4/figures_images/post-training/rl/plot_2_ifeval.png',
+      'https://arxiv.org/html/2411.15124v5/../other.png',
+      'https://arxiv.org/html/2411.15124v5//other.png',
+      'https://example.org/html/2411.15124v5/figure.png',
+    ]) {
+      expect(() => validateCuratedSourceAsset({ ...valid, source_image_url })).toThrow();
+    }
+    expect(() => validateCuratedSourceAsset({ ...valid, source_asset_sha256: '0'.repeat(64) })).toThrow();
+    expect(() => validateCuratedSourceAsset({ ...valid, derivation: 'source-svg-copy' })).toThrow();
+    expect(() => validateCuratedSourceAsset({ ...valid, source_image_url: valid.source_image_url?.replace(/\.png$/, '.svg') })).toThrow();
+  });
+
+  it.each(['curated-sequence-rwkv4-92f374fb9a52', 'curated-sequence-rwkv7-046abe9e2b39'])(
+    'accepts an unchanged version-pinned arXiv SVG: %s', (id) => {
+      const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8'), { merge: true }) as {
+        assets: CuratedAsset[];
+      };
+      const valid = registry.assets.find(asset => asset.id === id)!;
+      expect(valid).toBeTruthy();
+      expect(() => validateCuratedSourceAsset(valid)).not.toThrow();
+      expectDecodableImage(resolve(root, valid.asset));
+      for (const invalid of [
+        { derivation: 'source-raster-copy' },
+        { derivation: 'redrawn' },
+        { asset: valid.asset.replace(/\.svg$/, '.png') },
+        { source_image_url: valid.source_image_url?.replace(/\.svg$/, '.png') },
+        { source_url: valid.source_url?.replace(/v\d+$/, '') },
+        { source_image_url: valid.source_image_url?.replace(/v\d+\//, 'v99/') },
+        { source_asset_sha256: '0'.repeat(64) },
+        { sha256: '0'.repeat(64) },
+        { source_asset_sha256: '0'.repeat(64), sha256: '0'.repeat(64) },
+        { source_asset_sha256: undefined },
+        { author: '' },
+        { license: '' },
+        { license_url: undefined },
+        { metadata_status: 'unverified' },
+        { modifications: '' }
+      ]) {
+        expect(() => validateCuratedSourceAsset({ ...valid, ...invalid })).toThrow();
+      }
+    }
+  );
 
   it('rejects invalid tracked course PDF provenance', () => {
     const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8'), { merge: true }) as {

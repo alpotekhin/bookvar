@@ -1,0 +1,42 @@
+schema_version: 1
+reviewed: 2026-09-21
+used_in: 00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md
+assets:
+  - local_path: webdreamer-planning-paradigms.png
+    author: Yu Gu, Boyuan Zheng, Boyu Gou, Kai Zhang, Cheng Chang, Sanjari Srivastava, Yanan Xie, Peng Qi, Huan Sun, Yu Su
+    source_title: "Is Your LLM Secretly a World Model of the Internet? Model-Based Planning for Web Agents"
+    source_version: arXiv:2411.06559v1
+    source_figure: 1
+    source_url: https://arxiv.org/html/2411.06559v1#S1.F1
+    source_image_url: https://arxiv.org/html/2411.06559v1/wm_fig1.png
+    source_asset_sha256: d27a590a9aec9357dbd3fa35619b3e9fde3373a82732dbfade9a50af1f86a1b2
+    sha256: d27a590a9aec9357dbd3fa35619b3e9fde3373a82732dbfade9a50af1f86a1b2
+    dimensions_px: [1081, 417]
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    license_evidence_url: https://arxiv.org/html/2411.06559v1
+    derivation: source-raster-copy
+    modifications: "Original versioned arXiv PNG downloaded without modification; bytes unchanged."
+    visual_review: "All three panels and their labels are intact. Dotted and solid arrows distinguish predicted, backtracking, and real transitions without relying only on color."
+  - local_path: memgpt-figure3-memory-hierarchy.png
+    author: Charles Packer, Sarah Wooders, Kevin Lin, Vivian Fang, Shishir G. Patil, Ion Stoica, Joseph E. Gonzalez
+    source_title: "MemGPT: Towards LLMs as Operating Systems"
+    source_version: arXiv:2310.08560v2
+    source_figure: 3
+    source_url: https://arxiv.org/pdf/2310.08560v2#page=3
+    source_asset: 05 Источники/Papers/Source PDFs/memgpt-2310.08560v2.pdf
+    source_asset_sha256: 9f674bcff69c86f11c813dcfad613d8841f5f8ed17979e3c4df06a91df7762e0
+    source_page: 3
+    source_canvas_pt: [612, 792]
+    crop_box_pt: [73.92, 62.88, 531.84, 234.96]
+    sha256: 136e1de6954b34212f646ad84e528d1fc8829efeabca885285429a4d0bd656ae
+    dimensions_px: [1908, 717]
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    license_evidence_url: https://arxiv.org/html/2310.08560v2
+    derivation: pdf-page-render-crop
+    modifications: "Poppler pdftoppm 300 DPI, physical page 3, x=308 y=262 W=1908 H=717 output pixels. Complete Figure 3 retained; page header, external figure caption, and surrounding prose excluded. No redrawing or content changes."
+    visual_review: "Full diagram inspected at native resolution. All labels, braces, storage boxes, and arrows are intact; no stray header text remains."
+existing_asset_reused:
+  asset: 00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m03-p31-hipporag-index-and-retrieval.png
+  change: "Added another use in chapter 67; existing bytes and provenance unchanged."

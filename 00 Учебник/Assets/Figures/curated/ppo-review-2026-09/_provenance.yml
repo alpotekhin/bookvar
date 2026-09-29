@@ -1,0 +1,19 @@
+source_repository: https://github.com/natolambert/rlhf-book
+commit: 3f573487c58548c16a548cd5fb8979a0189384c7
+author: Nathan Lambert
+source_chapter: https://rlhfbook.com/c/06-policy-gradients
+license: MIT
+license_url: https://github.com/natolambert/rlhf-book/blob/3f573487c58548c16a548cd5fb8979a0189384c7/LICENSE-CODE
+license_scope: "README applies MIT outside book/chapters; these are the author's diagrams, not third-party photos or screenshots. Chapter prose has a separate CC BY-NC-SA 4.0 license."
+license_notice: site/public/licenses/rlhf-book-MIT.txt
+modifications: None; original PNG bytes retained.
+assets:
+  - file: rlhf-overview.png
+    source_path: book/images/rlhf-overview.png
+    sha256: 7bea1360f9c9ce4e62a866f6746a295467f1d2ebcda03160baa52fcc4297f8c2
+  - file: ppo-clip-viz.png
+    source_path: book/images/ppo-clip-viz.png
+    sha256: b23a0f2151970951720a5c736257127fe6ebf96d0c9347b0fb8351251739d026
+  - file: value-fn-training.png
+    source_path: book/images/value_fn_training.png
+    sha256: 669a0852e8cee79f52631a82f44a7fb546227424af9ac86abbcd86aabdae15bf
